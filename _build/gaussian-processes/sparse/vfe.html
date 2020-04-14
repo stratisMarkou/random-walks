@@ -1,0 +1,73 @@
+---
+interact_link: content/gaussian-processes/sparse/vfe.ipynb
+kernel_name: venv-random-walks
+kernel_path: content/gaussian-processes/sparse
+has_widgets: false
+title: |-
+  VFE
+pagenum: 4
+prev_page:
+  url: /gaussian-processes/sparse/fitc.html
+next_page:
+  url: /guide/01_overview.html
+suffix: .ipynb
+search: mathbf x f bar y q left right p k align boldsymbol theta neq def log frac int begin end cancel choose special approximate posterior mathcal free energy bound d kxx kxb kbx kbb fx fb lrb vfe maximize kl divergence elbo note form maximise w r t text argmax solve maximising substitute prior require df substituting n observations tightness expressiveness different things
+
+comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
+---
+
+    <main class="jupyter-page">
+    <div id="page-info"><div id="page-title">VFE</div>
+</div>
+    <div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Maximize KL divergence ELBO:</p>
+\begin{align}
+\mathbf{F}(q, \boldsymbol{\theta}) &amp;= \log p(\mathbf{y} | \boldsymbol{\theta}) + \int q(f | \mathbf{y}) \log \frac{p(f | \mathbf{y})}{q(f | \mathbf{y})}\\
+&amp;= \int q(f | \mathbf{y}) \log \frac{p(\mathbf{y}, f | \boldsymbol{\theta})}{q(f | \mathbf{y})}
+\end{align}<p>Note that we can choose the form of $q(f | \mathbf{y})$ as we like. Choose a special approximate posterior:</p>
+\begin{align}
+q(f | \mathbf{y}) = p\left(f_{\neq \mathbf{\bar{X}}} | \mathbf{f}_{\mathbf{\bar{X}}}\right) q\left(\mathbf{f}_{\mathbf{\bar{X}}} | \mathbf{y} \right)
+\end{align}<p>Maximise $\mathcal{F}$ w.r.t. $q$:</p>
+\begin{align}
+q^*\left(\mathbf{f}_{\mathbf{\bar{X}}} | \mathbf{y} \right) = \text{argmax}_{q} \mathbf{F}(q, \boldsymbol{\theta})
+\end{align}<h2 id="Solve-for-maximising-the-free-energy">Solve for maximising the free energy<a class="anchor-link" href="#Solve-for-maximising-the-free-energy"> </a></h2><p>Substitute special prior in free energy bound:</p>
+\begin{align} \require{cancel}
+\mathbf{F}(q, \boldsymbol{\theta}) &amp;= \int p\left(f_{\neq \mathbf{\bar{X}}} | \mathbf{f}_{\mathbf{\bar{X}}}\right) q\left(\mathbf{f}_{\mathbf{\bar{X}}} | \mathbf{y} \right) \log \frac{p(\mathbf{y}, f | \boldsymbol{\theta})}{p\left(f_{\neq \mathbf{\bar{X}}} | \mathbf{f}_{\mathbf{\bar{X}}}\right) q\left(\mathbf{f}_{\mathbf{\bar{X}}} | \mathbf{y} \right)}\\
+&amp;= \int p\left(f_{\neq \mathbf{\bar{X}}} | \mathbf{f}_{\mathbf{\bar{X}}}\right) q\left(\mathbf{f}_{\mathbf{\bar{X}}} | \mathbf{y} \right) \log \frac{p(\mathbf{y} | \mathbf{f}, \boldsymbol{\theta})  \cancel{p\left(f_{\mathbf{\neq \bar{X}}}| \mathbf{f}_{\mathbf{\bar{X}}}\right)}  p(\mathbf{f}_{\mathbf{\bar{X}}})}{\cancel{p\left(f_{\neq \mathbf{\bar{X}}} | \mathbf{f}_{\mathbf{\bar{X}}}\right)} q\left(\mathbf{f}_{\mathbf{\bar{X}}} | \mathbf{y} \right)} df\\
+&amp;= \int p\left(\mathbf{f} | \mathbf{f}_{\mathbf{\bar{X}}}\right) q\left(\mathbf{f}_{\mathbf{\bar{X}}} | \mathbf{y} \right) \log \frac{p(\mathbf{y} | \mathbf{f}, \boldsymbol{\theta}) p(\mathbf{f}_{\mathbf{\bar{X}}})}{ q\left(\mathbf{f}_{\mathbf{\bar{X}}} | \mathbf{y} \right)} d\mathbf{f}_{\mathbf{X}} d\mathbf{f}_{\mathbf{\bar{X}}}
+\end{align}<p>Substituting $p\left(f_{\neq \mathbf{\bar{X}}} | \mathbf{f}_{\mathbf{\bar{X}}}\right) = \mathcal{N}\left(f_{\neq \mathbf{\bar{X}}}; \mathbf{K}_{\mathbf{X}\mathbf{\bar{X}}} \mathbf{K}_{\mathbf{\bar{X}}\mathbf{\bar{X}}}^{-1},  \mathbf{K}_{\mathbf{\bar{X}}\mathbf{\bar{X}}} - \mathbf{K}_{\mathbf{X}\mathbf{\bar{X}}} \mathbf{K}_{\mathbf{\bar{X}}\mathbf{\bar{X}}}^{-1} \right)$</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Observations">Observations<a class="anchor-link" href="#Observations"> </a></h2><p>Tightness of bound and expressiveness of approximate posterior are different things.</p>
+<p>$
+ \def\Kxx{\mathbf{K}_{\mathbf{X}\mathbf{X}}}
+ \def\Kxb{\mathbf{K}_{\mathbf{X}\mathbf{\bar{X}}}}
+ \def\Kbx{\mathbf{K}_{\mathbf{\bar{X}}\mathbf{X}}}
+ \def\Kbb{\mathbf{K}_{\mathbf{\bar{X}}\mathbf{\bar{X}}}}
+ \def\fx{\mathbf{f}_{\mathbf{X}}}
+ \def\fb{\mathbf{f}_{\mathbf{\bar{X}}}}
+ \def\lrb[#1]{\left(#1\right)}
+$</p>
+<p>$\Kxx, \Kxb, \Kbx, \Kbb, \fx, \fb, \lrb[\frac{1}{2}]$</p>
+
+</div>
+</div>
+</div>
+</div>
+
+ 
+
+
+    </main>
+    

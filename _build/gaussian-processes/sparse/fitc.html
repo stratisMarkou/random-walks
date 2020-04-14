@@ -263,25 +263,27 @@ p(\mathbf{\bar{f}} | \mathbf{y}, \mathbf{\bar{X}}, \mathbf{X}) &amp;= \mathcal{N
 \begin{align}
 p(y_*| \mathbf{x}_*, \mathbf{y}, \mathbf{X}, \mathbf{\bar{X}}) &amp;= \int p(y_*| f_*) p(f_* | \mathbf{x}_*, \mathbf{y}, \mathbf{X}, \mathbf{\bar{X}}) d\mathbf{\bar{f}} \\
 &amp;= \mathcal{N}\left(y_*; \mathbf{K}_{\mathbf{x}_* \mathbf{\bar{X}}} \mathbf{Q}^{-1} \mathbf{K}_{\mathbf{\bar{X}} \mathbf{X}} \left( \mathbf{D} + \sigma^2 \mathbf{I} \right)^{-1} \mathbf{y}, \mathbf{K}_{\mathbf{x_*} \mathbf{x_*}} - \mathbf{K}_{\mathbf{x_*}\mathbf{\bar{X}}} \left( \mathbf{K}_{\mathbf{\bar{X}}\mathbf{\bar{X}}}^{-1} - \mathbf{Q}^{-1} \right) \mathbf{K}_{\mathbf{\bar{X}}\mathbf{x_*}} + \sigma^2 \right)
-\end{align}<p><details></p>
-<p><summary>Bayes' rule for Gaussian distributions</summary>
+\end{align}<!---
+<details>
+<summary>Bayes' rule for Gaussian distributions</summary>
 <br>
 Assuming a Gaussian prior and a likelihood of the form
 \begin{align}
-p(\mathbf{x}) &amp;= \mathcal{N}\left(\mathbf{x}; \boldsymbol{\mu}_{\mathbf{x}}, \boldsymbol{\Lambda}^{-1}_{\mathbf{x}} \right)\\
-p(\mathbf{y} | \mathbf{x}) &amp;= \mathcal{N}\left(\mathbf{y}; \mathbf{A}\mathbf{x} + \mathbf{b}, \boldsymbol{\Lambda}^{-1}_{\mathbf{y} | \mathbf{x}} \right)
+p(\mathbf{x}) &= \mathcal{N}\left(\mathbf{x}; \boldsymbol{\mu}_{\mathbf{x}}, \boldsymbol{\Lambda}^{-1}_{\mathbf{x}} \right)\\
+p(\mathbf{y} | \mathbf{x}) &= \mathcal{N}\left(\mathbf{y}; \mathbf{A}\mathbf{x} + \mathbf{b}, \boldsymbol{\Lambda}^{-1}_{\mathbf{y} | \mathbf{x}} \right)
 \end{align}
 <br>
 respectively, we can apply Bayes' rule to obtain the marginal of $\mathbf{y}$ and posterior $\mathbf{x}| \mathbf{y}$:
-<br></p>
-\begin{align}
-p(\mathbf{y}) &amp;= \mathcal{N}\left(\mathbf{y}; \mathbf{A}\boldsymbol{\mu}_{\mathbf{x}} + \mathbf{b}, \boldsymbol{\Lambda}^{-1}_{\mathbf{y} | \mathbf{x}} + \mathbf{A} \boldsymbol{\Lambda}^{-1}_{\mathbf{x}}\mathbf{A}^\top \right)\\
-p(\mathbf{x} | \mathbf{y}) &amp;= \mathcal{N}\left(\mathbf{y}; \boldsymbol{\Lambda}_{\mathbf{x}|\mathbf{y}}^{-1} \left( \mathbf{A}^\top\boldsymbol{\Lambda}_{\mathbf{y} | \mathbf{x}} (\mathbf{y} - \mathbf{b}) +  \boldsymbol{\Lambda}_{\mathbf{x}} \boldsymbol{\mu}_{\mathbf{x}}\right), \boldsymbol{\Lambda}_{\mathbf{x}|\mathbf{y}}^{-1} \right)
-\end{align}<p><br>
-where $\boldsymbol{\Lambda}_{\mathbf{x}|\mathbf{y}} = \left(\boldsymbol{\Lambda}_{\mathbf{x}} + \mathbf{A}^\top\boldsymbol{\Lambda}_{\mathbf{y} | \mathbf{x}}\mathbf{A} \right)$.
-&lt;/details&gt;
-*/</p>
+<br>
 
+\begin{align}
+p(\mathbf{y}) &= \mathcal{N}\left(\mathbf{y}; \mathbf{A}\boldsymbol{\mu}_{\mathbf{x}} + \mathbf{b}, \boldsymbol{\Lambda}^{-1}_{\mathbf{y} | \mathbf{x}} + \mathbf{A} \boldsymbol{\Lambda}^{-1}_{\mathbf{x}}\mathbf{A}^\top \right)\\
+p(\mathbf{x} | \mathbf{y}) &= \mathcal{N}\left(\mathbf{y}; \boldsymbol{\Lambda}_{\mathbf{x}|\mathbf{y}}^{-1} \left( \mathbf{A}^\top\boldsymbol{\Lambda}_{\mathbf{y} | \mathbf{x}} (\mathbf{y} - \mathbf{b}) +  \boldsymbol{\Lambda}_{\mathbf{x}} \boldsymbol{\mu}_{\mathbf{x}}\right), \boldsymbol{\Lambda}_{\mathbf{x}|\mathbf{y}}^{-1} \right)
+\end{align}
+<br>
+where $\boldsymbol{\Lambda}_{\mathbf{x}|\mathbf{y}} = \left(\boldsymbol{\Lambda}_{\mathbf{x}} + \mathbf{A}^\top\boldsymbol{\Lambda}_{\mathbf{y} | \mathbf{x}}\mathbf{A} \right)$.
+</details>
+--->
 </div>
 </div>
 </div>
