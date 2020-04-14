@@ -11,7 +11,7 @@ prev_page:
 next_page:
   url: /guide/01_overview.html
 suffix: .ipynb
-search: mathbf x f bar y q left right p k align boldsymbol theta neq def log frac int begin end cancel choose special approximate posterior mathcal free energy bound d kxx kxb kbx kbb fx fb lrb vfe maximize kl divergence elbo note form maximise w r t text argmax solve maximising substitute prior require df substituting n observations tightness expressiveness different things
+search: mathbf x f bar y q p fb lrb def theta k align neq left right xb boldsymbol log frac int bs begin end fx cancel choose special approximate posterior mathcal free energy bound df d kxx kxb kbx kbb bm vfe maximize kl divergence elbo note form maximise w r t text argmax solve maximising substitute prior require substituting n observations tightness expressiveness different things
 
 comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
 ---
@@ -35,9 +35,9 @@ q(f | \mathbf{y}) = p\left(f_{\neq \mathbf{\bar{X}}} | \mathbf{f}_{\mathbf{\bar{
 q^*\left(\mathbf{f}_{\mathbf{\bar{X}}} | \mathbf{y} \right) = \text{argmax}_{q} \mathbf{F}(q, \boldsymbol{\theta})
 \end{align}<h2 id="Solve-for-maximising-the-free-energy">Solve for maximising the free energy<a class="anchor-link" href="#Solve-for-maximising-the-free-energy"> </a></h2><p>Substitute special prior in free energy bound:</p>
 \begin{align} \require{cancel}
-\mathbf{F}(q, \boldsymbol{\theta}) &amp;= \int p\left(f_{\neq \mathbf{\bar{X}}} | \mathbf{f}_{\mathbf{\bar{X}}}\right) q\left(\mathbf{f}_{\mathbf{\bar{X}}} | \mathbf{y} \right) \log \frac{p(\mathbf{y}, f | \boldsymbol{\theta})}{p\left(f_{\neq \mathbf{\bar{X}}} | \mathbf{f}_{\mathbf{\bar{X}}}\right) q\left(\mathbf{f}_{\mathbf{\bar{X}}} | \mathbf{y} \right)}\\
-&amp;= \int p\left(f_{\neq \mathbf{\bar{X}}} | \mathbf{f}_{\mathbf{\bar{X}}}\right) q\left(\mathbf{f}_{\mathbf{\bar{X}}} | \mathbf{y} \right) \log \frac{p(\mathbf{y} | \mathbf{f}, \boldsymbol{\theta})  \cancel{p\left(f_{\mathbf{\neq \bar{X}}}| \mathbf{f}_{\mathbf{\bar{X}}}\right)}  p(\mathbf{f}_{\mathbf{\bar{X}}})}{\cancel{p\left(f_{\neq \mathbf{\bar{X}}} | \mathbf{f}_{\mathbf{\bar{X}}}\right)} q\left(\mathbf{f}_{\mathbf{\bar{X}}} | \mathbf{y} \right)} df\\
-&amp;= \int p\left(\mathbf{f} | \mathbf{f}_{\mathbf{\bar{X}}}\right) q\left(\mathbf{f}_{\mathbf{\bar{X}}} | \mathbf{y} \right) \log \frac{p(\mathbf{y} | \mathbf{f}, \boldsymbol{\theta}) p(\mathbf{f}_{\mathbf{\bar{X}}})}{ q\left(\mathbf{f}_{\mathbf{\bar{X}}} | \mathbf{y} \right)} d\mathbf{f}_{\mathbf{X}} d\mathbf{f}_{\mathbf{\bar{X}}}
+\mathbf{F}(q, \boldsymbol{\theta}) &amp;= \int p\lrb[f_{\neq \Xb} | \fb] q\lrb[\fb | \mathbf{y}] \log \frac{p(\mathbf{y}, f | \bs[\theta])}{p\lrb[f_{\neq \Xb} | \fb] q\lrb[\mathbf{f}_{\mathbf{\bar{X}}} | \mathbf{y}]} df\\
+&amp;= \int p\lrb[f_{\neq \Xb} | \fb] q\lrb[\fb | \mathbf{y}] \log \frac{p(\mathbf{y} | \mathbf{f}, \bs[\theta])  \cancel{p\lrb[f_{\neq \Xb} | fb]}  p\lrb[\fb]}{\cancel{p\lrb[f_{\neq \Xb} | \fb]} q\left(\fb | \mathbf{y} \right)} df\\
+&amp;= \int p\lrb[\fx | \fb] q\lrb[\fb | \mathbf{y}] \log \frac{p(\mathbf{y} | \mathbf{f}, \bs[\theta]) p(\fb)}{ q\lrb[\fb | \mathbf{y}]} d\fx d\fb
 \end{align}<p>Substituting $p\left(f_{\neq \mathbf{\bar{X}}} | \mathbf{f}_{\mathbf{\bar{X}}}\right) = \mathcal{N}\left(f_{\neq \mathbf{\bar{X}}}; \mathbf{K}_{\mathbf{X}\mathbf{\bar{X}}} \mathbf{K}_{\mathbf{\bar{X}}\mathbf{\bar{X}}}^{-1},  \mathbf{K}_{\mathbf{\bar{X}}\mathbf{\bar{X}}} - \mathbf{K}_{\mathbf{X}\mathbf{\bar{X}}} \mathbf{K}_{\mathbf{\bar{X}}\mathbf{\bar{X}}}^{-1} \right)$</p>
 
 </div>
@@ -57,9 +57,13 @@ q^*\left(\mathbf{f}_{\mathbf{\bar{X}}} | \mathbf{y} \right) = \text{argmax}_{q} 
  \def\Kbb{\mathbf{K}_{\mathbf{\bar{X}}\mathbf{\bar{X}}}}
  \def\fx{\mathbf{f}_{\mathbf{X}}}
  \def\fb{\mathbf{f}_{\mathbf{\bar{X}}}}
+ \def\X{\mathbf{X}}
+ \def\Xb{\mathbf{\bar{X}}}
  \def\lrb[#1]{\left(#1\right)}
+ \def\bm[#1]{\mathbf{#1}}
+ \def\bs[#1]{\boldsymbol{#1}}
 $</p>
-<p>$\Kxx, \Kxb, \Kbx, \Kbb, \fx, \fb, \lrb[\frac{1}{2}]$</p>
+<p>$\Kxx, \Kxb, \Kbx, \Kbb, \fx, \fb, \X, \Xb, \lrb[\frac{1}{2}], \bm[1], \bs[\theta]$</p>
 
 </div>
 </div>
