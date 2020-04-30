@@ -1,0 +1,138 @@
+---
+interact_link: content/convex-optimisation/lecture-2.ipynb
+kernel_name: venv-random-walks
+kernel_path: content/convex-optimisation
+has_widgets: false
+title: |-
+  Fundamental definitions
+pagenum: 7
+prev_page:
+  url: /convex-optimisation/lecture-1.html
+next_page:
+  url: /convex-optimisation/lecture-3.html
+suffix: .ipynb
+search: x s convex y theta k set top f r n points c lambda mathbb cone align not minimal element sets z line text cones hyperplane leq implies b xc inequalities minimum affine where norm function inequality also contains geq mathbf begin proper generalised dual its segment combinations elements conic d end boundary supporting combination such big frac preccurlyeqk succcurlyeq theorem between form neq positive preccurlyeq show perspective point exists defined any linear hull textbf non balls satisfies intersection closed convexity left used define separating xn smallest contain since halfspaces ball p cx ax mapping statement interior pointed preck hold
+
+comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
+---
+
+    <main class="jupyter-page">
+    <div id="page-info"><div id="page-title">Fundamental definitions</div>
+</div>
+    
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Affine-sets">Affine sets<a class="anchor-link" href="#Affine-sets"> </a></h2><p><strong>Line:</strong> through points $x_1$ and $x_2$ is the set</p>
+$$x = \theta x_1 + (1 - \theta) x_2, \text{ where } \theta \in \mathbb{R}.$$<p><strong>Affine set:</strong> an affine set is a set which contains the line defined by any two of its points.</p>
+<h2 id="Convex-sets">Convex sets<a class="anchor-link" href="#Convex-sets"> </a></h2><p><strong>Line segment:</strong> the line segment between two points $x_1$ and $x_2$ is the set of points</p>
+$$x = \theta x_1 + (1 - \theta) x_2, \text{ where } \theta \in [0, 1].$$<p><strong>Convex set:</strong> a convex set contains the line segments between any two of its points. Affine sets are convex.</p>
+<h2 id="Convex-combinations-and-convex-hulls">Convex combinations and convex hulls<a class="anchor-link" href="#Convex-combinations-and-convex-hulls"> </a></h2><p><strong>Convex combination:</strong> a linear combination of points $x_1, x_2, ..., x_n$ of the form</p>
+$$x = \theta_1 x_1 + \theta_2 x_2 + ... + \theta_n x_n,$$<p>is a convex combination if $\theta_k \geq 0$ for all $k$ and $\sum_k \theta_k = 1$.</p>
+<p><strong>Convex hull:</strong> of a set $S$, $\textbf{conv}S$, is the set of all convex combinations of $S$. It is the smallest convex set that contains $S$, as any convex superset of $S$ must contain all convex combinations of elements in $S$ and by extension $\textbf{conv}S$ as well.</p>
+<h2 id="Cones-and-convex-cones">Cones and convex cones<a class="anchor-link" href="#Cones-and-convex-cones"> </a></h2><p><strong>Cone:</strong> a set which contains all non-negative multiples of its points</p>
+$$x \in C, \theta \geq 0 \implies \theta x \in C.$$<p>Cones are not necessarily convex: the set $\mathbb{R}_{+} \cup \mathbb{R}_{-}$ is a cone but is not convex.</p>
+<p><strong>Conic combination:</strong> a linear combination of points $x_1$ and $x_2$</p>
+$$x = \theta_1 x_1 + \theta_2 x_2$$<p>is a conic combination if $\theta_1, \theta_2 \geq 0$.</p>
+<p><strong>Convex cone:</strong> a set which contains all conic combinations of its points. Since the set of conic combinations of a set subsumes the set of convex combinations, such a set is convex as well as a cone.</p>
+<p><strong>Conic hull:</strong> of a set $C$ is the smallest set which contains all conic combinations of $C$. A conic hull is the smallest convex cone that contains $C$, by the same argument applied to convex hulls and convex sets.</p>
+<h2 id="Hyperplanes-and-halfspaces">Hyperplanes and halfspaces<a class="anchor-link" href="#Hyperplanes-and-halfspaces"> </a></h2><p><strong>Hyperplane:</strong> a set of points of the form</p>
+$$\{x | a^\top x = b\}, a \neq 0.$$<p><strong>Halfspace:</strong> a set of points of the form</p>
+$$\{x | a^\top x \leq b\}, a \neq 0.$$<p>Hyperplanes are affine and convex. Halfspaces are convex but they are not affine.</p>
+<h2 id="Euclidian-balls-and-ellipsoids">Euclidian balls and ellipsoids<a class="anchor-link" href="#Euclidian-balls-and-ellipsoids"> </a></h2><p><strong>(Euclidean) ball:</strong> with center $x_c$ and radius $r$</p>
+$$B(x_c, r) = \{x~|~||x - x_c||_2 \leq r \} = \{x_c + ru~|~||u||_2 \leq 1 \}.$$<p><strong>Ellipsoid:</strong> a set of the form</p>
+$$E(x_c, P) = \{x~|~(x - x_c)^\top P (x - x_c) \leq 1\} = \{x_c + Au~|~||u||_2 \leq 1 \},$$<p>where $P$ is a symmetric positive-definite and $A$ is non-singular.</p>
+<p>Euclidean balls and ellipsoids are convex sets.</p>
+<h2 id="Norm-balls-and-norm-cones">Norm balls and norm cones<a class="anchor-link" href="#Norm-balls-and-norm-cones"> </a></h2><p><strong>Norm:</strong> a norm is a function $||\cdot||$ that satisfies</p>
+<ol>
+<li>$||x|| \geq 0$</li>
+<li>$||cx|| = |c|~||x||$</li>
+<li>$||x + y|| \leq ||x|| + ||y||$</li>
+</ol>
+<p><strong>Norm ball:</strong> a norm ball with center $x_c$ and radius $r$ is the set $\{x~|~||x - x_c|| \leq r\}.$</p>
+<p><strong>Norm cone:</strong> the set $\{(x, t) ~|~ ||x|| \leq t\}.$</p>
+<p>Norm balls and norm cones are convex sets.</p>
+<h2 id="Polyhedra">Polyhedra<a class="anchor-link" href="#Polyhedra"> </a></h2><p><strong>Polyhedron:</strong> the set of finitely many linear inequalities and equalities</p>
+$$Ax \preccurlyeq b, \text{ and } Cx = d,$$<p>where $\preccurlyeq$ is the component-wise inequality. Polyhedra are convex and can be expressed as an intersection of finitely many halfspaces (inequalities) and hyperplances (equalities).</p>
+<h2 id="Positive-semidefinite-cone">Positive-semidefinite cone<a class="anchor-link" href="#Positive-semidefinite-cone"> </a></h2><p>The set of all positive-semidefinite matrices $\mathbf{S}_+^n = \{X~|~ z^\top Xz \geq 0~\forall~z \in \mathbb{R}^n\}$ is a convex cone:</p>
+\begin{align}
+X, Y \in \mathbf{S}_+^n \implies \theta_1 X + \theta_2 Y \in \mathbf{S}_+^n, \text{ if } \theta_1, \theta_2 \geq 0.
+\end{align}<p>Similarly, the set of all positive-definite matrices $\mathbf{S}_{++}^n = \{X~|~ z^\top Xz &gt; 0\}$ is also a convex cone:</p>
+\begin{align}
+X, Y \in \mathbf{S}_{++}^n \implies \theta_1 X + \theta_2 Y \in \mathbf{S}_{++}^n, \text{ if } \theta_1, \theta_2 &gt; 0.
+\end{align}<p>The difference between these sets is that $\mathbf{S}_+^n$ is closed, whereas $\mathbf{S}_{++}^n$ is open. Both of these are examples of convex sets.</p>
+<h2 id="Operations-that-preserve-convexity">Operations that preserve convexity<a class="anchor-link" href="#Operations-that-preserve-convexity"> </a></h2><p><strong>Intersection:</strong> The intersection of any number of convex sets is convex.</p>
+<p>To show this, suppose $S_1, S_2, ...$ is a (finite or infinite) sequence of convex sets whose intersection is $S$ and $x, y \in S$, then $x, y$ are inside every $S_n$ and so is the line segment between them (by convexity of $S_n$). This implies the line segment is itself in $S$, showing $S$ is convex.</p>
+<p><strong>Affine function:</strong> An affine mapping, $f(x) = Ax + b$, of a convex set is also convex. Convexity is also preserved under inverses of affine maps, where the inverse map is defined as $f^{-1}(S)\{x~|~f(x) \in S\}$.</p>
+<p>To show the first statement, let $S_1$ be a convex set, $S_2 = f(S_1)$ and $x, y \in S_1$. Then the line segment $\theta x + (1 - \theta) y, \theta \in [0, 1]$ is in $S_1$ and</p>
+\begin{align}
+f\big(\theta x + (1 - \theta) y\big) = \theta Ax + (1 - \theta) Ay + b = \theta f(x) + (1 - \theta) f(y)~\in~f(S_2) 
+\end{align}<p>so $S_2$ is convex. To show the second statement, let $S_2$ be a convex set, $S_1 = f^{-1}(S_2)$ and $x, y \in S_2$. Then $f^{-1}(x), f^{-1}(y) \subset S_1$, and we want to show that if $x^* \in f^{-1}(x), y^* \in f^{-1}(y)$, then the line segment $\theta x^* + (1 - \theta)y^*$ is also in $S_1$. By the convexity of $S_2$, the line segment $\theta x + (1 - \theta) y$ is in $S_2$, so:</p>
+\begin{align}
+f\Big(\big\{\theta x^* + (1 - \theta)y^* | x^* \in f^{-1}(x), y^* \in f^{-1}(y)\big\}\Big) = \theta x + (1 - \theta) y \in S_2
+\end{align}<p>and since the left hand side is in $S_2$, the argument of $f$ on the left hand side must be a subset of $S_1$ (by the definition of $f^{-1}$), showing that $S_1$ is convex.</p>
+<p><strong>Perspective function:</strong> A perspective function $f : \{x~|~ x \in \mathbb{R}^{n} \text{ and } x_n &gt; 0\} \to \mathbb{R}^{n - 1}$ is the mapping</p>
+$$f(x) = \left(\frac{x_1}{x_{n}}, \frac{x_2}{x_{n}}, ..., \frac{x_{n-1}}{x_{n}} \right),$$<p>and it is a convex function. The perspective function can be interpreted as a projection of a point in $\mathbb{R}^{n}$ to the image plane of a pinhole camera. It is also closely related to homogeneous coordinates, used in graphics and computer vision - for further reading see Roberto Cipolla's <a href="http://mi.eng.cam.ac.uk/~cipolla/lectures/4F12/Slides/2019-4F12-notes-3.pdf">notes on Computer Vision</a>.</p>
+<p><strong>Linear-fractional function:</strong> A perspective function $f : \mathbb{R}^{n} \to \mathbb{R}^m$ is a mapping of the form</p>
+$$f(x) = \left(\frac{x_1}{x_{n}}, \frac{x_2}{x_{n}}, ..., \frac{x_{n-1}}{x_{n}} \right),$$<p>and is also a convex function. It is a generalisation of the perspective funtion, and equal to it if $c^\top = [0, 0, ..., 1]$ and $d = 0$.</p>
+<h2 id="Proper-cones,-generalised-inequalities,-minimum-and-minimal-elements">Proper cones, generalised inequalities, minimum and minimal elements<a class="anchor-link" href="#Proper-cones,-generalised-inequalities,-minimum-and-minimal-elements"> </a></h2><p><strong>Proper cone:</strong> A convex cone is a proper cone if it is</p>
+<ol>
+<li>Closed (contains its boundary),</li>
+<li>Solid (it has non-zero interior) and</li>
+<li>Pointed (does not contain a line).</li>
+</ol>
+<p>Proper cones are used to define another useful concept, the generalised inequality.</p>
+<p><strong>Generalised inequality:</strong> The generalised inequalities $\preccurlyeq_K$ and $\prec_K$ with respect to a proper cone $K$ are defined as</p>
+\begin{align}
+x \preccurlyeq_K y &amp;\implies y - x \in K \\
+x \prec_K y &amp;\implies y - x \in \textbf{ int}(K).
+\end{align}<p>In general however, we might have both $x \not \preccurlyeq_K y$ and $x \not \succcurlyeq_K y$ simultaneously, if $x$ and $y$ are not comparable under the inequality. For example, comparing the points $x = (1, 0)$ and $y = (-1, 1)$ using the inequality $\preccurlyeq_{\mathbb{R}^2_{+}}$ (where $\mathbb{R}^2_{+}$ is the positive quadrant of $\mathbb{R}^2$), we see that neither $x \preccurlyeq_{\mathbb{R}^2_{+}} y$ nor $x \succcurlyeq_{\mathbb{R}^2_{+}} y$ hold, because neither $y - x$ nor $x - y$ are in $\mathbb{R}^2_{+}$. This inequality is therefore a <em>partial ordering</em>, and we need to distinguish between different kinds of "minimum" points.</p>
+<p><strong>Minimum element:</strong> The minimum element $x$ of $S$ satisfies</p>
+$$y \in S \implies x \preccurlyeq_K y.$$<p>So <em>if $y \in S$ then $y$ is no greater than $x$</em>. Thus $x$ can be compared to all other points $y \in S$ and inequality can be unambiguously decided.</p>
+<p><strong>Minimal element:</strong> A minimal element $x$ of $S$ satisfies</p>
+$$y \in S, y \preccurlyeq_K x \implies x = y.$$<p>This means that if there is another element $y$ in $S$ such that it can be compared to $x$ and is in fact smaller than or equal to $x$, then $x = y$. The reason we define minimal elements in addition to minimum elements, is to deal with cases where not all points can be compared to each other, like the $\mathbb{R}^2_{+}$ example above. In such cases, there may not be a minimum point but there will be minimal points.</p>
+<h2 id="Separating-hyperplane-theorem">Separating hyperplane theorem<a class="anchor-link" href="#Separating-hyperplane-theorem"> </a></h2><p>If $C$ and $D$ are disjoint convex sets, then there exist $a \neq 0$ and $b$ such that</p>
+\begin{align}
+&amp;a^\top x \leq b \text{ for } x \in C \\
+\text{ and } &amp;a^\top x \geq b \text{ for } x \in D.
+\end{align}<p>In other words, the plane separates the two sets. Strict inequality would require further restrictions: consider the case where $C$ is an open (does not contain its boundary) convex set and $D$ is a point on the boundary of $C$; strict equality $a^\top x &gt; b \text{ for } x \in D$ would not hold.</p>
+<h2 id="Supporting-hyperplane-theorem">Supporting hyperplane theorem<a class="anchor-link" href="#Supporting-hyperplane-theorem"> </a></h2><p><strong>Supporting hyperplane:</strong> A supporting hyperplane to $C$, at an $x_0$ on the boundary of $C$, is the set: $$\{x | a^\top x = a^\top x_0\},$$ where $a \neq 0$ and $a^\top x \leq a^\top x_0$ for $x \in C$.</p>
+<p><strong>Supporting hyperplane theorem:</strong> If $C$ is a convex set, then there exists a supporting hyperplane to $C$ at every one of its boundary points.</p>
+<p>The supporting hyperplane theorem can be proved by using the separating hyperplane theorem. If $x_0$ is a boundary point of $C$ we can define $D = \{x_0\}$, and apply the separating hyperplane theorem to show that a separating hyperplane exists, which is also supporting because $x_0$ is on the boundary of $C$.</p>
+<h2 id="Dual-cones-and-dual-generalised-inequalities">Dual cones and dual generalised inequalities<a class="anchor-link" href="#Dual-cones-and-dual-generalised-inequalities"> </a></h2><p><strong>Dual cone:</strong> the dual cone of a cone $K$ is defined as</p>
+$$K^* = \{z~|~ z^\top x \geq 0 \text{ for all } x \in K\},$$<p>and satisfies the useful properties:</p>
+<ul>
+<li>$K^*$ is closed and convex.</li>
+<li>If $K_1 \subseteq K_2$ then $K_2^* \subseteq K_1^*$.</li>
+<li>If $K$ has nonempty interior, then $K^*$ is pointed.</li>
+<li>If the closure of $K$ is pointed then $K^*$ has non-empty interior.</li>
+<li>$K^{**}$ is the closure of the convex hull of $K$. If $K$ is closed and convex to begin with, then $K = K^{**}$.</li>
+</ul>
+<p><strong>Dual generalised inequalities:</strong> The dual cones of proper cones are proper, and can also be used to define generalised inequalities</p>
+\begin{align}
+x \preccurlyeq_{K^*} y &amp;\implies y - x \in K^* \\
+x \prec_{K^*} y &amp;\implies y - x \in \textbf{ int}(K^*).
+\end{align}<p>Two important properties that relate generalised inequalities and their duals are:</p>
+<ul>
+<li>$x \preccurlyeq_K y \iff \lambda^\top x \leq \lambda^\top y$ for all $\lambda \succcurlyeq_{K*} 0$,</li>
+<li>$x \prec_K y \iff \lambda^\top x &lt; \lambda^\top y$ for all $\lambda \succcurlyeq_{K*} 0, \lambda \neq 0$,</li>
+</ul>
+<p>and since $K = K^{**}$ for proper cones, the above properties also hold if $K^*$ and $K^{**}$ are swapped.</p>
+<h2 id="Minimum-and-minimal-elements-via-dual-inequalities">Minimum and minimal elements via dual inequalities<a class="anchor-link" href="#Minimum-and-minimal-elements-via-dual-inequalities"> </a></h2><p>We have the following conditions on minimum and minimal elements based on dual inequalities.</p>
+<p><strong>Minimum element:</strong> An element $x \in S$ is the minimum element of $S$ if and only if $x$ is the unique minimiser of $\lambda^\top z, z \in S$ for all $\lambda \succ_{K^*} 0$.</p>
+<p><strong>Minimal element:</strong> An element $x \in S$ is a minimal element of $S$ if $x$ minimises $\lambda^\top z, z \in S$ for some $\lambda \succcurlyeq_{K^*} 0$.</p>
+<p>The converse of the above statement is generally not true. If $x$ is a minimal point, it is not true in general that there exists $\lambda \succ_{K^*} 0$, such that $x$ minimises $\lambda^\top z, z \in S$. However, if $S$ is convex, then a necessary and sufficient condition exists.</p>
+<p><strong>Minimal element of a convex set:</strong> An element $x$ of a convex set $S$, is minimal if and only if there exists $\lambda \succcurlyeq_{K^*} 0$ such that $x$ minimises $\lambda^\top z, z \in S$.</p>
+<p>For the statements on minimal elements, the strict inequality $\lambda \succ_{K^*} 0$ plays an important role. If $\lambda \succcurlyeq_{K^*} 0$ was used in the statements, counter-examples can be easily found.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+ 
+
+
+    </main>
+    

@@ -9,7 +9,7 @@ pagenum: 4
 prev_page:
   url: /gaussian-processes/sparse/fitc.html
 next_page:
-  url: /guide/01_overview.html
+  url: /convex-optimisation/intro.html
 suffix: .ipynb
 search: mathbf lrb fb y q p x f align fx mathcal kbb def bs log bar bm sigma begin end posterior theta int d frac n xb approximate m k kbx kxb left right top cost neq inducing points also ksb fstar predictive o gaussian elbo kxx kl obtain vfe marginal likelihood data optimise objective kbs kss df choose bound z using evaluate distribution exact fitc compute thus optimisation not variational free energy model used ksx w r t special form cancel lambda text tr term need evaluating nm gp accurately input costly tractable kxs declaremathoperator argmax arg newcommand maximising
 
@@ -19,11 +19,12 @@ comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /con
     <main class="jupyter-page">
     <div id="page-info"><div id="page-title">VFE</div>
 </div>
-    <div class="jb_cell">
+    
+<div class="jb_cell">
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Approximate-posteriors-vs.-approximate-models">Approximate posteriors vs. approximate models<a class="anchor-link" href="#Approximate-posteriors-vs.-approximate-models"> </a></h2><p>One issue with the <a href="https://random-walks.org/gaussian-processes/sparse/fitc.html">FITC</a> and {% cite ruby %}</p>
+<h2 id="Approximate-posteriors-vs.-approximate-models">Approximate posteriors vs. approximate models<a class="anchor-link" href="#Approximate-posteriors-vs.-approximate-models"> </a></h2><p>One issue with the <a href="https://random-walks.org/gaussian-processes/sparse/fitc.html">FITC</a> and</p>
 <p>Often, the log marginal likelihood of the data can be costly or intractable to compute. To circumvent this difficulty, one solution is to optimise an alternative objective instead of the log-marginal. This objective should be cheaper and tractable, thus enabling parameter optimisation, potentially at the expense of optimising the parameters to values which are not quite</p>
 <p>The Variational Free Energy (VFE), also known as the ELBO, is an objective which lower-bounds the log marginal likelihood of a model and can be used as an optimisation objective when the log marginal likelihood is costly or difficult to optimise.</p>
 <p>$
@@ -162,7 +163,7 @@ q\lrb[\fb | \mathbf{y}] = \frac{p\lrb[\fb] H\lrb[\mathbf{y}, \fx]}{Z},
 
 <div class="jb_cell tag_hide_input">
 
-<div class="cell border-box-sizing code_cell rendered tag_hide_input">
+<div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
 <div class="inner_cell">
@@ -269,7 +270,7 @@ q\lrb[\fb | \mathbf{y}] = \frac{p\lrb[\fb] H\lrb[\mathbf{y}, \fx]}{Z},
 
 <div class="jb_cell tag_hide_input">
 
-<div class="cell border-box-sizing code_cell rendered tag_hide_input">
+<div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
 <div class="inner_cell">
@@ -1519,14 +1520,14 @@ z
 
 <div class="jb_cell tag_hide_input">
 
-<div class="cell border-box-sizing code_cell rendered tag_hide_input">
+<div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">constant_mean</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                  <span class="n">dtype</span><span class="p">,</span>
                  <span class="n">name</span><span class="o">=</span><span class="s1">&#39;eq_covariance&#39;</span><span class="p">):</span>
         
@@ -1535,13 +1536,13 @@ z
         <span class="bp">self</span><span class="o">.</span><span class="n">constant</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">))</span>
         
         
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">constant</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
     
     
 <span class="k">class</span> <span class="nc">eq_covariance</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
                  <span class="n">log_coeff</span><span class="p">,</span>
                  <span class="n">log_scales</span><span class="p">,</span>
                  <span class="n">dim</span><span class="p">,</span>
@@ -1560,13 +1561,13 @@ z
         <span class="n">log_scales</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">log_scales</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
 
         <span class="k">assert</span> <span class="n">log_scales</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">dim</span><span class="p">,</span>                \
-            <span class="sa">f</span><span class="s1">&#39;Expected the size of scales at axis 2 &#39;</span>    <span class="o">+</span> \
-            <span class="sa">f</span><span class="s1">&#39;to be dim, found shapes </span><span class="si">{</span><span class="n">scales</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1"> &#39;</span>   <span class="o">+</span> \
-            <span class="sa">f</span><span class="s1">&#39;and </span><span class="si">{</span><span class="n">dim</span><span class="si">}</span><span class="s1">.&#39;</span>
+            <span class="n">f</span><span class="s1">&#39;Expected the size of scales at axis 2 &#39;</span>    <span class="o">+</span> \
+            <span class="n">f</span><span class="s1">&#39;to be dim, found shapes </span><span class="si">{scales.shape}</span><span class="s1"> &#39;</span>   <span class="o">+</span> \
+            <span class="n">f</span><span class="s1">&#39;and </span><span class="si">{dim}</span><span class="s1">.&#39;</span>
 
         <span class="k">assert</span> <span class="n">log_coeff</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(),</span>                     \
-            <span class="sa">f</span><span class="s1">&#39;Expected coeff to be a single scalar, &#39;</span>   <span class="o">+</span> \
-            <span class="sa">f</span><span class="s1">&#39;found coeff.shape == </span><span class="si">{</span><span class="n">coeff</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">.&#39;</span>
+            <span class="n">f</span><span class="s1">&#39;Expected coeff to be a single scalar, &#39;</span>   <span class="o">+</span> \
+            <span class="n">f</span><span class="s1">&#39;found coeff.shape == </span><span class="si">{coeff.shape}</span><span class="s1">.&#39;</span>
         
         <span class="c1"># Set input dimensionality</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">=</span> <span class="n">dim</span>
@@ -1586,7 +1587,7 @@ z
         <span class="k">return</span> <span class="mi">10</span> <span class="o">**</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_coeff</span>
         
         
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                  <span class="n">x1</span><span class="p">,</span>
                  <span class="n">x2</span><span class="p">,</span>
                  <span class="n">diag_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -1599,10 +1600,10 @@ z
         <span class="c1"># Check dimensions are correct</span>
         <span class="k">assert</span> <span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">rank</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span> <span class="o">==</span> <span class="n">tf</span><span class="o">.</span><span class="n">rank</span><span class="p">(</span><span class="n">x2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="ow">and</span>       \
                <span class="p">(</span><span class="n">x1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">x2</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">),</span>   \
-            <span class="sa">f</span><span class="s1">&#39;Expected x1 and x2 to have 2 dimensions &#39;</span>  <span class="o">+</span> \
-            <span class="sa">f</span><span class="s1">&#39;and to both match self.dim at second &#39;</span>     <span class="o">+</span> \
-            <span class="sa">f</span><span class="s1">&#39;dimension, instead found shapes &#39;</span>          <span class="o">+</span> \
-            <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">x1</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1"> and </span><span class="si">{</span><span class="n">x2</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">.&#39;</span>
+            <span class="n">f</span><span class="s1">&#39;Expected x1 and x2 to have 2 dimensions &#39;</span>  <span class="o">+</span> \
+            <span class="n">f</span><span class="s1">&#39;and to both match self.dim at second &#39;</span>     <span class="o">+</span> \
+            <span class="n">f</span><span class="s1">&#39;dimension, instead found shapes &#39;</span>          <span class="o">+</span> \
+            <span class="n">f</span><span class="s1">&#39;</span><span class="si">{x1.shape}</span><span class="s1"> and </span><span class="si">{x2.shape}</span><span class="s1">.&#39;</span>
 
         <span class="n">scales</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scales</span>
         
@@ -1649,7 +1650,7 @@ z
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">VFEGP</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                  <span class="n">x_train</span><span class="p">,</span>
                  <span class="n">y_train</span><span class="p">,</span>
                  <span class="n">x_ind_init</span><span class="p">,</span>
@@ -1765,7 +1766,7 @@ z
 
 <div class="jb_cell tag_hide_input">
 
-<div class="cell border-box-sizing code_cell rendered tag_hide_input">
+<div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
 <div class="inner_cell">
@@ -1808,7 +1809,7 @@ z
                 <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">,</span>
                 <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;Init. $\bar{\mathbf</span><span class="si">{X}</span><span class="s1">}$&#39;</span><span class="p">)</span>
     
-    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;VFE after </span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s1"> optimisation steps&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;VFE after </span><span class="si">{step}</span><span class="s1"> optimisation steps&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mf">8.</span><span class="p">,</span> <span class="mf">8.</span><span class="p">])</span>
@@ -1820,11 +1821,11 @@ z
 <span class="k">def</span> <span class="nf">print_numbers</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
     
     <span class="n">free_energy</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">free_energy</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Step: </span><span class="si">{</span><span class="n">step</span><span class="si">:</span><span class="s1">5&gt;</span><span class="si">}</span><span class="s1"> &#39;</span>
-          <span class="sa">f</span><span class="s1">&#39;Free energy: </span><span class="si">{</span><span class="n">free_energy</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="si">:</span><span class="s1">8.3f</span><span class="si">}</span><span class="s1"> &#39;</span>
-          <span class="sa">f</span><span class="s1">&#39;Log coeff: </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">cov</span><span class="o">.</span><span class="n">log_coeff</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="si">:</span><span class="s1">5.2f</span><span class="si">}</span><span class="s1"> &#39;</span>
-          <span class="sa">f</span><span class="s1">&#39;Log scales: </span><span class="si">{</span><span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="n">num</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">cov</span><span class="o">.</span><span class="n">log_scales</span><span class="o">.</span><span class="n">numpy</span><span class="p">()]</span><span class="si">}</span><span class="s1"> &#39;</span>
-          <span class="sa">f</span><span class="s1">&#39;Log noise: </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">log_noise</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="si">:</span><span class="s1">5.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Step: </span><span class="si">{step:5&gt;}</span><span class="s1"> &#39;</span>
+          <span class="n">f</span><span class="s1">&#39;Free energy: {free_energy.numpy():8.3f} &#39;</span>
+          <span class="n">f</span><span class="s1">&#39;Log coeff: {model.cov.log_coeff.numpy():5.2f} &#39;</span>
+          <span class="n">f</span><span class="s1">&#39;Log scales: {[round(num[0], 3) for num in model.cov.log_scales.numpy()]} &#39;</span>
+          <span class="n">f</span><span class="s1">&#39;Log noise: {model.log_noise.numpy():5.2f}&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -4649,17 +4650,6 @@ z
 <li>How tight is the bound in general? Compute the KL.</li>
 </ul>
 <p>Tightness of bound and expressiveness of approximate posterior are different things in general. An approximate posterior can be used to get an exact log-likelihood. But if we use the KL ELBO, then the expressiveness of $q$ and the tightness of the bound are closely related.</p>
-
-</div>
-</div>
-</div>
-</div>
-
-<div class="jb_cell">
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="References">References<a class="anchor-link" href="#References"> </a></h1><p>{% bibliography --cited %}</p>
 
 </div>
 </div>

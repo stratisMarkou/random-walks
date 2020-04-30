@@ -3,7 +3,7 @@ redirect_from:
   - "/guide/06-advanced"
 title: |-
   Advanced topics and how-tos
-pagenum: 14
+pagenum: 20
 prev_page:
   url: /guide/05_faq.html
 next_page:
@@ -17,7 +17,8 @@ comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /con
     <main class="jupyter-page">
     <div id="page-info"><div id="page-title">Advanced topics and how-tos</div>
 </div>
-    <div class="jb_cell">
+    
+<div class="jb_cell">
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -80,11 +81,11 @@ First change directories into the root of your book folder, and then
 run the script below as a Python script or within a Jupyter Notebook
 (modifying as necessary for your use case).
 Finally, check the changes that will be made and commit them to your repository.</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nbformat</span> <span class="k">as</span> <span class="nn">nbf</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nbformat</span> <span class="kn">as</span> <span class="nn">nbf</span>
 <span class="kn">from</span> <span class="nn">glob</span> <span class="kn">import</span> <span class="n">glob</span>
 
 <span class="c1"># Collect a list of all notebooks in the content folder</span>
-<span class="n">notebooks</span> <span class="o">=</span> <span class="n">glob</span><span class="p">(</span><span class="s2">&quot;./content/**/*.ipynb&quot;</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">notebooks</span> <span class="o">=</span> <span class="n">glob</span><span class="p">(</span><span class="s2">&quot;./content/**/*.ipynb&quot;</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
 <span class="c1"># Text to look for in adding tags</span>
 <span class="n">text_search_dict</span> <span class="o">=</span> <span class="p">{</span>
