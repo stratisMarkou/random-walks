@@ -1,0 +1,3063 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,minimum-scale=1">
+
+  <title>FITC</title>
+  <meta name="description" content="        FITC    What is the Fully Independent Training Conditional (FITC aka SPGP)? The Sparse Pseudo-input Guassian Process (SPGP) approximation is a partic...">
+
+  <link rel="canonical" href="http://localhost:4000/gaussian-processes/sparse/fitc.html">
+  <link rel="alternate" type="application/rss+xml" title="Random Walks" href="http://localhost:4000/feed.xml">
+
+  <meta property="og:url"         content="http://localhost:4000/gaussian-processes/sparse/fitc.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="FITC" />
+<meta property="og:description" content="        FITC    What is the Fully Independent Training Conditional (FITC aka SPGP)? The Sparse Pseudo-input Guassian Process (SPGP) approximation is a partic..." />
+<meta property="og:image"       content="http://localhost:4000/images/logo/logo.svg" />
+
+<meta name="twitter:card" content="summary">
+
+
+  <script type="application/ld+json">
+  {
+  "@context": "http://schema.org",
+  "@type": "NewsArticle",
+  "mainEntityOfPage": "http://localhost:4000/gaussian-processes/sparse/fitc.html",
+  "headline": "FITC",
+  "datePublished": "2020-05-04T00:04:58+03:00",
+  "dateModified": "2020-05-04T00:04:58+03:00",
+  "description": "        FITC    What is the Fully Independent Training Conditional (FITC aka SPGP)? The Sparse Pseudo-input Guassian Process (SPGP) approximation is a partic...",
+  "author": {
+    "@type": "Person",
+    "name": "Stratis Markou"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Data 100 at UC Berkeley",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:4000",
+      "width": 60,
+      "height": 60
+    }
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "http://localhost:4000",
+    "height": 60,
+    "width": 60
+  }
+}
+
+  </script>
+  <link rel="stylesheet" href="/assets/css/styles.css">
+
+  <!-- <link rel="manifest" href="/manifest.json"> -->
+  <!-- <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#efae0a"> -->
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+  <meta name="theme-color" content="#233947">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="/images/logo/favicon.ico">
+
+  <!-- MathJax Config -->
+  <!-- Allow inline math using $ and automatically break long math lines -->
+<!-- (mostly) copied from nbconvert configuration -->
+<!-- https://github.com/jupyter/nbconvert/blob/master/nbconvert/templates/html/mathjax.tpl -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+        processEnvironments: true
+    },
+    // Center justify equations in code and markdown cells. Elsewhere
+    // we use CSS to left justify single line equations in code cells.
+    displayAlign: 'center',
+    "HTML-CSS": {
+        styles: {'.MathJax_Display': {"margin": 0}},
+        linebreaks: { automatic: true },
+    },
+    
+});
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML' async></script>
+
+
+  <!-- DOM updating function -->
+  <script src="/assets/js/page/dom-update.js"></script>
+
+  <!-- Selectors for elements on the page -->
+  <script src="/assets/js/page/documentSelectors.js"></script>
+
+  <!-- Define some javascript variables that will be useful in other javascript -->
+  <script>
+    const site_basename = '';
+  </script>
+
+  <!-- Add AnchorJS to let headers be linked -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js" async></script>
+  <script src="/assets/js/page/anchors.js" async></script>
+
+  <!-- Include Turbolinks to make page loads fast -->
+  <!-- https://github.com/turbolinks/turbolinks -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.2.0/turbolinks.js" async></script>
+  <meta name="turbolinks-cache-control" content="no-cache">
+
+  <!-- Load nbinteract for widgets -->
+  
+
+  <!-- Load Thebelab for interactive widgets -->
+  <!-- Include Thebelab for interactive code if it's enabled -->
+
+
+<!-- Display Thebelab button in each code cell -->
+<script>
+/**
+ * Set up thebelab button for code blocks
+ */
+
+const thebelabCellButton = id =>
+  `<a id="thebelab-cell-button-${id}" class="btn thebebtn o-tooltip--left" data-tooltip="Interactive Mode">
+    <img src="/assets/images/edit-button.svg" alt="Start thebelab interactive mode">
+  </a>`
+
+
+const addThebelabButtonToCodeCells =  () => {
+
+  const codeCells = document.querySelectorAll('div.input_area > div.highlight:not(.output) pre')
+  codeCells.forEach((codeCell, index) => {
+    const id = codeCellId(index)
+    codeCell.setAttribute('id', id)
+    if (document.getElementById("thebelab-cell-button-" + id) == null) {
+      codeCell.insertAdjacentHTML('afterend', thebelabCellButton(id));
+    }
+  })
+}
+
+initFunction(addThebelabButtonToCodeCells);
+</script>
+
+
+<script src="https://unpkg.com/thebelab@latest/lib/index.js" async></script>
+<script>
+    /**
+     * Add attributes to Thebelab blocks
+     */
+
+    const initThebelab = () => {
+        const addThebelabToCodeCells = () => {
+            console.log("Adding thebelab to code cells...");
+            // If Thebelab hasn't loaded, wait a bit and try again. This
+            // happens because we load ClipboardJS asynchronously.
+            if (window.thebelab === undefined) {
+                setTimeout(addThebelabToCodeCells, 250)
+            return
+            }
+
+            // If we already detect a Thebelab cell, don't re-run
+            if (document.querySelectorAll('div.thebelab-cell').length > 0) {
+                return;
+            }
+
+            // Find all code cells, replace with Thebelab interactive code cells
+            const codeCells = document.querySelectorAll('.input_area pre')
+            codeCells.forEach((codeCell, index) => {
+                const id = codeCellId(index)
+
+                // Clean up the language to make it work w/ CodeMirror and add it to the cell
+                dataLanguage = ""
+                dataLanguage = detectLanguage(dataLanguage);
+                codeCell.setAttribute('data-language', dataLanguage)
+                codeCell.setAttribute('data-executable', 'true')
+
+                // If the code cell is hidden, show it
+                var inputCheckbox = document.querySelector(`input#hidebtn${codeCell.id}`);
+                if (inputCheckbox !== null) {
+                    setCodeCellVisibility(inputCheckbox, 'visible');
+                }
+            });
+
+            // Remove the event listener from the page so keyboard press doesn't
+            // Change page
+            document.removeEventListener('keydown', initPageNav)
+            keyboardListener = false;
+
+            // Init thebelab
+            thebelab.bootstrap();
+
+            // Remove copy buttons since they won't work anymore
+            const copyAndThebeButtons = document.querySelectorAll('.copybtn, .thebebtn')
+            copyAndThebeButtons.forEach((button, index) => {
+                button.remove();
+            });
+
+            // Remove outputs since they'll be stale
+            const outputs = document.querySelectorAll('.output *, .output')
+            outputs.forEach((output, index) => {
+                output.remove();
+            });
+
+            // Find any cells with an initialization tag and ask ThebeLab to run them when ready
+            var thebeInitCells = document.querySelectorAll('div.tag_thebelab-init');
+            thebeInitCells.forEach((cell) => {
+                console.log("Initializing ThebeLab with cell: " + cell.id);
+                cell.querySelector('.thebelab-run-button').click();
+            });
+        }
+
+        // Add event listener for the function to modify code cells
+        const thebelabButtons = document.querySelectorAll('[id^=thebelab], [id$=thebelab]')
+        thebelabButtons.forEach((thebelabButton,index) => {
+            if (thebelabButton === null) {
+                setTimeout(initThebelab, 250)
+                return
+            };
+            thebelabButton.addEventListener('click', addThebelabToCodeCells);
+        });
+    }
+
+    // Initialize Thebelab
+    initFunction(initThebelab);
+
+// Helper function to munge the language name
+var detectLanguage = (language) => {
+    if (language.indexOf('python') > -1) {
+        language = "python";
+    }
+    return language;
+}
+</script>
+
+
+
+  <!-- Load the auto-generating TOC (non-async otherwise the TOC won't load w/ turbolinks) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.8.1/tocbot.min.js" async></script>
+  <script src="/assets/js/page/tocbot.js"></script>
+
+  <!-- Google analytics -->
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-52617120-7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-52617120-7');
+</script>
+
+
+
+  <!-- Clipboard copy button -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" async></script>
+
+  <!-- Load custom website scripts -->
+  <script src="/assets/js/scripts.js" async></script>
+
+  <!-- Load custom user CSS and JS  -->
+  <script src="/assets/custom/custom.js" async></script>
+  <link rel="stylesheet" href="/assets/custom/custom.css">
+
+  <!-- Update interact links w/ REST param, is defined in includes so we can use templates -->
+  
+<script>
+/**
+  * To auto-embed hub URLs in interact links if given in a RESTful fashion
+ */
+
+function getJsonFromUrl(url) {
+  var query = url.split('?');
+  if (query.length < 2) {
+    // No queries so just return false
+    return false;
+  }
+  query = query[1];
+  // Collect REST params into a dictionary
+  var result = {};
+  query.split("&").forEach(function(part) {
+    var item = part.split("=");
+    result[item[0]] = decodeURIComponent(item[1]);
+  });
+  return result;
+}
+    
+function dict2param(dict) {
+    params = Object.keys(dict).map(function(k) {
+        return encodeURIComponent(k) + '=' + encodeURIComponent(dict[k])
+    });
+    return params.join('&')
+}
+
+// Parse a Binder URL, converting it to the string needed for JupyterHub
+function binder2Jupyterhub(url) {
+  newUrl = {};
+  parts = url.split('v2/gh/')[1];
+  // Grab the base repo information
+  repoinfo = parts.split('?')[0];
+  var [org, repo, ref] = repoinfo.split('/');
+  newUrl['repo'] = ['https://github.com', org, repo].join('/');
+  newUrl['branch'] = ref
+  // Grab extra parameters passed
+  params = getJsonFromUrl(url);
+  if (params['filepath'] !== undefined) {
+    newUrl['subPath'] = params['filepath']
+  }
+  return dict2param(newUrl);
+}
+
+// Filter out potentially unsafe characters to prevent xss
+function safeUrl(url)
+{
+   return String(encodeURIComponent(url))
+            .replace(/&/g, '&amp;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+}
+
+function addParamToInternalLinks(hub) {
+  var links = document.querySelectorAll("a").forEach(function(link) {
+    var href = link.href;
+    // If the link is an internal link...
+    if (href.search("http://localhost:4000") !== -1 || href.startsWith('/') || href.search("127.0.0.1:") !== -1) {
+      // Assume we're an internal link, add the hub param to it
+      var params = getJsonFromUrl(href);
+      if (params !== false) {
+        // We have REST params, so append a new one
+        params['jupyterhub'] = hub;
+      } else {
+        // Create the REST params
+        params = {'jupyterhub': hub};
+      }
+      // Update the link
+      var newHref = href.split('?')[0] + '?' + dict2param(params);
+      link.setAttribute('href', decodeURIComponent(newHref));
+    }
+  });
+  return false;
+}
+
+
+// Update interact links
+function updateInteractLink() {
+    // hack to make this work since it expects a ? in the URL
+    rest = getJsonFromUrl("?" + location.search.substr(1));
+    jupyterHubUrl = rest['jupyterhub'];
+    var hubType = null;
+    var hubUrl = null;
+    if (jupyterHubUrl !== undefined) {
+      hubType = 'jupyterhub';
+      hubUrl = jupyterHubUrl;
+    }
+
+    if (hubType !== null) {
+      // Sanitize the hubUrl
+      hubUrl = safeUrl(hubUrl);
+
+      // Add HTTP text if omitted
+      if (hubUrl.indexOf('http') < 0) {hubUrl = 'http://' + hubUrl;}
+      var interactButtons = document.querySelectorAll("button.interact-button")
+      var lastButton = interactButtons[interactButtons.length-1];
+      var link = lastButton.parentElement;
+
+      // If we've already run this, skip the link updating
+      if (link.nextElementSibling !== null) {
+        return;
+      }
+
+      // Update the link and add context div
+      var href = link.getAttribute('href');
+      if (lastButton.id === 'interact-button-binder') {
+        // If binder links exist, we need to re-work them for jupyterhub
+        if (hubUrl.indexOf('http%3A%2F%2Flocalhost') > -1) {
+          // If localhost, assume we're working from a local Jupyter server and remove `/hub`
+          first = [hubUrl, 'git-sync'].join('/')
+        } else {
+          first = [hubUrl, 'hub', 'user-redirect', 'git-sync'].join('/')
+        }
+        href = first + '?' + binder2Jupyterhub(href);
+      } else {
+        // If interact button isn't binderhub, assume it's jupyterhub
+        // If JupyterHub links, we only need to replace the hub url
+        href = href.replace("", hubUrl);
+        if (hubUrl.indexOf('http%3A%2F%2Flocalhost') > -1) {
+          // Assume we're working from a local Jupyter server and remove `/hub`
+          href = href.replace("/hub/user-redirect", "");
+        }
+      }
+      link.setAttribute('href', decodeURIComponent(href));
+
+      // Add text after interact link saying where we're launching
+      hubUrlNoHttp = decodeURIComponent(hubUrl).replace('http://', '').replace('https://', '');
+      link.insertAdjacentHTML('afterend', '<div class="interact-context">on ' + hubUrlNoHttp + '</div>');
+
+      // Update internal links so we retain the hub url
+      addParamToInternalLinks(hubUrl);
+    }
+}
+
+runWhenDOMLoaded(updateInteractLink)
+document.addEventListener('turbolinks:load', updateInteractLink)
+</script>
+
+
+  <!-- Lunr search code - will only be executed on the /search page -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.6/lunr.min.js" async></script>
+  <script>var initQuery = function() {
+  // See if we have a search box
+  var searchInput = document.querySelector('input#lunr_search');
+  if (searchInput === null) {
+    return;
+  }
+
+  // Function to parse our lunr cache
+  var idx = lunr(function () {
+    this.field('title')
+    this.field('excerpt')
+    this.field('categories')
+    this.field('tags')
+    this.ref('id')
+
+    this.pipeline.remove(lunr.trimmer)
+
+    for (var item in store) {
+      this.add({
+        title: store[item].title,
+        excerpt: store[item].excerpt,
+        categories: store[item].categories,
+        tags: store[item].tags,
+        id: item
+      })
+    }
+  });
+
+  // Run search upon keyup
+  searchInput.addEventListener('keyup', function () {
+    var resultdiv = document.querySelector('#results');
+    var query = document.querySelector("input#lunr_search").value.toLowerCase();
+    var result =
+      idx.query(function (q) {
+        query.split(lunr.tokenizer.separator).forEach(function (term) {
+          q.term(term, { boost: 100 })
+          if(query.lastIndexOf(" ") != query.length-1){
+            q.term(term, {  usePipeline: false, wildcard: lunr.Query.wildcard.TRAILING, boost: 10 })
+          }
+          if (term != ""){
+            q.term(term, {  usePipeline: false, editDistance: 1, boost: 1 })
+          }
+        })
+      });
+
+      // Empty the results div
+      while (resultdiv.firstChild) {
+        resultdiv.removeChild(resultdiv.firstChild);
+      }
+
+    resultdiv.insertAdjacentHTML('afterbegin', '<p class="results__found">'+result.length+' Result(s) found</p>');
+    for (var item in result) {
+      var ref = result[item].ref;
+      if(store[ref].teaser){
+        var searchitem =
+          '<div class="list__item">'+
+            '<article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">'+
+              '<h2 class="archive__item-title" itemprop="headline">'+
+                '<a href="'+store[ref].url+'" rel="permalink">'+store[ref].title+'</a>'+
+              '</h2>'+
+              '<div class="archive__item-teaser">'+
+                '<img src="'+store[ref].teaser+'" alt="">'+
+              '</div>'+
+              '<p class="archive__item-excerpt" itemprop="description">'+store[ref].excerpt.split(" ").splice(0,20).join(" ")+'...</p>'+
+            '</article>'+
+          '</div>';
+      }
+      else{
+    	  var searchitem =
+          '<div class="list__item">'+
+            '<article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">'+
+              '<h2 class="archive__item-title" itemprop="headline">'+
+                '<a href="'+store[ref].url+'" rel="permalink">'+store[ref].title+'</a>'+
+              '</h2>'+
+              '<p class="archive__item-excerpt" itemprop="description">'+store[ref].excerpt.split(" ").splice(0,20).join(" ")+'...</p>'+
+            '</article>'+
+          '</div>';
+      }
+      resultdiv.insertAdjacentHTML('beforeend', searchitem);
+    }
+  });
+};
+
+initFunction(initQuery);
+</script>
+
+  <!-- Load JS that depends on site variables -->
+  <script src="/assets/js/page/copy-button.js" async></script>
+
+  <!-- Hide cell code -->
+  <script src="/assets/js/page/hide-cell.js" async></script>
+
+  <!-- Printing the screen -->
+  <!-- Include nbinteract for interactive widgets -->
+<script src="https://printjs-4de6.kxcdn.com/print.min.js" async></script>
+<script>
+printContent = () => {
+    // MathJax displays a second version of any math for assistive devices etc.
+    // This prevents double-rendering in the PDF output.
+    var ignoreAssistList = [];
+    assistives = document.querySelectorAll('.MathJax_Display span.MJX_Assistive_MathML').forEach((element, index) => {
+        var thisId = 'MathJax-assistive-' + index.toString();
+        element.setAttribute('id', thisId);
+        ignoreAssistList.push(thisId)
+    });
+
+    // Print the actual content object
+    printJS({
+        printable: 'textbook_content',
+        type: 'html',
+        css: "/assets/css/styles.css",
+        style: "#textbook_content {padding-top: 40px};",
+        scanStyles: false,
+        targetStyles: ["*"],
+        ignoreElements: ignoreAssistList,
+        documentTitle: "Made with Jupyter Book"
+    })
+};
+
+initPrint = () => {
+    document.querySelector('#interact-button-print').addEventListener('click', printContent)
+}
+
+initFunction(initPrint)
+</script>
+
+</head>
+
+  <body>
+    <!-- Include the ThebeLab config so it gets reloaded on each page -->
+    <script type="text/x-thebe-config">{
+    requestKernel: true,
+    binderOptions: {
+    repo: "jupyter/jupyter-book",
+    ref: "gh-pages",
+    },
+    codeMirrorConfig: {
+    theme: "abcdef",
+    mode: ""
+    },
+    kernelOptions: {
+    kernelName: "venv-random-walks",
+    path: "content/gaussian-processes/sparse"
+    }
+}
+</script>
+
+    <!-- .js-show-sidebar shows sidebar by default -->
+    <div id="js-textbook" class="c-textbook js-show-sidebar">
+      
+
+
+
+<nav id="js-sidebar" class="c-textbook__sidebar">
+  <a href="https://random-walks.org/home.html"><img src="/images/logo/logo.svg" class="textbook_logo" id="sidebar-logo" alt="textbook logo" data-turbolinks-permanent/></a>
+  <h2 class="c-sidebar__title">Random Walks</h2>
+  <ul class="c-sidebar__chapters">
+    
+      
+      
+
+      
+      
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter" data-url="/home">
+        <a class="c-sidebar__entry"
+          href="/home.html"
+        >
+          
+          Welcome
+        </a>
+      </li>
+
+      
+      
+
+      
+
+      
+      
+
+      
+
+      
+    
+      
+      
+
+      
+      
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter" data-url="/gaussian-processes/gp-intro">
+        <a class="c-sidebar__entry"
+          href="/gaussian-processes/gp-intro.html"
+        >
+          
+          Gaussian Processes
+        </a>
+      </li>
+
+      
+      
+
+      
+
+      
+      
+
+      
+        
+
+        
+
+        <ul class="c-sidebar__sections u-hidden-visually">
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/gaussian-processes/sparse/intro">
+              <a class="c-sidebar__entry"
+                href="/gaussian-processes/sparse/intro.html"
+              >
+                
+                Sparse Gaussian Processes
+              </a>
+            </li>
+            
+              
+              <ul class='c-sidebar__subsections u-hidden-visually'>
+              
+                
+                
+                
+                
+                <li class="c-sidebar__subsection" data-url="/gaussian-processes/sparse/fitc">
+                  <a class="c-sidebar__entry"
+                    href="/gaussian-processes/sparse/fitc.html"
+                  >
+                    
+                    FITC
+                  </a>
+                </li>
+              
+                
+                
+                
+                
+                <li class="c-sidebar__subsection" data-url="/gaussian-processes/sparse/vfe">
+                  <a class="c-sidebar__entry"
+                    href="/gaussian-processes/sparse/vfe.html"
+                  >
+                    
+                    VFE
+                  </a>
+                </li>
+              
+              </ul>
+            
+            
+          
+        </ul>
+      
+
+      
+    
+      
+      
+
+      
+      
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter" data-url="/convex-optimisation/intro">
+        <a class="c-sidebar__entry"
+          href="/convex-optimisation/intro.html"
+        >
+          
+            1.
+          
+          Convex optimisation
+        </a>
+      </li>
+
+      
+      
+
+      
+
+      
+      
+
+      
+        
+
+        
+
+        <ul class="c-sidebar__sections u-hidden-visually">
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/convex-optimisation/lecture-1">
+              <a class="c-sidebar__entry"
+                href="/convex-optimisation/lecture-1.html"
+              >
+                
+                  1.1
+                
+                Introduction to Convex Optimisation
+              </a>
+            </li>
+            
+            
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/convex-optimisation/lecture-2">
+              <a class="c-sidebar__entry"
+                href="/convex-optimisation/lecture-2.html"
+              >
+                
+                  1.2
+                
+                Fundamental definitions
+              </a>
+            </li>
+            
+            
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/convex-optimisation/lecture-3">
+              <a class="c-sidebar__entry"
+                href="/convex-optimisation/lecture-3.html"
+              >
+                
+                  1.3
+                
+                Convex functions
+              </a>
+            </li>
+            
+            
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/convex-optimisation/lecture-4">
+              <a class="c-sidebar__entry"
+                href="/convex-optimisation/lecture-4.html"
+              >
+                
+                  1.4
+                
+                Operations that preserve convexity
+              </a>
+            </li>
+            
+            
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/convex-optimisation/lecture-5">
+              <a class="c-sidebar__entry"
+                href="/convex-optimisation/lecture-5.html"
+              >
+                
+                  1.5
+                
+                Optimality and problem definitions
+              </a>
+            </li>
+            
+            
+          
+        </ul>
+      
+
+      
+    
+      
+      
+
+      
+      
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter" data-url="books">
+        <a class="c-sidebar__entry"
+          href="/books.html"
+        >
+          
+            2.
+          
+          Convex optimisation
+        </a>
+      </li>
+
+      
+      
+
+      
+
+      
+      
+
+      
+
+      
+    
+      
+      
+
+      
+      
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter" data-url="/guide/01_overview">
+        <a class="c-sidebar__entry"
+          href="/guide/01_overview.html"
+        >
+          
+          The Jupyter Book Guide
+        </a>
+      </li>
+
+      
+      
+
+      
+
+      
+      
+
+      
+        
+
+        
+
+        <ul class="c-sidebar__sections">
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/guide/01-5_tour">
+              <a class="c-sidebar__entry"
+                href="/guide/01-5_tour.html"
+              >
+                
+                Anatomy of a Jupyter Book
+              </a>
+            </li>
+            
+            
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/guide/02_create">
+              <a class="c-sidebar__entry"
+                href="/guide/02_create.html"
+              >
+                
+                Create your Jupyter Book template
+              </a>
+            </li>
+            
+            
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/guide/03_build">
+              <a class="c-sidebar__entry"
+                href="/guide/03_build.html"
+              >
+                
+                Build HTML for each page of your book
+              </a>
+            </li>
+            
+            
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/guide/04_publish">
+              <a class="c-sidebar__entry"
+                href="/guide/04_publish.html"
+              >
+                
+                Publishing your book online
+              </a>
+            </li>
+            
+              
+              <ul class='c-sidebar__subsections u-hidden-visually'>
+              
+                
+                
+                
+                
+                <li class="c-sidebar__subsection" data-url="/guide/publish/book-html">
+                  <a class="c-sidebar__entry"
+                    href="/guide/publish/book-html.html"
+                  >
+                    
+                    Build the book's site HTML locally
+                  </a>
+                </li>
+              
+                
+                
+                
+                
+                <li class="c-sidebar__subsection" data-url="/guide/publish/github-pages">
+                  <a class="c-sidebar__entry"
+                    href="/guide/publish/github-pages.html"
+                  >
+                    
+                    Publishing your book with GitHub Pages
+                  </a>
+                </li>
+              
+                
+                
+                
+                
+                <li class="c-sidebar__subsection" data-url="/guide/publish/netlify">
+                  <a class="c-sidebar__entry"
+                    href="/guide/publish/netlify.html"
+                  >
+                    
+                    Automatically building and hosting your book with Netlify
+                  </a>
+                </li>
+              
+              </ul>
+            
+            
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/guide/05_faq">
+              <a class="c-sidebar__entry"
+                href="/guide/05_faq.html"
+              >
+                
+                Frequently Asked Questions (FAQ)
+              </a>
+            </li>
+            
+            
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/guide/06_advanced">
+              <a class="c-sidebar__entry"
+                href="/guide/06_advanced.html"
+              >
+                
+                Advanced topics and how-tos
+              </a>
+            </li>
+            
+            
+          
+        </ul>
+      
+
+      
+    
+      
+      
+
+      
+      
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter" data-url="/features/features">
+        <a class="c-sidebar__entry"
+          href="/features/features.html"
+        >
+          
+          Features
+        </a>
+      </li>
+
+      
+      
+
+      
+
+      
+      
+
+      
+        
+
+        
+
+        <ul class="c-sidebar__sections">
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/features/markdown">
+              <a class="c-sidebar__entry"
+                href="/features/markdown.html"
+              >
+                
+                Creating book content
+              </a>
+            </li>
+            
+            
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/features/notebooks">
+              <a class="c-sidebar__entry"
+                href="/features/notebooks.html"
+              >
+                
+                Content with notebooks
+              </a>
+            </li>
+            
+            
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/features/hiding">
+              <a class="c-sidebar__entry"
+                href="/features/hiding.html"
+              >
+                
+                Hiding or removing code blocks or entire cells
+              </a>
+            </li>
+            
+            
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/features/interact">
+              <a class="c-sidebar__entry"
+                href="/features/interact.html"
+              >
+                
+                Connecting content with JupyterHub and Binder
+              </a>
+            </li>
+            
+            
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/features/executing">
+              <a class="c-sidebar__entry"
+                href="/features/executing.html"
+              >
+                
+                Executing pages of your book
+              </a>
+            </li>
+            
+            
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/features/beta">
+              <a class="c-sidebar__entry"
+                href="/features/beta.html"
+              >
+                
+                Beta features
+              </a>
+            </li>
+            
+              
+              <ul class='c-sidebar__subsections u-hidden-visually'>
+              
+                
+                
+                
+                
+                <li class="c-sidebar__subsection" data-url="/features/interactive_cells">
+                  <a class="c-sidebar__entry"
+                    href="/features/interactive_cells.html"
+                  >
+                    
+                    Interactive code in your book
+                  </a>
+                </li>
+              
+                
+                
+                
+                
+                <li class="c-sidebar__subsection" data-url="/features/math">
+                  <a class="c-sidebar__entry"
+                    href="/features/math.html"
+                  >
+                    
+                    Typesetting Math in your book
+                  </a>
+                </li>
+              
+                
+                
+                
+                
+                <li class="c-sidebar__subsection" data-url="/features/titles">
+                  <a class="c-sidebar__entry"
+                    href="/features/titles.html"
+                  >
+                    
+                    Page titles and authors
+                  </a>
+                </li>
+              
+                
+                
+                
+                
+                <li class="c-sidebar__subsection" data-url="/features/jupytext">
+                  <a class="c-sidebar__entry"
+                    href="/features/jupytext.html"
+                  >
+                    
+                    Jupytext with Jupyter Book
+                  </a>
+                </li>
+              
+                
+                
+                
+                
+                <li class="c-sidebar__subsection" data-url="/features/layout">
+                  <a class="c-sidebar__entry"
+                    href="/features/layout.html"
+                  >
+                    
+                    Controlling the page layout
+                  </a>
+                </li>
+              
+                
+                
+                
+                
+                <li class="c-sidebar__subsection" data-url="/features/page">
+                  <a class="c-sidebar__entry"
+                    href="/features/page.html"
+                  >
+                    
+                    Building a single page instead of a book
+                  </a>
+                </li>
+              
+              </ul>
+            
+            
+          
+        </ul>
+      
+
+      
+    
+      
+      
+
+      
+      
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter" data-url="/advanced/advanced">
+        <a class="c-sidebar__entry"
+          href="/advanced/advanced.html"
+        >
+          
+          Advanced topics and guides
+        </a>
+      </li>
+
+      
+      
+
+      
+
+      
+      
+
+      
+        
+
+        
+
+        <ul class="c-sidebar__sections">
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/advanced/circleci">
+              <a class="c-sidebar__entry"
+                href="/advanced/circleci.html"
+              >
+                
+                Automatically building, previewing, and pushing your book with CircleCI
+              </a>
+            </li>
+            
+            
+          
+        </ul>
+      
+
+      
+    
+      
+      
+
+      
+      
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter" data-url="https://github.com/jupyter/jupyter-book">
+        <a class="c-sidebar__entry"
+          href="https://github.com/jupyter/jupyter-book"
+        >
+          
+          GitHub repository
+        </a>
+      </li>
+
+      
+      
+
+      
+
+      
+      
+
+      
+
+      
+    
+      
+      
+
+      
+      
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter" data-url="/contributing">
+        <a class="c-sidebar__entry"
+          href="/contributing.html"
+        >
+          
+          Contributing to Jupyter Book
+        </a>
+      </li>
+
+      
+      
+
+      
+
+      
+      
+
+      
+
+      
+    
+      
+      
+        <li class="c-sidebar__divider"></li>
+        
+      
+      
+        <li><h2 class="c-sidebar__title">Demo textbook</li>
+        
+      
+      
+
+      
+      
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter" data-url="/01/what-is-data-science">
+        <a class="c-sidebar__entry"
+          href="/01/what-is-data-science.html"
+        >
+          
+            3.
+          
+          What is Data Science
+        </a>
+      </li>
+
+      
+      
+
+      
+
+      
+      
+
+      
+        
+
+        
+
+        <ul class="c-sidebar__sections u-hidden-visually">
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/01/1/intro">
+              <a class="c-sidebar__entry"
+                href="/01/1/intro.html"
+              >
+                
+                  3.1
+                
+                Chapter 1: Introduction
+              </a>
+            </li>
+            
+            
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/01/2/why-data-science">
+              <a class="c-sidebar__entry"
+                href="/01/2/why-data-science.html"
+              >
+                
+                  3.2
+                
+                Why Data Science?
+              </a>
+            </li>
+            
+            
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/01/3/Plotting_the_Classics">
+              <a class="c-sidebar__entry"
+                href="/01/3/Plotting_the_Classics.html"
+              >
+                
+                  3.3
+                
+                Plotting The Classics
+              </a>
+            </li>
+            
+              
+              <ul class='c-sidebar__subsections u-hidden-visually'>
+              
+                
+                
+                
+                
+                <li class="c-sidebar__subsection" data-url="/01/3/subsection/subsections">
+                  <a class="c-sidebar__entry"
+                    href="/01/3/subsection/subsections.html"
+                  >
+                    
+                      3.3.1
+                      
+                    
+                    Subsections
+                  </a>
+                </li>
+              
+                
+                
+                
+                
+                <li class="c-sidebar__subsection" data-url="/01/3/subsection/subsectiontwo">
+                  <a class="c-sidebar__entry"
+                    href="/01/3/subsection/subsectiontwo.html"
+                  >
+                    
+                      3.3.2
+                      
+                    
+                    A second subsection page
+                  </a>
+                </li>
+              
+              </ul>
+            
+            
+          
+        </ul>
+      
+
+      
+    
+      
+      
+
+      
+      
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter" data-url="/02/causality-and-experiments">
+        <a class="c-sidebar__entry"
+          href="/02/causality-and-experiments.html"
+        >
+          
+            4.
+          
+          Causality and Experiments
+        </a>
+      </li>
+
+      
+      
+
+      
+
+      
+      
+
+      
+        
+
+        
+
+        <ul class="c-sidebar__sections u-hidden-visually">
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/02/1/observation-and-visualization-john-snow-and-the-broad-street-pump">
+              <a class="c-sidebar__entry"
+                href="/02/1/observation-and-visualization-john-snow-and-the-broad-street-pump.html"
+              >
+                
+                  4.1
+                
+                Observation and Visualization: John Snow and the Broad Street Pump
+              </a>
+            </li>
+            
+            
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/02/2/snow-s-grand-experiment">
+              <a class="c-sidebar__entry"
+                href="/02/2/snow-s-grand-experiment.html"
+              >
+                
+                  4.2
+                
+                Snow’s “Grand Experiment”
+              </a>
+            </li>
+            
+            
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/02/3/establishing-causality">
+              <a class="c-sidebar__entry"
+                href="/02/3/establishing-causality.html"
+              >
+                
+                  4.3
+                
+                Establishing Causality
+              </a>
+            </li>
+            
+            
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/02/4/randomization">
+              <a class="c-sidebar__entry"
+                href="/02/4/randomization.html"
+              >
+                
+                  4.4
+                
+                Randomization
+              </a>
+            </li>
+            
+            
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/02/5/endnote">
+              <a class="c-sidebar__entry"
+                href="/02/5/endnote.html"
+              >
+                
+                  4.5
+                
+                Endnote
+              </a>
+            </li>
+            
+            
+          
+        </ul>
+      
+
+      
+    
+      
+      
+
+      
+      
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter" data-url="/03/programming-in-python">
+        <a class="c-sidebar__entry"
+          href="/03/programming-in-python.html"
+        >
+          
+            5.
+          
+          Programming in Python
+        </a>
+      </li>
+
+      
+      
+
+      
+
+      
+      
+
+      
+        
+
+        
+
+        <ul class="c-sidebar__sections u-hidden-visually">
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/03/1/Expressions">
+              <a class="c-sidebar__entry"
+                href="/03/1/Expressions.html"
+              >
+                
+                  5.1
+                
+                Expressions
+              </a>
+            </li>
+            
+            
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/03/2/Names">
+              <a class="c-sidebar__entry"
+                href="/03/2/Names.html"
+              >
+                
+                  5.2
+                
+                Names
+              </a>
+            </li>
+            
+            
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/03/3/Calls">
+              <a class="c-sidebar__entry"
+                href="/03/3/Calls.html"
+              >
+                
+                  5.3
+                
+                Calls
+              </a>
+            </li>
+            
+            
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/03/4/Introduction_to_Tables">
+              <a class="c-sidebar__entry"
+                href="/03/4/Introduction_to_Tables.html"
+              >
+                
+                  5.4
+                
+                Introduction To Tables
+              </a>
+            </li>
+            
+            
+          
+        </ul>
+      
+
+      
+    
+      
+      
+
+      
+      
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter" data-url="/04/Types">
+        <a class="c-sidebar__entry"
+          href="/04/Types.html"
+        >
+          
+            6.
+          
+          Types
+        </a>
+      </li>
+
+      
+      
+
+      
+
+      
+      
+
+      
+        
+
+        
+
+        <ul class="c-sidebar__sections u-hidden-visually">
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/04/1/Numbers">
+              <a class="c-sidebar__entry"
+                href="/04/1/Numbers.html"
+              >
+                
+                  6.1
+                
+                Numbers
+              </a>
+            </li>
+            
+            
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/04/2/Strings">
+              <a class="c-sidebar__entry"
+                href="/04/2/Strings.html"
+              >
+                
+                  6.2
+                
+                Strings
+              </a>
+            </li>
+            
+            
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/04/3/Comparison">
+              <a class="c-sidebar__entry"
+                href="/04/3/Comparison.html"
+              >
+                
+                  6.3
+                
+                Comparison
+              </a>
+            </li>
+            
+            
+          
+        </ul>
+      
+
+      
+    
+      
+      
+        <li class="c-sidebar__divider"></li>
+        
+      
+      
+
+      
+      
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter" data-url="/test_pages/test">
+        <a class="c-sidebar__entry"
+          href="/test_pages/test.html"
+        >
+          
+          Test pages
+        </a>
+      </li>
+
+      
+      
+
+      
+
+      
+      
+
+      
+        
+
+        
+
+        <ul class="c-sidebar__sections u-hidden-visually">
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/test_pages/layout_elements">
+              <a class="c-sidebar__entry"
+                href="/test_pages/layout_elements.html"
+              >
+                
+                Testing page elements
+              </a>
+            </li>
+            
+            
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/test_pages/equations">
+              <a class="c-sidebar__entry"
+                href="/test_pages/equations.html"
+              >
+                
+                Mathematical equations
+              </a>
+            </li>
+            
+            
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/test_pages/code">
+              <a class="c-sidebar__entry"
+                href="/test_pages/code.html"
+              >
+                
+                Testing code blocks
+              </a>
+            </li>
+            
+            
+          
+            
+            
+
+            
+            
+            
+            
+
+            <li class="c-sidebar__section" data-url="/test_pages/limits">
+              <a class="c-sidebar__entry"
+                href="/test_pages/limits.html"
+              >
+                
+                Demo page to showcase markdown
+              </a>
+            </li>
+            
+            
+          
+        </ul>
+      
+
+      
+    
+  </ul>
+  <p class="sidebar_footer"></p>
+</nav>
+
+      
+      <div class="c-topbar" id="top-navbar">
+  <!-- We show the sidebar by default so we use .is-active -->
+  <div class="c-topbar__buttons">
+    <button
+      id="js-sidebar-toggle"
+      class="hamburger hamburger--arrowalt is-active"
+    >
+      <span class="hamburger-box">
+        <span class="hamburger-inner"></span>
+      </span>
+    </button>
+    <div class="buttons">
+<div class="download-buttons-dropdown">
+    <button id="dropdown-button-trigger" class="interact-button"><img src="/assets/images/download-solid.svg" alt="Download" /></button>
+    <div class="download-buttons">
+        <a href="/content/gaussian-processes/sparse/fitc.ipynb" download>
+        <button id="interact-button-download" class="interact-button">.ipynb</button>
+        </a>
+        
+        <a id="interact-button-print"><button id="interact-button-download" class="interact-button">.pdf</button></a>
+    </div>
+</div>
+
+
+  <button id="interact-button-thebelab" class="interact-button">Thebelab</button>
+
+  
+  
+
+
+
+
+
+
+<a href="https://mybinder.org/v2/gh/jupyter/jupyter-book/gh-pages?filepath=content%2Fgaussian-processes%2Fsparse%2Ffitc.ipynb"><button class="interact-button" id="interact-button-binder"><img class="interact-button-logo" src="/assets/images/logo_binder.svg" alt="Interact" />Interact</button></a>
+  
+
+
+</div>
+
+  </div>
+  <!-- Empty sidebar placeholder that we'll auto-fill with javascript -->
+  <aside class="sidebar__right">
+    <header><h4 class="nav__title"><img src="/assets/images/list-solid.svg" alt="Search" />   On this page</h4></header>
+    <nav class="onthispage">
+    </nav>
+  </aside>
+  <a href="/search.html" class="topbar-right-button" id="search-button">
+    <img src="/assets/images/search-solid.svg" alt="Search" />
+  </a>
+</div>
+
+      <main class="c-textbook__page" tabindex="-1">
+            <div class="c-textbook__content" id="textbook_content">
+                  <main class="jupyter-page">
+    <div id="page-info"><div id="page-title">FITC</div>
+</div>
+    
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="What-is-the-Fully-Independent-Training-Conditional-(FITC-aka-SPGP)?">What is the Fully Independent Training Conditional (FITC aka SPGP)?<a class="anchor-link" href="#What-is-the-Fully-Independent-Training-Conditional-(FITC-aka-SPGP)?"> </a></h2><p>The Sparse Pseudo-input Guassian Process (SPGP) approximation is a particular method moodelling with a sparse, and therefore cheaply invertible, covariance matrix. This method discards the original GP model and works with a <em>new model</em>, which assumes the observed data are independent given certain <em>latent variables</em> called <em>pseudo-points</em>, leading to the sparse covariance structure. SPGP has also been called the Fully Independent Training Conditional (FITC) approximation and we adopt the same nomenclature because it's more appropriate and specific - there are in fact several sparse pseudo-input GP approximations, so SPGP is not very specific a name.</p>
+<p>In any case, it's worth repeating that FITC works by throwing the original GP away and working with a computationally cheaper model which will hopefully approximate the predictions of the original. Let's start by laying out the modelling assumptions and the generative process and then moving on to inference and predictions.</p>
+<h2 id="The-FITC-generative-model-and-assumptions">The FITC generative model and assumptions<a class="anchor-link" href="#The-FITC-generative-model-and-assumptions"> </a></h2><p>Consider the following model. We define a set of $M$ inputs $\mathbf{\bar{X}} = \{\mathbf{\bar{x}}_m\}_{m=1}^M$, which we call the <em>inducing-</em> or <em>pseudo-points</em>. We also define a set of $M$ unobserved random variables $\mathbf{\bar{f}} = (\bar{f_1}, \bar{f_2}, ..., \bar{f_M})^\top$, and place a GP prior over them:</p>
+$$p\left(\mathbf{\bar{f}} | \mathbf{\bar{X}}\right) \sim \mathcal{N}\left(\mathbf{0}, \mathbf{K}_{\mathbf{\bar{X}}\mathbf{\bar{X}}}\right).$$<p>Given the sampled $\mathbf{\bar{f}}$ as well as $N$ further inputs $\mathbf{X} = \{\mathbf{\bar{x}}_n\}_{n=1}^N$, we sample $N$ further random variables from the GP prior conditioned on $\mathbf{\bar{f}}$ <em>independently from each other</em>:</p>
+$$p \left(f_n | \mathbf{\bar{f}}, \mathbf{\bar{X}}, \mathbf{x}_n \right) \sim \mathcal{N}\left(f_n;~\mathbf{K}_{\mathbf{x}_n\mathbf{\bar{X}}} \mathbf{K}_{\mathbf{\bar{X}}\mathbf{\bar{X}}}^{-1}\mathbf{\bar{f}},~\mathbf{K}_{\mathbf{x}_n\mathbf{x}_n} - \mathbf{K}_{\mathbf{x}_n\mathbf{X}}\mathbf{K}_{\mathbf{\bar{X}}\mathbf{\bar{X}}}^{-1}\mathbf{K}_{\mathbf{X}\mathbf{x}_n} \right) \text{ independently for each } n.$$<p>Finally, some idependent and identically distributed onse is added to the $\mathbf{f}$ to obtain the noisy observations $\mathbf{y}$:</p>
+\begin{align}
+p(\mathbf{y} | \mathbf{f}) = \mathcal{N}\left(\mathbf{y}; \mathbf{f}, \sigma^2 \mathbf{I}\right),
+\end{align}<p>and that's how we obtain the observed data $\mathbf{y}$. Let sample some data accoding to this generative process and see what it looks like. We'll work with a zero-mean GP with an Exponentiated Quadratic covariance function - imports and definitions are hidden below.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell tag_hide_input">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="k">def</span> <span class="nf">eq_covariance</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span>
+                  <span class="n">x2</span><span class="p">,</span>
+                  <span class="n">coeff</span><span class="p">,</span>
+                  <span class="n">scale</span><span class="p">,</span>
+                  <span class="n">diag_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                  <span class="n">epsilon</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+    <span class="c1"># If not calculating diagonal only, expand to broadcast</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">diag_only</span><span class="p">:</span>
+
+        <span class="n">x1</span> <span class="o">=</span> <span class="n">x1</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
+        <span class="n">x2</span> <span class="o">=</span> <span class="n">x2</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+
+    <span class="c1"># Compute differences</span>
+    <span class="n">diffs</span> <span class="o">=</span> <span class="n">x1</span> <span class="o">-</span> <span class="n">x2</span>
+
+    <span class="c1"># Compute quadratic form</span>
+    <span class="n">quad</span> <span class="o">=</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">diffs</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">scale</span>
+    <span class="n">quad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">quad</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Exponentiate and multiply by covariance coeff</span>
+    <span class="n">exp_quad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">quad</span><span class="p">)</span>
+    <span class="n">eq_cov</span> <span class="o">=</span> <span class="n">coeff</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">exp_quad</span>
+
+    <span class="c1"># Add epsilon for invertibility</span>
+    <span class="k">if</span> <span class="n">epsilon</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="n">eq_cov</span> <span class="o">=</span> <span class="n">eq_cov</span> <span class="o">+</span> <span class="n">epsilon</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">eq_cov</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">eq_cov</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Set random seed - change to see different samples</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Num. inducing points (M), num. observations (N)</span>
+<span class="n">M</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="c1"># EQ hyperparameters</span>
+<span class="n">coeff</span> <span class="o">=</span> <span class="mf">1e0</span>
+<span class="n">scale</span> <span class="o">=</span> <span class="mf">1e0</span>
+<span class="n">noise</span> <span class="o">=</span> <span class="mf">1e-1</span>
+
+<span class="c1"># Pick inducing and observed inputs at random</span>
+<span class="n">x_ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=-</span><span class="mf">3.</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">3.</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">x_obs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=-</span><span class="mf">4.</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">4.</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># Compute covariance matrix terms</span>
+<span class="n">K_ind_ind</span> <span class="o">=</span> <span class="n">eq_covariance</span><span class="p">(</span><span class="n">x_ind</span><span class="p">,</span> <span class="n">x_ind</span><span class="p">,</span> <span class="n">coeff</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">)</span>
+<span class="n">K_ind_obs</span> <span class="o">=</span> <span class="n">eq_covariance</span><span class="p">(</span><span class="n">x_ind</span><span class="p">,</span> <span class="n">x_obs</span><span class="p">,</span> <span class="n">coeff</span><span class="p">,</span> <span class="n">scale</span><span class="p">)</span>
+<span class="n">K_obs_ind</span> <span class="o">=</span> <span class="n">eq_covariance</span><span class="p">(</span><span class="n">x_obs</span><span class="p">,</span> <span class="n">x_ind</span><span class="p">,</span> <span class="n">coeff</span><span class="p">,</span> <span class="n">scale</span><span class="p">)</span>
+<span class="n">K_obs_diag</span> <span class="o">=</span> <span class="n">eq_covariance</span><span class="p">(</span><span class="n">x_obs</span><span class="p">,</span> <span class="n">x_obs</span><span class="p">,</span> <span class="n">coeff</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">diag_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Sample f_ind | x_ind</span>
+<span class="n">f_ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">K_ind_ind</span><span class="p">),</span>
+               <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+
+<span class="c1"># Mean and vaariance of normal distribution of f_obs | f_ind</span>
+<span class="n">f_obs_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">K_obs_ind</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">K_ind_ind</span><span class="p">,</span> <span class="n">f_ind</span><span class="p">))</span>
+<span class="n">f_obs_var</span> <span class="o">=</span> <span class="n">K_obs_diag</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">K_obs_ind</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">K_ind_ind</span><span class="p">,</span> <span class="n">K_ind_obs</span><span class="p">)))</span>
+<span class="n">f_obs_var</span> <span class="o">=</span> <span class="n">f_obs_var</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>
+
+<span class="c1"># Sample f_obs | f_ind from normal i.i.d.</span>
+<span class="n">f_obs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">f_obs_mean</span><span class="p">,</span> <span class="n">f_obs_var</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">)</span>
+
+<span class="c1"># Sample y_obs | f_obs (noisy observations)</span>
+<span class="n">y_obs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">f_obs</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">noise</span><span class="p">)</span>
+
+<span class="c1"># Locations to plot mean and variance of generative model, y_plot | f_ind, x_plot</span>
+<span class="n">x_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">4.</span><span class="p">,</span> <span class="mf">4.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">]</span>
+
+<span class="c1"># Covariances between inducing points and input locations</span>
+<span class="n">K_ind_plot</span> <span class="o">=</span> <span class="n">eq_covariance</span><span class="p">(</span><span class="n">x_ind</span><span class="p">,</span> <span class="n">x_plot</span><span class="p">,</span> <span class="n">coeff</span><span class="p">,</span> <span class="n">scale</span><span class="p">)</span>
+<span class="n">K_plot_ind</span> <span class="o">=</span> <span class="n">eq_covariance</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span> <span class="n">x_ind</span><span class="p">,</span> <span class="n">coeff</span><span class="p">,</span> <span class="n">scale</span><span class="p">)</span>
+<span class="n">K_plot_diag</span> <span class="o">=</span> <span class="n">eq_covariance</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span> <span class="n">x_plot</span><span class="p">,</span> <span class="n">coeff</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">diag_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Mean and standard deviation of y_plot | f_ind, x_plot</span>
+<span class="n">y_plot_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">K_plot_ind</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">K_ind_ind</span><span class="p">,</span> <span class="n">f_ind</span><span class="p">))[:,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">f_plot_var</span> <span class="o">=</span> <span class="n">K_plot_diag</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">K_plot_ind</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">K_ind_ind</span><span class="p">,</span> <span class="n">K_ind_plot</span><span class="p">)))</span>
+<span class="n">y_plot_var</span> <span class="o">=</span> <span class="n">f_plot_var</span> <span class="o">+</span> <span class="n">noise</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="n">y_plot_std</span> <span class="o">=</span> <span class="n">y_plot_var</span> <span class="o">**</span> <span class="mf">0.5</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell tag_hide_input">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Plot inducing points and observed data</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># Plot inducing points</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_ind</span><span class="p">,</span>
+            <span class="n">f_ind</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span>
+            <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span>
+            <span class="n">zorder</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\mathbf{\bar</span><span class="si">{f}</span><span class="s1">}$&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot observed data</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_obs</span><span class="p">,</span>
+            <span class="n">y_obs</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span>
+            <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span>
+            <span class="n">zorder</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\mathbf</span><span class="si">{y}</span><span class="s1">$&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot mean of generative model</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span>
+         <span class="n">y_plot_mean</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> 
+         <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Plot noise of generative model</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x_plot</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span>
+                 <span class="n">y_plot_mean</span> <span class="o">-</span> <span class="n">y_plot_std</span><span class="p">,</span>
+                 <span class="n">y_plot_mean</span> <span class="o">+</span> <span class="n">y_plot_std</span><span class="p">,</span>
+                 <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span>
+                 <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                 <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+                 <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$\pm 1$ std.&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot formatting</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Samples from FITC generative model&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">22</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mf">4.</span><span class="p">,</span> <span class="mf">4.</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../../images/gaussian-processes/sparse/fitc_3_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Interpretation-and-comparison-to-the-full-GP">Interpretation and comparison to the full GP<a class="anchor-link" href="#Interpretation-and-comparison-to-the-full-GP"> </a></h2><h3 id="Comparison-to-the-full-GP">Comparison to the full GP<a class="anchor-link" href="#Comparison-to-the-full-GP"> </a></h3><p>So how is the FITC generative model different from a zero-mean GP with an EQ covariance? In the vanilla GP setting, all observations are correlated and the joint distribution does not factor. Suppose we drew $\mathbf{\bar{f}}$ from a GP prior:</p>
+$$\mathbf{\bar{f}} | \mathbf{\bar{X}} \sim \mathcal{N}\left(\mathbf{0}, \mathbf{K}_{\mathbf{\bar{X}}\mathbf{\bar{X}}}\right).$$<p>The way to draw $\mathbf{f}$ further samples <em>conditioned on</em> $\mathbf{\bar{f}}$ <em>under the vanilla GP model</em> is to use the conditional prior:</p>
+\begin{align}
+p(\mathbf{f} | \mathbf{\bar{f}}, \mathbf{\bar{X}}, \mathbf{X}) = \mathcal{N}\left(\mathbf{f} ;~\mathbf{K}_{\mathbf{X}\mathbf{\bar{X}}} \mathbf{K}_{\mathbf{\bar{X}}\mathbf{\bar{X}}}^{-1}\mathbf{\bar{f}},~\mathbf{K}_{\mathbf{X}\mathbf{X}} - \mathbf{K}_{\mathbf{X}\mathbf{X}}\mathbf{K}_{\mathbf{\bar{X}}\mathbf{\bar{X}}}^{-1}\mathbf{K}_{\mathbf{X}\mathbf{X}} \right).
+\end{align}<p>Since the matrix $\mathbf{K}_{\mathbf{X}\mathbf{X}} - \mathbf{K}_{\mathbf{X}\mathbf{X}}\mathbf{K}_{\mathbf{\bar{X}}\mathbf{\bar{X}}}^{-1}\mathbf{K}_{\mathbf{X}\mathbf{X}}$ is in general full-rank, it includes correlations between all $f$'s and the joint over $\mathbf{f}$ cannot be simplified:</p>
+\begin{align}
+p(\mathbf{f} | \mathbf{\bar{f}}, \mathbf{\bar{X}}, \mathbf{X}) &amp;\neq p(f_1| f_2, ..., f_n, \mathbf{\bar{f}}, \mathbf{\bar{X}}, \mathbf{X})~p(f_2| f_3, ..., f_n, \mathbf{\bar{f}}, \mathbf{\bar{X}}, \mathbf{X})~...~p(f_n | \mathbf{\bar{f}}, \mathbf{\bar{X}}, \mathbf{X}).
+\end{align}<p>By contrast, the generative process of FITC says: given $\mathbf{\bar{f}}, \mathbf{\bar{X}}, \mathbf{X}$, my $f_n$ samples will all be drawn from the conditional prior, but they will be drawn independently from each other. Under this generative process we have $p(f_i | f_j, \mathbf{\bar{f}}, \mathbf{\bar{X}}, \mathbf{X})$ = $p(f_i |\mathbf{\bar{f}}, \mathbf{\bar{X}}, \mathbf{X})$ for $i \neq j$ and we can simplify the conditional prior as:</p>
+\begin{align}
+p(\mathbf{f} | \mathbf{\bar{f}}, \mathbf{\bar{X}}, \mathbf{X}) &amp;= p(f_1, ..., f_{n-1}| f_n, \mathbf{\bar{f}}, \mathbf{\bar{X}}, \mathbf{X})p(f_n | \mathbf{\bar{f}}, \mathbf{\bar{X}}, \mathbf{X})\\
+&amp;=p(f_1, ..., f_{n-2}| f_n, f_{n-1}, \mathbf{\bar{f}}, \mathbf{\bar{X}}, \mathbf{X})p(f_{n-1} | f_n \mathbf{\bar{f}}, \mathbf{\bar{X}}, \mathbf{X})p(f_n | \mathbf{\bar{f}}, \mathbf{\bar{X}}, \mathbf{X})\\
+&amp;...\\
+&amp;=p(f_1| \mathbf{\bar{f}}, \mathbf{\bar{X}}, \mathbf{X})~...~p(f_n | \mathbf{\bar{f}}, \mathbf{\bar{X}}, \mathbf{X}).
+\end{align}<p>It's worthwhile stressing that FITC is just a different model. It can be considered as an attempt to approximate the predictions made by a full GP, but its modelling assumption about independence makes is a fundamentally different model from the full GP.</p>
+<h3 id="Interpretation-as-an-input-dependent-noise-regressor">Interpretation as an input dependent noise regressor<a class="anchor-link" href="#Interpretation-as-an-input-dependent-noise-regressor"> </a></h3><p>Snelson and Ghahramani point out that FITC can be regarded as a regression model with an input-dependent noise level, since in the predictive posterior:</p>
+\begin{align}
+p \left(y_n | \mathbf{\bar{f}}, \mathbf{\bar{X}}, \mathbf{x}_n \right) \sim \mathcal{N}\left(f_n;~\mathbf{K}_{\mathbf{x}_n\mathbf{\bar{X}}} \mathbf{K}_{\mathbf{\bar{X}}\mathbf{\bar{X}}}^{-1}\mathbf{\bar{f}},~\mathbf{K}_{\mathbf{x}_n\mathbf{x}_n} - \mathbf{K}_{\mathbf{x}_n\mathbf{X}}\mathbf{K}_{\mathbf{\bar{X}}\mathbf{\bar{X}}}^{-1}\mathbf{K}_{\mathbf{X}\mathbf{x}_n} + \sigma^2 \mathbf{I} \right),
+\end{align}<p>both the predictive variance is a function of $\mathbf{x}$. However, the FITC model couples the predictive mean and variance in a potentially undesirable way. In particular, under FITC it is not possible to have a posterior predictive with a mean that is far from the prior mean whilst maintaining a large noise level. The noise level in FITC corresponds to the uncertainty of a full GP conditioned on the inducing points. This uncertainty can only increase by moving away from the inducing points.</p>
+<h2 id="Inference-and-prediction">Inference and prediction<a class="anchor-link" href="#Inference-and-prediction"> </a></h2><p>We have looked at the generative assumptions of FITC and seen how to sample $\mathbf{\bar{f}}$, then $\mathbf{f} | \mathbf{\bar{f}}$, then $\mathbf{y} | \mathbf{f}$ (forward probability). How about inferring $p(\mathbf{\bar{f}} | \mathbf{y})$? We can apply Bayes' rule for Gaussian variables to the prior and likelihood</p>
+\begin{align}
+p\left(\mathbf{\bar{f}} | \mathbf{\bar{X}}\right) &amp;= \mathcal{N}\left(\mathbf{0}, \mathbf{K}_{\mathbf{\bar{X}}\mathbf{\bar{X}}}\right)\\
+p\left(\mathbf{y} | \mathbf{\bar{f}}, \mathbf{\bar{X}}, \mathbf{X} \right) &amp;= \mathcal{N}\left(f_n;~\mathbf{K}_{\mathbf{X}\mathbf{\bar{X}}} \mathbf{K}_{\mathbf{\bar{X}}\mathbf{\bar{X}}}^{-1}\mathbf{\bar{f}},~\mathbf{D} + \sigma^2 \mathbf{I} \right),
+\end{align}<p>where $\mathbf{D}$ is a diagonal matrix with entries $D_{nn} = \mathbf{K}_{\mathbf{x}_n\mathbf{x}_n} - \mathbf{K}_{\mathbf{x}_n\mathbf{X}}\mathbf{K}_{\mathbf{X}\mathbf{X}}^{-1}\mathbf{K}_{\mathbf{X}\mathbf{x}_n}$, we can apply Bayes' rule for Gaussian distributions to obtain the marginal of $\mathbf{y}$ and the posterior $\mathbf{\bar{f}}| \mathbf{y}$</p>
+\begin{align}
+p(\mathbf{y}|\mathbf{\bar{X}}, \boldsymbol{\theta}) &amp;= \mathcal{N}\left(\mathbf{y}; \mathbf{0}, \mathbf{K}_{\mathbf{X}\mathbf{\bar{X}}} \mathbf{K}_{\mathbf{\bar{X}}\mathbf{\bar{X}}}^{-1}\mathbf{K}_{\mathbf{\bar{X}}\mathbf{X}} + \mathbf{D} + \sigma^2 \mathbf{I}\right)\\
+p(\mathbf{\bar{f}} | \mathbf{y}, \mathbf{\bar{X}}, \mathbf{X}) &amp;= \mathcal{N}\left(\mathbf{\bar{f}}; \mathbf{K}_{\mathbf{\bar{X}}\mathbf{\bar{X}}} \mathbf{Q}^{-1} \mathbf{K}_{\mathbf{\bar{X}} \mathbf{X}} \left( \mathbf{D} + \sigma^2 \mathbf{I} \right)^{-1} \mathbf{y}, \mathbf{K}_{\mathbf{\bar{X}}\mathbf{\bar{X}}} \mathbf{Q}^{-1} \mathbf{K}_{\mathbf{\bar{X}}\mathbf{\bar{X}}} \right)
+\end{align}<p>where $\mathbf{Q} = \left(\mathbf{K}_{\mathbf{\bar{X}} \mathbf{\bar{X}}} + \mathbf{K}_{\mathbf{\bar{X}}\mathbf{X}} \left( \mathbf{D} + \sigma^2 \mathbf{I} \right) \mathbf{K}_{\mathbf{X}\mathbf{\bar{X}}} \right)$. To make a prediction at a new input $\mathbf{\bar{x}_*}$, we integrate out $f_*$ according to the posterior:</p>
+\begin{align}
+p(y_*| \mathbf{x}_*, \mathbf{y}, \mathbf{X}, \mathbf{\bar{X}}) &amp;= \int p(y_*| f_*) p(f_* | \mathbf{x}_*, \mathbf{y}, \mathbf{X}, \mathbf{\bar{X}}) d\mathbf{\bar{f}} \\
+&amp;= \mathcal{N}\left(y_*; \mathbf{K}_{\mathbf{x}_* \mathbf{\bar{X}}} \mathbf{Q}^{-1} \mathbf{K}_{\mathbf{\bar{X}} \mathbf{X}} \left( \mathbf{D} + \sigma^2 \mathbf{I} \right)^{-1} \mathbf{y}, \mathbf{K}_{\mathbf{x_*} \mathbf{x_*}} - \mathbf{K}_{\mathbf{x_*}\mathbf{\bar{X}}} \left( \mathbf{K}_{\mathbf{\bar{X}}\mathbf{\bar{X}}}^{-1} - \mathbf{Q}^{-1} \right) \mathbf{K}_{\mathbf{\bar{X}}\mathbf{x_*}} + \sigma^2 \right)
+\end{align}<!---
+<details>
+<summary>Bayes' rule for Gaussian distributions</summary>
+<br>
+Assuming a Gaussian prior and a likelihood of the form
+\begin{align}
+p(\mathbf{x}) &= \mathcal{N}\left(\mathbf{x}; \boldsymbol{\mu}_{\mathbf{x}}, \boldsymbol{\Lambda}^{-1}_{\mathbf{x}} \right)\\
+p(\mathbf{y} | \mathbf{x}) &= \mathcal{N}\left(\mathbf{y}; \mathbf{A}\mathbf{x} + \mathbf{b}, \boldsymbol{\Lambda}^{-1}_{\mathbf{y} | \mathbf{x}} \right)
+\end{align}
+<br>
+respectively, we can apply Bayes' rule to obtain the marginal of $\mathbf{y}$ and posterior $\mathbf{x}| \mathbf{y}$:
+<br>
+
+\begin{align}
+p(\mathbf{y}) &= \mathcal{N}\left(\mathbf{y}; \mathbf{A}\boldsymbol{\mu}_{\mathbf{x}} + \mathbf{b}, \boldsymbol{\Lambda}^{-1}_{\mathbf{y} | \mathbf{x}} + \mathbf{A} \boldsymbol{\Lambda}^{-1}_{\mathbf{x}}\mathbf{A}^\top \right)\\
+p(\mathbf{x} | \mathbf{y}) &= \mathcal{N}\left(\mathbf{y}; \boldsymbol{\Lambda}_{\mathbf{x}|\mathbf{y}}^{-1} \left( \mathbf{A}^\top\boldsymbol{\Lambda}_{\mathbf{y} | \mathbf{x}} (\mathbf{y} - \mathbf{b}) +  \boldsymbol{\Lambda}_{\mathbf{x}} \boldsymbol{\mu}_{\mathbf{x}}\right), \boldsymbol{\Lambda}_{\mathbf{x}|\mathbf{y}}^{-1} \right)
+\end{align}
+<br>
+where $\boldsymbol{\Lambda}_{\mathbf{x}|\mathbf{y}} = \left(\boldsymbol{\Lambda}_{\mathbf{x}} + \mathbf{A}^\top\boldsymbol{\Lambda}_{\mathbf{y} | \mathbf{x}}\mathbf{A} \right)$.
+</details>
+--->
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Learning-$\mathbf{\bar{X}}$-and-$\boldsymbol{\theta}$">Learning $\mathbf{\bar{X}}$ and $\boldsymbol{\theta}$<a class="anchor-link" href="#Learning-$\mathbf{\bar{X}}$-and-$\boldsymbol{\theta}$"> </a></h2><p>Up to now, we have pretended to know the inducing inputs $\mathbf{\bar{X}}$ and kernel hyperparameters $\boldsymbol{\theta}$, but in general this will not be the case. In practice, we will be interested iin setting $\mathbf{\bar{X}}$ and $\boldsymbol{\theta}$ from the data. One approach would be to set hyper-priors $p(\mathbf{\bar{X}})$ and $p(\boldsymbol{\theta})$ and integrate out $\mathbf{\bar{X}}$ and $\boldsymbol{\theta}$, but this would be challenging because the associated expressions would not have a closed form. Instead, we can still use the priors $p(\mathbf{\bar{X}})$ and $p(\boldsymbol{\theta})$ to obtain maximum-a-posteriori point estimates:</p>
+\begin{align}
+\mathbf{\bar{X}}_{MAP}, \boldsymbol{\theta}_{MAP} = \text{argmax}_{\mathbf{\bar{X}}, \boldsymbol{\theta}}~ \left[p(\mathbf{y}|\mathbf{\bar{X}}, \boldsymbol{\theta}) p(\mathbf{\bar{X}}, \boldsymbol{\theta})\right]
+\end{align}<p>In the case of flat priors, which are uniform in the allowed range of $\mathbf{\bar{X}}$ and $\boldsymbol{\theta}$, this reduces to maximising the marginal likelihood:</p>
+\begin{align}
+\mathbf{\bar{X}}_{ML}, \boldsymbol{\theta}_{ML} = \text{argmax}_{\mathbf{\bar{X}}, \boldsymbol{\theta}}~ p(\mathbf{y}|\mathbf{\bar{X}}, \boldsymbol{\theta}).
+\end{align}<p>The marginal likelihood $p(\mathbf{y}|\mathbf{\bar{X}}, \boldsymbol{\theta})$ can be expressed in closed form as:</p>
+\begin{align}
+p(\mathbf{y}|\mathbf{\bar{X}}, \boldsymbol{\theta}) &amp;= \int p(\mathbf{y}| \mathbf{\bar{f}}, \mathbf{\bar{X}}, \boldsymbol{\theta}) p(\mathbf{\bar{f}} | \mathbf{\bar{X}}) d\mathbf{\bar{f}}\\
+&amp;= \mathcal{N}\left(\mathbf{y}; \mathbf{0}, \mathbf{K}_{\mathbf{X}\mathbf{\bar{X}}} \mathbf{K}_{\mathbf{\bar{X}}\mathbf{\bar{X}}}^{-1}\mathbf{K}_{\mathbf{\bar{X}}\mathbf{X}} + \mathbf{D} + \sigma^2 \mathbf{I}\right)
+\end{align}
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Implementation">Implementation<a class="anchor-link" href="#Implementation"> </a></h2><p>Let's see what an implementation of FITC might look like. We'll define classes for the mean and covariance function and have them inherit from <code>tf.keras.Model</code>, to make them trainable.</p>
+<h3 id="Mean-and-Covariance">Mean and Covariance<a class="anchor-link" href="#Mean-and-Covariance"> </a></h3><p>We'll use a constant mean function, with a trainable mean and an exponentiated quadratic (EQ) covariance.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+
+<span class="k">class</span> <span class="nc">constant_mean</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">dtype</span><span class="p">,</span>
+                 <span class="n">name</span><span class="o">=</span><span class="s1">&#39;eq_covariance&#39;</span><span class="p">):</span>
+        
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">constant</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">))</span>
+        
+        
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">constant</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+    
+    
+<span class="k">class</span> <span class="nc">eq_covariance</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
+                 <span class="n">log_coeff</span><span class="p">,</span>
+                 <span class="n">log_scales</span><span class="p">,</span>
+                 <span class="n">dim</span><span class="p">,</span>
+                 <span class="n">dtype</span><span class="p">,</span>
+                 <span class="n">name</span><span class="o">=</span><span class="s1">&#39;eq_covariance&#39;</span><span class="p">,</span>
+                 <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    
+        <span class="c1"># Convert parameters to tensors</span>
+        <span class="n">log_coeff</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">(</span><span class="n">log_coeff</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="n">log_scales</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">(</span><span class="n">log_scales</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+
+        <span class="c1"># Reshape parameter tensors</span>
+        <span class="n">log_coeff</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">log_coeff</span><span class="p">)</span>
+        <span class="n">log_scales</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">log_scales</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+
+        <span class="k">assert</span> <span class="n">log_scales</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">dim</span><span class="p">,</span>                \
+            <span class="n">f</span><span class="s1">&#39;Expected the size of scales at axis 2 &#39;</span>    <span class="o">+</span> \
+            <span class="n">f</span><span class="s1">&#39;to be dim, found shapes </span><span class="si">{scales.shape}</span><span class="s1"> &#39;</span>   <span class="o">+</span> \
+            <span class="n">f</span><span class="s1">&#39;and </span><span class="si">{dim}</span><span class="s1">.&#39;</span>
+
+        <span class="k">assert</span> <span class="n">log_coeff</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(),</span>                     \
+            <span class="n">f</span><span class="s1">&#39;Expected coeff to be a single scalar, &#39;</span>   <span class="o">+</span> \
+            <span class="n">f</span><span class="s1">&#39;found coeff.shape == </span><span class="si">{coeff.shape}</span><span class="s1">.&#39;</span>
+        
+        <span class="c1"># Set input dimensionality</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">=</span> <span class="n">dim</span>
+        
+        <span class="c1"># Set EQ parameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log_scales</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">log_scales</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log_coeff</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">log_coeff</span><span class="p">)</span>
+        
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">scales</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_scales</span><span class="p">)</span> <span class="o">**</span> <span class="mf">2.</span>
+    
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">coeff</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_coeff</span><span class="p">)</span> <span class="o">**</span> <span class="mf">2.</span>
+        
+        
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">x1</span><span class="p">,</span>
+                 <span class="n">x2</span><span class="p">,</span>
+                 <span class="n">diag_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">epsilon</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        
+        <span class="c1"># Reshape input tensors</span>
+        <span class="n">x1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="n">x2</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+
+        <span class="c1"># Check dimensions are correct</span>
+        <span class="k">assert</span> <span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">rank</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span> <span class="o">==</span> <span class="n">tf</span><span class="o">.</span><span class="n">rank</span><span class="p">(</span><span class="n">x2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="ow">and</span>       \
+               <span class="p">(</span><span class="n">x1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">x2</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">),</span>   \
+            <span class="n">f</span><span class="s1">&#39;Expected x1 and x2 to have 2 dimensions &#39;</span>  <span class="o">+</span> \
+            <span class="n">f</span><span class="s1">&#39;and to both match self.dim at second &#39;</span>     <span class="o">+</span> \
+            <span class="n">f</span><span class="s1">&#39;dimension, instead found shapes &#39;</span>          <span class="o">+</span> \
+            <span class="n">f</span><span class="s1">&#39;</span><span class="si">{x1.shape}</span><span class="s1"> and </span><span class="si">{x2.shape}</span><span class="s1">.&#39;</span>
+
+        <span class="n">scales</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scales</span>
+        
+        <span class="c1"># If not calculating diagonal only, expand to broadcast</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">diag_only</span><span class="p">:</span>
+
+            <span class="n">x1</span> <span class="o">=</span> <span class="n">x1</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
+            <span class="n">x2</span> <span class="o">=</span> <span class="n">x2</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+
+            <span class="n">scales</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scales</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+
+        <span class="c1"># Compute differences</span>
+        <span class="n">diffs</span> <span class="o">=</span> <span class="n">x1</span> <span class="o">-</span> <span class="n">x2</span>
+
+        <span class="c1"># Compute quadratic form</span>
+        <span class="n">quad</span> <span class="o">=</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">diffs</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">scales</span>
+        <span class="n">quad</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">quad</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Exponentiate and multiply by covariance coeff</span>
+        <span class="n">exp_quad</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">quad</span><span class="p">)</span>
+        <span class="n">eq_cov</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">coeff</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">exp_quad</span>
+        
+        <span class="c1"># Add epsilon for invertibility</span>
+        <span class="k">if</span> <span class="n">epsilon</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            
+            <span class="n">eq_cov</span> <span class="o">=</span> <span class="n">eq_cov</span> <span class="o">+</span> <span class="n">epsilon</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">eq_cov</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">eq_cov</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="The-FITC-GP-model">The FITC GP model<a class="anchor-link" href="#The-FITC-GP-model"> </a></h3><p>We'll also make the GP itself a trainable model, which takes the training data and inducing point initialisation, a mean, a covariance and an initial log-noise level.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">FITCGP</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">x_train</span><span class="p">,</span>
+                 <span class="n">y_train</span><span class="p">,</span>
+                 <span class="n">x_ind_init</span><span class="p">,</span>
+                 <span class="n">mean</span><span class="p">,</span>
+                 <span class="n">cov</span><span class="p">,</span>
+                 <span class="n">log_noise</span><span class="p">,</span>
+                 <span class="n">dtype</span><span class="p">,</span>
+                 <span class="n">name</span><span class="o">=</span><span class="s1">&#39;fitc-gp&#39;</span><span class="p">,</span>
+                 <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        
+        <span class="c1"># Set training data and inducing point initialisation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x_train</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span>
+                                            <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span>
+                                            <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">x_ind</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">(</span><span class="n">x_ind_init</span><span class="p">,</span>
+                                          <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x_ind</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_ind</span><span class="p">)</span>
+        
+        <span class="c1"># Set mean and covariance functions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mean</span> <span class="o">=</span> <span class="n">mean</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cov</span> <span class="o">=</span> <span class="n">cov</span>
+    
+        <span class="c1"># Set log of noise parameter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log_noise</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">(</span><span class="n">log_noise</span><span class="p">,</span>
+                                              <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log_noise</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">log_noise</span><span class="p">)</span>
+        
+        
+        
+    <span class="k">def</span> <span class="nf">post_pred</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_pred</span><span class="p">):</span>
+        
+        <span class="c1"># Compute D matrix (diagonal) plus noise</span>
+        <span class="n">D_diag_plus_noise</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">D_diag</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">noise</span>
+        
+        <span class="c1"># Compute Q matrix</span>
+        <span class="n">Q</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Q</span>
+        
+        <span class="c1"># Covariance between prediction and inducing points</span>
+        <span class="n">K_pred_ind</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">x_pred</span><span class="p">,</span>
+                              <span class="bp">self</span><span class="o">.</span><span class="n">x_ind</span><span class="p">)</span>
+        
+        <span class="n">K_ind_pred</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">K_pred_ind</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+        
+        <span class="c1"># Covariance between inducing and training points</span>
+        <span class="n">K_ind_train</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_ind</span><span class="p">,</span>
+                               <span class="bp">self</span><span class="o">.</span><span class="n">x_train</span><span class="p">)</span>
+        
+        <span class="c1"># Covariance between inducing and training points</span>
+        <span class="n">K_ind_ind</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_ind</span><span class="p">,</span>
+                             <span class="bp">self</span><span class="o">.</span><span class="n">x_ind</span><span class="p">,</span>
+                             <span class="n">epsilon</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">)</span>
+        
+        <span class="c1"># Compute diagonal of covariance between prediction points</span>
+        <span class="n">K_pred_pred_diag</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">x_pred</span><span class="p">,</span>
+                                    <span class="n">x_pred</span><span class="p">,</span>
+                                    <span class="n">diag_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        
+        <span class="c1"># Compute inversions to use one einsum at the end</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_train</span><span class="p">)</span>
+        <span class="n">Q_inv_K_ind_train</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">K_ind_train</span><span class="p">)</span>
+        <span class="n">D_diag_plus_noise_inv_y</span> <span class="o">=</span> <span class="p">(</span><span class="n">D_diag_plus_noise</span> <span class="o">**</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">diff</span>
+        
+        <span class="c1"># Compute mean of posterior predictive</span>
+        <span class="n">mean</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;ij, jk, k -&gt; i&#39;</span><span class="p">,</span>
+                         <span class="n">K_pred_ind</span><span class="p">,</span>
+                         <span class="n">Q_inv_K_ind_train</span><span class="p">,</span>
+                         <span class="n">D_diag_plus_noise_inv_y</span><span class="p">)</span>
+        
+        <span class="n">mean</span> <span class="o">=</span> <span class="n">mean</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x_pred</span><span class="p">)</span>
+        
+        <span class="c1"># Compute inversions</span>
+        <span class="n">K_ind_ind_inv_K_ind_pred</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">K_ind_ind</span><span class="p">,</span> <span class="n">K_ind_pred</span><span class="p">)</span>
+        <span class="n">Q_inv_K_ind_pred</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">K_ind_pred</span><span class="p">)</span>
+        
+        <span class="n">diff_term</span> <span class="o">=</span> <span class="n">K_ind_ind_inv_K_ind_pred</span> <span class="o">-</span> <span class="n">Q_inv_K_ind_pred</span>
+        <span class="n">diff_term</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;ij, ji -&gt; i&#39;</span><span class="p">,</span>
+                              <span class="n">K_pred_ind</span><span class="p">,</span>
+                              <span class="n">diff_term</span><span class="p">)</span>
+        
+        <span class="n">var</span> <span class="o">=</span> <span class="n">K_pred_pred_diag</span> <span class="o">-</span> <span class="n">diff_term</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">noise</span>
+        
+        <span class="k">return</span> <span class="n">mean</span><span class="p">,</span> <span class="n">var</span>
+    
+    
+    <span class="k">def</span> <span class="nf">log_lik</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the log marginal likelihood.</span>
+<span class="sd">        </span>
+<span class="sd">        Diagonal A : A = D + sigma^2 I</span>
+<span class="sd">        Covariance : B = A + K_nm K_mm^-1 K_mn</span>
+<span class="sd">        Cholesky V : VVT = C = K_mm + K_mn A^-1 K_nm</span>
+<span class="sd">        Precision  : L = A^-1 - (A^-1 K_nm VT^-1) (V^-1 K_mn A^-1) = A^-1 - UT U</span>
+<span class="sd">        </span>
+<span class="sd">        LogNorm    : -0.5 * (N * log(2 * pi) + log|A + K_nm K_mm^-1 K_mn|)</span>
+<span class="sd">        LogNorm    : log|A + K_nm K_mm^-1 K_mn| =</span>
+<span class="sd">                        = log|K_mm + K_mn A^-1 K_nm| - log|K_mm| + log|A|</span>
+<span class="sd">                    </span>
+<span class="sd">        Quad: -0.5 * yT L y = </span>
+<span class="sd">                    = -0.5 * yT A^-1 y + 0.5 * yT (V^-1 K_mn C^-1)T (V^-1 K_mn C^-1) y</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">N</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        
+        <span class="n">A</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">D_diag</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">noise</span>
+        
+        <span class="n">K_ind_ind</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_ind</span><span class="p">,</span>
+                             <span class="bp">self</span><span class="o">.</span><span class="n">x_ind</span><span class="p">,</span>
+                             <span class="n">epsilon</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        
+        <span class="n">K_ind_train</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_ind</span><span class="p">,</span>
+                               <span class="bp">self</span><span class="o">.</span><span class="n">x_train</span><span class="p">)</span>
+        
+        <span class="c1"># Compute V</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="n">K_ind_ind</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="n">C</span> <span class="o">+</span> <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;ij, j, kj -&gt; ik&#39;</span><span class="p">,</span>
+                          <span class="n">K_ind_train</span><span class="p">,</span>
+                          <span class="n">A</span> <span class="o">**</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+                          <span class="n">K_ind_train</span><span class="p">)</span>
+        <span class="n">V</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
+        
+        <span class="c1"># Compute U</span>
+        <span class="n">U</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">K_ind_train</span> <span class="o">/</span> <span class="n">A</span><span class="p">)</span>
+        
+        <span class="c1"># Difference between mean and y_train</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span>
+        
+        <span class="c1"># Compute quadratic form</span>
+        <span class="n">U_diff</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;ij, j -&gt; i&#39;</span><span class="p">,</span>
+                        <span class="n">U</span><span class="p">,</span>
+                        <span class="n">diff</span><span class="p">)</span>
+        
+        <span class="n">quad</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">diff</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">A</span><span class="p">)</span>
+        <span class="n">quad</span> <span class="o">=</span> <span class="n">quad</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">U_diff</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+        
+        <span class="n">logdet</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">slogdet</span><span class="p">(</span><span class="n">C</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">logdet</span> <span class="o">=</span> <span class="n">logdet</span> <span class="o">-</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">slogdet</span><span class="p">(</span><span class="n">K_ind_ind</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">logdet</span> <span class="o">=</span> <span class="n">logdet</span> <span class="o">+</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+        
+        <span class="n">log_lik</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">N</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">logdet</span> <span class="o">+</span> <span class="n">quad</span>
+        
+        <span class="k">return</span> <span class="n">log_lik</span>
+    
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">D_diag</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        
+        <span class="c1"># Covariance between training points (diagnal components)</span>
+        <span class="n">K_train_train</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_train</span><span class="p">,</span>
+                                 <span class="bp">self</span><span class="o">.</span><span class="n">x_train</span><span class="p">,</span>
+                                 <span class="n">diag_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        
+        <span class="c1"># Covariance between training and inducing points</span>
+        <span class="n">K_train_ind</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_train</span><span class="p">,</span>
+                               <span class="bp">self</span><span class="o">.</span><span class="n">x_ind</span><span class="p">)</span>
+        
+        <span class="n">K_ind_train</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">K_train_ind</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+        
+        <span class="c1"># Covariance between inducing points</span>
+        <span class="n">K_ind_ind</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_ind</span><span class="p">,</span>
+                             <span class="bp">self</span><span class="o">.</span><span class="n">x_ind</span><span class="p">,</span>
+                             <span class="n">epsilon</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">)</span>
+        
+        <span class="n">K_ind_ind_inv_K_ind_train</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky_solve</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">K_ind_ind</span><span class="p">),</span>
+                                                             <span class="n">K_ind_train</span><span class="p">)</span>
+        
+        <span class="c1"># Compute diagonal D matrix</span>
+        <span class="n">K_inv_term</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;nm, mn -&gt; n&#39;</span><span class="p">,</span>
+                               <span class="n">K_train_ind</span><span class="p">,</span>
+                               <span class="n">K_ind_ind_inv_K_ind_train</span><span class="p">)</span>
+        
+        <span class="n">D</span> <span class="o">=</span> <span class="n">K_train_train</span> <span class="o">-</span> <span class="n">K_inv_term</span>
+        
+        <span class="k">return</span> <span class="n">D</span>
+    
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">noise</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_noise</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+    
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Q</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        
+        <span class="n">K_ind_ind</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_ind</span><span class="p">,</span>
+                             <span class="bp">self</span><span class="o">.</span><span class="n">x_ind</span><span class="p">)</span>
+        
+        <span class="n">K_train_ind</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_train</span><span class="p">,</span>
+                               <span class="bp">self</span><span class="o">.</span><span class="n">x_ind</span><span class="p">)</span>
+        
+        <span class="n">D_diag</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">D_diag</span>
+        <span class="n">D_diag_plus_noise_inv</span> <span class="o">=</span> <span class="p">(</span><span class="n">D_diag</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">noise</span><span class="p">)</span> <span class="o">**</span> <span class="o">-</span><span class="mi">1</span>
+        
+        <span class="n">Q</span> <span class="o">=</span> <span class="n">K_ind_ind</span>
+        <span class="n">Q</span> <span class="o">=</span> <span class="n">Q</span> <span class="o">+</span> <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;nm, n, nk -&gt; mk&#39;</span><span class="p">,</span>
+                          <span class="n">K_train_ind</span><span class="p">,</span>
+                          <span class="n">D_diag_plus_noise_inv</span><span class="p">,</span>
+                          <span class="n">K_train_ind</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">Q</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="A-sanity-check:-train-on-data-generated-by-FITC">A sanity check: train on data generated by FITC<a class="anchor-link" href="#A-sanity-check:-train-on-data-generated-by-FITC"> </a></h2><p>Before training on random data, we better make sure the model can learn to fit data that are sampled from it. In particular, we are interested to see that the model can learn the $\boldsymbol{\theta}$ and $\mathbf{\bar{X}}$ which were used to generate the data, starting from a different initial $\boldsymbol{\theta}$ and $\mathbf{\bar{X}}$. If it doesn't, then we know something's wrong. So, let's try to learn the dataset we sampled previously, from a different initialisation:</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell tag_hide_input tag_hide_output">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="n">model</span><span class="p">,</span>
+         <span class="n">x_pred</span><span class="p">,</span>
+         <span class="n">x_train</span><span class="p">,</span>
+         <span class="n">y_train</span><span class="p">,</span>
+         <span class="n">x_ind_prev</span><span class="p">,</span>
+         <span class="n">x_ind_init</span><span class="p">,</span>
+         <span class="n">step</span><span class="p">):</span>
+
+    <span class="n">mean</span><span class="p">,</span> <span class="n">var</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">post_pred</span><span class="p">(</span><span class="n">x_pred</span><span class="p">)</span>
+
+    <span class="n">x_pred</span> <span class="o">=</span> <span class="n">x_pred</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+    <span class="n">mean</span> <span class="o">=</span> <span class="n">mean</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+    <span class="n">var</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+
+    <span class="n">x_ind_curr</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">x_ind</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_pred</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x_pred</span><span class="p">,</span>
+                     <span class="n">mean</span> <span class="o">-</span> <span class="n">var</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">,</span>
+                     <span class="n">mean</span> <span class="o">+</span> <span class="n">var</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">,</span>
+                     <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span>
+                     <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_ind_curr</span><span class="p">,</span>
+                <span class="o">-</span><span class="mf">5.</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">x_ind_curr</span><span class="p">),</span>
+                <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span>
+                <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">,</span>
+                <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;Current $\bar{\mathbf</span><span class="si">{X}</span><span class="s1">}$&#39;</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_ind_prev</span><span class="p">,</span>
+                <span class="o">-</span><span class="mf">5.5</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">x_ind_prev</span><span class="p">),</span>
+                <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span>
+                <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">,</span>
+                <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+                <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;Previous $\bar{\mathbf</span><span class="si">{X}</span><span class="s1">}$&#39;</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_ind_init</span><span class="p">,</span>
+                <span class="mf">5.5</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">x_ind_init</span><span class="p">),</span>
+                <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span>
+                <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">,</span>
+                <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;Init. $\bar{\mathbf</span><span class="si">{X}</span><span class="s1">}$&#39;</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;FITC after </span><span class="si">{step}</span><span class="s1"> optimisation steps&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mf">4.</span><span class="p">,</span> <span class="mf">4.</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">6.</span><span class="p">,</span> <span class="mf">6.</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    
+    
+<span class="k">def</span> <span class="nf">print_numbers</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
+    
+    <span class="n">log_lik</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">log_lik</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Step: </span><span class="si">{step:5&gt;}</span><span class="s1"> &#39;</span>
+          <span class="n">f</span><span class="s1">&#39;Log evidence: {log_lik.numpy():8.3f} &#39;</span>
+          <span class="n">f</span><span class="s1">&#39;Log coeff: {model.cov.log_coeff.numpy():5.2f} &#39;</span>
+          <span class="n">f</span><span class="s1">&#39;Log scales: {[round(num[0], 3) for num in model.cov.log_scales.numpy()]} &#39;</span>
+          <span class="n">f</span><span class="s1">&#39;Log noise: {model.log_noise.numpy():5.2f}&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow_probability</span> <span class="k">as</span> <span class="nn">tfp</span>
+
+<span class="c1"># Set random seed and tensor dtype</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">set_seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">dtype</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">float64</span>
+
+<span class="c1"># Number of inducing points</span>
+<span class="n">M</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">inducing_range</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">3.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">)</span>
+<span class="n">log_noise</span> <span class="o">=</span> <span class="mf">0.</span>
+<span class="n">log_coeff</span> <span class="o">=</span> <span class="mf">1.</span>
+<span class="n">log_scales</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.</span><span class="p">]</span>
+<span class="n">learn_rate</span> <span class="o">=</span> <span class="mf">1e-2</span>
+<span class="n">num_steps</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1e4</span><span class="p">)</span>
+
+<span class="c1"># Training data x_obs, y_obs are the data sampled from FITC from before</span>
+<span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="n">x_obs</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">y_obs</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Initial locations of inducing points</span>
+<span class="n">x_ind_dist</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="n">inducing_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">high</span><span class="o">=</span><span class="n">inducing_range</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">x_ind_init</span> <span class="o">=</span> <span class="n">x_ind_dist</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">sample_shape</span><span class="o">=</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">x_ind_init</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">x_ind_init</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+
+<span class="c1"># Locations to visualise the</span>
+<span class="n">x_pred</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">6.</span><span class="p">,</span> <span class="mf">6.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">]</span>
+<span class="n">x_pred</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">x_pred</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+
+<span class="n">mean</span> <span class="o">=</span> <span class="n">constant_mean</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+
+<span class="n">cov</span> <span class="o">=</span> <span class="n">eq_covariance</span><span class="p">(</span><span class="n">log_coeff</span><span class="o">=</span><span class="n">log_coeff</span><span class="p">,</span>
+                    <span class="n">log_scales</span><span class="o">=</span><span class="n">log_scales</span><span class="p">,</span>
+                    <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+
+<span class="n">fitc_gp</span> <span class="o">=</span> <span class="n">FITCGP</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="n">mean</span><span class="p">,</span>
+                 <span class="n">cov</span><span class="o">=</span><span class="n">cov</span><span class="p">,</span>
+                 <span class="n">log_noise</span><span class="o">=</span><span class="n">log_noise</span><span class="p">,</span>
+                 <span class="n">x_train</span><span class="o">=</span><span class="n">x_train</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">],</span>
+                 <span class="n">y_train</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span>
+                 <span class="n">x_ind_init</span><span class="o">=</span><span class="n">x_ind_init</span><span class="p">,</span>
+                 <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">learn_rate</span><span class="p">)</span>
+
+<span class="n">x_ind_prev</span> <span class="o">=</span> <span class="n">x_ind_init</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+
+
+<span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_steps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    
+    <span class="k">if</span> <span class="n">step</span> <span class="o">%</span> <span class="n">num_steps</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        
+        <span class="n">print_numbers</span><span class="p">(</span><span class="n">fitc_gp</span><span class="p">,</span>
+                      <span class="n">step</span><span class="p">)</span>
+        
+        <span class="n">plot</span><span class="p">(</span><span class="n">fitc_gp</span><span class="p">,</span>
+             <span class="n">x_pred</span><span class="p">,</span>
+             <span class="n">x_train</span><span class="p">,</span>
+             <span class="n">y_train</span><span class="p">,</span>
+             <span class="n">x_ind_prev</span><span class="p">,</span>
+             <span class="n">x_ind_init</span><span class="p">,</span>
+             <span class="n">step</span><span class="p">)</span>
+    
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+
+        <span class="n">log_evidence</span> <span class="o">=</span> <span class="n">fitc_gp</span><span class="o">.</span><span class="n">log_lik</span><span class="p">()</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="o">-</span> <span class="n">log_evidence</span>
+
+    <span class="n">gradients</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">fitc_gp</span><span class="o">.</span><span class="n">trainable_variables</span><span class="p">)</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">apply_gradients</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">gradients</span><span class="p">,</span> <span class="n">fitc_gp</span><span class="o">.</span><span class="n">trainable_variables</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Step: 0 Log evidence: -213.4827 Log coeff:  1.00 Log scales: [1.0] Log noise:  0.00
+</pre>
+</div>
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../../images/gaussian-processes/sparse/fitc_12_1.png"
+>
+</div>
+
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Step: 10000 Log evidence: -79.6820 Log coeff: -0.02 Log scales: [-0.019] Log noise: -2.56
+</pre>
+</div>
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../../images/gaussian-processes/sparse/fitc_12_3.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion"> </a></h2><h3 id="Summary">Summary<a class="anchor-link" href="#Summary"> </a></h3><p>FITC is a sparse model which can be scaled to larger datasets. It achieves scalability by introducing $M$ <em>inducing points</em> and assuming an independence between the observations given the outputs of the inducing points. Due to this independence, FITC enjoys $\mathcal(O)(NM^2)$ complexity when evaluating the evidence or making predictions, allowing it to scale to larger datasets.</p>
+<h3 id="Issues-and-observations">Issues and observations<a class="anchor-link" href="#Issues-and-observations"> </a></h3><ul>
+<li><p>FITC is a different model from the simple GP we started with. The modelling assumptions are simply different from the original GP. So, if we are looking for a tractable method that is still faithful to the original GP, FITC may not be a great choice. That being said, maybe FITC is a model we should have considered in the first place, as a candidate for modelling the data. The suitability of different models can be quantified by evaluating the marginal likelihood - if FITC is more likely than a vanilla GP, given the data, then we should use that!</p>
+</li>
+<li><p>Although FITC can be used as a cheap and easy way to model data with an input-dependent noise level, it's generative assumptions tie the mean and error bars in an unusual way. In particular, the model cannot get more uncertain without the mean decaying back to the prior mean. In regions where the data has a large mean and large noise level simulateneously, FITC would have trouble.</p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+
+ 
+
+
+    </main>
+    
+            </div>
+            <div class="c-textbook__footer" id="textbook_footer">
+              
+<nav class="c-page__nav">
+  
+    
+    
+
+    <a id="js-page__nav__prev" class="c-page__nav__prev" href="/gaussian-processes/sparse/intro.html">
+      〈 <span class="u-margin-right-tiny"></span> Sparse Gaussian Processes
+    </a>
+  
+
+  
+    
+
+    
+    <a id="js-page__nav__next" class="c-page__nav__next" href="/gaussian-processes/sparse/vfe.html">
+      VFE <span class="u-margin-right-tiny"></span> 〉
+    </a>
+  
+</nav>
+
+              <footer>
+  <p class="footer"></p>
+</footer>
+
+            </div>
+
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
