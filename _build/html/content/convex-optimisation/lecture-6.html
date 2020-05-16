@@ -1,0 +1,240 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Generalised linear-fractional programmes &#8212; Random walks</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/sphinx-book-theme.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/mystnb.js"></script>
+    <script src="../../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .secondtoggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="canonical" href="https://random-walks.org/content/convex-optimisation/lecture-6.html" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://random-walks.org/content/convex-optimisation/lecture-6.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Generalised linear-fractional programmes" />
+<meta property="og:description" content="Generalised linear-fractional programmesQuadratic programmes  Quadratic Programme: an optimisation problem of the form  \begin{align} &\text{minimise}&& \frac{1" />
+<meta property="og:image"       content="https://random-walks.org/_static/logo.svg" />
+
+<meta name="twitter:card" content="summary">
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <img src="../../_static/logo.svg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Random walks</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  
+  <ul class="nav sidenav_l1">
+  <li class="">
+    <a href="../home.html">Welcome</a>
+  </li>
+  <li class="">
+    <a href="../gaussian-processes/gp-intro.html">Gaussian Processes</a>
+  </li>
+</ul>
+</nav>
+<p class="navbar_footer"></p>
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse" data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu" aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation" title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i class="fas fa-download"></i></button>
+
+            
+            <div class="dropdown-buttons">
+                <!-- ipynb file if we had a myst markdown file -->
+                
+                <!-- Download raw file -->
+                <a class="dropdown-buttons" href="../../_sources/content/convex-optimisation/lecture-6.ipynb.txt"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.ipynb</button></a>
+                <!-- Download PDF via print -->
+                <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF" onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+            </div>
+            
+        </div>
+
+        <!-- Edit this page -->
+        
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+            <div class="dropdown-buttons">
+                
+                <a class="binder-button" href="https://mybinder.org/v2/gh/stratisMarkou/stratisMarkou.github.io/master?urlpath=tree/./content/convex-optimisation/lecture-6.ipynb"><button type="button" class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip" data-placement="left"><img class="binder-button-logo" src="../../_static/images/logo_binder.svg" alt="Interact on binder">Binder</button></a>
+                
+                
+                
+            </div>
+        </div>
+        
+    </div>
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+    </ul>
+</nav>
+
+
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="generalised-linear-fractional-programmes">
+<h1>Generalised linear-fractional programmes<a class="headerlink" href="#generalised-linear-fractional-programmes" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="quadratic-programmes">
+<h1>Quadratic programmes<a class="headerlink" href="#quadratic-programmes" title="Permalink to this headline">¶</a></h1>
+<p><strong>Quadratic Programme:</strong> an optimisation problem of the form</p>
+<p>\begin{align}
+&amp;\text{minimise}&amp;&amp; \frac{1}{2}x^\top P x + q^\top x + c\
+&amp;\text{subject to}&amp;&amp; Gx \preccurlyeq h\
+&amp; &amp;&amp; Ax = b\
+\end{align}</p>
+<p>where <span class="math notranslate nohighlight">\(P \succcurlyeq 0\)</span>.</p>
+<p><strong>Least squares:</strong></p>
+<p><strong>Linear programme with random cost:</strong></p>
+<p>\begin{align}
+&amp;\text{minimise}&amp;&amp; \tilde{c}^\top x + \gamma x^\top \Sigma x = \mathbb{E}[c^\top x] + \gamma \text{Var}[c^\top x]\
+&amp;\text{subject to}&amp;&amp; Gx \preccurlyeq h\
+&amp; &amp;&amp; Ax = b\
+\end{align}</p>
+<p><strong>Quadratically constrained quadratic programme:</strong></p>
+<p>\begin{align}
+&amp;\text{minimise}&amp;&amp; \frac{1}{2}x^\top P x + q^\top x + c\
+&amp;\text{subject to}&amp;&amp; \frac{1}{2}x^\top P_n x + q_n^\top x + c_n \leq 0, \text{ where } n = 1, 2, …, N\
+&amp; &amp;&amp; Ax = b\
+\end{align}</p>
+<p><strong>Second-order cone programming:</strong></p>
+<p>\begin{align}
+&amp;\text{minimise}&amp;&amp; f^\top x \
+&amp;\text{subject to}&amp;&amp; ||A_n x + b_n||_2 \leq c_n^\top x + d_n, \text{ where } n = 1, 2, …, N\
+&amp; &amp;&amp; Fx = g\
+\end{align}</p>
+</div>
+<div class="section" id="geometric-programmes">
+<h1>Geometric programmes<a class="headerlink" href="#geometric-programmes" title="Permalink to this headline">¶</a></h1>
+<p><strong>Monomial functions:</strong> a function of the form <span class="math notranslate nohighlight">\($f(x) = cx_1^{a_1}x_2^{a_2}...x_n^{a_n},\)</span>$ where <span class="math notranslate nohighlight">\(\textbf{dom}~f = \mathbb{R}^n_{++}\)</span> with <span class="math notranslate nohighlight">\(c &gt; 0, a_i \in \mathbb{R}\)</span>.</p>
+<p><strong>Posynomial function:</strong> a function that is the sum of monomials <span class="math notranslate nohighlight">\($ f(x) = \sum^K_{k = 1} c_kx_1^{a_{1k}}x_2^{a_{2k}}...x_K^{a_{1K}}\)</span>$ where <span class="math notranslate nohighlight">\(\textbf{dom}~f = \mathbb{R}^n_{++}\)</span> with <span class="math notranslate nohighlight">\(c &gt; 0, a_{ik} \in \mathbb{R}\)</span>.</p>
+<p><strong>Geometric programme:</strong> a (non-convex) problem with posynomial inequalities and monomial equality constraints \begin{align}
+&amp;\text{minimise} &amp;&amp; f_0(x) &amp;&amp;&amp;\
+&amp;\text{subject to} &amp;&amp; f_n(x) \leq 1, &amp;&amp;&amp; n = 1,…, N\
+&amp; &amp;&amp; h_m(x) = 1, &amp;&amp;&amp; m = 1,…, M
+\end{align}</p>
+<p>Geometric programmes are not convex but can be converted to convex ones by making a change of variables <span class="math notranslate nohighlight">\(y_i = \log x_i\)</span> and minimise the <span class="math notranslate nohighlight">\(\log\)</span> of <span class="math notranslate nohighlight">\(f_0\)</span>.</p>
+<div class="section" id="cantilever-beam-example">
+<h2>Cantilever beam example<a class="headerlink" href="#cantilever-beam-example" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="minimising-the-spectral-radius-of-a-nonnegative-matrix">
+<h2>Minimising the spectral radius of a nonnegative matrix<a class="headerlink" href="#minimising-the-spectral-radius-of-a-nonnegative-matrix" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Stratos Markou<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../../_static/js/index.js"></script>
+    
+  </body>
+</html>
