@@ -34,7 +34,7 @@
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="FITC" href="fitc.html" />
+    <link rel="next" title="DTC" href="dtc.html" />
     <link rel="prev" title="Gaussian Processes" href="../gp-intro.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -82,12 +82,18 @@
   <li class="">
     <a href="../../home.html">Welcome</a>
   </li>
+  <li class="">
+    <a href="../../prob-intro/intro.html">Probability</a>
+  </li>
   <li class="active">
     <a href="../gp-intro.html">Gaussian Processes</a>
   <ul class="nav sidenav_l2">
     <li class="active">
       <a href="">Sparse Gaussian Processes</a>
       <ul class="nav sidenav_l3">
+      <li class="">
+        <a href="dtc.html">DTC</a>
+      </li>
       <li class="">
         <a href="fitc.html">FITC</a>
       </li>
@@ -97,6 +103,9 @@
     </ul>
     </li>
   </ul>
+  </li>
+  <li class="">
+    <a href="../../c-programming/intro.html">The C programming language</a>
   </li>
 </ul>
 </nav>
@@ -198,10 +207,11 @@
 <div class="section" id="how-can-sparsity-help-gps-scale">
 <h2>How can sparsity help GPs scale?<a class="headerlink" href="#how-can-sparsity-help-gps-scale" title="Permalink to this headline">¶</a></h2>
 <p>To speed up hyperparameter learning and inference Gaussian Processes, it’s clear that we’ll have to give up something: if we want to work with the <em>exact</em> marginal likelihood and the <em>exact</em> predictive posterior</p>
-<p>\begin{align}
-p(\mathbf{y} | \mathbf{X}) &amp;= \mathcal{N}\left(\mathbf{y}; \mathbf{0}, \mathbf{K}<em>{\mathbf{X}\mathbf{X}} + \sigma^2 \mathbf{I}\right),\
-p(\mathbf{y}^* | \mathbf{x}^<em>, \mathbf{y}, \mathbf{X}) &amp;= \mathcal{N}\left(\mathbf{y}^</em>; \mathbf{K}</em>{\mathbf{x}^<em>\mathbf{X}} \left(\mathbf{K}<em>{\mathbf{X}\mathbf{X}} + \sigma^2 \mathbf{I} \right)^{-1} \mathbf{y}, \mathbf{K}</em>{\mathbf{x}^</em>\mathbf{x}^<em>} - \mathbf{K}_{\mathbf{x}^</em>\mathbf{X}} \left(\mathbf{K}<em>{\mathbf{X}\mathbf{X}} + \sigma^2 \mathbf{I} \right)^{-1}\mathbf{K}</em>{\mathbf{X}\mathbf{x}^*}\right),
-\end{align}</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+p(\mathbf{y} | \mathbf{X}) &amp;= \mathcal{N}\left(\mathbf{y}; \mathbf{0}, \mathbf{K}_{\mathbf{X}\mathbf{X}} + \sigma^2 \mathbf{I}\right),\\
+p(\mathbf{y}^* | \mathbf{x}^*, \mathbf{y}, \mathbf{X}) &amp;= \mathcal{N}\left(\mathbf{y}^*; \mathbf{K}_{\mathbf{x}^*\mathbf{X}} \left(\mathbf{K}_{\mathbf{X}\mathbf{X}} + \sigma^2 \mathbf{I} \right)^{-1} \mathbf{y}, \mathbf{K}_{\mathbf{x}^*\mathbf{x}^*} - \mathbf{K}_{\mathbf{x}^*\mathbf{X}} \left(\mathbf{K}_{\mathbf{X}\mathbf{X}} + \sigma^2 \mathbf{I} \right)^{-1}\mathbf{K}_{\mathbf{X}\mathbf{x}^*}\right),
+\end{align}\end{split}\]</div>
 <p>we cannot do any better than suffering <span class="math notranslate nohighlight">\(\mathcal{O}(N^3)\)</span> cost when calculating either quantity, because they both involve the inverse of an <span class="math notranslate nohighlight">\(N \times N\)</span> covariance matrix. If we want to scale GPs to larger datasets <em>we cannot consider correlations between all datapoints</em> because of the cubic cost of inverting the associated covariance. One idea for scaling GPs to larger data is to make some approximations about the structure of the covariance matrix, such as an independence assumption between certain variables, which will make the matrix inversion cheaper.</p>
 </div>
 <div class="section" id="literature-on-sparse-gaussian-processes">
@@ -237,7 +247,7 @@ p(\mathbf{y}^* | \mathbf{x}^<em>, \mathbf{y}, \mathbf{X}) &amp;= \mathcal{N}\lef
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="../gp-intro.html" title="previous page">Gaussian Processes</a>
-    <a class='right-next' id="next-link" href="fitc.html" title="next page">FITC</a>
+    <a class='right-next' id="next-link" href="dtc.html" title="next page">DTC</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

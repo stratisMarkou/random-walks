@@ -83,16 +83,16 @@ $$q(f)$$
 
 Maximise KL divergence ELBO:
 
-\begin{align}
+$$\begin{align}
 \mathbf{F}(q, \bs{\theta}) &= \log p(\mathbf{y} | \bs{\theta}) + \int q(f | \mathbf{y}) \log \frac{p(f | \mathbf{y})}{q(f | \mathbf{y})} df \\
 &= \int q(f | \mathbf{y}) \log \frac{p(\mathbf{y}, f | \bs{\theta})}{q(f | \mathbf{y})} df
-\end{align}
+\end{align}$$
 
 Maximise $\mathcal{F}$ w.r.t. $q$:
 
-\begin{align}
+$$\begin{align}
 q^*\left(\mathbf{f}_{\mathbf{\bar{X}}} | \mathbf{y} \right) = \argmax_{q} \mathcal{F}(q, \bs{\theta})
-\end{align}
+\end{align}$$
 
 
 
@@ -200,23 +200,6 @@ $$\begin{align}
 ## Implementation
 
 ### Sample traning data from an exact GP
-
-# Test to see if this renders
-
-$$\begin{align} 
-a^2 &= b^2 + c^2\\
-a^2 &= b^2 + c^2
-\end{align}$$
-
-$\begin{align}
-a^2 = b^2 + c^2
-\end{align}$
-
-$$\begin{align}
-a^2 = b^2 + c^2
-\end{align}$$
-
-$$a^2 = b^2 + c^2$$
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -683,8 +666,8 @@ This distinction offers several crucial benefits to VFE:
 
 
 
-# References
+## References
 
-```{bibliography} ../../../references.bib
+```{bibliography::cited} ../../../references.bib
 ```
 

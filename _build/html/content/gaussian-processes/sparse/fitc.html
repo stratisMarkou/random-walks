@@ -35,7 +35,7 @@
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="VFE" href="vfe.html" />
-    <link rel="prev" title="Sparse Gaussian Processes" href="sparse-intro.html" />
+    <link rel="prev" title="DTC" href="dtc.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
@@ -82,12 +82,18 @@
   <li class="">
     <a href="../../home.html">Welcome</a>
   </li>
+  <li class="">
+    <a href="../../prob-intro/intro.html">Probability</a>
+  </li>
   <li class="active">
     <a href="../gp-intro.html">Gaussian Processes</a>
   <ul class="nav sidenav_l2">
     <li class="active">
       <a href="sparse-intro.html">Sparse Gaussian Processes</a>
       <ul class="nav sidenav_l3">
+      <li class="">
+        <a href="dtc.html">DTC</a>
+      </li>
       <li class="active">
         <a href="">FITC</a>
       </li>
@@ -97,6 +103,9 @@
     </ul>
     </li>
   </ul>
+  </li>
+  <li class="">
+    <a href="../../c-programming/intro.html">The C programming language</a>
   </li>
 </ul>
 </nav>
@@ -324,7 +333,7 @@ p(\mathbf{y} | \mathbf{f}) = \mathcal{N}\left(\mathbf{y}; \mathbf{f}, \sigma^2 \
 <span class="n">f_ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">K_ind_ind</span><span class="p">),</span>
                <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
 
-<span class="c1"># Mean and vaariance of normal distribution of f_obs | f_ind</span>
+<span class="c1"># Mean and variance of normal distribution of f_obs | f_ind</span>
 <span class="n">f_obs_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">K_obs_ind</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">K_ind_ind</span><span class="p">,</span> <span class="n">f_ind</span><span class="p">))</span>
 <span class="n">f_obs_var</span> <span class="o">=</span> <span class="n">K_obs_diag</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">K_obs_ind</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">K_ind_ind</span><span class="p">,</span> <span class="n">K_ind_obs</span><span class="p">)))</span>
 <span class="n">f_obs_var</span> <span class="o">=</span> <span class="n">f_obs_var</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>
@@ -1011,7 +1020,7 @@ p(\mathbf{y}|\mathbf{\bar{X}}, \boldsymbol{\theta}) &amp;= \int p(\mathbf{y}| \m
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="sparse-intro.html" title="previous page">Sparse Gaussian Processes</a>
+    <a class='left-prev' id="prev-link" href="dtc.html" title="previous page">DTC</a>
     <a class='right-next' id="next-link" href="vfe.html" title="next page">VFE</a>
 
     </div>

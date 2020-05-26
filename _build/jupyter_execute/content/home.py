@@ -26,5 +26,7 @@ Welcome to Random Walks! This is a collection of explorations, in the union of I
 :titlesonly:
 
 
+prob-intro/intro
 gaussian-processes/gp-intro
+c-programming/intro
 ```

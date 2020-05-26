@@ -86,7 +86,7 @@ K_obs_diag = eq_covariance(x_obs, x_obs, coeff, scale, diag_only=True)
 f_ind = np.dot(np.linalg.cholesky(K_ind_ind),
                np.random.normal(loc=0., scale=1., size=(M, 1)))
 
-# Mean and vaariance of normal distribution of f_obs | f_ind
+# Mean and variance of normal distribution of f_obs | f_ind
 f_obs_mean = np.dot(K_obs_ind, np.linalg.solve(K_ind_ind, f_ind))
 f_obs_var = K_obs_diag - np.diag(np.dot(K_obs_ind, np.linalg.solve(K_ind_ind, K_ind_obs)))
 f_obs_var = f_obs_var[:, None]

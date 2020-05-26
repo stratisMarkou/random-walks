@@ -34,6 +34,7 @@
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="The C programming language" href="../../c-programming/intro.html" />
     <link rel="prev" title="FITC" href="fitc.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -81,12 +82,18 @@
   <li class="">
     <a href="../../home.html">Welcome</a>
   </li>
+  <li class="">
+    <a href="../../prob-intro/intro.html">Probability</a>
+  </li>
   <li class="active">
     <a href="../gp-intro.html">Gaussian Processes</a>
   <ul class="nav sidenav_l2">
     <li class="active">
       <a href="sparse-intro.html">Sparse Gaussian Processes</a>
       <ul class="nav sidenav_l3">
+      <li class="">
+        <a href="dtc.html">DTC</a>
+      </li>
       <li class="">
         <a href="fitc.html">FITC</a>
       </li>
@@ -96,6 +103,9 @@
     </ul>
     </li>
   </ul>
+  </li>
+  <li class="">
+    <a href="../../c-programming/intro.html">The C programming language</a>
   </li>
 </ul>
 </nav>
@@ -215,6 +225,14 @@
             </ul>
         </li>
     
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#notes-and-questions" class="nav-link">Notes and questions:</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#references" class="nav-link">References</a>
+        </li>
+    
     </ul>
 </nav>
 
@@ -296,14 +314,16 @@ p(\mathbf{y} | \mathbf{x}) \geq \mathcal{F}(q, \bs{\theta}) &amp;= \int p(\mathb
 <div class="math notranslate nohighlight">
 \[q(f)\]</div>
 <p>Maximise KL divergence ELBO:</p>
-<p>\begin{align}
-\mathbf{F}(q, \bs{\theta}) &amp;= \log p(\mathbf{y} | \bs{\theta}) + \int q(f | \mathbf{y}) \log \frac{p(f | \mathbf{y})}{q(f | \mathbf{y})} df \
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\mathbf{F}(q, \bs{\theta}) &amp;= \log p(\mathbf{y} | \bs{\theta}) + \int q(f | \mathbf{y}) \log \frac{p(f | \mathbf{y})}{q(f | \mathbf{y})} df \\
 &amp;= \int q(f | \mathbf{y}) \log \frac{p(\mathbf{y}, f | \bs{\theta})}{q(f | \mathbf{y})} df
-\end{align}</p>
+\end{align}\end{split}\]</div>
 <p>Maximise <span class="math notranslate nohighlight">\(\mathcal{F}\)</span> w.r.t. <span class="math notranslate nohighlight">\(q\)</span>:</p>
-<p>\begin{align}
-q^*\left(\mathbf{f}<em>{\mathbf{\bar{X}}} | \mathbf{y} \right) = \argmax</em>{q} \mathcal{F}(q, \bs{\theta})
-\end{align}</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+q^*\left(\mathbf{f}_{\mathbf{\bar{X}}} | \mathbf{y} \right) = \argmax_{q} \mathcal{F}(q, \bs{\theta})
+\end{align}\]</div>
 </div>
 <div class="section" id="solve-for-maximising-the-free-energy">
 <h2>Solve for maximising the free energy<a class="headerlink" href="#solve-for-maximising-the-free-energy" title="Permalink to this headline">¶</a></h2>
@@ -399,25 +419,6 @@ q\lrb[\fb | \mathbf{y}] = \frac{p\lrb[\fb] H\lrb[\mathbf{y}, \fx]}{Z},
 <h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="sample-traning-data-from-an-exact-gp">
 <h3>Sample traning data from an exact GP<a class="headerlink" href="#sample-traning-data-from-an-exact-gp" title="Permalink to this headline">¶</a></h3>
-</div>
-</div>
-</div>
-<div class="section" id="test-to-see-if-this-renders">
-<h1>Test to see if this renders<a class="headerlink" href="#test-to-see-if-this-renders" title="Permalink to this headline">¶</a></h1>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{align} 
-a^2 &amp;= b^2 + c^2\\
-a^2 &amp;= b^2 + c^2
-\end{align}\end{split}\]</div>
-<p><span class="math notranslate nohighlight">\(\begin{align}
-a^2 = b^2 + c^2
-\end{align}\)</span></p>
-<div class="math notranslate nohighlight">
-\[\begin{align}
-a^2 = b^2 + c^2
-\end{align}\]</div>
-<div class="math notranslate nohighlight">
-\[a^2 = b^2 + c^2\]</div>
 <div class="cell tag_hide_input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -545,7 +546,7 @@ a^2 = b^2 + c^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/vfe_13_0.svg" src="../../../_images/vfe_13_0.svg" /></div>
+<img alt="../../../_images/vfe_9_0.svg" src="../../../_images/vfe_9_0.svg" /></div>
 </div>
 <div class="cell tag_hide_input docutils container">
 <div class="cell_input docutils container">
@@ -902,10 +903,12 @@ a^2 = b^2 + c^2
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>Step: 0 Free energy:  -30.972 Log coeff:  0.00 Log scales: [0.0] Log noise: -1.00
 </pre></div>
 </div>
-<img alt="../../../_images/vfe_17_1.svg" src="../../../_images/vfe_17_1.svg" /><div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>Step: 1000 Free energy:    0.546 Log coeff:  0.07 Log scales: [0.047] Log noise: -0.99
+<img alt="../../../_images/vfe_13_1.svg" src="../../../_images/vfe_13_1.svg" /><div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>Step: 1000 Free energy:    0.546 Log coeff:  0.07 Log scales: [0.047] Log noise: -0.99
 </pre></div>
 </div>
-<img alt="../../../_images/vfe_17_3.svg" src="../../../_images/vfe_17_3.svg" /></div>
+<img alt="../../../_images/vfe_13_3.svg" src="../../../_images/vfe_13_3.svg" /></div>
+</div>
+</div>
 </div>
 <div class="section" id="notes-and-questions">
 <h2>Notes and questions:<a class="headerlink" href="#notes-and-questions" title="Permalink to this headline">¶</a></h2>
@@ -923,15 +926,9 @@ a^2 = b^2 + c^2
 <li><p>VFE explicitly represents posterior uncertainty, keeping it separate from noise uncertainty whereas methods do not. DTC ignores posterior uncertainty of the conditional prior, and FITC mixes up posterior and</p></li>
 </ol>
 </div>
-</div>
 <div class="section" id="references">
-<h1>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h1>
-<p id="bibtex-bibliography-content/gaussian-processes/sparse/vfe-0"><dl class="citation">
-<dt class="bibtex label" id="titsiasvfe"><span class="brackets"><a class="fn-backref" href="#id1">Tit09</a></span></dt>
-<dd><p>Michalis Titsias. Variational learning of inducing variables in sparse gaussian processes. In <em>Proceedings of the Twelth International Conference on Artificial Intelligence and Statistics</em>, Proceedings of Machine Learning Research. PMLR, 2009.</p>
-</dd>
-</dl>
-</p>
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+</div>
 </div>
 
 
@@ -944,6 +941,7 @@ a^2 = b^2 + c^2
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="fitc.html" title="previous page">FITC</a>
+    <a class='right-next' id="next-link" href="../../c-programming/intro.html" title="next page">The C programming language</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
