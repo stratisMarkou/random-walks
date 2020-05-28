@@ -1,5 +1,7 @@
 # Discrete random variables
 
+Discrete random variables are random variables whose images are countable sets. We define discrete random variables and probability mass functions and present some examples. The (conditional) expectation and variance are important summary statistics of random variables.
+
 ## Discrete random variables
 
 We are often interested in the value of a function of elementary events. For example we might be interested in the profit of a gambling game as a function of the elementary outcomes of the game.
@@ -110,7 +112,7 @@ $$\begin{align}
 
 then the number of events occuring within any time interval are Poisson-distributed.
 
-### Geometric distribution
+### Geometric
 
 A random variable $X$ has the geometric distribution with parameter $p$ if
 
@@ -120,7 +122,7 @@ $$\begin{align}
 
 The geometric distribution naturally models random variables such as "the number of i.i.d. trials up to and including the first occurence of A". For example, the number of i.i.d. coin tosses required until heads is obtained the first time, is geometrically distributed.
 
-### Negative binomial distribution
+### Negative binomial
 
 A random variable $X$ has the negative binomial distribution with parameters $n$ and $p \in [0, 1]$ if
 
@@ -132,6 +134,8 @@ The number of i.i.d. coin tosses up to and including the $n^{th}$ success is dis
 
 
 ## Expectations
+
+Although random variables are not perfectly determined, we can reason about the values they could attain. The expectation of a random variable captures the value that we expect the variable will have on average - as weighted by the probability measure.
 
 <div class='definition'>
 
@@ -147,10 +151,74 @@ whenever this sum converges absolutely, i.e. $\sum |x\mathbb{P}(X = x)| < \infty
 
 <br>
 
-The need for the last statement in this definition is because the expectation of a discrete random variable may not always exist. For example, if $X$ has pmf
+The need for the last statement in this definition is that the expectation of a discrete random variable may not always exist. For example, if $X$ has pmf
 
 $$\mathbb{P}(X = x) = \frac{A}{x^{3/2}} \text{ for } x = 1, 2, ...$$
 
-where $A$ is a normalising constant, then the sum in the definition of $\mathbb{E}(X)$ does not converge.
+where $A$ is a normalising constant, then the sum in the definition of $\mathbb{E}(X)$ does not converge. When taking expectations of *functions* of discrete random variables, the following result that we often take for granted
 
+<div class='theorem'>
+
+**Theorem (Law of the subconscious statistician)** If $X$ is a discrete random variable and $g : \mathbb{R} \to \mathbb{R}$, then
+
+$$\begin{align}
+\mathbb{E}\left(g(x)\right) = \sum_{x \in \text{Im}X} x \mathbb{P}(X = x)
+\end{align}$$
+
+whenever this sum converges absolutely.
+
+</div>
+
+<br>
+
+The above can be shown by defining $Y = g(X)$ and considering the expectation of $Y$, showing this is equal to $\mathbb{E}\left(g(X)\right)$. The variance is another central quantity that captures information about a random variable, and in particular about its spread.
+
+
+<div class='definition'>
+
+**Definition (Variance)** The **variance** of a discrete random variable $X$ is denoted by $\text{Var}(X)$ and defined by
+
+$$\begin{align}
+\text{Var}(X) &= \mathbb{E}\left([X - \mathbb{E}(X)]^2\right) \\
+&= \mathbb{E}(X^2) - \mathbb{E}(X)^2
+\end{align}$$
+
+</div>
+
+<br>
+
+## Conditional expectations
+
+We are often interested in the expectation of a random variable **conditioned on some event**. For example, the event we are conditioning on could be some observed data, based on which we would like to update our beliefs about the random variable, and compute its expectation.
+
+<div class='definition'>
+
+**Definition (Conditional expectation)** If $X$ is a random variable and $\mathbb{P}(B) > 0$, then the expectation of $X$ conditioned on $B$ is written $\mathbb{E}[X | B]$ and defined by
+
+$$\begin{align}
+\mathbb{E}[X | B] &= \sum_{x \in \text{Im} X} x\mathbb{P}(X = x | B)
+&= \mathbb{E}(X^2) - \mathbb{E}(X)^2
+\end{align}$$
+
+whenever this sum converges absolutely.
+
+</div>
+
+<br>
+
+As with conditional probabilities, there is a partition theorem associated with conditional expectations, also known as the law of total expectation.
+
+<div class='theorem'>
+
+**Theorem (Partition theorem for conditional expectations)** If $X$ is a discrete random variable and $\{B_1, B_2, ...\}$ is a partition of $\Omega$ with $\mathbb{P}(B_k) > 0$, we have
+
+$$\begin{align}
+\mathbb{E}(X) = \sum_k \mathbb{E}(X | B_k)\mathbb{P}(B_k)
+\end{align}$$
+
+whenever this sum converges absolutely.
+
+</div>
+
+<br>
 

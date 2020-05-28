@@ -45,7 +45,7 @@
 <meta property="og:url"         content="https://random-walks.org/content/prob-intro/ch2/content.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Discrete random variables" />
-<meta property="og:description" content="Discrete random variables  Discrete random variables  We are often interested in the value of a function of elementary events. For example we might be intereste" />
+<meta property="og:description" content="Discrete random variables  Discrete random variables are random variables whose images are countable sets. We define discrete random variables and probability m" />
 <meta property="og:image"       content="https://random-walks.org/_static/logo.svg" />
 
 <meta name="twitter:card" content="summary">
@@ -178,11 +178,11 @@
         </li>
     
         <li class="nav-item toc-entry toc-h3">
-            <a href="#geometric-distribution" class="nav-link">Geometric distribution</a>
+            <a href="#geometric" class="nav-link">Geometric</a>
         </li>
     
         <li class="nav-item toc-entry toc-h3">
-            <a href="#negative-binomial-distribution" class="nav-link">Negative binomial distribution</a>
+            <a href="#negative-binomial" class="nav-link">Negative binomial</a>
         </li>
     
             </ul>
@@ -190,6 +190,10 @@
     
         <li class="nav-item toc-entry toc-h2">
             <a href="#expectations" class="nav-link">Expectations</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#conditional-expectations" class="nav-link">Conditional expectations</a>
         </li>
     
     </ul>
@@ -205,6 +209,7 @@
                 
   <div class="section" id="discrete-random-variables">
 <h1>Discrete random variables<a class="headerlink" href="#discrete-random-variables" title="Permalink to this headline">¶</a></h1>
+<p>Discrete random variables are random variables whose images are countable sets. We define discrete random variables and probability mass functions and present some examples. The (conditional) expectation and variance are important summary statistics of random variables.</p>
 <div class="section" id="id1">
 <h2>Discrete random variables<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>We are often interested in the value of a function of elementary events. For example we might be interested in the profit of a gambling game as a function of the elementary outcomes of the game.</p>
@@ -293,8 +298,8 @@ p_X(s) &amp;= 0 &amp;&amp; \text{ if } s \not \in S
 \end{align}\end{split}\]</div>
 <p>then the number of events occuring within any time interval are Poisson-distributed.</p>
 </div>
-<div class="section" id="geometric-distribution">
-<h3>Geometric distribution<a class="headerlink" href="#geometric-distribution" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="geometric">
+<h3>Geometric<a class="headerlink" href="#geometric" title="Permalink to this headline">¶</a></h3>
 <p>A random variable <span class="math notranslate nohighlight">\(X\)</span> has the geometric distribution with parameter <span class="math notranslate nohighlight">\(p\)</span> if</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
@@ -302,8 +307,8 @@ p_X(s) &amp;= 0 &amp;&amp; \text{ if } s \not \in S
 \end{align}\]</div>
 <p>The geometric distribution naturally models random variables such as “the number of i.i.d. trials up to and including the first occurence of A”. For example, the number of i.i.d. coin tosses required until heads is obtained the first time, is geometrically distributed.</p>
 </div>
-<div class="section" id="negative-binomial-distribution">
-<h3>Negative binomial distribution<a class="headerlink" href="#negative-binomial-distribution" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="negative-binomial">
+<h3>Negative binomial<a class="headerlink" href="#negative-binomial" title="Permalink to this headline">¶</a></h3>
 <p>A random variable <span class="math notranslate nohighlight">\(X\)</span> has the negative binomial distribution with parameters <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(p \in [0, 1]\)</span> if</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
@@ -314,6 +319,7 @@ p_X(s) &amp;= 0 &amp;&amp; \text{ if } s \not \in S
 </div>
 <div class="section" id="expectations">
 <h2>Expectations<a class="headerlink" href="#expectations" title="Permalink to this headline">¶</a></h2>
+<p>Although random variables are not perfectly determined, we can reason about the values they could attain. The expectation of a random variable captures the value that we expect the variable will have on average - as weighted by the probability measure.</p>
 <div class='definition'>
 <p><strong>Definition (Expectation)</strong> The <strong>expectation</strong> of a discrete random variable <span class="math notranslate nohighlight">\(X\)</span> is denoted by <span class="math notranslate nohighlight">\(\mathbb{E}(X)\)</span> and defined by</p>
 <div class="math notranslate nohighlight">
@@ -323,10 +329,53 @@ p_X(s) &amp;= 0 &amp;&amp; \text{ if } s \not \in S
 <p>whenever this sum converges absolutely, i.e. <span class="math notranslate nohighlight">\(\sum |x\mathbb{P}(X = x)| &lt; \infty.\)</span></p>
 </div>
 <br>
-<p>The need for the last statement in this definition is because the expectation of a discrete random variable may not always exist. For example, if <span class="math notranslate nohighlight">\(X\)</span> has pmf</p>
+<p>The need for the last statement in this definition is that the expectation of a discrete random variable may not always exist. For example, if <span class="math notranslate nohighlight">\(X\)</span> has pmf</p>
 <div class="math notranslate nohighlight">
 \[\mathbb{P}(X = x) = \frac{A}{x^{3/2}} \text{ for } x = 1, 2, ...\]</div>
-<p>where <span class="math notranslate nohighlight">\(A\)</span> is a normalising constant, then the sum in the definition of <span class="math notranslate nohighlight">\(\mathbb{E}(X)\)</span> does not converge.</p>
+<p>where <span class="math notranslate nohighlight">\(A\)</span> is a normalising constant, then the sum in the definition of <span class="math notranslate nohighlight">\(\mathbb{E}(X)\)</span> does not converge. When taking expectations of <em>functions</em> of discrete random variables, the following result that we often take for granted</p>
+<div class='theorem'>
+<p><strong>Theorem (Law of the subconscious statistician)</strong> If <span class="math notranslate nohighlight">\(X\)</span> is a discrete random variable and <span class="math notranslate nohighlight">\(g : \mathbb{R} \to \mathbb{R}\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{E}\left(g(x)\right) = \sum_{x \in \text{Im}X} x \mathbb{P}(X = x)
+\end{align}\]</div>
+<p>whenever this sum converges absolutely.</p>
+</div>
+<br>
+<p>The above can be shown by defining <span class="math notranslate nohighlight">\(Y = g(X)\)</span> and considering the expectation of <span class="math notranslate nohighlight">\(Y\)</span>, showing this is equal to <span class="math notranslate nohighlight">\(\mathbb{E}\left(g(X)\right)\)</span>. The variance is another central quantity that captures information about a random variable, and in particular about its spread.</p>
+<div class='definition'>
+<p><strong>Definition (Variance)</strong> The <strong>variance</strong> of a discrete random variable <span class="math notranslate nohighlight">\(X\)</span> is denoted by <span class="math notranslate nohighlight">\(\text{Var}(X)\)</span> and defined by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\text{Var}(X) &amp;= \mathbb{E}\left([X - \mathbb{E}(X)]^2\right) \\
+&amp;= \mathbb{E}(X^2) - \mathbb{E}(X)^2
+\end{align}\end{split}\]</div>
+</div>
+<br>
+</div>
+<div class="section" id="conditional-expectations">
+<h2>Conditional expectations<a class="headerlink" href="#conditional-expectations" title="Permalink to this headline">¶</a></h2>
+<p>We are often interested in the expectation of a random variable <strong>conditioned on some event</strong>. For example, the event we are conditioning on could be some observed data, based on which we would like to update our beliefs about the random variable, and compute its expectation.</p>
+<div class='definition'>
+<p><strong>Definition (Conditional expectation)</strong> If <span class="math notranslate nohighlight">\(X\)</span> is a random variable and <span class="math notranslate nohighlight">\(\mathbb{P}(B) &gt; 0\)</span>, then the expectation of <span class="math notranslate nohighlight">\(X\)</span> conditioned on <span class="math notranslate nohighlight">\(B\)</span> is written <span class="math notranslate nohighlight">\(\mathbb{E}[X | B]\)</span> and defined by</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{E}[X | B] &amp;= \sum_{x \in \text{Im} X} x\mathbb{P}(X = x | B)
+&amp;= \mathbb{E}(X^2) - \mathbb{E}(X)^2
+\end{align}\]</div>
+<p>whenever this sum converges absolutely.</p>
+</div>
+<br>
+<p>As with conditional probabilities, there is a partition theorem associated with conditional expectations, also known as the law of total expectation.</p>
+<div class='theorem'>
+<p><strong>Theorem (Partition theorem for conditional expectations)</strong> If <span class="math notranslate nohighlight">\(X\)</span> is a discrete random variable and <span class="math notranslate nohighlight">\(\{B_1, B_2, ...\}\)</span> is a partition of <span class="math notranslate nohighlight">\(\Omega\)</span> with <span class="math notranslate nohighlight">\(\mathbb{P}(B_k) &gt; 0\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{E}(X) = \sum_k \mathbb{E}(X | B_k)\mathbb{P}(B_k)
+\end{align}\]</div>
+<p>whenever this sum converges absolutely.</p>
+</div>
+<br>
 </div>
 </div>
 
