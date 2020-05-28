@@ -34,7 +34,7 @@
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Gaussian Processes" href="../../gaussian-processes/gp-intro.html" />
+    <link rel="next" title="Discrete random variables" href="../ch2/content.html" />
     <link rel="prev" title="Probability" href="../intro.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,7 +45,7 @@
 <meta property="og:url"         content="https://random-walks.org/content/prob-intro/ch1/content.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Events and Probabilities" />
-<meta property="og:description" content="Events and Probabilities  Sample and event spaces  Given an experiment \mathcal{E}, we denote the set of possible outcomes of \mathcal{E} by \Omega and we call " />
+<meta property="og:description" content="Events and Probabilities  This first chapter presents the fundamental definitions of sample and event spaces, probability measures and probability spaces. These" />
 <meta property="og:image"       content="https://random-walks.org/_static/logo.svg" />
 
 <meta name="twitter:card" content="summary">
@@ -87,6 +87,9 @@
   <ul class="nav sidenav_l2">
     <li class="active">
       <a href="">Events and Probabilities</a>
+    </li>
+    <li class="">
+      <a href="../ch2/content.html">Discrete random variables</a>
     </li>
   </ul>
   </li>
@@ -164,7 +167,7 @@
         </li>
     
         <li class="nav-item toc-entry toc-h2">
-            <a href="#conditional-probability-independence-and-bayes-rule" class="nav-link">Conditional probability, independence and Bayes’ rule</a>
+            <a href="#conditional-probability-and-independence" class="nav-link">Conditional probability and independence</a>
         </li>
     
         <li class="nav-item toc-entry toc-h2">
@@ -188,12 +191,13 @@
                 
   <div class="section" id="events-and-probabilities">
 <h1>Events and Probabilities<a class="headerlink" href="#events-and-probabilities" title="Permalink to this headline">¶</a></h1>
+<p>This first chapter presents the fundamental definitions of sample and event spaces, probability measures and probability spaces. These enable a calculus of the probability of experiment outcomes. Fundamental results such as Bayes’ rule and the continuity of probability measures are presented.</p>
 <div class="section" id="sample-and-event-spaces">
 <h2>Sample and event spaces<a class="headerlink" href="#sample-and-event-spaces" title="Permalink to this headline">¶</a></h2>
-<p>Given an experiment <span class="math notranslate nohighlight">\(\mathcal{E}\)</span>, we denote the set of possible outcomes of <span class="math notranslate nohighlight">\(\mathcal{E}\)</span> by <span class="math notranslate nohighlight">\(\Omega\)</span> and we call this the <strong>event space</strong>. The members <span class="math notranslate nohighlight">\(\omega \in \Omega\)</span> are called <strong>elementary events</strong>. For example, in an experiment where a die is tossed once, we could define the elementary events to be the outcome of the toss and <span class="math notranslate nohighlight">\(\Omega\)</span> to be</p>
+<p>We are interested in reasoning about the outcomes of an experiment <span class="math notranslate nohighlight">\(\mathcal{E}\)</span>. We denote the set of possible outcomes of <span class="math notranslate nohighlight">\(\mathcal{E}\)</span> by <span class="math notranslate nohighlight">\(\Omega\)</span> and we call this the <strong>event space</strong>. The members <span class="math notranslate nohighlight">\(\omega \in \Omega\)</span> are called <strong>elementary events</strong>. For example, if <span class="math notranslate nohighlight">\(\mathcal{E}\)</span> is an experiment where a die is tossed once, we could define the elementary events to be the possible outcomes of the toss and <span class="math notranslate nohighlight">\(\Omega\)</span> to be</p>
 <div class="math notranslate nohighlight">
 \[ \Omega = \{1, 2, 3, 4, 5, 6\}\]</div>
-<p>As their name suggests, elementary events represent experimental outcomes which are atomic, and are used to express the outcomes we are actually interested in. For example, we could ask whether the outcome of tossing the die is even, i.e. whether it is in the set <span class="math notranslate nohighlight">\(\{2, 4, 6\}\)</span>. In probability theory, experimental outcomes like this are naturally represented as sets of elementary events, that is in terms of subsets of <span class="math notranslate nohighlight">\(\Omega\)</span>: in addition to the sample space <span class="math notranslate nohighlight">\(\Omega\)</span>, we define <strong>event spaces</strong> which we use to represent the events that we are interested in. These event spaces are defined to have certain properties which enable reasoning about probabilities of unions, intersections and complements of events.</p>
+<p>As their name suggests, elementary events represent experimental outcomes which are in some sense atomic. Using sets of these elementary outcomes we can express more complicated outcomes which might be of interest. For example, the event where the outcome of the toss is even corresponds to the set of elementary events <span class="math notranslate nohighlight">\(\{2, 4, 6\}\)</span>. Experimental outcomes are naturally represented as sets of elementary events, that is in terms of subsets of <span class="math notranslate nohighlight">\(\Omega\)</span>. In addition to the sample space <span class="math notranslate nohighlight">\(\Omega\)</span>, we define <strong>event spaces</strong> to represent the events of interest. These event spaces are defined to have certain properties which enable reasoning about probabilities of unions, intersections and complements of events.</p>
 <div class='definition'>
 <p><strong>Definition (Event space)</strong> The collection <span class="math notranslate nohighlight">\(\mathcal{F}\)</span> of subsets of the sample space <span class="math notranslate nohighlight">\(\Omega\)</span> is called an event space if</p>
 <div class="math notranslate nohighlight">
@@ -213,7 +217,7 @@
 </div>
 <div class="section" id="probability-measures">
 <h2>Probability measures<a class="headerlink" href="#probability-measures" title="Permalink to this headline">¶</a></h2>
-<p>We have defined the sample space <span class="math notranslate nohighlight">\(\Omega\)</span> and the event space <span class="math notranslate nohighlight">\(\mathbb{F}\)</span> of the experiment, but we are still missing the probabilities of the experimental outcomes. This is achieved by a mapping called the <strong>probability measure</strong> which assigns a probability to each event in <span class="math notranslate nohighlight">\(\mathcal{F}\)</span>.</p>
+<p>We have defined the sample space <span class="math notranslate nohighlight">\(\Omega\)</span> and the event space <span class="math notranslate nohighlight">\(\mathcal{F}\)</span> of the experiment, but we are still missing the probabilities of the experimental outcomes. This is achieved by a mapping called the <strong>probability measure</strong> which assigns a probability to each event in <span class="math notranslate nohighlight">\(\mathcal{F}\)</span>.</p>
 <div class='definition'>
 <p><strong>Definition (Probability measure)</strong> A mapping <span class="math notranslate nohighlight">\(\mathbb{P} : \mathcal{F} \to \mathbb{R}\)</span> is called a <strong>probability measure</strong> on <span class="math notranslate nohighlight">\((\Omega, \mathcal{F})\)</span> if</p>
 <ol class="simple">
@@ -246,8 +250,8 @@
 <li><p>If <span class="math notranslate nohighlight">\(A, B \in \mathcal{F}\)</span> and <span class="math notranslate nohighlight">\(A \subseteq B\)</span> then <span class="math notranslate nohighlight">\(\mathbb{P}(A) \leq \mathbb{P}(B)\)</span>.</p></li>
 </ol>
 </div>
-<div class="section" id="conditional-probability-independence-and-bayes-rule">
-<h2>Conditional probability, independence and Bayes’ rule<a class="headerlink" href="#conditional-probability-independence-and-bayes-rule" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="conditional-probability-and-independence">
+<h2>Conditional probability and independence<a class="headerlink" href="#conditional-probability-and-independence" title="Permalink to this headline">¶</a></h2>
 <p>Often we may have partial information about the outcome of an experiment, and want to adjust our beliefs about the outcome based on these beliefs. We are therefore interested in the probability of some event <span class="math notranslate nohighlight">\(A\)</span> occuring, given that another event <span class="math notranslate nohighlight">\(B\)</span> occurs. This updated probability is called a conditional probability.</p>
 <div class='definition'>
 <p><strong>Definition (Conditional probabiility)</strong> Given <span class="math notranslate nohighlight">\(A, B \in \mathcal{F}\)</span> and <span class="math notranslate nohighlight">\(\mathbb{P}(B) &gt; 0\)</span>, the <strong>conditional probability</strong> of <span class="math notranslate nohighlight">\(A\)</span> given <span class="math notranslate nohighlight">\(B\)</span>, <span class="math notranslate nohighlight">\(\mathbb{P}(A | B)\)</span>, is defined as</p>
@@ -265,7 +269,7 @@
 <br>
 <p>This definition of independence is slightly more general than the statement “<span class="math notranslate nohighlight">\(A, B\)</span> are independent <span class="math notranslate nohighlight">\(\iff\)</span> <span class="math notranslate nohighlight">\(\mathbb{P}(A | B) = \mathbb{P}(A)\)</span>” in the sense that it allows for <span class="math notranslate nohighlight">\(\mathbb{P}(B) = 0\)</span>. Conditional probabilities define valid probability spaces too, in the sense of the following result.</p>
 <div class='theorem'>
-<p><strong>Theorem (Conditional probability space)</strong> If <span class="math notranslate nohighlight">\((\Omega, \mathcal{F}, \mathbb{P})\)</span> iis a probability space and <span class="math notranslate nohighlight">\(B \in \mathcal{F}\)</span> with <span class="math notranslate nohighlight">\(\mathbb{P} &gt; 0\)</span>, then <span class="math notranslate nohighlight">\((\Omega, \mathcal{F}, \mathbb{Q})\)</span> where <span class="math notranslate nohighlight">\(\mathbb{Q} : \mathcal{F} \to \mathbb{R}\)</span> and <span class="math notranslate nohighlight">\(\mathbb{Q}(A) = \mathbb{P}(A | B)\)</span> is also a probability space.</p>
+<p><strong>Theorem (Conditional probability space)</strong> If <span class="math notranslate nohighlight">\((\Omega, \mathcal{F}, \mathbb{P})\)</span> is a probability space and <span class="math notranslate nohighlight">\(B \in \mathcal{F}\)</span> with <span class="math notranslate nohighlight">\(\mathbb{P} &gt; 0\)</span>, then <span class="math notranslate nohighlight">\((\Omega, \mathcal{F}, \mathbb{Q})\)</span> where <span class="math notranslate nohighlight">\(\mathbb{Q} : \mathcal{F} \to \mathbb{R}\)</span> and <span class="math notranslate nohighlight">\(\mathbb{Q}(A) = \mathbb{P}(A | B)\)</span> is also a probability space.</p>
 </div>
 <br>
 <p>This can be be proved by showing that <span class="math notranslate nohighlight">\(\mathbb{Q}\)</span> satisfies the three conditions of probability measures.</p>
@@ -279,10 +283,22 @@
 \[\mathbb{P}(A) = \sum_n \mathbb{P}(A | B_n)\mathbb{P}(B_n).\]</div>
 </div>
 <br>
-<p>The partition theorem is closely related to Bayes’ rule, which takes a central role in probabilistic inference.</p>
+<p>The partition theorem is closely related to Bayes’ rule, which provides the way for computing the probability of <span class="math notranslate nohighlight">\(B | A\)</span> given the probability of <span class="math notranslate nohighlight">\(A | B\)</span>. We are often interested in making statements about the probability of an event <span class="math notranslate nohighlight">\(B\)</span>, given the fact that we have observed another event <span class="math notranslate nohighlight">\(A\)</span>, starting from an experssion for</p>
+<div class='theorem'>
+<p><strong>Theorem (Bayes’ theorem)</strong> If <span class="math notranslate nohighlight">\(B_1, B_2, ...\)</span> is a partition of <span class="math notranslate nohighlight">\(\Omega\)</span> with <span class="math notranslate nohighlight">\(\mathbb{P}(B_n) &gt; 0\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[ \mathbb{P}(B_k | A) = \frac{\mathbb{P}(A | B_k)\mathbb{P}(B_k)}{\sum_n \mathbb{P}(A | B_n)\mathbb{P}(B_n)}.\]</div>
+</div>
 </div>
 <div class="section" id="continuity">
 <h2>Continuity<a class="headerlink" href="#continuity" title="Permalink to this headline">¶</a></h2>
+<p>One final important result, useful in calclations pertaining to the convergence of limits of probabilities, is the following <strong>continuity theorem</strong>.</p>
+<div class='theorem'>
+<p><strong>Theorem (Continuity theorem)</strong> Given a sequence of sets <span class="math notranslate nohighlight">\(A_1 \subseteq A_2 \subseteq ...\)</span> with limit <span class="math notranslate nohighlight">\(A\)</span> then</p>
+<div class="math notranslate nohighlight">
+\[\mathbb{P}(A) = \lim_{n \to \infty} \mathbb{P}(A_n).\]</div>
+</div>
+<br>
 </div>
 </div>
 
@@ -296,7 +312,7 @@
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="../intro.html" title="previous page">Probability</a>
-    <a class='right-next' id="next-link" href="../../gaussian-processes/gp-intro.html" title="next page">Gaussian Processes</a>
+    <a class='right-next' id="next-link" href="../ch2/content.html" title="next page">Discrete random variables</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

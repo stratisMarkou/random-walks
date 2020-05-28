@@ -1,13 +1,14 @@
 # Events and Probabilities
 
+This first chapter presents the fundamental definitions of sample and event spaces, probability measures and probability spaces. These enable a calculus of the probability of experiment outcomes. Fundamental results such as Bayes' rule and the continuity of probability measures are presented.
 
 ## Sample and event spaces
 
-Given an experiment $\mathcal{E}$, we denote the set of possible outcomes of $\mathcal{E}$ by $\Omega$ and we call this the **event space**. The members $\omega \in \Omega$ are called **elementary events**. For example, in an experiment where a die is tossed once, we could define the elementary events to be the outcome of the toss and $\Omega$ to be
+We are interested in reasoning about the outcomes of an experiment $\mathcal{E}$. We denote the set of possible outcomes of $\mathcal{E}$ by $\Omega$ and we call this the **event space**. The members $\omega \in \Omega$ are called **elementary events**. For example, if $\mathcal{E}$ is an experiment where a die is tossed once, we could define the elementary events to be the possible outcomes of the toss and $\Omega$ to be
 
 $$ \Omega = \{1, 2, 3, 4, 5, 6\}$$
 
-As their name suggests, elementary events represent experimental outcomes which are atomic, and are used to express the outcomes we are actually interested in. For example, we could ask whether the outcome of tossing the die is even, i.e. whether it is in the set $\{2, 4, 6\}$. In probability theory, experimental outcomes like this are naturally represented as sets of elementary events, that is in terms of subsets of $\Omega$: in addition to the sample space $\Omega$, we define **event spaces** which we use to represent the events that we are interested in. These event spaces are defined to have certain properties which enable reasoning about probabilities of unions, intersections and complements of events.
+As their name suggests, elementary events represent experimental outcomes which are in some sense atomic. Using sets of these elementary outcomes we can express more complicated outcomes which might be of interest. For example, the event where the outcome of the toss is even corresponds to the set of elementary events $\{2, 4, 6\}$. Experimental outcomes are naturally represented as sets of elementary events, that is in terms of subsets of $\Omega$. In addition to the sample space $\Omega$, we define **event spaces** to represent the events of interest. These event spaces are defined to have certain properties which enable reasoning about probabilities of unions, intersections and complements of events.
 
 
 <div class='definition'>
@@ -32,7 +33,7 @@ Note that an event space is always defined with respect to a sample space, and a
 
 ## Probability measures
 
-We have defined the sample space $\Omega$ and the event space $\mathbb{F}$ of the experiment, but we are still missing the probabilities of the experimental outcomes. This is achieved by a mapping called the **probability measure** which assigns a probability to each event in $\mathcal{F}$.
+We have defined the sample space $\Omega$ and the event space $\mathcal{F}$ of the experiment, but we are still missing the probabilities of the experimental outcomes. This is achieved by a mapping called the **probability measure** which assigns a probability to each event in $\mathcal{F}$.
 
 
 <div class='definition'>
@@ -73,7 +74,7 @@ From the definitions of $\Omega$, $\mathcal{F}$ and $\mathbb{P}$ follow several 
 4. If $A, B \in \mathcal{F}$ then $\mathbb{P}(A \cup B) + \mathbb{P}(A \cap B) = \mathbb{P}(A) + \mathbb{P}(B)$.
 5. If $A, B \in \mathcal{F}$ and $A \subseteq B$ then $\mathbb{P}(A) \leq \mathbb{P}(B)$.
 
-## Conditional probability, independence and Bayes' rule
+## Conditional probability and independence
 
 Often we may have partial information about the outcome of an experiment, and want to adjust our beliefs about the outcome based on these beliefs. We are therefore interested in the probability of some event $A$ occuring, given that another event $B$ occurs. This updated probability is called a conditional probability.
 
@@ -107,7 +108,7 @@ This definition of independence is slightly more general than the statement "$A,
 
 <div class='theorem'>
 
-**Theorem (Conditional probability space)** If $(\Omega, \mathcal{F}, \mathbb{P})$ iis a probability space and $B \in \mathcal{F}$ with $\mathbb{P} > 0$, then $(\Omega, \mathcal{F}, \mathbb{Q})$ where $\mathbb{Q} : \mathcal{F} \to \mathbb{R}$ and $\mathbb{Q}(A) = \mathbb{P}(A | B)$ is also a probability space.
+**Theorem (Conditional probability space)** If $(\Omega, \mathcal{F}, \mathbb{P})$ is a probability space and $B \in \mathcal{F}$ with $\mathbb{P} > 0$, then $(\Omega, \mathcal{F}, \mathbb{Q})$ where $\mathbb{Q} : \mathcal{F} \to \mathbb{R}$ and $\mathbb{Q}(A) = \mathbb{P}(A | B)$ is also a probability space.
 
 </div>
 
@@ -130,6 +131,28 @@ $$\mathbb{P}(A) = \sum_n \mathbb{P}(A | B_n)\mathbb{P}(B_n).$$
 
 <br>
 
-The partition theorem is closely related to Bayes' rule, which takes a central role in probabilistic inference.
+The partition theorem is closely related to Bayes' rule, which provides the way for computing the probability of $B | A$ given the probability of $A | B$. We are often interested in making statements about the probability of an event $B$, given the fact that we have observed another event $A$, starting from an experssion for 
+
+<div class='theorem'>
+
+**Theorem (Bayes' theorem)** If $B_1, B_2, ...$ is a partition of $\Omega$ with $\mathbb{P}(B_n) > 0$, we have
+
+$$ \mathbb{P}(B_k | A) = \frac{\mathbb{P}(A | B_k)\mathbb{P}(B_k)}{\sum_n \mathbb{P}(A | B_n)\mathbb{P}(B_n)}.$$
+
+</div>
 
 ## Continuity
+
+One final important result, useful in calclations pertaining to the convergence of limits of probabilities, is the following **continuity theorem**.
+
+
+<div class='theorem'>
+
+**Theorem (Continuity theorem)** Given a sequence of sets $A_1 \subseteq A_2 \subseteq ...$ with limit $A$ then
+
+$$\mathbb{P}(A) = \lim_{n \to \infty} \mathbb{P}(A_n).$$
+
+</div>
+
+<br>
+
