@@ -171,8 +171,27 @@ whenever this sum converges absolutely.
 
 <br>
 
-The above can be shown by defining $Y = g(X)$ and considering the expectation of $Y$, showing this is equal to $\mathbb{E}\left(g(X)\right)$. The variance is another central quantity that captures information about a random variable, and in particular about its spread.
 
+
+The above can be shown by defining $Y = g(X)$ and considering the expectation
+ of $Y$, showing this is equal to $\mathbb{E}\left(g(X)\right)$. Two useful
+  results about discrete random variables are:
+
+<div class='theorem'>
+
+**Theorem (Two results for discrete random variables)** Let $X$ be a discrete
+ random variable and $a, b \in \mathbb{R}$, then
+ 
+ 1. If $\mathbb{P}(X \geq 0) = 1$ and $\mathbb{E}(X)$, then $\mathbb{P}(X = 0
+ ) = 1$.
+ 2. $\mathbb{E}(a X + b) = a\mathbb{E}(X) + b$.
+
+</div>
+
+<br>
+
+Appart from the expectation, the variance is another central quantity that
+ captures information about a random variable, particularly about its spread.
 
 <div class='definition'>
 

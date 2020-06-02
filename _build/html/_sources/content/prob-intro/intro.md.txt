@@ -1,4 +1,4 @@
-# Probability
+# Probability: An introdction
 
 These are notes on the book, *Probability: An Introduction* by Grimmett and Walsh. {cite}`grimmettprob`
 

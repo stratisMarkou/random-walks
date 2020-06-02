@@ -34,7 +34,7 @@
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Gaussian Processes" href="../../gaussian-processes/gp-intro.html" />
+    <link rel="next" title="Multivariate discrete distributions" href="../ch3/content.html" />
     <link rel="prev" title="Events and Probabilities" href="../ch1/content.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -83,13 +83,16 @@
     <a href="../../home.html">Welcome</a>
   </li>
   <li class="active">
-    <a href="../intro.html">Probability</a>
+    <a href="../intro.html">Probability: An introdction</a>
   <ul class="nav sidenav_l2">
     <li class="">
       <a href="../ch1/content.html">Events and Probabilities</a>
     </li>
     <li class="active">
       <a href="">Discrete random variables</a>
+    </li>
+    <li class="">
+      <a href="../ch3/content.html">Multivariate discrete distributions</a>
     </li>
   </ul>
   </li>
@@ -342,7 +345,21 @@ p_X(s) &amp;= 0 &amp;&amp; \text{ if } s \not \in S
 <p>whenever this sum converges absolutely.</p>
 </div>
 <br>
-<p>The above can be shown by defining <span class="math notranslate nohighlight">\(Y = g(X)\)</span> and considering the expectation of <span class="math notranslate nohighlight">\(Y\)</span>, showing this is equal to <span class="math notranslate nohighlight">\(\mathbb{E}\left(g(X)\right)\)</span>. The variance is another central quantity that captures information about a random variable, and in particular about its spread.</p>
+<p>The above can be shown by defining <span class="math notranslate nohighlight">\(Y = g(X)\)</span> and considering the expectation
+of <span class="math notranslate nohighlight">\(Y\)</span>, showing this is equal to <span class="math notranslate nohighlight">\(\mathbb{E}\left(g(X)\right)\)</span>. Two useful
+results about discrete random variables are:</p>
+<div class='theorem'>
+<p><strong>Theorem (Two results for discrete random variables)</strong> Let <span class="math notranslate nohighlight">\(X\)</span> be a discrete
+random variable and <span class="math notranslate nohighlight">\(a, b \in \mathbb{R}\)</span>, then</p>
+<ol class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(\mathbb{P}(X \geq 0) = 1\)</span> and <span class="math notranslate nohighlight">\(\mathbb{E}(X)\)</span>, then <span class="math notranslate nohighlight">\(\mathbb{P}(X = 0
+) = 1\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbb{E}(a X + b) = a\mathbb{E}(X) + b\)</span>.</p></li>
+</ol>
+</div>
+<br>
+<p>Appart from the expectation, the variance is another central quantity that
+captures information about a random variable, particularly about its spread.</p>
 <div class='definition'>
 <p><strong>Definition (Variance)</strong> The <strong>variance</strong> of a discrete random variable <span class="math notranslate nohighlight">\(X\)</span> is denoted by <span class="math notranslate nohighlight">\(\text{Var}(X)\)</span> and defined by</p>
 <div class="math notranslate nohighlight">
@@ -389,7 +406,7 @@ p_X(s) &amp;= 0 &amp;&amp; \text{ if } s \not \in S
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="../ch1/content.html" title="previous page">Events and Probabilities</a>
-    <a class='right-next' id="next-link" href="../../gaussian-processes/gp-intro.html" title="next page">Gaussian Processes</a>
+    <a class='right-next' id="next-link" href="../ch3/content.html" title="next page">Multivariate discrete distributions</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
