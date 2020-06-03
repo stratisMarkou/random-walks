@@ -45,7 +45,7 @@
 <meta property="og:url"         content="https://random-walks.org/content/prob-intro/ch3/content.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Multivariate discrete distributions" />
-<meta property="og:description" content="Multivariate discrete distributions  Definition  The definition of the pmf of a discrete random variable can be extended into a distribution over several random" />
+<meta property="og:description" content="Multivariate discrete distributions  Multivariate discrete pmfs are the extension of univariate discrete distributions over multiple variables. The definition o" />
 <meta property="og:image"       content="https://random-walks.org/_static/logo.svg" />
 
 <meta name="twitter:card" content="summary">
@@ -101,6 +101,9 @@
   </li>
   <li class="">
     <a href="../../c-programming/intro.html">The C programming language</a>
+  </li>
+  <li class="">
+    <a href="../../reading-and-links.html">Interesting reading and websites</a>
   </li>
 </ul>
 </nav>
@@ -162,7 +165,15 @@
         </li>
     
         <li class="nav-item toc-entry toc-h2">
-            <a href="#multivariate-expectation-and-independence" class="nav-link">Multivariate expectation and independence</a>
+            <a href="#expectation-and-independence" class="nav-link">Expectation and independence</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#sums-of-discrete-random-variables" class="nav-link">Sums of discrete random variables</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#indicator-functions" class="nav-link">Indicator functions</a>
         </li>
     
     </ul>
@@ -178,6 +189,10 @@
                 
   <div class="section" id="multivariate-discrete-distributions">
 <h1>Multivariate discrete distributions<a class="headerlink" href="#multivariate-discrete-distributions" title="Permalink to this headline">¶</a></h1>
+<p>Multivariate discrete pmfs are the extension of univariate discrete
+distributions over multiple variables. The definition of independence can
+be extended from events to discrete random variables. We discuss results
+concerning the expectation and independence of discrete random variables.</p>
 <div class="section" id="definition">
 <h2>Definition<a class="headerlink" href="#definition" title="Permalink to this headline">¶</a></h2>
 <p>The definition of the pmf of a discrete random variable can be extended into a
@@ -189,8 +204,8 @@ function over <span class="math notranslate nohighlight">\(X\)</span> and <span 
   , 1]\)</span> defined by</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
-p_{X, Y}(x, y) = \mathbb{P}\left({\omega \in \Omega : X(\omega) = x, Y
-(\omega) = y}\right).
+p_{X, Y}(x, y) = \mathbb{P}\left(\{\omega \in \Omega : X(\omega) = x, Y
+(\omega) = y\}\right).
 \end{align}\]</div>
 <p>This is usually abbreviated to <span class="math notranslate nohighlight">\(p_{X, Y}(x, y) = \mathbb{P}\left(X = x, Y = y\right)\)</span>.</p>
 </div>
@@ -209,10 +224,11 @@ satisfies the marginalisation property</p>
 <p>This definition can be extended to multivariate distributions of more than
 two variables by adding more variables to the set being measured.</p>
 </div>
-<div class="section" id="multivariate-expectation-and-independence">
-<h2>Multivariate expectation and independence<a class="headerlink" href="#multivariate-expectation-and-independence" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="expectation-and-independence">
+<h2>Expectation and independence<a class="headerlink" href="#expectation-and-independence" title="Permalink to this headline">¶</a></h2>
 <p>We are often interested in taking the expectation of functions of multiple
-random variables, given by the following formula as intuition would suggest:</p>
+random variables, given by the following formula which is the extension
+of its univariate version.</p>
 <div class='theorem'>
 <p><strong>Theorem (Law of the subconscious statistician - multivariate)</strong> Let <span class="math notranslate nohighlight">\(X\)</span> and
 <span class="math notranslate nohighlight">\(Y\)</span> be discrete random variables on <span class="math notranslate nohighlight">\((\Omega, \mathcal{F}, \mathbb{P})\)</span> and
@@ -250,22 +266,93 @@ variables <span class="math notranslate nohighlight">\(X\)</span> and <span clas
   : \mathbb{R} \to \mathbb{R}\)</span> such that</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
-  p_{X, Y}(x, y) = f(x)g(y) \text{ for } x, y \mathbb{R}.
+  p_{X, Y}(x, y) = f(x)g(y) \text{ for } x, y \in \mathbb{R}.
   \end{align}\]</div>
 </div>
 <br>
-<p>This can be shown simply by showing that the product <span class="math notranslate nohighlight">\(f(x)g(y)\)</span> is equal to
-<span class="math notranslate nohighlight">\(p_X(x)p_Y(y)\)</span>.</p>
+<p>This can be proved by showing that the product <span class="math notranslate nohighlight">\(f(x)g(y)\)</span> is equal to
+<span class="math notranslate nohighlight">\(p_X(x)p_Y(y)\)</span>. A related result is that if two random variables are
+independent, the expectation of their product is equal to the product of
+their expectations.</p>
 <div class='theorem'>
 <p><strong>Theorem (Expectation of product of independent variables)</strong> If <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are
 independent discrete random variables, the expectation of their product is
 equal to the product of their expectations, as in</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
-  \mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y].
+  \mathbb{E}(XY) = \mathbb{E}(X)\mathbb{E}(Y).
   \end{align}\]</div>
 </div>
 <br>
+<p>This can be proved by considering the expectation of <span class="math notranslate nohighlight">\(XY\)</span>, factoring <span class="math notranslate nohighlight">\(p_{X, Y
+}\)</span> into <span class="math notranslate nohighlight">\(p_X p_Y\)</span> and rearranging the expectation in terms of expectations
+over <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>. We also have the following useful result relating
+factorisation and independence.</p>
+<div class='theorem'>
+<p><strong>Theorem (Independence <span class="math notranslate nohighlight">\(\iff\)</span> expected product of functions factorises)</strong>
+Discrete random variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are independent if and only if</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{E}(f(X)g(y)) = \mathbb{E}(f(X))\mathbb{E}((g(Y))
+\end{align}\]</div>
+<p>for all <span class="math notranslate nohighlight">\(f, g : \mathbb{R} \to \mathbb{R}\)</span> for which the last two
+expectations exist.</p>
+</div>
+<br>
+</div>
+<div class="section" id="sums-of-discrete-random-variables">
+<h2>Sums of discrete random variables<a class="headerlink" href="#sums-of-discrete-random-variables" title="Permalink to this headline">¶</a></h2>
+<p>The sum of independent discrete random variables can be expressed in terms
+of the convolution of the pmfs of the random variables.</p>
+<div class='theorem'>
+<p><strong>Theorem (Convoltion formula)</strong> If <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are independent discrete
+random variables, then <span class="math notranslate nohighlight">\(Z = X + Y\)</span> has pmf</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{P}(Z = z) = \sum_{x \in \text{Im} X} \mathbb{P}(X = x)\mathbb{P}(Y
+ = z - x).
+\end{align}\]</div>
+</div>
+<br>
+<p>This can be extended to multiple random variables, by considering multiple
+convolutions in turn. However, there exist more convenient methods for
+summing independent random variables, such as <a class="reference external" href="https://en.wikipedia.org/wiki/Probability-generating_function">probability generating
+functions</a>, which are introduced in the next chapter.</p>
+</div>
+<div class="section" id="indicator-functions">
+<h2>Indicator functions<a class="headerlink" href="#indicator-functions" title="Permalink to this headline">¶</a></h2>
+<p>Indicator functions are a useful tool for problems involving counting of
+occurences of events.</p>
+<div class='definition'>
+<p><strong>Definition (Indicator functions)</strong> The indicator function of an event <span class="math notranslate nohighlight">\(A\)</span>
+is the random variable <span class="math notranslate nohighlight">\(1_{A}\)</span> defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+ 1_A(\omega) = \begin{cases}
+ 1 &amp; \text{ if } \omega \in A, \\
+ 0 &amp; \text{ otherwise.}
+ \end{cases}
+ \end{align}\end{split}\]</div>
+</div>
+<br>
+<p>One example use of indicator functions is the proof of the <strong>inclusion
+exclusion formula</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{P}\left(\bigcup^N_{n=1} A_n\right) = \sum_{n} \mathbb{P}(A_{n
+}) - \sum_
+{n_1 &lt; n_2}\mathbb{P}(A_{n_1} \cap A_{n_2})~+~...~+~(-1)^{N+1
+}~\mathbb{P}\left(\bigcap_n A_{n}\right).
+\end{align}\]</div>
+<p>Letting <span class="math notranslate nohighlight">\(A = \bigcup^N_{n=1} A_n\)</span>, considering that the indicator <span class="math notranslate nohighlight">\(1_A\)</span> can
+be written as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+1_A &amp;= 1 - \prod_{n=1}^N \left(1 - 1_{A_n}\right)\\
+    &amp;= \sum_n 1_{A_n} - \sum_{n_1 &lt; n_2} 1_{A_{n_1}}1_{A_{n_2}} +~...~+ (-1
+    )^{N+1} 1_{A_1} 1_{A_2} ... 1_{A_N},
+\end{align}\end{split}\]</div>
+<p>and taking expectations proves the inclusion-exclusion formula.</p>
 </div>
 </div>
 

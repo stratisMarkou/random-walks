@@ -1,4 +1,4 @@
-# Interesting sites and reading
+# Interesting reading and websites
 
 - [Missing semester](https://missing.csail.mit.edu/) of your CS education, an
  MIT course on all those tools you learn the long way: bash, vim, git and more.

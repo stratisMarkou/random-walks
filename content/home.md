@@ -2,12 +2,9 @@
 
 ## About
 
-Welcome to Random Walks! This is a collection of explorations, in the union of Inference, Probability, Optimisation and Physics. I am putting this together to keep track of the things I study and to share it with you :)
-
-## New on Random Walks
-
-- Fully Independent Training Conditionals (FITC) GP model.
-- Variational Free Energy (VFE) approximation for GPs.
+Welcome to Random Walks! This is an archive of explorations, in the convex
+ hull of Inference, Probability, Optimisation and Physics. I am putting this
+  together to keep track of the things I study and to share it with the web.
 
 ## Modes under exploration
 
@@ -16,17 +13,9 @@ Welcome to Random Walks! This is a collection of explorations, in the union of I
 - Approximate inference for Gaussian Processes.
 - Probabilistic methods for Reinforcement Learning, like [PILCO](https://www.doc.ic.ac.uk/~mpd37/publications/pami_final_w_appendix.pdf).
 
-<div style="text-align: center;">
-    <img style="padding:50px" src="images/logo/logo.svg" />
-<div/>
+## New on Random Walks
 
-
-```{toctree}
-:hidden:
-:titlesonly:
-
-
-prob-intro/intro
-gaussian-processes/gp-intro
-c-programming/intro
-```
+- Notes on the first three chapters of *Probability: An Introduction*
+- Deterministic Training Conditionals (DTC) GP model
+- Fully Independent Training Conditionals (FITC) GP model.
+- Variational Free Energy (VFE) approximation for GPs.
