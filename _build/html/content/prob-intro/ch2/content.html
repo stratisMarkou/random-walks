@@ -94,7 +94,16 @@
     <li class="">
       <a href="../ch3/content.html">Multivariate discrete distributions</a>
     </li>
+    <li class="">
+      <a href="../ch4/content.html">Probability generating functions</a>
+    </li>
+    <li class="">
+      <a href="../ch5/content.html">Distribution and density functions</a>
+    </li>
   </ul>
+  </li>
+  <li class="">
+    <a href="../../itila/intro.html">Information theory, Inference and Learning Algorithms</a>
   </li>
   <li class="">
     <a href="../../gaussian-processes/gp-intro.html">Gaussian Processes</a>
@@ -320,7 +329,20 @@ p_X(s) &amp;= 0 &amp;&amp; \text{ if } s \not \in S
 \[\begin{align}
 \mathbb{P}(X = k) = {k - 1 \choose n - 1} p^n q^{k - n} &amp; \text{ for } k = n, n + 1, n + 2, ...
 \end{align}\]</div>
-<p>The number of i.i.d. coin tosses up to and including the <span class="math notranslate nohighlight">\(n^{th}\)</span> success is distributed according to the negative binomial distribution. To see this, consider that a sequence of trials up to the <span class="math notranslate nohighlight">\(n^{th}\)</span> success contains <span class="math notranslate nohighlight">\(n\)</span> successes and <span class="math notranslate nohighlight">\(k - n\)</span> failures, so the probability of obtaining that particular sequence is <span class="math notranslate nohighlight">\(p^nq^{k - n}\)</span>. To count the number of all possible sequences with <span class="math notranslate nohighlight">\(k - n\)</span> failures and <span class="math notranslate nohighlight">\(n\)</span> successes, consider that the last trial must be a success. That leaves us with <span class="math notranslate nohighlight">\(k - 1\)</span> choose <span class="math notranslate nohighlight">\(n - 1\)</span> ways to rearrange the remaining successes and failures, arriving at the final expression.</p>
+<p>The number of i.i.d. coin tosses up to and including the <span class="math notranslate nohighlight">\(n^{th}\)</span> success is
+distributed according to the negative binomial distribution. To see this
+, consider that a sequence of trials up to the <span class="math notranslate nohighlight">\(n^{th}\)</span> success contains <span class="math notranslate nohighlight">\(n\)</span>
+successes and <span class="math notranslate nohighlight">\(k - n\)</span> failures, so the probability of obtaining that
+particular sequence is <span class="math notranslate nohighlight">\(p^nq^{k - n}\)</span>. To count the number of all possible
+sequences with <span class="math notranslate nohighlight">\(k - n\)</span> failures and <span class="math notranslate nohighlight">\(n\)</span> successes, consider that the last
+trial must be a success. That leaves us with <span class="math notranslate nohighlight">\(k - 1\)</span> choose <span class="math notranslate nohighlight">\(n - 1\)</span> ways
+to rearrange the remaining successes and failures, arriving at the
+final expression.</p>
+<p>Note also that from the definition of this distribution, if <span class="math notranslate nohighlight">\(X_1, X_2, ..., X_n\)</span>
+are geometrically distributed with parameter <span class="math notranslate nohighlight">\(p\)</span>, then $X = X_1 + X_2</p>
+<ul class="simple">
+<li><p>… + X_n$ is negative-binomially distributed with parameters <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(p\)</span>.</p></li>
+</ul>
 </div>
 </div>
 <div class="section" id="expectations">
@@ -429,6 +451,16 @@ captures information about a random variable, particularly about its spread.</p>
     </div>
 
     <script src="../../../_static/js/index.js"></script>
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-168728006-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
     
   </body>
 </html>

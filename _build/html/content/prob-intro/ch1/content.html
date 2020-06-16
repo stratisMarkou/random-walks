@@ -94,7 +94,16 @@
     <li class="">
       <a href="../ch3/content.html">Multivariate discrete distributions</a>
     </li>
+    <li class="">
+      <a href="../ch4/content.html">Probability generating functions</a>
+    </li>
+    <li class="">
+      <a href="../ch5/content.html">Distribution and density functions</a>
+    </li>
   </ul>
+  </li>
+  <li class="">
+    <a href="../../itila/intro.html">Information theory, Inference and Learning Algorithms</a>
   </li>
   <li class="">
     <a href="../../gaussian-processes/gp-intro.html">Gaussian Processes</a>
@@ -300,11 +309,19 @@
 <h2>Continuity<a class="headerlink" href="#continuity" title="Permalink to this headline">¶</a></h2>
 <p>One final important result, useful in calclations pertaining to the convergence of limits of probabilities, is the following <strong>continuity theorem</strong>.</p>
 <div class='theorem'>
-<p><strong>Theorem (Continuity theorem)</strong> Given a sequence of sets <span class="math notranslate nohighlight">\(A_1 \subseteq A_2 \subseteq ...\)</span> with limit <span class="math notranslate nohighlight">\(A\)</span> then</p>
+<p><strong>Theorem (Continuity theorem)</strong> Let <span class="math notranslate nohighlight">\((\Omega, \mathcal{F}, \mathbb{P})\)</span>
+be a probability space. If <span class="math notranslate nohighlight">\(A_1 \subseteq A_2 \subseteq ...\)</span> is an
+nondecreasing sequence of sets with limit <span class="math notranslate nohighlight">\(A\)</span>, then</p>
 <div class="math notranslate nohighlight">
 \[\mathbb{P}(A) = \lim_{n \to \infty} \mathbb{P}(A_n).\]</div>
 </div>
 <br>
+<p>The continuity theorem can also be written in the form of the limit of
+nonincreasing sets <span class="math notranslate nohighlight">\(B_n \supseteq B_{n+1} \supseteq ... \to B\)</span>, in the sense</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+ \mathbb{P}(B) = \lim_{n \to \infty} \mathbb{P}(B_n).
+ \end{align}\]</div>
 </div>
 </div>
 
@@ -338,6 +355,16 @@
     </div>
 
     <script src="../../../_static/js/index.js"></script>
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-168728006-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
     
   </body>
 </html>

@@ -130,7 +130,19 @@ $$\begin{align}
 \mathbb{P}(X = k) = {k - 1 \choose n - 1} p^n q^{k - n} & \text{ for } k = n, n + 1, n + 2, ...
 \end{align}$$
 
-The number of i.i.d. coin tosses up to and including the $n^{th}$ success is distributed according to the negative binomial distribution. To see this, consider that a sequence of trials up to the $n^{th}$ success contains $n$ successes and $k - n$ failures, so the probability of obtaining that particular sequence is $p^nq^{k - n}$. To count the number of all possible sequences with $k - n$ failures and $n$ successes, consider that the last trial must be a success. That leaves us with $k - 1$ choose $n - 1$ ways to rearrange the remaining successes and failures, arriving at the final expression.
+The number of i.i.d. coin tosses up to and including the $n^{th}$ success is
+ distributed according to the negative binomial distribution. To see this
+ , consider that a sequence of trials up to the $n^{th}$ success contains $n$
+  successes and $k - n$ failures, so the probability of obtaining that
+   particular sequence is $p^nq^{k - n}$. To count the number of all possible
+    sequences with $k - n$ failures and $n$ successes, consider that the last
+     trial must be a success. That leaves us with $k - 1$ choose $n - 1$ ways
+      to rearrange the remaining successes and failures, arriving at the
+       final expression.
+       
+Note also that from the definition of this distribution, if $X_1, X_2, ..., X_n$
+are geometrically distributed with parameter $p$, then $X = X_1 + X_2
+ + ... + X_n$ is negative-binomially distributed with parameters $n$ and $p$.
 
 
 ## Expectations

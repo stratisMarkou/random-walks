@@ -148,11 +148,20 @@ One final important result, useful in calclations pertaining to the convergence 
 
 <div class='theorem'>
 
-**Theorem (Continuity theorem)** Given a sequence of sets $A_1 \subseteq A_2 \subseteq ...$ with limit $A$ then
+**Theorem (Continuity theorem)** Let $(\Omega, \mathcal{F}, \mathbb{P})$
+ be a probability space. If $A_1 \subseteq A_2 \subseteq ...$ is an
+  nondecreasing sequence of sets with limit $A$, then
 
 $$\mathbb{P}(A) = \lim_{n \to \infty} \mathbb{P}(A_n).$$
 
 </div>
 
 <br>
+
+The continuity theorem can also be written in the form of the limit of
+ nonincreasing sets $B_n \supseteq B_{n+1} \supseteq ... \to B$, in the sense
+ 
+ $$\begin{align}
+ \mathbb{P}(B) = \lim_{n \to \infty} \mathbb{P}(B_n).
+ \end{align}$$
 
