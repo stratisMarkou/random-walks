@@ -1,0 +1,488 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Multivariate distributions &#8212; Random walks</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../../../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/jupyter-sphinx.css" />
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/sphinx-book-theme.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/mystnb.js"></script>
+    <script src="../../../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .secondtoggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="canonical" href="https://random-walks.org/content/prob-intro/ch6/content.html" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Moments and moment generating functions" href="../ch7/content.html" />
+    <link rel="prev" title="Distribution and density functions" href="../ch5/content.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://random-walks.org/content/prob-intro/ch6/content.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Multivariate distributions" />
+<meta property="og:description" content="Multivariate distributions  Joint distributions and the independence of general random variables are defined. Joint continuous distributions are defined, and an" />
+<meta property="og:image"       content="https://random-walks.org/_static/logo.svg" />
+
+<meta name="twitter:card" content="summary">
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../../index.html">
+  
+  <img src="../../../_static/logo.svg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Random walks</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  
+  <ul class="nav sidenav_l1">
+  <li class="">
+    <a href="../../home.html">Welcome</a>
+  </li>
+  <li class="active">
+    <a href="../intro.html">Probability: An introduction</a>
+  <ul class="nav sidenav_l2">
+    <li class="">
+      <a href="../ch1/content.html">Events and Probabilities</a>
+    </li>
+    <li class="">
+      <a href="../ch2/content.html">Discrete random variables</a>
+    </li>
+    <li class="">
+      <a href="../ch3/content.html">Multivariate discrete distributions</a>
+    </li>
+    <li class="">
+      <a href="../ch4/content.html">Probability generating functions</a>
+    </li>
+    <li class="">
+      <a href="../ch5/content.html">Distribution and density functions</a>
+    </li>
+    <li class="active">
+      <a href="">Multivariate distributions</a>
+    </li>
+    <li class="">
+      <a href="../ch7/content.html">Moments and moment generating functions</a>
+    </li>
+  </ul>
+  </li>
+  <li class="">
+    <a href="../../itila/intro.html">Information theory, Inference and Learning Algorithms</a>
+  </li>
+  <li class="">
+    <a href="../../gaussian-processes/gp-intro.html">Gaussian Processes</a>
+  </li>
+  <li class="">
+    <a href="../../c-programming/intro.html">The C programming language</a>
+  </li>
+  <li class="">
+    <a href="../../reading-and-links.html">Interesting reading and websites</a>
+  </li>
+  <li class="">
+    <a href="../../misc/misc.html">Miscellaneous</a>
+  </li>
+</ul>
+</nav>
+<p class="navbar_footer"></p>
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse" data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu" aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation" title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i class="fas fa-download"></i></button>
+
+            
+            <div class="dropdown-buttons">
+                <!-- ipynb file if we had a myst markdown file -->
+                
+                <!-- Download raw file -->
+                <a class="dropdown-buttons" href="../../../_sources/content/prob-intro/ch6/content.md.txt"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.md</button></a>
+                <!-- Download PDF via print -->
+                <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF" onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+            </div>
+            
+        </div>
+
+        <!-- Edit this page -->
+        
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+        
+    </div>
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#joint-distributions" class="nav-link">Joint distributions</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#joint-density-functions" class="nav-link">Joint density functions</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#independence-and-sums" class="nav-link">Independence and sums</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#changes-of-variables" class="nav-link">Changes of variables</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#conditional-density-functions" class="nav-link">Conditional density functions</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#expectations-of-continuous-random-variables" class="nav-link">Expectations of continuous random variables</a>
+        </li>
+    
+    </ul>
+</nav>
+
+
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="multivariate-distributions">
+<h1>Multivariate distributions<a class="headerlink" href="#multivariate-distributions" title="Permalink to this headline">¶</a></h1>
+<p>Joint distributions and the independence of general random variables are
+defined. Joint continuous distributions are defined, and analogues of the
+results for multivariate discrete random variables are given for the
+continuous case.</p>
+<div class="section" id="joint-distributions">
+<h2>Joint distributions<a class="headerlink" href="#joint-distributions" title="Permalink to this headline">¶</a></h2>
+<p>We are often interested in the values taken by two random variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>
+, defined on the same probability space <span class="math notranslate nohighlight">\((\Omega, \mathcal{F}, \mathbb{P})\)</span>
+. The joint distribution function describes the probability of the outcome
+that <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> assume some values simultaneously.</p>
+<div class='definition'>
+<p><strong>Definition (Joint distribution function)</strong> Given random variables <span class="math notranslate nohighlight">\(X, Y\)</span>
+on <span class="math notranslate nohighlight">\((\Omega, \mathcal{F}, \mathbb{P})\)</span>, their joint distribution function is
+the mapping <span class="math notranslate nohighlight">\(F_{X, Y} : \mathbb{R}^2 \to [0, 1]\)</span> given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+  F_{X, Y}(x, y) = \mathbb{P}(X \leq x, Y \leq y).
+  \end{align}\]</div>
+</div>
+<br>
+<p>This definition can be extended to joint distributions of any number of
+variables, by adding more variables to the set being measured. The joint
+distribution function satisfies:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+  \lim_{x, y \to -\infty}F_{X, Y}(x, y) = 0&amp;,\\
+  \lim_{x, y \to \infty}F_{X, Y}(x, y) = 1&amp;,\\
+  x_1 \leq x_2 \text { and } y_1 \leq y_2 \implies  F_{X, Y}(x_1, y_1) \leq
+   F_{X, Y}(x_2, y_2)&amp;.
+  \end{align}\end{split}\]</div>
+<p>The joint distribution function <span class="math notranslate nohighlight">\(F_{X, Y}\)</span> is related to its marginal
+distributions <span class="math notranslate nohighlight">\(F_X(x), F_{Y}(y)\)</span> by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+ \lim_{y \to \infty} F_{X, Y}(x, y) = F_X(x),
+ \lim_{x \to \infty} F_{X, Y}(x, y) = F_Y(y).
+ \end{align}\]</div>
+<p>We are often interested in how two random variables are related. In the special
+case where they are unrelated, we call them independent.</p>
+<div class='definition'>
+<p><strong>Definition (Independence of variables)</strong> We say that two random variables
+<span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are independent if for all <span class="math notranslate nohighlight">\(x, y \in \mathbb{R}\)</span>, the events <span class="math notranslate nohighlight">\(\{X \leq x\}\)</span> and <span class="math notranslate nohighlight">\(\{Y \leq y\}\)</span> are independent.</p>
+</div>
+<br>
+<p>Note that previously we had defined independence between events, as well as
+between discrete random variables. This definition extends independence to
+all random variables (discrete, continuous or other).</p>
+</div>
+<div class="section" id="joint-density-functions">
+<h2>Joint density functions<a class="headerlink" href="#joint-density-functions" title="Permalink to this headline">¶</a></h2>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are continuous we can go further and define their joint pmf
+from their density function.</p>
+<div class='definition'>
+<p><strong>Definition (Joint probability density function)</strong> The random variables <span class="math notranslate nohighlight">\(X
+, Y\)</span> on <span class="math notranslate nohighlight">\((\Omega, \mathcal{F}, \mathbb{P})\)</span> is called jointly continuous if
+its joint distribution function can be expressed in the form</p>
+<div class="math notranslate nohighlight">
+\[F_{X, Y}(x, y) = \mathbb{P}(X \leq, Y \leq y) = \int^x_{-\infty} \int^y_
+ {-\infty} f(u, v) du dv\]</div>
+<p>for <span class="math notranslate nohighlight">\(x, y \in \mathbb{R}\)</span> and <span class="math notranslate nohighlight">\(f : \mathbb{R}^2 \to [0, \infty)\)</span>. If this
+holds, we say that <span class="math notranslate nohighlight">\(X, Y\)</span> have joint distribution <span class="math notranslate nohighlight">\(f\)</span>, denoted <span class="math notranslate nohighlight">\(f_{X, Y}\)</span>.</p>
+</div>
+<br>
+<p>The joint probability density function is related to the joint mass function by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+  f_{X, Y}(x, y) = \begin{cases}
+  \frac{d}{dx}\frac{d}{dy} F_{X, Y}(x, y) &amp; \text{ if this exists at } (x, y), \\
+  0 &amp; \text{ otherwise.}
+  \end{cases}
+\end{align}\end{split}\]</div>
+<p>The following theorem says that we can go the other way around, integrating
+the pdf to obtain the probability of an event.</p>
+<div class='theorem'>
+<p><strong>Theorem (Integral of a pdf)</strong> If <span class="math notranslate nohighlight">\(A\)</span> is a regular subset of <span class="math notranslate nohighlight">\(\mathbb{R}^2\)</span>
+and <span class="math notranslate nohighlight">\(X, Y\)</span> are jointly continuous random variables with joint density
+function <span class="math notranslate nohighlight">\(f_{X, Y}\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+ \mathbb{P}\left((X, Y) \in A\right) = \int \int_{(x, y) \in A} f_{X, Y}(x, y
+ )dxdy.
+ \end{align}\]</div>
+</div>
+<br>
+</div>
+<div class="section" id="independence-and-sums">
+<h2>Independence and sums<a class="headerlink" href="#independence-and-sums" title="Permalink to this headline">¶</a></h2>
+<p>The manipulation of a joint distribution may simplify considerably if the
+variables are independent. As with discrete random variables, two variables
+are independent if and only if the joint distribution of continuous random
+variables factorises.</p>
+<div class='theorem'>
+<p><strong>Theorem (Independence <span class="math notranslate nohighlight">\(\iff\)</span> pdf factorises)</strong> Two jointly continuous
+random variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are independent if and only if their joint
+density function may be expressed in the form</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+  f_{X, Y}(x, y) = g(x)h(y), \text{ for } x, y \in \mathbb{R}.
+  \end{align}\]</div>
+</div>
+<br>
+<p>Again, much like with discrete random variables, the sum of two independent
+continuous random variables has pmf equal to the convolution of the pmfs of
+the summands.</p>
+<div class='theorem'>
+<p><strong>Theorem (Convolution formula)</strong> If the random variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are
+independent and continuous, with pdfs <span class="math notranslate nohighlight">\(f_X\)</span> and <span class="math notranslate nohighlight">\(f_Y\)</span>, then the density
+function of their sum <span class="math notranslate nohighlight">\(Z = X + Y\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+  f_Z(z) = \int^\infty_{-\infty} f_X(x)f_Y(z - x) dx, \text{ for } z \in
+   \mathbb{R}.
+  \end{align}\]</div>
+</div>
+<br>
+</div>
+<div class="section" id="changes-of-variables">
+<h2>Changes of variables<a class="headerlink" href="#changes-of-variables" title="Permalink to this headline">¶</a></h2>
+<p>Given random variables <span class="math notranslate nohighlight">\(X, Y\)</span>, we are often interested in the distribution of
+<span class="math notranslate nohighlight">\(T(X, Y)\)</span>. If the random variables are continuous, and the function <span class="math notranslate nohighlight">\(T\)</span> is a
+bijection, then the pmf of <span class="math notranslate nohighlight">\(T\)</span> is given by the result below.</p>
+<div class='theorem'>
+<p><strong>Theorem (Jacobian formula)</strong> Let <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> be jointly continuous with
+pdf <span class="math notranslate nohighlight">\(f_{X, Y}\)</span> and <span class="math notranslate nohighlight">\(B(x, y) = (u(x, y), v(x, y))\)</span> is a bijection from <span class="math notranslate nohighlight">\(D
+  = \{(x, y) : f_{X, Y}(x, y) &gt; 0\}\)</span> to <span class="math notranslate nohighlight">\(S \subseteq \mathbb{R}^2\)</span>. Then the
+pair <span class="math notranslate nohighlight">\((U, V) = (u(X, Y), v(X, Y))\)</span> is jointly continuous with joint pdf</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+  f_{U, V}(u, v) = \begin{cases}
+  f_{X, Y}\left(x(u, v), y(u, v)\right) |J(u, v)|, &amp; \text{ if } (u, v) \in S,\\
+  0 &amp; \text{ otherwise,}
+  \end{cases}
+  \end{align}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(J(u, v)\)</span> is the Jacobian of <span class="math notranslate nohighlight">\(B\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+  J(u, v) = \begin{vmatrix}
+  \frac{\partial x}{\partial u}&amp; \frac{\partial x}{\partial v} \\
+  \frac{\partial y}{\partial u}&amp; \frac{\partial y}{\partial v}
+  \end{vmatrix}.
+  \end{align}\end{split}\]</div>
+</div>
+<br>
+<p>This result extends the single-variable analogue for <span class="math notranslate nohighlight">\(Y = g(X(\omega))\)</span>
+, where <span class="math notranslate nohighlight">\(g\)</span> is an invertible mapping:</p>
+<div class="math notranslate nohighlight">
+\[f_Y(y) = f_X(g^{-1}(y)) \frac{d}{dy} g^{-1}(y).\]</div>
+<p>It can be extended to more random variables by adding further variables to
+the Jacobian.</p>
+</div>
+<div class="section" id="conditional-density-functions">
+<h2>Conditional density functions<a class="headerlink" href="#conditional-density-functions" title="Permalink to this headline">¶</a></h2>
+<p>We are often interested in the distribution of one variable <span class="math notranslate nohighlight">\(Y\)</span>, conditioned
+on another event <span class="math notranslate nohighlight">\(\{X = x\}\)</span>, defined analogously to its discrete counterpart.</p>
+<div class='definition'>
+<p><strong>Definition (Conditional density function)</strong> The conditional density
+function of <span class="math notranslate nohighlight">\(Y\)</span> given <span class="math notranslate nohighlight">\(X = x\)</span> is written <span class="math notranslate nohighlight">\(f_{Y | X}(\cdot | x)\)</span> and defined by</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+ f_{Y | X}(y | x) = \frac{f_{X, Y} (x, y)}{f_X(x)}
+ \end{align}\]</div>
+<p>for <span class="math notranslate nohighlight">\(y \in \mathbb{R}\)</span> and <span class="math notranslate nohighlight">\(f_X(x) &gt; 0\)</span>.</p>
+</div>
+<br>
+</div>
+<div class="section" id="expectations-of-continuous-random-variables">
+<h2>Expectations of continuous random variables<a class="headerlink" href="#expectations-of-continuous-random-variables" title="Permalink to this headline">¶</a></h2>
+<p>The law of the subconscious statistician for discrete random variables has
+the following counterpart for continuous random variables.</p>
+<div class='theorem'>
+<p><strong>Theorem (Law of the subconscious statistician)</strong> For any jointly continuous
+random variables <span class="math notranslate nohighlight">\(X, Y\)</span> with pmf <span class="math notranslate nohighlight">\(f_{X, Y}\)</span> and well-behaved <span class="math notranslate nohighlight">\(g\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+ \mathbb{E}\left(g(X, Y)\right) = \int^\infty_{-\infty}\int^{\infty}_{-\infty
+ } g(x, y) f_{X, Y}(x, y) dx dy,
+ \end{align}\]</div>
+<p>whenever this integral converges absolutely.</p>
+</div>
+<br>
+<p>The above result is useful because we need not worry about evaluating the
+distribution of <span class="math notranslate nohighlight">\(Z = g(X, Y)\)</span>, and can instead evaluate the integral directly.</p>
+<p>We also have the following result relating the independence of
+random variables to the factorisation of expectations of products of
+functions of the variables. This is again analogous to the similar result
+for discrete distributions.</p>
+<div class='theorem'>
+<p><strong>Theorem (Independence <span class="math notranslate nohighlight">\(\iff\)</span> expectations of products of functions factorise
+)</strong> Jointly continuous random variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are independent if and
+only if</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+ \mathbb{E}(g(X)h(Y)) = \mathbb{E}(g(X))\mathbb{E}(h(Y))
+ \end{align}\]</div>
+<p>for all functions <span class="math notranslate nohighlight">\(g, h : \mathbb{R} \to \mathbb{R}\)</span> for which these
+expectations exist.</p>
+</div>
+<br>
+<p>The conditional expectation of continuous random variables is defined
+analogously to that for discrete distributions, as shown below.</p>
+<div class='definition'>
+<p><strong>Definition (Continuous conditional expectation)</strong> If <span class="math notranslate nohighlight">\(X, Y\)</span> are jointly
+continuous random variables with joint density function <span class="math notranslate nohighlight">\(f_{X, Y}\)</span>, the
+conditional expectation of <span class="math notranslate nohighlight">\(Y\)</span> given <span class="math notranslate nohighlight">\(X = x\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+  \mathbb{E}(Y | X = x) = \int^\infty_{-\infty} y f_{Y | X}(y | x) dy = \int
+  ^{\infty}_{-\infty} y \frac{f_{X, Y}(x, y)}{f_X(x)} dy,
+  \end{align}\]</div>
+<p>valid for any <span class="math notranslate nohighlight">\(x\)</span> for which <span class="math notranslate nohighlight">\(f_X(x) &gt; 0\)</span>.</p>
+</div>
+<br>
+<p>We also have the following result about conditional expectations, an analogue
+of the equivalent result for discrete functions.</p>
+<div class='theorem'>
+<p><strong>Theorem (Law of iterated expectations)</strong> If <span class="math notranslate nohighlight">\(X, Y\)</span> are jointly continuous
+random variables, then</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+ \mathbb{E}(Y) = \int^{\infty}_{-\infty} \mathbb{E}(Y | X = x)f_X(x)dx,
+ \end{align}\]</div>
+<p>where the integral is over all <span class="math notranslate nohighlight">\(x\)</span> for which <span class="math notranslate nohighlight">\(f_X(x) &gt; 0\)</span>.</p>
+</div>
+<br>
+</div>
+</div>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="../ch5/content.html" title="previous page">Distribution and density functions</a>
+    <a class='right-next' id="next-link" href="../ch7/content.html" title="next page">Moments and moment generating functions</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Stratos Markou<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../../../_static/js/index.js"></script>
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-168728006-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    
+  </body>
+</html>

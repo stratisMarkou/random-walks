@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/jupyter-sphinx.css" />
     <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
     <script src="../../../_static/sphinx-book-theme.js"></script>
@@ -34,7 +35,7 @@
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Information theory, Inference and Learning Algorithms" href="../../itila/intro.html" />
+    <link rel="next" title="Multivariate distributions" href="../ch6/content.html" />
     <link rel="prev" title="Probability generating functions" href="../ch4/content.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,7 +46,7 @@
 <meta property="og:url"         content="https://random-walks.org/content/prob-intro/ch5/content.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Distribution and density functions" />
-<meta property="og:description" content="Distribution and density functions  Distribution functions  Extending the definition of a discrete random variable allows us to deal with probability spaces wit" />
+<meta property="og:description" content="Distribution and density functions  Random variables are functions from \Omega to \mathbb{R} which need not assume a countable set of values, unlike discrete ra" />
 <meta property="og:image"       content="https://random-walks.org/_static/logo.svg" />
 
 <meta name="twitter:card" content="summary">
@@ -83,7 +84,7 @@
     <a href="../../home.html">Welcome</a>
   </li>
   <li class="active">
-    <a href="../intro.html">Probability: An introdction</a>
+    <a href="../intro.html">Probability: An introduction</a>
   <ul class="nav sidenav_l2">
     <li class="">
       <a href="../ch1/content.html">Events and Probabilities</a>
@@ -100,6 +101,12 @@
     <li class="active">
       <a href="">Distribution and density functions</a>
     </li>
+    <li class="">
+      <a href="../ch6/content.html">Multivariate distributions</a>
+    </li>
+    <li class="">
+      <a href="../ch7/content.html">Moments and moment generating functions</a>
+    </li>
   </ul>
   </li>
   <li class="">
@@ -113,6 +120,9 @@
   </li>
   <li class="">
     <a href="../../reading-and-links.html">Interesting reading and websites</a>
+  </li>
+  <li class="">
+    <a href="../../misc/misc.html">Miscellaneous</a>
   </li>
 </ul>
 </nav>
@@ -211,6 +221,10 @@
             <a href="#functions-of-random-variables" class="nav-link">Functions of random variables</a>
         </li>
     
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#expectations-of-continuous-variables" class="nav-link">Expectations of continuous variables</a>
+        </li>
+    
     </ul>
 </nav>
 
@@ -224,6 +238,12 @@
                 
   <div class="section" id="distribution-and-density-functions">
 <h1>Distribution and density functions<a class="headerlink" href="#distribution-and-density-functions" title="Permalink to this headline">¶</a></h1>
+<p>Random variables are functions from <span class="math notranslate nohighlight">\(\Omega\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> which need not
+assume a countable set of values, unlike discrete random variables
+. Continuous random variables are a special case of random variables, whose
+distribution function can be written as the integral of another function
+, the probability density function. Some example continuous random
+variables are presented, as well as some basic results.</p>
 <div class="section" id="distribution-functions">
 <h2>Distribution functions<a class="headerlink" href="#distribution-functions" title="Permalink to this headline">¶</a></h2>
 <p>Extending the definition of a discrete random variable allows us to deal
@@ -247,11 +267,10 @@ the function <span class="math notranslate nohighlight">\(F_X : \mathbb{R} \to [
 <br>
 <p>The following useful properties are true of distribution functions:</p>
 <ol class="simple">
-<li><p><span class="math notranslate nohighlight">\(F_X(x) \leq F_X(y)\)</span> if <span class="math notranslate nohighlight">\(x \leq y\)</span>, since <span class="math notranslate nohighlight">\(\{X \leq x\} \subseteq \{Y \leq
-y\}\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\lim_{x \to -\infty} F_X(x) = 0\)</span> and <span class="math notranslate nohighlight">\(\lim_{x \to \infty} F_X(x) = 1\)</span>, by
-the continuity of <span class="math notranslate nohighlight">\(\mathbb{P}\)</span> and considering <span class="math notranslate nohighlight">\(\mathbb{P}(\emptyset) = 0\)</span>
-and <span class="math notranslate nohighlight">\(\mathbb{P}(\Omega) = 1\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(x \leq y\)</span>, then <span class="math notranslate nohighlight">\(F_X(x) \leq F_X(y)\)</span> if <span class="math notranslate nohighlight">\(x \leq y\)</span>, since <span class="math notranslate nohighlight">\(\{X \leq x
+\} \subseteq \{Y \leq y\}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(F_X(-\infty) = 0\)</span> and <span class="math notranslate nohighlight">\(F_X(\infty) = 1\)</span>, by the continuity of <span class="math notranslate nohighlight">\(\mathbb{P
+}\)</span> and considering <span class="math notranslate nohighlight">\(\mathbb{P}(\emptyset) = 0, \mathbb{P}(\Omega) = 1\)</span>.</p></li>
 <li><p><span class="math notranslate nohighlight">\(F_X\)</span> is continuous from the right, by the continuity of <span class="math notranslate nohighlight">\(\mathbb{P}\)</span>.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\mathbb{P}(a &lt; X \leq b) = \mathbb{P}(X \leq b) - \mathbb{P}(X \leq a)\)</span>.</p></li>
 </ol>
@@ -304,6 +323,22 @@ f_X(x) = \begin{cases}
 0 &amp; \text{otherwise}.
 \end{cases}
 \end{align}\end{split}\]</div>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is a uniformly distributed random variable and <span class="math notranslate nohighlight">\(F\)</span> is a distribution
+function, then the random variable <span class="math notranslate nohighlight">\(Y(\omega) = F^{-1}(X(\omega))\)</span> where</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+ F^{-1}(y) = \inf\{x : y \leq F(x)\},
+ \end{align}\]</div>
+<p>has distribution function <span class="math notranslate nohighlight">\(F\)</span>. This holds because</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+ \mathbb{P}(Y \leq y) &amp;= \mathbb{P}(F^{-1}(X) \leq y) \\
+                      &amp;= \mathbb{P}(X \leq F(y)) \\
+                      &amp;= F(y),
+ \end{align}\end{split}\]</div>
+<p>where we used <span class="math notranslate nohighlight">\(F(F^{-1}(x)) = x\)</span>, which holds because <span class="math notranslate nohighlight">\(F\)</span> is continuous from
+the right. This property can be used to generate random samples from any
+distribution, given its distribution function <span class="math notranslate nohighlight">\(F\)</span>.</p>
 </div>
 <div class="section" id="exponential">
 <h3>Exponential<a class="headerlink" href="#exponential" title="Permalink to this headline">¶</a></h3>
@@ -324,7 +359,7 @@ density function is</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
  f_X(x) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left(- \frac{1}{2\sigma^2}(x
-  - \mu)^2)\right) &amp; \text{ for } x \in \mathbb{R}.
+  - \mu)^2\right) &amp; \text{ for } x \in \mathbb{R}.
  \end{align}\]</div>
 </div>
 <div class="section" id="cauchy">
@@ -406,8 +441,47 @@ distributions of values these take. Strictly speaking, if <span class="math notr
 variable on <span class="math notranslate nohighlight">\((\Omega, \mathcal{F}, \mathbb{P})\)</span> and <span class="math notranslate nohighlight">\(g : \mathbb{R} \to
    \mathbb{R}\)</span> is any function, then <span class="math notranslate nohighlight">\(Y(\omega) = g[X(\omega)]\)</span> is not a
 variable in general, because <span class="math notranslate nohighlight">\(\{\omega \in \Omega : Y(\omega) = y\}\)</span> may
-not in general be in <span class="math notranslate nohighlight">\(\mathcal{F}\)</span>. Grimmett and Welsh acknowledge but
-defer this detail.</p>
+not be in <span class="math notranslate nohighlight">\(\mathcal{F}\)</span>. Grimmett and Welsh acknowledge and defer this
+detail for elsewhere. Modulo this detail, the following result gives us
+a rule for determining <span class="math notranslate nohighlight">\(f_Y\)</span>.</p>
+<div class="theorem">
+<p><strong>Theorem (Pdf of a function of a random variable)</strong> Let <span class="math notranslate nohighlight">\(X\)</span> be a continuous
+random variable on <span class="math notranslate nohighlight">\((\Omega, \mathcal{F}, \mathbb{P})\)</span> and <span class="math notranslate nohighlight">\(g : \mathbb{R
+ } \to \mathbb{R}\)</span> be a continuous increasing function. Then <span class="math notranslate nohighlight">\(Y(\omega) = g[X
+ (\omega)]\)</span> has pmf</p>
+<div class="math notranslate nohighlight">
+\[f_Y(y) = f_X(g^{-1}(y)) \frac{d}{dy} g^{-1}(y).\]</div>
+</div>
+<br>
+<p>A similar relation holds for continuous and decreasing <span class="math notranslate nohighlight">\(g\)</span>, where a <span class="math notranslate nohighlight">\(-\)</span> sign is
+added in front of the right hand side of the above result. Cases where <span class="math notranslate nohighlight">\(g\)</span>
+is not strictly increasing or decreasing, are best treated on their own.</p>
+</div>
+<div class="section" id="expectations-of-continuous-variables">
+<h2>Expectations of continuous variables<a class="headerlink" href="#expectations-of-continuous-variables" title="Permalink to this headline">¶</a></h2>
+<p>The expectation of a continuous random variable is the sensible analogue of
+the expectation of a continuous random variable.</p>
+<div class="definition">
+<p><strong>Definition (Expectation of continuous random variable)</strong> If <span class="math notranslate nohighlight">\(X\)</span> is a
+continuous random variable with pdf <span class="math notranslate nohighlight">\(f_X\)</span>, the expectation of <span class="math notranslate nohighlight">\(X\)</span> is defined by</p>
+<div class="math notranslate nohighlight">
+\[\mathbb{E}(X) = \int^\infty_{-\infty} xf_X(x) dx,\]</div>
+<p>whenever the integral converges absolutely.</p>
+</div>
+<br>
+<p>Finally, as with discrete random variables, an analogous law of the subconscious
+statistician states that we can compute expectations of functions of random
+variables in the straightforward way.</p>
+<div class="theorem">
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is a continuous random variable with density function <span class="math notranslate nohighlight">\(f_X\)</span>, and <span class="math notranslate nohighlight">\(g
+ : \mathbb{R} \to \mathbb{R}\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+ \mathbb{E}(g(X)) = \int^\infty_{-\infty} g(x)f_X(x) dx,
+ \end{align}\]</div>
+<p>whenever the integral converges absolutely.</p>
+</div>
+<br>
 <hr class="docutils" />
 <dl class="footnote brackets">
 <dt class="label" id="pdfandpmf"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
@@ -428,7 +502,7 @@ and <span class="math notranslate nohighlight">\(p_X(x)\)</span>, where <span cl
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="../ch4/content.html" title="previous page">Probability generating functions</a>
-    <a class='right-next' id="next-link" href="../../itila/intro.html" title="next page">Information theory, Inference and Learning Algorithms</a>
+    <a class='right-next' id="next-link" href="../ch6/content.html" title="next page">Multivariate distributions</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
