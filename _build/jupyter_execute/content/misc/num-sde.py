@@ -21,7 +21,7 @@ HTML(f'<style>{css_style}</style>')
     
 </div>
 
-## Script 1 - Sampling from a Wiener process
+## Sampling from a Wiener process
 
 np.random.seed(0)
 
@@ -49,7 +49,7 @@ plt.xlabel('Time (t)')
 plt.ylabel('Position (x)')
 plt.show()
 
-## Script 2 - Sampling from a mapping of a Wiener process
+## Sampling from a mapping of a Wiener process
 
 np.random.seed(0)
 
@@ -91,7 +91,7 @@ plt.xlabel('Time (t)')
 plt.ylabel('Value (u)')
 plt.show()
 
-## Script 3 - Evaluating a stochastic integral
+## Evaluating a stochastic integral
 
 def h(x):
     return x
@@ -126,14 +126,14 @@ strat_exact = 0.5 * W[-2] ** 2
 print(f'Ito integral approximation (exact): {ito_approx:.3f} ({ito_exact:.3f})')
 print(f'Stratonovich approximation (exact): {strat_approx:.3f} ({strat_exact:.3f})')
 
-## Script 4 - Euler-Maruyama
+## Euler-Maruyama method
 
 <div class="definition">
     
 **Definition (Euler-Maruyama method)** Given a scalar SDE with drift and diffusion functions $f$ and $g$
     \begin{align}dX(t) = f(X(t))dt + g(X(t)) dW(t),\end{align}
     the Euler-Maruyama method approximates $X$ by
-    \begin{align} X_{j + 1} = X_j + f(X_j) \Delta t + g(X_j) (\Delta W_{j+1} - \Delta W_j),\end{align}
+    \begin{align} X_{j + 1} = X_j + f(X_j) \Delta t + g(X_j) \Delta W_j,\end{align}
     where $\Delta t > 0$ is the time step, $X_j = X(\tau_j), W_j = W(\tau_j)$ and $\tau_j = j\Delta t$.
     
 </div>
@@ -166,8 +166,8 @@ def f_g_black_scholes(lamda, mu):
     def f(X, t):
         return lamda * X
     
-    def g(X, t):
-        return mu * X
+    def g(X, t, grad=False):
+        return mu if grad else mu * X
     
     return f, g
 
@@ -180,7 +180,7 @@ mu = 1
 seed = 0
 X0 = 1
 T = 1
-N = int(1e3)
+N = int(1e2)
 
 f, g = f_g_black_scholes(lamda=lamda, mu=mu)
 
@@ -188,11 +188,14 @@ t, X, W = euler_maruyama(seed=seed, X0=X0, T=T, N=N, f=f, g=g)
 X_exact = exact_black_scholes(X0=X0, t=t, W=W, lamda=lamda, mu=mu)
 
 plt.plot(t, X_exact, color='k', zorder=1, label='Exact solution')
-plt.scatter(t[::10], X[::10], s=20, marker='x', color='red', zorder=2, label='Euler-Maruyama (subsampled)')
+plt.scatter(t, X, s=20, marker='x', color='red', zorder=2, label='Euler-Maruyama (subsampled)')
 plt.legend()
 plt.xlim([0, T])
 plt.xticks(np.linspace(0, 1, 6))
-plt.yticks(np.linspace(0, 3, 5))
+plt.yticks(np.linspace(0, 8, 5))
+plt.title('Euler-Maruyama solution', fontsize=20)
+plt.xlabel('t', fontsize=20)
+plt.ylabel('X', fontsize=20)
 plt.show()
 
 def f_g_sine(omega, mu):
@@ -222,5 +225,261 @@ plt.legend()
 plt.xlim([0, T])
 plt.xticks(np.linspace(0, T, 6))
 plt.yticks(np.linspace(-3, 3, 5))
+plt.show()
+
+## Strong and weak convergence
+
+<div class="definition">
+    
+**Definition (Strong convergence)** A method for approximating a stochastic process $X(t)$ is said to have strong order of convergence $\gamma$ if there exists a constant such that
+    \begin{align}\mathbb{E}|X_n - X(\tau_n)| \leq C\Delta t^\gamma\end{align}
+    for any fixed $\tau_n = n\Delta t \in [0, T]$ and $\Delta t$ sufficiently small.
+
+</div>
+<br>
+
+A weaker condition for convergence is the amount by which the expected values of the stochastic process depart from each other. 
+
+<div class="definition">
+    
+**Definition (Weak convergence)** A method for approximating a stochastic process $X(t)$ is said to have weak order of convergence $\gamma$ if there exists a constant such that
+    \begin{align}|\mathbb{E}[X_n] - \mathbb{E}[X(\tau_n)]| \leq C\Delta t^\gamma\end{align}
+    for any fixed $\tau_n = n\Delta t \in [0, T]$ and $\Delta t$ sufficiently small.
+
+</div>
+<br>
+
+The paper states without proof that, under conditions on $f$ and $g$, Euler-Maruyama has strong order of convergence $\frac{1}{2}$ and weak order of convergence $1$. We do not provide a proof for any of the above statements, but instead evaluate the rate of convergence empirically, as in the paper.
+
+def parallel_euler_maruyama(seed, num_paths, X0, T, N, f, g):
+    
+    np.random.seed(seed)
+    
+    dt = T / N
+    
+    X = X0 * np.ones(shape=(num_paths, N + 1))
+    
+    t = np.linspace(0, T, N + 1)
+    
+    dW = dt ** 0.5 * np.random.normal(size=(num_paths, N))
+    
+    for i in range(N):
+        
+        X[:, i+1] = X[:, i] + f(X[:, i], t[i]) * dt + g(X[:, i], t[i]) * dW[:, i]
+        
+    W = np.concatenate([np.zeros(shape=(num_paths, 1)), np.cumsum(dW, axis=1)], axis=1)
+    
+    return t, X, W
+
+lamda = 2
+mu = 1
+
+seed = 0
+X0 = 1
+T = 1
+Ns = (10 ** np.linspace(2, 4, 4)).astype(dtype=np.int)
+num_paths = int(1e4)
+
+f, g = f_g_black_scholes(lamda=lamda, mu=mu)
+
+dts = []
+X_abs_diffs = []
+
+for N in Ns:
+    
+    t, X, W = parallel_euler_maruyama(seed=seed, num_paths=num_paths, X0=X0, T=T, N=N, f=f, g=g)
+    X_exact = exact_black_scholes(X0=X0, t=t[None, :], W=W, lamda=lamda, mu=mu)
+    
+    dts.append(T / N)
+    
+    X_abs_diff = np.abs(X[:, -1] - X_exact[:, -1])
+    X_abs_diffs.append(X_abs_diff)
+    
+X_abs_diffs = np.stack(X_abs_diffs, axis=0)
+em_strong_errors = np.mean(X_abs_diffs, axis=1)
+
+plt.plot(dts, em_strong_errors, color='k')
+plt.loglog()
+plt.yticks([1e-2, 1e-1, 1e0])
+plt.xlabel(r'$\Delta t$', fontsize=20)
+plt.ylabel(r'$\mathbb{E}|X_n - X(\tau_n)|$', fontsize=20)
+plt.title('Euler-Maruyama strong convergence', fontsize=20)
+plt.show()
+
+lamda = 2
+mu = 1
+
+seed = 0
+X0 = 1
+T = 1
+Ns = (10 ** np.linspace(2, 4, 4)).astype(dtype=np.int)
+num_paths = int(1e4)
+
+f, g = f_g_black_scholes(lamda=lamda, mu=mu)
+
+dts = []
+X_approx = []
+X_exacts = []
+
+for N in Ns:
+    
+    t, X, W = parallel_euler_maruyama(seed=seed, num_paths=num_paths, X0=X0, T=T, N=N, f=f, g=g)
+    X_exact = exact_black_scholes(X0=X0, t=t[None, :], W=W, lamda=lamda, mu=mu)
+    
+    dts.append(T / N)
+    X_approx.append(X[:, -1])
+    X_exacts.append(X_exact[:, -1])
+    
+X_approx = np.stack(X_approx, axis=0)
+X_exacts = np.stack(X_exacts, axis=0)
+
+X_approx_means = np.mean(X_approx, axis=-1)
+X_exacts_means = np.mean(X_exacts, axis=-1)
+
+em_weak_errors = np.abs(X_approx_means - X_exacts_means)
+
+plt.plot(dts, em_weak_errors, color='k')
+plt.loglog()
+plt.yticks([1e-3, 1e-2, 1e-1, 1e0])
+plt.xlabel(r'$\Delta t$', fontsize=20)
+plt.ylabel(r'$|\mathbb{E}X_n - \mathbb{E}X(\tau_n)|$', fontsize=20)
+plt.title('Euler-Maruyama weak convergence', fontsize=20)
+plt.show()
+
+# Milstein's higher order method
+
+<div class="definition">
+    
+**Definition (Milstein's method)** Given a scalar SDE with drift and diffusion functions $f$ and $g$
+    \begin{align}dX(t) = f(X(t))dt + g(X(t)) dW(t),\end{align}
+    the Milstein method approximates $X$ by
+    \begin{align} X_{j + 1} = X_j + f(X_j) \Delta t + g(X_j) \Delta W_j + \frac{1}{2}g(X_j)g'(X_j) (\Delta W_j^2 - \Delta t),\end{align}
+    where $\Delta t > 0$ is the time step, $X_j = X(\tau_j), W_j = W(\tau_j)$ and $\tau_j = j\Delta t$.
+    
+</div>
+<br>
+
+def parallel_milstein(seed, num_paths, X0, T, N, f, g):
+    
+    np.random.seed(seed)
+    
+    dt = T / N
+    
+    X = X0 * np.ones(shape=(num_paths, N + 1))
+    
+    t = np.linspace(0, T, N + 1)
+    
+    dW = dt ** 0.5 * np.random.normal(size=(num_paths, N))
+    
+    for i in range(N):
+        
+        # Compute the EM term and the higher order correction term
+        dX = f(X[:, i], t[i]) * dt + g(X[:, i], t[i]) * dW[:, i]
+        dX = dX + 0.5 * g(X[:, i], t[i]) * g(X[:, i], t[i], grad=True) * (dW[:, i] ** 2 - dt)
+        
+        X[:, i+1] = X[:, i] + dX
+        
+    W = np.concatenate([np.zeros(shape=(num_paths, 1)), np.cumsum(dW, axis=1)], axis=1)
+    
+    return t, X, W
+
+lamda = 2
+mu = 1
+
+seed = 0
+X0 = 1
+T = 1
+N = int(1e2)
+num_paths = 1
+
+f, g = f_g_black_scholes(lamda=lamda, mu=mu)
+
+t, X, W = parallel_milstein(seed=seed, num_paths=num_paths, X0=X0, T=T, N=N, f=f, g=g)
+X_exact = exact_black_scholes(X0=X0, t=t[None, :], W=W, lamda=lamda, mu=mu)
+
+plt.plot(t, X_exact[0, :], color='k', zorder=1, label='Exact solution')
+plt.scatter(t, X[0, :], s=20, marker='x', color='red', zorder=2, label='Euler-Maruyama (subsampled)')
+plt.legend()
+plt.xlim([0, T])
+plt.xticks(np.linspace(0, 1, 6))
+plt.yticks(np.linspace(0, 8, 5))
+plt.title('Milstein solution', fontsize=20)
+plt.xlabel('t', fontsize=20)
+plt.ylabel('X', fontsize=20)
+plt.show()
+
+lamda = 2
+mu = 1
+
+seed = 0
+X0 = 1
+T = 1
+Ns = (10 ** np.linspace(2, 4, 4)).astype(dtype=np.int)
+num_paths = int(1e4)
+
+f, g = f_g_black_scholes(lamda=lamda, mu=mu)
+
+dts = []
+X_abs_diffs = []
+
+for N in Ns:
+    
+    t, X, W = parallel_milstein(seed=seed, num_paths=num_paths, X0=X0, T=T, N=N, f=f, g=g)
+    X_exact = exact_black_scholes(X0=X0, t=t[None, :], W=W, lamda=lamda, mu=mu)
+    
+    dts.append(T / N)
+    
+    X_abs_diff = np.abs(X[:, -1] - X_exact[:, -1])
+    X_abs_diffs.append(X_abs_diff)
+    
+X_abs_diffs = np.stack(X_abs_diffs, axis=0)
+mil_strong_errors = np.mean(X_abs_diffs, axis=1)
+
+plt.plot(dts, em_strong_errors, color='k')
+plt.loglog()
+plt.yticks([1e-2, 1e-1, 1e0])
+plt.xlabel(r'$\Delta t$', fontsize=20)
+plt.ylabel(r'$\mathbb{E}|X_n - X(\tau_n)|$', fontsize=20)
+plt.title('Milstein strong convergence', fontsize=20)
+plt.show()
+
+lamda = 2
+mu = 1
+
+seed = 0
+X0 = 1
+T = 1
+Ns = (10 ** np.linspace(2, 4, 4)).astype(dtype=np.int)
+num_paths = int(1e4)
+
+f, g = f_g_black_scholes(lamda=lamda, mu=mu)
+
+dts = []
+X_approx = []
+X_exacts = []
+
+for N in Ns:
+    
+    t, X, W = parallel_milstein(seed=seed, num_paths=num_paths, X0=X0, T=T, N=N, f=f, g=g)
+    X_exact = exact_black_scholes(X0=X0, t=t[None, :], W=W, lamda=lamda, mu=mu)
+    
+    dts.append(T / N)
+    X_approx.append(X[:, -1])
+    X_exacts.append(X_exact[:, -1])
+    
+X_approx = np.stack(X_approx, axis=0)
+X_exacts = np.stack(X_exacts, axis=0)
+
+X_approx_means = np.mean(X_approx, axis=-1)
+X_exacts_means = np.mean(X_exacts, axis=-1)
+
+mil_weak_errors = np.abs(X_approx_means - X_exacts_means)
+
+plt.plot(dts, mil_weak_errors, color='k')
+plt.loglog()
+plt.yticks([1e-3, 1e-2, 1e-1, 1e0])
+plt.xlabel(r'$\Delta t$', fontsize=20)
+plt.ylabel(r'$|\mathbb{E}X_n - \mathbb{E}X(\tau_n)|$', fontsize=20)
+plt.title('Milstein weak convergence', fontsize=20)
 plt.show()
 

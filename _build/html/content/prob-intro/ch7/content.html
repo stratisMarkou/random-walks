@@ -46,7 +46,7 @@
 <meta property="og:url"         content="https://random-walks.org/content/prob-intro/ch7/content.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Moments and moment generating functions" />
-<meta property="og:description" content="Moments and moment generating functions  Moments  <div class='theorem'>   Theorem (Uniqueness theorem for moments) Suppose that all moments $ \mathbb{E}(X^k), k" />
+<meta property="og:description" content="Moments and moment generating functions  Moments are an important tool in the study of random variables. Moment generating functions are a useful tool related t" />
 <meta property="og:image"       content="https://random-walks.org/_static/logo.svg" />
 
 <meta name="twitter:card" content="summary">
@@ -184,11 +184,37 @@
         </li>
     
         <li class="nav-item toc-entry toc-h2">
-            <a href="#variance-and-covariance" class="nav-link">Variance and covariance</a>
+            <a href="#covariance-and-correlation" class="nav-link">Covariance and correlation</a>
         </li>
     
         <li class="nav-item toc-entry toc-h2">
             <a href="#moment-generating-functions" class="nav-link">Moment generating functions</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#examples-of-mgfs" class="nav-link">Examples of mgfs</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#uniform" class="nav-link">Uniform</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#exponential" class="nav-link">Exponential</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#normal" class="nav-link">Normal</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#cauchy" class="nav-link">Cauchy</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#gamma" class="nav-link">Gamma</a>
+        </li>
+    
+            </ul>
         </li>
     
         <li class="nav-item toc-entry toc-h2">
@@ -212,12 +238,23 @@
                 
   <div class="section" id="moments-and-moment-generating-functions">
 <h1>Moments and moment generating functions<a class="headerlink" href="#moments-and-moment-generating-functions" title="Permalink to this headline">¶</a></h1>
+<p>Moments are an important tool in the study of random variables. Moment
+generating functions are a useful tool related to the moments of random
+variables. Under certain conditions, there is a one-to-one mapping between
+random variables and moment generating functions. One example use of
+mgfs is the computation of a sum of independent random variables.  Mgfs do
+not always exist, an issue that is circumvented by characteristic
+functions which exist for a much broader class of random variables. Two
+useful inequalities, the Markov and the Jensen inequalities are presented
+and proved.</p>
 <div class="section" id="moments">
 <h2>Moments<a class="headerlink" href="#moments" title="Permalink to this headline">¶</a></h2>
+<p>The moments of a random variable contain useful information about it. In fact
+, under the following technical conditions, the moments uniquely determine
+the distribution of the random variable.</p>
 <div class='theorem'>
-<p><strong>Theorem (Uniqueness theorem for moments)</strong> Suppose that all moments $
-\mathbb{E}(X^k), k = 1, 2, …$ of the random variable <span class="math notranslate nohighlight">\(X\)</span> exist, and that
-the series</p>
+<p><strong>Theorem (Uniqueness theorem for moments)</strong> Suppose that all moments <span class="math notranslate nohighlight">\(\mathbb{E}(X^k), k = 1, 2, ...\)</span>
+of the random variable <span class="math notranslate nohighlight">\(X\)</span> exist, and that the series</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
  \sum^\infty_{k = 0}\frac{t^k}{k!} \mathbb{E}(X^k),
@@ -227,8 +264,10 @@ determine the distribution of <span class="math notranslate nohighlight">\(X\)</
 </div>
 <br>
 </div>
-<div class="section" id="variance-and-covariance">
-<h2>Variance and covariance<a class="headerlink" href="#variance-and-covariance" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="covariance-and-correlation">
+<h2>Covariance and correlation<a class="headerlink" href="#covariance-and-correlation" title="Permalink to this headline">¶</a></h2>
+<p>We are often interested in the extent to which two random variables co-vary, a
+property that is quantified by the their covariance, as defined below.</p>
 <div class='definition'>
 <p><strong>Definition (Covariance)</strong> If <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are random variables, then their
 covariance is denoted <span class="math notranslate nohighlight">\(\text{cov}(X, Y)\)</span> and defined as</p>
@@ -240,6 +279,10 @@ covariance is denoted <span class="math notranslate nohighlight">\(\text{cov}(X,
 <p>whenever these expectations exist.</p>
 </div>
 <br>
+<p>Clearly, if we multiply <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> by <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> respectively, their
+covariance will change by a factor of <span class="math notranslate nohighlight">\(ab\)</span>. We may be interested
+in a scale-invariant metric of the covariance between two random variables
+, captured by the correlation coefficient.</p>
 <div class='definition'>
 <p><strong>Definition (Correlation coefficient)</strong> If <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are random variables
 , then their correlation coefficient is denoted <span class="math notranslate nohighlight">\(\rho(X, Y)\)</span> and defined as</p>
@@ -252,6 +295,9 @@ covariance is denoted <span class="math notranslate nohighlight">\(\text{cov}(X,
   0\)</span>.</p>
 </div>
 <br>
+<p>The correlation coefficient of two random variables has absolute value less
+than or equal to <span class="math notranslate nohighlight">\(1\)</span>, as stated by the following result which is worth
+bearing in mind.</p>
 <div class="theorem">
 <p><strong>Theorem (Correlation between <span class="math notranslate nohighlight">\(-1\)</span> and <span class="math notranslate nohighlight">\(1\)</span>)</strong> If <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are random
 variables, then</p>
@@ -261,6 +307,23 @@ variables, then</p>
  \end{align}\]</div>
 <p>whenever this correlation exists.</p>
 </div>
+<br>
+<p>The above result can be shown quickly from an application of the Cauchy
+-Schwartz inequality stated and proved below.</p>
+<details class="proof">
+<summary>Proof: \(-1 \leq \rho(X, Y) \leq 1\) </summary>
+<div>
+<p>Given random variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>, define <span class="math notranslate nohighlight">\(U = X - \bar{X}\)</span> and <span class="math notranslate nohighlight">\(V = Y- \bar{Y}\)</span>
+. By applying the Cauchy-Schwartz inequality on <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(V\)</span>, we obtain
+\begin{align}
+\frac{\mathbb{E}(UV)^2}{\mathbb{E}(U^2)\mathbb{E}(V^2)} \leq 1.
+\end{align}
+Taking a square root and substituting for <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(V\)</span> we arrive at the result
+\begin{align}
+-1 \leq \rho(X, Y) \leq 1.
+\end{align}</p>
+</div>
+</details>
 <br>
 <div class="theorem">
 <p><strong>Theorem (Cauchy-Schwartz inequality)</strong> If <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(V\)</span> are random variables
@@ -275,7 +338,7 @@ variables, then</p>
 <details class="proof">
 <summary>Proof: Cauchy-Schwartz inequality</summary>
 <div>
-<p>Let <span class="math notranslate nohighlight">\(s \in \mathbb{R}\)</span> be a real number and <span class="math notranslate nohighlight">\(W = U + sV\)</span> be a random variable
+<p>Let <span class="math notranslate nohighlight">\(s \in \mathbb{R}\)</span> be a real number and <span class="math notranslate nohighlight">\(W = sU + V\)</span> be a random variable
 . Then <span class="math notranslate nohighlight">\(W^2 \geq 0\)</span> and we have
 \begin{align}\mathbb{E}(X^2) = a s^2 + b s + c \geq 0,\end{align}
 where <span class="math notranslate nohighlight">\(a = \mathbb{E}(U^2)\)</span>, <span class="math notranslate nohighlight">\(b = 2\mathbb{E}(UV)\)</span> and <span class="math notranslate nohighlight">\(\mathbb{E}(V^2)\)</span>
@@ -292,6 +355,7 @@ from which we arrive at the result
 </div>
 <div class="section" id="moment-generating-functions">
 <h2>Moment generating functions<a class="headerlink" href="#moment-generating-functions" title="Permalink to this headline">¶</a></h2>
+<p>Since the moments of a random variable uniquely determine its distribution.</p>
 <div class="definition">
 <p><strong>Definition (Moment generating function)</strong> The moment generating function of
 a random variable <span class="math notranslate nohighlight">\(X\)</span>, denoted <span class="math notranslate nohighlight">\(M_X\)</span> is defined by</p>
@@ -302,6 +366,8 @@ a random variable <span class="math notranslate nohighlight">\(X\)</span>, denot
 <p>for all <span class="math notranslate nohighlight">\(t \in \mathbb{R}\)</span> for which the expectation exists.</p>
 </div>
 <br>
+<p>We have the following relation between moments of a random variable and
+derivatives of its mgf.</p>
 <div class="theorem">
 <p><strong>Theorem (Moments equal to derivatives of mgf)</strong> If <span class="math notranslate nohighlight">\(M_X\)</span> exists in a
 neighbourhood of <span class="math notranslate nohighlight">\(0\)</span>, then <span class="math notranslate nohighlight">\(k = 1, 2, ...\)</span>,</p>
@@ -312,6 +378,8 @@ neighbourhood of <span class="math notranslate nohighlight">\(0\)</span>, then <
 <p>the <span class="math notranslate nohighlight">\(k^{th}\)</span> derivative of <span class="math notranslate nohighlight">\(M_X\)</span> at <span class="math notranslate nohighlight">\(t = 0\)</span>.</p>
 </div>
 <br>
+<p>Further, we also have the following useful relation for the mgf of a sum of
+random variables.</p>
 <div class="theorem">
 <p><strong>Theorem (Independence <span class="math notranslate nohighlight">\(\implies\)</span> mgf of sum factorises)</strong> If <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are
 independent random variables, then <span class="math notranslate nohighlight">\(X + Y\)</span> has moment generating function</p>
@@ -321,10 +389,20 @@ independent random variables, then <span class="math notranslate nohighlight">\(
  \]</div>
 </div>
 <br>
+<p>Intuitively, since the moments of a random variable uniquely determine its
+distribution, then also a generating function <span class="math notranslate nohighlight">\(M_X(t)\)</span> uniquely determines the
+distribution of the corresponding random variable <span class="math notranslate nohighlight">\(X\)</span>. On an intuitive
+level this can be seen by noting that <span class="math notranslate nohighlight">\(M_X(t)\)</span> can be rewritten as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\mathbb{E}(e^{tX}) &amp;= \mathbb{E}\left[ \sum_{n = 1}^N \frac{1}{n!} (tX)^n, \right]\\
+                   &amp;=  \sum_{n = 1}^N \frac{t^n}{n!} \mathbb{E}\left[X^n\right],
+\end{align}\end{split}\]</div>
+<p>so the moments can be determined from the mgf, and the distribution of <span class="math notranslate nohighlight">\(X\)</span>
+can then be determined from the moments. The following result formalises this
+intuition.</p>
 <div class="theorem">
-<p><strong>Theorem (Uniqueness of mgfs)</strong> If the moment generating function <span class="math notranslate nohighlight">\(M_X(t
-) = \mathbb{E}(e^{tX}) &lt; \infty\)</span> for all <span class="math notranslate nohighlight">\(t \in [-\delta, \delta]\)</span> for some $
-\delta &gt; 0$, there is a unique distribution with mgf <span class="math notranslate nohighlight">\(M_X\)</span>. Under this
+<p><strong>Theorem (Uniqueness of mgfs)</strong> If the moment generating function <span class="math notranslate nohighlight">\(M_X(t) = \mathbb{E}(e^{tX}) &lt; \infty\)</span> for all <span class="math notranslate nohighlight">\(t \in [-\delta, \delta]\)</span> for some <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span>, there is a unique distribution with mgf <span class="math notranslate nohighlight">\(M_X\)</span>. Under this
 condition, we have that <span class="math notranslate nohighlight">\(\mathbb{E}(X^k) &lt; \infty\)</span> for <span class="math notranslate nohighlight">\(k = 1, 2, ...\)</span> and</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
@@ -334,8 +412,55 @@ condition, we have that <span class="math notranslate nohighlight">\(\mathbb{E}(
 </div>
 <br>
 </div>
+<div class="section" id="examples-of-mgfs">
+<h2>Examples of mgfs<a class="headerlink" href="#examples-of-mgfs" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="uniform">
+<h3>Uniform<a class="headerlink" href="#uniform" title="Permalink to this headline">¶</a></h3>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is uniformly distributed in <span class="math notranslate nohighlight">\([a, b]\)</span>, then its mgf is
+\begin{align}
+M_X(t) = \frac{e^{tb} - e^{ta}}{t}.
+\end{align}</p>
+</div>
+<div class="section" id="exponential">
+<h3>Exponential<a class="headerlink" href="#exponential" title="Permalink to this headline">¶</a></h3>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is exponentially distributed with parameter <span class="math notranslate nohighlight">\(\lambda\)</span>, then its mgf is
+\begin{align}
+M_X(t) = \frac{\lambda}{\lambda - t}.
+\end{align}</p>
+</div>
+<div class="section" id="normal">
+<h3>Normal<a class="headerlink" href="#normal" title="Permalink to this headline">¶</a></h3>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is normally distributed with parameters <span class="math notranslate nohighlight">\(\mu\)</span>, <span class="math notranslate nohighlight">\(\sigma^2 &gt; 0\)</span>, then
+its mgf is</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+ M_X(t) = \exp\left(\mu t + \frac{\sigma^2t}{2}\right).
+ \end{align}\]</div>
+</div>
+<div class="section" id="cauchy">
+<h3>Cauchy<a class="headerlink" href="#cauchy" title="Permalink to this headline">¶</a></h3>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is Cauchy distributed, then it does not have an mgf because the integral</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\int^\infty_{-\infty} \frac{e^{tx}}{1 + x^2} dx,
+\end{align}\]</div>
+<p>diverges for any <span class="math notranslate nohighlight">\(t \neq 0\)</span>. Many other variables do not have mgfs for the
+same reason, a difficulty that is circumvented by characteristic functions
+defined below.</p>
+</div>
+<div class="section" id="gamma">
+<h3>Gamma<a class="headerlink" href="#gamma" title="Permalink to this headline">¶</a></h3>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is gamma distributed with parameters <span class="math notranslate nohighlight">\(w &gt; 0\)</span> and <span class="math notranslate nohighlight">\(\lambda &gt; 0\)</span>, then
+its mgf is
+\begin{align}
+M_X(t) = \left(\frac{\lambda}{\lambda - t}\right)^w.
+\end{align}</p>
+</div>
+</div>
 <div class="section" id="markov-and-jensen-inequalities">
 <h2>Markov and Jensen inequalities<a class="headerlink" href="#markov-and-jensen-inequalities" title="Permalink to this headline">¶</a></h2>
+<p>The Markov inequality is a useful result that bounds the probability that a
+non-negative random variable is larger than some positive threshold.</p>
 <div class="theorem">
 <p><strong>Theorem (Markov inequality)</strong> For any non-negative random variable <span class="math notranslate nohighlight">\(X
  : \Omega \to \mathbb{R}\)</span>,</p>
@@ -356,6 +481,16 @@ otherwise. Rearranging and taking expectations, we obtain
 </div>
 </details>
 <br>
+<p>One consequence of the Markov inequality is the Chebyshev inequality</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{P}(|X - \bar{X}| \geq \alpha) \leq \frac{\sigma^2}{\alpha^2}
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\sigma^2\)</span> is the variance of <span class="math notranslate nohighlight">\(X\)</span>. The Markov inequality is useful in
+proofs involving bounds of probabilities that a variable will fall within a
+certain range.</p>
+<p>Another useful result is Jensen’s inequality, which is handy when working with
+convex or concave functions.</p>
 <div class="definition">
 <p><strong>Definition (Convex function)</strong> A function <span class="math notranslate nohighlight">\(g : (a, b) \to \mathbb{R}\)</span> is
 convex if</p>
@@ -366,6 +501,8 @@ convex if</p>
 <p>for every <span class="math notranslate nohighlight">\(t \in [0, 1]\)</span> and <span class="math notranslate nohighlight">\(u, v \in (a, b)\)</span>.</p>
 </div>
 <br>
+<p>The definition of a concave function is as above, except the inequality sign
+is flipped. Jensen’s inequality then takes the following form.</p>
 <div class="theorem">
 <p><strong>Theorem (Jensen’s inequality)</strong> Let <span class="math notranslate nohighlight">\(X\)</span> be a random variable taking values
 in the, possibly infinite, domain <span class="math notranslate nohighlight">\((a, b)\)</span> such that <span class="math notranslate nohighlight">\(\mathbb{E}(X)\)</span> exists
@@ -377,7 +514,7 @@ and <span class="math notranslate nohighlight">\(g : (a, b) \to \mathbb{R}\)</sp
   \end{align}\]</div>
 </div>
 <br>
-<p>Jensen’s inequality can be proved quickly by applying the supporting tangent
+<p>It can be proved quickly by applying the supporting tangent
 theorem (see below) and taking an expectation over <span class="math notranslate nohighlight">\(X\)</span>.</p>
 <details class="proof">
 <summary>Proof: Jensen's inequality</summary>
@@ -390,6 +527,9 @@ over <span class="math notranslate nohighlight">\(X\)</span>, the <span class="m
 </div>
 </details>
 <br>
+<p>The supporting tangent theorem says that for any point <span class="math notranslate nohighlight">\(w\)</span> in the domain of a
+convex function <span class="math notranslate nohighlight">\(g\)</span>, we can always find a line passing through <span class="math notranslate nohighlight">\((w, g(w))\)</span>
+, which lower-bounds the function.</p>
 <div class="theorem">
 <p><strong>Theorem (Supporting tangent theorem)</strong> Let <span class="math notranslate nohighlight">\(g : (a, b) \to \mathbb{R}\)</span> be
 convex, and let <span class="math notranslate nohighlight">\(w \in (u, v)\)</span>. There exists <span class="math notranslate nohighlight">\(\alpha \in \mathbb{R}\)</span> such that</p>

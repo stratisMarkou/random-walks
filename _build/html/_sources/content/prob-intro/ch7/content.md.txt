@@ -1,12 +1,25 @@
 # Moments and moment generating functions
 
+Moments are an important tool in the study of random variables. Moment
+ generating functions are a useful tool related to the moments of random
+  variables. Under certain conditions, there is a one-to-one mapping between
+   random variables and moment generating functions. One example use of
+   mgfs is the computation of a sum of independent random variables.  Mgfs do
+    not always exist, an issue that is circumvented by characteristic
+     functions which exist for a much broader class of random variables. Two
+      useful inequalities, the Markov and the Jensen inequalities are presented
+       and proved. 
+
 ## Moments
+
+The moments of a random variable contain useful information about it. In fact
+, under the following technical conditions, the moments uniquely determine
+ the distribution of the random variable.
 
 <div class='theorem'>
 
-**Theorem (Uniqueness theorem for moments)** Suppose that all moments $
-\mathbb{E}(X^k), k = 1, 2, ...$ of the random variable $X$ exist, and that
- the series
+**Theorem (Uniqueness theorem for moments)** Suppose that all moments $\mathbb{E}(X^k), k = 1, 2, ...$
+of the random variable $X$ exist, and that the series
  
  $$\begin{align}
  \sum^\infty_{k = 0}\frac{t^k}{k!} \mathbb{E}(X^k),
@@ -18,7 +31,10 @@
 </div>
 <br>
 
-## Variance and covariance
+## Covariance and correlation
+
+We are often interested in the extent to which two random variables co-vary, a
+ property that is quantified by the their covariance, as defined below.
 
 <div class='definition'>
 
@@ -34,6 +50,11 @@
 
 </div>
 <br>
+
+Clearly, if we multiply $X$ and $Y$ by $a$ and $b$ respectively, their
+ covariance will change by a factor of $ab$. We may be interested
+  in a scale-invariant metric of the covariance between two random variables
+  , captured by the correlation coefficient.
 
 <div class='definition'>
 
@@ -51,6 +72,10 @@
 </div>
 <br>
 
+The correlation coefficient of two random variables has absolute value less
+ than or equal to $1$, as stated by the following result which is worth
+  bearing in mind.
+
 <div class="theorem">
 
 **Theorem (Correlation between $-1$ and $1$)** If $X$ and $Y$ are random
@@ -63,6 +88,29 @@
  whenever this correlation exists.
 
 </div>
+<br>
+
+The above result can be shown quickly from an application of the Cauchy
+-Schwartz inequality stated and proved below.
+
+<details class="proof">
+<summary>Proof: \(-1 \leq \rho(X, Y) \leq 1\) </summary>
+
+<div>
+
+Given random variables $X$ and $Y$, define $U = X - \bar{X}$ and $V = Y- \bar{Y}$
+. By applying the Cauchy-Schwartz inequality on $U$ and $V$, we obtain
+\begin{align}
+\frac{\mathbb{E}(UV)^2}{\mathbb{E}(U^2)\mathbb{E}(V^2)} \leq 1.
+\end{align}
+Taking a square root and substituting for $U$ and $V$ we arrive at the result
+\begin{align}
+ -1 \leq \rho(X, Y) \leq 1.
+\end{align}
+ 
+</div>
+
+</details>
 <br>
 
 <div class="theorem">
@@ -84,7 +132,7 @@ whenever these expectations exist.
 
 <div>
 
-Let $s \in \mathbb{R}$ be a real number and $W = U + sV$ be a random variable
+Let $s \in \mathbb{R}$ be a real number and $W = sU + V$ be a random variable
 . Then $W^2 \geq 0$ and we have
 \begin{align}\mathbb{E}(X^2) = a s^2 + b s + c \geq 0,\end{align}
 where $a = \mathbb{E}(U^2)$, $b = 2\mathbb{E}(UV)$ and $\mathbb{E}(V^2)$
@@ -103,6 +151,8 @@ from which we arrive at the result
 
 ## Moment generating functions
 
+Since the moments of a random variable uniquely determine its distribution.
+
 <div class="definition">
 
 **Definition (Moment generating function)** The moment generating function of
@@ -116,6 +166,11 @@ from which we arrive at the result
 
 </div>
 <br>
+
+
+  
+We have the following relation between moments of a random variable and
+ derivatives of its mgf.
 
 <div class="theorem">
 
@@ -131,6 +186,9 @@ from which we arrive at the result
 </div>
 <br>
 
+Further, we also have the following useful relation for the mgf of a sum of
+ random variables.
+
 <div class="theorem">
 
 **Theorem (Independence $\implies$ mgf of sum factorises)** If $X$ and $Y$ are
@@ -143,11 +201,23 @@ from which we arrive at the result
 </div>
 <br>
 
+Intuitively, since the moments of a random variable uniquely determine its
+ distribution, then also a generating function $M_X(t)$ uniquely determines the
+  distribution of the corresponding random variable $X$. On an intuitive
+   level this can be seen by noting that $M_X(t)$ can be rewritten as
+
+$$\begin{align}
+\mathbb{E}(e^{tX}) &= \mathbb{E}\left[ \sum_{n = 1}^N \frac{1}{n!} (tX)^n, \right]\\
+                   &=  \sum_{n = 1}^N \frac{t^n}{n!} \mathbb{E}\left[X^n\right],
+\end{align}$$
+
+so the moments can be determined from the mgf, and the distribution of $X$
+ can then be determined from the moments. The following result formalises this
+  intuition.
+
 <div class="theorem">
 
-**Theorem (Uniqueness of mgfs)** If the moment generating function $M_X(t
-) = \mathbb{E}(e^{tX}) < \infty$ for all $t \in [-\delta, \delta]$ for some $
-\delta > 0$, there is a unique distribution with mgf $M_X$. Under this
+**Theorem (Uniqueness of mgfs)** If the moment generating function $M_X(t) = \mathbb{E}(e^{tX}) < \infty$ for all $t \in [-\delta, \delta]$ for some $\delta > 0$, there is a unique distribution with mgf $M_X$. Under this
  condition, we have that $\mathbb{E}(X^k) < \infty$ for $k = 1, 2, ...$ and
  
  $$\begin{align}
@@ -158,8 +228,56 @@ from which we arrive at the result
 </div>
 <br>
 
+## Examples of mgfs
+
+### Uniform
+
+If $X$ is uniformly distributed in $[a, b]$, then its mgf is
+\begin{align}
+M_X(t) = \frac{e^{tb} - e^{ta}}{t}.
+\end{align}
+
+### Exponential
+
+If $X$ is exponentially distributed with parameter $\lambda$, then its mgf is
+\begin{align}
+M_X(t) = \frac{\lambda}{\lambda - t}.
+\end{align}
+
+### Normal
+
+If $X$ is normally distributed with parameters $\mu$, $\sigma^2 > 0$, then
+ its mgf is
+ 
+ $$\begin{align}
+ M_X(t) = \exp\left(\mu t + \frac{\sigma^2t}{2}\right).
+ \end{align}$$
+
+### Cauchy
+
+If $X$ is Cauchy distributed, then it does not have an mgf because the integral
+
+$$\begin{align}
+\int^\infty_{-\infty} \frac{e^{tx}}{1 + x^2} dx,
+\end{align}$$
+
+diverges for any $t \neq 0$. Many other variables do not have mgfs for the
+ same reason, a difficulty that is circumvented by characteristic functions
+  defined below.
+
+### Gamma
+
+If $X$ is gamma distributed with parameters $w > 0$ and $\lambda > 0$, then
+ its mgf is
+\begin{align}
+M_X(t) = \left(\frac{\lambda}{\lambda - t}\right)^w.
+\end{align}
+
 
 ## Markov and Jensen inequalities
+
+The Markov inequality is a useful result that bounds the probability that a
+ non-negative random variable is larger than some positive threshold.
 
 <div class="theorem">
 
@@ -187,6 +305,19 @@ otherwise. Rearranging and taking expectations, we obtain
 </details>
 <br>
 
+One consequence of the Markov inequality is the Chebyshev inequality
+
+$$\begin{align}
+\mathbb{P}(|X - \bar{X}| \geq \alpha) \leq \frac{\sigma^2}{\alpha^2}
+\end{align}$$
+
+where $\sigma^2$ is the variance of $X$. The Markov inequality is useful in
+ proofs involving bounds of probabilities that a variable will fall within a
+  certain range.
+  
+Another useful result is Jensen's inequality, which is handy when working with
+ convex or concave functions.
+
 <div class="definition">
 
 **Definition (Convex function)** A function $g : (a, b) \to \mathbb{R}$ is
@@ -200,6 +331,9 @@ otherwise. Rearranging and taking expectations, we obtain
 
 </div>
 <br>
+
+The definition of a concave function is as above, except the inequality sign
+ is flipped. Jensen's inequality then takes the following form.
 
 <div class="theorem">
 
@@ -215,7 +349,7 @@ otherwise. Rearranging and taking expectations, we obtain
 </div>
 <br>
 
-Jensen's inequality can be proved quickly by applying the supporting tangent
+It can be proved quickly by applying the supporting tangent
  theorem (see below) and taking an expectation over $X$.
 
 <details class="proof">
@@ -233,6 +367,10 @@ and by setting the constant $w = \mathbb{E}(X)$ and taking an expectation
 
 </details>
 <br>
+
+The supporting tangent theorem says that for any point $w$ in the domain of a
+ convex function $g$, we can always find a line passing through $(w, g(w))$
+ , which lower-bounds the function.
 
 <div class="theorem">
 

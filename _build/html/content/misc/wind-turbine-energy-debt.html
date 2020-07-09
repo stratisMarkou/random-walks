@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Miscellaneous &#8212; Random walks</title>
+    <title>Wind turbine energy balance &#8212; Random walks</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link href="../../_static/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="../../_static/sphinx-book-theme.css" type="text/css" />
@@ -31,21 +31,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="canonical" href="https://random-walks.org/content/misc/misc.html" />
+    <link rel="canonical" href="https://random-walks.org/content/misc/wind-turbine-energy-debt.html" />
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="prev" title="Interesting reading and websites" href="../reading-and-links.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
 
 
 <!-- Opengraph tags -->
-<meta property="og:url"         content="https://random-walks.org/content/misc/misc.html" />
+<meta property="og:url"         content="https://random-walks.org/content/misc/wind-turbine-energy-debt.html" />
 <meta property="og:type"        content="article" />
-<meta property="og:title"       content="Miscellaneous" />
-<meta property="og:description" content="Miscellaneous  This is a collection of miscellaneous files for which I haven’t found a home yet.  " />
+<meta property="og:title"       content="Wind turbine energy balance" />
+<meta property="og:description" content="Wind turbine energy balance  Several times I have heard the claim that wind turbines have a negative energy balance, meaning that the energy put into manufactur" />
 <meta property="og:image"       content="https://random-walks.org/_static/logo.svg" />
 
 <meta name="twitter:card" content="summary">
@@ -97,8 +96,8 @@
   <li class="">
     <a href="../reading-and-links.html">Interesting reading and websites</a>
   </li>
-  <li class="active">
-    <a href="">Miscellaneous</a>
+  <li class="">
+    <a href="misc.html">Miscellaneous</a>
   </li>
 </ul>
 </nav>
@@ -131,7 +130,7 @@
                 <!-- ipynb file if we had a myst markdown file -->
                 
                 <!-- Download raw file -->
-                <a class="dropdown-buttons" href="../../_sources/content/misc/misc.md.txt"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.md</button></a>
+                <a class="dropdown-buttons" href="../../_sources/content/misc/wind-turbine-energy-debt.md.txt"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.md</button></a>
                 <!-- Download PDF via print -->
                 <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF" onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
             </div>
@@ -148,9 +147,24 @@
         
     </div>
     <div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
 
 <nav id="bd-toc-nav">
     <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#a-rough-upper-bound" class="nav-link">A rough upper bound</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#more-realistic-bound" class="nav-link">More realistic bound</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#takeaway" class="nav-link">Takeaway</a>
+        </li>
     
     </ul>
 </nav>
@@ -163,11 +177,65 @@
         
               <div>
                 
-  <div class="section" id="miscellaneous">
-<h1>Miscellaneous<a class="headerlink" href="#miscellaneous" title="Permalink to this headline">¶</a></h1>
-<p>This is a collection of miscellaneous files for which I haven’t found a home
-yet.</p>
-<div class="toctree-wrapper compound">
+  <div class="section" id="wind-turbine-energy-balance">
+<h1>Wind turbine energy balance<a class="headerlink" href="#wind-turbine-energy-balance" title="Permalink to this headline">¶</a></h1>
+<p>Several times I have heard the claim that wind turbines have a negative
+energy balance, meaning that the energy put into manufacturing them, to mine
+and process ore, manufacture the various parts, transport and installation
+, take more energy than what the turbine outputs in its lifetime. I was
+curious if this claim is true so I made an estimate.</p>
+<div class="section" id="a-rough-upper-bound">
+<h2>A rough upper bound<a class="headerlink" href="#a-rough-upper-bound" title="Permalink to this headline">¶</a></h2>
+<p>A N1000 1MW Nordic Windpower turbine costs about 1-2 million, let’s say 1.5
+million. If instead of building the turbine we used the same money to buy
+gasoline, and burned that gasoline in a utility-scale power plant to
+harvest electric energy, here’s how much energy we would get. One litre of
+gasoline produces 34.2 MJ/L of energy per litre, of which approximately
+40% gets converted into electrical energy, giving 15 MJ/L in electric
+energy. Now at 1.5 euros/L, that would be 10 MJ/euro if we bought
+gasoline and burnt it at a utility-scale power plant (without
+including the cost of the plant). How much would the turbine have to
+work for to make up for the energy taken to produce it? We’ve just
+seen that 10 MJ/euro is an upper bound to what the energy content
+of a turbine (because the 1.5 million / MW price tag of the
+turbine includes all the energy put into manufacturing it, as
+well as raw materials wages etc), so the energy content of a
+wind turbine is at most (10 MJ/euro) x (1.5 million euros) = 1
+.5 x 10^7 MJ per turbine. At maximum output and without
+considering  any maintenance costs yet, the turbine will take
+1.5 x 10^7 seconds = 173 days = 0.5 years, to cover this
+energy debt.</p>
+</div>
+<div class="section" id="more-realistic-bound">
+<h2>More realistic bound<a class="headerlink" href="#more-realistic-bound" title="Permalink to this headline">¶</a></h2>
+<p>Now, wind turbines do not work all the time, neither do they work at maximum
+capacity. If a wind turbine works 25% of the time, at 50% of its capacity on
+average, then it would take 4 years to cover its energy debt. We should
+however acknowledge that the upper bound we placed above is probably too
+large, because not all of the cost of producing a wind turbine is used
+for energy (mining ore, processing it, manufacturing the parts and
+installation), so it probably takes less than 1.5 x 10^7 MJ to produce
+a turbine. We therefore expect that it wouldn’t take much longer than
+a few years for a wind turbine to cover its energy debt, and since
+turbines last for 1-2 decades, we can probably assume they would
+repay this debt.</p>
+<p>We could object that we should also include the maintenance/inspection costs
+of the turbine, but here we are interested purely in the energy footprint of
+the turbine, and whether it will output more energy than what is used to
+produce it, during its lifetime.</p>
+</div>
+<div class="section" id="takeaway">
+<h2>Takeaway<a class="headerlink" href="#takeaway" title="Permalink to this headline">¶</a></h2>
+<p>The claim that, throughout its lifetime, a wind turbine does not produce more
+energy than what is used to produce it, is probably not true. If a turbine
+was placed in an especially poor location, so that its output is orders of
+magnitude below what we assumed above, perhaps the picture could be
+different. At least under these estimates, wind turbines do repay their
+energy debt.</p>
+<p>Last, this estimate account for the financial or environmental viability of
+wind turbines, their impact on fauna and flora, or whether they degrade the
+natural beauty of sites at which they are installed. All of these are very
+important issues, each worth lots of discussion on its own.</p>
 </div>
 </div>
 
@@ -180,7 +248,6 @@ yet.</p>
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="../reading-and-links.html" title="previous page">Interesting reading and websites</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
