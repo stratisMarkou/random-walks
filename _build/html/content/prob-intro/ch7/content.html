@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Moments and moment generating functions &#8212; Random walks</title>
+    <title>Moment generating functions &#8212; Random walks</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link href="../../../_static/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="../../../_static/sphinx-book-theme.css" type="text/css" />
@@ -35,7 +35,7 @@
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Information theory, Inference and Learning Algorithms" href="../../itila/intro.html" />
+    <link rel="next" title="Main limit theorems" href="../ch8/content.html" />
     <link rel="prev" title="Multivariate distributions" href="../ch6/content.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,8 +45,8 @@
 <!-- Opengraph tags -->
 <meta property="og:url"         content="https://random-walks.org/content/prob-intro/ch7/content.html" />
 <meta property="og:type"        content="article" />
-<meta property="og:title"       content="Moments and moment generating functions" />
-<meta property="og:description" content="Moments and moment generating functions  Moments are an important tool in the study of random variables. Moment generating functions are a useful tool related t" />
+<meta property="og:title"       content="Moment generating functions" />
+<meta property="og:description" content="Moment generating functions  Moments are an important tool in the study of random variables. Moment generating functions are a useful tool related to the moment" />
 <meta property="og:image"       content="https://random-walks.org/_static/logo.svg" />
 
 <meta name="twitter:card" content="summary">
@@ -105,7 +105,10 @@
       <a href="../ch6/content.html">Multivariate distributions</a>
     </li>
     <li class="active">
-      <a href="">Moments and moment generating functions</a>
+      <a href="">Moment generating functions</a>
+    </li>
+    <li class="">
+      <a href="../ch8/content.html">Main limit theorems</a>
     </li>
   </ul>
   </li>
@@ -188,7 +191,7 @@
         </li>
     
         <li class="nav-item toc-entry toc-h2">
-            <a href="#moment-generating-functions" class="nav-link">Moment generating functions</a>
+            <a href="#id1" class="nav-link">Moment generating functions</a>
         </li>
     
         <li class="nav-item toc-entry toc-h2">
@@ -236,8 +239,8 @@
         
               <div>
                 
-  <div class="section" id="moments-and-moment-generating-functions">
-<h1>Moments and moment generating functions<a class="headerlink" href="#moments-and-moment-generating-functions" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="moment-generating-functions">
+<h1>Moment generating functions<a class="headerlink" href="#moment-generating-functions" title="Permalink to this headline">¶</a></h1>
 <p>Moments are an important tool in the study of random variables. Moment
 generating functions are a useful tool related to the moments of random
 variables. Under certain conditions, there is a one-to-one mapping between
@@ -312,7 +315,6 @@ variables, then</p>
 -Schwartz inequality stated and proved below.</p>
 <details class="proof">
 <summary>Proof: \(-1 \leq \rho(X, Y) \leq 1\) </summary>
-<div>
 <p>Given random variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>, define <span class="math notranslate nohighlight">\(U = X - \bar{X}\)</span> and <span class="math notranslate nohighlight">\(V = Y- \bar{Y}\)</span>
 . By applying the Cauchy-Schwartz inequality on <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(V\)</span>, we obtain
 \begin{align}
@@ -322,7 +324,6 @@ Taking a square root and substituting for <span class="math notranslate nohighli
 \begin{align}
 -1 \leq \rho(X, Y) \leq 1.
 \end{align}</p>
-</div>
 </details>
 <br>
 <div class="theorem">
@@ -337,7 +338,6 @@ Taking a square root and substituting for <span class="math notranslate nohighli
 <br>
 <details class="proof">
 <summary>Proof: Cauchy-Schwartz inequality</summary>
-<div>
 <p>Let <span class="math notranslate nohighlight">\(s \in \mathbb{R}\)</span> be a real number and <span class="math notranslate nohighlight">\(W = sU + V\)</span> be a random variable
 . Then <span class="math notranslate nohighlight">\(W^2 \geq 0\)</span> and we have
 \begin{align}\mathbb{E}(X^2) = a s^2 + b s + c \geq 0,\end{align}
@@ -349,12 +349,11 @@ achieve negative values. Therefore we have
 ) \leq 0,\end{align}
 from which we arrive at the result
 \begin{align}\mathbb{E}(UV)^2 &amp;\leq \mathbb{E}(U^2)\mathbb{E}(V^2).\end{align}</p>
-</div>
 </details>
 <br>
 </div>
-<div class="section" id="moment-generating-functions">
-<h2>Moment generating functions<a class="headerlink" href="#moment-generating-functions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h2>Moment generating functions<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>Since the moments of a random variable uniquely determine its distribution.</p>
 <div class="definition">
 <p><strong>Definition (Moment generating function)</strong> The moment generating function of
@@ -458,7 +457,7 @@ M_X(t) = \left(\frac{\lambda}{\lambda - t}\right)^w.
 </div>
 </div>
 <div class="section" id="markov-and-jensen-inequalities">
-<h2>Markov and Jensen inequalities<a class="headerlink" href="#markov-and-jensen-inequalities" title="Permalink to this headline">¶</a></h2>
+<span id="prob-intro-markov-jensen"></span><h2>Markov and Jensen inequalities<a class="headerlink" href="#markov-and-jensen-inequalities" title="Permalink to this headline">¶</a></h2>
 <p>The Markov inequality is a useful result that bounds the probability that a
 non-negative random variable is larger than some positive threshold.</p>
 <div class="theorem">
@@ -472,13 +471,11 @@ non-negative random variable is larger than some positive threshold.</p>
 <br>
 <details class="proof">
 <summary>Proof: Markov inequality</summary>
-<div>
 <p>For any non-negative random variable <span class="math notranslate nohighlight">\(X(\omega)\)</span> and positive <span class="math notranslate nohighlight">\(t &gt; 0\)</span>, we have
 \begin{align}X(\omega) \geq t \mathbb{1}_{X \geq t},\end{align}
 where <span class="math notranslate nohighlight">\(\mathbb{1}_{X \geq t} = 1\)</span> if <span class="math notranslate nohighlight">\(X(\omega) \geq t\)</span> and <span class="math notranslate nohighlight">\(\mathbb{1}_{X\geq t} = 0\)</span>
 otherwise. Rearranging and taking expectations, we obtain
 \begin{align}\mathbb{P}(X \geq t) = \frac{\mathbb{E}(X)}{t}.\end{align}</p>
-</div>
 </details>
 <br>
 <p>One consequence of the Markov inequality is the Chebyshev inequality</p>
@@ -518,13 +515,11 @@ and <span class="math notranslate nohighlight">\(g : (a, b) \to \mathbb{R}\)</sp
 theorem (see below) and taking an expectation over <span class="math notranslate nohighlight">\(X\)</span>.</p>
 <details class="proof">
 <summary>Proof: Jensen's inequality</summary>
-<div>
 <p>From the supporting tangent theorem we have
 \begin{align}g(X) \geq g(w) + \alpha (X - w),\end{align}
 and by setting the constant <span class="math notranslate nohighlight">\(w = \mathbb{E}(X)\)</span> and taking an expectation
 over <span class="math notranslate nohighlight">\(X\)</span>, the <span class="math notranslate nohighlight">\(X - w\)</span> term cancels and we obtain Jensen’s inequality
 \begin{align}\mathbb{E}[g(X)] \geq g(\mathbb{E}(X)).\end{align}</p>
-</div>
 </details>
 <br>
 <p>The supporting tangent theorem says that for any point <span class="math notranslate nohighlight">\(w\)</span> in the domain of a
@@ -541,7 +536,6 @@ convex, and let <span class="math notranslate nohighlight">\(w \in (u, v)\)</spa
 <br>
 <details class="proof">
 <summary>Proof: Supporting tangent theorem</summary>
-<div>
 <p>Since <span class="math notranslate nohighlight">\(g\)</span> is convex, we have
 \begin{align}\frac{g(w) - g(u)}{w - u} \leq \frac{g(v) - g(w)}{v - w},\end{align}
 otherwise <span class="math notranslate nohighlight">\(g\)</span> could not be convex, because <span class="math notranslate nohighlight">\(g(w)\)</span> would be strictly less
@@ -556,12 +550,12 @@ By rearranging the two sides of the above equation we obtain
 \begin{align}g(x) \geq g(w) + \alpha (x - w),\end{align}
 for the cases where <span class="math notranslate nohighlight">\(x = u &lt; w\)</span> and <span class="math notranslate nohighlight">\(x = v &gt; w\)</span> respectively. The
 inequality holds trivially for <span class="math notranslate nohighlight">\(x = w\)</span>.</p>
-</div>
 </details>
 <br>
 </div>
 <div class="section" id="characteristic-functions">
 <h2>Characteristic functions<a class="headerlink" href="#characteristic-functions" title="Permalink to this headline">¶</a></h2>
+<p>Unlike the moment generating function which might not exist for some random variables, the characteristic function of a random variable, defined below, exists for a broader set of variables.</p>
 <div class="definition">
 <p><strong>Definition (Characteristic function)</strong> The characteristic function of a
 random variable <span class="math notranslate nohighlight">\(X\)</span> is written <span class="math notranslate nohighlight">\(\phi_X\)</span> and defined as</p>
@@ -571,21 +565,45 @@ random variable <span class="math notranslate nohighlight">\(X\)</span> is writt
  \end{align}\]</div>
 </div>
 <br>
+<p>The characteristic function has the following two useful properties.</p>
 <div class="theorem">
 <p><strong>Theorem (Two properties of characteristic functions)</strong> Let <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> be
 independent random variables with characteristic functions <span class="math notranslate nohighlight">\(\phi_X\)</span> and <span class="math notranslate nohighlight">\(\phi_Y\)</span>. Then</p>
 <ol class="simple">
 <li><p>If <span class="math notranslate nohighlight">\(a, b \in \mathbb{R}\)</span> and <span class="math notranslate nohighlight">\(Z = aX + b\)</span>, then <span class="math notranslate nohighlight">\(\phi_Z(t) = e^{itb} \phi_X(at)\)</span>.</p></li>
-<li><p>The characteristic function of <span class="math notranslate nohighlight">\(X, Y\)</span> is <span class="math notranslate nohighlight">\(\phi_{X + Y}(t) = \phi_X(t)\phi_Y(t)\)</span>.</p></li>
+<li><p>The characteristic function of <span class="math notranslate nohighlight">\(X + Y\)</span> is <span class="math notranslate nohighlight">\(\phi_{X + Y}(t) = \phi_X(t)\phi_Y(t)\)</span>.</p></li>
 </ol>
 </div>
 <br>
+<details class="proof">
+<summary>Proof: Properties of the characteristic function</summary>
+<p>To show the first property, consider</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+  \phi_Z(t) &amp;= \mathbb{E}\left(e^{itZ}\right)\\
+  &amp;= \mathbb{E}\left(e^{it(aX + b)}\right)\\
+  &amp;= e^{itb} \mathbb{E}\left(e^{itaX}\right)\\
+  &amp;= e^{itb} \phi_X(at).
+  \end{align}\end{split}\]</div>
+<p>For the second property, consider</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+  \phi_{X + Y}(t) &amp;= \mathbb{E}\left(e^{it(X + Y)}\right)\\
+  &amp;= \mathbb{E}\left(e^{itX} e^{itY}\right)\\
+  &amp;= \mathbb{E}\left(e^{itX}\right)\mathbb{E}\left(e^{itY}\right)\\
+  &amp;= \phi_X(t) \phi_Y(t),
+  \end{align}\end{split}\]</div>
+<p>where we have used the fact that <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are independent to get from the second to the third line.</p>
+</details>
+<br>
+<p>As with the mgf, the characteristic function of a random variable is unique, in the sense that two radoom variables have the same distributions if and only if they have the same characteristic functions.</p>
 <div class="theorem">
 <p><strong>Theorem (Uniqueness of characteristic functions)</strong> Let <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> have
 characteristic functions <span class="math notranslate nohighlight">\(\phi_X\)</span> and <span class="math notranslate nohighlight">\(\phi_Y\)</span>. Then <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> have the
 same distributions if and only if <span class="math notranslate nohighlight">\(\phi_X(t) = \phi_Y(t)\)</span> for all <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>.</p>
 </div>
 <br>
+<p>We can obtain the pdf of a random variable by applying the following inverse transformation.</p>
 <div class="theorem">
 <p><strong>Theorem (Inversion theorem)</strong> Let <span class="math notranslate nohighlight">\(X\)</span> have characteristic function <span class="math notranslate nohighlight">\(\phi_X\)</span>
 and density function <span class="math notranslate nohighlight">\(f\)</span>. Then</p>
@@ -595,7 +613,9 @@ and density function <span class="math notranslate nohighlight">\(f\)</span>. Th
  \end{align}\]</div>
 <p>at every point <span class="math notranslate nohighlight">\(x\)</span> where <span class="math notranslate nohighlight">\(f\)</span> is differentiable.</p>
 </div>
-<br></div>
+<br>
+<p>Note the similarity between the Fourier transform and the transform of the characteristic function.</p>
+</div>
 </div>
 
 
@@ -608,7 +628,7 @@ and density function <span class="math notranslate nohighlight">\(f\)</span>. Th
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="../ch6/content.html" title="previous page">Multivariate distributions</a>
-    <a class='right-next' id="next-link" href="../../itila/intro.html" title="next page">Information theory, Inference and Learning Algorithms</a>
+    <a class='right-next' id="next-link" href="../ch8/content.html" title="next page">Main limit theorems</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

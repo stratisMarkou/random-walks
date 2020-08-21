@@ -1,8 +1,10 @@
 # Numerical simulation of SDEs
 
-This is a reproduction of certain scripts found in Higham, *An algorithmic Introduction to Numerical Simulation of Stochastic Differential Equations.*{cite}`higham` This paper is an accessible introduction to SDEs, centered around ten MATLAB scripts. Here, I have reproduced eight of them in Python and added some notes, skipping over the sections on linear stability.
+This is a reproduction of certain scripts found in Higham, *An algorithmic Introduction to Numerical Simulation of Stochastic Differential Equations.*{cite}`higham` This paper is an accessible introduction to SDEs, which is centered around ten MATLAB scripts. Below are reproductions of these scripts (excluding two on linear stability) and some supplementary notes.
 
-Stochastic differential equations (SDEs) describe the evolution of stochastic processes which take values in a continuous space, and are indexed by a continuous time variable. Whereas ordinary differential equations (ODEs) describe a variables which change according to a deterministic rule, SDEs describe variables whose change is governed partly by a deterministic component and partly by a stochastic component. SDEs are therefore an appropriate model for systems whose dynamics involve some true randomness, or some fine grained complexity which we cannot afford to or do not wish to model.
+## Why Stochastic differential equations
+
+We are often interested in modelling a system whose state takes values in a continuous range, and over a continuous time domain. Whereas ordinary differential equations (ODEs) describe variables which change according to a deterministic rule, SDEs describe variables whose change is governed partly by a deterministic component and partly by a stochastic component. SDEs are therefore an appropriate model for systems whose dynamics involve some true randomness, or some fine grained complexity which we cannot afford to or do not wish to model.
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -12,9 +14,9 @@ set_matplotlib_formats('pdf', 'svg')
 css_style = open('../../../_static/custom_style.css', 'r').read()
 HTML(f'<style>{css_style}</style>')
 
-## The Wiener Process
+## The Wiener process
 
-The Wiener process is a stochastic process that is not only of interest in itself, but is also used as the stochastic component in SDEs.
+In order to define the stochastic component of the transition rule of a stochastic system, we must define an appropriate noise model. The Wiener process is a stochastic process that is commonly used for this purpose.
 
 <div class="definition">
     
@@ -32,18 +34,18 @@ We can imagine the Wiener process as the path followed by a particle that experi
 
 ## Sampling from a Wiener process
 
-How can we draw a sample $W_t$ from a Wiener process? Since a sample from the Wiener process takes a random value for every $t \in [0, \infty)$, the best we can do on a computer is to sample the process at a finite subset of time instances. We specify the times $t_1, t_2, ..., t_N$ at which to sample $W_t$, and then use the definition of the Wiener process to see that we should sample as follows:
+Before using the Wiener process to define an SDE, let's look at the process itself. How can we draw a sample $W(t)$ from it? Since a sample from the Wiener process takes a random value for every $t \in [0, \infty)$, the best we can do on a computer is to sample the process at a finite subset of time instances. We specify the times $t_1 < t_2 < ... < t_N$ at which to sample $W(t)$, and then use the definition of the Wiener process to see that we should sample as follows:
 
 $$\begin{align}
-W_{t_{n+1}} = W_{t_{n}} + \Delta W_{t_{n}}, \text{ where } \Delta W_{t_{n}} \sim \mathcal{N}(0, t_{n+1} - t_n),
+W(t_{n+1}) = W(t_{n}) + \Delta W(t_{n}), \text{ where } \Delta W(t_{n}) \sim \mathcal{N}(0, t_{n+1} - t_n),
 \end{align}$$
 
-where $W_{t_0} = W_{0} = 0$. We can therefore sample all the $\Delta W_{t_n}$ independently, and take their cumulative sum to compute $W_{t_n}$.
+where $W(t_0) = W(0) = 0$. We can therefore sample all the $\Delta W(t_n)$ independently, and take their cumulative sum to compute $W(t_n)$, as shown below.
 
 # Set random seed
 np.random.seed(0)
 
-# Time to simulate for and level of discretisation
+# Integration parameters
 T = 1
 N = 500
 dt = T / N
@@ -63,22 +65,22 @@ plt.yticks(np.linspace(-2, 2, 5))
 plt.xlim([0, 1])
 plt.ylim([-2, 2])
 
-plt.title('Discretised sample from Weiner process')
-plt.xlabel('Time (t)')
-plt.ylabel('Position (x)')
+plt.title('Sample from a Wiener process', fontsize=20)
+plt.xlabel(r'$t$', fontsize=20)
+plt.ylabel(r'$W(t)$', fontsize=20)
 plt.show()
 
 So even though we can't represent the entirety of the path, we can sample it to arbitrary precision.
 
 ## Function of a Wiener process
 
-If we are interested in a stochastic process which is a function of a Wiener process, say
+Suppose we are interested in a stochastic process which is a function of a Wiener process, say
 
 $$\begin{align}
-X_t = \exp\left(t + \frac{1}{2}W_t\right)
+X(t) = \exp\left(t + \frac{1}{2}W(t)\right).
 \end{align}$$
 
-we can sample $W_t$ first, then pass it through the function to get the corresponding values of $X_t$. We'll draw `S = 1000` samples of $X_t$, compute their mean, standard deviation and show three of these samples.
+In this case we can sample $X(t)$ by first sampling $W(t)$, and then computing the corresponding values of $X(t)$. We'll draw `S = 1000` samples of $X(t)$, compute their mean, standard deviation and show three of these samples.
 
 # Set random seed 
 np.random.seed(0)
@@ -119,15 +121,97 @@ plt.yticks(np.linspace(0, 6, 4))
 plt.xlim([0, 1])
 plt.ylim([0, 6])
 
-plt.title(r'Samples from $\exp\left(t + \frac{1}{2} W_t\right)$')
-plt.xlabel('Time (t)')
-plt.ylabel('Value (x)')
+plt.title(r'Samples from $\exp\left(t + \frac{1}{2} W(t)\right)$', fontsize=20)
+plt.xlabel(r'$t$', fontsize=20)
+plt.ylabel(r'$X(t)$', fontsize=20)
 plt.legend()
 plt.show()
 
 ## Evaluating a stochastic integral
 
-The next thing that we're interested in is evaluating a stochastic integral. Stochastic integrals turn out to be a whole different chapter from the usual deterministic integrals.
+The next thing that we look at is the evaluation of a stochastic integral. Let's consider the integral
+
+$$\begin{align}
+Y = \int^1_0 W(t)~dW(t),
+\end{align}$$
+
+where $W(t)$ is a Wiener process. To evaluate it, we first need to define what the $\int$ means in the stochastic case. In the deterministic case we use Riemann integral, which is the limit of a discretised sum:
+
+$$\begin{align}
+R = \int^b_a f(t)~dt = \lim_{N \to \infty} \sum_{n = 0}^{N - 1} f\left(a + n\delta t\right) \delta t
+\end{align}$$
+
+where $\delta t = \frac{b - a}{N}$. We have chosen to evaluate $f$ on the left side of the discretisation bins. In the deterministic case, it does not matter where we evaluate $f$ within a discretisation bin, meaning that the integral
+
+$$\begin{align}
+R_\lambda = \lim_{N \to \infty} \sum_{n = 0}^{N - 1} f\left(a + \left(n + \lambda\right) \delta t\right) \delta t,
+\end{align}$$
+
+does not depend on the choice of $\lambda \in [0, 1]$ when we take $\delta t \to 0$ (provided $f$ is sufficiently well behaved). For stochastic integrals, this does not hold: the choice of where to evaluate the integrand affects the value of the integral, even in the limit $\delta t \to 0$ - we will see an example from Higham shortly. We therefore have to make a choice in defining the integral. Two widespread choices are the Ito and the Stratonovich integrals:
+
+$$\begin{align}
+&\int^b_a h(t) dW(t) = \lim_{N \to \infty} \sum_{n = 0}^{N - 1} h(t_n) \left(W(t_{n + 1}) - W(t_n)\right), \text{ Ito}.\\
+\\
+&\int^b_a h(t) dW(t) = \lim_{N \to \infty} \sum_{n = 0}^{N - 1} h\left(\frac{t_n + t_{n+1}}{2}\right) \left(W(t_{n + 1}) - W(t_n)\right), \text{ Stratonovich}.
+\end{align}$$
+
+where we have defined $t_n = a + n \delta t$. While Ito evaluates the integrand on the left side of the discretisation bin ($\lambda = 0$), Stratonovich evaluates it at the midpoint of the bin ($\lambda = 1/2$). Our stochastic integral of interest
+
+$$\begin{align}
+Y = \int^1_0 W_t~dW_t,
+\end{align}$$
+
+is equal to the following values under the Ito and Stratonovich definitions:
+
+$$\begin{align}
+\int^1_0 W_t~dW_t = \begin{cases}
+\frac{1}{2}W(T)^2 - \frac{1}{2}T^2 & \text{ under Ito,}\\
+\frac{1}{2}W(T)^2 & \text{ under Stratonovich.}
+\end{cases}
+\end{align}$$
+
+<br>
+
+<details class="proof">
+<summary>Evaluating \(\int W(t)~dW(t)\) under the Ito and Stratonovich integrals</summary>
+
+<div>
+    
+If we use the Ito integral, we have
+    
+$$\begin{align}
+\sum_{n = 0}^{N - 1} W(t_n) \left(W(t_{n + 1}) - W(t_n)\right) &= \frac{1}{2}\sum_{n = 0}^{N - 1} \left( W(t_{n + 1})^2 - W(t_n)^2 - (W(t_{n + 1}) - W(t_n))^2 \right)\\
+&= \frac{1}{2}\left(  W(T)^2 - W(0)^2 - \sum_{n = 0}^{N - 1} (W(t_{n + 1}) - W(t_n))^2 \right).
+\end{align}$$
+    
+The distribution of $(W(t_{n + 1}) - W(t_n))^2$ has mean equal to the second moment of $\Delta W_{t_n}$ and variance equal to the fourth moment of $\Delta W_{t_n}$, which are $\delta t$ and $3 \delta t^2$ respectively. Therefore, the sum above is a random variable with mean $T$ and variance $\mathcal{O}(\delta t)$ - where we have used the fact that the summands are independent, so the variance of the sum is the sum of the variances. So in the limit of $\delta t \to 0$, the integral converges to $\frac{1}{2}W(T)^2 - \frac{1}{2}T^2$ under the Ito definition.
+    
+By contrast, if we use the Stratonovich integral, we have
+    
+$$\begin{align}
+\sum_{n = 0}^{N - 1} W\left(\frac{t_{n+1} + t_n}{2}\right) \left(W(t_{n + 1}\right) - W(t_n)) &= \sum_{n = 0}^{N - 1} \left(\frac{W(t_{n + 1}) + W(t_n)}{2} + \Delta Z_n\right) \left(W(t_{n + 1}\right) - W(t_n))\\
+&= \sum_{n = 0}^{N - 1} \frac{1}{2} W(t_{n + 1})^2 - \frac{1}{2} W(t_n)^2 + \Delta Z_n \left(W(t_{n + 1}\right) - W(t_n))\\
+&= \frac{1}{2} W(T)^2 - \frac{1}{2} W(0)^2 + \sum_{n = 0}^{N - 1} \Delta Z_n \left(W(t_{n + 1}\right) - W(t_n)),
+\end{align}$$
+    
+where $\Delta Z_n \sim \mathcal{N}(0, \delta t / 4)$. To obtain the first equality above, we used the fact that
+    
+$$\begin{align}
+p\left(W\left(\frac{t_{n+1} + t_n}{2}\right)\big |~ W(t_{n+1}), W(t_{n})\right) = \frac{p\left( W(t_{n+1}) | W\left(\frac{t_{n+1} + t_n}{2}\right)\right) p\left( W\left(\frac{t_{n+1} + t_n}{2}\right) \big | W(t_{n}) \right) p(W(t_n))}{p(W(t_{n+1}), W(t_{n}))},\\
+\end{align}$$
+    
+and observing that the distribution above has the form of a product of normal distributions over $W\left(\frac{t_{n+1} + t_n}{2}\right)$, we arrive at the result:
+    
+$$\begin{align}
+p\left(W\left(\frac{t_{n+1} + t_n}{2}\right)\big |~ W(t_{n+1}), W(t_{n})\right) = \mathcal{N}\left(W\left(\frac{t_{n+1} + t_n}{2}\right); \frac{W(t_{n+1}) + W(t_{n})}{2}, \frac{\delta t}{4}\right).
+\end{align}$$
+    
+Since $\Delta Z_n$ is independent of $W_t$, the term $\Delta Z_n \left(W(t_{n + 1}\right) - W(t_n))$ has mean 0, and variance $\delta t^2 / 4$. Therefore, the sum term has mean 0 and variance $\mathcal{O}(\delta t)$, so in the limit of $\delta t \to 0$ the integral converges to $\frac{1}{2}W(T)^2$ under the Stratonovich definition.
+ 
+</div>
+
+</details>
+<br>
 
 # Set random seed
 np.random.seed(3)
@@ -156,6 +240,8 @@ strat_exact = 0.5 * W[-2] ** 2
 print(f'Ito integral approximation (exact): {ito_approx:.3f} ({ito_exact:.3f})')
 print(f'Stratonovich approximation (exact): {strat_approx:.3f} ({strat_exact:.3f})')
 
+The difference between the Ito and Stratonovich integrals does not vanish as $dt \to 0$, which you can verify by experimenting with $dt$ above. The choice of definition has implications about the resulting integral (itself a stochastic process), which may be more or less appropriate for different applications. From here onwards we will work with the Ito integral exclusively, although much of the discussion is ammenable to the Stratonovich integral too.
+
 ## Euler-Maruyama method
 
 The Euler-Maruyama method is the analoge of the Euler method for deterministic integrals, applied to the stochastic case.
@@ -165,13 +251,13 @@ The Euler-Maruyama method is the analoge of the Euler method for deterministic i
 **Definition (Euler-Maruyama method)** Given a scalar SDE with drift and diffusion functions $f$ and $g$
     \begin{align}dX(t) = f(X(t))dt + g(X(t)) dW(t),\end{align}
     the Euler-Maruyama method approximates $X$ by
-    \begin{align} X_{j + 1} = X_j + f(X_j) \Delta t + g(X_j) \Delta W_j,\end{align}
-    where $\Delta t > 0$ is the time step, $X_j = X(\tau_j), W_j = W(\tau_j)$ and $\tau_j = j\Delta t$.
+    \begin{align} X_{n + 1} = X_n + f(X_n) \Delta t + g(X_n) \Delta W_n,\end{align}
+    where $\delta t > 0$ is the time step, $X_n = X(t_n), W_n = W(t_n)$ and $t_n = n\delta t$.
     
 </div>
 <br>
 
-The `euler_maruyama` function takes the *drift* and *diffusion* functions $f$, $g$ and applies the EM algorithm (not to be confused with Expectation Maximisation), from the specified initial conditions. Note that we can sample the `dW` in advance.
+Let's look at an implementation of the Euler-Maruyama (EM) method. The `euler_maruyama` below function takes the *drift* and *diffusion* functions $f$, $g$ and applies the EM algorithm (not to be confused with Expectation Maximisation), from the specified initial conditions. Note that we can sample the `dW` in advance.
 
 def euler_maruyama(seed, X0, T, N, f, g):
     
@@ -203,7 +289,7 @@ Below is the definition of `f` and `g` that we will be integrating, namely
 
 $$\begin{align}
 f(x, t) &= \lambda x,\\
-g(x, t) &= \mu x,
+g(x, t) &= \mu x,\\
 \end{align}$$
 
 known as the Black-Scholes model. This is implemented as a closure, i.e. `f_g_black_scholes` takes in the appropriate `lambda` and `mu` and returns the corresponding `f` and `g`.
@@ -218,13 +304,13 @@ def f_g_black_scholes(lamda, mu):
     
     return f, g
 
-Higham chose these drift and diffusion terms because the associated SDE has a closed form solution, with which we can compare our numerical solution. The analytic solution to the Black-Scholes model is
+We choose these drift and diffusion terms because the associated SDE has a closed form solution, with which we can compare our numerical solution. The analytic solution to the Black-Scholes model is
 
 $$\begin{align}
-X_t = X_0 \exp \left[\Big(\lambda - \frac{1}{2} \mu^2\Big)~t + \mu W_t\right],
+X_t = X_0 \exp \left[\Big(\lambda - \frac{1}{2} \mu^2\Big)~t + \mu W(t)\right],
 \end{align}$$
 
-which we implement in `exact_black_scholes` below. Unlike deterministic differential equations, where the solution is a unique function, the solution of an SDE depends on the random noise sample $W_t$. In particular, an analytic solution to an SDE is still a stochastic process, where the dependence on $t$ and $W_t$ is written in closed form. It's important to note that a different $W_t$ sample will lead to a different $X_t$ solution, so the EM solution and the exact solution must share the same $W_t$.
+which we implement in `exact_black_scholes` below. Unlike ODEs, whose solution is a unique function, the solution of an SDE depends on the random noise sample $W(t)$. It's important to remember to share the same $W(t)$ sample between the exact solution and its numerical approximation.
 
 def exact_black_scholes(X0, t, W, lamda, mu):
     return X0 * np.exp((lamda - 0.5 * mu ** 2) * t + mu * W)
@@ -257,20 +343,20 @@ plt.scatter(t, X, s=20, marker='x', color='red', zorder=2, label='Euler-Maruyama
 plt.xlim([0, T])
 plt.xticks(np.linspace(0, 1, 6))
 plt.yticks(np.linspace(0, 8, 5))
-plt.title('Euler-Maruyama and exact solutions of Black-Scholes model')
-plt.xlabel('t')
-plt.ylabel('$X_t$')
+plt.title('EM and exact solutions\nof Black-Scholes', fontsize=20)
+plt.xlabel('$t$', fontsize=20)
+plt.ylabel('$X(t)$', fontsize=20)
 plt.legend()
 plt.show()
 
-We can change the accuracy of the solution by changing $N$ appropriately - more of this in the convergence section. As a fun aside, what if we try out a different drift term? One nice choice is
+We can change the accuracy of the solution by adjusting $N$. As a fun aside, what if we try out a different drift term? One nice choice is
 
 $$\begin{align}
 f(x, t) &= \omega~\text{cos}(\omega t),\\
-g(x, t) &= \mu x.
+g(x, t) &= \mu x.\\
 \end{align}$$
 
-In the case $\mu = 0$, the solution is the deterministic function $X_t = \text{sin}(\omega t)$. When $\mu \neq 0$, the solution will be perturbed by the gaussian noise, hopefully in an interesting way.
+In the case $\mu = 0$, the solution is the deterministic function $X_t = \text{sin}(\omega t)$. When $\mu \neq 0$, the solution will be perturbed by the gaussian noise.
 
 def f_g_sine(omega, mu):
     
@@ -303,13 +389,15 @@ plt.scatter(t, X, s=1, marker='x', color='red', zorder=2, label='Euler-Maruyama'
 plt.xlim([0, T])
 plt.xticks(np.linspace(0, T, 6))
 plt.yticks(np.linspace(-3, 3, 5))
-plt.title('Euler-Maruyama solution of sine model')
-plt.xlabel('t')
-plt.ylabel('$X_t$')
+plt.title('EM solution of sine model', fontsize=20)
+plt.xlabel('t', fontsize=20)
+plt.ylabel('$X(t)$', fontsize=20)
 plt.legend()
 plt.show()
 
 ## Strong and weak convergence
+
+Since the choice of the number of bins $N$ of the discretisation affects the accuracy of our method, we are interested in how quickly the approximation converges to the exact solution as a function of $N$. To do so, we must first define *what convergence means* in the stochastic case, which leads us to two disctinct notions of convergence, the strong sence and the weak sense.
 
 <div class="definition">
     
@@ -320,7 +408,7 @@ plt.show()
 </div>
 <br>
 
-A weaker condition for convergence is the amount by which the expected values of the stochastic process depart from each other. 
+Strong convergence refers to the rate of convergence of the approximation $X_n$ to the exact solution $X(\tau_n)$ as $\Delta t \to 0$, in expectation. A weaker condition for convergence is rate at which the expected value of the approximation converges to the true expected value, as $\Delta t \to 0$, as given below.
 
 <div class="definition">
     
@@ -331,72 +419,46 @@ A weaker condition for convergence is the amount by which the expected values of
 </div>
 <br>
 
-The paper states without proof that, under conditions on $f$ and $g$, Euler-Maruyama has strong order of convergence $\frac{1}{2}$ and weak order of convergence $1$. We do not provide a proof for any of the above statements, but instead evaluate the rate of convergence empirically, as in the paper.
+The paper states without proof that, under conditions on $f$ and $g$, Euler-Maruyama has strong order of convergence $\frac{1}{2}$ and weak order of convergence $1$. We do not provide a proof for any of the above statements, but instead evaluate the rate of convergence empirically. To speed up the evaluation, we implement a function that evaluates several EM solutions in parallel below.
 
 def parallel_euler_maruyama(seed, num_paths, X0, T, N, f, g):
     
+    # Set the random seed
     np.random.seed(seed)
     
+    # Time increment
     dt = T / N
     
+    # Set initial X values
     X = X0 * np.ones(shape=(num_paths, N + 1))
     
+    # Times at which to evaluate the integral
     t = np.linspace(0, T, N + 1)
     
+    # Wiener process samples
     dW = dt ** 0.5 * np.random.normal(size=(num_paths, N))
     
     for i in range(N):
         
+        # Calculate new X according to EM rule
         X[:, i+1] = X[:, i] + f(X[:, i], t[i]) * dt + g(X[:, i], t[i]) * dW[:, i]
         
     W = np.concatenate([np.zeros(shape=(num_paths, 1)), np.cumsum(dW, axis=1)], axis=1)
     
     return t, X, W
 
+# Black-Scholes parameters
 lamda = 2
 mu = 1
 
+# Seed and integration parameters
 seed = 0
 X0 = 1
 T = 1
 Ns = (10 ** np.linspace(2, 4, 4)).astype(dtype=np.int)
 num_paths = int(1e4)
 
-f, g = f_g_black_scholes(lamda=lamda, mu=mu)
-
-dts = []
-X_abs_diffs = []
-
-for N in Ns:
-    
-    t, X, W = parallel_euler_maruyama(seed=seed, num_paths=num_paths, X0=X0, T=T, N=N, f=f, g=g)
-    X_exact = exact_black_scholes(X0=X0, t=t[None, :], W=W, lamda=lamda, mu=mu)
-    
-    dts.append(T / N)
-    
-    X_abs_diff = np.abs(X[:, -1] - X_exact[:, -1])
-    X_abs_diffs.append(X_abs_diff)
-    
-X_abs_diffs = np.stack(X_abs_diffs, axis=0)
-em_strong_errors = np.mean(X_abs_diffs, axis=1)
-
-plt.plot(dts, em_strong_errors, color='k')
-plt.loglog()
-plt.yticks([1e-2, 1e-1, 1e0])
-plt.xlabel(r'$\Delta t$', fontsize=20)
-plt.ylabel(r'$\mathbb{E}|X_n - X(\tau_n)|$', fontsize=20)
-plt.title('Euler-Maruyama strong convergence', fontsize=20)
-plt.show()
-
-lamda = 2
-mu = 1
-
-seed = 0
-X0 = 1
-T = 1
-Ns = (10 ** np.linspace(2, 4, 4)).astype(dtype=np.int)
-num_paths = int(1e4)
-
+# Get drift and diffusion functions of the Black-Scholes model
 f, g = f_g_black_scholes(lamda=lamda, mu=mu)
 
 dts = []
@@ -415,20 +477,39 @@ for N in Ns:
 X_approx = np.stack(X_approx, axis=0)
 X_exacts = np.stack(X_exacts, axis=0)
 
+X_abs_diffs = np.abs(X_approx - X_exacts)
+em_strong_errors = np.mean(X_abs_diffs, axis=1)
+
 X_approx_means = np.mean(X_approx, axis=-1)
 X_exacts_means = np.mean(X_exacts, axis=-1)
-
 em_weak_errors = np.abs(X_approx_means - X_exacts_means)
 
+plt.figure(figsize=(8, 4))
+
+plt.subplot(121)
+plt.plot(dts, em_strong_errors, color='k')
+
+plt.loglog()
+plt.yticks([1e-2, 1e-1, 1e0])
+plt.xlabel(r'$\delta t$', fontsize=20)
+plt.ylabel(r'$\mathbb{E}|X_n - X(t_n)|$', fontsize=20)
+plt.title('Euler-Maruyama\nstrong convergence', fontsize=20)
+
+plt.subplot(122)
 plt.plot(dts, em_weak_errors, color='k')
+
 plt.loglog()
 plt.yticks([1e-3, 1e-2, 1e-1, 1e0])
-plt.xlabel(r'$\Delta t$', fontsize=20)
-plt.ylabel(r'$|\mathbb{E}X_n - \mathbb{E}X(\tau_n)|$', fontsize=20)
-plt.title('Euler-Maruyama weak convergence', fontsize=20)
+plt.xlabel(r'$\delta t$', fontsize=20)
+plt.ylabel(r'$|\mathbb{E}X_n - \mathbb{E}X(t_n)|$', fontsize=20)
+plt.title('Euler-Maruyama\nweak convergence', fontsize=20)
+
+plt.tight_layout()
 plt.show()
 
 ## Milstein's higher order method
+
+Just as higher order methods for ODEs exist for obtaining refined estimates of the solution, so do methods for SDEs, such as Milstein's higher order method.
 
 <div class="definition">
     
@@ -441,16 +522,23 @@ plt.show()
 </div>
 <br>
 
+ Milstein's method achieves a strong congergence rate of $1$ and a weak convergence rate of $1$. Below is an implementation of Milstein's method for sampling multiple paths at once.
+
 def parallel_milstein(seed, num_paths, X0, T, N, f, g):
     
+    # Set the random seed
     np.random.seed(seed)
     
+    # Time increment
     dt = T / N
     
+    # Set initial X values
     X = X0 * np.ones(shape=(num_paths, N + 1))
     
+    # Times at which to evaluate the integral
     t = np.linspace(0, T, N + 1)
     
+    # Wiener process samples
     dW = dt ** 0.5 * np.random.normal(size=(num_paths, N))
     
     for i in range(N):
@@ -465,17 +553,23 @@ def parallel_milstein(seed, num_paths, X0, T, N, f, g):
     
     return t, X, W
 
+Let's first use Milstein's method to get a single solution of the Black-Scholes model, as we did for EM.
+
+# Black-Scholes parameters
 lamda = 2
 mu = 1
 
+# Seed and integration parameters
 seed = 0
 X0 = 1
 T = 1
 N = int(1e2)
 num_paths = 1
 
+# Get drift and diffusion functions of the Black-Scholes model
 f, g = f_g_black_scholes(lamda=lamda, mu=mu)
 
+# Solve using milstein's method
 t, X, W = parallel_milstein(seed=seed, num_paths=num_paths, X0=X0, T=T, N=N, f=f, g=g)
 X_exact = exact_black_scholes(X0=X0, t=t[None, :], W=W, lamda=lamda, mu=mu)
 
@@ -486,54 +580,22 @@ plt.xlim([0, T])
 plt.xticks(np.linspace(0, 1, 6))
 plt.yticks(np.linspace(0, 8, 5))
 plt.title('Milstein solution', fontsize=20)
-plt.xlabel('t', fontsize=20)
-plt.ylabel('X', fontsize=20)
+plt.xlabel(r'$t$', fontsize=20)
+plt.ylabel(r'$X(t)$', fontsize=20)
 plt.show()
 
+# Black-Scholes parameters
 lamda = 2
 mu = 1
 
+# Seed and integration parameters
 seed = 0
 X0 = 1
 T = 1
 Ns = (10 ** np.linspace(2, 4, 4)).astype(dtype=np.int)
 num_paths = int(1e4)
 
-f, g = f_g_black_scholes(lamda=lamda, mu=mu)
-
-dts = []
-X_abs_diffs = []
-
-for N in Ns:
-    
-    t, X, W = parallel_milstein(seed=seed, num_paths=num_paths, X0=X0, T=T, N=N, f=f, g=g)
-    X_exact = exact_black_scholes(X0=X0, t=t[None, :], W=W, lamda=lamda, mu=mu)
-    
-    dts.append(T / N)
-    
-    X_abs_diff = np.abs(X[:, -1] - X_exact[:, -1])
-    X_abs_diffs.append(X_abs_diff)
-    
-X_abs_diffs = np.stack(X_abs_diffs, axis=0)
-mil_strong_errors = np.mean(X_abs_diffs, axis=1)
-
-plt.plot(dts, em_strong_errors, color='k')
-plt.loglog()
-plt.yticks([1e-2, 1e-1, 1e0])
-plt.xlabel(r'$\Delta t$', fontsize=20)
-plt.ylabel(r'$\mathbb{E}|X_n - X(\tau_n)|$', fontsize=20)
-plt.title('Milstein strong convergence', fontsize=20)
-plt.show()
-
-lamda = 2
-mu = 1
-
-seed = 0
-X0 = 1
-T = 1
-Ns = (10 ** np.linspace(2, 4, 4)).astype(dtype=np.int)
-num_paths = int(1e4)
-
+# Get drift and diffusion functions of the Black-Scholes model
 f, g = f_g_black_scholes(lamda=lamda, mu=mu)
 
 dts = []
@@ -552,17 +614,34 @@ for N in Ns:
 X_approx = np.stack(X_approx, axis=0)
 X_exacts = np.stack(X_exacts, axis=0)
 
+X_abs_diffs = np.abs(X_approx - X_exacts)
+milstein_strong_errors = np.mean(X_abs_diffs, axis=1)
+
 X_approx_means = np.mean(X_approx, axis=-1)
 X_exacts_means = np.mean(X_exacts, axis=-1)
+milstein_weak_errors = np.abs(X_approx_means - X_exacts_means)
 
-mil_weak_errors = np.abs(X_approx_means - X_exacts_means)
+plt.figure(figsize=(8, 4))
 
-plt.plot(dts, mil_weak_errors, color='k')
+plt.subplot(121)
+plt.plot(dts, milstein_strong_errors, color='k')
+
+plt.loglog()
+plt.yticks([1e-2, 1e-1, 1e0])
+plt.xlabel(r'$\delta t$', fontsize=20)
+plt.ylabel(r'$\mathbb{E}|X_n - X(t_n)|$', fontsize=20)
+plt.title('Milstein\nstrong convergence', fontsize=20)
+
+plt.subplot(122)
+plt.plot(dts, milstein_weak_errors, color='k')
+
 plt.loglog()
 plt.yticks([1e-3, 1e-2, 1e-1, 1e0])
-plt.xlabel(r'$\Delta t$', fontsize=20)
-plt.ylabel(r'$|\mathbb{E}X_n - \mathbb{E}X(\tau_n)|$', fontsize=20)
-plt.title('Milstein weak convergence', fontsize=20)
+plt.xlabel(r'$\delta t$', fontsize=20)
+plt.ylabel(r'$|\mathbb{E}X_n - \mathbb{E}X(t_n)|$', fontsize=20)
+plt.title('Milstein\nweak convergence', fontsize=20)
+
+plt.tight_layout()
 plt.show()
 
 ## Stochastic chain rule
@@ -604,7 +683,7 @@ If $V$ does not depend on $t$, we have
 </div>
 <br>
 
-For a more formal definition and proof of Ito's result see {cite}`oksendal` (Theorem 4.1.8 and pages 44-48). Below is a short sketch proof, which highlights why the additional term appears in this example.
+For a more formal definition and proof of Ito's result see {cite}`oksendal` (Theorem 4.1.8 and pages 44-48). Below is a short sketch proof, which highlights why the additional term appears in the formula.
 
 <details class="proof">
 <summary>Informal argument: Ito's result for one dimension</summary>
@@ -613,7 +692,7 @@ For a more formal definition and proof of Ito's result see {cite}`oksendal` (The
     
 Writing the infinitesimal difference in $Y_t$ as a Taylor expansion we get
 \begin{align}
-    dY_t = \frac{\partial V}{\partial t} dt + \frac{\partial V}{\partial X} dX_t + \frac{1}{2} \left[\frac{\partial^2 V}{\partial^2 X} dX_t^2 + 2 \frac{\partial^2 V}{\partial X \partial t} dt dX_t + \frac{\partial^2 V}{\partial t^2} dt^2 \right] + o(dt^2),
+    dY_t = \frac{\partial V}{\partial t} dt + \frac{\partial V}{\partial X} dX_t + \frac{1}{2} \left[\frac{\partial^2 V}{\partial X^2} dX_t^2 + 2 \frac{\partial^2 V}{\partial X \partial t} dt dX_t + \frac{\partial^2 V}{\partial t^2} dt^2 \right] + o(dt^2),
 \end{align}
 where the $o(dt^n)$ notation means that the ratio of the term being ommited, to the infinitesimal $dt^n$ goes to 0 as $dt \to 0$. Now since $dX_t = U_t dt + H_t dW_t$ and $dW_t$ is of order $dt^{1/2}$, the last two terms in the square brackets are $o(dt^{3/2})$ and we can neglect them. The reference provides a formal argument for neglecting these terms, showing that their contribution to the Ito integral has zero mean and a variance that tends to 0 as $dt \to 0$ - these contributions converge to $0$ in the sense of mean square convergence.
     
@@ -641,7 +720,7 @@ where $t_n = n~dt$ and $N = T / dt$. This sum has expectation $\sum_{n = 1}^N a_
 </details>
 <br>
 
-With this corrected rule, we can directly
+With this corrected rule, we can directly integrate the stochastic process in question.
 
 ## References
 

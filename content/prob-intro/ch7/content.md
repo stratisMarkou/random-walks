@@ -1,4 +1,4 @@
-# Moments and moment generating functions
+# Moment generating functions
 
 Moments are an important tool in the study of random variables. Moment
  generating functions are a useful tool related to the moments of random
@@ -96,8 +96,6 @@ The above result can be shown quickly from an application of the Cauchy
 <details class="proof">
 <summary>Proof: \(-1 \leq \rho(X, Y) \leq 1\) </summary>
 
-<div>
-
 Given random variables $X$ and $Y$, define $U = X - \bar{X}$ and $V = Y- \bar{Y}$
 . By applying the Cauchy-Schwartz inequality on $U$ and $V$, we obtain
 \begin{align}
@@ -108,7 +106,6 @@ Taking a square root and substituting for $U$ and $V$ we arrive at the result
  -1 \leq \rho(X, Y) \leq 1.
 \end{align}
  
-</div>
 
 </details>
 <br>
@@ -130,8 +127,6 @@ whenever these expectations exist.
 <details class="proof">
 <summary>Proof: Cauchy-Schwartz inequality</summary>
 
-<div>
-
 Let $s \in \mathbb{R}$ be a real number and $W = sU + V$ be a random variable
 . Then $W^2 \geq 0$ and we have
 \begin{align}\mathbb{E}(X^2) = a s^2 + b s + c \geq 0,\end{align}
@@ -143,8 +138,6 @@ where $a = \mathbb{E}(U^2)$, $b = 2\mathbb{E}(UV)$ and $\mathbb{E}(V^2)$
 ) \leq 0,\end{align}
 from which we arrive at the result 
 \begin{align}\mathbb{E}(UV)^2 &\leq \mathbb{E}(U^2)\mathbb{E}(V^2).\end{align}
-
-</div>
 
 </details>
 <br>
@@ -273,7 +266,7 @@ If $X$ is gamma distributed with parameters $w > 0$ and $\lambda > 0$, then
 M_X(t) = \left(\frac{\lambda}{\lambda - t}\right)^w.
 \end{align}
 
-
+(prob-intro-markov-jensen)=
 ## Markov and Jensen inequalities
 
 The Markov inequality is a useful result that bounds the probability that a
@@ -293,7 +286,6 @@ The Markov inequality is a useful result that bounds the probability that a
 
 <details class="proof">
 <summary>Proof: Markov inequality</summary>
-<div>
 
 For any non-negative random variable $X(\omega)$ and positive $t > 0$, we have
 \begin{align}X(\omega) \geq t \mathbb{1}_{X \geq t},\end{align}
@@ -301,7 +293,6 @@ where $\mathbb{1}_{X \geq t} = 1$ if $X(\omega) \geq t$ and $\mathbb{1}_{X\geq t
 otherwise. Rearranging and taking expectations, we obtain 
 \begin{align}\mathbb{P}(X \geq t) = \frac{\mathbb{E}(X)}{t}.\end{align}
 
-</div>
 </details>
 <br>
 
@@ -355,15 +346,11 @@ It can be proved quickly by applying the supporting tangent
 <details class="proof">
 <summary>Proof: Jensen's inequality</summary>
 
-<div>
-
 From the supporting tangent theorem we have
 \begin{align}g(X) \geq g(w) + \alpha (X - w),\end{align}
 and by setting the constant $w = \mathbb{E}(X)$ and taking an expectation
  over $X$, the $X - w$ term cancels and we obtain Jensen's inequality
  \begin{align}\mathbb{E}[g(X)] \geq g(\mathbb{E}(X)).\end{align}
-
-</div>
 
 </details>
 <br>
@@ -387,8 +374,6 @@ The supporting tangent theorem says that for any point $w$ in the domain of a
 <details class="proof">
 <summary>Proof: Supporting tangent theorem</summary>
 
-<div>
-
 Since $g$ is convex, we have
 \begin{align}\frac{g(w) - g(u)}{w - u} \leq \frac{g(v) - g(w)}{v - w},\end{align}
 otherwise $g$ could not be convex, because $g(w)$ would be strictly less
@@ -403,15 +388,13 @@ otherwise $g$ could not be convex, because $g(w)$ would be strictly less
     \begin{align}g(x) \geq g(w) + \alpha (x - w),\end{align}
     for the cases where $x = u < w$ and $x = v > w$ respectively. The
      inequality holds trivially for $x = w$.
- 
-
-
-</div>
 
 </details>
 <br>
 
 ## Characteristic functions
+
+Unlike the moment generating function which might not exist for some random variables, the characteristic function of a random variable, defined below, exists for a broader set of variables.
 
 <div class="definition">
 
@@ -425,16 +408,46 @@ otherwise $g$ could not be convex, because $g(w)$ would be strictly less
 </div>
 <br>
 
+The characteristic function has the following two useful properties.
+
 <div class="theorem">
 
 **Theorem (Two properties of characteristic functions)** Let $X$ and $Y$ be
  independent random variables with characteristic functions $\phi_X$ and $\phi_Y$. Then 
  
 1. If $a, b \in \mathbb{R}$ and $Z = aX + b$, then $\phi_Z(t) = e^{itb} \phi_X(at)$.
-2. The characteristic function of $X, Y$ is $\phi_{X + Y}(t) = \phi_X(t)\phi_Y(t)$.
+2. The characteristic function of $X + Y$ is $\phi_{X + Y}(t) = \phi_X(t)\phi_Y(t)$.
 
 </div>
 <br>
+
+<details class="proof">
+<summary>Proof: Properties of the characteristic function</summary>
+
+To show the first property, consider
+
+  $$\begin{align}
+  \phi_Z(t) &= \mathbb{E}\left(e^{itZ}\right)\\
+  &= \mathbb{E}\left(e^{it(aX + b)}\right)\\
+  &= e^{itb} \mathbb{E}\left(e^{itaX}\right)\\
+  &= e^{itb} \phi_X(at).
+  \end{align}$$
+    
+For the second property, consider
+    
+  $$\begin{align}
+  \phi_{X + Y}(t) &= \mathbb{E}\left(e^{it(X + Y)}\right)\\
+  &= \mathbb{E}\left(e^{itX} e^{itY}\right)\\
+  &= \mathbb{E}\left(e^{itX}\right)\mathbb{E}\left(e^{itY}\right)\\
+  &= \phi_X(t) \phi_Y(t),
+  \end{align}$$
+    
+where we have used the fact that $X$ and $Y$ are independent to get from the second to the third line.
+
+</details>
+<br>
+
+As with the mgf, the characteristic function of a random variable is unique, in the sense that two radoom variables have the same distributions if and only if they have the same characteristic functions.
 
 <div class="theorem">
 
@@ -444,6 +457,8 @@ otherwise $g$ could not be convex, because $g(w)$ would be strictly less
 
 </div>
 <br>
+
+We can obtain the pdf of a random variable by applying the following inverse transformation.
 
 <div class="theorem">
 
@@ -458,3 +473,5 @@ otherwise $g$ could not be convex, because $g(w)$ would be strictly less
 
 </div>
 <br>
+
+Note the similarity between the Fourier transform and the transform of the characteristic function.
