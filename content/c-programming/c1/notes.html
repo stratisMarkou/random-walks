@@ -1,0 +1,446 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>A tutorial introduction &#8212; Random walks</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../../../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/jupyter-sphinx.css" />
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/sphinx-book-theme.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/mystnb.js"></script>
+    <script src="../../../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .secondtoggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="canonical" href="https://random-walks.org/content/c-programming/c1/notes.html" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Interesting reading and websites" href="../../reading-and-links.html" />
+    <link rel="prev" title="The C programming language" href="../intro.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://random-walks.org/content/c-programming/c1/notes.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="A tutorial introduction" />
+<meta property="og:description" content="A tutorial introduction  Hello world in C  Running the customary hello world programme in C is quite different than in other languages like Python. C is a compi" />
+<meta property="og:image"       content="https://random-walks.org/_static/logo.svg" />
+
+<meta name="twitter:card" content="summary">
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../../index.html">
+  
+  <img src="../../../_static/logo.svg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Random walks</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  
+  <ul class="nav sidenav_l1">
+  <li class="">
+    <a href="../../home.html">Welcome</a>
+  </li>
+  <li class="">
+    <a href="../../prob-intro/intro.html">Probability: An introduction</a>
+  </li>
+  <li class="">
+    <a href="../../itila/intro.html">Information theory, Inference and Learning Algorithms</a>
+  </li>
+  <li class="">
+    <a href="../../gaussian-processes/gp-intro.html">Gaussian Processes</a>
+  </li>
+  <li class="active">
+    <a href="../intro.html">The C programming language</a>
+  <ul class="nav sidenav_l2">
+    <li class="active">
+      <a href="">A tutorial introduction</a>
+    </li>
+  </ul>
+  </li>
+  <li class="">
+    <a href="../../reading-and-links.html">Interesting reading and websites</a>
+  </li>
+  <li class="">
+    <a href="../../misc/misc.html">Miscellaneous</a>
+  </li>
+</ul>
+</nav>
+<p class="navbar_footer"></p>
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse" data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu" aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation" title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i class="fas fa-download"></i></button>
+
+            
+            <div class="dropdown-buttons">
+                <!-- ipynb file if we had a myst markdown file -->
+                
+                <!-- Download raw file -->
+                <a class="dropdown-buttons" href="../../../_sources/content/c-programming/c1/notes.md.txt"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.md</button></a>
+                <!-- Download PDF via print -->
+                <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF" onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+            </div>
+            
+        </div>
+
+        <!-- Edit this page -->
+        
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+        
+    </div>
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#hello-world-in-c" class="nav-link">Hello world in C</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#variables-and-arithemtic" class="nav-link">Variables and arithemtic</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#declaration-and-assignment" class="nav-link">Declaration and assignment</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#arithmetic" class="nav-link">Arithmetic</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#string-formatting-and-printf" class="nav-link">String formatting and printf</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#while-statement" class="nav-link">While-statement</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#for-statement" class="nav-link">For-statement</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#symbolic-constants" class="nav-link">Symbolic constants</a>
+        </li>
+    
+    </ul>
+</nav>
+
+
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="a-tutorial-introduction">
+<h1>A tutorial introduction<a class="headerlink" href="#a-tutorial-introduction" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="hello-world-in-c">
+<h2>Hello world in C<a class="headerlink" href="#hello-world-in-c" title="Permalink to this headline">¶</a></h2>
+<p>Running the customary hello world programme in C is quite different than in
+other languages like Python. C is a compiled language in which programmes must
+be compiled before they are executed, in contrast to interpreted languages like
+Python which are not compiled but are instead interpreted at runtime.</p>
+<p>To print hello world , make a new
+file called <code class="docutils literal notranslate"><span class="pre">hello.c</span></code> and write this into it</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>\<span class="c1">#include &lt;stdio.h&gt;</span>
+
+<span class="n">main</span><span class="p">(){</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s2">&quot;hello, world</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Then compile it (in a UNIX-based system like Linux or MacOS) by running</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cc hello.c
+</pre></div>
+</div>
+<p>This will create a executable file called <code class="docutils literal notranslate"><span class="pre">a.out</span></code>, which you can execute from
+the terminal by running</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./a.out
+</pre></div>
+</div>
+<p>The name a.out comes from <a class="reference external" href="https://en.wikipedia.org/wiki/A.out">“assembler output”</a>, coined by <a class="reference external" href="https://en.wikipedia.org/wiki/Ken_Thompson">Ken Thompson</a>, who apparently used this standard name for the output files of his assembler. This is a bit confusing since C uses a compiler and not an assembler (<a class="reference external" href="https://cs.stackexchange.com/questions/13904/is-there-any-real-difference-between-a-compiler-and-an-assembler">what is the difference?</a>).</p>
+<p>Here’s what is happening in this programme</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">\#include</span> <span class="pre">&lt;stdio.h&gt;</span></code> line tells the compiler to include the standard
+input/output library, which provides the <code class="docutils literal notranslate"><span class="pre">printf</span></code> function.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">main(){...}</span></code> is the declaration of a function which takes no arguments, whose insides are contained in the braces. <code class="docutils literal notranslate"><span class="pre">main</span></code> is a special function name in C, and every programme begins by executing at the start of <code class="docutils literal notranslate"><span class="pre">main</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">printf(&quot;hello,</span> <span class="pre">world\n&quot;)</span></code> prints the string “hello, world” followed by the
+new-line character - <code class="docutils literal notranslate"><span class="pre">printf</span></code> doesn’t leave a new line on its own.</p></li>
+</ul>
+<p><strong>Exercise 1.1:</strong> Leaving out certain parts of the programme gives different
+errors at compilation time. For example, removing the <code class="docutils literal notranslate"><span class="pre">;</span></code> after the function
+call gives the compilation error “error: expected ‘;’ after expression”.
+Another interesting error is if we replace the print statement by <code class="docutils literal notranslate"><span class="pre">printf(1);</span></code>,
+then the programme compiles (but gives a warning). When run, this programme
+gives a segmentation fault <code class="docutils literal notranslate"><span class="pre">Segmentation</span> <span class="pre">fault:</span> <span class="pre">11</span></code>.</p>
+<p><strong>Exercise 1.2:</strong> Replacing the <code class="docutils literal notranslate"><span class="pre">&quot;\n&quot;</span></code> above by other expressions of the form
+<code class="docutils literal notranslate"><span class="pre">&quot;\c&quot;</span></code>, where c is some other character, has different effects depending on c.
+If c corresponds to one of the known escape seqences (like t), then the string is resolved according to that escape seqence. For other choices of c (like !), the symbol following the <code class="docutils literal notranslate"><span class="pre">/</span></code> is printed, whereas if c was a number the escape sequence was ignored.</p>
+</div>
+<div class="section" id="variables-and-arithemtic">
+<h2>Variables and arithemtic<a class="headerlink" href="#variables-and-arithemtic" title="Permalink to this headline">¶</a></h2>
+<p>The following programme prints the conversion table from Fahrenheit to Celcius,
+using the formula <span class="math notranslate nohighlight">\(^oC = 5 \times (^oF - 32) / 9\)</span> and rounding C down to an
+integer:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
+
+<span class="o">/*</span> <span class="n">Print</span> <span class="n">the</span> <span class="n">conversion</span> <span class="n">table</span> <span class="kn">from</span> <span class="nn">Fahrenheit</span> <span class="n">to</span> <span class="n">Celcius</span> <span class="o">*/</span>
+
+<span class="n">main</span><span class="p">(){</span>
+
+	<span class="nb">int</span> <span class="n">fahr</span><span class="p">,</span> <span class="n">celcius</span><span class="p">;</span>
+	<span class="nb">int</span> <span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">,</span> <span class="n">step</span><span class="p">;</span>
+	
+	<span class="n">lower</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="n">upper</span> <span class="o">=</span> <span class="mi">300</span><span class="p">;</span>
+	<span class="n">step</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+
+	<span class="n">fahr</span> <span class="o">=</span> <span class="n">lower</span><span class="p">;</span>
+	<span class="k">while</span> <span class="p">(</span><span class="n">fahr</span> <span class="o">&lt;=</span> <span class="n">upper</span><span class="p">){</span>
+
+		<span class="n">celcius</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">*</span> <span class="p">(</span><span class="n">fahr</span> <span class="o">-</span> <span class="mi">32</span><span class="p">)</span>  <span class="o">/</span> <span class="mi">9</span><span class="p">;</span>
+		
+		<span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="se">\t</span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fahr</span><span class="p">,</span> <span class="n">celcius</span><span class="p">);</span>
+		
+		<span class="n">fahr</span> <span class="o">=</span> <span class="n">fahr</span> <span class="o">+</span> <span class="n">step</span><span class="p">;</span>
+
+	<span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>After compiling and running, it prints:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span>		<span class="o">-</span><span class="mi">17</span>
+<span class="mi">20</span>		<span class="o">-</span><span class="mi">6</span>
+<span class="mi">40</span>		<span class="mi">4</span>
+<span class="mi">60</span>		<span class="mi">15</span>
+<span class="mi">80</span>		<span class="mi">26</span>
+<span class="mi">100</span>		<span class="mi">37</span>
+<span class="mi">120</span>		<span class="mi">48</span>
+<span class="mi">140</span>		<span class="mi">60</span>
+<span class="mi">160</span>		<span class="mi">71</span>
+<span class="mi">180</span>		<span class="mi">82</span>
+<span class="mi">200</span>		<span class="mi">93</span>
+<span class="mi">220</span>		<span class="mi">104</span>
+<span class="mi">240</span>		<span class="mi">115</span>
+<span class="mi">260</span>		<span class="mi">126</span>
+<span class="mi">280</span>		<span class="mi">137</span>
+<span class="mi">300</span>		<span class="mi">148</span>
+</pre></div>
+</div>
+<p>This program introduces a few fundamental aspects of C.</p>
+<div class="section" id="declaration-and-assignment">
+<h3>Declaration and assignment<a class="headerlink" href="#declaration-and-assignment" title="Permalink to this headline">¶</a></h3>
+<p>In C all variables must be declared before usage, and a variable <em>declaration</em>
+consists of a <strong>type</strong> (e.g. <code class="docutils literal notranslate"><span class="pre">int</span></code>) and a <strong>name</strong> (e.g. <code class="docutils literal notranslate"><span class="pre">fahr</span></code>). Declarations
+of variables of the same type can be made in the same line as above. Variable
+can be assigned values through an <em>assignment</em> statement like</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lower</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>A variable can also be declared and have a value assigned to it, both in the same statement, as in</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">fahr</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>is also a valid statement. Once declared, a variable cannot be re-declared so
+a programme containing</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">fahr</span><span class="p">;</span>
+<span class="nb">int</span> <span class="n">fahr</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> 
+</pre></div>
+</div>
+<p>will not compile. Once defined, we are not allowed to re-define <code class="docutils literal notranslate"><span class="pre">fahr</span></code>
+again. Important types included in C include</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">char</span>   <span class="o">//</span><span class="n">character</span>
+<span class="n">short</span>  <span class="o">//</span><span class="n">short</span> <span class="n">integer</span>
+<span class="n">long</span>   <span class="o">//</span><span class="n">long</span> <span class="n">integer</span>
+<span class="nb">float</span>  <span class="o">//</span><span class="n">single</span><span class="o">-</span><span class="n">precision</span> <span class="n">floating</span> <span class="n">point</span>
+<span class="n">double</span> <span class="o">//</span><span class="n">double</span><span class="o">-</span><span class="n">precision</span> <span class="n">floating</span> <span class="n">point</span>
+</pre></div>
+</div>
+<p>and here is a longer list of the <a class="reference external" href="https://en.wikipedia.org/wiki/C_data_types#Basic_types">main types of
+C</a>, including their
+sizes in bits, the ranges of numbers they can represent and their format
+specifiers (the bit that goes after <code class="docutils literal notranslate"><span class="pre">%</span></code> when formatting a string, more of this
+in a bit).</p>
+<p>Note that a <code class="docutils literal notranslate"><span class="pre">char</span></code> represents a single byte (8 bits, 128 possible values). The ASCII (American Standard Code for Information Interchange), a standard code for some standard
+symbols like letters or punctuation, contains exactly 128 elements, so the
+<code class="docutils literal notranslate"><span class="pre">char</span></code> is an ideal type for representing ASCII characters. A <code class="docutils literal notranslate"><span class="pre">char</span></code> can be
+readily mapped into an <code class="docutils literal notranslate"><span class="pre">int</span></code> and vice versa.</p>
+</div>
+<div class="section" id="arithmetic">
+<h3>Arithmetic<a class="headerlink" href="#arithmetic" title="Permalink to this headline">¶</a></h3>
+<p>In this programme, division by 9 in the expression <code class="docutils literal notranslate"><span class="pre">5</span> <span class="pre">*</span> <span class="pre">(fahr</span> <span class="pre">-</span> <span class="pre">32)</span>&#160; <span class="pre">/</span> <span class="pre">9</span> </code> evalatues to an integer, because integer division in C truncates the fractional part of the ‘true’ result - and this is an all-<code class="docutils literal notranslate"><span class="pre">int</span></code> experssion. However, arithmetic expressions between an <code class="docutils literal notranslate"><span class="pre">int</span></code> and a <code class="docutils literal notranslate"><span class="pre">float</span></code>, such as <code class="docutils literal notranslate"><span class="pre">5</span> <span class="pre">/</span> <span class="pre">9.0</span></code>, will automatically convert the <code class="docutils literal notranslate"><span class="pre">int</span></code> to a <code class="docutils literal notranslate"><span class="pre">float</span></code>, so the result will be a <code class="docutils literal notranslate"><span class="pre">float</span></code>. This carries over to expressions with other data types, and assignments like <code class="docutils literal notranslate"><span class="pre">float</span> <span class="pre">myfloat</span> <span class="pre">=</span> <span class="pre">0;</span></code> will automatically handdle this conversion.</p>
+<p>For example, if we define <code class="docutils literal notranslate"><span class="pre">float</span> <span class="pre">fahr</span> <span class="pre">=</span> <span class="pre">0</span></code>, the experssion <code class="docutils literal notranslate"><span class="pre">5</span> <span class="pre">*</span> <span class="pre">(fahr</span> <span class="pre">-</span> <span class="pre">32)</span> <span class="pre">/</span> <span class="pre">9</span></code> will evaluate to <code class="docutils literal notranslate"><span class="pre">-17.777...</span></code>. That’s because at each stage of the expression, the <code class="docutils literal notranslate"><span class="pre">int</span></code> will be converted to a <code class="docutils literal notranslate"><span class="pre">float</span></code> and the computation carried out - leaving us with a float in the end and without any of that integer truncation.</p>
+<p>This conversion also goes the other way, from <code class="docutils literal notranslate"><span class="pre">float</span></code> to <code class="docutils literal notranslate"><span class="pre">int</span></code>. This programme</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">main</span><span class="p">(){</span>
+
+	<span class="nb">float</span> <span class="n">myfloat</span> <span class="o">=</span> <span class="mf">3.14159</span><span class="p">;</span>
+	<span class="nb">int</span> <span class="n">myint</span> <span class="o">=</span> <span class="n">myfloat</span><span class="p">;</span>
+
+	<span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">myint</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>compiles and prints 3.</p>
+</div>
+<div class="section" id="string-formatting-and-printf">
+<h3>String formatting and <code class="docutils literal notranslate"><span class="pre">printf</span></code><a class="headerlink" href="#string-formatting-and-printf" title="Permalink to this headline">¶</a></h3>
+<p>As we saw in the Fahrenheit programme, <code class="docutils literal notranslate"><span class="pre">printf</span></code> command supports string formatting. If we pass a string containing expressions like <code class="docutils literal notranslate"><span class="pre">%d</span></code> or <code class="docutils literal notranslate"><span class="pre">%f</span></code>, followed by as many arguments as <code class="docutils literal notranslate"><span class="pre">%</span></code>-expressions as the string contained, then these expressions will be evaluated to a string representation of those arguments. As with expressions, type conversions are premissible here as well. For a list of formatters of the main types see <a class="reference external" href="https://en.wikipedia.org/wiki/C_data_types#Basic_types">this table</a>.</p>
+</div>
+<div class="section" id="while-statement">
+<h3>While-statement<a class="headerlink" href="#while-statement" title="Permalink to this headline">¶</a></h3>
+<p>The while loop <code class="docutils literal notranslate"><span class="pre">while</span> <span class="pre">(fahr</span> <span class="pre">&lt;=</span> <span class="pre">upper){...}</span></code> is executed in the familiar way.
+First the condition in the while statement is evaluated and if it’s true, then
+the contents of the loop are executed once. Then the condition is checked again
+and the contents rerun, repeating until the condition is false. <strong>Note that the
+condition is only checked after all the contents of the loop have been run.</strong></p>
+</div>
+<div class="section" id="for-statement">
+<h3>For-statement<a class="headerlink" href="#for-statement" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="symbolic-constants">
+<h2>Symbolic constants<a class="headerlink" href="#symbolic-constants" title="Permalink to this headline">¶</a></h2>
+<p>One way to keep C code tidy is to move constants to the top of a file using
+<code class="docutils literal notranslate"><span class="pre">define</span></code> statements like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
+
+<span class="c1">#define LOWER 0</span>
+<span class="c1">#define UPPER 300</span>
+<span class="c1">#define STEP  20</span>
+
+<span class="n">main</span><span class="p">(){</span>
+
+	<span class="nb">int</span> <span class="n">fahr</span><span class="p">;</span>
+	<span class="nb">float</span> <span class="n">celcius</span><span class="p">;</span>
+
+	<span class="k">for</span> <span class="p">(</span><span class="n">fahr</span> <span class="o">=</span> <span class="n">LOWER</span><span class="p">;</span> <span class="n">fahr</span> <span class="o">==</span> <span class="n">UPPER</span><span class="p">;</span> <span class="n">fahr</span> <span class="o">=</span> <span class="n">fahr</span> <span class="o">+</span> <span class="n">STEP</span><span class="p">){</span>
+		
+		<span class="n">celcius</span> <span class="o">=</span> <span class="p">(</span><span class="mf">5.0</span> <span class="o">/</span> <span class="mf">9.0</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">fahr</span> <span class="o">-</span> <span class="mf">32.0</span><span class="p">);</span>
+		
+		<span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%3d</span><span class="s2"> </span><span class="si">%6.1f</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fahr</span><span class="p">,</span> <span class="n">celcius</span><span class="p">);</span>
+	<span class="p">}</span>	
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="../intro.html" title="previous page">The C programming language</a>
+    <a class='right-next' id="next-link" href="../../reading-and-links.html" title="next page">Interesting reading and websites</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Stratos Markou<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../../../_static/js/index.js"></script>
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-168728006-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    
+  </body>
+</html>

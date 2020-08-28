@@ -1,0 +1,1039 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Numerical simulation of SDEs &#8212; Random walks</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../../../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/jupyter-sphinx.css" />
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/sphinx-book-theme.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/mystnb.js"></script>
+    <script src="../../../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .secondtoggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="canonical" href="https://random-walks.org/content/misc/sde/num-sde.html" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="prev" title="Miscellaneous" href="../misc.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://random-walks.org/content/misc/sde/num-sde.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Numerical simulation of SDEs" />
+<meta property="og:description" content="Numerical simulation of SDEs  This is a reproduction of certain scripts found in Higham, An algorithmic Introduction to Numerical Simulation of Stochastic Diffe" />
+<meta property="og:image"       content="https://random-walks.org/_static/logo.svg" />
+
+<meta name="twitter:card" content="summary">
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../../index.html">
+  
+  <img src="../../../_static/logo.svg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Random walks</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  
+  <ul class="nav sidenav_l1">
+  <li class="">
+    <a href="../../home.html">Welcome</a>
+  </li>
+  <li class="">
+    <a href="../../prob-intro/intro.html">Probability: An introduction</a>
+  </li>
+  <li class="">
+    <a href="../../itila/intro.html">Information theory, Inference and Learning Algorithms</a>
+  </li>
+  <li class="">
+    <a href="../../gaussian-processes/gp-intro.html">Gaussian Processes</a>
+  </li>
+  <li class="">
+    <a href="../../c-programming/intro.html">The C programming language</a>
+  </li>
+  <li class="">
+    <a href="../../reading-and-links.html">Interesting reading and websites</a>
+  </li>
+  <li class="active">
+    <a href="../misc.html">Miscellaneous</a>
+  <ul class="nav sidenav_l2">
+    <li class="active">
+      <a href="">Numerical simulation of SDEs</a>
+    </li>
+  </ul>
+  </li>
+</ul>
+</nav>
+<p class="navbar_footer"></p>
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse" data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu" aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation" title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i class="fas fa-download"></i></button>
+
+            
+            <div class="dropdown-buttons">
+                <!-- ipynb file if we had a myst markdown file -->
+                
+                <!-- Download raw file -->
+                <a class="dropdown-buttons" href="../../../_sources/content/misc/sde/num-sde.ipynb.txt"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.ipynb</button></a>
+                <!-- Download PDF via print -->
+                <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF" onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+            </div>
+            
+        </div>
+
+        <!-- Edit this page -->
+        
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+            <div class="dropdown-buttons">
+                
+                <a class="binder-button" href="https://mybinder.org/v2/gh/stratisMarkou/stratisMarkou.github.io/master?urlpath=tree/./content/misc/sde/num-sde.ipynb"><button type="button" class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip" data-placement="left"><img class="binder-button-logo" src="../../../_static/images/logo_binder.svg" alt="Interact on binder">Binder</button></a>
+                
+                
+                
+            </div>
+        </div>
+        
+    </div>
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#why-stochastic-differential-equations" class="nav-link">Why Stochastic differential equations</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#the-wiener-process" class="nav-link">The Wiener process</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#sampling-from-a-wiener-process" class="nav-link">Sampling from a Wiener process</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#function-of-a-wiener-process" class="nav-link">Function of a Wiener process</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#evaluating-a-stochastic-integral" class="nav-link">Evaluating a stochastic integral</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#euler-maruyama-method" class="nav-link">Euler-Maruyama method</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#strong-and-weak-convergence" class="nav-link">Strong and weak convergence</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#milstein-s-higher-order-method" class="nav-link">Milstein’s higher order method</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#stochastic-chain-rule" class="nav-link">Stochastic chain rule</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#references" class="nav-link">References</a>
+        </li>
+    
+    </ul>
+</nav>
+
+
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="numerical-simulation-of-sdes">
+<h1>Numerical simulation of SDEs<a class="headerlink" href="#numerical-simulation-of-sdes" title="Permalink to this headline">¶</a></h1>
+<p>This is a reproduction of certain scripts found in Higham, <em>An algorithmic Introduction to Numerical Simulation of Stochastic Differential Equations.</em><a class="bibtex reference internal" href="#higham" id="id1">[Hig01]</a> This paper is an accessible introduction to SDEs, which is centered around ten MATLAB scripts. Below are reproductions of these scripts (excluding two on linear stability) and some supplementary notes.</p>
+<div class="section" id="why-stochastic-differential-equations">
+<h2>Why Stochastic differential equations<a class="headerlink" href="#why-stochastic-differential-equations" title="Permalink to this headline">¶</a></h2>
+<p>We are often interested in modelling a system whose state takes values in a continuous range, and over a continuous time domain. Whereas ordinary differential equations (ODEs) describe variables which change according to a deterministic rule, SDEs describe variables whose change is governed partly by a deterministic component and partly by a stochastic component. SDEs are therefore an appropriate model for systems whose dynamics involve some true randomness, or some fine grained complexity which we cannot afford to or do not wish to model.</p>
+</div>
+<div class="section" id="the-wiener-process">
+<h2>The Wiener process<a class="headerlink" href="#the-wiener-process" title="Permalink to this headline">¶</a></h2>
+<p>In order to define the stochastic component of the transition rule of a stochastic system, we must define an appropriate noise model. The Wiener process is a stochastic process that is commonly used for this purpose.</p>
+<div class="definition">
+<p><strong>Definition (Wiener process)</strong> A <em>standard Wiener process</em> over [0, T] is a random variable <span class="math notranslate nohighlight">\(W(t)\)</span> that depends continuously on <span class="math notranslate nohighlight">\(t \in [0, T]\)</span> and satisfies:</p>
+<ol class="simple">
+<li><p>W(0) = 0, with probability 1.</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(0 \leq t_1 &lt; t_2 \leq T\)</span> the random variable <span class="math notranslate nohighlight">\(W(t_2) - W(t_1)\)</span> has distribution <span class="math notranslate nohighlight">\(\mathcal{N}(0, t_2 - t_1)\)</span>.</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(0 \leq t_1 &lt; t_2 &lt; t_3 &lt; t_4 \leq T\)</span>, the random variables <span class="math notranslate nohighlight">\(W(t_2) - W(t_1)\)</span> and <span class="math notranslate nohighlight">\(W(t_4) - W(t_3)\)</span> are independent.</p></li>
+</ol>
+</div>
+<br>
+<p>We can imagine the Wiener process as the path followed by a particle that experiences infinitely many, infinitesimal kicks. The size of these kicks, <span class="math notranslate nohighlight">\(W(t_2) - W(t_1)\)</span>, diminishes as the interval between them, <span class="math notranslate nohighlight">\(t_2 - t_1\)</span>, diminishes. The kicks are also independent from each other, so the future path of the particle is independent of its past path given its present position.</p>
+</div>
+<div class="section" id="sampling-from-a-wiener-process">
+<h2>Sampling from a Wiener process<a class="headerlink" href="#sampling-from-a-wiener-process" title="Permalink to this headline">¶</a></h2>
+<p>Before using the Wiener process to define an SDE, let’s look at the process itself. How can we draw a sample <span class="math notranslate nohighlight">\(W(t)\)</span> from it? Since a sample from the Wiener process takes a random value for every <span class="math notranslate nohighlight">\(t \in [0, \infty)\)</span>, the best we can do on a computer is to sample the process at a finite subset of time instances. We specify the times <span class="math notranslate nohighlight">\(t_1 &lt; t_2 &lt; ... &lt; t_N\)</span> at which to sample <span class="math notranslate nohighlight">\(W(t)\)</span>, and then use the definition of the Wiener process to see that we should sample as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+W(t_{n+1}) = W(t_{n}) + \Delta W(t_{n}), \text{ where } \Delta W(t_{n}) \sim \mathcal{N}(0, t_{n+1} - t_n),
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(W(t_0) = W(0) = 0\)</span>. We can therefore sample all the <span class="math notranslate nohighlight">\(\Delta W(t_n)\)</span> independently, and take their cumulative sum to compute <span class="math notranslate nohighlight">\(W(t_n)\)</span>, as shown below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set random seed</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Integration parameters</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="n">T</span> <span class="o">/</span> <span class="n">N</span>
+
+<span class="c1"># Times to sample at</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">]</span>
+
+<span class="c1"># Sample dW&#39;s and compute cumulative sum</span>
+<span class="n">dW</span> <span class="o">=</span> <span class="n">dt</span> <span class="o">**</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([[</span><span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">dW</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input tag_center-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Sample from a Wiener process&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$t$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$W(t)$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/num-sde_4_0.svg" src="../../../_images/num-sde_4_0.svg" /></div>
+</div>
+<p>So even though we can’t represent the entirety of the path, we can sample it to arbitrary precision.</p>
+</div>
+<div class="section" id="function-of-a-wiener-process">
+<h2>Function of a Wiener process<a class="headerlink" href="#function-of-a-wiener-process" title="Permalink to this headline">¶</a></h2>
+<p>Suppose we are interested in a stochastic process which is a function of a Wiener process, say</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+X(t) = \exp\left(t + \frac{1}{2}W(t)\right).
+\end{align}\]</div>
+<p>In this case we can sample <span class="math notranslate nohighlight">\(X(t)\)</span> by first sampling <span class="math notranslate nohighlight">\(W(t)\)</span>, and then computing the corresponding values of <span class="math notranslate nohighlight">\(X(t)\)</span>. We’ll draw <code class="docutils literal notranslate"><span class="pre">S</span> <span class="pre">=</span> <span class="pre">1000</span></code> samples of <span class="math notranslate nohighlight">\(X(t)\)</span>, compute their mean, standard deviation and show three of these samples.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set random seed </span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Time to simulate for, discretisation level and number of paths</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">S</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="n">T</span> <span class="o">/</span> <span class="n">N</span>
+
+<span class="c1"># Times to sample at</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+
+<span class="c1"># Sample dW&#39;s and compute cumulative sum</span>
+<span class="n">dW</span> <span class="o">=</span> <span class="n">dt</span> <span class="o">**</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">S</span><span class="p">))</span>
+<span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">S</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">dW</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Compute values </span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">t</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">W</span><span class="p">)</span>
+<span class="n">X_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">X_stdev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input tag_center-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Sample 1&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Sample 2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Sample 3&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">X_mean</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Mean&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">t</span><span class="p">,</span>
+                 <span class="n">X_mean</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">X_stdev</span><span class="p">,</span>
+                 <span class="n">X_mean</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">X_stdev</span><span class="p">,</span>
+                 <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span>
+                 <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+                 <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Std. dev.&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Samples from $\exp\left(t + \frac</span><span class="si">{1}{2}</span><span class="s1"> W(t)\right)$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$t$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$X(t)$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/num-sde_7_0.svg" src="../../../_images/num-sde_7_0.svg" /></div>
+</div>
+</div>
+<div class="section" id="evaluating-a-stochastic-integral">
+<h2>Evaluating a stochastic integral<a class="headerlink" href="#evaluating-a-stochastic-integral" title="Permalink to this headline">¶</a></h2>
+<p>The next thing that we look at is the evaluation of a stochastic integral. Let’s consider the integral</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+Y = \int^1_0 W(t)~dW(t),
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(W(t)\)</span> is a Wiener process. To evaluate it, we first need to define what the <span class="math notranslate nohighlight">\(\int\)</span> means in the stochastic case. In the deterministic case we use Riemann integral, which is the limit of a discretised sum:</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+R = \int^b_a f(t)~dt = \lim_{N \to \infty} \sum_{n = 0}^{N - 1} f\left(a + n\delta t\right) \delta t
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\delta t = \frac{b - a}{N}\)</span>. We have chosen to evaluate <span class="math notranslate nohighlight">\(f\)</span> on the left side of the discretisation bins. In the deterministic case, it does not matter where we evaluate <span class="math notranslate nohighlight">\(f\)</span> within a discretisation bin, meaning that the integral</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+R_\lambda = \lim_{N \to \infty} \sum_{n = 0}^{N - 1} f\left(a + \left(n + \lambda\right) \delta t\right) \delta t,
+\end{align}\]</div>
+<p>does not depend on the choice of <span class="math notranslate nohighlight">\(\lambda \in [0, 1]\)</span> when we take <span class="math notranslate nohighlight">\(\delta t \to 0\)</span> (provided <span class="math notranslate nohighlight">\(f\)</span> is sufficiently well behaved). For stochastic integrals, this does not hold: the choice of where to evaluate the integrand affects the value of the integral, even in the limit <span class="math notranslate nohighlight">\(\delta t \to 0\)</span> - we will see an example from Higham shortly. We therefore have to make a choice in defining the integral. Two widespread choices are the Ito and the Stratonovich integrals:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+&amp;\int^b_a h(t) dW(t) = \lim_{N \to \infty} \sum_{n = 0}^{N - 1} h(t_n) \left(W(t_{n + 1}) - W(t_n)\right), \text{ Ito}.\\
+\\
+&amp;\int^b_a h(t) dW(t) = \lim_{N \to \infty} \sum_{n = 0}^{N - 1} h\left(\frac{t_n + t_{n+1}}{2}\right) \left(W(t_{n + 1}) - W(t_n)\right), \text{ Stratonovich}.
+\end{align}\end{split}\]</div>
+<p>where we have defined <span class="math notranslate nohighlight">\(t_n = a + n \delta t\)</span>. While Ito evaluates the integrand on the left side of the discretisation bin (<span class="math notranslate nohighlight">\(\lambda = 0\)</span>), Stratonovich evaluates it at the midpoint of the bin (<span class="math notranslate nohighlight">\(\lambda = 1/2\)</span>). Our stochastic integral of interest</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+Y = \int^1_0 W_t~dW_t,
+\end{align}\]</div>
+<p>is equal to the following values under the Ito and Stratonovich definitions:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\int^1_0 W_t~dW_t = \begin{cases}
+\frac{1}{2}W(T)^2 - \frac{1}{2}T^2 &amp; \text{ under Ito,}\\
+\frac{1}{2}W(T)^2 &amp; \text{ under Stratonovich.}
+\end{cases}
+\end{align}\end{split}\]</div>
+<br>
+<details class="proof">
+<summary>Evaluating \(\int W(t)~dW(t)\) under the Ito and Stratonovich integrals</summary>
+<div>
+<p>If we use the Ito integral, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\sum_{n = 0}^{N - 1} W(t_n) \left(W(t_{n + 1}) - W(t_n)\right) &amp;= \frac{1}{2}\sum_{n = 0}^{N - 1} \left( W(t_{n + 1})^2 - W(t_n)^2 - (W(t_{n + 1}) - W(t_n))^2 \right)\\
+&amp;= \frac{1}{2}\left(  W(T)^2 - W(0)^2 - \sum_{n = 0}^{N - 1} (W(t_{n + 1}) - W(t_n))^2 \right).
+\end{align}\end{split}\]</div>
+<p>The distribution of <span class="math notranslate nohighlight">\((W(t_{n + 1}) - W(t_n))^2\)</span> has mean equal to the second moment of <span class="math notranslate nohighlight">\(\Delta W_{t_n}\)</span> and variance equal to the fourth moment of <span class="math notranslate nohighlight">\(\Delta W_{t_n}\)</span>, which are <span class="math notranslate nohighlight">\(\delta t\)</span> and <span class="math notranslate nohighlight">\(3 \delta t^2\)</span> respectively. Therefore, the sum above is a random variable with mean <span class="math notranslate nohighlight">\(T\)</span> and variance <span class="math notranslate nohighlight">\(\mathcal{O}(\delta t)\)</span> - where we have used the fact that the summands are independent, so the variance of the sum is the sum of the variances. So in the limit of <span class="math notranslate nohighlight">\(\delta t \to 0\)</span>, the integral converges to <span class="math notranslate nohighlight">\(\frac{1}{2}W(T)^2 - \frac{1}{2}T^2\)</span> under the Ito definition.</p>
+<p>By contrast, if we use the Stratonovich integral, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\sum_{n = 0}^{N - 1} W\left(\frac{t_{n+1} + t_n}{2}\right) \left(W(t_{n + 1}\right) - W(t_n)) &amp;= \sum_{n = 0}^{N - 1} \left(\frac{W(t_{n + 1}) + W(t_n)}{2} + \Delta Z_n\right) \left(W(t_{n + 1}\right) - W(t_n))\\
+&amp;= \sum_{n = 0}^{N - 1} \frac{1}{2} W(t_{n + 1})^2 - \frac{1}{2} W(t_n)^2 + \Delta Z_n \left(W(t_{n + 1}\right) - W(t_n))\\
+&amp;= \frac{1}{2} W(T)^2 - \frac{1}{2} W(0)^2 + \sum_{n = 0}^{N - 1} \Delta Z_n \left(W(t_{n + 1}\right) - W(t_n)),
+\end{align}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Delta Z_n \sim \mathcal{N}(0, \delta t / 4)\)</span>. To obtain the first equality above, we used the fact that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+p\left(W\left(\frac{t_{n+1} + t_n}{2}\right)\big |~ W(t_{n+1}), W(t_{n})\right) = \frac{p\left( W(t_{n+1}) | W\left(\frac{t_{n+1} + t_n}{2}\right)\right) p\left( W\left(\frac{t_{n+1} + t_n}{2}\right) \big | W(t_{n}) \right) p(W(t_n))}{p(W(t_{n+1}), W(t_{n}))},\\
+\end{align}\end{split}\]</div>
+<p>and observing that the distribution above has the form of a product of normal distributions over <span class="math notranslate nohighlight">\(W\left(\frac{t_{n+1} + t_n}{2}\right)\)</span>, we arrive at the result:</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+p\left(W\left(\frac{t_{n+1} + t_n}{2}\right)\big |~ W(t_{n+1}), W(t_{n})\right) = \mathcal{N}\left(W\left(\frac{t_{n+1} + t_n}{2}\right); \frac{W(t_{n+1}) + W(t_{n})}{2}, \frac{\delta t}{4}\right).
+\end{align}\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\Delta Z_n\)</span> is independent of <span class="math notranslate nohighlight">\(W_t\)</span>, the term <span class="math notranslate nohighlight">\(\Delta Z_n \left(W(t_{n + 1}\right) - W(t_n))\)</span> has mean 0, and variance <span class="math notranslate nohighlight">\(\delta t^2 / 4\)</span>. Therefore, the sum term has mean 0 and variance <span class="math notranslate nohighlight">\(\mathcal{O}(\delta t)\)</span>, so in the limit of <span class="math notranslate nohighlight">\(\delta t \to 0\)</span> the integral converges to <span class="math notranslate nohighlight">\(\frac{1}{2}W(T)^2\)</span> under the Stratonovich definition.</p>
+</div>
+</details>
+<br><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set random seed</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># Time to simulate for and discretisation level</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">N</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1e6</span><span class="p">)</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="n">T</span> <span class="o">/</span> <span class="n">N</span>
+
+<span class="c1"># Sample dW&#39;s and compute cumulative sum</span>
+<span class="n">dW</span> <span class="o">=</span> <span class="n">dt</span> <span class="o">**</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">N</span><span class="p">,))</span>
+<span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([[</span><span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">dW</span><span class="p">)])</span>
+
+<span class="c1"># Evaluate the Ito integral</span>
+<span class="n">ito_approx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">W</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">dW</span><span class="p">)</span>
+<span class="n">ito_exact</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">W</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">T</span>
+
+<span class="c1"># The Wiener process must be evaluated at the midpoints to evaluate the Stratonovich integral</span>
+<span class="n">W_midpoint</span> <span class="o">=</span> <span class="p">(</span><span class="n">W</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">W</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="n">W_midpoint</span> <span class="o">=</span> <span class="n">W_midpoint</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">dt</span> <span class="o">/</span> <span class="mi">4</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">N</span><span class="p">,))</span>
+
+<span class="c1"># Evaluate the Stratonovich integral</span>
+<span class="n">strat_approx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">W_midpoint</span> <span class="o">*</span> <span class="n">dW</span><span class="p">)</span>
+<span class="n">strat_exact</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">W</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Ito integral approximation (exact): </span><span class="si">{</span><span class="n">ito_approx</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">ito_exact</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Stratonovich approximation (exact): </span><span class="si">{</span><span class="n">strat_approx</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">strat_exact</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>Ito integral approximation (exact): 1.419 (1.415)
+Stratonovich approximation (exact): 1.917 (1.915)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The difference between the Ito and Stratonovich integrals does not vanish as <span class="math notranslate nohighlight">\(dt \to 0\)</span>, which you can verify by experimenting with <span class="math notranslate nohighlight">\(dt\)</span> above. The choice of definition has implications about the resulting integral (itself a stochastic process), which may be more or less appropriate for different applications. From here onwards we will work with the Ito integral exclusively, although much of the discussion is ammenable to the Stratonovich integral too.</p>
+</div>
+<div class="section" id="euler-maruyama-method">
+<h2>Euler-Maruyama method<a class="headerlink" href="#euler-maruyama-method" title="Permalink to this headline">¶</a></h2>
+<p>The Euler-Maruyama method is the analoge of the Euler method for deterministic integrals, applied to the stochastic case.</p>
+<div class="definition">
+<p><strong>Definition (Euler-Maruyama method)</strong> Given a scalar SDE with drift and diffusion functions <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span>
+\begin{align}dX(t) = f(X(t))dt + g(X(t)) dW(t),\end{align}
+the Euler-Maruyama method approximates <span class="math notranslate nohighlight">\(X\)</span> by
+\begin{align} X_{n + 1} = X_n + f(X_n) \Delta t + g(X_n) \Delta W_n,\end{align}
+where <span class="math notranslate nohighlight">\(\delta t &gt; 0\)</span> is the time step, <span class="math notranslate nohighlight">\(X_n = X(t_n), W_n = W(t_n)\)</span> and <span class="math notranslate nohighlight">\(t_n = n\delta t\)</span>.</p>
+</div>
+<br>
+<p>Let’s look at an implementation of the Euler-Maruyama (EM) method. The <code class="docutils literal notranslate"><span class="pre">euler_maruyama</span></code> below function takes the <em>drift</em> and <em>diffusion</em> functions <span class="math notranslate nohighlight">\(f\)</span>, <span class="math notranslate nohighlight">\(g\)</span> and applies the EM algorithm (not to be confused with Expectation Maximisation), from the specified initial conditions. Note that we can sample the <code class="docutils literal notranslate"><span class="pre">dW</span></code> in advance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">euler_maruyama</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span> <span class="n">X0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
+    
+    <span class="c1"># Set random seed</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    
+    <span class="c1"># Set discretisation, initial value and times at which to evaluate</span>
+    <span class="n">dt</span> <span class="o">=</span> <span class="n">T</span> <span class="o">/</span> <span class="n">N</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="p">[</span><span class="n">X0</span><span class="p">]</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    
+    <span class="c1"># Sample Wiener process dW&#39;s</span>
+    <span class="n">dW</span> <span class="o">=</span> <span class="n">dt</span> <span class="o">**</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">N</span><span class="p">,))</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        
+        <span class="c1"># Apply Euler-Maruyama at each point in time</span>
+        <span class="n">dX</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">+</span> <span class="n">g</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="n">dW</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        
+        <span class="c1"># Store the new X</span>
+        <span class="n">X</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">dX</span><span class="p">)</span>
+    
+    <span class="c1"># Compute W to return it at the end</span>
+    <span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([[</span><span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">dW</span><span class="p">)])</span>
+    
+    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">W</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Below is the definition of <code class="docutils literal notranslate"><span class="pre">f</span></code> and <code class="docutils literal notranslate"><span class="pre">g</span></code> that we will be integrating, namely</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+f(x, t) &amp;= \lambda x,\\
+g(x, t) &amp;= \mu x,\\
+\end{align}\end{split}\]</div>
+<p>known as the Black-Scholes model. This is implemented as a closure, i.e. <code class="docutils literal notranslate"><span class="pre">f_g_black_scholes</span></code> takes in the appropriate <code class="docutils literal notranslate"><span class="pre">lambda</span></code> and <code class="docutils literal notranslate"><span class="pre">mu</span></code> and returns the corresponding <code class="docutils literal notranslate"><span class="pre">f</span></code> and <code class="docutils literal notranslate"><span class="pre">g</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f_g_black_scholes</span><span class="p">(</span><span class="n">lamda</span><span class="p">,</span> <span class="n">mu</span><span class="p">):</span>
+    
+    <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">lamda</span> <span class="o">*</span> <span class="n">X</span>
+    
+    <span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">grad</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">mu</span> <span class="k">if</span> <span class="n">grad</span> <span class="k">else</span> <span class="n">mu</span> <span class="o">*</span> <span class="n">X</span>
+    
+    <span class="k">return</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We choose these drift and diffusion terms because the associated SDE has a closed form solution, with which we can compare our numerical solution. The analytic solution to the Black-Scholes model is</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+X_t = X_0 \exp \left[\Big(\lambda - \frac{1}{2} \mu^2\Big)~t + \mu W(t)\right],
+\end{align}\]</div>
+<p>which we implement in <code class="docutils literal notranslate"><span class="pre">exact_black_scholes</span></code> below. Unlike ODEs, whose solution is a unique function, the solution of an SDE depends on the random noise sample <span class="math notranslate nohighlight">\(W(t)\)</span>. It’s important to remember to share the same <span class="math notranslate nohighlight">\(W(t)\)</span> sample between the exact solution and its numerical approximation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">exact_black_scholes</span><span class="p">(</span><span class="n">X0</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">lamda</span><span class="p">,</span> <span class="n">mu</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">X0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">lamda</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">mu</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">t</span> <span class="o">+</span> <span class="n">mu</span> <span class="o">*</span> <span class="n">W</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We are can now run the EM method and compare it aginst the exact solution below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Black-Scholes parameters</span>
+<span class="n">lamda</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># Seed and integration parameters</span>
+<span class="n">seed</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">X0</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">N</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1e2</span><span class="p">)</span>
+
+<span class="c1"># Get drift and diffusion functions of the Black-Scholes model</span>
+<span class="n">f</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="n">f_g_black_scholes</span><span class="p">(</span><span class="n">lamda</span><span class="o">=</span><span class="n">lamda</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">)</span>
+
+<span class="c1"># Solve approximately via the EM method</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">W</span> <span class="o">=</span> <span class="n">euler_maruyama</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span> <span class="n">X0</span><span class="o">=</span><span class="n">X0</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="o">=</span><span class="n">g</span><span class="p">)</span>
+
+<span class="c1"># Get the exact solution for the same W sample</span>
+<span class="n">X_exact</span> <span class="o">=</span> <span class="n">exact_black_scholes</span><span class="p">(</span><span class="n">X0</span><span class="o">=</span><span class="n">X0</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">W</span><span class="o">=</span><span class="n">W</span><span class="p">,</span> <span class="n">lamda</span><span class="o">=</span><span class="n">lamda</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input tag_center-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">X_exact</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Exact solution&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Euler-Maruyama&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;EM and exact solutions</span><span class="se">\n</span><span class="s1">of Black-Scholes&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$t$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$X(t)$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/num-sde_18_0.svg" src="../../../_images/num-sde_18_0.svg" /></div>
+</div>
+<p>We can change the accuracy of the solution by adjusting <span class="math notranslate nohighlight">\(N\)</span>. As a fun aside, what if we try out a different drift term? One nice choice is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+f(x, t) &amp;= \omega~\text{cos}(\omega t),\\
+g(x, t) &amp;= \mu x.\\
+\end{align}\end{split}\]</div>
+<p>In the case <span class="math notranslate nohighlight">\(\mu = 0\)</span>, the solution is the deterministic function <span class="math notranslate nohighlight">\(X_t = \text{sin}(\omega t)\)</span>. When <span class="math notranslate nohighlight">\(\mu \neq 0\)</span>, the solution will be perturbed by the gaussian noise.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f_g_sine</span><span class="p">(</span><span class="n">omega</span><span class="p">,</span> <span class="n">mu</span><span class="p">):</span>
+    
+    <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">omega</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">omega</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">mu</span> <span class="o">*</span> <span class="n">X</span>
+    
+    <span class="k">return</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># SDE parameters</span>
+<span class="n">omega</span> <span class="o">=</span> <span class="mf">2.</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="mf">0.3</span>
+
+<span class="c1"># Seed and integration parameters</span>
+<span class="n">seed</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">X0</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">N</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1e3</span><span class="p">)</span>
+
+<span class="c1"># Get drift and diffusion functions of our sine model</span>
+<span class="n">f</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="n">f_g_sine</span><span class="p">(</span><span class="n">omega</span><span class="o">=</span><span class="n">omega</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">)</span>
+
+<span class="c1"># Solve approximately via the EM method</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">W</span> <span class="o">=</span> <span class="n">euler_maruyama</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span> <span class="n">X0</span><span class="o">=</span><span class="n">X0</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="o">=</span><span class="n">g</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input tag_center-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Euler-Maruyama&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;EM solution of sine model&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$X(t)$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/num-sde_22_0.svg" src="../../../_images/num-sde_22_0.svg" /></div>
+</div>
+</div>
+<div class="section" id="strong-and-weak-convergence">
+<h2>Strong and weak convergence<a class="headerlink" href="#strong-and-weak-convergence" title="Permalink to this headline">¶</a></h2>
+<p>Since the choice of the number of bins <span class="math notranslate nohighlight">\(N\)</span> of the discretisation affects the accuracy of our method, we are interested in how quickly the approximation converges to the exact solution as a function of <span class="math notranslate nohighlight">\(N\)</span>. To do so, we must first define <em>what convergence means</em> in the stochastic case, which leads us to two disctinct notions of convergence, the strong sence and the weak sense.</p>
+<div class="definition">
+<p><strong>Definition (Strong convergence)</strong> A method for approximating a stochastic process <span class="math notranslate nohighlight">\(X(t)\)</span> is said to have strong order of convergence <span class="math notranslate nohighlight">\(\gamma\)</span> if there exists a constant such that
+\begin{align}\mathbb{E}|X_n - X(\tau_n)| \leq C\Delta t^\gamma\end{align}
+for any fixed <span class="math notranslate nohighlight">\(\tau_n = n\Delta t \in [0, T]\)</span> and <span class="math notranslate nohighlight">\(\Delta t\)</span> sufficiently small.</p>
+</div>
+<br>
+<p>Strong convergence refers to the rate of convergence of the approximation <span class="math notranslate nohighlight">\(X_n\)</span> to the exact solution <span class="math notranslate nohighlight">\(X(\tau_n)\)</span> as <span class="math notranslate nohighlight">\(\Delta t \to 0\)</span>, in expectation. A weaker condition for convergence is rate at which the expected value of the approximation converges to the true expected value, as <span class="math notranslate nohighlight">\(\Delta t \to 0\)</span>, as given below.</p>
+<div class="definition">
+<p><strong>Definition (Weak convergence)</strong> A method for approximating a stochastic process <span class="math notranslate nohighlight">\(X(t)\)</span> is said to have weak order of convergence <span class="math notranslate nohighlight">\(\gamma\)</span> if there exists a constant such that
+\begin{align}|\mathbb{E}[X_n] - \mathbb{E}[X(\tau_n)]| \leq C\Delta t^\gamma\end{align}
+for any fixed <span class="math notranslate nohighlight">\(\tau_n = n\Delta t \in [0, T]\)</span> and <span class="math notranslate nohighlight">\(\Delta t\)</span> sufficiently small.</p>
+</div>
+<br>
+<p>The paper states without proof that, under conditions on <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span>, Euler-Maruyama has strong order of convergence <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span> and weak order of convergence <span class="math notranslate nohighlight">\(1\)</span>. We do not provide a proof for any of the above statements, but instead evaluate the rate of convergence empirically. To speed up the evaluation, we implement a function that evaluates several EM solutions in parallel below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">parallel_euler_maruyama</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span> <span class="n">num_paths</span><span class="p">,</span> <span class="n">X0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
+    
+    <span class="c1"># Set the random seed</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    
+    <span class="c1"># Time increment</span>
+    <span class="n">dt</span> <span class="o">=</span> <span class="n">T</span> <span class="o">/</span> <span class="n">N</span>
+    
+    <span class="c1"># Set initial X values</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">X0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">num_paths</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+    
+    <span class="c1"># Times at which to evaluate the integral</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    
+    <span class="c1"># Wiener process samples</span>
+    <span class="n">dW</span> <span class="o">=</span> <span class="n">dt</span> <span class="o">**</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">num_paths</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        
+        <span class="c1"># Calculate new X according to EM rule</span>
+        <span class="n">X</span><span class="p">[:,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">f</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">+</span> <span class="n">g</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="n">dW</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span>
+        
+    <span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">num_paths</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">dW</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">W</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input tag_center-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Black-Scholes parameters</span>
+<span class="n">lamda</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># Seed and integration parameters</span>
+<span class="n">seed</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">X0</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">Ns</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">)</span>
+<span class="n">num_paths</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1e4</span><span class="p">)</span>
+
+<span class="c1"># Get drift and diffusion functions of the Black-Scholes model</span>
+<span class="n">f</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="n">f_g_black_scholes</span><span class="p">(</span><span class="n">lamda</span><span class="o">=</span><span class="n">lamda</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">)</span>
+
+<span class="n">dts</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">X_approx</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">X_exacts</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="n">Ns</span><span class="p">:</span>
+    
+    <span class="n">t</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">W</span> <span class="o">=</span> <span class="n">parallel_euler_maruyama</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span> <span class="n">num_paths</span><span class="o">=</span><span class="n">num_paths</span><span class="p">,</span> <span class="n">X0</span><span class="o">=</span><span class="n">X0</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="o">=</span><span class="n">g</span><span class="p">)</span>
+    <span class="n">X_exact</span> <span class="o">=</span> <span class="n">exact_black_scholes</span><span class="p">(</span><span class="n">X0</span><span class="o">=</span><span class="n">X0</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:],</span> <span class="n">W</span><span class="o">=</span><span class="n">W</span><span class="p">,</span> <span class="n">lamda</span><span class="o">=</span><span class="n">lamda</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">)</span>
+    
+    <span class="n">dts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">T</span> <span class="o">/</span> <span class="n">N</span><span class="p">)</span>
+    <span class="n">X_approx</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">X_exacts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">X_exact</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    
+<span class="n">X_approx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">X_approx</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">X_exacts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">X_exacts</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">X_abs_diffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">X_approx</span> <span class="o">-</span> <span class="n">X_exacts</span><span class="p">)</span>
+<span class="n">em_strong_errors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">X_abs_diffs</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">X_approx_means</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">X_approx</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">X_exacts_means</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">X_exacts</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">em_weak_errors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">X_approx_means</span> <span class="o">-</span> <span class="n">X_exacts_means</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dts</span><span class="p">,</span> <span class="n">em_strong_errors</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([</span><span class="mf">1e-2</span><span class="p">,</span> <span class="mf">1e-1</span><span class="p">,</span> <span class="mf">1e0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\delta t$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\mathbb</span><span class="si">{E}</span><span class="s1">|X_n - X(t_n)|$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Euler-Maruyama</span><span class="se">\n</span><span class="s1">strong convergence&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dts</span><span class="p">,</span> <span class="n">em_weak_errors</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([</span><span class="mf">1e-3</span><span class="p">,</span> <span class="mf">1e-2</span><span class="p">,</span> <span class="mf">1e-1</span><span class="p">,</span> <span class="mf">1e0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\delta t$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$|\mathbb</span><span class="si">{E}</span><span class="s1">X_n - \mathbb</span><span class="si">{E}</span><span class="s1">X(t_n)|$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Euler-Maruyama</span><span class="se">\n</span><span class="s1">weak convergence&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/num-sde_25_0.svg" src="../../../_images/num-sde_25_0.svg" /></div>
+</div>
+</div>
+<div class="section" id="milstein-s-higher-order-method">
+<h2>Milstein’s higher order method<a class="headerlink" href="#milstein-s-higher-order-method" title="Permalink to this headline">¶</a></h2>
+<p>Just as higher order methods for ODEs exist for obtaining refined estimates of the solution, so do methods for SDEs, such as Milstein’s higher order method.</p>
+<div class="definition">
+<p><strong>Definition (Milstein’s method)</strong> Given a scalar SDE with drift and diffusion functions <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span>
+\begin{align}dX(t) = f(X(t))dt + g(X(t)) dW(t),\end{align}
+the Milstein method approximates <span class="math notranslate nohighlight">\(X\)</span> by
+\begin{align} X_{j + 1} = X_j + f(X_j) \Delta t + g(X_j) \Delta W_j + \frac{1}{2}g(X_j)g’(X_j) (\Delta W_j^2 - \Delta t),\end{align}
+where <span class="math notranslate nohighlight">\(\Delta t &gt; 0\)</span> is the time step, <span class="math notranslate nohighlight">\(X_j = X(\tau_j), W_j = W(\tau_j)\)</span> and <span class="math notranslate nohighlight">\(\tau_j = j\Delta t\)</span>.</p>
+</div>
+<br>
+<p>Milstein’s method achieves a strong congergence rate of <span class="math notranslate nohighlight">\(1\)</span> and a weak convergence rate of <span class="math notranslate nohighlight">\(1\)</span>. Below is an implementation of Milstein’s method for sampling multiple paths at once.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">parallel_milstein</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span> <span class="n">num_paths</span><span class="p">,</span> <span class="n">X0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
+    
+    <span class="c1"># Set the random seed</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    
+    <span class="c1"># Time increment</span>
+    <span class="n">dt</span> <span class="o">=</span> <span class="n">T</span> <span class="o">/</span> <span class="n">N</span>
+    
+    <span class="c1"># Set initial X values</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">X0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">num_paths</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+    
+    <span class="c1"># Times at which to evaluate the integral</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    
+    <span class="c1"># Wiener process samples</span>
+    <span class="n">dW</span> <span class="o">=</span> <span class="n">dt</span> <span class="o">**</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">num_paths</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        
+        <span class="c1"># Compute the EM term and the higher order correction term</span>
+        <span class="n">dX</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">+</span> <span class="n">g</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="n">dW</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span>
+        <span class="n">dX</span> <span class="o">=</span> <span class="n">dX</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">g</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="n">g</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">dW</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">dt</span><span class="p">)</span>
+        
+        <span class="n">X</span><span class="p">[:,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">dX</span>
+        
+    <span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">num_paths</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">dW</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">W</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s first use Milstein’s method to get a single solution of the Black-Scholes model, as we did for EM.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Black-Scholes parameters</span>
+<span class="n">lamda</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># Seed and integration parameters</span>
+<span class="n">seed</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">X0</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">N</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1e2</span><span class="p">)</span>
+<span class="n">num_paths</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># Get drift and diffusion functions of the Black-Scholes model</span>
+<span class="n">f</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="n">f_g_black_scholes</span><span class="p">(</span><span class="n">lamda</span><span class="o">=</span><span class="n">lamda</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">)</span>
+
+<span class="c1"># Solve using milstein&#39;s method</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">W</span> <span class="o">=</span> <span class="n">parallel_milstein</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span> <span class="n">num_paths</span><span class="o">=</span><span class="n">num_paths</span><span class="p">,</span> <span class="n">X0</span><span class="o">=</span><span class="n">X0</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="o">=</span><span class="n">g</span><span class="p">)</span>
+<span class="n">X_exact</span> <span class="o">=</span> <span class="n">exact_black_scholes</span><span class="p">(</span><span class="n">X0</span><span class="o">=</span><span class="n">X0</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:],</span> <span class="n">W</span><span class="o">=</span><span class="n">W</span><span class="p">,</span> <span class="n">lamda</span><span class="o">=</span><span class="n">lamda</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input tag_center-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">X_exact</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Exact solution&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:],</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Euler-Maruyama (subsampled)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Milstein solution&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$t$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$X(t)$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/num-sde_30_0.svg" src="../../../_images/num-sde_30_0.svg" /></div>
+</div>
+<div class="cell tag_hide-input tag_center-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Black-Scholes parameters</span>
+<span class="n">lamda</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># Seed and integration parameters</span>
+<span class="n">seed</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">X0</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">Ns</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">)</span>
+<span class="n">num_paths</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1e4</span><span class="p">)</span>
+
+<span class="c1"># Get drift and diffusion functions of the Black-Scholes model</span>
+<span class="n">f</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="n">f_g_black_scholes</span><span class="p">(</span><span class="n">lamda</span><span class="o">=</span><span class="n">lamda</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">)</span>
+
+<span class="n">dts</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">X_approx</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">X_exacts</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="n">Ns</span><span class="p">:</span>
+    
+    <span class="n">t</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">W</span> <span class="o">=</span> <span class="n">parallel_milstein</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span> <span class="n">num_paths</span><span class="o">=</span><span class="n">num_paths</span><span class="p">,</span> <span class="n">X0</span><span class="o">=</span><span class="n">X0</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="o">=</span><span class="n">g</span><span class="p">)</span>
+    <span class="n">X_exact</span> <span class="o">=</span> <span class="n">exact_black_scholes</span><span class="p">(</span><span class="n">X0</span><span class="o">=</span><span class="n">X0</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:],</span> <span class="n">W</span><span class="o">=</span><span class="n">W</span><span class="p">,</span> <span class="n">lamda</span><span class="o">=</span><span class="n">lamda</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">)</span>
+    
+    <span class="n">dts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">T</span> <span class="o">/</span> <span class="n">N</span><span class="p">)</span>
+    <span class="n">X_approx</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">X_exacts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">X_exact</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    
+<span class="n">X_approx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">X_approx</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">X_exacts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">X_exacts</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">X_abs_diffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">X_approx</span> <span class="o">-</span> <span class="n">X_exacts</span><span class="p">)</span>
+<span class="n">milstein_strong_errors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">X_abs_diffs</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">X_approx_means</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">X_approx</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">X_exacts_means</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">X_exacts</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">milstein_weak_errors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">X_approx_means</span> <span class="o">-</span> <span class="n">X_exacts_means</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dts</span><span class="p">,</span> <span class="n">milstein_strong_errors</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([</span><span class="mf">1e-2</span><span class="p">,</span> <span class="mf">1e-1</span><span class="p">,</span> <span class="mf">1e0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\delta t$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\mathbb</span><span class="si">{E}</span><span class="s1">|X_n - X(t_n)|$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Milstein</span><span class="se">\n</span><span class="s1">strong convergence&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dts</span><span class="p">,</span> <span class="n">milstein_weak_errors</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([</span><span class="mf">1e-3</span><span class="p">,</span> <span class="mf">1e-2</span><span class="p">,</span> <span class="mf">1e-1</span><span class="p">,</span> <span class="mf">1e0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\delta t$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$|\mathbb</span><span class="si">{E}</span><span class="s1">X_n - \mathbb</span><span class="si">{E}</span><span class="s1">X(t_n)|$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Milstein</span><span class="se">\n</span><span class="s1">weak convergence&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/num-sde_31_0.svg" src="../../../_images/num-sde_31_0.svg" /></div>
+</div>
+</div>
+<div class="section" id="stochastic-chain-rule">
+<h2>Stochastic chain rule<a class="headerlink" href="#stochastic-chain-rule" title="Permalink to this headline">¶</a></h2>
+<p>Suppose we want to evaluate a function <span class="math notranslate nohighlight">\(V(\cdot)\)</span> at various <span class="math notranslate nohighlight">\(X(t)\)</span>, i.e. <span class="math notranslate nohighlight">\(V(X(t))\)</span>. If <span class="math notranslate nohighlight">\(X(t)\)</span> were a deterministic quantity, such as the solution to an ODE, we could solve for <span class="math notranslate nohighlight">\(X(t)\)</span> and plug it into <span class="math notranslate nohighlight">\(V\)</span>. Alternatively, we could express the evolution of <span class="math notranslate nohighlight">\(V\)</span> itself as a differential equation using the chain rule:</p>
+<p>\begin{align}
+dV &amp;= \frac{dV}{dX}dX = \frac{dV}{dX} f(t) dt, \text{ where } dX = f(t) dt,\
+\end{align}</p>
+<p>This way, we could solve the following ODE directly for <span class="math notranslate nohighlight">\(V\)</span></p>
+<p>\begin{align}
+\frac{dV}{dt} &amp;= \frac{dV}{dX} f(t).
+\end{align}</p>
+<p>For an autonomous SDE however the chain rule takes a different form, which under the Ito definition is as follows.</p>
+<div class="theorem">
+<p><strong>Definition (Ito’s result for one dimension)</strong> Let <span class="math notranslate nohighlight">\(X_t\)</span> be an Ito process given by</p>
+<p>\begin{align}
+dX_t = U_t dt + H_t dW_t.
+\end{align}</p>
+<p>where <span class="math notranslate nohighlight">\(U_t, H_t\)</span> are square-integrable processes, and let <span class="math notranslate nohighlight">\(V(X, t)\)</span> be a twice continuously differentiable function. Then <span class="math notranslate nohighlight">\(Y_t = V(X_t, t)\)</span> is again an Ito process and</p>
+<p>\begin{align}
+dY_t = \frac{\partial V}{\partial t} dt + \frac{\partial V}{\partial X} dX_t + \frac{1}{2}\frac{\partial^2 V}{\partial X^2} V_t^2 dt.
+\end{align}</p>
+<p>If <span class="math notranslate nohighlight">\(V\)</span> does not depend on <span class="math notranslate nohighlight">\(t\)</span>, we have</p>
+<p>\begin{align}
+dY_t = \left(\frac{\partial V}{\partial X} U_t + \frac{1}{2}\frac{\partial^2 V}{\partial X^2} H_t^2 \right) dt + \frac{\partial V}{\partial X}H_t dW_t.
+\end{align}</p>
+</div>
+<br>
+<p>For a more formal definition and proof of Ito’s result see <a class="bibtex reference internal" href="#oksendal" id="id2">[Oks92]</a> (Theorem 4.1.8 and pages 44-48). Below is a short sketch proof, which highlights why the additional term appears in the formula.</p>
+<details class="proof">
+<summary>Informal argument: Ito's result for one dimension</summary>
+<div>
+<p>Writing the infinitesimal difference in <span class="math notranslate nohighlight">\(Y_t\)</span> as a Taylor expansion we get
+\begin{align}
+dY_t = \frac{\partial V}{\partial t} dt + \frac{\partial V}{\partial X} dX_t + \frac{1}{2} \left[\frac{\partial^2 V}{\partial X^2} dX_t^2 + 2 \frac{\partial^2 V}{\partial X \partial t} dt dX_t + \frac{\partial^2 V}{\partial t^2} dt^2 \right] + o(dt^2),
+\end{align}
+where the <span class="math notranslate nohighlight">\(o(dt^n)\)</span> notation means that the ratio of the term being ommited, to the infinitesimal <span class="math notranslate nohighlight">\(dt^n\)</span> goes to 0 as <span class="math notranslate nohighlight">\(dt \to 0\)</span>. Now since <span class="math notranslate nohighlight">\(dX_t = U_t dt + H_t dW_t\)</span> and <span class="math notranslate nohighlight">\(dW_t\)</span> is of order <span class="math notranslate nohighlight">\(dt^{1/2}\)</span>, the last two terms in the square brackets are <span class="math notranslate nohighlight">\(o(dt^{3/2})\)</span> and we can neglect them. The reference provides a formal argument for neglecting these terms, showing that their contribution to the Ito integral has zero mean and a variance that tends to 0 as <span class="math notranslate nohighlight">\(dt \to 0\)</span> - these contributions converge to <span class="math notranslate nohighlight">\(0\)</span> in the sense of mean square convergence.</p>
+<p>However, the first term is of order <span class="math notranslate nohighlight">\(dt\)</span> and does not vanish. In particular
+\begin{align}
+dX_t^2 = U_t^2 dt^2 + 2 U_tH_t dW_t dt + H_t^2 dW_t^2.
+\end{align}
+In the above expression, we can neglect the first two terms which are of order <span class="math notranslate nohighlight">\(dt^{3/2}\)</span> and larger. Again, here the formal argument is that their associated contributions to the Ito integral converge to 0 in mean square. This yields the expression
+\begin{align}
+dY_t = \frac{\partial V}{\partial X} U_t dt + \frac{1}{2}\frac{\partial^2 V}{\partial X^2} H_t^2 dW_t^2 + \frac{\partial V}{\partial X}H_t dW_t.
+\end{align}
+Now consider the contribution to the Ito integral of the last term, i.e. the sum
+\begin{align}
+\sum_{n = 1}^N \frac{\partial^2 V}{\partial X^2}\Bigg \vert_{X_{t_n}} H_{t_n}^2 dW_{t_n}^2 = \sum_{n = 1}^N a_n dW_{t_n}^2,
+\end{align}
+where <span class="math notranslate nohighlight">\(t_n = n~dt\)</span> and <span class="math notranslate nohighlight">\(N = T / dt\)</span>. This sum has expectation <span class="math notranslate nohighlight">\(\sum_{n = 1}^N a_n dt\)</span> and it can be shown that its variance goes to 0 as <span class="math notranslate nohighlight">\(dt \to 0\)</span>, so the contribution converges to <span class="math notranslate nohighlight">\(\sum_{n = 1}^N a_n dt\)</span> in mean square and we can write
+\begin{align}
+dY_t = \left(\frac{\partial V}{\partial X} U_t + \frac{1}{2}\frac{\partial^2 V}{\partial X^2} H_t^2 \right) dt + \frac{\partial V}{\partial X}H_t dW_t.
+\end{align}</p>
+</div>
+</details>
+<br>
+<p>With this corrected rule, we can directly integrate the stochastic process in question.</p>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p id="bibtex-bibliography-content/misc/sde/num-sde-0"><dl class="citation">
+<dt class="bibtex label" id="higham"><span class="brackets"><a class="fn-backref" href="#id1">Hig01</a></span></dt>
+<dd><p>D.J. Higham. An algorithmic introduction to numerical simulation of stochastic differential equations. <em>SIAM Review</em>, 43(3):525–546, 2001.</p>
+</dd>
+<dt class="bibtex label" id="oksendal"><span class="brackets"><a class="fn-backref" href="#id2">Oks92</a></span></dt>
+<dd><p>Bernt Oksendal. <em>Stochastic Differential Equations (3rd Ed.): An Introduction with Applications</em>. Springer-Verlag, Berlin, Heidelberg, 1992. ISBN 3387533354.</p>
+</dd>
+</dl>
+</p>
+</div>
+</div>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="../misc.html" title="previous page">Miscellaneous</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Stratos Markou<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../../../_static/js/index.js"></script>
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-168728006-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    
+  </body>
+</html>

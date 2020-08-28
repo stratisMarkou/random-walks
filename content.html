@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Content in Jupyter Book &#8212; My sample book</title>
+    <title>Content in Jupyter Book &#8212; Random walks</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link href="_static/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="_static/sphinx-book-theme.css" type="text/css" />
@@ -13,6 +13,8 @@
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom_style.css" />
+    <link rel="stylesheet" type="text/css" href="_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
     <link rel="stylesheet" type="text/css" href="_static/jupyter-sphinx.css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/sphinx-book-theme.js"></script>
@@ -29,14 +31,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="canonical" href="https://random-walks.org/content.html" />
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Welcome to your Jupyter Book" href="intro.html" />
-    <link rel="prev" title="Jupyter Book markdown syntax" href="syntax.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
 
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://random-walks.org/content.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Content in Jupyter Book" />
+<meta property="og:description" content="Content in Jupyter Book  There are many ways to write content in Jupyter Book. This short section covers a few tips for how to do so." />
+<meta property="og:image"       content="https://random-walks.org/_static/logo.svg" />
+
+<meta name="twitter:card" content="summary">
 
 
   </head>
@@ -46,15 +57,15 @@
     <div class="container-xl">
       <div class="row">
           
-
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    <div class="navbar-brand-box">
+    
+        <div class="navbar-brand-box">
 <a class="navbar-brand text-wrap" href="index.html">
   
-  <img src="_static/logo.png" class="logo" alt="logo">
+  <img src="_static/logo.svg" class="logo" alt="logo">
   
   
-  <h1 class="site-logo" id="site-title">My sample book</h1>
+  <h1 class="site-logo" id="site-title">Random walks</h1>
   
 </a>
 </div>
@@ -68,23 +79,29 @@
   
   <ul class="nav sidenav_l1">
   <li class="">
-    <a href="markdown.html">Markdown files</a>
+    <a href="content/home.html">Welcome</a>
   </li>
   <li class="">
-    <a href="syntax.html">Jupyter Book markdown syntax</a>
-  </li>
-  <li class="active">
-    <a href="">Content in Jupyter Book</a>
+    <a href="content/prob-intro/intro.html">Probability: An introduction</a>
   </li>
   <li class="">
-    <a href="intro.html">Welcome to your Jupyter Book</a>
+    <a href="content/itila/intro.html">Information theory, Inference and Learning Algorithms</a>
   </li>
   <li class="">
-    <a href="notebooks.html">Content with notebooks</a>
+    <a href="content/gaussian-processes/gp-intro.html">Gaussian Processes</a>
+  </li>
+  <li class="">
+    <a href="content/c-programming/intro.html">The C programming language</a>
+  </li>
+  <li class="">
+    <a href="content/reading-and-links.html">Interesting reading and websites</a>
+  </li>
+  <li class="">
+    <a href="content/misc/misc.html">Miscellaneous</a>
   </li>
 </ul>
 </nav>
-<p class="navbar_footer">Powered by <a href="https://jupyterbook.org">Jupyter Book</a></p>
+<p class="navbar_footer"></p>
 </div>
 
 
@@ -104,6 +121,7 @@
             <i class="fas fa-arrow-left"></i>
             <i class="fas fa-arrow-up"></i>
         </button>
+        
         <div class="dropdown-buttons-trigger">
             <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i class="fas fa-download"></i></button>
 
@@ -126,8 +144,6 @@
         <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i class="fas fa-expand"></i></button></a>
 
         <!-- Launch buttons -->
-        
-
         
     </div>
     <div class="d-none d-md-block col-md-2 bd-toc show">
@@ -161,15 +177,13 @@ covers a few tips for how to do so.</p>
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="syntax.html" title="previous page">Jupyter Book markdown syntax</a>
-    <a class='right-next' id="next-link" href="intro.html" title="next page">Welcome to your Jupyter Book</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
     <div class="container">
       <p>
         
-          By The Jupyter Book Community<br/>
+          By Stratos Markou<br/>
         
             &copy; Copyright 2020.<br/>
       </p>
@@ -182,6 +196,16 @@ covers a few tips for how to do so.</p>
     </div>
 
     <script src="_static/js/index.js"></script>
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-168728006-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
     
   </body>
 </html>
