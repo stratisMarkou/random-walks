@@ -5,48 +5,48 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Information theory, Inference and Learning Algorithms &#8212; Random walks</title>
+    <title>Markov chains &#8212; Random walks</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
-    <link href="../../_static/css/index.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../_static/sphinx-book-theme.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom_style.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/sphinx-book-theme.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/language_data.js"></script>
-    <script src="../../_static/togglebutton.js"></script>
-    <script src="../../_static/clipboard.min.js"></script>
-    <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/mystnb.js"></script>
-    <script src="../../_static/sphinx-book-theme.js"></script>
+    <link href="../../../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/jupyter-sphinx.css" />
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/sphinx-book-theme.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/mystnb.js"></script>
+    <script src="../../../_static/sphinx-book-theme.js"></script>
     <script >var togglebuttonSelector = '.toggle, .secondtoggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="canonical" href="https://random-walks.org/content/itila/intro.html" />
-    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
-    <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Introduction to information theory" href="ch1/content.html" />
-    <link rel="prev" title="Markov chains" href="../prob-intro/ch12/content.html" />
+    <link rel="canonical" href="https://random-walks.org/content/prob-intro/ch12/content.html" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Information theory, Inference and Learning Algorithms" href="../../itila/intro.html" />
+    <link rel="prev" title="Processes in continuous time" href="../ch11/content.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
 
 
 <!-- Opengraph tags -->
-<meta property="og:url"         content="https://random-walks.org/content/itila/intro.html" />
+<meta property="og:url"         content="https://random-walks.org/content/prob-intro/ch12/content.html" />
 <meta property="og:type"        content="article" />
-<meta property="og:title"       content="Information theory, Inference and Learning Algorithms" />
-<meta property="og:description" content="Information theory, Inference and Learning Algorithms  These are notes on David MacKay’s book Information theory, Inference and Learning algorithms [itila], and" />
+<meta property="og:title"       content="Markov chains" />
+<meta property="og:description" content="Markov chains" />
 <meta property="og:image"       content="https://random-walks.org/_static/logo.svg" />
 
 <meta name="twitter:card" content="summary">
@@ -62,9 +62,9 @@
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="../../index.html">
+<a class="navbar-brand text-wrap" href="../../../index.html">
   
-  <img src="../../_static/logo.svg" class="logo" alt="logo">
+  <img src="../../../_static/logo.svg" class="logo" alt="logo">
   
   
   <h1 class="site-logo" id="site-title">Random walks</h1>
@@ -72,7 +72,7 @@
 </a>
 </div>
 
-<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+<form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form>
@@ -81,30 +81,63 @@
   
   <ul class="nav sidenav_l1">
   <li class="">
-    <a href="../home.html">Welcome</a>
-  </li>
-  <li class="">
-    <a href="../prob-intro/intro.html">Probability: An introduction</a>
+    <a href="../../home.html">Welcome</a>
   </li>
   <li class="active">
-    <a href="">Information theory, Inference and Learning Algorithms</a>
+    <a href="../intro.html">Probability: An introduction</a>
   <ul class="nav sidenav_l2">
     <li class="">
-      <a href="ch1/content.html">Introduction to information theory</a>
+      <a href="../ch1/content.html">Events and Probabilities</a>
+    </li>
+    <li class="">
+      <a href="../ch2/content.html">Discrete random variables</a>
+    </li>
+    <li class="">
+      <a href="../ch3/content.html">Multivariate discrete distributions</a>
+    </li>
+    <li class="">
+      <a href="../ch4/content.html">Probability generating functions</a>
+    </li>
+    <li class="">
+      <a href="../ch5/content.html">Distribution and density functions</a>
+    </li>
+    <li class="">
+      <a href="../ch6/content.html">Multivariate distributions</a>
+    </li>
+    <li class="">
+      <a href="../ch7/content.html">Moment generating functions</a>
+    </li>
+    <li class="">
+      <a href="../ch8/content.html">Main limit theorems</a>
+    </li>
+    <li class="">
+      <a href="../ch9/content.html">Branching processes</a>
+    </li>
+    <li class="">
+      <a href="../ch10/content.html">Random walks</a>
+    </li>
+    <li class="">
+      <a href="../ch11/content.html">Processes in continuous time</a>
+    </li>
+    <li class="active">
+      <a href="">Markov chains</a>
     </li>
   </ul>
   </li>
   <li class="">
-    <a href="../gaussian-processes/gp-intro.html">Gaussian Processes</a>
+    <a href="../../itila/intro.html">Information theory, Inference and Learning Algorithms</a>
   </li>
   <li class="">
-    <a href="../c-programming/intro.html">The C programming language</a>
+    <a href="../../gaussian-processes/gp-intro.html">Gaussian Processes</a>
   </li>
   <li class="">
-    <a href="../reading-and-links.html">Interesting reading and websites</a>
+    <a href="../../c-programming/intro.html">The C programming language</a>
   </li>
   <li class="">
-    <a href="../misc/misc.html">Miscellaneous</a>
+    <a href="../../reading-and-links.html">Interesting reading and websites</a>
+  </li>
+  <li class="">
+    <a href="../../misc/misc.html">Miscellaneous</a>
   </li>
 </ul>
 </nav>
@@ -137,7 +170,7 @@
                 <!-- ipynb file if we had a myst markdown file -->
                 
                 <!-- Download raw file -->
-                <a class="dropdown-buttons" href="../../_sources/content/itila/intro.md.txt"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.md</button></a>
+                <a class="dropdown-buttons" href="../../../_sources/content/prob-intro/ch12/content.md.txt"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.md</button></a>
                 <!-- Download PDF via print -->
                 <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF" onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
             </div>
@@ -169,11 +202,8 @@
         
               <div>
                 
-  <div class="section" id="information-theory-inference-and-learning-algorithms">
-<h1>Information theory, Inference and Learning Algorithms<a class="headerlink" href="#information-theory-inference-and-learning-algorithms" title="Permalink to this headline">¶</a></h1>
-<p>These are notes on David MacKay’s book <em>Information theory, Inference and Learning algorithms</em> <span class="bibtex" id="id1">[itila]</span>, and accompanying course <em>Infromation theory, Pattern Recognition and Neural Networks</em>. <span class="bibtex" id="id2">[itprnn]</span></p>
-<div class="toctree-wrapper compound">
-</div>
+  <div class="section" id="markov-chains">
+<h1>Markov chains<a class="headerlink" href="#markov-chains" title="Permalink to this headline">¶</a></h1>
 </div>
 
 
@@ -185,8 +215,8 @@
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="../prob-intro/ch12/content.html" title="previous page">Markov chains</a>
-    <a class='right-next' id="next-link" href="ch1/content.html" title="next page">Introduction to information theory</a>
+    <a class='left-prev' id="prev-link" href="../ch11/content.html" title="previous page">Processes in continuous time</a>
+    <a class='right-next' id="next-link" href="../../itila/intro.html" title="next page">Information theory, Inference and Learning Algorithms</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
@@ -205,7 +235,7 @@
       </div>
     </div>
 
-    <script src="../../_static/js/index.js"></script>
+    <script src="../../../_static/js/index.js"></script>
     
     <!-- Google Analytics -->
     <script>

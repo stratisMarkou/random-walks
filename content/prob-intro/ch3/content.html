@@ -116,6 +116,12 @@
     <li class="">
       <a href="../ch10/content.html">Random walks</a>
     </li>
+    <li class="">
+      <a href="../ch11/content.html">Processes in continuous time</a>
+    </li>
+    <li class="">
+      <a href="../ch12/content.html">Markov chains</a>
+    </li>
   </ul>
   </li>
   <li class="">
@@ -217,19 +223,12 @@
                 
   <div class="section" id="multivariate-discrete-distributions">
 <h1>Multivariate discrete distributions<a class="headerlink" href="#multivariate-discrete-distributions" title="Permalink to this headline">¶</a></h1>
-<p>Multivariate discrete pmfs are the extension of univariate discrete
-distributions over multiple variables. The definition of independence can
-be extended from events to discrete random variables. We discuss results
-concerning the expectation and independence of discrete random variables.</p>
+<p>Multivariate discrete pmfs are the extension of univariate discrete distributions over multiple variables. The definition of independence can be extended from events to discrete random variables. We discuss results concerning the expectation and independence of discrete random variables.</p>
 <div class="section" id="definition">
 <h2>Definition<a class="headerlink" href="#definition" title="Permalink to this headline">¶</a></h2>
-<p>The definition of the pmf of a discrete random variable can be extended into a
-distribution over several random variables in the following way.</p>
+<p>The definition of the pmf of a discrete random variable can be extended into a distribution over several random variables in the following way.</p>
 <div class='definition'>
-<p><strong>Definition (Joint probability mass function)</strong> Given random variables <span class="math notranslate nohighlight">\(X\)</span>
-and <span class="math notranslate nohighlight">\(Y\)</span> on <span class="math notranslate nohighlight">\((\Omega, \mathcal{F}, \mathbb{P})\)</span>, the joint probability mass
-function over <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> is the function <span class="math notranslate nohighlight">\(p_{X, Y} : \mathbb{R}^2 \to [0
-  , 1]\)</span> defined by</p>
+<p><strong>Definition (Joint probability mass function)</strong> Given random variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> on <span class="math notranslate nohighlight">\((\Omega, \mathcal{F}, \mathbb{P})\)</span>, the joint probability mass function over <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> is the function <span class="math notranslate nohighlight">\(p_{X, Y} : \mathbb{R}^2 \to [0, 1]\)</span> defined by</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
 p_{X, Y}(x, y) = \mathbb{P}\left(\{\omega \in \Omega : X(\omega) = x, Y
@@ -238,8 +237,7 @@ p_{X, Y}(x, y) = \mathbb{P}\left(\{\omega \in \Omega : X(\omega) = x, Y
 <p>This is usually abbreviated to <span class="math notranslate nohighlight">\(p_{X, Y}(x, y) = \mathbb{P}\left(X = x, Y = y\right)\)</span>.</p>
 </div>
 <br>
-<p>Using the additivity of <span class="math notranslate nohighlight">\(\mathbb{P}\)</span>, we can verify that <span class="math notranslate nohighlight">\(p_{X, Y}\)</span> also
-satisfies the marginalisation property</p>
+<p>Using the additivity of <span class="math notranslate nohighlight">\(\mathbb{P}\)</span>, we can verify that <span class="math notranslate nohighlight">\(p_{X, Y}\)</span> also satisfies the marginalisation property</p>
 <div class="math notranslate nohighlight">
 \[\begin{align} p_X(x) = \sum_{y \in \text{Im}Y} \mathbb{P}\left(X = x, Y = y
 \right),
@@ -249,14 +247,11 @@ satisfies the marginalisation property</p>
 \[\begin{align}
 \sum_{x \in \text{Im}X} \sum_{y \in \text{Im}Y} p_{X, Y}(x, y) = 1.
 \end{align}\]</div>
-<p>This definition can be extended to multivariate distributions of more than
-two variables by adding more variables to the set being measured.</p>
+<p>This definition can be extended to multivariate distributions of more than two variables by adding more variables to the set being measured.</p>
 </div>
 <div class="section" id="expectation-and-independence">
 <h2>Expectation and independence<a class="headerlink" href="#expectation-and-independence" title="Permalink to this headline">¶</a></h2>
-<p>We are often interested in taking the expectation of functions of multiple
-random variables, given by the following formula which is the extension
-of its univariate version.</p>
+<p>We are often interested in taking the expectation of functions of multiple random variables, given by the following formula which is the extension of its univariate version.</p>
 <div class='theorem'>
 <p><strong>Theorem (Law of the subconscious statistician - multivariate)</strong> Let <span class="math notranslate nohighlight">\(X\)</span> and
 <span class="math notranslate nohighlight">\(Y\)</span> be discrete random variables on <span class="math notranslate nohighlight">\((\Omega, \mathcal{F}, \mathbb{P})\)</span> and
@@ -269,19 +264,13 @@ of its univariate version.</p>
 <p>whenever this sum converges absolutely.</p>
 </div>
 <br>
-<p>Often, downstream calculations, including the expectation written above, can
-be simplified if the random variables are independent. Previously we defined
-independence in terms of events and we can extend this concept to variables
-in the following intuitive way.</p>
+<p>Often, downstream calculations, including the expectation written above, can be simplified if the random variables are independent. Previously we defined independence in terms of events and we can extend this concept to variables in the following intuitive way.</p>
 <div class='definition'>
-<p><strong>Definition (Independence)</strong> Two discrete random variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are
-independent if <span class="math notranslate nohighlight">\({X = x}\)</span> and <span class="math notranslate nohighlight">\({Y = y}\)</span> are independent for all <span class="math notranslate nohighlight">\(x, y \in
-  \mathbb{R}\)</span>, and we typically abbreviate this condition as</p>
+<p><strong>Definition (Independence)</strong> Two discrete random variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are independent if <span class="math notranslate nohighlight">\({X = x}\)</span> and <span class="math notranslate nohighlight">\({Y = y}\)</span> are independent for all <span class="math notranslate nohighlight">\(x, y \in \mathbb{R}\)</span>, and we typically abbreviate this condition as</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
-  \mathbb{P}(X = x, Y = y) = \mathbb{P}(X = x)\mathbb{P}(Y = y) \text{ for
-   } x, y \in \mathbb{R}.
-  \end{align}\]</div>
+\mathbb{P}(X = x, Y = y) = \mathbb{P}(X = x)\mathbb{P}(Y = y) \text{ for } x, y \in \mathbb{R}.
+\end{align}\]</div>
 <p>Random variables which are not independent are called <strong>dependent</strong>.</p>
 </div>
 <br>
