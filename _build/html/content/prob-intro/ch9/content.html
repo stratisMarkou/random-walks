@@ -1,0 +1,477 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Branching processes &#8212; Random walks</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../../../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/jupyter-sphinx.css" />
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/sphinx-book-theme.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/mystnb.js"></script>
+    <script src="../../../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .secondtoggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="canonical" href="https://random-walks.org/content/prob-intro/ch9/content.html" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Random walks" href="../ch10/content.html" />
+    <link rel="prev" title="Main limit theorems" href="../ch8/content.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://random-walks.org/content/prob-intro/ch9/content.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Branching processes" />
+<meta property="og:description" content="Branching processes  Stochastic and brancing processes  This chapter deals with branching processes, which is a particular type of stochastic process. We make a" />
+<meta property="og:image"       content="https://random-walks.org/_static/logo.svg" />
+
+<meta name="twitter:card" content="summary">
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../../index.html">
+  
+  <img src="../../../_static/logo.svg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Random walks</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  
+  <ul class="nav sidenav_l1">
+  <li class="">
+    <a href="../../home.html">Welcome</a>
+  </li>
+  <li class="active">
+    <a href="../intro.html">Probability: An introduction</a>
+  <ul class="nav sidenav_l2">
+    <li class="">
+      <a href="../ch1/content.html">Events and Probabilities</a>
+    </li>
+    <li class="">
+      <a href="../ch2/content.html">Discrete random variables</a>
+    </li>
+    <li class="">
+      <a href="../ch3/content.html">Multivariate discrete distributions</a>
+    </li>
+    <li class="">
+      <a href="../ch4/content.html">Probability generating functions</a>
+    </li>
+    <li class="">
+      <a href="../ch5/content.html">Distribution and density functions</a>
+    </li>
+    <li class="">
+      <a href="../ch6/content.html">Multivariate distributions</a>
+    </li>
+    <li class="">
+      <a href="../ch7/content.html">Moment generating functions</a>
+    </li>
+    <li class="">
+      <a href="../ch8/content.html">Main limit theorems</a>
+    </li>
+    <li class="active">
+      <a href="">Branching processes</a>
+    </li>
+    <li class="">
+      <a href="../ch10/content.html">Random walks</a>
+    </li>
+  </ul>
+  </li>
+  <li class="">
+    <a href="../../itila/intro.html">Information theory, Inference and Learning Algorithms</a>
+  </li>
+  <li class="">
+    <a href="../../gaussian-processes/gp-intro.html">Gaussian Processes</a>
+  </li>
+  <li class="">
+    <a href="../../c-programming/intro.html">The C programming language</a>
+  </li>
+  <li class="">
+    <a href="../../reading-and-links.html">Interesting reading and websites</a>
+  </li>
+  <li class="">
+    <a href="../../misc/misc.html">Miscellaneous</a>
+  </li>
+</ul>
+</nav>
+<p class="navbar_footer"></p>
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse" data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu" aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation" title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i class="fas fa-download"></i></button>
+
+            
+            <div class="dropdown-buttons">
+                <!-- ipynb file if we had a myst markdown file -->
+                
+                <!-- Download raw file -->
+                <a class="dropdown-buttons" href="../../../_sources/content/prob-intro/ch9/content.md.txt"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.md</button></a>
+                <!-- Download PDF via print -->
+                <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF" onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+            </div>
+            
+        </div>
+
+        <!-- Edit this page -->
+        
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+        
+    </div>
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#stochastic-and-brancing-processes" class="nav-link">Stochastic and brancing processes</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#probability-generating-functions" class="nav-link">Probability generating functions</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#mean-population" class="nav-link">Mean population</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#ultimate-extinction" class="nav-link">Ultimate extinction</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#references" class="nav-link">References</a>
+        </li>
+    
+    </ul>
+</nav>
+
+
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="branching-processes">
+<h1>Branching processes<a class="headerlink" href="#branching-processes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="stochastic-and-brancing-processes">
+<h2>Stochastic and brancing processes<a class="headerlink" href="#stochastic-and-brancing-processes" title="Permalink to this headline">¶</a></h2>
+<p>This chapter deals with branching processes, which is a particular type of stochastic process. We make a brief digression to define stochastic processes<a class="bibtex reference internal" href="#spweiss" id="id1">[Wei20]</a> for completeness.</p>
+<div class='definition'>
+<p><strong>Definition (Stochastic process)</strong> A stochastic process is a family of random variables <span class="math notranslate nohighlight">\(\{X(t), t\in \mathcal{I}\}\)</span> on a probability space <span class="math notranslate nohighlight">\((\Omega, \mathcal{F}, \mathbb{P})\)</span>, where <span class="math notranslate nohighlight">\(\mathcal{I}\)</span> is a set called the index set.</p>
+</div>
+<br>
+<p>Stochastic processes can take discrete or continuous values and can have a discrete or continuous index set <span class="math notranslate nohighlight">\(\mathcal{I}\)</span>. The branching process describes how a population evolves at discrete time intervals, and therefore takes discrete values and has a discrete index set <span class="math notranslate nohighlight">\(\mathcal{I}\)</span>.</p>
+<div class='definition'>
+<p><strong>Definition (Branching process)</strong> A branching process is a collection of random variables <span class="math notranslate nohighlight">\(X_0, X_1, X_2, ...\)</span>, representing a population of <em>nomads</em> which evolves as follows:</p>
+<ol class="simple">
+<li><p>At <span class="math notranslate nohighlight">\(t = 0\)</span> there is one nomad, <span class="math notranslate nohighlight">\(X_0 = 0\)</span>.</p></li>
+<li><p>At every time-step, each nomad dies after giving birth to a <em>family</em> of new nomads of random size <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+<li><p>The family sizes descending from each nomad are i.i.d. and are distributed according to the pmf <span class="math notranslate nohighlight">\(\mathbb{P}(C = k) = p_k, k = 0, 1, 2 ...\)</span>, called the <em>family-size distribution</em>.</p></li>
+</ol>
+</div>
+<br>
+</div>
+<div class="section" id="probability-generating-functions">
+<h2>Probability generating functions<a class="headerlink" href="#probability-generating-functions" title="Permalink to this headline">¶</a></h2>
+<p>We are interested in the distribution of the nomad population at future times. The recursive nature of the process gives a neat expression in terms of the generating function of the family-size distribution.</p>
+<div class='theorem'>
+<p><strong>Theorem (Probability generating functions of a branching process)</strong> Let <span class="math notranslate nohighlight">\(X_t\)</span> be a branching process with family-size distribution <span class="math notranslate nohighlight">\(\mathbb{P}(C = k) = p_k\)</span>, whose probability generating function is <span class="math notranslate nohighlight">\(G\)</span>. Then the probability generating functions <span class="math notranslate nohighlight">\(G_0, G_1, ...\)</span> of <span class="math notranslate nohighlight">\(X_0, X_1, ...\)</span> are</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+G_0(s) = s, G_{t+1}(s) = G_t(G(s)), \text{ for } t = 1, 2, ... .
+\end{align}\]</div>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Proability generating functions of a branching process</summary>
+<p>Let <span class="math notranslate nohighlight">\(C_{t, n}\)</span> be the family size born from the <span class="math notranslate nohighlight">\(n^{th}\)</span> nomad at time <span class="math notranslate nohighlight">\(t\)</span>. At <span class="math notranslate nohighlight">\(t = 0\)</span>, the population is <span class="math notranslate nohighlight">\(X_0 = 1\)</span> so that <span class="math notranslate nohighlight">\(G_0(s) = s\)</span>. For <span class="math notranslate nohighlight">\(t &gt; 0\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+G_{t + 1} &amp;= \mathbb{E}_{X_{t + 1}}\left[s^{X_{t + 1}}\right]\\
+&amp;= \mathbb{E}_{X_t}\left[\mathbb{E}_{C_{t, 1}, C_{t, 2}, ... C_{t, X_t}}\left[s^{X_{t + 1}} | X_t \right]\right]\\
+&amp;= \mathbb{E}_{X_t}\left[G(s)^{X_t}\right]\\
+&amp;= G_t(G(s)),
+\end{align}\end{split}\]</div>
+<p>where the subscripts in the expectations give the variables over which the expectation is taken. From the first to the second line we used the law of iterated expectations; from the second to the third we used the fact that the <span class="math notranslate nohighlight">\(C_{t, 1}, C_{t, 2}..., C_{t, X_t}\)</span> variables are i.i.d. so the pgf of their sum is equal to the product of their pgfs.</p>
+</details>
+<br>
+</div>
+<div class="section" id="mean-population">
+<h2>Mean population<a class="headerlink" href="#mean-population" title="Permalink to this headline">¶</a></h2>
+<div class='theorem'>
+<p><strong>Theorem (Mean population of a branching process)</strong> The mean value of a branching process <span class="math notranslate nohighlight">\(X_t\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{E}(X_t) = \mu^t,
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mu = \mathbb{E}(C)\)</span> is the mean family size. From this, it follows that as <span class="math notranslate nohighlight">\(t \to \infty\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\mathbb{E}(X_t) \to \begin{cases}
+0 &amp; \text{ if } \mu &lt; 1\\
+1 &amp; \text{ if } \mu = 1\\
+\infty &amp; \text{ if } \mu &gt; 1
+\end{cases}
+\end{align}\end{split}\]</div>
+</div>
+<br>
+<p>This result is not surprising since each nomad will give birth to <span class="math notranslate nohighlight">\(\mu\)</span> other nomads on average. It can be proved quickly using probability generating functions.</p>
+<details class="proof">
+<summary>Proof: Mean population of a branching process</summary>
+<p>We have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\mathbb{E}(X_t) &amp;= \frac{d}{ds} G_t(s) \bigg \vert_{s = 1}\\
+&amp;= G_{t - 1}'(G(1))G'(1)\\
+&amp;= G_{t - 1}'(1)\mu
+\end{align}\end{split}\]</div>
+<p>and considering that <span class="math notranslate nohighlight">\(G_{t - 1}'(1) = \mathbb{E}(X_{t-1})\)</span>, the result follows by induction.</p>
+</details>
+<br>
+</div>
+<div class="section" id="ultimate-extinction">
+<h2>Ultimate extinction<a class="headerlink" href="#ultimate-extinction" title="Permalink to this headline">¶</a></h2>
+<p>We are also interested in the behaviour of the process as <span class="math notranslate nohighlight">\(t \to \infty\)</span>. If the population ever reaches <span class="math notranslate nohighlight">\(X_t = 0\)</span>, it will have become extinct.</p>
+<div class='definition'>
+<p><strong>Definition (Extinction probability)</strong> Given a branching process <span class="math notranslate nohighlight">\(X_t\)</span>, the extinction probability <span class="math notranslate nohighlight">\(e\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+e = \mathbb{P}(X_t = 0 \text{ for some } t \geq 0).
+\end{align}\]</div>
+<p>Alternatively, defining <span class="math notranslate nohighlight">\(E_t = \{X_t = 0\}\)</span> as the event that the process is extinct by time <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(e_t = \mathbb{P}(E_t)\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\{X_t = 0 \text{ for some } t \geq 0\} = \bigcup^\infty_{t = 0} E_t,
+\end{align}\]</div>
+<p>and since <span class="math notranslate nohighlight">\(E_t \subseteq E_{t+1}\)</span> we have <span class="math notranslate nohighlight">\(e = \lim_{t \to \infty} e_t\)</span> by the continuity of probability measures. Thus <span class="math notranslate nohighlight">\(e\)</span> can equivalently be defined as the limit of <span class="math notranslate nohighlight">\(e_t\)</span> as <span class="math notranslate nohighlight">\(t \to \infty\)</span>.</p>
+</div>
+<br>
+<p>We are interested in the probability of ultimate extinction, that is the probability that <span class="math notranslate nohighlight">\(X_t = 0\)</span> for some <span class="math notranslate nohighlight">\(t\)</span>. Again, generating functions give a neat answer for this quantity too.</p>
+<div class='theorem'>
+<p><strong>Theorem (Extinction probability theorem)</strong> Let <span class="math notranslate nohighlight">\(X_t\)</span> be a branching process, whose family sizes <span class="math notranslate nohighlight">\(C\)</span> have common probability generating function <span class="math notranslate nohighlight">\(G\)</span>. The probability of extinction <span class="math notranslate nohighlight">\(e\)</span> is the smallest non-negative root of the equation</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+x = G(x).
+\end{align}\]</div>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Extinction proability theorem</summary>
+<p>We have <span class="math notranslate nohighlight">\(e_t = \mathbb{P}(X_t = 0) = G_t(0)\)</span> and <span class="math notranslate nohighlight">\(G_{t + 1}(s) = G(G_t(s))\)</span> so that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+e_{t + 1} &amp;= G_{t + 1}(0)\\
+&amp;= G(G_t(0)) \\
+&amp;= G(e_t) \\
+\end{align}\end{split}\]</div>
+<p>Taking the limit <span class="math notranslate nohighlight">\(t \to \infty\)</span> with initial condition <span class="math notranslate nohighlight">\(e_0 = 0\)</span>, we obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+e &amp;= \lim_{t \to \infty} e_t\\
+\implies G(e) &amp;= G\left(\lim_{t \to \infty} e_t\right)\\
+&amp;= \lim_{t \to \infty} G(e_t)\\
+&amp;= \lim_{t \to \infty} e_{t+1}\\
+&amp; \\
+&amp;= e\\
+\implies e &amp;= G(e)
+\end{align}\end{split}\]</div>
+<p>where we have used the fact that <span class="math notranslate nohighlight">\(G\)</span> is continuous on <span class="math notranslate nohighlight">\([0, 1]\)</span>. To show that <span class="math notranslate nohighlight">\(e\)</span> is the smallest non-negative root, suppose <span class="math notranslate nohighlight">\(\eta \geq 0\)</span> is another non-negative root. Since <span class="math notranslate nohighlight">\(G\)</span> is non-decreasing on <span class="math notranslate nohighlight">\([0, 1]\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+e_1 &amp;= G(0) \leq G(\eta) = \eta\\
+e_2 &amp;= G(e_1) \leq G(\eta) = \eta\\
+&amp;~~\vdots\\
+e &amp;\leq \eta
+\end{align}\end{split}\]</div>
+</details>
+<br>
+<p>The following theorem gives a necessary and sufficient condition for ultimate extinction to be certain.</p>
+<div class='theorem'>
+<p><strong>Theorem (Extinction survival theorem)</strong> Let <span class="math notranslate nohighlight">\(X_t\)</span> be a branching process whose family size distribution satisfies <span class="math notranslate nohighlight">\(\mathbb{P}(C = 1) \neq 1\)</span>. The probability of ultimate extinction satisfies <span class="math notranslate nohighlight">\(e = 1\)</span> if and only if the mean family size satisfies <span class="math notranslate nohighlight">\(\mu \leq 1\)</span>.</p>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Extinction survival theorem</summary>
+<p>In the trivial case where <span class="math notranslate nohighlight">\(\mathbb{P}(C = 1) = 1\)</span> we have <span class="math notranslate nohighlight">\(X_t = 1\)</span> for all <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(e = 0\)</span>. Now considering the facts that on the interval <span class="math notranslate nohighlight">\([0, 1]\)</span>, the function <span class="math notranslate nohighlight">\(G\)</span> is</p>
+<ol class="simple">
+<li><p>continuous, since it is a power series with a radius of convergence of at least <span class="math notranslate nohighlight">\(1\)</span>,</p></li>
+<li><p>non-decreasing, since <span class="math notranslate nohighlight">\(G'(x) \geq 0\)</span>,</p></li>
+<li><p>convex, since <span class="math notranslate nohighlight">\(G''(x) \geq 0\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(G(1) = 1\)</span>,</p></li>
+</ol>
+<p>we see that the graph of <span class="math notranslate nohighlight">\(y = G(x)\)</span> will intersect the graph of <span class="math notranslate nohighlight">\(y = x\)</span> at <span class="math notranslate nohighlight">\(x = 1\)</span>, and that the two graphs will have a smaller non-negative point of intersection if and only if <span class="math notranslate nohighlight">\(G'(1) &gt; 1\)</span>. The condition <span class="math notranslate nohighlight">\(e = 1\)</span> holds if and only if the smallest non-negative point of intesection is <span class="math notranslate nohighlight">\(1\)</span>, which is equivalent to the condition <span class="math notranslate nohighlight">\(G'(1) = \mu \leq 1\)</span>, arriving at the result.</p>
+</details>
+<br>
+<p>From the definition of the probability of extinction, it follows that if <span class="math notranslate nohighlight">\(\mu \leq 0\)</span>, then <span class="math notranslate nohighlight">\(X_t \to 0\)</span> in probability. Further, if the inequality is strict, <span class="math notranslate nohighlight">\(\mu &lt; 1\)</span>, then <span class="math notranslate nohighlight">\(X_t \to 0\)</span> in mean square - this does not hold for <span class="math notranslate nohighlight">\(\mu = 1\)</span>.</p>
+<details class="proof">
+<summary>Proof: Convergence of a branching process in probability and in mean-square</summary>
+<p>To show that <span class="math notranslate nohighlight">\(X_t \to 0\)</span> in probability, suppose <span class="math notranslate nohighlight">\(\mu \leq 1\)</span>, let <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> and consider</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\mathbb{P}(X_t &gt; \epsilon) &amp;= 1 - \mathbb{P}(X_t \leq \epsilon)\\
+&amp;= 1 - \big(\mathbb{P}(X_t = 0) + \mathbb{P}(0 &lt; X_t \leq \epsilon)\big).
+\end{align}\end{split}\]</div>
+<p>From the extinction survival theorem, <span class="math notranslate nohighlight">\(\mathbb{P}(X_t = 0) \to 1\)</span> as <span class="math notranslate nohighlight">\(t \to \infty\)</span> so</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{P}(X_t &gt; \epsilon) &amp;=  1 - \big(\mathbb{P}(X_t = 0) + \mathbb{P}(0 &lt; X_t \leq \epsilon)\big) \leq 1 - \mathbb{P}(X_t = 0) \to 0, \text{ as } t \to \infty,
+\end{align}\]</div>
+<p>and <span class="math notranslate nohighlight">\(X_t \to 0\)</span> in probability. We now treat the mean-square case. Consider</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{E}(X_t^2) &amp;= \text{Var}(X_t) + \mathbb{E}(X_t)^2.
+\end{align}\]</div>
+<p>Using the law of total variance</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\text{Var}(X_t) &amp;= \text{Var}_{X_{t - 1}}(\mathbb{E}_{X_t}(X_t | X_{t - 1})) + \mathbb{E}_{X_{t - 1}}(\text{Var}_{X_t}(X_t | X_{t - 1}))\\
+&amp;= \text{Var}_{X_{t - 1}}(\mu X_{t-1}) + \mathbb{E}_{X_{t - 1}}(X_{t - 1} \sigma^2)\\
+&amp;= \mu^2 \sigma_{t - 1}^2 + \mu^t \sigma^2
+\end{align}\end{split}\]</div>
+<p>Proceeding recursively, we obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\sigma_1^2 &amp;= \sigma^2 \\
+\sigma_2^2 &amp;= \mu \sigma^2 + \mu^2 \sigma^2\\
+&amp;~\vdots \\
+\sigma_t^2 &amp;= \mu^{t-1} \sigma^2 + \mu^t \sigma^2 + ... + \mu^{2t - 1} \sigma^2,
+\end{align}\end{split}\]</div>
+<p>which is a geometric sum. In the special case of <span class="math notranslate nohighlight">\(\mu = 1\)</span>, we see that <span class="math notranslate nohighlight">\(\sigma_t^2 = t \sigma^2\)</span>. If <span class="math notranslate nohighlight">\(\mu \neq 1\)</span>, we can use the geometric sum to obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\sigma_t^2 &amp;= \sigma^2 \mu^{t - 1} \frac{1 - \mu^t}{1 - \mu}.
+\end{align}\]</div>
+<p>Substituting these results into the expression for <span class="math notranslate nohighlight">\(\mathbb{E}(X_t^2)\)</span> we obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\mathbb{E}(X_t^2) = \begin{cases}
+1 + t\sigma^2 &amp; \text{ if } \mu = 1\\
+\mu^{2t} + \sigma^2 \mu^{t - 1} \frac{1 - \mu^t}{1 - \mu} &amp; \text{ if } \mu \neq 1.
+\end{cases}
+\end{align}\end{split}\]</div>
+<p>Therefore <span class="math notranslate nohighlight">\(\mathbb{E}(X_t^2) \to 0\)</span>, implying that <span class="math notranslate nohighlight">\(X_t \to 0\)</span> in mean-square if and only if <span class="math notranslate nohighlight">\(\mu &lt; 1\)</span>.</p>
+</details>
+<br>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p id="bibtex-bibliography-content/prob-intro/ch9/content-0"><dl class="citation">
+<dt class="bibtex label" id="spweiss"><span class="brackets"><a class="fn-backref" href="#id1">Wei20</a></span></dt>
+<dd><p>Eric W. Weisstein. Stochastic process. 2020. [From MathWorld–A Wolfram Web Resource. Online; accessed 28-August-2020]. URL: <a class="reference external" href="https://mathworld.wolfram.com/StochasticProcess.html">https://mathworld.wolfram.com/StochasticProcess.html</a>.</p>
+</dd>
+</dl>
+</p>
+</div>
+</div>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="../ch8/content.html" title="previous page">Main limit theorems</a>
+    <a class='right-next' id="next-link" href="../ch10/content.html" title="next page">Random walks</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Stratos Markou<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../../../_static/js/index.js"></script>
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-168728006-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    
+  </body>
+</html>

@@ -42,7 +42,7 @@ $$\begin{align}
 \end{pmatrix}, \text{ where } \mathbf{M} = (\mathbf{A} - \mathbf{B} \mathbf{C}^{-1}\mathbf{B}^\top)^{-1},
 \end{align}$$
 
-and oberving that the entry $M_{ij}$ is a function of all the $\{\mathbf{x}_n\}_{1:N}$ inputs and not just $\mathbf{x}_i$ and $\mathbf{x}_j$. Thus, the precision function cannot be self-consistent if it takes pairs of inputs as its argument. In other words, the precision matrix depends on the whole set of inputs we are conditioning on, and any precision function that takes **pairs of inputs** as its arguments will be inconsistent in general - perhaps with some trivial exceptions. We therefore have the following informal observation.
+and oberving that the entry $M_{ij}$ is a function of all the $\mathbf{x}_{1:N}$ inputs and not just $\mathbf{x}_i$ and $\mathbf{x}_j$. Thus, the precision function cannot be self-consistent if it takes pairs of inputs as its argument. In other words, the precision matrix depends on the whole set of inputs we are conditioning on, and any precision function that takes **pairs of inputs** as its arguments will be inconsistent in general - perhaps with some trivial exceptions. We therefore have the following informal observation.
 
 
 <div class='observation'>

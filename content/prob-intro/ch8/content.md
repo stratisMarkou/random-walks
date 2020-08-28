@@ -1,19 +1,25 @@
 # Main limit theorems
 
+This chapter introduces convergence for random variables, which may be in either of the three senses (1) in mean-square, (2) in probability or (3) in distribution, and the implication of one from the other are proved. Important theorems involving limits of random variables are presented, such as the law of large numbers (mean-square and weak versions), the central limit theorem and the large deviation theorem. The continuity theorems for moment generating functions and characteristic functions are presented.
+
 ## Convergence in mean-square and law of large numbers
+
+We are often interested in the convergence of a sequence of random variables to another random variable. Unlike real sequences, where convergence has one meaning only, the convergence of a sequence of random variables can be defined in different ways. One such way is convergence in mean-square, as defined below.
 
 <div class='definition'>
 
-**Definition (Mean square convergence)** We say that a sequence of random variables $Z_1, Z_2, ...$ converges in mean square to a limit variable $Z$ if 
+**Definition (Mean-square convergence)** We say that a sequence of random variables $X_1, X_2, ...$ converges in mean square to a limit variable $X$ if 
  
   $$\begin{align}
-  \mathbb{E}\left((Z_n - Z)^2\right) \to 0 \text{ as } n \to \infty,
+  \mathbb{E}\left[(X_n - X)^2\right] \to 0 \text{ as } n \to \infty,
   \end{align}$$
 
-and write this as $Z_n \to Z$ in mean square as $n \to \infty$.
+and write this as $X_n \to X$ in mean square as $n \to \infty$.
 
 </div>
 <br>
+
+Note that for mean-square convergence to be meaningful, $\mathbb{E}(X)$ as well as all $\mathbb{E}\left[(X_n - X)^2\right]$ must exist. We can use this definition to state one version of the famous mean square law of large numbers as follows.
 
 <div class='theorem'>
 
@@ -24,8 +30,6 @@ and write this as $Z_n \to Z$ in mean square as $n \to \infty$.
  \end{align}$$
 
 </div>
-<br>
-
 <br>
 
 
@@ -52,29 +56,32 @@ Where in the first line we used the fact $\text{Var}(aX) = a^2\text{Var}(X)$. Th
 
 ## Convergence in probability and weak law of large numbers
 
+A weaker sense in which a sequence of random variables can converge is that of convergence in probability.
 
 <div class='definition'>
 
-**Definition (Convergence in probability)** We say that a sequence of random variables $Z_1, Z_2, ...$ converges in probability to $Z$ as $n \to \infty$ if for all $\epsilon > 0$
+**Definition (Convergence in probability)** We say that a sequence of random variables $X_1, X_2, ...$ converges in probability to $X$ as $n \to \infty$ if for all $\epsilon > 0$
     
   $$\begin{align}
-  \mathbb{P}\left(|Z_n - Z| > \epsilon\right) \to 0, \text{ as } n \to \infty,
+  \mathbb{P}\left(|X_n - X| > \epsilon\right) \to 0, \text{ as } n \to \infty,
   \end{align}$$
     
-and write this as $Z_n \to Z$ in probability as $n \to \infty$.
+and write this as $X_n \to X$ in probability as $n \to \infty$.
 
 </div>
 <br>
 
+Convergence in probability is a weaker condition than convergence in mean-square in the sense that the former implies the latter, as stated by the following theorem.
 
 <div class='theorem'>
 
-**Theorem (Conv. in mean square $\implies$ conv. in probability)** If $Z_1, Z_2, ...$ is a sequence of random variables and $Z_n \to Z$ in mean square, then $Z_n \to Z$ in probability.
+**Theorem (Conv. in mean square $\implies$ conv. in probability)** If $X_1, X_2, ...$ is a sequence of random variables and $X_n \to X$ in mean square, then $X_n \to X$ in probability.
 
 </div>
 
 <br>
 
+To prove the above we use Chebyshev's inequality, a useful tool in probability theory, which is presented and proved below.
 
 <details class="proof">
 <summary>Proof: Convergence in mean square \(\implies\) convergence in probability</summary>
@@ -82,20 +89,19 @@ and write this as $Z_n \to Z$ in probability as $n \to \infty$.
 To show this result, we use Chebyshev's inequality
     
 $$\begin{align}
-\mathbb{P}(|X| \geq t) \leq \frac{\mathbb{E}\left(X^2\right)}{t^2},
+\mathbb{P}(|Z| \geq t) \leq \frac{\mathbb{E}\left(Z^2\right)}{t^2},
 \end{align}$$
     
-which proved below. Now set $X_n = Z_n - Z$ and $t = \epsilon > 0$ and let $n \to \infty$ to obtain
+which proved below. Now set $Z = X_n - X$ and $t = \epsilon > 0$ and let $n \to \infty$ to obtain
     
 $$\begin{align}
-\mathbb{P}(|Z_n - Z| \geq \epsilon) \leq \frac{\mathbb{E}\left((Z_n - Z)^2\right)}{\epsilon^2} \to 0 \text{ as } n \to \infty,
+\mathbb{P}(|X_n - X| \geq \epsilon) \leq \frac{\mathbb{E}\left((X_n - X)^2\right)}{\epsilon^2} \to 0 \text{ as } n \to \infty,
 \end{align}$$
     
-where we have used the assumption that $Z_n \to Z$ in mean square, so $\mathbb{P}\left(|Z_n - Z| \geq \epsilon\right) \to 0$ as $n \to \infty$.
+where we have used the assumption that $X_n \to X$ in mean square, so $\mathbb{P}\left(|X_n - X| \geq \epsilon\right) \to 0$ as $n \to \infty$.
 
 </details>
 <br>
-
 
 <div class='theorem'>
 
@@ -108,6 +114,23 @@ where we have used the assumption that $Z_n \to Z$ in mean square, so $\mathbb{P
 </div>
 <br>
 
+<details class="proof">
+<summary>Proof: Chebyshev's inequality</summary>
+
+Considering that $|X| \geq t \iff X^2 \geq t^2$ we have
+
+ $$\begin{align}
+ \mathbb{P}(|X| \geq t) = \mathbb{P}(X^2 \geq t^2) \leq \frac{\mathbb{E}\left(X^2\right)}{t^2}.
+ \end{align}$$
+
+by the {ref}`Markov inequality <prob-intro-markov-jensen>`, arriving at Chebyshev's inequality
+    
+
+</details>
+<br>
+    
+Just as the law of large numbers can be stated in the mean-square sense, it can also be stated in the weaker sense of convergence in probability.
+
 <div class='theorem'>
 
 **Theorem (Weak law of large numbers)** Let $X_1, X_2, ...$ be a sequence of independent random variables each with mean $\mu$ and variance $\sigma^2$. Then
@@ -118,7 +141,8 @@ where we have used the assumption that $Z_n \to Z$ in mean square, so $\mathbb{P
 
 </div>
 <br>
-
+    
+This weak version is a direct implication of the fact that convergence in mean-square implies convergence in probability, as shown in the following proof.
 
 <details class="proof">
 <summary>Proof: Weak law of large numbers</summary>
@@ -346,7 +370,7 @@ where we have used the facts that $X_n \to X$ in probability and that $\mathbb{P
 </details>
 <br>
     
-The second is an alternative proof which includes a diagram, that is hopefully more intuitives.
+The second is an alternative proof which includes a diagram, that is hopefully more intuitive.
     
 <details class="proof">
 <summary>Proof (b): Convergence in probability \(\implies\) convergence in distribution</summary>

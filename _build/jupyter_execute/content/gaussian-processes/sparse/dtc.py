@@ -1,5 +1,7 @@
 # DTC
 
+The deterministic training conditionals (DTC) method{cite}`dtcorig` is a sparse approximation for GPs. The DTC nomenclature was introduced by Candella and Rasmussen,{cite}`canrasuni` to describe the type of approximation made in this method. Instead of dealing with the exact GP model, the DTC method approximates the exact model using a second, approximate model. Strictly speaking, the probabilistic model assumed by DTC is not a valid GP model but has tractable inference and prediction stages.
+
 $$
 \def\Kxx{\mathbf{K}_{\mathbf{X}\mathbf{X}}}
  \def\Kxb{\mathbf{K}_{\mathbf{X}\mathbf{\bar{X}}}}
@@ -31,17 +33,19 @@ $$
 
 ## Approximate generative model
 
-The DTC approximation assumes **different generative processes for the train and the test data**. Because of this, as Candela and Rasmussen {cite}`canrasuni` have pointed out, DTC does not correspond exactly to a GP. That's because the training and test points need to be identified before sampling them.
-
-Sample inducing points from a GP prior:
+Consider the following approximate model. Given a set of $M$ inputs $\Xb = \mathbf{\bar{x}}_{1:M}$, called the *inducing inputs*, we draw $M$ samples from the GP prior
 
 $$\fb \sim \mathcal{N}\lrb{\bm{0}, \Kbb}.$$
 
-Sample latent function values at training data locations, and add noise to obtain observed training data:
+Once the $\fb$ variables have been drawn, and given another set of $N$ inputs $\X = \mathbf{x}_{1:N}$, called the *training inputs*, we draw $N$ independent samples at each input $\mathbf{x}_{1:N}$ and the corresponding noisy training observations $\bm{y}$
 
 $$\begin{align} \fx | \fb &\sim \mathcal{N}\lrb{ \Kxb \Kbb^{-1} \fb, \bm{0}}, \\
-\bm{y} | \fx &\sim \mathcal{N}\lrb{\fx, \sigma^2 \bm{I}}
+\bm{y} | \fx &\sim \mathcal{N}\lrb{\fx, \sigma^2 \bm{I}}.
 \end{align}$$
+
+For making test predictions, the 
+
+DTC gets its name from the fact that the $\fx$ are deterministic when conditioned on $\Xb$. Note that the DTC involves different generative processes for the training and test data. Because of this, as Candela and Rasmussen {cite}`canrasuni` have pointed out, DTC does not correspond exactly to a GP. That's because the training and test points need to be identified before sampling them.
 
 In this model, the entries of vector $\bm{y}$ are conditionally independent given $\fb$.
 
@@ -49,34 +53,8 @@ $$\begin{align} \fs | \fb &\sim \mathcal{N}\lrb{ \Kxs \Kss^{-1} \fs, \text{diag}
 \bm{y}^* | \fs &\sim \mathcal{N}\lrb{\fs, \sigma^2 \bm{I}}
 \end{align}$$
 
-## Posterior over inducing variables
 
-The posterior over inducing variables is
 
-$$\begin{align}p\lrb{\fb | \bm{y}} = \mathcal{N}\lrb{\fb; \bs{\Sigma} \bm{A}^\top \bm{y}, \bs{\Sigma}}, \text{ where } &\bs{\Sigma} = \sigma^2 \lrb{\Kbb^{-1} + \sigma^{-2}\Kbb^{-1}\Kbx\Kxb\Kbb^{-1}}^{-1}\\
-\text{ and } & \bm{A} = \Kxb \Kbb^{-1} \end{align}$$
-
-which we can rewrite, by defining $\bm{L}, \bm{V}$ and $\bm{M}$ such that
-
-$$\begin{align}
-\Kbb &= \bm{L}\bm{L}^\top\\
-\bm{V} &= \bm{L}^{-1} \Kbx\\
-\bm{M} &= \sigma^2 \bm{I} + \bm{V}\bm{V}^\top,
-\end{align}$$
-
-we can tidy up the posterior:
-
-$$\begin{align}p\lrb{\fb | \bm{y}} = \mathcal{N}\lrb{\fb; \bm{L}\bm{M}^{-1}\bm{V}\bm{y}, \sigma^2 \bm{L} \bm{M}^{-1}\bm{L}}
-\end{align}$$
-
-## Marginal likelihood of the training data
-
-The marginal likelihood of this approximate model is the probability of the data under the approximate likelihood integrated against the prior:
-
-$$\begin{align}
-p(\bm{y} | \X, \bs{\theta}) &= \int p\lrb{\bm{y} | \X, \bs{\theta}} p\lrb{\fx | \fb, \bs{\theta}}p\lrb{\fb | \bs{\theta}} d\fx d\fb\\
-&= \mathcal{N}\lrb{\bm{y}; \bm{0}, \sigma^2 \bm{I} + \bm{V}^\top\bm{V}}
-\end{align}$$
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -266,6 +244,35 @@ plt.yticks(np.arange(-3, 4, 3), fontsize=14)
 plt.legend(loc='lower right', fontsize=14)
 plt.xlim([-4., 4.])
 plt.show()
+
+## Posterior over inducing variables
+
+The posterior over inducing variables is
+
+$$\begin{align}p\lrb{\fb | \bm{y}} = \mathcal{N}\lrb{\fb; \bs{\Sigma} \bm{A}^\top \bm{y}, \bs{\Sigma}}, \text{ where } &\bs{\Sigma} = \sigma^2 \lrb{\Kbb^{-1} + \sigma^{-2}\Kbb^{-1}\Kbx\Kxb\Kbb^{-1}}^{-1}\\
+\text{ and } & \bm{A} = \Kxb \Kbb^{-1} \end{align}$$
+
+which we can rewrite, by defining $\bm{L}, \bm{V}$ and $\bm{M}$ such that
+
+$$\begin{align}
+\Kbb &= \bm{L}\bm{L}^\top\\
+\bm{V} &= \bm{L}^{-1} \Kbx\\
+\bm{M} &= \sigma^2 \bm{I} + \bm{V}\bm{V}^\top,
+\end{align}$$
+
+we can tidy up the posterior:
+
+$$\begin{align}p\lrb{\fb | \bm{y}} = \mathcal{N}\lrb{\fb; \bm{L}\bm{M}^{-1}\bm{V}\bm{y}, \sigma^2 \bm{L} \bm{M}^{-1}\bm{L}}
+\end{align}$$
+
+## Marginal likelihood of the training data
+
+The marginal likelihood of this approximate model is the probability of the data under the approximate likelihood integrated against the prior:
+
+$$\begin{align}
+p(\bm{y} | \X, \bs{\theta}) &= \int p\lrb{\bm{y} | \X, \bs{\theta}} p\lrb{\fx | \fb, \bs{\theta}}p\lrb{\fb | \bs{\theta}} d\fx d\fb\\
+&= \mathcal{N}\lrb{\bm{y}; \bm{0}, \sigma^2 \bm{I} + \bm{V}^\top\bm{V}}
+\end{align}$$
 
 # Implementation
 
@@ -510,6 +517,6 @@ class DTCGP(tf.keras.Model):
 
 ## References
 
-```{bibliography} ../../../references.bib
+```{bibliography} ./ref-dtc.bib
 ```
 

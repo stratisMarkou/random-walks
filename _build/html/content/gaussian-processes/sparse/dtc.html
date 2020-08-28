@@ -46,7 +46,7 @@
 <meta property="og:url"         content="https://random-walks.org/content/gaussian-processes/sparse/dtc.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="DTC" />
-<meta property="og:description" content="DTC   \def\Kxx{\mathbf{K}_{\mathbf{X}\mathbf{X}}}  \def\Kxb{\mathbf{K}_{\mathbf{X}\mathbf{\bar{X}}}}  \def\Kbx{\mathbf{K}_{\mathbf{\bar{X}}\mathbf{X}}}  \def\Kb" />
+<meta property="og:description" content="DTC  The deterministic training conditionals (DTC) method[SWL03] is a sparse approximation for GPs. The DTC nomenclature was introduced by Candella and Rasmusse" />
 <meta property="og:image"       content="https://random-walks.org/_static/logo.svg" />
 
 <meta name="twitter:card" content="summary">
@@ -211,6 +211,7 @@
                 
   <div class="section" id="dtc">
 <h1>DTC<a class="headerlink" href="#dtc" title="Permalink to this headline">¶</a></h1>
+<p>The deterministic training conditionals (DTC) method<a class="bibtex reference internal" href="#dtcorig" id="id1">[SWL03]</a> is a sparse approximation for GPs. The DTC nomenclature was introduced by Candella and Rasmussen,<a class="bibtex reference internal" href="#canrasuni" id="id2">[QCR05]</a> to describe the type of approximation made in this method. Instead of dealing with the exact GP model, the DTC method approximates the exact model using a second, approximate model. Strictly speaking, the probabilistic model assumed by DTC is not a valid GP model but has tractable inference and prediction stages.</p>
 <div class="math notranslate nohighlight">
 \[
 \def\Kxx{\mathbf{K}_{\mathbf{X}\mathbf{X}}}
@@ -242,46 +243,20 @@
 \]</div>
 <div class="section" id="approximate-generative-model">
 <h2>Approximate generative model<a class="headerlink" href="#approximate-generative-model" title="Permalink to this headline">¶</a></h2>
-<p>The DTC approximation assumes <strong>different generative processes for the train and the test data</strong>. Because of this, as Candela and Rasmussen <a class="bibtex reference internal" href="#canrasuni" id="id1">[QCR05]</a> have pointed out, DTC does not correspond exactly to a GP. That’s because the training and test points need to be identified before sampling them.</p>
-<p>Sample inducing points from a GP prior:</p>
+<p>Consider the following approximate model. Given a set of <span class="math notranslate nohighlight">\(M\)</span> inputs <span class="math notranslate nohighlight">\(\Xb = \mathbf{\bar{x}}_{1:M}\)</span>, called the <em>inducing inputs</em>, we draw <span class="math notranslate nohighlight">\(M\)</span> samples from the GP prior</p>
 <div class="math notranslate nohighlight">
 \[\fb \sim \mathcal{N}\lrb{\bm{0}, \Kbb}.\]</div>
-<p>Sample latent function values at training data locations, and add noise to obtain observed training data:</p>
+<p>Once the <span class="math notranslate nohighlight">\(\fb\)</span> variables have been drawn, and given another set of <span class="math notranslate nohighlight">\(N\)</span> inputs <span class="math notranslate nohighlight">\(\X = \mathbf{x}_{1:N}\)</span>, called the <em>training inputs</em>, we draw <span class="math notranslate nohighlight">\(N\)</span> independent samples at each input <span class="math notranslate nohighlight">\(\mathbf{x}_{1:N}\)</span> and the corresponding noisy training observations <span class="math notranslate nohighlight">\(\bm{y}\)</span></p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align} \fx | \fb &amp;\sim \mathcal{N}\lrb{ \Kxb \Kbb^{-1} \fb, \bm{0}}, \\
-\bm{y} | \fx &amp;\sim \mathcal{N}\lrb{\fx, \sigma^2 \bm{I}}
+\bm{y} | \fx &amp;\sim \mathcal{N}\lrb{\fx, \sigma^2 \bm{I}}.
 \end{align}\end{split}\]</div>
+<p>For making test predictions, the</p>
+<p>DTC gets its name from the fact that the <span class="math notranslate nohighlight">\(\fx\)</span> are deterministic when conditioned on <span class="math notranslate nohighlight">\(\Xb\)</span>. Note that the DTC involves different generative processes for the training and test data. Because of this, as Candela and Rasmussen <a class="bibtex reference internal" href="#canrasuni" id="id3">[QCR05]</a> have pointed out, DTC does not correspond exactly to a GP. That’s because the training and test points need to be identified before sampling them.</p>
 <p>In this model, the entries of vector <span class="math notranslate nohighlight">\(\bm{y}\)</span> are conditionally independent given <span class="math notranslate nohighlight">\(\fb\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align} \fs | \fb &amp;\sim \mathcal{N}\lrb{ \Kxs \Kss^{-1} \fs, \text{diag}\lrb{\Kss - \Ksb \Kbb^{-1} \Kbs}}, \\
 \bm{y}^* | \fs &amp;\sim \mathcal{N}\lrb{\fs, \sigma^2 \bm{I}}
-\end{align}\end{split}\]</div>
-</div>
-<div class="section" id="posterior-over-inducing-variables">
-<h2>Posterior over inducing variables<a class="headerlink" href="#posterior-over-inducing-variables" title="Permalink to this headline">¶</a></h2>
-<p>The posterior over inducing variables is</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{align}p\lrb{\fb | \bm{y}} = \mathcal{N}\lrb{\fb; \bs{\Sigma} \bm{A}^\top \bm{y}, \bs{\Sigma}}, \text{ where } &amp;\bs{\Sigma} = \sigma^2 \lrb{\Kbb^{-1} + \sigma^{-2}\Kbb^{-1}\Kbx\Kxb\Kbb^{-1}}^{-1}\\
-\text{ and } &amp; \bm{A} = \Kxb \Kbb^{-1} \end{align}\end{split}\]</div>
-<p>which we can rewrite, by defining <span class="math notranslate nohighlight">\(\bm{L}, \bm{V}\)</span> and <span class="math notranslate nohighlight">\(\bm{M}\)</span> such that</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{align}
-\Kbb &amp;= \bm{L}\bm{L}^\top\\
-\bm{V} &amp;= \bm{L}^{-1} \Kbx\\
-\bm{M} &amp;= \sigma^2 \bm{I} + \bm{V}\bm{V}^\top,
-\end{align}\end{split}\]</div>
-<p>we can tidy up the posterior:</p>
-<div class="math notranslate nohighlight">
-\[\begin{align}p\lrb{\fb | \bm{y}} = \mathcal{N}\lrb{\fb; \bm{L}\bm{M}^{-1}\bm{V}\bm{y}, \sigma^2 \bm{L} \bm{M}^{-1}\bm{L}}
-\end{align}\]</div>
-</div>
-<div class="section" id="marginal-likelihood-of-the-training-data">
-<h2>Marginal likelihood of the training data<a class="headerlink" href="#marginal-likelihood-of-the-training-data" title="Permalink to this headline">¶</a></h2>
-<p>The marginal likelihood of this approximate model is the probability of the data under the approximate likelihood integrated against the prior:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{align}
-p(\bm{y} | \X, \bs{\theta}) &amp;= \int p\lrb{\bm{y} | \X, \bs{\theta}} p\lrb{\fx | \fb, \bs{\theta}}p\lrb{\fb | \bs{\theta}} d\fx d\fb\\
-&amp;= \mathcal{N}\lrb{\bm{y}; \bm{0}, \sigma^2 \bm{I} + \bm{V}^\top\bm{V}}
 \end{align}\end{split}\]</div>
 <div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
@@ -487,9 +462,36 @@ p(\bm{y} | \X, \bs{\theta}) &amp;= \int p\lrb{\bm{y} | \X, \bs{\theta}} p\lrb{\f
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/dtc_4_0.png" src="../../../_images/dtc_4_0.png" />
+<img alt="../../../_images/dtc_3_0.png" src="../../../_images/dtc_3_0.png" />
 </div>
 </div>
+</div>
+<div class="section" id="posterior-over-inducing-variables">
+<h2>Posterior over inducing variables<a class="headerlink" href="#posterior-over-inducing-variables" title="Permalink to this headline">¶</a></h2>
+<p>The posterior over inducing variables is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}p\lrb{\fb | \bm{y}} = \mathcal{N}\lrb{\fb; \bs{\Sigma} \bm{A}^\top \bm{y}, \bs{\Sigma}}, \text{ where } &amp;\bs{\Sigma} = \sigma^2 \lrb{\Kbb^{-1} + \sigma^{-2}\Kbb^{-1}\Kbx\Kxb\Kbb^{-1}}^{-1}\\
+\text{ and } &amp; \bm{A} = \Kxb \Kbb^{-1} \end{align}\end{split}\]</div>
+<p>which we can rewrite, by defining <span class="math notranslate nohighlight">\(\bm{L}, \bm{V}\)</span> and <span class="math notranslate nohighlight">\(\bm{M}\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\Kbb &amp;= \bm{L}\bm{L}^\top\\
+\bm{V} &amp;= \bm{L}^{-1} \Kbx\\
+\bm{M} &amp;= \sigma^2 \bm{I} + \bm{V}\bm{V}^\top,
+\end{align}\end{split}\]</div>
+<p>we can tidy up the posterior:</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}p\lrb{\fb | \bm{y}} = \mathcal{N}\lrb{\fb; \bm{L}\bm{M}^{-1}\bm{V}\bm{y}, \sigma^2 \bm{L} \bm{M}^{-1}\bm{L}}
+\end{align}\]</div>
+</div>
+<div class="section" id="marginal-likelihood-of-the-training-data">
+<h2>Marginal likelihood of the training data<a class="headerlink" href="#marginal-likelihood-of-the-training-data" title="Permalink to this headline">¶</a></h2>
+<p>The marginal likelihood of this approximate model is the probability of the data under the approximate likelihood integrated against the prior:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+p(\bm{y} | \X, \bs{\theta}) &amp;= \int p\lrb{\bm{y} | \X, \bs{\theta}} p\lrb{\fx | \fb, \bs{\theta}}p\lrb{\fb | \bs{\theta}} d\fx d\fb\\
+&amp;= \mathcal{N}\lrb{\bm{y}; \bm{0}, \sigma^2 \bm{I} + \bm{V}^\top\bm{V}}
+\end{align}\end{split}\]</div>
 </div>
 </div>
 <div class="section" id="implementation">
@@ -619,8 +621,8 @@ p(\bm{y} | \X, \bs{\theta}) &amp;= \int p\lrb{\bm{y} | \X, \bs{\theta}} p\lrb{\f
 <div class="math notranslate nohighlight">
 \[\begin{align}p\lrb{\fb | \bm{y}} = \mathcal{N}\lrb{\fb; \bm{L}\bm{M}^{-1}\bm{V}\bm{y}, \sigma^2 \bm{L} \bm{M}^{-1}\bm{L}}
 \end{align}\]</div>
-<div class="section" id="id2">
-<h2>Marginal likelihood of the training data<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id4">
+<h2>Marginal likelihood of the training data<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <p>The marginal likelihood of this approximate model is the probability of the data under the approximate likelihood integrated against the prior:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
@@ -747,11 +749,11 @@ p(\bm{y} | \X, \bs{\theta}) &amp;= \int p\lrb{\bm{y} | \X, \bs{\theta}} p\lrb{\f
 <div class="section" id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
 <p id="bibtex-bibliography-content/gaussian-processes/sparse/dtc-0"><dl class="citation">
-<dt class="bibtex label" id="cprogkr"><span class="brackets">KR88</span></dt>
-<dd><p>Brian W. Kernighan and Dennis M. Ritchie. <em>The C Programming Language</em>. Prentice Hall Professional Technical Reference, 2nd edition, 1988. ISBN 0131103709.</p>
-</dd>
-<dt class="bibtex label" id="canrasuni"><span class="brackets"><a class="fn-backref" href="#id1">QCR05</a></span></dt>
+<dt class="bibtex label" id="canrasuni"><span class="brackets">QCR05</span><span class="fn-backref">(<a href="#id2">1</a>,<a href="#id3">2</a>)</span></dt>
 <dd><p>J. Quinonero Candela and CE. Rasmussen. A unifying view of sparse approximate gaussian process regression. <em>Journal of Machine Learning Research</em>, 2005.</p>
+</dd>
+<dt class="bibtex label" id="dtcorig"><span class="brackets"><a class="fn-backref" href="#id1">SWL03</a></span></dt>
+<dd><p>Matthias Seeger, Christopher Williams, and Neil Lawrence. Fast forward selection to speed up sparse gaussian process regression. <em>Artificial Intelligence and Statistics 9</em>, 2003.</p>
 </dd>
 </dl>
 </p>

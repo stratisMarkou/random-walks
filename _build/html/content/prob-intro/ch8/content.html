@@ -35,7 +35,7 @@
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Information theory, Inference and Learning Algorithms" href="../../itila/intro.html" />
+    <link rel="next" title="Branching processes" href="../ch9/content.html" />
     <link rel="prev" title="Moment generating functions" href="../ch7/content.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -46,7 +46,7 @@
 <meta property="og:url"         content="https://random-walks.org/content/prob-intro/ch8/content.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Main limit theorems" />
-<meta property="og:description" content="Main limit theorems  Convergence in mean-square and law of large numbers  <div class='definition'>   Definition (Mean square convergence) We say that a sequence" />
+<meta property="og:description" content="Main limit theorems  This chapter introduces convergence for random variables, which may be in either of the three senses (1) in mean-square, (2) in probability" />
 <meta property="og:image"       content="https://random-walks.org/_static/logo.svg" />
 
 <meta name="twitter:card" content="summary">
@@ -109,6 +109,12 @@
     </li>
     <li class="active">
       <a href="">Main limit theorems</a>
+    </li>
+    <li class="">
+      <a href="../ch9/content.html">Branching processes</a>
+    </li>
+    <li class="">
+      <a href="../ch10/content.html">Random walks</a>
     </li>
   </ul>
   </li>
@@ -223,17 +229,20 @@
                 
   <div class="section" id="main-limit-theorems">
 <h1>Main limit theorems<a class="headerlink" href="#main-limit-theorems" title="Permalink to this headline">¶</a></h1>
+<p>This chapter introduces convergence for random variables, which may be in either of the three senses (1) in mean-square, (2) in probability or (3) in distribution, and the implication of one from the other are proved. Important theorems involving limits of random variables are presented, such as the law of large numbers (mean-square and weak versions), the central limit theorem and the large deviation theorem. The continuity theorems for moment generating functions and characteristic functions are presented.</p>
 <div class="section" id="convergence-in-mean-square-and-law-of-large-numbers">
 <h2>Convergence in mean-square and law of large numbers<a class="headerlink" href="#convergence-in-mean-square-and-law-of-large-numbers" title="Permalink to this headline">¶</a></h2>
+<p>We are often interested in the convergence of a sequence of random variables to another random variable. Unlike real sequences, where convergence has one meaning only, the convergence of a sequence of random variables can be defined in different ways. One such way is convergence in mean-square, as defined below.</p>
 <div class='definition'>
-<p><strong>Definition (Mean square convergence)</strong> We say that a sequence of random variables <span class="math notranslate nohighlight">\(Z_1, Z_2, ...\)</span> converges in mean square to a limit variable <span class="math notranslate nohighlight">\(Z\)</span> if</p>
+<p><strong>Definition (Mean-square convergence)</strong> We say that a sequence of random variables <span class="math notranslate nohighlight">\(X_1, X_2, ...\)</span> converges in mean square to a limit variable <span class="math notranslate nohighlight">\(X\)</span> if</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
-  \mathbb{E}\left((Z_n - Z)^2\right) \to 0 \text{ as } n \to \infty,
+  \mathbb{E}\left[(X_n - X)^2\right] \to 0 \text{ as } n \to \infty,
   \end{align}\]</div>
-<p>and write this as <span class="math notranslate nohighlight">\(Z_n \to Z\)</span> in mean square as <span class="math notranslate nohighlight">\(n \to \infty\)</span>.</p>
+<p>and write this as <span class="math notranslate nohighlight">\(X_n \to X\)</span> in mean square as <span class="math notranslate nohighlight">\(n \to \infty\)</span>.</p>
 </div>
 <br>
+<p>Note that for mean-square convergence to be meaningful, <span class="math notranslate nohighlight">\(\mathbb{E}(X)\)</span> as well as all <span class="math notranslate nohighlight">\(\mathbb{E}\left[(X_n - X)^2\right]\)</span> must exist. We can use this definition to state one version of the famous mean square law of large numbers as follows.</p>
 <div class='theorem'>
 <p><strong>Theorem (Mean square law of large numbers)</strong> Let <span class="math notranslate nohighlight">\(X_1, X_2, ...\)</span> be a sequence of independent random variables each with mean <span class="math notranslate nohighlight">\(\mu\)</span> and variance <span class="math notranslate nohighlight">\(\sigma^2\)</span>. Then</p>
 <div class="math notranslate nohighlight">
@@ -241,7 +250,6 @@
  \frac{1}{N}\sum_{n = 1}^N X_n \to \mu \text{ as } n \to \infty \text{ in mean square}.
  \end{align}\]</div>
 </div>
-<br>
 <br>
 <details class="proof">
 <summary>Proof: Mean-square law of large numbers</summary>
@@ -262,32 +270,35 @@
 </div>
 <div class="section" id="convergence-in-probability-and-weak-law-of-large-numbers">
 <h2>Convergence in probability and weak law of large numbers<a class="headerlink" href="#convergence-in-probability-and-weak-law-of-large-numbers" title="Permalink to this headline">¶</a></h2>
+<p>A weaker sense in which a sequence of random variables can converge is that of convergence in probability.</p>
 <div class='definition'>
-<p><strong>Definition (Convergence in probability)</strong> We say that a sequence of random variables <span class="math notranslate nohighlight">\(Z_1, Z_2, ...\)</span> converges in probability to <span class="math notranslate nohighlight">\(Z\)</span> as <span class="math notranslate nohighlight">\(n \to \infty\)</span> if for all <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span></p>
+<p><strong>Definition (Convergence in probability)</strong> We say that a sequence of random variables <span class="math notranslate nohighlight">\(X_1, X_2, ...\)</span> converges in probability to <span class="math notranslate nohighlight">\(X\)</span> as <span class="math notranslate nohighlight">\(n \to \infty\)</span> if for all <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span></p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
-  \mathbb{P}\left(|Z_n - Z| &gt; \epsilon\right) \to 0, \text{ as } n \to \infty,
+  \mathbb{P}\left(|X_n - X| &gt; \epsilon\right) \to 0, \text{ as } n \to \infty,
   \end{align}\]</div>
-<p>and write this as <span class="math notranslate nohighlight">\(Z_n \to Z\)</span> in probability as <span class="math notranslate nohighlight">\(n \to \infty\)</span>.</p>
+<p>and write this as <span class="math notranslate nohighlight">\(X_n \to X\)</span> in probability as <span class="math notranslate nohighlight">\(n \to \infty\)</span>.</p>
 </div>
 <br>
+<p>Convergence in probability is a weaker condition than convergence in mean-square in the sense that the former implies the latter, as stated by the following theorem.</p>
 <div class='theorem'>
-<p><strong>Theorem (Conv. in mean square <span class="math notranslate nohighlight">\(\implies\)</span> conv. in probability)</strong> If <span class="math notranslate nohighlight">\(Z_1, Z_2, ...\)</span> is a sequence of random variables and <span class="math notranslate nohighlight">\(Z_n \to Z\)</span> in mean square, then <span class="math notranslate nohighlight">\(Z_n \to Z\)</span> in probability.</p>
+<p><strong>Theorem (Conv. in mean square <span class="math notranslate nohighlight">\(\implies\)</span> conv. in probability)</strong> If <span class="math notranslate nohighlight">\(X_1, X_2, ...\)</span> is a sequence of random variables and <span class="math notranslate nohighlight">\(X_n \to X\)</span> in mean square, then <span class="math notranslate nohighlight">\(X_n \to X\)</span> in probability.</p>
 </div>
 <br>
+<p>To prove the above we use Chebyshev’s inequality, a useful tool in probability theory, which is presented and proved below.</p>
 <details class="proof">
 <summary>Proof: Convergence in mean square \(\implies\) convergence in probability</summary>
 <p>To show this result, we use Chebyshev’s inequality</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
-\mathbb{P}(|X| \geq t) \leq \frac{\mathbb{E}\left(X^2\right)}{t^2},
+\mathbb{P}(|Z| \geq t) \leq \frac{\mathbb{E}\left(Z^2\right)}{t^2},
 \end{align}\]</div>
-<p>which proved below. Now set <span class="math notranslate nohighlight">\(X_n = Z_n - Z\)</span> and <span class="math notranslate nohighlight">\(t = \epsilon &gt; 0\)</span> and let <span class="math notranslate nohighlight">\(n \to \infty\)</span> to obtain</p>
+<p>which proved below. Now set <span class="math notranslate nohighlight">\(Z = X_n - X\)</span> and <span class="math notranslate nohighlight">\(t = \epsilon &gt; 0\)</span> and let <span class="math notranslate nohighlight">\(n \to \infty\)</span> to obtain</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
-\mathbb{P}(|Z_n - Z| \geq \epsilon) \leq \frac{\mathbb{E}\left((Z_n - Z)^2\right)}{\epsilon^2} \to 0 \text{ as } n \to \infty,
+\mathbb{P}(|X_n - X| \geq \epsilon) \leq \frac{\mathbb{E}\left((X_n - X)^2\right)}{\epsilon^2} \to 0 \text{ as } n \to \infty,
 \end{align}\]</div>
-<p>where we have used the assumption that <span class="math notranslate nohighlight">\(Z_n \to Z\)</span> in mean square, so <span class="math notranslate nohighlight">\(\mathbb{P}\left(|Z_n - Z| \geq \epsilon\right) \to 0\)</span> as <span class="math notranslate nohighlight">\(n \to \infty\)</span>.</p>
+<p>where we have used the assumption that <span class="math notranslate nohighlight">\(X_n \to X\)</span> in mean square, so <span class="math notranslate nohighlight">\(\mathbb{P}\left(|X_n - X| \geq \epsilon\right) \to 0\)</span> as <span class="math notranslate nohighlight">\(n \to \infty\)</span>.</p>
 </details>
 <br>
 <div class='theorem'>
@@ -298,6 +309,17 @@
  \end{align}\]</div>
 </div>
 <br>
+<details class="proof">
+<summary>Proof: Chebyshev's inequality</summary>
+<p>Considering that <span class="math notranslate nohighlight">\(|X| \geq t \iff X^2 \geq t^2\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+ \mathbb{P}(|X| \geq t) = \mathbb{P}(X^2 \geq t^2) \leq \frac{\mathbb{E}\left(X^2\right)}{t^2}.
+ \end{align}\]</div>
+<p>by the <a class="reference internal" href="../ch7/content.html#prob-intro-markov-jensen"><span class="std std-ref">Markov inequality</span></a>, arriving at Chebyshev’s inequality</p>
+</details>
+<br>
+<p>Just as the law of large numbers can be stated in the mean-square sense, it can also be stated in the weaker sense of convergence in probability.</p>
 <div class='theorem'>
 <p><strong>Theorem (Weak law of large numbers)</strong> Let <span class="math notranslate nohighlight">\(X_1, X_2, ...\)</span> be a sequence of independent random variables each with mean <span class="math notranslate nohighlight">\(\mu\)</span> and variance <span class="math notranslate nohighlight">\(\sigma^2\)</span>. Then</p>
 <div class="math notranslate nohighlight">
@@ -306,6 +328,7 @@
  \end{align}\]</div>
 </div>
 <br>
+<p>This weak version is a direct implication of the fact that convergence in mean-square implies convergence in probability, as shown in the following proof.</p>
 <details class="proof">
 <summary>Proof: Weak law of large numbers</summary>
 <p>We have shown that as (N \to \infty), the partial sum</p>
@@ -476,7 +499,7 @@ S_N &gt; aN \iff g(S_N) &gt; g(aN).
 <p>where we have used the facts that <span class="math notranslate nohighlight">\(X_n \to X\)</span> in probability and that <span class="math notranslate nohighlight">\(\mathbb{P}(X \leq x)\)</span> is continuous at <span class="math notranslate nohighlight">\(x\)</span>.</p>
 </details>
 <br>
-<p>The second is an alternative proof which includes a diagram, that is hopefully more intuitives.</p>
+<p>The second is an alternative proof which includes a diagram, that is hopefully more intuitive.</p>
 <details class="proof">
 <summary>Proof (b): Convergence in probability \(\implies\) convergence in distribution</summary>
 <p>The set <span class="math notranslate nohighlight">\(Z_n \leq z\)</span> corresponds to the yellow, red, green and pink regions below, and the set <span class="math notranslate nohighlight">\(Z \leq z\)</span> corresponds to the blue, orange, green and pink regions. Therefore the difference <span class="math notranslate nohighlight">\(\mathbb{P}(Z_n \leq z) - \mathbb{P}(Z \leq z)\)</span> is equal to the sum of the probability measure on the blue and orange regions, minus that of the yellow and red regions. We wish to show this difference goes to <span class="math notranslate nohighlight">\(0\)</span> as <span class="math notranslate nohighlight">\(n \to \infty\)</span>.</p>
@@ -530,7 +553,7 @@ S_N &gt; aN \iff g(S_N) &gt; g(aN).
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="../ch7/content.html" title="previous page">Moment generating functions</a>
-    <a class='right-next' id="next-link" href="../../itila/intro.html" title="next page">Information theory, Inference and Learning Algorithms</a>
+    <a class='right-next' id="next-link" href="../ch9/content.html" title="next page">Branching processes</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
