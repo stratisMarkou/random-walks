@@ -1,0 +1,408 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Multivariate discrete distributions &#8212; Random walks</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../../../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/jupyter-sphinx.css" />
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/sphinx-book-theme.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/mystnb.js"></script>
+    <script src="../../../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .secondtoggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="canonical" href="https://random-walks.org/content/prob-intro/ch03/content.html" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Probability generating functions" href="../ch04/content.html" />
+    <link rel="prev" title="Discrete random variables" href="../ch02/content.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://random-walks.org/content/prob-intro/ch03/content.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Multivariate discrete distributions" />
+<meta property="og:description" content="Multivariate discrete distributions  Multivariate discrete pmfs are the extension of univariate discrete distributions over multiple variables. The definition o" />
+<meta property="og:image"       content="https://random-walks.org/_static/logo.svg" />
+
+<meta name="twitter:card" content="summary">
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../../index.html">
+  
+  <img src="../../../_static/logo.svg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Random walks</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  
+  <ul class="nav sidenav_l1">
+  <li class="">
+    <a href="../../home.html">Welcome</a>
+  </li>
+  <li class="active">
+    <a href="../intro.html">Probability: An introduction</a>
+  <ul class="nav sidenav_l2">
+    <li class="">
+      <a href="../ch01/content.html">Events and Probabilities</a>
+    </li>
+    <li class="">
+      <a href="../ch02/content.html">Discrete random variables</a>
+    </li>
+    <li class="active">
+      <a href="">Multivariate discrete distributions</a>
+    </li>
+    <li class="">
+      <a href="../ch04/content.html">Probability generating functions</a>
+    </li>
+    <li class="">
+      <a href="../ch05/content.html">Distribution and density functions</a>
+    </li>
+    <li class="">
+      <a href="../ch06/content.html">Multivariate distributions</a>
+    </li>
+    <li class="">
+      <a href="../ch07/content.html">Moment generating functions</a>
+    </li>
+    <li class="">
+      <a href="../ch08/content.html">Main limit theorems</a>
+    </li>
+    <li class="">
+      <a href="../ch09/content.html">Branching processes</a>
+    </li>
+    <li class="">
+      <a href="../ch10/content.html">Random walks</a>
+    </li>
+    <li class="">
+      <a href="../ch11/content.html">Processes in continuous time</a>
+    </li>
+    <li class="">
+      <a href="../ch12/content.html">Markov chains</a>
+    </li>
+  </ul>
+  </li>
+  <li class="">
+    <a href="../../misc/misc.html">Miscellaneous</a>
+  </li>
+  <li class="">
+    <a href="../../reading-and-links.html">Interesting reading and websites</a>
+  </li>
+</ul>
+</nav>
+<p class="navbar_footer"></p>
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse" data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu" aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation" title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i class="fas fa-download"></i></button>
+
+            
+            <div class="dropdown-buttons">
+                <!-- ipynb file if we had a myst markdown file -->
+                
+                <!-- Download raw file -->
+                <a class="dropdown-buttons" href="../../../_sources/content/prob-intro/ch03/content.md.txt"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.md</button></a>
+                <!-- Download PDF via print -->
+                <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF" onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+            </div>
+            
+        </div>
+
+        <!-- Edit this page -->
+        
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+        
+    </div>
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#definition" class="nav-link">Definition</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#expectation-and-independence" class="nav-link">Expectation and independence</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#sums-of-discrete-random-variables" class="nav-link">Sums of discrete random variables</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#indicator-functions" class="nav-link">Indicator functions</a>
+        </li>
+    
+    </ul>
+</nav>
+
+
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="multivariate-discrete-distributions">
+<h1>Multivariate discrete distributions<a class="headerlink" href="#multivariate-discrete-distributions" title="Permalink to this headline">¶</a></h1>
+<p>Multivariate discrete pmfs are the extension of univariate discrete distributions over multiple variables. The definition of independence can be extended from events to discrete random variables. We discuss results concerning the expectation and independence of discrete random variables.</p>
+<div class="section" id="definition">
+<h2>Definition<a class="headerlink" href="#definition" title="Permalink to this headline">¶</a></h2>
+<p>The definition of the pmf of a discrete random variable can be extended into a distribution over several random variables in the following way.</p>
+<div class='definition'>
+<p><strong>Definition (Joint probability mass function)</strong> Given random variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> on <span class="math notranslate nohighlight">\((\Omega, \mathcal{F}, \mathbb{P})\)</span>, the joint probability mass function over <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> is the function <span class="math notranslate nohighlight">\(p_{X, Y} : \mathbb{R}^2 \to [0, 1]\)</span> defined by</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+p_{X, Y}(x, y) = \mathbb{P}\left(\{\omega \in \Omega : X(\omega) = x, Y
+(\omega) = y\}\right).
+\end{align}\]</div>
+<p>This is usually abbreviated to <span class="math notranslate nohighlight">\(p_{X, Y}(x, y) = \mathbb{P}\left(X = x, Y = y\right)\)</span>.</p>
+</div>
+<br>
+<p>Using the additivity of <span class="math notranslate nohighlight">\(\mathbb{P}\)</span>, we can verify that <span class="math notranslate nohighlight">\(p_{X, Y}\)</span> also satisfies the marginalisation property</p>
+<div class="math notranslate nohighlight">
+\[\begin{align} p_X(x) = \sum_{y \in \text{Im}Y} \mathbb{P}\left(X = x, Y = y
+\right),
+\end{align}\]</div>
+<p>and also since <span class="math notranslate nohighlight">\(\mathbb{P}(\Omega) = 1\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\sum_{x \in \text{Im}X} \sum_{y \in \text{Im}Y} p_{X, Y}(x, y) = 1.
+\end{align}\]</div>
+<p>This definition can be extended to multivariate distributions of more than two variables by adding more variables to the set being measured.</p>
+</div>
+<div class="section" id="expectation-and-independence">
+<h2>Expectation and independence<a class="headerlink" href="#expectation-and-independence" title="Permalink to this headline">¶</a></h2>
+<p>We are often interested in taking the expectation of functions of multiple random variables, given by the following formula which is the extension of its univariate version.</p>
+<div class='theorem'>
+<p><strong>Theorem (Law of the subconscious statistician - multivariate)</strong> Let <span class="math notranslate nohighlight">\(X\)</span> and
+<span class="math notranslate nohighlight">\(Y\)</span> be discrete random variables on <span class="math notranslate nohighlight">\((\Omega, \mathcal{F}, \mathbb{P})\)</span> and
+<span class="math notranslate nohighlight">\(g : \mathbb{R}^2 \to \mathbb{R}\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+  \mathbb{E}(g(X, Y)) = \sum_{x \in \text{Im} X}\sum_{y \in \text{Im} Y} g(x
+  , y) \mathbb{P}(X = x, Y = y)
+  \end{align}\]</div>
+<p>whenever this sum converges absolutely.</p>
+</div>
+<br>
+<p>Often, downstream calculations, including the expectation written above, can be simplified if the random variables are independent. Previously we defined independence in terms of events and we can extend this concept to variables in the following intuitive way.</p>
+<div class='definition'>
+<p><strong>Definition (Independence)</strong> Two discrete random variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are independent if <span class="math notranslate nohighlight">\({X = x}\)</span> and <span class="math notranslate nohighlight">\({Y = y}\)</span> are independent for all <span class="math notranslate nohighlight">\(x, y \in \mathbb{R}\)</span>, and we typically abbreviate this condition as</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{P}(X = x, Y = y) = \mathbb{P}(X = x)\mathbb{P}(Y = y) \text{ for } x, y \in \mathbb{R}.
+\end{align}\]</div>
+<p>Random variables which are not independent are called <strong>dependent</strong>.</p>
+</div>
+<br>
+<p>Two discrete random variables are independent if their pmf can be expressed
+as the product of its marginals, or more generally as the product of
+functions of different arguments, as shown below.</p>
+<div class='theorem'>
+<p><strong>Theorem (Independence <span class="math notranslate nohighlight">\(\iff\)</span> pmf factorises)</strong> Two discrete random
+variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are independent if and only if there exist <span class="math notranslate nohighlight">\(f, g
+  : \mathbb{R} \to \mathbb{R}\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+  p_{X, Y}(x, y) = f(x)g(y) \text{ for } x, y \in \mathbb{R}.
+  \end{align}\]</div>
+</div>
+<br>
+<p>This can be proved by showing that the product <span class="math notranslate nohighlight">\(f(x)g(y)\)</span> is equal to
+<span class="math notranslate nohighlight">\(p_X(x)p_Y(y)\)</span>. A related result is that if two random variables are
+independent, the expectation of their product is equal to the product of
+their expectations.</p>
+<div class='theorem'>
+<p><strong>Theorem (Expectation of product of independent variables)</strong> If <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are
+independent discrete random variables, the expectation of their product is
+equal to the product of their expectations, as in</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+  \mathbb{E}(XY) = \mathbb{E}(X)\mathbb{E}(Y).
+  \end{align}\]</div>
+</div>
+<br>
+<p>This can be proved by considering the expectation of <span class="math notranslate nohighlight">\(XY\)</span>, factoring <span class="math notranslate nohighlight">\(p_{X, Y
+}\)</span> into <span class="math notranslate nohighlight">\(p_X p_Y\)</span> and rearranging the expectation in terms of expectations
+over <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>. We also have the following useful result relating
+factorisation and independence.</p>
+<div class='theorem'>
+<p><strong>Theorem (Independence <span class="math notranslate nohighlight">\(\iff\)</span> expected product of functions factorises)</strong>
+Discrete random variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are independent if and only if</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{E}(f(X)g(y)) = \mathbb{E}(f(X))\mathbb{E}((g(Y))
+\end{align}\]</div>
+<p>for all <span class="math notranslate nohighlight">\(f, g : \mathbb{R} \to \mathbb{R}\)</span> for which the last two
+expectations exist.</p>
+</div>
+<br>
+</div>
+<div class="section" id="sums-of-discrete-random-variables">
+<h2>Sums of discrete random variables<a class="headerlink" href="#sums-of-discrete-random-variables" title="Permalink to this headline">¶</a></h2>
+<p>The sum of independent discrete random variables can be expressed in terms
+of the convolution of the pmfs of the random variables.</p>
+<div class='theorem'>
+<p><strong>Theorem (Convoltion formula)</strong> If <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are independent discrete
+random variables, then <span class="math notranslate nohighlight">\(Z = X + Y\)</span> has pmf</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{P}(Z = z) = \sum_{x \in \text{Im} X} \mathbb{P}(X = x)\mathbb{P}(Y
+ = z - x).
+\end{align}\]</div>
+</div>
+<br>
+<p>This can be extended to multiple random variables, by considering multiple
+convolutions in turn. However, there exist more convenient methods for
+summing independent random variables, such as <span class="xref std std-ref">probability generating functions</span>, which are introduced in the next chapter.</p>
+</div>
+<div class="section" id="indicator-functions">
+<h2>Indicator functions<a class="headerlink" href="#indicator-functions" title="Permalink to this headline">¶</a></h2>
+<p>Indicator functions are a useful tool for problems involving counting of
+occurences of events.</p>
+<div class='definition'>
+<p><strong>Definition (Indicator functions)</strong> The indicator function of an event <span class="math notranslate nohighlight">\(A\)</span>
+is the random variable <span class="math notranslate nohighlight">\(1_{A}\)</span> defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+ 1_A(\omega) = \begin{cases}
+ 1 &amp; \text{ if } \omega \in A, \\
+ 0 &amp; \text{ otherwise.}
+ \end{cases}
+ \end{align}\end{split}\]</div>
+</div>
+<br>
+<p>One example use of indicator functions is the proof of the <strong>inclusion
+exclusion formula</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{P}\left(\bigcup^N_{n=1} A_n\right) = \sum_{n} \mathbb{P}(A_{n
+}) - \sum_
+{n_1 &lt; n_2}\mathbb{P}(A_{n_1} \cap A_{n_2})~+~...~+~(-1)^{N+1
+}~\mathbb{P}\left(\bigcap_n A_{n}\right).
+\end{align}\]</div>
+<p>Letting <span class="math notranslate nohighlight">\(A = \bigcup^N_{n=1} A_n\)</span>, considering that the indicator <span class="math notranslate nohighlight">\(1_A\)</span> can
+be written as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+1_A &amp;= 1 - \prod_{n=1}^N \left(1 - 1_{A_n}\right)\\
+    &amp;= \sum_n 1_{A_n} - \sum_{n_1 &lt; n_2} 1_{A_{n_1}}1_{A_{n_2}} +~...~+ (-1
+    )^{N+1} 1_{A_1} 1_{A_2} ... 1_{A_N},
+\end{align}\end{split}\]</div>
+<p>and taking expectations proves the inclusion-exclusion formula.</p>
+</div>
+</div>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="../ch02/content.html" title="previous page">Discrete random variables</a>
+    <a class='right-next' id="next-link" href="../ch04/content.html" title="next page">Probability generating functions</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Stratos Markou<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../../../_static/js/index.js"></script>
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-168728006-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    
+  </body>
+</html>
