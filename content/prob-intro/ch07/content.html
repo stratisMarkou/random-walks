@@ -1,0 +1,659 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Moment generating functions &#8212; Random walks</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../../../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/jupyter-sphinx.css" />
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/sphinx-book-theme.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/mystnb.js"></script>
+    <script src="../../../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .secondtoggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="canonical" href="https://random-walks.org/content/prob-intro/ch07/content.html" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Main limit theorems" href="../ch08/content.html" />
+    <link rel="prev" title="Multivariate distributions" href="../ch06/content.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://random-walks.org/content/prob-intro/ch07/content.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Moment generating functions" />
+<meta property="og:description" content="Moment generating functions  Moments are an important tool in the study of random variables. Moment generating functions are a useful tool related to the moment" />
+<meta property="og:image"       content="https://random-walks.org/_static/logo.svg" />
+
+<meta name="twitter:card" content="summary">
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../../index.html">
+  
+  <img src="../../../_static/logo.svg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Random walks</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  
+  <ul class="nav sidenav_l1">
+  <li class="">
+    <a href="../../home.html">Welcome</a>
+  </li>
+  <li class="active">
+    <a href="../intro.html">Probability: An introduction</a>
+  <ul class="nav sidenav_l2">
+    <li class="">
+      <a href="../ch01/content.html">Events and Probabilities</a>
+    </li>
+    <li class="">
+      <a href="../ch02/content.html">Discrete random variables</a>
+    </li>
+    <li class="">
+      <a href="../ch03/content.html">Multivariate discrete distributions</a>
+    </li>
+    <li class="">
+      <a href="../ch04/content.html">Probability generating functions</a>
+    </li>
+    <li class="">
+      <a href="../ch05/content.html">Distribution and density functions</a>
+    </li>
+    <li class="">
+      <a href="../ch06/content.html">Multivariate distributions</a>
+    </li>
+    <li class="active">
+      <a href="">Moment generating functions</a>
+    </li>
+    <li class="">
+      <a href="../ch08/content.html">Main limit theorems</a>
+    </li>
+    <li class="">
+      <a href="../ch09/content.html">Branching processes</a>
+    </li>
+    <li class="">
+      <a href="../ch10/content.html">Random walks</a>
+    </li>
+    <li class="">
+      <a href="../ch11/content.html">Processes in continuous time</a>
+    </li>
+    <li class="">
+      <a href="../ch12/content.html">Markov chains</a>
+    </li>
+  </ul>
+  </li>
+  <li class="">
+    <a href="../../itila/intro.html">Information theory, Inference and Learning Algorithms</a>
+  </li>
+  <li class="">
+    <a href="../../gaussian-processes/gp-intro.html">Gaussian Processes</a>
+  </li>
+  <li class="">
+    <a href="../../c-programming/intro.html">The C programming language</a>
+  </li>
+  <li class="">
+    <a href="../../reading-and-links.html">Interesting reading and websites</a>
+  </li>
+  <li class="">
+    <a href="../../misc/misc.html">Miscellaneous</a>
+  </li>
+</ul>
+</nav>
+<p class="navbar_footer"></p>
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse" data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu" aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation" title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i class="fas fa-download"></i></button>
+
+            
+            <div class="dropdown-buttons">
+                <!-- ipynb file if we had a myst markdown file -->
+                
+                <!-- Download raw file -->
+                <a class="dropdown-buttons" href="../../../_sources/content/prob-intro/ch07/content.md.txt"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.md</button></a>
+                <!-- Download PDF via print -->
+                <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF" onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+            </div>
+            
+        </div>
+
+        <!-- Edit this page -->
+        
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+        
+    </div>
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#moments" class="nav-link">Moments</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#covariance-and-correlation" class="nav-link">Covariance and correlation</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#id1" class="nav-link">Moment generating functions</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#examples-of-mgfs" class="nav-link">Examples of mgfs</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#uniform" class="nav-link">Uniform</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#exponential" class="nav-link">Exponential</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#normal" class="nav-link">Normal</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#cauchy" class="nav-link">Cauchy</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#gamma" class="nav-link">Gamma</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#markov-and-jensen-inequalities" class="nav-link">Markov and Jensen inequalities</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#characteristic-functions" class="nav-link">Characteristic functions</a>
+        </li>
+    
+    </ul>
+</nav>
+
+
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="moment-generating-functions">
+<h1>Moment generating functions<a class="headerlink" href="#moment-generating-functions" title="Permalink to this headline">¶</a></h1>
+<p>Moments are an important tool in the study of random variables. Moment generating functions are a useful tool related to the moments of random variables. Under certain conditions, there is a one-to-one mapping between random variables and moment generating functions. One example use of mgfs is the computation of a sum of independent random variables.  Mgfs do not always exist, an issue that is circumvented by characteristic functions which exist for a much broader class of random variables. Two useful inequalities, the Markov and the Jensen inequalities are presented and proved.</p>
+<div class="section" id="moments">
+<span id="prob-intro-moments"></span><h2>Moments<a class="headerlink" href="#moments" title="Permalink to this headline">¶</a></h2>
+<p>The moments of a random variable contain useful information about it. In fact, under the following technical conditions, the moments uniquely determine the distribution of the random variable.</p>
+<div class='theorem'>
+<p><strong>Theorem (Uniqueness theorem for moments)</strong> Suppose that all moments <span class="math notranslate nohighlight">\(\mathbb{E}(X^k), k = 1, 2, ...\)</span>
+of the random variable <span class="math notranslate nohighlight">\(X\)</span> exist, and that the series</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+ \sum^\infty_{k = 0}\frac{t^k}{k!} \mathbb{E}(X^k),
+ \end{align}\]</div>
+<p>is absolutely convergent for some <span class="math notranslate nohighlight">\(t &gt; 0\)</span>. Then the moments uniquely
+determine the distribution of <span class="math notranslate nohighlight">\(X\)</span>.</p>
+</div>
+<br>
+</div>
+<div class="section" id="covariance-and-correlation">
+<h2>Covariance and correlation<a class="headerlink" href="#covariance-and-correlation" title="Permalink to this headline">¶</a></h2>
+<p>We are often interested in the extent to which two random variables co-vary, a
+property that is quantified by the their covariance, as defined below.</p>
+<div class='definition'>
+<p><strong>Definition (Covariance)</strong> If <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are random variables, then their
+covariance is denoted <span class="math notranslate nohighlight">\(\text{cov}(X, Y)\)</span> and defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+ \text{cov}(X, Y) = \mathbb{E}\left(X - \mathbb{E}(X)\right)\mathbb{E}\left(Y
+  - \mathbb{E}(Y)\right),
+ \end{align}\]</div>
+<p>whenever these expectations exist.</p>
+</div>
+<br>
+<p>Clearly, if we multiply <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> by <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> respectively, their
+covariance will change by a factor of <span class="math notranslate nohighlight">\(ab\)</span>. We may be interested
+in a scale-invariant metric of the covariance between two random variables
+, captured by the correlation coefficient.</p>
+<div class='definition'>
+<p><strong>Definition (Correlation coefficient)</strong> If <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are random variables
+, then their correlation coefficient is denoted <span class="math notranslate nohighlight">\(\rho(X, Y)\)</span> and defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+ \rho(X, Y) = \frac{\text{cov}(X, Y)}{\sqrt{\text{var}(X)\text{var}(Y)}},
+ \end{align}\]</div>
+<p>whenever the covariance and variances exist and <span class="math notranslate nohighlight">\(\text{Var}(X)\text{Var}(Y
+ ) \neq
+  0\)</span>.</p>
+</div>
+<br>
+<p>The correlation coefficient of two random variables has absolute value less
+than or equal to <span class="math notranslate nohighlight">\(1\)</span>, as stated by the following result which is worth
+bearing in mind.</p>
+<div class="theorem">
+<p><strong>Theorem (Correlation between <span class="math notranslate nohighlight">\(-1\)</span> and <span class="math notranslate nohighlight">\(1\)</span>)</strong> If <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are random
+variables, then</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+ -1 \leq \rho(X, Y) \leq 1,
+ \end{align}\]</div>
+<p>whenever this correlation exists.</p>
+</div>
+<br>
+<p>The above result can be shown quickly from an application of the Cauchy
+-Schwartz inequality stated and proved below.</p>
+<details class="proof">
+<summary>Proof: \(-1 \leq \rho(X, Y) \leq 1\) </summary>
+<p>Given random variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>, define <span class="math notranslate nohighlight">\(U = X - \bar{X}\)</span> and <span class="math notranslate nohighlight">\(V = Y- \bar{Y}\)</span>
+. By applying the Cauchy-Schwartz inequality on <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(V\)</span>, we obtain
+\begin{align}
+\frac{\mathbb{E}(UV)^2}{\mathbb{E}(U^2)\mathbb{E}(V^2)} \leq 1.
+\end{align}
+Taking a square root and substituting for <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(V\)</span> we arrive at the result
+\begin{align}
+-1 \leq \rho(X, Y) \leq 1.
+\end{align}</p>
+</details>
+<br>
+<div class="theorem">
+<p><strong>Theorem (Cauchy-Schwartz inequality)</strong> If <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(V\)</span> are random variables, then</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{E}(UV)^2 \leq \mathbb{E}(U^2)\mathbb{E}(V^2),
+\end{align}\]</div>
+<p>whenever these expectations exist.</p>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Cauchy-Schwartz inequality</summary>
+<p>Let <span class="math notranslate nohighlight">\(s \in \mathbb{R}\)</span> be a real number and <span class="math notranslate nohighlight">\(W = sU + V\)</span> be a random variable. Then <span class="math notranslate nohighlight">\(W^2 \geq 0\)</span> and we have</p>
+<p>\begin{align}\mathbb{E}(X^2) = a s^2 + b s + c \geq 0,\end{align}</p>
+<p>where <span class="math notranslate nohighlight">\(a = \mathbb{E}(U^2)\)</span>, <span class="math notranslate nohighlight">\(b = 2\mathbb{E}(UV)\)</span> and <span class="math notranslate nohighlight">\(\mathbb{E}(V^2)\)</span>. Since <span class="math notranslate nohighlight">\(\mathbb{E}(W^2) \geq 0\)</span> holds for all values of <span class="math notranslate nohighlight">\(s\)</span>, then the quadratic above can equal zero at most once - because otherwise it would achieve negative values. Therefore we have</p>
+<p>\begin{align}b^2 - 4ac = 4\mathbb{E}(UV)^2 - 4\mathbb{E(U^2)\mathbb{E}(V^2) \leq 0,\end{align}</p>
+<p>from which we arrive at the result</p>
+<p>\begin{align}\mathbb{E}(UV)^2 &amp;\leq \mathbb{E}(U^2)\mathbb{E}(V^2).\end{align}</p>
+</details>
+<br>
+</div>
+<div class="section" id="id1">
+<h2>Moment generating functions<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>Since the moments of a random variable uniquely determine its distribution.</p>
+<div class="definition">
+<p><strong>Definition (Moment generating function)</strong> The moment generating function of
+a random variable <span class="math notranslate nohighlight">\(X\)</span>, denoted <span class="math notranslate nohighlight">\(M_X\)</span> is defined by</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+ M_X(t) = \mathbb{E}(e^{tX}),
+ \end{align}\]</div>
+<p>for all <span class="math notranslate nohighlight">\(t \in \mathbb{R}\)</span> for which the expectation exists.</p>
+</div>
+<br>
+<p>We have the following relation between moments of a random variable and
+derivatives of its mgf.</p>
+<div class="theorem">
+<p><strong>Theorem (Moments equal to derivatives of mgf)</strong> If <span class="math notranslate nohighlight">\(M_X\)</span> exists in a
+neighbourhood of <span class="math notranslate nohighlight">\(0\)</span>, then <span class="math notranslate nohighlight">\(k = 1, 2, ...\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+ \mathbb{E}(X^k) = M_X^{(k)}(0),
+ \end{align}\]</div>
+<p>the <span class="math notranslate nohighlight">\(k^{th}\)</span> derivative of <span class="math notranslate nohighlight">\(M_X\)</span> at <span class="math notranslate nohighlight">\(t = 0\)</span>.</p>
+</div>
+<br>
+<p>Further, we also have the following useful relation for the mgf of a sum of
+random variables.</p>
+<div class="theorem">
+<p><strong>Theorem (Independence <span class="math notranslate nohighlight">\(\implies\)</span> mgf of sum factorises)</strong> If <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are
+independent random variables, then <span class="math notranslate nohighlight">\(X + Y\)</span> has moment generating function</p>
+<div class="math notranslate nohighlight">
+\[
+ M_{X + Y}(t) = M_X(t) M_Y(t).
+ \]</div>
+</div>
+<br>
+<p>Intuitively, since the moments of a random variable uniquely determine its
+distribution, then also a generating function <span class="math notranslate nohighlight">\(M_X(t)\)</span> uniquely determines the
+distribution of the corresponding random variable <span class="math notranslate nohighlight">\(X\)</span>. On an intuitive
+level this can be seen by noting that <span class="math notranslate nohighlight">\(M_X(t)\)</span> can be rewritten as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\mathbb{E}(e^{tX}) &amp;= \mathbb{E}\left[ \sum_{n = 1}^N \frac{1}{n!} (tX)^n, \right]\\
+                   &amp;=  \sum_{n = 1}^N \frac{t^n}{n!} \mathbb{E}\left[X^n\right],
+\end{align}\end{split}\]</div>
+<p>so the moments can be determined from the mgf, and the distribution of <span class="math notranslate nohighlight">\(X\)</span>
+can then be determined from the moments. The following result formalises this
+intuition.</p>
+<div class="theorem">
+<p><strong>Theorem (Uniqueness of mgfs)</strong> If the moment generating function <span class="math notranslate nohighlight">\(M_X(t) = \mathbb{E}(e^{tX}) &lt; \infty\)</span> for all <span class="math notranslate nohighlight">\(t \in [-\delta, \delta]\)</span> for some <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span>, there is a unique distribution with mgf <span class="math notranslate nohighlight">\(M_X\)</span>. Under this
+condition, we have that <span class="math notranslate nohighlight">\(\mathbb{E}(X^k) &lt; \infty\)</span> for <span class="math notranslate nohighlight">\(k = 1, 2, ...\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+ M_X(t) = \sum^\infty_{k = 0} \frac{t^k}{k!} \mathbb{E}(X^k) \text{ for } |t
+ | &lt; \delta.
+ \end{align}\]</div>
+</div>
+<br>
+</div>
+<div class="section" id="examples-of-mgfs">
+<h2>Examples of mgfs<a class="headerlink" href="#examples-of-mgfs" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="uniform">
+<h3>Uniform<a class="headerlink" href="#uniform" title="Permalink to this headline">¶</a></h3>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is uniformly distributed in <span class="math notranslate nohighlight">\([a, b]\)</span>, then its mgf is
+\begin{align}
+M_X(t) = \frac{e^{tb} - e^{ta}}{t}.
+\end{align}</p>
+</div>
+<div class="section" id="exponential">
+<h3>Exponential<a class="headerlink" href="#exponential" title="Permalink to this headline">¶</a></h3>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is exponentially distributed with parameter <span class="math notranslate nohighlight">\(\lambda\)</span>, then its mgf is
+\begin{align}
+M_X(t) = \frac{\lambda}{\lambda - t}.
+\end{align}</p>
+</div>
+<div class="section" id="normal">
+<h3>Normal<a class="headerlink" href="#normal" title="Permalink to this headline">¶</a></h3>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is normally distributed with parameters <span class="math notranslate nohighlight">\(\mu\)</span>, <span class="math notranslate nohighlight">\(\sigma^2 &gt; 0\)</span>, then
+its mgf is</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+ M_X(t) = \exp\left(\mu t + \frac{\sigma^2t}{2}\right).
+ \end{align}\]</div>
+</div>
+<div class="section" id="cauchy">
+<h3>Cauchy<a class="headerlink" href="#cauchy" title="Permalink to this headline">¶</a></h3>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is Cauchy distributed, then it does not have an mgf because the integral</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\int^\infty_{-\infty} \frac{e^{tx}}{1 + x^2} dx,
+\end{align}\]</div>
+<p>diverges for any <span class="math notranslate nohighlight">\(t \neq 0\)</span>. Many other variables do not have mgfs for the
+same reason, a difficulty that is circumvented by characteristic functions
+defined below.</p>
+</div>
+<div class="section" id="gamma">
+<h3>Gamma<a class="headerlink" href="#gamma" title="Permalink to this headline">¶</a></h3>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is gamma distributed with parameters <span class="math notranslate nohighlight">\(w &gt; 0\)</span> and <span class="math notranslate nohighlight">\(\lambda &gt; 0\)</span>, then
+its mgf is
+\begin{align}
+M_X(t) = \left(\frac{\lambda}{\lambda - t}\right)^w.
+\end{align}</p>
+</div>
+</div>
+<div class="section" id="markov-and-jensen-inequalities">
+<span id="prob-intro-markov-jensen"></span><h2>Markov and Jensen inequalities<a class="headerlink" href="#markov-and-jensen-inequalities" title="Permalink to this headline">¶</a></h2>
+<p>The Markov inequality is a useful result that bounds the probability that a
+non-negative random variable is larger than some positive threshold.</p>
+<div class="theorem">
+<p><strong>Theorem (Markov inequality)</strong> For any non-negative random variable <span class="math notranslate nohighlight">\(X
+ : \Omega \to \mathbb{R}\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+ \mathbb{P}(X \geq t) \leq \frac{\mathbb{E}(X)}{t} \text{ for } t &gt; 0.
+ \end{align}\]</div>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Markov inequality</summary>
+<p>For any non-negative random variable <span class="math notranslate nohighlight">\(X(\omega)\)</span> and positive <span class="math notranslate nohighlight">\(t &gt; 0\)</span>, we have
+\begin{align}X(\omega) \geq t \mathbb{1}_{X \geq t},\end{align}
+where <span class="math notranslate nohighlight">\(\mathbb{1}_{X \geq t} = 1\)</span> if <span class="math notranslate nohighlight">\(X(\omega) \geq t\)</span> and <span class="math notranslate nohighlight">\(\mathbb{1}_{X\geq t} = 0\)</span>
+otherwise. Rearranging and taking expectations, we obtain
+\begin{align}\mathbb{P}(X \geq t) = \frac{\mathbb{E}(X)}{t}.\end{align}</p>
+</details>
+<br>
+<p>One consequence of the Markov inequality is the Chebyshev inequality</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{P}(|X - \bar{X}| \geq \alpha) \leq \frac{\sigma^2}{\alpha^2}
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\sigma^2\)</span> is the variance of <span class="math notranslate nohighlight">\(X\)</span>. The Markov inequality is useful in
+proofs involving bounds of probabilities that a variable will fall within a
+certain range.</p>
+<p>Another useful result is Jensen’s inequality, which is handy when working with
+convex or concave functions.</p>
+<div class="definition">
+<p><strong>Definition (Convex function)</strong> A function <span class="math notranslate nohighlight">\(g : (a, b) \to \mathbb{R}\)</span> is
+convex if</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+ g\left(tu + (1 - t)v\right) \leq t g(u) + (1 - t) g(v),
+ \end{align}\]</div>
+<p>for every <span class="math notranslate nohighlight">\(t \in [0, 1]\)</span> and <span class="math notranslate nohighlight">\(u, v \in (a, b)\)</span>.</p>
+</div>
+<br>
+<p>The definition of a concave function is as above, except the inequality sign
+is flipped. Jensen’s inequality then takes the following form.</p>
+<div class="theorem">
+<p><strong>Theorem (Jensen’s inequality)</strong> Let <span class="math notranslate nohighlight">\(X\)</span> be a random variable taking values
+in the, possibly infinite, domain <span class="math notranslate nohighlight">\((a, b)\)</span> such that <span class="math notranslate nohighlight">\(\mathbb{E}(X)\)</span> exists
+and <span class="math notranslate nohighlight">\(g : (a, b) \to \mathbb{R}\)</span> be a convex function such that <span class="math notranslate nohighlight">\(\mathbb{E
+  }|g(X)| &lt; \infty\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+  \mathbb{E}[g(X)] \geq g[\mathbb{E}(X)].
+  \end{align}\]</div>
+</div>
+<br>
+<p>It can be proved quickly by applying the supporting tangent
+theorem (see below) and taking an expectation over <span class="math notranslate nohighlight">\(X\)</span>.</p>
+<details class="proof">
+<summary>Proof: Jensen's inequality</summary>
+<p>From the supporting tangent theorem we have
+\begin{align}g(X) \geq g(w) + \alpha (X - w),\end{align}
+and by setting the constant <span class="math notranslate nohighlight">\(w = \mathbb{E}(X)\)</span> and taking an expectation
+over <span class="math notranslate nohighlight">\(X\)</span>, the <span class="math notranslate nohighlight">\(X - w\)</span> term cancels and we obtain Jensen’s inequality
+\begin{align}\mathbb{E}[g(X)] \geq g(\mathbb{E}(X)).\end{align}</p>
+</details>
+<br>
+<p>The supporting tangent theorem says that for any point <span class="math notranslate nohighlight">\(w\)</span> in the domain of a
+convex function <span class="math notranslate nohighlight">\(g\)</span>, we can always find a line passing through <span class="math notranslate nohighlight">\((w, g(w))\)</span>
+, which lower-bounds the function.</p>
+<div class="theorem">
+<p><strong>Theorem (Supporting tangent theorem)</strong> Let <span class="math notranslate nohighlight">\(g : (a, b) \to \mathbb{R}\)</span> be
+convex, and let <span class="math notranslate nohighlight">\(w \in (u, v)\)</span>. There exists <span class="math notranslate nohighlight">\(\alpha \in \mathbb{R}\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+ g(x) \geq g(w) + \alpha (x - w), \text{ for } x \in (a, b).
+ \end{align}\]</div>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Supporting tangent theorem</summary>
+<p>Since <span class="math notranslate nohighlight">\(g\)</span> is convex, we have
+\begin{align}\frac{g(w) - g(u)}{w - u} \leq \frac{g(v) - g(w)}{v - w},\end{align}
+otherwise <span class="math notranslate nohighlight">\(g\)</span> could not be convex, because <span class="math notranslate nohighlight">\(g(w)\)</span> would be strictly less
+than the linear interpolation between <span class="math notranslate nohighlight">\(g(u)\)</span> and <span class="math notranslate nohighlight">\(g(v)\)</span> at <span class="math notranslate nohighlight">\(w\)</span>. The above
+inequality holds for all <span class="math notranslate nohighlight">\(u &lt; w &lt; v\)</span>, we can maximise the left hand side
+over <span class="math notranslate nohighlight">\(u\)</span> and the right hand side over <span class="math notranslate nohighlight">\(v\)</span> and obtain <span class="math notranslate nohighlight">\(L_w \leq R_w\)</span>, where
+\begin{align}L_w = \sup\left\{\frac{g(w) - g(u)}{w - u} : u &lt; w\right\}, R_w
+= \inf\left\{\frac{g(v) - g(w)}{v - w} : v &lt; w\right\}.\end{align}
+we can then take <span class="math notranslate nohighlight">\(\alpha \in [L_w, R_w]\)</span> and see that
+\begin{align}\frac{g(w) - g(u)}{w - u} \leq \alpha \leq \frac{g(v) - g(w)}{v- w}.\end{align}
+By rearranging the two sides of the above equation we obtain
+\begin{align}g(x) \geq g(w) + \alpha (x - w),\end{align}
+for the cases where <span class="math notranslate nohighlight">\(x = u &lt; w\)</span> and <span class="math notranslate nohighlight">\(x = v &gt; w\)</span> respectively. The
+inequality holds trivially for <span class="math notranslate nohighlight">\(x = w\)</span>.</p>
+</details>
+<br>
+</div>
+<div class="section" id="characteristic-functions">
+<span id="prob-intro-char-funcs"></span><h2>Characteristic functions<a class="headerlink" href="#characteristic-functions" title="Permalink to this headline">¶</a></h2>
+<p>Unlike the moment generating function which might not exist for some random variables, the characteristic function of a random variable, defined below, exists for a broader set of variables.</p>
+<div class="definition">
+<p><strong>Definition (Characteristic function)</strong> The characteristic function of a
+random variable <span class="math notranslate nohighlight">\(X\)</span> is written <span class="math notranslate nohighlight">\(\phi_X\)</span> and defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+ \phi_X(t) = \mathbb{E}(e^{itX}), \text{ for } t \in \mathbb{R}.
+ \end{align}\]</div>
+</div>
+<br>
+<p>The characteristic function has the following two useful properties.</p>
+<div class="theorem">
+<p><strong>Theorem (Two properties of characteristic functions)</strong> Let <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> be
+independent random variables with characteristic functions <span class="math notranslate nohighlight">\(\phi_X\)</span> and <span class="math notranslate nohighlight">\(\phi_Y\)</span>. Then</p>
+<ol class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(a, b \in \mathbb{R}\)</span> and <span class="math notranslate nohighlight">\(Z = aX + b\)</span>, then <span class="math notranslate nohighlight">\(\phi_Z(t) = e^{itb} \phi_X(at)\)</span>.</p></li>
+<li><p>The characteristic function of <span class="math notranslate nohighlight">\(X + Y\)</span> is <span class="math notranslate nohighlight">\(\phi_{X + Y}(t) = \phi_X(t)\phi_Y(t)\)</span>.</p></li>
+</ol>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Properties of the characteristic function</summary>
+<p>To show the first property, consider</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+  \phi_Z(t) &amp;= \mathbb{E}\left(e^{itZ}\right)\\
+  &amp;= \mathbb{E}\left(e^{it(aX + b)}\right)\\
+  &amp;= e^{itb} \mathbb{E}\left(e^{itaX}\right)\\
+  &amp;= e^{itb} \phi_X(at).
+  \end{align}\end{split}\]</div>
+<p>For the second property, consider</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+  \phi_{X + Y}(t) &amp;= \mathbb{E}\left(e^{it(X + Y)}\right)\\
+  &amp;= \mathbb{E}\left(e^{itX} e^{itY}\right)\\
+  &amp;= \mathbb{E}\left(e^{itX}\right)\mathbb{E}\left(e^{itY}\right)\\
+  &amp;= \phi_X(t) \phi_Y(t),
+  \end{align}\end{split}\]</div>
+<p>where we have used the fact that <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are independent to get from the second to the third line.</p>
+</details>
+<br>
+<p>As with the mgf, the characteristic function of a random variable is unique, in the sense that two radoom variables have the same distributions if and only if they have the same characteristic functions.</p>
+<div class="theorem">
+<p><strong>Theorem (Uniqueness of characteristic functions)</strong> Let <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> have
+characteristic functions <span class="math notranslate nohighlight">\(\phi_X\)</span> and <span class="math notranslate nohighlight">\(\phi_Y\)</span>. Then <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> have the
+same distributions if and only if <span class="math notranslate nohighlight">\(\phi_X(t) = \phi_Y(t)\)</span> for all <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>.</p>
+</div>
+<br>
+<p>We can obtain the pdf of a random variable by applying the following inverse transformation.</p>
+<div class="theorem">
+<p><strong>Theorem (Inversion theorem)</strong> Let <span class="math notranslate nohighlight">\(X\)</span> have characteristic function <span class="math notranslate nohighlight">\(\phi_X\)</span>
+and density function <span class="math notranslate nohighlight">\(f\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+ f(x) = \frac{1}{2\pi}\int^\infty_{-\infty} e^{-itx} \phi(t) dt,
+ \end{align}\]</div>
+<p>at every point <span class="math notranslate nohighlight">\(x\)</span> where <span class="math notranslate nohighlight">\(f\)</span> is differentiable.</p>
+</div>
+<br>
+<p>Note the similarity between the Fourier transform and the transform of the characteristic function.</p>
+</div>
+</div>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="../ch06/content.html" title="previous page">Multivariate distributions</a>
+    <a class='right-next' id="next-link" href="../ch08/content.html" title="next page">Main limit theorems</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Stratos Markou<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../../../_static/js/index.js"></script>
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-168728006-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    
+  </body>
+</html>

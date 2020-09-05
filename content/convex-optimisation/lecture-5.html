@@ -1,0 +1,426 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Optimality and problem definitions &#8212; Random walks</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/sphinx-book-theme.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/mystnb.js"></script>
+    <script src="../../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .secondtoggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="canonical" href="https://random-walks.org/content/convex-optimisation/lecture-5.html" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://random-walks.org/content/convex-optimisation/lecture-5.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Optimality and problem definitions" />
+<meta property="og:description" content="Optimality and problem definitions  Optimisation problem  Standard form: of an optimisation problem is  \begin{align} \text{minimise }~&f_0(x)\ \text{subject to" />
+<meta property="og:image"       content="https://random-walks.org/_static/logo.svg" />
+
+<meta name="twitter:card" content="summary">
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <img src="../../_static/logo.svg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Random walks</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  
+  <ul class="nav sidenav_l1">
+  <li class="">
+    <a href="../home.html">Welcome</a>
+  </li>
+  <li class="">
+    <a href="../prob-intro/intro.html">Probability: An introduction</a>
+  </li>
+  <li class="">
+    <a href="../itila/intro.html">Information theory, Inference and Learning Algorithms</a>
+  </li>
+  <li class="">
+    <a href="../gaussian-processes/gp-intro.html">Gaussian Processes</a>
+  </li>
+  <li class="">
+    <a href="../c-programming/intro.html">The C programming language</a>
+  </li>
+  <li class="">
+    <a href="../reading-and-links.html">Interesting reading and websites</a>
+  </li>
+  <li class="">
+    <a href="../misc/misc.html">Miscellaneous</a>
+  </li>
+</ul>
+</nav>
+<p class="navbar_footer"></p>
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse" data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu" aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation" title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i class="fas fa-download"></i></button>
+
+            
+            <div class="dropdown-buttons">
+                <!-- ipynb file if we had a myst markdown file -->
+                
+                <!-- Download raw file -->
+                <a class="dropdown-buttons" href="../../_sources/content/convex-optimisation/lecture-5.ipynb.txt"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.ipynb</button></a>
+                <!-- Download PDF via print -->
+                <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF" onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+            </div>
+            
+        </div>
+
+        <!-- Edit this page -->
+        
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+            <div class="dropdown-buttons">
+                
+                <a class="binder-button" href="https://mybinder.org/v2/gh/stratisMarkou/random-walks/master?urlpath=tree/./content/convex-optimisation/lecture-5.ipynb"><button type="button" class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip" data-placement="left"><img class="binder-button-logo" src="../../_static/images/logo_binder.svg" alt="Interact on binder">Binder</button></a>
+                
+                
+                
+            </div>
+        </div>
+        
+    </div>
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#optimisation-problem" class="nav-link">Optimisation problem</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#optimality-and-locally-optimal-points" class="nav-link">Optimality and locally optimal points</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#implicit-constraints-and-feasibility-problems" class="nav-link">Implicit constraints and feasibility problems</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#convex-optimisation-problem" class="nav-link">Convex optimisation problem</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#local-optima-global-optima-and-optimality-criteria" class="nav-link">Local optima, global optima and optimality criteria</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#equivalent-convex-problems" class="nav-link">Equivalent convex problems</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#quasiconvex-optimisation" class="nav-link">Quasiconvex optimisation</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#linear-programmes-lp" class="nav-link">Linear Programmes (LP)</a>
+        </li>
+    
+    </ul>
+</nav>
+
+
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="optimality-and-problem-definitions">
+<h1>Optimality and problem definitions<a class="headerlink" href="#optimality-and-problem-definitions" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="optimisation-problem">
+<h2>Optimisation problem<a class="headerlink" href="#optimisation-problem" title="Permalink to this headline">¶</a></h2>
+<p><strong>Standard form:</strong> of an optimisation problem is</p>
+<p>\begin{align}
+\text{minimise }~&amp;f_0(x)\
+\text{subject to }~&amp;f_m(x) \leq 0, \text{ for } m = 1, 2, …, M\
+&amp;h_n(x) = 0, \text{ for } n = 1, 2, …, N
+\end{align}</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x \in \mathbb{R}^n\)</span> is the optimisation variable</p></li>
+<li><p><span class="math notranslate nohighlight">\(f_0 : \mathbb{R}^n \to \mathbb{R}\)</span> is the optimisation objective</p></li>
+<li><p><span class="math notranslate nohighlight">\(f_m : \mathbb{R}^n \to \mathbb{R}\)</span> are the inequality constraints</p></li>
+<li><p><span class="math notranslate nohighlight">\(f_n : \mathbb{R}^n \to \mathbb{R}\)</span> are the equality constraints</p></li>
+</ul>
+<p><strong>Optimal value:</strong> of a problem defined as</p>
+<div class="math notranslate nohighlight">
+\[p^* = \text{inf}\{f(x_0~|~f_m(x) \leq 0, m = 1,..., M, h_n(x) = 0, n = 1, ..., N\}\]</div>
+<p>where the infimum of an empty set is <span class="math notranslate nohighlight">\(\infty\)</span> by convention (cost is infinite if no <span class="math notranslate nohighlight">\(x\)</span> satisfies the constraints).</p>
+</div>
+<div class="section" id="optimality-and-locally-optimal-points">
+<h2>Optimality and locally optimal points<a class="headerlink" href="#optimality-and-locally-optimal-points" title="Permalink to this headline">¶</a></h2>
+<p><strong>Feasible point:</strong> a point <span class="math notranslate nohighlight">\(x\)</span> is feasible if <span class="math notranslate nohighlight">\(x \in \textbf{dom}~f_0\)</span> and it satisfies the constraints.</p>
+<p><strong>Optimal point:</strong> a point is optimal if it is feasible and <span class="math notranslate nohighlight">\(f_0(x) = p^*\)</span>, where <span class="math notranslate nohighlight">\(p^*\)</span> is the optimal value of the problem. If no <span class="math notranslate nohighlight">\(x\)</span> satisfies <span class="math notranslate nohighlight">\(f_0(x) = p^*\)</span>, then we say the problem does not achieve its optimal value - for example, unconstrained minimsation of <span class="math notranslate nohighlight">\(f_0(x) = -\log x, x \in \mathbb{R}_{++}\)</span>, does not achieve its optimal value.</p>
+<p><strong>Locally optimal point:</strong> a point is locally optimal if there exists an <span class="math notranslate nohighlight">\(R &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(x\)</span> is optimal for the problem</p>
+<p>\begin{align}
+&amp;\text{minimise } &amp;&amp; f_0(z) \
+&amp;\text{subject to } &amp;&amp; f_n(z) \leq 0, n = 1, …, N\
+&amp; &amp;&amp;h_m(z) = 0, m = 1, …, M\
+&amp; &amp;&amp;||z - x||_2 \leq R.
+\end{align}</p>
+<p>In other words, within a small enough finite neighbourhood of <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(x\)</span> is the best feasible point.</p>
+</div>
+<div class="section" id="implicit-constraints-and-feasibility-problems">
+<h2>Implicit constraints and feasibility problems<a class="headerlink" href="#implicit-constraints-and-feasibility-problems" title="Permalink to this headline">¶</a></h2>
+<p><strong>Implicit constraint:</strong> In addition to its explicit constraints (equalities and inequalities), every optimisation problem has the implicit constraint that</p>
+<p>\begin{align}
+x \in \mathcal{D} = \bigcap_{n = 1}^N \textbf{dom}~f_n \cap \bigcap_{m = 1}^M \textbf{dom}~h_m,
+\end{align}</p>
+<p>where <span class="math notranslate nohighlight">\(\mathcal{D}\)</span> is called the <strong>domain of the problem</strong>. A problem is <strong>unconstrained</strong> if it has no explicit constraints <span class="math notranslate nohighlight">\(N = M = 0\)</span>.</p>
+<p><strong>Feasibility problem:</strong> A feasibility problem amounts to finding a feasible point and can be written as</p>
+<p>\begin{align}
+&amp;\text{minimise }~&amp;&amp;0\
+&amp;\text{subject to }~&amp;&amp;f_m(x) \leq 0, \text{ for } m = 1, 2, …, M\
+&amp; &amp;&amp;h_n(x) = 0, \text{ for } n = 1, 2, …, N.
+\end{align}</p>
+<p>Under this definition, any feasible point is optimal - which is enough when we search for a feasible point.</p>
+</div>
+<div class="section" id="convex-optimisation-problem">
+<h2>Convex optimisation problem<a class="headerlink" href="#convex-optimisation-problem" title="Permalink to this headline">¶</a></h2>
+<p><strong>Standard form of convex optimisation problem:</strong> The standard form of a convex optimisation problem is</p>
+<p>\begin{align}
+\text{minimise }~&amp;f_0(x)\
+\text{subject to }~&amp;f_m(x) \leq 0, \text{ for } m = 1, 2, …, M\
+&amp;a_n^\top x = b_n, \text{ for } n = 1, 2, …, N
+\end{align}</p>
+<p>where <span class="math notranslate nohighlight">\(f_0, f_1, ..., f_N\)</span> are convex and the equality constraints are affine. It is important to note that the constraints of a convex optimisation problem can be transformed so that the feasible set is unchanged, but the <span class="math notranslate nohighlight">\(f_1, ..., f_N\)</span> are no longer convex, or that the equalities are not affine. <strong>In this case, the problem is no longer convex, even if it is equivalent to its original form.</strong></p>
+<p><strong>Quasiconvex problem:</strong> A problem is <strong>quasiconvex</strong> if it takes the same form as above, except <span class="math notranslate nohighlight">\(f_0\)</span> is quasiconvex.</p>
+</div>
+<div class="section" id="local-optima-global-optima-and-optimality-criteria">
+<h2>Local optima, global optima and optimality criteria<a class="headerlink" href="#local-optima-global-optima-and-optimality-criteria" title="Permalink to this headline">¶</a></h2>
+<p>Any local optimum of a convex problem is also the global optimum. If the objective is also differentiable, there are useful criteria that every optimum must satisfy.</p>
+<p><strong>Optimality criterion for differentiable <span class="math notranslate nohighlight">\(f_0\)</span>:</strong> A point <span class="math notranslate nohighlight">\(x\)</span> is optimal if and only if it is feasible and</p>
+<div class="math notranslate nohighlight">
+\[\nabla f_0(x)^\top (y - x) \geq 0, \text{ for all feasible } y.\]</div>
+<p>If <span class="math notranslate nohighlight">\(\nabla f_0(x)\)</span> is nonzero, it defines a supporting hyperplane to the feasible set at <span class="math notranslate nohighlight">\(x\)</span>. This criterion takes more specific points depending on the constraints - since these determine the feasible set. Some examples are</p>
+<p><strong>Unconstrained problem:</strong> If a problem is unconstrained, then <span class="math notranslate nohighlight">\(x\)</span> is optimal if and only if</p>
+<div class="math notranslate nohighlight">
+\[x \in \textbf{dom}~f_0,~~\nabla f_0(x) = 0.\]</div>
+<p><strong>Equality constrained problem:</strong> If the problem has an affine constraint only</p>
+<p>\begin{align}
+\text{minimise }~&amp;f_0(x)\
+&amp;A x = b,
+\end{align}</p>
+<p>then <span class="math notranslate nohighlight">\(x\)</span> is optimal if and only if there exists <span class="math notranslate nohighlight">\(\nu\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[x \in \textbf{dom } f_0,~~Ax = b,~~ \nabla f_0(x) + A^\top \nu = 0.\]</div>
+<p><strong>Minimisation over nonnegative orthant:</strong> If the problem is constrained to the nonnegative orthant</p>
+<div class="math notranslate nohighlight">
+\[\textbf{minimise } f_0(x), \text{ subject to } x \succcurlyeq 0,\]</div>
+<p>then <span class="math notranslate nohighlight">\(x\)</span> is optimal if and only if</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}x \in \textbf{dom}~f_0,~x \succcurlyeq 0, \text{ and } \begin{cases}
+    \nabla f_0(x)_i \geq 0 &amp; \text{if } x_i = 0\\
+    \nabla f_0(x)_i = 0              &amp; \text{if } x_i &gt; 0
+\end{cases}\end{split}\]</div>
+</div>
+<div class="section" id="equivalent-convex-problems">
+<h2>Equivalent convex problems<a class="headerlink" href="#equivalent-convex-problems" title="Permalink to this headline">¶</a></h2>
+<p><strong>Equivalent problems (informal):</strong> Two problems are equivalent if the solution of one is readily obtained from the solution of the other with small computational overhead, and vice versa. Example ways which yield equivalent convex problems are:</p>
+<ul class="simple">
+<li><p><strong>Eliminating equality constraints:</strong> The standard convex problem \begin{align}
+\text{minimise }~&amp;f_0(x)\
+\text{subject to }~&amp;f_m(x) \leq 0, &amp;&amp;\text{ for } m = 1, 2, …, M\
+&amp;a_n^\top x = b_n, &amp;&amp;\text{ for } n = 1, 2, …, N
+\end{align} for example, can be recast into \begin{align}
+\text{minimise }~&amp;f_0(Fz + x_0)\
+\text{subject to }~&amp;f_m(Fz + x_0) \leq 0, \text{ for } m = 1, 2, …, M
+\end{align} where <span class="math notranslate nohighlight">\(F\)</span> and <span class="math notranslate nohighlight">\(x_0\)</span> are such that <span class="math notranslate nohighlight">\(Ax = b \iff x = Fz + x_0\)</span>. For example, <span class="math notranslate nohighlight">\(F\)</span> could be chosen to be a basis for the null space of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(x_0\)</span> a solution to <span class="math notranslate nohighlight">\(Ax = b\)</span>.</p></li>
+</ul>
+<br>
+<ul class="simple">
+<li><p><strong>Introducing equality constraints:</strong> We can go the opposite way and introduce equality constraints instead of eliminating them. For example, we can rewrite\begin{align}
+\text{minimise }~&amp;f_0(A_0 x + b_0)\
+\text{subject to }~&amp;f_m(A_m x + b_m) \leq 0, \text{ for } m = 1, 2, …, M
+\end{align} into the equivalent problem \begin{align}
+\text{minimise }~&amp;f_0(y_0)\
+\text{subject to }~&amp;f_m(y_m) \leq 0, &amp;&amp;\text{ for } m = 1, 2, …, M\
+&amp;y_m = A_m x + b_m, &amp;&amp;\text{ for } m = 0, 1, 2, …, M
+\end{align}</p></li>
+</ul>
+<br>
+<ul class="simple">
+<li><p><strong>Introducing slack variables for linear inequalities:</strong> We can also modify problems to convert inequalities into equalities by introducing slack variables and some additional inequalities. For example, we can rewrite\begin{align}
+\text{minimise }~&amp;f_0(x)\
+\text{subject to }~&amp;a_m^\top x \leq b_m, &amp;&amp;\text{ for } m = 1, 2, …, M
+\end{align} into the equivalent problem \begin{align}
+\text{minimise }~&amp;f_0(x)\
+\text{subject to }~&amp;a_m^\top x + s_m = b_m, &amp;&amp;\text{ for } m = 1, 2, …, M\
+&amp; s_m \geq 0, &amp;&amp;\text{ for } m = 1, 2, …, M
+\end{align}</p></li>
+</ul>
+<br>
+<ul class="simple">
+<li><p><strong>Linearise objective by using the epigraph:</strong> The standard form convex problem can also be written as\begin{align}
+\text{minimise }~&amp;t\
+\text{subject to }~&amp; f_0(x) - t \leq 0, &amp;&amp;\
+&amp;f_m(x) \leq 0, &amp;&amp;\text{ for } m = 1, 2, …, M\
+&amp;a_n^\top x = b_n, &amp;&amp;\text{ for } n = 1, 2, …, N,
+\end{align} making the objective linear. Note that this is still a convex problem because <span class="math notranslate nohighlight">\(f_0(x) - t\)</span> is jointly convex in <span class="math notranslate nohighlight">\((x, t)\)</span>.</p></li>
+</ul>
+<br>
+<ul class="simple">
+<li><p><strong>Minimising over a subset of variables:</strong> If some variables of our original problem are unconstrained \begin{align}
+\text{minimise }~&amp;f_0(x_1, x_2)\
+\text{subject to }~&amp;f_m(x_1) \leq 0, &amp;&amp;\text{ for } m = 1, 2, …, M
+\end{align} we can minimise over them to obtain the reduced problem \begin{align}
+\text{minimise }~&amp;\tilde{f_0}(x_1)\
+\text{subject to }~&amp;f_m(x_1) \leq 0, &amp;&amp;\text{ for } m = 1, 2, …, M
+\end{align} where <span class="math notranslate nohighlight">\(\tilde{f_0} = \inf_{x_2} f_0(x_1, x_2)\)</span>.</p></li>
+</ul>
+</div>
+<div class="section" id="quasiconvex-optimisation">
+<h2>Quasiconvex optimisation<a class="headerlink" href="#quasiconvex-optimisation" title="Permalink to this headline">¶</a></h2>
+<p><strong>Quasiconvex function:</strong> A function <span class="math notranslate nohighlight">\(f\)</span> is quasiconvex if it has a convex domain and it satisfies</p>
+<div class="math notranslate nohighlight">
+\[f\big(\theta x + (1 - \theta)y\big) \leq \max\{f(x),f(y)\},~\forall x, y \in \textbf{dom }f, \theta \in [0, 1].\]</div>
+<p><strong>Quasiconvex problem:</strong> A quasiconvex problem takes a similar form as a convex problem\begin{align}
+\text{minimise }~&amp;f_0(x)\
+\text{subject to }~&amp;f_m(x) \leq 0, &amp;&amp;\text{ for } m = 1, 2, …, M\
+&amp;a_n^\top x = b_n, &amp;&amp;\text{ for } n = 1, 2, …, N
+\end{align} except <span class="math notranslate nohighlight">\(f_0\)</span> is a quasi-convex function.</p>
+<p><strong>Solving quasiconvex problems:</strong> One method for solving quasiconvex problems is centered on two observations. The first is that the sublevel sets of quasiconvex functions are convex. The second is that for any quasiconvex function <span class="math notranslate nohighlight">\(f_0(x)\)</span>, there exists a family of functions <span class="math notranslate nohighlight">\(\phi_t(x)\)</span> which is convex in <span class="math notranslate nohighlight">\(x\)</span> for fixed <span class="math notranslate nohighlight">\(t\)</span>, and whose <span class="math notranslate nohighlight">\(0\)</span>-sublevel set is the <span class="math notranslate nohighlight">\(t\)</span>-sublevel set of <span class="math notranslate nohighlight">\(f_0(x)\)</span> <span class="math notranslate nohighlight">\($f_0(x) \leq t \iff \phi_t(x) \leq 0.\)</span>$ With this observation, we can solve the quasiconvex problem to arbitrary precision by iteratively solving the (convex) feasibility problem \begin{align}
+\text{minimise }~&amp;0\
+\text{subject to }~&amp; \phi_t(x) \leq 0, &amp;&amp;\
+&amp;f_m(x) \leq 0, &amp;&amp;\text{ for } m = 1, 2, …, M\
+&amp;a_n^\top x = b_n, &amp;&amp;\text{ for } n = 1, 2, …, N
+\end{align} for given <span class="math notranslate nohighlight">\(t\)</span>. This is a valid convex problem because <span class="math notranslate nohighlight">\(\phi_t(x)\)</span> is convex in <span class="math notranslate nohighlight">\(x\)</span> for fixed <span class="math notranslate nohighlight">\(t\)</span>. We can then then use bisection search to find the smallest value of <span class="math notranslate nohighlight">\(t\)</span> for which the feasibility problem has a solution. This smallest value of <span class="math notranslate nohighlight">\(t\)</span> is the optimal value of the original quasiconvex problem.</p>
+</div>
+<div class="section" id="linear-programmes-lp">
+<h2>Linear Programmes (LP)<a class="headerlink" href="#linear-programmes-lp" title="Permalink to this headline">¶</a></h2>
+<p><strong>Linear program:</strong> A linear programme is a convex optimisation of the form \begin{align} &amp;\text{minimise}&amp;&amp; c^\top x + d\
+&amp;\text{subject to}&amp;&amp; Gx \leq h \
+&amp; &amp;&amp; Ax = b.
+\end{align}</p>
+<p><strong>Examples of linear programmes:</strong></p>
+<ul class="simple">
+<li><p>The diet problem</p></li>
+<li><p>Piecewise linear functions</p></li>
+<li><p>Chebyshev center of a polyhedron</p></li>
+</ul>
+</div>
+</div>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Stratos Markou<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../../_static/js/index.js"></script>
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-168728006-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    
+  </body>
+</html>
