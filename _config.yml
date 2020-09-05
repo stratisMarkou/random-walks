@@ -1,0 +1,48 @@
+#######################################################################################
+# A default configuration that will be loaded for all jupyter books
+# Users are expected to override these values in their own `_config.yml` file.
+# This is also the "master list" of all allowed keys and values.
+
+#######################################################################################
+# Book settings
+title                       : Random walks
+author                      : Stratos Markou
+copyright                   : "2020"
+logo                        : "assets/logo.svg"
+exclude_patterns            : []
+
+#######################################################################################
+# Execution settings
+execute:
+  execute_notebooks         : 'off'
+  exclude_patterns          : []
+
+#######################################################################################
+# HTML-specific settings
+html:
+  favicon                   : "assets/favicon.ico"
+  navbar_number_sections    : False
+  navbar_footer_text        : ''
+  google_analytics_id       : "UA-168728006-1"
+  home_page_in_navbar       : true
+  use_edit_page_button      : false
+  baseurl                   : "https://random-walks.org/"
+
+#######################################################################################
+# Launch button settings
+launch_buttons:
+  notebook_interface        : "classic"
+  binderhub_url             : "https://mybinder.org"
+  jupyterhub_url            : ""
+  thebelab                  : false
+
+repository:
+  url                       : https://github.com/stratisMarkou/random-walks
+  path_to_book              : "./"
+  branch                    : master
+
+#######################################################################################
+# Advanced and power-user settings
+sphinx:
+  extra_extensions          : ""
+  config                    : ""
