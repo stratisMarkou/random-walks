@@ -46,7 +46,7 @@
 <meta property="og:url"         content="https://random-walks.org/content/prob-intro/ch12/content.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Markov chains" />
-<meta property="og:description" content="Markov chains" />
+<meta property="og:description" content="Markov chains  Markov chain and Markov property  <div class='definition'>   Definition (Markov chain and markov property) The sequence \mathbf{X} = X_0, X_1, .." />
 <meta property="og:image"       content="https://random-walks.org/_static/logo.svg" />
 
 <meta name="twitter:card" content="summary">
@@ -178,9 +178,16 @@
         
     </div>
     <div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
 
 <nav id="bd-toc-nav">
     <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#markov-chain-and-markov-property" class="nav-link">Markov chain and Markov property</a>
+        </li>
     
     </ul>
 </nav>
@@ -195,6 +202,47 @@
                 
   <div class="section" id="markov-chains">
 <h1>Markov chains<a class="headerlink" href="#markov-chains" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="markov-chain-and-markov-property">
+<h2>Markov chain and Markov property<a class="headerlink" href="#markov-chain-and-markov-property" title="Permalink to this headline">¶</a></h2>
+<div class='definition'>
+<p><strong>Definition (Markov chain and markov property)</strong> The sequence <span class="math notranslate nohighlight">\(\mathbf{X} = X_0, X_1, ...\)</span> is called a Markov chain if it satisfies the Markov property</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{P}(X_{n + 1} = x_{n + 1} | X_0 = x_0, X_1 = x_1, ..., X_n = x_n) = \mathbb{P}(X_{n + 1} = x_{n + 1} | X_n = x_n)
+\end{align}\]</div>
+<p>for all <span class="math notranslate nohighlight">\(n \geq 0\)</span> and all <span class="math notranslate nohighlight">\(x_0, x_1, ..., x_{n + 1} \in S\)</span>. The Markov chain is called homogeneuous if for all <span class="math notranslate nohighlight">\(u, v \in S\)</span>, the conditional probability <span class="math notranslate nohighlight">\(\mathbb{P}(X_{n + 1} = v | X_n = u)\)</span> does not depend on the value of <span class="math notranslate nohighlight">\(n\)</span>. In this case, we the <em>transition matrix</em> <span class="math notranslate nohighlight">\(P\)</span> and <em>initial distribution</em> <span class="math notranslate nohighlight">\(\lambda\)</span> of the chain are defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+P = (p_{i, j} : i, j \in S), \text{ where } p_{i, j} = \mathbb{P}(X_1 = j | X_0 = i)\\
+\lambda = (\lambda_i : i \in S), \text{ where } \lambda_i = \mathbb{P}(X_0 = i).
+\end{align}\end{split}\]</div>
+</div>
+<br>
+<p>Because they are probability distributions, <span class="math notranslate nohighlight">\(P\)</span> and <span class="math notranslate nohighlight">\(\lambda\)</span> satisfy</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\lambda \geq 0, &amp; \text{ and } \sum_{i \in S} \lambda_i = 1,\\
+p_{i, j} \geq 0, &amp; \text{ and } \sum_{j \in S} p_{i, j} = 1.
+\end{align}\end{split}\]</div>
+<p>Any matrix <span class="math notranslate nohighlight">\(P\)</span> which satisfies the above property is called a <strong>stochastic matrix</strong>.</p>
+<div class='theorem'>
+<p><strong>Theorem (Markov chain <span class="math notranslate nohighlight">\(\iff\)</span> distribution factorises)</strong> Let <span class="math notranslate nohighlight">\(\lambda\)</span> be a distribution and <span class="math notranslate nohighlight">\(P\)</span> be a stochastic matrix. The random sequence <span class="math notranslate nohighlight">\(\mathbb{X} = (X_n : n \geq 0)\)</span> is a Markov chain with initial distribution <span class="math notranslate nohighlight">\(\lambda\)</span> and transition matrix <span class="math notranslate nohighlight">\(P\)</span> if and only if</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{P}(X_0 = x_0, X_1 = x_1, ..., X_n = x_n) = \lambda_{x_0} p_{x_0, x_1} ... p_{x_{n - 1}, x_n}
+\end{align}\]</div>
+<p>for all <span class="math notranslate nohighlight">\(n \geq 0\)</span> and <span class="math notranslate nohighlight">\(x_0, x_1, ..., x_n \in S\)</span>.</p>
+</div>
+<br>
+<div class='theorem'>
+<p><strong>Theorem (Extended Markov property)</strong> Let <span class="math notranslate nohighlight">\(\mathbb{X} = (X_n : n \geq 0)\)</span> is a Markov chain. For <span class="math notranslate nohighlight">\(n \geq 0\)</span>, for any event <span class="math notranslate nohighlight">\(H\)</span> given in terms of <span class="math notranslate nohighlight">\(X_0, X_1, ..., X_{n - 1}\)</span> and any event given in terms of <span class="math notranslate nohighlight">\(X_{n + 1}, X_{n + 2}, ...\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{P}(F | X_n = x, H) = \mathbb{P}(F | X_n = x), \text{ for } x \in S.
+\end{align}\]</div>
+</div>
+<br>
+</div>
 </div>
 
 
