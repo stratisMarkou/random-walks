@@ -189,6 +189,14 @@
             <a href="#markov-chain-and-markov-property" class="nav-link">Markov chain and Markov property</a>
         </li>
     
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#stopping-times-and-the-strong-markov-property" class="nav-link">Stopping times and the strong Markov property</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#references" class="nav-link">References</a>
+        </li>
+    
     </ul>
 </nav>
 
@@ -210,11 +218,11 @@
 \[\begin{align}
 \mathbb{P}(X_{n + 1} = x_{n + 1} | X_0 = x_0, X_1 = x_1, ..., X_n = x_n) = \mathbb{P}(X_{n + 1} = x_{n + 1} | X_n = x_n)
 \end{align}\]</div>
-<p>for all <span class="math notranslate nohighlight">\(n \geq 0\)</span> and all <span class="math notranslate nohighlight">\(x_0, x_1, ..., x_{n + 1} \in S\)</span>. The Markov chain is called homogeneuous if for all <span class="math notranslate nohighlight">\(u, v \in S\)</span>, the conditional probability <span class="math notranslate nohighlight">\(\mathbb{P}(X_{n + 1} = v | X_n = u)\)</span> does not depend on the value of <span class="math notranslate nohighlight">\(n\)</span>. In this case, we the <em>transition matrix</em> <span class="math notranslate nohighlight">\(P\)</span> and <em>initial distribution</em> <span class="math notranslate nohighlight">\(\lambda\)</span> of the chain are defined as</p>
+<p>for all <span class="math notranslate nohighlight">\(n \geq 0\)</span> and all <span class="math notranslate nohighlight">\(x_0, x_1, ..., x_{n + 1} \in S\)</span>. The Markov chain is called homogeneuous if for all <span class="math notranslate nohighlight">\(u, v \in S\)</span>, the conditional probability <span class="math notranslate nohighlight">\(\mathbb{P}(X_{n + 1} = x_{n + 1} | X_n = x_n)\)</span> does not depend on the value of <span class="math notranslate nohighlight">\(n\)</span>. In this case, we the <em>transition matrix</em> <span class="math notranslate nohighlight">\(P\)</span> and <em>initial distribution</em> <span class="math notranslate nohighlight">\(\lambda\)</span> of the chain are defined as</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
-P = (p_{i, j} : i, j \in S), \text{ where } p_{i, j} = \mathbb{P}(X_1 = j | X_0 = i)\\
-\lambda = (\lambda_i : i \in S), \text{ where } \lambda_i = \mathbb{P}(X_0 = i).
+P = (p_{i, j} : i, j \in S), \text{ where } p_{i, j} &amp;= \mathbb{P}(X_1 = j | X_0 = i)\\
+\lambda = (\lambda_i : i \in S), \text{ where } \lambda_i &amp;= \mathbb{P}(X_0 = i).
 \end{align}\end{split}\]</div>
 </div>
 <br>
@@ -224,7 +232,7 @@ P = (p_{i, j} : i, j \in S), \text{ where } p_{i, j} = \mathbb{P}(X_1 = j | X_0 
 \lambda \geq 0, &amp; \text{ and } \sum_{i \in S} \lambda_i = 1,\\
 p_{i, j} \geq 0, &amp; \text{ and } \sum_{j \in S} p_{i, j} = 1.
 \end{align}\end{split}\]</div>
-<p>Any matrix <span class="math notranslate nohighlight">\(P\)</span> which satisfies the above property is called a <strong>stochastic matrix</strong>.</p>
+<p>Any matrix <span class="math notranslate nohighlight">\(P\)</span> which satisfies the above property is called a <strong>stochastic matrix</strong>. The book<a class="bibtex reference internal" href="#grimstir" id="id1">[GS01]</a> and these notes deal with homogeneous Markov chains only, although some of the definitions and theorems also apply to inhomogeneous Markov chains.</p>
 <div class='theorem'>
 <p><strong>Theorem (Markov chain <span class="math notranslate nohighlight">\(\iff\)</span> distribution factorises)</strong> Let <span class="math notranslate nohighlight">\(\lambda\)</span> be a distribution and <span class="math notranslate nohighlight">\(P\)</span> be a stochastic matrix. The random sequence <span class="math notranslate nohighlight">\(\mathbb{X} = (X_n : n \geq 0)\)</span> is a Markov chain with initial distribution <span class="math notranslate nohighlight">\(\lambda\)</span> and transition matrix <span class="math notranslate nohighlight">\(P\)</span> if and only if</p>
 <div class="math notranslate nohighlight">
@@ -235,13 +243,259 @@ p_{i, j} \geq 0, &amp; \text{ and } \sum_{j \in S} p_{i, j} = 1.
 </div>
 <br>
 <div class='theorem'>
-<p><strong>Theorem (Extended Markov property)</strong> Let <span class="math notranslate nohighlight">\(\mathbb{X} = (X_n : n \geq 0)\)</span> is a Markov chain. For <span class="math notranslate nohighlight">\(n \geq 0\)</span>, for any event <span class="math notranslate nohighlight">\(H\)</span> given in terms of <span class="math notranslate nohighlight">\(X_0, X_1, ..., X_{n - 1}\)</span> and any event given in terms of <span class="math notranslate nohighlight">\(X_{n + 1}, X_{n + 2}, ...\)</span>,</p>
+<p><strong>Theorem (Extended Markov property)</strong> Let <span class="math notranslate nohighlight">\(\mathbf{X} = (X_n : n \geq 0)\)</span> is a Markov chain. For <span class="math notranslate nohighlight">\(n \geq 0\)</span>, for any event <span class="math notranslate nohighlight">\(H\)</span> given in terms of <span class="math notranslate nohighlight">\(X_0, X_1, ..., X_{n - 1}\)</span> and any event given in terms of <span class="math notranslate nohighlight">\(X_{n + 1}, X_{n + 2}, ...\)</span>,</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
 \mathbb{P}(F | X_n = x, H) = \mathbb{P}(F | X_n = x), \text{ for } x \in S.
 \end{align}\]</div>
 </div>
 <br>
+<div class='theorem'>
+<p><strong>Theorem (Chapman-Kolmogorov equations)</strong> Let <span class="math notranslate nohighlight">\(\mathbf{X} = (X_n : n \geq 0)\)</span> be a Markov chain with initial distribution <span class="math notranslate nohighlight">\(\lambda\)</span> and transition matrix <span class="math notranslate nohighlight">\(P\)</span>. Then the <em>n-step transition probabilities</em> <span class="math notranslate nohighlight">\(p_{x_i, x_j}(n) = \mathbb{P}(X_n = x_j | X_0 = x_i)\)</span> satisfy</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+p_{x_i, x_j}(n + m) = \sum_{x_k \in S} p_{x_i, x_k}(n)p_{x_k, x_j}(m),
+\end{align}\]</div>
+<p>for <span class="math notranslate nohighlight">\(x_i, x_j \in S\)</span> and <span class="math notranslate nohighlight">\(n, m \geq 0\)</span>.</p>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Chapman-Holmogorov equations</summary>
+<p>From the definition of <span class="math notranslate nohighlight">\(p_{x_i, x_j}(n + m)\)</span> we see</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+p_{x_i, x_j}(n + m) &amp;= \mathbb{P}(X_{n + m} = x_j | X_0 = x_i)\\
+&amp;= \sum_{k \in S} \mathbb{P}(X_{n + m} = x_j | X_k = x_k, X_0 = x_0) \mahtbb{P}(X_k = x_k | X_0 = x_i) \\
+&amp;= \sum_{k \in S} \mathbb{P}(X_{n + m} = x_j | X_k = x_k) \mahtbb{P}(X_k = x_k | X_0 = x_i) \\
+&amp;= \sum_{k \in S} \mathbb{P}(X_{n + m} = x_j | X_k = x_k) \mahtbb{P}(X_k = x_k | X_0 = x_i) \\
+&amp;= \sum_{k \in S} p_{x_i, x_k}(n)p_{x_k, x_j}(m),
+\end{align}\end{split}\]</div>
+<p>where we have used the Markov property to go from the second to the third line.</p>
+</details>
+<br>
+<div class='definition'>
+<p><strong>Definition (Communicating states)</strong> Let <span class="math notranslate nohighlight">\(\mathbf{X} = X_0, X_1, ...\)</span> be a Markov chain with state space <span class="math notranslate nohighlight">\(S\)</span> and transition matrix <span class="math notranslate nohighlight">\(P\)</span>. For <span class="math notranslate nohighlight">\(i, j \in S\)</span>, we say that <span class="math notranslate nohighlight">\(i\)</span> leads to <span class="math notranslate nohighlight">\(j\)</span>, written <span class="math notranslate nohighlight">\(i \to j\)</span>, if <span class="math notranslate nohighlight">\(p_{i, j}(n) &gt; 0\)</span> for some <span class="math notranslate nohighlight">\(n \geq 0\)</span>. If <span class="math notranslate nohighlight">\(i \to j\)</span> and <span class="math notranslate nohighlight">\(j \to i\)</span>, we write <span class="math notranslate nohighlight">\(i \leftrightarrow j\)</span>, and say that <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> communicate.</p>
+</div>
+<br>
+<div class='lemma'>
+<p><strong>Lemma (Communication relation)</strong> The relation <span class="math notranslate nohighlight">\(\leftrightarrow\)</span> is an equivalence relation.</p>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Communication relation</summary>
+<p>A relation is an equivalence relation if it is reflexive, symmetric and transitive. First, for any <span class="math notranslate nohighlight">\(i \in S\)</span> we have <span class="math notranslate nohighlight">\(i \to i\)</span>, so <span class="math notranslate nohighlight">\(i \leftrightarrow i\)</span>, so communication is reflexive. Second, if <span class="math notranslate nohighlight">\(i \leftrightarrow j\)</span> we have <span class="math notranslate nohighlight">\(i \to j\)</span> and <span class="math notranslate nohighlight">\(j \to i\)</span>, from which it follows <span class="math notranslate nohighlight">\(j \to i\)</span>, so communication is symmetric. Finally, suppose <span class="math notranslate nohighlight">\(i \leftrightarrow j\)</span> and <span class="math notranslate nohighlight">\(j \leftrightarrow k\)</span>. Then, there exist <span class="math notranslate nohighlight">\(n, m \geq 0\)</span> such that <span class="math notranslate nohighlight">\(p_{i, j}(n) &gt; 0\)</span> and <span class="math notranslate nohighlight">\(p_{j, k}(m) &gt; 0\)</span>. By the Chapman-Kolmogorov equations</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+p_{i, k}(n + m) &amp;= \sum_{l \in S} p_{i, l}(n) p_{l, k}(m) \\
+&amp;= p_{i, j}(n) p_{j, k}(m) &gt; 0,
+\end{align}\end{split}\]</div>
+<p>from which it follows that <span class="math notranslate nohighlight">\(i \to k\)</span>. Similarly we have <span class="math notranslate nohighlight">\(k \to i\)</span>, thus <span class="math notranslate nohighlight">\(i \leftrightarrow k\)</span> and <span class="math notranslate nohighlight">\(\leftrightarrow\)</span> is transitive.</p>
+</details>
+<br>
+<div class='definition'>
+<p><strong>Definition (Communicating classes, irreducible chains, closed sets)</strong> The equivalence classes of <span class="math notranslate nohighlight">\(\leftrightarrow\)</span> are called communicating classes. A Markov chain <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> is called irreducible, if there is a single communicating class. A subset <span class="math notranslate nohighlight">\(C \subseteq S\)</span> is called closed if <span class="math notranslate nohighlight">\(i \in C, i \to j \implies j \in C\)</span>. If the singleton set <span class="math notranslate nohighlight">\(\{i\}\)</span> is closed, <span class="math notranslate nohighlight">\(i\)</span> is called an absorbing state.</p>
+</div>
+<br>
+<div class='definition'>
+<p><strong>Definition (First-passage times and probabilites)</strong> The first-passage time to state <span class="math notranslate nohighlight">\(j\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+T_j = \min \{n \geq 1 : X_n = j\},
+\end{align}\]</div>
+<p>and the first-passage probabilites are defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+f_{i, j}(n) = \mathbb{P}(T_j = n | X_0 = i).
+\end{align}\]</div>
+</div>
+<br>
+<div class='definition'>
+<p><strong>Definition (First-passage times and probabilites)</strong> A state <span class="math notranslate nohighlight">\(i\)</span> is called recurrent if <span class="math notranslate nohighlight">\(\mathbb{P}(T_j &lt; \infty | X_0 = i) = 1\)</span>, and it is called transient if it is not recurrent.</p>
+</div>
+<br>
+<div class='theorem'>
+<p><strong>Theorem (Recurrence <span class="math notranslate nohighlight">\(\iff\)</span> sum of return probabilities diverges)</strong> The state <span class="math notranslate nohighlight">\(i\)</span> is recurrent if and only if</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\sum^{\infty}_{n = 0} p_{i, i}(n) = \infty.
+\end{align}\]</div>
+</div>
+<br>
+<p>To prove this result we use the following theorem, which related the generating functions of the return probabilities and the first-passage times.</p>
+<details class="proof">
+<summary>Proof: Recurrence \(\iff\) sum of return probabilities diverges</summary>
+<p>Starting from the relation</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+P_{i, j} = \delta_{i, j} + F_{i, j}(s) P_{j, j}(s),
+\end{align}\]</div>
+<p>we set <span class="math notranslate nohighlight">\(j = i\)</span> and rearrange to obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+P_{j, j}(s) = \frac{1}{1 - F_{i, i}(s)}.
+\end{align}\]</div>
+<p>Then letting <span class="math notranslate nohighlight">\(s \to 1\)</span>, we obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\sum^{\infty}_{n = 0} p_{i, i}(n) = \lim_{s \to 1} P_{j, j}(s) = \lim_{s \to 1} \frac{1}{1 - F_{i, i}(s)}.
+\end{align}\]</div>
+<p>and considering <span class="math notranslate nohighlight">\(\lim_{s \to 1} F_{i, i}(s) = f_{i, i}\)</span>, we see that the sum on the left diverges if and only if <span class="math notranslate nohighlight">\(f_{i, i} = 1\)</span>, i.e. if the state is recurrent.</p>
+</details>
+<br>
+<div class='theorem'>
+<p><strong>Theorem (Gen. func. of return and first-passage probabilities)</strong> Let <span class="math notranslate nohighlight">\(P_{i, j}(s)\)</span> and <span class="math notranslate nohighlight">\(F_{i, j}(s)\)</span> be the generating functions</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+P_{i, j} &amp;= \sum_{n = 0}^\infty p_{i, j}(n) s^n, \\
+F_{i, j} &amp;= \sum_{n = 0}^\infty f_{i, j}(n) s^n.
+\end{align}\end{split}\]</div>
+<p>Then for any <span class="math notranslate nohighlight">\(i, j \in S\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+P_{i, j} = \delta_{i, j} + F_{i, j}(s) P_{j, j}(s).
+\end{align}\]</div>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Gen. func. of return and first-passage probabilities</summary>
+<p>First, we can write <span class="math notranslate nohighlight">\(p_{i, j}(n)\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+p_{i, j}(n) = \sum_{m = 1}^\infty \mathbb{P}(X_n = j | T_j = m, X_0 = i) \mathbb{P}(T_j = m | X_0 = i).
+\end{align}\]</div>
+<p>Writing <span class="math notranslate nohighlight">\(H = \{X_n \neq j \text{ for } 1 \leq n &lt; m\}\)</span> and using the extended Markov property</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{P}(X_n = j | T_j = m, X_0 = i) = \mathbb{P}(X_n = j | X_m = j, H, X_0 = i) = \mathbb{P}(X_n = j | X_m = j).
+\end{align}\]</div>
+<p>Using the fact that the chain is homogeneous</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+p_{i, j}(n) &amp;= \sum_{m = 1}^\infty \mathbb{P}(X_n = j | X_m = j) \mathbb{P}(T_j = m | X_0 = i), \\
+&amp;= \sum_{m = 1}^\infty f_{i, j}(m) p_{j, j}(n - m),
+\end{align}\end{split}\]</div>
+<p>and multiplying both sides by <span class="math notranslate nohighlight">\(s^n\)</span> and summing over <span class="math notranslate nohighlight">\(n\)</span>, we obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\sum_{n = 1}^\infty p_{i, j}(n) s^n &amp;= \sum_{n = 1}^\infty \sum_{m = 1}^\infty f_{i, j}(m) s^m p_{j, j}(n - m) s^{n - m}, \\
+&amp;= \sum_{m = 1}^\infty \sum_{n = m}^\infty f_{i, j}(m) s^m p_{j, j}(n - m) s^{n - m}, \\
+&amp;= \left[\sum_{m = 1}^\infty f_{i, j}(m) s^m \right] \left[\sum_{n = m}^\infty p_{j, j}(n - m) s^{n - m}\right],
+\end{align}\end{split}\]</div>
+<p>where we have used the fact <span class="math notranslate nohighlight">\(f_{i, j}(0) = 0\)</span>. Lastly, using the fact that <span class="math notranslate nohighlight">\(p_{i, j}(0) = \delta_{i, j}\)</span>, we arrive at the result</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+P_{i, j}(s) = \delta_{i, j} + F_{i, j}(s) P_{j, j}(s).
+\end{align}\]</div>
+</details>
+<br>
+<div class='theorem'>
+<p><strong>Theorem (Communicating class and recurrence/transience)</strong> Let <span class="math notranslate nohighlight">\(C\)</span> be a communicating class. Then</p>
+<ol class="simple">
+<li><p>Either every state in <span class="math notranslate nohighlight">\(C\)</span> is recurrent or every state is transient.</p></li>
+<li><p>Suppose <span class="math notranslate nohighlight">\(C\)</span> contains some recurrent state. Then <span class="math notranslate nohighlight">\(C\)</span> is closed.</p></li>
+</ol>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Communicating class and recurrence/transience</summary>
+<p><strong>Part 1:</strong> Suppose <span class="math notranslate nohighlight">\(i \in C\)</span> is recurrent. Then from the Chapman-Kolmogorov equations, for any <span class="math notranslate nohighlight">\(j \in C\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\sum_{n = 1}^\infty p_{j, j}(n) \geq \sum_{l = 1}^\infty p_{j, j}(k + l + m) = p_{j, i}(k) \left[\sum_{l = 1}^\infty p_{i, i}(l)\right] p_{i, j}(m) = \infty,
+\end{align}\]</div>
+<p>so <span class="math notranslate nohighlight">\(j\)</span> is also recurrent.</p>
+<p><strong>Part 2:</strong> Suppose <span class="math notranslate nohighlight">\(i \in C\)</span> is recurrent and that <span class="math notranslate nohighlight">\(C\)</span> is not closed. Then there exist <span class="math notranslate nohighlight">\(j \in C\)</span> and <span class="math notranslate nohighlight">\(k \not \in C\)</span> such that <span class="math notranslate nohighlight">\(j \to k\)</span> and <span class="math notranslate nohighlight">\(k \not \to j\)</span>. From the previous part of this theorem, <span class="math notranslate nohighlight">\(j\)</span> is also recurrent. Using these facts we arrive at the contradiction</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{P}(X_n \neq j \text{ for } n \geq 1 | X_0 = j) \geq p_{j, k} &gt; 0,
+\end{align}\]</div>
+<p>where the first inequality follows because <span class="math notranslate nohighlight">\(k \not \to j\)</span>, so if the chain transitions from <span class="math notranslate nohighlight">\(j\)</span> to <span class="math notranslate nohighlight">\(k\)</span> in the first step, it cannot return to <span class="math notranslate nohighlight">\(j\)</span> in any number of steps. Therefore the assumption that <span class="math notranslate nohighlight">\(C\)</span> is not closed, is contradicted.</p>
+</details>
+<br>
+<div class='theorem'>
+<p><strong>Theorem (Communication and recurrence of finite <span class="math notranslate nohighlight">\(S\)</span>)</strong> Suppose that the state space <span class="math notranslate nohighlight">\(S\)</span> is finite</p>
+<ol class="simple">
+<li><p>There exists at least one recurrent state.</p></li>
+<li><p>If the chain is irreducible, all states are recurrent.</p></li>
+</ol>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Communication and recurrence of finite \(S\)</summary>
+<p><strong>Part 1:</strong> Suppose <span class="math notranslate nohighlight">\(S\)</span> is finite and that all states are transient. Since all states are transient</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+P_{i, i}(1) &lt; \infty, F_{j, i}(1) \leq 1 \implies P_{j, i}(1) &lt; \infty
+\end{align}\]</div>
+<p>for any <span class="math notranslate nohighlight">\(i, j \in S\)</span>. Since <span class="math notranslate nohighlight">\(P_{j, i}(1) = \sum^\infty_{n = 1} p_{j, i}(n) &lt; \infty\)</span>, we must have <span class="math notranslate nohighlight">\(p_{j, i}(n) \to 0\)</span> as <span class="math notranslate nohighlight">\(n \to \infty\)</span>. Since <span class="math notranslate nohighlight">\(p_{i, j}(n)\)</span> is a distribution however</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\sum_{j \in S} p_{i, j}(n) = 1,
+\end{align}\]</div>
+<p>reaching a contradiction.</p>
+<p><strong>Part 2:</strong> Suppose that the chain is irreducible, so that all states belong to the same communicating class. From the first part of this theorem, there exists at least one recurrent state and since all states belonging to the same communicating class are either all recurrent or all transient, it follows that all states are recurrent.</p>
+</details>
+<br>
+<div class='theorem'>
+<p><strong>Theorem (Polya’s theorem)</strong> The symmetric random walk on <span class="math notranslate nohighlight">\(\mathbb{Z}^d\)</span> is recurrent if <span class="math notranslate nohighlight">\(d = 1, 2, ...\)</span> and transient if <span class="math notranslate nohighlight">\(d \geq 3\)</span>.</p>
+</div>
+<br>
+<div class='definition'>
+<p><strong>Definition (Hitting time, hitting and absorption probabilities)</strong> The hitting time of a subset <span class="math notranslate nohighlight">\(A \subseteq S\)</span> is the earliest time <span class="math notranslate nohighlight">\(n\)</span> at which <span class="math notranslate nohighlight">\(X_n \in A\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+H^A = \inf \{n \geq 0 : X_n \in A\}.
+\end{align}\]</div>
+<p>The hitting probability is defined in terms of the hitting time as</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+h^A_i = \mathbb{P}(H^A &lt; \infty | X_0 = i).
+\end{align}\]</div>
+<p>If <span class="math notranslate nohighlight">\(A\)</span> is closed, <span class="math notranslate nohighlight">\(h^A_i\)</span> is called an absorption probability.</p>
+</div>
+<br>
+<div class='theorem'>
+<p><strong>Theorem (Hitting probabilities)</strong> The vector of hitting probabilities <span class="math notranslate nohighlight">\(h^A = (h^A_i : i \in S)\)</span> is the minimal non-negative solution to</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+h^A_i = \begin{cases}
+1 &amp; \text{ for } i \in A, \\
+\sum_{j \in S} p_{i, j} h_j^A &amp; \text{ for } i \not \in A.
+\end{cases}
+\end{align}\end{split}\]</div>
+</div>
+<br>
+<div class='theorem'>
+<p><strong>Theorem (Expected hitting times)</strong> The vector of expected hitting times <span class="math notranslate nohighlight">\(k^A = (k_i^A = \mathbb{E}\left[H_i^A\right] : i \in S)\)</span> is the minimal non-negative solution to</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+k^A_i = \begin{cases}
+0 &amp; \text{ for } i \in A, \\
+1 + \sum_{j \in S} p_{i, j} k_j^A &amp; \text{ for } i \not \in A.
+\end{cases}
+\end{align}\end{split}\]</div>
+</div>
+<br>
+</div>
+<div class="section" id="stopping-times-and-the-strong-markov-property">
+<h2>Stopping times and the strong Markov property<a class="headerlink" href="#stopping-times-and-the-strong-markov-property" title="Permalink to this headline">¶</a></h2>
+<div class='definition'>
+<p><strong>Definition (Stopping time)</strong> The random variable <span class="math notranslate nohighlight">\(T : \Omega \to \{0, 1, 2, ...\} \cup \{\infty\}\)</span> is called a stopping time for the Markov chain <span class="math notranslate nohighlight">\(\mathbb{X}\)</span>, if the event <span class="math notranslate nohighlight">\(\{T = n\}\)</span> is given in terms of <span class="math notranslate nohighlight">\(X_0, X_1, ..., X_n\)</span> only, for all <span class="math notranslate nohighlight">\(n \geq 0\)</span>.</p>
+</div>
+<br>
+<div class='theorem'>
+<p><strong>Theorem (Strong Markov property)</strong> Let <span class="math notranslate nohighlight">\(\mathbb{X} = X_0, X_1, ...\)</span> be a Markov chain with transition matrix <span class="math notranslate nohighlight">\(P\)</span>, and let <span class="math notranslate nohighlight">\(T\)</span> be a stopping time. Given <span class="math notranslate nohighlight">\(T &lt; \infty\)</span> and <span class="math notranslate nohighlight">\(X_T = i\)</span>, the sequence <span class="math notranslate nohighlight">\(\mathbb{Y} = Y_0, Y_1, ...\)</span>, given by <span class="math notranslate nohighlight">\(Y_k = X_{T + k}\)</span>, is a Markov chain with transition matrix <span class="math notranslate nohighlight">\(P\)</span> and initial state <span class="math notranslate nohighlight">\(Y_0 = i\)</span>. Further, given that <span class="math notranslate nohighlight">\(T &lt; \infty\)</span> and <span class="math notranslate nohighlight">\(X_T = i\)</span>, <span class="math notranslate nohighlight">\(\mathbb{Y}\)</span> is independent of <span class="math notranslate nohighlight">\(X_0, X_1, ..., X_{T - 1}\)</span>.</p>
+</div>
+<br>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p id="bibtex-bibliography-content/prob-intro/ch12/content-0"><dl class="citation">
+<dt class="bibtex label" id="grimstir"><span class="brackets"><a class="fn-backref" href="#id1">GS01</a></span></dt>
+<dd><p>G.R. Grimmett and D.R. Stirzaker. <em>Probability and random processes</em>. Number 391. Oxford university press, 2001.</p>
+</dd>
+</dl>
+</p>
 </div>
 </div>
 
