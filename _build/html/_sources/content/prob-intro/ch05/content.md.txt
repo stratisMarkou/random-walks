@@ -48,7 +48,7 @@ The following useful properties are true of distribution functions:
 4. $\mathbb{P}(a < X \leq b) = \mathbb{P}(X \leq b) - \mathbb{P}(X \leq a)$.
 
 
-## Continuous random variable definition and examples
+## Continuous random variables
 
 Just like discrete random variables are special case of random variables
 , continuous random variables are another special case of interest.
@@ -254,7 +254,7 @@ A similar relation holds for continuous and decreasing $g$, where a $-$ sign is
  added in front of the right hand side of the above result. Cases where $g$
   is not strictly increasing or decreasing, are best treated on their own.
   
-## Expectations of continuous variables
+## Expectations
 
 The expectation of a continuous random variable is the sensible analogue of
  the expectation of a continuous random variable.
