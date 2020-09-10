@@ -2,7 +2,7 @@
 
 This chapter introduces convergence for random variables, which may be in either of the three senses (1) in mean-square, (2) in probability or (3) in distribution, and the implication of one from the other are proved. Important theorems involving limits of random variables are presented, such as the law of large numbers (mean-square and weak versions), the central limit theorem and the large deviation theorem. The continuity theorems for moment generating functions and characteristic functions are presented.
 
-## Convergence in mean-square and law of large numbers
+## Convergence in mean-square
 
 We are often interested in the convergence of a sequence of random variables to another random variable. Unlike real sequences, where convergence has one meaning only, the convergence of a sequence of random variables can be defined in different ways. One such way is convergence in mean-square, as defined below.
 
@@ -54,7 +54,7 @@ Where in the first line we used the fact $\text{Var}(aX) = a^2\text{Var}(X)$. Th
 </details>
 <br>
 
-## Convergence in probability and weak law of large numbers
+## Convergence in probability
 
 A weaker sense in which a sequence of random variables can converge is that of convergence in probability.
 
@@ -406,7 +406,7 @@ Illustration for the argument that convergence in probability implies convergenc
 <br>
 
 (prob-intro-char-cont)=
-## Characteristic functions for the limit theorem and weak law
+## Limits of characteristic functions
 
 <div class='theorem'>
 
