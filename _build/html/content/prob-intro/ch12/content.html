@@ -46,7 +46,7 @@
 <meta property="og:url"         content="https://random-walks.org/content/prob-intro/ch12/content.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Markov chains" />
-<meta property="og:description" content="Markov chains  Markov chain and Markov property  <div class='definition'>   Definition (Markov chain and markov property) The sequence \mathbf{X} = X_0, X_1, .." />
+<meta property="og:description" content="Markov chains    Markov chain and property  <div class='definition'>   Definition (Markov chain and markov property) The sequence \mathbf{X} = X_0, X_1, ... is " />
 <meta property="og:image"       content="https://random-walks.org/_static/logo.svg" />
 
 <meta name="twitter:card" content="summary">
@@ -186,11 +186,31 @@
     <ul class="nav section-nav flex-column">
     
         <li class="nav-item toc-entry toc-h2">
-            <a href="#markov-chain-and-markov-property" class="nav-link">Markov chain and Markov property</a>
+            <a href="#markov-chain-and-property" class="nav-link">Markov chain and property</a>
         </li>
     
         <li class="nav-item toc-entry toc-h2">
-            <a href="#stopping-times-and-the-strong-markov-property" class="nav-link">Stopping times and the strong Markov property</a>
+            <a href="#strong-markov-property" class="nav-link">Strong Markov property</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#classification-of-states" class="nav-link">Classification of states</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#invariant-distributions" class="nav-link">Invariant distributions</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#convergence-to-equilibrium" class="nav-link">Convergence to equilibrium</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#time-reversal" class="nav-link">Time reversal</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#random-walk-on-a-graph" class="nav-link">Random walk on a graph</a>
         </li>
     
         <li class="nav-item toc-entry toc-h2">
@@ -210,8 +230,8 @@
                 
   <div class="section" id="markov-chains">
 <h1>Markov chains<a class="headerlink" href="#markov-chains" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="markov-chain-and-markov-property">
-<h2>Markov chain and Markov property<a class="headerlink" href="#markov-chain-and-markov-property" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="markov-chain-and-property">
+<span id="prob-intro-mark-chain-prop"></span><h2>Markov chain and property<a class="headerlink" href="#markov-chain-and-property" title="Permalink to this headline">¶</a></h2>
 <div class='definition'>
 <p><strong>Definition (Markov chain and markov property)</strong> The sequence <span class="math notranslate nohighlight">\(\mathbf{X} = X_0, X_1, ...\)</span> is called a Markov chain if it satisfies the Markov property</p>
 <div class="math notranslate nohighlight">
@@ -234,13 +254,37 @@ p_{i, j} \geq 0, &amp; \text{ and } \sum_{j \in S} p_{i, j} = 1.
 \end{align}\end{split}\]</div>
 <p>Any matrix <span class="math notranslate nohighlight">\(P\)</span> which satisfies the above property is called a <strong>stochastic matrix</strong>. The book<a class="bibtex reference internal" href="#grimstir" id="id1">[GS01]</a> and these notes deal with homogeneous Markov chains only, although some of the definitions and theorems also apply to inhomogeneous Markov chains.</p>
 <div class='theorem'>
-<p><strong>Theorem (Markov chain <span class="math notranslate nohighlight">\(\iff\)</span> distribution factorises)</strong> Let <span class="math notranslate nohighlight">\(\lambda\)</span> be a distribution and <span class="math notranslate nohighlight">\(P\)</span> be a stochastic matrix. The random sequence <span class="math notranslate nohighlight">\(\mathbb{X} = (X_n : n \geq 0)\)</span> is a Markov chain with initial distribution <span class="math notranslate nohighlight">\(\lambda\)</span> and transition matrix <span class="math notranslate nohighlight">\(P\)</span> if and only if</p>
+<p><strong>Theorem (<span class="math notranslate nohighlight">\(\mathbf{X}\)</span> is a Markov chain <span class="math notranslate nohighlight">\(\iff\)</span> distribution factorises)</strong> Let <span class="math notranslate nohighlight">\(\lambda\)</span> be a distribution and <span class="math notranslate nohighlight">\(P\)</span> be a stochastic matrix. The random sequence <span class="math notranslate nohighlight">\(\mathbf{X} = (X_n : n \geq 0)\)</span> is a Markov chain with initial distribution <span class="math notranslate nohighlight">\(\lambda\)</span> and transition matrix <span class="math notranslate nohighlight">\(P\)</span> if and only if</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
 \mathbb{P}(X_0 = x_0, X_1 = x_1, ..., X_n = x_n) = \lambda_{x_0} p_{x_0, x_1} ... p_{x_{n - 1}, x_n}
 \end{align}\]</div>
 <p>for all <span class="math notranslate nohighlight">\(n \geq 0\)</span> and <span class="math notranslate nohighlight">\(x_0, x_1, ..., x_n \in S\)</span>.</p>
 </div>
+<br>
+<details class="proof">
+<summary>Proof: \(\mathbf{X}\) is a Markov chain \(\iff\) distribution factorises</summary>
+<p>Suppose <span class="math notranslate nohighlight">\(\mathbb{X} = (X_n : 0 \neq n)\)</span> is a Markov chain with initial distribution <span class="math notranslate nohighlight">\(\lambda = (\lambda_i : i \neq S)\)</span> and transition matrix <span class="math notranslate nohighlight">\(P = (p_{i, j} : i, j \neq S)\)</span>. From the definition of conditional probability and using the Markov property</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\mathbb{P}(X_0 = x_0, ..., X_n = x_n) &amp;= \mathbb{P}(X_n = x_n | X_0 = x_0, ..., X_{n - 1}) \mathbb{P}(X_0 = x_0, ..., X_{n - 1} = x_{n - 1}) \\
+&amp;= \mathbb{P}(X_n = x_n | X_{n - 1} = x_{n - 1}) \mathbb{P}(X_0 = x_0, ..., X_{n - 1} = x_{n - 1}) \\
+&amp;= p_{x_{n - 1}, x_n} \mathbb{P}(X_0 = x_0, ..., X_{n - 1} = x_{n - 1}),
+\end{align}\end{split}\]</div>
+<p>and proceeding recursively we obtain the required result, noting that <span class="math notranslate nohighlight">\(\mathbb{P}(X_0 = x_0) = \lambda_{x_0}\)</span>. Going the other way, suppose</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{P}(X_0 = x_0, ..., X_n = x_n) &amp;= \lambda_{x_0} p_{x_0, x_1} ... p_{x_{n - 1}, x_n}
+\end{align}\]</div>
+<p>for all <span class="math notranslate nohighlight">\(n \geq 0\)</span> and <span class="math notranslate nohighlight">\(x_0, x_1, ..., x_n \in S\)</span>. Then <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> satisfies the Markov property because</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\mathbb{P}(X_n = x_n | X_{n - 1} = x_{n - 1}, ..., X_0 = x_0) &amp;= \frac{\mathbb{P}(X_n = x_n, ..., X_0 = x_0)}{\mathbb{P}(X_{n - 1} = x_{n - 1}, ..., X_0 = x_0)}\\
+&amp;= p_{x_{n - 1}, x_n} \\
+&amp;= \frac{\mathbb{P}(X_n = x_n, X_{n - 1} = x_{n - 1})}{\mathbb{P}(X_{n - 1} = x_{n - 1})} \\
+&amp;= \mathbb{P}(X_n = x_n | X_{n - 1} = x_{n - 1})
+\end{align}\end{split}\]</div>
+</details>
 <br>
 <div class='theorem'>
 <p><strong>Theorem (Extended Markov property)</strong> Let <span class="math notranslate nohighlight">\(\mathbf{X} = (X_n : n \geq 0)\)</span> is a Markov chain. For <span class="math notranslate nohighlight">\(n \geq 0\)</span>, for any event <span class="math notranslate nohighlight">\(H\)</span> given in terms of <span class="math notranslate nohighlight">\(X_0, X_1, ..., X_{n - 1}\)</span> and any event given in terms of <span class="math notranslate nohighlight">\(X_{n + 1}, X_{n + 2}, ...\)</span>,</p>
@@ -249,6 +293,23 @@ p_{i, j} \geq 0, &amp; \text{ and } \sum_{j \in S} p_{i, j} = 1.
 \mathbb{P}(F | X_n = x, H) = \mathbb{P}(F | X_n = x), \text{ for } x \in S.
 \end{align}\]</div>
 </div>
+<br>
+<details class="proof">
+<summary>Partial Proof: Extended Markov property</summary>
+<p>This is a proof of a restricted version the extended Markov property, in which <span class="math notranslate nohighlight">\(F\)</span> depends on a finite number of values of the Markov chain, although the infinite case also holds.</p>
+<p>Let <span class="math notranslate nohighlight">\(H\)</span> be an event <span class="math notranslate nohighlight">\(X_0, X_1, ..., X_{n - 1}\)</span> only, in that it is a function of these random variables only. Similarly, let <span class="math notranslate nohighlight">\(F\)</span> be a function of <span class="math notranslate nohighlight">\(X_{n + 1}, X_{n + 2}, ... X_{n + k}\)</span> for some <span class="math notranslate nohighlight">\(k \geq 0\)</span>, only. By the <a class="reference internal" href="#prob-intro-mark-chain-prop"><span class="std std-ref">Markov property</span></a> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+&amp;\mathbb{P}(X_0 = x_0, ..., X_{n - 1} = x_{n - 1}, X_{n + 1} = x_{n + 1}, ..., X_{n + k} = x_{n + k} | X_n = x_n) = \\
+&amp;~~~~~~~~~~~~=\mathbb{P}(X_0 = x_0, ..., X_{n - 1} = x_{n - 1} | X_n = x_n) \mathbb{P}(X_{n + k} = x_{n + k} | X_n = x_n).
+\end{align}\end{split}\]</div>
+<p>Then summing over all values of <span class="math notranslate nohighlight">\(x_0, ..., x_{n - 1}\)</span> corresponding to <span class="math notranslate nohighlight">\(H\)</span> and over all values of <span class="math notranslate nohighlight">\(x_{n + 1}, ..., x_{n + k}\)</span> corresponding to <span class="math notranslate nohighlight">\(F\)</span>, and dividing both sides by <span class="math notranslate nohighlight">\(\mathbb{P}(H | X_n = x_n)\)</span>, we obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{P}(F, H | X_n = x_n) &amp;= \mathbb{P}(F | X_n = x_n) \mathbb{P}(H | X_n = x_n) \implies \mathbb{P}(F | H, X_n = x_n) &amp;= \mathbb{P}(F | X_n = x_n),
+\end{align}\]</div>
+<p>arriving at the result.</p>
+</details>
 <br>
 <div class='theorem'>
 <p><strong>Theorem (Chapman-Kolmogorov equations)</strong> Let <span class="math notranslate nohighlight">\(\mathbf{X} = (X_n : n \geq 0)\)</span> be a Markov chain with initial distribution <span class="math notranslate nohighlight">\(\lambda\)</span> and transition matrix <span class="math notranslate nohighlight">\(P\)</span>. Then the <em>n-step transition probabilities</em> <span class="math notranslate nohighlight">\(p_{x_i, x_j}(n) = \mathbb{P}(X_n = x_j | X_0 = x_i)\)</span> satisfy</p>
@@ -477,14 +538,208 @@ k^A_i = \begin{cases}
 </div>
 <br>
 </div>
-<div class="section" id="stopping-times-and-the-strong-markov-property">
-<h2>Stopping times and the strong Markov property<a class="headerlink" href="#stopping-times-and-the-strong-markov-property" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="strong-markov-property">
+<span id="prob-intro-strong-markov-prop"></span><h2>Strong Markov property<a class="headerlink" href="#strong-markov-property" title="Permalink to this headline">¶</a></h2>
 <div class='definition'>
-<p><strong>Definition (Stopping time)</strong> The random variable <span class="math notranslate nohighlight">\(T : \Omega \to \{0, 1, 2, ...\} \cup \{\infty\}\)</span> is called a stopping time for the Markov chain <span class="math notranslate nohighlight">\(\mathbb{X}\)</span>, if the event <span class="math notranslate nohighlight">\(\{T = n\}\)</span> is given in terms of <span class="math notranslate nohighlight">\(X_0, X_1, ..., X_n\)</span> only, for all <span class="math notranslate nohighlight">\(n \geq 0\)</span>.</p>
+<p><strong>Definition (Stopping time)</strong> The random variable <span class="math notranslate nohighlight">\(T : \Omega \to \{0, 1, 2, ...\} \cup \{\infty\}\)</span> is called a stopping time for the Markov chain <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>, if the event <span class="math notranslate nohighlight">\(\{T = n\}\)</span> is given in terms of <span class="math notranslate nohighlight">\(X_0, X_1, ..., X_n\)</span> only, for all <span class="math notranslate nohighlight">\(n \geq 0\)</span>.</p>
 </div>
 <br>
 <div class='theorem'>
-<p><strong>Theorem (Strong Markov property)</strong> Let <span class="math notranslate nohighlight">\(\mathbb{X} = X_0, X_1, ...\)</span> be a Markov chain with transition matrix <span class="math notranslate nohighlight">\(P\)</span>, and let <span class="math notranslate nohighlight">\(T\)</span> be a stopping time. Given <span class="math notranslate nohighlight">\(T &lt; \infty\)</span> and <span class="math notranslate nohighlight">\(X_T = i\)</span>, the sequence <span class="math notranslate nohighlight">\(\mathbb{Y} = Y_0, Y_1, ...\)</span>, given by <span class="math notranslate nohighlight">\(Y_k = X_{T + k}\)</span>, is a Markov chain with transition matrix <span class="math notranslate nohighlight">\(P\)</span> and initial state <span class="math notranslate nohighlight">\(Y_0 = i\)</span>. Further, given that <span class="math notranslate nohighlight">\(T &lt; \infty\)</span> and <span class="math notranslate nohighlight">\(X_T = i\)</span>, <span class="math notranslate nohighlight">\(\mathbb{Y}\)</span> is independent of <span class="math notranslate nohighlight">\(X_0, X_1, ..., X_{T - 1}\)</span>.</p>
+<p><strong>Theorem (Strong Markov property)</strong> Let <span class="math notranslate nohighlight">\(\mathbf{X} = X_0, X_1, ...\)</span> be a Markov chain with transition matrix <span class="math notranslate nohighlight">\(P\)</span>, and let <span class="math notranslate nohighlight">\(T\)</span> be a stopping time. Given <span class="math notranslate nohighlight">\(T &lt; \infty\)</span> and <span class="math notranslate nohighlight">\(X_T = i\)</span>, the sequence <span class="math notranslate nohighlight">\(\mathbf{Y} = Y_0, Y_1, ...\)</span>, given by <span class="math notranslate nohighlight">\(Y_k = X_{T + k}\)</span>, is a Markov chain with transition matrix <span class="math notranslate nohighlight">\(P\)</span> and initial state <span class="math notranslate nohighlight">\(Y_0 = i\)</span>. Further, given that <span class="math notranslate nohighlight">\(T &lt; \infty\)</span> and <span class="math notranslate nohighlight">\(X_T = i\)</span>, <span class="math notranslate nohighlight">\(\mathbf{Y}\)</span> is independent of <span class="math notranslate nohighlight">\(X_0, X_1, ..., X_{T - 1}\)</span>.</p>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Strong Markov property</summary>
+<p>We want to show that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+&amp;\mathbb{P}(X_{T + 1} = i_1, X_{T + 2} = i_2, ..., X_{T + n} = i_n, H | T &lt; \infty, X_T = i) =\\
+&amp;~~~~~~~~= \mathbb{P}(X_1 = i_1, X_2 = i_2, ..., X_n = i_n | X_T = i) \mathbb{P}(H | T &lt; \infty, X_T = i),
+\end{align}\end{split}\]</div>
+<p>which follows from the Markov property, except we also need to take care conditioning on the event <span class="math notranslate nohighlight">\(\{T &lt; \infty\}\)</span> rather than <span class="math notranslate nohighlight">\(\{T &lt; \infty\} \cup \{T = \infty\}\)</span>. Let <span class="math notranslate nohighlight">\(0 \leq m &lt; \infty\)</span> and consider</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+&amp;\mathbb{P}(X_{T + 1} = i_1, X_{T + 2} = i_2, ..., X_{T + n} = i_n, H, T = m | X_T = i) = \\
+&amp;~~~~~~~~= \mathbb{P}(X_1 = i_1, X_2 = i_2, ..., X_n = i_n | X_0 = i) \mathbb{P}(H, T = m | X_T = i),
+\end{align}\end{split}\]</div>
+<p>which follows from the <a class="reference internal" href="#prob-intro-mark-chain-prop"><span class="std std-ref">Markov property</span></a> together with the facts that <span class="math notranslate nohighlight">\(T\)</span> is a stopping time and the chain is homogeneous. Now summing over <span class="math notranslate nohighlight">\(m = 0, 1, 2, ...\)</span> and dividing by <span class="math notranslate nohighlight">\(\mathbb{P}(T &lt; \infty | X_T = i)\)</span> on both sides we obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+&amp;\mathbb{P}(X_{T + 1} = i_1, X_{T + 2} = i_2, ..., X_{T + n} = i_n, H | T &lt; \infty, X_T = i) = \\
+&amp;~~~~~~~~= \mathbb{P}(X_1 = i_1, X_2 = i_2, ..., X_n = i_n | X_0 = i) \mathbb{P}(H | T &lt; \infty, X_T = i).
+\end{align}\end{split}\]</div>
+</details>
+<br>
+</div>
+<div class="section" id="classification-of-states">
+<h2>Classification of states<a class="headerlink" href="#classification-of-states" title="Permalink to this headline">¶</a></h2>
+<div class='theorem'>
+<p><strong>Theorem (PDF of number of visits)</strong> Let <span class="math notranslate nohighlight">\(X_0 = i\)</span> and let <span class="math notranslate nohighlight">\(V_i = |\{n \geq 1 : X_n = i\}|\)</span> be the number of visits of the chain to state <span class="math notranslate nohighlight">\(i\)</span>. Then <span class="math notranslate nohighlight">\(V_i\)</span> has the geometric distribution</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{P}(V_i = r | X_0 = i) = (1 - f)f^r, \text{ for } r = 0, 1, 2, ...,
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(f = f_{i, i} = \mathbb{P}(X_n = i \text{ for some } n \geq 1)\)</span>, is the return probability. From this it follows that</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbb{P}(V_i = \infty | X_0 = i) = 1\)</span> if <span class="math notranslate nohighlight">\(i\)</span> is recurrent,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbb{P}(V_i &lt; \infty | X_0 = i) = 1\)</span> if <span class="math notranslate nohighlight">\(i\)</span> is transient.</p></li>
+</ol>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: PDF of number of visits</summary>
+<p>Let <span class="math notranslate nohighlight">\(f_{i, i} = \mathbb{P}(T_i &lt; \infty | X_0 = i)\)</span> and write <span class="math notranslate nohighlight">\(T_i^r\)</span> for the time at which the chain visits state <span class="math notranslate nohighlight">\(i\)</span> for the <span class="math notranslate nohighlight">\(r^{th}\)</span> time. Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\mathbb{P}(V_i \geq r | X_0 = i) &amp;= \mathbb{P}(T_i^r &lt; \infty | X_0 = i) \\
+&amp;= \mathbb{P}(T_i^r &lt; \infty | T_i^{r - 1} &lt; \infty, X_0 = i) \mathbb{P}(T_i^{r - 1} &lt; \infty | X_0 = i) \\
+&amp;= f \mathbb{P}(T_i^{r - 1} &lt; \infty | X_0 = i)
+\end{align}\end{split}\]</div>
+<p>where we have used the <a class="reference internal" href="#prob-intro-strong-markov-prop"><span class="std std-ref">strong Markov property</span></a> and the fact that the chain is homogeneous. In particular <span class="math notranslate nohighlight">\(T_i^k\)</span> is a stopping time so</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\mathbb{P}(T_i^r &lt; \infty | T_i^{r - 1} &lt; \infty, X_0 = i) &amp;= \mathbb{P}(T_i^r &lt; \infty | X_{T_i^{r - 1}} = i, T_i^{r - 1} &lt; \infty, X_0 = i) &amp;&amp; \\
+&amp;= \mathbb{P}(T_i^r &lt; \infty | X_{T_i^{r - 1}} = i) &amp;&amp; \hspace{-1cm} \text{ strong Markov property,} \\
+&amp;= f_{i, i} &amp;&amp; \hspace{-1cm} \text{ homogeneity.} \\
+\end{align}\end{split}\]</div>
+<p>Proceeding recursively, we obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{P}(V_i \geq r | X_0 = i) = f^r \implies \mathbb{P}(V_i = r | X_0 = i) = (1 - f) f^r.
+\end{align}\]</div>
+<p>For the limiting behaviour, we consider that <span class="math notranslate nohighlight">\(f_{i, i} = 1\)</span> if <span class="math notranslate nohighlight">\(i\)</span> is recurrent and <span class="math notranslate nohighlight">\(f_{i, i} = 0\)</span> if <span class="math notranslate nohighlight">\(i\)</span> is transient and let <span class="math notranslate nohighlight">\(r \to \infty\)</span>, arriving at the result.</p>
+</details>
+<br>
+<div class='definition'>
+<p><strong>Definition (Mean recurrence time)</strong> The mean recurrence time <span class="math notranslate nohighlight">\(\mu_i\)</span> of a state <span class="math notranslate nohighlight">\(i\)</span> is defined by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\mu_i = \mathbb{E}(T_i | X_0 = i) = \begin{cases}
+\sum_{n = 1}^\infty n f_{i, i} &amp; \text{ if } i \text{ is recurrent,}\\
+\infty &amp; \text{ if } i \text{ is transient.}
+\end{cases}
+\end{align}\end{split}\]</div>
+</div>
+<br>
+<div class='definition'>
+<p><strong>Definition (Null and positive states)</strong> If <span class="math notranslate nohighlight">\(i\)</span> is recurrent, we call it null if <span class="math notranslate nohighlight">\(\mu_i = \infty\)</span>, and positive if <span class="math notranslate nohighlight">\(\mu_i &lt; \infty\)</span>.</p>
+</div>
+<br>
+<div class='definition'>
+<p><strong>Definition (Period of a state)</strong> The period <span class="math notranslate nohighlight">\(d_i\)</span> of the state <span class="math notranslate nohighlight">\(i\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+d_i = \text{gcd}\{n : p_{i, i}(n) &gt; 0\}.
+\end{align}\]</div>
+<p>The state <span class="math notranslate nohighlight">\(i\)</span> is called aperiodic if <span class="math notranslate nohighlight">\(d_i = 1\)</span>, and periodic if <span class="math notranslate nohighlight">\(d_i &gt; 1\)</span>.</p>
+</div>
+<br>
+<div class='definition'>
+<p><strong>Definition (Ergodic states)</strong> State <span class="math notranslate nohighlight">\(i\)</span> is called ergodic if it is aperiodic and positive recurrent.</p>
+</div>
+<br>
+<div class='theorem'>
+<p><strong>Theorem (Implications of communication between states)</strong> If <span class="math notranslate nohighlight">\(i \leftrightarrow j\)</span>, then</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> have the same period,</p></li>
+<li><p><span class="math notranslate nohighlight">\(i\)</span> is recurrent if and only if <span class="math notranslate nohighlight">\(j\)</span> is recurrent,</p></li>
+<li><p><span class="math notranslate nohighlight">\(i\)</span> is positive recurrent if and only if <span class="math notranslate nohighlight">\(j\)</span> is positive recurrent,</p></li>
+<li><p><span class="math notranslate nohighlight">\(i\)</span> is ergodic if and only if <span class="math notranslate nohighlight">\(j\)</span> is ergodic.</p></li>
+</ol>
+</div>
+<br>
+</div>
+<div class="section" id="invariant-distributions">
+<h2>Invariant distributions<a class="headerlink" href="#invariant-distributions" title="Permalink to this headline">¶</a></h2>
+<div class='definition'>
+<p><strong>Definition (Invariant distribution)</strong> Let <span class="math notranslate nohighlight">\(\mathbf{X} = X_0, X_1, ...\)</span> be a Markov chain with transition matrix <span class="math notranslate nohighlight">\(P\)</span>. The vector <span class="math notranslate nohighlight">\(\pi = (\pi_i : i \in S)\)</span> is called an invariant distribution of the chain if:</p>
+<ol class="simple">
+<li><p>It is a distribution: <span class="math notranslate nohighlight">\(\pi_i \geq 0\)</span> for all <span class="math notranslate nohighlight">\(i \in S\)</span>, and <span class="math notranslate nohighlight">\(\sum_{i \in S} \pi_i = 1\)</span>,</p></li>
+<li><p>It is invariant under the transition matrix: <span class="math notranslate nohighlight">\(\pi_j = \sum_{i \in S} \pi_i P_{i, j}\)</span>.</p></li>
+</ol>
+</div>
+<br>
+<div class='theorem'>
+<p><strong>Theorem (Implications of communication between states)</strong> Consider an irreducible Markov chain.</p>
+<ol class="simple">
+<li><p>There exists an invariant distribution <span class="math notranslate nohighlight">\(\pi\)</span> if and only if some state is positive recurrent.</p></li>
+<li><p>If there exists an invariant distribution <span class="math notranslate nohighlight">\(\pi\)</span>, then every state is positive recurrent and \begin{align}\pi_i = \frac{1}{\mu_i} \text{ for } i \in S,\end{align}
+where <span class="math notranslate nohighlight">\(\mu_i\)</span> is the mean recurrence time of state <span class="math notranslate nohighlight">\(i\)</span>. In particular, <span class="math notranslate nohighlight">\(\pi\)</span> is the unique invariant distribution.</p></li>
+</ol>
+</div>
+<br>
+</div>
+<div class="section" id="convergence-to-equilibrium">
+<h2>Convergence to equilibrium<a class="headerlink" href="#convergence-to-equilibrium" title="Permalink to this headline">¶</a></h2>
+<div class='theorem'>
+<p><strong>Theorem (Convergence theorem for Markov chains)</strong> Consider a Markov chain that is aperiodic, irreducible and positive recurrent. For <span class="math notranslate nohighlight">\(i, j \in S\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+p_{i, j}(n) \to \pi_j \text{ as } n \to \infty,
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\pi\)</span> is the unique invariant distribution of the chain.</p>
+</div>
+<br>
+<div class='theorem'>
+<p><strong>Theorem (Irreducibility, recurrence and nullness)</strong> Let <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> be an irreducible, recurrent Markov chain. The following are equivalent</p>
+<ol class="simple">
+<li><p>There exists a state <span class="math notranslate nohighlight">\(i\)</span> such that <span class="math notranslate nohighlight">\(p_{i, i}(n) \to 0\)</span> as <span class="math notranslate nohighlight">\(n \to \infty\)</span>.</p></li>
+<li><p>Every state is null recurrent.</p></li>
+</ol>
+</div>
+<br>
+<div class='theorem'>
+<p><strong>Theorem (Convergence of mean visitation)</strong> Let <span class="math notranslate nohighlight">\(i \in S\)</span>. If the chain is irreducible and positive recurrent,</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\frac{1}{n} V_i(n) \implies \frac{1}{\mu_i} \text{ as } n \to \infty,
+\end{align}\]</div>
+<p>irrespective of the initial distribution of the chain.</p>
+</div>
+<br>
+</div>
+<div class="section" id="time-reversal">
+<h2>Time reversal<a class="headerlink" href="#time-reversal" title="Permalink to this headline">¶</a></h2>
+<div class='definition'>
+<p><strong>Definition (Reverse chain)</strong> Let <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> be an irreducible, positive recurrent Markov chain, with transition matrix <span class="math notranslate nohighlight">\(P\)</span> and initial distribution <span class="math notranslate nohighlight">\(\lambda = \pi\)</span> equal to its invariant distribution <span class="math notranslate nohighlight">\(\pi\)</span>. The reversed chain <span class="math notranslate nohighlight">\(\mathbf{Y} = (Y_n : 0 \leq n \leq N)\)</span> is given by <span class="math notranslate nohighlight">\(Y_n = X_{N - n}\)</span> for <span class="math notranslate nohighlight">\(0 \leq n \leq N\)</span>.</p>
+</div>
+<br>
+<div class='theorem'>
+<p><strong>Theorem (Reverse chain)</strong> Given a markov Chain <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>, its reversed chain <span class="math notranslate nohighlight">\(\mathbf{Y}\)</span> is an irreducible Markov chain with transition matrix <span class="math notranslate nohighlight">\(\hat{P} = (\hat{p} : i, j \in S)\)</span> given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\hat{p}_{i, j} = \frac{\pi_j}{\pi_i} p_{j, i} \text{ for } i, j \in S,
+\end{align}\]</div>
+<p>with an invariant distribution <span class="math notranslate nohighlight">\(\pi\)</span>.</p>
+</div>
+<br>
+<div class='definition'>
+<p><strong>Definition (Reversible chain)</strong> Let <span class="math notranslate nohighlight">\(\mathbf{X} = (X_n : 0 \leq n \leq N)\)</span> be an irreducible Markov chain such that <span class="math notranslate nohighlight">\(X_0\)</span> has the invariant distribution <span class="math notranslate nohighlight">\(\pi\)</span>. The chain is called reversible if <span class="math notranslate nohighlight">\(\mathbb{X}\)</span> and its time reversal <span class="math notranslate nohighlight">\(\mathbb{Y}\)</span> have the same distribution matrices, which is to say that</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\pi_i p_{i, j} = \pi_j p_{j, i} \text{ for } i, j \in S.
+\end{align}\]</div>
+</div>
+<br>
+<div class='theorem'>
+<p><strong>Theorem (Reverse chain)</strong> Let <span class="math notranslate nohighlight">\(P\)</span> be the transition matrix of an irreducible chain <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>, and suppose that <span class="math notranslate nohighlight">\(\pi\)</span> is a distribution statisfying</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\pi_i p_{i, j} = \pi_j p_{j, i} \text{ for } i, j \in S.
+\end{align}\]</div>
+<p>Then <span class="math notranslate nohighlight">\(\pi\)</span> is the unique invariant distribution of the chain. Furthermore, <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> is reversible in equilibrium.</p>
+</div>
+<br>
+</div>
+<div class="section" id="random-walk-on-a-graph">
+<h2>Random walk on a graph<a class="headerlink" href="#random-walk-on-a-graph" title="Permalink to this headline">¶</a></h2>
+<div class='theorem'>
+<p><strong>Theorem (Random walk on a finite connected graph)</strong> The random walk on the finite connected graph <span class="math notranslate nohighlight">\(G = (V, E)\)</span> is an irreducible Markov chain with unique invariant distribution</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\pi_v = \frac{d(v)}{2 |E|} \text{ for } v \in V.
+\end{align}\]</div>
+<p>The chain is reversible in equilibrium.</p>
 </div>
 <br>
 </div>

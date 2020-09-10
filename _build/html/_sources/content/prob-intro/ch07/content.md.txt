@@ -87,15 +87,17 @@ The above result can be shown quickly from an application of the Cauchy
 <details class="proof">
 <summary>Proof: \(-1 \leq \rho(X, Y) \leq 1\) </summary>
 
-Given random variables $X$ and $Y$, define $U = X - \bar{X}$ and $V = Y- \bar{Y}$
-. By applying the Cauchy-Schwartz inequality on $U$ and $V$, we obtain
-\begin{align}
+Given random variables $X$ and $Y$, define $U = X - \bar{X}$ and $V = Y- \bar{Y}$. By applying the Cauchy-Schwartz inequality on $U$ and $V$, we obtain
+
+$$\begin{align}
 \frac{\mathbb{E}(UV)^2}{\mathbb{E}(U^2)\mathbb{E}(V^2)} \leq 1.
-\end{align}
-Taking a square root and substituting for $U$ and $V$ we arrive at the result
-\begin{align}
- -1 \leq \rho(X, Y) \leq 1.
-\end{align}
+\end{align}$$
+
+Taking a square root and substituting for $U$ and $V$ we arrive at the result 
+
+$$\begin{align}
+-1 \leq \rho(X, Y) \leq 1.
+\end{align}$$
  
 
 </details>
@@ -211,7 +213,9 @@ so the moments can be determined from the mgf, and the distribution of $X$
 </div>
 <br>
 
-## Examples of mgfs
+## Examples of MGFS
+
+Here are examples of moment generating functions of some common continuous random variables.
 
 ### Uniform
 

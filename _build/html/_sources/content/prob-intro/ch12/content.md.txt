@@ -1,6 +1,7 @@
 # Markov chains
 
-## Markov chain and Markov property
+(prob-intro-mark-chain-prop)=
+## Markov chain and property
 
 <div class='definition'>
 
@@ -32,7 +33,7 @@ Any matrix $P$ which satisfies the above property is called a **stochastic matri
 
 <div class='theorem'>
 
-**Theorem (Markov chain $\iff$ distribution factorises)** Let $\lambda$ be a distribution and $P$ be a stochastic matrix. The random sequence $\mathbb{X} = (X_n : n \geq 0)$ is a Markov chain with initial distribution $\lambda$ and transition matrix $P$ if and only if
+**Theorem ($\mathbf{X}$ is a Markov chain $\iff$ distribution factorises)** Let $\lambda$ be a distribution and $P$ be a stochastic matrix. The random sequence $\mathbf{X} = (X_n : n \geq 0)$ is a Markov chain with initial distribution $\lambda$ and transition matrix $P$ if and only if
     
 $$\begin{align}
 \mathbb{P}(X_0 = x_0, X_1 = x_1, ..., X_n = x_n) = \lambda_{x_0} p_{x_0, x_1} ... p_{x_{n - 1}, x_n}
@@ -41,6 +42,35 @@ $$\begin{align}
 for all $n \geq 0$ and $x_0, x_1, ..., x_n \in S$.
 
 </div>
+<br>
+
+<details class="proof">
+<summary>Proof: \(\mathbf{X}\) is a Markov chain \(\iff\) distribution factorises</summary>
+
+Suppose $\mathbb{X} = (X_n : 0 \neq n)$ is a Markov chain with initial distribution $\lambda = (\lambda_i : i \neq S)$ and transition matrix $P = (p_{i, j} : i, j \neq S)$. From the definition of conditional probability and using the Markov property
+    
+$$\begin{align}
+\mathbb{P}(X_0 = x_0, ..., X_n = x_n) &= \mathbb{P}(X_n = x_n | X_0 = x_0, ..., X_{n - 1}) \mathbb{P}(X_0 = x_0, ..., X_{n - 1} = x_{n - 1}) \\
+&= \mathbb{P}(X_n = x_n | X_{n - 1} = x_{n - 1}) \mathbb{P}(X_0 = x_0, ..., X_{n - 1} = x_{n - 1}) \\
+&= p_{x_{n - 1}, x_n} \mathbb{P}(X_0 = x_0, ..., X_{n - 1} = x_{n - 1}),
+\end{align}$$
+   
+and proceeding recursively we obtain the required result, noting that $\mathbb{P}(X_0 = x_0) = \lambda_{x_0}$. Going the other way, suppose
+    
+$$\begin{align}
+\mathbb{P}(X_0 = x_0, ..., X_n = x_n) &= \lambda_{x_0} p_{x_0, x_1} ... p_{x_{n - 1}, x_n}
+\end{align}$$
+    
+for all $n \geq 0$ and $x_0, x_1, ..., x_n \in S$. Then $\mathbf{X}$ satisfies the Markov property because
+    
+$$\begin{align}
+\mathbb{P}(X_n = x_n | X_{n - 1} = x_{n - 1}, ..., X_0 = x_0) &= \frac{\mathbb{P}(X_n = x_n, ..., X_0 = x_0)}{\mathbb{P}(X_{n - 1} = x_{n - 1}, ..., X_0 = x_0)}\\
+&= p_{x_{n - 1}, x_n} \\
+&= \frac{\mathbb{P}(X_n = x_n, X_{n - 1} = x_{n - 1})}{\mathbb{P}(X_{n - 1} = x_{n - 1})} \\
+&= \mathbb{P}(X_n = x_n | X_{n - 1} = x_{n - 1})
+\end{align}$$
+
+</details>
 <br>
 
 
@@ -54,6 +84,29 @@ $$\begin{align}
 \end{align}$$
 
 </div>
+<br>
+
+<details class="proof">
+<summary>Partial Proof: Extended Markov property</summary>
+
+This is a proof of a restricted version the extended Markov property, in which $F$ depends on a finite number of values of the Markov chain, although the infinite case also holds.
+    
+Let $H$ be an event $X_0, X_1, ..., X_{n - 1}$ only, in that it is a function of these random variables only. Similarly, let $F$ be a function of $X_{n + 1}, X_{n + 2}, ... X_{n + k}$ for some $k \geq 0$, only. By the {ref}`Markov property<prob-intro-mark-chain-prop>` we have
+    
+$$\begin{align}
+&\mathbb{P}(X_0 = x_0, ..., X_{n - 1} = x_{n - 1}, X_{n + 1} = x_{n + 1}, ..., X_{n + k} = x_{n + k} | X_n = x_n) = \\
+&~~~~~~~~~~~~=\mathbb{P}(X_0 = x_0, ..., X_{n - 1} = x_{n - 1} | X_n = x_n) \mathbb{P}(X_{n + k} = x_{n + k} | X_n = x_n).
+\end{align}$$
+    
+Then summing over all values of $x_0, ..., x_{n - 1}$ corresponding to $H$ and over all values of $x_{n + 1}, ..., x_{n + k}$ corresponding to $F$, and dividing both sides by $\mathbb{P}(H | X_n = x_n)$, we obtain
+    
+$$\begin{align}
+\mathbb{P}(F, H | X_n = x_n) &= \mathbb{P}(F | X_n = x_n) \mathbb{P}(H | X_n = x_n) \implies \mathbb{P}(F | H, X_n = x_n) &= \mathbb{P}(F | X_n = x_n),
+\end{align}$$
+    
+arriving at the result.
+
+</details>
 <br>
 
 
@@ -381,13 +434,13 @@ k^A_i = \begin{cases}
 </div>
 <br>
 
-
-## Stopping times and the strong Markov property
+(prob-intro-strong-markov-prop)=
+## Strong Markov property
 
 
 <div class='definition'>
 
-**Definition (Stopping time)** The random variable $T : \Omega \to \{0, 1, 2, ...\} \cup \{\infty\}$ is called a stopping time for the Markov chain $\mathbb{X}$, if the event $\{T = n\}$ is given in terms of $X_0, X_1, ..., X_n$ only, for all $n \geq 0$.
+**Definition (Stopping time)** The random variable $T : \Omega \to \{0, 1, 2, ...\} \cup \{\infty\}$ is called a stopping time for the Markov chain $\mathbf{X}$, if the event $\{T = n\}$ is given in terms of $X_0, X_1, ..., X_n$ only, for all $n \geq 0$.
 
 </div>
 <br>
@@ -395,11 +448,279 @@ k^A_i = \begin{cases}
 
 <div class='theorem'>
 
-**Theorem (Strong Markov property)** Let $\mathbb{X} = X_0, X_1, ...$ be a Markov chain with transition matrix $P$, and let $T$ be a stopping time. Given $T < \infty$ and $X_T = i$, the sequence $\mathbb{Y} = Y_0, Y_1, ...$, given by $Y_k = X_{T + k}$, is a Markov chain with transition matrix $P$ and initial state $Y_0 = i$. Further, given that $T < \infty$ and $X_T = i$, $\mathbb{Y}$ is independent of $X_0, X_1, ..., X_{T - 1}$.
+**Theorem (Strong Markov property)** Let $\mathbf{X} = X_0, X_1, ...$ be a Markov chain with transition matrix $P$, and let $T$ be a stopping time. Given $T < \infty$ and $X_T = i$, the sequence $\mathbf{Y} = Y_0, Y_1, ...$, given by $Y_k = X_{T + k}$, is a Markov chain with transition matrix $P$ and initial state $Y_0 = i$. Further, given that $T < \infty$ and $X_T = i$, $\mathbf{Y}$ is independent of $X_0, X_1, ..., X_{T - 1}$.
 
 </div>
 <br>
 
+<details class="proof">
+<summary>Proof: Strong Markov property</summary>
+  
+We want to show that
+    
+$$\begin{align}
+&\mathbb{P}(X_{T + 1} = i_1, X_{T + 2} = i_2, ..., X_{T + n} = i_n, H | T < \infty, X_T = i) =\\
+&~~~~~~~~= \mathbb{P}(X_1 = i_1, X_2 = i_2, ..., X_n = i_n | X_T = i) \mathbb{P}(H | T < \infty, X_T = i),
+\end{align}$$
+
+which follows from the Markov property, except we also need to take care conditioning on the event $\{T < \infty\}$ rather than $\{T < \infty\} \cup \{T = \infty\}$. Let $0 \leq m < \infty$ and consider
+
+$$\begin{align}
+&\mathbb{P}(X_{T + 1} = i_1, X_{T + 2} = i_2, ..., X_{T + n} = i_n, H, T = m | X_T = i) = \\
+&~~~~~~~~= \mathbb{P}(X_1 = i_1, X_2 = i_2, ..., X_n = i_n | X_0 = i) \mathbb{P}(H, T = m | X_T = i),
+\end{align}$$
+    
+which follows from the {ref}`Markov property<prob-intro-mark-chain-prop>` together with the facts that $T$ is a stopping time and the chain is homogeneous. Now summing over $m = 0, 1, 2, ...$ and dividing by $\mathbb{P}(T < \infty | X_T = i)$ on both sides we obtain
+    
+$$\begin{align}
+&\mathbb{P}(X_{T + 1} = i_1, X_{T + 2} = i_2, ..., X_{T + n} = i_n, H | T < \infty, X_T = i) = \\
+&~~~~~~~~= \mathbb{P}(X_1 = i_1, X_2 = i_2, ..., X_n = i_n | X_0 = i) \mathbb{P}(H | T < \infty, X_T = i).
+\end{align}$$
+
+   
+</details>
+<br>
+
+
+## Classification of states
+
+<div class='theorem'>
+
+**Theorem (PDF of number of visits)** Let $X_0 = i$ and let $V_i = |\{n \geq 1 : X_n = i\}|$ be the number of visits of the chain to state $i$. Then $V_i$ has the geometric distribution
+    
+$$\begin{align}
+\mathbb{P}(V_i = r | X_0 = i) = (1 - f)f^r, \text{ for } r = 0, 1, 2, ...,
+\end{align}$$
+    
+where $f = f_{i, i} = \mathbb{P}(X_n = i \text{ for some } n \geq 1)$, is the return probability. From this it follows that
+    
+1. $\mathbb{P}(V_i = \infty | X_0 = i) = 1$ if $i$ is recurrent,
+2. $\mathbb{P}(V_i < \infty | X_0 = i) = 1$ if $i$ is transient.
+
+</div>
+<br>
+
+<details class="proof">
+<summary>Proof: PDF of number of visits</summary>
+  
+Let $f_{i, i} = \mathbb{P}(T_i < \infty | X_0 = i)$ and write $T_i^r$ for the time at which the chain visits state $i$ for the $r^{th}$ time. Then
+    
+$$\begin{align}
+\mathbb{P}(V_i \geq r | X_0 = i) &= \mathbb{P}(T_i^r < \infty | X_0 = i) \\
+&= \mathbb{P}(T_i^r < \infty | T_i^{r - 1} < \infty, X_0 = i) \mathbb{P}(T_i^{r - 1} < \infty | X_0 = i) \\
+&= f \mathbb{P}(T_i^{r - 1} < \infty | X_0 = i)
+\end{align}$$
+    
+where we have used the {ref}`strong Markov property <prob-intro-strong-markov-prop>` and the fact that the chain is homogeneous. In particular $T_i^k$ is a stopping time so
+    
+$$\begin{align}
+\mathbb{P}(T_i^r < \infty | T_i^{r - 1} < \infty, X_0 = i) &= \mathbb{P}(T_i^r < \infty | X_{T_i^{r - 1}} = i, T_i^{r - 1} < \infty, X_0 = i) && \\
+&= \mathbb{P}(T_i^r < \infty | X_{T_i^{r - 1}} = i) && \hspace{-1cm} \text{ strong Markov property,} \\
+&= f_{i, i} && \hspace{-1cm} \text{ homogeneity.} \\
+\end{align}$$
+    
+Proceeding recursively, we obtain
+    
+$$\begin{align}
+\mathbb{P}(V_i \geq r | X_0 = i) = f^r \implies \mathbb{P}(V_i = r | X_0 = i) = (1 - f) f^r.
+\end{align}$$
+    
+For the limiting behaviour, we consider that $f_{i, i} = 1$ if $i$ is recurrent and $f_{i, i} = 0$ if $i$ is transient and let $r \to \infty$, arriving at the result.
+   
+</details>
+<br>
+    
+    
+<div class='definition'>
+
+**Definition (Mean recurrence time)** The mean recurrence time $\mu_i$ of a state $i$ is defined by
+    
+$$\begin{align}
+\mu_i = \mathbb{E}(T_i | X_0 = i) = \begin{cases}
+\sum_{n = 1}^\infty n f_{i, i} & \text{ if } i \text{ is recurrent,}\\
+\infty & \text{ if } i \text{ is transient.}
+\end{cases}
+\end{align}$$
+
+</div>
+<br>
+    
+    
+<div class='definition'>
+
+**Definition (Null and positive states)** If $i$ is recurrent, we call it null if $\mu_i = \infty$, and positive if $\mu_i < \infty$.
+
+</div>
+<br>
+    
+    
+<div class='definition'>
+
+**Definition (Period of a state)** The period $d_i$ of the state $i$ is
+    
+$$\begin{align}
+d_i = \text{gcd}\{n : p_{i, i}(n) > 0\}.
+\end{align}$$
+
+The state $i$ is called aperiodic if $d_i = 1$, and periodic if $d_i > 1$.
+
+</div>
+<br>
+    
+    
+<div class='definition'>
+
+**Definition (Ergodic states)** State $i$ is called ergodic if it is aperiodic and positive recurrent.
+
+</div>
+<br>
+    
+    
+<div class='theorem'>
+
+**Theorem (Implications of communication between states)** If $i \leftrightarrow j$, then
+    
+1. $i$ and $j$ have the same period,
+2. $i$ is recurrent if and only if $j$ is recurrent,
+3. $i$ is positive recurrent if and only if $j$ is positive recurrent,
+4. $i$ is ergodic if and only if $j$ is ergodic.
+
+</div>
+<br>
+    
+    
+## Invariant distributions
+    
+    
+<div class='definition'>
+
+**Definition (Invariant distribution)** Let $\mathbf{X} = X_0, X_1, ...$ be a Markov chain with transition matrix $P$. The vector $\pi = (\pi_i : i \in S)$ is called an invariant distribution of the chain if:
+
+1. It is a distribution: $\pi_i \geq 0$ for all $i \in S$, and $\sum_{i \in S} \pi_i = 1$,
+2. It is invariant under the transition matrix: $\pi_j = \sum_{i \in S} \pi_i P_{i, j}$.
+
+</div>
+<br>
+    
+    
+<div class='theorem'>
+
+**Theorem (Implications of communication between states)** Consider an irreducible Markov chain.
+    
+1. There exists an invariant distribution $\pi$ if and only if some state is positive recurrent.
+2. If there exists an invariant distribution $\pi$, then every state is positive recurrent and \begin{align}\pi_i = \frac{1}{\mu_i} \text{ for } i \in S,\end{align}
+where $\mu_i$ is the mean recurrence time of state $i$. In particular, $\pi$ is the unique invariant distribution.
+
+</div>
+<br>
+    
+    
+## Convergence to equilibrium
+    
+<div class='theorem'>
+
+**Theorem (Convergence theorem for Markov chains)** Consider a Markov chain that is aperiodic, irreducible and positive recurrent. For $i, j \in S$
+    
+$$\begin{align}
+p_{i, j}(n) \to \pi_j \text{ as } n \to \infty,
+\end{align}$$
+    
+where $\pi$ is the unique invariant distribution of the chain.
+
+</div>
+<br>
+    
+    
+    
+<div class='theorem'>
+
+**Theorem (Irreducibility, recurrence and nullness)** Let $\mathbf{X}$ be an irreducible, recurrent Markov chain. The following are equivalent
+
+1. There exists a state $i$ such that $p_{i, i}(n) \to 0$ as $n \to \infty$.
+2. Every state is null recurrent.
+
+</div>
+<br>
+    
+    
+    
+<div class='theorem'>
+
+**Theorem (Convergence of mean visitation)** Let $i \in S$. If the chain is irreducible and positive recurrent,
+    
+$$\begin{align}
+\frac{1}{n} V_i(n) \implies \frac{1}{\mu_i} \text{ as } n \to \infty,
+\end{align}$$
+    
+irrespective of the initial distribution of the chain.
+
+</div>
+<br>
+    
+## Time reversal
+    
+<div class='definition'>
+
+**Definition (Reverse chain)** Let $\mathbf{X}$ be an irreducible, positive recurrent Markov chain, with transition matrix $P$ and initial distribution $\lambda = \pi$ equal to its invariant distribution $\pi$. The reversed chain $\mathbf{Y} = (Y_n : 0 \leq n \leq N)$ is given by $Y_n = X_{N - n}$ for $0 \leq n \leq N$.
+
+</div>
+<br>
+    
+<div class='theorem'>
+
+**Theorem (Reverse chain)** Given a markov Chain $\mathbf{X}$, its reversed chain $\mathbf{Y}$ is an irreducible Markov chain with transition matrix $\hat{P} = (\hat{p} : i, j \in S)$ given by
+    
+$$\begin{align}
+\hat{p}_{i, j} = \frac{\pi_j}{\pi_i} p_{j, i} \text{ for } i, j \in S,
+\end{align}$$
+    
+with an invariant distribution $\pi$.
+
+</div>
+<br>
+    
+    
+<div class='definition'>
+
+**Definition (Reversible chain)** Let $\mathbf{X} = (X_n : 0 \leq n \leq N)$ be an irreducible Markov chain such that $X_0$ has the invariant distribution $\pi$. The chain is called reversible if $\mathbb{X}$ and its time reversal $\mathbb{Y}$ have the same distribution matrices, which is to say that
+
+$$\begin{align}
+\pi_i p_{i, j} = \pi_j p_{j, i} \text{ for } i, j \in S.
+\end{align}$$
+
+</div>
+<br>
+    
+
+<div class='theorem'>
+
+**Theorem (Reverse chain)** Let $P$ be the transition matrix of an irreducible chain $\mathbf{X}$, and suppose that $\pi$ is a distribution statisfying
+    
+$$\begin{align}
+\pi_i p_{i, j} = \pi_j p_{j, i} \text{ for } i, j \in S.
+\end{align}$$
+    
+Then $\pi$ is the unique invariant distribution of the chain. Furthermore, $\mathbf{X}$ is reversible in equilibrium.
+
+</div>
+<br>
+    
+    
+## Random walk on a graph
+    
+<div class='theorem'>
+
+**Theorem (Random walk on a finite connected graph)** The random walk on the finite connected graph $G = (V, E)$ is an irreducible Markov chain with unique invariant distribution
+    
+$$\begin{align}
+\pi_v = \frac{d(v)}{2 |E|} \text{ for } v \in V.
+\end{align}$$
+
+The chain is reversible in equilibrium.
+
+</div>
+<br>
+    
     
 ## References
 
