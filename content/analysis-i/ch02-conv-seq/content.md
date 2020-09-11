@@ -147,16 +147,126 @@ arriving at the result.
 Let $\epsilon > 0$. If $a_n \to a$ and $\lambda \in \mathbb{R}$, there exists $N$ such that
     
 $$\begin{align}
-|a_n - a| < |\lambda| \epsilon, \text{ for all } n > N.
+|a_n - a| < \frac{\epsilon}{|\lambda|}, \text{ for all } n > N.
 \end{align}$$
     
 For that same $N$ we have
     
 $$\begin{align}
-|\lambda a_n - \lambda a| = |\lambda| |a_n - a| < |\lambda| \epsilon.
+|\lambda a_n - \lambda a| = |\lambda| |a_n - a| < \epsilon, \text{ for all } n > N,
 \end{align}$$
     
 so $\lambda a_n$ converges to $\lambda a$.
+
+</details>
+<br>
+    
+    
+    
+<div class="lemma">
+
+**Lemma (Product of bounded and $0$-limit sequence)** If $(a_n)$ is bounded and $b_n \to 0$, then $a_n b_n \to 0$.
+    
+</div>
+<br>
+    
+    
+<details class="proof">
+<summary>Proof: Product of bounded and \(0\)-limit sequence</summary>
+
+If $(a_n)$ is bounded, there exists $C > 0$ such that $|a_n| < C$ for all $n$. Further if $b_n \to 0$, there exists $N$ such that for any value of $\epsilon > 0$
+    
+$$\begin{align}
+|b_n - b| < \frac{\epsilon}{C}, \text{ for all } n > N.
+\end{align}$$
+    
+For that same $N$ we have
+    
+$$\begin{align}
+|a_nb_n - 0| = |a_nb_n| \leq |a_n| |b_n| < \epsilon, \text{ for all } n > N
+\end{align}$$
+    
+so $a_nb_n$ converges to $0$.
+
+</details>
+<br>
+    
+    
+<div class="lemma">
+
+**Lemma (Convergence $\implies$ bounded)** Every convergent sequence is bounded
+    
+</div>
+<br>
+    
+    
+<details class="proof">
+<summary>Proof: Convergence \(\implies\) bounded</summary>
+    
+If $a_n \to a$, then there exists $N$ such that
+    
+$$\begin{align}
+|a_n - a| < \epsilon, \text{ for all } n > N.
+\end{align}$$
+    
+Therefore the sequence is eventually bounded and by extension it is also bounded.
+
+</details>
+<br>
+    
+    
+    
+<div class="lemma">
+
+**Lemma (Product of sequences)** If $a_n \to a$ and $b_n \to b$, then $a_n b_n \to ab$.
+    
+</div>
+<br>
+    
+    
+<details class="proof">
+<summary>Proof: Product of sequences</summary>
+    
+If $a_n \to a$ then $(a_n)$ is bounded, and also if $b_n \to b$ then the sequence $\epsilon_n = b_n - b$ converges to $0$. The product of a bounded sequence and a $0$-limit sequence converges to $0$, so $a_n \epsilon_n \to 0$. Therefore
+    
+$$\begin{align}
+a_n b_n = a_n (\epsilon_n + b) \to ab.
+\end{align}$$
+
+</details>
+<br>
+    
+    
+<div class="lemma">
+
+**Lemma (Inverse of a sequence)** If $a_n \to a$, $a_n \neq 0$ and $a \neq 0$ then $\frac{1}{a_n} \to \frac{1}{a}$.
+    
+</div>
+<br>
+    
+    
+<details class="proof">
+<summary>Proof: Inverse of a sequence</summary>
+    
+Let $\epsilon > 0$. If $a_n \to a$, $a_n \neq 0$ and $a \neq 0$, there exists $N_1$ such that
+    
+$$\begin{align}
+|a_n - a| < \frac{a}{2}, \text{ for all } n > N_1,
+\end{align}$$
+    
+and $N_2$ such that
+    
+$$\begin{align}
+|a_n - a| < \frac{\epsilon a^2}{2}, \text{ for all } n > N_2,
+\end{align}$$
+    
+implying that
+    
+$$\begin{align}
+\left | \frac{1}{a_n} - \frac{1}{a} \right | = \left | \frac{a_n - a}{a_n a} \right | \leq \left | \frac{1}{a_n a} \right | \left | a_n - a \right | < \epsilon, \text{ for all } n > \max(N_1, N_2) = N^*,
+\end{align}$$
+    
+proving the result.
 
 </details>
 <br>
