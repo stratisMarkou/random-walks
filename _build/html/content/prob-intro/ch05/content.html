@@ -428,45 +428,27 @@ function</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
 f_X(x) = \begin{cases}
-\frac{1}{2\Gamma\left(\frac{n}{2}\right)} \left(\frac{x}{2}\right)^{\frac{n}{2
-} - 1} e ^{-\frac{x}{2}} &amp; \text{ if } x &gt; 0,\\
+\frac{1}{2\Gamma\left(\frac{n}{2}\right)} \left(\frac{x}{2}\right)^{\frac{n}{2} - 1} e ^{-\frac{x}{2}} &amp; \text{ if } x &gt; 0,\\
 0 &amp; \text{ if } x \leq 0.
 \end{cases}
 \end{align}\end{split}\]</div>
-<p>The chi-squared distribution is a special version of the gamma distribution
-, where <span class="math notranslate nohighlight">\(w = n / 2\)</span> and <span class="math notranslate nohighlight">\(\lambda = 1/2\)</span>, which is of interest on its own. For
-example, if <span class="math notranslate nohighlight">\(Z\)</span> is normally distributed with parameters <span class="math notranslate nohighlight">\((\mu, \sigma^2)\)</span>
-, then <span class="math notranslate nohighlight">\(X = (Z - \mu)^2 / \sigma^2\)</span> is chi-squared distributed with <span class="math notranslate nohighlight">\(n = 1\)</span>
-degrees of freedom.</p>
+<p>The chi-squared distribution is a special version of the gamma distribution, where <span class="math notranslate nohighlight">\(w = n / 2\)</span> and <span class="math notranslate nohighlight">\(\lambda = 1/2\)</span>, which is of interest on its own. For example, if <span class="math notranslate nohighlight">\(Z\)</span> is normally distributed with parameters <span class="math notranslate nohighlight">\((\mu, \sigma^2)\)</span>, then <span class="math notranslate nohighlight">\(X = (Z - \mu)^2 / \sigma^2\)</span> is chi-squared distributed with <span class="math notranslate nohighlight">\(n = 1\)</span> degrees of freedom.</p>
 </div>
 </div>
 <div class="section" id="functions-of-random-variables">
 <h2>Functions of random variables<a class="headerlink" href="#functions-of-random-variables" title="Permalink to this headline">¶</a></h2>
-<p>We are often interested in functions of random variables, and the
-distributions of values these take. Strictly speaking, if <span class="math notranslate nohighlight">\(X\)</span> is a random
-variable on <span class="math notranslate nohighlight">\((\Omega, \mathcal{F}, \mathbb{P})\)</span> and <span class="math notranslate nohighlight">\(g : \mathbb{R} \to
-   \mathbb{R}\)</span> is any function, then <span class="math notranslate nohighlight">\(Y(\omega) = g[X(\omega)]\)</span> is not a
-variable in general, because <span class="math notranslate nohighlight">\(\{\omega \in \Omega : Y(\omega) = y\}\)</span> may
-not be in <span class="math notranslate nohighlight">\(\mathcal{F}\)</span>. Grimmett and Welsh acknowledge and defer this
-detail for elsewhere. Modulo this detail, the following result gives us
-a rule for determining <span class="math notranslate nohighlight">\(f_Y\)</span>.</p>
+<p>We are often interested in functions of random variables, and the distributions of values these take. Strictly speaking, if <span class="math notranslate nohighlight">\(X\)</span> is a random variable on <span class="math notranslate nohighlight">\((\Omega, \mathcal{F}, \mathbb{P})\)</span> and <span class="math notranslate nohighlight">\(g : \mathbb{R} \to \mathbb{R}\)</span> is any function, then <span class="math notranslate nohighlight">\(Y(\omega) = g[X(\omega)]\)</span> is not a variable in general, because <span class="math notranslate nohighlight">\(\{\omega \in \Omega : Y(\omega) = y\}\)</span> may not be in <span class="math notranslate nohighlight">\(\mathcal{F}\)</span>. Modulo this detail, the following result gives us a rule for determining <span class="math notranslate nohighlight">\(f_Y\)</span>.</p>
 <div class="theorem">
-<p><strong>Theorem (Pdf of a function of a random variable)</strong> Let <span class="math notranslate nohighlight">\(X\)</span> be a continuous
-random variable on <span class="math notranslate nohighlight">\((\Omega, \mathcal{F}, \mathbb{P})\)</span> and <span class="math notranslate nohighlight">\(g : \mathbb{R
- } \to \mathbb{R}\)</span> be a continuous increasing function. Then <span class="math notranslate nohighlight">\(Y(\omega) = g[X
- (\omega)]\)</span> has pmf</p>
+<p><strong>Theorem (Pdf of a function of a random variable)</strong> Let <span class="math notranslate nohighlight">\(X\)</span> be a continuous random variable on <span class="math notranslate nohighlight">\((\Omega, \mathcal{F}, \mathbb{P})\)</span> and <span class="math notranslate nohighlight">\(g : \mathbb{R} \to \mathbb{R}\)</span> be a continuous increasing function. Then <span class="math notranslate nohighlight">\(Y(\omega) = g[X(\omega)]\)</span> has pmf</p>
 <div class="math notranslate nohighlight">
 \[f_Y(y) = f_X(g^{-1}(y)) \frac{d}{dy} g^{-1}(y).\]</div>
 </div>
 <br>
-<p>A similar relation holds for continuous and decreasing <span class="math notranslate nohighlight">\(g\)</span>, where a <span class="math notranslate nohighlight">\(-\)</span> sign is
-added in front of the right hand side of the above result. Cases where <span class="math notranslate nohighlight">\(g\)</span>
-is not strictly increasing or decreasing, are best treated on their own.</p>
+<p>A similar relation holds for continuous and decreasing <span class="math notranslate nohighlight">\(g\)</span>, where a <span class="math notranslate nohighlight">\(-\)</span> sign is added in front of the right hand side of the above result. Cases where <span class="math notranslate nohighlight">\(g\)</span> is not strictly increasing or decreasing, are best treated on their own.</p>
 </div>
 <div class="section" id="expectations">
 <h2>Expectations<a class="headerlink" href="#expectations" title="Permalink to this headline">¶</a></h2>
-<p>The expectation of a continuous random variable is the sensible analogue of
-the expectation of a continuous random variable.</p>
+<p>The expectation of a continuous random variable is the sensible analogue of the expectation of a continuous random variable.</p>
 <div class="definition">
 <p><strong>Definition (Expectation of continuous random variable)</strong> If <span class="math notranslate nohighlight">\(X\)</span> is a
 continuous random variable with pdf <span class="math notranslate nohighlight">\(f_X\)</span>, the expectation of <span class="math notranslate nohighlight">\(X\)</span> is defined by</p>

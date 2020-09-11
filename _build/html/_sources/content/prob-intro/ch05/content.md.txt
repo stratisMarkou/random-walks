@@ -214,35 +214,20 @@ $X$ is chi-squared distributed with $n$ degrees of freedom if it has density
  
 $$\begin{align}
 f_X(x) = \begin{cases}
-\frac{1}{2\Gamma\left(\frac{n}{2}\right)} \left(\frac{x}{2}\right)^{\frac{n}{2
-} - 1} e ^{-\frac{x}{2}} & \text{ if } x > 0,\\
+\frac{1}{2\Gamma\left(\frac{n}{2}\right)} \left(\frac{x}{2}\right)^{\frac{n}{2} - 1} e ^{-\frac{x}{2}} & \text{ if } x > 0,\\
 0 & \text{ if } x \leq 0.
 \end{cases}
 \end{align}$$
 
-The chi-squared distribution is a special version of the gamma distribution
-, where $w = n / 2$ and $\lambda = 1/2$, which is of interest on its own. For
- example, if $Z$ is normally distributed with parameters $(\mu, \sigma^2)$
- , then $X = (Z - \mu)^2 / \sigma^2$ is chi-squared distributed with $n = 1$
-  degrees of freedom.
+The chi-squared distribution is a special version of the gamma distribution, where $w = n / 2$ and $\lambda = 1/2$, which is of interest on its own. For example, if $Z$ is normally distributed with parameters $(\mu, \sigma^2)$, then $X = (Z - \mu)^2 / \sigma^2$ is chi-squared distributed with $n = 1$ degrees of freedom.
   
 ## Functions of random variables
 
-We are often interested in functions of random variables, and the
- distributions of values these take. Strictly speaking, if $X$ is a random
-  variable on $(\Omega, \mathcal{F}, \mathbb{P})$ and $g : \mathbb{R} \to
-   \mathbb{R}$ is any function, then $Y(\omega) = g[X(\omega)]$ is not a
-    variable in general, because $\{\omega \in \Omega : Y(\omega) = y\}$ may
-     not be in $\mathcal{F}$. Grimmett and Welsh acknowledge and defer this
-      detail for elsewhere. Modulo this detail, the following result gives us
-       a rule for determining $f_Y$.
+We are often interested in functions of random variables, and the distributions of values these take. Strictly speaking, if $X$ is a random variable on $(\Omega, \mathcal{F}, \mathbb{P})$ and $g : \mathbb{R} \to \mathbb{R}$ is any function, then $Y(\omega) = g[X(\omega)]$ is not a variable in general, because $\{\omega \in \Omega : Y(\omega) = y\}$ may not be in $\mathcal{F}$. Modulo this detail, the following result gives us a rule for determining $f_Y$.
        
 <div class="theorem">
 
-**Theorem (Pdf of a function of a random variable)** Let $X$ be a continuous
- random variable on $(\Omega, \mathcal{F}, \mathbb{P})$ and $g : \mathbb{R
- } \to \mathbb{R}$ be a continuous increasing function. Then $Y(\omega) = g[X
- (\omega)]$ has pmf
+**Theorem (Pdf of a function of a random variable)** Let $X$ be a continuous random variable on $(\Omega, \mathcal{F}, \mathbb{P})$ and $g : \mathbb{R} \to \mathbb{R}$ be a continuous increasing function. Then $Y(\omega) = g[X(\omega)]$ has pmf
  
  $$f_Y(y) = f_X(g^{-1}(y)) \frac{d}{dy} g^{-1}(y).$$
 
@@ -250,14 +235,11 @@ We are often interested in functions of random variables, and the
 
 <br>
 
-A similar relation holds for continuous and decreasing $g$, where a $-$ sign is
- added in front of the right hand side of the above result. Cases where $g$
-  is not strictly increasing or decreasing, are best treated on their own.
+A similar relation holds for continuous and decreasing $g$, where a $-$ sign is added in front of the right hand side of the above result. Cases where $g$ is not strictly increasing or decreasing, are best treated on their own.
   
 ## Expectations
 
-The expectation of a continuous random variable is the sensible analogue of
- the expectation of a continuous random variable.
+The expectation of a continuous random variable is the sensible analogue of the expectation of a continuous random variable.
  
 <div class="definition">
 
