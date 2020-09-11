@@ -13,7 +13,7 @@ Analysis deals with properties of objects like sequences, series, functions, der
 1. For any $a, b, c \in \mathbb{F}$, $a + (b + c) = (a + b) + c$ and $a \times (b \times c) = (a \times b) \times c$.
 2. For any $a, b \in \mathbb{F}$, $a + b = b + a$ and $a \times b = b \times a$.
 3. There exist $0, 1 \in \mathbb{F}$ such that for any $a \in \mathbb{F}$, $a + 0 = a$ and $a \times 1 = a$.
-4. For any $\mathbb{a} \in \mathbb{F}$, there exists $-a \in \mathbb{F}$ such that $a + (-a) = 0$. If $a \neq 0$, then for any $\mathbb{a} \in \mathbb{F}$, there exists $a^{-1} \in \mathbb{F}$ such that $a + a^{-1} = 1$.
+4. For any $\mathbb{a} \in \mathbb{F}$, there exists $-a \in \mathbb{F}$ such that $a + (-a) = 0$. If $a \neq 0$, then for any $\mathbb{a} \in \mathbb{F}$, there exists $a^{-1} \in \mathbb{F}$ such that $a \times a^{-1} = 1$.
 5. For any $a, b, c \in \mathbb{F}$, $a \times (b + c) = (a \times b) + (a \times c)$.
     
 </div>
@@ -48,7 +48,7 @@ Below is our first result, a property satisfied by ordered fields.
 
 <div class="lemma">
 
-**Definition (Squares are non-negative)** Let $\mathbb{F}$ be an ordered field and $x \in \mathbb{F}$. Then $x^2 \geq 0$.
+**Lemma (Squares are non-negative)** Let $\mathbb{F}$ be an ordered field and $x \in \mathbb{F}$. Then $x^2 \geq 0$.
     
 </div>
 <br>
@@ -122,6 +122,7 @@ Equivalent definitions for the lower bound, infimum and greatest lower bound pro
 </div>
 <br>
 
+(analysis-i-real-num)=
 ## The real numbers
 
 We are now at a position to define the real numbers in terms of an ordered field. One can check that such an object exists, and that the decimals satisfy the properties stated in the definition, but we do not do this here.
