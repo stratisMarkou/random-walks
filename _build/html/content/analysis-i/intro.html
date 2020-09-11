@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Eckart-Young and PCA &#8212; Random walks</title>
+    <title>Analysis I &#8212; Random walks</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link href="../../_static/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="../../_static/sphinx-book-theme.css" type="text/css" />
@@ -31,20 +31,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="canonical" href="https://random-walks.org/content/linear-algebra/lecture-7.html" />
+    <link rel="canonical" href="https://random-walks.org/content/analysis-i/intro.html" />
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="The real number system" href="ch01-reals/content.html" />
+    <link rel="prev" title="Markov chains" href="../prob-intro/ch12/content.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
 
 
 <!-- Opengraph tags -->
-<meta property="og:url"         content="https://random-walks.org/content/linear-algebra/lecture-7.html" />
+<meta property="og:url"         content="https://random-walks.org/content/analysis-i/intro.html" />
 <meta property="og:type"        content="article" />
-<meta property="og:title"       content="Eckart-Young and PCA" />
-<meta property="og:description" content="Eckart-Young and PCA  Vector norms  \ell_1 norm: ||v||_1 = |v_1| + |v_2| + ... + |v_n|  \ell_2 norm: ||v||_2 = \sqrt{v_1^2 + v_2^2 + ... + v_n^2}  \ell_\infty n" />
+<meta property="og:title"       content="Analysis I" />
+<meta property="og:description" content="Analysis I  These are notes on the first year (part I) analysis course, of the maths degree in Cambridge.  " />
 <meta property="og:image"       content="https://random-walks.org/_static/logo.svg" />
 
 <meta name="twitter:card" content="summary">
@@ -84,8 +86,13 @@
   <li class="">
     <a href="../prob-intro/intro.html">Probability: An introduction</a>
   </li>
-  <li class="">
-    <a href="../analysis-i/intro.html">Analysis I</a>
+  <li class="active">
+    <a href="">Analysis I</a>
+  <ul class="nav sidenav_l2">
+    <li class="">
+      <a href="ch01-reals/content.html">The real number system</a>
+    </li>
+  </ul>
   </li>
   <li class="">
     <a href="../misc/misc.html">Miscellaneous</a>
@@ -124,7 +131,7 @@
                 <!-- ipynb file if we had a myst markdown file -->
                 
                 <!-- Download raw file -->
-                <a class="dropdown-buttons" href="../../_sources/content/linear-algebra/lecture-7.ipynb.txt"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.ipynb</button></a>
+                <a class="dropdown-buttons" href="../../_sources/content/analysis-i/intro.md.txt"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.md</button></a>
                 <!-- Download PDF via print -->
                 <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF" onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
             </div>
@@ -139,33 +146,11 @@
 
         <!-- Launch buttons -->
         
-        <div class="dropdown-buttons-trigger">
-            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-            <div class="dropdown-buttons">
-                
-                <a class="binder-button" href="https://mybinder.org/v2/gh/stratisMarkou/random-walks/master?urlpath=tree/./content/linear-algebra/lecture-7.ipynb"><button type="button" class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip" data-placement="left"><img class="binder-button-logo" src="../../_static/images/logo_binder.svg" alt="Interact on binder">Binder</button></a>
-                
-                
-                
-            </div>
-        </div>
-        
     </div>
     <div class="d-none d-md-block col-md-2 bd-toc show">
-<div class="tocsection onthispage pt-5 pb-3">
-    <i class="fas fa-list"></i> On this page
-</div>
 
 <nav id="bd-toc-nav">
     <ul class="nav section-nav flex-column">
-    
-        <li class="nav-item toc-entry toc-h2">
-            <a href="#vector-norms" class="nav-link">Vector norms</a>
-        </li>
-    
-        <li class="nav-item toc-entry toc-h2">
-            <a href="#matrix-norms" class="nav-link">Matrix norms</a>
-        </li>
     
     </ul>
 </nav>
@@ -178,24 +163,10 @@
         
               <div>
                 
-  <div class="section" id="eckart-young-and-pca">
-<h1>Eckart-Young and PCA<a class="headerlink" href="#eckart-young-and-pca" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="vector-norms">
-<h2>Vector norms<a class="headerlink" href="#vector-norms" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\ell_1\)</span> norm: <span class="math notranslate nohighlight">\(||v||_1 = |v_1| + |v_2| + ... + |v_n|\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\ell_2\)</span> norm: <span class="math notranslate nohighlight">\(||v||_2 = \sqrt{v_1^2 + v_2^2 + ... + v_n^2}\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\ell_\infty\)</span> norm: <span class="math notranslate nohighlight">\(||v||_\infty = \max|v_i|\)</span></p></li>
-</ul>
-</div>
-<div class="section" id="matrix-norms">
-<h2>Matrix norms<a class="headerlink" href="#matrix-norms" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>Nuclear norm: <span class="math notranslate nohighlight">\(~~~||A||_{\text{Nuclear}} = \sum_{r = 1}^R \sigma_r\)</span></p></li>
-<li><p>Frobenius norm: <span class="math notranslate nohighlight">\(||A||_F = \sqrt{\sum_{nm} |a_{nm}|^2}\)</span></p></li>
-<li><p>Spectral norm: <span class="math notranslate nohighlight">\(~~||A||_2 = \max \sigma_r\)</span></p></li>
-</ul>
-<p><strong>Eckart-Young theorem:</strong> If <span class="math notranslate nohighlight">\(B\)</span> has rank <span class="math notranslate nohighlight">\(k\)</span> and <span class="math notranslate nohighlight">\(A_k\)</span> is the truncated SVD of <span class="math notranslate nohighlight">\(A\)</span> up to the <span class="math notranslate nohighlight">\(k^{th}\)</span> largest eigenvalue, then <span class="math notranslate nohighlight">\(||A - B|| \geq ||A - A_k||\)</span>.</p>
+  <div class="section" id="analysis-i">
+<h1>Analysis I<a class="headerlink" href="#analysis-i" title="Permalink to this headline">¶</a></h1>
+<p>These are notes on the first year (part I) analysis course, of the maths degree in Cambridge.</p>
+<div class="toctree-wrapper compound">
 </div>
 </div>
 
@@ -208,6 +179,8 @@
     
     <div class='prev-next-bottom'>
         
+    <a class='left-prev' id="prev-link" href="../prob-intro/ch12/content.html" title="previous page">Markov chains</a>
+    <a class='right-next' id="next-link" href="ch01-reals/content.html" title="next page">The real number system</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
