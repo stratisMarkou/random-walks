@@ -93,6 +93,7 @@ Combining these two identities we obtain $x^2 = (-x)^2.$ We can sleep peacefully
 </details>
 <br>
 
+(analysis-i-least-upper-bound)=
 ## Least upper bound property
 
 Another central concept in analysis is the upper (lower) bound and the least (greatest) upper (lower) bound. Among other uses, these are used to define the real numbers themselves.
