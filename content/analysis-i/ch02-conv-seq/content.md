@@ -388,14 +388,14 @@ If $a > x$, then we can set $\epsilon = a - x$ and find $N$ such that $|a_N - a|
 
 <div class="lemma">
 
-**Lemma (Monotone sequences $\implies$ archimedean property)** If an ordered field $\mathbb{F}$ has the {ref}`monotone sequences property<analysis-i-mon-seq-prop>`, it also has the {ref}`archimedean property<analysis-i-sequences>`.
+**Lemma (Monotone sequences $\implies$ Archimedean property)** If an ordered field $\mathbb{F}$ has the {ref}`monotone sequences property<analysis-i-mon-seq-prop>`, it also has the {ref}`Archimedean property<analysis-i-sequences>`.
     
 </div>
 <br>
     
 
 <details class="proof">
-<summary>Proof: Monotone sequences \(\implies\) archimedean property</summary>
+<summary>Proof: Monotone sequences \(\implies\) Archimedean property</summary>
     
 Suppose $\mathbb{F}$ is an ordered field with the monotone sequences property. The sequence with terms $a_n = \frac{1}{n}$ is decreasing and its terms are bounded below by $0$ and by the monotone sequences property, it converges to a limit $\delta$. By the previous lemma, $\delta \geq 0$. If we assume $\delta \neq 0$ we reach a contradiction, because we can set $\epsilon = \frac{\delta}{2}$ and observe that for all $n > \frac{\delta}{2}$
     
@@ -456,7 +456,7 @@ $$\begin{align}
 u_n - v_n = \frac{u_0 - v_0}{2^n}.
 \end{align}$$
     
-Since $\mathbb{F}$ has the monotone sequences property, it also has the archimedean property. Therefore the sequence $\frac{1}{n}$ converges to $0$ and by the sandwich rule
+Since $\mathbb{F}$ has the monotone sequences property, it also has the Archimedean property. Therefore the sequence $\frac{1}{n}$ converges to $0$ and by the sandwich rule
     
 $$\begin{align}
 u_n - v_n = \frac{u_0 - v_0}{2^n} \leq \frac{u_0 - v_0}{n} \to 0
@@ -525,7 +525,7 @@ $$\begin{align}
 \bigcap_{n = 1}^\infty I_n \neq \emptyset
 \end{align}$$
 
-so there exists $a \in \bigcap_{n = 1}^\infty I_n$. We will show that $a_{n_k} \to a$. Let $\epsilon > 0$. By the archimedean property, we can find $K$ such that
+so there exists $a \in \bigcap_{n = 1}^\infty I_n$. We will show that $a_{n_k} \to a$. Let $\epsilon > 0$. By the Archimedean property, we can find $K$ such that
     
 $$\begin{align}
 u_k - v_k = \frac{u_0 - v_0}{2^K} \leq \epsilon
@@ -570,7 +570,7 @@ Let $(a_n)$ be a sequence that converges to $a$ and $\epsilon > 0$. Then there e
     
 $$\begin{align}
 &|a_p - a| < \frac{\epsilon}{2} \text{ for all } p > N,\\
-&|a_q - a| < \frac{\epsilon}{2} \text{ for all } p > N.
+&|a_q - a| < \frac{\epsilon}{2} \text{ for all } q > N.
 \end{align}$$
     
 from which it follows that
@@ -611,15 +611,57 @@ Let $\mathbb{F}$ be an ordered field with the {ref}`monotone sequences property<
     
 <div class="lemma">
 
-**Lemma (Archimedean and Cauchy $\implies$ monotone sequences)** If $\mathbb{F}$ be a compete ordered field with the archimedean property, it also has the monotone sequences property.
+**Lemma (Archimedean property and Cauchy $\implies$ monotone sequences property)** If $\mathbb{F}$ is an ordered field in which every Cauchy sequence converges (complete) with the Archimedean property, it also has the monotone sequences property.
     
 </div>
 <br>
     
+The proof followed by the course shows that every increasing non-Cauchy sequence is not bounded above. This implies that if an increasing sequence is bounded above, then it must be Cauchy and therefore must also converge.
+    
 <details class="proof">
-<summary>Proof: Archimedean and Cauchy \(\implies\) monotone sequences</summary>
+<summary>Proof (a): Archimedean property and Cauchy \(\implies\) monotone sequences property</summary>
 
+Let $\mathbb{F}$ be a complete ordered field with the Archimedean property and let $(a_n)$ be an increasing sequence that is not Cauchy. Then there must exist $\epsilon > 0$ such that for all $N$, there exist $p, q \geq N$ such that
 
+$$\begin{align}
+|a_p - a_q| \geq \epsilon.
+\end{align}$$
+    
+Therefore, for any $N$ we can find $p$ such that
+
+$$\begin{align}
+a_p \geq a_N + \epsilon,
+\end{align}$$
+    
+from which we can construct a subsequence $a_{n_k}$ that satisfies
+
+$$\begin{align}
+a_{n_k} \geq a_{n_{k - 1}} + \epsilon \implies a_{n_k} \geq a_{n_1} + (k - 1)\epsilon
+\end{align}$$
+    
+By the Archimedean property, $(a_{n_k})$ and therefore also $(a_n)$ are unbounded.
+
+</details>
+<br>
+    
+An alternative proof is to show that every monotone sequence is Cauchy and therefore convergent.
+    
+<details class="proof">
+<summary>Proof (b): Archimedean property and Cauchy \(\implies\) monotone sequences property</summary>
+
+Let $\mathbb{F}$ be a complete ordered field with the Archimedean property and let $(a_n)$ be an increasing sequence that is bounded above by an upper bound $u$. Let $\epsilon > 0$, consider the intervals
+    
+$$\begin{align}
+[u - \epsilon, u], [u - 2\epsilon, u - \epsilon], ..., [u - k\epsilon, u - (k - 1)\epsilon], ...
+\end{align}$$
+    
+and select the interval with the smallest $k$ which contains at least one term of the sequence $(a_n)$. We can find such an interval because $(a_n)$ is an increasing sequence and all its terms are bounded below by $a_1$, so using the Archimedean property we can find integer $k$ large enough such that
+    
+$$\begin{align}
+k \geq \frac{u - a_1}{\epsilon} \implies u - k \epsilon \leq a_1.
+\end{align}$$
+    
+From the set of integers $k$ which satisfy the above criterion, select the smallest one. By construction and because $(a_n)$ is increasing, the interval $[u - k\epsilon, u - (k - 1)\epsilon]$ contains all terms of the sequence $(a_n)$ for $n \geq N$ beyond some $N$. All terms in this interval are within $\epsilon$ of each other, so the sequence is Cauchy and therefore it converges. Thus $\mathbb{F}$ has the monotone sequences property.
 
 </details>
 <br>
@@ -658,7 +700,44 @@ a_n \to a \iff \liminf a_n = \limsup a_n = a.
 <details class="proof">
 <summary>Proof: Equality of limit infimum/supremum and convergence</summary>
 
-
+For the first part of the statement, let $\epsilon > 0$ and assume $a_n \to a$. Then there exists $n$ such that
+    
+$$\begin{align}
+a - \epsilon \leq a_m \leq a + \epsilon, ~~~ \text { for all } m \geq n,
+\end{align}$$
+    
+from which it follows that
+    
+$$\begin{align}
+a - \epsilon \leq \inf_{m \geq n} a_m \leq \sup_{m \geq n} a_m \leq a + \epsilon, ~~~ \text { for all } n \geq N.
+\end{align}$$
+    
+Since $\epsilon > 0$ was arbitrary, it follows that
+    
+$$\begin{align}
+\liminf a_m = \limsup a_m = a.
+\end{align}$$
+    
+For the second part of the statement, let $\epsilon > 0$ and assume
+    
+$$\begin{align}
+\liminf a_n = \limsup a_n = a.
+\end{align}$$
+    
+Then there exists $n$ such that
+    
+$$\begin{align}
+&a - \epsilon < \inf_{m \geq n} a_m, \text{ and also }\\
+&\sup_{m \geq n} a_m < a + \epsilon,
+\end{align}$$
+    
+from which it follows that 
+    
+$$\begin{align}
+|a_m - a| < \epsilon \text{ for all } m \geq n,
+\end{align}$$
+    
+so that $(a_n) \to a$.
 
 </details>
 <br>
