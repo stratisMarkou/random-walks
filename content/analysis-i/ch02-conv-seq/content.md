@@ -5,11 +5,9 @@ This section introduces sequences and deals with results regarding their converg
 (analysis-i-sequences)=
 ## Sequences
 
-Analysis deals with properties of objects like sequences, series, functions, derivatives and integrals defined with respect to the real or the complex numbers. We therefore need to define the real numbers. Instead of doing so directly however, we define an object called a *field*, which has all the necessary properties on which to do analysis, and the reals can be shown to be an example of a field.
-
 <div class="definition">
 
-**Definition (Sequence)** A sequence $a$ is a function $a : \mathbb{N} \to \mathbb{R} (\text{ or } \mathbb{C})$. We denote the terms of the sequence as $a_n$ and an alternative notation for the sequence itself is $(a_n)$.
+**Definition (Sequence)** A sequence $a$ is a function $a : \mathbb{N} \to \mathbb{R}$ (or $\mathbb{C}$). We denote the terms of the sequence as $a_n$ and an alternative notation for the sequence itself is $(a_n)$.
     
 </div>
 <br>
