@@ -5,6 +5,8 @@ This section introduces sequences and deals with results regarding their converg
 (analysis-i-sequences)=
 ## Sequences
 
+Although sequences are familiar to us, we define them explicitly as functions mapping from the natural numbers $\mathbb{N} = \{1, 2, 3, ...\}$ to the real numbers $\mathbb{R}$.
+
 <div class="definition">
 
 **Definition (Sequence)** A sequence $a$ is a function $a : \mathbb{N} \to \mathbb{R}$ (or $\mathbb{C}$). We denote the terms of the sequence as $a_n$ and an alternative notation for the sequence itself is $(a_n)$.
@@ -12,14 +14,14 @@ This section introduces sequences and deals with results regarding their converg
 </div>
 <br>
 
-Now we can define what it means for a sequence to converge. Informally a sequence converges to a limit $\ell$ if after a certain term, all terms are within a small distance to $\ell$, where the small distance can be chosen to be arbitrarily small.
+Now we can define what it means for a sequence to converge. Informally a sequence converges to a limit $\ell$ if after a certain term, all subsequent terms are within a small distance to $\ell$, where the small distance can be chosen to be arbitrarily small.
 
 <div class="definition">
 
-**Definition (Convergence of a sequence)** Let $(a_n)$ be a sequence and $\ell \in \mathbb{R}$. We say that $a_n$ converges to $\ell$, tends to $\ell$ or $a_n \to \ell$, if for all $\epsilon > 0$, there are some $N \in \mathbb{N}$ such that whenever $n > N$, $|a_n - \ell| < \epsilon$, or in other words
+**Definition (Convergence of a sequence)** Let $(a_n)$ be a sequence and $\ell \in \mathbb{R}$. We say that $a_n$ converges to $\ell$, tends to $\ell$ or $a_n \to \ell$, if
     
 $$\begin{align}
-\forall \epsilon > 0, \exists N \text{ such that } |a_n - \ell| < \epsilon.
+\forall \epsilon > 0, \exists N ~\text{ such that }~ |a_n - \ell| < \epsilon.
 \end{align}$$
     
 In this case, we say that $\ell$ is the limit of $a_n$.
@@ -27,6 +29,7 @@ In this case, we say that $\ell$ is the limit of $a_n$.
 </div>
 <br>
 
+Now that we have defined sequence convergence, we can state an equivalent version of the {ref}`archimedean property<analysis-i-real-num>`.
 
 <div class="lemma">
 
@@ -38,7 +41,7 @@ In this case, we say that $\ell$ is the limit of $a_n$.
 <details class="proof">
 <summary>Proof: Archimedean property - alternative statement</summary>
 
-Let $\epsilon > 0$. We want to show there exists N such that
+Let $\epsilon > 0$. We want to show there exists $N$ such that
     
 $$\begin{align}
 \bigg|\frac{1}{n} - 0\bigg| = \frac{1}{n} < \epsilon, \text{for all } n \geq N.
@@ -60,7 +63,8 @@ arriving at the result.
 
 </details>
 <br>
-
+    
+Aside from convergence, another important property is boundedness. Intuitively, a sequence is bounded if the size of its terms never exceed a certain size, as defined below.
     
 <div class="definition">
 
@@ -79,6 +83,7 @@ $$\begin{align}
 </div>
 <br>
     
+These two definitions of boundedness are equivalent, in the sense that a sequence is bounded if and only if it is eventually bounded. Sometimes it's quicker to show a sequence is eventually bounded, so we state and prove this result now to avoid repeating it within proofs.
 
 <div class="lemma">
 
@@ -104,10 +109,10 @@ Now taking $C^* = \max \{|a_1|, |a_2|, ..., |a_{N - 1}|, C\}$, we see that $|a_n
     
 ## Convergence lemmas
     
+We now state and prove a number of lemmas about series convergence that come handy later. Once proved, we can state them in future proofs without having to justify us every time.
     
 Intuitively, if two sequences converge so does the sum of their terms, as stated by the result below.
-
-    
+ 
 <div class="lemma">
 
 **Lemma (Sum of sequences)** If $a_n \to a$ and $b_n \to b$, $a_n + b_n \to a + b$.
@@ -136,6 +141,9 @@ arriving at the result.
 <br>
     
     
+Another intuitive result is that the scalar multiple of a convergent sequence also converges.
+    
+    
 <div class="lemma">
 
 **Lemma (Scalar multiplication of sequences)** If $a_n \to a$ and $\lambda \in \mathbb{R}$, then $\lambda a_n \to \lambda a$.
@@ -162,7 +170,9 @@ so $\lambda a_n$ converges to $\lambda a$.
 
 </details>
 <br>
-    
+
+   
+If two sequences converge, one of which converges to $0$, then the product of their terms converges to $0$ as well. This is a useful intermediate step for showing that a product of sequences converges to the product of their limits.
     
     
 <div class="lemma">
@@ -194,6 +204,9 @@ so $a_nb_n$ converges to $0$.
 <br>
     
     
+Another intuitive result is that convergent sequences are bounded.
+    
+    
 <div class="lemma">
 
 **Lemma (Convergence $\implies$ bounded)** Every convergent sequence is bounded.
@@ -215,7 +228,9 @@ Therefore the sequence is eventually bounded and by extension it is also bounded
 
 </details>
 <br>
+
     
+Similarly to sums of sequences, the product of two convergent sequences converges to the product of their limits.
     
     
 <div class="lemma">
@@ -237,6 +252,9 @@ a_n b_n = a_n (\epsilon_n + b) \to ab.
 
 </details>
 <br>
+    
+    
+If a sequence is never equal to $0$ and converges to a limit other than $0$, then the reciprocals of the sequence converge to the reciprocal of the limit.
     
     
 <div class="lemma">
@@ -274,6 +292,9 @@ proving the result.
 <br>
     
     
+The above fact can be combined with the product-of-sequences fact to obtain the following useful lemmma.
+    
+    
 <div class="lemma">
 
 **Lemma (Quotient of sequences)** If $a_n \to a$, $b_n \to b$, $b_n \neq 0$ and $b \neq 0$ then $\frac{a_n}{b_n} \to \frac{a}{b}$.
@@ -289,6 +310,8 @@ If $b_n \to b$, $b_n \neq 0$ and $b \neq 0$, then $\frac{1}{b_n} \to b$ by the l
 </details>
 <br>
     
+    
+If two sequences sandwich another sequence (i.e. bound it from above and below) and covnverge to the same limit, then the middle sequence converges to the same limit.
     
     
 <div class="lemma">
@@ -320,7 +343,11 @@ Therefore $b_n \to \ell$ as $n \to \infty$.
 <br>
     
 (analysis-i-mon-seq-prop)=
-## Monotone sequences   
+## Monotone sequences
+    
+
+Monotonicity is another important property of sequences. Informally, a monotonic increasing (decreasing) sequence is one which never decreases (increases). A strictly monotonic increasing (decreasing) sequence is one which always increases (decreases).
+    
     
 <div class="definition">
 
@@ -329,6 +356,11 @@ Therefore $b_n \to \ell$ as $n \to \infty$.
 </div>
 <br>
     
+
+Monotonicity is a strong condition and tells us a lot about the behaviour of a sequence. Although one would intuitively expect that an increasing (decreasing) monotone sequence that is bounded from above (below) should converge, this is not necessarily the case. If the "limit" of the sequence is not in $\mathbb{F}$, then strictly speaking the sequence does not converge, because the "limit" is not in $\mathbb{F}$. For example, this could happen if we define a monotone sequence of rational numbers which converges to an irrational number, and restrict $\mathbb{F}$ to the rational numbers $\mathbb{Q}$. Then although the sequence is monotone and bounded above, it does not converge because its "limit" does not exist in $\mathbb{F}$.
+    
+For the above reason, we introduce the monotone sequences property. We say that an ordered field $\mathbb{F}$ has the monotone sequences property if every increasing (decreasing) monotone sequence that is bounded from above (below) converges.
+
     
 <div class="definition">
 
@@ -336,6 +368,9 @@ Therefore $b_n \to \ell$ as $n \to \infty$.
     
 </div>
 <br>
+    
+    
+The monotone sequences property is equivalent to the {ref}`least upper bound property<analysis-i-least-upper-bound>`, as stated and proved below. Intuitively, if an ordered field has the monotone sequences property, then any monotone sequence converges to some limit $\ell$ which can be shown to be the least upper bound of the sequence - implying that the ordered field has the least upper bound property. Conversely, if an ordered field has the least upper bound property, any monotone increasing (decreasing) sequence that is bounded above (below) can be shown to converge to a limit $\ell$ which is a least upper bound for the sequence - implying that the ordered field has the monotone sequences property.
     
 
 <div class="lemma">
