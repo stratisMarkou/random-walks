@@ -375,10 +375,12 @@ The monotone sequences property is equivalent to the {ref}`least upper bound pro
 
 <div class="lemma">
 
-**Lemma (Least upper bound $\implies$ monotone sequences property)** If an ordered field has the {ref}`least upper bound property<analysis-i-least-upper-bound>`, also has the {ref}`monotone sequences property<analysis-i-mon-seq-prop>`.
+**Lemma (Least upper bound $\iff$ monotone sequences property)** An ordered field has the {ref}`least upper bound property<analysis-i-least-upper-bound>` if and only if it also has the {ref}`monotone sequences property<analysis-i-mon-seq-prop>`.
     
 </div>
 <br>
+    
+The second part of this proof uses the two lemmas that follow - that the upper bound of a sequence also upper bounds the indivitdual terms and that the monotone sequences property implies the Archimedean property - as well as the {ref}`nested intervals property<analysis-i-bolz-weier>`.
 
 <details class="proof">
 <summary>Proof: Least upper bound \(\implies\) monotone sequences property</summary>
@@ -398,6 +400,33 @@ $$\begin{align}
 \end{align}$$
     
 showing that the sequence converges to $a$ and $\mathbb{F}$ has the monotone sequences property.
+
+</details>
+<br>
+    
+    
+<details class="proof">
+<summary>Proof: Monotone sequences \(\implies\) least upper bound property</summary>
+    
+Suppose $\mathbb{F}$ is an ordered field with the monotone sequences property, and let $S$ be a subset of $\mathbb{F}$ that is bounded above by some element $u_0 \in \mathbb{F}$. If $S$ is finite, then the largest element in $S$ is a least upper bound for it. Now suppose $S$ is infinite.
+    
+Pick $v_0 \in \mathbb{F}$ such that it is not an upper bound for $S$. Proceeding by repeated bisection, if $\frac{v_n + u_n}{2}$ is an upper bound set $u_{n + 1} = \frac{v_n + u_n}{2}$ and $v_{n + 1} = v_n$, otherwise set $v_{n + 1} = \frac{v_n + u_n}{2}$ and $u_{n + 1} = u_n$. Under this definition, the intervals $[v_n, u_n]$ all contain at least one element of $S$ and we have
+    
+$$\begin{align}
+u_n - v_n = \frac{u_0 - v_0}{2^n}.
+\end{align}$$
+    
+Since $\mathbb{F}$ has the monotone sequences property, it also has the Archimedean property. Therefore the sequence $\frac{1}{n}$ converges to $0$ and the sandwich rule
+    
+$$\begin{align}
+0 < u_n - v_n = \frac{u_0 - v_0}{2^n} \leq \frac{u_0 - v_0}{n} \to 0
+\end{align}$$
+    
+implies that $u_n - v_n$ also converges to $0$. Since $u_n$ is a decreasing sequence that is bounded below by $v_0$, it converges to a limit $s$, and similarly $v_n$ also converges to $s$. The intersection of the intervals $[v_n, u_n]$ equals the singleton set $\{s\}$ and this is a subset of $S$. We now show that $s = \sup S$.
+    
+If $s$ is not an upper bound, then there must exist $t \in S$ such that $s < t$, and since $u_n \to s$ there must also exist $m$ such that $u_m < t$, contradicting the fact that $u_m$ is an upper bound. To see that $s$ is the least upper bound, let $t < s$. Since $u_n \to s$ we can find $m$ such that $t < u_m$, implying that $t$ is not the upper bound.
+    
+Therefore $s$ is a least upper bound and $\mathbb{F}$ has the least upper bound property.
 
 </details>
 <br>
@@ -442,12 +471,7 @@ Thus $a_n$ cannot converge to $\delta > 0$ so we must have $\delta = 0$, and $\f
 <br>
     
     
-<div class="lemma">
-
-**Lemma (Monotone sequences $\implies$ least upper bound property)** If an ordered field $\mathbb{F}$ has the {ref}`monotone sequences property<analysis-i-mon-seq-prop>`, it also has the {ref}`least upper bound property<analysis-i-least-upper-bound>`.
-    
-</div>
-<br>
+The last result in this section points out the unsurprising fact that a sequence can have at most one limit.
     
 
 <div class="lemma">
@@ -467,39 +491,7 @@ $$\begin{align}
 & |b_n - b| < \epsilon \text{ for all } n > \max\{N_a, N_b\}.
 \end{align}$$
     
-Setting $\epsilon = \delta$ we arrive at a contradiction, because the above expressions cannot hold simultaneously when $\epsilon \leq \delta$.
-
-</details>
-<br>
-    
-    
-<div class="lemma">
-
-**Lemma (Monotone sequences $\implies$ least upper bound property)** If $\mathbb{F}$ is an ordered field with the {ref}`monotone sequences property<analysis-i-mon-seq-prop>`, then it also has the {ref}`least upper bound property<analysis-i-least-upper-bound>`.
-    
-</div>
-<br>
-    
-<details class="proof">
-<summary>Proof: Monotone sequences \(\implies\) least upper bound property</summary>
-    
-Suppose $\mathbb{F}$ is an ordered field with the monotone sequences property, and let $S$ be a subset of $\mathbb{F}$ that is bounded above by some element $u_0 \in \mathbb{F}$. Pick $v_0 \in \mathbb{F}$ such that it is not an upper bound for $\mathbb{F}$. Proceeding by repeated bisection, if $\frac{v_n + u_n}{2}$ is an upper bound set $u_{n + 1} = \frac{v_n + u_n}{2}$ and $v_{n + 1} = v_n$, otherwise set $v_{n + 1} = \frac{v_n + u_n}{2}$ and $u_{n + 1} = u_n$. With this definition we have
-    
-$$\begin{align}
-u_n - v_n = \frac{u_0 - v_0}{2^n}.
-\end{align}$$
-    
-Since $\mathbb{F}$ has the monotone sequences property, it also has the Archimedean property. Therefore the sequence $\frac{1}{n}$ converges to $0$ and by the sandwich rule
-    
-$$\begin{align}
-u_n - v_n = \frac{u_0 - v_0}{2^n} \leq \frac{u_0 - v_0}{n} \to 0
-\end{align}$$
-    
-implies that $u_n - v_n$ also converges to $0$. Since $u_n$ is a decreasing sequence that is bounded below by $v_0$, it converges to a limit $s$, and by extension $v_n$ also converges to $s$. We now show that $s = \sup S$.
-    
-If $s$ is not an upper bound, then there must exist $t \in S$ such that $s < t$, and since $u_n \to s$ there must also exist $m$ such that $u_m < t$, contradicting the fact that $u_m$ is an upper bound. To see that $s$ is the least upper bound, let $t < s$. Since $u_n \to s$ we can find $m$ such that $t < u_n$, implying that $t$ is not the upper bound.   
-    
-Therefore $s$ is a least upper bound and $\mathbb{F}$ has the least upper bound property.
+Setting $\epsilon = \delta$ we arrive at a contradiction.
 
 </details>
 <br>
@@ -507,9 +499,11 @@ Therefore $s$ is a least upper bound and $\mathbb{F}$ has the least upper bound 
 (analysis-i-bolz-weier)=
 ## Bolzano-Weierstrass theorem
     
+This section is concerned with the Bolzano-Weierstrass theorem, which is a very useful tool in analysis. To prove it we first state and prove the nested intervals property.
+    
 <div class="lemma">
 
-**Lemma (Nested intervals property)** Let $\mathbb{F}$ be an ordered field with the monotone sequences property. If $I_1 \supseteq I_2 \supseteq ...$ are closed and bounded non-empty intervals, then
+**Lemma (Nested intervals property)** Let $\mathbb{F}$ be an ordered field with the {ref}`monotone sequences property<analysis-i-mon-seq-prop>`. If $I_1 \supseteq I_2 \supseteq ...$ are closed and bounded non-empty intervals, then
 
 $$\begin{align}
 \bigcap_{n = 1}^\infty I_n \neq \emptyset
@@ -523,7 +517,7 @@ $$\begin{align}
 
 Let $\mathbb{F}$ be an ordered field with the monotone sequences property, and $I_1 \supseteq I_2 \supseteq ...$ be closed and bounded non-empty intervals. Writing $I_n = [a_n, b_n]$ we have $a_1 \leq a_2 \leq ...$ and $b_1 \geq b_2 \geq ...$. The sequence $a_n$ is increasing and upper bounded by $b_1$ since $a_n \leq b_n \leq b_1$. By the {ref}`monotone sequences property<analysis-i-mon-seq-prop>`, $(a_n)$ converges to a limit $a$.
     
-We now show that $a_n \leq a \leq b_n$ for all $n$. First, for any $n$ it must be true that $a_n \leq a$, because if $a_n > a$ for any $a$, then for all $m \geq n$ we would have $a_m \geq a_n > a$ and since $a_m$ converges to $a$ we would arrive at the contradiction $a > a$. Second, for any $n$ we have $a_m \leq b_m \leq b_n$ for all $m \geq n$, implying that $a \leq b_n$, since the {ref}`an upper bound of a sequence also bounds the limit of the sequence<analysis-i-mon-seq-prop>`.
+We now show that $a_n \leq a \leq b_n$ for all $n$. First, for any $n$ it must be true that $a_n \leq a$, because if $a_n > a$ for any $a$, then for all $m \geq n$ we would have $a_m \geq a_n > a$ and since $a_m$ converges to $a$ we would arrive at the contradiction $a > a$. Second, for any $n$ we have $a_m \leq b_m \leq b_n$ for all $m \geq n$, implying that $a \leq b_n$, since the an upper bound of a sequence also bounds the limit of the sequence.
     
 Thus for all $n$ we have $a_n \leq a \leq b_n$, implying that $a \in I_n$ for all $n$.
 
@@ -531,7 +525,7 @@ Thus for all $n$ we have $a_n \leq a \leq b_n$, implying that $a \in I_n$ for al
 <br>
     
     
-A useful consequence of the nested intervals property is the Bolzano-Weierstrass theorem.
+Now we can state and prove Bolzano-Weierstrass. Intuitively it says that if the ordered field has the monotone sequences property, then any sequence that is bounded above and below has a convergent subsequence.
     
 <div class="theorem">
 
@@ -577,6 +571,7 @@ $$\begin{align}
 (analysis-i-cauchy-seqs)=
 ## Cauchy sequences
     
+Another important notion of convergent sequences is that of Cauchy sequences.
 
 <div class="definition">
 
@@ -588,6 +583,8 @@ $$\begin{align}
     
 </div>
 <br>
+    
+Cauchy is a more broad property than convergent, in the sense that every sequence that is convergent is Cauchy but not vice versa.
     
 <div class="lemma">
 
@@ -617,6 +614,30 @@ hence $(a_n)$ is Cauchy.
 </details>
 <br>
     
+Although a Cauchy sequence does not necessarily converge, a Cauchy sequence with a convergent subsequence converges, as stated and proved below.
+    
+<div class="lemma">
+
+**Lemma (Cauchy sequence with convergent subsequence converges)** Let $(a_n)$ be a Cauchy sequence with a subsequence $(a_{n_k})$ that converges to $a$. Then $a_n \to a$.
+    
+</div>
+<br>
+    
+<details class="proof">
+<summary>Proof: Cauchy sequence with convergent subsequence converges</summary>
+
+Let $\epsilon > 0$. Since $(a_n)$ is a Cauchy, we can pick $N$ such that for all $p, q \geq N$, $|a_p - a_q| < \frac{\epsilon}{2}$. Since $a_{n_k}$ converges to $a$ we can also pick $K$ such that $n_K \geq N$ and $|a_{n_K} - a| < \frac{\epsilon}{2}$. Then for all $n \geq N$ we have
+    
+$$\begin{align}
+|a_n - a| \leq |a_n - a_{n_K}| + |a_{n_K} - a| < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon,
+\end{align}$$
+    
+so $a_n$ converges to $a$.
+
+</details>
+<br>
+    
+Previously we saw {ref}`an example<analysis-i-mon-seq-prop>` where a sequence of rational numbers in an ordered field $\mathbb{F}$ defined on the rationals $\mathbb{Q}$ could get closer and closer to an irational "limit", without converging since the "limit" was not in $\mathbb{F}$. Such a sequence could be Cauchy without being convergent. The following theorem says that if the ordered field also has the {ref}`monotone sequences property<analysis-i-mon-seq-prop>`, all Cauchy sequences are convergent.
     
 <div class="theorem">
 
@@ -628,23 +649,33 @@ hence $(a_n)$ is Cauchy.
 <details class="proof">
 <summary>Proof: The general principle of convergence</summary>
 
-Let $\mathbb{F}$ be an ordered field with the {ref}`monotone sequences property<analysis-i-mon-seq-prop>` and $(a_n)$ be a {ref}`Cauchy sequence<analysis-i-cauchy-seqs>` in $\mathbb{F}$. Then $(a_n)$ is eventually bounded because by the Cauchy condition, there exists $N$ such that $|a_n - a_N| \leq 1$ for all $n > N$. Therefore it is also bounded, and by the {ref}`Bolzano-Weierstrass theorem<analysis-i-bolz-weier>` it has a convergent subsequence $(a_{n_k})$. Therefore the sequence $(a_n)$ converges (to the same limit as its subsequence) concluding the proof.
+Let $\mathbb{F}$ be an ordered field with the {ref}`monotone sequences property<analysis-i-mon-seq-prop>` and $(a_n)$ be a {ref}`Cauchy sequence<analysis-i-cauchy-seqs>` in $\mathbb{F}$. Then $(a_n)$ is eventually bounded because by the Cauchy condition, there exists $N$ such that
+    
+$$\begin{align}
+|a_n - a_N| \leq 1 \text{ for all } n > N.
+\end{align}$$
+    
+Therefore it is also bounded, and by the {ref}`Bolzano-Weierstrass theorem<analysis-i-bolz-weier>` it has a convergent subsequence $(a_{n_k})$. Therefore the sequence $(a_n)$ converges (to the same limit as its subsequence) concluding the proof.
 
 </details>
 <br>
     
+
+Although a Cauchy sequence need not necessarily converge, we can restrict our attention to ordered fields in which all Cauchy sequences converge. These are called complete ordered fields, and the reals are an example of a complete ordered field, although we do not prove this here.
     
     
 <div class="definition">
 
-**Definition (Complete ordered field)** An ordered field in which every Cauchy sequence converges is called a completer ordered field.
+**Definition (Complete ordered field)** An ordered field in which every Cauchy sequence converges is called a complete ordered field.
     
 </div>
 <br>    
     
+The general principle of convergence says that if an ordered field has the monotone sequences property, then it is also complete. Going the other way, does a complete ordered field also have the monotone sequences property? If the field also have the Archimedean property, then the answer is positive, as stated and proved below. 
+    
 <div class="lemma">
 
-**Lemma (Archimedean property and Cauchy $\implies$ monotone sequences property)** If $\mathbb{F}$ is an ordered field in which every Cauchy sequence converges (complete) with the Archimedean property, it also has the monotone sequences property.
+**Lemma (Archimedean property and completeness $\implies$ monotone sequences property)** If $\mathbb{F}$ is an ordered field in which every Cauchy sequence converges (i.e. it is complete) with the Archimedean property, it also has the monotone sequences property.
     
 </div>
 <br>
@@ -652,7 +683,7 @@ Let $\mathbb{F}$ be an ordered field with the {ref}`monotone sequences property<
 The proof followed by the course shows that every increasing non-Cauchy sequence is not bounded above. This implies that if an increasing sequence is bounded above, then it must be Cauchy and therefore must also converge.
     
 <details class="proof">
-<summary>Proof (a): Archimedean property and Cauchy \(\implies\) monotone sequences property</summary>
+<summary>Proof (a): Archimedean property and completeness \(\implies\) monotone sequences property</summary>
 
 Let $\mathbb{F}$ be a complete ordered field with the Archimedean property and let $(a_n)$ be an increasing sequence that is not Cauchy. Then there must exist $\epsilon > 0$ such that for all $N$, there exist $p, q \geq N$ such that
 
@@ -680,7 +711,7 @@ By the Archimedean property, $(a_{n_k})$ and therefore also $(a_n)$ are unbounde
 An alternative proof is to show that every monotone sequence is Cauchy and therefore convergent.
     
 <details class="proof">
-<summary>Proof (b): Archimedean property and Cauchy \(\implies\) monotone sequences property</summary>
+<summary>Proof (b): Archimedean property and completeness \(\implies\) monotone sequences property</summary>
 
 Let $\mathbb{F}$ be a complete ordered field with the Archimedean property and let $(a_n)$ be an increasing sequence that is bounded above by an upper bound $u$. Let $\epsilon > 0$, consider the intervals
     
@@ -701,6 +732,8 @@ From the set of integers $k$ which satisfy the above criterion, select the small
     
     
 ## Limit infimum and supremum
+    
+We define the limit infimum and limit supremum of a sequence which will be used later.
     
 <div class="definition">
 
@@ -729,6 +762,8 @@ a_n \to a \iff \liminf a_n = \limsup a_n = a.
     
 </div>
 <br>
+    
+We have the following result which states that the limit infimum and supremum of a convergent sequence are both equal to its limit.
     
 <details class="proof">
 <summary>Proof: Equality of limit infimum/supremum and convergence</summary>
