@@ -2,6 +2,7 @@
 
 This section introduces infinite sums and presents results regarding their convergence.
 
+(analysis-i-infinte-sums)=
 ## Infinite sums
 
 An infinite sum, or series, is defined as the limit of the partial sum of the terms of a sequence.
@@ -227,6 +228,203 @@ $$\begin{align}
     
 Since this holds for any $\epsilon > 0$ and $K \geq N$ we must have $\sum^\infty_{n = 1} a_n = \sum^\infty_{n = 1} a_{\pi(n)}$.
 
+</details>
+<br>
+    
+## Convergence tests
+    
+Appart from the comparison test, there are a lot of other useful convergence tests that we state and prove here.
+    
+    
+<div class="lemma">
 
+**Lemma (Alternating sequence test)** Let $(a_n)$ be a non-negative decreasing sequence with $a_n \to 0$. Then the alternating series
+    
+$$\begin{align}
+\sum^\infty_{n = 1} (-1)^{n + 1} a_n,
+\end{align}$$
+    
+converges.
+
+</div>
+<br>
+
+<details class="proof">
+<summary>Proof: Alternating sequence test</summary>
+    
+Consider the sequence
+    
+$$\begin{align}
+S_N = \sum^N_{n = 1} (-1)^{n + 1} a_n.
+\end{align}$$
+    
+The partial sums $S_{2n}$ and $S_{2n + 1}$ can be grouped as
+    
+$$\begin{align}
+S_{2n} &= (a_1 - a_2) + (a_3 - a_4) + ...,
+S_{2n + 1} &= a_1 - (a_2 - a_3) - (a_4 - a_5) + ...,
+\end{align}$$
+    
+where the bracketed terms are all positive. The sequences $(S_{2n})$ and $(S_{2n + 1})$ are increasing and decreasing respectively and also
+    
+$$\begin{align}
+0 \leq S_{2n} \leq S_{2n + 1} \leq a_1.
+\end{align}$$
+    
+It follows from the monotonic sequences property that $(S_{2n})$ and $(S_{2n + 1})$ both converge and since $S_{2n + 1} - S_{2n} = a_{2n + 1} \to 0$, they converge to the same limit. Therefore $S_n$ also converges to that limit.
+
+    
+</details>
+<br>
+    
+Below we state and prove three versions of the ratio test. The proofs rest on comparing the sequence in question to the geometric sum, which we know converges.
+    
+<div class="lemma">
+
+**Lemma (Ratio test - version 1)** If there exists $c < 1$ such that
+    
+$$\begin{align}
+\frac{|a_{n + 1}|}{|a_n|} \leq c,
+\end{align}$$
+    
+for all $n$, then $\sum a_n$ converges absolutely.
+
+</div>
+<br>
+
+<details class="proof">
+<summary>Proof: Ratio test - version 1</summary>
+    
+Since $\frac{|a_{n + 1}|}{|a_n|} \leq c$ for all $n$, we have
+    
+$$\begin{align}
+|a_n| \leq c^{n - 1} |a_1|.
+\end{align}$$
+    
+Since $\sum c^{n - 1}$ converges when $|c| < 1$, $\sum |a_n|$ also converges {ref}`by the comparsion test<analysis-i-infinte-sums>` and $\sum a_n$ converges as well.
+
+</details>
+<br>
+    
+    
+<div class="lemma">
+
+**Lemma (Ratio test - version 2)** If there exists $c < 1$ and $N$ such that
+    
+$$\begin{align}
+\frac{|a_{n + 1}|}{|a_n|} \leq c
+\end{align}$$
+    
+for all $n > N$, then $\sum a_n$ converges.
+
+</div>
+<br>
+
+<details class="proof">
+<summary>Proof: Ratio test - version 2</summary>
+    
+Suppose there exists $c < 1$ and $N$ such that
+    
+$$\begin{align}
+\frac{|a_{n + 1}|}{|a_n|} \leq c
+\end{align}$$
+    
+for all $n > N$. Then the sum $\sum_{n = 1} a_{N + n}$ converges absolutely as proved in the previous lemma, and therefore $\sum_{n = 1}^N |a_n|$ converges as well.
+    
+</details>
+<br>
+    
+    
+<div class="lemma">
+
+**Lemma (Ratio test - version 3)** If there exists $\rho \in (-1, 1)$ such that
+    
+$$\begin{align}
+\frac{a_{n + 1}}{a_n} \to \rho,
+\end{align}$$
+    
+for all $n > N$, then $\sum a_n$ converges.
+
+</div>
+<br>
+
+<details class="proof">
+<summary>Proof: Ratio test - version 3</summary>
+    
+Suppose there exists $\rho \in (-1, 1)$ such that
+    
+$$\begin{align}
+\frac{a_{n + 1}}{a_n} \to \rho.
+\end{align}$$
+    
+Then we have
+    
+$$\begin{align}
+\frac{|a_{n + 1}|}{|a_n|} \to |\rho|,
+\end{align}$$
+    
+which implies that there exists $N$ such that $\frac{|a_{n + 1}|}{|a_n|}$ is within $\epsilon = \frac{1 - |\rho|}{2}$ of $\rho$, implying that
+    
+$$\begin{align}
+\frac{|a_{n + 1}|}{|a_n|} \to \frac{1 + |\rho|}{2} \leq 1,
+\end{align}$$
+    
+and the result follows by the previous lemma.
+    
+</details>
+<br>
+    
+The proof of the condensation test, stated below, includes an instructive trick of grouping sequence terms to enable comparison with another sequence.
+    
+<div class="theorem">
+
+**Theorem (Condensation test)** Let $a_n$ be a decreasing non-negative sequence. Then $\sum^\infty_{n = 1} a_n < \infty$ if and only if
+    
+$$\begin{align}
+\sum^\infty_{n = 1} 2^n a_{2^n} < \infty.
+\end{align}$$
+
+</div>
+<br>
+
+<details class="proof">
+<summary>Proof: Condensation test</summary>
+    
+Since $(a_n)$ is decreasing we have
+    
+$$\begin{align}
+\sum^\infty_{n = 1} a_n = &~a_1 + a_2 + (a_3 + a_4) + (a_5 + ... + a_8) + (a_9 + ... + a_{16}) + ... \\
+\leq &~a_1 + a_2 + 2a_4 + 4a_8 + ... = a_1 + \sum^\infty_{n = 1} 2^{n - 1} a_{2^n}
+\end{align}$$
+    
+which implies that if $\sum a_n$ converges, so does $\sum^\infty_{n = 1} 2^n a_{2^n}$. Going the other way around, we can write
+    
+$$\begin{align}
+a_1 + \sum^\infty_{n = 1} 2^n a_{2^n} =&~a_1 + 2a_2 + 4a_4 + 8a_8 + ... \\
+\leq &~a_1 + (a_2 + a_3) + (a_4 + a_5 + a_6 + a_7) + ... = \sum^\infty_{n = 1} a_n.
+\end{align}$$
+
+    
+</details>
+<br>
+    
+Although we have not formally defined the integral, that should be familiar to the reader, so we refer the following useful convergence test.
+    
+<div class="theorem">
+
+**Theorem (Integral test)** Let $f : [1, \infty] \to \mathbb{R}$ be a decreasing non-negative function. Then
+    
+$$\begin{align}
+\sum_{n = 1}^\infty f(n) < \infty \iff \int_1^\infty f(x) dx < \infty
+\end{align}$$
+
+</div>
+<br>
+
+<details class="proof">
+<summary>Proof: Integral test</summary>
+    
+Since we have not yet defined formally defined the integral, we defer this proof for later.
+    
 </details>
 <br>
