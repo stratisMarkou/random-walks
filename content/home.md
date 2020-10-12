@@ -17,6 +17,8 @@ Welcome to Random Walks! This is an archive of explorations, in the convex
 
 ## New on Random Walks
 
+[12/10/2020] {doc}`A short set of notes deriving Conjugate Gradients <./content/misc/optimisation/conjugate-gradients>`.
+
 [10/09/2020] {ref}`Rough notes on the last three chapters <prob-intro>` of Grimmett and Welsh, *An Introduction to Probability*.
 
 [06/09/2020] {ref}`Notes on the first nine chapters <prob-intro>` (out of 12) of Grimmett and Welsh, *An Introduction to Probability*. Three more to come soon.
