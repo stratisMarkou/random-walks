@@ -628,7 +628,7 @@ x(t) = x_0 e^{-\theta t} + \mu (1 - e^{-\theta t}) + \int^t_0 \sigma e^{-\theta 
 <span class="k">def</span> <span class="nf">exact_moments_mean_reverting_ou</span><span class="p">(</span><span class="n">X0</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
     
     <span class="n">X_mean</span> <span class="o">=</span> <span class="n">X0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span> <span class="n">theta</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">mu</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span> <span class="n">theta</span> <span class="o">*</span> <span class="n">t</span><span class="p">))</span>
-    <span class="n">X_variance</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sigma</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">theta</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">theta</span> <span class="o">*</span> <span class="n">t</span><span class="p">))</span>
+    <span class="n">X_variance</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sigma</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">theta</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">theta</span> <span class="o">*</span> <span class="n">t</span><span class="p">))</span>
     
     <span class="k">return</span> <span class="n">X_mean</span><span class="p">,</span> <span class="n">X_variance</span>
 </pre></div>
@@ -862,6 +862,8 @@ for any fixed <span class="math notranslate nohighlight">\(\tau_n = n\Delta t \i
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/num-sde_30_0.svg" src="../../../_images/num-sde_30_0.svg" /></div>
 </div>
 </div>
 <div class="section" id="milstein-s-higher-order-method">
@@ -949,6 +951,8 @@ where <span class="math notranslate nohighlight">\(\Delta t &gt; 0\)</span> is t
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/num-sde_35_0.svg" src="../../../_images/num-sde_35_0.svg" /></div>
 </div>
 <div class="cell tag_hide-input tag_center-output docutils container">
 <div class="cell_input docutils container">
@@ -1014,6 +1018,8 @@ where <span class="math notranslate nohighlight">\(\Delta t &gt; 0\)</span> is t
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/num-sde_36_0.svg" src="../../../_images/num-sde_36_0.svg" /></div>
 </div>
 </div>
 <div class="section" id="stochastic-chain-rule">
