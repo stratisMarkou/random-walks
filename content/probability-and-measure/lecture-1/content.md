@@ -171,13 +171,13 @@ Further, we sey that $\mu$ is
 <br>
 
 
-## Caratheodory extension theorem
+## Caratheodory's theorem
 
 One useful theorem that will be used throughout the rest of the course is Caratheodory's extension theorem.
 
 <div class="theorem">
 
-**Theorem (Caratheodory extension theorem)** Let $A \in \mathcal{P}(E)$ be a ring of subsets of $E$ and let $\mu : \mathcal{A} \to [0, \infty]$ be a countably additive set function. Then $\mu$ can be extended to a measure on $\sigma(\mathcal{A})$.
+**Theorem (Caratheodory's extension theorem)** Let $A \in \mathcal{P}(E)$ be a ring of subsets of $E$ and let $\mu : \mathcal{A} \to [0, \infty]$ be a countably additive set function. Then $\mu$ can be extended to a measure on $\sigma(\mathcal{A})$.
 
 </div>
 <br>
