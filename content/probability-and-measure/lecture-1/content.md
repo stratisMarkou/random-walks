@@ -111,11 +111,11 @@ Going the other way, if we start from
 A \in \bigcap_{\mathcal{E}~\sigma\text{-algebra } \supseteq \mathcal{A}} \mathcal{E},
 \end{align}
 
-then also $\sigma(A)$, arriving at the first part of the result. Now we also clearly have $\emptyset \in \sigma(\mathcal{A})$. Suppose $B, A_n \in \sigma(\mathcal{A})$. First, since $B \in \mathcal{E}$ for all $\mathcal{E}$ that contain $\mathcal{A}$, we also have $B^C \in \mathcal{E}$ for all such $\mathcal{E}$, from which it follows $A^C \in \sigma(\mathcal{A})$. Similarly, we also have
+then also $\sigma(A)$, arriving at the first part of the result. Now we also clearly have $\emptyset \in \sigma(\mathcal{A})$. Suppose $B, A_n \in \sigma(\mathcal{A})$. First, since $B \in \mathcal{E}$ for all $\mathcal{E}$ that contain $\mathcal{A}$, we also have $B^C \in \mathcal{E}$ for all such $\mathcal{E}$, from which it follows $B^C \in \sigma(\mathcal{A})$. Similarly, we also have
 
-$$ A = \bigcup_{n = 1}^\infty A \in \mathcal{E} $$
+$$ A = \bigcup_{n = 1}^\infty A_n \in \mathcal{E} $$
 
-for all $\mathcal{E} \supseteq \mathcal{A}$ so $A \in \sigma(\mathcal{A})$, concluding that $\sigma(\mathcal{A})$ is a $\sigma$-algebra.
+for all $\mathcal{E}$ that contain $\mathcal{A}$ so $A \in \sigma(\mathcal{A})$, concluding that $\sigma(\mathcal{A})$ is a $\sigma$-algebra.
 
 </details>
 <br>
@@ -149,7 +149,7 @@ If a ring contains the universe set $E$, it is also an algebra - defined below.
 </div>
 <br>
 
-
+(pnm-l1-setfunc)=
 ## Set functions
 
 We also introduce set functions, which are much like measures, but more general since we do not define them on $\sigma$-algebras and do not impose several of the conditions we imposed for measures.
@@ -164,8 +164,8 @@ Further, we sey that $\mu$ is
 
 1. Increasing if $\forall A, B \in \mathcal{A}$, such that $A \subseteq B$ \begin{align} \mu(A) \leq \mu(B). \end{align}
 2. Additive if $\forall A, B \in \mathcal{A}$ such that $A \cup B = \emptyset$ and $A \cup B \in \mathcal{A}$ we have \begin{align} \mu(A \cup B) = \mu(A) + \mu(B). \end{align}
-3. Countably additive if $\forall A_n \in \mathcal{A}$ such that $\bigcap_{n = 1}^\infty A_n = \emptyset$ and $\bigcup_{n = 1}^\infty A_n \in \mathcal{A}$ we have \begin{align} \mu\left( \bigcup_{n = 1}^\infty A_n \right) =  \sum_{n = 1}^\infty \mu\left(A_n \right).\end{align}
-4. Countably sub-additive if $\forall A_n \in \mathcal{A}$ such that $\bigcup_{n = 1}^\infty A_n \in \mathcal{A}$ we have \begin{align} \mu\left( \bigcup_{n = 1}^\infty A_n \right) =  \sum_{n = 1}^\infty \mu\left(A_n \right).\end{align}
+3. Countably additive if $\forall A_n \in \mathcal{A}$ such that $A_i \cap A_j = \emptyset$ and $\bigcup_{n = 1}^\infty A_n \in \mathcal{A}$ we have \begin{align} \mu\left( \bigcup_{n = 1}^\infty A_n \right) =  \sum_{n = 1}^\infty \mu\left(A_n \right).\end{align}
+4. Countably sub-additive if $\forall A_n \in \mathcal{A}$ such that $\bigcup_{n = 1}^\infty A_n \in \mathcal{A}$ we have \begin{align} \mu\left( \bigcup_{n = 1}^\infty A_n \right) \leq \sum_{n = 1}^\infty \mu\left(A_n \right).\end{align}
     
 </div>
 <br>
@@ -177,7 +177,7 @@ One useful theorem that will be used throughout the rest of the course is Carath
 
 <div class="theorem">
 
-**Theorem (Caratheodory's extension theorem)** Let $A \in \mathcal{P}(E)$ be a ring of subsets of $E$ and let $\mu : \mathcal{A} \to [0, \infty]$ be a countably additive set function. Then $\mu$ can be extended to a measure on $\sigma(\mathcal{A})$.
+**Theorem (Caratheodory's extension theorem)** Let $\mathcal{A} \subseteq \mathcal{P}(E)$ be a ring of subsets of $E$ and let $\mu : \mathcal{A} \to [0, \infty]$ be a countably additive set function. Then $\mu$ can be extended to a measure on $\sigma(\mathcal{A})$.
 
 </div>
 <br>
