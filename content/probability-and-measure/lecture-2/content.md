@@ -81,11 +81,11 @@ Now we show that $\mu^*$ extends $\mu$ in the sense that whenver $A \in \mathcal
 <details class="proof">
 <summary>Proof: \(\mu^*\) extends \(\mu\)</summary>
 
-Whenever $A \in \mathcal{A}$, we can find a disjoint sequence $A_n \in \mathcal{A}$ such that $A \subseteq \cup_n A_n$. We then have
+Whenever $A \in \mathcal{A}$ and for any disjoint sequence $A_n \in \mathcal{A}$ such that $A \subseteq \cup_n A_n$ we have
     
 $$ \mu(A) \leq \mu\left( \bigcup_{n = 1}^\infty (A \cap A_n) \right) \leq \sum_{n = 1}^\infty \mu(A_n),$$
     
-where in the last inequality we used the countable additivity of $\mu$. By taking the infimum over all possible sequences $A_n$ we have
+where in the last inequality we used the countable additivity of $\mu$. By taking the infimum of both sides, over all possible sequences $A_n$ such that $A \subseteq \cup_n A_n$, we have
     
 $$ \mu(A) \leq \mu^*(A).$$
     
@@ -93,7 +93,7 @@ We also have
     
 $$ \mu^*(A) \leq \mu(A),$$
     
-because we can set $A_1 = A, A_{n > 1} = \emptyset$ and observe that $\sum_n \mu(A_n)$ is at least as large as the infimum over all such possible $(A_n)$.
+because we can set $A_1 = A, A_{n > 1} = \emptyset$ and observe that $\sum_n \mu(A_n)$ is at least as large as the infimum in the definition of $\mu^*$.
 
 </details>
 <br>
@@ -101,7 +101,7 @@ because we can set $A_1 = A, A_{n > 1} = \emptyset$ and observe that $\sum_n \mu
 
 ## Family M contains family A
 
-We now show that $\mathcal{A} \subseteq \mathcal{M}$, which allows us to say that $\sigma(\mathcal{A}) \subseteq \sigma(\mathcal{M})$. Therefore a measure on $\sigma(\mathcal{M})$ would also be a well-defined measure on $\sigma(\mathcal{A})$.
+We now show that $\mathcal{A} \subseteq \mathcal{M}$, which implies $\sigma(\mathcal{A}) \subseteq \sigma(\mathcal{M})$. Therefore a measure on $\sigma(\mathcal{M})$ would also be a well-defined measure on $\sigma(\mathcal{A})$.
 
 <div class="lemma">
 
