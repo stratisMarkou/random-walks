@@ -1,0 +1,588 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Main limit theorems &#8212; Random walks</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../../../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/jupyter-sphinx.css" />
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/sphinx-book-theme.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/mystnb.js"></script>
+    <script src="../../../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .secondtoggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="canonical" href="https://random-walks.org/content/prob-intro/ch08/content.html" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Branching processes" href="../ch09/content.html" />
+    <link rel="prev" title="Moment generating functions" href="../ch07/content.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://random-walks.org/content/prob-intro/ch08/content.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Main limit theorems" />
+<meta property="og:description" content="Main limit theorems  This chapter introduces convergence for random variables, which may be in either of the three senses (1) in mean-square, (2) in probability" />
+<meta property="og:image"       content="https://random-walks.org/_static/logo.svg" />
+
+<meta name="twitter:card" content="summary">
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../../index.html">
+  
+  <img src="../../../_static/logo.svg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Random walks</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  
+  <ul class="nav sidenav_l1">
+  <li class="">
+    <a href="../../home.html">Welcome</a>
+  </li>
+  <li class="active">
+    <a href="../intro.html">Probability: An introduction</a>
+  <ul class="nav sidenav_l2">
+    <li class="">
+      <a href="../ch01/content.html">Events and Probabilities</a>
+    </li>
+    <li class="">
+      <a href="../ch02/content.html">Discrete random variables</a>
+    </li>
+    <li class="">
+      <a href="../ch03/content.html">Multivariate discrete distributions</a>
+    </li>
+    <li class="">
+      <a href="../ch04/content.html">Probability generating functions</a>
+    </li>
+    <li class="">
+      <a href="../ch05/content.html">Distribution and density functions</a>
+    </li>
+    <li class="">
+      <a href="../ch06/content.html">Multivariate distributions</a>
+    </li>
+    <li class="">
+      <a href="../ch07/content.html">Moment generating functions</a>
+    </li>
+    <li class="active">
+      <a href="">Main limit theorems</a>
+    </li>
+    <li class="">
+      <a href="../ch09/content.html">Branching processes</a>
+    </li>
+    <li class="">
+      <a href="../ch10/content.html">Random walks</a>
+    </li>
+    <li class="">
+      <a href="../ch11/content.html">Processes in continuous time</a>
+    </li>
+    <li class="">
+      <a href="../ch12/content.html">Markov chains</a>
+    </li>
+  </ul>
+  </li>
+  <li class="">
+    <a href="../../analysis-i/intro.html">Analysis I</a>
+  </li>
+  <li class="">
+    <a href="../../misc/misc.html">Miscellaneous</a>
+  </li>
+  <li class="">
+    <a href="../../reading-and-links.html">Interesting reading and websites</a>
+  </li>
+</ul>
+</nav>
+<p class="navbar_footer"></p>
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse" data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu" aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation" title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i class="fas fa-download"></i></button>
+
+            
+            <div class="dropdown-buttons">
+                <!-- ipynb file if we had a myst markdown file -->
+                
+                <!-- Download raw file -->
+                <a class="dropdown-buttons" href="../../../_sources/content/prob-intro/ch08/content.md.txt"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.md</button></a>
+                <!-- Download PDF via print -->
+                <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF" onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+            </div>
+            
+        </div>
+
+        <!-- Edit this page -->
+        
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+        
+    </div>
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#convergence-in-mean-square" class="nav-link">Convergence in mean-square</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#convergence-in-probability" class="nav-link">Convergence in probability</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#central-limit-theorem" class="nav-link">Central limit theorem</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#large-deviations" class="nav-link">Large deviations</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#convergence-in-distribution" class="nav-link">Convergence in distribution</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#limits-of-characteristic-functions" class="nav-link">Limits of characteristic functions</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#references" class="nav-link">References</a>
+        </li>
+    
+    </ul>
+</nav>
+
+
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="main-limit-theorems">
+<h1>Main limit theorems<a class="headerlink" href="#main-limit-theorems" title="Permalink to this headline">¶</a></h1>
+<p>This chapter introduces convergence for random variables, which may be in either of the three senses (1) in mean-square, (2) in probability or (3) in distribution, and the implication of one from the other are proved. Important theorems involving limits of random variables are presented, such as the law of large numbers (mean-square and weak versions), the central limit theorem and the large deviation theorem. The continuity theorems for moment generating functions and characteristic functions are presented.</p>
+<div class="section" id="convergence-in-mean-square">
+<h2>Convergence in mean-square<a class="headerlink" href="#convergence-in-mean-square" title="Permalink to this headline">¶</a></h2>
+<p>We are often interested in the convergence of a sequence of random variables to another random variable. Unlike real sequences, where convergence has one meaning only, the convergence of a sequence of random variables can be defined in different ways. One such way is convergence in mean-square, as defined below.</p>
+<div class='definition'>
+<p><strong>Definition (Mean-square convergence)</strong> We say that a sequence of random variables <span class="math notranslate nohighlight">\(X_1, X_2, ...\)</span> converges in mean square to a limit variable <span class="math notranslate nohighlight">\(X\)</span> if</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+  \mathbb{E}\left[(X_n - X)^2\right] \to 0 \text{ as } n \to \infty,
+  \end{align}\]</div>
+<p>and write this as <span class="math notranslate nohighlight">\(X_n \to X\)</span> in mean square as <span class="math notranslate nohighlight">\(n \to \infty\)</span>.</p>
+</div>
+<br>
+<p>Note that for mean-square convergence to be meaningful, <span class="math notranslate nohighlight">\(\mathbb{E}(X)\)</span> as well as all <span class="math notranslate nohighlight">\(\mathbb{E}\left[(X_n - X)^2\right]\)</span> must exist. We can use this definition to state one version of the famous mean square law of large numbers as follows.</p>
+<div class='theorem'>
+<p><strong>Theorem (Mean square law of large numbers)</strong> Let <span class="math notranslate nohighlight">\(X_1, X_2, ...\)</span> be a sequence of independent random variables each with mean <span class="math notranslate nohighlight">\(\mu\)</span> and variance <span class="math notranslate nohighlight">\(\sigma^2\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+ \frac{1}{N}\sum_{n = 1}^N X_n \to \mu \text{ as } n \to \infty \text{ in mean square}.
+ \end{align}\]</div>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Mean-square law of large numbers</summary>
+<p>The partial sum <span class="math notranslate nohighlight">\(S_N = X_1 + X_2 + ... + X_N\)</span> has mean</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{E}\left(\frac{1}{N}S_N\right) &amp;= \frac{1}{N}\left[\sum_{n = 1}^N X_n\right] = \mu
+\end{align}\]</div>
+<p>and variance</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\text{Var}\left(\frac{1}{N} S_N\right) &amp;= \frac{1}{N^2}\left[\mathbb{E}(S_N^2) - \mathbb{E}(S_N)^2\right]\\
+&amp;= \frac{1}{N} \sigma^2.
+\end{align}\end{split}\]</div>
+<p>Where in the first line we used the fact <span class="math notranslate nohighlight">\(\text{Var}(aX) = a^2\text{Var}(X)\)</span>. Therefore as <span class="math notranslate nohighlight">\(N \to \infty\)</span>, <span class="math notranslate nohighlight">\(S_N \to \mu\)</span> in mean square.</p>
+</details>
+<br>
+</div>
+<div class="section" id="convergence-in-probability">
+<h2>Convergence in probability<a class="headerlink" href="#convergence-in-probability" title="Permalink to this headline">¶</a></h2>
+<p>A weaker sense in which a sequence of random variables can converge is that of convergence in probability.</p>
+<div class='definition'>
+<p><strong>Definition (Convergence in probability)</strong> We say that a sequence of random variables <span class="math notranslate nohighlight">\(X_1, X_2, ...\)</span> converges in probability to <span class="math notranslate nohighlight">\(X\)</span> as <span class="math notranslate nohighlight">\(n \to \infty\)</span> if for all <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+  \mathbb{P}\left(|X_n - X| &gt; \epsilon\right) \to 0, \text{ as } n \to \infty,
+  \end{align}\]</div>
+<p>and write this as <span class="math notranslate nohighlight">\(X_n \to X\)</span> in probability as <span class="math notranslate nohighlight">\(n \to \infty\)</span>.</p>
+</div>
+<br>
+<p>Convergence in probability is a weaker condition than convergence in mean-square in the sense that the former implies the latter, as stated by the following theorem.</p>
+<div class='theorem'>
+<p><strong>Theorem (Conv. in mean square <span class="math notranslate nohighlight">\(\implies\)</span> conv. in probability)</strong> If <span class="math notranslate nohighlight">\(X_1, X_2, ...\)</span> is a sequence of random variables and <span class="math notranslate nohighlight">\(X_n \to X\)</span> in mean square, then <span class="math notranslate nohighlight">\(X_n \to X\)</span> in probability.</p>
+</div>
+<br>
+<p>To prove the above we use Chebyshev’s inequality, a useful tool in probability theory, which is presented and proved below.</p>
+<details class="proof">
+<summary>Proof: Convergence in mean square \(\implies\) convergence in probability</summary>
+<p>To show this result, we use Chebyshev’s inequality</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{P}(|Z| \geq t) \leq \frac{\mathbb{E}\left(Z^2\right)}{t^2},
+\end{align}\]</div>
+<p>which proved below. Now set <span class="math notranslate nohighlight">\(Z = X_n - X\)</span> and <span class="math notranslate nohighlight">\(t = \epsilon &gt; 0\)</span> and let <span class="math notranslate nohighlight">\(n \to \infty\)</span> to obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{P}(|X_n - X| \geq \epsilon) \leq \frac{\mathbb{E}\left((X_n - X)^2\right)}{\epsilon^2} \to 0 \text{ as } n \to \infty,
+\end{align}\]</div>
+<p>where we have used the assumption that <span class="math notranslate nohighlight">\(X_n \to X\)</span> in mean square, so <span class="math notranslate nohighlight">\(\mathbb{P}\left(|X_n - X| \geq \epsilon\right) \to 0\)</span> as <span class="math notranslate nohighlight">\(n \to \infty\)</span>.</p>
+</details>
+<br>
+<div class='theorem'>
+<p><strong>Theorem (Chebyshev’s inequality)</strong> If <span class="math notranslate nohighlight">\(X\)</span> is a random variable and <span class="math notranslate nohighlight">\(\mathbb{E}\left(X^2\right)\)</span> is finite then</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+ \mathbb{P}(|X| \geq t) \leq \frac{\mathbb{E}\left(X^2\right)}{t^2}.
+ \end{align}\]</div>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Chebyshev's inequality</summary>
+<p>Considering that <span class="math notranslate nohighlight">\(|X| \geq t \iff X^2 \geq t^2\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+ \mathbb{P}(|X| \geq t) = \mathbb{P}(X^2 \geq t^2) \leq \frac{\mathbb{E}\left(X^2\right)}{t^2}.
+ \end{align}\]</div>
+<p>by the <a class="reference internal" href="../ch07/content.html#prob-intro-markov-jensen"><span class="std std-ref">Markov inequality</span></a>, arriving at Chebyshev’s inequality</p>
+</details>
+<br>
+<p>Just as the law of large numbers can be stated in the mean-square sense, it can also be stated in the weaker sense of convergence in probability.</p>
+<div class='theorem'>
+<p><strong>Theorem (Weak law of large numbers)</strong> Let <span class="math notranslate nohighlight">\(X_1, X_2, ...\)</span> be a sequence of independent random variables each with mean <span class="math notranslate nohighlight">\(\mu\)</span> and variance <span class="math notranslate nohighlight">\(\sigma^2\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+ \frac{1}{N}\sum_{n = 1}^N X_n \to \mu \text{ as } n \to \infty \text{ in probability}.
+ \end{align}\]</div>
+</div>
+<br>
+<p>This weak version is a direct implication of the fact that convergence in mean-square implies convergence in probability, as shown in the following proof.</p>
+<details class="proof">
+<summary>Proof: Weak law of large numbers</summary>
+<p>We have shown that as (N \to \infty), the partial sum</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+S_N = X_1 + X_2 + ... + X_N
+\end{align}\]</div>
+<p>converges to <span class="math notranslate nohighlight">\(\mu\)</span> in mean square. Convergence in mean square implies convergence in probability, therefore <span class="math notranslate nohighlight">\(S_N\)</span> converges to <span class="math notranslate nohighlight">\(\mu\)</span> in probability too.</p>
+</details>
+<br>
+<p>Unlike the mean-square law of large numbers, the weak law holds even when <span class="math notranslate nohighlight">\(\sigma^2\)</span> is infinite, provided that the <span class="math notranslate nohighlight">\(X_n\)</span> all come from the same distribution - this result is proved at the end of this chapter.</p>
+</div>
+<div class="section" id="central-limit-theorem">
+<h2>Central limit theorem<a class="headerlink" href="#central-limit-theorem" title="Permalink to this headline">¶</a></h2>
+<div class='theorem'>
+<p><strong>Theorem (Central limit theorem)</strong> Let <span class="math notranslate nohighlight">\(X_1, X_2, ...\)</span> be a sequence of independent and identically distributed random variables, each with mean <span class="math notranslate nohighlight">\(\mu\)</span> and variance <span class="math notranslate nohighlight">\(\sigma^2\)</span>. Then the random variable</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+ Z_N = \frac{S_N - N\mu}{\sqrt{N}\sigma}, \text{ where } S_N = X_1 + X_2 + ... + X_N
+ \end{align}\]</div>
+<p>satisfies, as <span class="math notranslate nohighlight">\(N \to \infty\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+ \mathbb{P}(Z_N \leq z) \to \int^z_{-\infty} \frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2}u^2} du, \text{ for } x \in \mathbb{R}.
+ \end{align}\]</div>
+</div>
+<br>
+<div class='theorem'>
+<p><strong>Theorem (Continuity theorem with mgfs)</strong> Let <span class="math notranslate nohighlight">\(X_1, X_2, ...\)</span> be a sequence of random variables with moment generating functions <span class="math notranslate nohighlight">\(M_1, M_2 ...\)</span> and suppose that as <span class="math notranslate nohighlight">\(n \to \infty\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+ M_n(t) \to e^{\frac{1}{2}t^2} \text{ for } t \in \mathbb{R}
+ \end{align}\]</div>
+<p>Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+ \mathbb{P}(Z_n \leq z) \to \int^z_{-\infty} \frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2}u^2} du, \text{ for } x \in \mathbb{R}.
+ \end{align}\]</div>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Central limit theorem</summary>
+<p>Let <span class="math notranslate nohighlight">\(U_n = X_n - \mu\)</span>, so that the <span class="math notranslate nohighlight">\(U_n\)</span> are independent and identically distributed with mean <span class="math notranslate nohighlight">\(0\)</span> and variance <span class="math notranslate nohighlight">\(\sigma^2\)</span>. We will show that the mgf of</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+Z_N = \frac{S_N - N\mu}{\sigma\sqrt{N}}, \text{ where } S_N = X_1 + X_2 + ... + X_N
+\end{align}\]</div>
+<p>converges to the mgf of the standard normal. Then, by applying the continuity theorem for mgfs, the distribution function of <span class="math notranslate nohighlight">\(Z_N\)</span> converges to the standard normal distribution. Writing out the mgf of <span class="math notranslate nohighlight">\(Z_N\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+M_{Z_N}(t) &amp;= \mathbb{E}\left(\exp(tZ_N)\right)\\
+&amp;= \mathbb{E}\left[\exp\left(\frac{t}{\sqrt{N}\sigma} \sum^N_{n=1} U_n \right)\right]\\
+&amp;= \left[ M_U\left(\frac{t}{\sigma\sqrt{N}}\right) \right]^N
+\end{align}\end{split}\]</div>
+<p>where we have used the fact that the mgf of a sum of independent random variables (<span class="math notranslate nohighlight">\(U_n\)</span> in this case) is equal to the product of the mgfs of the random variables. Now, taking the Taylor expansion of <span class="math notranslate nohighlight">\(M_{U_n}(t)\)</span> about <span class="math notranslate nohighlight">\(0\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+M_{U_n}(t) &amp;= 1 + t\mathbb{E}(U_n) + \frac{1}{2}t^2\mathbb{E}(U_n^2) + o(t^2)\\
+&amp;= 1 + \frac{1}{2} \sigma^2 t^2 + o(t^2)
+\end{align}\end{split}\]</div>
+<p>so that</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+M_{Z_N}(t) = \left[ 1 + \frac{1}{2} \frac{t^2}{N} + o\left(\frac{1}{N}\right) \right]^N \to e^{\frac{1}{2}t^2} \text{ as } N \to \infty.
+\end{align}\]</div>
+<p>Therefore <span class="math notranslate nohighlight">\(M_{Z_N}(t) \to e^{\frac{1}{2}t^2}\)</span> as <span class="math notranslate nohighlight">\(N \to \infty\)</span> and by the continuity theorem for mgfs, the distribution function of <span class="math notranslate nohighlight">\(Z_N\)</span> converges to the standard normal distribution:</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{P}(Z_N \leq z) \to \int^z_{-\infty} \frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2}u^2} du, \text{ for } x \in \mathbb{R}.
+\end{align}\]</div>
+</details>
+<br>
+</div>
+<div class="section" id="large-deviations">
+<h2>Large deviations<a class="headerlink" href="#large-deviations" title="Permalink to this headline">¶</a></h2>
+<p>We are sometimes interested in the probability that a sum of i.i.d. random variables <span class="math notranslate nohighlight">\(S_N = X_1 + X_2 + ... + X_N\)</span> will deviate from its mean by an amount proportional to <span class="math notranslate nohighlight">\(N\)</span>, i.e. <span class="math notranslate nohighlight">\(\mathbb{P}(S_N - \mu N &gt; aN)\)</span>. The large deviation theorem relates the probability of a large deviation to a quantity called the Fenchel-Legendre transform, defined below.</p>
+<div class='definition'>
+<p><strong>Definition (Fenchel-Legendre transform)</strong> Given a random variable <span class="math notranslate nohighlight">\(X\)</span>, with moment generating function <span class="math notranslate nohighlight">\(M\)</span>, its Fenchel-Legendre transform is</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+  \Lambda^*(a) = \sup\left\{at - \Lambda(t) : t \in \mathbb{R}\right\}, \text{ where } a \in \mathbb{R},
+  \end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Lambda(t) = \log M(t)\)</span>.</p>
+</div>
+<br>
+<p>The large deviation theorem then takes the following form.</p>
+<div class='theorem'>
+<p><strong>Theorem (Large deviation theorem)</strong> Let <span class="math notranslate nohighlight">\(X_1, X_2, ...\)</span> be independent, identically distributed random variables with mean <span class="math notranslate nohighlight">\(0\)</span> and a common generating function <span class="math notranslate nohighlight">\(M(t) = \mathbb{E}(e^{tX})\)</span> which is finite in some neighbourhood <span class="math notranslate nohighlight">\([-\delta, \delta]\)</span> of the origin. Let <span class="math notranslate nohighlight">\(a &gt; 0\)</span> be such that <span class="math notranslate nohighlight">\(\mathbb{P}(X &gt; a) &gt; 0\)</span>. Then <span class="math notranslate nohighlight">\(\Lambda^*(a) &gt; 0\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+   \frac{1}{N} \log \mathbb{P}(S_N &gt; aN) \to - \Lambda^*(a), \text{ as } N \to \infty.
+   \end{align}\]</div>
+</div>
+<br>
+<p>The proof of this theorem can be found in <em>Probability and Random Processes</em><a class="bibtex reference internal" href="../ch12/content.html#grimstir" id="id1">[GS01]</a> (section 5.11), but is ommitted from the book and these notes. Instead we prove below that</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\frac{1}{N}\log\mathbb{P}(S_N &gt; aN) \leq -\Lambda^*(a).
+\end{align}\]</div>
+<details class="proof">
+<summary>Proof: Partial proof of the large deviation theorem</summary>
+<p>Let <span class="math notranslate nohighlight">\(X_1, X_2, ...\)</span> be a sequence of independent and identically distributed random variables with zero mean and common moment generating function <span class="math notranslate nohighlight">\(M(t)\)</span>, and define <span class="math notranslate nohighlight">\(S_N = X_1 + ... + X_N\)</span>. For any strictly increasing function <span class="math notranslate nohighlight">\(g(\cdot) : \mathbb{R} \to \mathbb{R}\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+S_N &gt; aN \iff g(S_N) &gt; g(aN).
+\end{align}\]</div>
+<p>The exponential function <span class="math notranslate nohighlight">\(g(x) = e^x\)</span> is strictly increasing and in addition it is non-negative, so</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{P}(S_N &gt; aN) = \mathbb{P}(g(tS_N) &gt; g(taN)) \leq \frac{M(t)^N}{e^{taN}}, \text{ for } t &gt; 0,
+\end{align}\]</div>
+<p>by the <a class="reference internal" href="../ch07/content.html#prob-intro-markov-jensen"><span class="std std-ref">Markov inequality</span></a>. Minimising over <span class="math notranslate nohighlight">\(t\)</span> we obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{P}(S_N &gt; aN) \leq \inf \left\{ \frac{M(t)}{e^{ta}} : \text{ for } t &gt; 0 \right\}^N
+\end{align}\]</div>
+<p>Taking a logarithm of each side, we arrive at the result</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\frac{1}{N}\log \mathbb{P}(S_N &gt; aN) \leq - \sup \left\{ ta - \Lambda(t) : \text{ for } t &gt; 0 \right\} = - \Lambda^*(a).
+\end{align}\]</div>
+</details>
+<br>
+</div>
+<div class="section" id="convergence-in-distribution">
+<h2>Convergence in distribution<a class="headerlink" href="#convergence-in-distribution" title="Permalink to this headline">¶</a></h2>
+<div class='definition'>
+<p><strong>Definition (Convergence in distribution)</strong> The sequence <span class="math notranslate nohighlight">\(X_1, X_2, ...\)</span> is said to converge in distribution, or to converge weakly, to <span class="math notranslate nohighlight">\(X\)</span> as <span class="math notranslate nohighlight">\(n \to \infty\)</span> if</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+  \mathbb{P}(X_n \leq x) \to \mathbb{P}(X \leq x), \text{ for any } x \in C,
+  \end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(C\)</span> is the set of reals at which the distribution function of <span class="math notranslate nohighlight">\(X\)</span> is continuous. If the above holds, we write <span class="math notranslate nohighlight">\(X_n \implies X\)</span>.</p>
+</div>
+<br>
+<p>Convergence in distribution is a weaker condition than convergence in probability. If the condition <span class="math notranslate nohighlight">\(x \in \mathbb{R}\)</span> was used instead of <span class="math notranslate nohighlight">\(x \in C\)</span> above, there would exist examples of sequences of random variables that would converge in probability but not in distribution. By requiring that the criterion for convergence holds only where <span class="math notranslate nohighlight">\(\mathbb{P}(X \leq x)\)</span> is continuous, we avoid these cases and make convergence in probability a special case of the weaker criterion of convergence in distribution, as stated by the following theorem.</p>
+<div class='theorem'>
+<p><strong>Theorem (Conv. in probability <span class="math notranslate nohighlight">\(\implies\)</span> conv. in distribution)</strong> Let <span class="math notranslate nohighlight">\(X_1, X_2, ...\)</span> be a sequence of variables and <span class="math notranslate nohighlight">\(X_n \to X\)</span> in probability, then <span class="math notranslate nohighlight">\(X_n \implies X\)</span>.</p>
+</div>
+<br>
+<p>Below are two proofs for this result. The first is a textbook proof from the book,<a class="bibtex reference internal" href="../intro.html#grimmettprob" id="id2">[GWW86]</a> based on inequalities.</p>
+<details class="proof">
+<summary>Proof (a): Convergence in probability \(\implies\) convergence in distribution</summary>
+<p>Let <span class="math notranslate nohighlight">\(X_1, X_2, ...\)</span> be a sequence of random variables which converges in probability to another random variable <span class="math notranslate nohighlight">\(X\)</span>. Let <span class="math notranslate nohighlight">\(x\)</span> be any point where the distribution function of <span class="math notranslate nohighlight">\(X\)</span> is continuous. Now consider</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\mathbb{P}(X_n \leq x) &amp;= \mathbb{P}(X_n \leq x, X \leq x + \epsilon) + \mathbb{P}(X_n \leq x, X &gt; x + \epsilon)\\
+&amp;\leq \mathbb{P}(X \leq x + \epsilon) + \mathbb{P}(X - X_n &gt; \epsilon)\\
+&amp;\leq \mathbb{P}(X \leq x + \epsilon) + \mathbb{P}(|X - X_n| &gt; \epsilon)
+\end{align}\end{split}\]</div>
+<p>Similarly we can switch the roles of <span class="math notranslate nohighlight">\(X_n\)</span> and <span class="math notranslate nohighlight">\(X\)</span> to obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\mathbb{P}(X \leq x - \epsilon) &amp;= \mathbb{P}(X \leq x - \epsilon, X_n \leq x) + \mathbb{P}(X_n \leq x - \epsilon, X &gt; x)\\
+&amp;\leq \mathbb{P}(X_n \leq x) + \mathbb{P}(X_n - X &gt; \epsilon)\\
+&amp;\leq \mathbb{P}(X_n \leq x) + \mathbb{P}(|X_n - X| &gt; \epsilon).
+\end{align}\end{split}\]</div>
+<p>Combining these two inequalities we obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{P}(X \leq x - \epsilon) - \mathbb{P}(|X_n - X| &gt; \epsilon) \leq \mathbb{P}(X_n \leq x) \leq \mathbb{P}(X \leq x + \epsilon) + \mathbb{P}(|X - X_n| &gt; \epsilon),
+\end{align}\]</div>
+<p>and taking <span class="math notranslate nohighlight">\(\epsilon\)</span> to <span class="math notranslate nohighlight">\(0\)</span> we obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{P}(X \leq x) \leq \mathbb{P}(X_n \leq x) \leq \mathbb{P}(X \leq x) \iff \mathbb{P}(X_n \leq x) = \mathbb{P}(X \leq x),
+\end{align}\]</div>
+<p>where we have used the facts that <span class="math notranslate nohighlight">\(X_n \to X\)</span> in probability and that <span class="math notranslate nohighlight">\(\mathbb{P}(X \leq x)\)</span> is continuous at <span class="math notranslate nohighlight">\(x\)</span>.</p>
+</details>
+<br>
+<p>The second is an alternative proof which includes a diagram, that is hopefully more intuitive.</p>
+<details class="proof">
+<summary>Proof (b): Convergence in probability \(\implies\) convergence in distribution</summary>
+<p>The set <span class="math notranslate nohighlight">\(Z_n \leq z\)</span> corresponds to the yellow, red, green and pink regions below, and the set <span class="math notranslate nohighlight">\(Z \leq z\)</span> corresponds to the blue, orange, green and pink regions. Therefore the difference <span class="math notranslate nohighlight">\(\mathbb{P}(Z_n \leq z) - \mathbb{P}(Z \leq z)\)</span> is equal to the sum of the probability measure on the blue and orange regions, minus that of the yellow and red regions. We wish to show this difference goes to <span class="math notranslate nohighlight">\(0\)</span> as <span class="math notranslate nohighlight">\(n \to \infty\)</span>.</p>
+<p>Since <span class="math notranslate nohighlight">\(|Z_n - Z| \geq \epsilon\)</span> corresponds to <span class="math notranslate nohighlight">\((\text{white + green + blue + yellow})\)</span> and <span class="math notranslate nohighlight">\(\mathbb{P}(|Z_n - Z| \geq \epsilon) \to 0\)</span> as <span class="math notranslate nohighlight">\(n \to \infty\)</span>, the yellow and blue areas have <span class="math notranslate nohighlight">\(0\)</span> probability in the <span class="math notranslate nohighlight">\(n \to \infty\)</span> limit. Assuming <span class="math notranslate nohighlight">\(\mathbb{P}(Z \leq z)\)</span> is continuous in <span class="math notranslate nohighlight">\(z\)</span> at <span class="math notranslate nohighlight">\(z = z_0\)</span>, then the red and orange areas must also have <span class="math notranslate nohighlight">\(0\)</span> probability in the <span class="math notranslate nohighlight">\(n \to \infty\)</span> limit, otherwise the continuity condition would be contradicted. Therefore</p>
+<div class="math notranslate nohighlight">
+\[\lim_{n \to \infty} \big | \mathbb{P}(Z_n \leq z) - \mathbb{P}(Z \leq z) \big |  = 0,\]</div>
+<p>and the variables converge in distribution.</p>
+<div class="figure align-default" id="conv-in-prob-proof">
+<a class="reference internal image-reference" href="../../../_images/conv-in-prob-proof.svg"><img alt="../../../_images/conv-in-prob-proof.svg" height="500px" src="../../../_images/conv-in-prob-proof.svg" width="500px" /></a>
+<p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">Illustration for the argument that convergence in probability implies convergence in distribution. The presence of a darker border indicates that the corresponding region contains the border itself - the cyan region does not contain its border. See text for explanation.</span><a class="headerlink" href="#conv-in-prob-proof" title="Permalink to this image">¶</a></p>
+</div>
+</details>
+<br>
+<div class='theorem'>
+<p><strong>Theorem (Conv. in distribution to <span class="math notranslate nohighlight">\(c\)</span> <span class="math notranslate nohighlight">\(\implies\)</span> conv. in probability to <span class="math notranslate nohighlight">\(c\)</span>)</strong> Let <span class="math notranslate nohighlight">\(X_1, X_2, ...\)</span> be a sequence of variables and which coverges in distribution to a constant <span class="math notranslate nohighlight">\(c\)</span>. Then <span class="math notranslate nohighlight">\(X_n\)</span> converges to <span class="math notranslate nohighlight">\(c\)</span> in probability also.</p>
+</div>
+<br>
+</div>
+<div class="section" id="limits-of-characteristic-functions">
+<span id="prob-intro-char-cont"></span><h2>Limits of characteristic functions<a class="headerlink" href="#limits-of-characteristic-functions" title="Permalink to this headline">¶</a></h2>
+<div class='theorem'>
+<p><strong>Theorem (Continuity theorem with characteristic functions)</strong> Let <span class="math notranslate nohighlight">\(X, X_1, X_2, ...\)</span> be random variables with characteristic functions <span class="math notranslate nohighlight">\(\phi, \phi_1, \phi_2 ...\)</span>. Then <span class="math notranslate nohighlight">\(X_N \implies X\)</span> as <span class="math notranslate nohighlight">\(N \to \infty\)</span> if and only if</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+ \phi_N(t) \to \phi(t) \text{ as } N \to \infty, \text{ for } t \in \mathbb{R}.
+ \end{align}\]</div>
+</div>
+<br>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p id="bibtex-bibliography-content/prob-intro/ch08/content-0"><dl class="citation">
+<dt class="bibtex label" id="grimmettprob"><span class="brackets"><a class="fn-backref" href="#id2">GWW86</a></span></dt>
+<dd><p>G. Grimmett, D.J.A. Welsh, and D. Welsh. <em>Probability: An Introduction</em>. Oxford University Press. Clarendon Press, 1986.</p>
+</dd>
+<dt class="bibtex label" id="grimstir"><span class="brackets"><a class="fn-backref" href="#id1">GS01</a></span></dt>
+<dd><p>G.R. Grimmett and D.R. Stirzaker. <em>Probability and random processes</em>. Number 391. Oxford university press, 2001.</p>
+</dd>
+</dl>
+</p>
+</div>
+</div>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="../ch07/content.html" title="previous page">Moment generating functions</a>
+    <a class='right-next' id="next-link" href="../ch09/content.html" title="next page">Branching processes</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Stratos Markou<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../../../_static/js/index.js"></script>
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-168728006-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    
+  </body>
+</html>

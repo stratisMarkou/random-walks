@@ -1,0 +1,647 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Introduction to information theory &#8212; Random walks</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../../../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/jupyter-sphinx.css" />
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/sphinx-book-theme.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/mystnb.js"></script>
+    <script src="../../../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .secondtoggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="canonical" href="https://random-walks.org/content/itila/ch1/content.html" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://random-walks.org/content/itila/ch1/content.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Introduction to information theory" />
+<meta property="og:description" content="Introduction to information theory  Communication over an imperfect channel  One important and interesting challenge is that of communicating information over a" />
+<meta property="og:image"       content="https://random-walks.org/_static/logo.svg" />
+
+<meta name="twitter:card" content="summary">
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../../index.html">
+  
+  <img src="../../../_static/logo.svg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Random walks</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  
+  <ul class="nav sidenav_l1">
+  <li class="">
+    <a href="../../home.html">Welcome</a>
+  </li>
+  <li class="">
+    <a href="../../prob-intro/intro.html">Probability: An introduction</a>
+  </li>
+  <li class="">
+    <a href="../../analysis-i/intro.html">Analysis I</a>
+  </li>
+  <li class="">
+    <a href="../../misc/misc.html">Miscellaneous</a>
+  </li>
+  <li class="">
+    <a href="../../reading-and-links.html">Interesting reading and websites</a>
+  </li>
+</ul>
+</nav>
+<p class="navbar_footer"></p>
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse" data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu" aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation" title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i class="fas fa-download"></i></button>
+
+            
+            <div class="dropdown-buttons">
+                <!-- ipynb file if we had a myst markdown file -->
+                
+                <!-- Download raw file -->
+                <a class="dropdown-buttons" href="../../../_sources/content/itila/ch1/content.ipynb.txt"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.ipynb</button></a>
+                <!-- Download PDF via print -->
+                <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF" onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+            </div>
+            
+        </div>
+
+        <!-- Edit this page -->
+        
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+            <div class="dropdown-buttons">
+                
+                <a class="binder-button" href="https://mybinder.org/v2/gh/stratisMarkou/random-walks/master?urlpath=tree/./content/itila/ch1/content.ipynb"><button type="button" class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip" data-placement="left"><img class="binder-button-logo" src="../../../_static/images/logo_binder.svg" alt="Interact on binder">Binder</button></a>
+                
+                
+                
+            </div>
+        </div>
+        
+    </div>
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#communication-over-an-imperfect-channel" class="nav-link">Communication over an imperfect channel</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#the-binary-symmetric-channel" class="nav-link">The binary symmetric channel</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#error-correcting-codes" class="nav-link">Error correcting codes</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#repetition-codes" class="nav-link">Repetition codes</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#the-7-4-hamming-code" class="nav-link">The (7, 4) Hamming code</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#one-14-4-code" class="nav-link">One (14, 4) code</a>
+        </li>
+    
+    </ul>
+</nav>
+
+
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="introduction-to-information-theory">
+<h1>Introduction to information theory<a class="headerlink" href="#introduction-to-information-theory" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="communication-over-an-imperfect-channel">
+<h2>Communication over an imperfect channel<a class="headerlink" href="#communication-over-an-imperfect-channel" title="Permalink to this headline">¶</a></h2>
+<p>One important and interesting challenge is that of communicating information over an imperfect channel. Natural and artificial communication channels are ubiquitous, with some examples</p>
+<ol class="simple">
+<li><p>The wireless communication system between an antenna on Earth and a satellite, where the medium is the vacuum.</p></li>
+<li><p>A disc drive storing bits, sending it from your present self to your future self, where the medium is a magnetic strip.</p></li>
+<li><p>A cell storing its genetic information, sending it to its future self and to its offspring, where the medium is DNA.</p></li>
+</ol>
+<p>Virtually all real communication channels are noisy to some extent. For instance (1) ambient electromagnetic noise could corrupt the signal that reaches your computer from the router; (2) electromagnetic noise could flip bits in a magnetic disc drive; (3) solar radiation could produce mutations in the DNA of a cell.</p>
+<p>The <strong>physical approach</strong> to the communication problem aims to make the channel less noisy. The <strong>system approach</strong> accepts the noise inherent in the channel, and instead builds a system before and after the channel which improves its reliability.</p>
+<p>What makes the systems approach very exciting is that it’s applicable in situations where the physical approach cannot be realistically applied. For example, we can’t hope to make the vacuum between Earth and a satellite less noisy (although we could perhaps try to build better antennae and use stronger signals). Instead, we can accept the noise inherent in the channel and instead <strong>add redundancy</strong> to the communicated messages, which enables the system to recover a more accurate approximation of the original message.</p>
+</div>
+<div class="section" id="the-binary-symmetric-channel">
+<h2>The binary symmetric channel<a class="headerlink" href="#the-binary-symmetric-channel" title="Permalink to this headline">¶</a></h2>
+<p>One simple noisy channel that is used throughout the book is the binary symmetric channel. The binary symmetric channel takes a single bit as its input and returns the same bit with probability <span class="math notranslate nohighlight">\(1 - p\)</span> or flips the bit with probability <span class="math notranslate nohighlight">\(p\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+x_r = \begin{cases}
+x_t &amp; \text{ prob. } 1 - p \\
+x_t \bigoplus 1 &amp; \text{ prob. } p
+\end{cases}
+\end{align}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bigoplus\)</span> means addition modulo 2. It is called binary symmetric because its input and output are binary and because it has the same flipping probabilities for either a 0 or a 1 input. In general, a channel may not be binary (it could be analogue for example) or symmetric, but this channel is simple and neat to test ideas on. Here’s the binay symmetric channel defined as a small helper.</p>
+<div class="cell tag_hide-cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">binary_symmetric_channel</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">flip_prob</span><span class="p">):</span>
+    
+    <span class="n">source_shape</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    
+    <span class="n">noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="nb">len</span><span class="p">(</span><span class="n">source</span><span class="p">),</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span> <span class="o">-</span> <span class="n">flip_prob</span><span class="p">,</span> <span class="n">flip_prob</span><span class="p">],</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="n">transmitted</span> <span class="o">=</span> <span class="p">(</span><span class="n">source</span> <span class="o">+</span> <span class="n">noise</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span>
+    <span class="n">transmitted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">transmitted</span><span class="p">,</span> <span class="n">source_shape</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">transmitted</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Passing a binary image through this channel we obtain a corrupted version of it.</p>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;turtle.npy&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;binary&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">binary_symmetric_channel</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">flip_prob</span><span class="o">=</span><span class="mf">0.1</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;binary&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/content_5_0.png" src="../../../_images/content_5_0.png" />
+</div>
+</div>
+<p>We can now ask: <em>what can we do to recover a cleaner version of the image on the right?</em></p>
+</div>
+<div class="section" id="error-correcting-codes">
+<h2>Error correcting codes<a class="headerlink" href="#error-correcting-codes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="repetition-codes">
+<h3>Repetition codes<a class="headerlink" href="#repetition-codes" title="Permalink to this headline">¶</a></h3>
+<p>One way to improve reliability is to repeat the message several times. For example, if we want to transmit the message <code class="docutils literal notranslate"><span class="pre">01001010</span></code> we can send it three times, or equivalently repeat each bit three times. Once the message is sent, each bit is corrupted by noise independently, and received at the other end, where we want to infer what the source message was.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p></p></th>
+<th class="text-align:center head"><p></p></th>
+<th class="text-align:center head"><p></p></th>
+<th class="text-align:center head"><p></p></th>
+<th class="text-align:center head"><p></p></th>
+<th class="text-align:center head"><p></p></th>
+<th class="text-align:center head"><p></p></th>
+<th class="text-align:center head"><p></p></th>
+<th class="text-align:center head"><p></p></th>
+<th class="text-align:center head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p>source</p></td>
+<td class="text-align:center"><p>0</p></td>
+<td class="text-align:center"><p>1</p></td>
+<td class="text-align:center"><p>0</p></td>
+<td class="text-align:center"><p>0</p></td>
+<td class="text-align:center"><p>1</p></td>
+<td class="text-align:center"><p>0</p></td>
+<td class="text-align:center"><p>0</p></td>
+<td class="text-align:center"><p>1</p></td>
+<td class="text-align:center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>transmitted</p></td>
+<td class="text-align:center"><p>000</p></td>
+<td class="text-align:center"><p>111</p></td>
+<td class="text-align:center"><p>000</p></td>
+<td class="text-align:center"><p>000</p></td>
+<td class="text-align:center"><p>111</p></td>
+<td class="text-align:center"><p>000</p></td>
+<td class="text-align:center"><p>000</p></td>
+<td class="text-align:center"><p>111</p></td>
+<td class="text-align:center"><p>000</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p>noise</p></td>
+<td class="text-align:center"><p>000</p></td>
+<td class="text-align:center"><p>010</p></td>
+<td class="text-align:center"><p>000</p></td>
+<td class="text-align:center"><p>110</p></td>
+<td class="text-align:center"><p>000</p></td>
+<td class="text-align:center"><p>100</p></td>
+<td class="text-align:center"><p>000</p></td>
+<td class="text-align:center"><p>000</p></td>
+<td class="text-align:center"><p>010</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>received</p></td>
+<td class="text-align:center"><p>000</p></td>
+<td class="text-align:center"><p>101</p></td>
+<td class="text-align:center"><p>000</p></td>
+<td class="text-align:center"><p>110</p></td>
+<td class="text-align:center"><p>111</p></td>
+<td class="text-align:center"><p>100</p></td>
+<td class="text-align:center"><p>000</p></td>
+<td class="text-align:center"><p>111</p></td>
+<td class="text-align:center"><p>010</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p>decoded</p></td>
+<td class="text-align:center"><p>0</p></td>
+<td class="text-align:center"><p>1</p></td>
+<td class="text-align:center"><p>0</p></td>
+<td class="text-align:center"><p>1</p></td>
+<td class="text-align:center"><p>1</p></td>
+<td class="text-align:center"><p>0</p></td>
+<td class="text-align:center"><p>0</p></td>
+<td class="text-align:center"><p>1</p></td>
+<td class="text-align:center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p><strong>corrected error</strong></p></td>
+<td class="text-align:center"><p></p></td>
+<td class="text-align:center"><p>*</p></td>
+<td class="text-align:center"><p></p></td>
+<td class="text-align:center"><p>*</p></td>
+<td class="text-align:center"><p></p></td>
+<td class="text-align:center"><p>*</p></td>
+<td class="text-align:center"><p></p></td>
+<td class="text-align:center"><p></p></td>
+<td class="text-align:center"><p>*</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p><strong>error</strong></p></td>
+<td class="text-align:center"><p></p></td>
+<td class="text-align:center"><p></p></td>
+<td class="text-align:center"><p></p></td>
+<td class="text-align:center"><p>*</p></td>
+<td class="text-align:center"><p></p></td>
+<td class="text-align:center"><p></p></td>
+<td class="text-align:center"><p></p></td>
+<td class="text-align:center"><p></p></td>
+<td class="text-align:center"><p></p></td>
+</tr>
+</tbody>
+</table>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+
+
+<span class="k">def</span> <span class="nf">encode</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">G_T</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">G_T</span><span class="p">,</span> <span class="n">source</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span>
+
+
+<span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="n">received</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">decode_dict</span><span class="p">):</span>
+    
+    <span class="n">syndrome</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">received</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span>
+    
+    <span class="n">noise</span> <span class="o">=</span> <span class="n">decode_dict</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">syndrome</span><span class="p">)]</span>
+    
+    <span class="n">decoded</span> <span class="o">=</span> <span class="p">(</span><span class="n">received</span> <span class="o">+</span> <span class="n">noise</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span>
+    
+    <span class="k">return</span> <span class="n">decoded</span><span class="p">,</span> <span class="n">syndrome</span><span class="p">,</span> <span class="n">noise</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">build_decode_dict</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">syndrome_size</span><span class="p">,</span> <span class="n">code_size</span><span class="p">):</span>
+    
+    <span class="c1"># All possible syndromes</span>
+    <span class="n">syndromes</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">*</span> <span class="n">syndrome_size</span>
+    <span class="n">syndromes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="n">syndromes</span><span class="p">))</span>
+
+    <span class="c1"># All possible codes</span>
+    <span class="n">codes</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">*</span> <span class="n">code_size</span>
+    <span class="n">codes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="n">codes</span><span class="p">))</span>
+
+    <span class="c1"># Decode dictionary to store {syndrome : code} pairs</span>
+    <span class="n">decode_dict</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># For each syndrome, code with least 1s which produces the syndrome</span>
+    <span class="k">for</span> <span class="n">syndrome</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">syndromes</span><span class="p">):</span>
+        
+        <span class="n">syndrome_tup</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">syndrome</span><span class="p">)</span>
+
+        <span class="c1"># Loop over all codes, to find the code with least 1s</span>
+        <span class="k">for</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">codes</span><span class="p">:</span>
+            
+            <span class="c1"># Num bits in code</span>
+            <span class="n">num_bits</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
+            
+            <span class="c1"># Syndrome produced by the code</span>
+            <span class="n">code_syndrome</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">code</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span>
+            <span class="n">code_syndrome_tup</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">code_syndrome</span><span class="p">)</span>
+
+            <span class="c1"># If syndrome patterns match, replace code if better than previous</span>
+            <span class="k">if</span> <span class="n">syndrome_tup</span> <span class="o">==</span> <span class="n">code_syndrome_tup</span><span class="p">:</span>
+
+                <span class="k">if</span> <span class="n">syndrome_tup</span> <span class="ow">in</span> <span class="n">decode_dict</span><span class="p">:</span>
+
+                    <span class="k">if</span> <span class="p">(</span><span class="n">num_bits</span> <span class="o">&lt;</span> <span class="n">decode_dict</span><span class="p">[</span><span class="n">syndrome_tup</span><span class="p">][</span><span class="mi">1</span><span class="p">]):</span>
+                        <span class="n">decode_dict</span><span class="p">[</span><span class="n">syndrome_tup</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">num_bits</span><span class="p">)</span>
+
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">decode_dict</span><span class="p">[</span><span class="n">syndrome_tup</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">num_bits</span><span class="p">)</span>
+
+    <span class="c1"># Take out the bit-numbers</span>
+    <span class="n">decode_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span> <span class="p">:</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">decode_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+    
+    <span class="k">return</span> <span class="n">decode_dict</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="the-7-4-hamming-code">
+<h2>The (7, 4) Hamming code<a class="headerlink" href="#the-7-4-hamming-code" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">syndrome_size</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">code_size</span> <span class="o">=</span> <span class="mi">7</span>
+
+<span class="n">G_T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+
+<span class="n">H</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hamming_dict</span> <span class="o">=</span> <span class="n">build_decode_dict</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">syndrome_size</span><span class="o">=</span><span class="n">syndrome_size</span><span class="p">,</span> <span class="n">code_size</span><span class="o">=</span><span class="n">code_size</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="stderr docutils container">
+<pre class="stderr literal-block">100%|██████████| 8/8 [00:00&lt;00:00, 303.48it/s]
+</pre>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">num_source_bits</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">num_trans</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1e5</span><span class="p">)</span>
+<span class="n">flip_prob</span> <span class="o">=</span> <span class="mf">1e-1</span>
+
+<span class="n">total_errors</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">total_bits</span> <span class="o">=</span> <span class="n">num_source_bits</span> <span class="o">*</span> <span class="n">num_trans</span>
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_trans</span><span class="p">):</span>
+    
+    <span class="n">source_bits</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">num_source_bits</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="n">encoded</span> <span class="o">=</span> <span class="n">encode</span><span class="p">(</span><span class="n">source_bits</span><span class="p">,</span> <span class="n">G_T</span><span class="p">)</span>
+    
+    <span class="n">noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="nb">len</span><span class="p">(</span><span class="n">encoded</span><span class="p">),</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span> <span class="o">-</span> <span class="n">flip_prob</span><span class="p">,</span> <span class="n">flip_prob</span><span class="p">],</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">num_noisy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">noise</span><span class="p">)</span>
+    
+    <span class="n">transmitted</span> <span class="o">=</span> <span class="p">(</span><span class="n">encoded</span> <span class="o">+</span> <span class="n">noise</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span>
+    
+    <span class="n">decoded</span><span class="p">,</span> <span class="n">syndrome</span><span class="p">,</span> <span class="n">decoded_noise</span> <span class="o">=</span> <span class="n">decode</span><span class="p">(</span><span class="n">transmitted</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">hamming_dict</span><span class="p">)</span>
+    
+    <span class="n">num_errors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">encoded</span><span class="p">[:</span><span class="n">num_source_bits</span><span class="p">]</span> <span class="o">!=</span> <span class="n">decoded</span><span class="p">[:</span><span class="n">num_source_bits</span><span class="p">])</span>
+    
+    <span class="n">total_errors</span> <span class="o">=</span> <span class="n">total_errors</span> <span class="o">+</span> <span class="n">num_errors</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;p(bit error) </span><span class="si">{</span><span class="n">total_errors</span> <span class="o">/</span> <span class="n">total_bits</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1"> rate </span><span class="si">{</span><span class="p">(</span><span class="n">code_size</span> <span class="o">-</span> <span class="n">syndrome_size</span><span class="p">)</span><span class="o">/</span><span class="n">code_size</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>p(bit error) 0.066 rate 0.571
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="one-14-4-code">
+<h2>One (14, 4) code<a class="headerlink" href="#one-14-4-code" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">syndrome_size</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">code_size</span> <span class="o">=</span> <span class="mi">14</span>
+
+<span class="n">G_T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+
+<span class="n">H</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">custom_dict</span> <span class="o">=</span> <span class="n">build_decode_dict</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">syndrome_size</span><span class="o">=</span><span class="n">syndrome_size</span><span class="p">,</span> <span class="n">code_size</span><span class="o">=</span><span class="n">code_size</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="stderr docutils container">
+<pre class="stderr literal-block">100%|██████████| 1024/1024 [05:24&lt;00:00,  3.16it/s]
+</pre>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">num_source_bits</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">num_trans</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1e5</span><span class="p">)</span>
+<span class="n">flip_prob</span> <span class="o">=</span> <span class="mf">1e-1</span>
+
+<span class="n">total_errors</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">total_bits</span> <span class="o">=</span> <span class="n">num_source_bits</span> <span class="o">*</span> <span class="n">num_trans</span>
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_trans</span><span class="p">):</span>
+    
+    <span class="n">source_bits</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">num_source_bits</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="n">encoded</span> <span class="o">=</span> <span class="n">encode</span><span class="p">(</span><span class="n">source_bits</span><span class="p">,</span> <span class="n">G_T</span><span class="p">)</span>
+    
+    <span class="n">noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="nb">len</span><span class="p">(</span><span class="n">encoded</span><span class="p">),</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span> <span class="o">-</span> <span class="n">flip_prob</span><span class="p">,</span> <span class="n">flip_prob</span><span class="p">],</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">num_noisy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">noise</span><span class="p">)</span>
+    
+    <span class="n">transmitted</span> <span class="o">=</span> <span class="p">(</span><span class="n">encoded</span> <span class="o">+</span> <span class="n">noise</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span>
+    
+    <span class="n">decoded</span><span class="p">,</span> <span class="n">syndrome</span><span class="p">,</span> <span class="n">decoded_noise</span> <span class="o">=</span> <span class="n">decode</span><span class="p">(</span><span class="n">transmitted</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">custom_dict</span><span class="p">)</span>
+    
+    <span class="n">num_errors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">encoded</span><span class="p">[:</span><span class="n">num_source_bits</span><span class="p">]</span> <span class="o">!=</span> <span class="n">decoded</span><span class="p">[:</span><span class="n">num_source_bits</span><span class="p">])</span>
+    
+    <span class="n">total_errors</span> <span class="o">=</span> <span class="n">total_errors</span> <span class="o">+</span> <span class="n">num_errors</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;p(bit error) </span><span class="si">{</span><span class="n">total_errors</span> <span class="o">/</span> <span class="n">total_bits</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1"> rate </span><span class="si">{</span><span class="p">(</span><span class="n">code_size</span> <span class="o">-</span> <span class="n">syndrome_size</span><span class="p">)</span><span class="o">/</span><span class="n">code_size</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>p(bit error) 0.019 rate 0.286
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Stratos Markou<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../../../_static/js/index.js"></script>
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-168728006-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    
+  </body>
+</html>

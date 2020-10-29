@@ -1,0 +1,769 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Conjugate gradients &#8212; Random walks</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../../../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/jupyter-sphinx.css" />
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/sphinx-book-theme.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/mystnb.js"></script>
+    <script src="../../../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .secondtoggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="canonical" href="https://random-walks.org/content/misc/optimisation/conjugate-gradients.html" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="The Kalman filter and smoother" href="../kalman/kalman.html" />
+    <link rel="prev" title="Numerical simulation of SDEs" href="../sde/num-sde.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://random-walks.org/content/misc/optimisation/conjugate-gradients.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Conjugate gradients" />
+<meta property="og:description" content="Conjugate gradients  Conjugate Gradients (CG) is a widespread optimisation method that is applicable to continuous optimisation problems where the first-order d" />
+<meta property="og:image"       content="https://random-walks.org/_static/logo.svg" />
+
+<meta name="twitter:card" content="summary">
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../../index.html">
+  
+  <img src="../../../_static/logo.svg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Random walks</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  
+  <ul class="nav sidenav_l1">
+  <li class="">
+    <a href="../../home.html">Welcome</a>
+  </li>
+  <li class="">
+    <a href="../../prob-intro/intro.html">Probability: An introduction</a>
+  </li>
+  <li class="">
+    <a href="../../analysis-i/intro.html">Analysis I</a>
+  </li>
+  <li class="active">
+    <a href="../misc.html">Miscellaneous</a>
+  <ul class="nav sidenav_l2">
+    <li class="">
+      <a href="../sde/num-sde.html">Numerical simulation of SDEs</a>
+    </li>
+    <li class="active">
+      <a href="">Conjugate gradients</a>
+    </li>
+    <li class="">
+      <a href="../kalman/kalman.html">The Kalman filter and smoother</a>
+    </li>
+  </ul>
+  </li>
+  <li class="">
+    <a href="../../reading-and-links.html">Interesting reading and websites</a>
+  </li>
+</ul>
+</nav>
+<p class="navbar_footer"></p>
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse" data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu" aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation" title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i class="fas fa-download"></i></button>
+
+            
+            <div class="dropdown-buttons">
+                <!-- ipynb file if we had a myst markdown file -->
+                
+                <!-- Download raw file -->
+                <a class="dropdown-buttons" href="../../../_sources/content/misc/optimisation/conjugate-gradients.ipynb.txt"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.ipynb</button></a>
+                <!-- Download PDF via print -->
+                <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF" onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+            </div>
+            
+        </div>
+
+        <!-- Edit this page -->
+        
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+            <div class="dropdown-buttons">
+                
+                <a class="binder-button" href="https://mybinder.org/v2/gh/stratisMarkou/random-walks/master?urlpath=tree/./content/misc/optimisation/conjugate-gradients.ipynb"><button type="button" class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip" data-placement="left"><img class="binder-button-logo" src="../../../_static/images/logo_binder.svg" alt="Interact on binder">Binder</button></a>
+                
+                
+                
+            </div>
+        </div>
+        
+    </div>
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#motivating-conjugate-gradients" class="nav-link">Motivating Conjugate Gradients</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#steepest-descent" class="nav-link">Steepest Descent</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#conjugate-directions" class="nav-link">Conjugate directions</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#id2" class="nav-link">Conjugate Gradients</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#references" class="nav-link">References</a>
+        </li>
+    
+    </ul>
+</nav>
+
+
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="conjugate-gradients">
+<h1>Conjugate gradients<a class="headerlink" href="#conjugate-gradients" title="Permalink to this headline">¶</a></h1>
+<p>Conjugate Gradients (CG) is a widespread optimisation method that is applicable to continuous optimisation problems where the first-order derivatives of the objective are available. These notes are roughly based off of Jonathan R. Shewchuk’s<a class="bibtex reference internal" href="#shewchuk" id="id1">[She94]</a> notes on CG.</p>
+<div class="section" id="motivating-conjugate-gradients">
+<h2>Motivating Conjugate Gradients<a class="headerlink" href="#motivating-conjugate-gradients" title="Permalink to this headline">¶</a></h2>
+<p>We motivate CG by first discussing the Steepest Descent and Conjugate Direction methods, in the context of minimising quadratic functions of the form</p>
+<div class="math notranslate nohighlight">
+\[ \text{minimise}~~~f(x) = \frac{1}{2} x^\top A x - b^\top x,\]</div>
+<p>where <span class="math notranslate nohighlight">\(x, b \in \mathbb{R}^D\)</span>, <span class="math notranslate nohighlight">\(A\)</span> is a symmmetric positive semi-definite matrix. With minor modifications, CG is also applicable to non-quadratic problems.</p>
+<div class="cell tag_hide-input tag_center-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">set_matplotlib_formats</span>
+<span class="n">set_matplotlib_formats</span><span class="p">(</span><span class="s1">&#39;pdf&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">)</span>
+<span class="n">css_style</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../../../_static/custom_style.css&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">HTML</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&lt;style&gt;</span><span class="si">{</span><span class="n">css_style</span><span class="si">}</span><span class="s1">&lt;/style&gt;&#39;</span><span class="p">)</span>
+
+<span class="c1"># Objective function</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    
+    <span class="n">f_</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;...i, ij, ...j -&gt; ...&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">f_</span> <span class="o">=</span> <span class="n">f_</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">f_</span>
+
+
+<span class="k">def</span> <span class="nf">plot_f</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">show</span><span class="p">):</span>
+    
+    <span class="n">num_points</span> <span class="o">=</span> <span class="mi">20</span>
+    
+    <span class="n">x1_lin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">num_points</span><span class="p">)</span>
+    <span class="n">x2_lin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">num_points</span><span class="p">)</span>
+    
+    <span class="n">x1_grid</span><span class="p">,</span> <span class="n">x2_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x1_lin</span><span class="p">,</span> <span class="n">x2_lin</span><span class="p">)</span>
+    <span class="n">x_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">x1_grid</span><span class="p">,</span> <span class="n">x2_grid</span><span class="p">],</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="n">f_</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x_grid</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+    
+    <span class="n">levels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">x1_grid</span><span class="p">,</span> <span class="n">x2_grid</span><span class="p">,</span> <span class="n">f_</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;coolwarm&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="n">levels</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$x_0$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$x_1$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">show</span><span class="p">:</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># A and b for defining the quadratic form</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.9</span><span class="p">],</span>
+              <span class="p">[</span><span class="o">-</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]])</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">])</span>
+
+<span class="n">plot_f</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Objective $f$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/conjugate-gradients_1_0.svg" src="../../../_images/conjugate-gradients_1_0.svg" /></div>
+</div>
+<div class="section" id="steepest-descent">
+<h3>Steepest Descent<a class="headerlink" href="#steepest-descent" title="Permalink to this headline">¶</a></h3>
+<p>We can try solving the quadratic problem above iteratively, by starting from an initial guess <span class="math notranslate nohighlight">\(x = x_0\)</span> and repeatedly taking steps towards the direction of steepest decrease of <span class="math notranslate nohighlight">\(f\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+x_{n + 1} = x_n + \alpha_n g_n, \text{ where } g_n = \nabla f(x_n).
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha_n\)</span> is an appropriately chosen step size. For quadratic problems, we can choose the <span class="math notranslate nohighlight">\(\alpha_n\)</span> which minimises</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\alpha_n = \argmin_\alpha f(x_n + \alpha g_n) = - \frac{g_n^\top g_n}{g_n^\top A g_n},
+\end{align}\]</div>
+<p>in closed form - see derivation below.</p>
+<details class="proof">
+<summary>Proof: Optimal single-step size for steepest descent</summary>
+<p>The step size <span class="math notranslate nohighlight">\(\alpha_n\)</span> that minimises the objective in the direction of <span class="math notranslate nohighlight">\(g_n\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\alpha_n = \argmin_\alpha f(x_n + \alpha g_n)
+\end{align}\]</div>
+<p>and satisfies</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\frac{d}{d\alpha_n} f(x_n + \alpha_n g_n) = 0 \implies A(x_n + \alpha_n g_n) - b = 0.
+\end{align}\]</div>
+<p>Taking the inner product with <span class="math notranslate nohighlight">\(g_n\)</span> and rearranging we arrive at</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\alpha_n = - \frac{g_n^\top g_n}{g_n^\top A g_n}.
+\end{align}\]</div>
+</details>
+<br>
+<p>The issue with this algorithm, as illustrated by the following example, is that when there is a large difference between the largest and smallest eigenvalues of <span class="math notranslate nohighlight">\(A\)</span>, the algorithm can jump around instead of moving towards the minimum.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">quadratic_steepest_descent</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">num_steps</span><span class="p">):</span>
+    
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x0</span>
+    <span class="n">x_hist</span> <span class="o">=</span> <span class="p">[</span><span class="n">x0</span><span class="p">]</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_steps</span><span class="p">):</span>
+        
+        <span class="n">g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">b</span>
+        
+        <span class="n">gT_g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+        <span class="n">gT_A_g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;i, ij, j -&gt; &#39;</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+        
+        <span class="n">a</span> <span class="o">=</span> <span class="o">-</span> <span class="n">gT_g</span> <span class="o">/</span> <span class="n">gT_A_g</span>
+        
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">a</span> <span class="o">*</span> <span class="n">g</span>
+        
+        <span class="n">x_hist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x_hist</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input tag_center-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># A and b for defining the quadratic form</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.9</span><span class="p">],</span>
+              <span class="p">[</span><span class="o">-</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]])</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">])</span>
+
+<span class="c1"># Initial guess</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">])</span>
+
+<span class="c1"># Number of steps of steepest descent</span>
+<span class="n">num_steps</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="c1"># Execute steepest descent algorithm</span>
+<span class="n">x_hist</span> <span class="o">=</span> <span class="n">quadratic_steepest_descent</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">x0</span><span class="p">,</span> <span class="n">num_steps</span><span class="o">=</span><span class="n">num_steps</span><span class="p">)</span>
+
+<span class="c1"># Plot the loss function</span>
+<span class="n">plot_f</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Plot path taken by steepest descent</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_hist</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_hist</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_hist</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_hist</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Steepest descent&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/conjugate-gradients_4_0.svg" src="../../../_images/conjugate-gradients_4_0.svg" /></div>
+</div>
+</div>
+<div class="section" id="conjugate-directions">
+<h3>Conjugate directions<a class="headerlink" href="#conjugate-directions" title="Permalink to this headline">¶</a></h3>
+<p>How can we fix this problem where the optimiser taking large steps in opposite directions? One idea would be to constrain the search directions to be orthogonal to each other. For example, we could pick the basis set of <span class="math notranslate nohighlight">\(x\)</span>, say <span class="math notranslate nohighlight">\(\{u_0, u_1, ..., u_D\}\)</span> as the search directions and take steps in each direction by finding the step size <span class="math notranslate nohighlight">\(\alpha_n\)</span> that minimises <span class="math notranslate nohighlight">\(f\)</span> along the search direction.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">quadratic_orthogonal_descent</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">num_steps</span><span class="p">):</span>
+    
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x0</span>
+    <span class="n">x_hist</span> <span class="o">=</span> <span class="p">[</span><span class="n">x0</span><span class="p">]</span>
+    
+    <span class="n">num_dim</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_steps</span><span class="p">):</span>
+        
+        <span class="n">g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">b</span>
+        
+        <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_dim</span><span class="p">)</span>
+        <span class="n">u</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="n">num_dim</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        
+        <span class="n">gT_u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
+        <span class="n">uT_A_u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;i, ij, j -&gt; &#39;</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
+        
+        <span class="n">a</span> <span class="o">=</span> <span class="o">-</span> <span class="n">gT_u</span> <span class="o">/</span> <span class="n">uT_A_u</span>
+        
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">a</span> <span class="o">*</span> <span class="n">u</span>
+        
+        <span class="n">x_hist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x_hist</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Perhaps this sounds like a good idea, but it isn’t. As illustrated below, the optimisation process can still jump around a great deal, and converge to the minimum very slowly. This occurs because although the search directions are orthogonal to each other, the fact that the eigenvectors of <span class="math notranslate nohighlight">\(A\)</span> are at an angle to the search directions prevent the algorithm from making large steps.</p>
+<div class="cell tag_hide-input tag_center-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># A and b for defining the quadratic form</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.9</span><span class="p">],</span>
+              <span class="p">[</span><span class="o">-</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]])</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">])</span>
+
+<span class="c1"># Initial guess</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">])</span>
+
+<span class="c1"># Number of steps of descent</span>
+<span class="n">num_steps</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="c1"># Execute descent with orthogonal search directions</span>
+<span class="n">x_hist</span> <span class="o">=</span> <span class="n">quadratic_orthogonal_descent</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">x0</span><span class="p">,</span> <span class="n">num_steps</span><span class="o">=</span><span class="n">num_steps</span><span class="p">)</span>
+
+<span class="c1"># Plot the loss function</span>
+<span class="n">plot_f</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Plot path taken by orthogonal search directions</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_hist</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_hist</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_hist</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_hist</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Descent with orthogonal</span><span class="se">\n</span><span class="s1">search directions&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/conjugate-gradients_8_0.svg" src="../../../_images/conjugate-gradients_8_0.svg" /></div>
+</div>
+<p>If the search directions were orthogonal and <span class="math notranslate nohighlight">\(A\)</span> was a diagonal matrix, then the search would reach the optimum within <span class="math notranslate nohighlight">\(D\)</span> steps - see the example below.</p>
+<div class="cell tag_hide-input tag_center-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># A and b for defining the quadratic form</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+              <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">]])</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">])</span>
+
+<span class="c1"># Initial guess</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">])</span>
+
+<span class="c1"># Number of steps of steepest descent</span>
+<span class="n">num_steps</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="c1"># Execute descent with orthogonal search directions</span>
+<span class="n">x_hist_ortho</span> <span class="o">=</span> <span class="n">quadratic_orthogonal_descent</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">x0</span><span class="p">,</span> <span class="n">num_steps</span><span class="o">=</span><span class="n">num_steps</span><span class="p">)</span>
+
+<span class="c1"># Plot the loss function</span>
+<span class="n">plot_f</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Plot path taken by orthogonal search directions</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_hist_ortho</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_hist_ortho</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_hist_ortho</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_hist_ortho</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Descent with orthogonal</span><span class="se">\n</span><span class="s1">search directions&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/conjugate-gradients_10_0.svg" src="../../../_images/conjugate-gradients_10_0.svg" /></div>
+</div>
+<p>This points at the idea of choosing search directions <span class="math notranslate nohighlight">\(\{d_0, d_1, ..., d_{D - 1}\}\)</span> which are orthogonal in the space spanned by the eigenvectors of <span class="math notranslate nohighlight">\(A\)</span>. Any such set of vectors must be <span class="math notranslate nohighlight">\(A\)</span>-orthogonal in the sense</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+d_i A d_j = 0, \text{ if } i \neq j.
+\end{align}\]</div>
+<p>How can achieve <span class="math notranslate nohighlight">\(A\)</span>-orthogonality? Given any basis set, say <span class="math notranslate nohighlight">\(\{u_0, u_1, ..., u_{D - 1}\}\)</span> we can prodce another basis that is <span class="math notranslate nohighlight">\(A\)</span>-orthogonal, by removing from each basis vector all components that are not <span class="math notranslate nohighlight">\(A\)</span>-orthogonal to any preceeding vectors</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+v_i = u_i + \sum_{j = 1}^{i - 1} \beta_{ij} v_j.
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(v_0 = u_0\)</span> and <span class="math notranslate nohighlight">\(\beta_{ij}\)</span> are appropriately chosen constants such that <span class="math notranslate nohighlight">\(d_i A d_j = 0\)</span> whenever <span class="math notranslate nohighlight">\(i \neq j\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\beta_{ij} = - \frac{u_i^\top A v_j}{v_j^\top A v_j}.
+\end{align}\]</div>
+<details class="proof">
+<summary>Proof: Deriving the \(\beta_{ij}\) coefficients</summary>
+<p>Starting from the expression</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+v_i = u_i + \sum_{j = 1}^{i - 1} \beta_{ij} v_j,
+\end{align}\]</div>
+<p>take the product with <span class="math notranslate nohighlight">\(v_j^\top A\)</span> to obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+v_j^\top A v_i = v_j^\top A u_i + \sum_{k = 1}^{i - 1} \beta_{ik} v_j^\top A v_k.
+\end{align}\]</div>
+<p>Using the fact that <span class="math notranslate nohighlight">\(v_j^\top A v_k = 0\)</span> if <span class="math notranslate nohighlight">\(i \neq k\)</span> and rearranging we arrive at</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\beta_{ij} = -\frac{u_i^\top A v_j}{v_j^\top A v_j}.
+\end{align}\]</div>
+</details>
+<br>
+<p>This is called a <em>conjugate Gram-Schmidt process</em>. Its disadvantage is that all previous search vectors must be kept in memory to generate a new search vector.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">quadratic_gram_schmidt</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x0</span><span class="p">):</span>
+    
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x0</span>
+    <span class="n">x_hist</span> <span class="o">=</span> <span class="p">[</span><span class="n">x0</span><span class="p">]</span>
+    
+    <span class="n">num_dim</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="c1"># Create orthogonal u basis</span>
+    <span class="n">U</span> <span class="o">=</span> <span class="p">[</span><span class="n">u</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">num_dim</span><span class="p">)]</span>
+    
+    <span class="n">D</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="c1"># Execute descent</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_dim</span><span class="p">):</span>
+        
+        <span class="c1"># Gradient wrt x and search direction</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">b</span>
+        
+        <span class="n">d_i</span> <span class="o">=</span> <span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+            
+            <span class="n">b_ij</span> <span class="o">=</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">D</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span>
+            <span class="n">b_ij</span> <span class="o">=</span> <span class="n">b_ij</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">D</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">D</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span>
+            
+            <span class="n">d_i</span> <span class="o">=</span> <span class="n">d_i</span> <span class="o">+</span> <span class="n">b_ij</span> <span class="o">*</span> <span class="n">D</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            
+        <span class="n">D</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d_i</span><span class="p">)</span>
+        
+        <span class="n">gT_d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">d_i</span><span class="p">)</span>
+        <span class="n">dT_A_d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;i, ij, j -&gt; &#39;</span><span class="p">,</span> <span class="n">d_i</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">d_i</span><span class="p">)</span>
+        
+        <span class="n">a</span> <span class="o">=</span> <span class="o">-</span> <span class="n">gT_d</span> <span class="o">/</span> <span class="n">dT_A_d</span>
+        
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">a</span> <span class="o">*</span> <span class="n">d_i</span>
+        
+        <span class="n">x_hist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x_hist</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input tag_center-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># A and b for defining the quadratic form</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.9</span><span class="p">],</span>
+              <span class="p">[</span><span class="o">-</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]])</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">])</span>
+
+<span class="c1"># Initial guess</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">])</span>
+
+<span class="c1"># Number of steps of steepest descent</span>
+<span class="n">num_steps</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="c1"># Execute descent with orthogonal search directions</span>
+<span class="n">x_hist_ortho</span> <span class="o">=</span> <span class="n">quadratic_gram_schmidt</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">x0</span><span class="p">)</span>
+
+<span class="c1"># Plot the loss function</span>
+<span class="n">plot_f</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Plot path taken by orthogonal search directions</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_hist_ortho</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_hist_ortho</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_hist_ortho</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_hist_ortho</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Descent with Gram-Schmidt&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/conjugate-gradients_13_0.svg" src="../../../_images/conjugate-gradients_13_0.svg" /></div>
+</div>
+<p>For quadratic <span class="math notranslate nohighlight">\(f\)</span>, conjugate directions (with Gram-Schmidt) converges in <span class="math notranslate nohighlight">\(D\)</span> steps, where <span class="math notranslate nohighlight">\(D\)</span> is the dimensionality of the problem. However, Gram-Schmidt must keep track of all previous search directions and adjust the next search direction to be <span class="math notranslate nohighlight">\(A\)</span>-orthogonal to them, which incurs a memory as well as a computational cost. This brings us to the method Conjugate Gradients (CG), which fixes this issue by picking sensible search directions <span class="math notranslate nohighlight">\(d_0, d_1, ...\)</span>, leveraging the fact that <span class="math notranslate nohighlight">\(f\)</span> is a quadratic form.</p>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>Conjugate Gradients<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>Our choice of setting <span class="math notranslate nohighlight">\(u_0\)</span> equal to the basis was an arbitrary decision to get the algorithm started, but is not at all sensible. For one, if we use this choice then the initial search direction <span class="math notranslate nohighlight">\(d_0\)</span> does not at all depend on <span class="math notranslate nohighlight">\(A\)</span> or <span class="math notranslate nohighlight">\(b\)</span> at all - surely there must be a better initial condition. Consider instead setting</p>
+<div class="math notranslate nohighlight">
+\[ u_n = -g_n = \nabla f(x_n) = -(Ax_n - b). \]</div>
+<p>This seems more sensible, because it at least takes into account local information about <span class="math notranslate nohighlight">\(f\)</span> by means of the gradient. However, it turns out that this decision brings more benefits than is immediately obvious. Under the choice <span class="math notranslate nohighlight">\(u_n = -g_n\)</span>, the Gram-Schmidt conjugation step becomes</p>
+<div class="math notranslate nohighlight">
+\[d_{n + 1} = - g_{n + 1} + \sum_{k = 1}^n \beta_{nk} d_k,\]</div>
+<p>while the transition rule still has the form</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+x_{n + 1} &amp;= x_n + \alpha_n d_n.
+\end{align}\]</div>
+<p>Because <span class="math notranslate nohighlight">\(\nabla f(x_n) = -(Ax_n - b)\)</span>, the gradient also evolves according to</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+g_{n + 1} = g_n + \alpha_n A d_n.
+\end{align}\]</div>
+<p>It can be shown (see below) that all Gram-Schmidt coeffiecients appart from <span class="math notranslate nohighlight">\(\beta_{n, n - 1}\)</span> vanish, giving the iterative step</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+x_{n + 1} &amp;= x_n + \alpha_n d_n, &amp;&amp; \text{ where } \alpha_n = - \frac{g_n^\top g_n}{d_n^\top Ad_n},\\
+g_{n + 1} &amp;= g_n + \alpha_n A d_n, \\
+d_{n + 1} &amp;= - g_{n + 1} + \beta_n d_n, &amp;&amp; \text{ where } \beta_n = \frac{g_{n + 1}^\top A d_n}{d_n^\top Ad_n}.
+\end{align}\end{split}\]</div>
+<details class="proof">
+<summary>Proof: The Gram-Schmidt conefficients for Conjugate Gradients</summary>
+<p>Consider setting <span class="math notranslate nohighlight">\(u_n = -g_n\)</span>, starting from <span class="math notranslate nohighlight">\(x = x_0\)</span> and evolving according to the transition rules</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+x_{n + 1} &amp;= x_n + \alpha_n d_n, \\
+g_{n + 1} &amp;= g_n + \alpha_n A d_n, &amp;&amp; \text{ where } \alpha_n = - \frac{d_n^\top A g_n}{d_n^\top Ad_n}, \\
+d_{n + 1} &amp;= - g_{n + 1} + \sum_{k = 1}^n \beta_{nk} d_k,
+\end{align}\end{split}\]</div>
+<p>where the constants <span class="math notranslate nohighlight">\(\beta_{nk}\)</span> are chosen so that the <span class="math notranslate nohighlight">\(d_n\)</span> vectors are all <span class="math notranslate nohighlight">\(A\)</span>-orthogonal. Defining the spanning set</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathcal{D}_{n + 1} &amp;= \text{span}\{d_0, d_1, d_2, ..., d_n\},
+\end{align}\]</div>
+<p>we can see that minimising the objective by iterative steps along each of these directions is equivalent to minimising the objective jointly over <span class="math notranslate nohighlight">\(x_0 + \mathcal{D}_{n + 1}\)</span>, because the vectors <span class="math notranslate nohighlight">\(\{d_0, d_1, d_2, ..., d_n\}\)</span> are <span class="math notranslate nohighlight">\(A\)</span>-orthogonal. Therefore, the gradient <span class="math notranslate nohighlight">\(g_{n + 1}\)</span> at <span class="math notranslate nohighlight">\(x = x_{n + 1}\)</span> is perpendicular to the spanning set <span class="math notranslate nohighlight">\(\mathcal{D}_{n + 1}\)</span>, otherwise the position <span class="math notranslate nohighlight">\(x_{n + 1}\)</span> would not be a minimiser of the objective within <span class="math notranslate nohighlight">\(x_0 + \mathcal{D}_{n + 1}\)</span>. Therefore we arrive at</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+g_n \perp d_m \text{ for all } m &lt; n.
+\end{align}\]</div>
+<p>In addition we observe that the spanning set <span class="math notranslate nohighlight">\(\mathcal{D}_{n + 1}\)</span> can be written as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\mathcal{D}_{n + 1} &amp;= \text{span}\{d_0, d_1, d_2, ..., d_n\} \\
+              &amp;= \text{span}\{d_0, Ad_0, A^2 d_0, ..., A^{n - 1} d_n\},
+\end{align}\end{split}\]</div>
+<p>where at any given step of the algorithm, the set is augmented from <span class="math notranslate nohighlight">\(\mathcal{D}_n\)</span> to <span class="math notranslate nohighlight">\(\mathcal{D}_n + A\mathcal{D}_{n + 1}\)</span>. By the same argument, the set spanned by the gradients is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+         \mathcal{G}_{n + 1} &amp;= \text{span}\{g_0, g_1, g_2, ..., g_n\} \\
+                             &amp;= \text{span}\{d_0, Ad_0, A^2 d_0, ..., A^{n - 1} d_n\} \\
+\implies \mathcal{G}_{n + 1} &amp;= \mathcal{D}_n.
+\end{align}\end{split}\]</div>
+<p>Since <span class="math notranslate nohighlight">\(A\mathcal{D}_n \subseteq \mathcal{D}_{n + 1}\)</span> we also have</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+g_{n + 1} \perp \mathcal{D}_n \implies g_{n + 1} \perp A\mathcal{D}_{n - 1},
+\end{align}\]</div>
+<p>so <span class="math notranslate nohighlight">\(d_m^\top A g_{n + 1} = 0\)</span> for all <span class="math notranslate nohighlight">\(m &lt; n\)</span>. Using this fact together with the <span class="math notranslate nohighlight">\(A\)</span>-orthogonality of the <span class="math notranslate nohighlight">\(d_0, d_1, ..., d_n\)</span> vectors and the requirement that <span class="math notranslate nohighlight">\(d_{n + 1} \perp \mathcal{D}_{n + 1}\)</span>, we see that all Gram-Schmidt coefficients must vanish except for <span class="math notranslate nohighlight">\(\beta_{nn}\)</span>. We therefore call this coeffient <span class="math notranslate nohighlight">\(\beta_n\)</span> and compute its value as</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\beta_n = \frac{g_{n + 1}^\top A d_n}{d_n^\top Ad_n}.
+\end{align}\]</div>
+</details>
+<br>
+<p>Note how at each step we only have to compute a single Gram-Schmidt term <span class="math notranslate nohighlight">\(\beta_n A d_n\)</span>, and that we don’t need to keep all previous search directions <span class="math notranslate nohighlight">\(d_0\)</span> through to <span class="math notranslate nohighlight">\(d_{n - 1}\)</span> in memory anymore.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">conjugate_gradients</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x0</span><span class="p">):</span>
+    
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x0</span>
+    <span class="n">x_hist</span> <span class="o">=</span> <span class="p">[</span><span class="n">x0</span><span class="p">]</span>
+    
+    <span class="n">num_dim</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            
+    <span class="n">g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">b</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="o">-</span> <span class="n">g</span>
+    
+    <span class="c1"># Execute descent</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_dim</span><span class="p">):</span>
+        
+        <span class="n">alpha</span> <span class="o">=</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
+        
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">d</span>
+        <span class="n">x_hist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        
+        <span class="n">g</span> <span class="o">=</span> <span class="n">g</span> <span class="o">+</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+
+        <span class="n">beta</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="o">-</span> <span class="n">g</span> <span class="o">+</span> <span class="n">beta</span> <span class="o">*</span> <span class="n">d</span>
+        
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x_hist</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_center-output tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># A and b for defining the quadratic form</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.9</span><span class="p">],</span>
+              <span class="p">[</span><span class="o">-</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]])</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">])</span>
+
+<span class="c1"># Initial guess</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">])</span>
+
+<span class="c1"># Number of steps of steepest descent</span>
+<span class="n">num_steps</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="c1"># Execute descent with orthogonal search directions</span>
+<span class="n">x_hist_ortho</span> <span class="o">=</span> <span class="n">conjugate_gradients</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">x0</span><span class="p">)</span>
+
+<span class="c1"># Plot the loss function</span>
+<span class="n">plot_f</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Plot path taken by orthogonal search directions</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_hist_ortho</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_hist_ortho</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_hist_ortho</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_hist_ortho</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Conjugate gradients&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/conjugate-gradients_17_0.svg" src="../../../_images/conjugate-gradients_17_0.svg" /></div>
+</div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p id="bibtex-bibliography-content/misc/optimisation/conjugate-gradients-0"><dl class="citation">
+<dt class="bibtex label" id="shewchuk"><span class="brackets"><a class="fn-backref" href="#id1">She94</a></span></dt>
+<dd><p>Jonathan R Shewchuk. An introduction to the conjugate gradient method without the agonizing pain. Technical Report, Carnegie Mellon University, 1994.</p>
+</dd>
+</dl>
+</p>
+</div>
+</div>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="../sde/num-sde.html" title="previous page">Numerical simulation of SDEs</a>
+    <a class='right-next' id="next-link" href="../kalman/kalman.html" title="next page">The Kalman filter and smoother</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Stratos Markou<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../../../_static/js/index.js"></script>
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-168728006-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    
+  </body>
+</html>
