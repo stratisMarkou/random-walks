@@ -131,7 +131,7 @@ Two useful definitions are rings and algebras. These are simpler objects than $\
 1. It contains the empty set $\emptyset \in \mathcal{A}$.
 2. It is closed under unions and differences $A, B \in \mathcal{A} \implies A \cup B \in \mathcal{A}$ and $B \setminus A \in \mathcal{A}$.
 
-It is a direct corollary of this definition that $A, B \in \mathcal{A} \implies A \int B \in \mathcal{A}$.
+It is a direct corollary of this definition that $A, B \in \mathcal{A} \implies A \cap B \in \mathcal{A}$.
 
 </div>
 <br>
