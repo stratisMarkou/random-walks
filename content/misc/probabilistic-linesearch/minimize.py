@@ -23,7 +23,7 @@ def kalman_filter_smoother(t, y, log_nsr):
     mf[0], mf[1], Vf[0], Vf[1] = filter_initialise(dt[0], y, A(dt[0]), C, n2)
     
     # Forward filtering steps
-    mf, Vf, S = filter_forward(dt, y, mf, Vf, S, C, R)
+    mf, Vf, S, nlml, s2 = filter_forward(dt, y, mf, Vf, S, C, R)
     
     # Backward smoothing steps
     ms, Vs, CV = smooth_backward(dt, y, mf, Vf, S, ms, Vs, CV, C, R)
@@ -83,6 +83,9 @@ def filter_forward(dt, y, mf, Vf, S, C, R):
     
     T = y.shape[0]
     
+    quad = 0
+    logdet = 0
+    
     for i in range(2, T):
         
         # Set A and Q matrices for current time
@@ -90,12 +93,19 @@ def filter_forward(dt, y, mf, Vf, S, C, R):
         Qt = Q(dt[i-1])
         
         S[i] = np.dot(At, np.dot(Vf[i-1, :], At.T)) + Qt
-        y_minus_CAm = y[i, :] - np.dot(C, np.dot(At, mf[i-1, :]))
+        diff = y[i, :] - np.dot(C, np.dot(At, mf[i-1, :]))
         
-        mf[i, :] = np.dot(At, mf[i-1, :]) + kalman_dot(y_minus_CAm, S[i], C, R)
+        mf[i, :] = np.dot(At, mf[i-1, :]) + kalman_dot(diff, S[i], C, R)
         Vf[i, :] = S[i] - kalman_dot(np.dot(C, S[i]), S[i], C, R)
         
-    return mf, Vf, S
+        R_CSCT = R + np.dot(C, np.dot(S[i], C.T))
+        
+        quad = quad + 0.5 * np.dot(diff, np.linalg.solve(R_CVCT, diff))
+        logdet = logdet + 0.5 * np.linalg.slogdet(R_CSCT)[1]
+        
+    
+        
+    return mf, Vf, S, nlml, s2
 
 
 def smooth_backward(dt, y, mf, Vf, S, ms, Vs, CV, C, R):
