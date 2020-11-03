@@ -23,15 +23,19 @@ def kalman_filter_smoother(t, y, log_nsr):
     mf[0], mf[1], Vf[0], Vf[1] = filter_initialise(dt[0], y, A(dt[0]), C, n2)
     
     # Forward filtering steps
-    mf, Vf, S, nlml, s2 = filter_forward(dt, y, mf, Vf, S, C, R)
+    mf, Vf, S, theta2, nlml = filter_forward(dt, y, mf, Vf, S, C, R)
     
     # Backward smoothing steps
     ms, Vs, CV = smooth_backward(dt, y, mf, Vf, S, ms, Vs, CV, C, R)
     
     # Compute the first smoothed posterior
     ms, Vs, CV = smoother_finalise(dt, y, mf, ms, Vs, CV, n2)
+    
+    # Adjust variances by overal scale parameter
+    Vf = theta2 * Vf
+    Vs = theta2 * Vs
         
-    return mf, Vf, ms, Vs, CV
+    return mf, Vf, ms, Vs, CV, theta2, nlml
 
 
 def A(dt):
@@ -83,8 +87,9 @@ def filter_forward(dt, y, mf, Vf, S, C, R):
     
     T = y.shape[0]
     
-    quad = 0
-    logdet = 0
+    diff = y[1, :] - np.dot(C, np.dot(A(dt[0]), mf[0, :]))
+    quad = np.dot(np.array([[1, - dt[0] / 2]]), diff) ** 2 / (dt[0] ** 5 / 120 + 2 * R[0, 0])
+    logdet = 2 * np.log(dt[0]) + np.log(dt[0] ** 5 + 240 * R[0, 0]) - np.log(120)
     
     for i in range(2, T):
         
@@ -92,7 +97,7 @@ def filter_forward(dt, y, mf, Vf, S, C, R):
         At = A(dt[i-1])
         Qt = Q(dt[i-1])
         
-        S[i] = np.dot(At, np.dot(Vf[i-1, :], At.T)) + Qt
+        S[i] = np.dot(At, np.dot(Vf[i-1], At.T)) + Qt
         diff = y[i, :] - np.dot(C, np.dot(At, mf[i-1, :]))
         
         mf[i, :] = np.dot(At, mf[i-1, :]) + kalman_dot(diff, S[i], C, R)
@@ -100,12 +105,13 @@ def filter_forward(dt, y, mf, Vf, S, C, R):
         
         R_CSCT = R + np.dot(C, np.dot(S[i], C.T))
         
-        quad = quad + 0.5 * np.dot(diff, np.linalg.solve(R_CVCT, diff))
-        logdet = logdet + 0.5 * np.linalg.slogdet(R_CSCT)[1]
+        quad = quad + np.dot(diff, np.linalg.solve(R_CSCT, diff))
+        logdet = logdet + np.linalg.slogdet(R_CSCT)[1]
         
-    
+    theta2 = quad / (2 * T - 3)
+    nlml = logdet / 2 + (2 * T - 3) * np.log(quad) / 2
         
-    return mf, Vf, S, nlml, s2
+    return mf, Vf, S, theta2, nlml
 
 
 def smooth_backward(dt, y, mf, Vf, S, ms, Vs, CV, C, R):
@@ -159,3 +165,92 @@ def kalman_dot(array, V, C, R):
     K_array = np.dot(V, np.dot(C.T, R_CVCT_inv_array))
     
     return K_array
+
+
+def post_pred(dt1, m1, V1, dt2, m2, V2, CV):
+    """
+    Computes the predictive mean and variance for an input point *t*. It is
+    assumed that *t* lies between two observation points at *t1* and *t2* and
+    that no other observation points lie in the interval (t1, t2).
+    """
+    
+    # Compute state-space matrices
+    A1 = A(dt1)
+    A2 = A(dt2)
+    Q1 = Q(dt1)
+    Q2 = Q(dt2)
+    
+    # Compute Sigma, the variance matrix of p(x | x1, x2)
+    A2Q1 = np.dot(A2, Q1)
+    Q2_plus_A2Q1A2T = Q2 + np.dot(A2Q1, A2.T)
+    Sigma = Q1 - np.dot(A2Q1.T, np.linalg.solve(Q2_plus_A2Q1A2T, A2Q1))
+    
+    # Compute the mean of p(x | data)
+    m = np.linalg.solve(Q1, np.dot(A1, m1)) + np.dot(A2.T, np.linalg.solve(Q2, m2))
+    m = np.dot(Sigma, m)
+    
+    # Compute the variance of p(x | data)
+    iQ2A2 = np.linalg.solve(Q2, A2)
+    iQ1A1 = np.linalg.solve(Q1, A1)
+    
+    V = np.dot(iQ2A2.T, np.dot(V2, iQ2A2))
+    V = V + np.dot(iQ1A1, np.dot(V1, iQ1A1.T))
+    V = V + np.dot(iQ2A2.T, np.dot(CV, iQ1A1.T))
+    V = V + np.dot(iQ1A1, np.dot(CV.T, iQ2A2))
+    V = Sigma + np.dot(Sigma, np.dot(V, Sigma))
+    
+    return m, V
+    
+
+def spline_plus_basis_covariance(x1, x2, theta2, noise2, bvar):
+    
+    def k_f_f(x, x_):
+    
+        min_ = np.min([x, x_])
+        abs_ = np.abs(x - x_)
+        
+        spline_part = theta2 / 4 * (1 / 5 * min_ ** 5 + 1 / 2 * abs_ * min_ ** 4 + 1 / 3 * abs_ ** 2 * min_ ** 3)
+        basis_part = bvar * (1 + x * x_ + x ** 2 * x_ ** 2)
+        
+        return spline_part + basis_part
+    
+    def k_f_d(x, x_):
+    
+        min_ = np.min([x, x_])
+        abs_ = np.abs(x - x_)
+        
+        spline_part = theta2 / 4 * (2 / 3 * (x_ - x) * min_ ** 3 + 1 / 2 * (x_ ** 2 - x ** 2) * min_ ** 2 + 1 / 2 * (x_ * x) ** 2)
+        basis_part = bvar * (x + 2 * x ** 2 * x_)
+        
+        return spline_part + basis_part
+    
+    def k_d_d(x, x_):
+    
+        min_ = np.min([x, x_])
+        abs_ = np.abs(x - x_)
+        
+        spline_part = theta2 * (1 / 3 * min_ ** 3 + 1 / 2 * abs_ * min_ ** 2)
+        basis_part = bvar * (1 + 4 * x * x_)
+        
+        return spline_part + basis_part
+    
+    n1 = x1.shape[0]
+    n2 = x2.shape[0]
+    K = np.zeros(shape=(2 * n1, 2 * n2))
+    
+    for i, x1_ in enumerate(x1):
+        for j, x2_ in enumerate(x2):
+            
+            K[2*i, 2*j] = k_f_f(x1_, x2_)
+            K[2*i, 2*j+1] = k_f_d(x1_, x2_)
+            K[2*i+1, 2*j] = k_f_d(x2_, x1_)
+            K[2*i+1, 2*j+1] = k_d_d(x1_, x2_)
+            
+    if n1 == n2 and noise2 > 0.:
+        
+        noise = np.array([noise2, 1e-6] * n1)
+        noise = np.diag(noise)
+        
+        K = K + noise
+            
+    return K
