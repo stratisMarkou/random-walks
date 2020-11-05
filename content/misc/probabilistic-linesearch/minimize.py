@@ -1,4 +1,5 @@
-import numpy as np
+import autograd.numpy as np
+from autograd.scipy.stats import norm
 
 def kalman_filter_smoother(t, y, log_nsr):
     
@@ -185,13 +186,19 @@ def post_pred(dt1, m1, V1, dt2, m2, V2, CV):
     Q2_plus_A2Q1A2T = Q2 + np.dot(A2Q1, A2.T)
     Sigma = Q1 - np.dot(A2Q1.T, np.linalg.solve(Q2_plus_A2Q1A2T, A2Q1))
     
-    # Compute the mean of p(x | data)
-    m = np.linalg.solve(Q1, np.dot(A1, m1)) + np.dot(A2.T, np.linalg.solve(Q2, m2))
-    m = np.dot(Sigma, m)
-    
-    # Compute the variance of p(x | data)
-    iQ2A2 = np.linalg.solve(Q2, A2)
-    iQ1A1 = np.linalg.solve(Q1, A1)
+    try:
+        # Compute the mean of p(x | data)
+        m = np.linalg.solve(Q1, np.dot(A1, m1)) + np.dot(A2.T, np.linalg.solve(Q2, m2))
+        m = np.dot(Sigma, m)
+
+        # Compute the variance of p(x | data)
+        iQ2A2 = np.linalg.solve(Q2, A2)
+        iQ1A1 = np.linalg.solve(Q1, A1)
+        
+    except np.linalg.LinAlgError:
+        print('dt1, dt2')
+        print(dt1, dt2)
+        raise Exception
     
     V = np.dot(iQ2A2.T, np.dot(V2, iQ2A2))
     V = V + np.dot(iQ1A1, np.dot(V1, iQ1A1.T))
@@ -200,57 +207,60 @@ def post_pred(dt1, m1, V1, dt2, m2, V2, CV):
     V = Sigma + np.dot(Sigma, np.dot(V, Sigma))
     
     return m, V
-    
 
-def spline_plus_basis_covariance(x1, x2, theta2, noise2, bvar):
+def log_expected_improvement(f0, m, v):
     
-    def k_f_f(x, x_):
+    # Posterior standard deviation and normalised difference
+    s = v ** 0.5
+    z = (f0 - m) / s
     
-        min_ = np.min([x, x_])
-        abs_ = np.abs(x - x_)
+    # Compute log expected improvement differently, depending on size of z
+    if z > -20:
+        return np.log((f0 - m) * norm.cdf(z) + s * norm.pdf(z))
+    
+    else:
+        return - 0.5 * np.log(2 * np.pi) - 0.5 * z ** 2 - np.log(z ** 2 - 1)
+    
+    
+    
+def newton(objective, budget, t0, tmin, tmax):
+    
+    t = t0
+    f, df, ddf = objective(t)
+    budget = budget - 1
+    
+    while budget > 0:
         
-        spline_part = theta2 / 4 * (1 / 5 * min_ ** 5 + 1 / 2 * abs_ * min_ ** 4 + 1 / 3 * abs_ ** 2 * min_ ** 3)
-        basis_part = bvar * (1 + x * x_ + x ** 2 * x_ ** 2)
-        
-        return spline_part + basis_part
-    
-    def k_f_d(x, x_):
-    
-        min_ = np.min([x, x_])
-        abs_ = np.abs(x - x_)
-        
-        spline_part = theta2 / 4 * (2 / 3 * (x_ - x) * min_ ** 3 + 1 / 2 * (x_ ** 2 - x ** 2) * min_ ** 2 + 1 / 2 * (x_ * x) ** 2)
-        basis_part = bvar * (x + 2 * x ** 2 * x_)
-        
-        return spline_part + basis_part
-    
-    def k_d_d(x, x_):
-    
-        min_ = np.min([x, x_])
-        abs_ = np.abs(x - x_)
-        
-        spline_part = theta2 * (1 / 3 * min_ ** 3 + 1 / 2 * abs_ * min_ ** 2)
-        basis_part = bvar * (1 + 4 * x * x_)
-        
-        return spline_part + basis_part
-    
-    n1 = x1.shape[0]
-    n2 = x2.shape[0]
-    K = np.zeros(shape=(2 * n1, 2 * n2))
-    
-    for i, x1_ in enumerate(x1):
-        for j, x2_ in enumerate(x2):
+        # If ddf +ve, then newton is looking for a minimum, so accept it
+        if ddf > 0:
             
-            K[2*i, 2*j] = k_f_f(x1_, x2_)
-            K[2*i, 2*j+1] = k_f_d(x1_, x2_)
-            K[2*i+1, 2*j] = k_f_d(x2_, x1_)
-            K[2*i+1, 2*j+1] = k_d_d(x1_, x2_)
+            # Compute Newton step and ensure it's withing alloed range
+            t = t - df / ddf
+            t = max(tmin, min(t0, tmax))
             
-    if n1 == n2 and noise2 > 0.:
-        
-        noise = np.array([noise2, 1e-6] * n1)
-        noise = np.diag(noise)
-        
-        K = K + noise
+        # Elif df and ddf -ve, move to right boundary
+        elif df < 0:
+            t = tmax
             
-    return K
+        # Elif df +ve and ddf -ve, move to left boundary
+        elif df > 0:
+            t = tmin
+            
+        # If df >= 0.0 we have moved to the left, so update tmax
+        if df >= 0.0:
+            tmax = t0
+        # If df < 0.0 we have moved to the right, so update tmin
+        else:
+            tmin = t0
+
+        f, df, ddf = objective(t)
+        budget = budget - 1
+        
+        if f > f0:
+            t = (t + t0) / 2
+            
+            f, df, ddf = objective(t)
+            budget = budget - 1
+        
+    return t
+        
