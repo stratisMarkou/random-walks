@@ -208,6 +208,7 @@ def post_pred(dt1, m1, V1, dt2, m2, V2, CV):
     
     return m, V
 
+
 def log_expected_improvement(f0, m, v):
     
     # Posterior standard deviation and normalised difference
@@ -220,47 +221,3 @@ def log_expected_improvement(f0, m, v):
     
     else:
         return - 0.5 * np.log(2 * np.pi) - 0.5 * z ** 2 - np.log(z ** 2 - 1)
-    
-    
-    
-def newton(objective, budget, t0, tmin, tmax):
-    
-    t = t0
-    f, df, ddf = objective(t)
-    budget = budget - 1
-    
-    while budget > 0:
-        
-        # If ddf +ve, then newton is looking for a minimum, so accept it
-        if ddf > 0:
-            
-            # Compute Newton step and ensure it's withing alloed range
-            t = t - df / ddf
-            t = max(tmin, min(t0, tmax))
-            
-        # Elif df and ddf -ve, move to right boundary
-        elif df < 0:
-            t = tmax
-            
-        # Elif df +ve and ddf -ve, move to left boundary
-        elif df > 0:
-            t = tmin
-            
-        # If df >= 0.0 we have moved to the left, so update tmax
-        if df >= 0.0:
-            tmax = t0
-        # If df < 0.0 we have moved to the right, so update tmin
-        else:
-            tmin = t0
-
-        f, df, ddf = objective(t)
-        budget = budget - 1
-        
-        if f > f0:
-            t = (t + t0) / 2
-            
-            f, df, ddf = objective(t)
-            budget = budget - 1
-        
-    return t
-        
