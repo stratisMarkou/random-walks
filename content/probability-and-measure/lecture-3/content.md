@@ -78,6 +78,7 @@ By construction, this is a $\pi$ system that contains $\mathcal{A}$. By repeatin
 </details>
 <br>
 
+(pnm-uniqueness)=
 ## Uniqueness of measures
 
 <div class="theorem">

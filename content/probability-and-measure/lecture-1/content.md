@@ -2,6 +2,7 @@
 
 The first lecture introduces the central definitions of $\sigma$-algebras and measures and discusses some properties which follow from their definitions. It also introduces measure spaces, rings, algebras and set functions. Caratheodory's extension theorem is stated here, and proved in the following lecture.
 
+(pnm-sigalg-meas)=
 ## Sigma algebras
 
 <div class="definition">
