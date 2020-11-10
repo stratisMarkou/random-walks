@@ -8,17 +8,14 @@ import tensorflow as tf
 # Exponentiated Quadratic covariance helper
 # =============================================================================
 
-def eq_covariance(x1, x2, scale, cov_coeff, noise_coeff):
+def eq_covariance(x1, x2, scale, cov_coeff):
     
     # Matrices of input differences
     diff = x1[..., :, None, :] - x2[..., None, :, :]
     
     # Quadratic form of EQ, and EQ covariance
     quad = - 0.5 * tf.reduce_sum((diff / scale) ** 2, axis=-1)
-    cov = cov_coeff ** 2 * np.exp(quad)
-    
-    cov = cov + noise_coeff ** 2 * tf.eye(cov.shape[-1],
-                                          batch_shape=cov.shape[:-2])
+    cov = cov_coeff * np.exp(quad)
     
     return cov
 
@@ -38,16 +35,18 @@ def sample_1d_datasets_from_gp(x_min,
     
     # Draw inputs uniformly at random within [x_min, x_max]
     x_shape = (num_datasets, num_datapoints)
-    x = tf.random.uniform(shape=x_shape, minval=x_min, maxval=x_max)
+    x = tf.random.uniform(shape=x_shape,
+                          minval=x_min,
+                          maxval=x_max,
+                          dtype=tf.float64)
     
     # Covariance of outputs
     cov = eq_covariance(x[..., None],
                         x[..., None],
                         scale,
-                        cov_coeff,
-                        noise_coeff)
+                        cov_coeff)
+    cov = cov + noise_coeff * tf.eye(num_datapoints)[None, :, :]
     
-    print(cov.shape)
     # Cholesky factor of covariance
     cov_chol = tf.linalg.cholesky(cov)
     
