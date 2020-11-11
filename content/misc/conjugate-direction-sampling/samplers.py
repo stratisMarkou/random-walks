@@ -53,8 +53,11 @@ class CGSSKernel(tfp.mcmc.TransitionKernel):
         
         _, dl = self.log_prob(x)
         
-        if D.shape[1] == 0:
-            return dl
+        if True: D.shape[1] == 0:
+#             return dl
+            rand = tf.random.uniform(shape=(D.shape[0], 1))
+            rand = rand / tf.reduce_sum(rand ** 2)
+            return rand
         
         else:
             # Get hessian-gradient products at x, compute conjugate direction
