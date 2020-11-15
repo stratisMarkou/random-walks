@@ -1,6 +1,6 @@
 # Non-measurablity and probability axioms
 
-In this page we discuss non-measurable sets and introduce the axioms of probability. We bring an example subset of $\mathcal{P}((0, 1])$ that is not Lebesgue-measurable, because it is not contained in $\mathcal{B}$. We then introduce the axioms of probability, which are really just the properties of measure functions.
+In this page we discuss non-measurable sets and introduce the axioms of probability. We bring an example subset of $\mathcal{P}((0, 1])$ that is not Lebesgue-measurable, justifying the use of $\sigma$-algebras smaller than power sets. We then introduce the axioms of probability, which are in fact the properties of measure functions.
 
 ## Remarks on the Lebesgue measure
 
@@ -141,4 +141,16 @@ Then $\sigma(\mathcal{A}_1)$ and $\sigma(\mathcal{A}_2)$ are independent.
 </div>
 <br>
 
-This theorem is proved in the next section.
+<details class="proof">
+<summary>Proof: Independence of \(\pi\) systems \(\implies\) independence of \(\sigma\)-algebras</summary>
+
+Fix $A_1 \in \mathcal{A}_1$ and define the measures $\mu(A) = \mathbb{P}(A \cap A_1)$ and $\nu(A) = \mathbb{P}(A)\mathbb{P}(A_1)$. These are finite measures and $\mu(\Omega) = \nu(\Omega) = \mathbb{P}(A_1)$. By assumption we have 
+    
+$$\mathbb{P}(A_1 \cup A_2) = \mathbb{P}(A_1)\mathbb{P}(A_2) \text{ for all } A_1 \in \mathcal{A}_1, A_2 \in \mathcal{A}_2$$
+    
+from which it follows that $\mu(A) = \nu(A)$ for all $A \in \mathcal{A}_2$. Since $\mu$ and $\nu$ are finite measures which agree on the $\pi$-system $A_2$, they also agree on $\sigma(A_2)$ by the {ref}`uniqueness theorem<pnm-uniqueness>`. Similarly, fixing $A_2 \in \mathcal{A}_2$ and repeating the argument, we arrive at
+    
+$$ \mathbb{P}(A_1 \cup A_2) = \mathbb{P}(A_1)\mathbb{P}(A_2) \text{ for all } A_1 \in \sigma(\mathcal{A}_1), A_2 \in \sigma(\mathcal{A}_2).$$
+    
+</details>
+<br>

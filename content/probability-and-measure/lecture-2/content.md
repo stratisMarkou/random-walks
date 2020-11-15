@@ -2,6 +2,9 @@
 
 This page, and the whole of the second lecture, are concerned with Caratheodory's extension theorem. We state it below and break down its proof in several steps.
 
+(pnm-caratheodory)=
+## Statement
+
 <div class="theorem">
 
 **Theorem (Caratheodory's extension theorem)** Let $\mathcal{A} \subseteq \mathcal{P}(E)$ be a ring of subsets of $E$ and let $\mu : \mathcal{A} \to [0, \infty]$ be a countably additive set function. Then $\mu$ can be extended to a measure on $\sigma(\mathcal{A})$.
