@@ -41,7 +41,7 @@ class CGSSKernel(tfp.mcmc.TransitionKernel):
         D = tf.concat([D, d], axis=-1)
         
         if D.shape[1] >= self.reset_every:
-            D = D[:, -self.reset_every:]
+            D = tf.zeros(shape=(D.shape[0], 0))
         
         return x, [D]
     
@@ -53,8 +53,7 @@ class CGSSKernel(tfp.mcmc.TransitionKernel):
         
         _, dl = self.log_prob(x)
         
-        if True: D.shape[1] == 0:
-#             return dl
+        if D.shape[1] == 0:
             rand = tf.random.uniform(shape=(D.shape[0], 1))
             rand = rand / tf.reduce_sum(rand ** 2)
             return rand
