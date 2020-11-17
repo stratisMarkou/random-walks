@@ -168,7 +168,29 @@ def kalman_dot(array, V, C, R):
     return K_array
 
 
-def post_pred(dt1, m1, V1, dt2, m2, V2, CV):
+def post_pred(t, t_data, ms, Vs, CV):
+    
+    # Index of first datapoint to the right of time t (datapoint 2)
+    i = np.searchsorted(t_data, t)
+    
+    # Time difference from datapoint to left of t
+    dt1 = t - t_data[i-1]
+    
+    # Check if interpolating or extrapolating
+    if i < t_data.shape[0]:
+        
+        # Time difference to datapoint to right of t
+        dt2 = t_data[i] - t
+        
+        # If interpolating, use interpolating posterior
+        return int_post_pred(dt1, ms[i-1], Vs[i-1], dt2, ms[i], Vs[i], CV[i-1])
+    
+    else:
+        # Otherwise, use extrapolating posterior
+        return ext_post_pred(dt1, ms[-1], Vs[-1])
+    
+
+def int_post_pred(dt1, m1, V1, dt2, m2, V2, CV):
     """
     Computes the predictive mean and variance for an input point *t*. It is
     assumed that *t* lies between two observation points at *t1* and *t2* and
@@ -180,32 +202,41 @@ def post_pred(dt1, m1, V1, dt2, m2, V2, CV):
     A2 = A(dt2)
     Q1 = Q(dt1)
     Q2 = Q(dt2)
-    
+
     # Compute Sigma, the variance matrix of p(x | x1, x2)
     A2Q1 = np.dot(A2, Q1)
     Q2_plus_A2Q1A2T = Q2 + np.dot(A2Q1, A2.T)
     Sigma = Q1 - np.dot(A2Q1.T, np.linalg.solve(Q2_plus_A2Q1A2T, A2Q1))
-    
-    try:
-        # Compute the mean of p(x | data)
-        m = np.linalg.solve(Q1, np.dot(A1, m1)) + np.dot(A2.T, np.linalg.solve(Q2, m2))
-        m = np.dot(Sigma, m)
 
-        # Compute the variance of p(x | data)
-        iQ2A2 = np.linalg.solve(Q2, A2)
-        iQ1A1 = np.linalg.solve(Q1, A1)
-        
-    except np.linalg.LinAlgError:
-        print('dt1, dt2')
-        print(dt1, dt2)
-        raise Exception
-    
+    # Compute the mean of p(x | data)
+    m = np.linalg.solve(Q1, np.dot(A1, m1)) + np.dot(A2.T, np.linalg.solve(Q2, m2))
+    m = np.dot(Sigma, m)
+
+    # Compute the variance of p(x | data)
+    iQ2A2 = np.linalg.solve(Q2, A2)
+    iQ1A1 = np.linalg.solve(Q1, A1)
+
     V = np.dot(iQ2A2.T, np.dot(V2, iQ2A2))
     V = V + np.dot(iQ1A1, np.dot(V1, iQ1A1.T))
     V = V + np.dot(iQ2A2.T, np.dot(CV, iQ1A1.T))
     V = V + np.dot(iQ1A1, np.dot(CV.T, iQ2A2))
     V = Sigma + np.dot(Sigma, np.dot(V, Sigma))
+
+    return m, V
     
+    
+def ext_post_pred(dt1, m1, V1):
+        
+    # Compute state-space matrices
+    A1 = A(dt1)
+    Q1 = Q(dt1)
+
+    # Compute the mean of p(x | data)
+    m = np.dot(A1, m1)
+
+    # Compute the variance of p(x | data)
+    V = np.dot(A1, np.dot(V1, A1.T)) + Q1
+
     return m, V
 
 
@@ -221,3 +252,59 @@ def log_expected_improvement(f0, m, v):
     
     else:
         return - 0.5 * np.log(2 * np.pi) - 0.5 * z ** 2 - np.log(z ** 2 - 1)
+    
+    
+    
+def newton(objective, budget, t0, tmin, tmax, t_data, ms, Vs, CV):
+    
+    min_t = tmin + 1e-1 * (tmax - tmin)
+    max_t = tmax - 1e-1 * (tmax - tmin)
+    
+    f0, df0, ddf0 = objective(t0, t_data, ms, Vs, CV)
+    budget = budget - 1
+    
+    t, f, df, ddf = t0, f0, df0, ddf0
+    
+    while budget > 1:
+        
+        # If ddf +ve, then newton is looking for a minimum, so accept it
+        if ddf > 0:
+            
+            # Compute Newton step and ensure it's withing alloed range
+            t = t - df / ddf
+            t = max(min_t, min(t, max_t))
+            
+        # Elif df and ddf -ve, move to right boundary
+        elif df < 0:
+            t = max_t
+            
+        # Elif df +ve and ddf -ve, move to left boundary
+        elif df > 0:
+            t = min_t
+            
+        # If df >= 0.0 we have moved to the left, so update tmax
+        if df >= 0.0:
+            tmax = t0
+        # If df < 0.0 we have moved to the right, so update tmin
+        else:
+            tmin = t0
+
+        f, df, ddf = objective(t, t_data, ms, Vs, CV)
+        budget = budget - 1
+            
+        if f < f0:
+            t0, f0, df0 = t, f, df
+            
+        elif t0 == t:
+            break
+        
+    t = min(max(t, min_t), max_t)
+    
+    f, df, ddf = objective(t, t_data, ms, Vs, CV)
+    budget = budget - 1
+        
+    return t, f
+
+
+
+def wolfe_powell(ms, Vs)
