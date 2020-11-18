@@ -307,4 +307,44 @@ def newton(objective, budget, t0, tmin, tmax, t_data, ms, Vs, CV):
 
 
 
-def wolfe_powell(ms, Vs)
+def covariances_to_left(ms, Vs, CV, target_point):
+    
+    """
+    Computes state covariances between the first location of the data
+    and all other locations
+    
+        Cov(x_k, x_0) =   Cov_{x_{k-1}} [ E(x_k | x_{k-1}), E(x_0 | x_{k-1}) ] + 
+                        + E_{x_{k-1}}   [ Cov(x_k, x_0 | x_{k - 1}) ]
+                    
+                      = Cov_{x_{k-1}} [ E(x_k | x_{k-1}), E(x_0 | x_{k-1}) ]
+                      
+    """
+    
+    # Number of datapoints
+    N = ms.shape[0]
+    
+    CV_left = np.zeros(shape=CV.shape)
+    CV_left[0, :, :] = CV[0]
+    
+    for t in range(1, N):
+        
+        m1 = ms[t]
+        m2 = ms[t+1]
+        
+        V1 = Vs[t]
+        V2 = Vs[t+1]
+        
+        CV21 = CV[t]
+        
+
+        
+def prec_and_inv_prec_blocks_from_cov(V11, V12, V21, V22):
+    
+    inv_prec_upper_left_block = V11 - V12 @ np.linalg.solve(V22, V21)
+    
+    prec_upper_right_block = np.linalg.solve(inv_prec_upper_left_block, V12)
+    prec_upper_right_block = np.linalg.solve(V22, prec_upper_right_block.T)
+    prec_upper_right_block = - prec_upper_right_block.T
+    
+    return inv_prec_upper_left_block, prec_upper_right_block
+        
