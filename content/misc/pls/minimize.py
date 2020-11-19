@@ -10,7 +10,7 @@ def kalman_filter_smoother(t, y, log_nsr):
     ms = np.zeros(shape=(T, 3))
     Vs = np.zeros(shape=(T, 3, 3))
     S = np.zeros(shape=(T, 3, 3))
-    CV = np.zeros(shape=(T - 1, 3, 3))
+    iVC = np.zeros(shape=(T - 1, 3, 3))
     dt = t[1:] - t[:-1]
     
     # Noise variance to signal variance ratio
@@ -27,16 +27,16 @@ def kalman_filter_smoother(t, y, log_nsr):
     mf, Vf, S, theta2, nlml = filter_forward(dt, y, mf, Vf, S, C, R)
     
     # Backward smoothing steps
-    ms, Vs, CV = smooth_backward(dt, y, mf, Vf, S, ms, Vs, CV, C, R)
+    ms, Vs, iVC = smooth_backward(dt, y, mf, Vf, S, ms, Vs, iVC, C, R)
     
     # Compute the first smoothed posterior
-    ms, Vs, CV = smoother_finalise(dt, y, mf, ms, Vs, CV, n2)
+    ms, Vs, iVC = smoother_finalise(dt, y, mf, ms, Vs, iVC, n2)
     
     # Adjust variances by overal scale parameter
     Vf = theta2 * Vf
     Vs = theta2 * Vs
         
-    return mf, Vf, ms, Vs, CV, theta2, nlml
+    return mf, Vf, ms, Vs, iVC, theta2, nlml
 
 
 def A(dt):
@@ -115,7 +115,7 @@ def filter_forward(dt, y, mf, Vf, S, C, R):
     return mf, Vf, S, theta2, nlml
 
 
-def smooth_backward(dt, y, mf, Vf, S, ms, Vs, CV, C, R):
+def smooth_backward(dt, y, mf, Vf, S, ms, Vs, iVC, C, R):
     
     T = y.shape[0]
         
@@ -133,12 +133,12 @@ def smooth_backward(dt, y, mf, Vf, S, ms, Vs, CV, C, R):
         J = np.linalg.solve(S[i+1], np.dot(At, Vf[i])).T
         Vs[i] = Vf[i] + np.dot(J, np.dot(Vs[i+1] - S[i+1], J.T))
         ms[i] = mf[i] + np.dot(J, ms[i+1] - np.dot(At, mf[i]))
-        CV[i] = np.dot(Vs[i+1], J.T)
+        iVC[i] = J.T
         
-    return ms, Vs, CV
+    return ms, Vs, iVC
 
 
-def smoother_finalise(dt, y, mf, ms, Vs, CV, n2):
+def smoother_finalise(dt, y, mf, ms, Vs, iVC, n2):
         
     # Hard coded smoothing step
     J = np.array([[960 * n2, - 600 * n2 * dt[0], 120 * n2 * dt[0] ** 2],
@@ -153,9 +153,9 @@ def smoother_finalise(dt, y, mf, ms, Vs, CV, n2):
                       [-60 * n2 * dt[0] ** 3, 0, dt[0] ** 6 + 720 * n2 * dt[0]]])
     Vs[0] = np.dot(J, np.dot(Vs[1], J.T)) + Vs[0] / (9 * dt[0] ** 5 + 2880 * n2)
     
-    CV[0] = np.dot(Vs[1], J.T)
+    iVC[0] = J.T
     
-    return ms, Vs, CV
+    return ms, Vs, iVC
     
     
 def kalman_dot(array, V, C, R):
@@ -168,7 +168,7 @@ def kalman_dot(array, V, C, R):
     return K_array
 
 
-def post_pred(t, t_data, ms, Vs, CV):
+def post_pred(t, t_data, ms, Vs, iVC):
     
     # Index of first datapoint to the right of time t (datapoint 2)
     i = np.searchsorted(t_data, t)
@@ -183,14 +183,14 @@ def post_pred(t, t_data, ms, Vs, CV):
         dt2 = t_data[i] - t
         
         # If interpolating, use interpolating posterior
-        return int_post_pred(dt1, ms[i-1], Vs[i-1], dt2, ms[i], Vs[i], CV[i-1])
+        return int_post_pred(dt1, ms[i-1], Vs[i-1], dt2, ms[i], Vs[i], iVC[i-1])
     
     else:
         # Otherwise, use extrapolating posterior
         return ext_post_pred(dt1, ms[-1], Vs[-1])
     
 
-def int_post_pred(dt1, m1, V1, dt2, m2, V2, CV):
+def int_post_pred(dt1, m1, V1, dt2, m2, V2, iVC):
     """
     Computes the predictive mean and variance for an input point *t*. It is
     assumed that *t* lies between two observation points at *t1* and *t2* and
@@ -215,11 +215,14 @@ def int_post_pred(dt1, m1, V1, dt2, m2, V2, CV):
     # Compute the variance of p(x | data)
     iQ2A2 = np.linalg.solve(Q2, A2)
     iQ1A1 = np.linalg.solve(Q1, A1)
+    
+    # Compute covariance from inverse variance times covariance matrix
+    C = V2 @ iVC
 
     V = np.dot(iQ2A2.T, np.dot(V2, iQ2A2))
     V = V + np.dot(iQ1A1, np.dot(V1, iQ1A1.T))
-    V = V + np.dot(iQ2A2.T, np.dot(CV, iQ1A1.T))
-    V = V + np.dot(iQ1A1, np.dot(CV.T, iQ2A2))
+    V = V + np.dot(iQ2A2.T, np.dot(C, iQ1A1.T))
+    V = V + np.dot(iQ1A1, np.dot(C.T, iQ2A2))
     V = Sigma + np.dot(Sigma, np.dot(V, Sigma))
 
     return m, V
@@ -255,12 +258,12 @@ def log_expected_improvement(f0, m, v):
     
     
     
-def newton(objective, budget, t0, tmin, tmax, t_data, ms, Vs, CV):
+def newton(objective, budget, t0, tmin, tmax, t_data, ms, Vs, iVC):
     
     min_t = tmin + 1e-1 * (tmax - tmin)
     max_t = tmax - 1e-1 * (tmax - tmin)
     
-    f0, df0, ddf0 = objective(t0, t_data, ms, Vs, CV)
+    f0, df0, ddf0 = objective(t0, t_data, ms, Vs, iVC)
     budget = budget - 1
     
     t, f, df, ddf = t0, f0, df0, ddf0
@@ -289,7 +292,7 @@ def newton(objective, budget, t0, tmin, tmax, t_data, ms, Vs, CV):
         else:
             tmin = t0
 
-        f, df, ddf = objective(t, t_data, ms, Vs, CV)
+        f, df, ddf = objective(t, t_data, ms, Vs, iVC)
         budget = budget - 1
             
         if f < f0:
@@ -300,51 +303,104 @@ def newton(objective, budget, t0, tmin, tmax, t_data, ms, Vs, CV):
         
     t = min(max(t, min_t), max_t)
     
-    f, df, ddf = objective(t, t_data, ms, Vs, CV)
+    f, df, ddf = objective(t, t_data, ms, Vs, iVC)
     budget = budget - 1
         
     return t, f
 
 
 
-def covariances_to_left(ms, Vs, CV, target_point):
+def covariances_to_left(ms, Vs, iVC):
     
     """
     Computes state covariances between the first location of the data
-    and all other locations
-    
-        Cov(x_k, x_0) =   Cov_{x_{k-1}} [ E(x_k | x_{k-1}), E(x_0 | x_{k-1}) ] + 
-                        + E_{x_{k-1}}   [ Cov(x_k, x_0 | x_{k - 1}) ]
-                    
-                      = Cov_{x_{k-1}} [ E(x_k | x_{k-1}), E(x_0 | x_{k-1}) ]
-                      
+    and all other locations, given the data.
     """
     
     # Number of datapoints
     N = ms.shape[0]
     
-    CV_left = np.zeros(shape=CV.shape)
-    CV_left[0, :, :] = CV[0]
+    covs = np.zeros(shape=iVC.shape)
+    covs[0, :, :] = iVC[0]
+    
+    M = np.eye(3)
+    W = Vs[1]
     
     for t in range(1, N):
         
-        m1 = ms[t]
-        m2 = ms[t+1]
-        
-        V1 = Vs[t]
-        V2 = Vs[t+1]
-        
-        CV21 = CV[t]
-        
-
-        
-def prec_and_inv_prec_blocks_from_cov(V11, V12, V21, V22):
+        V11 = Vs[t-1]
+        iVC21 = iVC[t-1]
+        V22 = Vs[t]
     
-    inv_prec_upper_left_block = V11 - V12 @ np.linalg.solve(V22, V21)
+        iL22 = V22 - V21 @ np.linalg.solve(V11, V21.T)
     
-    prec_upper_right_block = np.linalg.solve(inv_prec_upper_left_block, V12)
-    prec_upper_right_block = np.linalg.solve(V22, prec_upper_right_block.T)
-    prec_upper_right_block = - prec_upper_right_block.T
+        iL22L21 = np.linalg.solve(V11, - V21.T).T
+        
+        M = iL22L21 @ M
+        W = iL22 + iL22L21 @ W @ iL22L21.T
+        
+        Lt1 = np.linalg.solve(W, M)
+        Vt1 = - V22 @ Lt1 @ V
+        
+        covs[t, :, :] = Vt1
+        
+    return covs
+        
+        
+        
+        
+def inverse_left_blocks(Maa, Mab, Mbb):
     
-    return inv_prec_upper_left_block, prec_upper_right_block
+    """
+    Given a matrix written in the form
+    
+        M = [[Maa, Mab,
+              Mba, Mbb]],
+              
+    this function computes the inverse upper-left (Laa^-1) block and
+    the lower-left (Lba) block of the corresponding inverse matrix
+    
+        L = M^-1 = [[Laa, Lab,
+                     Lba, Lbb]],
+                     
+    using the identities
+    
+        Laa = (Maa - Mab Mbb^-1 Mba)^-1,
+        Lab = - Laa Lab Lbb^-1.
+    """
+    
+    iLaa = Maa - Mab @ np.linalg.solve(Mbb, Mab.T) # iMbbMba
+    
+    iLaaLab = np.linalg.solve(Mbb, - Mab.T).T # - (iMbbMba).T
+    
+    return iLaa, iLaaLab
+        
+        
+# def inverse_left_blocks(Maa, Mab, Mbb):
+    
+#     """
+#     Given a matrix written in the form
+    
+#         M = [[Maa, Mab,
+#               Mba, Mbb]],
+              
+#     this function computes the inverse upper-left (Laa^-1) block and
+#     the lower-left (Lba) block of the corresponding inverse matrix
+    
+#         L = M^-1 = [[Laa, Lab,
+#                      Lba, Lbb]],
+                     
+#     using the identities
+    
+#         Laa = (Maa - Mab Mbb^-1 Mba)^-1,
+#         Lab = - Laa Lab Lbb^-1.
+#     """
+    
+#     iLaa = Maa - Mab @ np.linalg.solve(Mbb, Mab.T)
+#     iLbb = Mbb - Mab.T @ np.linalg.solve(Maa, Mab)
+    
+#     Lab = np.linalg.solve(iLaa, - Mab).T
+#     Lab = np.linalg.solve(Mbb, Lab).T
+    
+#     return iLaa, Lab, iLbb
         
