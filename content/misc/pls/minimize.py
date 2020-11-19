@@ -260,8 +260,8 @@ def log_expected_improvement(f0, m, v):
     
 def newton(objective, budget, t0, tmin, tmax, t_data, ms, Vs, iVC):
     
-    min_t = tmin + 1e-1 * (tmax - tmin)
-    max_t = tmax - 1e-1 * (tmax - tmin)
+    min_t = tmin + 2e-1 * (tmax - tmin)
+    max_t = tmax - 2e-1 * (tmax - tmin)
     
     f0, df0, ddf0 = objective(t0, t_data, ms, Vs, iVC)
     budget = budget - 1
@@ -309,9 +309,7 @@ def newton(objective, budget, t0, tmin, tmax, t_data, ms, Vs, iVC):
     return t, f
 
 
-
 def covariances_to_left(ms, Vs, iVC):
-    
     """
     Computes state covariances between the first location of the data
     and all other locations, given the data.
@@ -320,87 +318,50 @@ def covariances_to_left(ms, Vs, iVC):
     # Number of datapoints
     N = ms.shape[0]
     
-    covs = np.zeros(shape=iVC.shape)
-    covs[0, :, :] = iVC[0]
+    C0 = np.zeros(shape=iVC.shape)
+    C0[0, :, :] = Vs[0] @ iVC[0]
     
-    M = np.eye(3)
-    W = Vs[1]
+    M = iVC[0]
     
-    for t in range(1, N):
+    for t in range(1, N-1):
         
-        V11 = Vs[t-1]
-        iVC21 = iVC[t-1]
-        V22 = Vs[t]
-    
-        iL22 = V22 - V21 @ np.linalg.solve(V11, V21.T)
-    
-        iL22L21 = np.linalg.solve(V11, - V21.T).T
+        M = iVC[t] @ M
+        C0[t, :, :] = Vs[t+1] @ M
         
-        M = iL22L21 @ M
-        W = iL22 + iL22L21 @ W @ iL22L21.T
+    return C0
         
-        Lt1 = np.linalg.solve(W, M)
-        Vt1 = - V22 @ Lt1 @ V
+    
+def wolfe_powell(c1, c2, t, ms, Vs, iVC, theta2):
+    
+    # Number of datapoints
+    N = ms.shape[0]
+    
+    mf0 = ms[0, 0]
+    mdf0 = ms[0, 1]
+    
+    C0 = covariances_to_left(ms, Vs, iVC)
+    wp_probs = np.zeros(shape=(N-1,))
+    
+    for i in range(1, N):
         
-        covs[t, :, :] = Vt1
+        # Check WP2. Gradient is noiseless so check is a simple comparison
+        if np.abs(ms[i, 1]) > np.abs(c2 * mdf0):
+            continue
         
-    return covs
-        
-        
-        
-        
-def inverse_left_blocks(Maa, Mab, Mbb):
+        # If WP2 met, check WP1 and set nonzero WP acceptance probability
+        else:
+            mu = ms[i, 0] - mf0
+            std = theta2 ** 0.5 * (Vs[0, 0, 0] + Vs[i, 0, 0] - 2 * C0[i-1, 0, 0]) ** 0.5
+            
+            alpha = c1 * t[i] * mdf0
+            alpha = (alpha - mu) / std
+            
+            wp_probs[i-1] = norm.cdf(alpha)
+            
+    return wp_probs
+            
+            
+            
+            
+            
     
-    """
-    Given a matrix written in the form
-    
-        M = [[Maa, Mab,
-              Mba, Mbb]],
-              
-    this function computes the inverse upper-left (Laa^-1) block and
-    the lower-left (Lba) block of the corresponding inverse matrix
-    
-        L = M^-1 = [[Laa, Lab,
-                     Lba, Lbb]],
-                     
-    using the identities
-    
-        Laa = (Maa - Mab Mbb^-1 Mba)^-1,
-        Lab = - Laa Lab Lbb^-1.
-    """
-    
-    iLaa = Maa - Mab @ np.linalg.solve(Mbb, Mab.T) # iMbbMba
-    
-    iLaaLab = np.linalg.solve(Mbb, - Mab.T).T # - (iMbbMba).T
-    
-    return iLaa, iLaaLab
-        
-        
-# def inverse_left_blocks(Maa, Mab, Mbb):
-    
-#     """
-#     Given a matrix written in the form
-    
-#         M = [[Maa, Mab,
-#               Mba, Mbb]],
-              
-#     this function computes the inverse upper-left (Laa^-1) block and
-#     the lower-left (Lba) block of the corresponding inverse matrix
-    
-#         L = M^-1 = [[Laa, Lab,
-#                      Lba, Lbb]],
-                     
-#     using the identities
-    
-#         Laa = (Maa - Mab Mbb^-1 Mba)^-1,
-#         Lab = - Laa Lab Lbb^-1.
-#     """
-    
-#     iLaa = Maa - Mab @ np.linalg.solve(Mbb, Mab.T)
-#     iLbb = Mbb - Mab.T @ np.linalg.solve(Maa, Mab)
-    
-#     Lab = np.linalg.solve(iLaa, - Mab).T
-#     Lab = np.linalg.solve(Mbb, Lab).T
-    
-#     return iLaa, Lab, iLbb
-        
