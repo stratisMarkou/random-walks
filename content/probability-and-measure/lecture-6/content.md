@@ -76,14 +76,14 @@ $$ \mathbb{P}(A_n \text{ i.o.}) = 1 - \mathbb{P}\left(\bigcup_n \bigcap_{m \geq 
 </details>
 <br>
     
-    
+(pnm-measurable-func)=
 ## Measurable functions
 
 We now introduce measurable functions. Ginve measurable spaces $(E, \mathcal{E})$ and $(G, \mathcal{G})$, a function $f : \mathcal{E} \to \mathcal{G}$ is measurable if the pre-image of $f$ of any set in $\mathcal{G}$ is also in $\mathcal{E}$.
     
 <div class="definition">
     
-**Definition (Measurable functions)** Let $(E, \mathcal{E})$ and $(G, \mathcal{G})$ be measurable spaces. A function $f : \mathcal{E} \to \mathcal{G}$ is called $\mathcal{E}-\mathcal{G}$ measurable if
+**Definition (Measurable functions)** Let $(E, \mathcal{E})$ and $(G, \mathcal{G})$ be measurable spaces. A function $f : E \to G$ is called $\mathcal{E}-\mathcal{G}$ measurable if
     
 $$ f^{-1}(A) = \{ x \in E : f(x) \in A\} \in \mathcal{E} \text{ for all } A \in \mathcal{G}.$$
     
