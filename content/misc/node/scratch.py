@@ -156,12 +156,11 @@ class NODE(tf.Module):
 dtype = tf.float32
 state_size = 2
 
-z0 = 20 * (np.random.uniform(size=(state_size,)) - 0.5)
+z0 = 20 * (np.random.uniform(size=(3 * state_size)) - 0.5)
 
 # Set integration parameters
 t0 = 0.
 t1 = 10.
-num_traj = 100
 num_steps = 50
 dt = t1 / num_steps
 
@@ -182,7 +181,6 @@ ode = ode.set_initial_value(z0, t0)
 while ode.successful() and ode.t < t1:
     z = ode.integrate(ode.t + dt)
     
-print(z.shape)
 z1 = z
     
 # Set backward ODE integrator
@@ -193,29 +191,19 @@ ode = ode.set_initial_value(z1, t1)
 while ode.successful() and ode.t > t0:
     z0_ = ode.integrate(ode.t - dt)
     
-print(z0, z0_)
-
-# np.save('z0.npy', z0)
-# np.save('z1.npy', z1)
-# np.save('z0_.npy', z0_)
-
-# z0 = np.load('z0.npy')
-# z1 = np.load('z1.npy')
-# z0_ = np.load('z0_.npy')
-    
 za1 = node.backward_initial_conditions(t1,
                                        tf.convert_to_tensor(np.reshape(z1, (-1, 2)), dtype=dtype),
                                        tf.convert_to_tensor(np.reshape(z1, (-1, 2)), dtype=dtype))
 
 za1 = np.array(za1)
 
-print(za1.shape)
-print(node.backward_dynamics(1., za1).shape)
+print('za1', za1.shape)
+print(za1)
     
 # Set backward ODE integrator
 f = lambda t, za : np.array(tf.reshape(node.backward_dynamics(t, za), (-1,)))
-ode = ODE(f=f).set_integrator('vode')
-ode = ode.set_initial_value(za1[0, :], t1)
+ode = ODE(f=f).set_integrator('vode', atol=1e-3)
+ode = ode.set_initial_value(np.reshape(za1, (-1,)), t1)
 
 print(5 * '\n')
 
