@@ -1,6 +1,98 @@
 import autograd.numpy as np
 from autograd.scipy.stats import norm
 
+
+def line_search(objective, c1, c2, wp_thresh, y0, t_guess):
+    
+    # Newton budget
+    newton_budget = 10
+    
+    # Log noise to signal ratio grid for marginalisation
+    log_nsr_grid = np.linspace(-20., 20., 21)
+    
+    # Make initial guess, initialise t and y arrays
+    y_guess = objective(t_guess)
+    
+    t = np.array([0, t_])
+    y = np.concatenate([y0, y_guess], axis=0)
+    
+    # Loop until a WP acceptable point is found
+    while True:
+        
+        # Kalman filtering and smoothing for all models
+        # results = (mf, Vf, ms, Vs, iVC, theta2, nlml)
+        results = [kalman_filter_smoother(t, y, log_nsr) \
+                  for log_nsr in log_nsr_grid]
+        results = list(zip(*results))
+        
+        # Compute posterior likelihood of each model
+        post_probs = np.array([np.exp(-nlml) for nlml in results[-1]])
+        post_probs = post_probs / np.sum(post_probs)
+        
+        # Check for WP acceptable points
+        wp_probs = [marg_lik * wolfe_powell(c1, c2, t, ms, Vs, iVC, theta2) \
+                    for post_prob, ms, Vs, iVC in zip(post_probs, *results[2:5])]
+        wp_probs = np.sum(wp_probs, axis=0)
+        
+        # If most probable WP point passes the probability threshold, return it
+        idx_most_probable = np.argmax(wp_probs)
+        if wp_probs[idx_most_probable] >= wp_thresh:
+            return t[idx_most_probable+1], y[idx_most_probable+1]
+        
+        # Optimise EI mixture over each interval separately
+        t_opts, f_opts = newton_mixture_on_intervals(budget=newton_budget, 
+                                                     t=t,
+                                                     ms=ms,
+                                                     Vs=Vs,
+                                                     iVC=iVC,
+                                                     post_probs=post_probs)
+            
+        # Acquire new points
+        y_new = [objective(t_opt) for t_opt in t_opts]
+        
+        t = np.insert(t, idx_acq, t_news, axis=0)
+        y = np.insert(y, idx_acq, y_news, axis=0)
+        
+        
+
+#     for idx in num_points_to_idx(20):
+
+#         mf, Vf, ms, Vs, iVC, theta2, nlml = kalman_filter_smoother(t=t, y=y, log_nsr=log_nsr)
+
+#         tmin = None
+#         tmax = None
+#         t0 = None
+
+#         if idx == y.shape[0] - 1:
+
+#             tmin = t[idx]
+#             tmax = t[idx] + 2e-1 * (t[-1] - t[0])
+
+#         else:
+#             tmin = t[idx]
+#             tmax = t[idx+1]
+
+#         t0 = (tmax + tmin) / 2
+
+#         t_opt, f_opt = newton(objective=objective,
+#                               budget=budget,
+#                               t0=t0,
+#                               tmin=tmin,
+#                               tmax=tmax,
+#                               t_data=t,
+#                               ms=ms,
+#                               Vs=Vs,
+#                               iVC=iVC)
+
+#         x_new, y_new = sample_sine_data(t=np.array([t_opt]), omega=omega, R=R)
+#         x_new, y_new = x_new[0], y_new[0]
+
+#         t = np.insert(t, idx + 1, t_opt)
+
+#         x = np.insert(x, idx + 1, x_new, axis=0)
+#         y = np.insert(y, idx + 1, y_new, axis=0)
+
+
 def kalman_filter_smoother(t, y, log_nsr):
     
     # Set arrays to store means and variances, compute time differences
@@ -241,29 +333,14 @@ def ext_post_pred(dt1, m1, V1):
     V = np.dot(A1, np.dot(V1, A1.T)) + Q1
 
     return m, V
-
-
-def log_expected_improvement(f0, m, v):
-    
-    # Posterior standard deviation and normalised difference
-    s = v ** 0.5
-    z = (f0 - m) / s
-    
-    # Compute log expected improvement differently, depending on size of z
-    if z > -20:
-        return np.log((f0 - m) * norm.cdf(z) + s * norm.pdf(z))
-    
-    else:
-        return - 0.5 * np.log(2 * np.pi) - 0.5 * z ** 2 - np.log(z ** 2 - 1)
     
     
-    
-def newton(objective, budget, t0, tmin, tmax, t_data, ms, Vs, iVC):
+def newton(objective, budget, t0, tmin, tmax, t_data, *args):
     
     min_t = tmin + 2e-1 * (tmax - tmin)
     max_t = tmax - 2e-1 * (tmax - tmin)
     
-    f0, df0, ddf0 = objective(t0, t_data, ms, Vs, iVC)
+    f0, df0, ddf0 = objective(t0, t_data, *args)
     budget = budget - 1
     
     t, f, df, ddf = t0, f0, df0, ddf0
@@ -292,7 +369,7 @@ def newton(objective, budget, t0, tmin, tmax, t_data, ms, Vs, iVC):
         else:
             tmin = t0
 
-        f, df, ddf = objective(t, t_data, ms, Vs, iVC)
+        f, df, ddf = objective(t, t_data, *args)
         budget = budget - 1
             
         if f < f0:
@@ -303,10 +380,108 @@ def newton(objective, budget, t0, tmin, tmax, t_data, ms, Vs, iVC):
         
     t = min(max(t, min_t), max_t)
     
-    f, df, ddf = objective(t, t_data, ms, Vs, iVC)
+    f, df, ddf = objective(t, t_data, *args)
     budget = budget - 1
         
     return t, f
+
+
+def log_expected_improvement(f0, m, v):
+    
+    # Posterior standard deviation and normalised difference
+    s = v ** 0.5
+    z = (f0 - m) / s
+    
+    # Compute log expected improvement differently, depending on size of z
+    if z > -20:
+        return np.log((f0 - m) * norm.cdf(z) + s * norm.pdf(z))
+    
+    else:
+        return - 0.5 * np.log(2 * np.pi) - 0.5 * z ** 2 - np.log(z ** 2 - 1)
+    
+    
+def _neg_log_ei(t, t_data, ms_, Vs_, iVC_, log_post_):
+    
+    """
+    Computes the negative log expected improvement of a set of
+    quintic sline models.
+    
+    params t : float, position along the line to evaluate EI at
+    params t_data : np.array, positions of data
+    params ms_ : [np.array], means for each model
+    params ms_ : [np.array], variances for each model
+    params Vs_ : [np.array], inverse variances times covariances for each model
+    params log_post_ : np.array, log-posterior probabilites of each model 
+    """
+
+    # Objective value to improve on
+    f0 = np.min(ms[:, 0])
+
+    # Posterior predictive of model
+    m_, v_ = list(zip(*[post_pred(t, t_data, ms_, Vs_, iVC_) \
+                        for ms, Vs, iVC in zip(ms_, Vs_, iVC_)])
+
+    # Log expected improvement at time t
+    log_ei = np.array([log_expected_improvement(f0=f0, m=m[0], v=v[0, 0]) \
+                       for m, v in zip(m, v)])
+                  
+    max_log_ei = np.max(log_ei + log_post_)
+                  
+    log_ei = max_log_ei + np.log(np.sum(np.exp(log_ei - max_log_ei)))
+    
+    return - log_ei
+                  
+
+_dneg_log_ei = grad(_neg_log_ei, argnum=0)
+_ddneg_log_ei = hessian(_neg_log_ei, argnum=0)
+
+                  
+def neg_log_ei(t, t_data, ms_, Vs_, iVC_, post_probs):
+
+    ei = _neg_log_ei(t, t_data, ms_, Vs_, iVC_, post_probs)
+    dei = _dneg_log_ei(t, t_data, ms_, Vs_, iVC_, post_probs)
+    ddei = float(_ddneg_log_ei(t, t_data, ms_, Vs_, iVC_, post_probs))
+
+    return ei, dei, ddei
+
+
+def newton_mixture_on_intervals(budget, t, ms, Vs, iVC, post_probs):
+    
+    t_opts = []
+    f_opts = []
+    idx_acq = np.arange(t.shape[0])
+
+    for idx in idx_acq:
+
+        # If interpolating, set tmin and tmax to t's of current interval
+        if idx < y.shape[0] - 1:
+            tmin = t[idx]
+            tmax = t[idx+1]
+            
+        # If extrapolating, set tmax to last datum plus fraction of range
+        else:
+            tmin = t[idx]
+            tmax = t[idx] + 2e-1 * (t[-1] - t[0])
+
+        # Initialise newton search at midpoint of interval
+        t0 = (tmax + tmin) / 2
+
+        # Do newton search
+        t_new, f_new = newton(objective=neg_log_ei,
+                              budget=budget,
+                              t0=t0,
+                              tmin=tmin,
+                              tmax=tmax,
+                              t_data=t,
+                              ms_=ms,
+                              Vs_=Vs,
+                              iVC_=iVC,
+                              log_probs_=post_probs)
+
+        t_news.append(t_new)
+        f_news.append(f_new)
+                  
+    return t_news, f_news
 
 
 def covariances_to_left(ms, Vs, iVC):
@@ -331,7 +506,7 @@ def covariances_to_left(ms, Vs, iVC):
     return C0
         
     
-def wolfe_powell(c1, c2, t, ms, Vs, iVC, theta2):
+def wolfe_powell(c1, c2, t, ms, Vs, iVC):
     
     # Number of datapoints
     N = ms.shape[0]
@@ -351,7 +526,7 @@ def wolfe_powell(c1, c2, t, ms, Vs, iVC, theta2):
         # If WP2 met, check WP1 and set nonzero WP acceptance probability
         else:
             mu = ms[i, 0] - mf0
-            std = theta2 ** 0.5 * (Vs[0, 0, 0] + Vs[i, 0, 0] - 2 * C0[i-1, 0, 0]) ** 0.5
+            std = (Vs[0, 0, 0] + Vs[i, 0, 0] - 2 * C0[i-1, 0, 0]) ** 0.5
             
             alpha = c1 * t[i] * mdf0
             alpha = (alpha - mu) / std
