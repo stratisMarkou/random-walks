@@ -1,0 +1,967 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Neural ODEs &#8212; Random walks</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../../../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/jupyter-sphinx.css" />
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/sphinx-book-theme.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/mystnb.js"></script>
+    <script src="../../../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .secondtoggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="canonical" href="https://random-walks.org/content/misc/node/node.html" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Conjugate gradients" href="../optimisation/conjugate-gradients.html" />
+    <link rel="prev" title="Numerical simulation of SDEs" href="../sde/num-sde.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://random-walks.org/content/misc/node/node.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Neural ODEs" />
+<meta property="og:description" content="Neural ODEs  This page discusses Neural Ordinary Differential Equations.[CRBD18] The contribution of this paper is really on the ODE side, and in particular on " />
+<meta property="og:image"       content="https://random-walks.org/_static/logo.svg" />
+
+<meta name="twitter:card" content="summary">
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../../index.html">
+  
+  <img src="../../../_static/logo.svg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Random walks</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  
+  <ul class="nav sidenav_l1">
+  <li class="">
+    <a href="../../home.html">Welcome</a>
+  </li>
+  <li class="">
+    <a href="../../prob-intro/intro.html">Probability: An introduction</a>
+  </li>
+  <li class="active">
+    <a href="../misc.html">Miscellaneous</a>
+  <ul class="nav sidenav_l2">
+    <li class="">
+      <a href="../sde/num-sde.html">Numerical simulation of SDEs</a>
+    </li>
+    <li class="active">
+      <a href="">Neural ODEs</a>
+    </li>
+    <li class="">
+      <a href="../optimisation/conjugate-gradients.html">Conjugate gradients</a>
+    </li>
+    <li class="">
+      <a href="../kalman/kalman.html">The Kalman filter and smoother</a>
+    </li>
+  </ul>
+  </li>
+  <li class="">
+    <a href="../../reading-and-links.html">Interesting reading and websites</a>
+  </li>
+</ul>
+</nav>
+<p class="navbar_footer"></p>
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse" data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu" aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation" title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i class="fas fa-download"></i></button>
+
+            
+            <div class="dropdown-buttons">
+                <!-- ipynb file if we had a myst markdown file -->
+                
+                <!-- Download raw file -->
+                <a class="dropdown-buttons" href="../../../_sources/content/misc/node/node.ipynb.txt"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.ipynb</button></a>
+                <!-- Download PDF via print -->
+                <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF" onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+            </div>
+            
+        </div>
+
+        <!-- Edit this page -->
+        
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+            <div class="dropdown-buttons">
+                
+                <a class="binder-button" href="https://mybinder.org/v2/gh/stratisMarkou/random-walks/master?urlpath=tree/./content/misc/node/node.ipynb"><button type="button" class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip" data-placement="left"><img class="binder-button-logo" src="../../../_static/images/logo_binder.svg" alt="Interact on binder">Binder</button></a>
+                
+                
+                
+            </div>
+        </div>
+        
+    </div>
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#ordinary-differential-equations" class="nav-link">Ordinary differential equations</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#the-self-adjoint-sensitivity-method" class="nav-link">The self-adjoint sensitivity method</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#visualising-trajectories" class="nav-link">Visualising trajectories</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#implementation" class="nav-link">Implementation</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#training-on-synthetic-data" class="nav-link">Training on synthetic data</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#conclusions-and-follow-up-work" class="nav-link">Conclusions and follow-up work</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#references" class="nav-link">References</a>
+        </li>
+    
+    </ul>
+</nav>
+
+
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="neural-odes">
+<h1>Neural ODEs<a class="headerlink" href="#neural-odes" title="Permalink to this headline">¶</a></h1>
+<p>This page discusses <em>Neural Ordinary Differential Equations</em>.<a class="bibtex reference internal" href="#chen2018neural" id="id1">[CRBD18]</a> The contribution of this paper is really on the ODE side, and in particular on taking derivatives through ODEs, rather than on the neural side. They present the self adjoint sensitivity method for taking derivatives through ODEs. This method was known before this work (see <a class="reference external" href="https://slideslive.com/38923497/bullshit-that-i-and-others-have-said-about-neural-odes">David Duvenaud’s retrospective talk</a>), so in some sense, the authors’ real contribution was <a class="reference external" href="https://github.com/rtqichen/torchdiffeq">porting the self adjoint method to pytorch</a> and using it in the context of ODEs and Normalising Flows.</p>
+<div class="section" id="ordinary-differential-equations">
+<h2>Ordinary differential equations<a class="headerlink" href="#ordinary-differential-equations" title="Permalink to this headline">¶</a></h2>
+<p>Here is the problem statement. Let <span class="math notranslate nohighlight">\(\mathbf{z} \in \mathbb{R}^N\)</span> be a vector whose dynamics evolve according to the <a class="reference external" href="https://mathworld.wolfram.com/OrdinaryDifferentialEquation.html">ordinary differential equation</a></p>
+<div class="math notranslate nohighlight">
+\[ \frac{d\mathbf{z}}{dt} = \mathbf{f}(\mathbf{z}, \mathbf{\theta}, t), \]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{\theta} \in \mathbb{R}^P\)</span> and let <span class="math notranslate nohighlight">\(\text{ODEsolve}(\mathbf{z}_0, t_0, t_1, \theta)\)</span> denote the solution to this ODE, where <span class="math notranslate nohighlight">\(\mathbf{z}(t_0) = \mathbf{z}_0\)</span>. Also let <span class="math notranslate nohighlight">\(L : \mathbb{R}^N \to \mathbb{R}\)</span> be a loss function. We want to compute the derivatives of the loss <span class="math notranslate nohighlight">\(L(\text{ODEsolve}(\mathbf{z}_0, t_0, t_1, \theta))\)</span> with respect to the parameters <span class="math notranslate nohighlight">\(\mathbf{\theta}\)</span>.</p>
+<p>One way to do this would be to solve numerically for <span class="math notranslate nohighlight">\(\mathbf{z}(t_1)\)</span> and then backpropagate through the numerical integration routine. Numerical integration routines like <a class="reference external" href="https://mathworld.wolfram.com/Runge-KuttaMethod.html">Runge Kutta</a> involve only summations and evaluations of <span class="math notranslate nohighlight">\(\mathbf{f}\)</span>, so we could implement such an algorithm using an automatic differentiation library, run the numerical integration forwards, and then backpropagate through it. However, this requires that we retain the intermediate values of <span class="math notranslate nohighlight">\(\mathbf{z}(t)\)</span> that the solver used during integration (much like we need to retain the activations of a neural network), which would incur a memory cost of <span class="math notranslate nohighlight">\(\mathcal{O}(T)\)</span> where <span class="math notranslate nohighlight">\(T = t_1 - t_0\)</span> is the time interval we are solving over.</p>
+</div>
+<div class="section" id="the-self-adjoint-sensitivity-method">
+<h2>The self-adjoint sensitivity method<a class="headerlink" href="#the-self-adjoint-sensitivity-method" title="Permalink to this headline">¶</a></h2>
+<p>The Neural ODE paper proposes first solving the ODE foward from <span class="math notranslate nohighlight">\(t_0\)</span> to <span class="math notranslate nohighlight">\(t_1\)</span>, and then setting up a new differential equation which when solved backwards from <span class="math notranslate nohighlight">\(t_1\)</span> to <span class="math notranslate nohighlight">\(t_0\)</span> will give us the derivatives of <span class="math notranslate nohighlight">\(L\)</span> w.r.t. <span class="math notranslate nohighlight">\(\mathbf{\theta}.\)</span> This has two convenient implications. First, we do not need to retain the intermediate <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> in memory, because we won’t be backpropagating through the ODE solver. Second, we can use off-the-shelf numerical integrators to solve this new backward equation. So there is no need to implement a new solver that supports automatic differentiation.</p>
+<p>Let’s look at the details of this method, which hinges on two key insights. First, we define the adjoint, which we will use to set up the backward equation.</p>
+<div class='definition'>
+<p><strong>Definition (Adjoint)</strong> Given <span class="math notranslate nohighlight">\(\mathbf{z}(t) \in \mathbb{R}^N\)</span> for <span class="math notranslate nohighlight">\(t \in [t_0, t_1]\)</span> and a function <span class="math notranslate nohighlight">\(L : \mathbb{R}^N \to \mathbb{R}\)</span>, the adjoint is defined as</p>
+<div class="math notranslate nohighlight">
+\[ \mathbf{a}(t) = \frac{\partial L}{\partial \mathbf{z}(t)}. \]</div>
+</div>
+<br>
+<p>The first piece of insight is that the adjoint itself obeys a differential equation, stated and proved below.</p>
+<div class='theorem'>
+<p><strong>Result (Differential equation of the adjoint)</strong> Given an ODE of the form</p>
+<div class="math notranslate nohighlight">
+\[\frac{d\mathbf{z}}{dt} = \mathbf{f}(\mathbf{z}, \mathbf{\theta}, t),\]</div>
+<p>the adjoint <span class="math notranslate nohighlight">\(\mathbf{a}(t)\)</span> obeys the differential equation</p>
+<div class="math notranslate nohighlight">
+\[ \frac{d \mathbf{a}}{dt} = - \frac{\partial \mathbf{f}}{\partial \mathbf{z}} \mathbf{a},\]</div>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Differential equation of the adjoint</summary>
+<div>
+<p>Starting from the relation</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbf{a}(t) &amp;= \frac{\partial \mathbf{z}(t + \epsilon)}{\partial \mathbf{z}(t)} \frac{d L}{d \mathbf{z}(t + \epsilon)} = \frac{\partial \mathbf{z}(t + \epsilon)}{\partial \mathbf{z}(t)} \mathbf{a}(t + \epsilon),
+\end{align}\]</div>
+<p>we substitute the following identity</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}
+\frac{\partial \mathbf{z}(t + \epsilon)}{\partial \mathbf{z}(t)} &amp;= \frac{\partial}{\partial \mathbf{z}} \left[\mathbf{z}(t) + \int_t^{t + \epsilon} \mathbf{f}(\mathbf{z}, t) dt \right] = \mathbf{I} + \epsilon \frac{\partial \mathbf{f}}{\partial \mathbf{z}} + \mathcal{O}(\epsilon^2),
+\end{align}\]</div>
+<p>to obtain the relation</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbf{a}(t) = \left[ \mathbf{I} + \epsilon \frac{\partial \mathbf{f}}{\partial \mathbf{z}} + \mathcal{O}(\epsilon^2) \right] \mathbf{a}(t + \epsilon),
+\end{align}\]</div>
+<p>Now we write the change in <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> from <span class="math notranslate nohighlight">\(t\)</span> to <span class="math notranslate nohighlight">\(t + \epsilon\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbf{a}(t + \epsilon) - \mathbf{a}(t) = \left[ - \epsilon \frac{\partial \mathbf{f}}{\partial \mathbf{z}} + \mathcal{O}(\epsilon^2) \right] \mathbf{a}(t + \epsilon).
+\end{align}\]</div>
+<p>Dividing by <span class="math notranslate nohighlight">\(\epsilon\)</span> and taking the limit <span class="math notranslate nohighlight">\(\epsilon \to 0\)</span> we arrive at</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\frac{d \mathbf{a}}{d t} = - \frac{\partial \mathbf{f}}{\partial \mathbf{z}} \mathbf{a},~~\text{ where } \left(\frac{\partial \mathbf{f}}{\partial \mathbf{z}}\right)_{ij} = \frac{\partial f_j}{\partial z_i}.
+\end{align}\]</div>
+</div>
+</details>
+<br>
+<p>Now if we integrate the differential equation of the adjoint from <span class="math notranslate nohighlight">\(T\)</span> to <span class="math notranslate nohighlight">\(t\)</span> we obtain</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}
+\frac{d L}{d \mathbf{z}(t)} = \mathbf{a}(T) + \int_t^T \frac{d \mathbf{f}}{d \mathbf{z}} \mathbf{a}~dt.
+\end{align}\]</div>
+<p>It would be great if in addition to <span class="math notranslate nohighlight">\(\frac{d L}{d \mathbf{z}(t)}\)</span> we could also compute <span class="math notranslate nohighlight">\(\frac{d L}{d \mathbf{\theta}}\)</span> in a similar way. This is where the second piece of insight comes in. If we append <span class="math notranslate nohighlight">\(\mathbf{\theta}\)</span> to the state vector <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> to obtain the augmented state</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align}
+\mathbf{z}_{aug} = \begin{bmatrix}\mathbf{z} \\ \mathbf{\theta} \end{bmatrix},
+\end{align}\end{split}\]</div>
+<p>and let this evolve accoding to the ODE</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align}
+\frac{d \mathbf{z}_{aug}}{d t} = \mathbf{f}_{aug}(\mathbf{z}_{aug}, \mathbf{\theta}, t),~~\text{ where }~~\mathbf{f}_{aug} = \begin{bmatrix}\mathbf{f} \\ 0 \end{bmatrix},
+\end{align}\end{split}\]</div>
+<p>then the augmented adjoint obeys</p>
+<div class="math notranslate nohighlight">
+\[ \frac{d \mathbf{a}_{aug}}{dt} = - \frac{\partial \mathbf{f}_{aug}}{\partial \mathbf{z}_{aug}} \mathbf{a}_{aug}. \]</div>
+<p>We can then integrate this equation in precisely the same way as above to obtain</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}
+\frac{d L}{d \mathbf{z}_{aug}(t)} \equiv \left[\frac{d L}{d \mathbf{z}(t)}, \frac{d L}{d \mathbf{\theta}}\right] = \mathbf{a}_{aug}(T) + \int_t^T \frac{d \mathbf{f}_{aug}}{d \mathbf{z}_{aug}} \mathbf{a}_{aug}~dt,
+\end{align}\]</div>
+<p>arriving at the derivative <span class="math notranslate nohighlight">\(\frac{d L}{d \mathbf{\theta}}\)</span> which are after. In practice, when solving backwards the above intetgral, we will require <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> at each time instance, so we can append the dynamics of the <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> vector to obtain an equation we can solve backwards. Putting this together with the forward solve we have the following algorithm, called the adjoint sensitivity method.</p>
+<div class='definition'>
+<p><strong>Definition (ODE gradients with the adjoint sensitivity method)</strong> Given <span class="math notranslate nohighlight">\(\mathbf{z}(t) \in \mathbb{R}^N, t \in [t_0, t_1]\)</span> evolving according to</p>
+<div class="math notranslate nohighlight">
+\[ \frac{d\mathbf{z}}{dt} = \mathbf{f}(\mathbf{z}, \mathbf{\theta}, t), \]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{\theta} \in \mathbb{R}^P\)</span> and let <span class="math notranslate nohighlight">\(L : \mathbb{R}^N \to \mathbb{R}\)</span>, with the initial condition <span class="math notranslate nohighlight">\(\mathbf{z}_0\)</span> and a function <span class="math notranslate nohighlight">\(L : \mathbb{R}^N \to \mathbb{R}\)</span>, the adjoint sensitivity method computes the derivatives of <span class="math notranslate nohighlight">\(L\)</span> w.r.t. <span class="math notranslate nohighlight">\(\mathbf{\theta}\)</span> in two steps:</p>
+<ol class="simple">
+<li><p>Solve the above ODE for <span class="math notranslate nohighlight">\(\mathbf{z}(t_1) = \mathbf{z}_1\)</span> and compute <span class="math notranslate nohighlight">\(\mathbf{a}(t_1) = \mathbf{a}_1\)</span>.</p></li>
+<li><p>Solve the following ODE from time <span class="math notranslate nohighlight">\(t = t_1\)</span> to <span class="math notranslate nohighlight">\(t = t_0\)</span></p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\frac{d}{d t} \begin{bmatrix} \mathbf{z} \\ \frac{\partial L}{\partial \mathbf{z}} \\ \frac{\partial L}{\partial \mathbf{\theta}} \end{bmatrix} = \begin{bmatrix} \mathbf{f} \\ - \frac{\partial \mathbf{f}}{\partial \mathbf{z}}\mathbf{a} \\ - \frac{\partial \mathbf{f}}{\partial \mathbf{\theta}}\mathbf{a} \end{bmatrix}, \text{ with init. cond. } \left[\mathbf{z}_1, \mathbf{a}_1, \mathbf{\theta} \right].
+\end{align}\end{split}\]</div>
+</div>
+<br>
+<details class="proof">
+<summary>Derivation: ODE gradients with the adjoint sensitivity method</summary>
+<p>Here we derive the ODE in the second step of the above algorithm. The matrix <span class="math notranslate nohighlight">\(\frac{\partial \mathbf{f}_{aug}}{\partial \mathbf{z}_{aug}}\)</span> in the expression</p>
+<div class="math notranslate nohighlight">
+\[ \frac{d \mathbf{a}_{aug}}{dt} = - \frac{\partial \mathbf{f}_{aug}}{\partial \mathbf{z}_{aug}} \mathbf{a}_{aug}. \]</div>
+<p>is given by the following expression</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \frac{\partial \mathbf{f}_{aug}}{\partial \mathbf{z}_{aug}} = \begin{bmatrix}
+\frac{d\mathbf{f}}{d\mathbf{z}} &amp; \mathbf{0}  \\
+\frac{d\mathbf{f}}{d\mathbf{\theta}} &amp; \mathbf{0}  \end{bmatrix}.\end{split}\]</div>
+<p>Hence, the augmented adjoint obeys</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align}
+\frac{d \mathbf{a}_{aug}}{d t} = \frac{d}{d t} \begin{bmatrix} \frac{\partial L}{\partial \mathbf{z}} \\ \frac{\partial L}{\partial \mathbf{\theta}} \end{bmatrix} = \begin{bmatrix} - \frac{\partial \mathbf{f}}{\partial \mathbf{z}}\mathbf{a} \\ - \frac{\partial \mathbf{f}}{\partial \mathbf{\theta}}\mathbf{a} \end{bmatrix}.
+\end{align}\end{split}\]</div>
+<p>In order to evaluate the expression on the RHS at any time <span class="math notranslate nohighlight">\(t\)</span> during the backward solve, we will need to know <span class="math notranslate nohighlight">\(\mathbf{z}(t)\)</span>. We therefore explicitly include the evolution of <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> in the ODE, arriving at the ODE problem</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\frac{d}{d t} \begin{bmatrix} \mathbf{z} \\ \frac{\partial L}{\partial \mathbf{z}} \\ \frac{\partial L}{\partial \mathbf{\theta}} \end{bmatrix} = \begin{bmatrix} \mathbf{f} \\ - \frac{\partial \mathbf{f}}{\partial \mathbf{z}}\mathbf{a} \\ - \frac{\partial \mathbf{f}}{\partial \mathbf{\theta}}\mathbf{a} \end{bmatrix}, \text{ with init. cond. } \left[\mathbf{z}_1, \mathbf{a}_1, \mathbf{\theta} \right].
+\end{align}\end{split}\]</div>
+</details>
+<br>
+</div>
+<div class="section" id="visualising-trajectories">
+<h2>Visualising trajectories<a class="headerlink" href="#visualising-trajectories" title="Permalink to this headline">¶</a></h2>
+<p>Before implementing this algorithm, let’s have a look at what the trajecotries from our model may look like. Let’s set <span class="math notranslate nohighlight">\(\mathbf{f}\)</span> to be a neural network with a single hidden layer, with randomly initialised weights. We do not need derivatives, so we’ll keep things simple for now and implement the transition dynamics <span class="math notranslate nohighlight">\(\mathbb{f}\)</span> in Numpy.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">class</span> <span class="nc">TransitionDynamics</span><span class="p">:</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">,</span> <span class="n">state_size</span><span class="p">):</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">W1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">state_size</span><span class="p">),</span>
+                                   <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                                   <span class="n">scale</span><span class="o">=</span><span class="n">state_size</span><span class="o">**-</span><span class="mf">0.5</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">b1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">hidden_size</span><span class="p">,))</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">W2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">state_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">),</span>
+                                   <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                                   <span class="n">scale</span><span class="o">=</span><span class="n">hidden_size</span><span class="o">**-</span><span class="mf">0.5</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">b2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">state_size</span><span class="p">,))</span>
+        
+    
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+        
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b1</span>
+        
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W2</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b2</span>
+        
+        <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we sample nine such models (each corresponding to one of the squares below). For each model we sample initial points uniformly at random, and solve the ODE defined by the model forwards, to obtain the trajectories shown.</p>
+<div class="cell tag_center-output tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">ode</span> <span class="k">as</span> <span class="n">ODE</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="c1"># Set random seed to sample same weights each time</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Set integration parameters</span>
+<span class="n">t0</span> <span class="o">=</span> <span class="mf">0.</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="mf">10.</span>
+<span class="n">num_traj</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">num_steps</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="n">t1</span> <span class="o">/</span> <span class="n">num_steps</span>
+
+<span class="c1"># Hidden size for transition dynamics</span>
+<span class="n">hidden_size</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="c1"># Set state size to 2 for 2D plots</span>
+<span class="n">state_size</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="c1"># Simulate and plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># New transition dynamics with random weights</span>
+    <span class="n">transition_dynamics</span> <span class="o">=</span> <span class="n">TransitionDynamics</span><span class="p">(</span><span class="n">hidden_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">state_size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">seed</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_traj</span><span class="p">):</span>
+
+        <span class="c1"># Sample initial states</span>
+        <span class="n">y0</span> <span class="o">=</span> <span class="mi">20</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span>
+
+        <span class="c1"># Array to store states</span>
+        <span class="n">states</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+
+        <span class="c1"># Set ODE integrator</span>
+        <span class="n">ode</span> <span class="o">=</span> <span class="n">ODE</span><span class="p">(</span><span class="n">f</span><span class="o">=</span><span class="n">transition_dynamics</span><span class="o">.</span><span class="fm">__call__</span><span class="p">)</span><span class="o">.</span><span class="n">set_integrator</span><span class="p">(</span><span class="s1">&#39;vode&#39;</span><span class="p">)</span>
+        <span class="n">ode</span> <span class="o">=</span> <span class="n">ode</span><span class="o">.</span><span class="n">set_initial_value</span><span class="p">(</span><span class="n">y0</span><span class="p">,</span> <span class="n">t0</span><span class="p">)</span>
+
+        <span class="c1"># Integrate numerically within time interval</span>
+        <span class="k">while</span> <span class="n">ode</span><span class="o">.</span><span class="n">successful</span><span class="p">()</span> <span class="ow">and</span> <span class="n">ode</span><span class="o">.</span><span class="n">t</span> <span class="o">&lt;</span> <span class="n">t1</span><span class="p">:</span>
+            <span class="n">states</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">states</span><span class="p">,</span> <span class="n">ode</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">ode</span><span class="o">.</span><span class="n">t</span> <span class="o">+</span> <span class="n">dt</span><span class="p">)[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            
+        <span class="c1"># Plot starting point and trajectory</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">states</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">states</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">p</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">states</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">8</span> <span class="ow">and</span> <span class="n">seed</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="n">s</span><span class="p">,</span> <span class="n">p</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;Start&#39;</span><span class="p">,</span> <span class="s1">&#39;Trajectory&#39;</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+    
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;NODE trajectories with random weights&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">rect</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/node_5_0.png" src="../../../_images/node_5_0.png" />
+</div>
+</div>
+<p>The Neural ODE models seem to be able to demonstrate a variety of different dynamics.</p>
+</div>
+<div class="section" id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h2>
+<p>Now let’s implement the full model with backwards and forwards dynamics. To apply the adjoint sensitivity method, we will have to differentiate through the transition function <span class="math notranslate nohighlight">\(\mathbf{f}\)</span> as well as the loss function <span class="math notranslate nohighlight">\(L\)</span>. We’ll therefore impement the NODE as a tensorflow module.</p>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">tensorflow.keras</span> <span class="k">as</span> <span class="nn">tfk</span>
+<span class="kn">import</span> <span class="nn">tensorflow_probability</span> <span class="k">as</span> <span class="nn">tfp</span>
+
+<span class="n">tfd</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">distributions</span>
+
+<span class="k">class</span> <span class="nc">NODE</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    ODE model whose dynamics are expressed using a neural network with</span>
+<span class="sd">    a single hidden layer, with a tanh nonlinearity.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">,</span> <span class="n">state_size</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;node&#39;</span><span class="p">):</span>
+        
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span> <span class="o">=</span> <span class="n">dtype</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_size</span> <span class="o">=</span> <span class="n">state_size</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">W1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">state_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">),</span>
+                                   <span class="n">mean</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span>
+                                   <span class="n">stddev</span><span class="o">=</span><span class="n">state_size</span><span class="o">**-</span><span class="mf">0.5</span><span class="p">,</span>
+                                   <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">W1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W1</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">b1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">),</span>
+                                   <span class="n">mean</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span>
+                                   <span class="n">stddev</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span>
+                                   <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">b1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b1</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">W2</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">state_size</span><span class="p">),</span>
+                                   <span class="n">mean</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                                   <span class="n">stddev</span><span class="o">=</span><span class="n">hidden_size</span><span class="o">**-</span><span class="mf">0.5</span><span class="p">,</span>
+                                   <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">W2</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W2</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">b2</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">state_size</span><span class="p">),</span>
+                                   <span class="n">mean</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span>
+                                   <span class="n">stddev</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span>
+                                   <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">b2</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b2</span><span class="p">)</span>
+        
+    
+    <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The forward dynamics of the ODE.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">z</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_size</span><span class="p">))</span>
+        
+        <span class="n">f</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;ni, ij -&gt; nj&#39;</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">W1</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">f</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b1</span>
+        
+        <span class="n">f</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        
+        <span class="n">f</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;ni, ij -&gt; nj&#39;</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">W2</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">f</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b2</span>
+        
+        <span class="k">return</span> <span class="n">f</span>
+    
+    
+    <span class="k">def</span> <span class="nf">w</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">za</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The auugmented backward dynamics of the ODE.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">num_params</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">([</span><span class="n">tf</span><span class="o">.</span><span class="n">reduce_prod</span><span class="p">(</span><span class="n">tensor</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> \
+                                    <span class="k">for</span> <span class="n">tensor</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainable_variables</span><span class="p">])</span>
+        <span class="n">last_dim</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_size</span> <span class="o">+</span> <span class="n">num_params</span>
+        
+        <span class="n">za</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">(</span><span class="n">za</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="n">za</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">za</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">last_dim</span><span class="p">))</span>
+        
+        <span class="n">z</span> <span class="o">=</span> <span class="n">za</span><span class="p">[:,</span> <span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">state_size</span><span class="p">]</span> <span class="c1"># (B, Z)</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">za</span><span class="p">[:,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_size</span><span class="p">:</span><span class="mi">2</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">state_size</span><span class="p">]</span> <span class="c1"># (B, Z)</span>
+        
+        <span class="n">f</span><span class="p">,</span> <span class="n">dfdz_a</span><span class="p">,</span> <span class="n">dfdtheta_a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">jacobians</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+        
+        <span class="n">w</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">f</span><span class="p">,</span> <span class="n">dfdz_a</span><span class="p">]</span> <span class="o">+</span> <span class="n">dfdtheta_a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">w</span>
+    
+    
+    <span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
+    <span class="k">def</span> <span class="nf">jacobians</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Decorate the gradient calculations with a tf.function for improved</span>
+<span class="sd">        efficiency.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">(</span><span class="n">persistent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+
+            <span class="n">tape</span><span class="o">.</span><span class="n">watch</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+            <span class="n">tape</span><span class="o">.</span><span class="n">watch</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trainable_variables</span><span class="p">)</span>
+
+            <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+        
+        <span class="n">dfdz</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">batch_jacobian</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="c1"># (B, Z, Z) dfdz_ij = (df_i)/dz_j</span>
+        <span class="n">dfdz_a</span> <span class="o">=</span> <span class="o">-</span> <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;nij, ni -&gt; nj&#39;</span><span class="p">,</span> <span class="n">dfdz</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+        
+        <span class="n">dfdtheta</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">jacobian</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainable_variables</span><span class="p">)</span> <span class="c1"># list of (B, Z, P[i])</span>
+        <span class="n">dfdtheta</span> <span class="o">=</span> <span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">tensor</span><span class="p">,</span> <span class="p">(</span><span class="n">tensor</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tensor</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span> \
+                    <span class="k">for</span> <span class="n">tensor</span> <span class="ow">in</span> <span class="n">dfdtheta</span><span class="p">]</span>
+        <span class="n">dfdtheta_a</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span> <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;nij, ni -&gt; nj&#39;</span><span class="p">,</span> <span class="n">tensor</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">tensor</span> <span class="ow">in</span> <span class="n">dfdtheta</span><span class="p">]</span>
+        
+        <span class="k">return</span> <span class="n">f</span><span class="p">,</span> <span class="n">dfdz_a</span><span class="p">,</span> <span class="n">dfdtheta_a</span>
+    
+    
+    <span class="k">def</span> <span class="nf">loglik</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zpred</span><span class="p">,</span> <span class="n">zdata</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Helper that calculates the log-likelihood of data under the model.</span>
+<span class="sd">        The likelihood function is a diagonal gaussian with unit scale,</span>
+<span class="sd">        centered at the predictions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">assert</span> <span class="n">zpred</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">zdata</span><span class="o">.</span><span class="n">shape</span>
+
+        <span class="n">dist</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">MultivariateNormalDiag</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">zpred</span><span class="p">,</span> <span class="n">scale_identity_multiplier</span><span class="o">=</span><span class="mf">1e0</span><span class="p">)</span>
+
+        <span class="c1"># Loglik of each state dimension, for each datapoint (B, Z)</span>
+        <span class="n">loglik</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">zdata</span><span class="p">)</span>
+        
+        <span class="c1"># Average log likelihood over batch</span>
+        <span class="n">loglik</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">loglik</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">loglik</span>
+    
+    
+    <span class="k">def</span> <span class="nf">backward_initial_conditions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">zdata</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Helper that computes the initial conditions for the backwards solve</span>
+<span class="sd">        at some time t and position z.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">(</span><span class="n">persistent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+            
+            <span class="n">tape</span><span class="o">.</span><span class="n">watch</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+            
+            <span class="n">L</span> <span class="o">=</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">loglik</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">zdata</span><span class="p">)</span>
+            
+        <span class="n">dLdz</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+        
+        <span class="n">zeros</span> <span class="o">=</span> <span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">z</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_prod</span><span class="p">(</span><span class="n">tensor</span><span class="o">.</span><span class="n">shape</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span> \
+                 <span class="k">for</span> <span class="n">tensor</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainable_variables</span><span class="p">]</span>
+        
+        <span class="n">init_cond</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">z</span><span class="p">,</span> <span class="n">dLdz</span><span class="p">]</span> <span class="o">+</span> <span class="n">zeros</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">init_cond</span>
+    
+    
+    <span class="k">def</span> <span class="nf">gradients_from_za</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">za</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Helper to unpack the gradients of the parameters from a flat [z, a]</span>
+<span class="sd">        vector, into the shapes used by the model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">var_sizes</span> <span class="o">=</span> <span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">reduce_prod</span><span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">]</span>
+        <span class="n">za_size</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_size</span> <span class="o">+</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">var_sizes</span><span class="p">)</span>
+        
+        <span class="n">za</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">(</span><span class="n">za</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="n">za</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">za</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">za_size</span><span class="p">))</span>
+        
+        <span class="n">gradients</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">za</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        
+        <span class="n">idx_start</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">variable_gradients</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">:</span>
+            
+            <span class="n">variable_shape</span> <span class="o">=</span> <span class="n">variable</span><span class="o">.</span><span class="n">shape</span>
+            <span class="n">variable_size</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_prod</span><span class="p">(</span><span class="n">variable_shape</span><span class="p">)</span>
+            
+            <span class="n">variable_gradient</span> <span class="o">=</span> <span class="n">gradients</span><span class="p">[</span><span class="n">idx_start</span><span class="p">:</span><span class="n">idx_start</span><span class="o">+</span><span class="n">variable_size</span><span class="p">]</span>
+            <span class="n">variable_gradient</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">variable_gradient</span><span class="p">,</span> <span class="n">variable_shape</span><span class="p">)</span>
+            
+            <span class="n">idx_start</span> <span class="o">=</span> <span class="n">idx_start</span> <span class="o">+</span> <span class="n">variable_size</span>
+            
+            <span class="n">variable_gradients</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">variable_gradient</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">variable_gradients</span>
+    
+    
+    <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">init_cond</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">atol</span><span class="p">,</span> <span class="n">forward</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Helper that does a forward or backward solve between t0 &lt; t1.</span>
+<span class="sd">        The parameter atol is the absolute error tolerance for the ODE solver.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="k">if</span> <span class="n">forward</span><span class="p">:</span>
+            
+            <span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">z</span> <span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span> <span class="n">z</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,))</span>
+            <span class="n">ode</span> <span class="o">=</span> <span class="n">ODE</span><span class="p">(</span><span class="n">f</span><span class="o">=</span><span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">set_integrator</span><span class="p">(</span><span class="s1">&#39;vode&#39;</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">atol</span><span class="p">)</span>
+            <span class="n">ode</span> <span class="o">=</span> <span class="n">ode</span><span class="o">.</span><span class="n">set_initial_value</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">init_cond</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,)),</span> <span class="n">t0</span><span class="p">)</span>
+            
+            <span class="k">while</span> <span class="n">ode</span><span class="o">.</span><span class="n">successful</span><span class="p">:</span>
+                <span class="n">solution</span> <span class="o">=</span> <span class="n">ode</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">ode</span><span class="o">.</span><span class="n">t</span> <span class="o">+</span> <span class="n">dt</span><span class="p">)</span>
+                
+                <span class="k">if</span> <span class="n">ode</span><span class="o">.</span><span class="n">t</span> <span class="o">&gt;</span> <span class="n">t1</span><span class="p">:</span> <span class="k">return</span> <span class="n">solution</span>
+        
+        <span class="k">else</span><span class="p">:</span>
+            
+            <span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">za</span> <span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span> <span class="n">za</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,))</span>
+            <span class="n">ode</span> <span class="o">=</span> <span class="n">ODE</span><span class="p">(</span><span class="n">f</span><span class="o">=</span><span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">set_integrator</span><span class="p">(</span><span class="s1">&#39;vode&#39;</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">atol</span><span class="p">)</span>
+            <span class="n">ode</span> <span class="o">=</span> <span class="n">ode</span><span class="o">.</span><span class="n">set_initial_value</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">init_cond</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,)),</span> <span class="n">t1</span><span class="p">)</span>
+            
+            <span class="k">while</span> <span class="n">ode</span><span class="o">.</span><span class="n">successful</span><span class="p">:</span>
+                <span class="n">solution</span> <span class="o">=</span> <span class="n">ode</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">ode</span><span class="o">.</span><span class="n">t</span> <span class="o">-</span> <span class="n">dt</span><span class="p">)</span>
+                
+                <span class="k">if</span> <span class="n">ode</span><span class="o">.</span><span class="n">t</span> <span class="o">&lt;</span> <span class="n">t0</span><span class="p">:</span> <span class="k">return</span> <span class="n">solution</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As a sanity check, let’s draw some models at random again, and do a forwards solve to inspect the trajectories.</p>
+<div class="cell tag_center-output tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set random seed to sample same weights each time</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">dtype</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">float64</span>
+
+<span class="c1"># Set integration parameters</span>
+<span class="n">t0</span> <span class="o">=</span> <span class="mf">0.</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="mf">10.</span>
+<span class="n">num_traj</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">num_steps</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="n">t1</span> <span class="o">/</span> <span class="n">num_steps</span>
+
+<span class="c1"># Hidden size for transition dynamics</span>
+<span class="n">hidden_size</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="c1"># Set state size to 2 for 2D plots</span>
+<span class="n">state_size</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="c1"># Simulate and plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># New transition dynamics with random weights</span>
+    <span class="n">node</span> <span class="o">=</span> <span class="n">NODE</span><span class="p">(</span><span class="n">hidden_size</span><span class="o">=</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">state_size</span><span class="o">=</span><span class="n">state_size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+    
+    <span class="c1"># Random initial states</span>
+    <span class="n">z0</span> <span class="o">=</span> <span class="mi">20</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">num_traj</span><span class="p">,</span> <span class="n">state_size</span><span class="p">))</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">z0</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">(</span><span class="n">z0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="n">z0</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">z0</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,))</span>
+
+    <span class="c1"># Set ODE integrator</span>
+    <span class="n">ode</span> <span class="o">=</span> <span class="n">ODE</span><span class="p">(</span><span class="n">f</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">z</span> <span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">z</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,)))</span><span class="o">.</span><span class="n">set_integrator</span><span class="p">(</span><span class="s1">&#39;vode&#39;</span><span class="p">)</span>
+    <span class="n">ode</span> <span class="o">=</span> <span class="n">ode</span><span class="o">.</span><span class="n">set_initial_value</span><span class="p">(</span><span class="n">z0</span><span class="p">,</span> <span class="n">t0</span><span class="p">)</span>
+    
+    <span class="c1"># For storing intermediate states for plotting</span>
+    <span class="n">states</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">num_traj</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">state_size</span><span class="p">))</span>
+
+    <span class="c1"># Integrate numerically within time interval</span>
+    <span class="k">while</span> <span class="n">ode</span><span class="o">.</span><span class="n">successful</span><span class="p">()</span> <span class="ow">and</span> <span class="n">ode</span><span class="o">.</span><span class="n">t</span> <span class="o">&lt;</span> <span class="n">t1</span><span class="p">:</span>
+        <span class="n">next_states</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">ode</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">ode</span><span class="o">.</span><span class="n">t</span> <span class="o">+</span> <span class="n">dt</span><span class="p">),</span> <span class="p">(</span><span class="n">num_traj</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">state_size</span><span class="p">))</span>
+        <span class="n">states</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">states</span><span class="p">,</span> <span class="n">next_states</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="c1"># Plot starting point and trajectory</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">states</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    
+    <span class="c1"># Plot the trajectories</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_traj</span><span class="p">):</span>
+        <span class="n">p</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">states</span><span class="p">[</span><span class="n">n</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">states</span><span class="p">[</span><span class="n">n</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">8</span> <span class="ow">and</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="n">s</span><span class="p">,</span> <span class="n">p</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;Start&#39;</span><span class="p">,</span> <span class="s1">&#39;Trajectory&#39;</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+    
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;NODE trajectories with random weights (TF module)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">rect</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/node_9_0.png" src="../../../_images/node_9_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="training-on-synthetic-data">
+<h2>Training on synthetic data<a class="headerlink" href="#training-on-synthetic-data" title="Permalink to this headline">¶</a></h2>
+<p>Now we will pick such a model, draw some data from it, and train another model using that data. The new model better be able to learn the dynamics of the first one.</p>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set random seeds and dtype</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">set_seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">dtype</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">float32</span>
+
+<span class="c1"># Set integration parameters</span>
+<span class="n">t0</span> <span class="o">=</span> <span class="mf">0.</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="mf">10.</span>
+<span class="n">num_steps</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="n">t1</span> <span class="o">/</span> <span class="n">num_steps</span>
+<span class="n">num_datapoints</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">atol</span> <span class="o">=</span> <span class="mf">1e-4</span>
+
+<span class="c1"># Hidden size for transition dynamics</span>
+<span class="n">hidden_size</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="c1"># Set state size to 2 for 2D plots</span>
+<span class="n">state_size</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="c1"># New transition dynamics with random weights</span>
+<span class="n">node_ground_truth</span> <span class="o">=</span> <span class="n">NODE</span><span class="p">(</span><span class="n">hidden_size</span><span class="o">=</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">state_size</span><span class="o">=</span><span class="n">state_size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+
+<span class="c1"># Initial positions</span>
+<span class="n">z0</span> <span class="o">=</span> <span class="mi">20</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">num_datapoints</span> <span class="o">*</span> <span class="n">state_size</span><span class="p">))</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span>
+
+<span class="c1"># Numerical solve for final conditions</span>
+<span class="n">z1</span> <span class="o">=</span> <span class="n">node_ground_truth</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">z0</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">atol</span><span class="p">,</span> <span class="n">forward</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">loglik</span> <span class="o">=</span> <span class="n">node_ground_truth</span><span class="o">.</span><span class="n">loglik</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">z1</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">state_size</span><span class="p">)),</span>
+                                  <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">z1</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">state_size</span><span class="p">)))</span> <span class="o">/</span> <span class="n">num_datapoints</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Drew </span><span class="si">{</span><span class="n">num_datapoints</span><span class="si">:</span><span class="s1">4d</span><span class="si">}</span><span class="s1"> datapoints from the ground truth. &#39;</span>
+      <span class="sa">f</span><span class="s1">&#39;Log-likelihood (per datapoint): </span><span class="si">{</span><span class="n">loglik</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>Drew  500 datapoints from the ground truth. Log-likelihood (per datapoint): -1.838
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s draw a new model with randomly initialised weights, and train it using the data drawn above.</p>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Change random seeds to draw different model</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">set_seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">num_train_steps</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">1e-2</span>
+
+<span class="c1"># New transition dynamics with random weights</span>
+<span class="n">node_learnt</span> <span class="o">=</span> <span class="n">NODE</span><span class="p">(</span><span class="n">hidden_size</span><span class="o">=</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">state_size</span><span class="o">=</span><span class="n">state_size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+
+<span class="n">z1_data</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">z1</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">state_size</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+
+<span class="n">optimiser</span> <span class="o">=</span> <span class="n">tfk</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_train_steps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    
+    <span class="n">z1_pred</span> <span class="o">=</span> <span class="n">node_learnt</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">z0</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">atol</span><span class="p">,</span> <span class="n">forward</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="n">z1_pred</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">z1_pred</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">state_size</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+
+    <span class="n">za1</span> <span class="o">=</span> <span class="n">node_learnt</span><span class="o">.</span><span class="n">backward_initial_conditions</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">z1_pred</span><span class="p">,</span> <span class="n">z1_data</span><span class="p">)</span>
+    <span class="n">za1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">za1</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,))</span>
+    
+    <span class="n">za0</span> <span class="o">=</span> <span class="n">node_learnt</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">za1</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">atol</span><span class="p">,</span> <span class="n">forward</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    
+    <span class="n">gradients</span> <span class="o">=</span> <span class="n">node_learnt</span><span class="o">.</span><span class="n">gradients_from_za</span><span class="p">(</span><span class="n">za0</span><span class="p">)</span>
+    
+    <span class="n">optimiser</span><span class="o">.</span><span class="n">apply_gradients</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">gradients</span><span class="p">,</span> <span class="n">node_learnt</span><span class="o">.</span><span class="n">variables</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">50</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">loglik</span> <span class="o">=</span> <span class="n">node_learnt</span><span class="o">.</span><span class="n">loglik</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">z1_pred</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">state_size</span><span class="p">)),</span>
+                                    <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">z1_data</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">state_size</span><span class="p">)))</span> <span class="o">/</span> <span class="n">num_datapoints</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;step: </span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s1">4d</span><span class="si">}</span><span class="s1"> log-likelihood (per datapoint): </span><span class="si">{</span><span class="n">loglik</span><span class="si">:</span><span class="s1">10.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>step:    0 log-likelihood (per datapoint):   -283.869
+step:   50 log-likelihood (per datapoint):    -50.833
+step:  100 log-likelihood (per datapoint):     -7.577
+step:  150 log-likelihood (per datapoint):     -2.579
+step:  200 log-likelihood (per datapoint):     -2.199
+step:  250 log-likelihood (per datapoint):     -2.061
+step:  300 log-likelihood (per datapoint):     -2.002
+step:  350 log-likelihood (per datapoint):     -1.975
+step:  400 log-likelihood (per datapoint):     -1.962
+step:  450 log-likelihood (per datapoint):     -1.955
+step:  500 log-likelihood (per datapoint):     -1.951
+step:  550 log-likelihood (per datapoint):     -1.949
+step:  600 log-likelihood (per datapoint):     -1.946
+step:  650 log-likelihood (per datapoint):     -1.945
+step:  700 log-likelihood (per datapoint):     -1.943
+step:  750 log-likelihood (per datapoint):     -1.941
+step:  800 log-likelihood (per datapoint):     -1.939
+step:  850 log-likelihood (per datapoint):     -1.938
+step:  900 log-likelihood (per datapoint):     -1.936
+step:  950 log-likelihood (per datapoint):     -1.934
+step: 1000 log-likelihood (per datapoint):     -1.932
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input tag_center-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Simulate and plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">titles</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Ground Truth&#39;</span><span class="p">,</span> <span class="s1">&#39;Learnt model&#39;</span><span class="p">]</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">node_ground_truth</span><span class="p">,</span> <span class="n">node_learnt</span><span class="p">]):</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Set ODE integrator</span>
+    <span class="n">ode</span> <span class="o">=</span> <span class="n">ODE</span><span class="p">(</span><span class="n">f</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">z</span> <span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">z</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,)))</span><span class="o">.</span><span class="n">set_integrator</span><span class="p">(</span><span class="s1">&#39;vode&#39;</span><span class="p">)</span>
+    <span class="n">ode</span> <span class="o">=</span> <span class="n">ode</span><span class="o">.</span><span class="n">set_initial_value</span><span class="p">(</span><span class="n">z0</span><span class="p">,</span> <span class="n">t0</span><span class="p">)</span>
+
+    <span class="c1"># For storing intermediate states for plotting</span>
+    <span class="n">states</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">z0</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">state_size</span><span class="p">))</span> <span class="c1"># np.zeros(shape=(num_datapoints, 0, state_size))</span>
+
+    <span class="c1"># Integrate numerically within time interval</span>
+    <span class="k">while</span> <span class="n">ode</span><span class="o">.</span><span class="n">successful</span><span class="p">()</span> <span class="ow">and</span> <span class="n">ode</span><span class="o">.</span><span class="n">t</span> <span class="o">&lt;</span> <span class="n">t1</span><span class="p">:</span>
+        <span class="n">next_states</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">ode</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">ode</span><span class="o">.</span><span class="n">t</span> <span class="o">+</span> <span class="n">dt</span><span class="p">),</span> <span class="p">(</span><span class="n">num_datapoints</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">state_size</span><span class="p">))</span>
+        <span class="n">states</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">states</span><span class="p">,</span> <span class="n">next_states</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Plot starting point and trajectory</span>
+    <span class="n">z0_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">z0</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="n">z1_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">z1</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+    
+    <span class="n">s1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">z0_</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">z0_</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">s2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">z1_</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">z1_</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># Plot the trajectories</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_datapoints</span><span class="p">):</span>
+        <span class="n">p</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">states</span><span class="p">[</span><span class="n">n</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">states</span><span class="p">[</span><span class="n">n</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">,</span> <span class="n">p</span><span class="p">],</span> 
+                   <span class="p">[</span><span class="sa">r</span><span class="s1">&#39;$\mathbf</span><span class="si">{z}</span><span class="s1">_0$&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$\mathbf</span><span class="si">{z}</span><span class="s1">_1$&#39;</span><span class="p">,</span> <span class="s1">&#39;Trajectory&#39;</span><span class="p">],</span>
+                   <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">,</span>
+                   <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">titles</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/node_14_0.png" src="../../../_images/node_14_0.png" />
+</div>
+</div>
+<p>We see that the learnt model has roughly learnt to predict <span class="math notranslate nohighlight">\(\mathbf{z}_1\)</span> from <span class="math notranslate nohighlight">\(\mathbf{z}_0\)</span>. The trajectories themselves are roughly similar to the ground truth model but not entirely the same - there is no reason the model would reproduce the shapes of the trajectories exactly in regions where there are no data. With further training, a better-tuned learning rate and stricter error tolerance, we can train the new model to predict <span class="math notranslate nohighlight">\(\mathbf{z}_1\)</span> much more closely.</p>
+</div>
+<div class="section" id="conclusions-and-follow-up-work">
+<h2>Conclusions and follow-up work<a class="headerlink" href="#conclusions-and-follow-up-work" title="Permalink to this headline">¶</a></h2>
+<p>That’s it for now. There are several things this page has not touched on, including using ODE solvers for Continuous Normalising flows,<a class="bibtex reference internal" href="#chen2018neural" id="id2">[CRBD18]</a> learning real datasets. There are several interesting follow-up works on Neural ODEs. One such follow-up is the Augmented Neural ODE <a class="bibtex reference internal" href="#dupont2019augmented" id="id3">[DDT19]</a> model. ODEs preserve the topology of the input space (they are a <a class="reference external" href="https://mathworld.wolfram.com/Diffeomorphism.html">diffeomorphism</a>) and therefore cannot learn certain functions of interest. Augmented Neural ODEs fix this by adding auxiliary dimensions, and solving in the augmented space. Another interesting follow-up is the Neural Controlled ODE<a class="bibtex reference internal" href="#kidger2020neural" id="id4">[KMFL20]</a> model. Given the initial conditions and ODE dynamics, the trajectory of the model is fully determined. The whole trajectory must therefore be encoded in the initial state, regardless of how long this trajectory is. We can imagine having to pack more and more information into the initial state is difficult. Neural CDEs address this issue by introducing a more flexible class of models. These models do not have the nice Markov property that ODE or other time series models (like RNNs or LSTMs) have, nor do they correspond to well-defined processes for generating data. However, they do help with learning more complicated functions and constitute a more expressive class of models. Lastly, <a class="reference external" href="https://slideslive.com/38923497/bullshit-that-i-and-others-have-said-about-neural-odes">David Duvenaud’s retrospective talk</a> on Neural ODEs is worth watching.</p>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p id="bibtex-bibliography-content/misc/node/node-0"><dl class="citation">
+<dt class="bibtex label" id="chen2018neural"><span class="brackets">CRBD18</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>)</span></dt>
+<dd><p>Ricky TQ Chen, Yulia Rubanova, Jesse Bettencourt, and David K Duvenaud. Neural ordinary differential equations. In <em>Advances in neural information processing systems</em>, 6571–6583. 2018.</p>
+</dd>
+<dt class="bibtex label" id="dupont2019augmented"><span class="brackets"><a class="fn-backref" href="#id3">DDT19</a></span></dt>
+<dd><p>Emilien Dupont, Arnaud Doucet, and Yee Whye Teh. Augmented neural odes. In <em>Advances in Neural Information Processing Systems</em>, 3140–3150. 2019.</p>
+</dd>
+<dt class="bibtex label" id="kidger2020neural"><span class="brackets"><a class="fn-backref" href="#id4">KMFL20</a></span></dt>
+<dd><p>Patrick Kidger, James Morrill, James Foster, and Terry Lyons. Neural controlled differential equations for irregular time series. <em>arXiv preprint arXiv:2005.08926</em>, 2020.</p>
+</dd>
+</dl>
+</p>
+</div>
+</div>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="../sde/num-sde.html" title="previous page">Numerical simulation of SDEs</a>
+    <a class='right-next' id="next-link" href="../optimisation/conjugate-gradients.html" title="next page">Conjugate gradients</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Stratos Markou<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../../../_static/js/index.js"></script>
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-168728006-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    
+  </body>
+</html>

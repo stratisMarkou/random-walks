@@ -35,7 +35,7 @@
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Conjugate gradients" href="../optimisation/conjugate-gradients.html" />
+    <link rel="next" title="Neural ODEs" href="../node/node.html" />
     <link rel="prev" title="Miscellaneous" href="../misc.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -86,14 +86,14 @@
   <li class="">
     <a href="../../prob-intro/intro.html">Probability: An introduction</a>
   </li>
-  <li class="">
-    <a href="../../analysis-i/intro.html">Analysis I</a>
-  </li>
   <li class="active">
     <a href="../misc.html">Miscellaneous</a>
   <ul class="nav sidenav_l2">
     <li class="active">
       <a href="">Numerical simulation of SDEs</a>
+    </li>
+    <li class="">
+      <a href="../node/node.html">Neural ODEs</a>
     </li>
     <li class="">
       <a href="../optimisation/conjugate-gradients.html">Conjugate gradients</a>
@@ -341,7 +341,7 @@ X(t) = \exp\left(t + \frac{1}{2}W(t)\right).
                  <span class="n">X_mean</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">X_stdev</span><span class="p">,</span>
                  <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span>
                  <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
-                 <span class="n">label</span><span class="o">=</span><span class="s1">&#39;2 Std. dev.&#39;</span><span class="p">)</span>
+                 <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Std. dev.&#39;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
@@ -411,22 +411,19 @@ Y = \int^1_0 W_t~dW_t,
 <p>By contrast, if we use the Stratonovich integral, we have</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
-  &amp;\sum_{n = 0}^{N - 1} W\left(\frac{t_{n+1} + t_n}{2}\right) \left(W(t_{n + 1}\right) - W(t_n)) = \\
-= ~&amp;\sum_{n = 0}^{N - 1} \left(\frac{W(t_{n + 1}) + W(t_n)}{2} + \Delta Z_n\right) \left(W(t_{n + 1}\right) - W(t_n))\\
-= ~&amp; \sum_{n = 0}^{N - 1} \frac{1}{2} W(t_{n + 1})^2 - \frac{1}{2} W(t_n)^2 + \Delta Z_n \left(W(t_{n + 1}\right) - W(t_n))\\
-= ~&amp; \frac{1}{2} W(T)^2 - \frac{1}{2} W(0)^2 + \sum_{n = 0}^{N - 1} \Delta Z_n \left(W(t_{n + 1}\right) - W(t_n)),
+\sum_{n = 0}^{N - 1} W\left(\frac{t_{n+1} + t_n}{2}\right) \left(W(t_{n + 1}\right) - W(t_n)) &amp;= \sum_{n = 0}^{N - 1} \left(\frac{W(t_{n + 1}) + W(t_n)}{2} + \Delta Z_n\right) \left(W(t_{n + 1}\right) - W(t_n))\\
+&amp;= \sum_{n = 0}^{N - 1} \frac{1}{2} W(t_{n + 1})^2 - \frac{1}{2} W(t_n)^2 + \Delta Z_n \left(W(t_{n + 1}\right) - W(t_n))\\
+&amp;= \frac{1}{2} W(T)^2 - \frac{1}{2} W(0)^2 + \sum_{n = 0}^{N - 1} \Delta Z_n \left(W(t_{n + 1}\right) - W(t_n)),
 \end{align}\end{split}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\Delta Z_n \sim \mathcal{N}(0, \delta t / 4)\)</span>. To obtain the first equality above, we used the fact that</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
-&amp; p\left(W\left(\frac{t_{n+1} + t_n}{2}\right)\big |~ W(t_{n+1}), W(t_{n})\right) =\\
-~\\
-=~&amp;\frac{p\left( W(t_{n+1}) | W\left(\frac{t_{n+1} + t_n}{2}\right)\right) p\left( W\left(\frac{t_{n+1} + t_n}{2}\right) \big | W(t_{n}) \right) p(W(t_n))}{p(W(t_{n+1}), W(t_{n}))},
+p\left(W\left(\frac{t_{n+1} + t_n}{2}\right)\big |~ W(t_{n+1}), W(t_{n})\right) = \frac{p\left( W(t_{n+1}) | W\left(\frac{t_{n+1} + t_n}{2}\right)\right) p\left( W\left(\frac{t_{n+1} + t_n}{2}\right) \big | W(t_{n}) \right) p(W(t_n))}{p(W(t_{n+1}), W(t_{n}))},\\
 \end{align}\end{split}\]</div>
-<p>and observed that the distribution above has the form of a product of gaussian functions, to obtain</p>
+<p>and observing that the distribution above has the form of a product of normal distributions over <span class="math notranslate nohighlight">\(W\left(\frac{t_{n+1} + t_n}{2}\right)\)</span>, we arrive at the result:</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
-&amp; p\left(W\left(\frac{t_{n+1} + t_n}{2}\right)\big |~ W(t_{n+1}), W(t_{n})\right) = \mathcal{N}\left(W\left(\frac{t_{n+1} + t_n}{2}\right); \frac{W(t_{n+1}) + W(t_{n})}{2}, \frac{\delta t}{4}\right).
+p\left(W\left(\frac{t_{n+1} + t_n}{2}\right)\big |~ W(t_{n+1}), W(t_{n})\right) = \mathcal{N}\left(W\left(\frac{t_{n+1} + t_n}{2}\right); \frac{W(t_{n+1}) + W(t_{n})}{2}, \frac{\delta t}{4}\right).
 \end{align}\]</div>
 <p>Since <span class="math notranslate nohighlight">\(\Delta Z_n\)</span> is independent of <span class="math notranslate nohighlight">\(W_t\)</span>, the term <span class="math notranslate nohighlight">\(\Delta Z_n \left(W(t_{n + 1}\right) - W(t_n))\)</span> has mean 0, and variance <span class="math notranslate nohighlight">\(\delta t^2 / 4\)</span>. Therefore, the sum term has mean 0 and variance <span class="math notranslate nohighlight">\(\mathcal{O}(\delta t)\)</span>, so in the limit of <span class="math notranslate nohighlight">\(\delta t \to 0\)</span> the integral converges to <span class="math notranslate nohighlight">\(\frac{1}{2}W(T)^2\)</span> under the Stratonovich definition.</p>
 </div>
@@ -595,103 +592,7 @@ X_t = X_0 \exp \left[\Big(\lambda - \frac{1}{2} \mu^2\Big)~t + \mu W(t)\right],
 <div class="cell_output docutils container">
 <img alt="../../../_images/num-sde_18_0.svg" src="../../../_images/num-sde_18_0.svg" /></div>
 </div>
-<p>We can change the accuracy of the solution by adjusting <span class="math notranslate nohighlight">\(N\)</span>. Let’s try another model for which we have analytic results. The mean-reverting Ornstein Uhlenbeck process has drift and diffusion functions</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{align}
-f(x, t) &amp;= \theta (x - \mu),\\
-g(x, t) &amp;= \sigma.          \\
-\end{align}\end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(x(0) = x_0\)</span>. This process has the closed form solution</p>
-<div class="math notranslate nohighlight">
-\[\begin{align}
-x(t) = x_0 e^{-\theta t} + \mu (1 - e^{-\theta t}) + \int^t_0 \sigma e^{-\theta \tau} dW(t).
-\end{align}\]</div>
-<p>The last integral must be evaluated numerically, however we can compute the mean and variance of this process in closed form. Since the integral is a linear combination of Gaussian random variables, it is a Gaussian random variable, so <span class="math notranslate nohighlight">\(x(t)\)</span> is Gaussian-distributed according to</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{align}
-                    x(t) &amp;\sim \mathcal{N}(\mu(t), \sigma^2(t)), \\
-                    ~\\
-   \text{ where } \mu(t) &amp;= x_0 e^{-\theta t} + \mu (1 - e^{-\theta t}), \\
-             \sigma^2(t) &amp;= \frac{\sigma^2}{2\theta}\left(1 - e^{-2\theta t}\right).
-\end{align}\end{split}\]</div>
-<p>If <span class="math notranslate nohighlight">\(\theta &gt; 0\)</span>, the model will quickly settle to fluctuating around a mean at <span class="math notranslate nohighlight">\(x = \mu\)</span>, with fluctuations of size <span class="math notranslate nohighlight">\(\sigma / \sqrt{2 \theta}\)</span>. The closure <code class="docutils literal notranslate"><span class="pre">mean_reverting_ou</span></code> gives the drift and diffusion functions for the mean-reverting OU process, while the second function gives the mean and variance of <span class="math notranslate nohighlight">\(x(t)\)</span>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mean_reverting_ou</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
-    
-    <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">theta</span> <span class="o">*</span> <span class="p">(</span><span class="n">mu</span> <span class="o">-</span> <span class="n">X</span><span class="p">)</span>
-    
-    <span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">grad</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="k">return</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">grad</span> <span class="k">else</span> <span class="n">sigma</span>
-    
-    <span class="k">return</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span>
-
-
-<span class="k">def</span> <span class="nf">exact_moments_mean_reverting_ou</span><span class="p">(</span><span class="n">X0</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-    
-    <span class="n">X_mean</span> <span class="o">=</span> <span class="n">X0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span> <span class="n">theta</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">mu</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span> <span class="n">theta</span> <span class="o">*</span> <span class="n">t</span><span class="p">))</span>
-    <span class="n">X_variance</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sigma</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">theta</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">theta</span> <span class="o">*</span> <span class="n">t</span><span class="p">))</span>
-    
-    <span class="k">return</span> <span class="n">X_mean</span><span class="p">,</span> <span class="n">X_variance</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Below we integrate the mean-reverting OU using EM as before. The process does indeed quickly settle to fluctuating around <span class="math notranslate nohighlight">\(x = 2\)</span>. The size of the error bars in <span class="math notranslate nohighlight">\(x\)</span> contains most datapoints, as expected.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mean-reverting OU parameters</span>
-<span class="n">theta</span> <span class="o">=</span> <span class="mf">5.</span>
-<span class="n">mu</span> <span class="o">=</span> <span class="mf">2.</span>
-<span class="n">sigma</span> <span class="o">=</span> <span class="mf">1.</span>
-
-<span class="c1"># Seed and integration parameters</span>
-<span class="n">seed</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">X0</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="n">T</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">N</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1e2</span><span class="p">)</span>
-
-<span class="c1"># Get drift and diffusion functions of the Mean-Revering OU model</span>
-<span class="n">f</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="n">mean_reverting_ornstein_uhlenbeck</span><span class="p">(</span><span class="n">theta</span><span class="o">=</span><span class="n">theta</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">)</span>
-
-<span class="c1"># Solve approximately via the EM method</span>
-<span class="n">t</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">W</span> <span class="o">=</span> <span class="n">euler_maruyama</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span> <span class="n">X0</span><span class="o">=</span><span class="n">X0</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="o">=</span><span class="n">g</span><span class="p">)</span>
-
-<span class="c1"># Compute exact moments of Mean-Reverting OU model</span>
-<span class="n">X_mean</span><span class="p">,</span> <span class="n">X_variance</span> <span class="o">=</span> <span class="n">exact_moments_mean_reverting_ou</span><span class="p">(</span><span class="n">X0</span><span class="o">=</span><span class="n">X0</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="n">theta</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell tag_center-output tag_hide-input docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Euler-Maruyama&#39;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">X_mean</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Mean&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">t</span><span class="p">,</span>
-                 <span class="n">X_mean</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">X_variance</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">,</span>
-                 <span class="n">X_mean</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">X_variance</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">,</span>
-                 <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span>
-                 <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
-                 <span class="n">label</span><span class="o">=</span><span class="s1">&#39;2 Std. dev.&#39;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;EM solution</span><span class="se">\n</span><span class="s1">of mean-reverting OU&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$t$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$X(t)$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../../_images/num-sde_23_0.svg" src="../../../_images/num-sde_23_0.svg" /></div>
-</div>
-<p>Lastly, as a fun aside, what if we try a whackier drift term? One nice choice is</p>
+<p>We can change the accuracy of the solution by adjusting <span class="math notranslate nohighlight">\(N\)</span>. As a fun aside, what if we try out a different drift term? One nice choice is</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
 f(x, t) &amp;= \omega~\text{cos}(\omega t),\\
@@ -750,7 +651,7 @@ g(x, t) &amp;= \mu x.\\
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/num-sde_27_0.svg" src="../../../_images/num-sde_27_0.svg" /></div>
+<img alt="../../../_images/num-sde_22_0.svg" src="../../../_images/num-sde_22_0.svg" /></div>
 </div>
 </div>
 <div class="section" id="strong-and-weak-convergence">
@@ -865,8 +766,6 @@ for any fixed <span class="math notranslate nohighlight">\(\tau_n = n\Delta t \i
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../../_images/num-sde_30_0.svg" src="../../../_images/num-sde_30_0.svg" /></div>
 </div>
 </div>
 <div class="section" id="milstein-s-higher-order-method">
@@ -954,8 +853,6 @@ where <span class="math notranslate nohighlight">\(\Delta t &gt; 0\)</span> is t
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../../_images/num-sde_35_0.svg" src="../../../_images/num-sde_35_0.svg" /></div>
 </div>
 <div class="cell tag_hide-input tag_center-output docutils container">
 <div class="cell_input docutils container">
@@ -1021,8 +918,6 @@ where <span class="math notranslate nohighlight">\(\Delta t &gt; 0\)</span> is t
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../../_images/num-sde_36_0.svg" src="../../../_images/num-sde_36_0.svg" /></div>
 </div>
 </div>
 <div class="section" id="stochastic-chain-rule">
@@ -1037,13 +932,13 @@ dV &amp;= \frac{dV}{dX}dX = \frac{dV}{dX} f(t) dt, \text{ where } dX = f(t) dt,\
 \end{align}</p>
 <p>For an autonomous SDE however the chain rule takes a different form, which under the Ito definition is as follows.</p>
 <div class="theorem">
-<p><strong>Theorem (Ito’s result for one dimension)</strong> Let <span class="math notranslate nohighlight">\(X_t\)</span> be an Ito process given by</p>
+<p><strong>Definition (Ito’s result for one dimension)</strong> Let <span class="math notranslate nohighlight">\(X_t\)</span> be an Ito process given by</p>
 <p>\begin{align}
 dX_t = U_t dt + H_t dW_t.
 \end{align}</p>
 <p>where <span class="math notranslate nohighlight">\(U_t, H_t\)</span> are square-integrable processes, and let <span class="math notranslate nohighlight">\(V(X, t)\)</span> be a twice continuously differentiable function. Then <span class="math notranslate nohighlight">\(Y_t = V(X_t, t)\)</span> is again an Ito process and</p>
 <p>\begin{align}
-dY_t = \frac{\partial V}{\partial t} dt + \frac{\partial V}{\partial X} dX_t + \frac{1}{2}\frac{\partial^2 V}{\partial X^2} H_t^2 dt.
+dY_t = \frac{\partial V}{\partial t} dt + \frac{\partial V}{\partial X} dX_t + \frac{1}{2}\frac{\partial^2 V}{\partial X^2} V_t^2 dt.
 \end{align}</p>
 <p>If <span class="math notranslate nohighlight">\(V\)</span> does not depend on <span class="math notranslate nohighlight">\(t\)</span>, we have</p>
 <p>\begin{align}
@@ -1105,7 +1000,7 @@ dY_t = \left(\frac{\partial V}{\partial X} U_t + \frac{1}{2}\frac{\partial^2 V}{
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="../misc.html" title="previous page">Miscellaneous</a>
-    <a class='right-next' id="next-link" href="../optimisation/conjugate-gradients.html" title="next page">Conjugate gradients</a>
+    <a class='right-next' id="next-link" href="../node/node.html" title="next page">Neural ODEs</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
