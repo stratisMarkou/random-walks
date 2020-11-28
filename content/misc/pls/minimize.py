@@ -2,27 +2,27 @@ import autograd.numpy as np
 from autograd.scipy.stats import norm
 from autograd import grad, hessian
 
+import warnings
 
-def line_search(objective, c1, c2, wp_thresh, y0, t_guess):
+
+def line_search(objective, c1, c2, wp_thresh, t0, y0, t_guess):
     
     # Newton budget
     newton_budget = 6
     
     # Log noise to signal ratio grid for marginalisation
-    log_nsr_grid = np.linspace(-10., 4., 10)
+    log_nsr_grid = np.linspace(-20., 0., 6)
     
     # Make initial guess, initialise t and y arrays
     y_guess = objective(t_guess)
     
-    t = np.array([0, float(t_guess)])
+    t = np.array([t0, t0 + float(t_guess)])
     y = np.concatenate([y0, y_guess], axis=0)
-    
-    terminate = False
     
     # Loop until a WP acceptable point is found
     while True:
     
-        print(f'Executing linesearch loop, with {t.shape[0]:3d} points')
+        # print(f'Executing linesearch loop, with {t.shape[0]:3d} points')
         
         # Kalman filtering and smoothing for all models
         # results = (mf, Vf, ms, Vs, iVC, theta2, nlml)
@@ -45,7 +45,7 @@ def line_search(objective, c1, c2, wp_thresh, y0, t_guess):
         
         # If most probable WP point passes the probability threshold, return it
         idx_most_probable = np.argmax(wp_probs)
-        if wp_probs[idx_most_probable] >= wp_thresh or terminate:
+        if wp_probs[idx_most_probable] >= wp_thresh:
             return t, y, wp_probs, ms, Vs, iVC, post_probs
         
         # Optimise EI mixture over each interval separately
@@ -113,9 +113,18 @@ def A(dt):
 def Q(dt):
     
     Qdt = np.array([[dt ** 5 / 20, dt ** 4 / 8, dt ** 3 / 6],
-                    [dt ** 4 / 8, dt ** 3 / 3, dt ** 2 / 2],
-                    [dt ** 3 / 6, dt ** 2 / 2, dt]])
+                    [ dt ** 4 / 8, dt ** 3 / 3, dt ** 2 / 2],
+                    [ dt ** 3 / 6, dt ** 2 / 2, dt         ]])
     return Qdt
+
+
+def iQ(dt):
+    
+    iQdt = np.array([[ 720 * dt ** -5, -360 * dt ** -4,  60 * dt ** -3],
+                     [-360 * dt ** -4,  192 * dt ** -3, -36 * dt ** -2],
+                     [  60 * dt ** -3,  -36 * dt ** -2,   9 * dt ** -1]])
+    
+    return iQdt
 
 
 def filter_initialise(dt0, y, A0, C, n2):
@@ -265,6 +274,8 @@ def int_post_pred(dt1, m1, V1, dt2, m2, V2, iVC):
     A2 = A(dt2)
     Q1 = Q(dt1)
     Q2 = Q(dt2)
+    iQ1 = iQ(dt1)
+    iQ2 = iQ(dt2)
 
     # Compute Sigma, the variance matrix of p(x | x1, x2)
     A2Q1 = np.dot(A2, Q1)
@@ -272,12 +283,12 @@ def int_post_pred(dt1, m1, V1, dt2, m2, V2, iVC):
     Sigma = Q1 - np.dot(A2Q1.T, np.linalg.solve(Q2_plus_A2Q1A2T, A2Q1))
 
     # Compute the mean of p(x | data)
-    m = np.linalg.solve(Q1, np.dot(A1, m1)) + np.dot(A2.T, np.linalg.solve(Q2, m2))
+    m = iQ1 @ np.dot(A1, m1) + np.dot(A2.T, iQ2 @ m2)
     m = np.dot(Sigma, m)
 
     # Compute the variance of p(x | data)
-    iQ2A2 = np.linalg.solve(Q2, A2)
-    iQ1A1 = np.linalg.solve(Q1, A1)
+    iQ1A1 = iQ1 @ A1
+    iQ2A2 = iQ2 @ A2
     
     # Compute covariance from inverse variance times covariance matrix
     C = V2 @ iVC
@@ -471,7 +482,7 @@ def covariances_to_left(ms, Vs, iVC):
     N = ms.shape[0]
     
     C0 = np.zeros(shape=iVC.shape)
-    C0[0, :, :] = Vs[0] @ iVC[0]
+    C0[0, :, :] = Vs[1] @ iVC[0]
     
     M = iVC[0]
     
@@ -498,16 +509,35 @@ def wolfe_powell(c1, c2, t, ms, Vs, iVC):
         
         # Check WP2. Gradient is noiseless so check is a simple comparison
         if np.abs(ms[i, 1]) > np.abs(c2 * mdf0):
-            continue
+            wp_probs[i-1] = 0.
         
         # If WP2 met, check WP1 and set nonzero WP acceptance probability
         else:
             mu = ms[i, 0] - mf0
-            std = (Vs[0, 0, 0] + Vs[i, 0, 0] - 2 * C0[i-1, 0, 0]) ** 0.5
-            
+            var = Vs[0, 0, 0] + Vs[i, 0, 0] - 2 * C0[i-1, 0, 0]
+                
             alpha = c1 * t[i] * mdf0
-            alpha = (alpha - mu) / std
+            alpha = (alpha - mu)
             
-            wp_probs[i-1] = norm.cdf(alpha)
+            if var <= -1e-6:
+                raise Exception("WP standard deviation was <= 1e-6")
+                
+            elif -1e-6 <= var and var <= 0.:
+                
+                warnings.warn(f'wolfe_powell var was {var}. '
+                              'Treating this as 0, manually.')
+
+                if alpha == 0:
+                    wp_probs[i-1] = 0.5
+
+                elif alpha > 0.:
+                    wp_probs[i-1] = 1.
+
+                else:
+                    wp_probs[i-1] = 0.
+                        
+            else:
+                alpha = alpha / var ** 0.5
+                wp_probs[i-1] = norm.cdf(alpha)
             
     return wp_probs
