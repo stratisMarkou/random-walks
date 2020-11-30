@@ -27,6 +27,8 @@ def line_post_pred(t_data, ms, Vs, iVC, num_points=100):
 def plot_linesearch(c1,
                     c2,
                     t_data,
+                    mf,
+                    Vf,
                     ms,
                     Vs,
                     iVC,
@@ -37,6 +39,10 @@ def plot_linesearch(c1,
                     options=None):
     
     plt.figure(figsize=(14, 9))
+    
+    # Filtered posteriors
+    mf_average = np.sum(np.array(mf) * post_probs[:, None], axis=0)
+    Vf_average = np.sum(np.array(Vf) * post_probs[:, None, None], axis=0)
     
     # Smoothed posteriors
     ms_average = np.sum(np.array(ms) * post_probs[:, None], axis=0)
@@ -66,7 +72,45 @@ def plot_linesearch(c1,
     for i in range(3):
     
         # Plot smootthed posterior
-        plt.subplot(3, 3, 3 * i + 1)
+        plt.subplot(3, 4, 4 * i + 1)
+
+        if not(x is None):
+            plt.scatter(t_data, x[:, i], marker='x', color='blue', label=r'$x_{}$'.format(i+1))
+
+        if i < 2:
+            plt.scatter(t_data, y[:, i], marker='x', color='red', label=r'$y_{}$'.format(i+1))
+            
+        if i == 0:
+            
+            if not (options is None):
+                kfs_info = options['kfs_info']
+                plt.title('Filtered posterior (KFS)\n' + kfs_info, fontsize=16)
+                
+            else:
+                plt.title('Filtered posterior (KFS)', fontsize=16)
+                
+
+        plt.errorbar(x=t_data,
+                     y=mf_average[:, i],
+                     yerr=Vf_average[:, i, i] ** 0.5,
+                     color='black',
+                     zorder=2,
+                     fmt="none",
+                     label=r"$m_t^t \pm \sqrt{V_t^T}$",
+                     capsize=4)
+        
+        plt.xlabel(r'$t$', fontsize=16)
+        plt.legend(loc='upper right')
+
+        if i == 0:
+            plt.ylabel(r'$f$', fontsize=16)
+        if i == 1:
+            plt.ylabel(r"$f'$", fontsize=16)
+        if i == 2:
+            plt.ylabel(r"$f''$", fontsize=16)
+    
+        # Plot smootthed posterior
+        plt.subplot(3, 4, 4 * i + 2)
 
         if not(x is None):
             plt.scatter(t_data, x[:, i], marker='x', color='blue', label=r'$x_{}$'.format(i+1))
@@ -95,17 +139,10 @@ def plot_linesearch(c1,
         
         plt.xlabel(r'$t$', fontsize=16)
         plt.legend(loc='upper right')
-
-        if i == 0:
-            plt.ylabel(r'$f$', fontsize=16)
-        if i == 1:
-            plt.ylabel(r"$f'$", fontsize=16)
-        if i == 2:
-            plt.ylabel(r"$f''$", fontsize=16)
             
 
         # Plot Quintic Spline posterior
-        plt.subplot(3, 3, 3 * i + 2)
+        plt.subplot(3, 4, 4 * i + 3)
 
         plt.plot(t, m[:, i], color='k')
         
@@ -136,17 +173,12 @@ def plot_linesearch(c1,
 
         if i == 0:
             plt.title('Smoothed posterior', fontsize=16)
-            plt.ylabel(r'$f$', fontsize=16)
-        if i == 1:
-            plt.ylabel(r"$f'$", fontsize=16)
-        if i == 2:
-            plt.ylabel(r"$f''$", fontsize=16)
 
 
         # Plot WP acceptance probabilities
         if i < 2:
 
-            plt.subplot(3, 3, 3 * i + 3)
+            plt.subplot(3, 4, 4 * i + 4)
 
             if i == 0:
                 wp_line = ms[0, 0] + t * c1 * ms[0, 1]

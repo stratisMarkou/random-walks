@@ -41,12 +41,12 @@ def line_search(objective, c1, c2, wp_thresh, t0, y0, t_guess):
         wp_probs = np.sum(wp_probs, axis=0)
         
         # Unpack results
-        _, _, ms, Vs, iVC, _, _ = results
+        mf, Vf, ms, Vs, iVC, _, _ = results
         
         # If most probable WP point passes the probability threshold, return it
         idx_most_probable = np.argmax(wp_probs)
         if wp_probs[idx_most_probable] >= wp_thresh:
-            return t, y, wp_probs, ms, Vs, iVC, post_probs
+            return t, y, wp_probs, mf, Vf, ms, Vs, iVC, post_probs
         
         # Optimise EI mixture over each interval separately
         t_news, _ = newton_mixture_on_intervals(budget=newton_budget, 
@@ -64,7 +64,7 @@ def line_search(objective, c1, c2, wp_thresh, t0, y0, t_guess):
         y = np.insert(y, np.arange(y_news.shape[0]) + 1, y_news, axis=0)
 
 
-def kalman_filter_smoother(t, y, log_nsr):
+def kalman_filter_smoother(t, y, log_nsr, verbose=False):
     
     # Set arrays to store means and variances, compute time differences
     T = t.shape[0]
@@ -84,10 +84,12 @@ def kalman_filter_smoother(t, y, log_nsr):
     R = np.array([[n2, 0], [0, 0]])
     
     # Compute first two filtered posteriors
-    mf[0], mf[1], Vf[0], Vf[1] = filter_initialise(dt[0], y, A(dt[0]), C, n2)
+    mf[0, :], mf[1, :], Vf[0, :, :], Vf[1, :, :] = filter_initialise(dt[0], y, A(dt[0]), C, n2)
+    
+    if verbose: print(Vf[0, :, :])
     
     # Forward filtering steps
-    mf, Vf, S, theta2, nlml = filter_forward(dt, y, mf, Vf, S, C, R)
+    mf, Vf, S, theta2, nlml = filter_forward(dt, y, mf, Vf, S, C, R, verbose=verbose)
     
     # Backward smoothing steps
     ms, Vs, iVC = smooth_backward(dt, y, mf, Vf, S, ms, Vs, iVC, C, R)
@@ -98,6 +100,8 @@ def kalman_filter_smoother(t, y, log_nsr):
     # Adjust variances by overal scale parameter
     Vf = theta2 * Vf
     Vs = theta2 * Vs
+    
+    if verbose: print(Vf[0, :, :])
         
     return mf, Vf, ms, Vs, iVC, theta2, nlml
 
@@ -156,11 +160,12 @@ def filter_initialise(dt0, y, A0, C, n2):
     return mf1, mf2, Vf1, Vf2
 
 
-def filter_forward(dt, y, mf, Vf, S, C, R):
+def filter_forward(dt, y, mf, Vf, S, C, R, verbose=False):
     
     T = y.shape[0]
     
     diff = y[1, :] - np.dot(C, np.dot(A(dt[0]), mf[0, :]))
+    if verbose: print('diff', diff)
     quad = np.dot(np.array([[1, - dt[0] / 2]]), diff) ** 2 / (dt[0] ** 5 / 120 + 2 * R[0, 0])
     logdet = 2 * np.log(dt[0]) + np.log(dt[0] ** 5 + 240 * R[0, 0]) - np.log(120)
     
@@ -176,10 +181,18 @@ def filter_forward(dt, y, mf, Vf, S, C, R):
         mf[i, :] = np.dot(At, mf[i-1, :]) + kalman_dot(diff, S[i], C, R)
         Vf[i, :] = S[i] - kalman_dot(np.dot(C, S[i]), S[i], C, R)
         
-        R_CSCT = R + np.dot(C, np.dot(S[i], C.T))
+        R_CSCT = R + C @ S[i] @ C.T
         
-        quad = quad + np.dot(diff, iR_CMCT(diff, S[i], C, R)) # np.dot(diff, np.linalg.solve(R_CSCT, diff))
+        if verbose: print('quad', quad)
+        if verbose: print('diff', diff)
+        if verbose:
+            print('S')
+            print(S)
+            
+        quad = quad + np.dot(diff, np.linalg.solve(R_CSCT, diff)) # np.dot(diff, iR_CMCT(diff, S[i], C, R))
         logdet = logdet + np.linalg.slogdet(R_CSCT)[1]
+        
+    if verbose: print('quad', quad)
         
     theta2 = quad / (2 * T - 3)
     nlml = logdet / 2 + (2 * T - 3) * np.log(quad) / 2
@@ -231,12 +244,6 @@ def smoother_finalise(dt, y, mf, ms, Vs, iVC, n2):
     
     
 def kalman_dot(array, V, C, R):
-    
-#     [  c/(- b^2 + a*c + c*n),      -b/(- b^2 + a*c + c*n)]
-#     [ -b/(- b^2 + a*c + c*n), (a + n)/(- b^2 + a*c + c*n)]
-    
-#     R_CVCT = R + np.dot(C, np.dot(V, C.T))
-#     R_CVCT_inv_array = np.linalg.solve(R_CVCT, array)
 
     iR_CVCT_array = iR_CMCT(array, V, C, R)
     
@@ -251,6 +258,10 @@ def iR_CMCT(array, M, C, R):
     R_CMCT_inv_array = np.linalg.solve(R_CMCT, array)
     
     return R_CMCT_inv_array
+
+    
+#     [  c/(- b^2 + a*c + c*n),      -b/(- b^2 + a*c + c*n)]
+#     [ -b/(- b^2 + a*c + c*n), (a + n)/(- b^2 + a*c + c*n)]
 
 #     n2 = R[0, 0]
 #     B = np.dot(C, np.dot(M, C.T))
