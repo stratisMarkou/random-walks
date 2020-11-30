@@ -33,7 +33,8 @@ def plot_linesearch(c1,
                     post_probs,
                     wp_probs,
                     x=None,
-                    y=None):
+                    y=None,
+                    options=None):
     
     plt.figure(figsize=(14, 9))
     
@@ -74,7 +75,14 @@ def plot_linesearch(c1,
             plt.scatter(t_data, y[:, i], marker='x', color='red', label=r'$y_{}$'.format(i+1))
             
         if i == 0:
-            plt.title('Smoothed posterior (KFS)', fontsize=16)
+            
+            if not (options is None):
+                kfs_info = options['kfs_info']
+                plt.title('Smoothed posterior (KFS)\n' + kfs_info, fontsize=16)
+                
+            else:
+                plt.title('Smoothed posterior (KFS)', fontsize=16)
+                
 
         plt.errorbar(x=t_data,
                      y=ms_average[:, i],
@@ -186,4 +194,8 @@ def plot_linesearch(c1,
             plt.ylim([0, 1])
 
     plt.tight_layout()
+    
+    if not (options is None):
+        plt.savefig(options['save_path'])
+        
     plt.show()

@@ -129,7 +129,7 @@ def iQ(dt):
 
 def filter_initialise(dt0, y, A0, C, n2):
     
-    # Hard coded filtered variances (V11 is not used in smoothing pass)
+    # Hard coded filtered variances (Vf1 is never used at all)
     Vf1 = np.array([[n2, 0, 0],
                     [0, 0, 0],
                     [0, 0, float('inf')]])
@@ -178,7 +178,7 @@ def filter_forward(dt, y, mf, Vf, S, C, R):
         
         R_CSCT = R + np.dot(C, np.dot(S[i], C.T))
         
-        quad = quad + np.dot(diff, np.linalg.solve(R_CSCT, diff))
+        quad = quad + np.dot(diff, iR_CMCT(diff, S[i], C, R)) # np.dot(diff, np.linalg.solve(R_CSCT, diff))
         logdet = logdet + np.linalg.slogdet(R_CSCT)[1]
         
     theta2 = quad / (2 * T - 3)
@@ -232,12 +232,44 @@ def smoother_finalise(dt, y, mf, ms, Vs, iVC, n2):
     
 def kalman_dot(array, V, C, R):
     
-    R_CVCT = R + np.dot(C, np.dot(V, C.T))
-    R_CVCT_inv_array = np.linalg.solve(R_CVCT, array)
+#     [  c/(- b^2 + a*c + c*n),      -b/(- b^2 + a*c + c*n)]
+#     [ -b/(- b^2 + a*c + c*n), (a + n)/(- b^2 + a*c + c*n)]
     
-    K_array = np.dot(V, np.dot(C.T, R_CVCT_inv_array))
+#     R_CVCT = R + np.dot(C, np.dot(V, C.T))
+#     R_CVCT_inv_array = np.linalg.solve(R_CVCT, array)
+
+    iR_CVCT_array = iR_CMCT(array, V, C, R)
+    
+    K_array = np.dot(V, np.dot(C.T, iR_CVCT_array))
     
     return K_array
+
+
+def iR_CMCT(array, M, C, R):
+    
+    R_CMCT = R + np.dot(C, np.dot(M, C.T))
+    R_CMCT_inv_array = np.linalg.solve(R_CMCT, array)
+    
+    return R_CMCT_inv_array
+
+#     n2 = R[0, 0]
+#     B = np.dot(C, np.dot(M, C.T))
+    
+#     a = B[0, 0]
+#     b = B[0, 1]
+#     c = B[1, 1]
+    
+#     tmp1 = np.array([[c, -b],
+#                      [-b, a]])
+    
+#     tmp2 = np.array([[0, 0],
+#                      [0, n2]])
+#     tmp = (tmp1 @ array) + (tmp2 @ array)
+    
+#     tmp = tmp / ((a * c - b ** 2) + c * n2)
+    
+#     return tmp
+    
 
 
 def post_pred(t, t_data, ms, Vs, iVC):
