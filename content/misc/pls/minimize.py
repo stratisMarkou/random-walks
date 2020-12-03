@@ -4,6 +4,8 @@ from autograd import grad, hessian
 
 import warnings
 
+import matplotlib.pyplot as plt
+
 
 def line_search(objective, c1, c2, wp_thresh, t0, y0, t_guess):
     
@@ -11,7 +13,7 @@ def line_search(objective, c1, c2, wp_thresh, t0, y0, t_guess):
     newton_budget = 6
     
     # Log noise to signal ratio grid for marginalisation
-    log_nsr_grid = np.linspace(-20., 0., 6)
+    log_nsr_grid = np.linspace(-10., 0., 6)
     
     # Make initial guess, initialise t and y arrays
     y_guess = objective(t_guess)
@@ -25,23 +27,17 @@ def line_search(objective, c1, c2, wp_thresh, t0, y0, t_guess):
         # print(f'Executing linesearch loop, with {t.shape[0]:3d} points')
         
         # Kalman filtering and smoothing for all models
-        # results = (mf, Vf, ms, Vs, iVC, theta2, nlml)
-        results = [kalman_filter_smoother(t, y, log_nsr) \
-                  for log_nsr in log_nsr_grid]
-        
-        results = list(zip(*results))
+        results = kalman_filter_smoother(t, y, log_nsr_grid)
+        mf, Vf, ms, Vs, iVC, theta2, nlml = results
         
         # Compute posterior likelihood of each model
-        post_probs = np.array([np.exp(-nlml) for nlml in results[-1]])
+        post_probs = np.array([np.exp(-nlml_) for nlml_ in nlml])
         post_probs = post_probs / np.sum(post_probs)
         
         # Check for WP acceptable points
         wp_probs = [post_prob * wolfe_powell(c1, c2, t, ms, Vs, iVC) \
                     for post_prob, ms, Vs, iVC in zip(post_probs, *results[2:5])]
         wp_probs = np.sum(wp_probs, axis=0)
-        
-        # Unpack results
-        mf, Vf, ms, Vs, iVC, _, _ = results
         
         # If most probable WP point passes the probability threshold, return it
         idx_most_probable = np.argmax(wp_probs)
@@ -64,46 +60,82 @@ def line_search(objective, c1, c2, wp_thresh, t0, y0, t_guess):
         y = np.insert(y, np.arange(y_news.shape[0]) + 1, y_news, axis=0)
 
 
-def kalman_filter_smoother(t, y, log_nsr, verbose=False):
+def kalman_filter_smoother(t, y, log_nsr_grid, verbose=False):
     
-    # Set arrays to store means and variances, compute time differences
-    T = t.shape[0]
-    mf = np.zeros(shape=(T, 3))
-    Vf = np.zeros(shape=(T, 3, 3))
-    ms = np.zeros(shape=(T, 3))
-    Vs = np.zeros(shape=(T, 3, 3))
-    S = np.zeros(shape=(T, 3, 3))
-    iVC = np.zeros(shape=(T - 1, 3, 3))
-    dt = t[1:] - t[:-1]
+    result = []
     
-    # Noise variance to signal variance ratio
-    n2 = np.exp(log_nsr)
+#     t, y, scale = scale_kfs_inputs(t, y)
     
-    # Time independent state space model matrices
-    C = np.eye(3)[:2, :]
-    R = np.array([[n2, 0], [0, 0]])
+    for log_nsr in log_nsr_grid:
     
-    # Compute first two filtered posteriors
-    mf[0, :], mf[1, :], Vf[0, :, :], Vf[1, :, :] = filter_initialise(dt[0], y, A(dt[0]), C, n2)
+        # Set arrays to store means and variances, compute time differences
+        T = t.shape[0]
+        mf = np.zeros(shape=(T, 3))
+        Vf = np.zeros(shape=(T, 3, 3))
+        ms = np.zeros(shape=(T, 3))
+        Vs = np.zeros(shape=(T, 3, 3))
+        S = np.zeros(shape=(T, 3, 3))
+        iVC = np.zeros(shape=(T - 1, 3, 3))
+        dt = t[1:] - t[:-1]
+
+        # Noise variance to signal variance ratio
+        n2 = np.exp(log_nsr)
+
+        # Time independent state space model matrices
+        C = np.eye(3)[:2, :]
+        R = np.array([[n2, 0], [0, 0]])
+
+        # Compute first two filtered posteriors
+        mf[0, :], mf[1, :], Vf[0, :, :], Vf[1, :, :] = filter_initialise(dt[0], y, A(dt[0]), C, n2)
+
+        # Forward filtering steps
+        mf, Vf, S, theta2, nlml = filter_forward(dt, y, mf, Vf, S, C, R, verbose=verbose)
+
+        # Backward smoothing steps
+        ms, Vs, iVC = smooth_backward(dt, y, mf, Vf, S, ms, Vs, iVC, C, R)
+
+        # Compute the first smoothed posterior
+        ms, Vs, iVC = smoother_finalise(dt, y, mf, ms, Vs, iVC, n2)
+
+        # Adjust variances by overal scale parameter
+        Vf = theta2 * Vf
+        Vs = theta2 * Vs
     
-    if verbose: print(Vf[0, :, :])
-    
-    # Forward filtering steps
-    mf, Vf, S, theta2, nlml = filter_forward(dt, y, mf, Vf, S, C, R, verbose=verbose)
-    
-    # Backward smoothing steps
-    ms, Vs, iVC = smooth_backward(dt, y, mf, Vf, S, ms, Vs, iVC, C, R)
-    
-    # Compute the first smoothed posterior
-    ms, Vs, iVC = smoother_finalise(dt, y, mf, ms, Vs, iVC, n2)
-    
-    # Adjust variances by overal scale parameter
-    Vf = theta2 * Vf
-    Vs = theta2 * Vs
-    
-    if verbose: print(Vf[0, :, :])
+#         mf, Vf, ms, Vs, iVC, theta2 = scale_kfs_outputs(mf, Vf, ms, Vs, iVC, theta2, scale)
+
+        result.append([mf, Vf, ms, Vs, iVC, theta2, nlml])
         
-    return mf, Vf, ms, Vs, iVC, theta2, nlml
+    result = list(zip(*result))
+    
+    return result
+
+
+# def scale_kfs_inputs(t, y):
+    
+#     scale = 1. # np.max(t)
+    
+#     t = t.copy()
+#     y = y.copy()
+    
+#     t = t / scale
+#     y[:, 1] = y[:, 1] * scale
+    
+#     return t, y, scale
+
+
+# def scale_kfs_outputs(mf, Vf, ms, Vs, iVC, theta2, scale):
+    
+#     scale = np.array([1., scale, scale ** 2])
+    
+#     ms = ms / scale[None, :]
+#     mf = mf / scale[None, :]
+    
+#     Vs = Vs / (scale[None, :, None] * scale[None, None, :])
+#     Vf = Vf / (scale[None, :, None] * scale[None, None, :])
+    
+#     theta2 = theta2 * scale ** 5
+    
+#     return ms, Vf, ms, Vs, iVC, theta2
 
 
 def A(dt):
@@ -165,7 +197,7 @@ def filter_forward(dt, y, mf, Vf, S, C, R, verbose=False):
     T = y.shape[0]
     
     diff = y[1, :] - np.dot(C, np.dot(A(dt[0]), mf[0, :]))
-    if verbose: print('diff', diff)
+#     if verbose: print('diff', diff)
     quad = np.dot(np.array([[1, - dt[0] / 2]]), diff) ** 2 / (dt[0] ** 5 / 120 + 2 * R[0, 0])
     logdet = 2 * np.log(dt[0]) + np.log(dt[0] ** 5 + 240 * R[0, 0]) - np.log(120)
     
@@ -183,16 +215,16 @@ def filter_forward(dt, y, mf, Vf, S, C, R, verbose=False):
         
         R_CSCT = R + C @ S[i] @ C.T
         
-        if verbose: print('quad', quad)
-        if verbose: print('diff', diff)
-        if verbose:
-            print('S')
-            print(S)
+#         if verbose: print('quad', quad)
+#         if verbose: print('diff', diff)
+#         if verbose:
+#             print('S')
+#             print(S)
             
         quad = quad + np.dot(diff, np.linalg.solve(R_CSCT, diff)) # np.dot(diff, iR_CMCT(diff, S[i], C, R))
         logdet = logdet + np.linalg.slogdet(R_CSCT)[1]
         
-    if verbose: print('quad', quad)
+#     if verbose: print('quad', quad)
         
     theta2 = quad / (2 * T - 3)
     nlml = logdet / 2 + (2 * T - 3) * np.log(quad) / 2
@@ -584,3 +616,238 @@ def wolfe_powell(c1, c2, t, ms, Vs, iVC):
                 wp_probs[i-1] = norm.cdf(alpha)
             
     return wp_probs
+
+
+
+
+
+
+
+
+
+
+
+
+def line_post_pred(t_data, ms, Vs, iVC, num_points=100):
+
+    tdiff = t_data[-1] - t_data[0]
+    tmin = t_data[0] + tdiff * 1e-2
+    tmax = t_data[-1] + 0.5 * tdiff
+    
+    t = np.linspace(tmin, tmax, num_points)
+    
+    mean, var = list(zip(*[post_pred(t_, t_data, ms, Vs, iVC) for t_ in t]))
+    
+    mean = np.array(mean)
+    var = np.array(var)
+            
+    return t, mean, var
+            
+            
+def plot_linesearch(c1,
+                    c2,
+                    t_data,
+                    mf,
+                    Vf,
+                    ms,
+                    Vs,
+                    iVC,
+                    post_probs,
+                    wp_probs,
+                    x=None,
+                    y=None,
+                    options=None):
+    
+    plt.figure(figsize=(14, 9))
+    
+    # Filtered posteriors
+    mf_average = np.sum(np.array(mf) * post_probs[:, None], axis=0)
+    Vf_average = np.sum(np.array(Vf) * post_probs[:, None, None], axis=0)
+    
+    # Smoothed posteriors
+    ms_average = np.sum(np.array(ms) * post_probs[:, None], axis=0)
+    Vs_average = np.sum(np.array(Vs) * post_probs[:, None, None], axis=0)
+    
+    # Interpolated/extrapolated posterior
+    posteriors = list(zip(*[line_post_pred(t_data, ms_, Vs_, iVC_) \
+                            for ms_, Vs_, iVC_ in zip(ms, Vs, iVC)]))
+    
+    t, m, v = posteriors
+    t = t[0]
+    m = np.sum(np.array(m) * post_probs[:, None], axis=0)
+    v = np.sum(np.array(v) * post_probs[:, None, None], axis=0)
+    
+    ms = np.sum(np.array(ms) * post_probs[:, None], axis=0)
+    
+    ymin = np.min(y, axis=0)
+    ymax = np.max(y, axis=0)
+    yrange = ymax - ymin
+    ymin = ymin - 4e-1 * yrange
+    ymax = ymax + 4e-1 * yrange
+    
+    tmin = np.min(t, axis=0)
+    tmax = np.max(t, axis=0)
+    trange = tmax - tmin
+
+    for i in range(3):
+    
+        # Plot smootthed posterior
+        plt.subplot(3, 4, 4 * i + 1)
+
+        if not(x is None):
+            plt.scatter(t_data, x[:, i], marker='x', color='blue', label=r'$x_{}$'.format(i+1))
+
+        if i < 2:
+            plt.scatter(t_data, y[:, i], marker='x', color='red', label=r'$y_{}$'.format(i+1))
+            
+        if i == 0:
+            
+            if not (options is None):
+                kfs_info = options['kfs_info']
+                plt.title('Filtered posterior (KFS)\n' + kfs_info, fontsize=16)
+                
+            else:
+                plt.title('Filtered posterior (KFS)', fontsize=16)
+                
+
+        plt.errorbar(x=t_data,
+                     y=mf_average[:, i],
+                     yerr=Vf_average[:, i, i] ** 0.5,
+                     color='black',
+                     zorder=2,
+                     fmt="none",
+                     label=r"$m_t^t \pm \sqrt{V_t^T}$",
+                     capsize=4)
+        
+        plt.xlabel(r'$t$', fontsize=16)
+        plt.legend(loc='upper right')
+
+        if i == 0:
+            plt.ylabel(r'$f$', fontsize=16)
+        if i == 1:
+            plt.ylabel(r"$f'$", fontsize=16)
+        if i == 2:
+            plt.ylabel(r"$f''$", fontsize=16)
+    
+        # Plot smootthed posterior
+        plt.subplot(3, 4, 4 * i + 2)
+
+        if not(x is None):
+            plt.scatter(t_data, x[:, i], marker='x', color='blue', label=r'$x_{}$'.format(i+1))
+
+        if i < 2:
+            plt.scatter(t_data, y[:, i], marker='x', color='red', label=r'$y_{}$'.format(i+1))
+            
+        if i == 0:
+            
+            if not (options is None):
+                kfs_info = options['kfs_info']
+                plt.title('Smoothed posterior (KFS)\n' + kfs_info, fontsize=16)
+                
+            else:
+                plt.title('Smoothed posterior (KFS)', fontsize=16)
+                
+
+        plt.errorbar(x=t_data,
+                     y=ms_average[:, i],
+                     yerr=Vs_average[:, i, i] ** 0.5,
+                     color='black',
+                     zorder=2,
+                     fmt="none",
+                     label=r"$m_t^t \pm \sqrt{V_t^T}$",
+                     capsize=4)
+        
+        plt.xlabel(r'$t$', fontsize=16)
+        plt.legend(loc='upper right')
+            
+
+        # Plot Quintic Spline posterior
+        plt.subplot(3, 4, 4 * i + 3)
+
+        plt.plot(t, m[:, i], color='k')
+        
+        if not(x is None):
+            plt.scatter(t_data,
+                        x[:, i],
+                        marker='x',
+                        color='blue',
+                        label=r'$x_{}$'.format(i+1))
+
+        if i < 2:
+            plt.scatter(t_data,
+                        y[:, i],
+                        marker='x',
+                        color='red',
+                        label=r'$y_{}$'.format(i+1))
+
+        plt.fill_between(t,
+                         m[:, i] - v[:, i, i] ** 0.5,
+                         m[:, i] + v[:, i, i] ** 0.5,
+                         color='gray', alpha=0.5)
+        
+        plt.xlabel(r'$t$', fontsize=16)
+        if i < 2 or not (x is None): plt.legend(loc='upper right')
+            
+#         if i < 2:
+#             plt.ylim([ymin[i], ymax[i]])
+
+        if i == 0:
+            plt.title('Smoothed posterior', fontsize=16)
+
+
+        # Plot WP acceptance probabilities
+        if i < 2:
+
+            plt.subplot(3, 4, 4 * i + 4)
+
+            if i == 0:
+                wp_line = ms[0, 0] + t * c1 * ms[0, 1]
+                plt.plot(t, wp_line, '--', color='k')
+
+            else:
+                wp_line1 = c2 * np.abs(ms[0, 1]) * np.ones_like(t)
+                wp_line2 = - c2 * np.abs(ms[0, 1]) * np.ones_like(t)
+                
+                plt.plot(t, wp_line1, '--', color='k')
+                plt.plot(t, wp_line2, '--', color='k')
+
+            if not (x is None):
+                plt.scatter(t_data,
+                            x[:, i],
+                            marker='x',
+                            color='blue',
+                            label=r'$x_{}$'.format(i+1))
+                
+            plt.title('EI and WP acceptance probs', fontsize=16)
+
+            plt.plot(t, m[:, i], color='k')
+            plt.fill_between(t,
+                             m[:, i] - v[:, i, i] ** 0.5,
+                             m[:, i] + v[:, i, i] ** 0.5,
+                             color='gray', alpha=0.5)
+
+            plt.xlabel(r'$t$', fontsize=16)
+            if not (x is None): plt.legend(loc='upper right')
+            
+#             if i < 2:
+#                 plt.ylim([ymin[i], ymax[i]])
+
+            ax2 = plt.gca().twinx()
+            ax2.bar(t_data[1:],
+                    height=wp_probs,
+                    width=(trange/100),
+                    color='green',
+                    alpha=0.2,
+                    linewidth=1,
+                    edgecolor='black',
+                    label='WP acc. prob.')
+
+            plt.legend(loc='lower left')
+            plt.ylim([0, 1])
+
+    plt.tight_layout()
+    
+    if not (options is None):
+        plt.savefig(options['save_path'])
+        
+    plt.show()
