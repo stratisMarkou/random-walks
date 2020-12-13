@@ -13,7 +13,7 @@ def line_search(objective, c1, c2, wp_thresh, t0, y0, t_guess):
     newton_budget = 6
     
     # Log noise to signal ratio grid for marginalisation
-    log_nsr_grid = np.linspace(-10., 0., 6)
+    log_nsr_grid = np.linspace(-10., 10., 11)
     
     # Make initial guess, initialise t and y arrays
     y_guess = objective(t_guess)
@@ -24,10 +24,13 @@ def line_search(objective, c1, c2, wp_thresh, t0, y0, t_guess):
     # Loop until a WP acceptable point is found
     while True:
     
-        # print(f'Executing linesearch loop, with {t.shape[0]:3d} points')
+        print(f'Executing linesearch loop, with {t.shape[0]:3d} points')
+        
+        t_range = np.max(t) - np.min(t)
+        log_nsr_adjusted = log_nsr_grid + 5 * np.log(t_range)
         
         # Kalman filtering and smoothing for all models
-        results = kalman_filter_smoother(t, y, log_nsr_grid)
+        results = kalman_filter_smoother(t, y, log_nsr_adjusted)
         mf, Vf, ms, Vs, iVC, theta2, nlml = results
         
         # Compute posterior likelihood of each model
@@ -38,6 +41,20 @@ def line_search(objective, c1, c2, wp_thresh, t0, y0, t_guess):
         wp_probs = [post_prob * wolfe_powell(c1, c2, t, ms, Vs, iVC) \
                     for post_prob, ms, Vs, iVC in zip(post_probs, *results[2:5])]
         wp_probs = np.sum(wp_probs, axis=0)
+        
+        if t.shape[0] >= 16:
+            plot_linesearch(c1=c1,
+                            c2=c2,
+                            t_data=t,
+                            mf=mf,
+                            Vf=Vf,
+                            ms=ms,
+                            Vs=Vs,
+                            iVC=iVC,
+                            post_probs=post_probs,
+                            wp_probs=wp_probs,
+                            x=None,
+                            y=y)
         
         # If most probable WP point passes the probability threshold, return it
         idx_most_probable = np.argmax(wp_probs)
@@ -110,32 +127,32 @@ def kalman_filter_smoother(t, y, log_nsr_grid, verbose=False):
     return result
 
 
-# def scale_kfs_inputs(t, y):
+def scale_kfs_inputs(t, y):
     
-#     scale = 1. # np.max(t)
+    scale = 1. # np.max(t)
     
-#     t = t.copy()
-#     y = y.copy()
+    t = t.copy()
+    y = y.copy()
     
-#     t = t / scale
-#     y[:, 1] = y[:, 1] * scale
+    t = t / scale
+    y[:, 1] = y[:, 1] * scale
     
-#     return t, y, scale
+    return t, y, scale
 
 
-# def scale_kfs_outputs(mf, Vf, ms, Vs, iVC, theta2, scale):
+def scale_kfs_outputs(mf, Vf, ms, Vs, iVC, theta2, scale):
     
-#     scale = np.array([1., scale, scale ** 2])
+    scale = np.array([1., scale, scale ** 2])
     
-#     ms = ms / scale[None, :]
-#     mf = mf / scale[None, :]
+    ms = ms / scale[None, :]
+    mf = mf / scale[None, :]
     
-#     Vs = Vs / (scale[None, :, None] * scale[None, None, :])
-#     Vf = Vf / (scale[None, :, None] * scale[None, None, :])
+    Vs = Vs / (scale[None, :, None] * scale[None, None, :])
+    Vf = Vf / (scale[None, :, None] * scale[None, None, :])
     
-#     theta2 = theta2 * scale ** 5
+    theta2 = theta2 * scale ** 5
     
-#     return ms, Vf, ms, Vs, iVC, theta2
+    return ms, Vf, ms, Vs, iVC, theta2
 
 
 def A(dt):
