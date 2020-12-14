@@ -106,7 +106,8 @@ We are now at a position to introduce the axioms of probability. Although we ref
 </div>
 <br>
 
-## Independence
+(pnm-indep-event-alg)=
+## Independence of events and algebras
 
 Lastly, we introduce independent events. Independence is a key property of study in probability theory. Note that the independence of a potentially infinite number of events is defined in terms of *finite* sub-families of events.
 

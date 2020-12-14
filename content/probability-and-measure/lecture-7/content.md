@@ -141,3 +141,93 @@ We say that any $F$ with the above properties is a cdf.
 
 </div>
 <br>
+    
+    
+## Independence of random variables
+    
+<div class="definition">
+    
+**Definition (Independence of random variables)** A countable family $(X_i : i \in I)$ of random variables is independent if the family of $\sigma$-algebras induced by it $(\sigma(X_i) : i \in I)$ is {ref}`independent<pnm-indep-event-alg>`.
+    
+</div>
+<br>
+    
+    
+<div class="observation">
+    
+**Remark (Independence $\iff$ factorisation)** A family of independent random variables $(X_i : i \in I)$ in $\mathbb{R}$ is independent if and only if
+    
+$$ \mathbf{P}(X_1 \leq x_1, ..., X_n \leq x_n) = \mathbb{P}(X_1 \leq x_1) ... \mathbb{P}(X_n \leq x_n), $$
+    
+for all $x_i \in \mathbb{R}$, for all finite selections $X_1, ..., X_n$ of random variables in the family. 
+    
+</div>
+<br>
+    
+    
+## Construction of random variables
+    
+Here we construct three common random variables, the Rademacher, Bernoulli and Uniform random variables. More specifically, we will construct countably infinite famililies of independent Bernoulli and Uniform random variables.
+    
+
+<div class="definition">
+    
+**Definition (Rademacher random variable)** The Rademacher random variable $R_n : (0, 1) \to \{0, 1\}$ is the mapping
+    
+$$ R_n(\omega) = \omega_n, \text{ where } \omega = 0.\omega_1\omega_2 ... \omega_n ... $$
+    
+is the binary expansion of $\omega$ - made unique by prohibiting infinitely many trailing zeroes.
+    
+</div>
+<br>
+    
+    
+<div class="lemma">
+
+**Lemma (Family of Rademacher variables is Bernoulli)** The countably infinite family of Rademacher random variables $(R_n : n \in \mathbb{N})$ is independent and identically distributed, with
+    
+$$ \mathbb{P}(R_n = 0) = \mathbb{P}(R_n = 1) = \frac{1}{2}. $$
+
+</div>
+<br>
+    
+    
+<div class="lemma">
+
+**Lemma (Construction of uniformly distributed family)** Given a bijection $m : \mathbb{N}^2 \to \mathbb{N}$, the random variable
+    
+$$ U_n = \sum_{k = 1}^\infty 2^{-k} U_{nk}, \text{ where } U_{nk} = R_{m(n,k)}$$
+    
+are indepnendent and uniformly distributed on $(0, 1)$.
+
+</div>
+<br>
+    
+    
+<div class="observation">
+
+**Remark (Family of cdfs $\implies$ family of independent r.v.s exists)** Let $(F_n : n \in \mathbb{N})$ be any sequence of probability distribution functions on $\mathbb{R}$. Then, there exist independent random variables $(X_n : n \in \mathbb{N})$ defined on $(\Omega, \mathcal{F}, \mathbb{P}) = ((0, 1), \mathcal{B}(0, 1), \mu_{|(0, 1)})$ such that their probability distributions are $F_{X_n} = F_n$ for all $n \in \mathbb{N}$.
+
+</div>
+<br>
+    
+
+<details class="proof">
+<summary>Proof: Family of cdfs \(\implies\) family of independent r.v.s exists</summary>
+
+Let $Y_n \sim U(0, 1)$ be a family of i.i.d. random variables and set
+    
+$$ X_n = G_n(Y_n) \text{ where } G_n(y) = \inf \{ x : y \leq F_n(x)\}. $$
+    
+Then by the lemma of generalised inverses, we have
+    
+$$\begin{align}
+\mathbb{P}(X_n \leq x_n) &= \mathbb{P}(G_n(Y_n) \leq x_n) \\
+                         &= \mathbb{P}(Y_n \leq F_n(x_n)) \\
+                         &= F_n(x_n),
+\end{align}$$
+    
+arriving at the result.
+    
+</details>
+<br>
