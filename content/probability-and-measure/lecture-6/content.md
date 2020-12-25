@@ -3,6 +3,7 @@
 This page briefly states and proves the Borel-Cantelli lemmas and then focuses on the measurability of functions. A function from one measurable space to another is called measurable if the pre-image of every set in its range sigma-algebra is in its domain sigma-algebra. We state and prove some results on the measurability of functions, including the monotone classes theorem.
     
     
+(pnm-bcl)=
 ## Borel-Cantelli lemmas
 
 First we introduce the defintion of liminf and limsup in the context of sets.
@@ -11,8 +12,8 @@ First we introduce the defintion of liminf and limsup in the context of sets.
     
 **Definition (liminf and limsup)** We define the $\lim \inf$ and $\lim \sup$ of sets as
     
-$$\begin{align} \lim \sup A_n &= \bigcup_n \bigcap_{m \geq n} A_m = \{A_n \text{ infinitely often (i.o.)}\} \\
-\lim \inf A_n &= \bigcap_n \bigcup_{m \geq n} A_m = \{A_n \text{ eventually}\}\end{align}$$
+$$\begin{align} \lim \sup A_n &= \bigcap_n \bigcup_{m \geq n} A_m = \{A_n \text{ infinitely often (i.o.)}\} \\
+\lim \inf A_n &= \bigcup_n \bigcap_{m \geq n} A_m = \{A_n \text{ eventually}\}\end{align}$$
     
 </div>
 <br>
@@ -34,9 +35,9 @@ The first Borell-Cantelli lemma states that if the sum of the probabilities of a
 By definition we have
     
 $$\begin{align}
-\mathbb{P}(A \text{ i.o.}) &= \mathbb{P}\left(\cap_n \cap_{m \geq n} A_m\right) \\
-                           &\geq \mathbb{P}\left(\cap_{m \geq n} A_m\right) \text{ for all } n\\
-                           &\geq \sum_{m \geq n}\mathbb{P}\left(A_m\right) \to 0 \text{ as } n \to \infty.
+\mathbb{P}(A \text{ i.o.}) &= \mathbb{P}\left(\cap_n \cup_{m \geq n} A_m\right) \\
+                           &\leq \mathbb{P}\left(\cup_{m \geq n} A_m\right) \text{ for all } n\\
+                           &\leq \sum_{m \geq n}\mathbb{P}\left(A_m\right) \to 0 \text{ as } n \to \infty.
 \end{align}$$
     
 Hence $\sum_n \mathbb{P}(A_n) < \infty \implies \mathbb{P}(A_n \text{ i.o.}) = 0$.

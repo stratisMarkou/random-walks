@@ -44,17 +44,21 @@ Let $y \in I$ and define the set
     
 $$ J_y = \{x : y \leq g(x)\}, $$
     
-which is non-empty since $g(-\infty) < y < g(\infty)$ so we can always find some $x$ suuch that $y \leq g(x)$. Since $J_y$ is non-empty, its infimum is finite and we write
+which is non-empty since $g(-\infty) < y < g(\infty)$ so we can always find some $x$ such that $y \leq g(x)$. Since $J_y$ is non-empty, its infimum is finite and we write
         
 $$ f(y) = \inf J_y. $$
 
-If $x \in J_y$ and $x' \geq x$ then $y \leq g(x) \leq g(x')$ because $g$ is increasing, so $x' \in J_y$. Also for any sequence $x_n \in J_y$ such that $x_n \downarrow x$, we have $y \leq g(x)$ by right continuity so $J_y = [f(y), \infty)$. Therefore
+If $x \in J_y$ and $x \leq x'$ then $y \leq g(x) \leq g(x')$ because $g$ is increasing, so $x' \in J_y$. Also for any sequence $x_n \in J_y$ such that $x_n \downarrow x$, we have $y \leq g(x)$ by right continuity. This implies $y \leq g(f(y))$ so $f(y) \in J_y = [f(y), \infty)$ and also
     
-$$f(y) \leq x \iff y \leq g(x).$$
+$$f(y) \leq x \iff y \leq g(x). $$
     
-In addition, $y' \leq y \implies J_y \subseteq J_{y'} \implies f(y') \leq f(y)$ hence $f$ is increasing. Lastly if $y_n \uparrow y$, then $J_y = \lim_{n \to \infty} \bigcap_n J_{y_n}$ so
+The $\implies$ part of above follows by applying $g$ to either side of $f(y) \leq x$ and the $\impliedby$ part follows by considering that if $y \leq g(x)$, then $J_y = [f(y), \infty)$ contains $x$.
     
-$$ f(y_n) = \inf J_{y_n} = \inf \bigcap^n_k J_{y_k} \to f(y). $$
+Last, since $y' \leq y \implies J_y \subseteq J_{y'} \implies f(y') \leq f(y)$ hence $f$ is increasing. Lastly if $y_n \uparrow y$, then $J_y = \lim_{n \to \infty} \bigcap_n J_{y_n}$ so
+    
+$$ f(y_n) = \inf J_{y_n} = \inf \bigcap^n_{k = 1} J_{y_k} \to f(y), $$
+    
+and $f$ is left-continuous.
     
 </details>
 <br>
@@ -62,7 +66,7 @@ $$ f(y_n) = \inf J_{y_n} = \inf \bigcap^n_k J_{y_k} \to f(y). $$
 
 <div class="theorem">
     
-**Definition (Existence of Radon measures on $\mathbb{R}$)** Let $g : \mathbb{R} \to \mathbb{R}$ be a non-constant, right-continuous and non-decreasing function. Then there exists a {ref}`Radon measure<pnm-borel-sig-alg>` $\mu_g$ on $\mathcal{B}$ such that
+**Theorem (Existence of Radon measures on $\mathbb{R}$)** Let $g : \mathbb{R} \to \mathbb{R}$ be a non-constant, right-continuous and non-decreasing function. Then there exists a {ref}`Radon measure<pnm-borel-sig-alg>` $\mu_g$ on $\mathcal{B}$ such that
     
 $$ \mu_g((a, b]) = g(b) - g(a),$$
     
@@ -219,7 +223,7 @@ Let $Y_n \sim U(0, 1)$ be a family of i.i.d. random variables and set
     
 $$ X_n = G_n(Y_n) \text{ where } G_n(y) = \inf \{ x : y \leq F_n(x)\}. $$
     
-Then by the lemma of generalised inverses, we have
+Then by the {ref}`lemma of generalised inverses<pnm-generalised-inv>`, we have
     
 $$\begin{align}
 \mathbb{P}(X_n \leq x_n) &= \mathbb{P}(G_n(Y_n) \leq x_n) \\
@@ -231,3 +235,156 @@ arriving at the result.
     
 </details>
 <br>
+    
+    
+## Convergence of random variables
+    
+    
+<div class="definition">
+    
+**Definition (Almost everywhere properties)** Let $(E, \mathcal{E}, \mu)$ be a measurable space. Then a property defining $A \in \mathcal{E}$ is said to hold almost everywhere if $\mu(A^C) = 0$. When $(E, \mathcal{E}, \mu) = (\Omega, \mathcal{F}, \mathbb{P})$, we say the property holds almost surely.
+    
+</div>
+<br>
+    
+    
+<div class="definition">
+    
+**Definition (Convergence almost everywhere/always)** A sequence of measurable $f_n : E \to \mathbb{R}$ is said to converge almost everywhere to $f : E \to \mathbb{R}$ if
+    
+$$ \mu(x \in E : f_n(x) \not \to f(x)) = 0. $$
+    
+where we note that $f$ need not be measurable. If $\mu$ is a probability measure, we say the sequence converges almost always.
+    
+</div>
+<br>
+    
+    
+<div class="definition">
+    
+**Definition (Convergence in mesasure/probability)** If $f_n, f : E \to \mathbb{R}$ are measurable maps, we say $f_n$ converges to $f$ in measure/probability if
+    
+$$\mu(x \in E : |f_n(x) - f(x)| > \epsilon ) \to 0, $$
+    
+for any $\epsilon > 0$.
+    
+</div>
+<br>
+    
+    
+<div class="definition">
+    
+**Definition (Convergence in distribution)** For randomm variables $X_n$ on $\mathbb{R}$, we say that $X_n$ converges to $X$ in distribution if the distribution functions
+    
+$$ F_{X_n}(x) \to F_X(x), $$
+    
+wherever $F_X$ is continuous.
+    
+</div>
+<br>
+    
+The reason we restrict the requirement for convergence only to those points where $F_X$ is continuous is because otherwise this definition would be too restrictive. Consider for example{cite}`grimmettprob` the measurable space $(\mathbb{R}, \mathcal{B}, \mathbb{P})$ and sequences of random variables $X_n, Y_n, Z$ such that
+    
+$$ \mathbb{P}\left(X_n = -\frac{1}{n}\right) = 1, \mathbb{P}\left(Y_n = \frac{1}{n}\right) = 1, \mathbb{P}\left(Z = 0\right) = 1. $$
+    
+If convergence in distribution required convergence of CDFs everywhere (not just the points where $F_Z$ is continuous), we would have $F_X \to F_Z$ but $F_Y \not \to F_Z$, because the condition would not be met at the point $z = 0$, where $F_Z$ is discontinuous.
+    
+    
+<div class="theorem">
+    
+**Theorem (Convergence almost everywhere and in probability)** Let $(f_n : n \in \mathbb{N})$ be a sequence of measurable functions on $(E, \mathcal{E}, \mu)$.
+    
+1. If $\mu(E) < \infty$, then $f_n \to 0$ almost everywhere $\implies f_n \to 0$ in measure.
+2. If $f_n \to 0$ in measure, then $f_{n_k} \to 0$ a.e. along a subsequence $n_k$.
+    
+</div>
+<br>
+    
+
+<details class="proof">
+<summary>Proof: Convergence almost everywhere and in probability</summary>
+
+**Part 1** Suppose that $f_n \to 0$ almost everywhere and let $\epsilon > 0, n \in \mathbb{N}$. Then we have
+    
+$$ \{x : f_k(x) \to 0 \text{ as } k \to \infty\} \subseteq \{x : |f_n(x)| \leq \epsilon\}, $$
+    
+from which it follows that
+    
+$$ \mu(f_n \to_{n \to \infty} 0) \leq \mu(|f_n| \leq \epsilon), $$
+    
+and using the fact that $\mu(|f_n| \leq \epsilon) \to \mu(E)$ as $n \to \infty$ we have that
+
+$$ \mu(f_n \to 0) \to \mu(E) \text{ as } n \to \infty, $$
+    
+arriving at the result.
+    
+**Part 2** Suppose that $f_n \to 0$ in measure. We can set $\epsilon = \frac{1}{k}$ and choose a sequence $n_k$ such that
+   
+$$ \mu\left(|f_{n_k}| \geq \frac{1}{k}\right) = \frac{1}{k^2}. $$
+    
+Then summing these terms we obtain
+    
+$$ \sum_{k = 1}^\infty \mu(|f_{n_k}| \geq \frac{1}{k}) < \infty, $$
+    
+so by the {ref}`first Borell-Cantelli lemma<pnm-bcl>` (which also holds not only for probability spaces, but also for general measurable spaces) we have
+    
+$$ \mu\left(|f_{n_k}| \geq \frac{1}{k} \text{ i.o.}\right) = 0. $$
+    
+Therefore, it follows that $\mu(f_{n_k} \to 0) = \mu(E)$ because the set for which this condition does not hold is exactly the set for which $|f_{n_k}| \geq \frac{1}{k}$ occurs infinitely often.
+    
+</details>
+<br>
+    
+    
+<div class="observation">
+
+**Remark (On almost everywhere convergence and in measure)** The requirements for each part in the theorem above are necessary. Consider the following counterexamples
+    
+**Part 1** If $\mu(E) = \infty$, the following counterexample holds. Let $f_n = \mathbb{1}_(n, \infty)$. This sequence converges to $0$ almost everywhere as $n \to \infty$ but
+    
+$$ \mu(x : |f_n(x)| \geq \epsilon) = \mu((n, \infty)) = \infty. $$ 
+    
+**Part 2** It must be the case that $f_{n_k}$ converges to $f$ along the subsequence $n_k$ instead of along all integers, because otherwise the following counterexample holds. Take independent events $A_n$ such that
+    
+$$\mathbb{P}(A_n) = \frac{1}{n}.$$
+    
+Then by the {ref}`second Borell-Cantelli lemma<pnm-bcl>`, we have 
+    
+$$ \mathbb{P}(\mathbb{1}_{A_n} = 1 \text{ i.o.}) = 1, \text{ so } \mathbb{1}_{A_n} \not\to 0 \text{ a.s.}, $$
+    
+In contrast $\mathbb{P}(\mathbb{1}_{A_n} \geq \epsilon) = \mathbb{P}(A_n) = \frac{1}{n} \to 0$, so $\mathbb{1}_{A_n} \to 0$ in probability as $n \to \infty$.
+
+</div>
+<br>
+    
+    
+## Tail events
+    
+<div class="definition">
+    
+**Definition (Tail $\sigma$-algebras)** For $X_n$ any sequence of random variables set
+    
+\begin{align}
+\tau_n &= \sigma(X_{n+1}, X_{n+2}, ...), \\
+\tau &= \bigcap_n \tau_n,
+\begin{align}
+    
+where $\tau$ is called the tail-$\sigma$-algebra.
+    
+</div>
+<br>
+    
+    
+
+<div class="theorem">
+    
+**Theorem (Kolmogorov 0-1 law)** Let $X_n$ be independent random variables. If $A \in \tau$, where $\tau$ is the tail-$\sigma$-algebra defined by these events, then $\mathbb{P}(A) = 1$ or $\mathbb{P}(A) = 0$. If $Y : (\Omega, \tau, \mathbb{P}) \to \mathbb{R}$ is measurable, then $Y$ is almost surely constant.
+    
+</div>
+<br>
+    
+    
+## References
+
+```{bibliography} ./references.bib
+```

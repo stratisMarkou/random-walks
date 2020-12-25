@@ -46,7 +46,9 @@ Now we can define measures, which are the subject of study of this whole course.
 **Definition (Measure)** A measure $\mu$ on $(E, \mathcal{E})$ is a non-negative set function $\mu : \mathcal{E} \to [0, \infty]$ such that
 
 1. The measure of the empty set is $0$, $\mu(\emptyset) = 0$.
-2. It is countably additive, meaning that for any $A_n \in \mathcal{E}$ such that $A_n \cap A_m = \emptyset$ \begin{align} \mu\left(\bigcup_{n = 1}^\infty A_n \right) = \sum_{n = 1}^\infty \mu(A_n). \end{align}
+2. It is countably additive, meaning that for any $A_n \in \mathcal{E}$ such that $A_n \cap A_m = \emptyset$
+    
+$$\begin{align} \mu\left(\bigcup_{n = 1}^\infty A_n \right) = \sum_{n = 1}^\infty \mu(A_n). \end{align}$$
     
 We call the triplet $(E, \mathcal{E}, \mu)$ a measurable space.
     
