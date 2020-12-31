@@ -205,7 +205,7 @@ Hence $A = \bigcup_{n = 1}^\infty A_n \in \mathcal{M}$ and $\mathcal{M}$ is clos
     
 ## Outer measure is a measure
     
-We complete the proof by showing that the restriction of $\mu^*$ to the domain $\mathcal{M}$ is a measure on $\mathcal{M}$. Hence it is also a valid measure on $\sigma(\mathcal{A}) \subseteq \mathcal{A}$.
+We complete the proof by showing that the restriction of $\mu^*$ to the domain $\mathcal{M}$ is a measure on $\mathcal{M}$. Hence it is also a valid measure on $\sigma(\mathcal{A}) \supseteq \mathcal{A}$.
     
 <div class="lemma">
 

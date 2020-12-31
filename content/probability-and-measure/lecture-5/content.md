@@ -101,7 +101,11 @@ We are now at a position to introduce the axioms of probability. Although we ref
     
 1. $\mathbb{P}(\emptyset) = 0$ and $\mathbb{P}(\Omega) = 1$.
 2. Probabilities are positive, $\mathbb{P}(A) \geq 0$ for all $A \in \mathcal{A}$.
-3. The probability of countable unions of disjoint events is the sum of the probabilities of the events:  \begin{align} \mathbb{P}\left(\bigcup_{n \in \mathbb{N}} A_n\right) = \sum_{n \in \mathbb{N}}\mathbb{P}\left(A_n\right) \end{align} for all disjoint $A_n \in \mathcal{A}$.
+3. The probability of countable unions of disjoint events is the sum of the probabilities of the events:
+    
+$$\begin{align}
+\mathbb{P}\left(\bigcup_{n \in \mathbb{N}} A_n\right) = \sum_{n \in \mathbb{N}}\mathbb{P}\left(A_n\right) \text{ for all disjoint } A_n \in \mathcal{A}.
+\end{align}$$
     
 </div>
 <br>

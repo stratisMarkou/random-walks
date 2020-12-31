@@ -90,9 +90,9 @@ $$ \sigma(\mathcal{A}) = \{A \subseteq E : A \in \mathcal{E}~\forall~\sigma\text
 
 **Corollary ($\sigma(\mathcal{A})$ $=$ smallest $\sigma$-algebra containg $\mathcal{A}$)** It is the case that
 
-\begin{align}
+$$\begin{align}
 \sigma(\mathcal{A}) = \bigcap_{\mathcal{E}~\sigma\text{-algebra } \supseteq \mathcal{A}} \mathcal{E},
-\end{align}
+\end{align}$$
 
 and that $\sigma(A)$ is itself a $\sigma$-algebra.
     
@@ -104,15 +104,15 @@ and that $\sigma(A)$ is itself a $\sigma$-algebra.
 
 Suppose $A \in \sigma(\mathcal{A})$. Then $A \in \mathcal{E}$ for any $\sigma$-algebra that contains $\mathcal{A}$ and so
 
-\begin{align}
+$$\begin{align}
 A \in \bigcap_{\mathcal{E}~\sigma\text{-algebra } \supseteq \mathcal{A}} \mathcal{E}.
-\end{align}
+\end{align}$$
 
 Going the other way, if we start from
 
-\begin{align}
+$$\begin{align}
 A \in \bigcap_{\mathcal{E}~\sigma\text{-algebra } \supseteq \mathcal{A}} \mathcal{E},
-\end{align}
+\end{align}$$
 
 then also $\sigma(A)$, arriving at the first part of the result. Now we also clearly have $\emptyset \in \sigma(\mathcal{A})$. Suppose $B, A_n \in \sigma(\mathcal{A})$. First, since $B \in \mathcal{E}$ for all $\mathcal{E}$ that contain $\mathcal{A}$, we also have $B^C \in \mathcal{E}$ for all such $\mathcal{E}$, from which it follows $B^C \in \sigma(\mathcal{A})$. Similarly, we also have
 
@@ -165,10 +165,29 @@ $$ \mu : \mathcal{A} \to [0, \infty],~\mu(\emptyset) = 0.$$
 
 Further, we sey that $\mu$ is
 
-1. Increasing if $\forall A, B \in \mathcal{A}$, such that $A \subseteq B$ \begin{align} \mu(A) \leq \mu(B). \end{align}
-2. Additive if $\forall A, B \in \mathcal{A}$ such that $A \cup B = \emptyset$ and $A \cup B \in \mathcal{A}$ we have \begin{align} \mu(A \cup B) = \mu(A) + \mu(B). \end{align}
-3. Countably additive if $\forall A_n \in \mathcal{A}$ such that $A_i \cap A_j = \emptyset$ and $\bigcup_{n = 1}^\infty A_n \in \mathcal{A}$ we have \begin{align} \mu\left( \bigcup_{n = 1}^\infty A_n \right) =  \sum_{n = 1}^\infty \mu\left(A_n \right).\end{align}
-4. Countably sub-additive if $\forall A_n \in \mathcal{A}$ such that $\bigcup_{n = 1}^\infty A_n \in \mathcal{A}$ we have \begin{align} \mu\left( \bigcup_{n = 1}^\infty A_n \right) \leq \sum_{n = 1}^\infty \mu\left(A_n \right).\end{align}
+- Increasing if $\forall A, B \in \mathcal{A}$, such that $A \subseteq B$ 
+    
+$$\begin{align}
+    \mu(A) \leq \mu(B).
+\end{align}$$
+    
+- Additive if $\forall A, B \in \mathcal{A}$ such that $A \cup B = \emptyset$ and $A \cup B \in \mathcal{A}$ we have
+    
+$$\begin{align}
+\mu(A \cup B) = \mu(A) + \mu(B).
+\end{align}$$
+    
+- Countably additive if $\forall A_n \in \mathcal{A}$ such that $A_i \cap A_j = \emptyset$ and $\bigcup_{n = 1}^\infty A_n \in \mathcal{A}$ we have
+    
+$$\begin{align}
+\mu\left( \bigcup_{n = 1}^\infty A_n \right) =  \sum_{n = 1}^\infty \mu\left(A_n \right).
+\end{align}$$
+    
+- Countably sub-additive if $\forall A_n \in \mathcal{A}$ such that $\bigcup_{n = 1}^\infty A_n \in \mathcal{A}$ we have 
+
+$$\begin{align}
+\mu\left( \bigcup_{n = 1}^\infty A_n \right) \leq \sum_{n = 1}^\infty \mu\left(A_n \right).
+\end{align}$$
     
 </div>
 <br>
