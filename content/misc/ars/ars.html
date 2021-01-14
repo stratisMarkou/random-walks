@@ -1,0 +1,767 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Adaptive rejection sampling &#8212; Random walks</title>
+    
+  <link rel="stylesheet" href="../../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://random-walks.org/content/misc/ars/ars.html" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Interesting reading and websites" href="../../reading-and-links.html" />
+    <link rel="prev" title="The Kalman filter and smoother" href="../kalman/kalman.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://random-walks.org/content/misc/ars/ars.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Adaptive rejection sampling" />
+<meta property="og:description" content="Adaptive rejection sampling  Rejection sampling (RS) is a useful method for sampling intractable distributions. It defines an envelope function which upper-boun" />
+<meta property="og:image"       content="https://random-walks.org/_static/logo.svg" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../../index.html">
+  
+  <img src="../../../_static/logo.svg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Random walks</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../home.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../../prob-intro/intro.html">
+   Probability: An introduction
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch01/content.html">
+     Events and Probabilities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch02/content.html">
+     Discrete random variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch03/content.html">
+     Multivariate discrete distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch04/content.html">
+     Probability generating functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch05/content.html">
+     Distribution and density functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch06/content.html">
+     Multivariate distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch07/content.html">
+     Moment generating functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch08/content.html">
+     Main limit theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch09/content.html">
+     Branching processes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch10/content.html">
+     Random walks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch11/content.html">
+     Processes in continuous time
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch12/content.html">
+     Markov chains
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="../misc.html">
+   Miscellaneous
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sde/num-sde.html">
+     Numerical simulation of SDEs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../node/node.html">
+     Neural ODEs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimisation/conjugate-gradients.html">
+     Conjugate gradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../kalman/kalman.html">
+     The Kalman filter and smoother
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Adaptive rejection sampling
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../reading-and-links.html">
+   Interesting reading and websites
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../../_sources/content/misc/ars/ars.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/stratisMarkou/random-walks/master?urlpath=tree/./content/misc/ars/ars.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#an-adaptive-envelope-function">
+   An adaptive envelope function
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   Adaptive rejection sampling
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusions">
+   Conclusions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="adaptive-rejection-sampling">
+<h1>Adaptive rejection sampling<a class="headerlink" href="#adaptive-rejection-sampling" title="Permalink to this headline">¶</a></h1>
+<p>Rejection sampling (RS) is a useful method for sampling intractable distributions. It defines an envelope function which upper-bounds the target unnormalised probability density to be sampled. It then proceeds to sample points in the area under the envelope, rejecting those points which fall above the target and accepting the rest. The accepted points are independent and identically distributed samples from the target distribution. There are two important issues with RS. The first is that if the envelope is a very loose upper bound, then most samples will be rejected and the scheme will be slow. The second is that for rejection sampling to work, we must be certain that the envelope is an upper bound to the target, which in practice may be a challenging task.</p>
+<p>Adaptive rejection sampling (ARS) <a class="bibtex reference internal" href="#gilks1992ars" id="id1">[GW92]</a> is an efficient method for sampling log-concave targets, which deals with both of these issues. It is origially defined for univariate distributions, but can also be extended to multivariate distributions via Gibbs sampling.<a class="bibtex reference internal" href="#bishop2006prml" id="id2">[Bis06]</a> ARS maintains an envelope which adapts as more points are sampled, becoming a progressively tighter bound to the target, thereby avoiding the inefficiency of regular RS. Further, the way that ARS constructs this envelope guarantees that the envelope is in fact an upper bound to the target, which sidesteps the second difficulty described above.</p>
+<div class="section" id="an-adaptive-envelope-function">
+<h2>An adaptive envelope function<a class="headerlink" href="#an-adaptive-envelope-function" title="Permalink to this headline">¶</a></h2>
+<p>Suppose we wish to sample from a log-concave univariate distribution with unnormalised distribution function <span class="math notranslate nohighlight">\(f\)</span>. Whereas RS defines a fixed envelope, ARS will define an envelope <span class="math notranslate nohighlight">\(g_u\)</span> that upper bounds <span class="math notranslate nohighlight">\(f\)</span> and adapts its shape as the sampling procedure progresses. By adapting its shape, using the infromation that <span class="math notranslate nohighlight">\(f\)</span> is log-concave, the envelope reduces the probability of future rejections. In addition the envelope function, ARS can use an optional function <span class="math notranslate nohighlight">\(g_l\)</span> which lower bounds <span class="math notranslate nohighlight">\(f\)</span>, called the squeezing function. The squeezing function can be used to avoid evaluating <span class="math notranslate nohighlight">\(f\)</span> in the rejection step, which can be especially useful if <span class="math notranslate nohighlight">\(f\)</span> is computationally expensive to evaluate.</p>
+<p>Given the an ordered set of points <span class="math notranslate nohighlight">\(x_1 &lt; x_2 &lt; ... &lt; x_K\)</span>, ARS defines the log-envelope <span class="math notranslate nohighlight">\(\log ~ g_u\)</span> to be the minimum over the tangents to <span class="math notranslate nohighlight">\(h = \log f\)</span> at these points. The log-squeezing function is defined to be the piecewise linear function which joins the points <span class="math notranslate nohighlight">\((x_k, h(x_k))\)</span> inside the interval <span class="math notranslate nohighlight">\([x_1, x_K]\)</span> and is equal to <span class="math notranslate nohighlight">\(-\infty\)</span> outside this innterval. Examples of envelope and squeezing functions are shown below.</p>
+<div class="definition">
+<p><strong>Definition (Abscissa set, envelope function and squeezing function)</strong> Let <span class="math notranslate nohighlight">\(f(x)\)</span> be a univariate log-concave function, with non-zero domain <span class="math notranslate nohighlight">\(D = \{x : f(x) &gt; 0\}\)</span>. An abscissa set <span class="math notranslate nohighlight">\(T_K\)</span> is an ordered set of points in <span class="math notranslate nohighlight">\(D\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[T_k = \{x_1 &lt; x_2 &lt; ... &lt; x_K\}.\]</div>
+<p>The envelope function <span class="math notranslate nohighlight">\(g_u(x)\)</span> defined by <span class="math notranslate nohighlight">\(T_k\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[g_u(x) = \min_{k} g_{u, k}(x)\]</div>
+<p>where <span class="math notranslate nohighlight">\(g_{u, k}(x), k = 1, 2, ..., K\)</span> are piecewise exponential functions such that</p>
+<div class="math notranslate nohighlight">
+\[g_{u, k}(x_k) = f(x_k) \text{ and } g_{u, k}'(x_k) = \log f'(x_k).\]</div>
+<p>The squeezing function <span class="math notranslate nohighlight">\(g_l(x)\)</span> defined by <span class="math notranslate nohighlight">\(T_k\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}g_l(x) = \begin{cases} \min_{k} g_{l, k}(x)  &amp; \text{ if } x_1 \leq x \leq x_k, \\ 0 &amp; \text{ otherwise.} \end{cases}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(g_{u, k}(x), k = 1, 2, ..., K - 1\)</span> are piecewise exponential functions such that</p>
+<div class="math notranslate nohighlight">
+\[g_{l, k}(x_k) = f(x_k) \text{ and } g_{l, k}(x_{k+1}) = \log f(x_{k+1}).\]</div>
+</div>
+<br>
+<p>Below are functions implementing the necessary calculations to determine the envelope and squeezing functions, all of which are cheap operations. The functions take in points at input locations <span class="math notranslate nohighlight">\(x\)</span> and corresponding <span class="math notranslate nohighlight">\(h\)</span> and <span class="math notranslate nohighlight">\(h'\)</span> values and carry out computations in log-space, before exponentiating the result at the end.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">g_u</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xs</span><span class="p">,</span> <span class="n">hs</span><span class="p">,</span> <span class="n">dhdxs</span><span class="p">):</span>
+    
+    <span class="n">z</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">compute_points_of_intersection_and_intercepts</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">hs</span><span class="p">,</span> <span class="n">dhdxs</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">dhdxs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">xs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">+</span> <span class="n">hs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    
+
+<span class="k">def</span> <span class="nf">g_l</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xs</span><span class="p">,</span> <span class="n">hs</span><span class="p">):</span>
+    
+    <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">xs</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">all</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">xs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mf">0.</span>
+    
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="p">(</span><span class="n">hs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">hs</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">xs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">xs</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">hs</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">xs</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="n">m</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">compute_points_of_intersection_and_intercepts</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">dhdx</span><span class="p">):</span>
+    
+    <span class="c1"># y-intercepts c of envelope function line segments, intersection points z</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">h</span> <span class="o">-</span> <span class="n">dhdx</span> <span class="o">*</span> <span class="n">x</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">c</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">dhdx</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">dhdx</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+    
+    <span class="k">return</span> <span class="n">z</span><span class="p">,</span> <span class="n">c</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s define a log unnormalised Gaussian log density, and use this to illustrate the envelope and squeezing function defined by an abcissa set with three points.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">log_gaussian</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">variance</span><span class="p">):</span>
+    <span class="k">return</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="p">(</span><span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">variance</span><span class="p">,</span> <span class="o">-</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span> <span class="o">/</span> <span class="n">variance</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input tag_center-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The log unnormalised density to illustrate</span>
+<span class="n">log_prob</span> <span class="o">=</span> <span class="n">log_gaussian</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span>
+
+<span class="c1"># Points in the abcissa set and corresponding log-probabilities and gradients</span>
+<span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">])</span>
+<span class="n">hs</span><span class="p">,</span> <span class="n">dhdxs</span> <span class="o">=</span> <span class="n">log_prob</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+
+<span class="c1"># Locations to plot the log unnorm. density and envelope/squeezing functions</span>
+<span class="n">x_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">log_probs</span> <span class="o">=</span> <span class="p">[</span><span class="n">log_prob</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x_plot</span><span class="p">]</span>
+<span class="n">gu</span> <span class="o">=</span> <span class="p">[</span><span class="n">g_u</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xs</span><span class="p">,</span> <span class="n">hs</span><span class="p">,</span> <span class="n">dhdxs</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x_plot</span><span class="p">]</span>
+<span class="n">gl</span> <span class="o">=</span> <span class="p">[</span><span class="n">g_l</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xs</span><span class="p">,</span> <span class="n">hs</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x_plot</span><span class="p">]</span>
+
+<span class="c1"># Plot the log unnormalised density, the envelope and squeezing functions</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">hs</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span> <span class="n">log_probs</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$\log~f = h$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">gu</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$\log~g_u$&#39;</span><span class="p">)</span>
+
+<span class="c1"># Handle the case of negatively infinite gl, for plotting presentation</span>
+<span class="n">floored_log_gl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gl</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">gl</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1e-9</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span> <span class="n">floored_log_gl</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$\log~g_l$&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot formatting</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$x$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$\log~f(x)$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/ars_6_0.svg" src="../../../_images/ars_6_0.svg" /></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>Adaptive rejection sampling<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>As observed above, by vitrue of the log-concavity of <span class="math notranslate nohighlight">\(f\)</span>, the envelope and squeezing functions defined in this way are upper and lower bounds to <span class="math notranslate nohighlight">\(f\)</span>. If we then sample a point at random from the area under <span class="math notranslate nohighlight">\(g_u\)</span>, and this point also happens to be in the area under <span class="math notranslate nohighlight">\(f\)</span>, then the point is uniformly distributed in the area under <span class="math notranslate nohighlight">\(f\)</span>, and is an exact sample from the target distribution. Further, if the point happened to lie in the area under the squeezing function <span class="math notranslate nohighlight">\(g_l\)</span>, it is certain to also lie in the area under <span class="math notranslate nohighlight">\(f\)</span>, so we need not check this latter condition explicitly. This shortcut is particularly useful if the function <span class="math notranslate nohighlight">\(f\)</span> is expensive to evaluate, because it avoids some of the evaluations of <span class="math notranslate nohighlight">\(f\)</span>. Combining these checks, we arrive at the ARS algorithm below.</p>
+<div class="definition">
+<p><strong>Algorithm (Adaptive Rejection Sampling)</strong> Given a univariate un-normalised probability density <span class="math notranslate nohighlight">\(f(x)\)</span>, perform the following initialisation, sampling and update steps:</p>
+<ol class="simple">
+<li><p>Initialise an abscissa set <span class="math notranslate nohighlight">\(T_k\)</span>, such that <span class="math notranslate nohighlight">\(f'(x_1) &gt; 0\)</span> and <span class="math notranslate nohighlight">\(f'(x_k) &lt; 0\)</span>, as well as the corresponding envelope and squeezing functions <span class="math notranslate nohighlight">\(g_u\)</span> and <span class="math notranslate nohighlight">\(g_l\)</span>. This can be efficiently achieved by starting from an initial guess and stepping out in steps of exponentially increasing size.</p></li>
+<li><p>Sample \[x’ \sim \frac{g_u(x)}{\int g_u(x’) dx’} \text{ and } z \sim \text{Unifrom}(0, 1),\] and perform the following squeezing and rejection tests. If \[z \leq \frac{g_l(x’)}{g_u(x’)}\] holds, then accept <span class="math notranslate nohighlight">\(x'\)</span> otherwise perform the following rejection test \[z \leq \frac{h(x’)}{g_u(x’)}\] If this holds, accept the point and otherwise reject it.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(x'\)</span> was accepted at the squeezing test, go to step 2 immediately. Otherwise insert <span class="math notranslate nohighlight">\(x'\)</span> into <span class="math notranslate nohighlight">\(T_k\)</span> to obtain <span class="math notranslate nohighlight">\(T_{k+1}\)</span>, update the piecewise exponential functions <span class="math notranslate nohighlight">\(g_l\)</span> and <span class="math notranslate nohighlight">\(g_u\)</span> accordingly and then return to step 2.</p></li>
+</ol>
+</div>
+<br>
+<p>Below are functions which implement envelope sampling, that is drawing</p>
+<div class="math notranslate nohighlight">
+\[ x' \sim \frac{g_u(x)}{\int g_u(x') dx'}. \]</div>
+<p>The first function determines the left and right limits as well as the the unnormalised probabilities <span class="math notranslate nohighlight">\(\int g_{u, k}(x') dx'\)</span> of each piecewise exponential. The second samples uniformly from the area under the envelope function <span class="math notranslate nohighlight">\(g_u\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">envelope_limits_and_unnormalised_probabilities</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">hs</span><span class="p">,</span> <span class="n">dhdxs</span><span class="p">):</span>
+    
+    <span class="c1"># Compute the points of intersection of the lines making up the envelope</span>
+    <span class="n">z</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">compute_points_of_intersection_and_intercepts</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">hs</span><span class="p">,</span> <span class="n">dhdxs</span><span class="p">)</span>
+    
+    <span class="c1"># Left-right endpoints for each piece in the piecewise envelope</span>
+    <span class="n">limits</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([[</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;-inf&#39;</span><span class="p">)],</span> <span class="n">z</span><span class="p">,</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)]])</span>
+    <span class="n">limits</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">limits</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">limits</span><span class="p">[</span><span class="mi">1</span><span class="p">:]],</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        
+    <span class="n">probs</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">dhdxs</span> <span class="o">*</span> <span class="n">limits</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">dhdxs</span> <span class="o">*</span> <span class="n">limits</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+    
+    <span class="c1"># Catch any intervals where dhdx was zero</span>
+    <span class="n">idx_nonzero</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">dhdxs</span> <span class="o">!=</span> <span class="mf">0.</span><span class="p">)</span>
+    <span class="n">probs</span><span class="p">[</span><span class="n">idx_nonzero</span><span class="p">]</span> <span class="o">=</span> <span class="n">probs</span><span class="p">[</span><span class="n">idx_nonzero</span><span class="p">]</span> <span class="o">/</span> <span class="n">dhdxs</span><span class="p">[</span><span class="n">idx_nonzero</span><span class="p">]</span>
+    
+    <span class="n">idx_zero</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">dhdxs</span> <span class="o">==</span> <span class="mf">0.</span><span class="p">)</span>
+    <span class="n">probs</span><span class="p">[</span><span class="n">idx_zero</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="n">limits</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">limits</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">c</span><span class="p">))[</span><span class="n">idx_zero</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">limits</span><span class="p">,</span> <span class="n">probs</span>
+
+
+<span class="k">def</span> <span class="nf">sample_envelope</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">hs</span><span class="p">,</span> <span class="n">dhdxs</span><span class="p">):</span>
+    
+    <span class="n">limits</span><span class="p">,</span> <span class="n">probs</span> <span class="o">=</span> <span class="n">envelope_limits_and_unnormalised_probabilities</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">hs</span><span class="p">,</span> <span class="n">dhdxs</span><span class="p">)</span>
+    <span class="n">probs</span> <span class="o">=</span> <span class="n">probs</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">probs</span><span class="p">)</span>
+    
+    <span class="c1"># Randomly chosen interval in which the sample lies</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">probs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">p</span><span class="o">=</span><span class="n">probs</span><span class="p">)</span>
+    
+    <span class="c1"># Sample u = Uniform(0, 1)</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">()</span>
+    
+    <span class="c1"># Invert i^th piecewise exponential CDF to get a sample from that interval</span>
+    <span class="k">if</span> <span class="n">dhdxs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mf">0.</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">u</span> <span class="o">*</span> <span class="p">(</span><span class="n">limits</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">limits</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="n">limits</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+        
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">u</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">dhdxs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">limits</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> \
+                   <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">u</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">dhdxs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">limits</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">/</span> <span class="n">dhdxs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> 
+    
+        <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we draw samples from the envelope defined by the three previous points without the rejection step, we obtain the following distribution.</p>
+<div class="cell tag_hide-input tag_center-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">4.</span><span class="p">,</span> <span class="mf">4.</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">probs</span> <span class="o">=</span> <span class="n">envelope_limits_and_unnormalised_probabilities</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">hs</span><span class="p">,</span> <span class="n">dhdxs</span><span class="p">)</span>
+
+<span class="n">samples</span> <span class="o">=</span> <span class="p">[</span><span class="n">sample_envelope</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">hs</span><span class="p">,</span> <span class="n">dhdxs</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">)]</span>
+<span class="n">gu</span> <span class="o">=</span> <span class="p">[</span><span class="n">g_u</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xs</span><span class="p">,</span> <span class="n">hs</span><span class="p">,</span> <span class="n">dhdxs</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">probs</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x_plot</span><span class="p">]</span>
+
+<span class="c1"># Plot samples and envelope</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span>
+         <span class="n">gu</span><span class="p">,</span>
+         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Normalised $g_u$&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span>
+         <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+         <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span>
+         <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Envelope samples&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot formatting</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$x$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$f(x)~/~Z$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/ars_10_0.svg" src="../../../_images/ars_10_0.svg" /></div>
+</div>
+<p>We still need to add the initialisation of the abcissa set, the (optional) squeezing test and the rejection test. For the initialisation step, we can start from an initial point, and search to the left and to the right in exponentially increasing step sizes, until we find a point on the left side with positive <span class="math notranslate nohighlight">\(h'\)</span> and a point on the right with negative <span class="math notranslate nohighlight">\(h'\)</span>, and use these as end-points of the abscissa set. The following function <code class="docutils literal notranslate"><span class="pre">adaptive_rejection_sampling</span></code> implements this initialisation step together with the squeezing and rejection tests.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">initialise_abcissa</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">log_unnorm_prob</span><span class="p">):</span>
+    
+    <span class="c1"># Expand to the left/right until the abcissa is correctly initialised</span>
+    <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x0</span><span class="p">])</span>
+    <span class="n">hs</span><span class="p">,</span> <span class="n">dhdxs</span> <span class="o">=</span> <span class="n">log_unnorm_prob</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+    
+    <span class="n">dx</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.</span>
+    
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        
+        <span class="k">if</span> <span class="n">dx</span> <span class="o">&lt;</span> <span class="mf">0.</span> <span class="ow">and</span> <span class="n">dhdxs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.</span><span class="p">:</span>
+            <span class="n">dx</span> <span class="o">=</span> <span class="mf">1.</span>
+            
+        <span class="k">elif</span> <span class="n">dx</span> <span class="o">&gt;</span> <span class="mf">0.</span> <span class="ow">and</span> <span class="n">dhdxs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">0.</span><span class="p">:</span>
+            <span class="k">break</span>
+        
+        <span class="n">insert_idx</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">dx</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="nb">len</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+        
+        <span class="n">x</span> <span class="o">=</span> <span class="n">xs</span><span class="p">[</span><span class="mi">0</span> <span class="k">if</span> <span class="n">dx</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">dx</span>
+        
+        <span class="n">h</span><span class="p">,</span> <span class="n">dhdx</span> <span class="o">=</span> <span class="n">log_unnorm_prob</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        
+        <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">insert_idx</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+        <span class="n">hs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">hs</span><span class="p">,</span> <span class="n">insert_idx</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+        <span class="n">dhdxs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">dhdxs</span><span class="p">,</span> <span class="n">insert_idx</span><span class="p">,</span> <span class="n">dhdx</span><span class="p">)</span>
+        
+        <span class="n">dx</span> <span class="o">=</span> <span class="n">dx</span> <span class="o">*</span> <span class="mi">2</span>
+        
+    <span class="k">return</span> <span class="n">xs</span><span class="p">,</span> <span class="n">hs</span><span class="p">,</span> <span class="n">dhdxs</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This approach to initialising the abcissa set does not have any tunable parameters, except <code class="docutils literal notranslate"><span class="pre">x0</span></code>. Any initialisation method which guarantees <span class="math notranslate nohighlight">\(h'(x_1) &gt; 0\)</span> and <span class="math notranslate nohighlight">\(x'(x_K) &lt; 0\)</span> will give a valid abcissa set and this method is only a specific choice. Changing the <code class="docutils literal notranslate"><span class="pre">x0</span></code> value used to the does not significantly affect the efficiency of ARS, since the initialisation method will terminate quickly because of the exponentially increasing step sizes. This implementation assumes that the domain <span class="math notranslate nohighlight">\(D\)</span> of <span class="math notranslate nohighlight">\(f\)</span>, that is the set of points where <span class="math notranslate nohighlight">\(f\)</span> is non-zero, is all of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>. If this is not the case, then this initialisation function will fail. A more robust initialisation method could use boolean comparisons of <span class="math notranslate nohighlight">\(h'\)</span> values instead of <span class="math notranslate nohighlight">\(h\)</span> values, setting <span class="math notranslate nohighlight">\(h = -\infty\)</span> outside <span class="math notranslate nohighlight">\(D\)</span>, but for the purposes of exposition, this illustration assumes that <span class="math notranslate nohighlight">\(D = \mathbb{R}\)</span> and does not bother further with this technical point. Putting the initialisation step together with the squeezing and rejection steps, we arrive at the complete ARS algorithm below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">adaptive_rejection_sampling</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">log_unnorm_prob</span><span class="p">,</span> <span class="n">num_samples</span><span class="p">):</span>
+    
+    <span class="n">xs</span><span class="p">,</span> <span class="n">hs</span><span class="p">,</span> <span class="n">dhdxs</span> <span class="o">=</span> <span class="n">initialise_abcissa</span><span class="p">(</span><span class="n">x0</span><span class="o">=</span><span class="n">x0</span><span class="p">,</span> <span class="n">log_unnorm_prob</span><span class="o">=</span><span class="n">log_unnorm_prob</span><span class="p">)</span>
+    
+    <span class="n">samples</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">num_samples</span><span class="p">:</span>
+        
+        <span class="n">x</span> <span class="o">=</span> <span class="n">sample_envelope</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">hs</span><span class="p">,</span> <span class="n">dhdxs</span><span class="p">)</span>
+        
+        <span class="n">gl</span> <span class="o">=</span> <span class="n">g_l</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xs</span><span class="p">,</span> <span class="n">hs</span><span class="p">)</span>
+        <span class="n">gu</span> <span class="o">=</span> <span class="n">g_u</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xs</span><span class="p">,</span> <span class="n">hs</span><span class="p">,</span> <span class="n">dhdxs</span><span class="p">)</span>
+
+        <span class="c1"># Squeezing test</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">u</span> <span class="o">*</span> <span class="n">gu</span> <span class="o">&lt;=</span> <span class="n">gl</span><span class="p">:</span>
+            <span class="n">samples</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        
+        <span class="n">h</span><span class="p">,</span> <span class="n">dhdx</span> <span class="o">=</span> <span class="n">log_unnorm_prob</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="c1"># Rejection test</span>
+        <span class="k">if</span> <span class="n">u</span> <span class="o">*</span> <span class="n">gu</span> <span class="o">&lt;=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">h</span><span class="p">):</span>
+            <span class="n">samples</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+        <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+        <span class="n">hs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">hs</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+        <span class="n">dhdxs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">dhdxs</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">dhdx</span><span class="p">)</span>
+        
+    <span class="k">return</span> <span class="n">samples</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we can finally use this function to sample from the example standard Gaussian distribution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">target_mean</span> <span class="o">=</span> <span class="mf">0.</span>
+<span class="n">target_variance</span> <span class="o">=</span> <span class="mf">1.</span>
+
+<span class="n">x0</span> <span class="o">=</span> <span class="mf">1.</span>
+<span class="n">num_samples</span> <span class="o">=</span> <span class="mi">10000</span>
+
+<span class="n">log_unnorm_prob</span> <span class="o">=</span> <span class="n">log_gaussian</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="n">target_mean</span><span class="p">,</span> <span class="n">variance</span><span class="o">=</span><span class="n">target_variance</span><span class="p">)</span>
+
+<span class="n">samples</span> <span class="o">=</span> <span class="n">adaptive_rejection_sampling</span><span class="p">(</span><span class="n">x0</span><span class="o">=</span><span class="n">x0</span><span class="p">,</span> <span class="n">log_unnorm_prob</span><span class="o">=</span><span class="n">log_unnorm_prob</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="n">num_samples</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input tag_center-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Log probabilites for plotting the target</span>
+<span class="n">x_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">log_probs</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_prob</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x_plot</span><span class="p">]</span>
+
+<span class="c1"># Plot samples and target</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span>
+         <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+         <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span>
+         <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Samples&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span>
+         <span class="n">log_probs</span><span class="p">,</span>
+         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Normalised $f(x)$&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot formatting</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$x$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$f(x)~/~Z$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/ars_17_0.svg" src="../../../_images/ars_17_0.svg" /></div>
+</div>
+</div>
+<div class="section" id="conclusions">
+<h2>Conclusions<a class="headerlink" href="#conclusions" title="Permalink to this headline">¶</a></h2>
+<p>ARS is an efficient method for sampling log-concave univariate distributions. Although very effective for log-concave one-dimensional differentiable distributions, the algorithm presented here has two shortcomings. First, this algorithm requires gradients of the objective with respect to the input variable. These may be expensive to compute or perhaps even may not exist if <span class="math notranslate nohighlight">\(f\)</span> is nowhere differentiable. For this, there exists a modified version of ARS<a class="bibtex reference internal" href="#gilks1992adaptive" id="id4">[Gil92]</a> which builds the envelope in a way that does not require gradients. The present page presented the gradient-based method because this is nicer for illustrative purposes. Second, although many distributions of practical interest are log-concave, there are many others which are not. In this case, the ARS algorithm does not apply since the envelope is not guaranteed to entirely contain the probability distribution. For this, there exists an extension of ARS for non-log-concave distributions called the adaptive rejection Metropolis algorithm<a class="bibtex reference internal" href="#gilks1995adaptive" id="id5">[GBT95]</a> (ARMS). ARMS also builds an envelope and uses it to propose samples, which are then accepted or rejected using a Metropolis-Hastings step to ensure that the samples are distributed according to the target. Note that in general, ARMS does not produce independent samples from the target, due to the Metropolis-Hastings accept/reject step. For log-concave functions, ARMS reduces to ARS.</p>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p id="bibtex-bibliography-content/misc/ars/ars-0"><dl class="citation">
+<dt class="bibtex label" id="bishop2006prml"><span class="brackets"><a class="fn-backref" href="#id2">Bis06</a></span></dt>
+<dd><p>Christopher M. Bishop. <em>Pattern Recognition and Machine Learning</em>. Springer, 2006.</p>
+</dd>
+<dt class="bibtex label" id="gilks1992ars"><span class="brackets"><a class="fn-backref" href="#id1">GW92</a></span></dt>
+<dd><p>W. R. Gilks and P. Wild. Adaptive rejection sampling for gibbs sampling. <em>Journal of the Royal Statistical Society. Series C (Applied Statistics)</em>, 41(2):337–348, 1992.</p>
+</dd>
+<dt class="bibtex label" id="gilks1992adaptive"><span class="brackets"><a class="fn-backref" href="#id4">Gil92</a></span></dt>
+<dd><p>Wally R Gilks. Derivative-free adaptive rejection sampling for gibbs sampling. <em>Bayesian Statistics</em>, 1992.</p>
+</dd>
+<dt class="bibtex label" id="gilks1995adaptive"><span class="brackets"><a class="fn-backref" href="#id5">GBT95</a></span></dt>
+<dd><p>Wally R Gilks, Nicky G Best, and KKC Tan. Adaptive rejection metropolis sampling within gibbs sampling. <em>Journal of the Royal Statistical Society: Series C (Applied Statistics)</em>, 44(4):455–472, 1995.</p>
+</dd>
+</dl>
+</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "venv-random-walks"
+        },
+        kernelOptions: {
+            kernelName: "venv-random-walks",
+            path: "./content/misc/ars"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'venv-random-walks'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="../kalman/kalman.html" title="previous page">The Kalman filter and smoother</a>
+    <a class='right-next' id="next-link" href="../../reading-and-links.html" title="next page">Interesting reading and websites</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Stratos Markou<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-168728006-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    
+  </body>
+</html>

@@ -1,23 +1,43 @@
 
-
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
     <title>Fundamental definitions &#8212; Random walks</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
-    <link href="../../_static/css/index.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../_static/sphinx-book-theme.css" type="text/css" />
+    
+  <link rel="stylesheet" href="../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom_style.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.3da636dd464baa7582d2.js">
+
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/sphinx-book-theme.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
@@ -25,19 +45,24 @@
     <script src="../../_static/togglebutton.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/mystnb.js"></script>
-    <script src="../../_static/sphinx-book-theme.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .secondtoggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <link rel="canonical" href="https://random-walks.org/content/convex-optimisation/lecture-2.html" />
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="docsearch:language" content="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
 
 
 <!-- Opengraph tags -->
@@ -47,7 +72,7 @@
 <meta property="og:description" content="Fundamental definitions  Affine sets  Line: through points x_1 and x_2 is the set  x = \theta x_1 + (1 - \theta) x_2, \text{ where } \theta \in \mathbb{R}.  Aff" />
 <meta property="og:image"       content="https://random-walks.org/_static/logo.svg" />
 
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary" />
 
 
   </head>
@@ -68,31 +93,135 @@
   <h1 class="site-logo" id="site-title">Random walks</h1>
   
 </a>
-</div>
-
-<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form>
-
 <nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-  
-  <ul class="nav sidenav_l1">
-  <li class="">
-    <a href="../home.html">Welcome</a>
-  </li>
-  <li class="">
-    <a href="../prob-intro/intro.html">Probability: An introduction</a>
-  </li>
-  <li class="">
-    <a href="../misc/misc.html">Miscellaneous</a>
-  </li>
-  <li class="">
-    <a href="../reading-and-links.html">Interesting reading and websites</a>
-  </li>
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../home.html">
+   Welcome
+  </a>
+ </li>
 </ul>
-</nav>
-<p class="navbar_footer"></p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../prob-intro/intro.html">
+   Probability: An introduction
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prob-intro/ch01/content.html">
+     Events and Probabilities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prob-intro/ch02/content.html">
+     Discrete random variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prob-intro/ch03/content.html">
+     Multivariate discrete distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prob-intro/ch04/content.html">
+     Probability generating functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prob-intro/ch05/content.html">
+     Distribution and density functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prob-intro/ch06/content.html">
+     Multivariate distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prob-intro/ch07/content.html">
+     Moment generating functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prob-intro/ch08/content.html">
+     Main limit theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prob-intro/ch09/content.html">
+     Branching processes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prob-intro/ch10/content.html">
+     Random walks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prob-intro/ch11/content.html">
+     Processes in continuous time
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prob-intro/ch12/content.html">
+     Markov chains
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../misc/misc.html">
+   Miscellaneous
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../misc/sde/num-sde.html">
+     Numerical simulation of SDEs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../misc/node/node.html">
+     Neural ODEs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../misc/optimisation/conjugate-gradients.html">
+     Conjugate gradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../misc/kalman/kalman.html">
+     The Kalman filter and smoother
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../misc/ars/ars.html">
+     Adaptive rejection sampling
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../reading-and-links.html">
+   Interesting reading and websites
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
 </div>
 
 
@@ -107,119 +236,150 @@
     </div>
     <div class="col pl-2 topbar-main">
         
-        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse" data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu" aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation" title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
             <i class="fas fa-bars"></i>
             <i class="fas fa-arrow-left"></i>
             <i class="fas fa-arrow-up"></i>
         </button>
         
-        <div class="dropdown-buttons-trigger">
-            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i class="fas fa-download"></i></button>
-
-            
-            <div class="dropdown-buttons">
-                <!-- ipynb file if we had a myst markdown file -->
-                
-                <!-- Download raw file -->
-                <a class="dropdown-buttons" href="../../_sources/content/convex-optimisation/lecture-2.ipynb.txt"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.ipynb</button></a>
-                <!-- Download PDF via print -->
-                <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF" onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
-            </div>
-            
-        </div>
-
-        <!-- Edit this page -->
         
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
 
-        <!-- Full screen (wrap in <a> to have style consistency -->
-        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i class="fas fa-expand"></i></button></a>
-
-        <!-- Launch buttons -->
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
         
-        <div class="dropdown-buttons-trigger">
-            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-            <div class="dropdown-buttons">
-                
-                <a class="binder-button" href="https://mybinder.org/v2/gh/stratisMarkou/random-walks/master?urlpath=tree/./content/convex-optimisation/lecture-2.ipynb"><button type="button" class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip" data-placement="left"><img class="binder-button-logo" src="../../_static/images/logo_binder.svg" alt="Interact on binder">Binder</button></a>
-                
-                
-                
-            </div>
-        </div>
-        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/content/convex-optimisation/lecture-2.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
-    <div class="d-none d-md-block col-md-2 bd-toc show">
-<div class="tocsection onthispage pt-5 pb-3">
-    <i class="fas fa-list"></i> On this page
 </div>
 
-<nav id="bd-toc-nav">
-    <ul class="nav section-nav flex-column">
-    
-        <li class="nav-item toc-entry toc-h2">
-            <a href="#affine-sets" class="nav-link">Affine sets</a>
-        </li>
-    
-        <li class="nav-item toc-entry toc-h2">
-            <a href="#convex-sets" class="nav-link">Convex sets</a>
-        </li>
-    
-        <li class="nav-item toc-entry toc-h2">
-            <a href="#convex-combinations-and-convex-hulls" class="nav-link">Convex combinations and convex hulls</a>
-        </li>
-    
-        <li class="nav-item toc-entry toc-h2">
-            <a href="#cones-and-convex-cones" class="nav-link">Cones and convex cones</a>
-        </li>
-    
-        <li class="nav-item toc-entry toc-h2">
-            <a href="#hyperplanes-and-halfspaces" class="nav-link">Hyperplanes and halfspaces</a>
-        </li>
-    
-        <li class="nav-item toc-entry toc-h2">
-            <a href="#euclidian-balls-and-ellipsoids" class="nav-link">Euclidian balls and ellipsoids</a>
-        </li>
-    
-        <li class="nav-item toc-entry toc-h2">
-            <a href="#norm-balls-and-norm-cones" class="nav-link">Norm balls and norm cones</a>
-        </li>
-    
-        <li class="nav-item toc-entry toc-h2">
-            <a href="#polyhedra" class="nav-link">Polyhedra</a>
-        </li>
-    
-        <li class="nav-item toc-entry toc-h2">
-            <a href="#positive-semidefinite-cone" class="nav-link">Positive-semidefinite cone</a>
-        </li>
-    
-        <li class="nav-item toc-entry toc-h2">
-            <a href="#operations-that-preserve-convexity" class="nav-link">Operations that preserve convexity</a>
-        </li>
-    
-        <li class="nav-item toc-entry toc-h2">
-            <a href="#proper-cones-generalised-inequalities-minimum-and-minimal-elements" class="nav-link">Proper cones, generalised inequalities, minimum and minimal elements</a>
-        </li>
-    
-        <li class="nav-item toc-entry toc-h2">
-            <a href="#separating-hyperplane-theorem" class="nav-link">Separating hyperplane theorem</a>
-        </li>
-    
-        <li class="nav-item toc-entry toc-h2">
-            <a href="#supporting-hyperplane-theorem" class="nav-link">Supporting hyperplane theorem</a>
-        </li>
-    
-        <li class="nav-item toc-entry toc-h2">
-            <a href="#dual-cones-and-dual-generalised-inequalities" class="nav-link">Dual cones and dual generalised inequalities</a>
-        </li>
-    
-        <li class="nav-item toc-entry toc-h2">
-            <a href="#minimum-and-minimal-elements-via-dual-inequalities" class="nav-link">Minimum and minimal elements via dual inequalities</a>
-        </li>
-    
-    </ul>
-</nav>
+        <!-- Source interaction buttons -->
 
 
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/stratisMarkou/random-walks/master?urlpath=tree/./content/convex-optimisation/lecture-2.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#affine-sets">
+   Affine sets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convex-sets">
+   Convex sets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convex-combinations-and-convex-hulls">
+   Convex combinations and convex hulls
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cones-and-convex-cones">
+   Cones and convex cones
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hyperplanes-and-halfspaces">
+   Hyperplanes and halfspaces
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#euclidian-balls-and-ellipsoids">
+   Euclidian balls and ellipsoids
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#norm-balls-and-norm-cones">
+   Norm balls and norm cones
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#polyhedra">
+   Polyhedra
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#positive-semidefinite-cone">
+   Positive-semidefinite cone
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#operations-that-preserve-convexity">
+   Operations that preserve convexity
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#proper-cones-generalised-inequalities-minimum-and-minimal-elements">
+   Proper cones, generalised inequalities, minimum and minimal elements
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#separating-hyperplane-theorem">
+   Separating hyperplane theorem
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#supporting-hyperplane-theorem">
+   Supporting hyperplane theorem
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dual-cones-and-dual-generalised-inequalities">
+   Dual cones and dual generalised inequalities
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#minimum-and-minimal-elements-via-dual-inequalities">
+   Minimum and minimal elements via dual inequalities
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
     </div>
 </div>
     <div id="main-content" class="row">
@@ -374,7 +534,7 @@ x \prec_K y &amp;\implies y - x \in \textbf{ int}(K).
 </div>
 <div class="section" id="supporting-hyperplane-theorem">
 <h2>Supporting hyperplane theorem<a class="headerlink" href="#supporting-hyperplane-theorem" title="Permalink to this headline">¶</a></h2>
-<p><strong>Supporting hyperplane:</strong> A supporting hyperplane to <span class="math notranslate nohighlight">\(C\)</span>, at an <span class="math notranslate nohighlight">\(x_0\)</span> on the boundary of <span class="math notranslate nohighlight">\(C\)</span>, is the set: <span class="math notranslate nohighlight">\($\{x | a^\top x = a^\top x_0\},\)</span>$ where <span class="math notranslate nohighlight">\(a \neq 0\)</span> and <span class="math notranslate nohighlight">\(a^\top x \leq a^\top x_0\)</span> for <span class="math notranslate nohighlight">\(x \in C\)</span>.</p>
+<p><strong>Supporting hyperplane:</strong> A supporting hyperplane to <span class="math notranslate nohighlight">\(C\)</span>, at an <span class="math notranslate nohighlight">\(x_0\)</span> on the boundary of <span class="math notranslate nohighlight">\(C\)</span>, is the set: $<span class="math notranslate nohighlight">\(\{x | a^\top x = a^\top x_0\},\)</span><span class="math notranslate nohighlight">\( where \)</span>a \neq 0<span class="math notranslate nohighlight">\( and \)</span>a^\top x \leq a^\top x_0<span class="math notranslate nohighlight">\( for \)</span>x \in C$.</p>
 <p><strong>Supporting hyperplane theorem:</strong> If <span class="math notranslate nohighlight">\(C\)</span> is a convex set, then there exists a supporting hyperplane to <span class="math notranslate nohighlight">\(C\)</span> at every one of its boundary points.</p>
 <p>The supporting hyperplane theorem can be proved by using the separating hyperplane theorem. If <span class="math notranslate nohighlight">\(x_0\)</span> is a boundary point of <span class="math notranslate nohighlight">\(C\)</span> we can define <span class="math notranslate nohighlight">\(D = \{x_0\}\)</span>, and apply the separating hyperplane theorem to show that a separating hyperplane exists, which is also supporting because <span class="math notranslate nohighlight">\(x_0\)</span> is on the boundary of <span class="math notranslate nohighlight">\(C\)</span>.</p>
 </div>
@@ -414,6 +574,25 @@ x \prec_{K^<em>} y &amp;\implies y - x \in \textbf{ int}(K^</em>).
 </div>
 </div>
 
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "venv-random-walks"
+        },
+        kernelOptions: {
+            kernelName: "venv-random-walks",
+            path: "./content/convex-optimisation"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'venv-random-walks'</script>
 
               </div>
               
@@ -441,7 +620,10 @@ x \prec_{K^<em>} y &amp;\implies y - x \in \textbf{ int}(K^</em>).
       </div>
     </div>
 
-    <script src="../../_static/js/index.js"></script>
+    
+  <script src="../../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
     
     <!-- Google Analytics -->
     <script>
