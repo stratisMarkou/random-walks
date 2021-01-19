@@ -1,5 +1,11 @@
 # Continuous functions
 
+This section introduces continuous functions and presents some of their fundamental properties.
+
+## Defintion
+
+Intuitively, a function is continuous if for any region in its range, we can find a sufficiently small region in its domain such that the image of the domain-region is inside the range-region.
+
 <div class="definition">
 
 **Definition (Continuous function)** A function $f$ is continuous at $x_0$ if for any $\epsilon > 0$, there exists $\delta > 0$ such that
@@ -9,9 +15,11 @@ $$ |x - x_0| < \delta \implies |f(x) - f(x_0)| < \epsilon. $$
 </div>
 <br>
 
+If a function is continuous, then the image of any convergent sequence through this function, is also convergent. Vice versa if the image, through a function $f$ of every convergent sequence is also a convergent sequence, then $f$ is a continuous function. This useufl result is stated and proved below in more detail.
+
 <div class="lemma">
 
-**Lemma (Sufficient and necessary condition for continuity)** The following two statements are equivalent
+**Lemma (Equivalent statements of continuity)** The following two statements are equivalent
     
 1. $f$ is continuous.
 2. If $a_n \to a$ is a sequence in $\mathbb{R}$, then $f(a_n) \to f(a)$.
@@ -50,6 +58,10 @@ which directly contradicts our assumption that $f(a_n) \to f(a)$ for any converg
 </details>
 <br>
 
+
+## Operations preserving continuity
+
+Once we have some continuous functions, we can combine them in different ways to obtain other continuous functions. Examples of such operations are addition, multiplication, division and composition - where further constraints apply to the latter two.
 
 <div class="lemma">
 
@@ -148,6 +160,11 @@ $$\begin{align}
 <br>
 
 
+## Maximum and intermediate value
+
+Two useful theorems about continuous functions are the maximum and intermediate value theorems. The first says that a continuous function in some finite interval is bounded, and that it attains its bounds. The second says that given the value of a continuous function at two different inputs, the function is guaranteed to attain every value between these two values within the interval.
+
+
 <div class="theorem">
 
 **Theorem (Maximum value theorem)** Let $[a, b]$ be a closed interval in $\mathbb{R}$ amd $f : [a, b] \to \mathbb{R}$ be continuous. Then $f$ is bounded and attains its bounds.
@@ -157,11 +174,22 @@ $$\begin{align}
 
 <details class="proof">
 <summary>Proof: Maximum value theorem</summary>
-
+    
+Suppose that $f$ is not bounded above. Then for any $n \in \mathbb{N}$, there exists $x_n \in [a, b]$ such that $f(x_n) \geq n$. Since $x_n \in [a, b]$ is a bounded sequence, it has a convergent subsequence $x_{n_k}$ by the {ref}`Bolzano-Weierstrass theorem<analysis-i-bolz-weier>`. Call the limit of the convergent subsequence $x$. Now $f(x_{n_k}) \geq n \to \infty$ but since $f$ is continuous we also have $f(x_{n_k}) \to f(x)$, which is a contradiction. Therefore $f$ must be bounded.
+    
+Let the supremum of $f$ in $[a, b]$ be $s$. Then for any $n \in \mathbb{N}$, there exists $x_n \in [a, b]$ such that
+    
+$$ s - \frac{1}{n} \leq f(x_n) \leq s. $$
+    
+Again, by the {ref}`Bolzano-Weierstrass theorem<analysis-i-bolz-weier>` $x_n$ has a convergent subsequence $x_{n_k}$, whose limit we again denote by $x$. From the above inequality
+    
+$$ s - \frac{1}{n} \leq f(x_{n_k}) \leq s \implies f(x_{n_k}) \to s, $$
+    
+arriving at the result.
     
 </details>
 <br>
-
+    
 
 <div class="theorem">
 
@@ -173,27 +201,55 @@ $$\begin{align}
 <details class="proof">
 <summary>Proof: Intermediate value theorem</summary>
 
+We can prove this result by repeated bisection. Consider setting $a_0 = a, b_0 = b$ and defining
+    
+$$ \begin{align} [a_n, b_n] = \begin{cases}[a_n, m_n] & \text{ if } f(m_n) > 0, \\
+[m_n, b_n] & \text{ if } f(m_n) < 0, \end{cases}
+\end{align}$$
+    
+where $m_n = \frac{a_{n - 1} + b_{n - 1}}{2}$. Note that if any of the $m_n$ terms is equal to $0$ we are done, so let's assume $m_n \neq 0$. By the {ref}`nested intervals property<analysis-i-bolz-weier>`, the intersection of the nested intervals $[a_n, b_n]$ is non-empty. Since the size of the intervals tends to $0$, the intersection can only contain a single element, called $x$. By construction we have $f(a_n) < 0 < f(b_n)$ and since $f$ is continuous and $a_n, b_n \to x$ we have $f(a_n) \uparrow f(x)$ and $f(b_n) \downarrow f(x)$. Since $f(a_n)$ and $f(b_n)$ are negative and positive sequences which converge to the same limit, their limit $f(x)$ must be $0$. Hence $f(x) = 0$, arriving at the result.
     
 </details>
 <br>
-
-
+    
+    
+## The inverse
+    
+If a function is continuous and strictly increasing, then it is invertible. Further its inverse is continuous and stictly increasing, as stated and proved below.
 
 <div class="lemma">
 
-**Lemma (Sufficient condition for inverse)** Let $f : [a, b] \to [c, d]$ be a continuous strictly increasing function with $f(a) = c, f(b) = d$. Then $f$ is invertible and its inverse is continuous.
+**Lemma (Sufficient condition for inverse)** Let $f : [a, b] \to [c, d]$ be a continuous strictly increasing function with $f(a) = c, f(b) = d$. Then $f$ is invertible and its inverse is continuous and strictly increasing.
     
 </div>
 <br>
+    
 
 <details class="proof">
 <summary>Proof: Sufficient condition for inverse</summary>
     
-
+Since $f$ is strictly increasing it is an injection. Since $f$ is continuous and $f(a) = c, f(b) = d$, then for any $y \in [c, d]$, there exists $x \in [a, b]$ such that $f(x) - y = 0$ by the intermediate value theorem. Therefore $f$ is a bijection and therefore invertible. Let the inverse be $g$. We also see that $g$ is strictly increasing because if $g(x_1) < g(x_2)$, then applying $f$ to both sides we obtain $x_1 < x_2$. Hence $g(x_1) < g(x_2)$ can only be true if $x_1 < x_2$ holds so $g$ is increasing. It is strictly increasing because if $g(x_1) = g(x_2)$, then applying $f$ to both sides we obtain $x_1 = x_2$, so $g(x_1) = g(x_2)$ can only hold if $x_1 = x_2$. Hence $g$ is strictly increasing.
+    
+Now let $\epsilon > 0$, $y \in [c, d]$, $x = g(y)$ and also
+    
+$$u = f(\max(x - \epsilon, c)) \text{ and } v = f(\min(x + \epsilon, d)). $$
+    
+We can always find $\delta$ such that
+    
+$$ (\max(y - \delta, c), \min(y + \delta, d)) \subseteq [u, v]. $$
+    
+Letting $z \in (\max(y - \delta, c), \min(y + \delta, d))$ and applying $g$ to the endpoints of the interval on each side, together with the fact that $g$ is strictly increasing, we obtain
+    
+$$ |z - y| < \delta \implies |g(z) - g(y)| < \epsilon, $$
+    
+arriving at the result.
     
 </details>
 <br>
 
+## Continuous induction
+    
+The following lemma is a tool that can be used to prove some of the previous results in an alternative way. This lemma is called continuous induction, since it can be viewed as an extension of the familiar proof by induction in the naturals, to the real numbers.
 
 <div class="lemma">
 
@@ -213,6 +269,5 @@ Then $b \in A$.
 
 Since $A$ is a bounded set, its supremum $s$ is in $[a, b]$. Since $s$ is the supremum of $A$, for any $\epsilon > 0$ the set $(s - \epsilon, s]$ contains an element of $A$, so $s$ is contained in $A$ by property (3) of $A$. Now suppose $s \neq b$. In this case, from property (2) there exists another element $x \in A$ such that $s < x$. Therefore $s$ is not the supremum of $A$ reaching a contradiction. Therefore we must have $s = b$.
 
-    
 </details>
 <br>
