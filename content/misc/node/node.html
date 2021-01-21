@@ -203,6 +203,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../ncs/ncs.html">
+     Natural cubic splines
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../ars/ars.html">
      Adaptive rejection sampling
     </a>
@@ -1041,7 +1046,7 @@ step: 1000 log-likelihood (per datapoint):     -1.932
 </div>
 <div class="section" id="conclusions-and-follow-up-work">
 <h2>Conclusions and follow-up work<a class="headerlink" href="#conclusions-and-follow-up-work" title="Permalink to this headline">¶</a></h2>
-<p>That’s it for now. There are several things this page has not touched on, including using ODE solvers for Continuous Normalising flows,<a class="bibtex reference internal" href="#chen2018neural" id="id2">[CRBD18]</a> learning real datasets. There are several interesting follow-up works on Neural ODEs. One such follow-up is the Augmented Neural ODE <a class="bibtex reference internal" href="#dupont2019augmented" id="id3">[DDT19]</a> model. ODEs preserve the topology of the input space (they are a <a class="reference external" href="https://mathworld.wolfram.com/Diffeomorphism.html">diffeomorphism</a>) and therefore cannot learn certain functions of interest. Augmented Neural ODEs fix this by adding auxiliary dimensions, and solving in the augmented space. Another interesting follow-up is the Neural Controlled ODE<a class="bibtex reference internal" href="#kidger2020neural" id="id4">[KMFL20]</a> model. Given the initial conditions and ODE dynamics, the trajectory of the model is fully determined. The whole trajectory must therefore be encoded in the initial state, regardless of how long this trajectory is. We can imagine having to pack more and more information into the initial state is difficult. Neural CDEs address this issue by introducing a more flexible class of models. These models do not have the nice Markov property that ODE or other time series models (like RNNs or LSTMs) have, nor do they correspond to well-defined processes for generating data. However, they do help with learning more complicated functions and constitute a more expressive class of models. Lastly, <a class="reference external" href="https://slideslive.com/38923497/bullshit-that-i-and-others-have-said-about-neural-odes">David Duvenaud’s retrospective talk</a> on Neural ODEs is worth watching.</p>
+<p>That’s it for now. There are several things this page has not touched on, including using ODE solvers for Continuous Normalising flows,<a class="bibtex reference internal" href="#chen2018neural" id="id2">[CRBD18]</a> ODEs in the context of latent variable models<a class="bibtex reference internal" href="#rubanova2019latent" id="id3">[RCD19]</a> or learning real datasets. There are several interesting follow-up works on Neural ODEs. One such follow-up is the Augmented Neural ODE <a class="bibtex reference internal" href="#dupont2019augmented" id="id4">[DDT19]</a> model. ODEs preserve the topology of the input space (they are a <a class="reference external" href="https://mathworld.wolfram.com/Diffeomorphism.html">diffeomorphism</a>) and therefore cannot learn certain functions of interest. Augmented Neural ODEs fix this by adding auxiliary dimensions, and solving in the augmented space. Another interesting follow-up is the Neural Controlled ODE<a class="bibtex reference internal" href="#kidger2020neural" id="id5">[KMFL20]</a> model. Given the initial conditions and ODE dynamics, the trajectory of the model is fully determined. The whole trajectory must therefore be encoded in the initial state, regardless of how long this trajectory is. We can imagine having to pack more and more information into the initial state is difficult. Neural CDEs address this issue by introducing a more flexible class of models. These models do not have the nice Markov property that ODE or other time series models (like RNNs or LSTMs) have, nor do they correspond to well-defined processes for generating data. However, they do help with learning more complicated functions and constitute a more expressive class of models. Lastly, <a class="reference external" href="https://slideslive.com/38923497/bullshit-that-i-and-others-have-said-about-neural-odes">David Duvenaud’s retrospective talk</a> on Neural ODEs is worth watching.</p>
 </div>
 <div class="section" id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
@@ -1049,11 +1054,14 @@ step: 1000 log-likelihood (per datapoint):     -1.932
 <dt class="bibtex label" id="chen2018neural"><span class="brackets">CRBD18</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>)</span></dt>
 <dd><p>Ricky TQ Chen, Yulia Rubanova, Jesse Bettencourt, and David K Duvenaud. Neural ordinary differential equations. In <em>Advances in neural information processing systems</em>, 6571–6583. 2018.</p>
 </dd>
-<dt class="bibtex label" id="dupont2019augmented"><span class="brackets"><a class="fn-backref" href="#id3">DDT19</a></span></dt>
+<dt class="bibtex label" id="dupont2019augmented"><span class="brackets"><a class="fn-backref" href="#id4">DDT19</a></span></dt>
 <dd><p>Emilien Dupont, Arnaud Doucet, and Yee Whye Teh. Augmented neural odes. In <em>Advances in Neural Information Processing Systems</em>, 3140–3150. 2019.</p>
 </dd>
-<dt class="bibtex label" id="kidger2020neural"><span class="brackets"><a class="fn-backref" href="#id4">KMFL20</a></span></dt>
+<dt class="bibtex label" id="kidger2020neural"><span class="brackets"><a class="fn-backref" href="#id5">KMFL20</a></span></dt>
 <dd><p>Patrick Kidger, James Morrill, James Foster, and Terry Lyons. Neural controlled differential equations for irregular time series. <em>arXiv preprint arXiv:2005.08926</em>, 2020.</p>
+</dd>
+<dt class="bibtex label" id="rubanova2019latent"><span class="brackets"><a class="fn-backref" href="#id3">RCD19</a></span></dt>
+<dd><p>Yulia Rubanova, Ricky TQ Chen, and David Duvenaud. Latent odes for irregularly-sampled time series. <em>arXiv preprint arXiv:1907.03907</em>, 2019.</p>
 </dd>
 </dl>
 </p>

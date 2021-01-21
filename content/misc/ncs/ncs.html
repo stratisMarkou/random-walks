@@ -1,0 +1,621 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Natural cubic splines &#8212; Random walks</title>
+    
+  <link rel="stylesheet" href="../../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://random-walks.org/content/misc/ncs/ncs.html" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Adaptive rejection sampling" href="../ars/ars.html" />
+    <link rel="prev" title="The Kalman filter and smoother" href="../kalman/kalman.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://random-walks.org/content/misc/ncs/ncs.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Natural cubic splines" />
+<meta property="og:description" content="Natural cubic splines  Natural cubic splines (NCS) are an interpolation tool that is of interest to many applications. They are a special case of spline models," />
+<meta property="og:image"       content="https://random-walks.org/_static/logo.svg" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../../index.html">
+  
+  <img src="../../../_static/logo.svg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Random walks</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../home.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../../prob-intro/intro.html">
+   Probability: An introduction
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch01/content.html">
+     Events and Probabilities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch02/content.html">
+     Discrete random variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch03/content.html">
+     Multivariate discrete distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch04/content.html">
+     Probability generating functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch05/content.html">
+     Distribution and density functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch06/content.html">
+     Multivariate distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch07/content.html">
+     Moment generating functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch08/content.html">
+     Main limit theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch09/content.html">
+     Branching processes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch10/content.html">
+     Random walks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch11/content.html">
+     Processes in continuous time
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch12/content.html">
+     Markov chains
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="../misc.html">
+   Miscellaneous
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sde/num-sde.html">
+     Numerical simulation of SDEs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../node/node.html">
+     Neural ODEs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimisation/conjugate-gradients.html">
+     Conjugate gradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../kalman/kalman.html">
+     The Kalman filter and smoother
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Natural cubic splines
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ars/ars.html">
+     Adaptive rejection sampling
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../reading-and-links.html">
+   Interesting reading and websites
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../../_sources/content/misc/ncs/ncs.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/stratisMarkou/random-walks/master?urlpath=tree/./content/misc/ncs/ncs.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spline-models">
+   Spline models
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementation">
+   Implementation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="natural-cubic-splines">
+<h1>Natural cubic splines<a class="headerlink" href="#natural-cubic-splines" title="Permalink to this headline">¶</a></h1>
+<p>Natural cubic splines (NCS) are an interpolation tool that is of interest to many applications. They are a special case of spline models, which are favoured for their smoothness and are relevant in particular applications where the degree of smoothness of the interpolant is important. This page presents the NCS linear system of equations and an implementation plus demo on toy data.</p>
+<div class="section" id="spline-models">
+<h2>Spline models<a class="headerlink" href="#spline-models" title="Permalink to this headline">¶</a></h2>
+<p>In interpolation problems, we are given some datapoints and want to produce a function that passes through them. One choice for achieving this would be to use a piecewise linear function, and constrain the slopes and intercepts of the piecewise linear segments, such that it passes through the datapoints. This would give a rough approximation to the underlying function. However, in many settings it may be appropriate to impose further, or different conditions on the interpolating curve. For example, we may know that the underlying function is differentiable (the piecewise linear spline is not differentiable), or that it is <span class="math notranslate nohighlight">\(n\)</span>-times differentiable and so on.</p>
+<p>To achieve further regularity, we can choose a piecewise polynomial as the interpolating function. We can then constrain the piecewise segments to pass through the datapoints and (if necessary) to have equal derivatives at the datapoints. Such piecewise polynomials are called <a class="reference external" href="https://mathworld.wolfram.com/Spline.html">splines</a>. Cubic splines are splines in which the piecewise polynomials are of third-order. NCS have the further constraint that the curvature, that is the second derivative, of the interpolating function at the first and last point is <span class="math notranslate nohighlight">\(0\)</span>.</p>
+<p>In particular,<a class="bibtex reference internal" href="#kvarving2008natural" id="id1">[Rid00]</a> given <span class="math notranslate nohighlight">\(N\)</span> datapoints a cubic piecewise polynomial has <span class="math notranslate nohighlight">\(N-1\)</span> piecewise segments, each with four coeffcients, giving <span class="math notranslate nohighlight">\(4(N - 1)\)</span> degrees of freedom. Constraining the function values, first derivatives and second derivatives to be equal for the piecewise polynomials at all points except the first and last points gives <span class="math notranslate nohighlight">\(3(N-2)\)</span> equations. Constraining the function values to be equal to the datapoint values gives <span class="math notranslate nohighlight">\(N\)</span> more constraints. We are left with <span class="math notranslate nohighlight">\(2\)</span> degrees of freedom, which can be dealt in different ways, giving different spline interpolants. If we constrain the second derivatives to be zero at the first and last points, we obtain NCS. Since all the constraints are linear, solving for the coefficients of a spline interpolant is a linear equation. Because the constraints relate pairs of segments only, the matrix corresponding to these linear constraints is tri-diagonal and can therefore be solved in <span class="math notranslate nohighlight">\(\mathcal{O}(N)\)</span> time. Below are the expressions<a class="bibtex reference internal" href="#kvarving2008natural" id="id2">[Rid00]</a> for the NCS system of equations.</p>
+<div class='lemma'>
+<p><strong>Result (Natural cubic spline)</strong> Given data <span class="math notranslate nohighlight">\(\{x_n, y_n\}_{n = 0}^N\)</span> with <span class="math notranslate nohighlight">\(x_n &lt; x_{n+1}\)</span>, the natural cubic spline interpolating the data in the <span class="math notranslate nohighlight">\(n^{th}\)</span> interval <span class="math notranslate nohighlight">\([x_n, x_{n+1}]\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+S_n(x) = &amp;~\alpha_n (x - x_n)^3 + \beta_n (x_{n + 1} -x)^3 + \gamma_n (x - x_n) + \delta_n (x_{n + 1} - x).
+\end{align}\]</div>
+<p>where the constants are given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\alpha_n &amp;= \frac{z_{n+1}}{6h_n},~~\beta_n = \frac{z_n}{6h_n},~~\gamma_n = \left(\frac{y_{n + 1}}{h_n} -  \frac{y_{n + 1}h_n}{6} \right), ~~\delta_n = \left(\frac{y_n}{h_n} - \frac{y_nh_n}{6}\right),
+\end{align}\]</div>
+<p>and the curvatures <span class="math notranslate nohighlight">\(z_n\)</span> are the solution to the linear problem</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\begin{pmatrix}
+v_1    &amp; h_1    &amp; 0   &amp; \dots &amp; 0 &amp; 0 &amp; 0 \\
+h_1    &amp; v_2    &amp; h_2 &amp; \dots &amp; 0 &amp; 0 &amp; 0 \\
+0      &amp; h_2    &amp; v_3 &amp; \dots &amp; \vdots &amp; \vdots &amp; \vdots \\
+\vdots &amp; \vdots &amp; \vdots  &amp; \ddots &amp; v_{N-3} &amp; h_{N-3} &amp; 0 \\
+0      &amp; 0      &amp; 0  &amp; \dots &amp; h_{N-3} &amp; v_{N-2} &amp; h_{N-2} \\
+0      &amp; 0      &amp; 0  &amp; \dots &amp; 0 &amp; h_{N-2} &amp; v_{N-1} \\
+\end{pmatrix}\begin{pmatrix}
+z_{1} \\
+z_{2} \\
+\vdots \\
+\vdots \\
+z_{N-2} \\
+z_{N-1} \\
+\end{pmatrix}=\begin{pmatrix}
+u_{1} \\
+u_{2} \\
+\vdots \\
+\vdots \\
+u_{N-2} \\
+u_{N-1} \\
+\end{pmatrix}
+\end{align}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(z_0 = z_n = 0\)</span> and the linear problem is defined by</p>
+<div class="math notranslate nohighlight">
+\[ h_n = x_{n + 1} - x_n,~b_n = \frac{1}{h_n} (y_{n + 1} - y_n),~v_n = 2 (h_n + h_{n - 1}),~u_n = 6 (b_n - b_{n - 1})\]</div>
+</div>
+<br>
+<p>As a further motivating point, it can be shown<a class="bibtex reference internal" href="#kvarving2008natural" id="id3">[Rid00]</a> that out of all curves NCS is the smoothest interpolator, where smoothness is quantified by an appropriate metric based on the second derivative of the interpolant.</p>
+<div class='lemma'>
+<p><strong>Result (NCS are the smoothest interpolator)</strong> Given data <span class="math notranslate nohighlight">\(x_n, y_n \in \mathbb{R}\)</span> for <span class="math notranslate nohighlight">\(n = 0, 1, 2, ..., N\)</span>, among all twice continuously differentiable functions functions <span class="math notranslate nohighlight">\(f : [a, b] \to \mathbb{R}\)</span> which interpolate <span class="math notranslate nohighlight">\(\left\{x_n, y_n\right\}_{n = 0}^N\)</span>, the natural cubic spline minimises the curvature metric</p>
+<div class="math notranslate nohighlight">
+\[ C(f) = \int^b_a \left(f''(x)\right)^2 dx. \]</div>
+</div>
+<br></div>
+<div class="section" id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h2>
+<p>Below is two functions implementing NCS. The first takes in data <code class="docutils literal notranslate"><span class="pre">x_data</span></code>, <code class="docutils literal notranslate"><span class="pre">y_data</span></code> computes <span class="math notranslate nohighlight">\(h\)</span> and solves the NCS equations for <span class="math notranslate nohighlight">\(z\)</span>. This is the costlier part of the algorithm (<span class="math notranslate nohighlight">\(\mathcal{O}(N)\)</span> in the number of datapoints) but only needs to be run once.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="kn">import</span> <span class="n">solve_banded</span>
+
+
+<span class="k">def</span> <span class="nf">solve_for_zh</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">):</span>
+
+    <span class="n">N</span> <span class="o">=</span> <span class="n">x_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">h</span> <span class="o">=</span> <span class="n">x_data</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">x_data</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_data</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">y_data</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">h</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="n">h</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="mi">6</span> <span class="o">*</span> <span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">b</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="n">N</span> <span class="o">-</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">2</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">2</span><span class="p">)]</span> <span class="o">=</span> <span class="n">v</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">3</span><span class="p">)]</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">3</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([[</span><span class="mf">0.</span><span class="p">],</span> <span class="n">z</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.</span><span class="p">]])</span>
+    
+    <span class="k">return</span> <span class="n">z</span><span class="p">,</span> <span class="n">h</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Once the <span class="math notranslate nohighlight">\(z\)</span> and <span class="math notranslate nohighlight">\(h\)</span> values have been computed, we can use them to compute <span class="math notranslate nohighlight">\(S(x)\)</span>. The function below takes in the data, the <span class="math notranslate nohighlight">\(z\)</span> and <span class="math notranslate nohighlight">\(h\)</span> values computed and as well as an input location and returns the value of the NCS at the input location.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">S</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+    
+    <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">x_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span><span class="p">:</span>
+    
+        <span class="n">S</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">6</span> <span class="o">*</span> <span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">x_data</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">**</span> <span class="mi">3</span>
+        <span class="n">S</span> <span class="o">=</span> <span class="n">S</span> <span class="o">+</span> <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">6</span> <span class="o">*</span> <span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="p">(</span><span class="n">x_data</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">**</span> <span class="mi">3</span>
+        <span class="n">S</span> <span class="o">=</span> <span class="n">S</span> <span class="o">+</span> <span class="p">(</span><span class="n">y_data</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="mi">6</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">x_data</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">S</span> <span class="o">=</span> <span class="n">S</span> <span class="o">+</span> <span class="p">(</span><span class="n">y_data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="mi">6</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">x_data</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span>
+    
+        <span class="k">return</span> <span class="n">S</span>
+    
+    <span class="k">elif</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        
+        <span class="n">slope</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">h</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="p">(</span><span class="n">x_data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="n">slope</span> <span class="o">=</span> <span class="n">slope</span> <span class="o">+</span> <span class="p">(</span><span class="n">y_data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">h</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">z</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">h</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="n">slope</span> <span class="o">=</span> <span class="n">slope</span> <span class="o">-</span> <span class="p">(</span><span class="n">y_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">h</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">z</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">h</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">6</span><span class="p">)</span>
+        
+        <span class="n">S</span> <span class="o">=</span> <span class="n">y_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">slope</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">x_data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        
+        <span class="k">return</span> <span class="n">S</span>
+    
+    <span class="k">elif</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">x_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span><span class="p">:</span>
+        
+        <span class="n">slope</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">h</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">x_data</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="n">slope</span> <span class="o">=</span> <span class="n">slope</span> <span class="o">+</span> <span class="p">(</span><span class="n">y_data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">h</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">z</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">h</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="n">slope</span> <span class="o">=</span> <span class="n">slope</span> <span class="o">-</span> <span class="p">(</span><span class="n">y_data</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="n">h</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">z</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">h</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="mi">6</span><span class="p">)</span>
+        
+        <span class="n">S</span> <span class="o">=</span> <span class="n">y_data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">slope</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">x_data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        
+        <span class="k">return</span> <span class="n">S</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can now fit NCS to a set of datapoints.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set random seed</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Generate data from noiseless sinusoid, with random inputs</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">x_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">,)))</span>
+<span class="n">y_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_center-output tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Plot interpolant and datapoints</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Format plots</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Example data&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">24</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/ncs_10_0.svg" src="../../../_images/ncs_10_0.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solve for z and h</span>
+<span class="n">z</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">solve_for_zh</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">)</span>
+
+<span class="n">x_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">8.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">spline</span> <span class="o">=</span> <span class="p">[</span><span class="n">S</span><span class="p">(</span><span class="n">x_</span><span class="p">,</span> <span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span> <span class="k">for</span> <span class="n">x_</span> <span class="ow">in</span> <span class="n">x_plot</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_center-output tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot interpolant and datapoints</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span> <span class="n">spline</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Format plots</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;NCS fit and data&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">24</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/ncs_12_0.svg" src="../../../_images/ncs_12_0.svg" /></div>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<p>This page has presented the NCS equations and a demo fit of NCS. Splines, and in particular cubic splines are of interest to many applications because of they are cheap to evaluate and have attractive smoothness conditions. For example, I am interested in them because they are used in the context of Neural Controlled Differential Equations.<a class="bibtex reference internal" href="../node/node.html#kidger2020neural" id="id4">[KMFL20]</a> There, they are favoured because they have the minimal smoothness conditions required for the modelling problem of interest. NCS and more generally any spline model can also be extended to Bayesian models of data using Gaussian Processes.<a class="bibtex reference internal" href="#gpmlbook" id="id5">[RW05]</a></p>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p id="bibtex-bibliography-content/misc/ncs/ncs-0"><dl class="citation">
+<dt class="bibtex label" id="kidger2020neural"><span class="brackets"><a class="fn-backref" href="#id4">KMFL20</a></span></dt>
+<dd><p>Patrick Kidger, James Morrill, James Foster, and Terry Lyons. Neural controlled differential equations for irregular time series. <em>arXiv preprint arXiv:2005.08926</em>, 2020.</p>
+</dd>
+<dt class="bibtex label" id="gpmlbook"><span class="brackets"><a class="fn-backref" href="#id5">RW05</a></span></dt>
+<dd><p>Carl Edward Rasmussen and Christopher K. I. Williams. <em>Gaussian Processes for Machine Learning (Adaptive Computation and Machine Learning)</em>. The MIT Press, 2005. ISBN 026218253X.</p>
+</dd>
+<dt class="bibtex label" id="kvarving2008natural"><span class="brackets">Rid00</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>,<a href="#id3">3</a>)</span></dt>
+<dd><p>Mustrum Ridcully. Kvarving, arne morten. Department of Mathematical Sciences, 2000.</p>
+</dd>
+</dl>
+</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "venv-random-walks"
+        },
+        kernelOptions: {
+            kernelName: "venv-random-walks",
+            path: "./content/misc/ncs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'venv-random-walks'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="../kalman/kalman.html" title="previous page">The Kalman filter and smoother</a>
+    <a class='right-next' id="next-link" href="../ars/ars.html" title="next page">Adaptive rejection sampling</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Stratos Markou<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-168728006-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    
+  </body>
+</html>
