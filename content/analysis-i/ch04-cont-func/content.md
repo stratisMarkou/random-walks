@@ -15,7 +15,7 @@ $$ |x - x_0| < \delta \implies |f(x) - f(x_0)| < \epsilon. $$
 </div>
 <br>
 
-If a function is continuous, then the image of any convergent sequence through this function, is also convergent. Vice versa if the image, through a function $f$ of every convergent sequence is also a convergent sequence, then $f$ is a continuous function. This useufl result is stated and proved below in more detail.
+If a function is continuous, then the image of any convergent sequence through this function, is also convergent. Vice versa if the image, through a function $f$ of every convergent sequence is also a convergent sequence, then $f$ is a continuous function. This useful result is stated and proved below in more detail.
 
 <div class="lemma">
 
