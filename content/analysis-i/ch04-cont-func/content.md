@@ -212,7 +212,7 @@ where $m_n = \frac{a_{n - 1} + b_{n - 1}}{2}$. Note that if any of the $m_n$ ter
 </details>
 <br>
     
-    
+(analysis-i-inv)=
 ## The inverse
     
 If a function is continuous and strictly increasing, then it is invertible. Further its inverse is continuous and stictly increasing, as stated and proved below.
