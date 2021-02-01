@@ -1,5 +1,7 @@
 # Differentiation
 
+## Limits of functions
+
 <div class="definition">
 
 **Definition (Limit of functions)** Let $A \subseteq \mathbb{R}$ and let $f : A \to \mathbb{R}$. We write
@@ -416,11 +418,27 @@ by an application of the chain rule.
 
 <div class="theorem">
 
-**Theorem (Taylor's theorem)** Let $f$ be an $n$-times differentiable function. Then
+**Theorem (Taylor's theorem)** Let $f$ be an $n$-times differentiable function. Then for any $x_0$ and $h > 0$ we can find $x \in (x_0, x_0 + h)$ such that
 
 $$ f(x_0 + h) = f(x_0) + hf'(x_0) + ... + \frac{h^{n-1}}{(n - 1)!} f^{(n-1)}(x_0) + \frac{h^n}{n!} f^{(n)}(x). $$
     
 </div>
+<br>
+    
+<details class="proof">
+<summary>Proof: Taylor's theorem</summary>
+
+Consider the polynomial
+    
+$$ Q(x_0 + h) = \sum_{n = 0}^{N-1} \frac{(x_0 + h)^n}{n!} f^{(n)}(x_0), $$
+    
+observing that $Q^{(k)}(x_0) = f^{(k)}(x_0)$ for $k = 0, 1, ..., N-1$. Now add another $N$-order term to $Q$, to obtain another polynomial $P$ such that $P(x_0 + h) = f(x_0 + h)$, namely
+    
+$$ P(x) = Q(x) + \frac{(x - x_0)^N}{h^N} (f(x_0 + h) - Q(x_0 + h)). $$
+    
+The polynomial $P$ therefore satisfies $P^{(k)}(x_0) = f^{(k)}(x_0)$ for $k = 0, 1, ..., n - 1,$ and also $P(x_0 + h) = f(x_0 + h)$. From the earlier {ref}`lemma on Rolle's for two functions<analysis-i-rolle>` there exists $x \in (x_0, x_0 + h)$ such that $P(h) = f(x_0 + h)$, arriving at the result.
+    
+</details>
 <br>
 
 
