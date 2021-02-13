@@ -1,0 +1,874 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Variational inference for diffusion processes &#8212; Random walks</title>
+    
+  <link rel="stylesheet" href="../../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://random-walks.org/content/misc/sde-as-gp/sde-as-gp.html" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Neural ODEs" href="../node/node.html" />
+    <link rel="prev" title="Numerical simulation of SDEs" href="../sde/num-sde.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://random-walks.org/content/misc/sde-as-gp/sde-as-gp.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Variational inference for diffusion processes" />
+<meta property="og:description" content="Variational inference for diffusion processes  Typically, the posterior of stochastic differential equation (SDE) models cannot be computed in closed form. Ther" />
+<meta property="og:image"       content="https://random-walks.org/_static/logo.svg" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../../index.html">
+  
+  <img src="../../../_static/logo.svg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Random walks</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../home.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../../prob-intro/intro.html">
+   Probability: An introduction
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch01/content.html">
+     Events and Probabilities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch02/content.html">
+     Discrete random variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch03/content.html">
+     Multivariate discrete distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch04/content.html">
+     Probability generating functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch05/content.html">
+     Distribution and density functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch06/content.html">
+     Multivariate distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch07/content.html">
+     Moment generating functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch08/content.html">
+     Main limit theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch09/content.html">
+     Branching processes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch10/content.html">
+     Random walks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch11/content.html">
+     Processes in continuous time
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch12/content.html">
+     Markov chains
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="../misc.html">
+   Miscellaneous
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sde/num-sde.html">
+     Numerical simulation of SDEs
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     VI for diffusion processes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../node/node.html">
+     Neural ODEs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimisation/conjugate-gradients.html">
+     Conjugate gradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../kalman/kalman.html">
+     The Kalman filter and smoother
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ncs/ncs.html">
+     Natural cubic splines
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ars/ars.html">
+     Adaptive rejection sampling
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../reading-and-links.html">
+   Interesting reading and websites
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../../_sources/content/misc/sde-as-gp/sde-as-gp.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/stratisMarkou/random-walks/master?urlpath=tree/./content/misc/sde-as-gp/sde-as-gp.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#two-sde-models">
+   Two SDE models
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#free-energy-approximation">
+   Free Energy approximation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#maximising-the-free-energy">
+   Maximising the Free Energy
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementation">
+   Implementation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-forward-step">
+     The forward step
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-backward-step">
+     The backward step
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#putting-the-two-together">
+     Putting the two together
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#demonstration">
+   Demonstration
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusions">
+   Conclusions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="variational-inference-for-diffusion-processes">
+<h1>Variational inference for diffusion processes<a class="headerlink" href="#variational-inference-for-diffusion-processes" title="Permalink to this headline">¶</a></h1>
+<p>Typically, the posterior of stochastic differential equation (SDE) models cannot be computed in closed form. Therefore, if are modelling some temporal data using an SDE, and are looking to compute the posterior of the model, we will have to resort to approximations. Here we discuss a method <a class="bibtex reference internal" href="#archambeau2007gaussian" id="id1">[ACOST07]</a> <a class="bibtex reference internal" href="#archambeau2008variational" id="id2">[AOS+08]</a> for approximating the posterior of an SDE, by fitting another approximating SDE to it.</p>
+<div class="section" id="two-sde-models">
+<h2>Two SDE models<a class="headerlink" href="#two-sde-models" title="Permalink to this headline">¶</a></h2>
+<p>Suppose we wish to model some data using an SDE with noisy observations of the form</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+dx &amp;= f(x, t) dt + \Sigma d\beta\\
+y &amp;\sim \mathcal{N}(0, r^2 I).
+\end{align}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\beta\)</span> is a standard Brownian motion. Given observations <span class="math notranslate nohighlight">\(\mathcal{D} = \{t_k, y_k\}_{k = 1}^K\)</span>, we are interested in approximating the posterior process <span class="math notranslate nohighlight">\(p(x, t | \mathcal{D})\)</span>. For most choices of <span class="math notranslate nohighlight">\(f(x, t)\)</span>, working with this SDE analytically is be impossible. Instead, we will approximate the posterior of this SDE with another stochastic process, described by the SDE</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+dx &amp;= g(x, t) dt + \Sigma d\beta, \text{ where } g(x, t) = -A(t)x(t) + b(t).
+\end{align}\]</div>
+<p>The motivation behind this particular form is that because this SDE is linear, it corresponds to a Gaussian Process (GP) whose marginal mean and variance can be treated almost entirely in analytic form. In particular, this mean and variance can be shown to exactly obey two ODEs which, even though cannot be solved in closed form, can be well approximated using numerical integration.</p>
+</div>
+<div class="section" id="free-energy-approximation">
+<h2>Free Energy approximation<a class="headerlink" href="#free-energy-approximation" title="Permalink to this headline">¶</a></h2>
+<p>Because the approximating SDE has an affine drift function <span class="math notranslate nohighlight">\(g\)</span> and a constant noise term, it is a Gaussian Process (GP). The marginal mean and variance, <span class="math notranslate nohighlight">\(m(t)\)</span> and <span class="math notranslate nohighlight">\(S(t)\)</span>, of this GP statisfy<a class="bibtex reference internal" href="#sarkka2019applied" id="id3">[SarkkaS19]</a> the ODEs</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\dot{m}(t) &amp;= -A(t)m(t) + b(t), \\
+\dot{S}(t) &amp;= -A(t)S(t) -S(t)A(t)^\top + \Sigma.
+\end{align}\end{split}\]</div>
+<p>We are therefore interested finding <span class="math notranslate nohighlight">\(A(t)\)</span> and <span class="math notranslate nohighlight">\(b(t)\)</span> such that the distribution of <span class="math notranslate nohighlight">\(x\)</span> under this SDE, approximates the distribution of <span class="math notranslate nohighlight">\(x\)</span> under the posterior process. Let us write <span class="math notranslate nohighlight">\(q(x, t)\)</span> for the distribution of <span class="math notranslate nohighlight">\(x\)</span> at time <span class="math notranslate nohighlight">\(t\)</span> according to the approximating SDE and <span class="math notranslate nohighlight">\(p(x, t)\)</span> for the prior of the exact SDE - we will often abbreviate these by <span class="math notranslate nohighlight">\(q(x)\)</span> and <span class="math notranslate nohighlight">\(p(x)\)</span>. We will fit <span class="math notranslate nohighlight">\(A, b\)</span> by minimising the free energy</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathcal{F}(A, b) &amp;= \sum_{k = 1}^K \int q(x_k) \log p(y_k | x_k) dx_k - KL\left[q || p\right].
+\end{align}\]</div>
+<p>We cannot compute this free energy in closed form, so we approximate it with a discretisation. Then letting the discretisation resolution go to <span class="math notranslate nohighlight">\(0\)</span> we come close to an analytic expression for the KL-divergence between the prior and the approximating SDE.</p>
+<div class="lemma">
+<p><strong>Lemma (KL-divergence between <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(q\)</span>)</strong> The KL-divergence between the prior and approximating SDEs can be written as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+KL\left[q || p\right] &amp;= KL\left[q(x_0) || p(x_0)\right] + \frac{1}{2}\int^{t_1}_{t_0} \int q(x_n) (f(x, t) - g(x, t))^\top \Sigma^{-1}(f(x, t) - g(x, t)) dx_n dt. \\
+\end{align}\end{split}\]</div>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: KL-divergence between \(p\) and \(q\)</summary>
+<div>
+<p>Consider splitting the time interval <span class="math notranslate nohighlight">\([t_0, t_1]\)</span> into <span class="math notranslate nohighlight">\(N\)</span> equal segments of size <span class="math notranslate nohighlight">\(\Delta t = \frac{t_1 - t_0}{N}\)</span> and let the values of the SDE at the endpoints of these segments be <span class="math notranslate nohighlight">\(x_0, x_1, ..., x_N\)</span>. Then, the joint distribution at these points in time under the prior and approximating SDEs are</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+p(x_0, ..., x_N) &amp;\approx p(x_0) \prod_{n = 1}^N \mathcal{N}(x_{n+1} | x_n + f_n \Delta t, \Sigma \Delta t), \\
+q(x_0, ..., x_N) &amp;\approx p(x_0) \prod_{n = 1}^N \mathcal{N}(x_{n+1} | x_n + g_n \Delta t, \Sigma \Delta t).
+\end{align}\end{split}\]</div>
+<p>We can then write the KL-divergence between these two multivariate distributions as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+&amp;KL[q(x_0, ..., x_N) || p(x_0, ..., x_N)] = \\
+=~&amp;KL\left[q(x_0) || p(x_0)\right] - \sum_{n = 1}^N \int\int q(x_{n+1}, x_n) \left[\log p(x_{n+1} | x_n) - \log q(x_{n+1} | x_n)\right]~dx_n dx_{n+1}~.
+\end{align}\end{split}\]</div>
+<p>Evaluating the second term and taking the <span class="math notranslate nohighlight">\(\Delta t \to 0\)</span> limit we obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+&amp; \sum_{n = 1}^N \int\int q(x_{n+1}, x_n) \left[\log p(x_{n+1} | x_n) - \log q(x_{n+1} | x_n)\right]~dx_n  =\\
+&amp;= \frac{1}{2}\sum_{n = 1}^N \int\int q(x_{n+1}, x_n) \big[(x_{n+1} - x_n - f_n \Delta t)^\top (\Sigma \Delta t)^{-1}(x_{n+1} - x_n - f_n \Delta t) \\
+&amp;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ - (x_{n+1} - x_n - g_n \Delta t)^\top (\Sigma \Delta t)^{-1}(x_{n+1} - x_n - g_n \Delta t) \big] ~dx_n dx_{n+1} \\
+&amp;= \frac{1}{2}\sum_{n = 1}^N \int q(x_{n+1}, x_n) \text{Tr}\big[(x_{n+1} - x_n - f_n \Delta t)(x_{n+1} - x_n - f_n \Delta t)^\top (\Sigma \Delta t)^{-1} \\
+&amp;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ - (x_{n+1} - x_n - g_n \Delta t)(x_{n+1} - x_n - g_n \Delta t)^\top (\Sigma \Delta t)^{-1} \big] ~dx_n dx_{n+1} \\
+&amp;= \frac{1}{2}\sum_{n = 1}^N \int q(x_n) (f_n - g_n)^\top \Sigma^{-1}(f_n - g_n) dx_n \\
+&amp;\to \frac{1}{2}\int^{t_1}_{t_0} \int q(x_n) (f_n - g_n)^\top \Sigma^{-1}(f_n - g_n) dx_n dt.\\
+\end{align}\end{split}\]</div>
+</div>
+</details>
+<br>
+<p>Therefore, the free energy is equal to</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\mathcal{F}(\theta, A, b) &amp;= \sum_{k = 1}^K \int q(x_k) \log p(y_k | x_k) dx_k + KL\left[q || p\right] \\
+&amp;= \sum_{k = 1}^K \int_{t_0}^{t_1} \underbrace{\int q(x_k) \log p(y_k | x_k) dx_k}_{= E_{obs}} \delta(t - t_k) dt + \\
+&amp;~~~~~+  \int^{t_1}_{t_0} \underbrace{\frac{1}{2}\int q(x_n) (f_n - g_n)^\top \Sigma^{-1}(f_n - g_n) dx_n}_{= E_{sde}} dt + KL\left[q(x_0) || p(x_0)\right],
+\end{align}\end{split}\]</div>
+<p>and we look to optimise this w.r.t. <span class="math notranslate nohighlight">\(A, b\)</span>.</p>
+</div>
+<div class="section" id="maximising-the-free-energy">
+<h2>Maximising the Free Energy<a class="headerlink" href="#maximising-the-free-energy" title="Permalink to this headline">¶</a></h2>
+<p>Maximising <span class="math notranslate nohighlight">\(\mathcal{F}\)</span> w.r.t. <span class="math notranslate nohighlight">\(A, b\)</span> directly is tricky because <span class="math notranslate nohighlight">\(m, S\)</span> depend on <span class="math notranslate nohighlight">\(A, b\)</span>. Changing <span class="math notranslate nohighlight">\(A, b\)</span> will change <span class="math notranslate nohighlight">\(m, S\)</span> in a complicated nonlinear way and we would have to account for this when computing the gradients of <span class="math notranslate nohighlight">\(\mathcal{F}\)</span> w.r.t. <span class="math notranslate nohighlight">\(A, b\)</span>. More specifically, since the approximating SDE is linear, its mean <span class="math notranslate nohighlight">\(m(t)\)</span> and covariance <span class="math notranslate nohighlight">\(S(t)\)</span> exactly follow</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\dot{m}(t) &amp;= -A(t)m(t) + b(t), \\
+\dot{S}(t) &amp;= -A(t)S(t) - S(t)A^\top(t) + \Sigma,
+\end{align}\end{split}\]</div>
+<p>linking the values of <span class="math notranslate nohighlight">\(m, S\)</span> at later times, to the values of <span class="math notranslate nohighlight">\(A, b\)</span> at earlier times. To avoid having to compute these gradients explicitly, we can treat the <span class="math notranslate nohighlight">\(m, S, A, b\)</span> variables as independent and instead introduce the ODEs above as constraints to the optimisation problem. This means that any solution found by our optimisation problem will respect these constraints and <span class="math notranslate nohighlight">\(m, S, A, b\)</span> will be consistent. Introducing Lagrange mulitpliers <span class="math notranslate nohighlight">\(\lambda\)</span> (a vector) and <span class="math notranslate nohighlight">\(\Psi\)</span> (a symmetric matrix), enforcing these constraints, we can write the Lagrangian <span class="math notranslate nohighlight">\(\mathcal{L}\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathcal{L} = \mathcal{F}(\theta, A, b) - \int_{t_0}^{t_1} \lambda^\top(t)(\dot{m}(t) + A(t)m(t) - b(t)) dt - \int_{t_0}^{t_1} \text{Tr}\left[\Psi(t)(\dot{S}(t) + 2A(t)S(t) - \Sigma)\right] dt.
+\end{align}\]</div>
+<p>Note that <span class="math notranslate nohighlight">\(\lambda(t_1)\)</span> and <span class="math notranslate nohighlight">\(\Psi(t_1)\)</span> can be set to <span class="math notranslate nohighlight">\(0\)</span> since we only need the ODE constraints to be satisfied for <span class="math notranslate nohighlight">\(t_0 \leq t &lt; t_1\)</span>. Taking variational derivatives, we obtain the four equations presented below - we ommit dependence on <span class="math notranslate nohighlight">\(t\)</span> to lighten the notation. The first two equations are</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\nabla_A \mathcal{L} &amp;= \frac{\partial E_{sde}}{\partial A} - \lambda^\top - 2\Psi S, \\
+\nabla_b \mathcal{L} &amp;= \frac{\partial E_{sde}}{\partial b} + \lambda.
+\end{align}\end{split}\]</div>
+<p>and give the gradients of the Lagrangian with respect to <span class="math notranslate nohighlight">\(A, b\)</span> - we’ll call these the. Taking variational derivatives and setting these equal to <span class="math notranslate nohighlight">\(0\)</span> we obtain the ODEs for <span class="math notranslate nohighlight">\(\lambda\)</span> and <span class="math notranslate nohighlight">\(\Psi\)</span> below</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\nabla_m \mathcal{L} &amp;= \dot{\lambda} + \frac{\partial E_{sde}}{\partial m} + \frac{\partial E_{obs}}{\partial m} - A^\top \lambda = 0, \\
+\nabla_S \mathcal{L}  &amp;= \dot{\Psi} + \frac{\partial E_{sde}}{\partial S} + \frac{\partial E_{obs}}{\partial S} - 2\Psi A = 0.
+\end{align}\end{split}\]</div>
+<p>Now in order to optimise the Lagrangian, we first solve forwards for <span class="math notranslate nohighlight">\(m, S\)</span> given <span class="math notranslate nohighlight">\(A, b\)</span> and initial conditions <span class="math notranslate nohighlight">\(m(t_0) = m_0, S(t_0) = S_0\)</span>. Then we then solve backwards for <span class="math notranslate nohighlight">\(\lambda(t), \Psi(t)\)</span> for given <span class="math notranslate nohighlight">\(m(t), S(t)\)</span> and <span class="math notranslate nohighlight">\(A(t), b(t)\)</span> with initial conditions <span class="math notranslate nohighlight">\(\lambda(t_1) = 0, \Psi(t_1) = 0\)</span>. Lastly we compute the gradients <span class="math notranslate nohighlight">\(\nabla_A \mathcal{L}\)</span> and <span class="math notranslate nohighlight">\(\nabla_b \mathcal{L}\)</span> and adjust <span class="math notranslate nohighlight">\(A, b\)</span> by taking a gradient step,<a class="bibtex reference internal" href="#archambeau2008variational" id="id4">[AOS+08]</a> that is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+A &amp;\leftarrow A - \eta \nabla_A \mathcal{L} = \frac{\partial E_{sde}}{\partial A} - \lambda^\top - 2\Psi S, \\
+b &amp;\leftarrow b - \eta \nabla_b \mathcal{L} = \frac{\partial E_{sde}}{\partial b} + \lambda.
+\end{align}\end{split}\]</div>
+<p>Alternatively,<span class="bibtex" id="id5">[archambeau2008gaussian]</span> we can equate these gradients to <span class="math notranslate nohighlight">\(0\)</span> and solve for <span class="math notranslate nohighlight">\(A, b\)</span>, giving a new set of parameters <span class="math notranslate nohighlight">\(\tilde{A}, \tilde{b}\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+A &amp;\leftarrow (1 - \omega) A - \omega \tilde{A} &amp;\text{where } \tilde{A} \text{ satisfies } \nabla_A \mathcal{L}\big|_{\tilde{A}} = 0 \\
+b &amp;\leftarrow (1 - \omega) b - \omega \tilde{b} &amp;\text{where } \tilde{b} \text{ satisfies } \nabla_b \mathcal{L}\big|_{\tilde{b}} = 0 .
+\end{align}\end{split}\]</div>
+</div>
+<div class="section" id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h2>
+<p>We now implement the algoritm, breaking it into a forward solve, a backward solve and a helper which interleaves these two steps a number of times. We will apply the algorithm to the <a class="reference external" href="https://en.wikipedia.org/wiki/Ornstein%E2%80%93Uhlenbeck_process">Ornstein-Uhlenbeck</a> SDE with a</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+dx &amp;= -\gamma x dt + \sigma dt, \\
+y &amp;\sim \mathcal{N}(x, r^2), \\
+\end{align}\end{split}\]</div>
+<p>This model was used in <a class="bibtex reference internal" href="#archambeau2007gaussian" id="id6">[ACOST07]</a>, because its posterior is available in closed form, since it corresponds to a GP with zero mean and covariance function</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+k(x, x') = \frac{\sigma^2}{2\gamma} e^{-\gamma|x - x'|}.
+\end{align}\]</div>
+<div class="section" id="the-forward-step">
+<h3>The forward step<a class="headerlink" href="#the-forward-step" title="Permalink to this headline">¶</a></h3>
+<p>In the forward step we solve the ODEs</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\dot{m}(t) &amp;= -A(t)m(t) + b(t), \\
+\dot{S}(t) &amp;= -A(t)S(t) - S(t)A^\top(t) + \Sigma,
+\end{align}\end{split}\]</div>
+<p>numerically for <span class="math notranslate nohighlight">\(m, S\)</span> of the approximating SDE, using the Euler method. Since the forward solve is independent of the SDE being approximated, none of the details of the OU SDE enter the <code class="docutils literal notranslate"><span class="pre">forward</span></code> function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">Sigma</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        
+        <span class="c1"># Euler step for m and S ODEs</span>
+        <span class="n">m</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">-</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="n">dt</span>
+        <span class="n">S</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">-</span> <span class="n">Sigma</span><span class="p">)</span> <span class="o">*</span> <span class="n">dt</span>
+        
+    <span class="k">return</span> <span class="n">m</span><span class="p">,</span> <span class="n">S</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="the-backward-step">
+<h3>The backward step<a class="headerlink" href="#the-backward-step" title="Permalink to this headline">¶</a></h3>
+<p>In the backward step we first solve the ODEs</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\dot{\lambda} = \frac{\partial E_{sde}}{\partial m} - \frac{\partial E_{obs}}{\partial m} + A^\top \lambda = 0, \\
+\dot{\Psi} = \frac{\partial E_{sde}}{\partial S} - \frac{\partial E_{obs}}{\partial S} + 2\Psi A = 0,
+\end{align}\end{split}\]</div>
+<p>and then compute the variational derivatives w.r.t. <span class="math notranslate nohighlight">\(A, b\)</span> and set these to zero to compute the updates <span class="math notranslate nohighlight">\(\tilde{A}, \tilde{b}\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\nabla_A \mathcal{L} &amp;= \frac{\partial E_{sde}}{\partial A} - \lambda^\top - 2\Psi S  = 0, \\
+\nabla_b \mathcal{L} &amp;= \frac{\partial E_{sde}}{\partial b} + \lambda = 0.
+\end{align}\end{split}\]</div>
+<p>For this SDE, the <span class="math notranslate nohighlight">\(E_{sde}\)</span> and <span class="math notranslate nohighlight">\(E_{obs}\)</span> quantities are</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+E_{sde} &amp;= (m^2 + S) \frac{(\alpha - \gamma)^2}{2\sigma^2} - bm\frac{\alpha - \gamma}{2\sigma^2} + \frac{b^2}{2\sigma^2}, \\
+E_{obs} &amp;= \frac{m^2 + S}{2r^2} - \frac{ym}{r^2} + \frac{y^2}{2r^2}.
+\end{align}\end{split}\]</div>
+<p>Note that because observation term of the free energy involves <span class="math notranslate nohighlight">\(\delta\)</span>-functions at the locations where observations are present, the following jump conditions must be applied at these locations</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\lambda(t_k^+) &amp;= \lambda(t_k^-) - \frac{\partial E_{obs}}{\partial m}, \\
+\Psi(t_k^+) &amp;= \Psi(t_k^-) - \frac{\partial E_{obs}}{\partial S}.
+\end{align}\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">backward</span><span class="p">(</span><span class="n">t_grid</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">Sigma</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">psi</span><span class="p">,</span> <span class="n">lamda</span><span class="p">,</span> <span class="n">t_dict</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+    
+    <span class="c1"># Arrays for storing the updates for A and b</span>
+    <span class="n">A_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">b_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        
+        <span class="c1"># Compute dEdS and dEdm</span>
+        <span class="n">coeff</span> <span class="o">=</span> <span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">gamma</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">Sigma</span>
+        <span class="n">dEdS</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">coeff</span>
+        <span class="n">dEdm</span> <span class="o">=</span> <span class="n">coeff</span> <span class="o">*</span> <span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">gamma</span><span class="p">)</span> <span class="o">/</span> <span class="n">Sigma</span>
+        
+        <span class="c1"># Euler step for lambda and psi ODEs</span>
+        <span class="n">lamda</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">lamda</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">lamda</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">-</span> <span class="n">dEdm</span><span class="p">)</span> <span class="o">*</span> <span class="n">dt</span>
+        <span class="n">psi</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">psi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">psi</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">-</span> <span class="n">dEdS</span><span class="p">)</span> <span class="o">*</span> <span class="n">dt</span>
+        
+        <span class="c1"># Handle jump conditions at locations of the data</span>
+        <span class="k">if</span> <span class="n">t_grid</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">t_dict</span><span class="p">:</span>
+            <span class="n">psi</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">psi</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">r</span> <span class="o">**</span> <span class="o">-</span><span class="mi">2</span>
+            <span class="n">lamda</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">lamda</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">r</span> <span class="o">**</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">t_dict</span><span class="p">[</span><span class="n">t_grid</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]]]</span> <span class="o">-</span> <span class="n">m</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+            
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">A_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">gamma</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Sigma</span><span class="p">,</span> <span class="n">psi</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">b_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A_</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Sigma</span><span class="p">,</span> <span class="n">lamda</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        
+    <span class="k">return</span> <span class="n">psi</span><span class="p">,</span> <span class="n">lamda</span><span class="p">,</span> <span class="n">b_</span><span class="p">,</span> <span class="n">A_</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="putting-the-two-together">
+<h3>Putting the two together<a class="headerlink" href="#putting-the-two-together" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">smoothing</span></code> function below puts the forward and backward steps together, executing them in an interleaved fashion for a specified number of times.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">smoothing</span><span class="p">(</span><span class="n">t_obs</span><span class="p">,</span> <span class="n">t_grid</span><span class="p">,</span> <span class="n">y_obs</span><span class="p">,</span> <span class="n">num_passes</span><span class="p">,</span> <span class="n">omega</span><span class="p">,</span> <span class="n">Sigma</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">m0</span><span class="p">,</span> <span class="n">S0</span><span class="p">):</span>
+    
+    <span class="n">grid_size</span> <span class="o">=</span> <span class="n">t_grid</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="c1"># Dictionary mapping from times to indices for array x</span>
+    <span class="n">t_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">t_obs</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">t_obs</span><span class="p">))))</span>
+    
+    <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">grid_size</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">grid_size</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_passes</span><span class="p">):</span>
+
+        <span class="n">lamda</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">grid_size</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">psi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">grid_size</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+        <span class="n">m</span> <span class="o">=</span> <span class="n">m0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">grid_size</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">S</span> <span class="o">=</span> <span class="n">S0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">grid_size</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        
+        <span class="c1"># Forward pass to compute m, S</span>
+        <span class="n">m</span><span class="p">,</span> <span class="n">S</span> <span class="o">=</span> <span class="n">forward</span><span class="p">(</span><span class="n">m</span><span class="o">=</span><span class="n">m</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="n">S</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">b</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="n">A</span><span class="p">,</span> <span class="n">Sigma</span><span class="o">=</span><span class="n">Sigma</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">)</span>
+        
+        <span class="c1"># Backward pass to compute psi, lamda, b_, A_</span>
+        <span class="n">psi</span><span class="p">,</span> <span class="n">lamda</span><span class="p">,</span> <span class="n">b_</span><span class="p">,</span> <span class="n">A_</span> <span class="o">=</span> <span class="n">backward</span><span class="p">(</span><span class="n">t_grid</span><span class="o">=</span><span class="n">t_grid</span><span class="p">,</span>
+                                      <span class="n">A</span><span class="o">=</span><span class="n">A</span><span class="p">,</span>
+                                      <span class="n">b</span><span class="o">=</span><span class="n">b</span><span class="p">,</span>
+                                      <span class="n">m</span><span class="o">=</span><span class="n">m</span><span class="p">,</span>
+                                      <span class="n">S</span><span class="o">=</span><span class="n">S</span><span class="p">,</span>
+                                      <span class="n">Sigma</span><span class="o">=</span><span class="n">Sigma</span><span class="p">,</span>
+                                      <span class="n">gamma</span><span class="o">=</span><span class="n">gamma</span><span class="p">,</span>
+                                      <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="p">,</span>
+                                      <span class="n">psi</span><span class="o">=</span><span class="n">psi</span><span class="p">,</span>
+                                      <span class="n">lamda</span><span class="o">=</span><span class="n">lamda</span><span class="p">,</span>
+                                      <span class="n">t_dict</span><span class="o">=</span><span class="n">t_dict</span><span class="p">,</span>
+                                      <span class="n">x</span><span class="o">=</span><span class="n">y_obs</span><span class="p">,</span>
+                                      <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">)</span>
+        
+        <span class="n">b</span> <span class="o">=</span> <span class="n">b</span> <span class="o">+</span> <span class="n">omega</span> <span class="o">*</span> <span class="p">(</span><span class="n">b_</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">A</span> <span class="o">+</span> <span class="n">omega</span> <span class="o">*</span> <span class="p">(</span><span class="n">A_</span> <span class="o">-</span> <span class="n">A</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">b</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">psi</span><span class="p">,</span> <span class="n">lamda</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="demonstration">
+<h2>Demonstration<a class="headerlink" href="#demonstration" title="Permalink to this headline">¶</a></h2>
+<p>We now apply the algorithm to toy data drawn from the exact GP model, shown below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ornstein_uhlenbeck</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">t_</span><span class="p">):</span>
+    
+    <span class="n">coeff</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sigma</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">gamma</span>
+    <span class="n">exp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">-</span> <span class="n">t_</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]))</span>
+    
+    <span class="k">return</span> <span class="n">coeff</span> <span class="o">*</span> <span class="n">exp</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_center-output tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initial and final time to approximate</span>
+<span class="n">t0</span> <span class="o">=</span> <span class="mf">0.</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="mf">5.</span>
+
+<span class="c1"># OU parameters sigma and gamma, and observation noise level</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mf">1.</span>
+<span class="n">gamma</span> <span class="o">=</span> <span class="mf">2.</span>
+<span class="n">r</span> <span class="o">=</span> <span class="mf">1e-1</span>
+
+<span class="c1"># Number of observations and integration grid size</span>
+<span class="n">num_obs</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">grid_size</span> <span class="o">=</span> <span class="mi">10000</span>
+
+<span class="c1"># Number of grid points between observation points</span>
+<span class="n">interval_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">grid_size</span> <span class="o">/</span> <span class="p">(</span><span class="n">num_obs</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1e-6</span><span class="p">)</span>
+
+<span class="c1"># Grid of times used for integration and grid of times for observations</span>
+<span class="n">t_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">grid_size</span><span class="p">)</span>
+<span class="n">t_obs</span> <span class="o">=</span> <span class="n">t_grid</span><span class="p">[::</span><span class="n">interval_size</span><span class="p">][</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Set random seed </span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Zero mean vector and OU covariance matrix for sampling from the SDE prior</span>
+<span class="n">y_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_obs</span><span class="p">,))</span>
+<span class="n">y_cov</span> <span class="o">=</span> <span class="n">ornstein_uhlenbeck</span><span class="p">(</span><span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="n">gamma</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t_obs</span><span class="p">,</span> <span class="n">t_</span><span class="o">=</span><span class="n">t_obs</span><span class="p">)</span>
+<span class="n">y_cov</span> <span class="o">=</span> <span class="n">y_cov</span> <span class="o">+</span> <span class="n">r</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">num_obs</span><span class="p">)</span>
+
+<span class="n">y_obs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="n">y_mean</span><span class="p">,</span> <span class="n">cov</span><span class="o">=</span><span class="n">y_cov</span><span class="p">)</span>
+
+<span class="c1"># Plot data</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">t_obs</span><span class="p">,</span> <span class="n">y_obs</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Format plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Example data&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$t$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$x$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/sde-as-gp_12_0.svg" src="../../../_images/sde-as-gp_12_0.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Algorithm parameters</span>
+<span class="n">num_passes</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">Sigma</span> <span class="o">=</span> <span class="n">sigma</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">omega</span> <span class="o">=</span> <span class="mf">5e-1</span>
+<span class="n">m0</span> <span class="o">=</span> <span class="mf">0.</span>
+<span class="n">S0</span> <span class="o">=</span> <span class="mf">1e-1</span>
+
+<span class="n">dt</span> <span class="o">=</span> <span class="p">(</span><span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span> <span class="o">/</span> <span class="n">grid_size</span>
+
+<span class="c1"># Run the smoothing algorithm</span>
+<span class="n">b</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">psi</span><span class="p">,</span> <span class="n">lamda</span> <span class="o">=</span> <span class="n">smoothing</span><span class="p">(</span><span class="n">t_obs</span><span class="o">=</span><span class="n">t_obs</span><span class="p">,</span>
+                                   <span class="n">t_grid</span><span class="o">=</span><span class="n">t_grid</span><span class="p">,</span>
+                                   <span class="n">y_obs</span><span class="o">=</span><span class="n">y_obs</span><span class="p">,</span>
+                                   <span class="n">num_passes</span><span class="o">=</span><span class="n">num_passes</span><span class="p">,</span>
+                                   <span class="n">omega</span><span class="o">=</span><span class="n">omega</span><span class="p">,</span>
+                                   <span class="n">Sigma</span><span class="o">=</span><span class="n">Sigma</span><span class="p">,</span>
+                                   <span class="n">gamma</span><span class="o">=</span><span class="n">gamma</span><span class="p">,</span>
+                                   <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="p">,</span>
+                                   <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span>
+                                   <span class="n">m0</span><span class="o">=</span><span class="n">m0</span><span class="p">,</span>
+                                   <span class="n">S0</span><span class="o">=</span><span class="n">S0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_center-output tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute the exact posterior of the OU process</span>
+<span class="n">t_post</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Zero mean vector and OU covariance matrix for sampling from the SDE prior</span>
+<span class="n">Ktt</span> <span class="o">=</span> <span class="n">ornstein_uhlenbeck</span><span class="p">(</span><span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="n">gamma</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t_obs</span><span class="p">,</span> <span class="n">t_</span><span class="o">=</span><span class="n">t_obs</span><span class="p">)</span>
+<span class="n">Ktt</span> <span class="o">=</span> <span class="n">Ktt</span> <span class="o">+</span> <span class="n">r</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">num_obs</span><span class="p">)</span>
+
+<span class="n">Kt_t</span> <span class="o">=</span> <span class="n">ornstein_uhlenbeck</span><span class="p">(</span><span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="n">gamma</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t_post</span><span class="p">,</span> <span class="n">t_</span><span class="o">=</span><span class="n">t_obs</span><span class="p">)</span>
+<span class="n">Kt_t_</span> <span class="o">=</span> <span class="n">ornstein_uhlenbeck</span><span class="p">(</span><span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="n">gamma</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t_post</span><span class="p">,</span> <span class="n">t_</span><span class="o">=</span><span class="n">t_post</span><span class="p">)</span>
+
+<span class="c1"># Exact posterior mean and variance</span>
+<span class="n">post_mean</span> <span class="o">=</span> <span class="n">Kt_t</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">Ktt</span><span class="p">,</span> <span class="n">y_obs</span><span class="p">)</span>
+<span class="n">post_var</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">Kt_t_</span> <span class="o">-</span> <span class="n">Kt_t</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">Ktt</span><span class="p">,</span> <span class="n">Kt_t</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
+
+<span class="c1"># Plot data, approximate and exact posterior</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+<span class="c1"># Observed data</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">t_obs</span><span class="p">,</span> <span class="n">y_obs</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># Approximate posterior</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_grid</span><span class="p">,</span> <span class="n">m</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">t_grid</span><span class="p">,</span>
+                 <span class="n">m</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">S</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">,</span>
+                 <span class="n">m</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">S</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">,</span>
+                 <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span>
+                 <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+                 <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                 <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Approximate posterior&#39;</span><span class="p">)</span>
+
+<span class="c1"># Exact posterior</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_post</span><span class="p">,</span> <span class="n">post_mean</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Exact posterior&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_post</span><span class="p">,</span> <span class="n">post_mean</span> <span class="o">-</span> <span class="n">post_var</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_post</span><span class="p">,</span> <span class="n">post_mean</span> <span class="o">+</span> <span class="n">post_var</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Format plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Exact and approximate posterior&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$t$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$x$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/sde-as-gp_14_0.svg" src="../../../_images/sde-as-gp_14_0.svg" /></div>
+</div>
+<p>Note that since we did not optimise the initial mean and variance <span class="math notranslate nohighlight">\(m_0, S_0\)</span>, the approximate posterior does not precisely match the exact posterior. Overall however, the approximation looks quite good. This is expected since this was a relatively easy example, where the SDE being approximated was linear. It would be interesting to test this algorithm in scenarios where the underlying SDE is non-linear or when the posterior SDE is multimodal.</p>
+</div>
+<div class="section" id="conclusions">
+<h2>Conclusions<a class="headerlink" href="#conclusions" title="Permalink to this headline">¶</a></h2>
+<p>The method presented in this page provides a way for approximating posteriors of constant-noise SDEs using a variational approach. To achieve this, the original SDE is approximated by a linear SDE with a time-varying diffusion function, adapted so that the approximate posterior minimises the free energy. One shortcoming of this method is that its computational complexity scales as <span class="math notranslate nohighlight">\(\mathcal{O}(T)\)</span> with the time interval <span class="math notranslate nohighlight">\(T\)</span>. Moreover, as the solution must be performed numerically on a fine grid, this cost is far from negligible. Furthermore, this method does not currently support adaptive stepsize numerical ODE solvers, since the forward and backward steps require access to the value of related quantities on the same grid of points. Lastly, this approximation must be repeated for different datasets - it would be interesting to investigate whether amortisation can be incorporated into this method.</p>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p id="bibtex-bibliography-content/misc/sde-as-gp/sde-as-gp-0"><dl class="citation">
+<dt class="bibtex label" id="archambeau2008variational"><span class="brackets">AOS+08</span><span class="fn-backref">(<a href="#id2">1</a>,<a href="#id4">2</a>)</span></dt>
+<dd><p>Cédric Archambeau, Manfred Opper, Yuan Shen, Dan Cornford, and John Shawe-taylor. Variational inference for diffusion processes. In J. Platt, D. Koller, Y. Singer, and S. Roweis, editors, <em>Advances in Neural Information Processing Systems</em>, volume 20. 2008.</p>
+</dd>
+<dt class="bibtex label" id="archambeau2007gaussian"><span class="brackets">ACOST07</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id6">2</a>)</span></dt>
+<dd><p>Cedric Archambeau, Dan Cornford, Manfred Opper, and John Shawe-Taylor. Gaussian process approximations of stochastic differential equations. In <em>Gaussian Processes in Practice</em>, 1–16. PMLR, 2007.</p>
+</dd>
+<dt class="bibtex label" id="sarkka2019applied"><span class="brackets"><a class="fn-backref" href="#id3">SarkkaS19</a></span></dt>
+<dd><p>Simo Särkkä and Arno Solin. <em>Applied stochastic differential equations</em>. Volume 10. Cambridge University Press, 2019.</p>
+</dd>
+</dl>
+</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "venv-random-walks"
+        },
+        kernelOptions: {
+            kernelName: "venv-random-walks",
+            path: "./content/misc/sde-as-gp"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'venv-random-walks'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="../sde/num-sde.html" title="previous page">Numerical simulation of SDEs</a>
+    <a class='right-next' id="next-link" href="../node/node.html" title="next page">Neural ODEs</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Stratos Markou<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-168728006-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    
+  </body>
+</html>
