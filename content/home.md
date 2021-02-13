@@ -17,6 +17,12 @@ Welcome to Random Walks! This is an archive of explorations, in the convex
 
 ## New on Random Walks
 
+[01/02/2021] Additional material on Conjugate Gradients (CG).
+
+[21/01/2021] Notes and demo on Natural Cubic Splinces (NCS).
+
+[14/01/2021] Notes and demo on the Adaptive Rejection Sampling (ARS) algorithm.
+
 [12/10/2020] {doc}`A short set of notes deriving Conjugate Gradients <./content/misc/optimisation/conjugate-gradients>`.
 
 [10/09/2020] {ref}`Rough notes on the last three chapters <prob-intro>` of Grimmett and Welsh, *An Introduction to Probability*.
