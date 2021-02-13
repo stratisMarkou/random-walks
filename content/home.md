@@ -17,6 +17,8 @@ Welcome to Random Walks! This is an archive of explorations, in the convex
 
 ## New on Random Walks
 
+[13/02/2021] Notes and a demo for the paper: [Gaussian process approximations of stochastic differential equations](./misc/sde-as-gp/sde-as-gp.ipynb).
+
 [01/02/2021] Additional material on Conjugate Gradients (CG).
 
 [21/01/2021] Notes and demo on Natural Cubic Splinces (NCS).
