@@ -473,7 +473,7 @@ q(x_0, ..., x_N) &amp;\approx p(x_0) \prod_{n = 1}^N \mathcal{N}(x_{n+1} | x_n +
 \nabla_A \mathcal{L} &amp;= \frac{\partial E_{sde}}{\partial A} - \lambda^\top - 2\Psi S, \\
 \nabla_b \mathcal{L} &amp;= \frac{\partial E_{sde}}{\partial b} + \lambda.
 \end{align}\end{split}\]</div>
-<p>and give the gradients of the Lagrangian with respect to <span class="math notranslate nohighlight">\(A, b\)</span> - we’ll call these the. Taking variational derivatives and setting these equal to <span class="math notranslate nohighlight">\(0\)</span> we obtain the ODEs for <span class="math notranslate nohighlight">\(\lambda\)</span> and <span class="math notranslate nohighlight">\(\Psi\)</span> below</p>
+<p>and give the gradients of the Lagrangian with respect to <span class="math notranslate nohighlight">\(A, b\)</span>. Taking variational derivatives and setting these equal to <span class="math notranslate nohighlight">\(0\)</span> we obtain the ODEs for <span class="math notranslate nohighlight">\(\lambda\)</span> and <span class="math notranslate nohighlight">\(\Psi\)</span> below</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
 \nabla_m \mathcal{L} &amp;= \dot{\lambda} + \frac{\partial E_{sde}}{\partial m} + \frac{\partial E_{obs}}{\partial m} - A^\top \lambda = 0, \\
@@ -485,7 +485,7 @@ q(x_0, ..., x_N) &amp;\approx p(x_0) \prod_{n = 1}^N \mathcal{N}(x_{n+1} | x_n +
 A &amp;\leftarrow A - \eta \nabla_A \mathcal{L} = \frac{\partial E_{sde}}{\partial A} - \lambda^\top - 2\Psi S, \\
 b &amp;\leftarrow b - \eta \nabla_b \mathcal{L} = \frac{\partial E_{sde}}{\partial b} + \lambda.
 \end{align}\end{split}\]</div>
-<p>Alternatively,<span class="bibtex" id="id5">[archambeau2008gaussian]</span> we can equate these gradients to <span class="math notranslate nohighlight">\(0\)</span> and solve for <span class="math notranslate nohighlight">\(A, b\)</span>, giving a new set of parameters <span class="math notranslate nohighlight">\(\tilde{A}, \tilde{b}\)</span></p>
+<p>Alternatively,<a class="bibtex reference internal" href="#archambeau2008variational" id="id5">[AOS+08]</a> we can equate these gradients to <span class="math notranslate nohighlight">\(0\)</span> and solve for <span class="math notranslate nohighlight">\(A, b\)</span>, giving a new set of parameters <span class="math notranslate nohighlight">\(\tilde{A}, \tilde{b}\)</span></p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
 A &amp;\leftarrow (1 - \omega) A - \omega \tilde{A} &amp;\text{where } \tilde{A} \text{ satisfies } \nabla_A \mathcal{L}\big|_{\tilde{A}} = 0 \\
@@ -793,7 +793,7 @@ E_{obs} &amp;= \frac{m^2 + S}{2r^2} - \frac{ym}{r^2} + \frac{y^2}{2r^2}.
 <div class="section" id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
 <p id="bibtex-bibliography-content/misc/sde-as-gp/sde-as-gp-0"><dl class="citation">
-<dt class="bibtex label" id="archambeau2008variational"><span class="brackets">AOS+08</span><span class="fn-backref">(<a href="#id2">1</a>,<a href="#id4">2</a>)</span></dt>
+<dt class="bibtex label" id="archambeau2008variational"><span class="brackets">AOS+08</span><span class="fn-backref">(<a href="#id2">1</a>,<a href="#id4">2</a>,<a href="#id5">3</a>)</span></dt>
 <dd><p>Cédric Archambeau, Manfred Opper, Yuan Shen, Dan Cornford, and John Shawe-taylor. Variational inference for diffusion processes. In J. Platt, D. Koller, Y. Singer, and S. Roweis, editors, <em>Advances in Neural Information Processing Systems</em>, volume 20. 2008.</p>
 </dd>
 <dt class="bibtex label" id="archambeau2007gaussian"><span class="brackets">ACOST07</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id6">2</a>)</span></dt>
