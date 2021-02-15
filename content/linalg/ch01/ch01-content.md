@@ -370,7 +370,7 @@ To show that $U_1 + ... + U_n$ is a subspace, we observe that it contains the ad
 <details class="proof">
 <summary>Proof: Direct sum \(\iff\) unique writing of \(0\)</summary>
 
-Suppose $U_1 + ... + U_n = U_1 \oplus ... \oplus U_n$ is a direct sum. By the {ref}`definition of the direct sum<linalg-direct-sum>`, there exists a single unique way to write $0$ as a sum of the form $u_1 + ... + u_n$ where $u_i \in U_i$, by setting each $u_i = 0$.
+Suppose $U_1 + ... + U_n = U_1 \oplus ... \oplus U_n$ is a direct sum. By the {ref}`definition of the direct sum<linalg-direct-sum>`, there exists a single unique way to write $0$ as a sum of the form $u_1 + ... + u_n$ where $u_i \in U_i$.
     
 Going the other way, suppose now there exists a unique way to write $0$ as the sum $u_1 + ... + u_n$ where $u_i \in U_i$, by setting $u_i = 0$. Now consider an element $v \in U_1 + ... + U_n$ and consider two ways of writing it
     
