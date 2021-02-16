@@ -1,7 +1,311 @@
 import tensorflow as tf
 
 import numpy as np
+from scipy.integrate import ode as ODE
 import matplotlib.pyplot as plt
 
 
-class NeuralNetwork
+class NeuralNetwork(tf.Module):
+
+    def __init__(self,
+                 input_dim,
+                 output_dim,
+                 hidden_dims,
+                 nonlinearity,
+                 dtype,
+                 name='neural_network',
+                 **kwargs):
+
+        super().__init__(name=name, **kwargs)
+
+        self.dtype = dtype
+
+        shapes = [input_dim] + hidden_dims + [output_dim]
+        shapes = [(s1, s2) for s1, s2 in zip(shapes[:-1], shapes[1:])]
+
+        self.W = []
+        self.b = []
+        self.num_linear = len(hidden_dims) + 1
+
+        with self.name_scope:
+            for shape in shapes:
+                W = tf.Variable(tf.random.normal(shape=shape, dtype=dtype) /
+                                shape[0] ** 0.5)
+                b = tf.Variable(tf.random.normal(shape=shape[1:],
+                                                 dtype=dtype))
+
+                self.W.append(W)
+                self.b.append(b)
+
+        self.nonlinearity = getattr(tf.nn, nonlinearity)
+
+    def __call__(self, tensor):
+
+        for i, (W, b) in enumerate(zip(self.W, self.b)):
+
+            tensor = tf.einsum('...i, ij -> ...j', tensor, W) + b
+
+            if i < self.num_linear - 1:
+                tensor = self.nonlinearity(tensor)
+
+        return tensor
+
+
+def OU_Esde(gamma, sigma):
+
+    def _OU_Esde(m, S, A, b):
+
+        term1 = (m[0] ** 2 + S[0, 0]) * (A[0, 0] - gamma) ** 2 / (2 * sigma ** 2)
+        term2 = - b[0] * m[0] * (A[0, 0] - gamma) / (2 * sigma ** 2)
+        term3 = b[0] ** 2 / (2 * sigma ** 2)
+
+        return term1 + term2 + term3
+
+    return _OU_Esde
+
+
+def moment_dynamics(network, t, z, Sigma, D):
+
+    # Convert input arrays to tensors of the right dtype
+    t = tf.convert_to_tensor(t, dtype=network.dtype)
+    t = tf.reshape(t, (-1,))
+    z = tf.convert_to_tensor(z, dtype=network.dtype)
+    Sigma = tf.convert_to_tensor(Sigma, dtype=network.dtype)
+
+    # Unpack current state into mean and covariance
+    m = z[:D]
+    S = tf.reshape(z[D:], (D, D))
+
+    # Pass t through network and unpack b and A
+    bA = network(t)
+    b = bA[:D]
+    A = tf.reshape(bA[D:], (D, D))
+
+    # ODEs for mean and variance
+    dm = - tf.tensordot(A, m, [[1], [0]]) + b
+    dS = - tf.matmul(A, S) - tf.matmul(S, A, transpose_b=True) + Sigma
+
+    # Repack mean and variance back into dz
+    dS = tf.reshape(dS, (-1,))
+    dz = tf.concat([dm, dS], axis=0)
+
+    # Convert back to numpy array
+    dz = dz.numpy()
+
+    return dz
+
+
+def moment_and_multiplier_dynamics(network, Esde, t, z, Sigma, D):
+
+    # Convert input arrays to tensors of the right dtype
+    t = tf.convert_to_tensor(t, dtype=network.dtype)
+    t = tf.reshape(t, (-1,))
+    z = tf.convert_to_tensor(z, dtype=network.dtype)
+    Sigma = tf.convert_to_tensor(Sigma, dtype=network.dtype)
+
+    # Split z into moment part and lagrange multiplier part
+    zm = z[:(D + D ** 2)]
+    zl = z[(D + D ** 2):]
+
+    # Unpack state into m, S, Psi, lamda
+    m = zm[:D]
+    S = tf.reshape(zm[D:], (D, D))
+    lamda = zl[:D]
+    Psi = tf.reshape(zl[D:], (D, D))
+
+    # Pass t through network and unpack b and A
+    bA = network(t)
+    b = bA[:D]
+    A = tf.reshape(bA[D:], (D, D))
+
+    # Take gradients of Esde wrt moments
+    with tf.GradientTape() as tape:
+        tape.watch(m)
+        tape.watch(S)
+
+        E = Esde(m, S, A, b)
+
+    # Take gradients and reshape
+    dE = tape.gradient(E, [m, S])
+    dEdm = dE[0]
+    dEdS = tf.reshape(dE[1], (D, D))
+
+    # ODEs for m and S
+    dm = - tf.tensordot(A, m, [[1], [0]]) + b
+    dS = - tf.matmul(A, S) - tf.matmul(S, A, transpose_b=True) + Sigma
+
+    # ODEs for lambda and Psi
+    dlamda = - dEdm + tf.tensordot(A, lamda, axes=[[0], [0]])
+    dPsi = - dEdS + 2 * tf.matmul(Psi, A)
+
+    # Repack m, S, lamda and Psi
+    dS = tf.reshape(dS, (-1,))
+    dPsi = tf.reshape(dPsi, (-1,))
+    dz = tf.concat([dm, dS, dlamda, dPsi], axis=0)
+
+    # Convert back to numpy array
+    dz = dz.numpy()
+
+    return dz
+
+
+def forward_solve(network, Sigma, m0, S0, t0, t1, dt, atol):
+
+    # State space dimension
+    D = m0.shape[0]
+
+    # Convert initial mean and covariance to numpy and pack into z state
+    S0 = tf.reshape(S0, (-1,))
+    z0 = tf.concat([m0, S0], axis=0)
+    z0 = z0.numpy()
+
+    # The moment dynamics function to use in the ODE integrator
+    f = lambda t, z: moment_dynamics(network, t, z, Sigma, D)
+
+    # Initialise ODE integrator
+    ode = ODE(f=f).set_integrator('vode', atol=atol)
+    ode = ode.set_initial_value(z0, t0)
+
+    t = [t0]
+    mS = [z0]
+
+    # Integrate forwards
+    while ode.successful:
+        z = ode.integrate(ode.t + dt)
+        t.append(ode.t + dt)
+        mS.append(z)
+        if ode.t > t1:
+            return t, mS
+
+
+def backward_solve(network, Sigma, Esde, m1, S1, t0, t1, dt, atol):
+
+    dtype = m1.dtype
+
+    # State space dimension
+    D = m1.shape[0]
+
+    # Convert initial mean and covariance to numpy and pack into z state
+    S1 = tf.reshape(S1, (-1,))
+    lamda1 = tf.zeros(shape=(D,), dtype=dtype)
+    Psi1 = tf.zeros(shape=(D ** 2,), dtype=dtype)
+    z1 = tf.concat([m1, S1, lamda1, Psi1], axis=0)
+    z1 = z1.numpy()
+
+    # The moment dynamics function to use in the ODE integrator
+    f = lambda t, z: moment_and_multiplier_dynamics(network=network,
+                                                    Esde=Esde,
+                                                    t=t,
+                                                    z=z,
+                                                    Sigma=Sigma,
+                                                    D=D)
+
+    # Initialise ODE integrator
+    ode = ODE(f=f).set_integrator('vode', atol=atol)
+    ode = ode.set_initial_value(z1, t1)
+
+    t = [t1]
+    mS = [z1]
+
+    # Integrate forwards
+    while ode.successful:
+        solution = ode.integrate(ode.t - dt)
+        t.append(ode.t - dt)
+        mS.append(solution)
+        if ode.t < t0:
+            return t, mS
+
+
+tf.random.set_seed(0)
+
+# Test neural network
+input_dim = 1
+output_dim = 2
+hidden_dims = [128, 128, 128]
+nonlinearity = 'relu'
+dtype = tf.float64
+
+network = NeuralNetwork(input_dim=input_dim,
+                        output_dim=output_dim,
+                        hidden_dims=hidden_dims,
+                        nonlinearity=nonlinearity,
+                        dtype=dtype)
+
+Sigma = tf.convert_to_tensor([1.], dtype=dtype)
+m0 = tf.convert_to_tensor([0.], dtype=dtype)
+S0 = tf.convert_to_tensor([5e-1], dtype=dtype)
+t0 = 0.
+t1 = 1.
+dt = 1e-3
+atol = 1e-6
+
+t, mS = forward_solve(network=network,
+                                Sigma=Sigma,
+                                m0=m0,
+                                S0=S0,
+                                t0=t0,
+                                t1=t1,
+                                dt=dt,
+                                atol=atol)
+
+t = np.array(t)[:-1]
+mS = np.array(mS)[:-1]
+
+plt.plot(t, mS[:, 0], color='k', zorder=2)
+plt.fill_between(t,
+                 mS[:, 0] - mS[:, 1] ** 0.5,
+                 mS[:, 0] + mS[:, 1] ** 0.5,
+                 color='gray',
+                 alpha=0.5,
+                 zorder=1)
+plt.ylim([-2, 2])
+plt.show()
+
+
+# ==============================================================================
+# Test augmented dynamics
+# ==============================================================================
+
+D = 1
+
+gamma = 1.
+sigma = 1.
+
+Esde = OU_Esde(gamma=gamma,
+               sigma=sigma)
+
+t0 = 0.
+t1 = t[-1]
+dt = 1e-3
+atol = 1e-6
+z = np.zeros(shape=(2 * D * (D + 1),))
+Sigma = tf.eye(D, dtype=dtype)
+
+m1 = mS[-1, :1]
+S1 = mS[-1, 1:, None]
+
+t_, mS_ = backward_solve(network=network,
+                         Sigma=Sigma,
+                         Esde=Esde,
+                         m1=m1,
+                         S1=S1,
+                         t0=t0,
+                         t1=t1,
+                         dt=dt,
+                         atol=atol)
+
+
+t_ = np.array(t_)
+mS_ = np.array(mS_)[:, :D*(D+1)]
+
+
+plt.plot(t_, mS_[:, 0], color='k', zorder=2)
+plt.fill_between(t_,
+                 mS_[:, 0] - mS_[:, 1] ** 0.5,
+                 mS_[:, 0] + mS_[:, 1] ** 0.5,
+                 color='gray',
+                 alpha=0.5,
+                 zorder=1)
+plt.ylim([-2, 2])
+
+plt.show()
