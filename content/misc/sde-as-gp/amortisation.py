@@ -5,6 +5,9 @@ import numpy as np
 from scipy.integrate import ode as ODE
 import matplotlib.pyplot as plt
 
+import sys
+from utils import sample_data_from_ou_gp
+
 
 class NeuralNetwork(tf.Module):
 
@@ -130,6 +133,23 @@ def moment_dynamics(network, t, z, Sigma, D):
     return dz
 
 
+def unpack_moment_and_multiplier_dynamics(z, D):
+
+    reshape = np.reshape if type(z) == np.ndarray else tf.reshape
+
+    # Split z into moment part and multiplier part
+    zm = z[:(D + D ** 2)]
+    zl = z[(D + D ** 2):2*(D + D ** 2)]
+
+    # Unpack state into m, S, Psi, lamda
+    m = zm[:D]
+    S = reshape(zm[D:], (D, D))
+    lamda = zl[:D]
+    Psi = reshape(zl[D:], (D, D))
+
+    return m, S, lamda, Psi
+
+
 def moment_and_multiplier_dynamics(network, Esde, t, z, Sigma, D):
 
     # Convert input arrays to tensors of the right dtype
@@ -138,15 +158,8 @@ def moment_and_multiplier_dynamics(network, Esde, t, z, Sigma, D):
     z = tf.convert_to_tensor(z, dtype=network.dtype)
     Sigma = tf.convert_to_tensor(Sigma, dtype=network.dtype)
 
-    # Split z into moment part and lagrange multiplier part
-    zm = z[:(D + D ** 2)]
-    zl = z[(D + D ** 2):2*(D + D ** 2)]
-
-    # Unpack state into m, S, Psi, lamda
-    m = zm[:D]
-    S = tf.reshape(zm[D:], (D, D))
-    lamda = zl[:D]
-    Psi = tf.reshape(zl[D:], (D, D))
+    # Unpack dynamics vector
+    m, S, lamda, Psi = unpack_moment_and_multiplier_dynamics(z, D)
 
     # Pass t through network and unpack b and A
     bA = network(t)
@@ -181,12 +194,6 @@ def moment_and_multiplier_dynamics(network, Esde, t, z, Sigma, D):
     dPsi = - dEdS + 2 * tf.matmul(Psi, A)
 
     # ODEs for parameter gradients
-    #db = dEdb + lamda
-    #ddtheta = tf.reduce_sum(db * dbdtheta, axis=0)
-    #dA = dEdA - tf.reduce_sum(lamda * m) - 2 * tf.matmul(Psi, S)
-    #ddtheta = ddtheta + tf.reduce_sum(dA * dAdtheta, axis=[0, 1])
-    #print(dEdA.shape, dAdtheta.shape)
-    #print(dEdb.shape, dbdtheta.shape)
     dLdtheta = tf.reduce_sum(dEdA[:, :, None] * dAdtheta, axis=[0, 1])
     dLdtheta = dLdtheta + tf.reduce_sum(dEdb[:, None] * dbdtheta, axis=[0])
     dLdtheta = dLdtheta - tf.einsum('ij, jkp, ki -> p', Psi, dAdtheta, S)
@@ -234,12 +241,28 @@ def forward_solve(network, Sigma, m0, S0, t0, t1, dt, atol):
             return t, np.array(mS)
 
 
-def backward_solve(network, Sigma, Esde, m1, S1, t0, t1, dt, atol):
+def backward_solve(network,
+                   t_data,
+                   y_data,
+                   Sigma,
+                   Esde,
+                   r,
+                   m1,
+                   S1,
+                   t0,
+                   t1,
+                   dt,
+                   atol):
 
+    # dtype to use
     dtype = m1.dtype
 
     # State space dimension
     D = m1.shape[0]
+
+    # Convert data tensors to numpy arrays
+    t_data = t_data.numpy()
+    y_data = y_data.numpy()
 
     # Convert initial mean and covariance to numpy and pack into z state
     S1 = tf.reshape(S1, (-1,))
@@ -260,20 +283,62 @@ def backward_solve(network, Sigma, Esde, m1, S1, t0, t1, dt, atol):
                                                     Sigma=Sigma,
                                                     D=D)
 
-    # Initialise ODE integrator
-    ode = ODE(f=f).set_integrator('vode', atol=atol)
-    ode = ode.set_initial_value(z1, t1)
+    t_limits = [(t_data[i], t_data[i+1]) for i in range(len(t_data)-1)]
+    t_limits = [(t0, t_data[0])] + t_limits + [(t_data[-1], t1)]
+    t_limits.reverse()
 
     t = [t1]
-    mS = [z1]
+    zs = [z1]
+    z = z1
 
-    # Integrate forwards
-    while ode.successful:
-        solution = ode.integrate(ode.t - dt)
-        t.append(ode.t - dt)
-        mS.append(solution)
-        if ode.t < t0:
-            return t, np.array(mS)
+    for i, (t_left, t_right) in enumerate(t_limits):
+
+        # Initialise ODE integrator
+        ode = ODE(f=f).set_integrator('vode', atol=atol)
+        ode = ode.set_initial_value(z, t_right)
+
+        # Integrate forwards
+        while ode.successful:
+
+            t_ = max(ode.t - dt, t_left)
+            z = ode.integrate(t_)
+
+            t.append(t_)
+            zs.append(z)
+
+            if ode.t <= t_left + 1e-6:
+
+                if i == len(t_limits)-1:
+                    return t, np.array(zs)
+
+                else:
+                    z = apply_multiplier_jump(z, y_data[i], r, D)
+                    break
+
+
+def apply_multiplier_jump(z, y, r, D):
+
+    # Unpack moments and multipliers
+    m, S, lamda, Psi = unpack_moment_and_multiplier_dynamics(z, D)
+
+    # Dimension of state space
+    D = m.shape[0]
+
+    # Compute gradients w.r.t. m and S
+    dEdm = (m - y) / r ** 2
+    dEdS = np.eye(y.shape[0]) / r ** 2
+
+    # Apply jump conditions
+    lamda = lamda + dEdm
+    Psi = Psi + dEdS
+    Psi = np.reshape(Psi, (-1,))
+
+    # Replace updated values of multipliers
+    z[D+D**2:(2*D+D**2)] = lamda
+    z[(2*D+D**2):2*(D+D**2)] = Psi
+
+    return z
+
 
 
 tf.random.set_seed(0)
@@ -373,7 +438,8 @@ tf.random.set_seed(0)
 #
 #plt.show()
 #
-#
+
+
 # ==============================================================================
 # Test gradient descent training
 # ==============================================================================
@@ -381,7 +447,7 @@ tf.random.set_seed(0)
 # Network parameters
 input_dim = 1
 output_dim = 2
-hidden_dims = [128]
+hidden_dims = [128, 128]
 nonlinearity = 'relu'
 dtype = tf.float64
 
@@ -395,6 +461,7 @@ D = m0.shape[0]
 
 gamma = 1.
 sigma = 1.
+r = 1e-2
 
 Esde = OU_Esde(gamma=gamma,
                sigma=sigma)
@@ -402,7 +469,7 @@ Esde = OU_Esde(gamma=gamma,
 
 # Training parameters
 num_steps = int(1e3)
-learning_rate = 1e-4
+learning_rate = 1e-6
 dt = 1e-3
 atol = 1e-4
 
@@ -415,6 +482,10 @@ network = NeuralNetwork(input_dim=input_dim,
 
 num_variables = tf.reduce_sum([tf.reduce_prod(v.shape) for v in \
                                network.trainable_variables])
+
+# Draw data from OU covariance
+t_data = tf.linspace(3., 7., 2)
+y_data = sample_data_from_ou_gp(t_data, sigma=sigma, gamma=gamma)[:, None]
 
 optimiser = tfk.optimizers.SGD(learning_rate=learning_rate)
 
@@ -438,6 +509,9 @@ for i in range(num_steps):
     t_, z = backward_solve(network=network,
                           Sigma=Sigma,
                           Esde=Esde,
+                          t_data=t_data,
+                          y_data=y_data,
+                          r=r,
                           m1=m1,
                           S1=S1,
                           t0=t0,
@@ -448,16 +522,21 @@ for i in range(num_steps):
     dtheta = z[-1, -num_variables:]
     dtheta = network.unflatten_parameters(dtheta)
     dtheta = [-dtheta_ for dtheta_ in dtheta]
+
+    t_ = np.array(t_)
+    lamda = z[:, 2]
+    Psi = z[:, 3]
+
     optimiser.apply_gradients(zip(dtheta, network.trainable_variables))
 
 
-    if i % 20 == 0:
+    if i % 1 == 0:
 
         t = tf.convert_to_tensor(t, dtype=dtype)
         bA_ = []
 
-        for t_ in t:
-            bA_.append(network(t_[None]))
+        for t__ in t:
+            bA_.append(network(t__[None]))
 
         bA_ = tf.convert_to_tensor(bA_)
         b = bA_[:, 0]
@@ -470,7 +549,12 @@ for i in range(num_steps):
                          color='gray',
                          alpha=0.5,
                          zorder=1)
+        plt.scatter(t_data.numpy(), y_data.numpy()[:, 0])
         plt.ylim([-2, 2])
-
         plt.show()
 
+        plt.plot(t_, lamda)
+        plt.show()
+
+        plt.plot(t_, Psi)
+        plt.show()
