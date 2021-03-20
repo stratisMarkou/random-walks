@@ -17,7 +17,9 @@ Welcome to Random Walks! This is an archive of explorations, in the convex
 
 ## New on Random Walks
 
-[10/03/2021] Short notes on the paper: [Estimation of non-normalized statistical models by score matching.](./misc/score-matching/score-matching)
+[20/03/2021] Notes and demo on the paper: [Interacting particle solutions of Fokker-Planck equations through gradient-log-density estimation](./misc/interacting/interacting)
+
+[10/03/2021] Short notes on the paper: [Estimation of non-normalized statistical models by score matching](./misc/score-matching/score-matching).
 
 [13/02/2021] Notes and a demo for the paper: [Gaussian process approximations of stochastic differential equations](./misc/sde-as-gp/sde-as-gp.ipynb).
 
