@@ -1,0 +1,797 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Interacting particle solutions of the FPK &#8212; Random walks</title>
+    
+  <link rel="stylesheet" href="../../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://random-walks.org/content/misc/interacting/interacting.html" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Interesting reading and websites" href="../../reading-and-links.html" />
+    <link rel="prev" title="Estimation by score matching" href="../score-matching/score-matching.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://random-walks.org/content/misc/interacting/interacting.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Interacting particle solutions of the FPK" />
+<meta property="og:description" content="Interacting particle solutions of the FPK  One central problem of interest in modelling with Stochastic Differential Equations (SDEs), is solving the Fokker-Pla" />
+<meta property="og:image"       content="https://random-walks.org/_static/logo.svg" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../../index.html">
+  
+  <img src="../../../_static/logo.svg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Random walks</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../home.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../../prob-intro/intro.html">
+   Probability: An introduction
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch01/content.html">
+     Events and Probabilities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch02/content.html">
+     Discrete random variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch03/content.html">
+     Multivariate discrete distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch04/content.html">
+     Probability generating functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch05/content.html">
+     Distribution and density functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch06/content.html">
+     Multivariate distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch07/content.html">
+     Moment generating functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch08/content.html">
+     Main limit theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch09/content.html">
+     Branching processes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch10/content.html">
+     Random walks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch11/content.html">
+     Processes in continuous time
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch12/content.html">
+     Markov chains
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="../misc.html">
+   Miscellaneous
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sde/num-sde.html">
+     Numerical simulation of SDEs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sde-as-gp/sde-as-gp.html">
+     VI for diffusion processes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../node/node.html">
+     Neural ODEs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimisation/conjugate-gradients.html">
+     Conjugate gradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../kalman/kalman.html">
+     The Kalman filter and smoother
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ncs/ncs.html">
+     Natural cubic splines
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ars/ars.html">
+     Adaptive rejection sampling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../score-matching/score-matching.html">
+     Estimation by score matching
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Interacting particle FPK
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../reading-and-links.html">
+   Interesting reading and websites
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../../_sources/content/misc/interacting/interacting.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/stratisMarkou/random-walks/master?urlpath=tree/./content/misc/interacting/interacting.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fokker-planck-kolmogorov">
+   Fokker-Planck-Kolmogorov
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#score-matching-objective">
+   Score matching objective
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#explicit-minimisation-of-j">
+   Explicit minimisation of
+   <span class="math notranslate nohighlight">
+    \(J\)
+   </span>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interpretation">
+   Interpretation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementation">
+   Implementation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="interacting-particle-solutions-of-the-fpk">
+<h1>Interacting particle solutions of the FPK<a class="headerlink" href="#interacting-particle-solutions-of-the-fpk" title="Permalink to this headline">¶</a></h1>
+<p>One central problem of interest in modelling with Stochastic Differential Equations (SDEs), is solving the Fokker-Planck-Kolmogorov equation (FPK). Given a particle whose state <span class="math notranslate nohighlight">\(x\)</span> evolves through time <span class="math notranslate nohighlight">\(t\)</span> according to an SDE, the FPK describes how the probability density <span class="math notranslate nohighlight">\(p_t(x)\)</span> evolves with time. The FPK is of central interest in many modelling, physical and statistical applications. Unfortunately, with few exceptions such as linear SDEs, the FPK cannot be solved in closed form and must be approximated numerically.</p>
+<p>Many numerical solution schemes have been developed for solving the FPK, <a class="bibtex reference internal" href="../sde-as-gp/sde-as-gp.html#sarkka2019applied" id="id1">[SarkkaS19]</a> including finite element methods and Monte Carlo simulations. Finite element methods are deterministic and typically depend on discretisations through state-space and time and thus scale poorly with the dimensionality of the state and the region being discretised. On the other hand, Monte Carlo simulations - which amount to simulating paths from the SDE and using these as an empirical approximation of <span class="math notranslate nohighlight">\(p_t(x)\)</span> - scale better with dimensionality but due to the finite number of sampled paths they induce significant variance in downstream estimators using these paths. Recently, Maoutsa et. al <a class="bibtex reference internal" href="#maoutsa2020interacting" id="id2">[MRO20]</a> have developed a numerical approximation scheme which solves for the FPK by simulating deterministic trajectories of an ODE. This method does not involve a discretisation and scales gracefully to higher dimensions. In addition, it is deterministic and therefore the empirically estimated <span class="math notranslate nohighlight">\(p_t(x)\)</span> achieves lower variance.</p>
+<div class="section" id="fokker-planck-kolmogorov">
+<h2>Fokker-Planck-Kolmogorov<a class="headerlink" href="#fokker-planck-kolmogorov" title="Permalink to this headline">¶</a></h2>
+<p>We begin by introducing the problem this method is trying to solve. Given an SDE of the form</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+dx = f(x, t)dt + \sigma(x, t) d\beta
+\end{align}\]</div>
+<p>with initial distribution <span class="math notranslate nohighlight">\(p_0(x)\)</span>, drift function <span class="math notranslate nohighlight">\(f : \mathbb{R}^D \times \mathbb{R} \to \mathbb{R}^D\)</span> and diffusion function <span class="math notranslate nohighlight">\(\sigma : \mathbb{R}^D \times \mathbb{R} \to \mathbb{R}^D\)</span> and a standard Brownian motion <span class="math notranslate nohighlight">\(\beta\)</span>, the FPK describes the evolution of the distribution <span class="math notranslate nohighlight">\(p_t(x)\)</span> of <span class="math notranslate nohighlight">\(x\)</span> at time <span class="math notranslate nohighlight">\(t\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\frac{\partial p_t(x)}{\partial t} = - \sum_{i = 1}^D \frac{\partial}{\partial x_i} [f_i(x, t) p_t(x)] + \frac{1}{2} \sum_{i = 1}^D\sum_{j = 1}^D \frac{\partial^2}{\partial x_i \partial x_j} \left[\sigma_i(x, t) \sigma_j(x, t)^\top p_t(x)\right].
+\end{align}\]</div>
+<p>Here we will constrain ourselves to the special case where the drift is time-independent <span class="math notranslate nohighlight">\(f(x, t) = f(x)\)</span> and the diffusion is constant <span class="math notranslate nohighlight">\(\sigma(x, t) = \sigma\)</span>. In this case, the FPK can be written in the form</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\frac{\partial p_t(x)}{\partial t} = - \nabla \cdot \left[ g(x, t) p_t(x) \right] \text{ where } g(x, t) = f(x)p_t(x) - \frac{\sigma^2}{2} \nabla \log p_t(x).
+\end{align}\]</div>
+<p>This is a deterministic equation, which can be regarded as the Liouville equation of the dynamical system</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\frac{d x}{d t} = g(x, t) \text{ where } x_0 \sim p_0(x).
+\end{align}\]</div>
+<p>Therefore, if we sample <span class="math notranslate nohighlight">\(x_0 \sim p_0(x)\)</span> and evolve this up to time <span class="math notranslate nohighlight">\(t\)</span> according to this ODE, we obtain <span class="math notranslate nohighlight">\(x_t\)</span> distributed according to <span class="math notranslate nohighlight">\(p_t(x)\)</span>. The difficulty with this is that in order to evolve <span class="math notranslate nohighlight">\(x_0\)</span> according to this ODE, we need access to <span class="math notranslate nohighlight">\(g(x, t)\)</span>. This itself depends on <span class="math notranslate nohighlight">\(p_t(x)\)</span> which is the quantity we are trying to solve for, and do not have direct access to. One way to circumvent this problem is to use <a class="reference external" href="https://en.wikipedia.org/wiki/Kernel_density_estimation">kernel density estimation</a>. This method fits a probability distribution <span class="math notranslate nohighlight">\(\hat{p}_t(x)\)</span> to the empirical samples <span class="math notranslate nohighlight">\(x_t\)</span>, and <span class="math notranslate nohighlight">\(\hat{p}_t(x)\)</span> is then used as an approximation to <span class="math notranslate nohighlight">\(p_t(x)\)</span>. However, KDE methods place a restrictive form to the function <span class="math notranslate nohighlight">\(\hat{p}_t(x)\)</span>. More generally, we can use any arbitrary function <span class="math notranslate nohighlight">\(p_t(x; w)\)</span> parametrised using parameters <span class="math notranslate nohighlight">\(w\)</span> and use this to approximate <span class="math notranslate nohighlight">\(p_t(x)\)</span> using the log-gradient <a class="reference internal" href="../score-matching/score-matching.html"><span class="doc std std-doc">gradient-log-density estimator</span></a> (GLD). <a class="bibtex reference internal" href="../score-matching/score-matching.html#hyvarinen2005estimation" id="id3">[HyvarinenD05]</a> We can also follow a non-parametric approach for modelling <span class="math notranslate nohighlight">\(p_t(x)\)</span>, however we do not explore this here – see <a class="bibtex reference internal" href="#maoutsa2020interacting" id="id4">[MRO20]</a> for more details on this.</p>
+</div>
+<div class="section" id="score-matching-objective">
+<h2>Score matching objective<a class="headerlink" href="#score-matching-objective" title="Permalink to this headline">¶</a></h2>
+<p>Here we recapitulate the GLD. Given data that comes from a distribution <span class="math notranslate nohighlight">\(p_t(x)\)</span>, the GLD can be used to fit a parametrised distribution <span class="math notranslate nohighlight">\(p_t(x; w)\)</span> to <span class="math notranslate nohighlight">\(p_t(x)\)</span>. In many cases of interest, we may know <span class="math notranslate nohighlight">\(p_t(x; w)\)</span> only up to a multiplicative normalising constant</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+p_t(x; w) = \frac{1}{Z} q_t(x; w).
+\end{align}\]</div>
+<p>This occurs for example if we use a complicated parametric function <span class="math notranslate nohighlight">\(q_t(x; w)\)</span>, which we cannot integrate in closed form to determine the normalising constant <span class="math notranslate nohighlight">\(Z\)</span>. The GLD estimator uses the objective function</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+J(w) = \frac{1}{2} \int p_t(x) || \psi_t(x; w) - \psi_t(x) ||^2 dx.
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\psi_t(x; w) = \nabla \log p_t(x; w)\)</span> and <span class="math notranslate nohighlight">\(\psi_t(x) = \nabla \log p_t(x)\)</span>, and estimates the parameters <span class="math notranslate nohighlight">\(w\)</span> as the minimiser of <span class="math notranslate nohighlight">\(J(w)\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\DeclareMathOperator*{\argmin}{arg\,min}
+w_{opt} = \argmin_{w} J(w).
+\end{align}\]</div>
+<p><a class="reference internal" href="../score-matching/score-matching.html"><span class="doc std std-doc">It can be shown</span></a> that minimising <span class="math notranslate nohighlight">\(J(w)\)</span> with respect to <span class="math notranslate nohighlight">\(w\)</span> is equivalent to minimising</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+J(w) = \frac{1}{2} \int p_t(x) \left[ \psi^\top(x; w)\psi(x; w) + 2 \nabla \cdot \psi(x; w)  \right] dx + \text{const}.
+\end{align}\]</div>
+<p>Unlike the previous form of <span class="math notranslate nohighlight">\(J\)</span>, this one involves <span class="math notranslate nohighlight">\(p_t(x)\)</span> only outside the square brackets. This means that given samples from <span class="math notranslate nohighlight">\(p_t(x)\)</span>, we can approximate <span class="math notranslate nohighlight">\(J\)</span> empirically as</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+J(w) = \frac{1}{2} \sum_{n = 1}^N \left[ \psi^\top(x_n; w)\psi(x_n; w) + 2 \nabla \cdot \psi(x_n; w) \right] dx \text{ where } x_n \sim p_t(x).
+\end{align}\]</div>
+</div>
+<div class="section" id="explicit-minimisation-of-j">
+<h2>Explicit minimisation of <span class="math notranslate nohighlight">\(J\)</span><a class="headerlink" href="#explicit-minimisation-of-j" title="Permalink to this headline">¶</a></h2>
+<p>Choosing a linear in the parameters model</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\log p_t(x; w) = \phi^\top(x) w_t + \text{const}.,
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\phi^\top(x) = [\phi_1(x), ..., \phi_K(x)]\)</span> is a collection of <span class="math notranslate nohighlight">\(K\)</span> basis functions, and substituting into the gradient-log-density estimator we get</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+J(w_t) &amp;= \frac{1}{2} \sum_{n = 1}^N \left[ w_t^\top \Psi(x_n)^\top \Psi(x_n) w_t + 2 \sum_{d = 1}^D g_d^\top(x_n) w_t  \right]
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Psi_{ij}(x) = \partial_i \phi_j(x)\)</span> and <span class="math notranslate nohighlight">\(g_{d}^\top(x) = \partial_d^2 \phi^\top(x)\)</span>. Note that this modelling choice is slightly different to the one employed in <a class="bibtex reference internal" href="#maoutsa2020interacting" id="id5">[MRO20]</a>. In the original work, the authors use parametric functions to model the vector function <span class="math notranslate nohighlight">\(\psi_t(x)\)</span>, whereas here we have used a parametric function to model the scalar function <span class="math notranslate nohighlight">\(\log p_t(x)\)</span>. The benefit of the present approach is that it yields (up to a normalising constant) an explicit function for <span class="math notranslate nohighlight">\(\log p_t(x)\)</span>, whereas the original method in the paper does not. Now, using the fact that <span class="math notranslate nohighlight">\(J(w)\)</span> is a quadratic form of <span class="math notranslate nohighlight">\(w\)</span>, we can find its minimiser in closed form</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\DeclareMathOperator*{\argmin}{arg\,min}
+w_{t, opt} = - \left(\sum^N_{n = 1} \Psi^\top(x_n) \Psi(x_n) \right)^{-1} \left( \sum_{d = 1}^D \partial_d^2 \phi(x) \right).
+\end{align}\]</div>
+<p>Note that <span class="math notranslate nohighlight">\(\Psi(x_n)\)</span> is a <span class="math notranslate nohighlight">\(D \times K\)</span> matrix, where <span class="math notranslate nohighlight">\(K\)</span> is the number of  for this matrix to be invertible, we must have <span class="math notranslate nohighlight">\(N \geq D\)</span>. We can also introduce a regularising term to <span class="math notranslate nohighlight">\(J(w)\)</span> to prevent <span class="math notranslate nohighlight">\(w_t\)</span> taking extreme values, by modifying the objective to <span class="math notranslate nohighlight">\(J(w_t) + \lambda ||w_t||^2\)</span> and obtaining the optimal <span class="math notranslate nohighlight">\(w_t\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\DeclareMathOperator*{\argmin}{arg\,min}
+w_{t, opt} = - \left(\lambda I  + \sum^N_{n = 1} \Psi^\top(x_n) \Psi(x_n)\right)^{-1} \left( \sum_{d = 1}^D \partial_d^2 \phi(x) \right).
+\end{align}\]</div>
+<p>Lastly, we can substitute <span class="math notranslate nohighlight">\(w_{opt}\)</span> in our Liouville equation to obtain the explicit ODE</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\frac{d x_n}{d t} = f(x_n) - \frac{\sigma^2}{2} \phi^\top(x_n) w_{t, opt}.
+\end{align}\]</div>
+<div class='definition'>
+<p><strong>Algorithm (Interacting particle FPK simulator)</strong> Given an SDE with drift <span class="math notranslate nohighlight">\(f(x)\)</span>, diffusion <span class="math notranslate nohighlight">\(\sigma\)</span> and initial state distribution <span class="math notranslate nohighlight">\(p_0(x)\)</span> the interacting particle simulator produces <span class="math notranslate nohighlight">\(N\)</span> approximate samples from <span class="math notranslate nohighlight">\(p_t(x)\)</span> by drawing <span class="math notranslate nohighlight">\(N\)</span> samples from <span class="math notranslate nohighlight">\(x_n \sim p_0(x)\)</span> and evolving them according to the ODE</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\frac{d x_n}{d t} = f(x_n) - \frac{\sigma^2}{2} \Psi(x_n) w_{t, opt},
+\end{align}\]</div>
+<p>where the time-dependent <span class="math notranslate nohighlight">\(w_{t, opt}\)</span> is obtained as described above.</p>
+</div>
+<br>
+</div>
+<div class="section" id="interpretation">
+<h2>Interpretation<a class="headerlink" href="#interpretation" title="Permalink to this headline">¶</a></h2>
+<p>This algorithm uses <span class="math notranslate nohighlight">\(N\)</span> particles to empirically estimate the density <span class="math notranslate nohighlight">\(p_t(x)\)</span> while evolving them in tandem. The trajectories of the particles are governed by the drift <span class="math notranslate nohighlight">\(f(x_n)\)</span> as well as the function <span class="math notranslate nohighlight">\(\Psi(x_n) w\)</span>. Since <span class="math notranslate nohighlight">\(w\)</span> itself depends on the positions of all particles, it constitutes an interaction term between them. The whole collection of particles determines the empirical estimate of <span class="math notranslate nohighlight">\(p_t(x)\)</span>, which in turn affects the trajectories of the particles.</p>
+</div>
+<div class="section" id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h2>
+<p>Below is an imlpementation of this interacting particle simulator. We first define the basis functions <span class="math notranslate nohighlight">\(\phi_k\)</span> which we will use, which will be Exponentiated Quadratic functions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">EQ</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">locs</span><span class="p">,</span> <span class="n">scales</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Exponentiated Quadratic basis functions.</span>
+<span class="sd">    </span>
+<span class="sd">    Arguments</span>
+<span class="sd">    x      : tf.Tensor, shape (N, D)</span>
+<span class="sd">    locs   : tf.Tensor, shape (K, D)</span>
+<span class="sd">    scales : tf.Tensor, shape (K, D)</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    Phi    : tf.Tensor, shape (N, K)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1"># Reshape tensors for broadcasting</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">locs</span> <span class="o">=</span> <span class="n">locs</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+    <span class="n">scales</span> <span class="o">=</span> <span class="n">scales</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+    
+    <span class="n">quad</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">locs</span><span class="p">)</span> <span class="o">/</span> <span class="n">scales</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="n">quad</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">quad</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">quad</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We define the helper function <code class="docutils literal notranslate"><span class="pre">optimal_weights</span></code>, which given a set of particles <span class="math notranslate nohighlight">\(x\)</span>, a set of basis functions <code class="docutils literal notranslate"><span class="pre">phi</span></code> and a regularisation costant <code class="docutils literal notranslate"><span class="pre">lamda</span></code>, computes the optimal weights. For this we use automatic differentiation via <code class="docutils literal notranslate"><span class="pre">GradientTape.batch_jacobian</span></code> and decorate the function using <code class="docutils literal notranslate"><span class="pre">&#64;tf.function</span></code> to avoid retracing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
+<span class="k">def</span> <span class="nf">optimal_weights</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">lamda</span><span class="p">):</span>
+    
+    <span class="c1"># Nested gradient tapes for computing first and second order derivatives</span>
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">(</span><span class="n">persistent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">tape1</span><span class="p">:</span>
+    
+        <span class="n">tape1</span><span class="o">.</span><span class="n">watch</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">(</span><span class="n">persistent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">tape2</span><span class="p">:</span>
+
+            <span class="n">tape2</span><span class="o">.</span><span class="n">watch</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+            <span class="n">phi_</span> <span class="o">=</span> <span class="n">phi</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="n">Psi</span> <span class="o">=</span> <span class="n">tape2</span><span class="o">.</span><span class="n">batch_jacobian</span><span class="p">(</span><span class="n">phi_</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+        
+    <span class="n">G</span> <span class="o">=</span> <span class="n">tape1</span><span class="o">.</span><span class="n">batch_jacobian</span><span class="p">(</span><span class="n">Psi</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    
+    <span class="c1"># Compute [Σ Ψ^Τ Ψ] + λ I</span>
+    <span class="n">PsiPsi</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;nij, nkj -&gt; ik&#39;</span><span class="p">,</span> <span class="n">Psi</span><span class="p">,</span> <span class="n">Psi</span><span class="p">)</span>
+    <span class="n">PsiPsi</span> <span class="o">=</span> <span class="n">PsiPsi</span> <span class="o">+</span> <span class="mf">1e-4</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">PsiPsi</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">PsiPsi</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+    
+    <span class="c1"># Compute optimal weights by solving the system of linear equations</span>
+    <span class="n">optimal_weights</span> <span class="o">=</span> <span class="o">-</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">PsiPsi</span><span class="p">,</span> <span class="n">G</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">])[:,</span> <span class="mi">0</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">optimal_weights</span><span class="p">,</span> <span class="n">Psi</span><span class="p">,</span> <span class="n">PsiPsi</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We also define the convenience function <code class="docutils literal notranslate"><span class="pre">augmented_drift</span></code> which computes the ODE drift <span class="math notranslate nohighlight">\(g(x, t)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">augmented_drift</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">lamda</span><span class="p">):</span>
+    
+    <span class="n">w</span><span class="p">,</span> <span class="n">Psi</span><span class="p">,</span> <span class="n">PsiPsi</span> <span class="o">=</span> <span class="n">optimal_weights</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">lamda</span><span class="p">)</span>
+    <span class="n">Phi_w</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;nij, i -&gt; nj&#39;</span><span class="p">,</span> <span class="n">Psi</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+    
+    <span class="n">drift</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sigma</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">Phi_w</span>
+    
+    <span class="k">return</span> <span class="n">drift</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will apply the interacting particle simulator to the double-well SDE, with drift</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+f(x) = - c x (x - 1) (x + 1),
+\end{align}\]</div>
+<p>and corresponding potential</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+U(x) = - \frac{c}{4} \left(x^4 - 2 x^2\right).
+\end{align}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">double_well_drift</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+    <span class="k">return</span> <span class="o">-</span> <span class="n">c</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mf">1.</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mf">1.</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>There is no closed-form for the density <span class="math notranslate nohighlight">\(p_t(x)\)</span> for this drift function. We will therefore simulate the density for a sufficiently long time, and then compare the simulated distribution with the stationary distribution, which we can calculate in closed form <a class="bibtex reference internal" href="../sde-as-gp/sde-as-gp.html#sarkka2019applied" id="id6">[SarkkaS19]</a></p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\pi(x) = \lim_{t \to \infty} p_t(x) \propto \exp \left(- \frac{2}{\sigma^2} U(x) \right).
+\end{align}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set float64 precision</span>
+<span class="n">dtype</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">float64</span>
+
+<span class="c1"># Number of particles, features and problem dimension</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">K</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">D</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># Initial/final simulation times and step size</span>
+<span class="n">t0</span> <span class="o">=</span> <span class="mf">0.</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="mf">1.</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">1e-2</span>
+
+<span class="c1"># SDE parameters: double well constant and diffusion sigma</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mf">2.</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mf">1.</span>
+
+<span class="c1"># Set basis functions and regularisation constant</span>
+<span class="n">locs</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="n">K</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">]</span>
+<span class="n">scales</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">D</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+
+<span class="n">phi</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">EQ</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">locs</span><span class="o">=</span><span class="n">locs</span><span class="p">,</span> <span class="n">scales</span><span class="o">=</span><span class="n">scales</span><span class="p">)</span>
+<span class="n">lamda</span> <span class="o">=</span> <span class="mf">1e-4</span>
+
+<span class="c1"># Solver tolerance</span>
+<span class="n">atol</span> <span class="o">=</span> <span class="mf">1e-4</span>
+
+<span class="c1"># Set up the ODE system</span>
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">double_well_drift</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">c</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">x</span> <span class="p">:</span> <span class="n">augmented_drift</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">D</span><span class="p">)),</span> <span class="n">f</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">lamda</span><span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">x</span> <span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">r</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,))</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+
+<span class="c1"># Initial locations of the particles</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1e0</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">D</span><span class="p">))</span>
+
+<span class="c1"># Set up the ODE solver</span>
+<span class="n">ode</span> <span class="o">=</span> <span class="n">ODE</span><span class="p">(</span><span class="n">g</span><span class="p">)</span><span class="o">.</span><span class="n">set_integrator</span><span class="p">(</span><span class="s1">&#39;vode&#39;</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">atol</span><span class="p">)</span>
+<span class="n">ode</span> <span class="o">=</span> <span class="n">ode</span><span class="o">.</span><span class="n">set_initial_value</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,)),</span> <span class="n">t0</span><span class="p">)</span>
+
+<span class="c1"># Array to keep track of the trajectries</span>
+<span class="n">trajectories</span> <span class="o">=</span> <span class="p">[</span><span class="n">x0</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span>
+
+<span class="c1"># Solve ODE forward</span>
+<span class="k">while</span> <span class="n">ode</span><span class="o">.</span><span class="n">successful</span> <span class="ow">and</span> <span class="n">ode</span><span class="o">.</span><span class="n">t</span> <span class="o">&lt;</span> <span class="n">t1</span><span class="p">:</span>
+    <span class="n">solution</span> <span class="o">=</span> <span class="n">ode</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">ode</span><span class="o">.</span><span class="n">t</span> <span class="o">+</span> <span class="n">dt</span><span class="p">)</span>
+    <span class="n">trajectories</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solution</span><span class="p">)</span>
+
+<span class="n">trajectories</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">trajectories</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">trajectories</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">trajectories</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">D</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input tag_center-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">trajectories</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_plot</span><span class="p">,</span> <span class="n">trajectories</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+
+<span class="c1"># Plot formatting</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Particle trajectories&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$t$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$x$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="n">t0</span><span class="p">,</span> <span class="n">t1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># Plot estimated pt(x) at t = t1</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Locations to plot pt(x) at</span>
+<span class="n">x_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">]</span>
+<span class="n">x_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x_plot</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x_plot</span><span class="p">)</span>
+
+<span class="c1"># Get optimal weights as given by GLD</span>
+<span class="n">w</span><span class="p">,</span> <span class="n">Psi</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">optimal_weights</span><span class="p">(</span><span class="n">trajectories</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span>  <span class="p">:,</span> <span class="p">:],</span> <span class="n">phi</span><span class="p">,</span> <span class="n">lamda</span><span class="p">)</span>
+
+<span class="c1"># Compute density estimated via φT w</span>
+<span class="n">est_density</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">phi</span><span class="p">(</span><span class="n">x_plot</span><span class="p">),</span> <span class="n">w</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">])[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+<span class="n">est_density</span> <span class="o">=</span> <span class="n">est_density</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">est_density</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">x_plot</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">x_range</span><span class="p">)</span>
+
+<span class="c1"># Compute true stationary density (t = infinity limit)</span>
+<span class="n">true_density</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">c</span> <span class="o">*</span> <span class="p">(</span><span class="mf">0.25</span> <span class="o">*</span> <span class="n">x_plot</span> <span class="o">**</span> <span class="mi">4</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">x_plot</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">true_density</span> <span class="o">=</span> <span class="n">true_density</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">true_density</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">x_plot</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># Plot particle histogram (t = t1)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">trajectories</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span>
+         <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+         <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span>
+         <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+         <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Particles $x_</span><span class="si">{t_1}</span><span class="s1">$&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot density estimated by GLD (t = t1)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span>
+         <span class="n">est_density</span><span class="p">,</span>
+         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Est. $e^{\phi^T w_</span><span class="si">{t_1}</span><span class="s1">}$&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot true stationary density (t = infinity limit)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span>
+         <span class="n">true_density</span><span class="p">,</span>
+         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Exact $p_{\infty}(x)$&#39;</span><span class="p">)</span>
+
+<span class="c1"># Format plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$x$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$p(x)$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/interacting_13_0.png" src="../../../_images/interacting_13_0.png" />
+</div>
+</div>
+<p>We see that the particle trakectories in this case quickly converge to some equilibrium distribution. This equilibrium distribution matches the exact stationary distribution of the SDE <span class="math notranslate nohighlight">\(p_{\infty}(x)\)</span> - both the particle histogram (blue) and the GLD-estimated distribution (black) match the stationary distribution. Note how the particle trajectories themselves are smooth, since the only source of randomness is the initial state distribution. If we were to sample the SDE directly, these samples would involve randomness both due to the initial state distribution as well as the random Brownian motion associated with each path. This means that downstream estimators using these deterministic particles to approximate <span class="math notranslate nohighlight">\(p_t(x)\)</span> will have smaller variance than paths sampled directly from the SDE.</p>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<p>We have seen how the FPK can be recast as a Liouville equation, which can in turn be simulated using the GLD estimator. This method evolves a number of particles with randomly sampled initial conditions and deterministic dynamics. The Liouville equation involves an term involving the particle density, which can be interpreted as an interaction term between the particles. This simulation method can be used to obtain lower-variance empirical estimates of the particle density compared to directly sampling paths from the FPK. Recently, this method has been applied <a class="bibtex reference internal" href="#song2020score" id="id7">[SSDK+20]</a> to training large-scale generative models to high-dimensional SDEs, using Neural Networks.</p>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p id="bibtex-bibliography-content/misc/interacting/interacting-0"><dl class="citation">
+<dt class="bibtex label" id="hyvarinen2005estimation"><span class="brackets"><a class="fn-backref" href="#id3">HyvarinenD05</a></span></dt>
+<dd><p>Aapo Hyvärinen and Peter Dayan. Estimation of non-normalized statistical models by score matching. <em>Journal of Machine Learning Research</em>, 2005.</p>
+</dd>
+<dt class="bibtex label" id="maoutsa2020interacting"><span class="brackets">MRO20</span><span class="fn-backref">(<a href="#id2">1</a>,<a href="#id4">2</a>,<a href="#id5">3</a>)</span></dt>
+<dd><p>Dimitra Maoutsa, Sebastian Reich, and Manfred Opper. Interacting particle solutions of fokker–planck equations through gradient–log–density estimation. <em>Entropy</em>, 2020.</p>
+</dd>
+<dt class="bibtex label" id="song2020score"><span class="brackets"><a class="fn-backref" href="#id7">SSDK+20</a></span></dt>
+<dd><p>Yang Song, Jascha Sohl-Dickstein, Diederik P Kingma, Abhishek Kumar, Stefano Ermon, and Ben Poole. Score-based generative modeling through stochastic differential equations. <em>arXiv preprint arXiv:2011.13456</em>, 2020.</p>
+</dd>
+<dt class="bibtex label" id="sarkka2019applied"><span class="brackets">SarkkaS19</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id6">2</a>)</span></dt>
+<dd><p>Simo Särkkä and Arno Solin. <em>Applied stochastic differential equations</em>. Volume 10. Cambridge University Press, 2019.</p>
+</dd>
+</dl>
+</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "venv-random-walks"
+        },
+        kernelOptions: {
+            kernelName: "venv-random-walks",
+            path: "./content/misc/interacting"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'venv-random-walks'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="../score-matching/score-matching.html" title="previous page">Estimation by score matching</a>
+    <a class='right-next' id="next-link" href="../../reading-and-links.html" title="next page">Interesting reading and websites</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Stratos Markou<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-168728006-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    
+  </body>
+</html>
