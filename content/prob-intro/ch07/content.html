@@ -407,13 +407,9 @@ covariance is denoted <span class="math notranslate nohighlight">\(\text{cov}(X,
 <p>whenever these expectations exist.</p>
 </div>
 <br>
-<p>Clearly, if we multiply <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> by <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> respectively, their
-covariance will change by a factor of <span class="math notranslate nohighlight">\(ab\)</span>. We may be interested
-in a scale-invariant metric of the covariance between two random variables
-, captured by the correlation coefficient.</p>
+<p>Clearly, if we multiply <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> by <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> respectively, their covariance will change by a factor of <span class="math notranslate nohighlight">\(ab\)</span>. We may be interested in a scale-invariant metric of the covariance between two random variables, captured by the correlation coefficient.</p>
 <div class='definition'>
-<p><strong>Definition (Correlation coefficient)</strong> If <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are random variables
-, then their correlation coefficient is denoted <span class="math notranslate nohighlight">\(\rho(X, Y)\)</span> and defined as</p>
+<p><strong>Definition (Correlation coefficient)</strong> If <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are random variables, then their correlation coefficient is denoted <span class="math notranslate nohighlight">\(\rho(X, Y)\)</span> and defined as</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
  \rho(X, Y) = \frac{\text{cov}(X, Y)}{\sqrt{\text{var}(X)\text{var}(Y)}},
@@ -423,9 +419,7 @@ in a scale-invariant metric of the covariance between two random variables
   0\)</span>.</p>
 </div>
 <br>
-<p>The correlation coefficient of two random variables has absolute value less
-than or equal to <span class="math notranslate nohighlight">\(1\)</span>, as stated by the following result which is worth
-bearing in mind.</p>
+<p>The correlation coefficient of two random variables has absolute value less than or equal to <span class="math notranslate nohighlight">\(1\)</span>, as stated by the following result which is worth bearing in mind.</p>
 <div class="theorem">
 <p><strong>Theorem (Correlation between <span class="math notranslate nohighlight">\(-1\)</span> and <span class="math notranslate nohighlight">\(1\)</span>)</strong> If <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are random
 variables, then</p>
@@ -436,8 +430,7 @@ variables, then</p>
 <p>whenever this correlation exists.</p>
 </div>
 <br>
-<p>The above result can be shown quickly from an application of the Cauchy
--Schwartz inequality stated and proved below.</p>
+<p>The above result can be shown quickly from an application of the Cauchy-Schwartz inequality stated and proved below.</p>
 <details class="proof">
 <summary>Proof: \(-1 \leq \rho(X, Y) \leq 1\) </summary>
 <p>Given random variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>, define <span class="math notranslate nohighlight">\(U = X - \bar{X}\)</span> and <span class="math notranslate nohighlight">\(V = Y- \bar{Y}\)</span>. By applying the Cauchy-Schwartz inequality on <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(V\)</span>, we obtain</p>
@@ -464,11 +457,20 @@ variables, then</p>
 <details class="proof">
 <summary>Proof: Cauchy-Schwartz inequality</summary>
 <p>Let <span class="math notranslate nohighlight">\(s \in \mathbb{R}\)</span> be a real number and <span class="math notranslate nohighlight">\(W = sU + V\)</span> be a random variable. Then <span class="math notranslate nohighlight">\(W^2 \geq 0\)</span> and we have</p>
-<p>\begin{align}\mathbb{E}(X^2) = a s^2 + b s + c \geq 0,\end{align}</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{E}(X^2) = a s^2 + b s + c \geq 0,
+\end{align}\]</div>
 <p>where <span class="math notranslate nohighlight">\(a = \mathbb{E}(U^2)\)</span>, <span class="math notranslate nohighlight">\(b = 2\mathbb{E}(UV)\)</span> and <span class="math notranslate nohighlight">\(\mathbb{E}(V^2)\)</span>. Since <span class="math notranslate nohighlight">\(\mathbb{E}(W^2) \geq 0\)</span> holds for all values of <span class="math notranslate nohighlight">\(s\)</span>, then the quadratic above can equal zero at most once - because otherwise it would achieve negative values. Therefore we have</p>
-<p>\begin{align}b^2 - 4ac = 4\mathbb{E}(UV)^2 - 4\mathbb{E(U^2)\mathbb{E}(V^2) \leq 0,\end{align}</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+b^2 - 4ac = 4\mathbb{E}(UV)^2 - 4\mathbb{E}(U^2)\mathbb{E}(V^2) \leq 0,
+\end{align}\]</div>
 <p>from which we arrive at the result</p>
-<p>\begin{align}\mathbb{E}(UV)^2 &amp;\leq \mathbb{E}(U^2)\mathbb{E}(V^2).\end{align}</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{E}(UV)^2 \leq \mathbb{E}(U^2)\mathbb{E}(V^2).
+\end{align}\]</div>
 </details>
 <br>
 </div>
@@ -536,22 +538,23 @@ condition, we have that <span class="math notranslate nohighlight">\(\mathbb{E}(
 <p>Here are examples of moment generating functions of some common continuous random variables.</p>
 <div class="section" id="uniform">
 <h3>Uniform<a class="headerlink" href="#uniform" title="Permalink to this headline">¶</a></h3>
-<p>If <span class="math notranslate nohighlight">\(X\)</span> is uniformly distributed in <span class="math notranslate nohighlight">\([a, b]\)</span>, then its mgf is
-\begin{align}
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is uniformly distributed in <span class="math notranslate nohighlight">\([a, b]\)</span>, then its mgf is</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
 M_X(t) = \frac{e^{tb} - e^{ta}}{t}.
-\end{align}</p>
+\end{align}\]</div>
 </div>
 <div class="section" id="exponential">
 <h3>Exponential<a class="headerlink" href="#exponential" title="Permalink to this headline">¶</a></h3>
-<p>If <span class="math notranslate nohighlight">\(X\)</span> is exponentially distributed with parameter <span class="math notranslate nohighlight">\(\lambda\)</span>, then its mgf is
-\begin{align}
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is exponentially distributed with parameter <span class="math notranslate nohighlight">\(\lambda\)</span>, then its mgf is</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
 M_X(t) = \frac{\lambda}{\lambda - t}.
-\end{align}</p>
+\end{align}\]</div>
 </div>
 <div class="section" id="normal">
 <h3>Normal<a class="headerlink" href="#normal" title="Permalink to this headline">¶</a></h3>
-<p>If <span class="math notranslate nohighlight">\(X\)</span> is normally distributed with parameters <span class="math notranslate nohighlight">\(\mu\)</span>, <span class="math notranslate nohighlight">\(\sigma^2 &gt; 0\)</span>, then
-its mgf is</p>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is normally distributed with parameters <span class="math notranslate nohighlight">\(\mu\)</span>, <span class="math notranslate nohighlight">\(\sigma^2 &gt; 0\)</span>, then its mgf is</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
  M_X(t) = \exp\left(\mu t + \frac{\sigma^2t}{2}\right).
@@ -564,17 +567,15 @@ its mgf is</p>
 \[\begin{align}
 \int^\infty_{-\infty} \frac{e^{tx}}{1 + x^2} dx,
 \end{align}\]</div>
-<p>diverges for any <span class="math notranslate nohighlight">\(t \neq 0\)</span>. Many other variables do not have mgfs for the
-same reason, a difficulty that is circumvented by characteristic functions
-defined below.</p>
+<p>diverges for any <span class="math notranslate nohighlight">\(t \neq 0\)</span>. Many other variables do not have mgfs for the same reason, a difficulty that is circumvented by characteristic functions defined below.</p>
 </div>
 <div class="section" id="gamma">
 <h3>Gamma<a class="headerlink" href="#gamma" title="Permalink to this headline">¶</a></h3>
-<p>If <span class="math notranslate nohighlight">\(X\)</span> is gamma distributed with parameters <span class="math notranslate nohighlight">\(w &gt; 0\)</span> and <span class="math notranslate nohighlight">\(\lambda &gt; 0\)</span>, then
-its mgf is
-\begin{align}
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is gamma distributed with parameters <span class="math notranslate nohighlight">\(w &gt; 0\)</span> and <span class="math notranslate nohighlight">\(\lambda &gt; 0\)</span>, then its mgf is</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
 M_X(t) = \left(\frac{\lambda}{\lambda - t}\right)^w.
-\end{align}</p>
+\end{align}\]</div>
 </div>
 </div>
 <div class="section" id="markov-and-jensen-inequalities">
@@ -592,11 +593,17 @@ non-negative random variable is larger than some positive threshold.</p>
 <br>
 <details class="proof">
 <summary>Proof: Markov inequality</summary>
-<p>For any non-negative random variable <span class="math notranslate nohighlight">\(X(\omega)\)</span> and positive <span class="math notranslate nohighlight">\(t &gt; 0\)</span>, we have
-\begin{align}X(\omega) \geq t \mathbb{1}_{X \geq t},\end{align}
-where <span class="math notranslate nohighlight">\(\mathbb{1}_{X \geq t} = 1\)</span> if <span class="math notranslate nohighlight">\(X(\omega) \geq t\)</span> and <span class="math notranslate nohighlight">\(\mathbb{1}_{X\geq t} = 0\)</span>
-otherwise. Rearranging and taking expectations, we obtain
-\begin{align}\mathbb{P}(X \geq t) = \frac{\mathbb{E}(X)}{t}.\end{align}</p>
+<p>For any non-negative random variable <span class="math notranslate nohighlight">\(X(\omega)\)</span> and positive <span class="math notranslate nohighlight">\(t &gt; 0\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+X(\omega) \geq t \mathbb{1}_{X \geq t},
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbb{1}_{X \geq t} = 1\)</span> if <span class="math notranslate nohighlight">\(X(\omega) \geq t\)</span> and <span class="math notranslate nohighlight">\(\mathbb{1}_{X\geq t} = 0\)</span>
+otherwise. Rearranging and taking expectations, we obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{P}(X \geq t) = \frac{\mathbb{E}(X)}{t}.
+\end{align}\]</div>
 </details>
 <br>
 <p>One consequence of the Markov inequality is the Chebyshev inequality</p>
@@ -636,16 +643,19 @@ and <span class="math notranslate nohighlight">\(g : (a, b) \to \mathbb{R}\)</sp
 theorem (see below) and taking an expectation over <span class="math notranslate nohighlight">\(X\)</span>.</p>
 <details class="proof">
 <summary>Proof: Jensen's inequality</summary>
-<p>From the supporting tangent theorem we have
-\begin{align}g(X) \geq g(w) + \alpha (X - w),\end{align}
-and by setting the constant <span class="math notranslate nohighlight">\(w = \mathbb{E}(X)\)</span> and taking an expectation
-over <span class="math notranslate nohighlight">\(X\)</span>, the <span class="math notranslate nohighlight">\(X - w\)</span> term cancels and we obtain Jensen’s inequality
-\begin{align}\mathbb{E}[g(X)] \geq g(\mathbb{E}(X)).\end{align}</p>
+<p>From the supporting tangent theorem we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+g(X) \geq g(w) + \alpha (X - w),
+\end{align}\]</div>
+<p>and by setting the constant <span class="math notranslate nohighlight">\(w = \mathbb{E}(X)\)</span> and taking an expectation over <span class="math notranslate nohighlight">\(X\)</span>, the <span class="math notranslate nohighlight">\(X - w\)</span> term cancels and we obtain Jensen’s inequality</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{E}[g(X)] \geq g(\mathbb{E}(X)).
+\end{align}\]</div>
 </details>
 <br>
-<p>The supporting tangent theorem says that for any point <span class="math notranslate nohighlight">\(w\)</span> in the domain of a
-convex function <span class="math notranslate nohighlight">\(g\)</span>, we can always find a line passing through <span class="math notranslate nohighlight">\((w, g(w))\)</span>
-, which lower-bounds the function.</p>
+<p>The supporting tangent theorem says that for any point <span class="math notranslate nohighlight">\(w\)</span> in the domain of a convex function <span class="math notranslate nohighlight">\(g\)</span>, we can always find a line passing through <span class="math notranslate nohighlight">\((w, g(w))\)</span>, which lower-bounds the function.</p>
 <div class="theorem">
 <p><strong>Theorem (Supporting tangent theorem)</strong> Let <span class="math notranslate nohighlight">\(g : (a, b) \to \mathbb{R}\)</span> be
 convex, and let <span class="math notranslate nohighlight">\(w \in (u, v)\)</span>. There exists <span class="math notranslate nohighlight">\(\alpha \in \mathbb{R}\)</span> such that</p>
@@ -657,20 +667,27 @@ convex, and let <span class="math notranslate nohighlight">\(w \in (u, v)\)</spa
 <br>
 <details class="proof">
 <summary>Proof: Supporting tangent theorem</summary>
-<p>Since <span class="math notranslate nohighlight">\(g\)</span> is convex, we have
-\begin{align}\frac{g(w) - g(u)}{w - u} \leq \frac{g(v) - g(w)}{v - w},\end{align}
-otherwise <span class="math notranslate nohighlight">\(g\)</span> could not be convex, because <span class="math notranslate nohighlight">\(g(w)\)</span> would be strictly less
-than the linear interpolation between <span class="math notranslate nohighlight">\(g(u)\)</span> and <span class="math notranslate nohighlight">\(g(v)\)</span> at <span class="math notranslate nohighlight">\(w\)</span>. The above
-inequality holds for all <span class="math notranslate nohighlight">\(u &lt; w &lt; v\)</span>, we can maximise the left hand side
-over <span class="math notranslate nohighlight">\(u\)</span> and the right hand side over <span class="math notranslate nohighlight">\(v\)</span> and obtain <span class="math notranslate nohighlight">\(L_w \leq R_w\)</span>, where
-\begin{align}L_w = \sup\left\{\frac{g(w) - g(u)}{w - u} : u &lt; w\right\}, R_w
-= \inf\left\{\frac{g(v) - g(w)}{v - w} : v &lt; w\right\}.\end{align}
-we can then take <span class="math notranslate nohighlight">\(\alpha \in [L_w, R_w]\)</span> and see that
-\begin{align}\frac{g(w) - g(u)}{w - u} \leq \alpha \leq \frac{g(v) - g(w)}{v- w}.\end{align}
-By rearranging the two sides of the above equation we obtain
-\begin{align}g(x) \geq g(w) + \alpha (x - w),\end{align}
-for the cases where <span class="math notranslate nohighlight">\(x = u &lt; w\)</span> and <span class="math notranslate nohighlight">\(x = v &gt; w\)</span> respectively. The
-inequality holds trivially for <span class="math notranslate nohighlight">\(x = w\)</span>.</p>
+<p>Since <span class="math notranslate nohighlight">\(g\)</span> is convex, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\frac{g(w) - g(u)}{w - u} \leq \frac{g(v) - g(w)}{v - w},
+\end{align}\]</div>
+<p>otherwise <span class="math notranslate nohighlight">\(g\)</span> could not be convex, because <span class="math notranslate nohighlight">\(g(w)\)</span> would be strictly less than the linear interpolation between <span class="math notranslate nohighlight">\(g(u)\)</span> and <span class="math notranslate nohighlight">\(g(v)\)</span> at <span class="math notranslate nohighlight">\(w\)</span>. The above inequality holds for all <span class="math notranslate nohighlight">\(u &lt; w &lt; v\)</span>, we can maximise the left hand side over <span class="math notranslate nohighlight">\(u\)</span> and the right hand side over <span class="math notranslate nohighlight">\(v\)</span> and obtain <span class="math notranslate nohighlight">\(L_w \leq R_w\)</span>, where</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+L_w = \sup\left\{\frac{g(w) - g(u)}{w - u} : u &lt; w\right\}, R_w = \inf\left\{\frac{g(v) - g(w)}{v - w} : v &lt; w\right\}.
+\end{align}\]</div>
+<p>we can then take <span class="math notranslate nohighlight">\(\alpha \in [L_w, R_w]\)</span> and see that</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\frac{g(w) - g(u)}{w - u} \leq \alpha \leq \frac{g(v) - g(w)}{v- w}.
+\end{align}\]</div>
+<p>By rearranging the two sides of the above equation we obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+g(x) \geq g(w) + \alpha (x - w),
+\end{align}\]</div>
+<p>for the cases where <span class="math notranslate nohighlight">\(x = u &lt; w\)</span> and <span class="math notranslate nohighlight">\(x = v &gt; w\)</span> respectively. The inequality holds trivially for <span class="math notranslate nohighlight">\(x = w\)</span>.</p>
 </details>
 <br>
 </div>
@@ -719,9 +736,7 @@ independent random variables with characteristic functions <span class="math not
 <br>
 <p>As with the mgf, the characteristic function of a random variable is unique, in the sense that two radoom variables have the same distributions if and only if they have the same characteristic functions.</p>
 <div class="theorem">
-<p><strong>Theorem (Uniqueness of characteristic functions)</strong> Let <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> have
-characteristic functions <span class="math notranslate nohighlight">\(\phi_X\)</span> and <span class="math notranslate nohighlight">\(\phi_Y\)</span>. Then <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> have the
-same distributions if and only if <span class="math notranslate nohighlight">\(\phi_X(t) = \phi_Y(t)\)</span> for all <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>.</p>
+<p><strong>Theorem (Uniqueness of characteristic functions)</strong> Let <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> have characteristic functions <span class="math notranslate nohighlight">\(\phi_X\)</span> and <span class="math notranslate nohighlight">\(\phi_Y\)</span>. Then <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> have the same distributions if and only if <span class="math notranslate nohighlight">\(\phi_X(t) = \phi_Y(t)\)</span> for all <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>.</p>
 </div>
 <br>
 <p>We can obtain the pdf of a random variable by applying the following inverse transformation.</p>
