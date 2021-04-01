@@ -1094,44 +1094,52 @@ dV &amp;= \frac{dV}{dX}dX = \frac{dV}{dX} f(t) dt, \text{ where } dX = f(t) dt,\
 <p>For an autonomous SDE however the chain rule takes a different form, which under the Ito definition is as follows.</p>
 <div class="theorem">
 <p><strong>Definition (Ito’s result for one dimension)</strong> Let <span class="math notranslate nohighlight">\(X_t\)</span> be an Ito process given by</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[\begin{align}
 dX_t = U_t dt + H_t dW_t.
-\end{align}</p>
+\end{align}\]</div>
 <p>where <span class="math notranslate nohighlight">\(U_t, H_t\)</span> are square-integrable processes, and let <span class="math notranslate nohighlight">\(V(X, t)\)</span> be a twice continuously differentiable function. Then <span class="math notranslate nohighlight">\(Y_t = V(X_t, t)\)</span> is again an Ito process and</p>
-<p>\begin{align}
-dY_t = \frac{\partial V}{\partial t} dt + \frac{\partial V}{\partial X} dX_t + \frac{1}{2}\frac{\partial^2 V}{\partial X^2} V_t^2 dt.
-\end{align}</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+dY_t = \frac{\partial V}{\partial t} dt + \frac{\partial V}{\partial X} dX_t + \frac{1}{2}\frac{\partial^2 V}{\partial X^2} V_t^2 dt. 
+\end{align}\]</div>
 <p>If <span class="math notranslate nohighlight">\(V\)</span> does not depend on <span class="math notranslate nohighlight">\(t\)</span>, we have</p>
-<p>\begin{align}
-dY_t = \left(\frac{\partial V}{\partial X} U_t + \frac{1}{2}\frac{\partial^2 V}{\partial X^2} H_t^2 \right) dt + \frac{\partial V}{\partial X}H_t dW_t.
-\end{align}</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+dY_t = \left(\frac{\partial V}{\partial X} U_t + \frac{1}{2}\frac{\partial^2 V}{\partial X^2} H_t^2 \right) dt + \frac{\partial V}{\partial X}H_t dW_t. 
+\end{align}\]</div>
 </div>
 <br>
 <p>For a more formal definition and proof of Ito’s result see <a class="bibtex reference internal" href="#oksendal" id="id2">[Oks92]</a> (Theorem 4.1.8 and pages 44-48). Below is a short sketch proof, which highlights why the additional term appears in the formula.</p>
 <details class="proof">
 <summary>Informal argument: Ito's result for one dimension</summary>
 <div>
-<p>Writing the infinitesimal difference in <span class="math notranslate nohighlight">\(Y_t\)</span> as a Taylor expansion we get
-\begin{align}
+<p>Writing the infinitesimal difference in <span class="math notranslate nohighlight">\(Y_t\)</span> as a Taylor expansion we get</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
 dY_t = \frac{\partial V}{\partial t} dt + \frac{\partial V}{\partial X} dX_t + \frac{1}{2} \left[\frac{\partial^2 V}{\partial X^2} dX_t^2 + 2 \frac{\partial^2 V}{\partial X \partial t} dt dX_t + \frac{\partial^2 V}{\partial t^2} dt^2 \right] + o(dt^2),
-\end{align}
-where the <span class="math notranslate nohighlight">\(o(dt^n)\)</span> notation means that the ratio of the term being ommited, to the infinitesimal <span class="math notranslate nohighlight">\(dt^n\)</span> goes to 0 as <span class="math notranslate nohighlight">\(dt \to 0\)</span>. Now since <span class="math notranslate nohighlight">\(dX_t = U_t dt + H_t dW_t\)</span> and <span class="math notranslate nohighlight">\(dW_t\)</span> is of order <span class="math notranslate nohighlight">\(dt^{1/2}\)</span>, the last two terms in the square brackets are <span class="math notranslate nohighlight">\(o(dt^{3/2})\)</span> and we can neglect them. The reference provides a formal argument for neglecting these terms, showing that their contribution to the Ito integral has zero mean and a variance that tends to 0 as <span class="math notranslate nohighlight">\(dt \to 0\)</span> - these contributions converge to <span class="math notranslate nohighlight">\(0\)</span> in the sense of mean square convergence.</p>
-<p>However, the first term is of order <span class="math notranslate nohighlight">\(dt\)</span> and does not vanish. In particular
-\begin{align}
+\end{align}\]</div>
+<p>where the <span class="math notranslate nohighlight">\(o(dt^n)\)</span> notation means that the ratio of the term being ommited, to the infinitesimal <span class="math notranslate nohighlight">\(dt^n\)</span> goes to 0 as <span class="math notranslate nohighlight">\(dt \to 0\)</span>. Now since <span class="math notranslate nohighlight">\(dX_t = U_t dt + H_t dW_t\)</span> and <span class="math notranslate nohighlight">\(dW_t\)</span> is of order <span class="math notranslate nohighlight">\(dt^{1/2}\)</span>, the last two terms in the square brackets are <span class="math notranslate nohighlight">\(o(dt^{3/2})\)</span> and we can neglect them. The reference provides a formal argument for neglecting these terms, showing that their contribution to the Ito integral has zero mean and a variance that tends to 0 as <span class="math notranslate nohighlight">\(dt \to 0\)</span> - these contributions converge to <span class="math notranslate nohighlight">\(0\)</span> in the sense of mean square convergence.</p>
+<p>However, the first term is of order <span class="math notranslate nohighlight">\(dt\)</span> and does not vanish. In particular</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
 dX_t^2 = U_t^2 dt^2 + 2 U_tH_t dW_t dt + H_t^2 dW_t^2.
-\end{align}
-In the above expression, we can neglect the first two terms which are of order <span class="math notranslate nohighlight">\(dt^{3/2}\)</span> and larger. Again, here the formal argument is that their associated contributions to the Ito integral converge to 0 in mean square. This yields the expression
-\begin{align}
-dY_t = \frac{\partial V}{\partial X} U_t dt + \frac{1}{2}\frac{\partial^2 V}{\partial X^2} H_t^2 dW_t^2 + \frac{\partial V}{\partial X}H_t dW_t.
-\end{align}
-Now consider the contribution to the Ito integral of the last term, i.e. the sum
-\begin{align}
+\end{align}\]</div>
+<p>In the above expression, we can neglect the first two terms which are of order <span class="math notranslate nohighlight">\(dt^{3/2}\)</span> and larger. Again, here the formal argument is that their associated contributions to the Ito integral converge to 0 in mean square. This yields the expression</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+dY_t = \frac{\partial V}{\partial X} U_t dt + \frac{1}{2}\frac{\partial^2 V}{\partial X^2} H_t^2 dW_t^2 + \frac{\partial V}{\partial X}H_t dW_t. 
+\end{align}\]</div>
+<p>Now consider the contribution to the Ito integral of the last term, i.e. the sum</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
 \sum_{n = 1}^N \frac{\partial^2 V}{\partial X^2}\Bigg \vert_{X_{t_n}} H_{t_n}^2 dW_{t_n}^2 = \sum_{n = 1}^N a_n dW_{t_n}^2,
-\end{align}
-where <span class="math notranslate nohighlight">\(t_n = n~dt\)</span> and <span class="math notranslate nohighlight">\(N = T / dt\)</span>. This sum has expectation <span class="math notranslate nohighlight">\(\sum_{n = 1}^N a_n dt\)</span> and it can be shown that its variance goes to 0 as <span class="math notranslate nohighlight">\(dt \to 0\)</span>, so the contribution converges to <span class="math notranslate nohighlight">\(\sum_{n = 1}^N a_n dt\)</span> in mean square and we can write
-\begin{align}
-dY_t = \left(\frac{\partial V}{\partial X} U_t + \frac{1}{2}\frac{\partial^2 V}{\partial X^2} H_t^2 \right) dt + \frac{\partial V}{\partial X}H_t dW_t.
-\end{align}</p>
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(t_n = n~dt\)</span> and <span class="math notranslate nohighlight">\(N = T / dt\)</span>. This sum has expectation <span class="math notranslate nohighlight">\(\sum_{n = 1}^N a_n dt\)</span> and it can be shown that its variance goes to 0 as <span class="math notranslate nohighlight">\(dt \to 0\)</span>, so the contribution converges to <span class="math notranslate nohighlight">\(\sum_{n = 1}^N a_n dt\)</span> in mean square and we can write</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+dY_t = \left(\frac{\partial V}{\partial X} U_t + \frac{1}{2}\frac{\partial^2 V}{\partial X^2} H_t^2 \right) dt + \frac{\partial V}{\partial X}H_t dW_t. 
+\end{align}\]</div>
 </div>
 </details>
 <br>
