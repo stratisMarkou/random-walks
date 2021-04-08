@@ -727,8 +727,8 @@ p\Bigg(\sup_{x, y \in \mathcal{M}}|z^\top(x)z(y) - k(x, y)| \geq \epsilon \Bigg)
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Timing exact GP regression:
 
-CPU times: user 11.1 s, sys: 849 ms, total: 12 s
-Wall time: 4.1 s
+CPU times: user 10.7 s, sys: 838 ms, total: 11.5 s
+Wall time: 4 s
 </pre></div>
 </div>
 </div>
@@ -754,8 +754,8 @@ Wall time: 4.1 s
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Timing exact approximate RFF regression:
 
-CPU times: user 279 ms, sys: 90.4 ms, total: 369 ms
-Wall time: 98.9 ms
+CPU times: user 276 ms, sys: 95 ms, total: 371 ms
+Wall time: 99.3 ms
 </pre></div>
 </div>
 </div>
@@ -802,8 +802,8 @@ Wall time: 98.9 ms
     <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">])</span>
     
     <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;$y$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
         
     <span class="k">else</span><span class="p">:</span>
@@ -821,7 +821,7 @@ Wall time: 98.9 ms
 </div>
 <div class="section" id="variance-starvation">
 <h3>Variance starvation<a class="headerlink" href="#variance-starvation" title="Permalink to this headline">¶</a></h3>
-<p>One issue with the RFF is that - like all other finte basis function models - is that it has a limited amount of degrees of freedom. Therefore, in some situations the datapoints may be such that they pin down the RFF model and significantly reducing the variance of the approximate regressor. To illustrate this, we sample a slightly larger dataset, with</p>
+<p>One issue with the RFF is that - like all other finte basis function models - is that it has a limited amount of degrees of freedom. Therefore, in some situations the datapoints may be such that they pin down the RFF model and significantly reducing the variance of the approximate regressor. To illustrate this, we sample a slightly different dataset, with a smaller gap in between the two data clumps.</p>
 <div class="cell tag_hide-input tag_center-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Number of datapoints to generate</span>
@@ -898,7 +898,8 @@ Wall time: 98.9 ms
     <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">])</span>
     
     <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;$y$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
         
     <span class="k">else</span><span class="p">:</span>
@@ -912,7 +913,7 @@ Wall time: 98.9 ms
 <div class="cell_output docutils container">
 <img alt="../../../_images/rff_22_0.svg" src="../../../_images/rff_22_0.svg" /></div>
 </div>
-<p>So the speedup that the RFF gives does not come without a cost. In certain cases, we can end up with approximate posteriors which are significantly overfitted. This can be alleviated by increasing the number of RFF features. However this increases the computational cost of performing regression and may defeat the purpose of using RFF features in the first place.</p>
+<p>The variance of the approximate estimator in between the data is (in some cases), signiticantly smaller than that of the exact posterior. So the speedup that the RFF gives does not come without a cost. In certain cases, we can end up with approximate posteriors which are significantly overfitted. This can be alleviated by increasing the number of RFF features. However this increases the computational cost of performing regression and may defeat the purpose of using RFF features in the first place.</p>
 </div>
 </div>
 <div class="section" id="conclusion">
