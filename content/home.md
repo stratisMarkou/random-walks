@@ -2,9 +2,7 @@
 
 ## About
 
-Welcome to Random Walks! This is an archive of explorations, in the convex
- hull of Inference, Probability, Optimisation and Physics. I am putting this
-  together to keep track of the things I study.
+Welcome to Random Walks! This is an archive of explorations, in the convex hull of Inference, Probability, Optimisation and Physics. I am putting this together to keep track of the things I study.
 
 ## Modes under exploration
 
@@ -17,9 +15,11 @@ Welcome to Random Walks! This is an archive of explorations, in the convex
 
 ## New on Random Walks
 
-[02/04/2021] Notes and demo on [Random Fourier Features](./misc/rff/rff)
+[19/04/2021] Notes and demo on [Stein Variational Gradient Descent](./misc/svgd/svgd).
 
-[20/03/2021] Notes and demo on [Interacting particle solutions of FPK equations through GLD estimation](./misc/interacting/interacting)
+[02/04/2021] Notes and demo on [Random Fourier Features](./misc/rff/rff).
+
+[20/03/2021] Notes and demo on [Interacting particle solutions of FPK equations through GLD estimation](./misc/interacting/interacting).
 
 [10/03/2021] Short notes on the paper: [Estimation of non-normalized statistical models by score matching](./misc/score-matching/score-matching).
 
