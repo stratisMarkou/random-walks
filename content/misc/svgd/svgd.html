@@ -1,0 +1,864 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Stein variational gradient descent &#8212; Random walks</title>
+    
+  <link rel="stylesheet" href="../../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://random-walks.org/content/misc/svgd/svgd.html" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Interesting reading and websites" href="../../reading-and-links.html" />
+    <link rel="prev" title="Random Fourier features" href="../rff/rff.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://random-walks.org/content/misc/svgd/svgd.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Stein variational gradient descent" />
+<meta property="og:description" content="Stein variational gradient descent  One central challenge in Statistics and Bayesian machine learning is dealing with intractable distributions. In many cases, " />
+<meta property="og:image"       content="https://random-walks.org/_static/logo.svg" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../../index.html">
+  
+  <img src="../../../_static/logo.svg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Random walks</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../home.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../../prob-intro/intro.html">
+   Probability: An introduction
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch01/content.html">
+     Events and Probabilities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch02/content.html">
+     Discrete random variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch03/content.html">
+     Multivariate discrete distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch04/content.html">
+     Probability generating functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch05/content.html">
+     Distribution and density functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch06/content.html">
+     Multivariate distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch07/content.html">
+     Moment generating functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch08/content.html">
+     Main limit theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch09/content.html">
+     Branching processes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch10/content.html">
+     Random walks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch11/content.html">
+     Processes in continuous time
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch12/content.html">
+     Markov chains
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="../misc.html">
+   Miscellaneous
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sde/num-sde.html">
+     Numerical simulation of SDEs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sde-as-gp/sde-as-gp.html">
+     VI for diffusion processes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../node/node.html">
+     Neural ODEs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimisation/conjugate-gradients.html">
+     Conjugate gradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../kalman/kalman.html">
+     The Kalman filter and smoother
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ncs/ncs.html">
+     Natural cubic splines
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ars/ars.html">
+     Adaptive rejection sampling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../score-matching/score-matching.html">
+     Estimation by score matching
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interacting/interacting.html">
+     Interacting particle FPK
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../rff/rff.html">
+     Random Fourier features
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Stein variational gradient descent
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../reading-and-links.html">
+   Interesting reading and websites
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../../_sources/content/misc/svgd/svgd.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/stratisMarkou/random-walks/master?urlpath=tree/./content/misc/svgd/svgd.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#derivation-of-svgd">
+   Derivation of SVGD
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#invertible-transformations">
+     Invertible transformations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#direction-of-steepest-descent">
+     Direction of steepest descent
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#empirical-approximation">
+     Empirical approximation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementation">
+   Implementation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#demo-on-simple-mog">
+     Demo on simple MoG
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#failure-mode-on-mog">
+     Failure mode on MoG
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="stein-variational-gradient-descent">
+<h1>Stein variational gradient descent<a class="headerlink" href="#stein-variational-gradient-descent" title="Permalink to this headline">¶</a></h1>
+<p>One central challenge in Statistics and Bayesian machine learning is dealing with intractable distributions. In many cases, our models involve complicated distributions, which can be difficult to integrate out or sample from - consider for example the posterior distribution over the parameters of a Bayesian neural network. A great deal of approaches have been devised to enable efficient handling of complicated distributions, broadly falling in two categories: Variational Inference (VI) and Markov Chain Monte Carlo (MCMC) - we focus on the former only here.</p>
+<p>Suppose we are working with an intractable distribution <span class="math notranslate nohighlight">\(p\)</span>. VI seeks to approximate <span class="math notranslate nohighlight">\(p\)</span> by another approximate distribution <span class="math notranslate nohighlight">\(q\)</span>, constrained to be in a tractable family of distributions - such as an independent Gaussian. By optimising a similarity metric between <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(p\)</span>, such as the KL-divergence, VI produces a (hopefully) decent approximation which captures some of the important aspects of the target. VI can be much faster than MCMC, but it is an approximate method. The severity of approximation involved in VI is largely affected by the family of the approximate distribution, and can be very large for many applications of interest.</p>
+<p>Stein Variational Gradient Descent (SVGD) <a class="bibtex reference internal" href="#liu2019stein" id="id1">[LW19]</a> is an algorithm which enables approximate inference for intractable distributions, wihtout the severe constraints of the approximating family of VI. Much like VI, it minimises the KL divergence between <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(p\)</span>, but unlike VI it does not involve heavy assumptions on the family of <span class="math notranslate nohighlight">\(q\)</span>. Instead, SVGD evolves a finite set of particles, which approximates <span class="math notranslate nohighlight">\(q\)</span>, by a sequence of transformations such that <span class="math notranslate nohighlight">\(q\)</span> gets progressively closer to <span class="math notranslate nohighlight">\(p\)</span>.</p>
+<div class="section" id="derivation-of-svgd">
+<h2>Derivation of SVGD<a class="headerlink" href="#derivation-of-svgd" title="Permalink to this headline">¶</a></h2>
+<p>The idea SVGD is to approximate a target distribution <span class="math notranslate nohighlight">\(p\)</span> by an approximate distribution <span class="math notranslate nohighlight">\(q\)</span>, by applying a sequence of transformations to <span class="math notranslate nohighlight">\(q\)</span> which will bring it closer to <span class="math notranslate nohighlight">\(p\)</span>. By applying the transformation (from a restricted family of transformations) which most rapidly reduces the KL divergence, we will obtain an algorithm that looks much like steepest-direction gradient descent.</p>
+<div class="section" id="invertible-transformations">
+<h3>Invertible transformations<a class="headerlink" href="#invertible-transformations" title="Permalink to this headline">¶</a></h3>
+<p>Suppose we have an initial distribution <span class="math notranslate nohighlight">\(q\)</span>, which we pass through a transformation <span class="math notranslate nohighlight">\(T : \mathbb{R}^N \to \mathbb{R}^N\)</span>, that is</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+z = T(x),~~\text{ where } x \sim q(x).
+\end{align}\]</div>
+<p>If the map <span class="math notranslate nohighlight">\(T\)</span> is invertible, we can easily compute the density of the transformed variable <span class="math notranslate nohighlight">\(z\)</span> via the change of variables formula. To ensure <span class="math notranslate nohighlight">\(T\)</span> is invertible, let us set <span class="math notranslate nohighlight">\(T(x) = x + \epsilon \phi(x)\)</span>, where <span class="math notranslate nohighlight">\(\epsilon\)</span> is a small coefficient and <span class="math notranslate nohighlight">\(\phi : \mathbb{R}^N \to \mathbb{R}^N\)</span>. If <span class="math notranslate nohighlight">\(\phi\)</span> is smooth and <span class="math notranslate nohighlight">\(\epsilon\)</span> is sufficiently small, then <span class="math notranslate nohighlight">\(T\)</span> is invertible, which which means we can easily compute the density of <span class="math notranslate nohighlight">\(z\)</span>. We turn to the question of how to pick an appropriate <span class="math notranslate nohighlight">\(\phi\)</span>.</p>
+</div>
+<div class="section" id="direction-of-steepest-descent">
+<h3>Direction of steepest descent<a class="headerlink" href="#direction-of-steepest-descent" title="Permalink to this headline">¶</a></h3>
+<p>Let us use the subscript notation <span class="math notranslate nohighlight">\(q_{[T]}\)</span> to denote the distribution obtained by passing <span class="math notranslate nohighlight">\(q\)</span> through <span class="math notranslate nohighlight">\(T\)</span>. Then we are interested in picking a <span class="math notranslate nohighlight">\(T\)</span> which minimises <span class="math notranslate nohighlight">\(\text{KL}(q_{[T]} || p)\)</span>. First, we compute the derivative of the KL w.r.t. <span class="math notranslate nohighlight">\(\epsilon\)</span>, which we obtain in closed form.</p>
+<div class="theorem">
+<p><strong>Theorem (Gradient of KL is the KSD)</strong> Let <span class="math notranslate nohighlight">\(x \sim q(x)\)</span>, and <span class="math notranslate nohighlight">\(T(x) = x + \epsilon \phi(x)\)</span>, where <span class="math notranslate nohighlight">\(\phi\)</span> is a smooth function. Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\nabla_{\epsilon}\text{KL}(q_{[T]} || p) \big|_{\epsilon = 0} = - \mathbb{E}_{x \sim q}\left[\text{trace} \mathcal{A}_p \phi(x) \right],
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(q_{[T]}\)</span> is the density of <span class="math notranslate nohighlight">\(T(x)\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathcal{A}_p \phi(x) = \nabla_x \log p(x)\phi^\top(x) + \nabla_x \phi(x).
+\end{align}\]</div>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Gradient of KL</summary>
+<p>Let <span class="math notranslate nohighlight">\(p_{\left[T^{-1}\right]}(x)\)</span> denote the density of <span class="math notranslate nohighlight">\(z = T^{-1}(x)\)</span> when <span class="math notranslate nohighlight">\(x \sim p(x)\)</span>. By changing the variable of integration from <span class="math notranslate nohighlight">\(z\)</span> to <span class="math notranslate nohighlight">\(x = T^{-1}(x)\)</span>, we obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\text{KL}(q_{[T]} || p) &amp;= \int q_{[T]}(z) \log \frac{q_{[T]}(z)}{p(z)} dz \\
+                        &amp;= \int q(x) \left[ \log q(x) - \log p_{\left[T^{-1}\right]}(x) \right] dx.
+\end{align}\end{split}\]</div>
+<p>This change of variables is convenient because now only one term in the integral depends on <span class="math notranslate nohighlight">\(\epsilon\)</span>, that is <span class="math notranslate nohighlight">\(p_{\left[T^{-1}\right]}(x)\)</span>. Now taking the derivative with respect to <span class="math notranslate nohighlight">\(\epsilon\)</span> we obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\nabla_{\epsilon} \text{KL}(q_{[T]} || p) &amp;= - \int q(x) \nabla_{\epsilon} \log p_{\left[T^{-1}\right]}(x) dx, \\
+                                          &amp;= - \int q(x) \nabla_{\epsilon} \log p_{\left[T^{-1}\right]}(x) dx,
+\end{align}\end{split}\]</div>
+<p>and using the fact that</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\log p_{\left[T^{-1}\right]}(x) &amp;= \log p(T(x)) + \log |\nabla_x T(x)|,
+\end{align}\]</div>
+<p>we obtain the expression</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\nabla_{\epsilon} \log p_{\left[T^{-1}\right]}(x) &amp;= \nabla \log p(T(x))^\top \nabla_\epsilon T(x) + \nabla_\epsilon \log |\nabla_x T(x)|, \\
+                                                  &amp;= \nabla \log p(T(x))^\top \nabla_\epsilon T(x) + \text{trace}\left[(\nabla_x T(x))^{-1} \nabla_\epsilon \nabla_x T(x)\right],
+\end{align}\end{split}\]</div>
+<p>where we have used the identity</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\nabla_{\epsilon} \log |\det A| = \text{trace} A^{-1} \nabla_{\epsilon} A,
+\end{align}\]</div>
+<p>we arrive at the following expression for the derivative</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\nabla_{\epsilon} \text{KL}(q_{[T]} || p) &amp;= - \mathbb{E}_{x \sim q} \left[\nabla \log p(T(x))^\top \nabla_\epsilon T(x) + \text{trace} (\nabla_x T(x))^{-1} \nabla_\epsilon \nabla_x T(x)\right].
+\end{align}\]</div>
+<p>Setting <span class="math notranslate nohighlight">\(T(x) = x + \epsilon \phi(x)\)</span> yields the result</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\nabla_{\epsilon} \text{KL}(q_{[T]} || p) &amp;= - \mathbb{E}_{x \sim q} \left[\nabla \log p(x)^\top \phi(x) + \text{trace}\left[\nabla_x \phi(x) \right]\right], \\
+                                          &amp;= - \mathbb{E}_{x \sim q} \left[\text{trace} \mathcal{A}_p \phi(x) \right].
+\end{align}\end{split}\]</div>
+</details>
+<br>
+<p>This result gives us the rate of change of the KL as <span class="math notranslate nohighlight">\(\epsilon\)</span> increases, for given <span class="math notranslate nohighlight">\(\phi\)</span>. Now, we want to pick <span class="math notranslate nohighlight">\(\phi\)</span> such that <span class="math notranslate nohighlight">\(-\mathbb{E}_{x \sim q} \left[\text{trace} \mathcal{A}_p \phi(x) \right]\)</span> is as negative as possible. However, this minimisation is not well defined, because one can scale <span class="math notranslate nohighlight">\(\phi\)</span> by an arbitrary scalar making the expectation unbounded. Further, the minimisation is not analytically or computationally tractable either. This issue can be resolved by considering a constrained version of this optimisation problem instead, using Reproducing Kernel Hilbert Spaces (RKHS).</p>
+<p>Let <span class="math notranslate nohighlight">\(k\)</span> be a positive-definite kernel, defining a corresponding RKHS <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> with inner product <span class="math notranslate nohighlight">\(\langle\cdot, \cdot \rangle_{\mathcal{H}}\)</span>. Let also <span class="math notranslate nohighlight">\(\mathcal{H}_D = \mathcal{H} \times ... \times \mathcal{H}\)</span> be the Hilbert space of <span class="math notranslate nohighlight">\(D\)</span>-dimensional vector valued functions <span class="math notranslate nohighlight">\(f = (f_1, ..., f_D) : f_1, ..., f_D \in \mathcal{H}\)</span> with corresponding inner product</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\langle f, g \rangle_{\mathcal{H}_D} = \sqrt{\sum_{d = 1}^D \langle f_d, g_d \rangle_{\mathcal{H}_D}^2}.
+\end{align}\]</div>
+<p>If we now constrain <span class="math notranslate nohighlight">\(\phi \in \mathcal{H}_D\)</span> and <span class="math notranslate nohighlight">\(|| \phi ||_{\mathcal{H}_D} \leq 1\)</span> we obtain<a class="bibtex reference internal" href="#liu2016kernelized" id="id2">[LLJ16]</a> the following analytic expression for the direction of steepest descent.</p>
+<div class="theorem">
+<p><strong>Theorem (Direction of steepest descent of the KL)</strong> The function <span class="math notranslate nohighlight">\(\phi^* \in \mathcal{H}_D, || \phi^* ||_{\mathcal{H}_D} \leq 1\)</span> which maximises the rate of decrease KL-divergence is</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\phi^*(\cdot) = \beta / ||\beta||_{\mathcal{H}_d} ,~~\beta(\cdot) = \mathbb{E}_{x \sim q}\left[ k(x, \cdot) \nabla_x \log p(x) + \nabla_x k(x, \cdot)\right].
+\end{align}\]</div>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Direction of steepest descent of the KL</summary>
+<p>For <span class="math notranslate nohighlight">\(f \in \mathcal{H}_D\)</span> we have the following equality</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\langle f, \beta \rangle_{\mathcal{H}_D} &amp;= \sum_{d = 1}^D \langle f_d(\cdot), \beta_d \rangle_{\mathcal{H}} \\
+                                          &amp;= \sum_{d = 1}^D \left \langle f_d(\cdot), \mathbb{E}_{x \sim q}\left[k(x, \cdot) \nabla_{x_d} \log p(x) + \nabla_{x_d} k(x, \cdot)\right] \right\rangle_{\mathcal{H}} \\
+                                          &amp;= \sum_{d = 1}^D \mathbb{E}_{x \sim q}\left[\nabla_{x_d} \log p(x) \langle f_d(\cdot), k(x, \cdot) \rangle + \langle f_d(\cdot), \nabla_{x_d} k(x, \cdot) \rangle \right] \rangle_{\mathcal{H}} \\
+                                          &amp;= \sum_{d = 1}^D \mathbb{E}_{x \sim q}\left[\nabla_{x_d} \log p(x) f_d(x) + \nabla_{x_d} f_d(x) \right] \\
+                                          &amp;= \mathbb{E}_{x \sim p}\left[\mathcal{A}_q f(x)\right].
+\end{align}\end{split}\]</div>
+<p>Therefore, the <span class="math notranslate nohighlight">\(f \in \mathcal{H}_D\)</span> which maximises <span class="math notranslate nohighlight">\(\mathbb{E}_{x \sim p}\left[\mathcal{A}_q f(x)\right]\)</span> is the one which maximises the inner product <span class="math notranslate nohighlight">\(\langle f, \beta \rangle_{\mathcal{H}_D}\)</span>, which occurs when <span class="math notranslate nohighlight">\(f\)</span> is proportional to <span class="math notranslate nohighlight">\(\beta\)</span>.</p>
+</details>
+<br>
+</div>
+<div class="section" id="empirical-approximation">
+<h3>Empirical approximation<a class="headerlink" href="#empirical-approximation" title="Permalink to this headline">¶</a></h3>
+<p>Now, if we approximate <span class="math notranslate nohighlight">\(q\)</span> by a finite set of <span class="math notranslate nohighlight">\(N\)</span> particles at locations <span class="math notranslate nohighlight">\(x_n^{(i)}, n = 1, ..., N\)</span>, at the <span class="math notranslate nohighlight">\(i^{th}\)</span> iteration, we obtain at the following iterative algorithm.</p>
+<div class="definition">
+<p><strong>Algorithm (Stein variational gradient descent)</strong> Given a distribution <span class="math notranslate nohighlight">\(p(x)\)</span>, a postive definite kernel <span class="math notranslate nohighlight">\(k(x, x')\)</span> and a set of particles with initial positions <span class="math notranslate nohighlight">\(\{x_n^{(0)}\}_{n=1}^N\)</span>, Stein variational gradient descent evolves the particles according to</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+x^{(i + 1)}_n = x^{(i)}_n + \frac{\epsilon^{(i)}}{N}\sum_{m = 1}^N \left[ k(x_n, x_m) \nabla_x \log p(x)|_{x_n} + \nabla_x k(x_m, x) |_{x_n}\right].
+\end{align}\]</div>
+</div>
+<br></div>
+</div>
+<div class="section" id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h2>
+<p>The SVGD algorithm is surprisingly easy to implement, while also each step is quite cheap to evaluate. We will use SVGD to approximate a mixture-of-gaussians (MoG) distribution, to allow for multiple modes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+
+<span class="k">def</span> <span class="nf">mixture_of_gaussians_logprob</span><span class="p">(</span><span class="n">locs</span><span class="p">,</span> <span class="n">scales</span><span class="p">,</span> <span class="n">probs</span><span class="p">):</span>
+    
+    <span class="k">def</span> <span class="nf">logprob</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        
+        <span class="c1"># Dimension of x</span>
+        <span class="n">D</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        
+        <span class="c1"># Ensure MOG weight probabilities sum to 1</span>
+        <span class="n">log_probs</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">probs</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">/</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">probs</span><span class="p">))</span>
+        
+        <span class="c1"># Differences between x and gaussian locations</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">locs</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+        
+        <span class="c1"># Compute log of gaussian, including the normalising constant</span>
+        <span class="n">quad</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">((</span><span class="n">diff</span> <span class="o">/</span> <span class="n">scales</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">quad</span> <span class="o">=</span> <span class="n">quad</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">D</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_prod</span><span class="p">(</span><span class="n">scales</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+        
+        <span class="c1"># Compute log-probability using the log-sum-exp trick for stability</span>
+        <span class="n">summands</span> <span class="o">=</span> <span class="n">log_probs</span> <span class="o">+</span> <span class="n">quad</span>
+        <span class="n">max_summand</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_max</span><span class="p">(</span><span class="n">summands</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        
+        <span class="n">summed</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">summands</span> <span class="o">-</span> <span class="n">max_summand</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">summed</span> <span class="o">=</span> <span class="n">max_summand</span> <span class="o">+</span> <span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">summed</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">summed</span>
+    
+    <span class="k">return</span> <span class="n">logprob</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_center-output tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Float dtype to use</span>
+<span class="n">dtype</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">float32</span>
+
+<span class="c1"># Parameters for mixture of gaussians pdf</span>
+<span class="n">locs</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">([[</span><span class="o">-</span><span class="mf">1e0</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">1e0</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+<span class="n">scales</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">([</span><span class="mf">2e-1</span><span class="p">,</span> <span class="mf">2e-1</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+<span class="n">probs</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">([</span><span class="mf">5e-1</span><span class="p">,</span> <span class="mf">5e-1</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+
+<span class="c1"># Discretisation grid reslution</span>
+<span class="n">grid_res</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="c1"># Create log-probabilty lambda</span>
+<span class="n">logprob</span> <span class="o">=</span> <span class="n">mixture_of_gaussians_logprob</span><span class="p">(</span><span class="n">locs</span><span class="o">=</span><span class="n">locs</span><span class="p">,</span>
+                                       <span class="n">scales</span><span class="o">=</span><span class="n">scales</span><span class="p">,</span>
+                                       <span class="n">probs</span><span class="o">=</span><span class="n">probs</span><span class="p">)</span>
+
+<span class="c1"># Input locations at which to compute log-probabilities</span>
+<span class="n">x_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="n">grid_res</span><span class="p">)</span>
+<span class="n">x_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span> <span class="n">x_plot</span><span class="p">),</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">x_plot</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+
+<span class="c1"># Compute log-probabilities</span>
+<span class="n">logp</span> <span class="o">=</span> <span class="n">logprob</span><span class="p">(</span><span class="n">x_plot</span><span class="p">)</span>
+
+<span class="c1"># Reshape to 3D and 2D arrays for plotting</span>
+<span class="n">x_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span> <span class="p">(</span><span class="n">grid_res</span><span class="p">,</span> <span class="n">grid_res</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">logp</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">logp</span><span class="p">,</span> <span class="p">(</span><span class="n">grid_res</span><span class="p">,</span> <span class="n">grid_res</span><span class="p">))</span>
+
+<span class="c1"># Contourplot levels corresponding to standard deviations</span>
+<span class="n">levels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logp</span><span class="p">))</span> <span class="o">*</span> \
+         <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Plot density</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">x_plot</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span>
+             <span class="n">x_plot</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">],</span>
+             <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logp</span><span class="p">),</span>
+             <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
+             <span class="n">levels</span><span class="o">=</span><span class="n">levels</span><span class="p">)</span>
+
+<span class="c1"># Format plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$x_1$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$x_2$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;MoG density&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/svgd_6_0.svg" src="../../../_images/svgd_6_0.svg" /></div>
+</div>
+<p>In the figure above, the contours are spaced such that they roughly correspond to the standard deviations of each Gaussian. With regards to the kernel <span class="math notranslate nohighlight">\(k\)</span>, although SVGD can use any positive-semidefinite kernel, we will focus our attention to the standard EQ kernel</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+k(x, x') = \exp\left(-\frac{1}{2\ell^2} (x - x')^2\right),
+\end{align}\]</div>
+<p>implemented by the <code class="docutils literal notranslate"><span class="pre">eq</span></code> function below. The <code class="docutils literal notranslate"><span class="pre">svgd_grad</span></code> computes the SVGD gradients for a set of particles, using Tensorflow’s batch jacobians.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">eq</span><span class="p">(</span><span class="n">lengthscales</span><span class="p">):</span>
+    
+    <span class="k">def</span> <span class="nf">kernel</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_</span><span class="p">):</span>
+    
+        <span class="n">diff</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">x_</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+        <span class="n">quad</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">((</span><span class="n">diff</span> <span class="o">/</span> <span class="n">lengthscales</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">exp</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">quad</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">exp</span>
+    
+    <span class="k">return</span> <span class="n">kernel</span>
+
+
+<span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
+<span class="k">def</span> <span class="nf">svgd_grad</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">logprob</span><span class="p">,</span> <span class="n">kernel</span><span class="p">):</span>
+    
+    <span class="n">x_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">(</span><span class="n">x</span><span class="p">[:],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">(</span><span class="n">persistent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+        
+        <span class="n">tape</span><span class="o">.</span><span class="n">watch</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        
+        <span class="n">logp</span> <span class="o">=</span> <span class="n">logprob</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">kernel</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_</span><span class="p">)</span>
+    
+    <span class="n">dlogp</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">logp</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">dk</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">batch_jacobian</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    
+    <span class="n">svg</span> <span class="o">=</span> <span class="p">(</span><span class="n">k</span> <span class="o">@</span> <span class="n">dlogp</span> <span class="o">+</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">dk</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span> <span class="o">/</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">svg</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="demo-on-simple-mog">
+<h3>Demo on simple MoG<a class="headerlink" href="#demo-on-simple-mog" title="Permalink to this headline">¶</a></h3>
+<p>We can now run SVGD using a modest number of particles initialised in between the two modes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Number of particles to simulate</span>
+<span class="n">num_particles</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="c1"># Initial positions of particles</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mf">2e-1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">num_particles</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+<span class="c1"># Create EQ kernel</span>
+<span class="n">eq_scales</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">([</span><span class="mf">2e-1</span><span class="p">,</span> <span class="mf">2e-1</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+<span class="n">kernel</span> <span class="o">=</span> <span class="n">eq</span><span class="p">(</span><span class="n">eq_scales</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_center-output tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Step size and number of gradient descent steps</span>
+<span class="n">stepsize</span> <span class="o">=</span> <span class="mf">1e-1</span>
+<span class="n">num_steps</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_steps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    
+    <span class="c1"># Plot 0th iteration and last iteration</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_steps</span><span class="p">]:</span>
+        
+        <span class="c1"># Choose appropriate subplot</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        
+        <span class="c1"># Plot particles and probabilities</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">x_plot</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span>
+                    <span class="n">x_plot</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">],</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logp</span><span class="p">),</span>
+                    <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
+                    <span class="n">levels</span><span class="o">=</span><span class="n">levels</span><span class="p">)</span>
+        
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">])</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">])</span>
+        
+        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$x_1$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+            
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$x_2$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+        
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Iteration </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+    
+    <span class="c1"># Compute Stein variational gradient</span>
+    <span class="n">svg</span> <span class="o">=</span> <span class="n">svgd_grad</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">logprob</span><span class="o">=</span><span class="n">logprob</span><span class="p">,</span> <span class="n">kernel</span><span class="o">=</span><span class="n">kernel</span><span class="p">)</span>
+    
+    <span class="c1"># Adapt particle locations using the SVG</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">stepsize</span> <span class="o">*</span> <span class="n">svg</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/svgd_11_0.svg" src="../../../_images/svgd_11_0.svg" /></div>
+</div>
+<p>We observe that some of the particles fall into each of the two modes, capturing the bimodality of the target, something which VI with a mean-field Gaussian <span class="math notranslate nohighlight">\(q\)</span> cannot do.</p>
+</div>
+<div class="section" id="failure-mode-on-mog">
+<h3>Failure mode on MoG<a class="headerlink" href="#failure-mode-on-mog" title="Permalink to this headline">¶</a></h3>
+<p>However, SVGD also has failure modes, as illustrated below. If we initialise the particles on one mode of two well-separated Gaussians, then the optimisation gets stuck at a local optimum which fails to capture one of the two modes of the MoG. Therefore, even though SVGD may be able to express more expressive approximate distributions than a simple VI method, it is not guaranteed that the optimisation will be able to find such a distribution.</p>
+<div class="cell tag_hide-input tag_center-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Step size and number of gradient descent steps</span>
+<span class="n">stepsize</span> <span class="o">=</span> <span class="mf">1e-1</span>
+<span class="n">num_steps</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_steps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    
+    <span class="c1"># Plot 0th iteration and last iteration</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_steps</span><span class="p">]:</span>
+        
+        <span class="c1"># Choose appropriate subplot</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        
+        <span class="c1"># Plot particles and probabilities</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">x_plot</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span>
+                    <span class="n">x_plot</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">],</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logp</span><span class="p">),</span>
+                    <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
+                    <span class="n">levels</span><span class="o">=</span><span class="n">levels</span><span class="p">)</span>
+        
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">])</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">])</span>
+        
+        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$x_1$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+            
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$x_2$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+        
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Iteration </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+    
+    <span class="c1"># Compute Stein variational gradient</span>
+    <span class="n">svg</span> <span class="o">=</span> <span class="n">svgd_grad</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">logprob</span><span class="o">=</span><span class="n">logprob</span><span class="p">,</span> <span class="n">kernel</span><span class="o">=</span><span class="n">kernel</span><span class="p">)</span>
+    
+    <span class="c1"># Adapt particle locations using the SVG</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">stepsize</span> <span class="o">*</span> <span class="n">svg</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/svgd_14_0.svg" src="../../../_images/svgd_14_0.svg" /></div>
+</div>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<p>This section presented SVGD, a very interesting general-purpose algorithm for approximate inference. SVGD works by simulating a set of particles, regarded as an empirical approximation of a distribution <span class="math notranslate nohighlight">\(q\)</span> which itself approximates the target distribution <span class="math notranslate nohighlight">\(p\)</span>. By evolving <span class="math notranslate nohighlight">\(q\)</span> according to a sequence of transformations, each of which is determined as the direction of steepest decrease in the KL between <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(p\)</span>, SVGD can produce a flexible approximation to the target <span class="math notranslate nohighlight">\(p\)</span>. Although is flexible enough to represent complicated distributions, it may also exhibit failure modes whereby the particles get stuck in a local mode, thus failing to represent other modes of the target. It would be interesting to consider how these issues may be remedied, for example by more sophisticated optimisation schemes, or alternative methods.</p>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p id="bibtex-bibliography-content/misc/svgd/svgd-0"><dl class="citation">
+<dt class="bibtex label" id="liu2016kernelized"><span class="brackets"><a class="fn-backref" href="#id2">LLJ16</a></span></dt>
+<dd><p>Qiang Liu, Jason Lee, and Michael Jordan. A kernelized stein discrepancy for goodness-of-fit tests. In <em>International conference on machine learning</em>, 276–284. PMLR, 2016.</p>
+</dd>
+<dt class="bibtex label" id="liu2019stein"><span class="brackets"><a class="fn-backref" href="#id1">LW19</a></span></dt>
+<dd><p>Qiang Liu and Dilin Wang. Stein variational gradient descent: a general purpose bayesian inference algorithm. 2019. <a class="reference external" href="https://arxiv.org/abs/1608.04471">arXiv:1608.04471</a>.</p>
+</dd>
+</dl>
+</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "venv-random-walks"
+        },
+        kernelOptions: {
+            kernelName: "venv-random-walks",
+            path: "./content/misc/svgd"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'venv-random-walks'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="../rff/rff.html" title="previous page">Random Fourier features</a>
+    <a class='right-next' id="next-link" href="../../reading-and-links.html" title="next page">Interesting reading and websites</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Stratos Markou<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-168728006-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    
+  </body>
+</html>
