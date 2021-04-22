@@ -40,7 +40,7 @@ We define the span of the empty list $()$ to be the set $\{0\}$.
     
 In the following, let $v_1, ..., v_n \in V$ and $S = \text{span}(v_1, ..., v_n)$.
 
-**Span is a subspace:** First, $\{0\} \in \mathbb{F}$ since $0$ is a linear combination of the vectors $v_1, ..., v_n$. Second, $S$ is closed under additions because if $s_1, s_2 \in S$ then $s_1, s_2$ are linear combinations of $v_1, ..., v_n$ and also $s_1 + s_2$ is a linear combination of $S$. Lastly, if $s \in S$ then also $\lambda s \in \mmathbb{F}$ because $s$ is a linear combination of $v_1, ..., v_n$ and the $\lambda$ coefficient can be absorbed in the coefficients of the linear combination. Therefore $S$ satisfies {ref}`the three necessary and sufficient conditions for being a subspace<linalg-subspaces>`.
+**Span is a subspace:** First, $\{0\} \in \mathbb{F}$ since $0$ is a linear combination of the vectors $v_1, ..., v_n$. Second, $S$ is closed under additions because if $s_1, s_2 \in S$ then $s_1, s_2$ are linear combinations of $v_1, ..., v_n$ and also $s_1 + s_2$ is a linear combination of $S$. Lastly, if $s \in S$ then also $\lambda s \in \mathbb{F}$ because $s$ is a linear combination of $v_1, ..., v_n$ and the $\lambda$ coefficient can be absorbed in the coefficients of the linear combination. Therefore $S$ satisfies {ref}`the three necessary and sufficient conditions for being a subspace<linalg-subspaces>`.
     
     
 **Span is the smallest containing subspace:** This holds because any subspace $U \subseteq V$ which contains the vectors $v_1, ..., v_n$ must also contain all of their linear combinations. Since all the elements in $S$ are linear combinations of the vectors $v_1, ..., v_n$ we have $S \subseteq U$.
@@ -349,7 +349,7 @@ implying $\text{dim span} {\ell_1} = \text{dim span} {\ell_2}$.
     
 <div class="definition">
 
-**Definition (Dimension)** 
+**Definition (Dimension)** Let $V$ be a {ref}`finite-dimensional vector space<linalg-indep>`. The dimension of $V$, written $\text{dim}~V$, is the length of any basis of $V$.
     
 </div>
 <br>
@@ -357,7 +357,7 @@ implying $\text{dim span} {\ell_1} = \text{dim span} {\ell_2}$.
     
 <div class="lemma">
 
-**Lemma (Dimension of a subspace)** If $V$ is a finite dimensional vector space and $U$ is a subspace of $V$, then $\text{dim} U \leq \text{dim} V$.
+**Lemma (Dimension of a subspace)** If $V$ is a finite dimensional vector space and $U$ is a subspace of $V$, then $\text{dim}~ U \leq \text{dim}~ V$.
     
 </div>
 <br>
@@ -366,7 +366,7 @@ implying $\text{dim span} {\ell_1} = \text{dim span} {\ell_2}$.
 <details class="proof">
 <summary>Proof: Dimension of a subspace</summary>
 
-Let $V$ be a finite dimensional vector space and $U$ be a subspace of $V$. Since $U$ is a finite dimensional vector space, it has a basis. This basis can be extended to a basis of $V$. The extended basis is a list with at least as many vectors as the original basis. Therefore $\text{dim} U \leq \text{dim} V$.
+Let $V$ be a finite dimensional vector space and $U$ be a subspace of $V$. Since $U$ is a finite dimensional vector space, it has a basis. This basis can be extended to a basis of $V$. The extended basis is a list with at least as many vectors as the original basis. Therefore $\text{dim}~ U \leq \text{dim}~ V$.
     
 </details>
 <br>
@@ -374,7 +374,7 @@ Let $V$ be a finite dimensional vector space and $U$ be a subspace of $V$. Since
     
 <div class="lemma">
 
-**Lemma (Linearly independent list of the right length is a basis)** If $V$ is a finite dimensional space, then every linearly independent list of length $\text{dim} V$ is a basis of $V$.
+**Lemma (Linearly independent list of the right length is a basis)** If $V$ is a finite dimensional space, then every linearly independent list of length $\text{dim}~V$ is a basis of $V$.
     
 </div>
 <br>
@@ -383,9 +383,78 @@ Let $V$ be a finite dimensional vector space and $U$ be a subspace of $V$. Since
 <details class="proof">
 <summary>Proof: Linearly independent list of the right length is a basis</summary>
     
-Suppose $V$ is a finite dimensional space and let $v_1, ..., v_n \in V$ be a linearly independent list with $n = \text{dim} V$. This list can be extended to a basis of $V$. But since all bases have the same length
-
+Suppose $V$ is a finite dimensional space and let $v_1, ..., v_n \in V$ be a linearly independent list with $n = \text{dim}~V$. This list can be extended to a basis of $V$. But since all bases have the same length, the extension construction cannot add any new vectors to the list. Therefore $v_1, ..., v_n$ is a basis of $V$, and all linearly independent lists of length $\text{dim}~V$ are bases.
     
 </details>
 <br>
   
+    
+<div class="lemma">
+
+**Lemma (Spanning list of the right length is a basis)** Suppose $V$ is a finite-dimensional vector space and $v_1, ..., v_n$ is a list of length with dimension $n = \text{dim}~V$. Then if $v_1, ..., v_n$ spans $V$ it is a basis of $V$.
+    
+</div>
+<br>
+    
+    
+<details class="proof">
+<summary>Proof: Spanning list of the right length is a basis</summary>
+    
+Suppose $V$ is a finite-dimensional vector space and $v_1, ..., v_n \in V$ is a list of length with dimension $n = \text{dim}~V$. Suppose also that $v_1, ..., v_n$ spans $V$. We will show that $v_1, ..., v_n$ is linearly independent.
+    
+If $v_1, ..., v_n$ were linearly dependent, then by the {ref}`linear dependence lemma<linalg-indep>` we could remove a non-zero number of vectors from it, while leaving its span unchanged. By removing vectors until the list becomes linearly independent, we would obtain a linearly independent list which spans $V$ and is therefore a basis. But this basis would have length striclty smaller than $n$, which is a contradiction because every basis of $V$ must have length $n$. So $v_1, ..., v_n$ was linearly independent to begin with, and therefore also a basis.
+    
+</details>
+<br>
+  
+    
+<div class="lemma">
+
+**Lemma (Dimension of a sum)** Suppose $U_1, U_2$ are subspaces of a finite-dimensional vector space. Then
+    
+$$\begin{align}
+\text{dim} (U_1 + U_2) = \text{dim}~U_1 + \text{dim}~U_2 - \text{dim} (U_1 \cap U_2).
+\end{align}$$
+    
+</div>
+<br>
+    
+    
+<details class="proof">
+<summary>Proof: Dimension of a sum</summary>
+    
+Suppose $U_1, U_2$ are subspaces of a finite-dimensional vector space. Then $U_1 \cap U_2$ is a finite-dimensional vector space, so there exists a basis $u_1, ..., u_n$ for it. This basis can be extended to a basis $u_1, ..., u_n, v_1, ..., v_k$ for $U_1$ and a basis $u_1, ..., u_n, w_1, ..., w_m$ for $U_2$. Now we will show that
+    
+$$\begin{align}
+\text{dim} (U_1 + U_2) = n + k + m.
+\end{align}$$
+    
+First, the list $u_1, ..., u_n, v_1, ..., v_k, w_1, ..., w_m$ spans $U_1 + U_2$. Second, it is linearly independent by the following argument. Suppose
+    
+$$\begin{align}
+a_1 u_1 + ... + a_n u_n + b_1 v_1 + ... + b_n v_n + c_1 w_1 + ... + c_n w_n = 0.
+\end{align}$$
+
+Then it holds that
+    
+$$\begin{align}
+c_1 w_1 + ... + c_n w_n = - a_1 u_1 - ... - a_n u_n - b_1 v_1 - ... - b_n v_n,
+\end{align}$$
+    
+which implies $(c_1 w_1 + ... + c_n w_n) \in U_1$. But since $w_i \in U_2$, we also have $(c_1 w_1 + ... + c_n w_n) \in U_1 \cap U_2$ so
+    
+$$\begin{align}
+c_1 w_1 + ... + c_n w_n = d_1 u_1 + ... + d_n u_n,
+\end{align}$$
+    
+for some $d_1, ..., d_n$. But since the $u$'s and $w$'s are linearly independent, this can only hold if the $c$'s and $d$'s are all zero. Therefore 
+    
+$$\begin{align}
+a_1 u_1 + ... + a_n u_n + b_1 v_1 + ... + b_n v_n = 0,
+\end{align}$$
+    
+which again by linear independence can hold only if the $a$'s and $b$'s are all zero, arriving at the result.
+    
+</details>
+<br>
+    
