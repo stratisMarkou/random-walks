@@ -140,6 +140,7 @@ $$ \lambda x = (\lambda x_1, ..., \lambda x_n). $$
 </div>
 <br>
 
+(linalg-vectorspace)=
 ## Vector spaces
 
 <div class="definition">
