@@ -1,5 +1,11 @@
 # Linear maps 
 
+This section deals with linear maps and their properties. Linear maps are functions which satisfy an additivity and a homogeneity property, and are the central topic of study of Linear Algebra. $ \newcommand{\L}[2]{\mathcal{L}(#1, #2)}
+\newcommand{\null}{\text{null}~}
+\newcommand{\range}{\text{range}~}
+\newcommand{\dim}{\text{dim}~}
+\newcommand{\span}{\text{span}}
+\newcommand{\F}{\mathbb{F}} $
 
 ## Vector space of linear maps
 
@@ -183,6 +189,284 @@ However, multiplication of linear maps is not commutative (even if the domains a
 We have
     
 $T(0) = T(0 + 0) = T(0) + T(0) \implies T(0) = 0.$
+
+</details>
+<br>
+
+    
+    
+
+## Null spaces and ranges
+    
+
+This section introduces null spaces and ranges of linear maps. The null space and range of a linear map are closely related and central to the study of linear maps and vector spaces.
+    
+(linalg-inj-surj)=
+### Injective and surjective
+ 
+<div class="definition">
+
+**Definition (Null space)** Suppose $T \in \mathcal{L}(V, W)$. Then the null space of $T$, denoted $\null T$ is
+    
+$$\begin{align}
+\null T = \{v \in V : Tv = 0\}.
+\end{align}$$
+    
+</div>
+<br>
+    
+The null space of a linear map is a subspace of the domain-space of the map.
+
+<div class="lemma">
+
+**Lemma (Null space is a subspace)** Suppose $T \in \mathcal{L}(V, W)$. Then $\null T$ is a subspace of $V$.
+    
+</div>
+<br>
+
+
+<details class="proof">
+<summary>Proof: Null space is a subspace</summary>
+    
+Suppose $T \in \mathcal{L}(V, W)$. Then $\null T$ is closed under addition and scalar multiplication. It also contains the zero element, so it fulfills the {ref}`criteria for being a subspace<linalg-subspaces>`.
+
+</details>
+<br>
+    
+    
+
+<div class="definition">
+
+**Definition (Injective map)** A function $T : V \to W$ is called injective if
+    
+$$\begin{align}
+Tu = Tv \implies u = v.
+\end{align}$$
+    
+</div>
+<br>
+    
+
+<div class="lemma">
+
+**Lemma (Injective $\iff$ $\text{null}~T = \{0\}$)** Suppose $T \in \mathcal{L}(V, W)$. Then $T$ is injective if and only if $\null T = \{0\}$.
+    
+</div>
+<br>
+
+
+<details class="proof">
+<summary>Proof: Injective \(\iff\) \(\text{null}~T = \{0\}\)</summary>
+    
+Suppose $T \in \mathcal{L}(V, W)$. If $T$ is injective, then
+    
+$$\begin{align}
+Tw = 0 \implies Tv + Tw = Tv \forall v \in V,
+\end{align}$$
+    
+and since $T$ is injective we have
+    
+$$\begin{align}
+v + w = v, \implies w = 0,
+\end{align}$$
+    
+so $Tv = Tw \implies v = w$ implies $\null T = \{0\}$. Conversely if $\null T = \{0\}$, then
+    
+$$\begin{align}
+Tv = Tw \implies T(v - w) = 0 \implies v = w,
+\end{align}$$
+    
+so $\null T = \{0\}$ implies $Tv = Tw \implies v = w$.
+
+</details>
+<br>
+    
+    
+<div class="definition">
+
+**Definition (Range)** Suppose $T \in \mathcal{L}(V, W)$. Then the null space of $T$, denoted $\range T$ is
+    
+$$\begin{align}
+\range T = \{Tv : v \in V\}.
+\end{align}$$
+    
+</div>
+<br>
+    
+
+<div class="lemma">
+
+**Lemma (Range is a subspace)** Suppose $T \in \mathcal{L}(V, W)$. Then $\text{range}~T$ is a subspace of $W$.
+    
+</div>
+<br>
+
+
+<details class="proof">
+<summary>Proof: Range is a subspace</summary>
+    
+Suppose $T \in \mathcal{L}(V, W)$. Then $\range T$ is closed under additions and scalar multiplication. It also contains the zero element, so it fulfills the {ref}`criteria for being a subspace<linalg-subspaces>`.
+
+</details>
+<br>
+    
+    
+<div class="definition">
+
+**Definition (Surjective map)** A function $T : V \to W$ is called surjective if
+    
+$$\begin{align}
+\range T = W.
+\end{align}$$
+    
+</div>
+<br>
+    
+(linalg-fund-linear)=
+### Fundamental theorem of linear maps
+    
+<div class="theorem">
+
+**Theorem (Fundamental theorem of linear maps)** Suppose $V$ is finite dimensional and $T \in \mathcal{L}(V, W)$. Then $\range T$ is finite dimensional and
+    
+$$\begin{align}
+\dim V = \dim \null T + \dim \range T.
+\end{align}$$
+    
+</div>
+<br>
+
+
+<details class="proof">
+<summary>Proof: Fundamental theorem of linear maps</summary>
+    
+Suppose $V$ is finite dimensional and $T \in \mathcal{L}(V, W)$. Then $\null T$ is a subspace of $V$ and is {ref}`also finite dimensional<linalg-indep>`. Let $u_1, ..., u_m$ be a basis of $\null T$ and $u_1, ..., u_m, v_1, ..., v_n$ be its extension to a basis of $V$. Then if $w \in \range T$ we have
+    
+$$\begin{align}
+Tv = w, \text{ for some } v \in V \implies T(a_1 u_1 + ... + a_m u_m + b_1 v_1 + ... + b_n v_n) = T(b_1 v_1 + ... + b_n v_n).
+\end{align}$$
+    
+Therefore any $w \in \range T$ can be written as a linear combination of the vectors $Tv_1, ..., Tv_n$, implying that $\range T = \span(Tv_1, ..., Tv_n)$. Therefore we have $\dim \null T = m$ and $\dim \range T = n$, as well as $\dim V = n + m$, arriving at
+    
+$$\begin{align}
+\dim V = \dim \null T + \dim \range T.
+\end{align}$$
+
+</details>
+<br>
+    
+    
+### Dimensions, injectivity and surjectivity
+    
+
+<div class="lemma">
+
+**Lemma (Map to fewer dimensions is not injective)** Suppose $V$ and $W$ are finite-dimensional vector spaces with $\dim V > \dim W$. Then no linear map from $V$ to $W$ is injective.
+    
+</div>
+<br>
+
+
+<details class="proof">
+<summary>Proof: Map to fewer dimensions is not injective</summary> 
+    
+Suppose $V$ and $W$ are finite-dimensional vector spaces with $\dim V > \dim W$, and let $T \in \mathcal(V, W)$. By the {ref}`fundamental theorem of linear maps<linalg-fund-linear>`, we have
+    
+$$\begin{align}
+\dim V &= \dim \null T + \dim \range T \implies \\
+\dim \null T &= \dim V - \dim \range T \\
+             &> \dim V - \dim W \\
+             &> 0,
+\end{align}$$
+    
+so $\dim \null T > 0$ which {ref}`implies<linalg-inj-surj>` $T$ is not injective.
+
+</details>
+<br>
+    
+    
+
+<div class="lemma">
+
+**Lemma (Map to more dimensions is not surjective)** Suppose $V$ and $W$ are finite-dimensional vector spaces with $\dim V < \dim W$. Then no linear map from $V$ to $W$ is surjective.
+    
+</div>
+<br>
+
+
+<details class="proof">
+<summary>Proof: Map to more dimensions is not surjective</summary>
+    
+Suppose $V$ and $W$ are finite-dimensional vector spaces with $\dim V < \dim W$, and let $T \in \mathcal(V, W)$. By the {ref}`fundamental theorem of linear maps<linalg-fund-linear>`, we have
+    
+$$\begin{align}
+\dim V &= \dim \null T + \dim \range T \implies \\
+\dim \range T &= \dim V - \dim \null T \\
+              &< \dim W - \dim \null T \\
+              &< \dim W,
+\end{align}$$
+    
+hence we cannot have $\range T = W$ and $T$ is not surjective.
+
+</details>
+<br>
+    
+
+<div class="lemma">
+
+**Lemma (Homogeneous system of linear of linear equations)** A homogeneous system of linear equations
+    
+$$\begin{align}
+\sum_{k = 1}^K A_{j, k} x_k = 0, j = 1, ..., J,
+\end{align}$$
+    
+with more variables $K$ than equations $J$, has nonzero solutions.
+    
+</div>
+<br>
+
+
+<details class="proof">
+<summary>Proof: Homogeneous system of linear of linear equations</summary>
+    
+Define the map $T : \F^K \to \F^J$ as
+    
+$$\begin{align}
+(Tx)_j = \sum_{k = 1}^K A_{j, k} x_k,
+\end{align}$$
+    
+for $x \in \F^m$. If $K > J$, then $T$ is a map to a space of fewer dimensions and is thus not injective, which implies its null space contains elements other than the zero element.
+
+</details>
+<br>
+    
+    
+
+
+<div class="lemma">
+
+**Lemma (Inhomogeneous system of linear of linear equations)** An inhomogeneous system of linear equations
+    
+$$\begin{align}
+\sum_{k = 1}^K A_{j, k} x_k = b_j, j = 1, ..., J,
+\end{align}$$
+    
+with more equations $J$ than variables $K$, has no solution for some choice of the constants $b_j$.
+    
+</div>
+<br>
+
+
+<details class="proof">
+<summary>Proof: Inhomogeneous system of linear of linear equations</summary>
+    
+Define the map $T : \F^K \to \F^J$ as
+    
+$$\begin{align}
+(Tx)_j = \sum_{k = 1}^K A_{j, k} x_k,
+\end{align}$$
+    
+for $x \in \F^m$. If $J > K$, then $T$ is a map to a space of more dimensions and is thus not surjective. This means there exists $w \in \F^J$ such that $w \not \in \range T$ and so $Tv \neq w$ for any $v \in \F^K$
 
 </details>
 <br>
