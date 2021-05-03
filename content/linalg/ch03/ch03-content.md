@@ -1,10 +1,11 @@
 # Linear maps 
 
-This section deals with linear maps and their properties. Linear maps are functions which satisfy an additivity and a homogeneity property, and are the central topic of study of Linear Algebra. $ \newcommand{\L}[2]{\mathcal{L}(#1, #2)}
+This section deals with linear maps and their properties. Linear maps are functions which satisfy an additivity and a homogeneity property, and are the central topic of study of Linear Algebra. $ \newcommand{\L}{\mathcal{L}}
 \newcommand{\null}{\text{null}~}
 \newcommand{\range}{\text{range}~}
 \newcommand{\dim}{\text{dim}~}
 \newcommand{\span}{\text{span}}
+\newcommand{\M}{\mathcal{M}} 
 \newcommand{\F}{\mathbb{F}} $
 
 ## Vector space of linear maps
@@ -439,8 +440,6 @@ for $x \in \F^m$. If $K > J$, then $T$ is a map to a space of fewer dimensions a
 
 </details>
 <br>
-    
-    
 
 
 <div class="lemma">
@@ -470,3 +469,162 @@ for $x \in \F^m$. If $J > K$, then $T$ is a map to a space of more dimensions an
 
 </details>
 <br>
+    
+    
+## Matrices
+    
+<div class="definition">
+
+**Definition (Matrix)** An $m \times n$ matrix $A$ is an array of elements of $\F$ with $n$ rows and $m$ columns
+    
+$$\begin{align}
+A = \begin{pmatrix}
+A_{1, 1} & \dots & A_{1, m} \\
+\vdots   & \ddots & \vdots   \\
+A_{n, 1} & \dots & A_{n, m}
+\end{pmatrix},
+\end{align}$$
+    
+where $A_{j, k}$ denotes the entry in row $j$, column $k$ of $A$. We use $\F^{n \times m}$ to denote the set of all $n \times m$ matrices, with entries in $\F$.
+    
+</div>
+<br>
+    
+    
+<div class="definition">
+
+**Definition (Matrix of a linear map)** Suppose $T \in \L(V, W)$ and let $v_1, ..., v_n$ and $w_1, ..., w_n$ be bases of $V$ and $W$ respectively. Then the matrix of $T$with respect to these bases is the $n \times m$ matrix $\M(T)$ whose entries $M_{j, k}$ satisfy
+
+$$\begin{align}
+Tv_k = A_{1, k} w_1 + ... + A_{n, k} w_n.
+\end{align}$$
+    
+</div>
+<br>
+    
+    
+<div class="definition">
+
+**Definition (Matrix addition)** The sum of two matrices is the matrix obtained by adding the two matrices entry-wise
+    
+$$\begin{align}
+(A + B)_{j, k} = A_{j, k} + B_{j, k}.
+\end{align}$$
+    
+</div>
+<br>
+
+
+<div class="lemma">
+
+**Lemma (Matrix of sum of maps)** If $T, S \mathcal{L}(V, W)$, then
+
+$$\begin{align}
+\mathcal{M}(T + S) = \mathcal{M}(T) + \mathcal{M}(S),
+\end{align}$$
+
+where both all matrices are with respect to the same bases.
+
+</div>
+<br>
+
+    
+<details class="proof">
+<summary>Proof: Matrix of sum of maps</summary>
+    
+Suppose $T, S \in \mathcal{L}(V, W)$, let $v_1, ..., v_n$ and $w_1, ..., w_n$ be bases of $V$ and $W$ respectively, and let $\mathcal{M}(\cdot)$ denote the matrix of a linear map with respect to these bases. Let also $A = \M(T), B = \M(S)$. Since $T, S$ are linear, they satisfy
+    
+$$\begin{align}
+(T + S)v_k &= Tv_k + Sv_k \\
+           &= (A_{1, k} + B_{1, k}) w_1 + ... + (A_{n, k} + B_{n, k}) w_n
+\end{align}$$
+    
+Therefore writing $C = \M(T + S)$ we have
+    
+$$\begin{align}
+C_{j, k} &= A_{j, k} + B_{j, k}.
+\end{align}$$
+
+</details>
+<br>
+    
+    
+<div class="definition">
+
+**Definition (Scalar multiplication of a matrix)** The scalar multiple of a matrix $A$ by a scalar $\lambda \in \F$ is the matrix whose entries are the corresponding entries of $A$ multiplied by $\lambda$
+    
+$$\begin{align}
+(\lambda A)_{j, k} = \lambda A_{j, k}.
+\end{align}$$
+    
+</div>
+<br>
+    
+
+<div class="lemma">
+
+**Lemma (Matrix of a scalar multiple of a map)** Suppose $\lambda \in \F$ and $T \in \L(V, W)$. Then $\M(\lambda T) = \lambda \M(T)$.
+    
+</div>
+<br>
+
+<details class="proof">
+<summary>Proof: Matrix of a scalar multiple of a map</summary>
+    
+Suppose $\lambda \in \F$ and $T \in \L(V, W)$. Let $v_1, ..., v_n$ and $w_1, ..., w_n$ be bases of $V$ and $W$ respectively, and let $\mathcal{M}(\cdot)$ denote the matrix of a linear map with respect to these bases. Then
+    
+$$\begin{align}
+(\lambda T)v_k &= \lambda (Tv_k) \\
+               &= (\lambda A_{1, k}) w_1 + ... + (\lambda A_{n, k}) w_n
+\end{align}$$
+    
+and writing $C = \M(\lambda T)$, which we see that
+    
+$$\begin{align}
+C_{j, k} = \lambda A_{j, k}.
+\end{align}$$
+
+</details>
+<br>
+    
+    
+
+<div class="lemma">
+
+**Lemma (Dimension of $\F^{n \times m}$)** With matrix addition and scalar multiplication as defined above, $\F^{n \times m}$ defines a vector space with dimension $n \times n$.
+    
+</div>
+<br>
+
+    
+<details class="proof">
+<summary>Proof: Dimension of \(\F^{n \times m}\)</summary>
+
+</details>
+<br>
+
+    
+
+    
+    
+    
+    
+    
+
+<div class="lemma">
+
+**Lemma ()** 
+    
+</div>
+<br>
+
+    
+<details class="proof">
+<summary>Proof: </summary>
+
+</details>
+<br>
+
+
+$$\begin{align}
+\end{align}$$
