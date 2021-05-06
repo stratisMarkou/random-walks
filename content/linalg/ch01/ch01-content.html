@@ -1,0 +1,743 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Vector spaces &#8212; Random walks</title>
+    
+  <link rel="stylesheet" href="../../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://random-walks.org/content/linalg/ch01/ch01-content.html" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://random-walks.org/content/linalg/ch01/ch01-content.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Vector spaces" />
+<meta property="og:description" content="Vector spaces  Complex numbers  It’s assumed that the reader is already familiar with the real numbers \mathbb{R}, but not necessarily with the complex numbers " />
+<meta property="og:image"       content="https://random-walks.org/_static/logo.svg" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../../index.html">
+  
+  <img src="../../../_static/logo.svg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Random walks</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../home.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../../prob-intro/intro.html">
+   Probability: An introduction
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch01/content.html">
+     Events and Probabilities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch02/content.html">
+     Discrete random variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch03/content.html">
+     Multivariate discrete distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch04/content.html">
+     Probability generating functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch05/content.html">
+     Distribution and density functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch06/content.html">
+     Multivariate distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch07/content.html">
+     Moment generating functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch08/content.html">
+     Main limit theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch09/content.html">
+     Branching processes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch10/content.html">
+     Random walks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch11/content.html">
+     Processes in continuous time
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch12/content.html">
+     Markov chains
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../../gp/gp-intro.html">
+   Gaussian Processes
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../gp/why-covariances.html">
+     Why covariance functions?
+    </a>
+   </li>
+   <li class="toctree-l2 collapsible-parent">
+    <a class="reference internal" href="../../gp/sparse/sparse-intro.html">
+     Sparse Gaussian Processes
+    </a>
+    <ul class="collapse-ul">
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../gp/sparse/vfe.html">
+       Variational Free Energy GPs
+      </a>
+     </li>
+    </ul>
+    <i class="fas fa-chevron-down">
+    </i>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../../misc/misc.html">
+   Miscellaneous
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../misc/sde/num-sde.html">
+     Numerical simulation of SDEs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../misc/sde-as-gp/sde-as-gp.html">
+     VI for diffusion processes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../misc/node/node.html">
+     Neural ODEs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../misc/optimisation/conjugate-gradients.html">
+     Conjugate gradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../misc/kalman/kalman.html">
+     The Kalman filter and smoother
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../misc/ncs/ncs.html">
+     Natural cubic splines
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../misc/ars/ars.html">
+     Adaptive rejection sampling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../misc/score-matching/score-matching.html">
+     Estimation by score matching
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../misc/interacting/interacting.html">
+     Interacting particle FPK
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../misc/rff/rff.html">
+     Random Fourier features
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../misc/svgd/svgd.html">
+     Stein variational gradient descent
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../misc/addgp/addgp.html">
+     Additive Gaussian Processes
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../reading-and-links.html">
+   Interesting reading and websites
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../../_sources/content/linalg/ch01/ch01-content.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#complex-numbers">
+   Complex numbers
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linalg-vectorspace">
+   Vector spaces
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#subspaces">
+     Subspaces
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#direct-sums">
+     Direct sums
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="vector-spaces">
+<h1>Vector spaces<a class="headerlink" href="#vector-spaces" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="complex-numbers">
+<h2>Complex numbers<a class="headerlink" href="#complex-numbers" title="Permalink to this headline">¶</a></h2>
+<p>It’s assumed that the reader is already familiar with the real numbers <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>, but not necessarily with the complex numbers <span class="math notranslate nohighlight">\(\mathbb{C}\)</span>, defined below.</p>
+<div class="definition">
+<p><strong>Definition (Complex numbers)</strong> A complex number is an oredered list <span class="math notranslate nohighlight">\((a, b)\)</span> where <span class="math notranslate nohighlight">\(a, b \in \mathbb{R}\)</span>, written as <span class="math notranslate nohighlight">\(a + bi\)</span>. The set of complex numbers is denoted by <span class="math notranslate nohighlight">\(\mathbb{C}\)</span>. Addition and multiplication on <span class="math notranslate nohighlight">\(\mathbb{C}\)</span> are denoted as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+(a + bi) + (c + di) &amp;= (a + c) + (b + d)i, \\
+(a + bi)(c + di) &amp;= (ac - bd) + (bc + ad)i. \\
+\end{align}\end{split}\]</div>
+</div>
+<br>
+<p>We often abbreviate <span class="math notranslate nohighlight">\(a + 0i\)</span> as <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(0 + bi\)</span> as <span class="math notranslate nohighlight">\(bi\)</span>. In what follows, we will often write <span class="math notranslate nohighlight">\(\mathbb{F}\)</span> to denote either <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> or <span class="math notranslate nohighlight">\(\mathbb{C}\)</span>. Multiplication and addition in the complex numbers satisfy the familiar properties that multiplication and addition of in the real numbers do.</p>
+<div class="lemma">
+<p><strong>Lemma (Properties of complex arithmetic)</strong> Addition and multiplication of complex numbers satisfy:</p>
+<ul class="simple">
+<li><p><strong>Commutativity:</strong> <span class="math notranslate nohighlight">\(a + b = b + a\)</span> and <span class="math notranslate nohighlight">\(ab = ba\)</span> for all <span class="math notranslate nohighlight">\(a, b \in \mathbb{C}\)</span>.</p></li>
+<li><p><strong>Associativity:</strong> <span class="math notranslate nohighlight">\((a + b) + c = a + (b + c)\)</span> and <span class="math notranslate nohighlight">\((ab)c = a(bc)\)</span> for all <span class="math notranslate nohighlight">\(a, b, c \in \mathbb{C}\)</span>.</p></li>
+<li><p><strong>Identities:</strong> <span class="math notranslate nohighlight">\(a + 0 = a\)</span> and <span class="math notranslate nohighlight">\(a \cdot 1 = a\)</span> for all <span class="math notranslate nohighlight">\(a\in \mathbb{C}\)</span>.</p></li>
+<li><p><strong>Additive inverses:</strong> For every <span class="math notranslate nohighlight">\(a \in \mathbb{C}\)</span>, there exists unique <span class="math notranslate nohighlight">\(b \in \mathbb{C}\)</span> such that <span class="math notranslate nohighlight">\(a + b = 0\)</span></p></li>
+<li><p><strong>Multiplicative inverses:</strong> For every nonzero <span class="math notranslate nohighlight">\(a \in \mathbb{C}\)</span>, there exists unique <span class="math notranslate nohighlight">\(b \in \mathbb{C}\)</span> such that <span class="math notranslate nohighlight">\(\frac{a}{b} = 1\)</span>.</p></li>
+<li><p><strong>Distributive property:</strong> <span class="math notranslate nohighlight">\((a + b)c = ac + bc\)</span> for all <span class="math notranslate nohighlight">\(a, b, c \in \mathbb{C}\)</span>.</p></li>
+</ul>
+</div>
+<br>
+<div class="definition">
+<p><strong>Definition (Subtraction and division)</strong> Let <span class="math notranslate nohighlight">\(a, b \in \mathbb{C}\)</span>. We then</p>
+<ul class="simple">
+<li><p>Write <span class="math notranslate nohighlight">\(-a\)</span> for the additive inverse of <span class="math notranslate nohighlight">\(a\)</span> and define subtractionn on <span class="math notranslate nohighlight">\(\mathbb{C}\)</span> by</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ b - a = b + (-a). \]</div>
+<ul class="simple">
+<li><p>Write <span class="math notranslate nohighlight">\(\frac{1}{a}\)</span> for the mmultiplicative inverse of <span class="math notranslate nohighlight">\(a\)</span> whenever <span class="math notranslate nohighlight">\(a \neq 0\)</span> and define division on <span class="math notranslate nohighlight">\(\mathbb{C}\)</span> by</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ \frac{b}{a} = b \left(\frac{1}{a}\right). \]</div>
+</div>
+<br>
+<div class="definition">
+<p><strong>Definition (Powers)</strong> For <span class="math notranslate nohighlight">\(a \in \mathbb{F}\)</span> and <span class="math notranslate nohighlight">\(m \in \mathbb{N}^+\)</span> we use <span class="math notranslate nohighlight">\(a^m\)</span> to define the product</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+a^m = \underbrace{a ... a}_{m \text{ times}},
+\end{align}\]</div>
+<p>and call this the <span class="math notranslate nohighlight">\(m^{th}\)</span> power of <span class="math notranslate nohighlight">\(a\)</span>.</p>
+</div>
+<br>
+<div class="definition">
+<p><strong>Definition (List, length)</strong> A list of length <span class="math notranslate nohighlight">\(n \in \mathbb{N}^0\)</span> is an ordered collection of <span class="math notranslate nohighlight">\(n\)</span> elements, written as</p>
+<div class="math notranslate nohighlight">
+\[ (x_1, ..., x_n) \]</div>
+<p>Two lists are equal if and only if they have the same length and the same elements in the same order. We sometimes ommit the parentheses and we write <span class="math notranslate nohighlight">\(()\)</span> for the empty list of length <span class="math notranslate nohighlight">\(0\)</span>.</p>
+</div>
+<br>
+<div class="definition">
+<p><strong>Definition (<span class="math notranslate nohighlight">\(\mathbb{F}^n\)</span>)</strong> We write <span class="math notranslate nohighlight">\(\mathbb{F}^n\)</span> for the set of all lists of length <span class="math notranslate nohighlight">\(n\)</span> of elements of <span class="math notranslate nohighlight">\(\mathbb{F}\)</span>. For <span class="math notranslate nohighlight">\((x_1, ..., x_n) \in \mathbb{F}^n\)</span> and <span class="math notranslate nohighlight">\(i \in \{1, ..., n\}\)</span>, we say that <span class="math notranslate nohighlight">\(x_i\)</span> is the <span class="math notranslate nohighlight">\(i^{th}\)</span> coordinate of <span class="math notranslate nohighlight">\((x_1, ..., x_n)\)</span>.</p>
+</div>
+<br>
+<div class="definition">
+<p><strong>Definition (Addition in <span class="math notranslate nohighlight">\(\mathbb{F}^n\)</span>)</strong> Addition in <span class="math notranslate nohighlight">\(\mathbb{F}^n\)</span> is defined by adding corresponding coordinates</p>
+<div class="math notranslate nohighlight">
+\[(x_1, ..., x_n) + (y_1, ..., y_n) = (x_1 + y_1, ..., x_n + y_n).\]</div>
+</div>
+<br>
+<div class="lemma">
+<p><strong>Lemma (Commutativity of addition in <span class="math notranslate nohighlight">\(\mathbb{F}^n\)</span>)</strong> Addition in <span class="math notranslate nohighlight">\(\mathbb{F}^n\)</span> is commutative</p>
+<div class="math notranslate nohighlight">
+\[ x, y \in \mathbb{F}^n \implies x + y = y + x. \]</div>
+</div>
+<br>
+<div class="definition">
+<p><strong>Definition (Zero list)</strong> We use <span class="math notranslate nohighlight">\(0\)</span> to denote a list whose coordinates are all <span class="math notranslate nohighlight">\(0\)</span>. Distinguishing this symbol from the real number <span class="math notranslate nohighlight">\(0\)</span> and determining the length of the list can be based on context.</p>
+</div>
+<br>
+<div class="definition">
+<p><strong>Definition (Additive inverse in <span class="math notranslate nohighlight">\(\mathbb{F}^n\)</span>)</strong> For <span class="math notranslate nohighlight">\(x \in \mathbb{F}^n\)</span>, the additive inverse of <span class="math notranslate nohighlight">\(x\)</span>, denoted <span class="math notranslate nohighlight">\(-x\)</span> is the vector <span class="math notranslate nohighlight">\(-x \in \mathbb{F}^n\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[ x + (-x) = 0. \]</div>
+</div>
+<br>
+<div class="definition">
+<p><strong>Definition (Scalar multiplication in <span class="math notranslate nohighlight">\(\mathbb{F}^n\)</span>)</strong> For <span class="math notranslate nohighlight">\(\lambda \in \mathbb{F}\)</span> and <span class="math notranslate nohighlight">\(x \in \mathbb{F}^n\)</span>, we define the multiple of <span class="math notranslate nohighlight">\(\lambda\)</span> and <span class="math notranslate nohighlight">\(x\)</span> to be the coordinate-wise product of <span class="math notranslate nohighlight">\(x\)</span> with <span class="math notranslate nohighlight">\(\lambda\)</span>, that is</p>
+<div class="math notranslate nohighlight">
+\[ \lambda x = (\lambda x_1, ..., \lambda x_n). \]</div>
+</div>
+<br>
+<div class="definition">
+<p><strong>Definition (Addition and scalar multiplication on sets)</strong> We define addition and scalar multiplication on sets as</p>
+<ul class="simple">
+<li><p><strong>Addition:</strong> a function which assigns an element <span class="math notranslate nohighlight">\(u + v \in V\)</span> to each pair <span class="math notranslate nohighlight">\(u, v \in V\)</span>.</p></li>
+<li><p><strong>Scalar multiplication:</strong> a function which assignsan element <span class="math notranslate nohighlight">\(\lambda v \in V\)</span> to each <span class="math notranslate nohighlight">\(\lambda \in \mathbb{F}\)</span> and <span class="math notranslate nohighlight">\(v \in V\)</span>.</p></li>
+</ul>
+</div>
+<br>
+</div>
+<div class="section" id="linalg-vectorspace">
+<span id="id1"></span><h2>Vector spaces<a class="headerlink" href="#linalg-vectorspace" title="Permalink to this headline">¶</a></h2>
+<div class="definition">
+<p><strong>Definition (Vector space)</strong> A vector space is a set <span class="math notranslate nohighlight">\(V\)</span> together with an addition and scalar multiplication defined on <span class="math notranslate nohighlight">\(V\)</span>, such that the following properties hold:</p>
+<ul class="simple">
+<li><p><strong>Commutativity:</strong> <span class="math notranslate nohighlight">\(u + v = v + u\)</span> for all <span class="math notranslate nohighlight">\(u, v \in V\)</span>.</p></li>
+<li><p><strong>Associativity:</strong> <span class="math notranslate nohighlight">\((u + v) + w = u + (v + w)\)</span> and <span class="math notranslate nohighlight">\((ab)v = a(bv)\)</span> for all <span class="math notranslate nohighlight">\(u, v, w \in V\)</span> and <span class="math notranslate nohighlight">\(a, b \in \mathbb{F}\)</span>.</p></li>
+<li><p><strong>Additive identity:</strong> there exists an element <span class="math notranslate nohighlight">\(0 \in V\)</span> such that <span class="math notranslate nohighlight">\(v + 0 = v\)</span> for all <span class="math notranslate nohighlight">\(v \in V\)</span>.</p></li>
+<li><p><strong>Additive inverse:</strong> for every <span class="math notranslate nohighlight">\(v \in V\)</span> there exists an element <span class="math notranslate nohighlight">\(w \in V\)</span> such that <span class="math notranslate nohighlight">\(v + w = 0\)</span>.</p></li>
+<li><p><strong>Multiplicative identity:</strong> <span class="math notranslate nohighlight">\(1 \cdot v = v\)</span> for all <span class="math notranslate nohighlight">\(v \in V\)</span>.</p></li>
+<li><p><strong>Distributive proeprties:</strong> <span class="math notranslate nohighlight">\(a (u + v) = au + av\)</span> and <span class="math notranslate nohighlight">\((a + b) v = av + bv\)</span> for all <span class="math notranslate nohighlight">\(a, b \in \mathbb{F}\)</span> and all <span class="math notranslate nohighlight">\(u, v \in V\)</span>.</p></li>
+</ul>
+<p>Elements of a vector space are called <em>vectors</em> or <em>points</em>.</p>
+</div>
+<br>
+<div class="definition">
+<p><strong>Definition (Real and complex vector spaces)</strong> A vector space over <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>, meaning its scalars are in <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>, is called a real vector space. A vector space over <span class="math notranslate nohighlight">\(\mathbb{C}\)</span>, meaning its scalars are in <span class="math notranslate nohighlight">\(\mathbb{C}\)</span>, is called a complex vector space.</p>
+</div>
+<br>
+<p>In these notes we follow Axler and use the symbol <span class="math notranslate nohighlight">\(V\)</span> to denote a vector space over <span class="math notranslate nohighlight">\(\mathbb{F}\)</span> where <span class="math notranslate nohighlight">\(\mathbb{F} = \mathbb{R}\)</span> or <span class="math notranslate nohighlight">\(\mathbb{F} = \mathbb{C}\)</span>.</p>
+<div class="definition">
+<p><strong>Definition (Notation <span class="math notranslate nohighlight">\(\mathbb{F}^S\)</span>)</strong> If <span class="math notranslate nohighlight">\(S\)</span> is a set, <span class="math notranslate nohighlight">\(\mathbb{F}^S\)</span> denotes the set of functions from <span class="math notranslate nohighlight">\(S\)</span> to <span class="math notranslate nohighlight">\(\mathbb{F}\)</span>.</p>
+<ul class="simple">
+<li><p>For <span class="math notranslate nohighlight">\(f, g \in \mathbb{F}^S\)</span>, the sum <span class="math notranslate nohighlight">\(f + g\)</span> is defined as <span class="math notranslate nohighlight">\((f + g)(x) = f(x) + g(x)\)</span>.</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(\lambda \in \mathbb{F}\)</span> and <span class="math notranslate nohighlight">\(f \in \mathbb{F}^S\)</span>, the product <span class="math notranslate nohighlight">\(\lambda f\)</span> is defined as <span class="math notranslate nohighlight">\((\lambda f)(x) = \lambda f(x)\)</span>.</p></li>
+</ul>
+</div>
+<br>
+<div class="lemma">
+<p><strong>Lemma (Unique additive identity/inverses)</strong> A vector space has a unique additive identity. Every element in a vector space has a unique additive inverse.</p>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Unique additive identity/inverses</summary>
+<p>Let <span class="math notranslate nohighlight">\(V\)</span> be a vector space and <span class="math notranslate nohighlight">\(a, b \in V\)</span> be additive identities in <span class="math notranslate nohighlight">\(V\)</span>. Then for any <span class="math notranslate nohighlight">\(v \in V\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+v + a = v = v + b
+\end{align}\]</div>
+<p>and adding the additive inverse of <span class="math notranslate nohighlight">\(v\)</span> to both sides we obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+v + a + (-v) &amp;= v + b + (-v) \\
+a &amp;= b
+\end{align}\end{split}\]</div>
+<p>therefore the additive identity is unique. Now suppose that <span class="math notranslate nohighlight">\(w, z \in V\)</span> are both additive inverses of <span class="math notranslate nohighlight">\(v\)</span>. Then we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+v + w = 0 = v + z
+\end{align}\]</div>
+<p>and adding <span class="math notranslate nohighlight">\(w\)</span> to both sides we obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+v + w + w &amp;= v + z + w \\
+w &amp;= z
+\end{align}\end{split}\]</div>
+<p>showing that additive inverses are unique.</p>
+</details>
+<br>
+<div class="lemma">
+<p><strong>Lemma (Multiplication by <span class="math notranslate nohighlight">\(0\)</span>)</strong> For any <span class="math notranslate nohighlight">\(a \in \mathbb{F}, v \in V\)</span>, we have <span class="math notranslate nohighlight">\(0v = 0\)</span> and <span class="math notranslate nohighlight">\(a0 = 0\)</span>.</p>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Multiplication by \(0\)</summary>
+<p>Let <span class="math notranslate nohighlight">\(a \in \mathbb{F}, v \in V\)</span>. Then by the definition of scalar multiplication in vector spaces we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+0v &amp;= (0 + 0)v = 0v + 0v \\
+\implies 0v &amp;= 0,
+\end{align}\end{split}\]</div>
+<p>and by the definition of <span class="math notranslate nohighlight">\(0 \in V\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+a0 &amp;= a(0 + 0) = a0 + a0 \\
+\implies a0 &amp;= 0.
+\end{align}\end{split}\]</div>
+</details>
+<br>
+<div class="lemma">
+<p><strong>Lemma (Multiplication by <span class="math notranslate nohighlight">\(-1\)</span>)</strong> We have <span class="math notranslate nohighlight">\((-1)v = -v\)</span> for every <span class="math notranslate nohighlight">\(v \in V\)</span>.</p>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Multiplication by \(-1\)</summary>
+<p>If <span class="math notranslate nohighlight">\(v \in V\)</span>, we then have</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+(1 - 1)v = v + (-1) v = 0 \implies -v = (-1) v,
+\end{align}\]</div>
+<p>since additive inverses are unique.</p>
+</details>
+<br>
+<div class="section" id="subspaces">
+<span id="linalg-subspaces"></span><h3>Subspaces<a class="headerlink" href="#subspaces" title="Permalink to this headline">¶</a></h3>
+<div class="definition">
+<p><strong>Definition (Subspace)</strong> A subset <span class="math notranslate nohighlight">\(U\)</span> of <span class="math notranslate nohighlight">\(V\)</span>is a subspace of <span class="math notranslate nohighlight">\(V\)</span> if <span class="math notranslate nohighlight">\(U\)</span> is also a vector space with the same addition and scalar multiplication as <span class="math notranslate nohighlight">\(V\)</span>.</p>
+</div>
+<br>
+<div class="lemma">
+<p><strong>Lemma (Conditions for subspace)</strong> A subset <span class="math notranslate nohighlight">\(U\)</span> of <span class="math notranslate nohighlight">\(V\)</span> is a subspace of <span class="math notranslate nohighlight">\(V\)</span> if and only if <span class="math notranslate nohighlight">\(U\)</span> satisfies</p>
+<ul class="simple">
+<li><p><strong>Additive identity:</strong> <span class="math notranslate nohighlight">\(0 \in U\)</span>.</p></li>
+<li><p><strong>Closure under addition:</strong> <span class="math notranslate nohighlight">\(u, w \in U\)</span> implies <span class="math notranslate nohighlight">\(u + w \in U\)</span>.</p></li>
+<li><p><strong>Closure under multiplication:</strong> <span class="math notranslate nohighlight">\(a \in \mathbb{F}\)</span> and <span class="math notranslate nohighlight">\(u \in U\)</span> implies <span class="math notranslate nohighlight">\(au \in U\)</span>.</p></li>
+</ul>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Conditions for subspace</summary>
+<p>If <span class="math notranslate nohighlight">\(U\)</span> is a subspace, then it satisfies all three properties by the definition of a vector space.</p>
+<p>If <span class="math notranslate nohighlight">\(U\)</span> satisfies all three of the above properties, we can confirm that it also satisfies the properties for being a vector space, one by one:</p>
+<ul class="simple">
+<li><p><strong>Commutativity, associativity, multiplicative identity, distributive properties:</strong> these are satisfied on <span class="math notranslate nohighlight">\(U\)</span>, because addition in <span class="math notranslate nohighlight">\(U\)</span> is defined in the same way as in <span class="math notranslate nohighlight">\(V\)</span> and <span class="math notranslate nohighlight">\(V\)</span> is a vector space.</p></li>
+<li><p><strong>Additive identity:</strong> the additive identity is in <span class="math notranslate nohighlight">\(U\)</span> by the assumptions of the lemma.</p></li>
+<li><p><strong>Additive inverse:</strong> for any element <span class="math notranslate nohighlight">\(v \in V\)</span>, its additive inverse <span class="math notranslate nohighlight">\(-v = (-1)v\)</span> is in <span class="math notranslate nohighlight">\(V\)</span> by the assumption of closure under multiplication.</p></li>
+</ul>
+</details>
+<br>
+<div class="definition">
+<p><strong>Definition (Sum of subsets)</strong> Let <span class="math notranslate nohighlight">\(U_1, ..., U_n\)</span> be subsets of <span class="math notranslate nohighlight">\(V\)</span>. We define the sum <span class="math notranslate nohighlight">\(U_1 + ... + U_n\)</span> as the set</p>
+<div class="math notranslate nohighlight">
+\[ U_1 + ... + U_n = \{u_1 + ... + u_m : u_1 \in U_1, ..., u_m \in U_m\}.\]</div>
+</div>
+<br>
+<div class="lemma">
+<p><strong>Lemma (Sum of sets is the smallest containing set)</strong> Let <span class="math notranslate nohighlight">\(U_1, ..., U_n\)</span> be subspaces of <span class="math notranslate nohighlight">\(V\)</span>. Then their sum <span class="math notranslate nohighlight">\(U_1 + ... + U_n\)</span> is the smallest subspace of <span class="math notranslate nohighlight">\(V\)</span> that contains them.</p>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Sum of sets is the smallest containing set</summary>
+<p>Let <span class="math notranslate nohighlight">\(S\)</span> be the smallest subspace of <span class="math notranslate nohighlight">\(V\)</span> that contains <span class="math notranslate nohighlight">\(U_1, ..., U_n\)</span>. Since <span class="math notranslate nohighlight">\(S\)</span> is a subspace, it <a class="reference internal" href="#linalg-subspaces"><span class="std std-ref">is closed under addition</span></a> so <span class="math notranslate nohighlight">\(S\)</span> must contain all elements of the form</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+u_1 + ... + u_n : u_1 \in U_1, ..., u_n \in U_n,
+\end{align}\]</div>
+<p>and must therefore contain <span class="math notranslate nohighlight">\(U_1 + ... + U_n\)</span>. Therefore <span class="math notranslate nohighlight">\(U_1 + ... + U_n \subseteq S\)</span>.</p>
+<p>To show that <span class="math notranslate nohighlight">\(U_1 + ... + U_n\)</span> is a subspace, we observe that it contains the additive identity, it is closed under addition and it is also closed under scalar multiplication. Therefore <span class="math notranslate nohighlight">\(U_1 + ... + U_n\)</span> is a subspace concluding the proof that the sum of <span class="math notranslate nohighlight">\(U_1, ..., U_n\)</span> is the smallest subspace containing them.</p>
+</details>
+<br>
+</div>
+<div class="section" id="direct-sums">
+<span id="linalg-direct-sum"></span><h3>Direct sums<a class="headerlink" href="#direct-sums" title="Permalink to this headline">¶</a></h3>
+<div class="definition">
+<p><strong>Definition (Direct sum)</strong> Let <span class="math notranslate nohighlight">\(U_1, ..., U_n\)</span> be subspaces of <span class="math notranslate nohighlight">\(V\)</span>. The sum <span class="math notranslate nohighlight">\(U_1 + ... + U_n\)</span> is called a direct sum if each element in the set can be written in only one way as a sum <span class="math notranslate nohighlight">\(u_1 + ... + u_n\)</span>. If <span class="math notranslate nohighlight">\(U_1 + ... + U_n\)</span> is a direct sum, we use the notation <span class="math notranslate nohighlight">\(U_1 \oplus ... \oplus U_n\)</span> to make this explicit.</p>
+</div>
+<br>
+<div class="lemma">
+<p><strong>Lemma (Direct sum <span class="math notranslate nohighlight">\(\iff\)</span> unique writing of <span class="math notranslate nohighlight">\(0\)</span>)</strong> Suppose <span class="math notranslate nohighlight">\(U_1, ..., U_n\)</span> are subspaces of <span class="math notranslate nohighlight">\(V\)</span>. Then <span class="math notranslate nohighlight">\(U_1 + ... + U_n\)</span> is a direct sum if and only if there is a unique way to write <span class="math notranslate nohighlight">\(0\)</span> as the sum <span class="math notranslate nohighlight">\(u_1 + ... + u_n\)</span> where <span class="math notranslate nohighlight">\(u_i \in U_i\)</span>, in which each <span class="math notranslate nohighlight">\(u_i = 0\)</span>.</p>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Direct sum \(\iff\) unique writing of \(0\)</summary>
+<p>Suppose <span class="math notranslate nohighlight">\(U_1 + ... + U_n = U_1 \oplus ... \oplus U_n\)</span> is a direct sum. By the <a class="reference internal" href="#linalg-direct-sum"><span class="std std-ref">definition of the direct sum</span></a>, there exists a single unique way to write <span class="math notranslate nohighlight">\(0\)</span> as a sum of the form <span class="math notranslate nohighlight">\(u_1 + ... + u_n\)</span> where <span class="math notranslate nohighlight">\(u_i \in U_i\)</span>.</p>
+<p>Going the other way, suppose now there exists a unique way to write <span class="math notranslate nohighlight">\(0\)</span> as the sum <span class="math notranslate nohighlight">\(u_1 + ... + u_n\)</span> where <span class="math notranslate nohighlight">\(u_i \in U_i\)</span>, by setting <span class="math notranslate nohighlight">\(u_i = 0\)</span>. Now consider an element <span class="math notranslate nohighlight">\(v \in U_1 + ... + U_n\)</span> and consider two ways of writing it</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+u_1 + ... + u_n = w_1 + ... + w_n,
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(u_i, w_i \in U_i\)</span>. Then also <span class="math notranslate nohighlight">\(u_i - w_i \in U_i\)</span>, so rearranging we obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+(u_1 - w_1) + ... + (u_n - w_n) = 0,
+\end{align}\]</div>
+<p>and since by assumption there is one unique way to write <span class="math notranslate nohighlight">\(0\)</span> as a sum of this form, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+u_i - v_i = 0 \implies u_i = v_i,
+\end{align}\]</div>
+<p>so the two ways of writing <span class="math notranslate nohighlight">\(v\)</span> are identical.</p>
+</details>
+<br>
+<div class="lemma">
+<p><strong>Lemma (Direct sum <span class="math notranslate nohighlight">\(\iff\)</span> intersection equals <span class="math notranslate nohighlight">\(\{0\}\)</span>)</strong> Suppose <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(W\)</span> are subspaces of <span class="math notranslate nohighlight">\(V\)</span>. Then <span class="math notranslate nohighlight">\(U + W\)</span> is a direct sum if and only if <span class="math notranslate nohighlight">\(U \cap W = \{0\}\)</span>.</p>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: (Direct sum \(\iff\) intersection equals \(\{0\}\)</summary>
+<p>Suppose <span class="math notranslate nohighlight">\(U + W = U \oplus W\)</span> is a direct sum. Suppose <span class="math notranslate nohighlight">\(v \in U\)</span> and <span class="math notranslate nohighlight">\(v \in W\)</span>. Then <span class="math notranslate nohighlight">\(v \in U \oplus W\)</span> and there exist at least two ways of writing <span class="math notranslate nohighlight">\(v\)</span> as the sum of the form</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+u_1 + w_1 = u_2 + w_2,
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(u_1, u_2 \in U\)</span> and <span class="math notranslate nohighlight">\(w_1, w_2 \in W\)</span>, which are by setting <span class="math notranslate nohighlight">\(u_1 = v, w_1 = 0\)</span> or <span class="math notranslate nohighlight">\(u_2 = 0, w_2 = v\)</span>. This contradicts the assumption that <span class="math notranslate nohighlight">\(U + W\)</span> is a direct sum.</p>
+<p>Going the other way, suppose now that <span class="math notranslate nohighlight">\(U \cap W = \{0\}\)</span>. Then there exists a unique way to write <span class="math notranslate nohighlight">\(0\)</span> as a sum of the form</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+u_1 + w_1 = u_2 + w_2 = 0,
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(u_1, u_2 \in U\)</span> and <span class="math notranslate nohighlight">\(w_1, w_2 \in W\)</span>. Then rearranging we would obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+(u_1 - u_2) + (w_1 - w_2) = 0,
+\end{align}\]</div>
+<p>but since <span class="math notranslate nohighlight">\(U, W\)</span> have no common elements, the only way to satisfy this equation is if <span class="math notranslate nohighlight">\(u_1 - u_2 = 0\)</span> and also <span class="math notranslate nohighlight">\(w_1 - w_2 = 0\)</span>, which shows that the two ways of writing <span class="math notranslate nohighlight">\(0\)</span> are identical. This shows that <span class="math notranslate nohighlight">\(U + W\)</span> is a <a class="reference internal" href="#linalg-direct-sum"><span class="std std-ref">direct sum</span></a>.</p>
+</details>
+<br></div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./content/linalg/ch01"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Stratos Markou<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-168728006-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    
+  </body>
+</html>

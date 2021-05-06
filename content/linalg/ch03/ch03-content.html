@@ -1,0 +1,884 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Linear maps &#8212; Random walks</title>
+    
+  <link rel="stylesheet" href="../../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://random-walks.org/content/linalg/ch03/ch03-content.html" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://random-walks.org/content/linalg/ch03/ch03-content.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Linear maps" />
+<meta property="og:description" content="Linear maps  This section deals with linear maps and their properties. Linear maps are functions which satisfy an additivity and a homogeneity property, and are" />
+<meta property="og:image"       content="https://random-walks.org/_static/logo.svg" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../../index.html">
+  
+  <img src="../../../_static/logo.svg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Random walks</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../home.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../../prob-intro/intro.html">
+   Probability: An introduction
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch01/content.html">
+     Events and Probabilities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch02/content.html">
+     Discrete random variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch03/content.html">
+     Multivariate discrete distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch04/content.html">
+     Probability generating functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch05/content.html">
+     Distribution and density functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch06/content.html">
+     Multivariate distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch07/content.html">
+     Moment generating functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch08/content.html">
+     Main limit theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch09/content.html">
+     Branching processes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch10/content.html">
+     Random walks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch11/content.html">
+     Processes in continuous time
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prob-intro/ch12/content.html">
+     Markov chains
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../../gp/gp-intro.html">
+   Gaussian Processes
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../gp/why-covariances.html">
+     Why covariance functions?
+    </a>
+   </li>
+   <li class="toctree-l2 collapsible-parent">
+    <a class="reference internal" href="../../gp/sparse/sparse-intro.html">
+     Sparse Gaussian Processes
+    </a>
+    <ul class="collapse-ul">
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../gp/sparse/vfe.html">
+       Variational Free Energy GPs
+      </a>
+     </li>
+    </ul>
+    <i class="fas fa-chevron-down">
+    </i>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../../misc/misc.html">
+   Miscellaneous
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../misc/sde/num-sde.html">
+     Numerical simulation of SDEs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../misc/sde-as-gp/sde-as-gp.html">
+     VI for diffusion processes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../misc/node/node.html">
+     Neural ODEs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../misc/optimisation/conjugate-gradients.html">
+     Conjugate gradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../misc/kalman/kalman.html">
+     The Kalman filter and smoother
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../misc/ncs/ncs.html">
+     Natural cubic splines
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../misc/ars/ars.html">
+     Adaptive rejection sampling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../misc/score-matching/score-matching.html">
+     Estimation by score matching
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../misc/interacting/interacting.html">
+     Interacting particle FPK
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../misc/rff/rff.html">
+     Random Fourier features
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../misc/svgd/svgd.html">
+     Stein variational gradient descent
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../misc/addgp/addgp.html">
+     Additive Gaussian Processes
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../reading-and-links.html">
+   Interesting reading and websites
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../../_sources/content/linalg/ch03/ch03-content.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#vector-space-of-linear-maps">
+   Vector space of linear maps
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#null-spaces-and-ranges">
+   Null spaces and ranges
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#injective-and-surjective">
+     Injective and surjective
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fundamental-theorem-of-linear-maps">
+     Fundamental theorem of linear maps
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dimensions-injectivity-and-surjectivity">
+     Dimensions, injectivity and surjectivity
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#matrices">
+   Matrices
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="linear-maps">
+<h1>Linear maps<a class="headerlink" href="#linear-maps" title="Permalink to this headline">¶</a></h1>
+<p>This section deals with linear maps and their properties. Linear maps are functions which satisfy an additivity and a homogeneity property, and are the central topic of study of Linear Algebra. <span class="math notranslate nohighlight">\( \newcommand{\L}{\mathcal{L}}
+\newcommand{\null}{\text{null}~}
+\newcommand{\range}{\text{range}~}
+\newcommand{\dim}{\text{dim}~}
+\newcommand{\span}{\text{span}}
+\newcommand{\M}{\mathcal{M}} 
+\newcommand{\F}{\mathbb{F}} \)</span></p>
+<div class="section" id="vector-space-of-linear-maps">
+<h2>Vector space of linear maps<a class="headerlink" href="#vector-space-of-linear-maps" title="Permalink to this headline">¶</a></h2>
+<p>Linear maps are one of the central objects of linear algebra. As the name suggests, linear maps are linear functions between vector spaces.</p>
+<div class="definition">
+<p><strong>Definition (Linear map)</strong> A linear map is a function <span class="math notranslate nohighlight">\(T : V \to W\)</span> with the following properties</p>
+<ul class="simple">
+<li><p><strong>Additivity:</strong> <span class="math notranslate nohighlight">\( T(u + v) = T(u) + T(v)\)</span></p></li>
+<li><p><strong>Homogeneity:</strong> <span class="math notranslate nohighlight">\( T(\lambda u) = \lambda T(u)\)</span></p></li>
+</ul>
+<p>for all <span class="math notranslate nohighlight">\(u, v \in V\)</span> and <span class="math notranslate nohighlight">\(\lambda \in \mathbb{F}\)</span>. We write <span class="math notranslate nohighlight">\(\mathcal{L}(V, W)\)</span> to denote the set of all linear maps from <span class="math notranslate nohighlight">\(V\)</span> to <span class="math notranslate nohighlight">\(W\)</span>.</p>
+</div>
+<br>
+<p>The values that a linear map takes are completely determined by the values it takes on a basis in its domain. Therefore, definining the values that a linear map takes on this basis fully characterises the whole linear map, making it unique.</p>
+<div class="lemma">
+<p><strong>Lemma (Uniqueness and existence of linear maps)</strong> Suppose <span class="math notranslate nohighlight">\(v_1, ..., v_n\)</span> is a basis of <span class="math notranslate nohighlight">\(V\)</span> and <span class="math notranslate nohighlight">\(w_1, ..., w_n \in W\)</span>. Then there exists a unique linear map such that</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+T v_j = w_j,~~j = 1, ..., n.
+\end{align}\]</div>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Uniqueness and existence of linear maps</summary>
+<p>Let <span class="math notranslate nohighlight">\(T : V \to W\)</span> be the map</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+T(c_1 v_1 + ... + c_n v_n) = c_1 w_1 + ... + c_n w_n,
+\end{align}\]</div>
+<p>which is a valid definition since all elements <span class="math notranslate nohighlight">\(v \in V\)</span> can be uniquely expressed in the form</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+v = c_1 v_1 + ... + c_n v_n.
+\end{align}\]</div>
+<p>We observe that the map <span class="math notranslate nohighlight">\(T\)</span> is linear. Now setting <span class="math notranslate nohighlight">\(c_j = 1\)</span> and <span class="math notranslate nohighlight">\(c_k = 0\)</span> for all <span class="math notranslate nohighlight">\(k \neq j\)</span> we see that the map satisfies</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+T v_j = w_j,~~j = 1, ..., n.
+\end{align}\]</div>
+<p>To show that the map is unique, suppose <span class="math notranslate nohighlight">\(S \in \mathcal{L}(V,W)\)</span> and that <span class="math notranslate nohighlight">\(Sv_j = w_j,~~j = 1, ..., n\)</span>. Then by the linearity and homogeneity of <span class="math notranslate nohighlight">\(S\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+S(c_1 v_1 + ... + c_n v_n) = c_1 w_1 + ... + c_n w_n,
+\end{align}\]</div>
+<p>which means that <span class="math notranslate nohighlight">\(S = T\)</span> on all of <span class="math notranslate nohighlight">\(\text{span}(v_1, ..., v_n) = V\)</span>, so <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span> are identical.</p>
+</details>
+<br>
+<div class="definition">
+<p><strong>Definition (Addition and multiplication on <span class="math notranslate nohighlight">\(\mathcal{L}(V, W)\)</span>)</strong> Suppose <span class="math notranslate nohighlight">\(S, T \in \mathcal{L}(V, W)\)</span> and <span class="math notranslate nohighlight">\(\lambda \in \mathcal{F}\)</span>. We define the sum <span class="math notranslate nohighlight">\(S + T\)</span> and product <span class="math notranslate nohighlight">\(\lambda T\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+(S + T)(v) &amp;= Sv + Tv,\\
+(\lambda T)(v) &amp;= \lambda (Tv),
+\end{align}\end{split}\]</div>
+<p>for all <span class="math notranslate nohighlight">\(v \in V\)</span>.</p>
+</div>
+<br>
+<div class="lemma">
+<p><strong>Lemma (<span class="math notranslate nohighlight">\(\mathcal{L}(V, W)\)</span> is a vector space)</strong> Under the definitions of addition and multiplication for linear operators, the set <span class="math notranslate nohighlight">\(\mathcal{L}(V, W)\)</span> of linear operators from <span class="math notranslate nohighlight">\(V\)</span> to <span class="math notranslate nohighlight">\(W\)</span> is a vector space.</p>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: \(\mathcal{L}(V, W)\) is a vector space</summary>
+<p>We note that under the definitions for addition and scalar multiplication given above, <span class="math notranslate nohighlight">\(\mathcal{L}(V, W)\)</span> satisfies <a class="reference internal" href="../ch01/ch01-content.html#linalg-vectorspace"><span class="std std-ref">the requirements for being a vector space</span></a>.</p>
+</details>
+<br>
+<p>Above we defined the scalar multiple of a linear map. We can also define the product of two linear maps to be their composition, provided the range of one is compatible with the domain of the other.</p>
+<div class="definition">
+<p><strong>Definition (Product of linear maps)</strong> If <span class="math notranslate nohighlight">\(T \in \mathcal{L}(U, V)\)</span> and <span class="math notranslate nohighlight">\(S \in \mathcal{L}(V, W)\)</span>, then the product <span class="math notranslate nohighlight">\(ST \in \mathcal{L}(U, W)\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+(ST)(u) = S(Tu).
+\end{align}\]</div>
+</div>
+<br>
+<p>Products of linear maps satisfy the following useful properties.</p>
+<div class="lemma">
+<p><strong>Lemma (Properties of products of linear maps)</strong> Products of linear maps satisfy the following properties</p>
+<ul class="simple">
+<li><p><strong>Associativity:</strong> Suppose <span class="math notranslate nohighlight">\(T_n \in \mathcal{L}(U_{n+1}, U_{n})\)</span> for <span class="math notranslate nohighlight">\(n = 1, 2, 3\)</span>. Then</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+(T_1 T_2) T_3 = T_1 (T_2 T_3)
+\end{align}\]</div>
+<ul class="simple">
+<li><p><strong>Identity:</strong> Suppose <span class="math notranslate nohighlight">\(T \in \mathcal{L}(U, V)\)</span> and let <span class="math notranslate nohighlight">\(I_U, I_V\)</span> be the identity maps on <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(V\)</span> respectively. Then</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+T I_U = I_V T = T.
+\end{align}\]</div>
+<ul class="simple">
+<li><p><strong>Distributive property:</strong> Suppose <span class="math notranslate nohighlight">\(T, T_1, T_2 \in \mathcal{L}(U, V)\)</span> and <span class="math notranslate nohighlight">\(S, S_1, S_2 \in \mathcal{L}(V, W)\)</span>. Then</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+(S_1 + S_2) T = S_1 T + S_2 T, \text{ and } S (T_1 + T_2) = ST_1 ST_2.
+\end{align}\]</div>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Properties of products of linear maps</summary>
+<p><strong>Associativity:</strong> Suppose <span class="math notranslate nohighlight">\(T_n \in \mathcal{L}(U_{n+1}, U_{n})\)</span> for <span class="math notranslate nohighlight">\(n = 1, 2, 3\)</span>, and let <span class="math notranslate nohighlight">\(u \in U_3\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+(T_1 T_2) T_3 u = (T_1 T_2) (T_3 u) = T_1 (T_2 (T_3 u)) = T_1 ((T_2 T_3) u)
+\end{align}\]</div>
+<p>which implies <span class="math notranslate nohighlight">\((T_1 T_2) T_3 = T_1 (T_2 T_3)\)</span>.</p>
+<p><strong>Identity:</strong> This holds by inspection of the expression <span class="math notranslate nohighlight">\(T I_U = I_V T = T\)</span>.</p>
+<p><strong>Distributive property:</strong> Suppose <span class="math notranslate nohighlight">\(T, T_1, T_2 \in \mathcal{L}(U, V)\)</span> and <span class="math notranslate nohighlight">\(S, S_1, S_2 \in \mathcal{L}(V, W)\)</span> and let <span class="math notranslate nohighlight">\(u \in U\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+(S_1 + S_2) (T u) = S_1 (T u) + S_2 (T u) = (S_1 T + S_2 T) u,
+\end{align}\]</div>
+<p>which implies <span class="math notranslate nohighlight">\((S_1 + S_2) T = S_1 T + S_2 T\)</span>. Similarly, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+S ((T_1 + T_2) u) = S (T_1 u + T_2 u) = S (T_1 u + T_2 u) = S T_1 u + S T_2 u = (S T_1 + S T_2) u,
+\end{align}\]</div>
+<p>which implies <span class="math notranslate nohighlight">\(S (T_1 + T_2) = ST_1 ST_2\)</span>.</p>
+</details>
+<br>
+<p>However, multiplication of linear maps is not commutative (even if the domains and ranges of the two linear maps are compatible), because in general function composition is not commutative. We conclude this section with the following unsurprising lemma on linear maps, which is useful for subsequent proofs.</p>
+<div class="lemma">
+<p><strong>Lemma (Linear maps take <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(0\)</span>)</strong> If <span class="math notranslate nohighlight">\(T \in \mathcal{L}(V, W)\)</span>, then <span class="math notranslate nohighlight">\(T(0) = 0\)</span>.</p>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Linear maps take \(0\) to \(0\)</summary>
+<p>We have</p>
+<p><span class="math notranslate nohighlight">\(T(0) = T(0 + 0) = T(0) + T(0) \implies T(0) = 0.\)</span></p>
+</details>
+<br>
+</div>
+<div class="section" id="null-spaces-and-ranges">
+<h2>Null spaces and ranges<a class="headerlink" href="#null-spaces-and-ranges" title="Permalink to this headline">¶</a></h2>
+<p>This section introduces null spaces and ranges of linear maps. The null space and range of a linear map are closely related and central to the study of linear maps and vector spaces.</p>
+<div class="section" id="injective-and-surjective">
+<span id="linalg-inj-surj"></span><h3>Injective and surjective<a class="headerlink" href="#injective-and-surjective" title="Permalink to this headline">¶</a></h3>
+<div class="definition">
+<p><strong>Definition (Null space)</strong> Suppose <span class="math notranslate nohighlight">\(T \in \mathcal{L}(V, W)\)</span>. Then the null space of <span class="math notranslate nohighlight">\(T\)</span>, denoted <span class="math notranslate nohighlight">\(\null T\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\null T = \{v \in V : Tv = 0\}.
+\end{align}\]</div>
+</div>
+<br>
+<p>The null space of a linear map is a subspace of the domain-space of the map.</p>
+<div class="lemma">
+<p><strong>Lemma (Null space is a subspace)</strong> Suppose <span class="math notranslate nohighlight">\(T \in \mathcal{L}(V, W)\)</span>. Then <span class="math notranslate nohighlight">\(\null T\)</span> is a subspace of <span class="math notranslate nohighlight">\(V\)</span>.</p>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Null space is a subspace</summary>
+<p>Suppose <span class="math notranslate nohighlight">\(T \in \mathcal{L}(V, W)\)</span>. Then <span class="math notranslate nohighlight">\(\null T\)</span> is closed under addition and scalar multiplication. It also contains the zero element, so it fulfills the <a class="reference internal" href="../ch01/ch01-content.html#linalg-subspaces"><span class="std std-ref">criteria for being a subspace</span></a>.</p>
+</details>
+<br>
+<div class="definition">
+<p><strong>Definition (Injective map)</strong> A function <span class="math notranslate nohighlight">\(T : V \to W\)</span> is called injective if</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+Tu = Tv \implies u = v.
+\end{align}\]</div>
+</div>
+<br>
+<div class="lemma">
+<p><strong>Lemma (Injective <span class="math notranslate nohighlight">\(\iff\)</span> <span class="math notranslate nohighlight">\(\text{null}~T = \{0\}\)</span>)</strong> Suppose <span class="math notranslate nohighlight">\(T \in \mathcal{L}(V, W)\)</span>. Then <span class="math notranslate nohighlight">\(T\)</span> is injective if and only if <span class="math notranslate nohighlight">\(\null T = \{0\}\)</span>.</p>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Injective \(\iff\) \(\text{null}~T = \{0\}\)</summary>
+<p>Suppose <span class="math notranslate nohighlight">\(T \in \mathcal{L}(V, W)\)</span>. If <span class="math notranslate nohighlight">\(T\)</span> is injective, then</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+Tw = 0 \implies Tv + Tw = Tv \forall v \in V,
+\end{align}\]</div>
+<p>and since <span class="math notranslate nohighlight">\(T\)</span> is injective we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+v + w = v, \implies w = 0,
+\end{align}\]</div>
+<p>so <span class="math notranslate nohighlight">\(Tv = Tw \implies v = w\)</span> implies <span class="math notranslate nohighlight">\(\null T = \{0\}\)</span>. Conversely if <span class="math notranslate nohighlight">\(\null T = \{0\}\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+Tv = Tw \implies T(v - w) = 0 \implies v = w,
+\end{align}\]</div>
+<p>so <span class="math notranslate nohighlight">\(\null T = \{0\}\)</span> implies <span class="math notranslate nohighlight">\(Tv = Tw \implies v = w\)</span>.</p>
+</details>
+<br>
+<div class="definition">
+<p><strong>Definition (Range)</strong> Suppose <span class="math notranslate nohighlight">\(T \in \mathcal{L}(V, W)\)</span>. Then the null space of <span class="math notranslate nohighlight">\(T\)</span>, denoted <span class="math notranslate nohighlight">\(\range T\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\range T = \{Tv : v \in V\}.
+\end{align}\]</div>
+</div>
+<br>
+<div class="lemma">
+<p><strong>Lemma (Range is a subspace)</strong> Suppose <span class="math notranslate nohighlight">\(T \in \mathcal{L}(V, W)\)</span>. Then <span class="math notranslate nohighlight">\(\text{range}~T\)</span> is a subspace of <span class="math notranslate nohighlight">\(W\)</span>.</p>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Range is a subspace</summary>
+<p>Suppose <span class="math notranslate nohighlight">\(T \in \mathcal{L}(V, W)\)</span>. Then <span class="math notranslate nohighlight">\(\range T\)</span> is closed under additions and scalar multiplication. It also contains the zero element, so it fulfills the <a class="reference internal" href="../ch01/ch01-content.html#linalg-subspaces"><span class="std std-ref">criteria for being a subspace</span></a>.</p>
+</details>
+<br>
+<div class="definition">
+<p><strong>Definition (Surjective map)</strong> A function <span class="math notranslate nohighlight">\(T : V \to W\)</span> is called surjective if</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\range T = W.
+\end{align}\]</div>
+</div>
+<br>
+</div>
+<div class="section" id="fundamental-theorem-of-linear-maps">
+<span id="linalg-fund-linear"></span><h3>Fundamental theorem of linear maps<a class="headerlink" href="#fundamental-theorem-of-linear-maps" title="Permalink to this headline">¶</a></h3>
+<div class="theorem">
+<p><strong>Theorem (Fundamental theorem of linear maps)</strong> Suppose <span class="math notranslate nohighlight">\(V\)</span> is finite dimensional and <span class="math notranslate nohighlight">\(T \in \mathcal{L}(V, W)\)</span>. Then <span class="math notranslate nohighlight">\(\range T\)</span> is finite dimensional and</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\dim V = \dim \null T + \dim \range T.
+\end{align}\]</div>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Fundamental theorem of linear maps</summary>
+<p>Suppose <span class="math notranslate nohighlight">\(V\)</span> is finite dimensional and <span class="math notranslate nohighlight">\(T \in \mathcal{L}(V, W)\)</span>. Then <span class="math notranslate nohighlight">\(\null T\)</span> is a subspace of <span class="math notranslate nohighlight">\(V\)</span> and is <a class="reference internal" href="../ch02/ch02-content.html#linalg-indep"><span class="std std-ref">also finite dimensional</span></a>. Let <span class="math notranslate nohighlight">\(u_1, ..., u_m\)</span> be a basis of <span class="math notranslate nohighlight">\(\null T\)</span> and <span class="math notranslate nohighlight">\(u_1, ..., u_m, v_1, ..., v_n\)</span> be its extension to a basis of <span class="math notranslate nohighlight">\(V\)</span>. Then if <span class="math notranslate nohighlight">\(w \in \range T\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+Tv = w, \text{ for some } v \in V \implies T(a_1 u_1 + ... + a_m u_m + b_1 v_1 + ... + b_n v_n) = T(b_1 v_1 + ... + b_n v_n).
+\end{align}\]</div>
+<p>Therefore any <span class="math notranslate nohighlight">\(w \in \range T\)</span> can be written as a linear combination of the vectors <span class="math notranslate nohighlight">\(Tv_1, ..., Tv_n\)</span>, implying that <span class="math notranslate nohighlight">\(\range T = \span(Tv_1, ..., Tv_n)\)</span>. Therefore we have <span class="math notranslate nohighlight">\(\dim \null T = m\)</span> and <span class="math notranslate nohighlight">\(\dim \range T = n\)</span>, as well as <span class="math notranslate nohighlight">\(\dim V = n + m\)</span>, arriving at</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\dim V = \dim \null T + \dim \range T.
+\end{align}\]</div>
+</details>
+<br>
+</div>
+<div class="section" id="dimensions-injectivity-and-surjectivity">
+<h3>Dimensions, injectivity and surjectivity<a class="headerlink" href="#dimensions-injectivity-and-surjectivity" title="Permalink to this headline">¶</a></h3>
+<div class="lemma">
+<p><strong>Lemma (Map to fewer dimensions is not injective)</strong> Suppose <span class="math notranslate nohighlight">\(V\)</span> and <span class="math notranslate nohighlight">\(W\)</span> are finite-dimensional vector spaces with <span class="math notranslate nohighlight">\(\dim V &gt; \dim W\)</span>. Then no linear map from <span class="math notranslate nohighlight">\(V\)</span> to <span class="math notranslate nohighlight">\(W\)</span> is injective.</p>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Map to fewer dimensions is not injective</summary> 
+<p>Suppose <span class="math notranslate nohighlight">\(V\)</span> and <span class="math notranslate nohighlight">\(W\)</span> are finite-dimensional vector spaces with <span class="math notranslate nohighlight">\(\dim V &gt; \dim W\)</span>, and let <span class="math notranslate nohighlight">\(T \in \mathcal(V, W)\)</span>. By the <a class="reference internal" href="#linalg-fund-linear"><span class="std std-ref">fundamental theorem of linear maps</span></a>, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\dim V &amp;= \dim \null T + \dim \range T \implies \\
+\dim \null T &amp;= \dim V - \dim \range T \\
+             &amp;&gt; \dim V - \dim W \\
+             &amp;&gt; 0,
+\end{align}\end{split}\]</div>
+<p>so <span class="math notranslate nohighlight">\(\dim \null T &gt; 0\)</span> which <a class="reference internal" href="#linalg-inj-surj"><span class="std std-ref">implies</span></a> <span class="math notranslate nohighlight">\(T\)</span> is not injective.</p>
+</details>
+<br>
+<div class="lemma">
+<p><strong>Lemma (Map to more dimensions is not surjective)</strong> Suppose <span class="math notranslate nohighlight">\(V\)</span> and <span class="math notranslate nohighlight">\(W\)</span> are finite-dimensional vector spaces with <span class="math notranslate nohighlight">\(\dim V &lt; \dim W\)</span>. Then no linear map from <span class="math notranslate nohighlight">\(V\)</span> to <span class="math notranslate nohighlight">\(W\)</span> is surjective.</p>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Map to more dimensions is not surjective</summary>
+<p>Suppose <span class="math notranslate nohighlight">\(V\)</span> and <span class="math notranslate nohighlight">\(W\)</span> are finite-dimensional vector spaces with <span class="math notranslate nohighlight">\(\dim V &lt; \dim W\)</span>, and let <span class="math notranslate nohighlight">\(T \in \mathcal(V, W)\)</span>. By the <a class="reference internal" href="#linalg-fund-linear"><span class="std std-ref">fundamental theorem of linear maps</span></a>, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\dim V &amp;= \dim \null T + \dim \range T \implies \\
+\dim \range T &amp;= \dim V - \dim \null T \\
+              &amp;&lt; \dim W - \dim \null T \\
+              &amp;&lt; \dim W,
+\end{align}\end{split}\]</div>
+<p>hence we cannot have <span class="math notranslate nohighlight">\(\range T = W\)</span> and <span class="math notranslate nohighlight">\(T\)</span> is not surjective.</p>
+</details>
+<br>
+<div class="lemma">
+<p><strong>Lemma (Homogeneous system of linear of linear equations)</strong> A homogeneous system of linear equations</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\sum_{k = 1}^K A_{j, k} x_k = 0, j = 1, ..., J,
+\end{align}\]</div>
+<p>with more variables <span class="math notranslate nohighlight">\(K\)</span> than equations <span class="math notranslate nohighlight">\(J\)</span>, has nonzero solutions.</p>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Homogeneous system of linear of linear equations</summary>
+<p>Define the map <span class="math notranslate nohighlight">\(T : \F^K \to \F^J\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+(Tx)_j = \sum_{k = 1}^K A_{j, k} x_k,
+\end{align}\]</div>
+<p>for <span class="math notranslate nohighlight">\(x \in \F^m\)</span>. If <span class="math notranslate nohighlight">\(K &gt; J\)</span>, then <span class="math notranslate nohighlight">\(T\)</span> is a map to a space of fewer dimensions and is thus not injective, which implies its null space contains elements other than the zero element.</p>
+</details>
+<br>
+<div class="lemma">
+<p><strong>Lemma (Inhomogeneous system of linear of linear equations)</strong> An inhomogeneous system of linear equations</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\sum_{k = 1}^K A_{j, k} x_k = b_j, j = 1, ..., J,
+\end{align}\]</div>
+<p>with more equations <span class="math notranslate nohighlight">\(J\)</span> than variables <span class="math notranslate nohighlight">\(K\)</span>, has no solution for some choice of the constants <span class="math notranslate nohighlight">\(b_j\)</span>.</p>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Inhomogeneous system of linear of linear equations</summary>
+<p>Define the map <span class="math notranslate nohighlight">\(T : \F^K \to \F^J\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+(Tx)_j = \sum_{k = 1}^K A_{j, k} x_k,
+\end{align}\]</div>
+<p>for <span class="math notranslate nohighlight">\(x \in \F^m\)</span>. If <span class="math notranslate nohighlight">\(J &gt; K\)</span>, then <span class="math notranslate nohighlight">\(T\)</span> is a map to a space of more dimensions and is thus not surjective. This means there exists <span class="math notranslate nohighlight">\(w \in \F^J\)</span> such that <span class="math notranslate nohighlight">\(w \not \in \range T\)</span> and so <span class="math notranslate nohighlight">\(Tv \neq w\)</span> for any <span class="math notranslate nohighlight">\(v \in \F^K\)</span></p>
+</details>
+<br>
+</div>
+</div>
+<div class="section" id="matrices">
+<h2>Matrices<a class="headerlink" href="#matrices" title="Permalink to this headline">¶</a></h2>
+<div class="definition">
+<p><strong>Definition (Matrix)</strong> An <span class="math notranslate nohighlight">\(m \times n\)</span> matrix <span class="math notranslate nohighlight">\(A\)</span> is an array of elements of <span class="math notranslate nohighlight">\(\F\)</span> with <span class="math notranslate nohighlight">\(n\)</span> rows and <span class="math notranslate nohighlight">\(m\)</span> columns</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+A = \begin{pmatrix}
+A_{1, 1} &amp; \dots &amp; A_{1, m} \\
+\vdots   &amp; \ddots &amp; \vdots   \\
+A_{n, 1} &amp; \dots &amp; A_{n, m}
+\end{pmatrix},
+\end{align}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(A_{j, k}\)</span> denotes the entry in row <span class="math notranslate nohighlight">\(j\)</span>, column <span class="math notranslate nohighlight">\(k\)</span> of <span class="math notranslate nohighlight">\(A\)</span>. We use <span class="math notranslate nohighlight">\(\F^{n \times m}\)</span> to denote the set of all <span class="math notranslate nohighlight">\(n \times m\)</span> matrices, with entries in <span class="math notranslate nohighlight">\(\F\)</span>.</p>
+</div>
+<br>
+<div class="definition">
+<p><strong>Definition (Matrix of a linear map)</strong> Suppose <span class="math notranslate nohighlight">\(T \in \L(V, W)\)</span> and let <span class="math notranslate nohighlight">\(v_1, ..., v_n\)</span> and <span class="math notranslate nohighlight">\(w_1, ..., w_n\)</span> be bases of <span class="math notranslate nohighlight">\(V\)</span> and <span class="math notranslate nohighlight">\(W\)</span> respectively. Then the matrix of <span class="math notranslate nohighlight">\(T\)</span>with respect to these bases is the <span class="math notranslate nohighlight">\(n \times m\)</span> matrix <span class="math notranslate nohighlight">\(\M(T)\)</span> whose entries <span class="math notranslate nohighlight">\(M_{j, k}\)</span> satisfy</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+Tv_k = A_{1, k} w_1 + ... + A_{n, k} w_n.
+\end{align}\]</div>
+</div>
+<br>
+<div class="definition">
+<p><strong>Definition (Matrix addition)</strong> The sum of two matrices is the matrix obtained by adding the two matrices entry-wise</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+(A + B)_{j, k} = A_{j, k} + B_{j, k}.
+\end{align}\]</div>
+</div>
+<br>
+<div class="lemma">
+<p><strong>Lemma (Matrix of sum of maps)</strong> If <span class="math notranslate nohighlight">\(T, S \mathcal{L}(V, W)\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathcal{M}(T + S) = \mathcal{M}(T) + \mathcal{M}(S),
+\end{align}\]</div>
+<p>where both all matrices are with respect to the same bases.</p>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Matrix of sum of maps</summary>
+<p>Suppose <span class="math notranslate nohighlight">\(T, S \in \mathcal{L}(V, W)\)</span>, let <span class="math notranslate nohighlight">\(v_1, ..., v_n\)</span> and <span class="math notranslate nohighlight">\(w_1, ..., w_n\)</span> be bases of <span class="math notranslate nohighlight">\(V\)</span> and <span class="math notranslate nohighlight">\(W\)</span> respectively, and let <span class="math notranslate nohighlight">\(\mathcal{M}(\cdot)\)</span> denote the matrix of a linear map with respect to these bases. Let also <span class="math notranslate nohighlight">\(A = \M(T), B = \M(S)\)</span>. Since <span class="math notranslate nohighlight">\(T, S\)</span> are linear, they satisfy</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+(T + S)v_k &amp;= Tv_k + Sv_k \\
+           &amp;= (A_{1, k} + B_{1, k}) w_1 + ... + (A_{n, k} + B_{n, k}) w_n
+\end{align}\end{split}\]</div>
+<p>Therefore writing <span class="math notranslate nohighlight">\(C = \M(T + S)\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+C_{j, k} &amp;= A_{j, k} + B_{j, k}.
+\end{align}\]</div>
+</details>
+<br>
+<div class="definition">
+<p><strong>Definition (Scalar multiplication of a matrix)</strong> The scalar multiple of a matrix <span class="math notranslate nohighlight">\(A\)</span> by a scalar <span class="math notranslate nohighlight">\(\lambda \in \F\)</span> is the matrix whose entries are the corresponding entries of <span class="math notranslate nohighlight">\(A\)</span> multiplied by <span class="math notranslate nohighlight">\(\lambda\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+(\lambda A)_{j, k} = \lambda A_{j, k}.
+\end{align}\]</div>
+</div>
+<br>
+<div class="lemma">
+<p><strong>Lemma (Matrix of a scalar multiple of a map)</strong> Suppose <span class="math notranslate nohighlight">\(\lambda \in \F\)</span> and <span class="math notranslate nohighlight">\(T \in \L(V, W)\)</span>. Then <span class="math notranslate nohighlight">\(\M(\lambda T) = \lambda \M(T)\)</span>.</p>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Matrix of a scalar multiple of a map</summary>
+<p>Suppose <span class="math notranslate nohighlight">\(\lambda \in \F\)</span> and <span class="math notranslate nohighlight">\(T \in \L(V, W)\)</span>. Let <span class="math notranslate nohighlight">\(v_1, ..., v_n\)</span> and <span class="math notranslate nohighlight">\(w_1, ..., w_n\)</span> be bases of <span class="math notranslate nohighlight">\(V\)</span> and <span class="math notranslate nohighlight">\(W\)</span> respectively, and let <span class="math notranslate nohighlight">\(\mathcal{M}(\cdot)\)</span> denote the matrix of a linear map with respect to these bases. Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+(\lambda T)v_k &amp;= \lambda (Tv_k) \\
+               &amp;= (\lambda A_{1, k}) w_1 + ... + (\lambda A_{n, k}) w_n
+\end{align}\end{split}\]</div>
+<p>and writing <span class="math notranslate nohighlight">\(C = \M(\lambda T)\)</span>, which we see that</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+C_{j, k} = \lambda A_{j, k}.
+\end{align}\]</div>
+</details>
+<br>
+<div class="lemma">
+<p><strong>Lemma (Dimension of <span class="math notranslate nohighlight">\(\F^{n \times m}\)</span>)</strong> With matrix addition and scalar multiplication as defined above, <span class="math notranslate nohighlight">\(\F^{n \times m}\)</span> defines a vector space with dimension <span class="math notranslate nohighlight">\(n \times n\)</span>.</p>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Dimension of \(\F^{n \times m}\)</summary>
+</details>
+<br>
+<div class="lemma">
+<p><strong>Lemma ()</strong></p>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: </summary>
+</details>
+<br>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\end{align}\]</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./content/linalg/ch03"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Stratos Markou<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-168728006-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    
+  </body>
+</html>
