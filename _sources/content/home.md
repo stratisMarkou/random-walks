@@ -15,6 +15,8 @@ Welcome to Random Walks! This is an archive of explorations, in the convex hull 
 
 ## New on Random Walks
 
+[05/05/2021] Notes and demo on [Variational Sparse Gaussian Processes](./gp/sparse/vfe).
+
 [30/04/2021] Notes and demo on [Additive Gaussian Processes](./misc/addgp/addgp).
 
 [19/04/2021] Notes and demo on [Stein Variational Gradient Descent](./misc/svgd/svgd).

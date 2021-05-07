@@ -416,6 +416,16 @@
      Implementing the VFE GP
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#learning-inducing-points">
+     Learning inducing points
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#complete-learning">
+     Complete learning
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -445,11 +455,11 @@
  \def\Kxb{\mathbf{K}_{\mathbf{X}\mathbf{\bar{X}}}}
  \def\Kbx{\mathbf{K}_{\mathbf{\bar{X}}\mathbf{X}}}
  \def\Kbb{\mathbf{K}_{\mathbf{\bar{X}}\mathbf{\bar{X}}}}
- \def\Ksb{\mathbf{K}_{\mathbf{\bar{X}^*}\mathbf{\bar{X}}}}
- \def\Kbs{\mathbf{K}_{\mathbf{\bar{X}}\mathbf{\bar{X}^*}}}
- \def\Ksx{\mathbf{K}_{\mathbf{\bar{X}^*}\mathbf{\bar{X}}}}
- \def\Kxs{\mathbf{K}_{\mathbf{\bar{X}}\mathbf{\bar{X}^*}}}
- \def\Kss{\mathbf{K}_{\mathbf{\bar{X}^*}\mathbf{\bar{X}^*}}}
+ \def\Ksb{\mathbf{K}_{\mathbf{X^*}\mathbf{\bar{X}}}}
+ \def\Kbs{\mathbf{K}_{\mathbf{\bar{X}}\mathbf{X^*}}}
+ \def\Ksx{\mathbf{K}_{\mathbf{X^*}\mathbf{\bar{X}}}}
+ \def\Kxs{\mathbf{K}_{\mathbf{\bar{X}}\mathbf{X^*}}}
+ \def\Kss{\mathbf{K}_{\mathbf{X^*}\mathbf{X^*}}}
  \def\fx{\mathbf{f}_{\mathbf{X}}}
  \def\fnb{f_{\neq \mathbf{\bar{X}}}}
  \def\fb{\mathbf{f}_{\mathbf{\bar{X}}}}
@@ -523,7 +533,7 @@ q^* = \argmax_{q} \mathcal{F}(q, \bs{\theta}).
 \[\begin{align}
 q^*\lrb[\fb] = \mathcal{N}\lrb[\fb;~\sigma^{-2} \Kbb \bs{\Sigma}^{-1} \Kbx \mathbf{y},~\Kbb\bs{\Sigma}^{-1}\Kbb]
 \end{align}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\bs{\Sigma}^{-1} = \Kbb\lrb[\Kbb + \sigma^{-2} \Kbx \Kxb]^{-1}\Kbb\)</span>. The corresponding free energy is</p>
+<p>where <span class="math notranslate nohighlight">\(\bs{\Sigma}^{-1} = \lrb[\Kbb + \sigma^{-2} \Kbx \Kxb]\)</span>. The corresponding free energy is</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
 \mathcal{F}(q^*, \bs{\theta}) = \mathcal{N}\lrb[\bm{y}; \bm{0}, \sigma^2 \bm{I} + \Kxb \Kbb^{-1} \Kbx] - \frac{1}{2\sigma^2} \text{Tr}\lrb[\Kxx - \Kxb\Kbb^{-1}\Kbx].
@@ -571,10 +581,9 @@ q^*\lrb[\fb | \mathbf{y}] = \mathcal{N}\lrb[\fb;~\sigma^{-2} \Kbb \bs{\Sigma}^{-
 \end{align}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\bs{\Sigma}^{-1}\)</span> is given by</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{align}
-\bs{\Sigma}^{-1} &amp;= \Kbb^{-1} + \sigma^{-2} \Kbb^{-1} \Kbx \Kxb \Kbb^{-1} \\
-                 &amp;= \Kbb\lrb[\Kbb + \sigma^{-2} \Kbx \Kxb]^{-1}\Kbb.
-\end{align}\end{split}\]</div>
+\[\begin{align}
+\bs{\Sigma}^{-1} &amp;= \lrb[\Kbb + \sigma^{-2} \Kbx \Kxb]^{-1}.
+\end{align}\]</div>
 <p>Substituting this back into the free energy we obtain</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
@@ -663,6 +672,7 @@ p\lrb[\bm{y}^* | \X^*, \Xb] = \mathcal{N}\lrb[\bm{y}^*; \sigma^{-2} \Ksb \bs{\Si
                  <span class="n">log_scales</span><span class="p">,</span>
                  <span class="n">dim</span><span class="p">,</span>
                  <span class="n">dtype</span><span class="p">,</span>
+                 <span class="n">trainable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                  <span class="n">name</span><span class="o">=</span><span class="s1">&#39;eq_covariance&#39;</span><span class="p">,</span>
                  <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         
@@ -680,8 +690,8 @@ p\lrb[\bm{y}^* | \X^*, \Xb] = \mathcal{N}\lrb[\bm{y}^*; \sigma^{-2} \Ksb \bs{\Si
         <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">=</span> <span class="n">dim</span>
         
         <span class="c1"># Set EQ parameters</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">log_scales</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">log_scales</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">log_coeff</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">log_coeff</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log_scales</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">log_scales</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log_coeff</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">log_coeff</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)</span>
         
         
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
@@ -826,6 +836,7 @@ p\lrb[\bm{y}^* | \X^*, \Xb] = \mathcal{N}\lrb[\bm{y}^*; \sigma^{-2} \Ksb \bs{\Si
                  <span class="n">mean</span><span class="p">,</span>
                  <span class="n">cov</span><span class="p">,</span>
                  <span class="n">log_noise</span><span class="p">,</span>
+                 <span class="n">trainable_noise</span><span class="p">,</span>
                  <span class="n">dtype</span><span class="p">,</span>
                  <span class="n">name</span><span class="o">=</span><span class="s1">&#39;vfe_gp&#39;</span><span class="p">,</span>
                  <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -845,39 +856,54 @@ p\lrb[\bm{y}^* | \X^*, \Xb] = \mathcal{N}\lrb[\bm{y}^*; \sigma^{-2} \Ksb \bs{\Si
         <span class="bp">self</span><span class="o">.</span><span class="n">cov</span> <span class="o">=</span> <span class="n">cov</span>
     
         <span class="c1"># Set log of noise parameter</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">log_noise</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">(</span><span class="n">log_noise</span><span class="p">,</span>
-                                              <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">log_noise</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">log_noise</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log_noise</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">(</span><span class="n">log_noise</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log_noise</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">log_noise</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable_noise</span><span class="p">)</span>
+    
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">noise</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">log_noise</span><span class="p">)</span>
         
         
     <span class="k">def</span> <span class="nf">post_pred</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_pred</span><span class="p">):</span>
         
+        <span class="c1"># Number of training points</span>
+        <span class="n">N</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_ind</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        
         <span class="c1"># Compute covariance terms</span>
-        <span class="n">K_ind_ind</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_ind</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_ind</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">)</span>
+        <span class="n">K_ind_ind</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_ind</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_ind</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">)</span>
         <span class="n">K_train_ind</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_train</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_ind</span><span class="p">)</span>
         <span class="n">K_ind_train</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_ind</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_train</span><span class="p">)</span>
         <span class="n">K_pred_ind</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">x_pred</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_ind</span><span class="p">)</span>
         <span class="n">K_ind_pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_ind</span><span class="p">,</span> <span class="n">x_pred</span><span class="p">)</span>
         <span class="n">K_pred_pred_diag</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">x_pred</span><span class="p">,</span> <span class="n">x_pred</span><span class="p">,</span> <span class="n">diag</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         
-        <span class="c1"># Compute cholesky factor for numerical stability</span>
-        <span class="n">U</span> <span class="o">=</span> <span class="n">K_ind_ind</span> <span class="o">+</span> <span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">K_ind_train</span><span class="p">,</span> <span class="n">K_train_ind</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">noise</span>
-        <span class="n">U_chol</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">U</span><span class="p">)</span>
-        
-        <span class="c1"># Difference between training data and mean</span>
-        <span class="n">diff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_train</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">]</span>
-        <span class="n">beta</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky_solve</span><span class="p">(</span><span class="n">U_chol</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">K_ind_train</span><span class="p">,</span> <span class="n">diff</span><span class="p">))</span>
-        <span class="n">beta</span> <span class="o">=</span> <span class="n">beta</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">noise</span>
-        
-        <span class="c1"># Mean at plotting locations</span>
-        <span class="n">mean</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">K_pred_ind</span><span class="p">,</span> <span class="n">beta</span><span class="p">)[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x_pred</span><span class="p">)</span>
-        
+        <span class="c1"># Compute shared matrix and its cholesky:</span>
+        <span class="c1"># L = chol(K_ind_ind)</span>
+        <span class="c1"># U = iL K_ind_train</span>
+        <span class="c1"># A = U / noise</span>
+        <span class="c1"># B = I + A A.T</span>
         <span class="n">L</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">K_ind_ind</span><span class="p">)</span>
-        <span class="n">M</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">triangular_solve</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">K_ind_pred</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">LT</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="n">U</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">triangular_solve</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">K_ind_train</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">U</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">noise</span>
+        <span class="n">B</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span> <span class="o">+</span> <span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">transpose_b</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">B_chol</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
         
-        <span class="n">var</span> <span class="o">=</span> <span class="n">K_pred_pred_diag</span>
-        <span class="n">var</span> <span class="o">=</span> <span class="n">var</span> <span class="o">-</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">diag_part</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">transpose_a</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
-        <span class="n">var</span> <span class="o">=</span> <span class="n">var</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">noise</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="c1"># Compute mean</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span> <span class="c1"># - self.mean(self.x_train)[:, None]</span>
+        <span class="n">beta</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky_solve</span><span class="p">(</span><span class="n">B_chol</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">diff</span><span class="p">))</span>
+        <span class="n">beta</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">triangular_solve</span><span class="p">(</span><span class="n">LT</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">mean</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">K_pred_ind</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">noise</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">beta</span><span class="p">)[:,</span> <span class="mi">0</span><span class="p">]</span>
+        
+        <span class="n">C</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">triangular_solve</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">K_ind_pred</span><span class="p">)</span>
+        <span class="n">D</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">triangular_solve</span><span class="p">(</span><span class="n">B_chol</span><span class="p">,</span> <span class="n">C</span><span class="p">)</span>
+        
+        <span class="c1"># Compute variance</span>
+        <span class="n">var</span> <span class="o">=</span> <span class="n">K_pred_pred_diag</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">noise</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="n">var</span> <span class="o">=</span> <span class="n">var</span> <span class="o">-</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">diag_part</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">transpose_a</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+        <span class="n">var</span> <span class="o">=</span> <span class="n">var</span> <span class="o">+</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">diag_part</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">transpose_a</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
         
         <span class="k">return</span> <span class="n">mean</span><span class="p">,</span> <span class="n">var</span>
         
@@ -889,14 +915,16 @@ p\lrb[\bm{y}^* | \X^*, \Xb] = \mathcal{N}\lrb[\bm{y}^*; \sigma^{-2} \Ksb \bs{\Si
         <span class="n">M</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_ind</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         
         <span class="c1"># Compute covariance terms</span>
-        <span class="n">K_ind_ind</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_ind</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_ind</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">)</span>
+        <span class="n">K_ind_ind</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_ind</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_ind</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">)</span>
         <span class="n">K_train_ind</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_train</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_ind</span><span class="p">)</span>
         <span class="n">K_ind_train</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_ind</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_train</span><span class="p">)</span>
-        <span class="n">K_train_train</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_train</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_train</span><span class="p">)</span>
+        <span class="n">K_train_train_diag</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_train</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_train</span><span class="p">,</span> <span class="n">diag</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         
         <span class="c1"># Compute shared matrix and its cholesky:</span>
-        <span class="c1"># LLT = K_ind_ind</span>
-        <span class="c1"># U = I + L-1 K_train_ind K_ind_train L / noise ** 2</span>
+        <span class="c1"># L = chol(K_ind_ind)</span>
+        <span class="c1"># U = iL K_ind_train</span>
+        <span class="c1"># A = U / noise</span>
+        <span class="c1"># B = I + A A.T</span>
         <span class="n">L</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">K_ind_ind</span><span class="p">)</span>
         <span class="n">U</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">triangular_solve</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">K_ind_train</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">A</span> <span class="o">=</span> <span class="n">U</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">noise</span>
@@ -905,7 +933,7 @@ p\lrb[\bm{y}^* | \X^*, \Xb] = \mathcal{N}\lrb[\bm{y}^*; \sigma^{-2} \Ksb \bs{\Si
         
         <span class="c1"># Compute log-normalising constant of the matrix</span>
         <span class="n">log_pi</span> <span class="o">=</span> <span class="o">-</span> <span class="n">N</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">))</span>
-        <span class="n">log_det_B</span> <span class="o">=</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">slogdet</span><span class="p">(</span><span class="n">B</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">log_det_B</span> <span class="o">=</span> <span class="o">-</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">diag_part</span><span class="p">(</span><span class="n">B_chol</span><span class="p">)))</span>
         <span class="n">log_det_noise</span> <span class="o">=</span> <span class="o">-</span> <span class="n">N</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">noise</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
         
         <span class="c1"># Log of determinant of normalising term</span>
@@ -918,17 +946,12 @@ p\lrb[\bm{y}^* | \X^*, \Xb] = \mathcal{N}\lrb[\bm{y}^*; \sigma^{-2} \Ksb \bs{\Si
         <span class="n">quad</span> <span class="o">=</span> <span class="n">quad</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">c</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
         
         <span class="c1"># Compute trace term</span>
-        <span class="n">trace</span> <span class="o">=</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">K_train_train</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">noise</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="n">trace</span> <span class="o">=</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">K_train_train_diag</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">noise</span> <span class="o">**</span> <span class="mi">2</span>
         <span class="n">trace</span> <span class="o">=</span> <span class="n">trace</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">transpose_b</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
         
         <span class="n">free_energy</span> <span class="o">=</span> <span class="p">(</span><span class="n">log_det</span> <span class="o">+</span> <span class="n">quad</span> <span class="o">+</span> <span class="n">trace</span><span class="p">)</span> <span class="o">/</span> <span class="n">N</span>
         
         <span class="k">return</span> <span class="n">free_energy</span>
-    
-    
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">noise</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">log_noise</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -963,14 +986,14 @@ p\lrb[\bm{y}^* | \X^*, \Xb] = \mathcal{N}\lrb[\bm{y}^*; \sigma^{-2} \Ksb \bs{\Si
     <span class="n">vfe_mean</span> <span class="o">=</span> <span class="n">vfe_mean</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
     <span class="n">vfe_var</span> <span class="o">=</span> <span class="n">vfe_var</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
     
-    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
     
     <span class="c1"># Plot posterior predictive</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_pred</span><span class="p">,</span>
              <span class="n">vfe_mean</span><span class="p">,</span>
              <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
              <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-             <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Approx. Pred.&#39;</span><span class="p">)</span>
+             <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Approx. Post.&#39;</span><span class="p">)</span>
     
     <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x_pred</span><span class="p">,</span>
                      <span class="n">vfe_mean</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">vfe_var</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">,</span>
@@ -995,7 +1018,7 @@ p\lrb[\bm{y}^* | \X^*, \Xb] = \mathcal{N}\lrb[\bm{y}^*; \sigma^{-2} \Ksb \bs{\Si
              <span class="s1">&#39;--&#39;</span><span class="p">,</span>
              <span class="n">color</span><span class="o">=</span><span class="s1">&#39;purple&#39;</span><span class="p">,</span>
              <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-             <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Exact post.&#39;</span><span class="p">)</span>
+             <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Exact Post.&#39;</span><span class="p">)</span>
 
     <span class="c1"># Plot training data</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
@@ -1042,18 +1065,22 @@ p\lrb[\bm{y}^* | \X^*, \Xb] = \mathcal{N}\lrb[\bm{y}^*; \sigma^{-2} \Ksb \bs{\Si
 </div>
 </div>
 </div>
+</div>
+<div class="section" id="learning-inducing-points">
+<h3>Learning inducing points<a class="headerlink" href="#learning-inducing-points" title="Permalink to this headline">¶</a></h3>
+<p>As a sanity check, we first try learning the inducing point locations only, setting the covariance parameters to their ground truth values.</p>
 <div class="cell tag_hide_input tag_center-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set random seed and tensor dtype</span>
 <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">set_seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">dtype</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">float64</span>
 
 <span class="c1"># Number GP constants</span>
 <span class="n">M</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="n">inducing_range</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">4.</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.</span><span class="p">)</span>
-<span class="n">log_noise</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.</span>
-<span class="n">log_coeff</span> <span class="o">=</span> <span class="mf">0.</span>
-<span class="n">log_scales</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.</span><span class="p">]</span>
+<span class="n">log_noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1e-1</span><span class="p">)</span>
+<span class="n">log_coeff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1e0</span><span class="p">)</span>
+<span class="n">log_scales</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1e0</span><span class="p">)]</span>
+<span class="n">trainable</span> <span class="o">=</span> <span class="kc">False</span>
 
 <span class="c1"># Define mean and covariance</span>
 <span class="n">mean</span> <span class="o">=</span> <span class="n">ConstantMean</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
@@ -1061,10 +1088,11 @@ p\lrb[\bm{y}^* | \X^*, \Xb] = \mathcal{N}\lrb[\bm{y}^*; \sigma^{-2} \Ksb \bs{\Si
 <span class="n">cov</span> <span class="o">=</span> <span class="n">EQcovariance</span><span class="p">(</span><span class="n">log_coeff</span><span class="o">=</span><span class="n">log_coeff</span><span class="p">,</span>
                    <span class="n">log_scales</span><span class="o">=</span><span class="n">log_scales</span><span class="p">,</span>
                    <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-                   <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+                   <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span>
+                   <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)</span>
 
 <span class="c1"># Initial locations of inducing points</span>
-<span class="n">x_ind_dist</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="n">inducing_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">high</span><span class="o">=</span><span class="n">inducing_range</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">x_ind_dist</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="o">*</span><span class="n">inducing_range</span><span class="p">)</span>
 <span class="n">x_ind_init</span> <span class="o">=</span> <span class="n">x_ind_dist</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">sample_shape</span><span class="o">=</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 <span class="n">x_ind_init</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">x_ind_init</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
 
@@ -1075,13 +1103,14 @@ p\lrb[\bm{y}^* | \X^*, \Xb] = \mathcal{N}\lrb[\bm{y}^*; \sigma^{-2} \Ksb \bs{\Si
                <span class="n">x_train</span><span class="o">=</span><span class="n">x_train</span><span class="p">,</span>
                <span class="n">y_train</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span>
                <span class="n">x_ind_init</span><span class="o">=</span><span class="n">x_ind_init</span><span class="p">,</span>
-               <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+               <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span>
+               <span class="n">trainable_noise</span><span class="o">=</span><span class="n">trainable</span><span class="p">)</span>
 
 <span class="n">num_steps</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="n">optimizer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="mf">1e-1</span><span class="p">)</span>
 
 <span class="n">x_pred</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">8.</span><span class="p">,</span> <span class="mf">8.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">]</span>
-<span class="n">x_pred</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">x_pred</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<span class="n">x_pred</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">x_pred</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_steps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
     
@@ -1109,24 +1138,109 @@ p\lrb[\bm{y}^* | \X^*, \Xb] = \mathcal{N}\lrb[\bm{y}^*; \sigma^{-2} \Ksb \bs{\Si
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 0 Free energy:   -3.246 Coeff:  1.00 Scales: [1.0] Noise:  0.37
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 0 Free energy:  -35.235 Coeff:  1.00 Scales: [1.0] Noise:  0.10
 </pre></div>
 </div>
-<img alt="../../../_images/vfe_14_1.svg" src="../../../_images/vfe_14_1.svg" /><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 1000 Free energy:    0.546 Coeff:  1.16 Scales: [1.114] Noise:  0.10
+<img alt="../../../_images/vfe_15_1.svg" src="../../../_images/vfe_15_1.svg" /><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 1000 Free energy:    0.532 Coeff:  1.00 Scales: [1.0] Noise:  0.10
 </pre></div>
 </div>
-<img alt="../../../_images/vfe_14_3.svg" src="../../../_images/vfe_14_3.svg" /></div>
+<img alt="../../../_images/vfe_15_3.svg" src="../../../_images/vfe_15_3.svg" /></div>
 </div>
 <p>Initially the positions of the inducing points (green) do not allow for an expressive enough posterior to match the exact GP posterior. By spreading out the inducing points, the model manages to recover an approximate posterior that is very close to the ground truth. We were expecting this to be possible since there are lots of observed data which are redundant, and should be summarisable by a smaller set of inducing points.</p>
+</div>
+<div class="section" id="complete-learning">
+<h3>Complete learning<a class="headerlink" href="#complete-learning" title="Permalink to this headline">¶</a></h3>
+<p>We now turn to joint learning of learning the inducing point locations as well as the covariance parameters. This time around we initialise the hyperparameters to values far from the ground truth, to see whether the model is able to recover something close to the true posterior.</p>
+<div class="cell tag_hide_input tag_center-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set random seed and tensor dtype</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">set_seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Number GP constants</span>
+<span class="n">M</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">inducing_range</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">4.</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.</span><span class="p">)</span>
+<span class="n">log_noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1e0</span><span class="p">)</span>
+<span class="n">log_coeff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1e1</span><span class="p">)</span>
+<span class="n">log_scales</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1e1</span><span class="p">)]</span>
+<span class="n">trainable</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1"># Define mean and covariance</span>
+<span class="n">mean</span> <span class="o">=</span> <span class="n">ConstantMean</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+
+<span class="n">cov</span> <span class="o">=</span> <span class="n">EQcovariance</span><span class="p">(</span><span class="n">log_coeff</span><span class="o">=</span><span class="n">log_coeff</span><span class="p">,</span>
+                   <span class="n">log_scales</span><span class="o">=</span><span class="n">log_scales</span><span class="p">,</span>
+                   <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                   <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span>
+                   <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)</span>
+
+<span class="c1"># Initial locations of inducing points</span>
+<span class="n">x_ind_dist</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="o">*</span><span class="n">inducing_range</span><span class="p">)</span>
+<span class="n">x_ind_init</span> <span class="o">=</span> <span class="n">x_ind_dist</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">sample_shape</span><span class="o">=</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">x_ind_init</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">x_ind_init</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+
+<span class="c1"># Re-define sparse VFEGP with trainable noise</span>
+<span class="n">vfe_gp</span> <span class="o">=</span> <span class="n">VFEGP</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="n">mean</span><span class="p">,</span>
+               <span class="n">cov</span><span class="o">=</span><span class="n">cov</span><span class="p">,</span>
+               <span class="n">log_noise</span><span class="o">=</span><span class="n">log_noise</span><span class="p">,</span>
+               <span class="n">x_train</span><span class="o">=</span><span class="n">x_train</span><span class="p">,</span>
+               <span class="n">y_train</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span>
+               <span class="n">x_ind_init</span><span class="o">=</span><span class="n">x_ind_init</span><span class="p">,</span>
+               <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span>
+               <span class="n">trainable_noise</span><span class="o">=</span><span class="n">trainable</span><span class="p">)</span>
+
+<span class="n">num_steps</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="mf">1e-1</span><span class="p">)</span>
+
+<span class="n">x_pred</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">8.</span><span class="p">,</span> <span class="mf">8.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">]</span>
+<span class="n">x_pred</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">x_pred</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_steps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+
+        <span class="n">free_energy</span> <span class="o">=</span> <span class="n">vfe_gp</span><span class="o">.</span><span class="n">free_energy</span><span class="p">()</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="o">-</span> <span class="n">free_energy</span>
+        
+        <span class="c1"># Print information and plot at start and end</span>
+        <span class="k">if</span> <span class="n">step</span> <span class="o">%</span> <span class="n">num_steps</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            
+            <span class="n">print_info</span><span class="p">(</span><span class="n">vfe_gp</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+
+            <span class="n">plot</span><span class="p">(</span><span class="n">vfe_gp</span><span class="p">,</span>
+                 <span class="n">ground_truth_cov</span><span class="p">,</span>
+                 <span class="n">x_pred</span><span class="p">,</span>
+                 <span class="n">x_train</span><span class="p">,</span>
+                 <span class="n">y_train</span><span class="p">,</span>
+                 <span class="n">x_ind_init</span><span class="p">,</span>
+                 <span class="n">step</span><span class="p">)</span>
+
+    <span class="n">gradients</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">vfe_gp</span><span class="o">.</span><span class="n">trainable_variables</span><span class="p">)</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">apply_gradients</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">gradients</span><span class="p">,</span> <span class="n">vfe_gp</span><span class="o">.</span><span class="n">trainable_variables</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 0 Free energy:   -1.232 Coeff: 10.00 Scales: [10.0] Noise:  1.00
+</pre></div>
+</div>
+<img alt="../../../_images/vfe_18_1.svg" src="../../../_images/vfe_18_1.svg" /><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 1000 Free energy:    0.547 Coeff:  1.16 Scales: [1.115] Noise:  0.10
+</pre></div>
+</div>
+<img alt="../../../_images/vfe_18_3.svg" src="../../../_images/vfe_18_3.svg" /></div>
+</div>
+<p>We observe that the model has been able to recover both an approximate posterior which is very close to the true posterior, as well as parameter values close to the ground truth. It achieves this with a complexity of just <span class="math notranslate nohighlight">\(\mathcal{O}(NM^2)\)</span> as opposed to exact GP inference which requires <span class="math notranslate nohighlight">\(\mathcal{O}(N^3)\)</span> operations.</p>
 </div>
 </div>
 <div class="section" id="conclusion">
 <h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
-<p>We have seen how the free energy may be used together with an inducing point approximate posterior to reduce the computational cost of doing infernce and learning with GPs. Unlike other methods such as DTC and FITC, the VFE method approximates the posterior rather than the model, bringing several benefits. VFE decouples model assumptions and approximations. In this way, it keeps the exact model sacrosanct and attempts to approximate it as faithfully as possible. Second, because the Free Energy is a lower bound to the marginal log-likelihood, it is impossible for VFE to overfit any more than the exact. model. By contrast, other methods can overfit more than the original GP.  VFE explicitly represents posterior uncertainty, keeping it separate from noise uncertainty whereas methods do not.</p>
+<p>We have seen how the free energy may be used together with an inducing point approximate posterior to reduce the computational cost of doing infernce and learning with GPs. Unlike other methods such as DTC and FITC, the VFE method approximates the posterior rather than the model, bringing several benefits.<a class="bibtex reference internal" href="#bauer2016understanding" id="id6">[BvdWR16]</a> VFE decouples model assumptions and approximations. In this way, it keeps the exact model sacrosanct and attempts to approximate it as faithfully as possible. Second, because the Free Energy is a lower bound to the marginal log-likelihood, it is impossible for VFE to overfit any more than the exact. model. By contrast, other methods can overfit more than the original GP. VFE explicitly represents posterior uncertainty, keeping it separate from noise uncertainty whereas methods do not.</p>
 </div>
 <div class="section" id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
 <p id="bibtex-bibliography-content/gp/sparse/vfe-0"><dl class="citation">
+<dt class="bibtex label" id="bauer2016understanding"><span class="brackets"><a class="fn-backref" href="#id6">BvdWR16</a></span></dt>
+<dd><p>Matthias Bauer, Mark van der Wilk, and Carl Edward Rasmussen. Understanding probabilistic sparse gaussian process approximations. In <em>Advances in Neural Information Processing Systems</em>. 2016.</p>
+</dd>
 <dt class="bibtex label" id="bui2017unifying"><span class="brackets">BYT17</span></dt>
 <dd><p>Thang Bui, Josiah Yan, and Richard Turner. A unifying framework for gaussian process pseudopoint approximations using power expectation propagation. <em>The Journal of Machine Learning Research</em>, 2017.</p>
 </dd>
