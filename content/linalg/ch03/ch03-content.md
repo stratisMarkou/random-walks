@@ -324,7 +324,7 @@ $$\begin{align}
 <br>
     
 (linalg-fund-linear)=
-### Fundamental theorem of linear maps
+### Theorem of linear maps
     
 <div class="theorem">
 
@@ -357,7 +357,7 @@ $$\begin{align}
 <br>
     
     
-### Dimensions, injectivity and surjectivity
+### Dimensions
     
 
 <div class="lemma">
@@ -599,11 +599,64 @@ C_{j, k} = \lambda A_{j, k}.
     
 <details class="proof">
 <summary>Proof: Dimension of \(\F^{n \times m}\)</summary>
+    
+Consider the collection of $nm$ matrices, which have all zero entries except for a single $1$. Let $M_{i, k}$ denote one of these matrices with its $1$ entry at $(j, k)$. These matrices span $\F^{n \times m}$ because any matrix in the space can be written as a linear combination of them. The $M_{i, k}$ matrices are also linearly independent so they are a basis of $\F^{n \times m}$, of length $nm$, so $\dim \F^{n \times m}  = nm$.
 
 </details>
 <br>
 
     
+<div class="definition">
+
+**Definition (Matrix multiplication)** Suppose $A$ is an $n \times m$ matrix and $B$ is an $m \times k$ matrix. We define $AB$ to be the matrix
+    
+$$\begin{align}
+(AB)_{j, k} = \sum_{l = 1} A_{j, l}  B_{l, k}.
+\end{align}$$
+    
+</div>
+<br>
+    
+    
+<div class="lemma">
+
+**Lemma (Matrix of product of linear maps)** If $T \L(U, V)$ and $S \in \L(V, W)$, then $\mathcal{M}(ST) = \mathcal{M}(S)\mathcal{M}(T)$.
+    
+</div>
+<br>
+    
+    
+<div class="lemma">
+
+**Lemma (Entry of product is row times column)** Suppose $A$ is an $n \times m$ matrix and $B$ is an $m \times k$ matrix. Then
+    
+$$\begin{align}
+(AB)_{j, k} = A_{j, \cdot} B_{\cdot, k}.
+\end{align}$$
+    
+</div>
+<br>
+    
+    
+<div class="lemma">
+
+**Lemma (Column of product is matrix times column)** Suppose $A$ is an $n \times m$ matrix and $B$ is an $m \times k$ matrix. Then
+    
+$$\begin{align}
+(AB)_{\cdot, k} = A B_{\cdot, k}.
+\end{align}$$
+    
+</div>
+<br>
+
+    
+<div class="definition">
+
+**Definition ()** 
+    
+</div>
+<br>
+    
 
     
     
@@ -611,6 +664,16 @@ C_{j, k} = \lambda A_{j, k}.
     
     
 
+    
+    
+<div class="definition">
+
+**Definition ()** 
+    
+</div>
+<br>
+    
+    
 <div class="lemma">
 
 **Lemma ()** 
