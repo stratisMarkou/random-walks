@@ -620,9 +620,31 @@ $$\begin{align}
     
 <div class="lemma">
 
-**Lemma (Matrix of product of linear maps)** If $T \L(U, V)$ and $S \in \L(V, W)$, then $\mathcal{M}(ST) = \mathcal{M}(S)\mathcal{M}(T)$.
+**Lemma (Matrix of product of linear maps)** If $T \L(U, V)$ and $S \in \L(V, W)$, then $\mathcal{M}(TS) = \mathcal{M}(T)\mathcal{M}(S)$.
     
 </div>
+<br>
+
+    
+<details class="proof">
+<summary>Proof: Matrix of product of linear maps</summary>
+    
+Let $T \L(U, V)$ and $S \in \L(V, W)$. Let also $u_1, ..., u_N$ be a basis of $U$, $v_1, ..., v_M$ be a basis of $V$ and $w_1, ..., w_L$ be a basis of $W$, and $\mathcal{M}(T) = A, \mathcal{M}(S) = B$. Then
+    
+$$\begin{align}
+(TS)u_n &= S\left( \sum_{k = 1}^K B_{k, n} v_k \right), \\
+        &= \sum_{k = 1}^K B_{k, n} Sv_k, \\
+        &= \sum_{k = 1}^K B_{k, n} \sum_{l = 1}^L A_{l, k} w_l, \\
+        &= \sum_{l = 1}^L \left( \sum_{k = 1}^K A_{l, k} B_{k, n} \right) w_l,
+\end{align}$$
+    
+and therefore
+    
+$$\begin{align}
+\mathcal{M}(TS)_{l, n} &= \sum_{k = 1}^K A_{l, k} B_{k, n}.
+\end{align}$$
+
+</details>
 <br>
     
     
@@ -635,6 +657,20 @@ $$\begin{align}
 \end{align}$$
     
 </div>
+<br>
+
+    
+<details class="proof">
+<summary>Proof: Entry of product is row times column</summary>
+
+From the definition of matrix multiplication we have
+
+$$\begin{align}
+(AB)_{n, k} &= \sum_{r = 1}^m A_{n, r} B_{r, k}  \\
+            &= A_{j, \cdot} B_{\cdot, k}.
+\end{align}$$
+
+</details>
 <br>
     
     
@@ -649,26 +685,25 @@ $$\begin{align}
 </div>
 <br>
 
+<details class="proof">
+<summary>Proof: Column of product is matrix times column</summary>
     
-<div class="definition">
+From the definition of matrix multiplication we have
 
-**Definition ()** 
-    
-</div>
+$$\begin{align}
+(AB)_{\cdot, k} &= \left( \sum_{r = 1}^m A_{n, r} B_{r, k}  \right)_{n = 1}^N  \\
+                &= A B_{\cdot, k}.
+\end{align}$$
+
+</details>
 <br>
-    
 
-    
-    
-    
-    
-    
 
-    
+## Invertibility and Isomorphism
     
 <div class="definition">
 
-**Definition ()** 
+**Definition (Invertible map, inverse)** The map $T \in \L (V, W)$ is invertible if there exists $S \in \L (W, V)$ such that $ST$ and $TS$ equal the identity map, defined on $V$ and $W$. The map $S$ is called the inverse of $T$.
     
 </div>
 <br>
@@ -676,18 +711,245 @@ $$\begin{align}
     
 <div class="lemma">
 
-**Lemma ()** 
+**Lemma (Inverse is unique)** Suppose $T \in \L (V, W)$ is an invertible linear map. Then the inverse of $T$ is unique. We write $T^{-1}$ to denote this unique inverse.
     
 </div>
 <br>
 
     
 <details class="proof">
-<summary>Proof: </summary>
+<summary>Proof: Inverse is unique</summary>
+    
+Suppose $T \in \L (V, W)$ is an invertible linear map, and let $S_1, S_2 \in \L (W, V)$ be inverses of $T$. Then
+    
+$$\begin{align}
+S_1 T = I = S_2 T \implies S_1 T S_1 = S_2 T S_1 \implies S_1 = S_2.
+\end{align}$$
+
+</details>
+<br>
+    
+    
+<div class="lemma">
+
+**Lemma (Invertible $\iff$ injective, surjective)** A linear map is invertible if and only if it is injective and surjective.
+    
+</div>
+<br>
+
+<details class="proof">
+<summary>Proof: Invertible \(\iff\) injective, surjective</summary>
+    
+Suppose $T \in \L (V, W)$ is a linear map. If $T$ is injective and surjective, then we can define $T^{-1}$ as
+
+$$\begin{align}
+T^{-1}w = v, \text{ where } w = Tv.
+\end{align}$$
+    
+This map is well defined because for any $w \in W$ there exists a $v \in V$ such that $w = Tv$, because $T$ is surjective, and further this $w$ is unique, because $T$ is injective. Further $T^{-1}$ is linear because:
+    
+$$\begin{align}
+T^{-1}(w) = v \implies w = Tv, T^{-1}(\lambda w) = v' \text{ where } \lambda w = Tv' \implies v' = \lambda v,
+\end{align}$$
+    
+hence $T^{-1}(\lambda w) = \lambda v$, and also
+    
+$$\begin{align}
+T^{-1}(w_1) = v_1,  T^{-1}(w_2) = v_2 \implies w_1 + w_2 = T(v_1 + v_2), T^{-1}(w_1 + w_2) = v' \text{ where } w_1 + w_2 = Tv' \implies v_1 + v_2 = w_1 + w_2,
+\end{align}$$
+    
+where in the last part we have used the surjectivity and linearity of $T$. Now suppose instead that $T$ is invertible. Then $T$ must be injective, because if it were not, its inverse would not be well defined. It must also be surjective because otherwise $T T^{-1}$ could not equal the identity.
+
+</details>
+<br>
+    
+    
+<div class="definition">
+
+**Definition (Isomorphism)** An isomorphim is an invertible linear map. Two vector spaces are called isomorphic if there exists an isomorphism from one to the other.
+    
+</div>
+<br>
+    
+    
+<div class="lemma">
+
+**Lemma (Isomorphic spaces $\iff$ same dimension)** Two finite dimensional vector spaces are isomorphic if and only if they have the same dimension.
+    
+</div>
+<br>
+
+    
+<details class="proof">
+<summary>Proof: Isomorphic spaces \(\iff\) same dimension</summary>
+    
+Let $U, V$ be finite dimensional vector and let $u_1, ..., u_n$ and $v_1, ..., v_m$ be bases of $U$ and $V$ respectively. If $n = m$, we can define $T \in \L (U, V)$ as
+    
+$$\begin{align}
+Tu_j = v_j, i = 1, ..., n.
+\end{align}$$
+    
+The map $T$ is injective, because $u_1, ..., u_n$ and $v_1, ..., v_n$ are linearly independent. Also $T$ is surjective because any $v \in V$ can be written as a linear combination of $v_1, ..., v_n$, and this linear combination can in turn be written in the form $T(u_1 + ... + u_n)$.
+
+</details>
+<br>
+    
+    
+<div class="lemma">
+
+**Lemma ($\L(V, W)$ and $\mathbb{F}^{n \times m}$ are isomorphic)** Let $v_1, ..., v_n$ and $w_1, ..., w_m$ be bases of $V$ and $W$. Then $\M$ with respect to these bases is an isomorphism from $\L(V, W)$ to $\mathbb{F}^{n \times m}$.
+    
+</div>
+<br>
+
+    
+<details class="proof">
+<summary>Proof: \(\L(V, W)\) and \(\mathbb{F}^{n \times m}\) are isomorphic</summary>
+    
+Let $v_1, ..., v_n$ and $w_1, ..., w_m$ be bases of $V$ and $W$. First, $\M$ is injective because its null space is $\{0\}$ since
+    
+$$\begin{align}
+\M(T) = 0 \implies Tv = 0 \text{ for all } v \in V \implies T = 0.
+\end{align}$$
+    
+Second, $\M$ is surjective because for any $A \in \mathbb{F}^{n \times m}$ we can define $T \in \L(V, W)$
+    
+$$\begin{align}
+Tv_k = \sum_{j = 1}^n A_{j, k} w_j,
+\end{align}$$
+    
+for which we have $\M(T) = A$, so $\M$ is surjective. Since $T$ is injective and surjective it is invertible.
+
+</details>
+<br>
+    
+
+    
+    
+<div class="lemma">
+
+**Lemma (Dimension of space of linear maps)** Suppose $V$ and $W$ are finite-dimensional. Then
+
+$$\begin{align}
+\dim \L(V, W) = \dim V \dim W.
+\end{align}$$
+    
+
+    
+</div>
+<br>
+
+    
+<details class="proof">
+<summary>Proof: Dimension of space of linear maps</summary>
+    
+Suppose $V$ and $W$ are finite-dimensional, with dimensions $n$ and $m$. We know that $\L(V, W)$ and $\mathbb{F}^{n \times m}$ are isomorphic, and that isomorphic spaces must have the same dimension. Since the dimension of $\mathbb{F}^{n \times m}$ is $nm$, and the dimensions of $\dim V$ and $\dim W$ are $n$ and $m$ respectively, we have
+
+$$\begin{align}
+\dim \L(V, W) = \dim V \dim W.
+\end{align}$$
+    
+</details>
+<br>
+    
+<div class="definition">
+
+**Definition (Matrix of a vector)** Suppose $v \in V$ and $v_1, ..., v_n$ is a basis of $V$. The matrix of $v$ with respect to this basis is
+
+$$\begin{align}
+\M(v) = \begin{pmatrix} c_1 \\ \vdots \\ c_n \end{pmatrix}, \text{ where } v = c_1 v_1 + ... + c_n v_n.
+\end{align}$$
+    
+</div>
+<br>
+    
+    
+<div class="lemma">
+
+**Lemma (Column of linear map is a basis vector)** If $T \in \L(V, W)$ and $v_1, ..., v_k$ and $w_1, ..., w_k$ are bases of $V$ and $W$ respectively, then $\M(T)_{\cdot, k} = \M(v_k)$.
+    
+</div>
+<br>
+
+    
+<details class="proof">
+<summary>Proof: Column of linear map is a basis vector</summary>
+    
+This follows immediately from the definitions of $\M(T)$ and $\M(v_k)$.
+
+</details>
+<br>
+    
+    
+<div class="lemma">
+
+**Lemma (Linear maps act like matrix multiplication)** Suppose $T \in \L(V, W)$ and $v \in V$, and also that $v_1, ..., v_n$ and $w_1, ..., w_n$ are bases of $V$ and $W$. Then
+
+$$\begin{align}
+\M(Tv) = \M(T) \M(v)
+\end{align}$$
+    
+</div>
+<br>
+
+    
+<details class="proof">
+<summary>Proof: Linear maps act like matrix multiplication</summary>
+    
+Suppose $T \in \L(V, W)$ and $v \in V$, and also that $v_1, ..., v_n$ and $w_1, ..., w_n$ are bases of $V$ and $W$. Then
+
+$$\begin{align}
+v = c_1 v_1 + ... + c_n v_n \implies Tv = c_1 Tv_1 + ... + c_n Tv_n,
+\end{align}$$
+    
+and by the linearity of $\M$
+    
+$$\begin{align}
+\M(Tv) = c_1 \M(Tv_1) + ... + c_n \M(Tv_n) = c_1 \M(T)_{\cdot, 1} + ... + c_n \M(T)_{\cdot, n} = \M(T) \M(v).
+\end{align}$$
+    
+</details>
+<br>
+    
+    
+<div class="definition">
+
+**Definition (Operator $\L(V)$)** A linear map from a vector space $V$ to itself is called an operator. We use the notation $\L(V)$ for the set of all operators on $V$, $\L(V, V)$.
+    
+</div>
+<br>
+    
+    
+<div class="lemma">
+
+**Lemma (Finite dimensional $T$ invertible $\iff$ $T$ injective $\iff$ $T$ surjective)** Suppose $V$ is a finite dimensional vector space and $T \in \L(V)$. Then the following are equivalent
+    
+$$\begin{align}
+T \text{ is invertible } \iff T \text{ is injective } \iff T \text{ is surjective}.
+\end{align}$$
+    
+</div>
+<br>
+
+    
+<details class="proof">
+<summary>Proof: Finite dimensional \(T\) invertible \(\iff\) \(T\) injective \(\iff\) \(T\) surjective</summary>
+    
+First, $T$ is invertible if and only if it is injective and surjective. Second, if $T$ is injective its null space must be $\{0\}$ so
+    
+$$\begin{align}
+\dim \range T = \dim V - \dim \null T = \dim V,
+\end{align}$$
+    
+so $T$ is surjective. Lastly, if $T$ is surjective, its range must be $V$ so
+    
+$$\begin{align}
+\dim \null T = \dim V - \dim \range T = 0,
+\end{align}$$
+    
+so $T$ is also injective, and therefore invertible. This suffices to show that all three statements are equivalent.
+
 
 </details>
 <br>
 
-
-$$\begin{align}
-\end{align}$$
