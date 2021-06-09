@@ -60,7 +60,7 @@
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Miscellaneous" href="../../misc/misc.html" />
+    <link rel="next" title="Efficiently sampling GP posteriors" href="gp-sampling.html" />
     <link rel="prev" title="Sparse Gaussian Processes" href="sparse-intro.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -195,6 +195,11 @@
      <li class="toctree-l3 current active">
       <a class="current reference internal" href="#">
        Variational Free Energy GPs
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gp-sampling.html">
+       Sampling GP posteriors
       </a>
      </li>
     </ul>
@@ -533,7 +538,7 @@ q^* = \argmax_{q} \mathcal{F}(q, \bs{\theta}).
 \[\begin{align}
 q^*\lrb[\fb] = \mathcal{N}\lrb[\fb;~\sigma^{-2} \Kbb \bs{\Sigma}^{-1} \Kbx \mathbf{y},~\Kbb\bs{\Sigma}^{-1}\Kbb]
 \end{align}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\bs{\Sigma}^{-1} = \lrb[\Kbb + \sigma^{-2} \Kbx \Kxb]\)</span>. The corresponding free energy is</p>
+<p>where <span class="math notranslate nohighlight">\(\bs{\Sigma} = \lrb[\Kbb + \sigma^{-2} \Kbx \Kxb]\)</span>. The corresponding free energy is</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
 \mathcal{F}(q^*, \bs{\theta}) = \mathcal{N}\lrb[\bm{y}; \bm{0}, \sigma^2 \bm{I} + \Kxb \Kbb^{-1} \Kbx] - \frac{1}{2\sigma^2} \text{Tr}\lrb[\Kxx - \Kxb\Kbb^{-1}\Kbx].
@@ -605,7 +610,7 @@ p\lrb[\bm{y}^* | \bm{X}^*, \Xb] \approx \int p\lrb[\bm{y}^* | \fstar] p\lrb[\fst
 <p><strong>Lemma (Approximate predictive posterior)</strong> Under the optimal approximate posterior <span class="math notranslate nohighlight">\(q^*\)</span>, the predictive posterior of the VFE approximation is</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
-p\lrb[\bm{y}^* | \X^*, \Xb] = \mathcal{N}\lrb[\bm{y}^*; \sigma^{-2} \Ksb \bs{\Sigma}^{-1} \Kbx \mathbf{y}, \Kss - \Ksb \Kbb^{-1}\Kbs + \Ksb \bs{\Sigma}^{-1} \Kbs].
+p\lrb[\bm{y}^* | \X^*, \Xb] = \mathcal{N}\lrb[\bm{y}^*; \sigma^{-2} \Ksb \bs{\Sigma}^{-1} \Kbx \mathbf{y}, \Kss - \Ksb \Kbb^{-1}\Kbs + \Ksb \bs{\Sigma}^{-1} \Kbs + \sigma^2 \mathbf{I}].
 \end{align}\]</div>
 </div>
 <br>
@@ -624,7 +629,7 @@ p\lrb[\fstar | \fb] = \mathcal{N}\lrb[\fstar;~\Ksb\Kbb^{-1}\fb,~\Kss - \Ksb\Kbb^
 <p>we obtain, using standard results for the product of Gaussians and marginals of Gaussians</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
-p\lrb[\bm{y}^* | \X^*, \Xb] = \mathcal{N}\lrb[\bm{y}^*; \sigma^{-2} \Ksb \bs{\Sigma}^{-1} \Kbx \mathbf{y}, \Kss - \Ksb \Kbb^{-1}\Kbs + \Ksb \bs{\Sigma}^{-1} \Kbs].
+p\lrb[\bm{y}^* | \X^*, \Xb] = \mathcal{N}\lrb[\bm{y}^*; \sigma^{-2} \Ksb \bs{\Sigma}^{-1} \Kbx \mathbf{y}, \Kss - \Ksb \Kbb^{-1}\Kbs + \Ksb \bs{\Sigma}^{-1}\Kbs + \sigma^2 \mathbf{I} ].
 \end{align}\]</div>
 </details>
 <br>
@@ -1287,7 +1292,7 @@ p\lrb[\bm{y}^* | \X^*, \Xb] = \mathcal{N}\lrb[\bm{y}^*; \sigma^{-2} \Ksb \bs{\Si
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="sparse-intro.html" title="previous page">Sparse Gaussian Processes</a>
-    <a class='right-next' id="next-link" href="../../misc/misc.html" title="next page">Miscellaneous</a>
+    <a class='right-next' id="next-link" href="gp-sampling.html" title="next page">Efficiently sampling GP posteriors</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
