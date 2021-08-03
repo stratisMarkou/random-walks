@@ -953,3 +953,221 @@ so $T$ is also injective, and therefore invertible. This suffices to show that a
 </details>
 <br>
 
+    
+<!---
+Products of vector spaces 
+-->
+
+## Products of vector spaces
+
+<div class="definition">
+
+**Definition (Product of vector spaces)** Suppose $V_1, \dots, V_m$ are vector spaces over $\F$. The product $V_1 \times \dots \times V_m$ is defined by
+    
+$$\begin{align}
+V_1 \times \dots \times V_m = \{(v_1, \dots, v_m) : v_1 \in V_1, \dots, v_m \in V_m\},
+\end{align}$$
+    
+with addition on this space defined as
+    
+$$\begin{align}
+(u_1, \dots, u_m) + (v_1, \dots, v_m) = (u_1 + v_1, \dots, u_m + v_m),
+\end{align}$$
+    
+and scalar multiplication defined as
+    
+$$\begin{align}
+\alpha (u_1, \dots, u_m) = (\alpha u_1, \dots, \alpha u_m).
+\end{align}$$
+    
+</div>
+<br>
+    
+    
+<div class="lemma">
+
+**Lemma (Product of vector spaces is a vector space)** Suppose $V_1, \dots, V_m$ are vector spaces $\F$. Then $V_1 \times \dots \times V_m$ is a vector space over $\F$.
+    
+</div>
+<br>
+
+    
+<details class="proof">
+<summary>Proof: Product of vector spaces is a vector space </summary>
+    
+Under the definition given above, a product of vector spaces satisfies the {ref}`properties for being a vector space<linalg-vectorspace>`.
+
+</details>
+<br>
+    
+    
+<div class="lemma">
+
+**Lemma (Dimension of product is sum of dimensions)** Suppose $V_1, \dots, V_m$ are finite dimensional vector spaces. Then their product is finite dimensional and
+    
+$$\begin{align}
+\dim(V_1 \times \dots \times V_m) = \dim(V_1) + \dots + \dim(V_m).
+\end{align}$$
+    
+</div>
+<br>
+
+    
+<details class="proof">
+<summary>Proof: Dimension of product is sum of dimensions </summary>
+    
+Since all the vector spaces are finite dimensional, we can choose a basis for each one. For each of the vector spaces, say $V_i$ consider its basis $v_{j1}, \cdot, v_{jd_j}$ and the vectors in the product space
+    
+$$\begin{align}
+(0, \cdots, 0, v_{j1}, 0, \cdots, 0)&
+\vdots &
+(0, \cdots, 0, \underbrace{v_{jd_j}}_{j^{th} \text{ slot}}, 0, \cdots, 0) &.
+\end{align}$$
+    
+Considering the set of all such vectors, we see that they are linearly independent and that they span the product space, so they are a basis for it. Counting the length of this list we see that
+    
+$$\begin{align}
+\dim(V_1 \times \dots \times V_m) = \dim V_1 + \dots + \dim V_m.
+\end{align}$$
+
+</details>
+<br>
+    
+    
+    
+<div class="lemma">
+
+**Lemma (Products and direct sums)** Suppoose that $U_1, \dots, U_m$ are subspaces of $V$ and define the linear map $\Gamma : U_1 \times \dots \times U_m \to U_1 + \dots + U_m$ by
+    
+$$\begin{align}
+\Gamma(u_1, \dots, u_m) = u_1 + \dots + u_m.
+\end{align}$$
+    
+Then $U_1 + \dots + U_m$ is a direct sum if and only if $\Gamma$ is injective.
+    
+</div>
+<br>
+
+    
+<details class="proof">
+<summary>Proof: Products and direct sums </summary>
+    
+By its definition, the linear map $\Gamma$ is injective if and only if
+    
+$$\begin{align}
+u_1 + \dots + u_m = 0 \implies u_1, \dots, u_m = 0.
+\end{align}$$
+    
+Since $U_1 + \dots + U_m$ is a direct sum if and only if the same condition holds, we arrive at the result.
+
+</details>
+<br>
+    
+    
+
+<div class="lemma">
+
+**Lemma (Direct sum $\iff$ dimensions add up)** Suppoose $U_1, \dots, U_m$ are subspaces of the finite-dimensional space $V$. Then $U_1 + \dots + U_m$ is a direct sum if and only if
+    
+$$\begin{align}
+\dim (U_1 + \dots + U_m) = \dim U_1 + \dots + \dim U_m.
+\end{align}$$
+    
+</div>
+<br>
+    
+<details class="proof">
+<summary>Proof: Direct sum \(\iff\) dimensions add up </summary>
+    
+The $\Gamma$ map defined earlier is surjective. By the fundamental theorem of linear maps, $\Gamma$ is injective if and only if
+    
+$$\begin{align}
+\dim (U_1 \times \dots \times U_m) = \dim (U_1 + \dots + U_m).
+\end{align}$$
+    
+By the previous lemma, we see that $U_1 + \dots + U_m$ is a direct sum if and only if
+    
+$$\begin{align}
+\dim (U_1 + \dots + U_m) = \dim U_1 + \dots + \dim U_m.
+\end{align}$$
+
+</details>
+<br>
+    
+    
+<!---
+Quotients of vector spaces 
+-->
+
+## Quotients of vector spaces
+
+<div class="definition">
+
+**Definition (Sum of vector and subspace)** Suppose $v \in V$ and $U$ is a subspace of $V$. Then $v + U$ is the subset of $V$ defined as
+    
+$$\begin{align}
+v + U = \{v + u : u \in U\}.
+\end{align}$$
+    
+</div>
+<br>
+
+    
+<div class="definition">
+
+**Definition (Affine subset)** We call any subset of $V$ that can be written in the form $v + U$, for some $v \in V$ and some subspace $U$ of $V$, an affine subset. We say the affine subset $v + U$ is parallel to $U$.
+    
+</div>
+<br>
+
+    
+<div class="definition">
+
+**Definition (Quotient space)** Suppose $U$ is a subspace of $V$. Then the quotient space $V / U$ is tthe set of all affine subsetts of $V$ parallel to $U$. In other words
+    
+$$\begin{align}
+V / U = \{v + U : v \in V\}.
+\end{align}$$
+    
+</div>
+<br>
+    
+The name quotient space is motivated by the fact that if $U, V$ are vector spaces, then 
+    
+$$\begin{align}
+(U \times V) / (\{0\} \times V) \text{ and } U \text{ are isomorphic}.
+\end{align}$$
+    
+So in this sense, the quotient of a space by another has the opposite meaning to the product of two spaces.
+    
+
+<div class="lemma">
+
+**Lemma (Affine subsets parallel to $U$ are equal or disjoint)** Suppose $U$ is a subspace of $V$ and $v, w \in V$. Then the following conditions are equivalent
+    
+1. $v - w \in U,$
+2. $v + U = w + U,$
+3. $(v + U) \cap (w + U) \neq \emptyset.$
+    
+</div>
+<br>
+    
+<details class="proof">
+<summary>Proof: Affine subsets parallel to \(U\) are equal or disjoint </summary>
+
+Suppose the first statement holds. If $u \in U$, then
+    
+$$\begin{align}
+v + u = w + ((v - w) + u) \in w + U,
+\end{align}$$
+    
+so $v + U \subseteq w + U$. Similarly $w + U \subseteq v + U$ and so $v + U = w + U$. Now if the second condition holds, the third condition also holds. Lastly, if the third condition holds, then letting $W = (v + U) \cap (w + U)$ we see that there exist $u_1, u_2$ such that $v + u_1 = w + u_2$ so
+    
+$$\begin{align}
+v + u_1 = w + u_2 \implies v - w = (u_2 - u_1) \in U,
+\end{align}$$
+    
+showing the first condition holds. Thus the three conditions are equivalent.
+
+</details>
+<br>
