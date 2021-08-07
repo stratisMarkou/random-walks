@@ -56,17 +56,19 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <link rel="canonical" href="https://random-walks.org/content/convex-optimisation/intro.html" />
+    <link rel="canonical" href="https://random-walks.org/content/cvx/intro.html" />
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Introduction" href="ch01.html" />
+    <link rel="prev" title="Markov chains" href="../prob-intro/ch12/content.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
 
 
 <!-- Opengraph tags -->
-<meta property="og:url"         content="https://random-walks.org/content/convex-optimisation/intro.html" />
+<meta property="og:url"         content="https://random-walks.org/content/cvx/intro.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Convex optimisation" />
 <meta property="og:description" content="Convex optimisation  These are notes and implementations I made off the course Convex Optimization I, taught by Stephen Boyd from Stanford. You can find the ful" />
@@ -105,7 +107,7 @@
   </a>
  </li>
 </ul>
-<ul class="nav sidenav_l1">
+<ul class="current nav sidenav_l1">
  <li class="toctree-l1 collapsible-parent">
   <a class="reference internal" href="../prob-intro/intro.html">
    Probability: An introduction
@@ -169,6 +171,30 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../prob-intro/ch12/content.html">
      Markov chains
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="current reference internal" href="#">
+   Convex optimisation
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch01.html">
+     Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch02.html">
+     Convex sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch03.html">
+     Convex functions
     </a>
    </li>
   </ul>
@@ -322,7 +348,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/content/convex-optimisation/intro.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../../_sources/content/cvx/intro.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -347,7 +373,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/stratisMarkou/random-walks/master?urlpath=tree/./content/convex-optimisation/intro.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/stratisMarkou/random-walks/master?urlpath=tree/./content/cvx/intro.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../../_static/images/logo_binder.svg"
@@ -374,7 +400,9 @@
   <div class="section" id="convex-optimisation">
 <h1>Convex optimisation<a class="headerlink" href="#convex-optimisation" title="Permalink to this headline">¶</a></h1>
 <p>These are notes and implementations I made off the course <a class="reference external" href="https://see.stanford.edu/Course/EE364A">Convex Optimization I</a>, taught by <a class="reference external" href="http://web.stanford.edu/~boyd/">Stephen Boyd</a> from Stanford. You can find the full course materials at the <a class="reference external" href="https://see.stanford.edu/Course/EE364A">official course page</a>. Video lectures can also be found at <a class="reference external" href="http://videolectures.net/stanfordee364aw08_convex_optimization1/">videolectures.net</a>. The course follows the <a class="reference external" href="https://web.stanford.edu/~boyd/cvxbook/">Convex Optimisation book</a> by Boyd and Vanderberghe, freely available on the web.</p>
-<p>A lot of the contents of these notes are a combination of the contents of the lectures and book, except I’ve filled in some gaps I would have liked to have been explained to me when I read the course.</p>
+<p>This is a set of notes which are completely derivative from the course and are by no means original material. All errors are almost surely mine.</p>
+<div class="toctree-wrapper compound">
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -390,7 +418,7 @@
         },
         kernelOptions: {
             kernelName: "venv-random-walks",
-            path: "./content/convex-optimisation"
+            path: "./content/cvx"
         },
         predefinedOutput: true
     }
@@ -405,6 +433,8 @@
     
     <div class='prev-next-bottom'>
         
+    <a class='left-prev' id="prev-link" href="../prob-intro/ch12/content.html" title="previous page">Markov chains</a>
+    <a class='right-next' id="next-link" href="ch01.html" title="next page">Introduction</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

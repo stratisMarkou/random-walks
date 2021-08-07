@@ -15,6 +15,8 @@ Welcome to Random Walks! This is an archive of explorations, in the convex hull 
 
 ## New on Random Walks
 
+[07/08/2021] [Convex Optimisation notes](./cvx/intro) on first three chapters of Boyd and Vandenberghe.
+
 [09/06/2021] Notes and demo on [Efficient Sampling from GP posteriors](./gp/sparse/gp-sampling).
 
 [05/05/2021] Notes and demo on [Variational Sparse Gaussian Processes](./gp/sparse/vfe).

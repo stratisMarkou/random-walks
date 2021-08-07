@@ -1,0 +1,919 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Convex functions &#8212; Random walks</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://random-walks.org/content/cvx/ch03.html" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Gaussian Processes" href="../gp/gp-intro.html" />
+    <link rel="prev" title="Convex sets" href="ch02.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://random-walks.org/content/cvx/ch03.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Convex functions" />
+<meta property="og:description" content="Convex functions  Definition and examples  &lt;div class=&#34;definition&#34;&gt;   Definition (Convex function) A function whose domain is convex, and which also satisfies  " />
+<meta property="og:image"       content="https://random-walks.org/_static/logo.svg" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <img src="../../_static/logo.svg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Random walks</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../home.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../prob-intro/intro.html">
+   Probability: An introduction
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prob-intro/ch01/content.html">
+     Events and Probabilities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prob-intro/ch02/content.html">
+     Discrete random variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prob-intro/ch03/content.html">
+     Multivariate discrete distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prob-intro/ch04/content.html">
+     Probability generating functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prob-intro/ch05/content.html">
+     Distribution and density functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prob-intro/ch06/content.html">
+     Multivariate distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prob-intro/ch07/content.html">
+     Moment generating functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prob-intro/ch08/content.html">
+     Main limit theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prob-intro/ch09/content.html">
+     Branching processes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prob-intro/ch10/content.html">
+     Random walks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prob-intro/ch11/content.html">
+     Processes in continuous time
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prob-intro/ch12/content.html">
+     Markov chains
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="intro.html">
+   Convex optimisation
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch01.html">
+     Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch02.html">
+     Convex sets
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Convex functions
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../gp/gp-intro.html">
+   Gaussian Processes
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../gp/why-covariances.html">
+     Why covariance functions?
+    </a>
+   </li>
+   <li class="toctree-l2 collapsible-parent">
+    <a class="reference internal" href="../gp/sparse/sparse-intro.html">
+     Sparse Gaussian Processes
+    </a>
+    <ul class="collapse-ul">
+     <li class="toctree-l3">
+      <a class="reference internal" href="../gp/sparse/vfe.html">
+       Variational Free Energy GPs
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../gp/sparse/gp-sampling.html">
+       Sampling GP posteriors
+      </a>
+     </li>
+    </ul>
+    <i class="fas fa-chevron-down">
+    </i>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../misc/misc.html">
+   Miscellaneous
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../misc/sde/num-sde.html">
+     Numerical simulation of SDEs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../misc/sde-as-gp/sde-as-gp.html">
+     VI for diffusion processes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../misc/node/node.html">
+     Neural ODEs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../misc/optimisation/conjugate-gradients.html">
+     Conjugate gradients
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../misc/kalman/kalman.html">
+     The Kalman filter and smoother
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../misc/ncs/ncs.html">
+     Natural cubic splines
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../misc/ars/ars.html">
+     Adaptive rejection sampling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../misc/score-matching/score-matching.html">
+     Estimation by score matching
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../misc/interacting/interacting.html">
+     Interacting particle FPK
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../misc/rff/rff.html">
+     Random Fourier features
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../misc/svgd/svgd.html">
+     Stein variational gradient descent
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../misc/addgp/addgp.html">
+     Additive Gaussian Processes
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../reading-and-links.html">
+   Interesting reading and websites
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/content/cvx/ch03.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#definition-and-examples">
+   Definition and examples
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#restriction-to-a-line">
+   Restriction to a line
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#extended-value-extension">
+   Extended value extension
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#two-conditions-for-convexity">
+   Two conditions for convexity
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples-of-convex-functions">
+   Examples of convex functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#epigraphs-and-sublevel-sets">
+   Epigraphs and sublevel sets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#jensen-s-inequality">
+   Jensen’s inequality
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#establishing-convexity">
+   Establishing convexity
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conjugate-function">
+   Conjugate function
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#quasiconvex-functions">
+   Quasiconvex functions
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="convex-functions">
+<h1>Convex functions<a class="headerlink" href="#convex-functions" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="definition-and-examples">
+<h2>Definition and examples<a class="headerlink" href="#definition-and-examples" title="Permalink to this headline">¶</a></h2>
+<div class="definition">
+<p><strong>Definition (Convex function)</strong> A function whose domain is convex, and which also satisfies</p>
+<div class="math notranslate nohighlight">
+\[f\big(\theta x + (1 - \theta) y\big) \leq \theta f(x) + (1 - \theta) f(y),\]</div>
+<p>for every <span class="math notranslate nohighlight">\(x, y \in \textbf{dom}(f)\)</span> and <span class="math notranslate nohighlight">\(\theta \in [0, 1]\)</span>. If the inequality is strict, we call the function strictly convex.</p>
+</div>
+<br>
+<p><strong>Concave and strictly concave funtions:</strong> If a function <span class="math notranslate nohighlight">\(f\)</span> satisfies the above definition but with the inequality sign going the other way, we call it a (strictly) concave function - the domain still needs to be a convex set. The negative of a concave function is convex and vice versa.</p>
+<p><strong>Examples of convex functions in <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>:</strong></p>
+<ul class="simple">
+<li><p>affine: <span class="math notranslate nohighlight">\(ax + b\)</span>, for any <span class="math notranslate nohighlight">\(a, b \in \mathbb{R}\)</span>.</p></li>
+<li><p>exponential: <span class="math notranslate nohighlight">\(e^{\alpha x}\)</span> for any <span class="math notranslate nohighlight">\(\alpha \in \mathbb{R}\)</span>.</p></li>
+<li><p>powers: <span class="math notranslate nohighlight">\(x^\alpha\)</span> on <span class="math notranslate nohighlight">\(\mathbb{R}_{++}\)</span> for <span class="math notranslate nohighlight">\(\alpha \geq 1\)</span> or <span class="math notranslate nohighlight">\(\alpha \leq 0\)</span>.</p></li>
+<li><p>powers of absolute value: <span class="math notranslate nohighlight">\(|x|^p\)</span> for <span class="math notranslate nohighlight">\(p \geq 1\)</span>.</p></li>
+</ul>
+<p><strong>Examples of concave functions in <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>:</strong></p>
+<ul class="simple">
+<li><p>affine: <span class="math notranslate nohighlight">\(ax + b\)</span>, for any <span class="math notranslate nohighlight">\(a, b \in \mathbb{R}\)</span>.</p></li>
+<li><p>logarithm: <span class="math notranslate nohighlight">\(\log x\)</span> for <span class="math notranslate nohighlight">\(x \in \mathbb{R}_{++}\)</span>.</p></li>
+<li><p>powers: <span class="math notranslate nohighlight">\(x^\alpha\)</span> on <span class="math notranslate nohighlight">\(\mathbb{R}_{++}\)</span> for <span class="math notranslate nohighlight">\(0 \leq \alpha \leq 1\)</span>.</p></li>
+</ul>
+<p><strong>Examples of convex functions in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>:</strong></p>
+<ul class="simple">
+<li><p>affine: <span class="math notranslate nohighlight">\(a^\top x + b\)</span>, for any <span class="math notranslate nohighlight">\(a \in \mathbb{R}^n, b \in \mathbb{R}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(p\)</span>-norm: <span class="math notranslate nohighlight">\(||x||_p = \left[ \sum_{i = 1}^n |x_i|^p\right]^{1/p}\)</span> for <span class="math notranslate nohighlight">\(p \geq 0\)</span>.</p></li>
+</ul>
+<p><strong>Examples of convex functions in <span class="math notranslate nohighlight">\(\mathbb{R}^{n \times m}\)</span>:</strong></p>
+<ul class="simple">
+<li><p>affine: <span class="math notranslate nohighlight">\(\text{Tr}(A^\top X) = \left[\sum_{i = 1}^n \sum_{j = 1}^m A_{ij} X_{ij}\right] + b\)</span></p></li>
+<li><p>spectral norm: <span class="math notranslate nohighlight">\(f(X) = ||X||_2 = \sigma_{\text{max}}(X) = \lambda^{1/2}_{\text{max}}(X^\top X)\)</span>, where <span class="math notranslate nohighlight">\(\lambda_{\text{max}}(\cdot)\)</span> is the maximum eigenvalue of a matrix.</p></li>
+</ul>
+</div>
+<div class="section" id="restriction-to-a-line">
+<span id="cvx-restrict"></span><h2>Restriction to a line<a class="headerlink" href="#restriction-to-a-line" title="Permalink to this headline">¶</a></h2>
+<div class="lemma">
+<p><strong>Lemma (Restriction to a line)</strong> A function <span class="math notranslate nohighlight">\(f\)</span> from <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> is convex if and only if the restriction <span class="math notranslate nohighlight">\(g\)</span> of <span class="math notranslate nohighlight">\(f\)</span> on any line, is also convex</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+g(t) = f(x + tv),~~~\textbf{dom}~g = \{t~|~x + tv \in \textbf{dom}~f\},
+\end{align}\]</div>
+<p>for any <span class="math notranslate nohighlight">\(x \in \textbf{dom}~f, v \in \mathbb{R}^n\)</span>.</p>
+</div>
+<br>
+<p><strong>Example use of restriction:</strong> Using the above result we can prove the convexity of quite complicated functions. Take for example the function <span class="math notranslate nohighlight">\(\log \det : \mathbf{S}_{++}^n \to \mathbb{R}\)</span> and restrict it to a line along matrix <span class="math notranslate nohighlight">\(V\)</span>. For <span class="math notranslate nohighlight">\(\textbf{dom}~g = \{t~|~X + tV \in \textbf{dom}~f\}\)</span> to be non-empty, <span class="math notranslate nohighlight">\(V\)</span> will have to be symmetric but does not have to be positive-definite. The restricted function <span class="math notranslate nohighlight">\(g\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+g(t) = \log \det (X + tV) &amp;= \log \det X + \log \det (I + tX^{-1/2}VX^{-1/2})\\
+&amp;= \log \det X + \sum_{i = 1}^n  \log (1 + t \lambda_i)
+\end{align}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\lambda_i\)</span> is the <span class="math notranslate nohighlight">\(i^\text{th}\)</span> eigenvalue of <span class="math notranslate nohighlight">\(X^{-1/2}VX^{-1/2}\)</span> and <span class="math notranslate nohighlight">\(X^{-1/2}\)</span> exists because <span class="math notranslate nohighlight">\(X\)</span> is positive-definite. The components <span class="math notranslate nohighlight">\(\log (1 + t \lambda_i)\)</span> are all concave regardless of the value of <span class="math notranslate nohighlight">\(\lambda_i\)</span>, so <span class="math notranslate nohighlight">\(g\)</span> is concave along any line in <span class="math notranslate nohighlight">\(\mathbf{S}_{++}^n\)</span> and thus <span class="math notranslate nohighlight">\(\log \det\)</span> is also concave.</p>
+</div>
+<div class="section" id="extended-value-extension">
+<h2>Extended value extension<a class="headerlink" href="#extended-value-extension" title="Permalink to this headline">¶</a></h2>
+<div class="lemma">
+<p><strong>Lemma (Extended-value extension)</strong> The extended-value extension <span class="math notranslate nohighlight">\(\tilde{f}\)</span> of <span class="math notranslate nohighlight">\(f\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\tilde{f}(x) = f(x) \text{ if } x\in \textbf{dom}~f, \text{ otherwise } \infty.
+\end{align}\]</div>
+</div>
+<br>
+<p>This definition helps to extend the domain of convex functions to a larger set, for example extending <span class="math notranslate nohighlight">\(f(x) = x^2, \textbf{dom}~f = \mathbb{R}_{+}\)</span> from the positive reals <span class="math notranslate nohighlight">\(\mathbb{R}_{+}\)</span> to the whole real line <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> and still have <span class="math notranslate nohighlight">\(\tilde{f}\)</span> be covex.</p>
+</div>
+<div class="section" id="two-conditions-for-convexity">
+<h2>Two conditions for convexity<a class="headerlink" href="#two-conditions-for-convexity" title="Permalink to this headline">¶</a></h2>
+<div class="definition">
+<p><strong>Defintion (First-order differentiability)</strong> A function <span class="math notranslate nohighlight">\(f\)</span> is differentiable if its domain is open and the gradient</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\nabla f(x) = \left(\frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, ..., \frac{\partial f}{\partial x_n} \right)
+\end{align}\]</div>
+<p>exists at each <span class="math notranslate nohighlight">\(x \in \textbf{dom}~f\)</span>.</p>
+</div>
+<br>
+<p>The following first-order condition for convexity follows from this definition.</p>
+<div class="lemma">
+<p><strong>Lemma (First-order condition)</strong> A differentiable function <span class="math notranslate nohighlight">\(f\)</span> with a convex domain is convex if and only if</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+f(x) \geq f(x_0) + \nabla f(x_0)^\top (x - x_0), \text{ for all } x_0, x \in \textbf{dom}~f.
+\end{align}\]</div>
+</div>
+<br>
+<div class="definition">
+<p><strong>Defintion (Second-order differentiability)</strong> A function <span class="math notranslate nohighlight">\(f\)</span> is twice differentiable if its domain is open and the hessian</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\nabla^2 f(x) \in \mathbf{S}^n, \nabla^2 f(x)_{ij} = \frac{\partial^2f(x)}{\partial x_i \partial x_j},~i, j = 1, ..., n,
+\end{align}\]</div>
+<p>exists at each <span class="math notranslate nohighlight">\(x \in \textbf{dom}~f\)</span>.</p>
+</div>
+<br>
+<p>From this definition, the following second-order condition for convexity follows.</p>
+<div class="lemma">
+<p><strong>Lemma (Second-order condition)</strong> A twice differentiable function <span class="math notranslate nohighlight">\(f\)</span> with convex domain is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\text{convex if and only if }\nabla^2 f &amp;\succcurlyeq 0 \text{ for all } x \in \textbf{dom} f\\
+\text{strictly convex if }\nabla^2 f &amp;\succ 0 \text{ for all } x \in \textbf{dom} f.
+\end{align}\end{split}\]</div>
+</div>
+<br>
+<p>Note <span class="math notranslate nohighlight">\(f\)</span> can be stricly convex and still have <span class="math notranslate nohighlight">\(\nabla^2 f = 0\)</span> for some <span class="math notranslate nohighlight">\(x\)</span> - take for example <span class="math notranslate nohighlight">\(f(x) = x^4\)</span>.</p>
+</div>
+<div class="section" id="examples-of-convex-functions">
+<h2>Examples of convex functions<a class="headerlink" href="#examples-of-convex-functions" title="Permalink to this headline">¶</a></h2>
+<p>Here are some examples of convex functions. For some, it is easy to see they are convex, while for others it is more challenging.</p>
+<p><strong>Quadratic form</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+f(x) = \frac{1}{2} x^\top P x + q^\top x + r \text{ for } P \succ 0.
+\end{align}\]</div>
+<p><strong>Least squares</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+f(x) = ||Ax - b||_2^2 \text{ for any } A, b.
+\end{align}\]</div>
+<p><strong>Quadratic-over-linear</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+f(x, y) = \frac{x^2}{y} \text{ for } y &gt; 0.
+\end{align}\]</div>
+<p><strong>Log-sum-exp or soft-max</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+f(x) = \log \sum_{n = 1}^N e^{x_k}.
+\end{align}\]</div>
+<p><strong>Geometric mean</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+f(x) = \left(\prod_{i = 1}^n x_i\right)^{1/n} \text{ where } x &gt; 0.
+\end{align}\]</div>
+<p>When in doubt, one can plot the values of the function being tested, along randomly chosen lines in the space. This is a useful heuristic which can help eliminate non-convex functions with minimal effort. Since a function is convex if and only if <a class="reference internal" href="#cvx-restrict"><span class="std std-ref">its restriction along any line is also convex</span></a>, we can be certain the function is not convex if any of its restrictions are not convex. If all the restrictions appear convex, we can then move in and try to prove that the function itself is.</p>
+</div>
+<div class="section" id="epigraphs-and-sublevel-sets">
+<h2>Epigraphs and sublevel sets<a class="headerlink" href="#epigraphs-and-sublevel-sets" title="Permalink to this headline">¶</a></h2>
+<div class="definition">
+<p><strong>Defintion (Sublevel set)</strong> The <span class="math notranslate nohighlight">\(\boldsymbol{\alpha}\)</span>-sublevel set of <span class="math notranslate nohighlight">\(f\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+C_\alpha = \{x \in \textbf{dom}~f~|~f(x) \leq \alpha \},
+\end{align}\]</div>
+<p>the set of <span class="math notranslate nohighlight">\(x\)</span> for which <span class="math notranslate nohighlight">\(f(x)\)</span> is no larger than <span class="math notranslate nohighlight">\(\alpha\)</span>. Sublevel sets of convex functions are convex.</p>
+</div>
+<br>
+<div class="definition">
+<p><strong>Defintion (Epigraph)</strong> The epigraph of <span class="math notranslate nohighlight">\(f : \mathbb{R}^n \to \mathbb{R}\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\textbf{epi}~f = \{(x, t) \in \mathbb{R}^{n + 1} : x \in \textbf{dom}~f, f(x \leq t)\},
+\end{align}\]</div>
+<p>the set of points which are on or above <span class="math notranslate nohighlight">\(f\)</span> in <span class="math notranslate nohighlight">\(\mathbb{R}^{n + 1}\)</span>.</p>
+</div>
+<br>
+</div>
+<div class="section" id="jensen-s-inequality">
+<h2>Jensen’s inequality<a class="headerlink" href="#jensen-s-inequality" title="Permalink to this headline">¶</a></h2>
+<p>The definition of a convex function</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+f\big(\theta x + (1 - \theta)y\big) \leq \theta f(x) + (1 - \theta)f(y),
+\end{align}\]</div>
+<p>is a special case of Jensen’s inequality.</p>
+<div class="theorem">
+<p><strong>Theorem (Jensen’s inequality)</strong> If <span class="math notranslate nohighlight">\(f\)</span> is convex and <span class="math notranslate nohighlight">\(\mathbb{E}\)</span> is the expectation over a random variable <span class="math notranslate nohighlight">\(x\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+f\big(\mathbb{E}[x]\big) \leq \mathbb{E}\big[f(x)\big].
+\end{align}\]</div>
+</div>
+<br>
+</div>
+<div class="section" id="establishing-convexity">
+<h2>Establishing convexity<a class="headerlink" href="#establishing-convexity" title="Permalink to this headline">¶</a></h2>
+<p>We have seen two main ways through which we can establish the convexity of a function. The first is to directly verify the definition, for example by restricting to an arbitrary line and showing the restricted function is convex. The second is to show the Hessian is positive semi-definite – provided the function is twice differentiable.</p>
+<p>A third way is to show that a convex function can be expressed in terms of operations that preserve convexity. The following is a list of operations which preserve convexity.</p>
+<div class="lemma">
+<p><strong>Lemma (Nonnegative multiple)</strong> <span class="math notranslate nohighlight">\(\alpha f\)</span> is convex if <span class="math notranslate nohighlight">\(f\)</span> is convex and <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>.</p>
+</div>
+<br>
+<div class="lemma">
+<p><strong>Lemma (Sum of convex functions)</strong> If <span class="math notranslate nohighlight">\(f_1\)</span> and <span class="math notranslate nohighlight">\(f_2\)</span> are convex, <span class="math notranslate nohighlight">\(f_1 + f_2\)</span> is convex. This extends to infinite sums and integrals.</p>
+</div>
+<br>
+<div class="lemma">
+<p><strong>Lemma (Composition with affine function)</strong> <span class="math notranslate nohighlight">\(f(Ax + b)\)</span> is convex if <span class="math notranslate nohighlight">\(f\)</span> is convex.</p>
+</div>
+<br>
+<div class="lemma">
+<p><strong>Lemma (Pointwise maximum)</strong> If <span class="math notranslate nohighlight">\(f_1, ..., f_n\)</span> are convex, then the following is convex</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+f(x) = \max \{f_1(x), f_2(x), ..., f_n(x)\}.
+\end{align}\]</div>
+</div>
+<br>
+<div class="lemma">
+<p><strong>Lemma (Pointwise supremum)</strong> If <span class="math notranslate nohighlight">\(f(x, y)\)</span> is convex in <span class="math notranslate nohighlight">\(x\)</span> for each <span class="math notranslate nohighlight">\(y \in \mathcal{Y}\)</span>, then the following is convex</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\DeclareMathOperator*{\sup}{sup} g(x) = \sup_{y \in \mathcal{Y}}f(x, y).
+\end{align}\]</div>
+</div>
+<br>
+<div class="lemma">
+<p><strong>Lemma (Composition with scalar function)</strong> Given functions <span class="math notranslate nohighlight">\(g : \mathbb{R}^n \to \mathbb{R}\)</span> and <span class="math notranslate nohighlight">\(h : \mathbb{R} \to \mathbb{R}\)</span> their composition</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+f(x) = h(g(x)),
+\end{align}\]</div>
+<p>is convex if (1) <span class="math notranslate nohighlight">\(g\)</span> is convex, <span class="math notranslate nohighlight">\(h\)</span> is convex and <span class="math notranslate nohighlight">\(\tilde{h}\)</span> is nondecreasing; if (2) <span class="math notranslate nohighlight">\(g\)</span> is concave, <span class="math notranslate nohighlight">\(h\)</span> is convex and <span class="math notranslate nohighlight">\(\tilde{h}\)</span> is nonincreasing.</p>
+</div>
+<br>
+<div class="lemma">
+<p><strong>Lemma (Vector composition)</strong> Composition with scalar functions can be extended to composition of vector functions. Suppose Given functions <span class="math notranslate nohighlight">\(g : \mathbb{R}^n \to \mathbb{R}^k\)</span> and <span class="math notranslate nohighlight">\(h : \mathbb{R}^k \to \mathbb{R}\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+f(x) = h\big(g(x)\big) = h\big(g_1(x), g_2(x), ..., g_k(x)\big),
+\end{align}\]</div>
+<p>is convex if (1) <span class="math notranslate nohighlight">\(g_i\)</span> are all convex, <span class="math notranslate nohighlight">\(h\)</span> is convex and <span class="math notranslate nohighlight">\(\tilde{h}\)</span> non-decreasing in each argument; (2) <span class="math notranslate nohighlight">\(g_i\)</span> are all concave, <span class="math notranslate nohighlight">\(h\)</span> is convex and <span class="math notranslate nohighlight">\(\tilde{h}\)</span> non-increasing in each argument.</p>
+</div>
+<br>
+<div class="lemma">
+<p><strong>Lemma (Minimisation)</strong> If <span class="math notranslate nohighlight">\(f\)</span> is convex in <span class="math notranslate nohighlight">\((x, y)\)</span> and <span class="math notranslate nohighlight">\(C\)</span> is a convex nonempty set, then</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+g(x) = \inf_{y \in C} f(x, y)
+\end{align}\]</div>
+<p>is convex in <span class="math notranslate nohighlight">\(x\)</span>, provided <span class="math notranslate nohighlight">\(g(x) &lt; - \infty\)</span> for all <span class="math notranslate nohighlight">\(x\)</span>.</p>
+</div>
+<br>
+<p>We provide two alternative proofs from Boyd and Vandenberghe below. The first shows the result, while the second gives additional intuition for a special case involving additional assumptions.</p>
+<details class="proof">
+<summary>Proof: Minimisation</summary>
+<p><strong>Proof (a)</strong> The first proof confirms Jensen’s inequality. Since <span class="math notranslate nohighlight">\(C\)</span> may be open and the definition involves an infimum, this proof involves an analysis argument. For any <span class="math notranslate nohighlight">\(y_1, y_2 \in C\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+g(\theta x_1 + (1 - \theta) x_2) &amp;= \inf_{y \in C} f(\theta x_1 + (1 - \theta) x_2, y) \\
+                                 &amp;\leq f(\theta x_1 + (1 - \theta) x_2, \theta y_1 + (1 - \theta) y_2) \\
+                                 &amp;\leq \theta f(x_1, y_1) + (1 - \theta) f(x_2, y_2)
+\end{align}\end{split}\]</div>
+<p>where from the first to the second line we have upper-bounded the infimum over <span class="math notranslate nohighlight">\(y\)</span> by inserting <span class="math notranslate nohighlight">\(y = \theta y_1 + (1 - \theta) y_2\)</span> and using the fact that <span class="math notranslate nohighlight">\(C\)</span> is convex -  so since <span class="math notranslate nohighlight">\(y_1, y_2 \in C\)</span>, we also have <span class="math notranslate nohighlight">\(\theta y_1 + (1 - \theta) y_2\)</span>. From the second to the third we have used the convexity of <span class="math notranslate nohighlight">\(f\)</span>.</p>
+<p>Now, since we have assumed that <span class="math notranslate nohighlight">\(g(x) &lt; - \infty\)</span> for all <span class="math notranslate nohighlight">\(x\)</span>, then for any <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> there exist <span class="math notranslate nohighlight">\(y_1, y_2 \in C\)</span> such that <span class="math notranslate nohighlight">\(f(x_i, y_i) \leq g(x_i) + \epsilon\)</span>. So for any <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> there exist <span class="math notranslate nohighlight">\(y_1, y_2 \in C\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+g(\theta x_1 + (1 - \theta) x_2) &amp;\leq \theta g(x_1) + (1 - \theta) g(x_2) + \epsilon
+\end{align}\]</div>
+<p>holds, proving the result. We see that the <span class="math notranslate nohighlight">\(\epsilon\)</span> argument is necessary to handdle the possibility that the infimum over <span class="math notranslate nohighlight">\(y\)</span> may not be attained in <span class="math notranslate nohighlight">\(C\)</span>, either because <span class="math notranslate nohighlight">\(C\)</span> is open or because <span class="math notranslate nohighlight">\(f\)</span> is monotonic decreasing along some direction.</p>
+<div class="figure align-default" id="cvx-infimum">
+<a class="reference internal image-reference" href="../../_images/cvx-infimum.svg"><img alt="../../_images/cvx-infimum.svg" height="300px" src="../../_images/cvx-infimum.svg" width="750px" /></a>
+</div>
+<p>In the figure above, <span class="math notranslate nohighlight">\(C\)</span> is the set of points above the curve and <span class="math notranslate nohighlight">\(y^*\)</span> minimises <span class="math notranslate nohighlight">\(f(\theta x_1 + (1 - \theta) x_2, y)\)</span>. At the convex combination of <span class="math notranslate nohighlight">\((x_1, y_1)\)</span> and <span class="math notranslate nohighlight">\((x_2, y_2)\)</span>, the function <span class="math notranslate nohighlight">\(f\)</span> attains a value larger than the one it attains at <span class="math notranslate nohighlight">\((\theta x_1 + (1 - \theta) x_2, y^*)\)</span>. Since this holds for any <span class="math notranslate nohighlight">\(y_1, y_2\)</span>, we see that by chosing <span class="math notranslate nohighlight">\(y_1, y_2\)</span> such that <span class="math notranslate nohighlight">\(f(x_i, y_i) \leq g(x_i, y_i) + \epsilon\)</span> for a sequence of vanishing <span class="math notranslate nohighlight">\(\epsilon\)</span>, the result must also follow.</p>
+<p><strong>Proof (b)</strong> We can get some additional intuition, by considering the special case where the infimum over <span class="math notranslate nohighlight">\(y\)</span> is attained in <span class="math notranslate nohighlight">\(C\)</span>, for every <span class="math notranslate nohighlight">\(x\)</span>. In this case we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\text{epi}~g = \{(x, t)~|~(x, y, t) \in \text{epi}~f \text{ for some } y \in C\},
+\end{align}\]</div>
+<p>which is a convex set because it is the projection of a convex set on a subset of the axes of the space it belongs.</p>
+</details>
+<br>
+<div class="lemma">
+<p><strong>Lemma (Perspective preserves convexity)</strong> If <span class="math notranslate nohighlight">\(f\)</span> is a convex function, then its perspective function <span class="math notranslate nohighlight">\(g\)</span> given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+g(x, t) = tf\left(\frac{x}{t}\right),
+\end{align}\]</div>
+<p>with domain <span class="math notranslate nohighlight">\(\text{dom}~g = \{(x, t) | x/t \in \text{dom}~f, t &gt; 0\}\)</span> is also convex.</p>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Perspective preserves convexity</summary>
+<p>The epigraphs of <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> satisfy</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+(x, t, y) \in \text{epi}~g &amp;\doublearrow tf\left(\frac{x}{t}\right) \leq y \\
+                           &amp;\doublearrow f\left(\frac{x}{t}\right) \leq \frac{y}{t} \\
+                           &amp;\left(\frac{x}{t}, \frac{y}{t}\right) \in \text{epi}~f.
+\end{align}\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+(\frac{x}{t}, \frac{y}{t}\right) \in \text{epi}~f &amp;\doublearrow f\left(\frac{x}{t}\right) \leq \frac{y}{t} \\
+                                                  &amp;\doublearrow tf\left(\frac{x}{t}\right) \leq y \\
+                                                  &amp;\doublearrow (x, t, y) \in \text{epi}~g \\
+\end{align}\end{split}\]</div>
+<p>Therefore, the epigraph of <span class="math notranslate nohighlight">\(g\)</span> is the inverse image of the epigraph of <span class="math notranslate nohighlight">\(f\)</span> under the perspective function. Since <span class="math notranslate nohighlight">\(\text{epi}~f\)</span> is a convex set, so is its inverse image under the perspective function, so <span class="math notranslate nohighlight">\(\text{epi}~g\)</span> is convex.</p>
+</details>
+<br>
+</div>
+<div class="section" id="conjugate-function">
+<h2>Conjugate function<a class="headerlink" href="#conjugate-function" title="Permalink to this headline">¶</a></h2>
+<div class="definition">
+<p><strong>Definition (Conjugate function)</strong> Given a function <span class="math notranslate nohighlight">\(f : \mathbb{R}^n \to \mathbb{R}\)</span>, its conjugate <span class="math notranslate nohighlight">\(f^* : \mathbb{R}^n \to \mathbb{R}\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+f^*(y) = \sup_{x \in \text{dom}~f} \left(y^\top x - f(x)\right).
+\end{align}\]</div>
+</div>
+<br>
+<p>The conjugate <span class="math notranslate nohighlight">\(f^*\)</span> of a function is always convex, even if <span class="math notranslate nohighlight">\(f\)</span> is not convex.</p>
+<div class="lemma">
+<p><strong>Lemma (Conjugate is convex)</strong> Suppose <span class="math notranslate nohighlight">\(f\)</span> is a convex function. Then its conjugate <span class="math notranslate nohighlight">\(f^*\)</span> is convex.</p>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Conjugate is convex</summary>
+<p>The conjugate of a function is the pointwise supremum of a set of affine (and thus convex) functions, and it is therefore convex.</p>
+</details>
+<br>
+<div class="lemma">
+<p><strong>Lemma (Convex <span class="math notranslate nohighlight">\(f \implies f^{**} = f\)</span>)</strong> Suppose <span class="math notranslate nohighlight">\(f\)</span> is convex. Then the conjugate of its conjugate is the original function</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+f^{**} = f
+\end{align}\]</div>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Convex \(f \implies f^{**} = f\)</summary>
+<p>Suppose <span class="math notranslate nohighlight">\(f\)</span> is a convex function and define its conjugate</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+f^*(y) = \sup_{x \in \text{dom}~f} \left(y^\top x - f(x)\right),
+\end{align}\]</div>
+<p>and the conjugate of the conjugate</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+f^{**}(x) = \sup_{y \in \text{dom}~f^{*}} \left(x^\top y - f^*(y)\right).
+\end{align}\]</div>
+<p>Note that <span class="math notranslate nohighlight">\(-f^*(y)\)</span> is the largest <span class="math notranslate nohighlight">\(y\)</span>-intercept that a plane with slope <span class="math notranslate nohighlight">\(y\)</span> which underestimates <span class="math notranslate nohighlight">\(f\)</span> can have. Given an in input <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(f^{**}(x)\)</span> is equal to the supremum of <span class="math notranslate nohighlight">\(x^\top y - f^*(y)\)</span> over <span class="math notranslate nohighlight">\(y\)</span>. This is the pointwise supremum of all planes with slope <span class="math notranslate nohighlight">\(y\)</span> and intercept <span class="math notranslate nohighlight">\(-f^*(y)\)</span>. Consider a point <span class="math notranslate nohighlight">\((x, t)\)</span> in the epigraph of <span class="math notranslate nohighlight">\(f\)</span>. This point is contained in the epigraphs of all affine functions with slope <span class="math notranslate nohighlight">\(y\)</span> and intercept <span class="math notranslate nohighlight">\(-f^*(y)\)</span>. Therefore, it is also contained in the epigraph of the pointwise supremum of these affine functions, which is equal to <span class="math notranslate nohighlight">\(f^{**}\)</span>, and <span class="math notranslate nohighlight">\(\text{epi}~f \subseteq \text{epi}~f^{**}\)</span>. Conversely, if <span class="math notranslate nohighlight">\((x, t)\)</span> is contained in the epigraph <span class="math notranslate nohighlight">\(f^{**}\)</span>, then it is contained in the epigraph of the pointwise supremum of all affine underestimators of <span class="math notranslate nohighlight">\(f\)</span> and is therefore also contained in the epigraph of <span class="math notranslate nohighlight">\(f\)</span>, so <span class="math notranslate nohighlight">\(\text{epi}~f^{**} \subseteq \text{epi}~f\)</span>. Thus <span class="math notranslate nohighlight">\(\text{epi}~f = \text{epi}~f^{**}\)</span> and <span class="math notranslate nohighlight">\(f = f^{**}\)</span>.</p>
+</details>
+<br>
+</div>
+<div class="section" id="quasiconvex-functions">
+<h2>Quasiconvex functions<a class="headerlink" href="#quasiconvex-functions" title="Permalink to this headline">¶</a></h2>
+<div class="definition">
+<p><strong>Definition (Quasiconvex, quasiconcave, quasilinear)</strong> A function <span class="math notranslate nohighlight">\(f : \mathbb{R}^n \to \mathbb{R}\)</span> is quasiconvex (or unimodal) if its domain and all sublevel sets are convex. A function <span class="math notranslate nohighlight">\(f\)</span> is quasiconcave if <span class="math notranslate nohighlight">\(-f\)</span> is quasiconvex. If a function is both quasiconvex and quasiconcave, we say it is quasilinear.</p>
+</div>
+<br>
+<div class="lemma">
+<p><strong>Lemma (Jensen’s inequality for quasiconvex functions)</strong> A function <span class="math notranslate nohighlight">\(f\)</span> is quasiconvex if</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+f\left(\theta x + (1 - \theta) y\right) = \max \left\{f(x), f(y)\right\},
+\end{align}\]</div>
+<p>for all <span class="math notranslate nohighlight">\(\theta \in [0, 1]\)</span> and all <span class="math notranslate nohighlight">\(x, y \in \text{dom}~f\)</span>.</p>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Jensen's inequality for quasiconvex functions</summary>
+<p>Suppose <span class="math notranslate nohighlight">\(f\)</span> is quasiconvex and consider <span class="math notranslate nohighlight">\(x, y \in \text{dom}~f\)</span>. Then the sublevel set</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+S_{\alpha} = \left\{z | z \leq \alpha\right\}, \text{ where } \alpha = \max \left\{f(x), f(y)\right\},
+\end{align}\]</div>
+<p>is convex and therefore contains all convex combinations of <span class="math notranslate nohighlight">\(x, y\)</span>, which is equivalent to the condition</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+f\left(\theta x + (1 - \theta) y\right) = \max \left\{f(x), f(y)\right\}.
+\end{align}\]</div>
+<p>Conversely, suppose that for any <span class="math notranslate nohighlight">\(x, y \in \text{dom}~f\)</span> the above inequality holds. We see that if <span class="math notranslate nohighlight">\(x, y\)</span> are in the sublevel set <span class="math notranslate nohighlight">\(S_{\alpha}\)</span>, then any convex combination of <span class="math notranslate nohighlight">\(x, y\)</span> satisfies</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+f\left(\theta x + (1 - \theta) y\right) = \max \left\{f(x), f(y)\right\} \leq \alpha
+\end{align}\]</div>
+<p>so <span class="math notranslate nohighlight">\(\theta x + (1 - \theta) y \in S_{\alpha}\)</span>.</p>
+</details>
+<br>
+<p>As for convex functions, when a function is differentiable, we have conditions for quasiconvexity based on deerivative information. There is a first-order necessary and sufficient condition as well as a second order necessary condition for quasiconvexity.</p>
+<div class="lemma">
+<p><strong>Lemma (First order condition for quasiconvexity)</strong> Suppose <span class="math notranslate nohighlight">\(f\)</span> is differentiable. Then <span class="math notranslate nohighlight">\(f\)</span> is quasiconvex if and only if</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+f(x_1) \leq f(x_2) \implies \nabla f(x_2)^\top (x_2 - x_1) \leq 0.
+\end{align}\]</div>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: First order condition for quasiconvexity</summary>
+<p>Suppose the condition</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+f(x_1) \leq f(x_2) \implies \nabla f(x_2)^\top (x_2 - x_1) \leq 0
+\end{align}\]</div>
+<p>holds and let <span class="math notranslate nohighlight">\(x_1, x_2 \in \text{dom}~f\)</span> be such that <span class="math notranslate nohighlight">\(f(x_1) \leq f(x_2)\)</span>. Now, constrain the function <span class="math notranslate nohighlight">\(f\)</span> to the line <span class="math notranslate nohighlight">\(\alpha x_1 + (1 - \alpha) x_2\)</span>, and fix <span class="math notranslate nohighlight">\(\theta \in [0, 1]\)</span>. If the point <span class="math notranslate nohighlight">\(\theta x_1 + (1 - \theta) x_2\)</span> is not in the sub-<span class="math notranslate nohighlight">\(f(x_2)\)</span> set of <span class="math notranslate nohighlight">\(f\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+f(\theta x_1 + (1 - \theta) x_2) &gt; f(x_2),
+\end{align}\]</div>
+<p>so there must exist <span class="math notranslate nohighlight">\(\alpha \in [0, 1]\)</span>, such that <span class="math notranslate nohighlight">\(\nabla f(\theta x_1 + (1 - \theta) x_2) &lt; 0\)</span></p>
+<p>Since sub-level sets are closed This means that any given sub-level set is the intersection of a set of halfplanes, that is the halfplanes whose boundary is tangent to the boundary of the sublevel set. Th</p>
+<p>Suppose <span class="math notranslate nohighlight">\(f\)</span> is quasiconvex and differentiable, and consider <span class="math notranslate nohighlight">\(x_1, x_2 \in \text{dom}~f\)</span> such that <span class="math notranslate nohighlight">\(f(x_1) \leq f(x_2)\)</span>. Now, constrain the function <span class="math notranslate nohighlight">\(f\)</span> to the line <span class="math notranslate nohighlight">\(\alpha x_1 + (1 - \alpha) x_2\)</span>. If</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\nabla f(x_2)^\top (x_2 - x_1) &gt; 0
+\end{align}\]</div>
+<p>then there exists sufficiently small <span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+f(\alpha x_1 + (1 - \alpha) x_2) &gt; 0
+\end{align}\]</div>
+<p>which means that the level set of <span class="math notranslate nohighlight">\(f\)</span> constrained along the line is disconnected, which contradicts the assumption that <span class="math notranslate nohighlight">\(f\)</span> is quasiconvex. Therefore</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+f(x_1) \leq f(x_2) \implies \nabla f(x_2)^\top (x_2 - x_1) \leq 0.
+\end{align}\]</div>
+</details>
+<br></div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./content/cvx"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="ch02.html" title="previous page">Convex sets</a>
+    <a class='right-next' id="next-link" href="../gp/gp-intro.html" title="next page">Gaussian Processes</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Stratos Markou<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-168728006-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    
+  </body>
+</html>

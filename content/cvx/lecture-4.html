@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Introduction to Convex Optimisation &#8212; Random walks</title>
+    <title>Operations that preserve convexity &#8212; Random walks</title>
     
   <link rel="stylesheet" href="../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -56,7 +56,7 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <link rel="canonical" href="https://random-walks.org/content/convex-optimisation/lecture-1.html" />
+    <link rel="canonical" href="https://random-walks.org/content/cvx/lecture-4.html" />
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -66,10 +66,10 @@
 
 
 <!-- Opengraph tags -->
-<meta property="og:url"         content="https://random-walks.org/content/convex-optimisation/lecture-1.html" />
+<meta property="og:url"         content="https://random-walks.org/content/cvx/lecture-4.html" />
 <meta property="og:type"        content="article" />
-<meta property="og:title"       content="Introduction to Convex Optimisation" />
-<meta property="og:description" content="Introduction to Convex Optimisation  If you are reading this, you probably need no convincing that optimisation is an extremely important topic and that a great" />
+<meta property="og:title"       content="Operations that preserve convexity" />
+<meta property="og:description" content="Operations that preserve convexity  Vector composition  Maximisation  Minimisation  PerspectiveVector compositionMaximisationMinimisationPerspectiveThe conjugat" />
 <meta property="og:image"       content="https://random-walks.org/_static/logo.svg" />
 
 <meta name="twitter:card" content="summary" />
@@ -169,6 +169,30 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../prob-intro/ch12/content.html">
      Markov chains
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="intro.html">
+   Convex optimisation
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch01.html">
+     Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch02.html">
+     Convex sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch03.html">
+     Convex functions
     </a>
    </li>
   </ul>
@@ -322,7 +346,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/content/convex-optimisation/lecture-1.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../../_sources/content/cvx/lecture-4.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -347,7 +371,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/stratisMarkou/random-walks/master?urlpath=tree/./content/convex-optimisation/lecture-1.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/stratisMarkou/random-walks/master?urlpath=tree/./content/cvx/lecture-4.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../../_static/images/logo_binder.svg"
@@ -369,19 +393,36 @@
         </div>
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#least-squares">
-   Least squares
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Operations that preserve convexity
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#vector-composition">
+     Vector composition
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#maximisation">
+     Maximisation
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#minimisation">
+     Minimisation
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#perspective">
+     Perspective
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#linear-programming">
-   Linear programming
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#convex-optimisation">
-   Convex optimisation
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-conjugate-function">
+   The conjugate function
   </a>
  </li>
 </ul>
@@ -395,40 +436,24 @@
         
               <div>
                 
-  <div class="section" id="introduction-to-convex-optimisation">
-<h1>Introduction to Convex Optimisation<a class="headerlink" href="#introduction-to-convex-optimisation" title="Permalink to this headline">¶</a></h1>
-<p>If you are reading this, you probably need no convincing that optimisation is an extremely important topic and that a great deal of applications can be viewed as optimisation problems. Unfortunately, most optimisation problems are very difficult to solve, in the sense that they are computationally expensive to solve exactly (e.g. global optimisation or Travelling Salesman). An even greater number of problems do not have a nice closed-form solution which we can write down (e.g. Linear Programmes) - in fact there are very few problems which do.</p>
-<p>However, the fact that a problem does not have a closed-form solution, does not imply the exact solution cannot be computed, or that the problem is a expensive to solve. Neither does it mean that the problem is more expensive to solve than other similar problems with closed-form solutions.</p>
-<p>Convex optimisation refers to a family of optimisation problems - problems with a convex cost and convex constraints - which in general do not have nice closed-form solutions, but can nontheless be solved exactly.</p>
-<div class="section" id="least-squares">
-<h2>Least squares<a class="headerlink" href="#least-squares" title="Permalink to this headline">¶</a></h2>
-<p>Least squares is an unconstrained optimisation problem of the form:</p>
-<p>\begin{align}
-&amp;\text{minimise}&amp;&amp;~~f_0(x) = ||Ax - b||_2^2
-\end{align}</p>
-<p>where <span class="math notranslate nohighlight">\(x \in \mathbb{R}^n\)</span>, <span class="math notranslate nohighlight">\(b \in \mathbb{R}^m\)</span> and <span class="math notranslate nohighlight">\(A \in \mathbb{R}^{m\times n}\)</span>.</p>
+  <div class="section" id="operations-that-preserve-convexity">
+<h1>Operations that preserve convexity<a class="headerlink" href="#operations-that-preserve-convexity" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="vector-composition">
+<h2>Vector composition<a class="headerlink" href="#vector-composition" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="linear-programming">
-<h2>Linear programming<a class="headerlink" href="#linear-programming" title="Permalink to this headline">¶</a></h2>
-<p>A linear programme is an optimisation problem of the form:</p>
-<p>\begin{align}
-&amp;\text{minimise}&amp;&amp;~~c^\top x\
-&amp;\text{subject to}&amp;&amp;~~a_i^\top x \leq b_i, \text{ for } i = 1, 2, …, n
-\end{align}</p>
+<div class="section" id="maximisation">
+<h2>Maximisation<a class="headerlink" href="#maximisation" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="convex-optimisation">
-<h2>Convex optimisation<a class="headerlink" href="#convex-optimisation" title="Permalink to this headline">¶</a></h2>
-<p>Least squares and linear programmes both fall in a wider family of optimisation problems, which this couurse is all about. An optimisation problem is convex if it can be written as:</p>
-<p>\begin{align}
-&amp; \text{minimise }&amp;&amp;~~f_0(x)\
-&amp; \text{subject to }&amp;&amp;~~f_n(x) \leq b_n, \text{ for } i = 1, 2, …, N\
-&amp; &amp;&amp;~~a_m^\top x = c_m, \text{ for } m = 1, 2, …, M\
-\end{align}</p>
-<p>where <span class="math notranslate nohighlight">\(f_i\)</span> are all convex functions. A function <span class="math notranslate nohighlight">\(f\)</span> is convex if and only if:</p>
-<p>\begin{align}
-f\big(\theta x + (1 - \theta) y\big) \leq \theta f(x) + (1 - \theta) f(y), \theta \in [0, 1].
-\end{align}</p>
+<div class="section" id="minimisation">
+<h2>Minimisation<a class="headerlink" href="#minimisation" title="Permalink to this headline">¶</a></h2>
 </div>
+<div class="section" id="perspective">
+<h2>Perspective<a class="headerlink" href="#perspective" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+<div class="section" id="the-conjugate-function">
+<h1>The conjugate function<a class="headerlink" href="#the-conjugate-function" title="Permalink to this headline">¶</a></h1>
+<p><strong>Conjuugate function:</strong> The conjugate function of <span class="math notranslate nohighlight">\(f\)</span> is defined as $<span class="math notranslate nohighlight">\(\DeclareMathOperator*{\sup}{sup}f^*(y) = \sup_{x \in \textbf{dom} f}\left(y^\top x - f(x)\right),\)</span><span class="math notranslate nohighlight">\( and is convex for any \)</span>f$.</p>
 </div>
 
     <script type="text/x-thebe-config">
@@ -444,7 +469,7 @@ f\big(\theta x + (1 - \theta) y\big) \leq \theta f(x) + (1 - \theta) f(y), \thet
         },
         kernelOptions: {
             kernelName: "venv-random-walks",
-            path: "./content/convex-optimisation"
+            path: "./content/cvx"
         },
         predefinedOutput: true
     }
