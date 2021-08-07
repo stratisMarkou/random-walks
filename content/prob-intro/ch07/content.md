@@ -42,15 +42,11 @@ We are often interested in the extent to which two random variables co-vary, a
 </div>
 <br>
 
-Clearly, if we multiply $X$ and $Y$ by $a$ and $b$ respectively, their
- covariance will change by a factor of $ab$. We may be interested
-  in a scale-invariant metric of the covariance between two random variables
-  , captured by the correlation coefficient.
+Clearly, if we multiply $X$ and $Y$ by $a$ and $b$ respectively, their covariance will change by a factor of $ab$. We may be interested in a scale-invariant metric of the covariance between two random variables, captured by the correlation coefficient.
 
 <div class='definition'>
 
-**Definition (Correlation coefficient)** If $X$ and $Y$ are random variables
-, then their correlation coefficient is denoted $\rho(X, Y)$ and defined as
+**Definition (Correlation coefficient)** If $X$ and $Y$ are random variables, then their correlation coefficient is denoted $\rho(X, Y)$ and defined as
  
  $$\begin{align}
  \rho(X, Y) = \frac{\text{cov}(X, Y)}{\sqrt{\text{var}(X)\text{var}(Y)}},
@@ -63,9 +59,7 @@ Clearly, if we multiply $X$ and $Y$ by $a$ and $b$ respectively, their
 </div>
 <br>
 
-The correlation coefficient of two random variables has absolute value less
- than or equal to $1$, as stated by the following result which is worth
-  bearing in mind.
+The correlation coefficient of two random variables has absolute value less than or equal to $1$, as stated by the following result which is worth bearing in mind.
 
 <div class="theorem">
 
@@ -81,8 +75,7 @@ The correlation coefficient of two random variables has absolute value less
 </div>
 <br>
 
-The above result can be shown quickly from an application of the Cauchy
--Schwartz inequality stated and proved below.
+The above result can be shown quickly from an application of the Cauchy-Schwartz inequality stated and proved below.
 
 <details class="proof">
 <summary>Proof: \(-1 \leq \rho(X, Y) \leq 1\) </summary>
@@ -121,15 +114,21 @@ whenever these expectations exist.
 
 Let $s \in \mathbb{R}$ be a real number and $W = sU + V$ be a random variable. Then $W^2 \geq 0$ and we have 
 
-\begin{align}\mathbb{E}(X^2) = a s^2 + b s + c \geq 0,\end{align}
+$$\begin{align}
+\mathbb{E}(X^2) = a s^2 + b s + c \geq 0,
+\end{align}$$
     
 where $a = \mathbb{E}(U^2)$, $b = 2\mathbb{E}(UV)$ and $\mathbb{E}(V^2)$. Since $\mathbb{E}(W^2) \geq 0$ holds for all values of $s$, then the quadratic above can equal zero at most once - because otherwise it would achieve negative values. Therefore we have 
-
-\begin{align}b^2 - 4ac = 4\mathbb{E}(UV)^2 - 4\mathbb{E(U^2)\mathbb{E}(V^2) \leq 0,\end{align}
+    
+$$\begin{align}
+b^2 - 4ac = 4\mathbb{E}(UV)^2 - 4\mathbb{E}(U^2)\mathbb{E}(V^2) \leq 0,
+\end{align}$$
     
 from which we arrive at the result
     
-\begin{align}\mathbb{E}(UV)^2 &\leq \mathbb{E}(U^2)\mathbb{E}(V^2).\end{align}
+$$\begin{align}
+\mathbb{E}(UV)^2 \leq \mathbb{E}(U^2)\mathbb{E}(V^2).
+\end{align}$$
 
 </details>
 <br>
@@ -220,21 +219,22 @@ Here are examples of moment generating functions of some common continuous rando
 ### Uniform
 
 If $X$ is uniformly distributed in $[a, b]$, then its mgf is
-\begin{align}
+
+$$\begin{align}
 M_X(t) = \frac{e^{tb} - e^{ta}}{t}.
-\end{align}
+\end{align}$$
 
 ### Exponential
 
 If $X$ is exponentially distributed with parameter $\lambda$, then its mgf is
-\begin{align}
+
+$$\begin{align}
 M_X(t) = \frac{\lambda}{\lambda - t}.
-\end{align}
+\end{align}$$
 
 ### Normal
 
-If $X$ is normally distributed with parameters $\mu$, $\sigma^2 > 0$, then
- its mgf is
+If $X$ is normally distributed with parameters $\mu$, $\sigma^2 > 0$, then its mgf is
  
  $$\begin{align}
  M_X(t) = \exp\left(\mu t + \frac{\sigma^2t}{2}\right).
@@ -248,17 +248,15 @@ $$\begin{align}
 \int^\infty_{-\infty} \frac{e^{tx}}{1 + x^2} dx,
 \end{align}$$
 
-diverges for any $t \neq 0$. Many other variables do not have mgfs for the
- same reason, a difficulty that is circumvented by characteristic functions
-  defined below.
+diverges for any $t \neq 0$. Many other variables do not have mgfs for the same reason, a difficulty that is circumvented by characteristic functions defined below.
 
 ### Gamma
 
-If $X$ is gamma distributed with parameters $w > 0$ and $\lambda > 0$, then
- its mgf is
-\begin{align}
+If $X$ is gamma distributed with parameters $w > 0$ and $\lambda > 0$, then its mgf is
+
+$$\begin{align}
 M_X(t) = \left(\frac{\lambda}{\lambda - t}\right)^w.
-\end{align}
+\end{align}$$
 
 (prob-intro-markov-jensen)=
 ## Markov and Jensen inequalities
@@ -282,10 +280,17 @@ The Markov inequality is a useful result that bounds the probability that a
 <summary>Proof: Markov inequality</summary>
 
 For any non-negative random variable $X(\omega)$ and positive $t > 0$, we have
-\begin{align}X(\omega) \geq t \mathbb{1}_{X \geq t},\end{align}
+    
+$$\begin{align}
+X(\omega) \geq t \mathbb{1}_{X \geq t},
+\end{align}$$
+    
 where $\mathbb{1}_{X \geq t} = 1$ if $X(\omega) \geq t$ and $\mathbb{1}_{X\geq t} = 0$
 otherwise. Rearranging and taking expectations, we obtain 
-\begin{align}\mathbb{P}(X \geq t) = \frac{\mathbb{E}(X)}{t}.\end{align}
+
+$$\begin{align}
+\mathbb{P}(X \geq t) = \frac{\mathbb{E}(X)}{t}.
+\end{align}$$
 
 </details>
 <br>
@@ -341,17 +346,21 @@ It can be proved quickly by applying the supporting tangent
 <summary>Proof: Jensen's inequality</summary>
 
 From the supporting tangent theorem we have
-\begin{align}g(X) \geq g(w) + \alpha (X - w),\end{align}
-and by setting the constant $w = \mathbb{E}(X)$ and taking an expectation
- over $X$, the $X - w$ term cancels and we obtain Jensen's inequality
- \begin{align}\mathbb{E}[g(X)] \geq g(\mathbb{E}(X)).\end{align}
+    
+$$\begin{align}
+g(X) \geq g(w) + \alpha (X - w),
+\end{align}$$
+    
+and by setting the constant $w = \mathbb{E}(X)$ and taking an expectation over $X$, the $X - w$ term cancels and we obtain Jensen's inequality
+    
+$$\begin{align}
+\mathbb{E}[g(X)] \geq g(\mathbb{E}(X)).
+\end{align}$$
 
 </details>
 <br>
 
-The supporting tangent theorem says that for any point $w$ in the domain of a
- convex function $g$, we can always find a line passing through $(w, g(w))$
- , which lower-bounds the function.
+The supporting tangent theorem says that for any point $w$ in the domain of a convex function $g$, we can always find a line passing through $(w, g(w))$, which lower-bounds the function.
 
 <div class="theorem">
 
@@ -369,19 +378,30 @@ The supporting tangent theorem says that for any point $w$ in the domain of a
 <summary>Proof: Supporting tangent theorem</summary>
 
 Since $g$ is convex, we have
-\begin{align}\frac{g(w) - g(u)}{w - u} \leq \frac{g(v) - g(w)}{v - w},\end{align}
-otherwise $g$ could not be convex, because $g(w)$ would be strictly less
- than the linear interpolation between $g(u)$ and $g(v)$ at $w$. The above
-  inequality holds for all $u < w < v$, we can maximise the left hand side
-   over $u$ and the right hand side over $v$ and obtain $L_w \leq R_w$, where
-    \begin{align}L_w = \sup\left\\{\frac{g(w) - g(u)}{w - u} : u < w\right\\}, R_w
-     = \inf\left\\{\frac{g(v) - g(w)}{v - w} : v < w\right\\}.\end{align}
-    we can then take $\alpha \in [L_w, R_w]$ and see that
-    \begin{align}\frac{g(w) - g(u)}{w - u} \leq \alpha \leq \frac{g(v) - g(w)}{v- w}.\end{align}
-    By rearranging the two sides of the above equation we obtain
-    \begin{align}g(x) \geq g(w) + \alpha (x - w),\end{align}
-    for the cases where $x = u < w$ and $x = v > w$ respectively. The
-     inequality holds trivially for $x = w$.
+
+$$\begin{align}
+\frac{g(w) - g(u)}{w - u} \leq \frac{g(v) - g(w)}{v - w},
+\end{align}$$
+
+otherwise $g$ could not be convex, because $g(w)$ would be strictly less than the linear interpolation between $g(u)$ and $g(v)$ at $w$. The above inequality holds for all $u < w < v$, we can maximise the left hand side over $u$ and the right hand side over $v$ and obtain $L_w \leq R_w$, where
+    
+$$\begin{align}
+L_w = \sup\left\{\frac{g(w) - g(u)}{w - u} : u < w\right\}, R_w = \inf\left\{\frac{g(v) - g(w)}{v - w} : v < w\right\}.
+\end{align}$$
+
+we can then take $\alpha \in [L_w, R_w]$ and see that
+    
+$$\begin{align}
+\frac{g(w) - g(u)}{w - u} \leq \alpha \leq \frac{g(v) - g(w)}{v- w}.
+\end{align}$$
+    
+By rearranging the two sides of the above equation we obtain
+    
+$$\begin{align}
+g(x) \geq g(w) + \alpha (x - w),
+\end{align}$$
+    
+for the cases where $x = u < w$ and $x = v > w$ respectively. The inequality holds trivially for $x = w$.
 
 </details>
 <br>
@@ -446,9 +466,7 @@ As with the mgf, the characteristic function of a random variable is unique, in 
 
 <div class="theorem">
 
-**Theorem (Uniqueness of characteristic functions)** Let $X$ and $Y$ have
- characteristic functions $\phi_X$ and $\phi_Y$. Then $X$ and $Y$ have the
-  same distributions if and only if $\phi_X(t) = \phi_Y(t)$ for all $\mathbb{R}$.
+**Theorem (Uniqueness of characteristic functions)** Let $X$ and $Y$ have characteristic functions $\phi_X$ and $\phi_Y$. Then $X$ and $Y$ have the same distributions if and only if $\phi_X(t) = \phi_Y(t)$ for all $\mathbb{R}$.
 
 </div>
 <br>

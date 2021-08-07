@@ -2,9 +2,7 @@
 
 ## About
 
-Welcome to Random Walks! This is an archive of explorations, in the convex
- hull of Inference, Probability, Optimisation and Physics. I am putting this
-  together to keep track of the things I study.
+Welcome to Random Walks! This is an archive of explorations, in the convex hull of Inference, Probability, Optimisation and Physics. I am putting this together to keep track of the things I study.
 
 ## Modes under exploration
 
@@ -17,18 +15,32 @@ Welcome to Random Walks! This is an archive of explorations, in the convex
 
 ## New on Random Walks
 
-[13/02/2021] Notes and a demo for the paper: [Gaussian process approximations of stochastic differential equations](./misc/sde-as-gp/sde-as-gp.ipynb).
+[09/06/2021] Notes and demo on [Efficient Sampling from GP posteriors](./gp/sparse/gp-sampling).
 
-[01/02/2021] Additional material on Conjugate Gradients (CG).
+[05/05/2021] Notes and demo on [Variational Sparse Gaussian Processes](./gp/sparse/vfe).
 
-[21/01/2021] Notes and demo on Natural Cubic Splinces (NCS).
+[30/04/2021] Notes and demo on [Additive Gaussian Processes](./misc/addgp/addgp).
 
-[14/01/2021] Notes and demo on the Adaptive Rejection Sampling (ARS) algorithm.
+[19/04/2021] Notes and demo on [Stein Variational Gradient Descent](./misc/svgd/svgd).
 
-[12/10/2020] {doc}`A short set of notes deriving Conjugate Gradients <./content/misc/optimisation/conjugate-gradients>`.
+[02/04/2021] Notes and demo on [Random Fourier Features](./misc/rff/rff).
 
-[10/09/2020] {ref}`Rough notes on the last three chapters <prob-intro>` of Grimmett and Welsh, *An Introduction to Probability*.
+[20/03/2021] Notes and demo on [Interacting particle solutions of FPK equations through GLD estimation](./misc/interacting/interacting).
 
-[06/09/2020] {ref}`Notes on the first nine chapters <prob-intro>` (out of 12) of Grimmett and Welsh, *An Introduction to Probability*. Three more to come soon.
+[10/03/2021] Short notes on the paper: [Estimation of non-normalized statistical models by score matching](./misc/score-matching/score-matching).
 
-[25/07/2020] A {doc}`reproduction <./content/misc/sde/num-sde.ipynb>` of Higham, *An algorithmic Introduction to Numerical Simulation of Stochastic Differential Equations*.
+[13/02/2021] Notes and a demo for the paper: [Gaussian process approximations of stochastic differential equations](./misc/sde-as-gp/sde-as-gp).
+
+[01/02/2021] Additional material on [Conjugate Gradients](./misc/optimisation/conjugate-gradients).
+
+[21/01/2021] Notes and demo on [Natural Cubic Splinces](./misc/ncs/ncs).
+
+[14/01/2021] Notes and demo on [Adaptive Rejection Sampling](./misc/ars/ars).
+
+[12/10/2020] Short notes on [Conjugate Gradients](./misc/optimisation/conjugate-gradients)
+
+[10/09/2020] Short notes on the last three chapters of Grimmett and Welsh, *An Introduction to Probability*.
+
+[06/09/2020] Short notes on the first nine chapters (out of 12) of Grimmett and Welsh, *An Introduction to Probability*.
+
+[25/07/2020] A reproduction of the paper: [Higham, *An algorithmic Introduction to Numerical Simulation of SDEs*](./misc/sde/num-sde).
