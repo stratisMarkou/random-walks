@@ -15,6 +15,10 @@ Welcome to Random Walks! This is an archive of explorations, in the convex hull 
 
 ## New on Random Walks
 
+[03/09/2021] Notes on the [Gumbel distribution](./misc/gumbel/gumbel).
+
+[01/09/2021] My [first year report](https://www.overleaf.com/read/wwcwwjgbfdnz) for the PhD at Cambridge.
+
 [07/08/2021] [Convex Optimisation notes](./cvx/intro) on first three chapters of Boyd and Vandenberghe.
 
 [09/06/2021] Notes and demo on [Efficient Sampling from GP posteriors](./gp/sparse/gp-sampling).
