@@ -8,6 +8,7 @@ This section deals with linear maps and their properties. Linear maps are functi
 \newcommand{\M}{\mathcal{M}} 
 \newcommand{\F}{\mathbb{F}} $
 
+(linalg-vector-space)=
 ## Vector space of linear maps
 
 Linear maps are one of the central objects of linear algebra. As the name suggests, linear maps are linear functions between vector spaces.
@@ -121,7 +122,7 @@ Products of linear maps satisfy the following useful properties.
 
 **Lemma (Properties of products of linear maps)** Products of linear maps satisfy the following properties
     
-- **Associativity:** Suppose $T_n \in \mathcal{L}(U_{n+1}, U_{n})$ for $n = 1, 2, 3$. Then
+- **Associativity:** Suppose $T_n \in \mathcal{L}(U_n, U_{n-1})$ for $n = 1, 2, 3$. Then
     
 $$\begin{align}
 (T_1 T_2) T_3 = T_1 (T_2 T_3)
@@ -173,7 +174,10 @@ which implies $S (T_1 + T_2) = ST_1 ST_2$.
 </details>
 <br>
     
-However, multiplication of linear maps is not commutative (even if the domains and ranges of the two linear maps are compatible), because in general function composition is not commutative. We conclude this section with the following unsurprising lemma on linear maps, which is useful for subsequent proofs.
+However, multiplication of linear maps is not commutative (even if the domains and ranges of the two linear maps are compatible), because in general function composition is not commutative. 
+
+    
+We also have the following lemma, which is unsurprising but useful for subsequent proofs.
 
 
 <div class="lemma">
@@ -189,7 +193,9 @@ However, multiplication of linear maps is not commutative (even if the domains a
     
 We have
     
-$T(0) = T(0 + 0) = T(0) + T(0) \implies T(0) = 0.$
+$$\begin{align}
+T(0) = T(0 + 0) = T(0) + T(0) \implies T(0) = 0.
+\end{align}$$
 
 </details>
 <br>
@@ -200,7 +206,7 @@ $T(0) = T(0 + 0) = T(0) + T(0) \implies T(0) = 0.$
 ## Null spaces and ranges
     
 
-This section introduces null spaces and ranges of linear maps. The null space and range of a linear map are closely related and central to the study of linear maps and vector spaces.
+This section introduces null spaces and ranges of linear maps. The null space and range of a linear map are closely related.
     
 (linalg-inj-surj)=
 ### Injective and surjective
@@ -250,14 +256,14 @@ Tu = Tv \implies u = v.
 
 <div class="lemma">
 
-**Lemma (Injective $\iff$ $\text{null}~T = \{0\}$)** Suppose $T \in \mathcal{L}(V, W)$. Then $T$ is injective if and only if $\null T = \{0\}$.
+**Lemma (Injective $\iff$ $\null~T = \{0\}$)** Suppose $T \in \mathcal{L}(V, W)$. Then $T$ is injective if and only if $\null T = \{0\}$.
     
 </div>
 <br>
 
 
 <details class="proof">
-<summary>Proof: Injective \(\iff\) \(\text{null}~T = \{0\}\)</summary>
+<summary>Proof: Injective \(\iff\) \(\null~T = \{0\}\)</summary>
     
 Suppose $T \in \mathcal{L}(V, W)$. If $T$ is injective, then
     
@@ -699,6 +705,7 @@ $$\begin{align}
 <br>
 
 
+(linalg-inv-iso)=
 ## Invertibility and Isomorphism
     
 <div class="definition">
@@ -1170,4 +1177,294 @@ v + u_1 = w + u_2 \implies v - w = (u_2 - u_1) \in U,
 showing the first condition holds. Thus the three conditions are equivalent.
 
 </details>
+<br>
+    
+    
+We can define addition and scalar multiplication on elements of $V / U$ in the following way.
+    
+    
+<div class="definition">
+
+**Definition (Addition and scalar multiplication on $V / U$)** Suppose $U$ is a subspace of $V$. TThen addition and scalar multiplication are defined on $V / U$ by
+    
+$$\begin{align}
+(v + U) + (w + U) &= (v + w) + U, \\
+\lambda (v + U) &= (\lambda v) + U,
+\end{align}$$
+    
+where $v, w \in V$ and $\lambda \in \mathbb{F}$.
+    
+</div>
+<br>
+    
+<details class="proof">
+<summary>Detail: Addition and scalar multiplication on \(V / U\)</summary>
+    
+One detail related to this definition is that an affine subset $v + U$ may have multiple representations, because if $\hat{v} = v + u, u \in U$, then we have $v + U = \hat{v} + U$. We would therefore like to show that addition and scalar multiplication are well defined, in the sense that we get the same result no matter which representation we use.
+    
+In particular, suppose that $v + U = \hat{v} + U$ and $w + U = \hat{w} + U$ and $\lambda \in \mathbb{F}$. Since $v + U = \hat{v} + U$, we have $v - \hat{v} \in U$, and similarly $w - \hat{w} \in U$. Then
+    
+$$\begin{align}
+(v - \hat{v}) + (w - \hat{w}) \in U \implies (v + w) - (\hat{v} + \hat{w}) \in U \implies (v + w) + U = (\hat{v} + \hat{w}) + V.
+\end{align}$$
+    
+Similarly, we have
+    
+$$\begin{align}
+(v - \hat{v}) \in U \implies \lambda (v - \hat{v}) \in U \implies \lambda v - \lambda \hat{v} \in U \implies (\lambda v) + U = \lambda \hat{v} + U.
+\end{align}$$
+
+</details>
+<br>
+    
+    
+With these definitions of addition and scalar multiplication, $V / U$ constitutes a vector space.
+    
+<div class="lemma">
+
+**Lemma (Quotient space is a vector space)** Suppose $U$ is a subspace of $V$. Then $V / U$, with addition and scalar multiplication as defined above is a vector space.
+    
+</div>
+<br>
+    
+    
+<details class="proof">
+<summary>Proof: Quotient space is a vector space</summary>
+    
+By the definition of $V / U$ and the definitions of addition and scalar multiplication on $V / U$, we see that $V / U$ satisfies {ref}`all requirements<linalg-vectorspace>` for being a vector space.
+
+</details>
+<br>
+    
+Now, for convenience, we define the quotient map $\pi$ which, for a given $U$, maps vectors to corresponding affine subsets $v + U$.
+    
+<div class="definition">
+
+**Definition (Quotient map)** Suppose $U$ is a subspace of $V$. The quotient map $\pi$ is the linear map $\pi : V \to V / U$ defined by
+    
+$$\begin{align}
+\pi(v) = v + U,
+\end{align}$$
+    
+for $v \in V$.
+    
+</div>
+<br>
+    
+    
+<div class="lemma">
+
+**Lemma (Dimension of a quotient space)** Suppose $V$ is finite-dimensional and $U$ is a subspace of $V$. Then
+    
+$$\begin{align}
+\text{dim} V / U = \text{dim} V - \text{dim} U
+\end{align}$$
+    
+</div>
+<br>
+    
+<details class="proof">
+<summary>Proof: Dimension of a quotient space</summary>
+    
+Using the fundamental theorem of linear algebra on $\pi$ we have
+    
+$$\begin{align}
+\text{dim} V / U = \text{dim range} \pi + \text{dim null} \pi.
+\end{align}$$
+
+</details>
+<br>
+    
+    
+    
+<div class="definition">
+
+**Definition ($\tilde{T}$ map on $V / (\null {T})$)** Suppose $T \in \mathcal{L}(V, W)$. We define $\tilde{T} : V / (\null T) \to W$ by
+    
+$$\begin{align}
+\tilde{T}(v + \null T) = Tv.
+\end{align}$$
+    
+</div>
+<br>
+    
+    
+<details class="proof">
+<summary>Detail: \(\tilde{T}\) map on \(V / (\null {T})\)</summary>
+    
+As with scalar addition and multiplication on $V / U$, here too we might worry about whether or not $\tilde{T}$ is well-defined. In particular, suppose $u, v \in V$. Then
+
+$$\begin{align}
+u + (\null T) = v + (\null T) \implies u - v \in \null T \implies \tilde{T} (u + \null{T}) = \tilde{T} (v + \null{T}),
+\end{align}$$
+
+which shows that $\tilde{T}$ is well defined.
+
+</details>
+<br>
+    
+    
+<div class="lemma">
+
+**Lemma (Null space and range of $\tilde{T}$)** Suppose $T \in \mathcal{L}(V, W)$. Then the following hold
+    
+- $\tilde{T}$ is a linear map from $V / (\null T)$ to $W$.
+- $\tilde{T}$ is injecive.
+- $\range \tilde{T} = \range T$.
+- $V / (\null T)$ is isomorphic to $\range T$.
+
+</div>
+<br>
+    
+    
+<details class="proof">
+<summary>Detail: Null space and range of \(\tilde{T}\)</summary>
+    
+First, $\tilde{T}$ satisfies the requirements for being a linear map, namely additivity and homogeneity, so it is a linear map.
+    
+Second, to show that $\tilde{T}$ is injective, suppose $\tilde{T} (v + \null T) = 0$ for some $v$. Then $Tv = 0$ which implies $v \in \null T$ so $v + \null T = 0 + \null T$. Therefore $0 + \null T = 0$ where the first zero is in $V$ and the second zero is in $V / (\null T)$. Thus $\tilde{T}$ is injective.
+    
+Third, to show that $\range \tilde{T} = \range T$, it suffices to consider the definition of $\tilde{T}$.
+    
+Last, from the previous two results, if we define $\tilde{T}$ to be a map from $V / (\null T)$ to $\range T$, then $\tilde{T}$ is injective, and also surjective, so it is an isomorphism.
+
+</details>
+<br>
+    
+
+(linalg-duality)=
+## Duality
+    
+    
+<div class="definition">
+
+**Definition (Linear functional)** A linear functional on $V$ is a linear map from $V$ to $\mathbb{F}$. In other words, it is an element of $\mathcal{L}(V, \mathbb{F})$.
+    
+</div>
+<br>
+    
+    
+<div class="definition">
+
+**Definition (Dual space)** The dual space of $V$, written $V'$, is the vector space of all linear functionals on $V$, that is $V' = \mathcal{L}(V, \mathbb{F})$.
+    
+</div>
+<br>
+    
+    
+<div class="lemma">
+
+**Lemma ($\dim V = \dim V'$)** Suppose $V$ is finite dimensional. Then $V'$ is also finite-dimensional and $\dim V = \dim V'$.
+
+</div>
+<br>
+    
+    
+<details class="proof">
+<summary>Detail: \(\dim V = \dim V'\)</summary>
+    
+Suppose $V$ is finite dimensional. Then, {ref}`as shown above<linalg-inv-iso>`, the following holds
+    
+$$\begin{align}
+\dim \mathcal{L}(V, W) = (\dim V) (\dim W) \implies \dim \mathcal{L}(V, \mathbb{F}) = (\dim V) (\dim \mathbb{F}) = \dim V.
+\end{align}$$
+
+</details>
+<br>    
+    
+    
+<div class="definition">
+
+**Definition (Dual basis)** If $v_1, \dots, v_n$ is a basis of $V$, then the dual basis of $v_1, \dots, v_n$ is the list $\phi_1, \dots, \phi_n$ of elements of $V'$ where
+    
+$$\begin{align}
+\phi_j(v_k) = \begin{cases}
+1 & \text{ if } k = j, \\
+0 & \text{ if } k \neq j.
+\end{cases}
+\end{align}$$
+    
+</div>
+<br>
+    
+    
+<details class="proof">
+<summary>Detail: Dual basis is well defined</summary>
+    
+One detail we might want to check is that given a basis $v_1, \dots, v_n$ of $V$, the dual basis $\phi_1, \dots, \phi_n$ of $V'$ exists. We have {ref}`already shown<linalg-vector-space>` that given two vector spaces $V$ with basis $v_1, \dots, v_n$ and $W$ is another vector space with $w_1, \dots, w_n \in W$, there exists a unique linear map such that
+
+$$\begin{align}
+Tv_i = w_i, \text{ for } i = 1, \dots, n.
+\end{align}$$
+    
+Then for given $j \in \{1, \dots, n\}$, we can label $T = \phi_j$, let $W = \mathbf{F}$ and set
+    
+$$\begin{align}
+w_k = \begin{cases}
+1 & \text{ if } k = j, \\
+0 & \text{ if } k \neq j,
+\end{cases}
+\end{align}$$
+    
+confirming that $\phi_j$ does exist and is unique.
+    
+</details>
+<br>   
+    
+    
+<div class="lemma">
+
+**Lemma (Dual basis is a basis)** Suppose $v_1, \dots, v_n$ is a basis of $V$. Then the dual basis $\phi_1, \dots, \phi_n$ is a basis of $V'$.
+
+</div>
+<br>
+    
+    
+<details class="proof">
+<summary>Detail: Dual basis is a basis of the dual space</summary>
+    
+Suppose $v_1, \dots, v_n$ is a basis of $V$ and $\phi_1, \dots, \phi_n$ be the corresponding dual basis. Suppose there exist $c_1, \dots, c_n$ such that
+    
+$$\begin{align}
+\phi = c_1 \phi_1 + \dots + c_n \phi_n = 0.
+\end{align}$$
+    
+Then we have
+    
+$$\begin{align}
+\phi = c_1 \phi_1(v_i) + \dots + c_n \phi_n(v_i) = 0, \text{ for } i = 1, \dots, n
+\end{align}$$
+    
+which implies that $\phi$ is zero for all elements in $\text{span}(v_1, \dots, v_n) = V$. Therefore $\phi$ is the zero map $\phi = 0 \in \mathcal{L}(V, \mathbb{F})$ which in turn implies that the $\phi_1, \dots, \phi_n$ are all linearly independent. Since the $\phi_1, \dots, \phi_n$ are a linearly independent list of the correct length ($\dim V = \dim V'$), they constitute a basis for $V'$.
+    
+</details>
+<br>
+    
+    
+<div class="definition">
+
+**Definition (Dual map)** If $T \in \mathcal{L}(V, W)$, then its dual map $T' \in \mathcal{L}(W', V')$ is
+    
+$$\begin{align}
+T'(\phi) = \phi \circ T,
+\end{align}$$
+    
+where $\phi \in W'$.
+    
+</div>
+<br>
+    
+Therefore, while $T$ acts on $v \in V$ to produce $w \in W$, the dual map $T'$ acts on $\phi \in W'$ to produce $\psi = \phi \circ T \in V'$.
+    
+    
+    
+<div class="lemma">
+
+**Lemma (Properties of dual maps)** Let $S, T \in \mathcal{L}(V, W)$. Then any dual maps $S', T' \in \mathcal{L}(W', V')$ satisfy
+    
+- $(S + T)' = S' + T'$.
+- $(\lambda S)' = \lambda S'$ for all $\lambda \in \mathbb{F}$.
+- $(ST)' = T'S'$.
+
+</div>
 <br>
