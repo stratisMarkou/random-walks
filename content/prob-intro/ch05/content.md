@@ -14,7 +14,7 @@ Extending the definition of a discrete random variable allows us to deal
 
 <div class='definition'>
 
-**Definition (Random variable)** A discrete random variable $X$ is a
+**Definition (Random variable)** A random variable $X$ is a
  function $X : \Omega \to \mathbb{R}$ such that for every $x \in \mathbb{R}$
   we have $\{\omega \in \Omega : X(\omega) = x\} \in \mathcal{F}$.
 

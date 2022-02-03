@@ -176,8 +176,7 @@ Indicator functions are a useful tool for problems involving counting of
 
 <br>
 
-One example use of indicator functions is the proof of the **inclusion
- exclusion formula**:
+One example use of indicator functions is the proof of the **inclusion exclusion formula**:
  
 $$\begin{align}
 \mathbb{P}\left(\bigcup^N_{n=1} A_n\right) = \sum_{n} \mathbb{P}(A_{n
