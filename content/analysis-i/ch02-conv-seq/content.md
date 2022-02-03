@@ -1,30 +1,34 @@
 # Convergence of sequences
 
-This section introduces sequences and deals with results regarding their convergence.
+This section introduces sequences and defines the convergence of sequences.
+Sequences are central in analysis and are used to study, and prove results for, virtually everything in this field.
 
 (analysis-i-sequences)=
 ## Sequences
 
-Although sequences are familiar to us, we define them explicitly as functions mapping from the natural numbers $\mathbb{N} = \{1, 2, 3, ...\}$ to the real numbers $\mathbb{R}$.
+Although sequences may already be familiar to us, here we define them explicitly.
+Formally, a sequence of is a function mapping the natural numbers $\mathbb{N} = \{1, 2, 3, ...\}$ to some other set, such as the real numbers $\mathbb{R}$.
 
 <div class="definition">
 
-**Definition (Sequence)** A sequence $a$ is a function $a : \mathbb{N} \to \mathbb{R}$ (or $\mathbb{C}$). We denote the terms of the sequence as $a_n$ and an alternative notation for the sequence itself is $(a_n)$.
+**Definition (Sequence)** A sequence $a$ is a function $a : \mathbb{N} \to \mathbb{R}$ (or $\mathbb{C}$).
+We denote the terms of the sequence as $a_n$ and an alternative notation for the sequence itself is $(a_n)$.
     
 </div>
 <br>
 
-Now we can define what it means for a sequence to converge. Informally a sequence converges to a limit $\ell$ if after a certain term, all subsequent terms are within a small distance to $\ell$, where the small distance can be chosen to be arbitrarily small.
+Now we can define what it means for a sequence to converge.
+Informally a sequence converges to a limit $\ell$ if after a certain term in the sequence, all subsequent terms are within a small distance to $\ell$, where the small distance can be chosen to be arbitrarily small.
 
 <div class="definition">
 
-**Definition (Convergence of a sequence)** Let $(a_n)$ be a sequence and $\ell \in \mathbb{R}$. We say that $a_n$ converges to $\ell$, tends to $\ell$ or $a_n \to \ell$, if
+**Definition (Convergence of a sequence)** Let $(a_n)$ be a sequence and $\ell \in \mathbb{R}$. We say that $a_n$ converges to $\ell$, if
     
 $$\begin{align}
 \forall \epsilon > 0, \exists N ~\text{ such that }~ |a_n - \ell| < \epsilon.
 \end{align}$$
     
-In this case, we say that $\ell$ is the limit of $a_n$.
+Equivalently we may say that $a_n$ tends to $\ell$ or $a_n \to \ell$, and we call $\ell$ is the limit of $a_n$.
     
 </div>
 <br>
@@ -33,7 +37,7 @@ Now that we have defined sequence convergence, we can state an equivalent versio
 
 <div class="lemma">
 
-**Lemma (Archimedean property - alternative statement)** The sequence $a_n = \frac{1}{n}$ converges to $0$.
+**Lemma (Archimedean property, alternative statement)** The sequence $a_n = \frac{1}{n}$ converges to $0$.
     
 </div>
 <br>
@@ -64,7 +68,8 @@ arriving at the result.
 </details>
 <br>
     
-Aside from convergence, another important property is boundedness. Intuitively, a sequence is bounded if the size of its terms never exceed a certain size, as defined below.
+Aside from convergence, another important property of sequences is boundedness.
+Intuitively, a sequence is bounded if the size of its terms never exceed a certain size, as defined below.
     
 <div class="definition">
 
@@ -101,7 +106,7 @@ $$\begin{align}
 |a_n| \leq C, \text{ for all } n \geq N.
 \end{align}$$
     
-Now taking $C^* = \max \{|a_1|, |a_2|, ..., |a_{N - 1}|, C\}$, we see that $|a_n| \leq C^*$, so $(a_n)$ is bounded.
+Now taking $C^* = \sup \{|a_1|, |a_2|, ..., |a_{N - 1}|, C\}$, we see that $|a_n| \leq C^*$, so $(a_n)$ is bounded.
 
 </details>
 <br>
@@ -109,7 +114,7 @@ Now taking $C^* = \max \{|a_1|, |a_2|, ..., |a_{N - 1}|, C\}$, we see that $|a_n
     
 ## Convergence lemmas
     
-We now state and prove a number of lemmas about series convergence that come handy later. Once proved, we can state them in future proofs without having to justify us every time.
+We now state and prove a number of lemmas about series convergence that come handy later. Once proved, we can state them in future proofs without having to justify them every time.
     
 Intuitively, if two sequences converge so does the sum of their terms, as stated by the result below.
  
@@ -126,7 +131,7 @@ Intuitively, if two sequences converge so does the sum of their terms, as stated
 Let $\epsilon > 0$. Since $a_n \to a$ and $b_n \to b$, there exists $N$ such that
     
 $$\begin{align}
-|a_n - a| \leq \frac{epsilon}{2} \text{ and } |b_n - b| \leq \frac{epsilon}{2}, \text{ for all } n \geq N.
+|a_n - a| \leq \frac{\epsilon}{2} \text{ and } |b_n - b| \leq \frac{epsilon}{2}, \text{ for all } n \geq N.
 \end{align}$$
     
 Then we have
@@ -172,7 +177,8 @@ so $\lambda a_n$ converges to $\lambda a$.
 <br>
 
    
-If two sequences converge, one of which converges to $0$, then the product of their terms converges to $0$ as well. This is a useful intermediate step for showing that a product of sequences converges to the product of their limits.
+If a sequence converegs to $0$ and another sequence is bounded, then the product of their terms converges to $0$ as well.
+This is a useful intermediate step for showing that a product of sequences converges to the product of their limits.
     
     
 <div class="lemma">
@@ -189,7 +195,7 @@ If two sequences converge, one of which converges to $0$, then the product of th
 If $(a_n)$ is bounded, there exists $C > 0$ such that $|a_n| < C$ for all $n$. Further if $b_n \to 0$, there exists $N$ such that for any value of $\epsilon > 0$
     
 $$\begin{align}
-|b_n - b| < \frac{\epsilon}{C}, \text{ for all } n > N.
+|b_n| < \frac{\epsilon}{C}, \text{ for all } n > N.
 \end{align}$$
     
 For that same $N$ we have
@@ -209,7 +215,7 @@ Another intuitive result is that convergent sequences are bounded.
     
 <div class="lemma">
 
-**Lemma (Convergence $\implies$ bounded)** Every convergent sequence is bounded.
+**Lemma (Convergent $\implies$ bounded)** Every convergent sequence is bounded.
     
 </div>
 <br>
