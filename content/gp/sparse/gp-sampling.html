@@ -103,7 +103,7 @@
     <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="../../home.html">
-   Welcome
+   Random walks
   </a>
  </li>
 </ul>
@@ -304,6 +304,11 @@
      Gumbel distribution
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../misc/gip/gip.html">
+     Global inducing points for BNNs
+    </a>
+   </li>
   </ul>
   <i class="fas fa-chevron-down">
   </i>
@@ -418,6 +423,11 @@
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#sanity-check-and-sampling">
      Sanity check and sampling
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-model">
+     The model
     </a>
    </li>
   </ul>
@@ -577,7 +587,7 @@ f(\cdot) = \boldsymbol{\phi}(\cdot)^\top \mathbf{w} + \mathbf{K}_{\cdot, \Xb} \m
 <div class="section" id="implementation">
 <h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h2>
 <p>We can now implement this algorithm, reusing code from the examples on the <a class="reference internal" href="vfe.html"><span class="doc std std-doc">VFE approximation</span></a>, as well as the <a class="reference internal" href="../../misc/rff/rff.html"><span class="doc std std-doc">RFF approximation</span></a>. First we write down the <code class="docutils literal notranslate"><span class="pre">ConstantMean</span></code> and <code class="docutils literal notranslate"><span class="pre">EQCovariance</span></code> classes, adding the <code class="docutils literal notranslate"><span class="pre">sample_rff</span></code> method to the <code class="docutils literal notranslate"><span class="pre">EQCovariance</span></code> class. This draws an RFF sample from the GP prior, and returns this as a function <code class="docutils literal notranslate"><span class="pre">rff</span></code>, which can be queried and differentiated at any input location in constant time.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input tag_remove-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 <span class="kn">import</span> <span class="nn">tensorflow_probability</span> <span class="k">as</span> <span class="nn">tfp</span>
@@ -780,7 +790,12 @@ f(\cdot) = \boldsymbol{\phi}(\cdot)^\top \mathbf{w} + \mathbf{K}_{\cdot, \Xb} \m
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mf">8.</span><span class="p">,</span> <span class="mf">8.</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$x$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$y$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -788,7 +803,10 @@ f(\cdot) = \boldsymbol{\phi}(\cdot)^\top \mathbf{w} + \mathbf{K}_{\cdot, \Xb} \m
 <div class="cell_output docutils container">
 <img alt="../../../_images/gp-sampling_7_0.svg" src="../../../_images/gp-sampling_7_0.svg" /></div>
 </div>
-<p>Lastly, we must implement</p>
+</div>
+<div class="section" id="the-model">
+<h3>The model<a class="headerlink" href="#the-model" title="Permalink to this headline">¶</a></h3>
+<p>Now let’s implement the GP which we will sample from. We will use the implementation we have for GPs approximated using the <a class="reference internal" href="vfe.html"><span class="doc std std-doc">VFE approximation</span></a>. The only new bit here is the method <code class="docutils literal notranslate"><span class="pre">sample_posterior</span></code>. This method returns a posterior sample, which is itself a function which can be queried at arbitrary inputs.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">VFEGP</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
@@ -823,11 +841,9 @@ f(\cdot) = \boldsymbol{\phi}(\cdot)^\top \mathbf{w} + \mathbf{K}_{\cdot, \Xb} \m
         <span class="bp">self</span><span class="o">.</span><span class="n">log_noise</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">(</span><span class="n">log_noise</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">log_noise</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">log_noise</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable_noise</span><span class="p">)</span>
     
-    
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">noise</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">log_noise</span><span class="p">)</span>
-        
         
     <span class="k">def</span> <span class="nf">post_pred</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_pred</span><span class="p">):</span>
         
@@ -864,7 +880,6 @@ f(\cdot) = \boldsymbol{\phi}(\cdot)^\top \mathbf{w} + \mathbf{K}_{\cdot, \Xb} \m
         <span class="n">var</span> <span class="o">=</span> <span class="n">var</span> <span class="o">+</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">diag_part</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">transpose_a</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
         
         <span class="k">return</span> <span class="n">mean</span><span class="p">,</span> <span class="n">var</span>
-        
         
     <span class="k">def</span> <span class="nf">free_energy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         
@@ -904,7 +919,6 @@ f(\cdot) = \boldsymbol{\phi}(\cdot)^\top \mathbf{w} + \mathbf{K}_{\cdot, \Xb} \m
         
         <span class="k">return</span> <span class="n">free_energy</span>
         
-
     <span class="k">def</span> <span class="nf">sample_posterior</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_features</span><span class="p">):</span>
         
         <span class="c1"># Number of inducing points</span>
@@ -943,7 +957,6 @@ f(\cdot) = \boldsymbol{\phi}(\cdot)^\top \mathbf{w} + \mathbf{K}_{\cdot, \Xb} \m
         
         <span class="k">return</span> <span class="n">post_sample</span>
     
-    
     <span class="k">def</span> <span class="nf">compute_intermediate_matrices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">K_ind_ind</span><span class="p">,</span> <span class="n">K_ind_train</span><span class="p">):</span>
         
         <span class="c1"># Compute the following matrices, in a numerically stable way</span>
@@ -969,7 +982,7 @@ f(\cdot) = \boldsymbol{\phi}(\cdot)^\top \mathbf{w} + \mathbf{K}_{\cdot, \Xb} \m
 <p>Finally, we can train the model on some data. We’ll use two datasets, one consisting of the GP-generated we created earlier, and another containing the sinusoidal data from the <a class="reference internal" href="../../misc/rff/rff.html"><span class="doc std std-doc">RFF example</span></a>.</p>
 <div class="section" id="gp-generated-data">
 <h3>GP generated data<a class="headerlink" href="#gp-generated-data" title="Permalink to this headline">¶</a></h3>
-<p>We train the VFE GP model on the GP-generated data we created earlier - the training procedure is identical to the <a class="reference internal" href="vfe.html"><span class="doc std std-doc">VFE GP example</span></a> -, and visualise approximate samples from the posterior.</p>
+<p>We train the VFE GP model on the GP-generated data we created earlier, the training procedure is identical to the <a class="reference internal" href="vfe.html"><span class="doc std std-doc">VFE GP example</span></a>, and visualise approximate samples from the posterior.</p>
 <div class="cell tag_hide_input tag_center-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set random seed and tensor dtype</span>
@@ -1027,16 +1040,18 @@ f(\cdot) = \boldsymbol{\phi}(\cdot)^\top \mathbf{w} + \mathbf{K}_{\cdot, \Xb} \m
 <span class="n">print_info</span><span class="p">(</span><span class="n">vfe_gp</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
 
 <span class="c1"># Plot posterior</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">vfe_gp</span><span class="p">,</span>
-     <span class="n">ground_truth_cov</span><span class="p">,</span>
-     <span class="n">noise</span><span class="p">,</span>
-     <span class="n">x_pred</span><span class="p">,</span>
-     <span class="n">x_train</span><span class="p">,</span>
-     <span class="n">y_train</span><span class="p">,</span>
-     <span class="n">x_ind_init</span><span class="p">,</span>
-     <span class="n">step</span><span class="p">,</span>
-     <span class="n">plot_post_pred</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-     <span class="n">num_samples</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span>
+    <span class="n">vfe_gp</span><span class="p">,</span>
+    <span class="n">ground_truth_cov</span><span class="p">,</span>
+    <span class="n">noise</span><span class="p">,</span>
+    <span class="n">x_pred</span><span class="p">,</span>
+    <span class="n">x_train</span><span class="p">,</span>
+    <span class="n">y_train</span><span class="p">,</span>
+    <span class="n">x_ind_init</span><span class="p">,</span>
+    <span class="n">step</span><span class="p">,</span>
+    <span class="n">plot_post_pred</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">num_samples</span><span class="o">=</span><span class="mi">10</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1050,7 +1065,7 @@ f(\cdot) = \boldsymbol{\phi}(\cdot)^\top \mathbf{w} + \mathbf{K}_{\cdot, \Xb} \m
 </div>
 <div class="section" id="sinusoidal-data">
 <h3>Sinusoidal data<a class="headerlink" href="#sinusoidal-data" title="Permalink to this headline">¶</a></h3>
-<p>We can also train the model on the <a class="reference internal" href="../../misc/rff/rff.html"><span class="doc std std-doc">sinusoidal data used in the RFF example</span></a>, where we observed that an approximate sparse posterior based solely on RFFs gave a rather poor approximation (see second dataset in example). The poor performance of RFF is due to the fact that an RFF-only model is equivalent to a finite basis function model, whose weights are quickly pinned down once enough data have been observed, leading to overly narrow error bars, a behaviour which is referred to as variance starvation.</p>
+<p>We can also train the model on a dataset similar to the one used in the <a class="reference internal" href="../../misc/rff/rff.html"><span class="doc std std-doc">sinusoidal data used in the RFF example</span></a>, where we observed that an approximate sparse posterior based solely on RFFs gave a rather poor approximation (see second dataset in example). The poor performance of RFF is due to the fact that an RFF-only model is equivalent to a finite basis function model, whose weights are quickly pinned down once enough data have been observed, leading to overly narrow error bars, a behaviour which is referred to as variance starvation.</p>
 <div class="cell tag_center-output tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Number of datapoints to generate</span>
@@ -1059,8 +1074,8 @@ f(\cdot) = \boldsymbol{\phi}(\cdot)^\top \mathbf{w} + \mathbf{K}_{\cdot, \Xb} \m
 <span class="c1"># Generate sinusoidal data with a gap in input space</span>
 <span class="n">x_train_sine</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="n">num_data</span> <span class="o">//</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span>
 <span class="n">x_train_sine</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">x_train_sine</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">x_train_sine</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">x_train_sine</span><span class="p">[:(</span><span class="mi">2</span><span class="o">*</span><span class="n">x_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">//</span><span class="mi">5</span><span class="p">)],</span>
-                               <span class="n">x_train_sine</span><span class="p">[</span><span class="o">-</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">//</span><span class="mi">5</span><span class="p">):]],</span>
+<span class="n">x_train_sine</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">x_train_sine</span><span class="p">[:(</span><span class="mi">2</span><span class="o">*</span><span class="n">x_train_sine</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">//</span><span class="mi">7</span><span class="p">)],</span>
+                               <span class="n">x_train_sine</span><span class="p">[</span><span class="o">-</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x_train_sine</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">//</span><span class="mi">7</span><span class="p">):]],</span>
                               <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">y_train_sine</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x_train_sine</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1e-1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">x_train_sine</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
         
@@ -1073,8 +1088,8 @@ f(\cdot) = \boldsymbol{\phi}(\cdot)^\top \mathbf{w} + \mathbf{K}_{\cdot, \Xb} \m
 <span class="c1"># Format plot</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Toy sinusoidal data&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$x$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$y$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$x$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$y$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
@@ -1115,9 +1130,11 @@ f(\cdot) = \boldsymbol{\phi}(\cdot)^\top \mathbf{w} + \mathbf{K}_{\cdot, \Xb} \m
 <span class="c1"># Initial locations of inducing points</span>
 <span class="n">x_ind_dist1</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="o">*</span><span class="n">inducing_ranges</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="n">x_ind_dist2</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="o">*</span><span class="n">inducing_ranges</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">x_ind_init</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">x_ind_dist1</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">sample_shape</span><span class="o">=</span><span class="p">(</span><span class="n">M</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
-                        <span class="n">x_ind_dist2</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">sample_shape</span><span class="o">=</span><span class="p">(</span><span class="n">M</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))],</span>
-                       <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">x_ind_init</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">x_ind_dist1</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">sample_shape</span><span class="o">=</span><span class="p">(</span><span class="n">M</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
+     <span class="n">x_ind_dist2</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">sample_shape</span><span class="o">=</span><span class="p">(</span><span class="n">M</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))],</span>
+    <span class="n">axis</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
 <span class="n">x_ind_init</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">x_ind_init</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
 
 <span class="c1"># Re-define sparse VFEGP with trainable noise</span>
@@ -1162,21 +1179,23 @@ f(\cdot) = \boldsymbol{\phi}(\cdot)^\top \mathbf{w} + \mathbf{K}_{\cdot, \Xb} \m
                          <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
 
 <span class="c1"># Plot posterior</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">vfe_gp</span><span class="p">,</span>
-     <span class="n">exact_cov</span><span class="p">,</span>
-     <span class="n">noise</span><span class="p">,</span>
-     <span class="n">x_pred</span><span class="p">,</span>
-     <span class="n">x_train_sine</span><span class="p">,</span>
-     <span class="n">y_train_sine</span><span class="p">,</span>
-     <span class="n">x_ind_init</span><span class="p">,</span>
-     <span class="n">step</span><span class="p">,</span>
-     <span class="n">plot_post_pred</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-     <span class="n">num_samples</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span>
+    <span class="n">vfe_gp</span><span class="p">,</span>
+    <span class="n">exact_cov</span><span class="p">,</span>
+    <span class="n">noise</span><span class="p">,</span>
+    <span class="n">x_pred</span><span class="p">,</span>
+    <span class="n">x_train_sine</span><span class="p">,</span>
+    <span class="n">y_train_sine</span><span class="p">,</span>
+    <span class="n">x_ind_init</span><span class="p">,</span>
+    <span class="n">step</span><span class="p">,</span>
+    <span class="n">plot_post_pred</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">num_samples</span><span class="o">=</span><span class="mi">10</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 1000 Free energy:    0.718 Coeff:  0.76 Scales: [1.385] Noise:  0.08
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step: 1000 Free energy:    0.739 Coeff:  0.76 Scales: [1.39] Noise:  0.07
 </pre></div>
 </div>
 <img alt="../../../_images/gp-sampling_15_1.svg" src="../../../_images/gp-sampling_15_1.svg" /></div>

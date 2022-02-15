@@ -103,7 +103,7 @@
     <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="../../home.html">
-   Welcome
+   Random walks
   </a>
  </li>
 </ul>
@@ -304,6 +304,11 @@
      Gumbel distribution
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../gip/gip.html">
+     Global inducing points for BNNs
+    </a>
+   </li>
   </ul>
   <i class="fas fa-chevron-down">
   </i>
@@ -461,15 +466,7 @@
 <p>where <span class="math notranslate nohighlight">\(x, b \in \mathbb{R}^D\)</span>, <span class="math notranslate nohighlight">\(A\)</span> is a symmmetric positive semi-definite matrix. With minor modifications, CG is also applicable to non-quadratic problems.</p>
 <div class="cell tag_hide-input tag_center-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">set_matplotlib_formats</span>
-<span class="n">set_matplotlib_formats</span><span class="p">(</span><span class="s1">&#39;pdf&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">)</span>
-<span class="n">css_style</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../../../_static/custom_style.css&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-<span class="n">HTML</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&lt;style&gt;</span><span class="si">{</span><span class="n">css_style</span><span class="si">}</span><span class="s1">&lt;/style&gt;&#39;</span><span class="p">)</span>
-
-<span class="c1"># Objective function</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define objective function</span>
 <span class="k">def</span> <span class="nf">F</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
     
     <span class="n">F_</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;...i, ij, ...j -&gt; ...&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
@@ -490,7 +487,7 @@
     
     <span class="n">F_</span> <span class="o">=</span> <span class="n">F</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x_grid</span><span class="p">)</span>
     
-    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
     
     <span class="n">levels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">x1_grid</span><span class="p">,</span> <span class="n">x2_grid</span><span class="p">,</span> <span class="n">F_</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;coolwarm&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="n">levels</span><span class="p">)</span>
@@ -517,7 +514,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/conjugate-gradients_1_0.svg" src="../../../_images/conjugate-gradients_1_0.svg" /></div>
+<img alt="../../../_images/conjugate-gradients_2_0.svg" src="../../../_images/conjugate-gradients_2_0.svg" /></div>
 </div>
 <div class="section" id="steepest-descent">
 <h3>Steepest Descent<a class="headerlink" href="#steepest-descent" title="Permalink to this headline">¶</a></h3>
@@ -602,7 +599,7 @@ x_{n + 1} = x_n + \alpha_n g_n, \text{ where } g_n = \nabla F(x_n).
 <span class="n">plot_F</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="c1"># Plot path taken by steepest descent</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_hist</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_hist</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_hist</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_hist</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_hist</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_hist</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Steepest descent&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
@@ -611,7 +608,7 @@ x_{n + 1} = x_n + \alpha_n g_n, \text{ where } g_n = \nabla F(x_n).
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/conjugate-gradients_4_0.svg" src="../../../_images/conjugate-gradients_4_0.svg" /></div>
+<img alt="../../../_images/conjugate-gradients_5_0.svg" src="../../../_images/conjugate-gradients_5_0.svg" /></div>
 </div>
 </div>
 <div class="section" id="conjugate-directions">
@@ -671,16 +668,16 @@ x_{n + 1} = x_n + \alpha_n g_n, \text{ where } g_n = \nabla F(x_n).
 <span class="n">plot_F</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="c1"># Plot path taken by orthogonal search directions</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_hist</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_hist</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_hist</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_hist</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_hist</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_hist</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Descent with orthogonal</span><span class="se">\n</span><span class="s1">search directions&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Descent with orthogonal search directions&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/conjugate-gradients_8_0.svg" src="../../../_images/conjugate-gradients_8_0.svg" /></div>
+<img alt="../../../_images/conjugate-gradients_9_0.svg" src="../../../_images/conjugate-gradients_9_0.svg" /></div>
 </div>
 <p>If the search directions were orthogonal and <span class="math notranslate nohighlight">\(A\)</span> was a diagonal matrix, then the search would reach the optimum within <span class="math notranslate nohighlight">\(D\)</span> steps - see the example below.</p>
 <div class="cell tag_hide-input tag_center-output docutils container">
@@ -704,16 +701,16 @@ x_{n + 1} = x_n + \alpha_n g_n, \text{ where } g_n = \nabla F(x_n).
 <span class="n">plot_F</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="c1"># Plot path taken by orthogonal search directions</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_hist_ortho</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_hist_ortho</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_hist_ortho</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_hist_ortho</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_hist_ortho</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_hist_ortho</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Descent with orthogonal</span><span class="se">\n</span><span class="s1">search directions&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Descent with orthogonal search directions&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/conjugate-gradients_10_0.svg" src="../../../_images/conjugate-gradients_10_0.svg" /></div>
+<img alt="../../../_images/conjugate-gradients_11_0.svg" src="../../../_images/conjugate-gradients_11_0.svg" /></div>
 </div>
 <p>This points at the idea of choosing search directions <span class="math notranslate nohighlight">\(\{d_0, d_1, ..., d_{D - 1}\}\)</span> which are orthogonal in the space spanned by the eigenvectors of <span class="math notranslate nohighlight">\(A\)</span>. Any such set of vectors must be <span class="math notranslate nohighlight">\(A\)</span>-orthogonal in the sense</p>
 <div class="math notranslate nohighlight">
@@ -817,7 +814,7 @@ v_j^\top A v_i = v_j^\top A u_i + \sum_{k = 1}^{i - 1} \beta_{ik} v_j^\top A v_k
 <span class="n">plot_F</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="c1"># Plot path taken using Gram-Schmidt orthogonalised directions</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_hist_gram_schmidt</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_hist_gram_schmidt</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_hist_gram_schmidt</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_hist_gram_schmidt</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_hist_gram_schmidt</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_hist_gram_schmidt</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Descent with Gram-Schmidt&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
@@ -826,7 +823,7 @@ v_j^\top A v_i = v_j^\top A u_i + \sum_{k = 1}^{i - 1} \beta_{ik} v_j^\top A v_k
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/conjugate-gradients_13_0.svg" src="../../../_images/conjugate-gradients_13_0.svg" /></div>
+<img alt="../../../_images/conjugate-gradients_14_0.svg" src="../../../_images/conjugate-gradients_14_0.svg" /></div>
 </div>
 <p>For quadratic <span class="math notranslate nohighlight">\(F\)</span>, conjugate directions (with Gram-Schmidt) converges in <span class="math notranslate nohighlight">\(D\)</span> steps, where <span class="math notranslate nohighlight">\(D\)</span> is the dimensionality of the problem. However, Gram-Schmidt must keep track of all previous search directions and adjust the next search direction to be <span class="math notranslate nohighlight">\(A\)</span>-orthogonal to them, which incurs a memory as well as a computational cost. This brings us to the method Conjugate Gradients (CG), which fixes this issue by picking sensible search directions <span class="math notranslate nohighlight">\(d_0, d_1, ...\)</span>, leveraging the fact that <span class="math notranslate nohighlight">\(f\)</span> is a quadratic form.</p>
 </div>
@@ -858,7 +855,7 @@ d_{n + 1} &amp;= - g_{n + 1} + \beta_n d_n, &amp;&amp; \text{ where } \beta_n = 
 \end{align}\end{split}\]</div>
 <details class="proof">
 <summary>Proof: The Gram-Schmidt coefficients for Conjugate Gradients</summary>
-<p>Consider setting <span class="math notranslate nohighlight">\(u_n = -g_n\)</span>, starting from <span class="math notranslate nohighlight">\(x = x_0\)</span> and evolving according to the transition rules</p>
+<p>Suppose we set <span class="math notranslate nohighlight">\(u_n = -g_n\)</span>, start from <span class="math notranslate nohighlight">\(x = x_0\)</span> and evolve according to the transition rules</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
 x_{n + 1} &amp;= x_n + \alpha_n d_n, \\
@@ -868,36 +865,35 @@ d_{n + 1} &amp;= - g_{n + 1} + \sum_{k = 1}^n \beta_{nk} d_k,
 <p>where the constants <span class="math notranslate nohighlight">\(\beta_{nk}\)</span> are chosen so that the <span class="math notranslate nohighlight">\(d_n\)</span> vectors are all <span class="math notranslate nohighlight">\(A\)</span>-orthogonal. Defining the spanning set</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
-\mathcal{D}_{n + 1} &amp;= \text{span}\{d_0, d_1, d_2, ..., d_n\},
+\mathcal{D}_{n + 1} &amp;= \text{span}~(d_0, d_1, d_2, ..., d_n),
 \end{align}\]</div>
-<p>we can see that minimising the objective by iterative steps along each of these directions is equivalent to minimising the objective jointly over <span class="math notranslate nohighlight">\(x_0 + \mathcal{D}_{n + 1}\)</span>, because the vectors <span class="math notranslate nohighlight">\(\{d_0, d_1, d_2, ..., d_n\}\)</span> are <span class="math notranslate nohighlight">\(A\)</span>-orthogonal. Therefore, the gradient <span class="math notranslate nohighlight">\(g_{n + 1}\)</span> at <span class="math notranslate nohighlight">\(x = x_{n + 1}\)</span> is perpendicular to the spanning set <span class="math notranslate nohighlight">\(\mathcal{D}_{n + 1}\)</span>, otherwise the position <span class="math notranslate nohighlight">\(x_{n + 1}\)</span> would not be a minimiser of the objective within <span class="math notranslate nohighlight">\(x_0 + \mathcal{D}_{n + 1}\)</span>. Therefore we arrive at</p>
+<p>we can see that minimising the objective by minimising the objective along each of the search directionsin turn, is equivalent to minimising the objective jointly over <span class="math notranslate nohighlight">\(x_0 + \mathcal{D}_{n + 1}\)</span>, because the vectors <span class="math notranslate nohighlight">\(\{d_0, d_1, d_2, ..., d_n\}\)</span> are <span class="math notranslate nohighlight">\(A\)</span>-orthogonal. Therefore, the gradient <span class="math notranslate nohighlight">\(g_{n + 1}\)</span> at <span class="math notranslate nohighlight">\(x = x_{n + 1}\)</span> is othogonal (not <span class="math notranslate nohighlight">\(A\)</span>-orthogonal but <span class="math notranslate nohighlight">\(I\)</span>-orthogonal) to the spanning set <span class="math notranslate nohighlight">\(\mathcal{D}_{n + 1}\)</span>, because otherwise the position <span class="math notranslate nohighlight">\(x_{n + 1}\)</span> would not be a minimiser of the objective within <span class="math notranslate nohighlight">\(x_0 + \mathcal{D}_{n + 1}\)</span>, which we can write as</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
 g_n \perp d_m \text{ for all } m &lt; n.
 \end{align}\]</div>
-<p>In addition we observe that the spanning set <span class="math notranslate nohighlight">\(\mathcal{D}_{n + 1}\)</span> can be written as</p>
+<p>In addition we observe that the span <span class="math notranslate nohighlight">\(\mathcal{D}_{n + 1}\)</span> can be written as</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
-\mathcal{D}_{n + 1} &amp;= \text{span}\{d_0, d_1, d_2, ..., d_n\} \\
-              &amp;= \text{span}\{d_0, Ad_0, A^2 d_0, ..., A^{n - 1} d_n\},
+\mathcal{D}_{n + 1} &amp;= \text{span}~(d_0, d_1, d_2, ..., d_n) \\
+              &amp;= \text{span}~(d_0, Ad_0, A^2 d_0, ..., A^{n - 1} d_n),
 \end{align}\end{split}\]</div>
-<p>where at any given step of the algorithm, the set is augmented from <span class="math notranslate nohighlight">\(\mathcal{D}_n\)</span> to <span class="math notranslate nohighlight">\(\mathcal{D}_n + A\mathcal{D}_{n + 1}\)</span>. By the same argument, the set spanned by the gradients is</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{align}
-         \mathcal{G}_{n + 1} &amp;= \text{span}\{g_0, g_1, g_2, ..., g_n\} \\
-                             &amp;= \text{span}\{d_0, Ad_0, A^2 d_0, ..., A^{n - 1} d_n\} \\
-\implies \mathcal{G}_{n + 1} &amp;= \mathcal{D}_n.
-\end{align}\end{split}\]</div>
-<p>Since <span class="math notranslate nohighlight">\(A\mathcal{D}_n \subseteq \mathcal{D}_{n + 1}\)</span> we also have</p>
+<p>where at any given step of the algorithm, the set is augmented from <span class="math notranslate nohighlight">\(\mathcal{D}_n\)</span> to <span class="math notranslate nohighlight">\(\mathcal{D}_n + A\mathcal{D}_{n + 1}\)</span>. Since <span class="math notranslate nohighlight">\(A\mathcal{D}_n \subseteq \mathcal{D}_{n + 1}\)</span> we have</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
 g_{n + 1} \perp \mathcal{D}_n \implies g_{n + 1} \perp A\mathcal{D}_{n - 1},
 \end{align}\]</div>
-<p>so <span class="math notranslate nohighlight">\(d_m^\top A g_{n + 1} = 0\)</span> for all <span class="math notranslate nohighlight">\(m &lt; n\)</span>. Using this fact together with the <span class="math notranslate nohighlight">\(A\)</span>-orthogonality of the <span class="math notranslate nohighlight">\(d_0, d_1, ..., d_n\)</span> vectors and the requirement that <span class="math notranslate nohighlight">\(d_{n + 1} \perp \mathcal{D}_{n + 1}\)</span>, we see that all Gram-Schmidt coefficients must vanish except for <span class="math notranslate nohighlight">\(\beta_{nn}\)</span>. We therefore call this coeffient <span class="math notranslate nohighlight">\(\beta_n\)</span> and compute its value as</p>
+<p>so <span class="math notranslate nohighlight">\(d_m^\top A g_{n + 1} = 0\)</span> for all <span class="math notranslate nohighlight">\(m &lt; n\)</span>. Using this we see that all Gram-Schmidt coefficients must vanish except for <span class="math notranslate nohighlight">\(\beta_{nn}\)</span>. We therefore call this coeffient <span class="math notranslate nohighlight">\(\beta_n\)</span> and compute its value as</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
 \beta_n = \frac{g_{n + 1}^\top A d_n}{d_n^\top Ad_n}.
 \end{align}\]</div>
+<p><strong>Intuition:</strong> The vanishing of the Gramm-Schmidt coefficients relies on the fact that <span class="math notranslate nohighlight">\(g_{n + 1} \perp A\mathcal{D}_{n - 1}\)</span>, which follows from the facts that <span class="math notranslate nohighlight">\(g_{n + 1} \perp \mathcal{D}_n\)</span> and that <span class="math notranslate nohighlight">\(\mathcal{D}_n\)</span> is a Krylov space</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathcal{D}_n = \text{span}~(d_0, Ad_0, A^2 d_0, ..., A^{n - 1} d_{n-1}).
+\end{align}\]</div>
+<p>The fact that <span class="math notranslate nohighlight">\(\mathcal{D}_n\)</span> is a Krylov space is a consequence of choosing <span class="math notranslate nohighlight">\(u_n = -g_n\)</span>. If instead we had picked <span class="math notranslate nohighlight">\(u_n\)</span> to be one-hot vectors with a <span class="math notranslate nohighlight">\(1\)</span> in the <span class="math notranslate nohighlight">\(n^{th}\)</span> entry, then <span class="math notranslate nohighlight">\(\mathcal{D}_n\)</span> would not be a Krylov space and the Gram-Schmidt coefficients would not in cancel in general.</p>
 </details>
 <br>
 <p>Note how at each step we only have to compute a single Gram-Schmidt term <span class="math notranslate nohighlight">\(\beta_n A d_n\)</span>, and that we don’t need to keep all previous search directions <span class="math notranslate nohighlight">\(d_0\)</span> through to <span class="math notranslate nohighlight">\(d_{n - 1}\)</span> in memory anymore.</p>
@@ -954,16 +950,16 @@ g_{n + 1} \perp \mathcal{D}_n \implies g_{n + 1} \perp A\mathcal{D}_{n - 1},
 <span class="n">plot_F</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="c1"># Plot path taken by Conjugate Gradients</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_hist_cg</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_hist_cg</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_hist_cg</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_hist_cg</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_hist_cg</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_hist_cg</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Conjugate gradients&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Conjugate Gradients&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/conjugate-gradients_17_0.svg" src="../../../_images/conjugate-gradients_17_0.svg" /></div>
+<img alt="../../../_images/conjugate-gradients_18_0.svg" src="../../../_images/conjugate-gradients_18_0.svg" /></div>
 </div>
 <p>We also apply each of these algorithms to a larger problem. We pick a random matrix <span class="math notranslate nohighlight">\(A\)</span> (which will almost surely be rank <span class="math notranslate nohighlight">\(d\)</span>) and make it positive-definite by setting <span class="math notranslate nohighlight">\(A \leftarrow A A^\top\)</span>. We also pich the vector <span class="math notranslate nohighlight">\(b\)</span> randomly. We optimise the quadratic objective using each method and compare their performance.</p>
 <div class="cell tag_hide-input tag_center-output docutils container">
@@ -1001,8 +997,8 @@ g_{n + 1} \perp \mathcal{D}_n \implies g_{n + 1} \perp A\mathcal{D}_{n - 1},
 
 <span class="c1"># Plotting options</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Comparison of descent methods on random $A$, $b$ ($d = 20$)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;optimisation step&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;objective $F$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Optimisation step&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Objective $F$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
@@ -1012,7 +1008,7 @@ g_{n + 1} \perp \mathcal{D}_n \implies g_{n + 1} \perp A\mathcal{D}_{n - 1},
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/conjugate-gradients_19_0.svg" src="../../../_images/conjugate-gradients_19_0.svg" /></div>
+<img alt="../../../_images/conjugate-gradients_20_0.svg" src="../../../_images/conjugate-gradients_20_0.svg" /></div>
 </div>
 <p>Note that CDGS and CG produce the same solution. GS initially enjoys larger improvements because it moves closer to the direction of steepest descent. For the first steps, SD and CG have the same perfromance because they move along the same direction, but CG subsequently outperforms SD.</p>
 </div>
