@@ -1,19 +1,14 @@
-# Welcome
+# Random walks
 
-## About
+This is an archive of explorations, in the convex hull of Inference, Probability, Optimisation and Physics. I am putting this together to keep track of the things I study.
 
-Welcome to Random Walks! This is an archive of explorations, in the convex hull of Inference, Probability, Optimisation and Physics. I am putting this together to keep track of the things I study.
+# About me
 
-## Modes under exploration
-
-- Notes on the book *An Introduction to Probability* by Grimmett and Welsh.
-- Approximate inference for Gaussian Processes.
-- Stochastic processes and stochastic differential equations.
-- Bayesian Methods for Adaptive Models: A reproduction of [David MacKay's PhD thesis](http://www.inference.org.uk/mackay/thesis.pdf).
-- The Neural Process family: [Conditional Neural Processes](https://arxiv.org/abs/1807.01613) (CNPs), [Neural Processes](https://arxiv.org/abs/1807.01622) (NPs) and [Attentive Neural Processes](https://arxiv.org/abs/1901.05761) (ANPs).
-- Probabilistic methods for Reinforcement Learning, like [PILCO](https://www.doc.ic.ac.uk/~mpd37/publications/pami_final_w_appendix.pdf).
+My name is Stratis. I am a second-year PhD student at the Computational and Biological Learning Lab (CBL) at the University of Cambridge. I am supervised by [Carl Rasmussen](http://mlg.eng.cam.ac.uk/carl/) and advised by [Richard Turner](http://cbl.eng.cam.ac.uk/Public/Turner/WebHome). I have broad interests in probabilistic machine learning, see [Google Scholar](https://scholar.google.com/citations?user=1tm1wcgAAAAJ&hl=el&oi=ao) for my recent work.
 
 ## New on Random Walks
+
+[15/02/2022] Notes and demo on [Global Inducing Point VI for BNNs](./misc/gip/gip).
 
 [03/09/2021] Notes on the [Gumbel distribution](./misc/gumbel/gumbel).
 
