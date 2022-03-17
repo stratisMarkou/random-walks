@@ -15,7 +15,8 @@ $$ |x - x_0| < \delta \implies |f(x) - f(x_0)| < \epsilon. $$
 </div>
 <br>
 
-If a function is continuous, then the image of any convergent sequence through this function, is also convergent. Vice versa if the image, through a function $f$ of every convergent sequence is also a convergent sequence, then $f$ is a continuous function. This useful result is stated and proved below in more detail.
+If a function is continuous, then the image of any convergent sequence through this function, is also convergent.
+Vice versa, if the image through a function $f$ of every convergent sequence is also a convergent sequence, then $f$ is a continuous function. This useful result is stated and proved below in more detail.
 
 <div class="lemma">
 
@@ -44,11 +45,12 @@ arriving at the result.
     
 $$ f(a_n) \to f(a). $$
     
-We will argue the other way, assuming $f$ is not continuous and arriving at a contradiction. Suppose that $f$ is not continuous. Then there exist $x_0, \epsilon$ such that for any $\delta$, there exists some $x_\delta$ such that
+We will argue the other way, assuming $f$ is not continuous and arriving at a contradiction. Suppose that $f$ is not continuous. Then there exist $x_0, \epsilon$ such that, for any $\delta$, there exists some $x_\delta$ such that
     
 $$ |x_\delta - x_0| < \delta \text{ and } |f(x_\delta) - f(x_0)| \geq \epsilon. $$
     
-Now consider a sequence of such $\delta$'s, setting $\delta_n = \frac{1}{n}$. For each $\delta_n$ there exists a corresponding $x_{\delta_n}$ that satisfies the above relation. But then the sequence $x_{\delta_n}$ satisfies
+Now consider a sequence $\delta_n = \frac{1}{n}$.
+For each $\delta_n$ there exists a corresponding $x_{\delta_n}$ that satisfies the above relation. But then the sequence $x_{\delta_n}$ satisfies
     
 $$ x_{\delta_n} \to x_0 \text{ and } |f(x_{\delta_n}) - f(x_0)| \geq \epsilon, $$
     
@@ -162,12 +164,15 @@ $$\begin{align}
 
 ## Maximum and intermediate value
 
-Two useful theorems about continuous functions are the maximum and intermediate value theorems. The first says that a continuous function in some finite interval is bounded, and that it attains its bounds. The second says that given the value of a continuous function at two different inputs, the function is guaranteed to attain every value between these two values within the interval.
+Two useful theorems about continuous functions are the maximum and intermediate value theorems.
+The first says that a continuous function in a finite closed interval is bounded, and that it attains its bounds.
+The second says that given the value of a continuous function at two different inputs, the function is guaranteed to attain every value between these two values within the interval.
 
 
 <div class="theorem">
 
-**Theorem (Maximum value theorem)** Let $[a, b]$ be a closed interval in $\mathbb{R}$ amd $f : [a, b] \to \mathbb{R}$ be continuous. Then $f$ is bounded and attains its bounds.
+**Theorem (Maximum value theorem)** Let $[a, b]$ be a closed interval in $\mathbb{R}$ and $f : [a, b] \to \mathbb{R}$ be continuous.
+Then $f$ is bounded and attains its bounds.
     
 </div>
 <br>
@@ -175,15 +180,19 @@ Two useful theorems about continuous functions are the maximum and intermediate 
 <details class="proof">
 <summary>Proof: Maximum value theorem</summary>
     
-Suppose that $f$ is not bounded above. Then for any $n \in \mathbb{N}$, there exists $x_n \in [a, b]$ such that $f(x_n) \geq n$. Since $x_n \in [a, b]$ is a bounded sequence, it has a convergent subsequence $x_{n_k}$ by the {ref}`Bolzano-Weierstrass theorem<analysis-i-bolz-weier>`. Call the limit of the convergent subsequence $x$. Now $f(x_{n_k}) \geq n \to \infty$ but since $f$ is continuous we also have $f(x_{n_k}) \to f(x)$, which is a contradiction. Therefore $f$ must be bounded.
+Suppose that $f$ is not bounded above.
+Then for any $n \in \mathbb{N}$, there exists $x_n \in [a, b]$ such that $f(x_n) \geq n$. 
+Since $x_n \in [a, b]$ is a bounded sequence, it has a convergent subsequence $x_{n_k}$ by the {ref}`Bolzano-Weierstrass theorem<analysis-i-bolz-weier>`.
+Call the limit of the convergent subsequence $x$. Now $f(x_{n_k}) \geq n \to \infty$ but since $f$ is continuous we also have $f(x_{n_k}) \to f(x)$, which is a contradiction. Therefore $f$ must be bounded.
     
 Let the supremum of $f$ in $[a, b]$ be $s$. Then for any $n \in \mathbb{N}$, there exists $x_n \in [a, b]$ such that
     
 $$ s - \frac{1}{n} \leq f(x_n) \leq s. $$
     
-Again, by the {ref}`Bolzano-Weierstrass theorem<analysis-i-bolz-weier>` $x_n$ has a convergent subsequence $x_{n_k}$, whose limit we again denote by $x$. From the above inequality
+Again, by the {ref}`Bolzano-Weierstrass theorem<analysis-i-bolz-weier>` $x_n$ has a convergent subsequence $x_{n_k}$, with limit $x \in [a, b]$.
+Since the image of a convergent sequence under a continuous function converges to the image of the limit of the sequence under the function, we have
     
-$$ s - \frac{1}{n} \leq f(x_{n_k}) \leq s \implies f(x_{n_k}) \to s, $$
+$$ x_{n_k} \to x \implies f(x_{n_k}) \to f(x) = s, $$
     
 arriving at the result.
     
@@ -193,7 +202,7 @@ arriving at the result.
 
 <div class="theorem">
 
-**Theorem (Intermediate value theorem)** Let $[a, b]$ be a closed interval in $\mathbb{R}$ amd $f : [a, b] \to \mathbb{R}$ be continuous. Suppose that $f(a) < 0 < f(b)$. Then there exists $x \in (a, b)$ such that $f(x) = 0$.
+**Theorem (Intermediate value theorem)** Let $[a, b]$ be a closed interval in $\mathbb{R}$ and $f : [a, b] \to \mathbb{R}$ be continuous. Suppose that $f(a) < 0 < f(b)$. Then there exists $x \in (a, b)$ such that $f(x) = 0$.
     
 </div>
 <br>
@@ -207,7 +216,11 @@ $$ \begin{align} [a_n, b_n] = \begin{cases}[a_n, m_n] & \text{ if } f(m_n) > 0, 
 [m_n, b_n] & \text{ if } f(m_n) < 0, \end{cases}
 \end{align}$$
     
-where $m_n = \frac{a_{n - 1} + b_{n - 1}}{2}$. Note that if any of the $m_n$ terms is equal to $0$ we are done, so let's assume $m_n \neq 0$. By the {ref}`nested intervals property<analysis-i-bolz-weier>`, the intersection of the nested intervals $[a_n, b_n]$ is non-empty. Since the size of the intervals tends to $0$, the intersection can only contain a single element, called $x$. By construction we have $f(a_n) < 0 < f(b_n)$ and since $f$ is continuous and $a_n, b_n \to x$ we have $f(a_n) \uparrow f(x)$ and $f(b_n) \downarrow f(x)$. Since $f(a_n)$ and $f(b_n)$ are negative and positive sequences which converge to the same limit, their limit $f(x)$ must be $0$. Hence $f(x) = 0$, arriving at the result.
+where $m_n = \frac{a_{n - 1} + b_{n - 1}}{2}$.
+Note that if any of the $f(m_n)$ terms is equal to $0$ we are done, so let's assume $f(m_n) \neq 0$.
+By the {ref}`nested intervals property<analysis-i-bolz-weier>`, the intersection of the nested intervals $[a_n, b_n]$ is non-empty. Since the size of the intervals tends to $0$, the intersection can only contain a single element, called $x$.
+By construction we have $f(a_n) < 0 < f(b_n)$ and since $f$ is continuous and $a_n, b_n \to x$ we have $f(a_n) \uparrow f(x)$ and $f(b_n) \downarrow f(x)$.
+Since $f(a_n)$ and $f(b_n)$ are negative and positive sequences which converge to the same limit, their limit $f(x)$ must be $0$. Hence $f(x) = 0$, arriving at the result.
     
 </details>
 <br>
@@ -219,7 +232,8 @@ If a function is continuous and strictly increasing, then it is invertible. Furt
 
 <div class="lemma">
 
-**Lemma (Sufficient condition for inverse)** Let $f : [a, b] \to [c, d]$ be a continuous strictly increasing function with $f(a) = c, f(b) = d$. Then $f$ is invertible and its inverse is continuous and strictly increasing.
+**Lemma (Sufficient condition for inverse)** Let $f : [a, b] \to [c, d]$ be a continuous strictly increasing function with $f(a) = c, f(b) = d$.
+Then $f$ is invertible and its inverse is continuous and strictly increasing.
     
 </div>
 <br>
@@ -228,7 +242,17 @@ If a function is continuous and strictly increasing, then it is invertible. Furt
 <details class="proof">
 <summary>Proof: Sufficient condition for inverse</summary>
     
-Since $f$ is strictly increasing it is an injection. Since $f$ is continuous and $f(a) = c, f(b) = d$, then for any $y \in [c, d]$, there exists $x \in [a, b]$ such that $f(x) - y = 0$ by the intermediate value theorem. Therefore $f$ is a bijection and therefore invertible. Let the inverse be $g$. We also see that $g$ is strictly increasing because if $g(x_1) < g(x_2)$, then applying $f$ to both sides we obtain $x_1 < x_2$. Hence $g(x_1) < g(x_2)$ can only be true if $x_1 < x_2$ holds so $g$ is increasing. It is strictly increasing because if $g(x_1) = g(x_2)$, then applying $f$ to both sides we obtain $x_1 = x_2$, so $g(x_1) = g(x_2)$ can only hold if $x_1 = x_2$. Hence $g$ is strictly increasing.
+Since $f$ is strictly increasing it is an injection.
+Since $f$ is continuous and $f(a) = c, f(b) = d$, then for any $y \in [c, d]$, there exists $x \in [a, b]$ such that $f(x) - y = 0$ by the intermediate value theorem.
+Therefore $f$ is a bijection and therefore invertible.
+Let the inverse be $g$.
+We also see that $g$ is strictly increasing because if there exist $x_1 < x_2$ such that $g(x_1) > g(x_2)$, then
+    
+    $$f(g(x_1)) > f(g(x_2)) \implies x_1 > x_2,$$
+    
+    which is a contradiction.
+Further, $g$ is strictly increasing because if $g(x_1) = g(x_2)$, then applying $f$ to both sides we obtain $x_1 = x_2$, which is also a contradiction.
+Hence $g$ is strictly increasing.
     
 Now let $\epsilon > 0$, $y \in [c, d]$, $x = g(y)$ and also
     

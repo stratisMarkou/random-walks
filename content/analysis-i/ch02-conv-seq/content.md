@@ -363,7 +363,7 @@ Monotonicity is another important property of sequences. Informally, a monotonic
 <br>
     
 
-Monotonicity is a strong condition and tells us a lot about the behaviour of a sequence. Although one would intuitively expect that an increasing (decreasing) monotone sequence that is bounded from above (below) should converge, this is not necessarily the case. If the "limit" of the sequence is not in $\mathbb{F}$, then strictly speaking the sequence does not converge, because the "limit" is not in $\mathbb{F}$. For example, this could happen if we define a monotone sequence of rational numbers which converges to an irrational number, and restrict $\mathbb{F}$ to the rational numbers $\mathbb{Q}$. Then although the sequence is monotone and bounded above, it does not converge because its "limit" does not exist in $\mathbb{F}$.
+Monotonicity is a strong condition and tells us a lot about the behaviour of a sequence. Although one would intuitively expect that an increasing (decreasing) monotone sequence that is bounded from above (below) should converge, this is not necessarily the case. If the "limit" of the sequence is not in $\mathbb{F}$, then strictly speaking the sequence does not converge, because the "limit" is not in $\mathbb{F}$. For example, this could happen if we define a monotonically increasing sequence of rational numbers which converges to an irrational number, and restrict $\mathbb{F}$ to the rational numbers $\mathbb{Q}$. Then although the sequence is monotone and bounded above, it does not converge because its "limit" does not exist in $\mathbb{F}$.
     
 For the above reason, we introduce the monotone sequences property. We say that an ordered field $\mathbb{F}$ has the monotone sequences property if every increasing (decreasing) monotone sequence that is bounded from above (below) converges.
 
@@ -386,7 +386,7 @@ The monotone sequences property is equivalent to the {ref}`least upper bound pro
 </div>
 <br>
     
-The second part of this proof uses the two lemmas that follow - that the upper bound of a sequence also upper bounds the indivitdual terms and that the monotone sequences property implies the Archimedean property - as well as the {ref}`nested intervals property<analysis-i-bolz-weier>`.
+The second part of this proof uses the two lemmas that follow - that the upper bound of a sequence also upper bounds the individual terms and that the monotone sequences property implies the Archimedean property - as well as the {ref}`nested intervals property<analysis-i-bolz-weier>`.
 
 <details class="proof">
 <summary>Proof: Least upper bound \(\implies\) monotone sequences property</summary>

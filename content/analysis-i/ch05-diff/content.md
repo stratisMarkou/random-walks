@@ -8,7 +8,7 @@
 
 $$ \lim_{x \to a} f(x) = \ell $$
     
-if for all $\epsilon > 0$, there exists $\delta > 0$ such that for all $x \in A$, such that $0 < |x - a| < \delta$ we have
+if for any $\epsilon > 0$, there exists $\delta > 0$ such that for all $x \in A$ for which $0 < |x - a| < \delta$, we have
     
 $$|f(x) - \ell| < \epsilon.$$
     
@@ -82,11 +82,11 @@ Using the previous result on products, with the functions $f$ and $\frac{1}{g}$,
 
 **Definition (Differentiable function)** We say that $f$ is differentiable at $x_0$ with a derivative $f'$ if
     
-$$ \lim_{x \to x_0} \frac{f(x) - f(x_0)}{x - x_0} = f', $$
+$$ \lim_{x \to x_0} \frac{f(x) - f(x_0)}{x - x_0} = f'(x_0), $$
     
 or equivalently if
     
-$$ \lim_{h \to 0} \frac{f(x_0 + h) - f(x_0)}{h} = f'. $$
+$$ \lim_{h \to 0} \frac{f(x_0 + h) - f(x_0)}{h} = f'(x_0). $$
     
 </div>
 <br>
@@ -305,10 +305,10 @@ arriving at the result.
 If $f$ is constant, then the result follows immediately. Assume $f$ is not constant. Since $f$ is continuous in $[a, b]$, it attains a maximal (or minimal) value in the interval $(a, b)$ which is strictly larger (or smaller) than $f(a) = f(b)$ - this must hold because otherwise $f$ is constant. Assume, wlog, that $f$ attains a maximum value at $x \in (a, b)$. Since $f(x)$ is a maximal value, we must have
     
 $$\begin{align}
-\leq f(x + \epsilon) - f(x) \leq 0 \geq f(x) - f(x - \epsilon)
+\frac{f(x + \epsilon) - f(x)}{\epsilon} \leq 0 \leq \frac{f(x) - f(x - \epsilon)}{\epsilon}
 \end{align}$$
     
-and since the limits of both sides as $\epsilon \to 0$ must both be equal to $f'(x)$, we arrive at $f'(x) = 0$.
+and since the limits of both sides as $\epsilon \to 0$ are equal to $f'(x)$, we arrive at $f'(x) = 0$.
     
 </details>
 <br>
@@ -327,7 +327,10 @@ Then, there exists $x \in (a, b)$ such that $f^{(n)}(x) = 0$.
 <details class="proof">
 <summary>Proof: Higher-order Rolle's theorem</summary>
     
-Let $f$ be defined as in the theorem. We can apply Rolle's theorem to $f$ to show that there exists $b_1 \in (a, b)$ such that $f^{(1)}(b_1)$. We can proceed recursively, applying Rolle's theorem at each step to see that there exists $b_{k+1} \in (a, b_k)$ such that $f^{(k+1)}(b_{k+1})$. Continuing to order $n$ we arrive at the result.
+Let $f$ be a function as defined in the theorem.
+We can apply Rolle's theorem to $f$ to show that there exists $b_1 \in (a, b)$ such that $f^{(1)}(b_1) = 0$.
+We can proceed iteratively, applying Rolle's theorem at each step to see that there exists $b_{k+1} \in (a, b_k)$ such that $f^{(k+1)}(b_{k+1}) = 0$.
+Continuing to order $n$ we arrive at the result.
     
 </details>
 <br>
@@ -336,7 +339,8 @@ Let $f$ be defined as in the theorem. We can apply Rolle's theorem to $f$ to sho
 
 <div class="lemma">
 
-**Corollary (Rolle's for two functions)** Suppose that $f$ and $g$ are both differentiable on an open interval containing $[a, b]$ and that $f^{(k)}(a) = g^{(k)}(a)$ for $k = 0, 1, ..., n - 1,$ and also $f(b) = g(b)$. Then there exists $x \in (a, b)$ such that $f^{(n)}(b) = g^{(n)}(b)$.
+**Corollary (Rolle's for two functions)** Suppose that $f$ and $g$ are both differentiable on an open interval containing $[a, b]$ and that $f^{(k)}(a) = g^{(k)}(a)$ for $k = 0, 1, ..., n - 1,$ and also $f(b) = g(b)$.
+Then there exists $x \in (a, b)$ such that $f^{(n)}(b) = g^{(n)}(b)$.
     
 </div>
 <br>
@@ -430,13 +434,13 @@ $$ f(x_0 + h) = f(x_0) + hf'(x_0) + ... + \frac{h^{n-1}}{(n - 1)!} f^{(n-1)}(x_0
 
 Consider the polynomial
     
-$$ Q(x_0 + h) = \sum_{n = 0}^{N-1} \frac{(x_0 + h)^n}{n!} f^{(n)}(x_0), $$
+$$ Q(x_0 + h) = \sum_{n = 0}^{N-1} \frac{h^n}{n!} f^{(n)}(x_0), $$
     
 observing that $Q^{(k)}(x_0) = f^{(k)}(x_0)$ for $k = 0, 1, ..., N-1$. Now add another $N$-order term to $Q$, to obtain another polynomial $P$ such that $P(x_0 + h) = f(x_0 + h)$, namely
     
-$$ P(x) = Q(x) + \frac{(x - x_0)^N}{h^N} (f(x_0 + h) - Q(x_0 + h)). $$
+$$ P(x) = Q(x) + \frac{(x - x_0)^N}{h^N} \big(f(x_0 + h) - Q(x_0 + h)\big). $$
     
-The polynomial $P$ therefore satisfies $P^{(k)}(x_0) = f^{(k)}(x_0)$ for $k = 0, 1, ..., n - 1,$ and also $P(x_0 + h) = f(x_0 + h)$. From the earlier {ref}`lemma on Rolle's for two functions<analysis-i-rolle>` there exists $x \in (x_0, x_0 + h)$ such that $P(h) = f(x_0 + h)$, arriving at the result.
+The polynomial $P$ therefore satisfies $P^{(k)}(x_0) = f^{(k)}(x_0)$ for $k = 0, 1, ..., n - 1,$ and also $P(x_0 + h) = f(x_0 + h)$. From the earlier {ref}`lemma on Rolle's for two functions<analysis-i-rolle>` there exists $x \in (x_0, x_0 + h)$ such that $P(x) = f(x)$, arriving at the result.
     
 </details>
 <br>

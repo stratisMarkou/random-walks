@@ -1,6 +1,9 @@
 # Convergence of infinite sums
 
-This section introduces infinite sums and presents results regarding their convergence.
+This section introduces infinite sums, or series.
+A central question way may want to ask about a series, is whether it converges.
+There are several tests which allow us to determine whether a series converges (or diverges), for example by comparing it to other series which we know to converge (or diverge).
+One central result of series convergence is the equivalence of absolute convergence (= when the sum of the absolute values of the terms of a sequence converges) and unconditional convergence (= when the sum of any permutation of the terms of a sequence converges).
 
 (analysis-i-infinte-sums)=
 ## Infinite sums
@@ -135,7 +138,7 @@ Another notion of convergence is uncondtional convergence. If a series is uncond
     
 <div class="definition">
 
-**Definition (Unconditional convergence)** We say that the series $\sum^\infty_{n = 1} a_n$ converges unconditionally if for any bijection $\pi \mathbb{N} \to \mathbb{N}$, the series $\sum^\infty_{n = 1} a_{\pi(n)}$ converges.
+**Definition (Unconditional convergence)** We say that the series $\sum^\infty_{n = 1} a_n$ converges unconditionally if for any bijection $\pi : \mathbb{N} \to \mathbb{N}$, the series $\sum^\infty_{n = 1} a_{\pi(n)}$ converges.
     
 </div>
 <br>
@@ -149,33 +152,13 @@ Another notion of convergence is uncondtional convergence. If a series is uncond
 <br>
     
 We present the proof broken into two parts.
-    
-<details class="proof">
-<summary>Proof: Absolute convergence \(\implies\) unconditional convergence</summary>
-    
-Let $\pi \mathbb{N} \to \mathbb{N}$ be a bijection. We show that if the series $\sum^\infty_{n = 1} a_n$ converges absolutely, then $\sum^\infty_{n = 1} a_{\pi(n)}$ is Cauchy and that it has a convergent subsequence, {ref}`implying that that the later converges<analysis-i-cauchy-seqs>`.
-    
-Let $S_N = \sum^N_{n = 1} a_{\pi(n)}$ and consider
-    
-$$\begin{align}
-|S_p - S_q| = \Bigg| \sum_{n = q + 1}^p a_{\pi(n)} \Bigg| \leq \sum_{n = q + 1}^p |a_{\pi(n)}|
-\end{align}$$
-    
-where $p > q$. Let $\epsilon > 0$. Since $\sum^\infty_{n = 1} |a_n|$ converges, we can pick $M$ such that $\sum^\infty_{n = q + 1} |a_n| < \epsilon$. If we pick $N$ large enough such that $\{1, ..., M\} \subseteq \{\pi(1), ..., \pi(N)\}$, then for any $n > N$ we have $\pi(n) > M$. Therefore, for any $p > q > N$ we have $\{\pi(q + 1), ..., \pi(p)\} \subseteq \{M + 1, M + 2, ...\}$ and thus
-    
-$$\begin{align}
-|S_p - S_q| \leq \sum_{n = q + 1}^p |a_{\pi(n)}| \leq \sum_{n = M + 1}^\infty |a_{\pi(n)}| < \epsilon,
-\end{align}$$
-    
-therefore $S_N$ is Cauchy and converges by {ref}`the general principle of convergence<analysis-i-cauchy-seqs>`.
-
-</details>
-<br>
+The first part shows that unconditional convergence implies absolute convergence.
     
 <details class="proof">
 <summary>Proof: Unconditional convergence \(\implies\) absolute convergence</summary>
     
-We prove that if a series does not converge absolutely, it does not converge unconditionally. Therefore, if a series converges unconditionally, it must be the case that it converges absolutely - otherwise a contradiction would be reached.
+We prove the contrapositive: that if a series does not converge absolutely, it does not converge unconditionally.
+Therefore, if a series converges unconditionally, it must be the case that it converges absolutely.
     
 Suppose that $\sum^\infty_{n = 1} |a_n| = \infty$. Let $(b_n)$ and $(c_n)$ be the subsequences of non-negative and negative terms of the sequence $(a_n)$, respectively. Then either $\sum^\infty_{n = 1} b_n$ or $\sum^\infty_{n = 1} c_n$ must be unbounded because otherwise $\sum^\infty_{n = 1} |a_n|$ would converge. Without loss of generality, we can assume $\sum^\infty_{n = 1} b_n = \infty$. From here we can construct a sequence $0 = n_0 < n_1 < n_2 < ...$ such that for all $k$, the contribution of the terms $b_{n_{k - 1} + 1}$ through $b_{n_k}$, plus the term $c_k$ is larger than $1$, as in
     
@@ -188,7 +171,67 @@ This is possible because $\sum^\infty_{n = 1} b_n = \infty$. Letting $\pi$ be th
 </details>
 <br>
     
-If a series converges unconditionally, do all of its permutations converge to the same limit? The affirmative answer is stated and proved in the lemma below.
+The second part shows that absolute convergence implies unconditional convergence.
+We provide two alternative proofs: the first proof shows the contrapositive statement, and the second proof (taken from the course) shows a direct construction.
+    
+<details class="proof">
+<summary>Proof (a): Absolute convergence \(\implies\) unconditional convergence</summary>
+    
+Again, we prove the contrapositive: that if a series does not converge unconditionally, it does not converge absolutely.
+Therefore, if a series converges absolutely it must also converge unconditionally.
+
+Suppose $S_N = \sum^N_{n = 1} a_n$ is a series which does not converge unconditionally, i.e. there exists a bijection $\pi : \mathbb{N} \to \mathbb{N}$ (a permutation), such that the series $\sum^N_{n = 1} a_{\pi(n)}$ does not converge.
+Therefore, the series $\sum^N_{n = 1} |a_{\pi(n)}|$ is unbounded.
+Now, for any $N$, we can pick $M$ such that $\{\pi(1), \dots, \pi(N)\} \subseteq \{1, \dots, M\}$, from which it follows that
+    
+$$\begin{equation}
+\sum^N_{n = 1} |a_{\pi(n)}| \leq \sum^M_{m = 1} |a_m| \to \infty.
+\end{equation}$$
+
+Therefore, if a series does not converge unconditionally, it does not converge absolutely.
+
+</details>
+<br>
+    
+<details class="proof">
+<summary>Proof (b): Absolute convergence \(\implies\) unconditional convergence</summary>
+    
+Let $\pi : \mathbb{N} \to \mathbb{N}$ be a bijection.
+We show that if the series $\sum^\infty_{n = 1} a_n$ converges absolutely, then $\sum^\infty_{n = 1} a_{\pi(n)}$ is Cauchy and that it has a convergent subsequence, {ref}`implying that that the later converges<analysis-i-cauchy-seqs>`.
+    
+Let $S_N = \sum^N_{n = 1} a_{\pi(n)}$ and consider
+    
+$$\begin{align}
+|S_p - S_q| = \Bigg| \sum_{n = q + 1}^p a_{\pi(n)} \Bigg| \leq \sum_{n = q + 1}^p |a_{\pi(n)}|
+\end{align}$$
+    
+where $p > q$, and let $\epsilon > 0$.
+Since $\sum^\infty_{n = 1} |a_n|$ converges, we can pick $M$ such that
+    
+$$\begin{align}
+\sum^\infty_{n = M + 1} |a_n| < \epsilon.
+\end{align}$$
+
+Now pick $N$ large enough such that $\{1, ..., M\} \subseteq \{\pi(1), ..., \pi(N)\}$.
+Then for any $q > N$ it holds that $\pi(q) > M$, so
+    
+$$\begin{align}
+\{\pi(q), ..., \pi(p)\} \subseteq \{M + 1, M + 2, ~\dots\}.
+\end{align}$$
+
+Therefore, for any $p > q > N$ we have
+    
+$$\begin{align}
+|S_p - S_q| \leq \underbrace{\sum_{n = q + 1}^p |a_{\pi(n)}|}_{\{\pi(q), ~\dots, ~\pi(p)\}} \leq \underbrace{\sum_{n = M + 1}^\infty |a_{\pi(n)}|}_{\{M + 1, ~M + 2, ~\dots\}} < \epsilon,
+\end{align}$$
+    
+therefore $S_N$ is Cauchy and converges by {ref}`the general principle of convergence<analysis-i-cauchy-seqs>`.
+
+</details>
+<br>
+    
+If a series converges unconditionally, do all of its permutations converge to the same limit?
+Yes, this is stated and proved in the lemma below.
     
 
 <div class="lemma">
@@ -394,13 +437,13 @@ Since $(a_n)$ is decreasing we have
     
 $$\begin{align}
 \sum^\infty_{n = 1} a_n = &~a_1 + a_2 + (a_3 + a_4) + (a_5 + ... + a_8) + (a_9 + ... + a_{16}) + ... \\
-\leq &~a_1 + a_2 + 2a_4 + 4a_8 + ... = a_1 + \sum^\infty_{n = 1} 2^{n - 1} a_{2^n}
+\geq &~a_1 + a_2 + 2a_4 + 4a_8 + ... = a_1 + \sum^\infty_{n = 1} 2^{n - 1} a_{2^n}
 \end{align}$$
     
-which implies that if $\sum a_n$ converges, so does $\sum^\infty_{n = 1} 2^n a_{2^n}$. Going the other way around, we can write
+which implies that if $\sum_{n=1}^\infty a_n$ converges, so does $\sum^\infty_{n = 1} 2^n a_{2^n}$. Going the other way around, we can write
     
 $$\begin{align}
-a_1 + \sum^\infty_{n = 1} 2^n a_{2^n} =&~a_1 + 2a_2 + 4a_4 + 8a_8 + ... \\
+\sum^\infty_{n = 1} 2^n a_{2^n} =&~a_1 + 2a_2 + 4a_4 + 8a_8 + ... \\
 \leq &~a_1 + (a_2 + a_3) + (a_4 + a_5 + a_6 + a_7) + ... = \sum^\infty_{n = 1} a_n.
 \end{align}$$
 

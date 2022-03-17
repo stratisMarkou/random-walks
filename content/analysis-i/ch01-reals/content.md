@@ -1,13 +1,14 @@
 # The real numbers
 
-In this section, we define fields, totally ordered sets, ordered fields, upper and lower bounds, and the upper and lower bound properties. We then define the real numbers in terms of these eariler definitions.
+In this section, we define fields, totally ordered sets, ordered fields, upper and lower bounds, and the upper and lower bound properties.
+We then define the real numbers in terms of these eariler definitions.
 
 ## Fields
 
 Analysis studies the properties of things like sequences, series, functions, derivatives and integrals defined with respect to the real or the complex numbers.
 We therefore need to define the real numbers.
 Instead of doing so directly however, we define an object called a *field*, which has all the necessary properties on which to do analysis.
-The reals can be shown to be an example of a field.
+The reals are an example of a field.
 
 <div class="definition">
 
@@ -22,6 +23,23 @@ The reals can be shown to be an example of a field.
 We sometimes ommit writing the $\times$ sign in which case, for example, $a \times b$ would be abbreviated as $ab$.
     
 </div>
+<br>
+
+<details class="proof">
+<summary>Note: Properties of addition and multiplication</summary>
+
+It is interesting to note that under the first three conditions, addition and multiplication have the same standing, in the sense that they are both binary operations namely commutativity, associativity and existence of identities.
+Now, if we assume that inverses exist for addition and require distributivity, we see that
+    
+$$\begin{equation}
+a \times 0 + a = a \times 0 + a \times 1 = a \times (0 + 1) = a \times 1 = a \implies a \times 0 = 0.
+\end{equation}$$
+    
+Now since $a \times 0 = 0$ for any $a$, we see that multiplication by $0$ is a many-to-one map, which is not invertible.
+So that's why we exclude $0$ from the condition for the existence of inverses.
+The distributivity property sets addition and multiplication apart.
+
+</details>
 <br>
 
 Now we define ordering operations.
@@ -117,7 +135,7 @@ Among other uses, we will use use these concepts to define the real numbers them
 
 <div class="definition">
 
-**Definition (Upper bound and supremum)** Let $S$ be an oredered field and $A \subseteq S$.
+**Definition (Upper bound and supremum)** Let $S$ be an ordered field and $A \subseteq S$.
 An upper bound for $A$ is an element $x \in S$ such that $a \leq x$ for all $a \in A$, and if such $a$ exists we say $A$ is bounded above.
 The upper bound $x$ is a supremum (or least upper bound) if for all $a < x$, there exists $b \in A$ such that $b < a$.
     
