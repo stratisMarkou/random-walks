@@ -127,8 +127,10 @@ If $X$ is a uniformly distributed random variable and $F$ is a distribution
  where we used $F(F^{-1}(x)) = x$, which holds because $F$ is continuous from
   the right. This property can be used to generate random samples from any
    distribution, given its distribution function $F$.
-
+   
+(prob-intro-exponential)=
 ### Exponential
+
 
 $X$ is exponentially distributed with parameter $\lambda$ if its density
  function is
