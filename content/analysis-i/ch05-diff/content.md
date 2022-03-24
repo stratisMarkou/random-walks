@@ -45,7 +45,7 @@ $$f(x) = \begin{cases} 1 & \text{ if } x = 0 \\ 0 & \text{ otherwise} \end{cases
 
 has a limit of $0$ at every $x \in \mathbb{R}$, including $x = 0$.
 Fourth, a function may have a limit at some point even if it is not defined at that point.
-For example $f(x) = \sin x / x \to 1$ as $x \to 0$, but $f(0)$ is undefined.
+For example $f(x) = \frac{\sin x}{x} \to 1$ as $x \to 0$, but $f(0)$ is undefined.
 
 The existence of a function limit at a point looks very similar to the definition of continuity at a point, but the two definitions are not the same.
 If a function is continuous at $x_0$, it also has a limit at $x_0$.
@@ -202,17 +202,24 @@ $$ g(x) = \frac{f(x) - f(x_0)}{x - x_0} $$
 
 has a limit at $x_0$.
 Note that a function may have a derivative at some point even if it is undefined at that point.
-For example, the function $f(x) = \sin x / x$ is not defined at $x = 0$, but is differentiable at every $x$.
-This is a direct benefit of our definition of function limits, which did not specify the behaviour of the function at the limit point.
+For example, the function $f(x) = \frac{\sin x}{x}$ is not defined at $x = 0$, but is differentiable at every $x \in \mathbb{R}$, including $0$.
+This extra bit of generality is a consequence of our definition of function limits, which did not specify the behaviour of the function at the limit point.
+
+Now we present an alternative and equivalent way to look at the derivative of a function.
+To make this definition precise, we introduce small oh notation.
 
 <div class="definition">
 
-**Definition (Small oh notation)** We write $o(h)$ for a function that satisfies
+**Definition (Small oh notation)** Suppose a function $f$ satisfies
     
-$$ \frac{o(h)}{h} \to 0 \text{ as } h \to 0. $$
+$$ \frac{f(h)}{h} \to 0 \text{ as } h \to 0. $$
+    
+We write $o(h)$ to denote any such funtion.
     
 </div>
 <br>
+
+We can view the derivative of $f$ at $x_0$ is that it is the slope of a linear approximation to the $f$ at $x_0$, which becomes arbitrarily accurate as we look at an increasingly smaller region around $x_0$.
 
 <div class="lemma">
 
@@ -224,6 +231,12 @@ In particular, this equality holds if and only if $f$ is differentiable at $x_0$
     
 </div>
 <br>
+
+Crucially, the error term of the approximation
+
+$$ f(x_0 + h) - (f(x_0) + h f'(x_0)) = o(h), $$
+
+tends to zero faster than $h$ tends to zero.
 
 <details class="proof">
 <summary>Proof: Equivalent definition of the derivative</summary>
@@ -259,6 +272,12 @@ $$ f'(x_0) = \lim_{h \to 0} \frac{f(x_0 + h) - f(x_0) - o(h)}{h} = \lim_{h \to 0
     
 </div>
 <br>
+
+
+
+## Differentiation lemmas
+
+We now show some standard results regarding derivatives, namely the sum, product, chain and product rules.
 
 <div class="lemma">
 
@@ -343,7 +362,12 @@ $$ \left(\frac{f}{g}\right)^{-1} = \frac{f'(x)g(x) - f(x)g'(x)}{g^2(x)}. $$
     
 </details>
 <br>
+    
+    
+We can also show that differentiability implies continuity.
+The product rule is useful in showing this.
 
+    
 <div class="lemma">
 
 **Lemma (Differentiability $\implies$ continuity)** If $f$ is differentiable at $x_0$, then it is also continuous at $x_0$.
@@ -373,9 +397,12 @@ arriving at the result.
 
 
 ## Derivative theorems
+    
+Now we turn our attention to showing some standard useful theorems involving derivatives.
 
 ### Derivative of an inverse
-
+    
+First, we give an expression for the inverse of a funtion.
 
 <div class="theorem">
 
@@ -399,12 +426,11 @@ arriving at the result.
     
 </details>
 <br>
-
-
     
 (analysis-i-rolle)=
 ### Rolle's theorem
 
+Rolle's theorem states that a continuous and differentiable function which attains the same value at two points, must have a point where its derivative is zero in between.
 
 <div class="theorem">
 
@@ -416,7 +442,10 @@ arriving at the result.
 <details class="proof">
 <summary>Proof: Rolle's theorem</summary>
     
-If $f$ is constant, then the result follows immediately. Assume $f$ is not constant. Since $f$ is continuous in $[a, b]$, it attains a maximal (or minimal) value in the interval $(a, b)$ which is strictly larger (or smaller) than $f(a) = f(b)$ - this must hold because otherwise $f$ is constant. Assume, wlog, that $f$ attains a maximum value at $x \in (a, b)$. Since $f(x)$ is a maximal value, we must have
+If $f$ is constant, then the result follows immediately.
+Assume $f$ is not constant.
+Since $f$ is continuous in $[a, b]$, it attains a maximal (or minimal) value in the interval $(a, b)$ which is strictly larger (or smaller) than $f(a) = f(b)$ - this must hold because otherwise $f$ is constant.
+Assume, wlog, that $f$ attains a maximum value at $x \in (a, b)$. Since $f(x)$ is a maximal value, we must have
     
 $$\begin{align}
 \frac{f(x + \epsilon) - f(x)}{\epsilon} \leq 0 \leq \frac{f(x) - f(x - \epsilon)}{\epsilon}
@@ -426,6 +455,8 @@ and since the limits of both sides as $\epsilon \to 0$ are equal to $f'(x)$, we 
     
 </details>
 <br>
+    
+Rolle's theorem can be generalised to higher order derivatives, in the following way.
 
 <div class="theorem">
 
@@ -449,7 +480,8 @@ Continuing to order $n$ we arrive at the result.
 </details>
 <br>
     
-    
+Higher order Rolle's theorem can also be generalised to include two functions.
+The next corollary says the same thing as the previous theorem if we set $g = 0$.
 
 <div class="lemma">
 
@@ -473,6 +505,8 @@ arriving at the result.
 
 
 ### Mean value theorem
+    
+We now prove the mean value theorem, which is a central and useful result in analysis.
 
 <div class="theorem">
 
@@ -486,7 +520,7 @@ $$ f'(x) = \frac{f(b) - f(a)}{b - a}. $$
 <details class="proof">
 <summary>Proof: Mean value theorem</summary>
     
-We can prove quickly prove the mean value theorem using {ref}`Rolle's theorem<analysis-i-rolle>`. Define the linear function
+We can quickly prove the mean value theorem using {ref}`Rolle's theorem<analysis-i-rolle>`. Define the linear function
     
 $$ g(x) = \frac{f(b) - f(a)}{b - a} x, $$
     
@@ -533,6 +567,8 @@ by an application of the chain rule.
 <br>
 
 ### Taylor's theorem
+    
+Taylor's theorem is one of the most useful analysis results, and finds wide usage in applications.
 
 <div class="theorem">
 
@@ -561,6 +597,8 @@ The polynomial $P$ therefore satisfies $P^{(k)}(x_0) = f^{(k)}(x_0)$ for $k = 0,
 
 
 ## Complex derivatives
+    
+Last, we define derivatives of complex functions, in an analogous way to derivatives of real functions.
 
 <div class="definition">
 
