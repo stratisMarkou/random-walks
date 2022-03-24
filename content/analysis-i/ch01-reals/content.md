@@ -28,8 +28,8 @@ We sometimes ommit writing the $\times$ sign in which case, for example, $a \tim
 <details class="proof">
 <summary>Note: Properties of addition and multiplication</summary>
 
-It is interesting to note that under the first three conditions, addition and multiplication have the same standing, in the sense that they are both binary operations namely commutativity, associativity and existence of identities.
-Now, if we assume that inverses exist for addition and require distributivity, we see that
+It is interesting to note that under the first three conditions, addition and multiplication have the same standing, in the sense that they are both binary operations which satisfy commutativity, associativity and have identity elements.
+Now, if we assume that inverses exist for addition and also require the distributivity property, we see that
     
 $$\begin{equation}
 a \times 0 + a = a \times 0 + a \times 1 = a \times (0 + 1) = a \times 1 = a \implies a \times 0 = 0.

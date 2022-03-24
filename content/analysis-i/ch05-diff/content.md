@@ -1,19 +1,115 @@
 # Differentiation
 
+In this chapter we introduce differentiation.
+We define the derivative of a function on $\mathbb{R}$ and prove basic properties of derivatives, such as linearity, the product rule, the sum rule and the chain rule.
+We discuss and prove some central theorems such as Rolle's theorem, the mean value theorem, and Taylor's theorem.
+Last, we define differentiation on $\mathbb{C}$.
+
 ## Limits of functions
+
+The derivative of a function $f$ at a point $x_0$ is, roughly speaking, a linear approximation to $f$ which becomes arbitrarily accurate when we look at a sufficiently small neighbourhood of $x_0$.
+To formalise this definition, we first define the limit of a function.
 
 <div class="definition">
 
-**Definition (Limit of functions)** Let $A \subseteq \mathbb{R}$ and let $f : A \to \mathbb{R}$. We write
+**Definition (Limit of function)** Let $A \subseteq \mathbb{R}$ and let $f : A \to \mathbb{R}$.
+We write
 
-$$ \lim_{x \to a} f(x) = \ell $$
+$$ \lim_{x \to x_0} f(x) = \ell $$
     
-if for any $\epsilon > 0$, there exists $\delta > 0$ such that for all $x \in A$ for which $0 < |x - a| < \delta$, we have
+if for any $\epsilon > 0$, there exists $\delta > 0$ such that
     
-$$|f(x) - \ell| < \epsilon.$$
+$$x \in A \text{ and } 0 < |x - x_0| < \delta \implies |f(x) - \ell| < \epsilon.$$
     
 </div>
 <br>
+
+We note the following things regarding limits of functions. First, the limit of a function is a local quantity and different $x_0$ can correspond to different limits.
+Second, the limit of a function may not always exist.
+It might be the case that a function does not have a limit at a particular $x_0$.
+For instance, the Heaviside step function
+
+$$H(x) = \begin{cases} 0 & \text{ if } x \leq 0 \\ 1 & \text{ otherwise} \end{cases}, $$
+
+does not have a limit at $x = 0$.
+It might be the case that a function does not have a limit for any $x_0$.
+For instance, the indicator function on the rationals
+
+$$I_{\mathbb{Q}}(x) = \begin{cases} 1 & \text{ if } x \in \mathbb{Q} \\ 0 & \text{ otherwise} \end{cases}, $$
+
+does not have a limit at any $x \in \mathbb{R}$.
+Third, the limit of $f$ at $x_0$ does not depend on $f(x_0)$ because the inequality $0 < |x - x_0| < \delta$ is strict.
+For example, the function
+
+$$f(x) = \begin{cases} 1 & \text{ if } x = 0 \\ 0 & \text{ otherwise} \end{cases}, $$
+
+has a limit of $0$ at every $x \in \mathbb{R}$, including $x = 0$.
+Fourth, a function may have a limit at some point even if it is not defined at that point.
+For example $f(x) = \sin x / x \to 1$ as $x \to 0$, but $f(0)$ is undefined.
+
+The existence of a function limit at a point looks very similar to the definition of continuity at a point, but the two definitions are not the same.
+If a function is continuous at $x_0$, it also has a limit at $x_0$.
+The converse is not true, since a function that has a limit at $x_0$ is not necessarily continuous at $x_0$.
+We also have the following lemma which highlights the relation between continuity and function limits.
+
+<div class="lemma">
+
+**Lemma (Continuity and function limits)** Given a function $f$, define
+    
+$$\begin{align} g(x) = \begin{cases} f(x) & x \neq x_0 \\ \ell & x = x_0 \end{cases}. \end{align}$$
+    
+Then, $f \to \ell$ as $x \to x_0$ if and only if $g$ is continuous at $x_0$.
+    
+</div>
+<br>
+
+<details class="proof">
+<summary>Proof: Continuity and function limits</summary>
+    
+Suppose $f$ is continuous at $x_0$.
+Then, by definition for any $\epsilon > 0$, there exists $\delta > 0$ such that
+    
+$$|x - x_0| < \delta \implies |f(x) - f(x_0)| < \epsilon.$$
+    
+For that $\delta$ it also holds that
+    
+$$0 < |x - x_0| < \delta \implies |f(x) - \ell| < \epsilon,$$
+    
+where $\ell = f(x_0)$, so $f \to \ell$ as $x \to x_0$.
+    
+For the second statement, suppose $f \to \ell$ as $x \to x_0$ and define the function
+
+$$ g(x) = \begin{cases} f(x) & x \neq x_0 \\ \ell & x = x_0 \end{cases}. $$
+    
+Then for any $\epsilon > 0$, there exists $\delta > 0$ such that
+    
+$$0 < |x - x_0| < \delta \implies |f(x) - \ell| < \epsilon \implies |g(x) - \ell| < \epsilon. $$
+    
+Then, because $g(x_0) = \ell$, we have
+    
+$$|x - x_0| < \delta \implies |g(x) - g(x_0)| < \epsilon, $$
+    
+so $g$ is continuous at $x_0$.
+Conversely, suppose $f$ is a function and a $g$ is another function which is continuous at $x_0$ and
+    
+$$ g(x) = \begin{cases} f(x) & x \neq x_0 \\ \ell = g(x_0) & x = x_0 \end{cases}. $$
+    
+Then, for any $\epsilon > 0$ there exists $\delta > 0$ such that
+    
+$$|x - x_0| < \delta \implies |g(x) - g(x_0)| < \epsilon. $$
+    
+This in turn implies that
+    
+$$0 < |x - x_0| < \delta \implies |g(x) - g(x_0)| < \epsilon, $$
+
+so $f \to \ell = g(x_0)$ as $x$.
+    
+</details>
+<br>
+
+
+
+Limits of functions have the following intuitive properties.
 
 <div class="lemma">
 
@@ -26,39 +122,43 @@ $$|f(x) - \ell| < \epsilon.$$
 <details class="proof">
 <summary>Proof: Rules for limits of functions</summary>
     
-In all following parts we assume $f(x) \to l$ and $g(x) \to m$ as $x \to a$.
+In all following parts we assume $f(x) \to l$ and $g(x) \to m$ as $x \to x_0$.
 
 **Proof for sums:** In general, it holds that
     
 $$|(f(x) + g(x)) - (l + m)| \leq |f(x) - l| + |g(x) - m|.$$
     
-Since $f, g$ have limits $l, m$, there exists for any $\epsilon > 0$ some $\delta > 0$ such that both terms of the right-hand side are less than $\frac{\epsilon}{2}$ for all $0 < |x - a| < \delta$. This means that for any $\epsilon > 0$
+Since $f$ and $g$ have limits $l$ and $m$, for any $\epsilon > 0$ there exists some $\delta > 0$ such that both terms of the right-hand side are less than $\frac{\epsilon}{2}$ for all $0 < |x - x_0| < \delta$. This means that for any $\epsilon > 0$
     
 $$|(f(x) + g(x)) - (l + m)| \leq |f(x) - l| + |g(x) - m| < \epsilon, $$
     
-arriving at  the result
+arriving at  the result.
     
 **Proof for products:** In general, it holds that
     
-$$|f(x)g(x) - lm| = |(f(x) - l)(g(x) - m) + (lg(x) - lm) + (mf(x) - lm)|.$$
+$$\begin{align}
+|f(x)g(x) - lm| &= |(f(x) - l)(g(x) - m) + (lg(x) - lm) + (mf(x) - lm)| \\
+                &\leq |(f(x) - l)|~|(g(x) - m)| + |l|~|g(x) - m| + |m|~|f(x) - l|
+\end{align}$$
     
-Since $f, g$ have limits $l, m$, we can find $\lambda > 0$ such that
+Since $f$ and $g$ have limits $l$ and $m$, for any $\lambda > 0$ we can find $\delta > 0$ such that
     
-$$ 0 < |x - a| < \delta \implies |f(x) - l| < \lambda \text{ and } |g(x) - m| < \lambda. $$
+$$ 0 < |x - x_0| < \delta \implies |f(x) - l| < \lambda \text{ and } |g(x) - m| < \lambda. $$
     
 Therefore we can write
     
-$$|f(x)g(x) - lm| < \lambda^2 + l\lambda + m\lambda,$$
+$$0 < |x - x_0| < \delta \implies |f(x)g(x) - lm| < \lambda^2 + |l|\lambda + |m|\lambda,$$
     
-and since $\lambda$ can be made arbitrarily small, the right hand side above can be made arbitrarily small, smaller than any required $\epsilon > 0$. Thus we conclude
+and since $\lambda$ can be made arbitrarily small, the right hand side above can be made arbitrarily small.
+Thus for any $\epsilon > 0$ we can find $\lambda$ which will make the right hand smaller than $\epsilon$ and there also exists $\delta > 0$ such that
     
-$$ 0 < |x - a| < \delta \implies |f(x)g(x) - lm| < \epsilon, $$
+$$ 0 < |x - x_0| < \delta \implies |f(x)g(x) - lm| < \epsilon, $$
     
 arriving at the result.
     
 **Proof for quotients:** For this part we also assume $m$ is non-zero and $g(x)$ is also non-zero (for any argument $x$). Since $g$ has limit $l$, then for any $\lambda > 0$ we can find $\delta > 0$ such that
     
-$$ 0 < |x - a| < \delta \implies |g(x) - l| < \lambda l^2. $$
+$$ 0 < |x - x_0| < \delta \implies |g(x) - l| < \lambda l^2. $$
     
 We also have the inequality
     
@@ -68,15 +168,20 @@ $$\begin{align}
     
 and the right-hand side of this inequality can be made arbitrarily small by choosing a sufficiently small $\lambda$. Therefore
     
-$$ \frac{1}{g(x)} \to \frac{1}{l} \text{ as } x \to a. $$
+$$ \frac{1}{g(x)} \to \frac{1}{l} \text{ as } x \to x_0. $$
     
 Using the previous result on products, with the functions $f$ and $\frac{1}{g}$, we arrive at the result.
     
 </details>
 <br>
 
+
+
 (analysis-i-derivative)=
-## The derivative
+## Derivatives
+
+Now we can define differentiable functions and their derivatives.
+We first give the standard definition, and then give an equivalent second definition.
 
 <div class="definition">
 
@@ -90,6 +195,15 @@ $$ \lim_{h \to 0} \frac{f(x_0 + h) - f(x_0)}{h} = f'(x_0). $$
     
 </div>
 <br>
+
+In other words, a function $f$ is differentiable at $x_0$ if the finite-difference function
+
+$$ g(x) = \frac{f(x) - f(x_0)}{x - x_0} $$
+
+has a limit at $x_0$.
+Note that a function may have a derivative at some point even if it is undefined at that point.
+For example, the function $f(x) = \sin x / x$ is not defined at $x = 0$, but is differentiable at every $x$.
+This is a direct benefit of our definition of function limits, which did not specify the behaviour of the function at the limit point.
 
 <div class="definition">
 
@@ -258,7 +372,7 @@ arriving at the result.
 <br>
 
 
-## Theorems involving derivatives
+## Derivative theorems
 
 ### Derivative of an inverse
 

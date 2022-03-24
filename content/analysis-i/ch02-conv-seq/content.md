@@ -402,7 +402,7 @@ $$\begin{align}
 and the sequence $|a_n - a|$ is decreasing, we have
     
 $$\begin{align}
-|a_n - a| < \epsilon \text{ for all } n > N,
+|a_m - a| < \epsilon \text{ for all } m > n,
 \end{align}$$
     
 showing that the sequence converges to $a$ and $\mathbb{F}$ has the monotone sequences property.
@@ -430,7 +430,7 @@ $$\begin{align}
     
 implies that $u_n - v_n$ also converges to $0$. Since $u_n$ is a decreasing sequence that is bounded below by $v_0$, it converges to a limit $s$, and similarly $v_n$ also converges to $s$. The intersection of the intervals $[v_n, u_n]$ equals the singleton set $\{s\}$ and this is a subset of $S$. We now show that $s = \sup S$.
     
-If $s$ is not an upper bound, then there must exist $t \in S$ such that $s < t$, and since $u_n \to s$ there must also exist $m$ such that $u_m < t$, contradicting the fact that $u_m$ is an upper bound. To see that $s$ is the least upper bound, let $t < s$. Since $u_n \to s$ we can find $m$ such that $t < u_m$, implying that $t$ is not the upper bound.
+If $s$ is not an upper bound, then there must exist $t \in S$ such that $s < t$, and since $u_n \to s$ there must also exist $m$ such that $u_m < t$, contradicting the fact that $u_m$ is an upper bound. To see that $s$ is the least upper bound, let $t < s$. Since $v_n \to s$ we can find $m$ such that $t < v_m$, implying that $t$ is not an upper bound.
     
 Therefore $s$ is a least upper bound and $\mathbb{F}$ has the least upper bound property.
 
