@@ -60,7 +60,7 @@
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Miscellaneous" href="../../misc/misc.html" />
+    <link rel="next" title="Variational Inference Revisited" href="../vfer/vfer.html" />
     <link rel="prev" title="Variational Gaussian Processes" href="vfe.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -229,6 +229,11 @@
     </ul>
     <i class="fas fa-chevron-down">
     </i>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vfer/vfer.html">
+     Variational Inference Revisited
+    </a>
    </li>
   </ul>
   <i class="fas fa-chevron-down">
@@ -433,8 +438,8 @@
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#training-and-posterior-sampling">
-   Training and posterior sampling
+  <a class="reference internal nav-link" href="#posterior-sampling">
+   Posterior sampling
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -807,7 +812,7 @@ f(\cdot) = \boldsymbol{\phi}(\cdot)^\top \mathbf{w} + \mathbf{K}_{\cdot, \Xb} \m
 <div class="section" id="the-model">
 <h3>The model<a class="headerlink" href="#the-model" title="Permalink to this headline">¶</a></h3>
 <p>Now let’s implement the GP which we will sample from. We will use the implementation we have for GPs approximated using the <a class="reference internal" href="vfe.html"><span class="doc std std-doc">VFE approximation</span></a>. The only new bit here is the method <code class="docutils literal notranslate"><span class="pre">sample_posterior</span></code>. This method returns a posterior sample, which is itself a function which can be queried at arbitrary inputs.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">VFEGP</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     
@@ -977,8 +982,8 @@ f(\cdot) = \boldsymbol{\phi}(\cdot)^\top \mathbf{w} + \mathbf{K}_{\cdot, \Xb} \m
 </div>
 </div>
 </div>
-<div class="section" id="training-and-posterior-sampling">
-<h2>Training and posterior sampling<a class="headerlink" href="#training-and-posterior-sampling" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="posterior-sampling">
+<h2>Posterior sampling<a class="headerlink" href="#posterior-sampling" title="Permalink to this headline">¶</a></h2>
 <p>Finally, we can train the model on some data. We’ll use two datasets, one consisting of the GP-generated we created earlier, and another containing the sinusoidal data from the <a class="reference internal" href="../../misc/rff/rff.html"><span class="doc std std-doc">RFF example</span></a>.</p>
 <div class="section" id="gp-generated-data">
 <h3>GP generated data<a class="headerlink" href="#gp-generated-data" title="Permalink to this headline">¶</a></h3>
@@ -1217,7 +1222,7 @@ f(\cdot) = \boldsymbol{\phi}(\cdot)^\top \mathbf{w} + \mathbf{K}_{\cdot, \Xb} \m
 <dd><p>James Wilson, Viacheslav Borovitskiy, Alexander Terenin, Peter Mostowsky, and Marc Deisenroth. Efficiently sampling functions from gaussian process posteriors. In <em>International Conference on Machine Learning</em>, 10292–10302. PMLR, 2020.</p>
 </dd>
 <dt class="bibtex label" id="wislon2021pathwise"><span class="brackets"><a class="fn-backref" href="#id7">WBT+21</a></span></dt>
-<dd><p>James T. Wilson, Viacheslav Borovitskiy, Alexander Terenin, Peter Mostowsky, and Marc Peter Deisenroth. Pathwise conditioning of gaussian processes. <em>Journal of Machine Learning Research</em>, 22(105):1–47, 2021. URL: <a class="reference external" href="http://jmlr.org/papers/v22/20-1260.html">http://jmlr.org/papers/v22/20-1260.html</a>.</p>
+<dd><p>James T. Wilson, Viacheslav Borovitskiy, Alexander Terenin, Peter Mostowsky, and Marc Peter Deisenroth. Pathwise conditioning of gaussian processes. <em>Journal of Machine Learning Research</em>, 2021.</p>
 </dd>
 </dl>
 </p>
@@ -1253,7 +1258,7 @@ f(\cdot) = \boldsymbol{\phi}(\cdot)^\top \mathbf{w} + \mathbf{K}_{\cdot, \Xb} \m
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="vfe.html" title="previous page">Variational Gaussian Processes</a>
-    <a class='right-next' id="next-link" href="../../misc/misc.html" title="next page">Miscellaneous</a>
+    <a class='right-next' id="next-link" href="../vfer/vfer.html" title="next page">Variational Inference Revisited</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

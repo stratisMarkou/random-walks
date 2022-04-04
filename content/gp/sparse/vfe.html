@@ -230,6 +230,11 @@
     <i class="fas fa-chevron-down">
     </i>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vfer/vfer.html">
+     Variational Inference Revisited
+    </a>
+   </li>
   </ul>
   <i class="fas fa-chevron-down">
   </i>
@@ -516,20 +521,34 @@
  \newcommand{\bm}[1]{\mathbf{#1}} \)</span></p>
 <div class="section" id="the-variational-free-energy">
 <h2>The Variational Free Energy<a class="headerlink" href="#the-variational-free-energy" title="Permalink to this headline">¶</a></h2>
-<p>Often, the log marginal likelihood of the data can be costly or intractable to compute. To circumvent this difficulty, one solution is to optimise an alternative objective instead of the log-marginal. This objective should be chosen such that (1) it is cheap to evaluate; (2) optimising it cannot lead to worse overfitting than the original model. The Variational Free Energy (VFE), also known as the ELBO, can be used to meet both these criteria. The precise same bound is used for a variety of other models involving latent variables - including Gassian Mixture Models, Variational Autoencoders or Bayesian Networks to mention a few.</p>
-<p>The VFE meets the two criteria above because (1) it can be cheap to evaluate if we make sensible approximation choices; (2) it lower bounds the marginal likelihood, so we can optimise it with respect to the hyperparameters without fear of overfitting any worse than the exact model would. The latter point is especially important because it decouples modelling assumptions (the awesome model we’d like to have) from our approximations (which we make out of computational necessity). A user can therefore state their assumptions clearly upfornt and buy themselves as good an approximation to the exact model as their comptational budget can afford them. We’ll expand on this further, later.</p>
-<p>Here is a short derivation for the VFE, which can be used as a starting point for <em>any</em> latent variable model. Suppose we want to evalate the marginal likelihood of some data <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> given some other data <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> under a model with latent variables <span class="math notranslate nohighlight">\(\mathbf{s}\)</span> and parameters <span class="math notranslate nohighlight">\(\bs{\theta}\)</span></p>
+<p>Often, the log marginal likelihood of the data can be costly or intractable to compute.
+To circumvent this difficulty, one solution is to optimise an alternative objective instead of the log-marginal.
+This objective should be chosen such that (1) it is cheap to evaluate; (2) optimising it cannot lead to worse overfitting than the original model.
+The Variational Free Energy (VFE), also known as the ELBO, can be used to meet both these criteria.
+The precise same bound is used for a variety of other models involving latent variables including Gassian Mixture Models, Variational Autoencoders or Bayesian Networks.</p>
+<p>The VFE meets the two criteria above because (1) it can be cheap to evaluate if we make sensible approximation choices; (2) it lower bounds the marginal likelihood, so we can optimise it with respect to the hyperparameters without fear of overfitting any worse than the exact model would.
+The latter point is especially important because it decouples modelling assumptions (which we choose to make because they are appropriate for the data) from our approximations (which we make out of computational necessity).
+A user can therefore state their assumptions clearly upfornt and buy themselves as good an approximation to the exact model as their comptational budget can afford them.
+We’ll expand on this further, later.</p>
+<p>Here is a short derivation for the VFE, which is applicable to any latent variable model.
+Suppose we want to evalate the marginal likelihood of some data <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> given some other data <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> under a model with latent variables <span class="math notranslate nohighlight">\(\mathbf{f}\)</span> and parameters <span class="math notranslate nohighlight">\(\bs{\theta}\)</span></p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
-p(\mathbf{y} | \mathbf{x}, \bs{\theta}) = \int p(\mathbf{y}, \mathbf{s} | \mathbf{x}, \bs{\theta}) d \mathbf{s}
+p(\mathbf{y} | \mathbf{x}, \bs{\theta}) = \int p(\mathbf{y}, \mathbf{f} | \mathbf{x}, \bs{\theta}) d \mathbf{f}
 \end{align}\]</div>
-<p>For Gaussian mixture models, <span class="math notranslate nohighlight">\(\mathbf{s}\)</span> are cluster memberships of the datapoints, often written <span class="math notranslate nohighlight">\(\mathbf{c}\)</span>. For VAEs, <span class="math notranslate nohighlight">\(\mathbf{s}\)</span> is the latent representation, often written <span class="math notranslate nohighlight">\(\mathbf{z}\)</span>. For GPs it will denote a set of latent function values <span class="math notranslate nohighlight">\(\mathbf{f}\)</span>. Now, defining a new probability distribution over <span class="math notranslate nohighlight">\(\mathbf{s}\)</span>, written <span class="math notranslate nohighlight">\(q(\mathbf{s})\)</span>. This is widely referred to as the <em>variational posterior</em>. If we subtract the KL divergence between <span class="math notranslate nohighlight">\(q(\mathbf{s})\)</span> and the true posterior <span class="math notranslate nohighlight">\(p(\mathbf{s} | \mathbf{y}, \mathbf{x})\)</span> from the marginal likelihood, we get the inequality</p>
+<p>Now, defining a new probability distribution over <span class="math notranslate nohighlight">\(\mathbf{f}\)</span>, written <span class="math notranslate nohighlight">\(q(\mathbf{f})\)</span>. This is widely referred to as the <em>variational posterior</em>.
+If we subtract the KL divergence between the variational and the true posterior from the marginal likelihood, we get the inequality</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
-\log p(\mathbf{y} | \mathbf{x}) \geq \mathcal{F}(q, \bs{\theta}) &amp;= \int q(\mathbf{s}) \log p(\mathbf{y} | \mathbf{x}, \bs{\theta}) d \mathbf{s} + \int q(\mathbf{s}) \log \frac{p(\mathbf{s} | \mathbf{y}, \mathbf{x}, \bs{\theta})}{q(\mathbf{s})} d\bm{s} \\
-&amp;= \int q(\mathbf{s}) \log \frac{p(\mathbf{y}, \mathbf{s} | \mathbf{x}, \bs{\theta})}{q(\mathbf{s})} d\bm{s},
+\log p(\mathbf{y} | \mathbf{x}) \geq \mathcal{F}(q, \bs{\theta}) &amp;= \int q(\mathbf{f}) \log p(\mathbf{y} | \mathbf{x}, \bs{\theta}) d \mathbf{f} + \int q(\mathbf{f}) \log \frac{p(\mathbf{f} | \mathbf{y}, \mathbf{x}, \bs{\theta})}{q(\mathbf{f})} d\bm{f} \\
+&amp;= \int q(\mathbf{f}) \log \frac{p(\mathbf{y}, \mathbf{f} | \mathbf{x}, \bs{\theta})}{q(\mathbf{f})} d\bm{f},
 \end{align}\end{split}\]</div>
-<p>where we have used the fact that the KL is non-negative. This shows that the VFE, <span class="math notranslate nohighlight">\(\mathcal{F}\)</span>, is a lower bound to the exact marginal likelihood. We made no assumptions about the distribution <span class="math notranslate nohighlight">\(q\)</span> and the inequality always holds, irrespective of our choice of <span class="math notranslate nohighlight">\(q\)</span>. The inequality becomes an equality when <span class="math notranslate nohighlight">\(q\)</span> is equal to the true posterior, where the KL divergence becomes zero, attaining its minimum value. Although we could pick <span class="math notranslate nohighlight">\(q\)</span> to be any distribution we like, we should seek a <span class="math notranslate nohighlight">\(q\)</span> which makes <span class="math notranslate nohighlight">\(\mathcal{F}\)</span> as large as possible while still remaining computationally tractable. It turns out that the VFE approximation for GPs achieves an excellent tradeoff between approximating the true posterior and keeping the computational cost low.</p>
+<p>where we have used the fact that the KL is non-negative.
+This shows that the VFE is a lower bound to the exact marginal likelihood.
+We made no assumptions about the distribution <span class="math notranslate nohighlight">\(q\)</span> and the inequality always holds, irrespective of our choice of variational posterior.
+The inequality becomes an equality when the variational posterior is equal to the true posterior, where the KL divergence becomes zero, attaining its minimum value.
+Although we could pick the variational posterior to be any distribution we like, we should select a distribution which makes the VFE as large as possible while still remaining computationally tractable.
+It turns out that the VFE approximation for GPs achieves an excellent tradeoff between approximating the true posterior and keeping the computational cost low.</p>
 </div>
 <div class="section" id="sparse-vfe-approximation">
 <h2>Sparse VFE approximation<a class="headerlink" href="#sparse-vfe-approximation" title="Permalink to this headline">¶</a></h2>
@@ -630,7 +649,8 @@ q^*\lrb[\fb | \mathbf{y}] = \mathcal{N}\lrb[\fb;~\sigma^{-2} \Kbb \bs{\Sigma}^{-
 \end{align}\]</div>
 </details>
 <br>
-<p>Looking at this expression for <span class="math notranslate nohighlight">\(\mathcal{F}\)</span>, we observe that the first term is a Gaussian involving a covariance with special structure. The <span class="math notranslate nohighlight">\(\sigma^2 \bm{I}\)</span> term is diagonal, while the <span class="math notranslate nohighlight">\(\Kxb \Kbb^{-1} \Kbx\)</span> has rank <span class="math notranslate nohighlight">\(\min(M, N)\)</span>. Such matrices can be inverted in <span class="math notranslate nohighlight">\(\mathcal{O}\lrb[\min(M, N)^3]\)</span> time, using the <a class="reference external" href="https://en.wikipedia.org/wiki/Woodbury_matrix_identity">Woodbury Identity</a>. The second term involves the trace of a matrix which, when <span class="math notranslate nohighlight">\(M &lt; N\)</span>, requires <span class="math notranslate nohighlight">\(\mathcal{O}\lrb[NM^2]\)</span> to compute. Therefore, the overal complexity of computing <span class="math notranslate nohighlight">\(\mathcal{F}\)</span> is <span class="math notranslate nohighlight">\(\mathcal{O}\lrb[NM^2]\)</span>, which is a significant gain over <span class="math notranslate nohighlight">\(\mathcal{O}\lrb[N^3]\)</span> if <span class="math notranslate nohighlight">\(M &lt;&lt; N\)</span>.</p>
+<p>Looking at this expression for <span class="math notranslate nohighlight">\(\mathcal{F}\)</span>, we observe that the first term is a Gaussian involving a covariance with special structure. The <span class="math notranslate nohighlight">\(\sigma^2 \bm{I}\)</span> term is diagonal, while the <span class="math notranslate nohighlight">\(\Kxb \Kbb^{-1} \Kbx\)</span> has rank <span class="math notranslate nohighlight">\(\min(M, N)\)</span>. Such matrices can be inverted in <span class="math notranslate nohighlight">\(\mathcal{O}\lrb[\min(NM^2, MN^2)]\)</span> time, using the <a class="reference external" href="https://en.wikipedia.org/wiki/Woodbury_matrix_identity">Woodbury Identity</a>.
+The second term involves the trace of a matrix which, when <span class="math notranslate nohighlight">\(M &lt; N\)</span>, requires <span class="math notranslate nohighlight">\(\mathcal{O}\lrb[NM^2]\)</span> to compute. Therefore, the overal complexity of computing the VFE is <span class="math notranslate nohighlight">\(\mathcal{O}\lrb[NM^2]\)</span>, which is a significant gain over <span class="math notranslate nohighlight">\(\mathcal{O}\lrb[N^3]\)</span> if <span class="math notranslate nohighlight">\(M &lt;&lt; N\)</span>.</p>
 </div>
 <div class="section" id="posterior-predictive">
 <h3>Posterior predictive<a class="headerlink" href="#posterior-predictive" title="Permalink to this headline">¶</a></h3>
@@ -683,7 +703,7 @@ p\lrb[\bm{y}^* | \X^*, \Xb] = \mathcal{N}\lrb[\bm{y}^*; \sigma^{-2} \Ksb \bs{\Si
 <div class="section" id="sampling-the-exact-gp">
 <h3>Sampling the exact GP<a class="headerlink" href="#sampling-the-exact-gp" title="Permalink to this headline">¶</a></h3>
 <p>First, we implement a constant GP mean class and an EQ covariance class, both as <code class="docutils literal notranslate"><span class="pre">tf.keras.Models</span></code>, so that we can later re-use them to make a trainable <code class="docutils literal notranslate"><span class="pre">VFEGP</span></code>.</p>
-<div class="cell tag_hide_input docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 <span class="kn">import</span> <span class="nn">tensorflow_probability</span> <span class="k">as</span> <span class="nn">tfp</span>
@@ -864,7 +884,7 @@ p\lrb[\bm{y}^* | \X^*, \Xb] = \mathcal{N}\lrb[\bm{y}^*; \sigma^{-2} \Ksb \bs{\Si
 <div class="section" id="implementing-the-vfe-gp">
 <h3>Implementing the VFE GP<a class="headerlink" href="#implementing-the-vfe-gp" title="Permalink to this headline">¶</a></h3>
 <p>We can now put things together and implement the <code class="docutils literal notranslate"><span class="pre">VFEGP</span></code>. The <code class="docutils literal notranslate"><span class="pre">post_pred</span></code> and <code class="docutils literal notranslate"><span class="pre">free_energy</span></code> methods usee the Woodbury identity to speed up the inversion of the matrices required in this computation. It turns out however that when using the Woodbury identity, some of the matrices involved are poorly condtitioned. To alleviate this issue, I’ve found it necessary to make use of a <a class="reference external" href="https://gpflow.readthedocs.io/en/master/notebooks/theory/SGPR_notes.html?highlight=variational">conditioning trick</a> also used in the GPFlow library.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">VFEGP</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     
@@ -898,11 +918,9 @@ p\lrb[\bm{y}^* | \X^*, \Xb] = \mathcal{N}\lrb[\bm{y}^*; \sigma^{-2} \Ksb \bs{\Si
         <span class="bp">self</span><span class="o">.</span><span class="n">log_noise</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">(</span><span class="n">log_noise</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">log_noise</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">log_noise</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable_noise</span><span class="p">)</span>
     
-    
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">noise</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">log_noise</span><span class="p">)</span>
-        
         
     <span class="k">def</span> <span class="nf">post_pred</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_pred</span><span class="p">):</span>
         
@@ -945,7 +963,6 @@ p\lrb[\bm{y}^* | \X^*, \Xb] = \mathcal{N}\lrb[\bm{y}^*; \sigma^{-2} \Ksb \bs{\Si
         <span class="n">var</span> <span class="o">=</span> <span class="n">var</span> <span class="o">+</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">diag_part</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">transpose_a</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
         
         <span class="k">return</span> <span class="n">mean</span><span class="p">,</span> <span class="n">var</span>
-        
         
     <span class="k">def</span> <span class="nf">free_energy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         
@@ -1095,11 +1112,14 @@ p\lrb[\bm{y}^* | \X^*, \Xb] = \mathcal{N}\lrb[\bm{y}^*; \sigma^{-2} \Ksb \bs{\Si
 <span class="k">def</span> <span class="nf">print_info</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
     
     <span class="n">free_energy</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">free_energy</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Step: </span><span class="si">{</span><span class="n">step</span><span class="si">:</span><span class="s1">5&gt;</span><span class="si">}</span><span class="s1"> &#39;</span>
-          <span class="sa">f</span><span class="s1">&#39;Free energy: </span><span class="si">{</span><span class="n">free_energy</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="si">:</span><span class="s1">8.3f</span><span class="si">}</span><span class="s1"> &#39;</span>
-          <span class="sa">f</span><span class="s1">&#39;Coeff: </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">cov</span><span class="o">.</span><span class="n">coeff</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="si">:</span><span class="s1">5.2f</span><span class="si">}</span><span class="s1"> &#39;</span>
-          <span class="sa">f</span><span class="s1">&#39;Scales: </span><span class="si">{</span><span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">cov</span><span class="o">.</span><span class="n">scales</span><span class="o">.</span><span class="n">numpy</span><span class="p">()]</span><span class="si">}</span><span class="s1"> &#39;</span>
-          <span class="sa">f</span><span class="s1">&#39;Noise: </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">noise</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="si">:</span><span class="s1">5.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s1">&#39;Step: </span><span class="si">{</span><span class="n">step</span><span class="si">:</span><span class="s1">5&gt;</span><span class="si">}</span><span class="s1"> &#39;</span>
+        <span class="sa">f</span><span class="s1">&#39;Free energy: </span><span class="si">{</span><span class="n">free_energy</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="si">:</span><span class="s1">8.3f</span><span class="si">}</span><span class="s1"> &#39;</span>
+        <span class="sa">f</span><span class="s1">&#39;Coeff: </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">cov</span><span class="o">.</span><span class="n">coeff</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="si">:</span><span class="s1">5.2f</span><span class="si">}</span><span class="s1"> &#39;</span>
+        <span class="sa">f</span><span class="s1">&#39;Scales: </span><span class="si">{</span><span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">cov</span><span class="o">.</span><span class="n">scales</span><span class="o">.</span><span class="n">numpy</span><span class="p">()]</span><span class="si">}</span><span class="s1"> &#39;</span>
+        <span class="sa">f</span><span class="s1">&#39;Noise: </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">noise</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="si">:</span><span class="s1">5.2f</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="p">)</span>
 </pre></div>
 </div>
 </div>

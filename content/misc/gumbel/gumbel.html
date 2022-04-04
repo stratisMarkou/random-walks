@@ -230,6 +230,11 @@
     <i class="fas fa-chevron-down">
     </i>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../gp/vfer/vfer.html">
+     Variational Inference Revisited
+    </a>
+   </li>
   </ul>
   <i class="fas fa-chevron-down">
   </i>
@@ -442,12 +447,9 @@ p(\Xi \leq \xi) = 1 - e^{-\lambda \xi}.
 \end{align}\]</div>
 <p>More generally, a Gumbel with parameter <span class="math notranslate nohighlight">\(\kappa\)</span> is identically distributed to an exponential <span class="math notranslate nohighlight">\(\Xi\)</span> with parameter <span class="math notranslate nohighlight">\(\lambda = \log \kappa\)</span> since</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{align}
-p(\Gamma \leq \gamma) &amp;= e^{-e^{- (\gamma - \kappa)}} \\
-                 &amp;= e^{-\lambda e^{- \gamma}} \\
-\implies p(\Xi \geq e^{-\gamma}) &amp;= e^{-\lambda v} \\
-         p(\Xi \leq e^{-\gamma} = v) &amp;= 1 - e^{-\lambda v}.
-\end{align}\end{split}\]</div>
+\[\begin{equation}
+p(\Gamma \leq \gamma) = e^{-e^{- (\gamma - \kappa)}} = e^{-\lambda e^{- \gamma}} \implies p(\Xi \geq e^{-\gamma}) = e^{-\lambda v} \implies p(\Xi \leq e^{-\gamma} = v) = 1 - e^{-\lambda v}.
+\end{equation}\]</div>
 </div>
 <div class="section" id="minimum-of-exponentials">
 <h2>Minimum of exponentials<a class="headerlink" href="#minimum-of-exponentials" title="Permalink to this headline">¶</a></h2>

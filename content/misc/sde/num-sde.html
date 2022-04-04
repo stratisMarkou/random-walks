@@ -230,6 +230,11 @@
     <i class="fas fa-chevron-down">
     </i>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../gp/vfer/vfer.html">
+     Variational Inference Revisited
+    </a>
+   </li>
   </ul>
   <i class="fas fa-chevron-down">
   </i>
@@ -715,11 +720,17 @@ Stratonovich approximation (exact): 1.917 (1.915)
 <h2>Euler-Maruyama method<a class="headerlink" href="#euler-maruyama-method" title="Permalink to this headline">¶</a></h2>
 <p>The Euler-Maruyama method is the analoge of the Euler method for deterministic integrals, applied to the stochastic case.</p>
 <div class="definition">
-<p><strong>Definition (Euler-Maruyama method)</strong> Given a scalar SDE with drift and diffusion functions <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span>
-\begin{align}dX(t) = f(X(t))dt + g(X(t)) dW(t),\end{align}
-the Euler-Maruyama method approximates <span class="math notranslate nohighlight">\(X\)</span> by
-\begin{align} X_{n + 1} = X_n + f(X_n) \Delta t + g(X_n) \Delta W_n,\end{align}
-where <span class="math notranslate nohighlight">\(\delta t &gt; 0\)</span> is the time step, <span class="math notranslate nohighlight">\(X_n = X(t_n), W_n = W(t_n)\)</span> and <span class="math notranslate nohighlight">\(t_n = n\delta t\)</span>.</p>
+<p><strong>Definition (Euler-Maruyama method)</strong> Given a scalar SDE with drift and diffusion functions <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+dX(t) = f(X(t))dt + g(X(t)) dW(t),
+\end{align}\]</div>
+<p>the Euler-Maruyama method approximates <span class="math notranslate nohighlight">\(X\)</span> by</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+X_{n + 1} = X_n + f(X_n) \Delta t + g(X_n) \Delta W_n,
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\delta t &gt; 0\)</span> is the time step, <span class="math notranslate nohighlight">\(X_n = X(t_n), W_n = W(t_n)\)</span> and <span class="math notranslate nohighlight">\(t_n = n\delta t\)</span>.</p>
 </div>
 <br>
 <p>Let’s look at an implementation of the Euler-Maruyama (EM) method. The <code class="docutils literal notranslate"><span class="pre">euler_maruyama</span></code> below function takes the <em>drift</em> and <em>diffusion</em> functions <span class="math notranslate nohighlight">\(f\)</span>, <span class="math notranslate nohighlight">\(g\)</span> and applies the EM algorithm (not to be confused with Expectation Maximisation), from the specified initial conditions. Note that we can sample the <code class="docutils literal notranslate"><span class="pre">dW</span></code> in advance.</p>
@@ -901,16 +912,20 @@ g(x, t) &amp;= \mu x.\\
 <h2>Strong and weak convergence<a class="headerlink" href="#strong-and-weak-convergence" title="Permalink to this headline">¶</a></h2>
 <p>Since the choice of the number of bins <span class="math notranslate nohighlight">\(N\)</span> of the discretisation affects the accuracy of our method, we are interested in how quickly the approximation converges to the exact solution as a function of <span class="math notranslate nohighlight">\(N\)</span>. To do so, we must first define <em>what convergence means</em> in the stochastic case, which leads us to two disctinct notions of convergence, the strong sence and the weak sense.</p>
 <div class="definition">
-<p><strong>Definition (Strong convergence)</strong> A method for approximating a stochastic process <span class="math notranslate nohighlight">\(X(t)\)</span> is said to have strong order of convergence <span class="math notranslate nohighlight">\(\gamma\)</span> if there exists a constant such that
-\begin{align}\mathbb{E}|X_n - X(\tau_n)| \leq C\Delta t^\gamma\end{align}
-for any fixed <span class="math notranslate nohighlight">\(\tau_n = n\Delta t \in [0, T]\)</span> and <span class="math notranslate nohighlight">\(\Delta t\)</span> sufficiently small.</p>
+<p><strong>Definition (Strong convergence)</strong> A method for approximating a stochastic process <span class="math notranslate nohighlight">\(X(t)\)</span> is said to have strong order of convergence <span class="math notranslate nohighlight">\(\gamma\)</span> if there exists a constant such that</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}\mathbb{E}|X_n - X(\tau_n)| \leq C\Delta t^\gamma
+\end{align}\]</div>
+<p>for any fixed <span class="math notranslate nohighlight">\(\tau_n = n\Delta t \in [0, T]\)</span> and <span class="math notranslate nohighlight">\(\Delta t\)</span> sufficiently small.</p>
 </div>
 <br>
 <p>Strong convergence refers to the rate of convergence of the approximation <span class="math notranslate nohighlight">\(X_n\)</span> to the exact solution <span class="math notranslate nohighlight">\(X(\tau_n)\)</span> as <span class="math notranslate nohighlight">\(\Delta t \to 0\)</span>, in expectation. A weaker condition for convergence is rate at which the expected value of the approximation converges to the true expected value, as <span class="math notranslate nohighlight">\(\Delta t \to 0\)</span>, as given below.</p>
 <div class="definition">
-<p><strong>Definition (Weak convergence)</strong> A method for approximating a stochastic process <span class="math notranslate nohighlight">\(X(t)\)</span> is said to have weak order of convergence <span class="math notranslate nohighlight">\(\gamma\)</span> if there exists a constant such that
-\begin{align}|\mathbb{E}[X_n] - \mathbb{E}[X(\tau_n)]| \leq C\Delta t^\gamma\end{align}
-for any fixed <span class="math notranslate nohighlight">\(\tau_n = n\Delta t \in [0, T]\)</span> and <span class="math notranslate nohighlight">\(\Delta t\)</span> sufficiently small.</p>
+<p><strong>Definition (Weak convergence)</strong> A method for approximating a stochastic process <span class="math notranslate nohighlight">\(X(t)\)</span> is said to have weak order of convergence <span class="math notranslate nohighlight">\(\gamma\)</span> if there exists a constant such that</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}|\mathbb{E}[X_n] - \mathbb{E}[X(\tau_n)]| \leq C\Delta t^\gamma
+\end{align}\]</div>
+<p>for any fixed <span class="math notranslate nohighlight">\(\tau_n = n\Delta t \in [0, T]\)</span> and <span class="math notranslate nohighlight">\(\Delta t\)</span> sufficiently small.</p>
 </div>
 <br>
 <p>The paper states without proof that, under conditions on <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span>, Euler-Maruyama has strong order of convergence <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span> and weak order of convergence <span class="math notranslate nohighlight">\(1\)</span>. We do not provide a proof for any of the above statements, but instead evaluate the rate of convergence empirically. To speed up the evaluation, we implement a function that evaluates several EM solutions in parallel below.</p>
@@ -1015,11 +1030,16 @@ for any fixed <span class="math notranslate nohighlight">\(\tau_n = n\Delta t \i
 <h2>Milstein’s higher order method<a class="headerlink" href="#milstein-s-higher-order-method" title="Permalink to this headline">¶</a></h2>
 <p>Just as higher order methods for ODEs exist for obtaining refined estimates of the solution, so do methods for SDEs, such as Milstein’s higher order method.</p>
 <div class="definition">
-<p><strong>Definition (Milstein’s method)</strong> Given a scalar SDE with drift and diffusion functions <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span>
-\begin{align}dX(t) = f(X(t))dt + g(X(t)) dW(t),\end{align}
-the Milstein method approximates <span class="math notranslate nohighlight">\(X\)</span> by
-\begin{align} X_{j + 1} = X_j + f(X_j) \Delta t + g(X_j) \Delta W_j + \frac{1}{2}g(X_j)g’(X_j) (\Delta W_j^2 - \Delta t),\end{align}
-where <span class="math notranslate nohighlight">\(\Delta t &gt; 0\)</span> is the time step, <span class="math notranslate nohighlight">\(X_j = X(\tau_j), W_j = W(\tau_j)\)</span> and <span class="math notranslate nohighlight">\(\tau_j = j\Delta t\)</span>.</p>
+<p><strong>Definition (Milstein’s method)</strong> Given a scalar SDE with drift and diffusion functions <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+dX(t) = f(X(t))dt + g(X(t)) dW(t),
+\end{align}\]</div>
+<p>the Milstein method approximates <span class="math notranslate nohighlight">\(X\)</span> by</p>
+<div class="math notranslate nohighlight">
+\[\begin{align} X_{j + 1} = X_j + f(X_j) \Delta t + g(X_j) \Delta W_j + \frac{1}{2}g(X_j)g'(X_j) (\Delta W_j^2 - \Delta t),
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Delta t &gt; 0\)</span> is the time step, <span class="math notranslate nohighlight">\(X_j = X(\tau_j), W_j = W(\tau_j)\)</span> and <span class="math notranslate nohighlight">\(\tau_j = j\Delta t\)</span>.</p>
 </div>
 <br>
 <p>Milstein’s method achieves a strong congergence rate of <span class="math notranslate nohighlight">\(1\)</span> and a weak convergence rate of <span class="math notranslate nohighlight">\(1\)</span>. Below is an implementation of Milstein’s method for sampling multiple paths at once.</p>
@@ -1166,13 +1186,15 @@ where <span class="math notranslate nohighlight">\(\Delta t &gt; 0\)</span> is t
 <div class="section" id="stochastic-chain-rule">
 <h2>Stochastic chain rule<a class="headerlink" href="#stochastic-chain-rule" title="Permalink to this headline">¶</a></h2>
 <p>Suppose we want to evaluate a function <span class="math notranslate nohighlight">\(V(\cdot)\)</span> at various <span class="math notranslate nohighlight">\(X(t)\)</span>, i.e. <span class="math notranslate nohighlight">\(V(X(t))\)</span>. If <span class="math notranslate nohighlight">\(X(t)\)</span> were a deterministic quantity, such as the solution to an ODE, we could solve for <span class="math notranslate nohighlight">\(X(t)\)</span> and plug it into <span class="math notranslate nohighlight">\(V\)</span>. Alternatively, we could express the evolution of <span class="math notranslate nohighlight">\(V\)</span> itself as a differential equation using the chain rule:</p>
-<p>\begin{align}
-dV &amp;= \frac{dV}{dX}dX = \frac{dV}{dX} f(t) dt, \text{ where } dX = f(t) dt,\
-\end{align}</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+dV &amp;= \frac{dV}{dX}dX = \frac{dV}{dX} f(t) dt, \text{ where } dX = f(t) dt,\\
+\end{align}\end{split}\]</div>
 <p>This way, we could solve the following ODE directly for <span class="math notranslate nohighlight">\(V\)</span></p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[\begin{align}
 \frac{dV}{dt} &amp;= \frac{dV}{dX} f(t).
-\end{align}</p>
+\end{align}\]</div>
 <p>For an autonomous SDE however the chain rule takes a different form, which under the Ito definition is as follows.</p>
 <div class="theorem">
 <p><strong>Definition (Ito’s result for one dimension)</strong> Let <span class="math notranslate nohighlight">\(X_t\)</span> be an Ito process given by</p>

@@ -8,6 +8,8 @@ My name is Stratis. I am a second-year PhD student at the Computational and Biol
 
 ## New on Random Walks
 
+[04/04/2022] Notes and demo on [The Variational Gaussian Approximation Revisited](./gp/vfer/vfer).
+
 [15/02/2022] Notes and demo on [Global Inducing Point VI for BNNs](./misc/gip/gip).
 
 [03/09/2021] Notes on the [Gumbel distribution](./misc/gumbel/gumbel).

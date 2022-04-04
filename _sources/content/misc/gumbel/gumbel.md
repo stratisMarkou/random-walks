@@ -31,12 +31,9 @@ $$\begin{align}
 
 More generally, a Gumbel with parameter $\kappa$ is identically distributed to an exponential $\Xi$ with parameter $\lambda = \log \kappa$ since
 
-$$\begin{align}
-p(\Gamma \leq \gamma) &= e^{-e^{- (\gamma - \kappa)}} \\
-                 &= e^{-\lambda e^{- \gamma}} \\
-\implies p(\Xi \geq e^{-\gamma}) &= e^{-\lambda v} \\
-         p(\Xi \leq e^{-\gamma} = v) &= 1 - e^{-\lambda v}.
-\end{align}$$
+$$\begin{equation}
+p(\Gamma \leq \gamma) = e^{-e^{- (\gamma - \kappa)}} = e^{-\lambda e^{- \gamma}} \implies p(\Xi \geq e^{-\gamma}) = e^{-\lambda v} \implies p(\Xi \leq e^{-\gamma} = v) = 1 - e^{-\lambda v}.
+\end{equation}$$
 
 ## Minimum of exponentials
 
