@@ -612,3 +612,11 @@ $$ f(x_0 + h) = f(x_0) + hf'(x_0) + o(h). $$
     
 </div>
 <br>
+    
+Note that this definition makes implicit the condition that, the ratio
+ 
+$$\begin{equation}
+    \frac{f(x_0 + h_n) - f(z)}{h_n}
+\end{equation}$$
+    
+should tend to the same limit $\ell$ regardless of the actual sequence $h_n$, so long as $h_n \to 0$. In other words, it should not matter how $h_n$ approaches $0$. This is implicit via the condition that the *limit exists*.
