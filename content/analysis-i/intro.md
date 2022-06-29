@@ -1,3 +1,3 @@
-# Analysis I
+# Analysis
 
-These are notes on the first year (part I) analysis course, of the maths degree in Cambridge.
+These are notes on the first year course on analysis course of the Maths Tripos at Cambridge (Analysis I). They are based on [Dexter Chua's notes](https://dec41.user.srcf.net/notes/IA_L/analysis_i.pdf), who took his own notes based on the lectures given in 2015 by Timothy Gowers. All mistakes in the present notes are most likely mine. Dexter has also uploaded the [examples sheets](https://dec41.user.srcf.net/notes/IA_L/analysis_i_eg.pdf) of the 2015 analysis course, and maintains a [large collection of notes](https://dec41.user.srcf.net/notes/) on other maths courses.

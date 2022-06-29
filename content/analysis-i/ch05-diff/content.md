@@ -504,6 +504,7 @@ arriving at the result.
 <br>
 
 
+(analysis-i-mean-value-theorem)=
 ### Mean value theorem
     
 We now prove the mean value theorem, which is a central and useful result in analysis.

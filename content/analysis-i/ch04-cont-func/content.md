@@ -162,7 +162,7 @@ $$\begin{align}
 <br>
 
 
-## Maximum and intermediate value
+## Maximum and intermediate value theorems
 
 Two useful theorems about continuous functions are the maximum and intermediate value theorems.
 The first says that a continuous function in a finite closed interval is bounded, and that it attains its bounds.
