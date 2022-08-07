@@ -281,7 +281,7 @@ The following lemma is a tool that can be used to prove some of the previous res
     
 1. $a \in A$
 2. If $x \in A$ and $x \neq b$ then there exists $y \in A$ such that $x < y$.
-3. If there exists $\epsilon > 0$ there exists $y \in A$ such that $y \in (x - \epsilon, x]$, then $x \in A$.
+3. Given $x \in [a, b]$, if for all $\epsilon > 0$ there exists $y \in A$ such that $y \in (x - \epsilon, x]$, then $x \in A$.
 
 Then $b \in A$.
     

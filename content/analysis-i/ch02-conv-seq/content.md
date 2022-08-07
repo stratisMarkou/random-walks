@@ -550,7 +550,7 @@ $$\begin{align}
 w_n = \frac{u_n + v_n}{2}
 \end{align}$$
 
-and selecting setting the interval $I_n$ equal to $[v_n, w_n]$ or $[w_n, u_n]$, whichever contains an infinite number of terms (if both contain an infinite number, select one arbitrarily), and renaming the left and right sides of $I_n$ to $v_{n+1}$ and $u_{n+1}$ respectively.
+and setting the interval $I_n$ equal to $[v_n, w_n]$ or $[w_n, u_n]$, whichever contains an infinite number of terms (if both contain an infinite number, select one arbitrarily), and renaming the left and right sides of $I_n$ to $v_{n+1}$ and $u_{n+1}$ respectively.
     
 Since each interval $I_k$ contains infinitely many terms of $(a_n)$, we can define a strictly increasing sequence of integers $(n_k)$ such that $a_{n_k} \in I_k$. By the nested intervals property
 

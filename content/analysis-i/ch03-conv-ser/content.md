@@ -451,7 +451,7 @@ $$\begin{align}
 </details>
 <br>
     
-Although we have not formally defined the integral, that should be familiar to the reader, so we refer the following useful convergence test.
+Although we have not yet defined the integral, which is left to a {ref}`later section<analysis-i-riemann-def>`, integration is fammiliar to us already, so we skip the gun to introduce a useful convergence test based on integrals.
     
 <div class="theorem">
 
