@@ -1468,3 +1468,22 @@ Therefore, while $T$ acts on $v \in V$ to produce $w \in W$, the dual map $T'$ a
 
 </div>
 <br>
+    
+    
+<details class="proof">
+<summary>Proof: Properties of dual maps</summary>
+    
+Let $S, T \in \mathcal{L}(V, W)$. Then by definition, for each $\phi \in W'$
+    
+$$\begin{equation}
+(S + T)'(\phi) = \phi \circ (S + T) =  \phi \circ S + \phi \circ T = S'(\phi) + T'(\phi).
+\end{equation}$$
+    
+Similarly, for each $\phi \in W'$ and $\lambda \in \mathbb{F}$, we have
+
+$$\begin{equation}
+(\lambda S)'(\phi) = \phi \circ (\lambda S) =  \lambda \phi \circ S = \lambda S'(\phi).
+\end{equation}$$
+    
+</details>
+<br>
