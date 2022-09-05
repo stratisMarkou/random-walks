@@ -14,21 +14,41 @@
       - file: content/prob-intro/ch10/content
       - file: content/prob-intro/ch11/content
       - file: content/prob-intro/ch12/content
-
-- file: content/linalg/intro
+    
+- file: content/cvx/intro
   sections:
-      - file: content/linalg/ch01/ch01-content
-      - file: content/linalg/ch02/ch02-content
-      - file: content/linalg/ch03/ch03-content
+    - file: content/cvx/ch01
+    - file: content/cvx/ch02
+    - file: content/cvx/ch03
+
+- file: content/gp/gp-intro
+  sections:
+      - file: content/gp/why-covariances
+      - file: content/gp/sparse/sparse-intro
+        sections:
+            - file: content/gp/sparse/vfe
+              title: Variational Free Energy GPs
+            - file: content/gp/sparse/gp-sampling
+              title: Sampling GP posteriors
+      - file: content/gp/vfer/vfer
   
-      
 - file: content/misc/misc
   sections:
     - file: content/misc/sde/num-sde
+    - file: content/misc/sde-as-gp/sde-as-gp
+      title: VI for diffusion processes
     - file: content/misc/node/node
     - file: content/misc/optimisation/conjugate-gradients
     - file: content/misc/kalman/kalman
     - file: content/misc/ncs/ncs
     - file: content/misc/ars/ars
+    - file: content/misc/score-matching/score-matching
+    - file: content/misc/interacting/interacting
+      title: Interacting particle FPK
+    - file: content/misc/rff/rff
+    - file: content/misc/svgd/svgd
+    - file: content/misc/addgp/addgp
+    - file: content/misc/gumbel/gumbel
+    - file: content/misc/gip/gip
     
 - file: content/reading-and-links.md
