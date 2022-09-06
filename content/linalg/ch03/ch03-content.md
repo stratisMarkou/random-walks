@@ -1485,5 +1485,138 @@ $$\begin{equation}
 (\lambda S)'(\phi) = \phi \circ (\lambda S) =  \lambda \phi \circ S = \lambda S'(\phi).
 \end{equation}$$
     
+Lastly, for each $\phi \in W'$, we have
+
+$$\begin{equation}
+(ST)'(\phi) = \phi \circ (ST) = \phi \circ S \circ T = S'(\phi) \circ T = T' S'(\phi).
+\end{equation}$$
+    
+</details>
+<br>
+    
+    
+<div class="definition">
+
+**Definition (Annihilator)** For $U \subseteq V$, the annihilator of $U$, denoted $U^0$, is defined as
+    
+$$\begin{equation}
+U^0 = \{\phi \in V' : \phi(u) = 0 \text{ for all } u \in U \}.
+\end{equation}$$
+    
+</div>
+<br>
+
+    
+    
+    
+<div class="lemma">
+
+**Lemma (Annihilator is a subspace)** Suppose $U \subseteq V$. Then $U^0$ is a subspace of $V'$.
+
+</div>
+<br>
+    
+    
+<details class="proof">
+<summary>Proof: Annihilator is a subspace</summary>
+    
+Suppose $U \subseteq V$. Then $U^0$ contains $0 \in V'$ because
+        
+$$\begin{equation}
+0(u) = 0 \implies 0 \in U^0.
+\end{equation}$$
+    
+Further, $U^0$ is closed under multiplications and additions of its elements, because for any $\phi, \psi \in U^0$ and any $\lambda \in \mathbb{F}$ we have
+    
+$$\begin{align}
+(\lambda \phi)(u) &= \lambda \phi(u) = 0 \implies \phi + \psi \in U^0, \\
+(\phi + \psi)(u) &= \phi(u) + \psi(u) = 0 + 0 = 0 \implies \phi + \psi \in U^0.
+\end{align}$$
+    
+</details>
+<br>
+    
+    
+    
+<div class="lemma">
+
+**Lemma (Dimension of the annihilator)** Suppose $V$ is finite-dimensional and $U$ is a subspace of $V$. Then
+    
+$$\begin{equation}
+\dim U + \dim U^0 = \dim V.
+\end{equation}$$
+
+</div>
+<br>
+    
+
+<details class="proof">
+<summary>Proof: Dimension of the annihilator</summary>
+    
+Suppose $V$ is finite-dimensional and $U$ is a subspace of $V$. Then there exists a basis $u_1, \dots, u_m$ for $U$, which can be extended to a basis $u_1, \dots, u_m, \dots, u_n$ of $V$. Now consider the dual basis of $u_1, \dots, u_m, \dots, u_n$, written $\phi_1, \dots, \phi_m, \dots, \phi_n$.
+    
+Suppose $\phi \in U^0$. Writing $\phi$ as a linear combination of the dual basis
+    
+$$\begin{equation}
+\phi = c_1 \phi_1 + \dots + c_m \phi_m + \dots + c_n \phi_n,
+\end{equation}$$
+    
+we see that for $k = 1, \dots, m$, we have
+
+$$\begin{equation}
+\phi(u_k) = c_1 \phi_1(u_k) + \dots + c_m \phi_m(u_k) + \dots + c_n \phi_n(u_k) = c_k = 0,
+\end{equation}$$
+    
+which means that $\phi$ can be written as a linear combination of $\phi_{m+1}, \dots, \phi_n$, which shows that $U^0 \subseteq \span(\phi_1, \dots, \phi_m)$. Conversely, if $\phi$ can be written as a linear combination of $\phi_{m+1}, \dots, \phi_n$, then for $k = 1, \dots, m$, we have
+    
+$$\begin{equation}
+\phi(u_k) = c_m \phi_m(u_k) + \dots + c_n \phi_n(u_k) = 0,
+\end{equation}$$
+    
+which implies that $\phi(u) = 0$ for all $u \in U$.
+    
+</details>
+<br>
+    
+    
+    
+<div class="lemma">
+
+**Lemma (Null space of $T'$)** Suppose $V$ and $W$ are finite-dimensional and $T \in \mathcal{L}(V, W)$. Then
+    
+- $\null T' = (\range T)^0$.
+- $\dim \null T' = \dim \null T + \dim W - \dim V$.
+
+</div>
+<br>
+    
+
+<details class="proof">
+<summary>Proof: Null space of \(T'\)</summary>
+
+Suppose $V$ and $W$ are finite-dimensional and $T \in \mathcal{L}(V, W)$. If $\phi \in \null T'$, then
+    
+$$\begin{equation}
+T'(\phi) = \phi \circ T = 0.
+\end{equation}$$
+    
+So for all $v \in V$ we have $\phi \circ T v = 0$. This means that if $w \in \range T$, then $\phi(w) = 0$. Therefore if $\phi \in \null T'$ then $\phi \in (\range T)^0$, so $\null T' \subseteq (\range T)^0$. Conversely, if $\phi \in (\range T)^0$, then $\phi(w) = 0$ for all $w \in \range T$, which implies that
+    
+$$\begin{equation}
+(T'(\phi))(v) = \phi \circ T(v) = 0,
+\end{equation}$$
+    
+for all $v \in V$. This means that $\phi \in \null T'$ so $(\range T)^0 \subseteq \null T'$. This concludes the proof that $\null T' = (\range T)^0$.
+    
+Also, we have
+    
+$$\begin{align}
+\dim \null T' &= \dim (\range T)^0, \\
+              &= \dim W - \dim \range T, \\
+              &= \dim W - (\dim V - \dim \null T), \\
+              &= \dim \null T + \dim W - \dim V.
+\end{align}$$
+
+    
 </details>
 <br>

@@ -1,8 +1,10 @@
 # Vector spaces
 
+Linear algebra studies linear maps on finite-dimensional vector spaces. A vector space is a set of elements, together with an addition, and a real or complex scalar multiplication. This section introduces complex numbers and vector spaces. It then defines subspaces of vector spaces, which have a role that is analogous to that of subsets of sets. It also defines sums and direct sums of subspaces, which have an analogous role to that of unions and disjoint unions of sets.
+
 ## Complex numbers
 
-It's assumed that the reader is already familiar with the real numbers $\mathbb{R}$, but not necessarily with the complex numbers $\mathbb{C}$, defined below.
+We define the complex numbers $\mathbb{C}$ as tuples of real numbers.
 
 <div class="definition">
 
@@ -34,6 +36,8 @@ We often abbreviate $a + 0i$ as $a$ and $0 + bi$ as $bi$. In what follows, we wi
 
 
 
+We define division and subtraction as the inverse operations of addition and multiplication.
+
 <div class="definition">
 
 **Definition (Subtraction and division)** Let $a, b \in \mathbb{C}$. We then
@@ -51,6 +55,8 @@ $$ \frac{b}{a} = b \left(\frac{1}{a}\right). $$
 
 
 
+Powers of elements of $\mathbb{F}$ are also defined in the familiar way.
+
 <div class="definition">
 
 **Definition (Powers)** For $a \in \mathbb{F}$ and $m \in \mathbb{N}^+$ we use $a^m$ to define the product
@@ -65,6 +71,7 @@ and call this the $m^{th}$ power of $a$.
 <br>
 
 
+A central object for the sequel is that of lists. A list is an ordered and finite collection elements.
 
 <div class="definition">
 
@@ -76,6 +83,9 @@ Two lists are equal if and only if they have the same length and the same elemen
     
 </div>
 <br>
+
+
+
 
 
 <div class="definition">
@@ -143,6 +153,9 @@ $$ \lambda x = (\lambda x_1, ..., \lambda x_n). $$
 (linalg-vectorspace)=
 ## Vector spaces
 
+
+We can now define vector spaces. Note that a vector space $V$ comes together with an addition and a scalar multiplication, the latter of which is defined in terms of a field $\mathbb{F}$.
+
 <div class="definition">
 
 **Definition (Vector space)** A vector space is a set $V$ together with an addition and scalar multiplication defined on $V$, such that the following properties hold:
@@ -160,6 +173,7 @@ Elements of a vector space are called *vectors* or *points*.
 <br>
 
 
+When we wish to specify whether $\mathbb{F} = \mathbb{R}$ or $\mathbb{F} = \mathbb{C}$ within a vector space, we will call it a real or a complex vector space respectively, for short.
 
 <div class="definition">
 
@@ -167,10 +181,6 @@ Elements of a vector space are called *vectors* or *points*.
     
 </div>
 <br>
-
-
-In these notes we follow Axler and use the symbol $V$ to denote a vector space over $\mathbb{F}$ where $\mathbb{F} = \mathbb{R}$ or $\mathbb{F} = \mathbb{C}$.
-
 
 <div class="definition">
 
@@ -406,7 +416,7 @@ so the two ways of writing $v$ are identical.
 
 
 <details class="proof">
-<summary>Proof: (Direct sum \(\iff\) intersection equals \(\{0\}\)</summary>
+<summary>Proof: Direct sum \(\iff\) intersection equals \(\{0\}\)</summary>
 
 Suppose $U + W = U \oplus W$ is a direct sum. Suppose $v \in U$ and $v \in W$. Then $v \in U \oplus W$ and there exist at least two ways of writing $v$ as the sum of the form
     

@@ -148,9 +148,9 @@ v = a_1 v_1 + ... + a_m v_m = \sum_{i \neq j} \left(a_i - \frac{a_i}{a_j} \right
 
 Suppose that $V$ is a finite dimensional vector space and that $u_1, ..., u_m$ is a linearly independent list while $w_1, ..., w_n$ is a spanning list. We can proceed in the following recursive process.
 
-The list $u_1, w_1, ..., w_n$ is linearly dependent, but by the Linear Dependence Lemma we can remove one of the $w$'s from it and it will still span $V$. We can proceed by inserting $u_2$ after $u_1$ in the list, to obtain a new list whose first two entries are $u_1, u_2$ and the rest are $w$'s to get another linearly dependent list. Again by the Linear Dependence Lemma, we can remove one of the $w$'s from the list to obtain a list that still spans $V$. Proceeding iteratively, we can insert all the $u$'s to the list while removing $w$'s - at each step, we can guarantee that a $w$ and not a $u$ will be removed, because the initial $u$-vectors in the list are all linearly independent - until all the $u$'s have been added to the list.
+The list $u_1, w_1, ..., w_n$ is linearly dependent, but by the Linear Dependence Lemma we can remove one of the $w$ vectors from this list, and the resulting list will still span $V$. We can proceed by inserting $u_2$ after $u_1$ in the list, to obtain a new list whose first two entries are $u_1, u_2$ and the rest are $w$'s to get another linearly dependent list. Again by the Linear Dependence Lemma, we can remove one of the $w$'s from the list to obtain a list that still spans $V$. Proceeding iteratively, we can insert all the $u$'s to the list while removing $w$'s, until all the $u$'s have been added to the list.
 
-At each step of the above process, the Linear Dependence Lemma implies that there is a $w$ term to remove and thus $m \leq n$.
+At each step of the above process, the linear independence of the $u_1, \dots, u_n$ together with the Linear Dependence Lemma imply that there is a $w$ term to remove and thus $m \leq n$.
     
 </details>
 <br>
