@@ -8,6 +8,8 @@ My name is Stratis. I am a second-year PhD student at the Computational and Biol
 
 ## New on Random Walks
 
+[02/02/2023] Notes and demo on [Annealed Importance Sampling](./misc/ais/ais).
+
 [04/04/2022] Notes and demo on [The Variational Gaussian Approximation Revisited](./gp/vfer/vfer).
 
 [15/02/2022] Notes and demo on [Global Inducing Point VI for BNNs](./misc/gip/gip).
