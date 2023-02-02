@@ -1454,10 +1454,13 @@ where $\phi \in W'$.
 </div>
 <br>
     
-Therefore, while $T$ acts on $v \in V$ to produce $w \in W$, the dual map $T'$ acts on $\phi \in W'$ to produce $\psi = \phi \circ T \in V'$.
+The following figure helps illustrate the various relationships between dual linear maps and vector spaces.
     
+<img alt="Dual map" src="../../../_images/duality-commutative.png" class="center-image">
     
-    
+While $T$ acts on $v \in V$ to produce $w \in W$, the dual map $T'$ acts on $\phi \in W'$ to produce $\psi = \phi \circ T \in V'$.
+
+
 <div class="lemma">
 
 **Lemma (Properties of dual maps)** Let $S, T \in \mathcal{L}(V, W)$. Then any dual maps $S', T' \in \mathcal{L}(W', V')$ satisfy
@@ -1620,3 +1623,131 @@ $$\begin{align}
     
 </details>
 <br>
+    
+    
+    
+<div class="lemma">
+
+**Lemma ($T$ is surjective $\iff$ $T'$ is injective)** Suppose $V$ and $W$ are finite-dimensional and $T \in \mathcal{L}(V, W)$. Then $T$ is surjective if and only if $T'$ is injective.
+
+</div>
+<br>
+    
+
+<details class="proof">
+<summary>Proof: \(T\) is surjective \(\iff\) \(T\) is injective</summary>
+
+Suppose $V$ and $W$ are finite-dimensional and $T \in \mathcal{L}(V, W)$. From the previous lemma, we have
+    
+$$\begin{equation}
+\dim \null T' = \dim W - \dim \range T.
+\end{equation}$$
+    
+If $T$ is surjective, then $\range T = W \implies \dim \range T = \dim W$, so $\dim \null T' = 0$, so $T'$ is injective. Conversely, if $T'$ is injective, then $\dim \null T' = 0$, so $\dim \range T = \dim W$ and, since $\range T \subseteq W$, this can only occur if $\range T = W$, which means that $T$ is surjective.
+    
+</details>
+<br>
+    
+    
+<div class="lemma">
+
+**Lemma (The range of $T'$)** Suppose $V$ and $W$ are finite-dimensional and $T \in \mathcal{L}(V, W)$. Then
+    
+- $\range T' = (\null T)^0$.
+- $\dim \range T' = \dim \range T$.
+
+</div>
+<br>
+    
+
+<details class="proof">
+<summary>Proof: The range of \(T'\)</summary>
+
+Let $V$ and $W$ be finite-dimensional and $T \in \mathcal{L}(V, W)$. First, it holds that $\dim \range T' = \dim \range T$ because
+    
+$$\begin{align}
+\dim \range T' &= \dim W' - \dim \null T' \\
+               &= \dim W' - \dim (\range T)^0 \\
+               &= \dim \range T,
+\end{align}$$
+    
+which shows the second result. Now, suppose $\phi \neq 0 \in \range T'$. Then there exists $\psi \in W'$ such that $\phi = T'(\psi)$. Now if $v \in \null T$, then $\phi(v) = 0$ because if not, then we would have
+    
+$$\begin{equation}
+(T'(\psi))(v) \neq 0 \implies \psi \circ T v \neq 0
+\end{equation}$$
+    
+which is a contradiction because we have assumed $v \in \null T$. Therefore $\phi(v) = 0$ for all $v \in \null T$, so $\phi \in (\null T)^0$, which implies that $\range T' \subseteq (\null T)^0$. Further, we have
+    
+$$\begin{align}
+\dim \range T' &= \dim \range T \\
+               &= \dim V - \dim \null T \\
+               &= \dim (\null T)^0.
+\end{align}$$
+
+Therefore, since $\range T' \subseteq (\null T)^0$ and $\dim \range T' = \dim (\null T)^0$, the two vector spaces must be equal, so $\range T' = (\null T)^0$.
+    
+</details>
+<br>
+    
+    
+    
+<div class="lemma">
+
+**Lemma ($T$ is injective $\iff$ $T'$ is surjective)** Suppose $V$ and $W$ are finite-dimensional and $T \in \mathcal{L}(V, W)$. Then $T$ is injective if and only if $T'$ is surjective.
+
+</div>
+<br>
+    
+
+<details class="proof">
+<summary>Proof: \(T\) is injective \(\iff\) \(T\) is surjective</summary>
+
+Suppose $V$ and $W$ are finite-dimensional and $T \in \mathcal{L}(V, W)$. From the previous lemma, we have
+    
+$$\begin{equation}
+\dim \range T' = \dim \range T = \dim V - \dim \null T = \dim V' - \dim \null T.
+\end{equation}$$
+    
+If $T$ is injective, then $\dim \null T = 0$ and $\dim \range T' = \dim V'$ so $T'$ is surjective. Conversely, if $T'$ is surjective, then $\dim \range T' = \dim V' = \dim V$ so $\dim \null T = 0$ which is equivalent to $T$ being injective.
+    
+</details>
+<br>
+
+
+<div class="definition">
+
+**Definition (Transpose)** The transpose of an $n$ by $m$ matrix $A$, denoted $A^\top$, is the $m$ by $n$ matrix obtained by interchanging the rows and columns of $A$, that is
+    
+$$\begin{equation}
+(A^\top)_{j, i} = A_{i, j}, \text{ for } i = 1, \dots, n \text{ and } j = 1, \dots, m.
+\end{equation}$$
+    
+</div>
+<br>
+    
+    
+    
+<div class="lemma">
+
+**Lemma (Transpose of product of matrices)** Let $A$ be an $n$ by $m$ matrix and $B$ be a $m$ by $k$ matrix. Then
+    
+$$\begin{equation}
+(AB)^\top = B^\top A^\top.
+\end{equation}$$
+
+</div>
+<br>
+
+<details class="proof">
+<summary>Proof: Transpose of product of matrices</summary>
+
+Let $A$ be an $n$ by $m$ matrix and $B$ be a $m$ by $k$ matrix. Then
+    
+$$\begin{equation}
+(AB)_{ij} = \sum_{k = 1}^m A_{ik} B_{kj} \implies ((AB)^\top)_{ij} = \sum_{k = 1}^m A_{jk} B_{ki} = \sum_{k = 1}^m (A^\top)_{kj} (B^\top)_{ik} = (B^\top A^\top)_{ij}.
+\end{equation}$$
+    
+</details>
+<br>
+    
