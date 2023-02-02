@@ -2,11 +2,13 @@
 
 This is an archive of explorations, in the convex hull of Inference, Probability, Optimisation and Physics. I am putting this together to keep track of the things I study.
 
-# About me
+# About
 
 My name is Stratis. I am a second-year PhD student at the Computational and Biological Learning Lab (CBL) at the University of Cambridge. I am supervised by [Carl Rasmussen](http://mlg.eng.cam.ac.uk/carl/) and advised by [Richard Turner](http://cbl.eng.cam.ac.uk/Public/Turner/WebHome). I have broad interests in probabilistic machine learning, see [Google Scholar](https://scholar.google.com/citations?user=1tm1wcgAAAAJ&hl=el&oi=ao) for my recent work.
 
 ## New on Random Walks
+
+[02/02/2023] Notes and demo on [Annealed Importance Sampling](./misc/ais/ais).
 
 [04/04/2022] Notes and demo on [The Variational Gaussian Approximation Revisited](./gp/vfer/vfer).
 
