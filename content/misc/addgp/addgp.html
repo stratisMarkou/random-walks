@@ -314,6 +314,11 @@
      Global inducing points for BNNs
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ais/ais.html">
+     Annealed Importance Sampling
+    </a>
+   </li>
   </ul>
   <i class="fas fa-chevron-down">
   </i>
@@ -743,18 +748,18 @@ S_K &amp;= \frac{1}{K} \sum_{k = 1}^{K} (-1)^{k-1} S_{K - k} P_k.
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Covariance matrix via Newton-Girard
-[[2.68965384 1.46812373 0.35503475]
- [1.34435512 2.3834466  1.89976853]
- [2.80927224 2.65321724 0.69253263]
- [1.49244366 1.39089004 0.32437561]
- [0.64391387 1.62276698 2.27971315]]
+[[1.47339647 0.59372449 1.69880744]
+ [2.84321461 1.30071419 2.9317356 ]
+ [1.68395336 1.25678636 2.50429074]
+ [2.46277178 0.98386969 1.63810484]
+ [1.25547276 0.83635858 1.74622176]]
 
 Covariance matrix via direct computation
-[[2.68965384 1.46812373 0.35503475]
- [1.34435512 2.3834466  1.89976853]
- [2.80927224 2.65321724 0.69253263]
- [1.49244366 1.39089004 0.32437561]
- [0.64391387 1.62276698 2.27971315]]
+[[1.47339647 0.59372449 1.69880744]
+ [2.84321461 1.30071419 2.9317356 ]
+ [1.68395336 1.25678636 2.50429074]
+ [2.46277178 0.98386969 1.63810484]
+ [1.25547276 0.83635858 1.74622176]]
 </pre></div>
 </div>
 </div>
@@ -1046,7 +1051,22 @@ f(x_1, x_2) = \text{cos}(2\pi x_1) + \text{cos}(2\pi x_2),
 <p>We have tried additive GPs on two-dimensional data, but really the regime of interest is higher-dimensional data. In higher dimensions, we do not have a strong prior for the kinds of interactions between the input variables, nor can we easily visualise it. We’ll apply additive GPs to the <a class="reference external" href="http://archive.ics.uci.edu/ml/datasets/concrete+compressive+strength">UCI concrete compressive strength dataset</a>.</p>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load pre-downloaded concrete dataset</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@tf</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="n">jit_compile</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">single_step</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">optimiser</span><span class="p">):</span>
+    
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+        
+        <span class="n">tape</span><span class="o">.</span><span class="n">watch</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">trainable_variables</span><span class="p">)</span>
+        
+        <span class="n">loss</span> <span class="o">=</span> <span class="o">-</span> <span class="n">marginal_likelihood</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">loss</span> <span class="o">/</span> <span class="n">num_train</span>
+        
+    <span class="n">gradients</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">trainable_variables</span><span class="p">)</span>
+    <span class="n">optimiser</span><span class="o">.</span><span class="n">apply_gradients</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">gradients</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">trainable_variables</span><span class="p">))</span>
+    
+    <span class="k">return</span> <span class="n">loss</span>
+
+<span class="c1"># Load pre-downloaded concrete dataset</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;data/concrete/x.npy&#39;</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;data/concrete/y.npy&#39;</span><span class="p">)</span>
 
@@ -1088,24 +1108,15 @@ f(x_1, x_2) = \text{cos}(2\pi x_1) + \text{cos}(2\pi x_2),
 
 <span class="c1"># Number of training steps and optimiser</span>
 <span class="n">num_steps</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="n">optimiser</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">lr</span><span class="o">=</span><span class="mf">1e-1</span><span class="p">)</span>
+<span class="n">optimiser</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="mf">1e-1</span><span class="p">)</span>
 
 <span class="n">losses</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="c1"># Optimiser additive GP hyperparameters</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_steps</span><span class="p">):</span>
     
-    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
-        
-        <span class="n">tape</span><span class="o">.</span><span class="n">watch</span><span class="p">(</span><span class="n">add_cov</span><span class="o">.</span><span class="n">trainable_variables</span><span class="p">)</span>
-        
-        <span class="n">loss</span> <span class="o">=</span> <span class="o">-</span> <span class="n">marginal_likelihood</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">add_cov</span><span class="p">)</span>
-        <span class="n">loss</span> <span class="o">=</span> <span class="n">loss</span> <span class="o">/</span> <span class="n">num_train</span>
-        
-        <span class="n">losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span>
-        
-    <span class="n">gradients</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">add_cov</span><span class="o">.</span><span class="n">trainable_variables</span><span class="p">)</span>
-    <span class="n">optimiser</span><span class="o">.</span><span class="n">apply_gradients</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">gradients</span><span class="p">,</span> <span class="n">add_cov</span><span class="o">.</span><span class="n">trainable_variables</span><span class="p">))</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">single_step</span><span class="p">(</span><span class="n">add_cov</span><span class="p">,</span> <span class="n">optimiser</span><span class="p">)</span>
+    <span class="n">losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
