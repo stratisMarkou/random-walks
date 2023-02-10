@@ -1,8 +1,11 @@
 # Riemann integral
 
+The last section of the course introduces the Riemann integral. We define the Riemann integral over $\mathbb{R}$ and show necessary and sufficient conditions under which it exists. We will show some central properties of the Riemann integral such as linearity, and prove some central theorems, including the Fundamental Theorem of Calculus.
 
 (analysis-i-riemann-def)=
 ## Riemann integral definition
+
+First, we define dissections. The Riemann integral will be defined as an appropriate limit of the area of a collection of rectangles which approximate the quantity that we think of as the area under the function. A dissection is a set of points which we can use to define the endpoints of these integrals.
 
 <div class="definition">
 
@@ -11,7 +14,7 @@
 </div>
 <br>
 
-    
+Next, we define upper and lower sums. These are the areas under the rectangles of two piecewise constant functions which approximate the function of interest, and are larger than and smaller than the function respectively. We will shortly consider how these approximations are affected when we refine the approximating rectangles, and define the Riemann integral as an appropriate limit of this refinement.
 
 <div class="definition">
 
@@ -25,7 +28,7 @@ U_{\mathcal{D}}(f) &= \sum_{n=1}^N (x_n - x_{n-1}) \sup_{x \in [x_{n-1}, x_n]} f
 </div>
 <br>
 
-    
+Given two dissections, we will say that 
 
 <div class="definition">
 
@@ -34,7 +37,7 @@ U_{\mathcal{D}}(f) &= \sum_{n=1}^N (x_n - x_{n-1}) \sup_{x \in [x_{n-1}, x_n]} f
 </div>
 <br>
 
-    
+Intuitively, as formulated by the lemma below, a refining dissection results in more accurate piecewise constant upper and lower approximations of a function.
     
 <div class="lemma">
 
@@ -54,14 +57,14 @@ L_{\mathcal{D}_1}(f) \leq L_{\mathcal{D}_2}(f) ~~~\text{ and }~~~ U_{\mathcal{D}
 Suppose $\mathcal{D}_1 = (x_0, x_1, \dots, x_N)$ is a dissection of $[a, b]$ and consider a function $f : \mathbb{R} \to \mathbb{R}$. Suppose $\mathcal{D}$ refines $\mathcal{D}_1$ and contains one additional point $z$ where $x_{n-1} < z < x_n$ for some $n \in \{1, 2, \dots, N\}$. Then, by the definition of the lower sum, we have
     
 $$\begin{align}
-L_{\mathcal{D}_1}(f) &= \left((x_1 - x_0) \inf_{x \in [x_0, x_1]} f(x) \right) + ~ \dots ~ + \left((x_N - x_{N-1}) \inf_{x \in [x_{N-1}, x_N]} f(x) \right) \\
+L_{\mathcal{D}_1}(f) &= \phantom{+} \left((x_1 - x_0) \inf_{x \in [x_0, x_1]} f(x) \right) + ~ \dots ~ + \left((x_N - x_{N-1}) \inf_{x \in [x_{N-1}, x_N]} f(x) \right) \\
                      ~\\
-                     &= \left((x_1 - x_0) \inf_{x \in [x_0, x_1]} f(x)\right) + ~ \dots ~ + \\
-                     &~~~~~ + \left((z - x_{N-1}) \inf_{x \in [x_{N-1}, x_N]} f(x)\right) + \left((x_N - z) \inf_{x \in [x_{N-1}, x_N]} f(x)\right) + ~ \dots ~ + \\
+                     &= \phantom{+} \left((x_1 - x_0) \inf_{x \in [x_0, x_1]} f(x)\right) + ~ \dots ~ + \\
+                     &~~~~~ + \left((z - x_{n-1}) \inf_{x \in [x_{n-1}, x_n]} f(x)\right) + \left((x_n - z) \inf_{x \in [x_{n-1}, x_n]} f(x)\right) + ~ \dots ~ + \\
                      &~~~~~ + \left((x_N - x_{N-1}) \inf_{x \in [x_{N-1}, x_N]} f(x) \right) \\
                      ~\\
-                     &\leq \left((x_1 - x_0) \inf_{x \in [x_0, x_1]} f(x)\right) + ~ \dots ~ + \\
-                     &~~~~~ + \left((z - x_{N-1}) \inf_{x \in [z, x_N]} f(x)\right) + \left((x_N - z) \inf_{x \in [z, x_N]} f(x)\right) + ~ \dots ~ + \\
+                     &\leq \phantom{+} \left((x_1 - x_0) \inf_{x \in [x_0, x_1]} f(x)\right) + ~ \dots ~ + \\
+                     &~~~~~ + \left((z - x_{N-1}) \inf_{x \in [x_{n-1}, z]} f(x)\right) + \left((x_N - z) \inf_{x \in [z, x_n]} f(x)\right) + ~ \dots ~ + \\
                      &~~~~~ + \left((x_N - x_{N-1}) \inf_{x \in [x_{N-1}, x_N]} f(x) \right) \\
                      ~\\
                      &= L_{\mathcal{D}}(f).
@@ -76,17 +79,17 @@ L_{\mathcal{D}_1}(f) \leq L_{\mathcal{D}_2}(f).
 Repeating this argument for the upper sum we have
     
 $$\begin{align}
-U_{\mathcal{D}_1}(f) &= \left((x_1 - x_0) \sup_{x \in [x_0, x_1]} f(x) \right) + ~ \dots ~ + \left((x_N - x_{N-1}) \sup_{x \in [x_{N-1}, x_N]} f(x) \right) \\
-                    ~\\
-                     &= \left((x_1 - x_0) \sup_{x \in [x_0, x_1]} f(x)\right) + ~ \dots ~ + \\
-                     &~~~~~ + \left((z - x_{N-1}) \sup_{x \in [x_{N-1}, x_N]} f(x)\right) + \left((x_N - z) \sup_{x \in [x_{N-1}, x_N]} f(x)\right) + ~ \dots ~ + \\
+U_{\mathcal{D}_1}(f) &= \phantom{+} \left((x_1 - x_0) \sup_{x \in [x_0, x_1]} f(x) \right) + ~ \dots ~ + \left((x_N - x_{N-1}) \sup_{x \in [x_{N-1}, x_N]} f(x) \right) \\
+                     ~\\
+                     &= \phantom{+} \left((x_1 - x_0) \sup_{x \in [x_0, x_1]} f(x)\right) + ~ \dots ~ + \\
+                     &~~~~~ + \left((z - x_{n-1}) \sup_{x \in [x_{n-1}, x_n]} f(x)\right) + \left((x_n - z) \sup_{x \in [x_{n-1}, x_n]} f(x)\right) + ~ \dots ~ + \\
                      &~~~~~ + \left((x_N - x_{N-1}) \sup_{x \in [x_{N-1}, x_N]} f(x) \right) \\
                      ~\\
-                     &\geq \left((x_1 - x_0) \sup_{x \in [x_0, x_1]} f(x)\right) + ~ \dots ~ + \\
-                     &~~~~~ + \left((z - x_{N-1}) \sup_{x \in [z, x_N]} f(x)\right) + \left((x_N - z) \sup_{x \in [z, x_N]} f(x)\right) + ~ \dots ~ + \\
+                     &\geq \phantom{+} \left((x_1 - x_0) \sup_{x \in [x_0, x_1]} f(x)\right) + ~ \dots ~ + \\
+                     &~~~~~ + \left((z - x_{N-1}) \sup_{x \in [x_{n-1}, z]} f(x)\right) + \left((x_N - z) \sup_{x \in [z, x_n]} f(x)\right) + ~ \dots ~ + \\
                      &~~~~~ + \left((x_N - x_{N-1}) \sup_{x \in [x_{N-1}, x_N]} f(x) \right) \\
                      ~\\
-                     &= U_{\mathcal{D}}(f).
+                     &= L_{\mathcal{D}}(f).
 \end{align}$$
     
 Therefore, by adding one point to the dissection $\mathcal{D}_1$, the resulting upper sum can only become smaller. Again, proceeding recursively, we arrive at
@@ -98,7 +101,7 @@ U_{\mathcal{D}_1}(f) \geq U_{\mathcal{D}_2}(f).
 </details>
 <br>
 
-    
+Further, given two dissections, we can form their least common refinement, which contains exactly those points contained in the two dissections. The least common refinement of two dissections refines both dissections, but is also refined by any other dissection which refines the two original dissections.
 
 <div class="definition">
 
@@ -107,6 +110,7 @@ U_{\mathcal{D}_1}(f) \geq U_{\mathcal{D}_2}(f).
 </div>
 <br>
 
+The following result, which we will use shortly, is that regardless of the choice of dissections, the upper sum with respect to one dissection is always larger than a lower sum with respect to any other dissection.
 
 <div class="lemma">
 
@@ -132,7 +136,7 @@ L_{\mathcal{D}_1}(f) \leq L_{\mathcal{D}}(f) \leq U_{\mathcal{D}}(f) \leq U_{\ma
 </details>
 <br>
 
-    
+Lastly, we are ready to define the Riemann integral.
 
 <div class="definition">
 
@@ -152,7 +156,7 @@ If the lower and upper integrals are equal, we call their value the Riemann inte
 ## Riemann integrability
 
 
-We will consider two examples, one of a function which is Riemann integrable, and another of a function which is not Riemann integrable. First, we will define the mesh of a dissection, which we will use in these examples and also later.
+We will consider two examples, one of a function which is Riemann integrable, and another of a function which is not Riemann integrable. For these examples it's useful to define the mesh of a dissection. We will also use the mesh of dissections later.
 
 
 <div class="definition">
@@ -219,7 +223,8 @@ Therefore $f$ is not Riemann integrable.
     
 </details>
 <br>
-    
+
+Having seen these examples, we realise that it would be useful to have a necessary and sufficient condition for Riemann integrability, using which we can determine if a function is Riemann integrable or not. This is the Riemann integrability condition stated and proved below, and will be useful for subsequent proofs. The condition states that a function is Riemann integrable if and only if we can find dissections which make the difference between the upper and lower Riemann sums arbitrarily small.
     
 <div class="lemma">
 
@@ -304,7 +309,7 @@ which is the required result.
 
 ## Linearity
 
-Here we will show some of the properties of the Riemann integral, starting with linearity. We will build the proof of linearity step by step.
+Next we will show some key properties of the Riemann integral, starting with linearity. We will build the proof of linearity step by step. We start by the fact that the Riemann integral of a non-negative multiple of a Riemann integrable function exists, and is equal to the multiple of the Riemann integral of the function.
 
 <div class="lemma">
 
@@ -358,6 +363,7 @@ as required.
 <br>
 
 
+Next, we account for negative signs, showing that the Riemann integral of the negative of a function exists and is equal to the negative to the Riemann integral of the function.
 
 
 <div class="lemma">
@@ -417,6 +423,7 @@ as required.
 </details>
 <br>
 
+Further, we show that the Riemann integral of the sum of two Riemann integrable functions exists and is equal to the sum to the Riemann integrals of the functions.
 
 <div class="lemma">
 
@@ -473,8 +480,7 @@ $$\begin{equation}
 </details>
 <br>
     
-    
-
+Putting the above lemmas together, we arrive at the fact that the Riemann integral is a linear function on Riemann integrable functions.
 
 <div class="lemma">
 
@@ -560,13 +566,13 @@ $$\begin{equation}
 Let $f : [a, b] \to \mathbb{R}$ be a Riemann integrable function. Then, we have
     
 $$\begin{equation}
-\Big(\sup_{u \in [x_{n-1}, x_n]} f(u) \Big) - \Big(\inf_{v \in [x_{n-1}, x_n]} f(v)\Big) = \sup_{u, v \in [x_{n-1}, x_n]}|f(u) - f(v)|.
+\sup_{u \in [x_{n-1}, x_n]} f(u)  - \inf_{v \in [x_{n-1}, x_n]} f(v) = \sup_{u, v \in [x_{n-1}, x_n]}|f(u) - f(v)|.
 \end{equation}$$
     
 Similarly, we have
     
 $$\begin{equation}
-\Big(\sup_{u \in [x_{n-1}, x_n]} |f(u)|\Big) - \Big(\inf_{v \in [x_{n-1}, x_n]} |f(v)|\Big) = \sup_{u, v \in [x_{n-1}, x_n]}||f(u)| - |f(v)||.
+\sup_{u \in [x_{n-1}, x_n]} |f(u)| - \inf_{v \in [x_{n-1}, x_n]} |f(v)| = \sup_{u, v \in [x_{n-1}, x_n]}||f(u)| - |f(v)||.
 \end{equation}$$
     
 By the triangle inequality, we have
@@ -584,7 +590,7 @@ $$\begin{equation}
 Therefore we have
     
 $$\begin{equation}
-\Big(\sup_{u \in [x_{n-1}, x_n]} |f(u)|\Big) - \Big(\inf_{v \in [x_{n-1}, x_n]} |f(v)|\Big) \leq \Big(\sup_{u \in [x_{n-1}, x_n]} f(u)\Big) - \Big(\inf_{v \in [x_{n-1}, x_n]} f(v)\Big),
+\sup_{u \in [x_{n-1}, x_n]} |f(u)| - \inf_{v \in [x_{n-1}, x_n]} |f(v)| \leq \sup_{u \in [x_{n-1}, x_n]} f(u) - \inf_{v \in [x_{n-1}, x_n]} f(v),
 \end{equation}$$
     
 which implies that for any dissection $\mathcal{D}$ we have
@@ -822,7 +828,7 @@ Uniform continuity is a stronger property than regular continuity because it req
 Let $f : [a, b] \to \mathbb{R}$ be a continous function. Suppose $f$ is not unifomly continuous. Then, there exists $\delta > 0$ such that for all $\epsilon > 0$ there exist $x, x' \in [a, b]$ such that $|x - x'| < \epsilon$ and also $|f(x) - f(x')| \geq \delta$. This implies that for all $n \in \mathbb{Z}^{++}$, we can find $x_n, x_n' \in [a, b]$ such that 
   
 $$\begin{equation}
-|x_n - x_n'| < \frac{1}{n} \implies |f(x_n) - f(x_n')| \geq \delta.
+|x_n - x_n'| < \frac{1}{n} ~\text{ and }~ |f(x_n) - f(x_n')| \geq \delta.
 \end{equation}$$
     
 Since $x_n \in [a, b]$, by the {ref}`Bolzano-Weierstrass theorem<analysis-i-bolz-weier>` we can find a subsequence of $x_n$, say $x_{k_n}$ which converges to some limit $x$. Also because $|x_n - x_n'| < \frac{1}{n}$ the sequence $x_{k_n}'$ also converges to $x$. Then because $f$ is continuous, we have
@@ -942,13 +948,12 @@ which implies that $f$ is Riemann integrable by the {ref}`Riemann integrability 
 
 </details>
 <br>
-
     
 
 
-<div class="corollary">
+<div class="lemma">
 
-**Corollary (Piecewise linear functinons are Riemann integrable)** Let $f : [a, b] \to \mathbb{R}$ be a piecewise linear functin on the closed bounded interval $[a, b]$. Then $f$ is Riemann integrable.
+**Lemma (Piecewise linear functinons are Riemann integrable)** Let $f : [a, b] \to \mathbb{R}$ be a piecewise linear functin on the closed bounded interval $[a, b]$. Then $f$ is Riemann integrable.
     
 </div>
 <br>
@@ -1083,10 +1088,9 @@ $$\begin{equation}
     
 Now we wish to show that the right hand side tends to $f(x)$ as $h$ tends to zero. Let $\epsilon > 0$. We have
     
-$$\begin{align}
-\left|\frac{1}{h} \int_x^{x+h} f(x')dx' - f(x)\right| &= \left|\frac{1}{h} \int_x^{x+h} (f(x') - f(x))dx' - \right|, \\
-                                                      &= \left|\frac{1}{h} \int_x^{x+h} |f(x') - f(x)|dx' - \right|.
-\end{align}$$
+$$\begin{equation}
+\left|\frac{1}{h} \int_x^{x+h} f(x')dx' - f(x)\right| = \left|\frac{1}{h} \int_x^{x+h} (f(x') - f(x))dx'\right| \leq \left|\frac{1}{h} \int_x^{x+h} |f(x') - f(x)|dx'\right|.
+\end{equation}$$
     
 Since $f$ is continuous, there exists $\delta > 0$ such that
     
@@ -1097,7 +1101,7 @@ $$\begin{equation}
 Therefore, for all $|h| < \delta$ we have
     
 $$\begin{equation}
-\left|\frac{1}{h} \int_x^{x+h} f(x')dx' - f(x)\right| < \epsilon,
+\left|\frac{1}{h} \int_x^{x+h} f(x')dx' - f(x)\right| \leq \left|\frac{1}{h} \int_x^{x+h} |f(x') - f(x)|dx'\right| \leq \left|\frac{1}{h} \int_x^{x+h} \epsilon dx'\right| < \epsilon,
 \end{equation}$$
     
 as required.
@@ -1208,27 +1212,185 @@ F'(x) = \begin{cases}
     
 Since the derivative $F'$ is unbounded, it cannot be Riemann integrable. Therefore, the theorem requirement that $F'$ is Riemann integrable for the result to hold.
     
+
+
+<div class="theorem">
+
+**Theorem (Integration by parts)** Let $f, g : [a, b] \to \mathbb{R}$ be differentiable and also Riemann integrable, and that
+    
+$$\begin{equation}
+\int_a^b f'(x)g(x) dx ~\text{ and }~ \int_a^b f(x)g'(x) dx ~\text{ both exist.} 
+\end{equation}$$
+    
+Then, we have
+    
+$$\begin{equation}
+\int_a^b f'(x)g(x) dx = f(b)g(b) - f(a)g(a) - \int_a^b f(x)g'(x) dx. 
+\end{equation}$$
+    
+</div>
+<br>
+    
+
+<details class="proof">
+<summary>Proof: Integration by parts</summary>
+    
+Let $f, g : [a, b] \to \mathbb{R}$ be differentiable and also Riemann integrable, and that
+    
+$$\begin{equation}
+\int_a^b f'(x)g(x) dx ~\text{ and }~ \int_a^b f(x)g'(x) dx ~\text{ both exist.} 
+\end{equation}$$
+    
+By the product rule, we have $(fg)' = f' g + f g'$, so
+    
+$$\begin{equation}
+\int_a^b (f(x)g(x))' dx = \int_a^b (f'(x)g(x) + f(x)g'(x)) dx,
+\end{equation}$$
+    
+and also by the fundamental theorem of calculus, we have
+    
+$$\begin{equation}
+\int_a^b (f(x)g(x))' dx = f(b)g(b) - f(a)g(a).
+\end{equation}$$
+    
+Putting these equations together and rearranging we arrive at
+    
+$$\begin{equation}
+\int_a^b f'(x)g(x) dx = f(b)g(b) - f(a)g(a) - \int_a^b f(x)g'(x) dx. 
+\end{equation}$$
+
+</details>
+<br>
+
+    
+<div class="theorem">
+
+**Theorem (Taylor's theorem with integral remainder term)** Let $f : [a, b] \to \mathbb{R}$ be $n+1$ times differentiable with $f^{(n+1)}$ continuous. Then
+    
+$$\begin{equation}
+f(b) = f(a) + (b - a) f^{(1)}(a) + \frac{(b-a)^2}{2!} f^{(2)}(a) + \dots + \frac{(b-a)^n}{n!} f^{(n)}(a) + \int_a^b \frac{(b-t)^n}{n!} f^{(n+1)}(t)dt.
+\end{equation}$$
+
+</div>
+<br>
+    
+<details class="proof">
+<summary>Proof: Taylor's theorem with integral remainder term</summary>
+    
+We proceed by induction. Note that the expression holds for $n=0$ because, by the fundamental theorem of calculus
+    
+$$\begin{equation}
+\int_a^b f^{(1)}(t)dt = f(b) - f(a) \implies f(b) = f(a) + \int_a^b f^{(1)}(t)dt.
+\end{equation}$$
+    
+Suppose that the claim holds for $n=k-1$. Then
+    
+$$\begin{align}
+f(b) &= f(a) + (b - a) f^{(1)}(a) + \frac{(b-a)^2}{2!} f^{(2)}(a) + \dots + \\
+     &~~~~ + \frac{(b-a)^{k-1}}{(k-1)!} f^{(k-1)}(a) + \int_a^b \frac{(b-t)^{k-1}}{(k-1)!} f^{(k)}(t)dt,
+\end{align}$$
+    
+and by integration by parts we have
+    
+$$\begin{equation}
+\int_a^b \frac{(b-t)^{k-1}}{(k-1)!} f^{(k)}(t)dt = \frac{(b-a)^k}{k!} + \int_a^b \frac{(b-t)^k}{k!} f^{(k+1)}(t)dt.
+\end{equation}$$
+    
+Substituting this into the previous equation gives the required result.
+
+</details>
+<br>
+    
+
+
+<div class="theorem">
+
+**Theorem (Integration by substitution)** Let $f: [a, b] \to \mathbb{R}$ be continuous. Let $g : [u, v] \to \mathbb{R}$ be continuously differentiable, i.e. differentiable with a continuous derivative. Further, suppose that $g(u) = a, g(v) = b$, and $f$ is defined everywhere on $g([u, v])$ and is continuous on $g([u, v])$. Then
+    
+$$\begin{equation}
+\int_a^b f(x) dx = \int_u^v f(g(t))g'(t) dt.
+\end{equation}$$
+    
+</div>
+<br>
+
+    
+<details class="proof">
+<summary>Proof: Integration by substitution</summary>
+
+By the fundamental theorem of calculus, $f$ has an anti-derivative $F$ defined on $g([u, v])$. Therefore
+    
+$$\begin{align}
+\int_u^v f(g(t))g'(t) dt &= \int_u^v F'(g(t))g'(t) dt \\
+&= \int_u^v (F \circ g)'(t) dt \\
+&= F \circ g(v) - F \circ g(u) \\
+&= F(b) - F(a) \\
+&= \int_a^b f(x) dx.
+\end{align}$$
+    
+</details>
+<br>
+
+
+
+## Improper integrals
+    
+Last, we introduce improper integrals, which extend Riemann integrals to unbounded intervals of $\mathbb{R}$. Note that the Riemann integral is defined over a bounded interval $[a, b] \subseteq \mathbb{R}$, so if we want to reason about Riemann integrals over unbounded intervals, for example $[0, \infty)$ we must extend the definition appropriately.
     
 <div class="definition">
 
-**Definition ()**
+**Definition (Improper integral)** Suppose a function $f: [a, b) \to \mathbb{R}$ is such that for every $\epsilon > 0$, it is integrable in $[a, b-\epsilon]$ and $\lim_{\epsilon \to 0} \int_a^{b-\epsilon} f(x)dx$ exists. Then, we define the improper integral
     
+$$\begin{equation}
+\int_a^b f(x) dx ~\text{ to be }~ \lim_{\epsilon \to 0} \int_a^{b - \epsilon} f(x)dx.
+\end{equation}$$
+    
+Similarly, suppose $f: [a, b] \to \mathbb{R}$ is such that for every $u > 0$, it is integrable in $[a, b+u]$ and $\lim_{u \to \infty} \int_a^{b+u} f(x)dx$ exists. Then, we define the improper integral
+    
+$$\begin{equation}
+\int_a^\infty f(x) dx ~\text{ to be }~ \lim_{u \to \infty} \int_a^{b + u} f(x)dx.
+\end{equation}$$
+    
+Lastly, we define the counterparts of these improper integrals with limits on the left side of the Riemann integral in a similar fashion.
+
 </div>
 <br>
     
+Note that the improper integral exists even if the Riemann integral $\int_a^b f(x) dx$ does not exist. As an example of where the improper integral becomes useful, consider the function $f: (0, 1] \to \mathbb{R}$ defined as $f(x) = x^{-1/2}$. Noting that $f$ is integrable in $[\epsilon, 1]$ for all $\epsilon > 0$, because it is continuous in such intervals, we have
+    
+$$\begin{equation}
+\int_\epsilon^1 f(x) dx = \int_\epsilon^1 x^{-1/2} dx = \left[2x^{1/2}\right]^1_\epsilon = 2 - 2\epsilon^{1/2} \to 2 \text{ as } \epsilon \to 0.
+\end{equation}$$
 
+Therefore, the improper integral exists and is equal to $2$, even though $f$ is not Riemann integrable in $[0, 1]$, since it is unbounded in this interval. We conclude with the integral test, a useful theorem for determining the convergence of infinite series. While it really belongs with the convergence tests on series, only now, after definining improper integrals, can we really state and prove it.
 
-<div class="lemma">
+<div class="theorem">
 
-**Lemma ()** 
+**Theorem (Integral test)** Let $f: [1, \infty] \to \mathbb{R}$ be a non-increasing non-negative function. Then
+    
+$$\begin{equation}
+\sum_{n = 1}^\infty f(n) \text{ converges } \iff \int_1^\infty f(x)dx < \infty.
+\end{equation}$$
     
 </div>
 <br>
-
-
-
+   
 <details class="proof">
-<summary>Proof: </summary>
-
+<summary>Proof: Integral test</summary>
+    
+Since $f$ is non-increasing, we have
+    
+$$\begin{equation}
+\int_n^{n+1} f(x)dx \leq \int_n^{n+1} f(n)dx = f(n) = \int_{n-1}^n f(n)dx \leq \int_{n-1}^n f(x)dx.
+\end{equation}$$
+    
+Therefore, we have
+    
+$$\begin{equation}
+\int_1^{N+1} f(x)dx \leq \sum_{n=1}^N f(n) \leq f(1) + \int_2^N f(x)dx.
+\end{equation}$$
+    
+If the series diverges, then the right hand side integral also dirverges as $N \to \infty$. Similarly, if the series converges, then the left hand side intgral also converges as $N \to \infty$, since it is a monotonic increasing and bounded sequence. Therefore, the series diverges if and only if the improper integral diverges.
+    
 </details>
 <br>
