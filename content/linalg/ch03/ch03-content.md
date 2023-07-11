@@ -1335,6 +1335,8 @@ Last, from the previous two results, if we define $\tilde{T}$ to be a map from $
 (linalg-duality)=
 ## Duality
     
+
+Now we turn to dual spaces and dual maps, starting by defining linear functionals.
     
 <div class="definition">
 
@@ -1342,6 +1344,8 @@ Last, from the previous two results, if we define $\tilde{T}$ to be a map from $
     
 </div>
 <br>
+
+The collection of all linear maps from $V$ to $\mathbb{F}$ is itself a vector space, and is special enough to give it its own notation and name, the *dual space* of $V$.
     
     
 <div class="definition">
@@ -1352,6 +1356,17 @@ Last, from the previous two results, if we define $\tilde{T}$ to be a map from $
 <br>
     
     
+<details class="proof">
+<summary>Side note: Duality</summary>
+    
+The words duality and dual carry different meanings in different areas of mathematics. In general however, if two things are called dual in mathematics, it means that they are closely related in some sense. For an overview of the different uses of duality in mathematics see [this article from Michael Atiyah](https://fme.upc.edu/ca/arxius/butlleti-digital/riemann/071218_conferencia_atiyah-d_article.pdf).
+
+</details>
+<br>
+    
+    
+A space $V$ and its dual $V'$ are closely related. First, if $V$ is finite-dimensional, $V'$ is also finite-dimensional, and they have the same dimension. In other words if $V$ is finite dimensional, $V$ and $V'$ are isomorphic.
+
 <div class="lemma">
 
 **Lemma ($\dim V = \dim V'$)** Suppose $V$ is finite dimensional. Then $V'$ is also finite-dimensional and $\dim V = \dim V'$.
@@ -1363,7 +1378,7 @@ Last, from the previous two results, if we define $\tilde{T}$ to be a map from $
 <details class="proof">
 <summary>Detail: \(\dim V = \dim V'\)</summary>
     
-Suppose $V$ is finite dimensional. Then, {ref}`as shown above<linalg-inv-iso>`, the following holds
+Suppose $V$ is finite dimensional. Then, {ref}`as shown earlier<linalg-inv-iso>`, the following holds
     
 $$\begin{align}
 \dim \mathcal{L}(V, W) = (\dim V) (\dim W) \implies \dim \mathcal{L}(V, \mathbb{F}) = (\dim V) (\dim \mathbb{F}) = \dim V.
@@ -1372,6 +1387,9 @@ $$\begin{align}
 </details>
 <br>    
     
+
+Now, since $V'$ is itself a vector space and is finite dimensional, we can pick a basis for it. Given a basis for the original space $V$, there is a natural choice for a basis of its dual $V'$, which we call the dual basis.
+
     
 <div class="definition">
 
@@ -1389,22 +1407,24 @@ $$\begin{align}
     
     
 <details class="proof">
-<summary>Detail: Dual basis is well defined</summary>
+<summary>Detail: Dual basis is well defined (elements of dual basis exist)</summary>
     
-One detail we might want to check is that given a basis $v_1, \dots, v_n$ of $V$, the dual basis $\phi_1, \dots, \phi_n$ of $V'$ exists. We have {ref}`already shown<linalg-vector-space>` that given two vector spaces $V$ with basis $v_1, \dots, v_n$ and $W$ is another vector space with $w_1, \dots, w_n \in W$, there exists a unique linear map such that
+One detail we might want to check is that, given a basis $v_1, \dots, v_n$ of $V$, the dual basis $\phi_1, \dots, \phi_n$ of $V'$ exists. We have {ref}`already shown<linalg-vector-space>` that given a vector space $V$ with basis $v_1, \dots, v_n$ and another vector space $W$ with basis $w_1, \dots, w_n \in W$, there exists a unique linear map such that
 
 $$\begin{align}
 Tv_i = w_i, \text{ for } i = 1, \dots, n.
 \end{align}$$
     
-Then for given $j \in \{1, \dots, n\}$, we can label $T = \phi_j$, let $W = \mathbf{F}$ and set
+Then for given $j \in \{1, \dots, n\}$, we let $W = \mathbf{F}$ and set
     
 $$\begin{align}
 w_k = \begin{cases}
 1 & \text{ if } k = j, \\
-0 & \text{ if } k \neq j,
+0 & \text{ if } k \neq j.
 \end{cases}
 \end{align}$$
+    
+can label $T = \phi_j$, and set
     
 confirming that $\phi_j$ does exist and is unique.
     
@@ -1453,10 +1473,6 @@ where $\phi \in W'$.
     
 </div>
 <br>
-    
-The following figure helps illustrate the various relationships between dual linear maps and vector spaces.
-    
-<img alt="Dual map" src="../../../_images/duality-commutative.png" class="center-image">
     
 While $T$ acts on $v \in V$ to produce $w \in W$, the dual map $T'$ acts on $\phi \in W'$ to produce $\psi = \phi \circ T \in V'$.
 
