@@ -1,0 +1,200 @@
+# Multivariate discrete distributions
+
+Multivariate discrete pmfs are the extension of univariate discrete distributions over multiple variables. The definition of independence can be extended from events to discrete random variables. We discuss results concerning the expectation and independence of discrete random variables.
+
+## Definition
+
+The definition of the pmf of a discrete random variable can be extended into a distribution over several random variables in the following way.
+
+<div class='definition'>
+
+**Definition (Joint probability mass function)** Given random variables $X$ and $Y$ on $(\Omega, \mathcal{F}, \mathbb{P})$, the joint probability mass function over $X$ and $Y$ is the function $p_{X, Y} : \mathbb{R}^2 \to [0, 1]$ defined by
+  
+$$\begin{align}
+p_{X, Y}(x, y) = \mathbb{P}\left(\{\omega \in \Omega : X(\omega) = x, Y
+(\omega) = y\}\right).
+\end{align}$$
+
+This is usually abbreviated to $p_{X, Y}(x, y) = \mathbb{P}\left(X = x, Y = y\right)$.
+
+</div>
+
+<br>
+
+Using the additivity of $\mathbb{P}$, we can verify that $p_{X, Y}$ also satisfies the marginalisation property
+
+$$\begin{align} p_X(x) = \sum_{y \in \text{Im}Y} \mathbb{P}\left(X = x, Y = y
+\right),
+\end{align}$$
+
+and also since $\mathbb{P}(\Omega) = 1$ we have
+
+$$\begin{align}
+\sum_{x \in \text{Im}X} \sum_{y \in \text{Im}Y} p_{X, Y}(x, y) = 1.
+\end{align}$$
+
+This definition can be extended to multivariate distributions of more than two variables by adding more variables to the set being measured.
+ 
+ ## Expectation and independence
+ 
+We are often interested in taking the expectation of functions of multiple random variables, given by the following formula which is the extension of its univariate version.
+ 
+<div class='theorem'>
+
+**Theorem (Law of the subconscious statistician - multivariate)** Let $X$ and
+ $Y$ be discrete random variables on $(\Omega, \mathcal{F}, \mathbb{P})$ and
+  $g : \mathbb{R}^2 \to \mathbb{R}$. Then
+  
+  $$\begin{align}
+  \mathbb{E}(g(X, Y)) = \sum_{x \in \text{Im} X}\sum_{y \in \text{Im} Y} g(x
+  , y) \mathbb{P}(X = x, Y = y)
+  \end{align}$$
+  
+  whenever this sum converges absolutely.
+  
+</div>
+
+<br>
+
+Often, downstream calculations, including the expectation written above, can be simplified if the random variables are independent. Previously we defined independence in terms of events and we can extend this concept to variables in the following intuitive way.
+
+<div class='definition'>
+
+**Definition (Independence)** Two discrete random variables $X$ and $Y$ are independent if ${X = x}$ and ${Y = y}$ are independent for all $x, y \in \mathbb{R}$, and we typically abbreviate this condition as
+  
+$$\begin{align}
+\mathbb{P}(X = x, Y = y) = \mathbb{P}(X = x)\mathbb{P}(Y = y) \text{ for } x, y \in \mathbb{R}.
+\end{align}$$
+  
+Random variables which are not independent are called **dependent**.
+  
+</div>
+
+<br>
+
+Two discrete random variables are independent if their pmf can be expressed
+ as the product of its marginals, or more generally as the product of
+  functions of different arguments, as shown below.
+  
+ 
+<div class='theorem'>
+
+**Theorem (Independence $\iff$ pmf factorises)** Two discrete random
+ variables $X$ and $Y$ are independent if and only if there exist $f, g
+  : \mathbb{R} \to \mathbb{R}$ such that
+  
+  $$\begin{align}
+  p_{X, Y}(x, y) = f(x)g(y) \text{ for } x, y \in \mathbb{R}.
+  \end{align}$$
+  
+</div>
+
+<br>
+
+This can be proved by showing that the product $f(x)g(y)$ is equal to
+ $p_X(x)p_Y(y)$. A related result is that if two random variables are
+  independent, the expectation of their product is equal to the product of
+   their expectations.
+ 
+<div class='theorem'>
+
+**Theorem (Expectation of product of independent variables)** If $X$ and $Y$ are
+ independent discrete random variables, the expectation of their product is
+  equal to the product of their expectations, as in
+  
+  $$\begin{align}
+  \mathbb{E}(XY) = \mathbb{E}(X)\mathbb{E}(Y).
+  \end{align}$$
+
+</div>
+
+<br>
+
+This can be proved by considering the expectation of $XY$, factoring $p_{X, Y
+}$ into $p_X p_Y$ and rearranging the expectation in terms of expectations
+ over $X$ and $Y$. We also have the following useful result relating
+  factorisation and independence.
+
+<div class='theorem'>
+
+**Theorem (Independence $\iff$ expected product of functions factorises)** 
+Discrete random variables $X$ and $Y$ are independent if and only if
+
+$$\begin{align}
+\mathbb{E}(f(X)g(y)) = \mathbb{E}(f(X))\mathbb{E}((g(Y))
+\end{align}$$
+
+for all $f, g : \mathbb{R} \to \mathbb{R}$ for which the last two
+ expectations exist.
+
+</div>
+
+<br>
+
+## Sums of discrete random variables
+
+The sum of independent discrete random variables can be expressed in terms
+ of the convolution of the pmfs of the random variables.
+
+<div class='theorem'>
+
+**Theorem (Convoltion formula)** If $X$ and $Y$ are independent discrete
+ random variables, then $Z = X + Y$ has pmf
+
+$$\begin{align}
+\mathbb{P}(Z = z) = \sum_{x \in \text{Im} X} \mathbb{P}(X = x)\mathbb{P}(Y
+ = z - x).
+\end{align}$$
+
+</div>
+
+<br>
+
+This can be extended to multiple random variables, by considering multiple
+ convolutions in turn. However, there exist more convenient methods for
+  summing independent random variables, such as {ref}`probability generating functions <prob-intro-prob-gen-func>`, which are introduced in the next chapter.
+
+
+## Indicator functions
+
+Indicator functions are a useful tool for problems involving counting of
+ occurences of events.
+
+<div class='definition'>
+
+**Definition (Indicator functions)** The indicator function of an event $A$
+ is the random variable $1_{A}$ defined as
+ 
+ $$\begin{align}
+ 1_A(\omega) = \begin{cases}
+ 1 & \text{ if } \omega \in A, \\
+ 0 & \text{ otherwise.}
+ \end{cases}
+ \end{align}$$
+
+</div>
+
+<br>
+
+One example use of indicator functions is the proof of the **inclusion
+ exclusion formula**:
+ 
+$$\begin{align}
+\mathbb{P}\left(\bigcup^N_{n=1} A_n\right) = \sum_{n} \mathbb{P}(A_{n
+}) - \sum_
+{n_1 < n_2}\mathbb{P}(A_{n_1} \cap A_{n_2})~+~...~+~(-1)^{N+1
+}~\mathbb{P}\left(\bigcap_n A_{n}\right).
+\end{align}$$
+
+Letting $A = \bigcup^N_{n=1} A_n$, considering that the indicator $1_A$ can
+ be written as
+
+$$\begin{align}
+1_A &= 1 - \prod_{n=1}^N \left(1 - 1_{A_n}\right)\\
+    &= \sum_n 1_{A_n} - \sum_{n_1 < n_2} 1_{A_{n_1}}1_{A_{n_2}} +~...~+ (-1
+    )^{N+1} 1_{A_1} 1_{A_2} ... 1_{A_N},
+\end{align}$$
+
+and taking expectations proves the inclusion-exclusion formula.
+
+
