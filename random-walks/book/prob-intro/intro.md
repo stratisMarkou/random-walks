@@ -9,5 +9,7 @@ All mistakes contained in these notes are mine with probability $1$.
 
 ## References
 
-```{bibliography}
-```
+:::{bibliography}
+:filter: docname in docnames
+
+:::
