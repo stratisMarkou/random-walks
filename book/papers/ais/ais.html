@@ -497,7 +497,7 @@ q(x) = \mathcal{N}(x; \mu_q, \sigma_q^2).
 \end{equation}\]</div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/f1c8fb22967711a64e90a4eecf5360f047d111106c36308a0261bac4a01116c8.svg" src="../../../_images/f1c8fb22967711a64e90a4eecf5360f047d111106c36308a0261bac4a01116c8.svg" /></div>
+<img alt="../../../_images/9c604f787eaccea0b8ce877adb66d17ce97cbce4e8ddd3774d42193850af656b.svg" src="../../../_images/9c604f787eaccea0b8ce877adb66d17ce97cbce4e8ddd3774d42193850af656b.svg" /></div>
 </div>
 <p>Using importance sampling, we can obtain an estimate of this intergral.</p>
 <div class="cell tag_remove-input docutils container">
@@ -532,7 +532,7 @@ The point of this additional Monte Carlo estimate is to give us an idea of how m
 To see why, this occurs, let’s plot the raw samples drawn from <span class="math notranslate nohighlight">\(q\)</span> (in green) as well as the samples weighted according to their importance weights (in blue).</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/f2bdbcf65ca8b3a5f726d051ae9f4be7bd7b992b4db8648b17a5ce871d96eb03.svg" src="../../../_images/f2bdbcf65ca8b3a5f726d051ae9f4be7bd7b992b4db8648b17a5ce871d96eb03.svg" /></div>
+<img alt="../../../_images/7ad43aac51d82c32ff3ae9541fcf089e22f27fda44882fc6bea279f200d451a3.svg" src="../../../_images/7ad43aac51d82c32ff3ae9541fcf089e22f27fda44882fc6bea279f200d451a3.svg" /></div>
 </div>
 <p>First off, this plot illustrates how importance sampling works.
 Although <span class="math notranslate nohighlight">\(q\)</span> proposes many samples in the middle, these are down-weighted by the importance weights, since <span class="math notranslate nohighlight">\(p\)</span> has small density there.
@@ -544,7 +544,7 @@ Since this sample has a large importance weight, it greatly affects the overall 
 Looking at a histogram of the importance weights we see that most weights are very small, and it’s only a few large weights which dominate the value of the integral (note the <span class="math notranslate nohighlight">\(x\)</span>-axis has a log-scale).</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/5cb91ecc736882a8a47e85d85fe756db70f70280e7a1a805b242b7732fb11193.svg" src="../../../_images/5cb91ecc736882a8a47e85d85fe756db70f70280e7a1a805b242b7732fb11193.svg" /></div>
+<img alt="../../../_images/9c1b888578ab32bea81432ae9fb9044e00206155976f26cb07312fbff429fd5c.svg" src="../../../_images/9c1b888578ab32bea81432ae9fb9044e00206155976f26cb07312fbff429fd5c.svg" /></div>
 </div>
 <p>Going a little further, note that the expectation of the value of an importance weight is always equal to one since</p>
 <div class="math notranslate nohighlight">
@@ -986,14 +986,14 @@ This gives <span class="math notranslate nohighlight">\(\beta_k\)</span> which g
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../../../_images/3a85deb5ca440722bfd108553f76db3d2518f0c215c4177dd6dd628b4a937724.svg" src="../../../_images/3a85deb5ca440722bfd108553f76db3d2518f0c215c4177dd6dd628b4a937724.svg" /></div>
+<img alt="../../../_images/37846f6afa9252ddcfd25936e4b5e7334cd8a222bd927a269ebb46cadb3ad119.svg" src="../../../_images/37846f6afa9252ddcfd25936e4b5e7334cd8a222bd927a269ebb46cadb3ad119.svg" /></div>
 </div>
 <p>We observe that the distribution of the AIS samples (purple bars) is similar to the target distribution <span class="math notranslate nohighlight">\(p\)</span> (blue line).
 Further, weighing the AIS samples by their importance weights (blue bars) does not appear to significantly change the resulting distribution.
 This would suggest that moost of the importance weights are close to <span class="math notranslate nohighlight">\(1\)</span>, which we can verify by plotting them on a histogram.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/03e16dcf64dd3161775b1b188b4a36872db2cbb0330910484c7d74ac4bdec15a.svg" src="../../../_images/03e16dcf64dd3161775b1b188b4a36872db2cbb0330910484c7d74ac4bdec15a.svg" /></div>
+<img alt="../../../_images/4d17cdb302c1456432bb98267c7b173d91373be89c065721a9f48a5c572cc725.svg" src="../../../_images/4d17cdb302c1456432bb98267c7b173d91373be89c065721a9f48a5c572cc725.svg" /></div>
 </div>
 <p>As expected, most of the AIS importance weights are close to <span class="math notranslate nohighlight">\(1\)</span>.
 Further, they have a clearly smaller variance than standard importance sampling.
