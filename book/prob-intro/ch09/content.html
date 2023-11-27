@@ -1,0 +1,717 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Branching processes &#8212; Random Walks</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/prob-intro/ch09/content';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../../intro.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Random Walks</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../intro.html">
+                    Home
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Notes on books</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../toc/000-intro.html">Theory of Computation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../toc/001-fsa.html">FSAs and Regular Expressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../toc/002-cfl.html">PDAs and Context Free Grammars</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../toc/000-exercises.html">Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../intro.html">Probability: An introduction</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ch01/content.html">Events and Probabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ch02/content.html">Discrete random variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ch03/content.html">Multivariate discrete distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ch04/content.html">Probability generating functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ch05/content.html">Distribution and density functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ch06/content.html">Multivariate distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ch07/content.html">Moment generating functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ch08/content.html">Main limit theorems</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mira/000-intro.html">Measure Theory</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mira/001-riemann.html">Riemann integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mira/000-exercises.html">Exercises</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Papers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../papers/intro.html">Stream of papers</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../papers/ais/ais.html">Annealed Importance Sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../papers/rff/rff.html">Random Fourier features</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/stratisMarkou/random-walks" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/stratisMarkou/random-walks/issues/new?title=Issue%20on%20page%20%2Fbook/prob-intro/ch09/content.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/book/prob-intro/ch09/content.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Branching processes</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stochastic-and-brancing-processes">Stochastic and brancing processes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-generating-functions">Probability generating functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-population">Mean population</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ultimate-extinction">Ultimate extinction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="branching-processes">
+<h1>Branching processes<a class="headerlink" href="#branching-processes" title="Permalink to this heading">#</a></h1>
+<section id="stochastic-and-brancing-processes">
+<h2>Stochastic and brancing processes<a class="headerlink" href="#stochastic-and-brancing-processes" title="Permalink to this heading">#</a></h2>
+<p>This chapter deals with branching processes, which is a particular type of stochastic process. We make a brief digression to define stochastic processes<span id="id1">[]</span> for completeness.</p>
+<div class='definition'>
+<p><strong>Definition (Stochastic process)</strong> A stochastic process is a family of random variables <span class="math notranslate nohighlight">\(\{X(t), t\in \mathcal{I}\}\)</span> on a probability space <span class="math notranslate nohighlight">\((\Omega, \mathcal{F}, \mathbb{P})\)</span>, where <span class="math notranslate nohighlight">\(\mathcal{I}\)</span> is a set called the index set.</p>
+</div>
+<br>
+<p>Stochastic processes can take discrete or continuous values and can have a discrete or continuous index set <span class="math notranslate nohighlight">\(\mathcal{I}\)</span>. The branching process describes how a population evolves at discrete time intervals, and therefore takes discrete values and has a discrete index set <span class="math notranslate nohighlight">\(\mathcal{I}\)</span>.</p>
+<div class='definition'>
+<p><strong>Definition (Branching process)</strong> A branching process is a collection of random variables <span class="math notranslate nohighlight">\(X_0, X_1, X_2, ...\)</span>, representing a population of <em>nomads</em> which evolves as follows:</p>
+<ol class="arabic simple">
+<li><p>At <span class="math notranslate nohighlight">\(t = 0\)</span> there is one nomad, <span class="math notranslate nohighlight">\(X_0 = 1\)</span>.</p></li>
+<li><p>At every time-step, each nomad dies after giving birth to a <em>family</em> of new nomads of random size <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+<li><p>The family sizes descending from each nomad are i.i.d. and are distributed according to the pmf <span class="math notranslate nohighlight">\(\mathbb{P}(C = k) = p_k, k = 0, 1, 2 ...\)</span>, called the <em>family-size distribution</em>.</p></li>
+</ol>
+</div>
+<br>
+</section>
+<section id="probability-generating-functions">
+<h2>Probability generating functions<a class="headerlink" href="#probability-generating-functions" title="Permalink to this heading">#</a></h2>
+<p>We are interested in the distribution of the nomad population at future times. The recursive nature of the process gives a neat expression in terms of the generating function of the family-size distribution.</p>
+<div class='theorem'>
+<p><strong>Theorem (Probability generating functions of a branching process)</strong> Let <span class="math notranslate nohighlight">\(X_t\)</span> be a branching process with family-size distribution <span class="math notranslate nohighlight">\(\mathbb{P}(C = k) = p_k\)</span>, whose probability generating function is <span class="math notranslate nohighlight">\(G\)</span>. Then the probability generating functions <span class="math notranslate nohighlight">\(G_0, G_1, ...\)</span> of <span class="math notranslate nohighlight">\(X_0, X_1, ...\)</span> are</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+G_0(s) = s, G_{t+1}(s) = G_t(G(s)), \text{ for } t = 1, 2, ... .
+\end{align}\]</div>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Proability generating functions of a branching process</summary>
+<p>Let <span class="math notranslate nohighlight">\(C_{t, n}\)</span> be the family size born from the <span class="math notranslate nohighlight">\(n^{th}\)</span> nomad at time <span class="math notranslate nohighlight">\(t\)</span>. At <span class="math notranslate nohighlight">\(t = 0\)</span>, the population is <span class="math notranslate nohighlight">\(X_0 = 1\)</span> so that <span class="math notranslate nohighlight">\(G_0(s) = s\)</span>. For <span class="math notranslate nohighlight">\(t &gt; 0\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+G_{t + 1} &amp;= \mathbb{E}_{X_{t + 1}}\left[s^{X_{t + 1}}\right]\\
+&amp;= \mathbb{E}_{X_t}\left[\mathbb{E}_{C_{t, 1}, C_{t, 2}, ... C_{t, X_t}}\left[s^{X_{t + 1}} | X_t \right]\right]\\
+&amp;= \mathbb{E}_{X_t}\left[G(s)^{X_t}\right]\\
+&amp;= G_t(G(s)),
+\end{align}\end{split}\]</div>
+<p>where the subscripts in the expectations give the variables over which the expectation is taken. From the first to the second line we used the law of iterated expectations; from the second to the third we used the fact that the <span class="math notranslate nohighlight">\(C_{t, 1}, C_{t, 2}..., C_{t, X_t}\)</span> variables are i.i.d. so the pgf of their sum is equal to the product of their pgfs.</p>
+</details>
+<br>
+</section>
+<section id="mean-population">
+<h2>Mean population<a class="headerlink" href="#mean-population" title="Permalink to this heading">#</a></h2>
+<div class='theorem'>
+<p><strong>Theorem (Mean population of a branching process)</strong> The mean value of a branching process <span class="math notranslate nohighlight">\(X_t\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{E}(X_t) = \mu^t,
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mu = \mathbb{E}(C)\)</span> is the mean family size. From this, it follows that as <span class="math notranslate nohighlight">\(t \to \infty\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\mathbb{E}(X_t) \to \begin{cases}
+0 &amp; \text{ if } \mu &lt; 1\\
+1 &amp; \text{ if } \mu = 1\\
+\infty &amp; \text{ if } \mu &gt; 1
+\end{cases}
+\end{align}\end{split}\]</div>
+</div>
+<br>
+<p>This result is not surprising since each nomad will give birth to <span class="math notranslate nohighlight">\(\mu\)</span> other nomads on average. It can be proved quickly using probability generating functions.</p>
+<details class="proof">
+<summary>Proof: Mean population of a branching process</summary>
+<p>We have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\mathbb{E}(X_t) &amp;= \frac{d}{ds} G_t(s) \bigg \vert_{s = 1}\\
+&amp;= G_{t - 1}'(G(1))G'(1)\\
+&amp;= G_{t - 1}'(1)\mu
+\end{align}\end{split}\]</div>
+<p>and considering that <span class="math notranslate nohighlight">\(G_{t - 1}'(1) = \mathbb{E}(X_{t-1})\)</span>, the result follows by induction.</p>
+</details>
+<br>
+</section>
+<section id="ultimate-extinction">
+<h2>Ultimate extinction<a class="headerlink" href="#ultimate-extinction" title="Permalink to this heading">#</a></h2>
+<p>We are also interested in the behaviour of the process as <span class="math notranslate nohighlight">\(t \to \infty\)</span>. If the population ever reaches <span class="math notranslate nohighlight">\(X_t = 0\)</span>, it will have become extinct.</p>
+<div class='definition'>
+<p><strong>Definition (Extinction probability)</strong> Given a branching process <span class="math notranslate nohighlight">\(X_t\)</span>, the extinction probability <span class="math notranslate nohighlight">\(e\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+e = \mathbb{P}(X_t = 0 \text{ for some } t \geq 0).
+\end{align}\]</div>
+<p>Alternatively, defining <span class="math notranslate nohighlight">\(E_t = \{X_t = 0\}\)</span> as the event that the process is extinct by time <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(e_t = \mathbb{P}(E_t)\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\{X_t = 0 \text{ for some } t \geq 0\} = \bigcup^\infty_{t = 0} E_t,
+\end{align}\]</div>
+<p>and since <span class="math notranslate nohighlight">\(E_t \subseteq E_{t+1}\)</span> we have <span class="math notranslate nohighlight">\(e = \lim_{t \to \infty} e_t\)</span> by the continuity of probability measures. Thus <span class="math notranslate nohighlight">\(e\)</span> can equivalently be defined as the limit of <span class="math notranslate nohighlight">\(e_t\)</span> as <span class="math notranslate nohighlight">\(t \to \infty\)</span>.</p>
+</div>
+<br>
+<p>We are interested in the probability of ultimate extinction, that is the probability that <span class="math notranslate nohighlight">\(X_t = 0\)</span> for some <span class="math notranslate nohighlight">\(t\)</span>. Again, generating functions give a neat answer for this quantity too.</p>
+<div class='theorem'>
+<p><strong>Theorem (Extinction probability theorem)</strong> Let <span class="math notranslate nohighlight">\(X_t\)</span> be a branching process, whose family sizes <span class="math notranslate nohighlight">\(C\)</span> have common probability generating function <span class="math notranslate nohighlight">\(G\)</span>. The probability of extinction <span class="math notranslate nohighlight">\(e\)</span> is the smallest non-negative root of the equation</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+x = G(x).
+\end{align}\]</div>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Extinction proability theorem</summary>
+<p>We have <span class="math notranslate nohighlight">\(e_t = \mathbb{P}(X_t = 0) = G_t(0)\)</span> and <span class="math notranslate nohighlight">\(G_{t + 1}(s) = G(G_t(s))\)</span> so that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+e_{t + 1} &amp;= G_{t + 1}(0)\\
+&amp;= G(G_t(0)) \\
+&amp;= G(e_t) \\
+\end{align}\end{split}\]</div>
+<p>Taking the limit <span class="math notranslate nohighlight">\(t \to \infty\)</span> with initial condition <span class="math notranslate nohighlight">\(e_0 = 0\)</span>, we obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+e &amp;= \lim_{t \to \infty} e_t\\
+\implies G(e) &amp;= G\left(\lim_{t \to \infty} e_t\right)\\
+&amp;= \lim_{t \to \infty} G(e_t)\\
+&amp;= \lim_{t \to \infty} e_{t+1}\\
+&amp; \\
+&amp;= e\\
+\implies e &amp;= G(e)
+\end{align}\end{split}\]</div>
+<p>where we have used the fact that <span class="math notranslate nohighlight">\(G\)</span> is continuous on <span class="math notranslate nohighlight">\([0, 1]\)</span>. To show that <span class="math notranslate nohighlight">\(e\)</span> is the smallest non-negative root, suppose <span class="math notranslate nohighlight">\(\eta \geq 0\)</span> is another non-negative root. Since <span class="math notranslate nohighlight">\(G\)</span> is non-decreasing on <span class="math notranslate nohighlight">\([0, 1]\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+e_1 &amp;= G(0) \leq G(\eta) = \eta\\
+e_2 &amp;= G(e_1) \leq G(\eta) = \eta\\
+&amp;~~\vdots\\
+e &amp;\leq \eta
+\end{align}\end{split}\]</div>
+</details>
+<br>
+<p>The following theorem gives a necessary and sufficient condition for ultimate extinction to be certain.</p>
+<div class='theorem'>
+<p><strong>Theorem (Extinction survival theorem)</strong> Let <span class="math notranslate nohighlight">\(X_t\)</span> be a branching process whose family size distribution satisfies <span class="math notranslate nohighlight">\(\mathbb{P}(C = 1) \neq 1\)</span>. The probability of ultimate extinction satisfies <span class="math notranslate nohighlight">\(e = 1\)</span> if and only if the mean family size satisfies <span class="math notranslate nohighlight">\(\mu \leq 1\)</span>.</p>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Extinction survival theorem</summary>
+<p>In the trivial case where <span class="math notranslate nohighlight">\(\mathbb{P}(C = 1) = 1\)</span> we have <span class="math notranslate nohighlight">\(X_t = 1\)</span> for all <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(e = 0\)</span>. Now considering the facts that on the interval <span class="math notranslate nohighlight">\([0, 1]\)</span>, the function <span class="math notranslate nohighlight">\(G\)</span> is</p>
+<ol class="arabic simple">
+<li><p>continuous, since it is a power series with a radius of convergence of at least <span class="math notranslate nohighlight">\(1\)</span>,</p></li>
+<li><p>non-decreasing, since <span class="math notranslate nohighlight">\(G'(x) \geq 0\)</span>,</p></li>
+<li><p>convex, since <span class="math notranslate nohighlight">\(G''(x) \geq 0\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(G(1) = 1\)</span>,</p></li>
+</ol>
+<p>we see that the graph of <span class="math notranslate nohighlight">\(y = G(x)\)</span> will intersect the graph of <span class="math notranslate nohighlight">\(y = x\)</span> at <span class="math notranslate nohighlight">\(x = 1\)</span>, and that the two graphs will have a smaller non-negative point of intersection if and only if <span class="math notranslate nohighlight">\(G'(1) &gt; 1\)</span>. The condition <span class="math notranslate nohighlight">\(e = 1\)</span> holds if and only if the smallest non-negative point of intesection is <span class="math notranslate nohighlight">\(1\)</span>, which is equivalent to the condition <span class="math notranslate nohighlight">\(G'(1) = \mu \leq 1\)</span>, arriving at the result.</p>
+</details>
+<br>
+<p>From the definition of the probability of extinction, it follows that if <span class="math notranslate nohighlight">\(\mu \leq 0\)</span>, then <span class="math notranslate nohighlight">\(X_t \to 0\)</span> in probability. Further, if the inequality is strict, <span class="math notranslate nohighlight">\(\mu &lt; 1\)</span>, then <span class="math notranslate nohighlight">\(X_t \to 0\)</span> in mean square - this does not hold for <span class="math notranslate nohighlight">\(\mu = 1\)</span>.</p>
+<details class="proof">
+<summary>Proof: Convergence of a branching process in probability and in mean-square</summary>
+<p>To show that <span class="math notranslate nohighlight">\(X_t \to 0\)</span> in probability, suppose <span class="math notranslate nohighlight">\(\mu \leq 1\)</span>, let <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> and consider</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\mathbb{P}(X_t &gt; \epsilon) &amp;= 1 - \mathbb{P}(X_t \leq \epsilon)\\
+&amp;= 1 - \big(\mathbb{P}(X_t = 0) + \mathbb{P}(0 &lt; X_t \leq \epsilon)\big).
+\end{align}\end{split}\]</div>
+<p>From the extinction survival theorem, <span class="math notranslate nohighlight">\(\mathbb{P}(X_t = 0) \to 1\)</span> as <span class="math notranslate nohighlight">\(t \to \infty\)</span> so</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{P}(X_t &gt; \epsilon) &amp;=  1 - \big(\mathbb{P}(X_t = 0) + \mathbb{P}(0 &lt; X_t \leq \epsilon)\big) \leq 1 - \mathbb{P}(X_t = 0) \to 0, \text{ as } t \to \infty,
+\end{align}\]</div>
+<p>and <span class="math notranslate nohighlight">\(X_t \to 0\)</span> in probability. We now treat the mean-square case. Consider</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{E}(X_t^2) &amp;= \text{Var}(X_t) + \mathbb{E}(X_t)^2.
+\end{align}\]</div>
+<p>Using the law of total variance</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\text{Var}(X_t) &amp;= \text{Var}_{X_{t - 1}}(\mathbb{E}_{X_t}(X_t | X_{t - 1})) + \mathbb{E}_{X_{t - 1}}(\text{Var}_{X_t}(X_t | X_{t - 1}))\\
+&amp;= \text{Var}_{X_{t - 1}}(\mu X_{t-1}) + \mathbb{E}_{X_{t - 1}}(X_{t - 1} \sigma^2)\\
+&amp;= \mu^2 \sigma_{t - 1}^2 + \mu^t \sigma^2
+\end{align}\end{split}\]</div>
+<p>Proceeding recursively, we obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\sigma_1^2 &amp;= \sigma^2 \\
+\sigma_2^2 &amp;= \mu \sigma^2 + \mu^2 \sigma^2\\
+&amp;~\vdots \\
+\sigma_t^2 &amp;= \mu^{t-1} \sigma^2 + \mu^t \sigma^2 + ... + \mu^{2t - 1} \sigma^2,
+\end{align}\end{split}\]</div>
+<p>which is a geometric sum. In the special case of <span class="math notranslate nohighlight">\(\mu = 1\)</span>, we see that <span class="math notranslate nohighlight">\(\sigma_t^2 = t \sigma^2\)</span>. If <span class="math notranslate nohighlight">\(\mu \neq 1\)</span>, we can use the geometric sum to obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\sigma_t^2 &amp;= \sigma^2 \mu^{t - 1} \frac{1 - \mu^t}{1 - \mu}.
+\end{align}\]</div>
+<p>Substituting these results into the expression for <span class="math notranslate nohighlight">\(\mathbb{E}(X_t^2)\)</span> we obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\mathbb{E}(X_t^2) = \begin{cases}
+1 + t\sigma^2 &amp; \text{ if } \mu = 1\\
+\mu^{2t} + \sigma^2 \mu^{t - 1} \frac{1 - \mu^t}{1 - \mu} &amp; \text{ if } \mu \neq 1.
+\end{cases}
+\end{align}\end{split}\]</div>
+<p>Therefore <span class="math notranslate nohighlight">\(\mathbb{E}(X_t^2) \to 0\)</span>, implying that <span class="math notranslate nohighlight">\(X_t \to 0\)</span> in mean-square if and only if <span class="math notranslate nohighlight">\(\mu &lt; 1\)</span>.</p>
+</details>
+<br>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<span class="target" id="id2"></span></section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book/prob-intro/ch09"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stochastic-and-brancing-processes">Stochastic and brancing processes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-generating-functions">Probability generating functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-population">Mean population</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ultimate-extinction">Ultimate extinction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Stratis Markou
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

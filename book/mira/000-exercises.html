@@ -1,0 +1,799 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Exercises &#8212; Random Walks</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/mira/000-exercises';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Stream of papers" href="../papers/intro.html" />
+    <link rel="prev" title="Riemann integration" href="001-riemann.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Random Walks</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Home
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Notes on books</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../toc/000-intro.html">Theory of Computation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../toc/001-fsa.html">FSAs and Regular Expressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../toc/002-cfl.html">PDAs and Context Free Grammars</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../toc/000-exercises.html">Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../prob-intro/intro.html">Probability: An introduction</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch01/content.html">Events and Probabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch02/content.html">Discrete random variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch03/content.html">Multivariate discrete distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch04/content.html">Probability generating functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch05/content.html">Distribution and density functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch06/content.html">Multivariate distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch07/content.html">Moment generating functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch08/content.html">Main limit theorems</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="000-intro.html">Measure Theory</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="001-riemann.html">Riemann integration</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Exercises</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Papers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../papers/intro.html">Stream of papers</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../papers/ais/ais.html">Annealed Importance Sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../papers/rff/rff.html">Random Fourier features</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/stratisMarkou/random-walks" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/stratisMarkou/random-walks/issues/new?title=Issue%20on%20page%20%2Fbook/mira/000-exercises.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/book/mira/000-exercises.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Exercises</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-1-a">Chapter 1.A</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="exercises">
+<h1>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h1>
+<p>This page gives solutions to the exercises from the book Measure, Integration and Real Analysis by Sheldon Axler.
+We have been working through the book and exercises with Adrian Goldwasser and Shreyas Padhy, and these solutions are a joint effort.
+Please <a class="reference external" href="mailto:stratismar&#37;&#52;&#48;gmail&#46;com">email me</a> if you find any errors in these solutions or have any other comments.</p>
+<section id="chapter-1-a">
+<h2>Chapter 1.A<a class="headerlink" href="#chapter-1-a" title="Permalink to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.A.1</p>
+<p>Suppose <span class="math notranslate nohighlight">\(f: [a, b] \to \mathbb{R}\)</span> is a bounded function such that</p>
+<div class="math notranslate nohighlight">
+\[L(f, P, [a, b]) = U(f, P, [a, b])\]</div>
+<p>for some partition <span class="math notranslate nohighlight">\(P\)</span> of <span class="math notranslate nohighlight">\([a, b].\)</span> Prove that <span class="math notranslate nohighlight">\(f\)</span> is a constant function on <span class="math notranslate nohighlight">\([a, b].\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(f\)</span> be a function and <span class="math notranslate nohighlight">\(P\)</span> be a partition <span class="math notranslate nohighlight">\(x_0, \ldots, x_N\)</span> of <span class="math notranslate nohighlight">\([a, b]\)</span> such tha</p>
+<div class="math notranslate nohighlight">
+\[L(f, P, [a, b]) = U(f, P, [a, b]).\]</div>
+<p class="sd-card-text">Note that for each <span class="math notranslate nohighlight">\(n = 1, \ldots, N,\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[(x_n - x_{n-1}) \inf_{x \in [x_{n-1}, x_n]} f = (x_n - x_{n-1}) \sup_{x \in [x_{n-1}, x_n]} f\]</div>
+<p class="sd-card-text">The infimum and supremum of a funtion on any domain are equal if and only if <span class="math notranslate nohighlight">\(f\)</span> is constant on this domain.
+Therefore, <span class="math notranslate nohighlight">\(f\)</span> is constant on each interval <span class="math notranslate nohighlight">\([x_{n-1}, x_n],\)</span> so it must be constant on <span class="math notranslate nohighlight">\([a, b].\)</span></p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.A.2</p>
+<p>Suppose <span class="math notranslate nohighlight">\(a \leq s &lt; t \leq b.\)</span>
+Define <span class="math notranslate nohighlight">\(f: [a, b] \to \mathbb{R}\)</span> by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}f(x) = \begin{cases}
+1 &amp; \text{if } s &lt; x &lt; t, \\
+0 &amp; \text{otherwise}.
+\end{cases}\end{split}\]</div>
+<p>Prove that <span class="math notranslate nohighlight">\(f\)</span> is Riemann integrable on <span class="math notranslate nohighlight">\([a, b]\)</span> and that <span class="math notranslate nohighlight">\(\int_a^b f = t - s.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(P_N\)</span> be the partition <span class="math notranslate nohighlight">\(x_0, \dots x_{3n}\)</span> of <span class="math notranslate nohighlight">\([a, b]\)</span> with <span class="math notranslate nohighlight">\(x_n = s\)</span> and <span class="math notranslate nohighlight">\(x_{2n} = t,\)</span> defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}x_i - x_{i-1} = \begin{cases}
+\frac{s - a}{n} \text{ if } 1 \leq i \leq n, \\
+\frac{t - s}{n} \text{ if } n &lt; i \leq 2n, \\
+\frac{b - t}{n} \text{ if } 2n &lt; i \leq 3n.
+\end{cases}\end{split}\]</div>
+<p class="sd-card-text">This partition satisifies</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+L(f, P_N, [a, b]) &amp;= \sum_{i=1}^n \frac{s - a}{n} \inf_{x \in [x_{i-1}, x_i]} f + \sum_{i=n+1}^{2n} \frac{t - s}{n} \inf_{x \in [x_{i-1}, x_i]} f + \sum_{i=2n+1}^{3n} \frac{b - t}{n} \inf_{x \in [x_{i-1}, x_i]} f \\
+&amp;= \frac{t - s}{n} (n - 2),
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">where the <span class="math notranslate nohighlight">\((n - 2)\)</span> term comes from the fact that <span class="math notranslate nohighlight">\(f(x_n) = f(s) = 0\)</span> and <span class="math notranslate nohighlight">\(f(x_{2n}) = f(t) = 0.\)</span>
+Similarly for the upper Riemann sum, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+U(f, P_N, [a, b]) &amp;= \sum_{i=1}^n \frac{s - a}{n} \sup_{x \in [x_{i-1}, x_i]} f + \sum_{i=n+1}^{2n} \frac{t - s}{n} \sup_{x \in [x_{i-1}, x_i]} f + \sum_{i=2n+1}^{3n} \frac{b - t}{n} \sup_{x \in [x_{i-1}, x_i]} f \\
+&amp;= (t - s).
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">Therefore</p>
+<div class="math notranslate nohighlight">
+\[\inf_{n \in \mathbb{N}} \left[U(f, P_N, [a, b]) - L(f, P_N, [a, b])\right] = 0,\]</div>
+<p class="sd-card-text">which implies that</p>
+<div class="math notranslate nohighlight">
+\[\inf_{n \in \mathbb{N}} \left[U(f, P_N, [a, b]) - L(f, P_N, [a, b])\right] \geq \inf_{n \in \mathbb{N}} U(f, P_N, [a, b]) - \sup_{n \in \mathbb{N}} L(f, P_N, [a, b])= 0.\]</div>
+<p class="sd-card-text">Therefore <span class="math notranslate nohighlight">\(f\)</span> is Riemann integrable on <span class="math notranslate nohighlight">\([a, b]\)</span> and that <span class="math notranslate nohighlight">\(\int_a^b f = t - s.\)</span></p>
+</div>
+</details></div>
+<div class="tip admonition" id="mira-ex-1a3">
+<p class="admonition-title">Exercise 1.A.3</p>
+<p>Suppose <span class="math notranslate nohighlight">\(f: [a, b] \to \mathbb{R}\)</span> is a bounded function.
+Prove that <span class="math notranslate nohighlight">\(f\)</span> is Riemann integrable on <span class="math notranslate nohighlight">\([a, b]\)</span> if and only if for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0,\)</span> there exists a partition <span class="math notranslate nohighlight">\(P\)</span> of <span class="math notranslate nohighlight">\([a, b]\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[U(f, P, [a, b]) - L(f, P, [a, b]) &lt; \epsilon.\]</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(f: [a, b] \to \mathbb{R}\)</span> be a bounded function.</p>
+<p class="sd-card-text"><strong>Part 1:</strong> Suppose <span class="math notranslate nohighlight">\(f\)</span> is Riemann integrable on <span class="math notranslate nohighlight">\([a, b].\)</span>
+Then by the definition of the Riemann integral, we have</p>
+<div class="math notranslate nohighlight">
+\[\inf_P U(f, P, [a, b]) - \sup_P L(f, P, [a, b]) = 0\]</div>
+<p class="sd-card-text">from which it follows that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\inf_P U(f, P, [a, b]) - \sup_P L(f, P, [a, b]) = 0 &amp;&amp; (\text{rearranging}) \\
+\inf_{P, P'}\left[U(f, P, [a, b]) - L(f, P', [a, b])\right] =0 &amp;&amp; (\text{rewriting inf using sup}) \\
+\inf_{P, P'}\left[U(f, P \cup P', [a, b]) - L(f, P \cup P', [a, b])\right] =0 &amp;&amp; (\text{refining partitions}) \\
+\inf_{R}\left[U(f, R, [a, b]) - L(f, R, [a, b])\right] =0 &amp;&amp; (\text{rewriting } R = P \cup P')
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">Therefore, for any <span class="math notranslate nohighlight">\(\epsilon &gt; 0,\)</span> there exists a partition <span class="math notranslate nohighlight">\(R\)</span> of <span class="math notranslate nohighlight">\([a, b]\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[U(f, R, [a, b]) - L(f, R, [a, b]) &lt; \epsilon.\]</div>
+<p class="sd-card-text"><strong>Part 2:</strong>
+Similarly, we can go in the other direction.
+Suppose that for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0,\)</span> there exists a partition <span class="math notranslate nohighlight">\(P\)</span> of <span class="math notranslate nohighlight">\([a, b]\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[U(f, P, [a, b]) - L(f, P, [a, b]) &lt; \epsilon.\]</div>
+<p class="sd-card-text">Then, taking the infimum over all partitions <span class="math notranslate nohighlight">\(P\)</span> of <span class="math notranslate nohighlight">\([a, b],\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\epsilon &amp;\geq \inf_P \left[U(f, P, [a, b]) - L(f, P, [a, b])\right] \\
+&amp;\geq \inf_P U(f, P, [a, b]) + \inf_P (- L(f, P, [a, b])) \\
+&amp;= \inf_P U(f, P, [a, b]) - \sup_P L(f, P, [a, b]) \\
+&amp;= U(f, [a, b]) - L(f, [a, b]) \\
+&amp;\geq 0
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">Therefore, <span class="math notranslate nohighlight">\(U(f, [a, b]) = L(f, [a, b]),\)</span> which means that <span class="math notranslate nohighlight">\(f\)</span> is Riemann integrable on <span class="math notranslate nohighlight">\([a, b].\)</span></p>
+</div>
+</details></div>
+<div class="tip admonition" id="mira-ex-1a4">
+<p class="admonition-title">Exercise 1.A.4</p>
+<p>Suppose <span class="math notranslate nohighlight">\(f, g: [a, b] \to \mathbb{R}\)</span> are Riemann integrable.
+Prove that <span class="math notranslate nohighlight">\(f + g\)</span> is Riemann integrable on <span class="math notranslate nohighlight">\([a, b]\)</span> and that</p>
+<div class="math notranslate nohighlight">
+\[\int_a^b (f + g) = \int_a^b f + \int_a^b g.\]</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(f, g: [a, b] \to \mathbb{R}\)</span> be Riemann integrable.
+Note that for any <span class="math notranslate nohighlight">\(a \leq c \leq d \leq b,\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\inf_{[c, d]} f + g &amp;\geq \inf_{[c, d]} f + \inf_{[c, d]} g, \\
+\sup_{[c, d]} f + g &amp;\leq \sup_{[c, d]} f + \sup_{[c, d]} g.
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">Therefore, for any partition <span class="math notranslate nohighlight">\(P\)</span> of <span class="math notranslate nohighlight">\([a, b],\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+L(f, P, [a, b]) + L(g, P, [a, b]) &amp;\leq L(f + g, P, [a, b]), \\
+U(f, P, [a, b]) + U(g, P, [a, b]) &amp;\geq U(f + g, P, [a, b]).
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">This implies that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+&amp;U(f + g, P, [a, b]) - L(f + g, P, [a, b]) \leq \\
+\leq &amp;U(f, P, [a, b]) - L(f, P, [a, b]) + U(g, P, [a, b]) - L(g, P, [a, b]).
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(\epsilon &gt; 0.\)</span>
+Now, from <a class="reference internal" href="#mira-ex-1a3"><span class="std std-ref">exercise 1.A.3</span></a>, since <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> are Riemann integrable, there exist partitions <span class="math notranslate nohighlight">\(P_f\)</span> and <span class="math notranslate nohighlight">\(P_g\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+U(f, P_f, [a, b]) - L(f, P_f, [a, b]) &amp;&lt; \frac{\epsilon}{2}, \\
+U(g, P_g, [a, b]) - L(g, P_g, [a, b]) &amp;&lt; \frac{\epsilon}{2}.
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">Defining the partition <span class="math notranslate nohighlight">\(P\)</span> of <span class="math notranslate nohighlight">\([a, b],\)</span> to be the partition containing all the points in <span class="math notranslate nohighlight">\(P_f\)</span> and <span class="math notranslate nohighlight">\(P_g,\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+U&amp;(f + g, P, [a, b]) - L(f + g, P, [a, b]) \\
+\leq U&amp;(f, P_f, [a, b]) - L(f, P_f, [a, b]) + U(g, P_g, [a, b]) - L(g, P_g, [a, b]) \\
+&amp;&lt; \epsilon.
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">where in the inequality we have used <a class="reference internal" href="001-riemann.html#mira-thm-refining-partitions">the property of refined partitions</a>.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.A.5</p>
+<p>Suppose <span class="math notranslate nohighlight">\(f: [a, b] \to \mathbb{R}\)</span> is Riemann integrable.
+Prove that the function <span class="math notranslate nohighlight">\(-f\)</span> is Riemann integrable on <span class="math notranslate nohighlight">\([a, b]\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[\int_a^b (-f) = - \int_a^b f.\]</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">If <span class="math notranslate nohighlight">\(f\)</span> is Riemann integrable, from <a class="reference internal" href="#mira-ex-1a3"><span class="std std-ref">exercise 1.A.3</span></a>, for any <span class="math notranslate nohighlight">\(\epsilon &gt; 0,\)</span> there exists a partition <span class="math notranslate nohighlight">\(P\)</span> of <span class="math notranslate nohighlight">\([a, b]\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[U(f, P, [a, b]) - L(f, P, [a, b]) &lt; \epsilon.\]</div>
+<p class="sd-card-text">Since <span class="math notranslate nohighlight">\(\inf_{[c, d]} -f = - \sup_{[c, d]} f,\)</span> we have <span class="math notranslate nohighlight">\(U(-f, P, [a, b]) = - L(f, P, [a, b])\)</span> so</p>
+<div class="math notranslate nohighlight">
+\[U(-f, P, [a, b]) - L(-f, P, [a, b]) = U(f, P, [a, b]) - L(f, P, [a, b]) &lt; \epsilon\]</div>
+<p class="sd-card-text">Therefore, again from <a class="reference internal" href="#mira-ex-1a3"><span class="std std-ref">exercise 1.A.3</span></a>, it follows that <span class="math notranslate nohighlight">\(-f\)</span> is also Riemann integrable on <span class="math notranslate nohighlight">\([a, b],\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[\int_a^b (-f) = - \int_a^b f.\]</div>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.A.6</p>
+<p>Suppose <span class="math notranslate nohighlight">\(f: [a, b] \to \mathbb{R}\)</span> is Riemann integrable.
+Suppose <span class="math notranslate nohighlight">\(g: [a, b] \to \mathbb{R}\)</span> is a function such that <span class="math notranslate nohighlight">\(g(x) = f(x)\)</span> for all but finitely many <span class="math notranslate nohighlight">\(x \in [a, b].\)</span>
+Prove that <span class="math notranslate nohighlight">\(g\)</span> is Riemann integrable on <span class="math notranslate nohighlight">\([a, b]\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[\int_a^b g = \int_a^b f.\]</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(f: [a, b] \to \mathbb{R}\)</span> be Riemann integrable and <span class="math notranslate nohighlight">\(g: [a, b] \to \mathbb{R}\)</span> be a function such that <span class="math notranslate nohighlight">\(g(x) = f(x)\)</span> for all but finitely many <span class="math notranslate nohighlight">\(x \in [a, b].\)</span></p>
+<p class="sd-card-text">Since <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> are equal for all but finitely many points, the function <span class="math notranslate nohighlight">\(h = f - g\)</span> is zero for all but finitely many <span class="math notranslate nohighlight">\(x \in [a, b].\)</span>
+Let <span class="math notranslate nohighlight">\(P_n\)</span> be the uniform partition of <span class="math notranslate nohighlight">\([a, b],\)</span> namely <span class="math notranslate nohighlight">\(x_0, x_1, \ldots, x_n\)</span> where</p>
+<div class="math notranslate nohighlight">
+\[x_i - x_{i-1} = \frac{b - a}{n},\]</div>
+<p class="sd-card-text">and let <span class="math notranslate nohighlight">\(C = \sup_{[a, b]} |h|.\)</span>
+Then, for any <span class="math notranslate nohighlight">\(n \in \mathbb{N},\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+U(h, P_n, [a, b]) - L(h, P_n, [a, b]) &amp;\leq 2k \frac{b - a}{n} C, 
+L(h, P_n, [a, b]) &amp;\geq -2k \frac{b - a}{n} C,
+\end{align}\]</div>
+<p class="sd-card-text">where <span class="math notranslate nohighlight">\(k\)</span> is the number of points in <span class="math notranslate nohighlight">\([a, b]\)</span> where <span class="math notranslate nohighlight">\(h\)</span> is non-zero.
+Therefore</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+U(g, P_n, [a, b]) - L(g, P_n, [a, b]) \leq 4k \frac{b - a}{n} C,
+\end{align}\]</div>
+<p class="sd-card-text">and since <span class="math notranslate nohighlight">\(n\)</span> can be made arbitrarily large it follows, by <a class="reference internal" href="#mira-ex-1a3"><span class="std std-ref">exercise 1.A.3</span></a>, that <span class="math notranslate nohighlight">\(h\)</span> is Riemann integrable on <span class="math notranslate nohighlight">\([a, b].\)</span>
+Therefore, <span class="math notranslate nohighlight">\(g = f - h\)</span> is also Riemann integrable on <span class="math notranslate nohighlight">\([a, b],\)</span> because it is a sum of two Riemann integrable functions, which we know from <a class="reference internal" href="#mira-ex-1a4"><span class="std std-ref">exercise 1.A.4</span></a> is Riemann integrable, and satisfies</p>
+<div class="math notranslate nohighlight">
+\[\int_a^b g = \int_a^b f - \int_a^b h = \int_a^b f.\]</div>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.A.7</p>
+<p>Suppose <span class="math notranslate nohighlight">\(f: [a, b] \to \mathbb{R}\)</span> is a bounded function.
+For <span class="math notranslate nohighlight">\(n \in \mathbb{N},\)</span> let <span class="math notranslate nohighlight">\(P_n\)</span> denote the partition that divides <span class="math notranslate nohighlight">\([a, b]\)</span> into <span class="math notranslate nohighlight">\(2^n\)</span> intervals of equal size.
+Prove that</p>
+<div class="math notranslate nohighlight">
+\[\lim_{n \to \infty} L(f, P_n, [a, b]) = L(f, [a, b]) \text{ and } \lim_{n \to \infty} U(f, P_n, [a, b]) = U(f, [a, b]).\]</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(f: [a, b] \to \mathbb{R}\)</span> is a bounded function, bounded above by <span class="math notranslate nohighlight">\(C\)</span> and below by <span class="math notranslate nohighlight">\(-C,\)</span> and define <span class="math notranslate nohighlight">\(L = L(f, [a, b]),\)</span> which is finite because <span class="math notranslate nohighlight">\(f\)</span> is bounded.
+By the definition of supremum, for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> there exists a partition <span class="math notranslate nohighlight">\(R_\epsilon\)</span> of <span class="math notranslate nohighlight">\([a, b]\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[L(f, [a, b]) - L(f, R_\epsilon, [a, b]) &lt; \epsilon.\]</div>
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(\delta(R_\epsilon)\)</span> be the size of the smallest subinterval of <span class="math notranslate nohighlight">\(R_\epsilon,\)</span> and let <span class="math notranslate nohighlight">\(E_{R_\epsilon, k}\)</span> be the partition of <span class="math notranslate nohighlight">\([a, b]\)</span> into <span class="math notranslate nohighlight">\(2^{n+k}\)</span> intervals of equal size, such that <span class="math notranslate nohighlight">\(\frac{(b-a)}{2^n} \leq \delta(R_\epsilon).\)</span>
+Now, note that</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\left|L(f, R_\epsilon, [a, b]) - L(f, E_{R_\epsilon, k}, [a, b])\right| &amp;\leq \frac{|R_\epsilon|}{2^{n+k}} 2C,
+\end{align}\]</div>
+<p class="sd-card-text">where <span class="math notranslate nohighlight">\(|R_\epsilon|\)</span> is the number of points in the partition <span class="math notranslate nohighlight">\(R_\epsilon.\)</span>
+Let <span class="math notranslate nohighlight">\(k_\epsilon\)</span> be the smallest integer such that</p>
+<div class="math notranslate nohighlight">
+\[\frac{|R_\epsilon|}{2^{n+k_\epsilon}} 2C &lt; \epsilon.\]</div>
+<p class="sd-card-text">Then, for any <span class="math notranslate nohighlight">\(k \geq k_\epsilon,\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\left|L(f, [a, b]) - L(f, E_{R_\epsilon, k}, [a, b])\right| = 2\epsilon.
+\end{align}\]</div>
+<p class="sd-card-text">Therefore the sequence <span class="math notranslate nohighlight">\(L(f, E_{R_{1/n}, k_{1/n}}, [a, b])\)</span> tends to <span class="math notranslate nohighlight">\(L(f, [a, b])\)</span> as <span class="math notranslate nohighlight">\(n \to \infty.\)</span>
+Note that this sequence is a subsequence of the increasing and bounded above sequence <span class="math notranslate nohighlight">\(L(f, P_n, [a, b]),\)</span> so it must also converge to <span class="math notranslate nohighlight">\(L(f, [a, b]).\)</span>
+Repeating this argument for the upper Riemann sums, we obtain an analogous result for the upper Riemann sum.
+Thefore, we have</p>
+<div class="math notranslate nohighlight">
+\[\lim_{n \to \infty} L(f, P_n, [a, b]) = L(f, [a, b]) \text{ and } \lim_{n \to \infty} U(f, P_n, [a, b]) = U(f, [a, b]).\]</div>
+</div>
+</details></div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book/mira"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="001-riemann.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Riemann integration</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../papers/intro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Stream of papers</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-1-a">Chapter 1.A</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Stratis Markou
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

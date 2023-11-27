@@ -1,0 +1,688 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Probability generating functions &#8212; Random Walks</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/prob-intro/ch04/content';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Distribution and density functions" href="../ch05/content.html" />
+    <link rel="prev" title="Multivariate discrete distributions" href="../ch03/content.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../../intro.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Random Walks</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../intro.html">
+                    Home
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Notes on books</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../toc/000-intro.html">Theory of Computation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../toc/001-fsa.html">FSAs and Regular Expressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../toc/002-cfl.html">PDAs and Context Free Grammars</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../toc/000-exercises.html">Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Probability: An introduction</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../ch01/content.html">Events and Probabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ch02/content.html">Discrete random variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ch03/content.html">Multivariate discrete distributions</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Probability generating functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ch05/content.html">Distribution and density functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ch06/content.html">Multivariate distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ch07/content.html">Moment generating functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ch08/content.html">Main limit theorems</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mira/000-intro.html">Measure Theory</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mira/001-riemann.html">Riemann integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mira/000-exercises.html">Exercises</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Papers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../papers/intro.html">Stream of papers</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../papers/ais/ais.html">Annealed Importance Sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../papers/rff/rff.html">Random Fourier features</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/stratisMarkou/random-walks" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/stratisMarkou/random-walks/issues/new?title=Issue%20on%20page%20%2Fbook/prob-intro/ch04/content.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/book/prob-intro/ch04/content.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Probability generating functions</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">Definition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uniqueness-of-pgfs-and-examples">Uniqueness of PGFs and examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bernoulli">Bernoulli</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binomial-distribution">Binomial distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#poisson-distribution">Poisson distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geometric-distribution">Geometric distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#negative-binomial-distribution">Negative binomial distribution</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#moments">Moments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sums-of-independent-variables">Sums of independent variables</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="probability-generating-functions">
+<h1>Probability generating functions<a class="headerlink" href="#probability-generating-functions" title="Permalink to this heading">#</a></h1>
+<p>Probability generating functions are a useful tool for studying discrete random variables, taking values in <span class="math notranslate nohighlight">\(n = 0, 1, 2 ...\)</span>.
+Each probability mass function has a unique probability generating function and vice versa.
+The moments of a random variable can be obtained straightforwardly from its probability generating function.
+Probability generating functions are useful when dealing with sums and random sums of independent random variables.</p>
+<section id="definition">
+<h2>Definition<a class="headerlink" href="#definition" title="Permalink to this heading">#</a></h2>
+<div class="proof definition admonition" id="definition-0">
+<p class="admonition-title"><span class="caption-number">Definition 30 </span> (Generating function)</p>
+<section class="definition-content" id="proof-content">
+<p>Given a sequence <span class="math notranslate nohighlight">\(u_0, u_1, ...\)</span>, its generating function is</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\sum^\infty_{n = 0} u_n s^n = u_0 + u_1 s + u_2 s^2 + ...
+\end{align}\]</div>
+<p>for all values of <span class="math notranslate nohighlight">\(s\)</span> for which the converges absolutely.</p>
+</section>
+</div><p>The generating function is a general definition, that is not specific to probability theory.
+When the terms of the sequence <span class="math notranslate nohighlight">\(u_0, u_1, ...\)</span> are the values of a probability mass function, then the generating function is called a probability generating function.</p>
+<div class="proof definition admonition" id="definition-1">
+<p class="admonition-title"><span class="caption-number">Definition 31 </span> (Probability generating function)</p>
+<section class="definition-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> be a random variable on <span class="math notranslate nohighlight">\((\Omega, \mathcal{F}, \mathbb{P})\)</span>, which takes values on the non-negative integers and let <span class="math notranslate nohighlight">\(p_n = \mathbb{P}(X = n)\)</span>. Then the probability generating function (or pgf) of <span class="math notranslate nohighlight">\(X\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+G_X(s) = \sum^\infty_{n = 0} p_n s^n = p_0 + p_1 s + p_2 s^2 + ...
+\end{align}\]</div>
+<p>for all values of <span class="math notranslate nohighlight">\(s\)</span> for which the sum converges absolutely.</p>
+</section>
+</div></section>
+<section id="uniqueness-of-pgfs-and-examples">
+<h2>Uniqueness of PGFs and examples<a class="headerlink" href="#uniqueness-of-pgfs-and-examples" title="Permalink to this heading">#</a></h2>
+<p>One very useful result is that if two random variables have the same pgf, then they have the same pmf - and vice versa.</p>
+<div class="proof theorem admonition" id="theorem-2">
+<p class="admonition-title"><span class="caption-number">Theorem 19 </span> (Uniqueness of pgfs)</p>
+<section class="theorem-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> be discrete random variables with probability generating functions <span class="math notranslate nohighlight">\(G_X\)</span> and <span class="math notranslate nohighlight">\(G_Y\)</span>.
+Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+G_X(s) = G_Y(s) \text{ for all } s \iff \mathbb{P}(X = k) = \mathbb{P}(Y = k
+), \text{ for } k = 0, 1, 2, ...
+\end{align}\]</div>
+</section>
+</div><p>One direction of this result follows by the definition of the pgf, whereas the other can be shown by taking the Taylor expansion of <span class="math notranslate nohighlight">\(G_X\)</span> and <span class="math notranslate nohighlight">\(G_Y\)</span>, and observing that all coefficients are equal, which shows that the pmfs of <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are identical.</p>
+<section id="bernoulli">
+<h3>Bernoulli<a class="headerlink" href="#bernoulli" title="Permalink to this heading">#</a></h3>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> has the Bernoulli distribution with parameter <span class="math notranslate nohighlight">\(p\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+G_X(s) = q + ps, \text{ where } q = 1 - p.
+\end{align}\]</div>
+</section>
+<section id="binomial-distribution">
+<h3>Binomial distribution<a class="headerlink" href="#binomial-distribution" title="Permalink to this heading">#</a></h3>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> has the binomial distribution with parameters <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(n\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+G_X(s) = (q + ps)^n, \text{ where } q = 1 - p.
+\end{align}\]</div>
+</section>
+<section id="poisson-distribution">
+<h3>Poisson distribution<a class="headerlink" href="#poisson-distribution" title="Permalink to this heading">#</a></h3>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> has the binomial distribution with parameter <span class="math notranslate nohighlight">\(\lambda\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+G_X(s) = e^{\lambda(s - 1)}.
+\end{align}\]</div>
+</section>
+<section id="geometric-distribution">
+<h3>Geometric distribution<a class="headerlink" href="#geometric-distribution" title="Permalink to this heading">#</a></h3>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> has the geometric distribution with parameter <span class="math notranslate nohighlight">\(p\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+G_X(s) = \frac{ps}{1 - qs}, \text{ where } q = 1 - p.
+\end{align}\]</div>
+</section>
+<section id="negative-binomial-distribution">
+<h3>Negative binomial distribution<a class="headerlink" href="#negative-binomial-distribution" title="Permalink to this heading">#</a></h3>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> has the negative binomial distribution with parameters <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(n\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+G_X(s) = \left(\frac{ps}{1 - qs}\right)^n, \text{ where } q = 1 - p.
+\end{align}\]</div>
+</section>
+</section>
+<section id="moments">
+<h2>Moments<a class="headerlink" href="#moments" title="Permalink to this heading">#</a></h2>
+<p>We are often interested in the moments, such as the mean, of a random variable as these summarise certain aspects of its pmf.</p>
+<div class="proof definition admonition" id="definition-3">
+<p class="admonition-title"><span class="caption-number">Definition 32 </span> (Moment)</p>
+<section class="definition-content" id="proof-content">
+<p>The <span class="math notranslate nohighlight">\(k \geq 1\)</span> moment of a random variable <span class="math notranslate nohighlight">\(X\)</span> is the quantity <span class="math notranslate nohighlight">\(\mathbb{E}(X^k)\)</span>.</p>
+</section>
+</div><p>We can easily obtain all moments of a random variable from its pgf, as stated by the following result.</p>
+<div class="proof theorem admonition" id="theorem-4">
+<p class="admonition-title"><span class="caption-number">Theorem 20 </span> (Moments from pgf derivatives)</p>
+<section class="theorem-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> be a random variable with pgf <span class="math notranslate nohighlight">\(G_X\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+ G_X^{(k)}(1) = \mathbb{E}\left(X(X - 1)...(X - k + 1)\right),
+\end{align}\]</div>
+<p>where the <span class="math notranslate nohighlight">\(G_X^{(k)}\)</span> notation denotes the <span class="math notranslate nohighlight">\(k^{th}\)</span> derivative of <span class="math notranslate nohighlight">\(G_X\)</span>.</p>
+</section>
+</div><p>The above result is useful in computing  higher order moments of random variables, by first finding the pgf and taking derivatives.</p>
+</section>
+<section id="sums-of-independent-variables">
+<h2>Sums of independent variables<a class="headerlink" href="#sums-of-independent-variables" title="Permalink to this heading">#</a></h2>
+<div class="proof theorem admonition" id="theorem-5">
+<p class="admonition-title"><span class="caption-number">Theorem 21 </span> (Independence <span class="math notranslate nohighlight">\(\implies\)</span> <span class="math notranslate nohighlight">\(G\)</span> factorises)</p>
+<section class="theorem-content" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are independent random variables, each taking values on the non-negative integers, then</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+G_{X + Y}(s) = G_X(s) G_Y(s).
+\end{align}\]</div>
+</section>
+</div><p>By extension, if <span class="math notranslate nohighlight">\(X_1, X_2, ..., X_n\)</span> are independent random variables, then their sum <span class="math notranslate nohighlight">\(X = X_1 + X_2 + ... + X_n\)</span> has pgf <span class="math notranslate nohighlight">\(G_X(s) = G_1(s)G_2(s)...G_n(s)\)</span>.
+One very useful consequence of the above result is that we can easily find the pmf of a sum of random variables by simply taking the product of (known) pgfs and matching them against other (known) pgfs. For example, by inspecting the example pgfs above, we see that:</p>
+<ul class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are independent and binomially distributed with parameters <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(m\)</span>, then <span class="math notranslate nohighlight">\(X + Y\)</span> is also binomially distributed with parameters <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(n + m\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are Poisson distributed with parameters <span class="math notranslate nohighlight">\(\lambda\)</span> and <span class="math notranslate nohighlight">\(\mu\)</span>, then <span class="math notranslate nohighlight">\(X + Y\)</span> is also Poisson distributed with parameter <span class="math notranslate nohighlight">\(\lambda + \mu\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are negative binomially distributed with parameters <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(m\)</span> respectively, then <span class="math notranslate nohighlight">\(X + Y\)</span> is also negative binomially distributed with parameters <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(n + m\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(X_1, X_2, ..., X_n\)</span> are independent and geometrically distributed, then <span class="math notranslate nohighlight">\(X_1 + X_2 + ... + X_n\)</span> is negative binomially distributed with parameters <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+</ul>
+<p>In some problems of interest, we may have a sum of <span class="math notranslate nohighlight">\(N\)</span> i.i.d. random variables, where <span class="math notranslate nohighlight">\(N\)</span> is itself a random variable. In this case, the following result, called the random sum formula, is very useful.</p>
+<div class="proof theorem admonition" id="theorem-6">
+<p class="admonition-title"><span class="caption-number">Theorem 22 </span> (Random sum formula)</p>
+<section class="theorem-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(N\)</span> and <span class="math notranslate nohighlight">\(X_1, X_2, ...\)</span> be random variables taking values on the non-negative integers. If <span class="math notranslate nohighlight">\(N\)</span> has pgf <span class="math notranslate nohighlight">\(G_N\)</span> and the <span class="math notranslate nohighlight">\(X_n\)</span> are independent and identically distributed, with pgf <span class="math notranslate nohighlight">\(G_X\)</span>, then the pgf of the sum</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+S = X_1 + X_2 + ... + X_N
+\end{align}\]</div>
+<p>has pgf</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+G_S(s) = G_N(G_X(s)).
+\end{align}\]</div>
+</section>
+</div><p>Using <span class="math notranslate nohighlight">\(G_S\)</span> we can easily determine the moments of a random sum. The random sum formula is especially useful when studying branching processes.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "venv-rw"
+        },
+        kernelOptions: {
+            name: "venv-rw",
+            path: "./book/prob-intro/ch04"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'venv-rw'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../ch03/content.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Multivariate discrete distributions</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../ch05/content.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Distribution and density functions</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">Definition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uniqueness-of-pgfs-and-examples">Uniqueness of PGFs and examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bernoulli">Bernoulli</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binomial-distribution">Binomial distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#poisson-distribution">Poisson distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geometric-distribution">Geometric distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#negative-binomial-distribution">Negative binomial distribution</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#moments">Moments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sums-of-independent-variables">Sums of independent variables</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Stratis Markou
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

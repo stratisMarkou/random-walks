@@ -1,0 +1,762 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>PDAs and context-free grammars &#8212; Random Walks</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/toc/002-cfl';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Excercises" href="000-exercises.html" />
+    <link rel="prev" title="Finite Automata and Regular Expressions" href="001-fsa.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Random Walks</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Home
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Notes on books</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="000-intro.html">Theory of Computation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="001-fsa.html">FSAs and Regular Expressions</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">PDAs and Context Free Grammars</a></li>
+<li class="toctree-l2"><a class="reference internal" href="000-exercises.html">Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../prob-intro/intro.html">Probability: An introduction</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch01/content.html">Events and Probabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch02/content.html">Discrete random variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch03/content.html">Multivariate discrete distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch04/content.html">Probability generating functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch05/content.html">Distribution and density functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch06/content.html">Multivariate distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch07/content.html">Moment generating functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch08/content.html">Main limit theorems</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../mira/000-intro.html">Measure Theory</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mira/001-riemann.html">Riemann integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mira/000-exercises.html">Exercises</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Papers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../papers/intro.html">Stream of papers</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../papers/ais/ais.html">Annealed Importance Sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../papers/rff/rff.html">Random Fourier features</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/stratisMarkou/random-walks" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/stratisMarkou/random-walks/issues/new?title=Issue%20on%20page%20%2Fbook/toc/002-cfl.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/book/toc/002-cfl.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>PDAs and context-free grammars</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#context-free-grammars">Context-free grammars</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chomsky-normal-form">Chomsky normal form</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pushdown-automata">Pushdown Automata</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#context-free-pumping-lemma">Context Free Pumping Lemma</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="pdas-and-context-free-grammars">
+<h1>PDAs and context-free grammars<a class="headerlink" href="#pdas-and-context-free-grammars" title="Permalink to this heading">#</a></h1>
+<p>Moving on from DFAs, NFAs and regular languages, we next consider more powerful models of computation, namely pushdown automata (PDAs) and context-free grammars (CFGs).
+These turn out to be analogous to finite-state automata and regular languages, but are more powerful.
+In particular, we will show that CFGs and PDAs are equivalent and that they are strict supersets of regular languages and NFAs.</p>
+<section id="context-free-grammars">
+<h2>Context-free grammars<a class="headerlink" href="#context-free-grammars" title="Permalink to this heading">#</a></h2>
+<p>A CFG consists of variables and terminal symbols, as well as rules which expand these variables into strings of other variables and terminal symbols.</p>
+<div class="proof definition admonition" id="definition-0">
+<p class="admonition-title"><span class="caption-number">Definition 9 </span> (Context-free grammar)</p>
+<section class="definition-content" id="proof-content">
+<p>A context-free grammar (CGG) is a 4-tuple <span class="math notranslate nohighlight">\((V, \Sigma, R, S)\)</span>, where</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(V\)</span> is a finite set called the variables,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Sigma\)</span> is a finite set that is disjoint from <span class="math notranslate nohighlight">\(V\)</span>, called the terminals,</p></li>
+<li><p><span class="math notranslate nohighlight">\(R\)</span> is a finite set of rules, with each rule being a pair consisting of a variable and a string of variables and terminals,</p></li>
+<li><p><span class="math notranslate nohighlight">\(S \in V\)</span> is the start variable.</p></li>
+</ol>
+</section>
+</div><p>We now introduce some terminology on CFGs.
+We say that a string yields another if the latter can be obtained by applying a rule of a CFG onto the former.
+Similarly, we say that a string derives another if the latter can be obtained by applying a finite number of rules to it.</p>
+<div class="proof definition admonition" id="definition-1">
+<p class="admonition-title"><span class="caption-number">Definition 10 </span> (Yields, derives)</p>
+<section class="definition-content" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(A \to w\)</span> is a rule of a CFG, we say that <span class="math notranslate nohighlight">\(uAv\)</span> yields <span class="math notranslate nohighlight">\(uwv\)</span>, written <span class="math notranslate nohighlight">\(uAv \implies uwv\)</span>.
+We say that <span class="math notranslate nohighlight">\(u\)</span> derives <span class="math notranslate nohighlight">\(v\)</span>, written <span class="math notranslate nohighlight">\(u \stackrel{*}{\implies} v\)</span>, if a sequence <span class="math notranslate nohighlight">\(u_1, u_2, \dots u_k\)</span> exists for some <span class="math notranslate nohighlight">\(k \geq 0\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[u \implies u_1 \implies \dots \implies u_k \implies v.\]</div>
+</section>
+</div><p>Similarly to DFAs and NFAs, we define the language of a CFG to be the set of strings it can represent, i.e. the set of strings that can be derived from it.</p>
+<div class="proof definition admonition" id="definition-2">
+<p class="admonition-title"><span class="caption-number">Definition 11 </span> (Context-free language)</p>
+<section class="definition-content" id="proof-content">
+<p>We define the language of a CFG <span class="math notranslate nohighlight">\(G\)</span> with terminals <span class="math notranslate nohighlight">\(\Sigma\)</span> and start variable <span class="math notranslate nohighlight">\(S\)</span>, to be the set <span class="math notranslate nohighlight">\(L(G) \equiv \{w \in \Sigma^* | S \stackrel{*}{\implies} w\}.\)</span></p>
+</section>
+</div><p>We can now look at a couple of examples of CFGs and strings that these generate.
+We can visualise the derivation of a string in a language using a parse tree, where each node is a variable or terminal symbol and each edge corresponds to part of a substitution rule.
+First is the following example of a CFG which generates all strings of the form <span class="math notranslate nohighlight">\(\texttt{0}^k\texttt{1}^k\)</span> for some <span class="math notranslate nohighlight">\(k \geq 0\)</span>.
+We already know that this set of strings is not a regular language.
+Therefore, this example shows that the set of context-free languages (CFLs) is not equal to the set of regular languages.</p>
+<div class="proof example admonition" id="example-3">
+<p class="admonition-title"><span class="caption-number">Example 6 </span> (Example CFG)</p>
+<section class="example-content" id="proof-content">
+<p>Consider the CFG <span class="math notranslate nohighlight">\(G_1 = (V, \Sigma, R, S)\)</span> where <span class="math notranslate nohighlight">\(V = \{S, E\}, \Sigma = \{\texttt{0}, \texttt{1}\}\)</span> and <span class="math notranslate nohighlight">\(R\)</span> consists of the rules</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+S &amp;\to \texttt{0}S\texttt{1} \\
+S &amp;\to E \\
+E &amp;\to \epsilon
+\end{align}\end{split}\]</div>
+<p>Below is an example of a derivation of the string <span class="math notranslate nohighlight">\(\texttt{0011}\)</span> using this language.</p>
+</section>
+</div><div class="cell tag_center-output tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/76c9157b44e691f07d8916006b64f4cde0bbb70f0349771ff3407790852dd6e6.png" src="../../_images/76c9157b44e691f07d8916006b64f4cde0bbb70f0349771ff3407790852dd6e6.png" />
+</div>
+</div>
+<p>We also have the following example CFG which generates valid mathematical expressions involving sums and multiplications.
+CFGs similar to this can be used to define parsers for programming languages.</p>
+<div class="proof example admonition" id="example-4">
+<p class="admonition-title"><span class="caption-number">Example 7 </span> (Example CFG for mathematical expressions)</p>
+<section class="example-content" id="proof-content">
+<p>Consider the CFG <span class="math notranslate nohighlight">\(G_2 = (V, \Sigma, R, S)\)</span> where <span class="math notranslate nohighlight">\(V = \{E, T, F\}, \Sigma = \{\texttt{a}, \texttt{(}, \texttt{)}\}, S = E\)</span> and <span class="math notranslate nohighlight">\(R\)</span> consists of the rules</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+E &amp;\to T~|~F+T \\
+T &amp;\to F~|~F*T \\
+F &amp;\to \texttt{(}E\texttt{)}~|~\texttt{a} \\
+\end{align}\end{split}\]</div>
+<p>Below is an example of a derivation of the string <span class="math notranslate nohighlight">\(\texttt{a*(a+a)}\)</span> using this language.</p>
+</section>
+</div><div class="cell tag_center-output tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/abf2f1619c8e6b6b2c0f510113ddc30fb11c004dc6d93bda54d204345ab37935.png" src="../../_images/abf2f1619c8e6b6b2c0f510113ddc30fb11c004dc6d93bda54d204345ab37935.png" />
+</div>
+</div>
+<p>Sometimes, a string in a CFL can be derived in more than one way (even if we account for applications of the same rules in different orders).
+In such cases, the language is ambiguous in the sense that there may be more than one parse tree that correspond to the same given string.
+The following definitions formalise this notion.</p>
+<div class="proof definition admonition" id="definition-5">
+<p class="admonition-title"><span class="caption-number">Definition 12 </span> (Leftmost derivation)</p>
+<section class="definition-content" id="proof-content">
+<p>We call a derivation of a string in a CFG a leftmost derivation if at every step of the derivation the leftmost variable is the one that is replaced.</p>
+</section>
+</div><p>This idea allows us to succinctly define ambiguous languages.</p>
+<div class="proof definition admonition" id="definition-6">
+<p class="admonition-title"><span class="caption-number">Definition 13 </span> (Ambiguity)</p>
+<section class="definition-content" id="proof-content">
+<p>We say that a string <span class="math notranslate nohighlight">\(w\)</span> is derived ambiguously from a CFG <span class="math notranslate nohighlight">\(G\)</span>, if there is more than one leftmost derivation of <span class="math notranslate nohighlight">\(w\)</span> in <span class="math notranslate nohighlight">\(G\)</span>.
+If a CFG <span class="math notranslate nohighlight">\(G\)</span> contains a string that can be derived ambiguously, we say that <span class="math notranslate nohighlight">\(G\)</span> is ambiguous.
+If a CFL can only be generated by an ambiguous CFG, we say it is inherently ambiguous.</p>
+</section>
+</div><p>Some CFLs are inherently ambiguous, which means that they can be generated only by ambiguous grammars.</p>
+</section>
+<section id="chomsky-normal-form">
+<h2>Chomsky normal form<a class="headerlink" href="#chomsky-normal-form" title="Permalink to this heading">#</a></h2>
+<div class="proof definition admonition" id="definition-7">
+<p class="admonition-title"><span class="caption-number">Definition 14 </span> (Chomsky normal form)</p>
+<section class="definition-content" id="proof-content">
+<p>A context-free grammar is in Chomsky normal form if every rule is of the form</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+A &amp;\to BC
+A &amp;\to a
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(a\)</span> is any terminal and <span class="math notranslate nohighlight">\(A,\)</span> <span class="math notranslate nohighlight">\(B,\)</span> and <span class="math notranslate nohighlight">\(C\)</span> are any variables, except that <span class="math notranslate nohighlight">\(B\)</span> and <span class="math notranslate nohighlight">\(C\)</span> may not be the start variable.
+In addition, we permit the rule <span class="math notranslate nohighlight">\(S \to \epsilon\)</span> where <span class="math notranslate nohighlight">\(S\)</span> is the start variable.</p>
+</section>
+</div><div class="proof lemma admonition" id="lemma-8">
+<p class="admonition-title"><span class="caption-number">Lemma 4 </span> (CFLs generated by CFG in Chomsky normal form)</p>
+<section class="lemma-content" id="proof-content">
+<p>Any context-free language is generated by a context-free grammar in Chomsky normal form.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof (CFLs generated by CFG in Chomsky normal form)<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(L\)</span> be a CFL.
+Then there exists a CFG <span class="math notranslate nohighlight">\(G = (V, \Sigma, R, S)\)</span> that generates it.
+We will convert <span class="math notranslate nohighlight">\(G\)</span> into an equivalent CFG <span class="math notranslate nohighlight">\(G'\)</span> in normal form by adding a new start variable, then eliminating all <span class="math notranslate nohighlight">\(\epsilon\)</span>-rules of the form <span class="math notranslate nohighlight">\(A \to \epsilon,\)</span> all unit rules of the form <span class="math notranslate nohighlight">\(A \to B,\)</span> and converting all remaining rules in proper form.</p>
+<p class="sd-card-text"><strong>Step 1:</strong>
+First, define a new start variable <span class="math notranslate nohighlight">\(S_0\)</span> and the rule <span class="math notranslate nohighlight">\(S_0 \to S.\)</span>
+This ensures that the start variable does not occur in the right hand side of a rule.</p>
+<p class="sd-card-text"><strong>Step 2:</strong>
+Second, we eliminate all <span class="math notranslate nohighlight">\(\epsilon\)</span>-rules of the form <span class="math notranslate nohighlight">\(A \to \epsilon\)</span> as follows.
+For each occurrence of a rule of the kind <span class="math notranslate nohighlight">\(A \to \epsilon,\)</span> first we remove the rule and then for each occcurence of <span class="math notranslate nohighlight">\(A\)</span> on the right hand side of any other rule, we add a new rule with that occurence deleted.
+For example, if we remove <span class="math notranslate nohighlight">\(A \to \epsilon\)</span> and there is another rule of the form <span class="math notranslate nohighlight">\(R \to uAvAw\)</span> (where <span class="math notranslate nohighlight">\(u, v, w\)</span> are strings of terminals and variables) we add the rules <span class="math notranslate nohighlight">\(R \to uvAw, R \to uAvw\)</span> and <span class="math notranslate nohighlight">\(R \to uvw\)</span> to the grammar.
+We repeat these steps until we have removed all <span class="math notranslate nohighlight">\(\epsilon\)</span>-rules not involving the start variable.
+This procedure is guaranteed to terminate because at each step the number of <span class="math notranslate nohighlight">\(\epsilon\)</span>-rules decreases by one, until it reaches zero.</p>
+<p class="sd-card-text"><strong>Step 3:</strong>
+Third, we handle unit rules.
+If there is a unit rule of the form <span class="math notranslate nohighlight">\(A \to B\)</span> we remove it.
+Then for each occurence of a rule of the type <span class="math notranslate nohighlight">\(B \to u\)</span> (where <span class="math notranslate nohighlight">\(u\)</span> is a string of terminals and variables) appears, we add <span class="math notranslate nohighlight">\(A \to u,\)</span> unless this was a unit rule that we removed previously.
+We repeat this step until we have removed all unit rules.
+This procedure is also guaranteed to terminate: there is a finite set of variables and thus a finite set of unit rules; since at each step we remove a unit rule and do not allow it to be re-introduced later in this procedure, at some point we will have removed all unit rules, and the procedure will terminate.</p>
+<p class="sd-card-text"><strong>Step 4:</strong>
+Last, we convert all remaining rulles in proper form.
+We replace each rule <span class="math notranslate nohighlight">\(A \to u_1 \dots u_k, k \geq 3,\)</span> where each <span class="math notranslate nohighlight">\(u_i\)</span> is a variable or terminal symbol, with the rules <span class="math notranslate nohighlight">\(A \to u_1 A_1, A_1 = u_2 A_2 \dots, A_{k-2} \to u_{k-1} u_k,\)</span> where the <span class="math notranslate nohighlight">\(A_i\)</span> are new variables.
+We replace every terminal <span class="math notranslate nohighlight">\(u_i\)</span> in the preceeding rules with a new variable <span class="math notranslate nohighlight">\(U_i\)</span> and add the rule <span class="math notranslate nohighlight">\(U_i \to u_i.\)</span>
+We repeat this step until all the rules are in proper form.
+Again, this procedure guaranteed to terminate since it is applied exactly once for every rule that was not originally in normal form.</p>
+<p class="sd-card-text">The grammar <span class="math notranslate nohighlight">\(G'\)</span> that results after these steps satisfies the requirements for being in Chomsky normal form, as required.</p>
+</div>
+</details></section>
+<section id="pushdown-automata">
+<h2>Pushdown Automata<a class="headerlink" href="#pushdown-automata" title="Permalink to this heading">#</a></h2>
+<p>Now we move to pushdown automata (PDA), which are another kind of computational model.
+PDAs are similar to NFAs in that they have a finite number of states and allow for nondeterminism.
+We will show that PDAs have the same expressive power as CFGs, in a somewhat analogous way that NFAs have the same power as regular expressions.
+It will turn out that PDAs are very useful in this sense because they provide another way to prove things about CFLs, in addition to CFGs.
+PDAs extend NFAs by introducing a stack of symbols, from which they can read symbols as well as add new ones or remove existing symbols.
+The stack itself can be of infinite length, which is what makes PDAs more powerful than NFAs.</p>
+<div class="proof definition admonition" id="definition-9">
+<p class="admonition-title"><span class="caption-number">Definition 15 </span> (Pushdown automaton (PDA))</p>
+<section class="definition-content" id="proof-content">
+<p>A pushdown automaton is a <span class="math notranslate nohighlight">\(6\)</span>-tuple <span class="math notranslate nohighlight">\((Q, \Sigma, \Gamma, \delta, q_0, F),\)</span> where <span class="math notranslate nohighlight">\(Q, \Sigma, \Gamma\)</span> and <span class="math notranslate nohighlight">\(F\)</span> are all finite sets, and</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(Q\)</span> is a finite set, the set of states,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Sigma\)</span> is a finite set, the input alphabet,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Gamma\)</span> is a finite set, the stack alphabet,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\delta : Q \times \Sigma_\epsilon \times \Gamma_\epsilon \to \mathcal{P}(Q \times \Gamma_\epsilon)\)</span> is a function, the transition funciton,</p></li>
+<li><p><span class="math notranslate nohighlight">\(q_0 \in Q\)</span> is the start state,</p></li>
+<li><p><span class="math notranslate nohighlight">\(F \subseteq Q\)</span> is the set of accept states.</p></li>
+</ol>
+</section>
+</div><p>Crucially a PDA can only read, write or remove symbols at the top of the stack.
+Now we define what it means for a PDA to accept a string, which is analogous to an NFA accepting a string.</p>
+<div class="proof definition admonition" id="definition-10">
+<p class="admonition-title"><span class="caption-number">Definition 16 </span> (PDA accepts)</p>
+<section class="definition-content" id="proof-content">
+<p>A pushdown automaton <span class="math notranslate nohighlight">\(M = (Q, \Sigma, \Gamma, \delta, q_0, F)\)</span> acccepts an input <span class="math notranslate nohighlight">\(w\)</span> if it can be written in the form <span class="math notranslate nohighlight">\(w = w_1w_2 \dots w_m, w_i \in \Sigma_\epsilon,\)</span> and there exist sequences of states <span class="math notranslate nohighlight">\(r_0, r_1, \dots, r_m \in Q\)</span> and strings <span class="math notranslate nohighlight">\(s_0, s_1, \dots, s_m \in \Gamma^*\)</span> that satisfy</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(r_0 = q_0\)</span> and <span class="math notranslate nohighlight">\(s_0 = \epsilon.\)</span></p></li>
+<li><p>For <span class="math notranslate nohighlight">\(i = 0, \dots, m - 1,\)</span> we have <span class="math notranslate nohighlight">\((r_{i+1}, b) \in \delta(r_i, w_{i+1}, a),\)</span> where <span class="math notranslate nohighlight">\(s_i = at, s_{i+1} = bt\)</span> with <span class="math notranslate nohighlight">\(a, b \in \Gamma_\epsilon\)</span> and <span class="math notranslate nohighlight">\(t \in \Gamma^*.\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(r_m \in F.\)</span></p></li>
+</ol>
+</section>
+</div></section>
+<section id="context-free-pumping-lemma">
+<h2>Context Free Pumping Lemma<a class="headerlink" href="#context-free-pumping-lemma" title="Permalink to this heading">#</a></h2>
+<div class="proof theorem admonition" id="toc-cfl-pumping-lemma">
+<p class="admonition-title"><span class="caption-number">Theorem 6 </span> (Pumping Lemma for CFLs)</p>
+<section class="theorem-content" id="proof-content">
+<p>For every CFL <span class="math notranslate nohighlight">\(A\)</span>, there exists an integer <span class="math notranslate nohighlight">\(p\)</span> such that if <span class="math notranslate nohighlight">\(s \in A\)</span> and <span class="math notranslate nohighlight">\(|s| \geq p\)</span>, then <span class="math notranslate nohighlight">\(s = uvxyz\)</span> where</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(uv^ixy^iz \in A\)</span> for all <span class="math notranslate nohighlight">\(i \geq 0\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(vy \neq \epsilon\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(|vxy| \leq p\)</span>.</p></li>
+</ol>
+</section>
+</div><div class="proof example admonition" id="example-12">
+<p class="admonition-title"><span class="caption-number">Example 8 </span> (A non-context-free language)</p>
+<section class="example-content" id="proof-content">
+<p>The language <span class="math notranslate nohighlight">\(A = \{0^k1^k2^k | k \geq 0\}\)</span> is not a CFL.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(A = \{0^k1^k2^k | k \geq 0\}\)</span> is CFL.
+Then by the <span class="xref std std-ref">pumping lemma for CFLs</span>, it has a pumping length <span class="math notranslate nohighlight">\(p\)</span>.
+Let <span class="math notranslate nohighlight">\(s = 0^p 1^p 2^p\)</span>.
+By the pumping lemma, it holds that <span class="math notranslate nohighlight">\(s = uvxyz\)</span>, such that the pumping lemma conditions hold.
+By the condition <span class="math notranslate nohighlight">\(|vxy| \leq p\)</span>, the substring <span class="math notranslate nohighlight">\(vxy\)</span> cannot both contain both zeros andd twos.
+Therefore, <span class="math notranslate nohighlight">\(uv^ixy^iz\)</span> will not contain equal numbers of zeros and twos when <span class="math notranslate nohighlight">\(i \geq 2,\)</span> which contradicts the pumping lemma.
+So <span class="math notranslate nohighlight">\(A\)</span> is not a CFL.</p>
+</div>
+</details></section>
+</div><div class="proof lemma admonition" id="lemma-13">
+<p class="admonition-title"><span class="caption-number">Lemma 5 </span> (CFL not closed under intersection)</p>
+<section class="lemma-content" id="proof-content">
+<p>The class of context-free languages are not closed under intersection.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">The languages <span class="math notranslate nohighlight">\(A_1 = \{0^k 1^k 2^l | k, l \geq 0\}\)</span> and <span class="math notranslate nohighlight">\(A_2 = \{0^l 1^k 2^k | k, l \geq 0\}\)</span> are context free since we can build PDAs that recognise them.
+For example, for <span class="math notranslate nohighlight">\(A_1\)</span> we can construct a PDA which pushes the zeros on its stack, then pops them as it reads the ones, and lastly read any number of twos.
+Similarly we can build a PDA that recognises <span class="math notranslate nohighlight">\(A_2\)</span>.
+However, <span class="math notranslate nohighlight">\(A_1 \cap A_2 = \{0^k 1^k 2^k | k \geq 0 \}\)</span>, which is not a CFL, so the class of CFLs is not closed under intersection.</p>
+</div>
+</details></section>
+</div></section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "venv-rw"
+        },
+        kernelOptions: {
+            name: "venv-rw",
+            path: "./book/toc"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'venv-rw'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="001-fsa.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Finite Automata and Regular Expressions</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="000-exercises.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Excercises</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#context-free-grammars">Context-free grammars</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chomsky-normal-form">Chomsky normal form</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pushdown-automata">Pushdown Automata</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#context-free-pumping-lemma">Context Free Pumping Lemma</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Stratis Markou
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

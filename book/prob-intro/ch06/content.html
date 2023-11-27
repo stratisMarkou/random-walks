@@ -1,0 +1,686 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Multivariate distributions &#8212; Random Walks</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/prob-intro/ch06/content';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Moment generating functions" href="../ch07/content.html" />
+    <link rel="prev" title="Distribution and density functions" href="../ch05/content.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../../intro.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Random Walks</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../intro.html">
+                    Home
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Notes on books</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../toc/000-intro.html">Theory of Computation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../toc/001-fsa.html">FSAs and Regular Expressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../toc/002-cfl.html">PDAs and Context Free Grammars</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../toc/000-exercises.html">Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Probability: An introduction</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../ch01/content.html">Events and Probabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ch02/content.html">Discrete random variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ch03/content.html">Multivariate discrete distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ch04/content.html">Probability generating functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ch05/content.html">Distribution and density functions</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Multivariate distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ch07/content.html">Moment generating functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ch08/content.html">Main limit theorems</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mira/000-intro.html">Measure Theory</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mira/001-riemann.html">Riemann integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mira/000-exercises.html">Exercises</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Papers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../papers/intro.html">Stream of papers</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../papers/ais/ais.html">Annealed Importance Sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../papers/rff/rff.html">Random Fourier features</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/stratisMarkou/random-walks" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/stratisMarkou/random-walks/issues/new?title=Issue%20on%20page%20%2Fbook/prob-intro/ch06/content.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/book/prob-intro/ch06/content.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Multivariate distributions</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#joint-distributions">Joint distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#independence-and-sums">Independence and sums</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#changes-of-variables">Changes of variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-density-functions">Conditional density functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expectations">Expectations</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="multivariate-distributions">
+<h1>Multivariate distributions<a class="headerlink" href="#multivariate-distributions" title="Permalink to this heading">#</a></h1>
+<p>Joint distributions and the independence of general random variables are defined. Joint continuous distributions are defined, and analogues of the results for multivariate discrete random variables are given for the continuous case.</p>
+<section id="joint-distributions">
+<h2>Joint distributions<a class="headerlink" href="#joint-distributions" title="Permalink to this heading">#</a></h2>
+<p>We are often interested in the values taken by two random variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y,\)</span> defined on the same probability space <span class="math notranslate nohighlight">\((\Omega, \mathcal{F}, \mathbb{P}).\)</span>
+The joint distribution function describes the probability of the outcome that <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> assume some values simultaneously.</p>
+<div class="proof definition admonition" id="definition-0">
+<p class="admonition-title"><span class="caption-number">Definition 37 </span> (Joint distribution function)</p>
+<section class="definition-content" id="proof-content">
+<p>Given random variables <span class="math notranslate nohighlight">\(X, Y\)</span> on <span class="math notranslate nohighlight">\((\Omega, \mathcal{F}, \mathbb{P})\)</span>, their joint distribution function is the mapping <span class="math notranslate nohighlight">\(F_{X, Y} : \mathbb{R}^2 \to [0, 1]\)</span> given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+F_{X, Y}(x, y) = \mathbb{P}(X \leq x, Y \leq y).
+\end{align}\]</div>
+</section>
+</div><p>This definition can be extended to joint distributions of any number of variables, by adding more variables to the set being measured. The joint distribution function satisfies:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\lim_{x, y \to -\infty}F_{X, Y}(x, y) = 0&amp;,\\
+\lim_{x, y \to \infty}F_{X, Y}(x, y) = 1&amp;,\\
+x_1 \leq x_2 \text { and } y_1 \leq y_2 \implies  F_{X, Y}(x_1, y_1) \leq
+F_{X, Y}(x_2, y_2)&amp;.
+\end{align}\end{split}\]</div>
+<p>The joint distribution function <span class="math notranslate nohighlight">\(F_{X, Y}\)</span> is related to its marginal distributions <span class="math notranslate nohighlight">\(F_X(x), F_{Y}(y)\)</span> by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\lim_{y \to \infty} F_{X, Y}(x, y) = F_X(x),
+\lim_{x \to \infty} F_{X, Y}(x, y) = F_Y(y).
+\end{align}\]</div>
+<p>We are often interested in how two random variables are related. In the special case where they are unrelated, we call them independent.</p>
+<div class="proof definition admonition" id="definition-1">
+<p class="admonition-title"><span class="caption-number">Definition 38 </span> (Independence of variables)</p>
+<section class="definition-content" id="proof-content">
+<p>We say that two random variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are independent if for all <span class="math notranslate nohighlight">\(x, y \in \mathbb{R}\)</span>, the events <span class="math notranslate nohighlight">\(\{X \leq x\}\)</span> and <span class="math notranslate nohighlight">\(\{Y \leq y\}\)</span> are independent.</p>
+</section>
+</div><p>Note that previously we had defined independence between events, as well as between discrete random variables. This definition extends independence to all random variables (discrete, continuous or other).</p>
+</section>
+<section id="independence-and-sums">
+<h2>Independence and sums<a class="headerlink" href="#independence-and-sums" title="Permalink to this heading">#</a></h2>
+<p>The manipulation of a joint distribution may simplify considerably if the variables are independent. As with discrete random variables, two variables are independent if and only if the joint distribution of continuous random variables factorises.</p>
+<div class="proof theorem admonition" id="theorem-2">
+<p class="admonition-title"><span class="caption-number">Theorem 26 </span> (Independence <span class="math notranslate nohighlight">\(\iff\)</span> pdf factorises)</p>
+<section class="theorem-content" id="proof-content">
+<p>Two jointly continuous random variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are independent if and only if their joint density function may be expressed in the form</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+f_{X, Y}(x, y) = g(x)h(y), \text{ for } x, y \in \mathbb{R}.
+\end{align}\]</div>
+</section>
+</div><p>Again, much like with discrete random variables, the sum of two independent continuous random variables has pmf equal to the convolution of the pmfs of the summands.</p>
+<div class="proof theorem admonition" id="theorem-3">
+<p class="admonition-title"><span class="caption-number">Theorem 27 </span> (Convolution formula)</p>
+<section class="theorem-content" id="proof-content">
+<p>If the random variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are independent and continuous, with pdfs <span class="math notranslate nohighlight">\(f_X\)</span> and <span class="math notranslate nohighlight">\(f_Y\)</span>, then the density function of their sum <span class="math notranslate nohighlight">\(Z = X + Y\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+f_Z(z) = \int^\infty_{-\infty} f_X(x)f_Y(z - x) dx, \text{ for } z \in
+\mathbb{R}.
+\end{align}\]</div>
+</section>
+</div></section>
+<section id="changes-of-variables">
+<h2>Changes of variables<a class="headerlink" href="#changes-of-variables" title="Permalink to this heading">#</a></h2>
+<p>Given random variables <span class="math notranslate nohighlight">\(X, Y\)</span>, we are often interested in the distribution of <span class="math notranslate nohighlight">\(T(X, Y)\)</span>. If the random variables are continuous, and the function <span class="math notranslate nohighlight">\(T\)</span> is a bijection, then the pmf of <span class="math notranslate nohighlight">\(T\)</span> is given by the result below.</p>
+<div class="proof theorem admonition" id="theorem-4">
+<p class="admonition-title"><span class="caption-number">Theorem 28 </span> (Jacobian formula)</p>
+<section class="theorem-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> be jointly continuous with pdf <span class="math notranslate nohighlight">\(f_{X, Y}\)</span> and <span class="math notranslate nohighlight">\(B(x, y) = (u(x, y), v(x, y))\)</span> is a bijection from <span class="math notranslate nohighlight">\(D = \{(x, y) : f_{X, Y}(x, y) &gt; 0\}\)</span> to <span class="math notranslate nohighlight">\(S \subseteq \mathbb{R}^2\)</span>. Then the pair <span class="math notranslate nohighlight">\((U, V) = (u(X, Y), v(X, Y))\)</span> is jointly continuous with joint pdf</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+f_{U, V}(u, v) = \begin{cases}
+f_{X, Y}\left(x(u, v), y(u, v)\right) |J(u, v)|, &amp; \text{ if } (u, v) \in S,\\
+0 &amp; \text{ otherwise,}
+\end{cases}
+\end{align}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(J(u, v)\)</span> is the Jacobian of <span class="math notranslate nohighlight">\(B\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+J(u, v) = \begin{vmatrix}
+\frac{\partial x}{\partial u}&amp; \frac{\partial x}{\partial v} \\
+\frac{\partial y}{\partial u}&amp; \frac{\partial y}{\partial v}
+\end{vmatrix}.
+\end{align}\end{split}\]</div>
+</section>
+</div><p>This result extends the single-variable analogue for <span class="math notranslate nohighlight">\(Y = g(X(\omega)),\)</span> where <span class="math notranslate nohighlight">\(g\)</span> is an invertible mapping:</p>
+<div class="math notranslate nohighlight">
+\[f_Y(y) = f_X(g^{-1}(y)) \frac{d}{dy} g^{-1}(y).\]</div>
+<p>It can be extended to more random variables by adding further variables to the Jacobian.</p>
+</section>
+<section id="conditional-density-functions">
+<h2>Conditional density functions<a class="headerlink" href="#conditional-density-functions" title="Permalink to this heading">#</a></h2>
+<p>We are often interested in the distribution of one variable <span class="math notranslate nohighlight">\(Y\)</span>, conditioned on another event <span class="math notranslate nohighlight">\(\{X = x\}\)</span>, defined analogously to its discrete counterpart.</p>
+<div class="proof definition admonition" id="definition-5">
+<p class="admonition-title"><span class="caption-number">Definition 39 </span> (Conditional density function)</p>
+<section class="definition-content" id="proof-content">
+<p>The conditional density function of <span class="math notranslate nohighlight">\(Y\)</span> given <span class="math notranslate nohighlight">\(X = x\)</span> is written <span class="math notranslate nohighlight">\(f_{Y | X}(\cdot | x)\)</span> and defined by</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+f_{Y | X}(y | x) = \frac{f_{X, Y} (x, y)}{f_X(x)}
+\end{align}\]</div>
+<p>for <span class="math notranslate nohighlight">\(y \in \mathbb{R}\)</span> and <span class="math notranslate nohighlight">\(f_X(x) &gt; 0\)</span>.</p>
+</section>
+</div></section>
+<section id="expectations">
+<h2>Expectations<a class="headerlink" href="#expectations" title="Permalink to this heading">#</a></h2>
+<p>The law of the subconscious statistician for discrete random variables has the following counterpart for continuous random variables.</p>
+<div class="proof theorem admonition" id="theorem-6">
+<p class="admonition-title"><span class="caption-number">Theorem 29 </span> (Law of the subconscious statistician)</p>
+<section class="theorem-content" id="proof-content">
+<p>For any jointly continuous random variables <span class="math notranslate nohighlight">\(X, Y\)</span> with pmf <span class="math notranslate nohighlight">\(f_{X, Y}\)</span> and well-behaved <span class="math notranslate nohighlight">\(g\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{E}\left(g(X, Y)\right) = \int^\infty_{-\infty}\int^{\infty}_{-\infty
+} g(x, y) f_{X, Y}(x, y) dx dy,
+\end{align}\]</div>
+<p>whenever this integral converges absolutely.</p>
+</section>
+</div><p>The above result is useful because we need not worry about evaluating the distribution of <span class="math notranslate nohighlight">\(Z = g(X, Y)\)</span>, and can instead evaluate the integral directly.</p>
+<p>We also have the following result relating the independence of random variables to the factorisation of expectations of products of functions of the variables. This is again analogous to the similar result for discrete distributions.</p>
+<div class="proof theorem admonition" id="theorem-7">
+<p class="admonition-title"><span class="caption-number">Theorem 30 </span> (Independence <span class="math notranslate nohighlight">\(\iff\)</span> expectations of products of functions factorise)</p>
+<section class="theorem-content" id="proof-content">
+<p>Jointly continuous random variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are independent if and only if</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{E}(g(X)h(Y)) = \mathbb{E}(g(X))\mathbb{E}(h(Y))
+\end{align}\]</div>
+<p>for all functions <span class="math notranslate nohighlight">\(g, h : \mathbb{R} \to \mathbb{R}\)</span> for which these expectations exist.</p>
+</section>
+</div><p>The conditional expectation of continuous random variables is defined analogously to that for discrete distributions, as shown below.</p>
+<div class="proof definition admonition" id="definition-8">
+<p class="admonition-title"><span class="caption-number">Definition 40 </span> (Continuous conditional expectation)</p>
+<section class="definition-content" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(X, Y\)</span> are jointly continuous random variables with joint density function <span class="math notranslate nohighlight">\(f_{X, Y}\)</span>, the conditional expectation of <span class="math notranslate nohighlight">\(Y\)</span> given <span class="math notranslate nohighlight">\(X = x\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{E}(Y | X = x) = \int^\infty_{-\infty} y f_{Y | X}(y | x) dy = \int
+^{\infty}_{-\infty} y \frac{f_{X, Y}(x, y)}{f_X(x)} dy,
+\end{align}\]</div>
+<p>valid for any <span class="math notranslate nohighlight">\(x\)</span> for which <span class="math notranslate nohighlight">\(f_X(x) &gt; 0\)</span>.</p>
+</section>
+</div><p>We also have the following result about conditional expectations, an analogue of the equivalent result for discrete functions.</p>
+<div class="proof theorem admonition" id="theorem-9">
+<p class="admonition-title"><span class="caption-number">Theorem 31 </span> (Law of iterated expectations)</p>
+<section class="theorem-content" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(X, Y\)</span> are jointly continuous random variables, then</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{E}(Y) = \int^{\infty}_{-\infty} \mathbb{E}(Y | X = x)f_X(x)dx,
+\end{align}\]</div>
+<p>where the integral is over all <span class="math notranslate nohighlight">\(x\)</span> for which <span class="math notranslate nohighlight">\(f_X(x) &gt; 0\)</span>.</p>
+</section>
+</div></section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "venv-rw"
+        },
+        kernelOptions: {
+            name: "venv-rw",
+            path: "./book/prob-intro/ch06"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'venv-rw'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../ch05/content.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Distribution and density functions</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../ch07/content.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Moment generating functions</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#joint-distributions">Joint distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#independence-and-sums">Independence and sums</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#changes-of-variables">Changes of variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-density-functions">Conditional density functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expectations">Expectations</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Stratis Markou
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

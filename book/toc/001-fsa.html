@@ -1,0 +1,1051 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Finite Automata and Regular Expressions &#8212; Random Walks</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/toc/001-fsa';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="PDAs and context-free grammars" href="002-cfl.html" />
+    <link rel="prev" title="Theory of Computation" href="000-intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Random Walks</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Home
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Notes on books</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="000-intro.html">Theory of Computation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">FSAs and Regular Expressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="002-cfl.html">PDAs and Context Free Grammars</a></li>
+<li class="toctree-l2"><a class="reference internal" href="000-exercises.html">Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../prob-intro/intro.html">Probability: An introduction</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch01/content.html">Events and Probabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch02/content.html">Discrete random variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch03/content.html">Multivariate discrete distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch04/content.html">Probability generating functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch05/content.html">Distribution and density functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch06/content.html">Multivariate distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch07/content.html">Moment generating functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch08/content.html">Main limit theorems</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../mira/000-intro.html">Measure Theory</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mira/001-riemann.html">Riemann integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mira/000-exercises.html">Exercises</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Papers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../papers/intro.html">Stream of papers</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../papers/ais/ais.html">Annealed Importance Sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../papers/rff/rff.html">Random Fourier features</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/stratisMarkou/random-walks" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/stratisMarkou/random-walks/issues/new?title=Issue%20on%20page%20%2Fbook/toc/001-fsa.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/book/toc/001-fsa.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Finite Automata and Regular Expressions</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finite-state-automata">Finite State Automata</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regular-operations">Regular operations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#closure-properties-union">Closure properties: union</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nondeterminism">Nondeterminism</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#closure-properties">Closure properties</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regular-languages-equiv-regular-expressions">Regular languages <span class="math notranslate nohighlight">\(\equiv\)</span> Regular expressions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regular-pumping-lemma">Regular pumping lemma</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="finite-automata-and-regular-expressions">
+<h1>Finite Automata and Regular Expressions<a class="headerlink" href="#finite-automata-and-regular-expressions" title="Permalink to this heading">#</a></h1>
+<p>The course slowly builds up different models of computation of increasing complexity, starting with finite state automata (FSAs).
+This chapter introduces FSAs and regular expressions, which turn out to be equivalent in terms of expressiveness.</p>
+<section id="finite-state-automata">
+<h2>Finite State Automata<a class="headerlink" href="#finite-state-automata" title="Permalink to this heading">#</a></h2>
+<p>Finite state automata (FSAs) are an abstraction for a kind of machine with finite memory.
+An FSA reads a sequence of symbol and either accepts or rejects it.
+We begin by defining finite state automata (FSAs) formally.</p>
+<div class="proof definition admonition" id="finite-state-automaton">
+<p class="admonition-title"><span class="caption-number">Definition 1 </span> (Finite State Automaton;  FSA)</p>
+<section class="definition-content" id="proof-content">
+<p>A finite state automaton <span class="math notranslate nohighlight">\(M\)</span> is a 5-tuple <span class="math notranslate nohighlight">\((Q, \Sigma, \delta, q_0, F)\)</span> where</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Q\)</span> is a finite set, whose elements we call the <em>states</em>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Sigma\)</span> is a finite set, whose elements we call the <em>alphabet symbols</em>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\delta : Q \times \Sigma \to Q\)</span> is a function called the transition function,</p></li>
+<li><p><span class="math notranslate nohighlight">\(q_0 \in Q\)</span> is the start state,</p></li>
+<li><p><span class="math notranslate nohighlight">\(F \subseteq Q\)</span> is a set of accept states.</p></li>
+</ul>
+</section>
+</div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>By its definition, at each state of the FSA there exists precisely one transition for each symbol in the alphabet.
+Having two or more transitions with the same symbol is not allowed, and having no transition for a given symbol is also not allowed.</p>
+</div>
+<p>In order to get a better idea for what an FSA does, we can draw it in the form of a state diagram.
+In a state diagram, we use circles for the states, labeled arrows for the transitions, an arrow to mark the inital state, and double circles to mark the final states.
+Below is an example of an FSA, with three states.</p>
+<div class="cell tag_center-output tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/ced88800a36442cb3957b94852d32a9ef1b2b0c86cec26a9cd2fd2a100e6ffbb.svg" src="../../_images/ced88800a36442cb3957b94852d32a9ef1b2b0c86cec26a9cd2fd2a100e6ffbb.svg" /></div>
+</div>
+<p>Now we define strings, which are sequences of symbols, and languages, which are sets of strings.</p>
+<div class="proof definition admonition" id="definition-1">
+<p class="admonition-title"><span class="caption-number">Definition 2 </span> (Strings and Languages)</p>
+<section class="definition-content" id="proof-content">
+<p>A string is a finite sequence of symbols from a finite set <span class="math notranslate nohighlight">\(\Sigma\)</span>.
+A language is a (finite or infinite) set of strings.
+The empty string <span class="math notranslate nohighlight">\(\epsilon\)</span> is the string of length <span class="math notranslate nohighlight">\(0\)</span>.
+The empty language <span class="math notranslate nohighlight">\(\emptyset\)</span> is the set of no strings.</p>
+</section>
+</div><p>Now we can formally define what it means for an FSA to accept or reject a string, or to recognise a language.</p>
+<div class="proof definition admonition" id="definition-2">
+<p class="admonition-title"><span class="caption-number">Definition 3 </span> (FSA accepts a string / recognises a language)</p>
+<section class="definition-content" id="proof-content">
+<p>We say that the FSA <span class="math notranslate nohighlight">\(M = (Q, \Sigma, \delta, q_0, F)\)</span> accepts the string <span class="math notranslate nohighlight">\(w = w_1 w_2\dots w_N\)</span>, where <span class="math notranslate nohighlight">\(w_n \in \Sigma\)</span> for all <span class="math notranslate nohighlight">\(n = 1, \dots, N\)</span>, if there is a sequence of states <span class="math notranslate nohighlight">\(r_0, r_1, \dots, r_n \in Q\)</span> such that</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(r_0 = q_0\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(r_n = \delta(r_{n-1}, r_n)\)</span> for <span class="math notranslate nohighlight">\(1 \leq n \leq N\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(r_n \in F\)</span>.</p></li>
+</ul>
+<p>We say that <span class="math notranslate nohighlight">\(M\)</span> recognises the language <span class="math notranslate nohighlight">\(L\)</span> if <span class="math notranslate nohighlight">\(M\)</span> accepts exactly those strings in <span class="math notranslate nohighlight">\(L\)</span>.
+We write <span class="math notranslate nohighlight">\(L(M)\)</span> to denote the language recognised by <span class="math notranslate nohighlight">\(M\)</span>, that is <span class="math notranslate nohighlight">\(L(M)= \{w | M \text{ accepts } w\}\)</span>.
+We say that <span class="math notranslate nohighlight">\(L(M)\)</span> is the language of <span class="math notranslate nohighlight">\(M\)</span>.</p>
+</section>
+</div><p>Note that the definition above means that there exists an FSA which accepts all strings in the language and rejects all other strings which are not in the language.</p>
+<div class="proof example admonition" id="example-3">
+<p class="admonition-title"><span class="caption-number">Example 1 </span></p>
+<section class="example-content" id="proof-content">
+<p>The FSA <span class="math notranslate nohighlight">\(M\)</span> shown above accepts all binary strings which contain <span class="math notranslate nohighlight">\(11\)</span> as a substring.</p>
+</section>
+</div><p>Now we come to an important definition, that of regular languages.
+We call a language regular if an FSA recognises it.</p>
+<div class="proof definition admonition" id="definition-4">
+<p class="admonition-title"><span class="caption-number">Definition 4 </span> (Regular language)</p>
+<section class="definition-content" id="proof-content">
+<p>We say that a language is regular if there exists an FSA that recognises it.</p>
+</section>
+</div><div class="proof example admonition" id="example-5">
+<p class="admonition-title"><span class="caption-number">Example 2 </span></p>
+<section class="example-content" id="proof-content">
+<p>The set of all finite strings which have an even number of <span class="math notranslate nohighlight">\(1\)</span>s is a regular language.
+An FSA that recognises this language is shown below.</p>
+</section>
+</div><div class="cell tag_remove-input tag_center-output docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/d6c288a19b5590022f6f0516b286c4761e5bb377fa320688ab942011238b948e.svg" src="../../_images/d6c288a19b5590022f6f0516b286c4761e5bb377fa320688ab942011238b948e.svg" /></div>
+</div>
+<div class="proof example admonition" id="example-6">
+<p class="admonition-title"><span class="caption-number">Example 3 </span></p>
+<section class="example-content" id="proof-content">
+<p>The set of all finite strings which have an equal number of <span class="math notranslate nohighlight">\(0\)</span>s and <span class="math notranslate nohighlight">\(1\)</span> is not a regular language.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(A\)</span> be the set of all finite strings with an equal number of <span class="math notranslate nohighlight">\(0\)</span>s and <span class="math notranslate nohighlight">\(1\)</span>.
+We will show that <span class="math notranslate nohighlight">\(L\)</span> is not a regular language by contradiction.
+Suppose <span class="math notranslate nohighlight">\(A\)</span> is a regular language.
+Then there exists an FSA <span class="math notranslate nohighlight">\(M = (Q, \Sigma, \delta, q_0, F)\)</span>, which recognises it.
+Since <span class="math notranslate nohighlight">\(Q\)</span> is finite, it contains a finite number of states <span class="math notranslate nohighlight">\(S\)</span>.
+Now, consider the set of strings <span class="math notranslate nohighlight">\(B = \{b_0, b_1, \dots, b_{S}\}\)</span>, where</p>
+<div class="math notranslate nohighlight">
+\[ b_s =  \underbrace{0 \dots 0}_{s ~\text{times}}~~\underbrace{1 \dots 1}_{S - s ~\text{times}}\]</div>
+<p class="sd-card-text">Also, define the string <span class="math notranslate nohighlight">\(\bar{b}_s\)</span> to be the string <span class="math notranslate nohighlight">\(b_s\)</span> with the zeroes and ones swapped, that is</p>
+<div class="math notranslate nohighlight">
+\[\bar{b}_s =  \underbrace{1 \dots 1}_{s ~\text{times}}~~\underbrace{0 \dots 0}_{S - s ~\text{times}}\]</div>
+<p class="sd-card-text">Now, consider feeding each of the strings into <span class="math notranslate nohighlight">\(M.\)</span>
+After reading all the symbols of a given string, <span class="math notranslate nohighlight">\(M\)</span> will be in some state in <span class="math notranslate nohighlight">\(Q.\)</span>
+Since there are <span class="math notranslate nohighlight">\(S\)</span> states and <span class="math notranslate nohighlight">\(S+1\)</span> strings, then by the <a class="reference external" href="https://en.wikipedia.org/wiki/Pigeonhole_principle">pigeonhole principle</a>, there will be two distinct strings, say <span class="math notranslate nohighlight">\(b_n\)</span> and <span class="math notranslate nohighlight">\(b_m\)</span>, which end up in the same state.
+Now note that <span class="math notranslate nohighlight">\(b_n \bar{b}_n\)</span> contains an equal number of zeroes and ones, so <span class="math notranslate nohighlight">\(M\)</span> accepts it.
+Further, since <span class="math notranslate nohighlight">\(b_n\)</span> and <span class="math notranslate nohighlight">\(b_m\)</span> arrive at the same state, <span class="math notranslate nohighlight">\(b_m \bar{b}_n\)</span> arrives at the same state as <span class="math notranslate nohighlight">\(b_n \bar{b}_n\)</span>, so it must be accepted.
+But the number of ones minus the number of zeros in <span class="math notranslate nohighlight">\(b_n \bar{b}_m\)</span> is <span class="math notranslate nohighlight">\((S - 2n) - (S - 2m) = 2m - 2n\)</span>, and since <span class="math notranslate nohighlight">\(m \neq n\)</span>, it follows that <span class="math notranslate nohighlight">\(b_n \bar{b}_m\)</span> does not contain an equal number of zeroes and ones, even though we established that it is accepted.
+Contradiction.</p>
+<p class="sd-card-text">This result can also be shown by using the Myhill-Nerode Theorem or the Regular Pumping Lemma.</p>
+</div>
+</details></section>
+</div><p>As this result suggests, FSAs are very limited in terms of the languages they can recognise and, more generally, are a limited model of computation.</p>
+</section>
+<section id="regular-operations">
+<h2>Regular operations<a class="headerlink" href="#regular-operations" title="Permalink to this heading">#</a></h2>
+<p>Given existing languages, we can construct new ones.
+In particular, we will define two binary operations, namely union and concatenation, and a unary operation, namely star, which create new languages from existing ones.
+We give these operations the special name <em>regular operations</em> because, as we will see later, they preserve the closure of regular languages.</p>
+<div class="proof definition admonition" id="definition-7">
+<p class="admonition-title"><span class="caption-number">Definition 5 </span> (Regular operations)</p>
+<section class="definition-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(A, B\)</span> be languages.
+We define the union, concatenation and star operations as:</p>
+<ul class="simple">
+<li><p><strong>Union</strong>: <span class="math notranslate nohighlight">\(A \cup B = \{w | w \in A \text{ or } w \in B\}.\)</span></p></li>
+<li><p><strong>Concatenation</strong>: <span class="math notranslate nohighlight">\(A \circ B = AB = \{xy | x \in A \text{ and } y \in B\}.\)</span></p></li>
+<li><p><strong>Star</strong>: <span class="math notranslate nohighlight">\(A^* = \{x_1 \dots x_N | x_n \in A \text{ for } k \geq 0\}.\)</span></p></li>
+</ul>
+<p>Note that the language obtained via the star operation always contains the empty string.</p>
+</section>
+</div><p>We can use these regular expressions to form new languages.
+Regular expressions are a useful bit of notation that facilitates this.</p>
+<div class="proof definition admonition" id="toc-def-regex">
+<p class="admonition-title"><span class="caption-number">Definition 6 </span> (Regular expressions)</p>
+<section class="definition-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\Sigma\)</span> be an alphabet set.
+A regular expression <span class="math notranslate nohighlight">\(R\)</span> on <span class="math notranslate nohighlight">\(\Sigma\)</span> is</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(a\)</span> for some <span class="math notranslate nohighlight">\(a \in \Sigma\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\epsilon\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\emptyset\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\((R_1 \cup R_2)\)</span>, where <span class="math notranslate nohighlight">\(R_1\)</span> and <span class="math notranslate nohighlight">\(R_2\)</span> are regular expressions,</p></li>
+<li><p><span class="math notranslate nohighlight">\((R_1 \circ R_2)\)</span>, where <span class="math notranslate nohighlight">\(R_1\)</span> and <span class="math notranslate nohighlight">\(R_2\)</span> are regular expressions,</p></li>
+<li><p><span class="math notranslate nohighlight">\((R_1^*)\)</span>, where <span class="math notranslate nohighlight">\(R_1\)</span> is a regular expression.</p></li>
+</ol>
+</section>
+</div><div class="proof example admonition" id="example-9">
+<p class="admonition-title"><span class="caption-number">Example 4 </span> (Some regular expressions)</p>
+<section class="example-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\Sigma = \{0, 1\}\)</span>.
+The following are examples of regular expressions:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\((0 \cup 1)^* = \Sigma^*\)</span> is the set of all strings over <span class="math notranslate nohighlight">\(\Sigma\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Sigma^*1\)</span> is the set of all strings that end in <span class="math notranslate nohighlight">\(1\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Sigma^*11\Sigma^*\)</span> is the set of all strings that contain <span class="math notranslate nohighlight">\(11\)</span>.</p></li>
+</ul>
+<p>When writing regular expressions, we may use the shorthand <span class="math notranslate nohighlight">\(a\)</span> instead of the singleton set <span class="math notranslate nohighlight">\(\{a\}\)</span>, as was done in the examples above.</p>
+</section>
+</div></section>
+<section id="closure-properties-union">
+<h2>Closure properties: union<a class="headerlink" href="#closure-properties-union" title="Permalink to this heading">#</a></h2>
+<p>We continue with proving three closure properties of regular languages, namely closure under union, concatenation and star operations.
+We will first prove closure under union.</p>
+<div class="proof theorem thm-reg-lang-union-closure-naive admonition" id="theorem-10">
+<p class="admonition-title"><span class="caption-number">Theorem 1 </span> (Closure under union)</p>
+<section class="theorem-content" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(A_1, A_2\)</span> are regular languages over an alphabet <span class="math notranslate nohighlight">\(\Sigma\)</span>, so is <span class="math notranslate nohighlight">\(A_1 \cup A_2\)</span>.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof (Closure under union)<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">If <span class="math notranslate nohighlight">\(A_1\)</span> and <span class="math notranslate nohighlight">\(A_2\)</span> are regular languages, then there exist FSAs <span class="math notranslate nohighlight">\(M_1 = (Q_1, \Sigma, \delta_1, q_1, F_1)\)</span> and <span class="math notranslate nohighlight">\(M_2 = (Q_2, \Sigma, \delta_2, q_2, F_2)\)</span> which recognise them, respectively.
+Define the FSA <span class="math notranslate nohighlight">\(M = (Q, \Sigma, \delta, q, F)\)</span> as follows</p>
+<ul class="simple">
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(Q = Q_1 \times Q_2\)</span></p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(q_0 = (q_1, q_2)\)</span></p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\delta : Q \times \Sigma \to Q\)</span> where <span class="math notranslate nohighlight">\(\delta((q, r), a) = (\delta_1(q, a), \delta_2(r, a))\)</span></p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(F = (F_1 \times Q_2) \cup (Q_1 \times F_2)\)</span></p></li>
+</ul>
+<p class="sd-card-text">Note that, from our definitions of <span class="math notranslate nohighlight">\(Q\)</span>, <span class="math notranslate nohighlight">\(q_0\)</span> and <span class="math notranslate nohighlight">\(\delta\)</span>, running the FSA <span class="math notranslate nohighlight">\(M\)</span> on a string <span class="math notranslate nohighlight">\(s\)</span> is equivalent to running <span class="math notranslate nohighlight">\(M_1\)</span> and <span class="math notranslate nohighlight">\(M_2\)</span> on <span class="math notranslate nohighlight">\(s\)</span> in parallel.
+In addition, by our definition of <span class="math notranslate nohighlight">\(F\)</span>, <span class="math notranslate nohighlight">\(M\)</span> accepts its input if either <span class="math notranslate nohighlight">\(M_1\)</span> or <span class="math notranslate nohighlight">\(M_2\)</span> accepts it.
+Therefore <span class="math notranslate nohighlight">\(L(M) = L(M_1) \cup L(M_2) = A_1 \cup A_2\)</span> is regular.</p>
+</div>
+</details><p>It is more challenging to prove closure under concatenation and star in this way.
+Instead, introducing a new concept, nondeterminism, will make these proofs much easier.
+It will also simplify the proof for closure under union and make it more intuitive.
+More generally, nondeterminism is a recurring theme across the theory of computation.</p>
+</section>
+<section id="nondeterminism">
+<h2>Nondeterminism<a class="headerlink" href="#nondeterminism" title="Permalink to this heading">#</a></h2>
+<p>We introduce the nondeterministic finite automaton (NFA), which extends the finite automata we have been looking at up to now, which we will refer to as deterministic finite automata (DFA).
+Below is an example of an NFA which differs from DFAs in two important ways:</p>
+<ol class="arabic simple">
+<li><p>From each state in the NFA, there may be none, one or more outgoing transitions for each symbol.</p></li>
+<li><p>There is an <span class="math notranslate nohighlight">\(\epsilon\)</span> symbol which represents a transition that reads no symbol from the input, and just changes the state of the FSA.</p></li>
+</ol>
+<p>The NFA accepts a string if there is any valid path from the initial state to some finite state.</p>
+<div class="cell tag_center-output tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/6e840b1c56714cc78fa011001bc0f3a69491e6269eaee2179963c43e1f30b8df.svg" src="../../_images/6e840b1c56714cc78fa011001bc0f3a69491e6269eaee2179963c43e1f30b8df.svg" /></div>
+</div>
+<p>We can also look at a few example input strings, and whether this NFA accepts or rejects them.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NFA accepts input ab
+NFA rejects input aa
+NFA accepts input aba
+NFA rejects input abb
+NFA accepts input aab
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we define NFAs formally.
+The definition is the same as for DFAs except for the transition function <span class="math notranslate nohighlight">\(\delta\)</span>.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Nondeterministic finite automata (NFAs) were introduced by Rabin and Scott in their 1959 paper <a class="reference external" href="https://ieeexplore.ieee.org/document/5392601"><em>Finite automata and their decision problems</em></a>.
+Since then, nondeterminism has become a key concept across Computer Science.</p>
+</aside>
+<div class="proof definition admonition" id="definition-11">
+<p class="admonition-title"><span class="caption-number">Definition 7 </span> (Nondeterministic Finite Automaton)</p>
+<section class="definition-content" id="proof-content">
+<p>A nondeterministic finite automaton (NFA) <span class="math notranslate nohighlight">\(N\)</span> is a <span class="math notranslate nohighlight">\(5\)</span>-tuple <span class="math notranslate nohighlight">\((Q, \Sigma, \delta, q_0, F)\)</span> where</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Q\)</span> is a finite set of states,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Sigma\)</span> is a finite set of symbols,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\delta : Q \times \Sigma_{\epsilon} \to \mathcal{P}(Q) = \{R | R \subseteq Q\}\)</span> is the transition function, where <span class="math notranslate nohighlight">\(\Sigma_{\epsilon} = \Sigma \cup \{\epsilon\}\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(q_0 \in Q\)</span> is the initial state,</p></li>
+<li><p><span class="math notranslate nohighlight">\(F \subseteq Q\)</span> is a set of accept states.</p></li>
+</ul>
+</section>
+</div><p>Even though NFAs appear to be more powerful than DFAs, they are in fact equivalent to them.
+Every DFA is an NFA but perhaps more surprisingly every NFA has an equivalent DFA.</p>
+<div class="proof theorem admonition" id="toc-dfa-nfa-equivalence">
+<p class="admonition-title"><span class="caption-number">Theorem 2 </span> (NFA recognises <span class="math notranslate nohighlight">\(A\)</span> <span class="math notranslate nohighlight">\(\implies\)</span> <span class="math notranslate nohighlight">\(A\)</span> is regular)</p>
+<section class="theorem-content" id="proof-content">
+<p>If an NFA recognises <span class="math notranslate nohighlight">\(A\)</span>, then <span class="math notranslate nohighlight">\(A\)</span> is regular, so there exists a DFA that recognises it.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose an NFA <span class="math notranslate nohighlight">\(M = (Q, \Sigma, \delta, q_0, F)\)</span> recognises <span class="math notranslate nohighlight">\(A\)</span>.
+We will define a DFA <span class="math notranslate nohighlight">\(M' = (Q', \Sigma, \delta', q_0', F')\)</span> which recognises <span class="math notranslate nohighlight">\(A\)</span>.
+Let</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+Q' &amp;= \mathcal{P}(Q) \\
+q_0' &amp;= \{q_0\} \\
+F' &amp;= \{R \in Q' | R \cap F \text{ is nonempty}\}
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">For the transition function, we need to consider the possibility of making transitions along <span class="math notranslate nohighlight">\(\epsilon\)</span> arrows.
+For <span class="math notranslate nohighlight">\(R \subseteq Q\)</span>, let <span class="math notranslate nohighlight">\(E(R)\)</span> be the set of states that can be reached from <span class="math notranslate nohighlight">\(R\)</span> using any number of <span class="math notranslate nohighlight">\(\epsilon\)</span> transitions only, including <span class="math notranslate nohighlight">\(R\)</span> itself.
+Then we define the transition function as</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\delta'(R, a) &amp;= \{q | q \in E(\delta(r, a)) \text{ for some } r \in R\}.
+\end{align}\]</div>
+<p class="sd-card-text">The resulting DFA <span class="math notranslate nohighlight">\(M' = (Q', \Sigma, \delta', q_0', F')\)</span> accepts the same strings as <span class="math notranslate nohighlight">\(M\)</span>, so it recognises <span class="math notranslate nohighlight">\(A\)</span>, which is regular.</p>
+</div>
+</details><p>We can use the procedure in this proof to convert any NFA, to an equivalent DFA.
+For example, we can convert the NFA from the previous example into the following equivalent DFA.</p>
+<div class="cell tag_remove-input tag_center-output docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/78b8c04fbfd604286d58ab6fa1f451f0c1e17a4d5347459571eed89a34ca5281.svg" src="../../_images/78b8c04fbfd604286d58ab6fa1f451f0c1e17a4d5347459571eed89a34ca5281.svg" /></div>
+</div>
+</section>
+<section id="closure-properties">
+<h2>Closure properties<a class="headerlink" href="#closure-properties" title="Permalink to this heading">#</a></h2>
+<p>We can now use nondeterminism to prove closure under union, intersection and star, much more easily.
+The proof is based on the intuitive idea that we can make a larger NFA which is literally equivalent to running both machines in parallel.</p>
+<div class="proof theorem thm-reg-lang-union-closure admonition" id="theorem-13">
+<p class="admonition-title"><span class="caption-number">Theorem 3 </span> (Closure under union)</p>
+<section class="theorem-content" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(A_1, A_2\)</span> are regular languages over an alphabet <span class="math notranslate nohighlight">\(\Sigma\)</span>, so is <span class="math notranslate nohighlight">\(A_1 \cup A_2\)</span>.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof (Closure under union)<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">If <span class="math notranslate nohighlight">\(A_1\)</span> and <span class="math notranslate nohighlight">\(A_2\)</span> are regular languages, then there exist DFAs <span class="math notranslate nohighlight">\(M_1 = (Q_1, \Sigma, \delta_1, q_1, F_1)\)</span> and <span class="math notranslate nohighlight">\(M_2 = (Q_2, \Sigma, \delta_2, q_2, F_2)\)</span> which recognise them, respectively.
+Let us consider these DFAs to be NFAs (since any DFA can be viewed as an NFA).</p>
+<p class="sd-card-text">Let the NFA <span class="math notranslate nohighlight">\(M = (Q, \Sigma, \delta, q, F)\)</span> be defined as follows.
+Let the initial state be <span class="math notranslate nohighlight">\(q = q_0\)</span>, the state space be <span class="math notranslate nohighlight">\(Q = Q_1 \cup Q_2\)</span>, the set of final states be <span class="math notranslate nohighlight">\(F = F_1 \cup F_2\)</span> and the transition function be</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \delta(q, a) = \begin{cases}
+\delta_1(q, a) &amp; q \in Q_1 \\
+\delta_2(q, a) &amp; q \in Q_2 \\
+q_1 &amp; q = q_0, a = \epsilon \\
+q_2 &amp; q = q_0, a = \epsilon
+\end{cases}\end{split}\]</div>
+<p class="sd-card-text">This NFA accepts exactly those strings in <span class="math notranslate nohighlight">\(A_1 \cup A_2\)</span>, so and since every <span class="xref std std-ref">NFA has an equivalent DFA</span>, there exists a DFA which recognises <span class="math notranslate nohighlight">\(A_1 \cup A_2\)</span>, so it is regular.</p>
+</div>
+</details><p>Similarly, we can prove closure under concatenation, by joining two DFAs into a single larger NFA.</p>
+<div class="proof theorem thm-reg-lang-concatenation-closure admonition" id="theorem-14">
+<p class="admonition-title"><span class="caption-number">Theorem 4 </span> (Closure under concatenation)</p>
+<section class="theorem-content" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(A_1, A_2\)</span> are regular languages over an alphabet <span class="math notranslate nohighlight">\(\Sigma\)</span>, so is <span class="math notranslate nohighlight">\(A_1 \circ A_2\)</span>.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof (Closure under concatenation)<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">If <span class="math notranslate nohighlight">\(A_1\)</span> and <span class="math notranslate nohighlight">\(A_2\)</span> are regular languages, then there exist DFAs <span class="math notranslate nohighlight">\(M_1 = (Q_1, \Sigma, \delta_1, q_1, F_1)\)</span> and <span class="math notranslate nohighlight">\(M_2 = (Q_2, \Sigma, \delta_2, q_2, F_2)\)</span> which recognise them, respectively.
+Let us consider these DFAs to be NFAs (since any DFA can be viewed as an NFA).</p>
+<p class="sd-card-text">Let the NFA <span class="math notranslate nohighlight">\(M = (Q, \Sigma, \delta, q, F)\)</span> be defined as follows.
+Let the initial state be <span class="math notranslate nohighlight">\(q = q_1\)</span>, the state space be <span class="math notranslate nohighlight">\(Q = Q_1 \cup Q_2\)</span>, the set of final states be <span class="math notranslate nohighlight">\(F = F_2\)</span> and the transition function be</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \delta(q, a) = \begin{cases}
+\delta_1(q, a) &amp; q \in Q_1, q \not \in F_1 \\
+\delta_1(q, a) &amp; q \in Q_1, q \in F_1, a \neq \epsilon \\
+\{q_2\} &amp; q \in Q_1, q \in F_1, a = \epsilon \\
+\delta_2(q, a) &amp; q \in Q_2
+\end{cases}\end{split}\]</div>
+<p class="sd-card-text">This NFA accepts exactly those strings in <span class="math notranslate nohighlight">\(A_1 \circ A_2\)</span>, so and since every <span class="xref std std-ref">NFA has an equivalent DFA</span>, there exists a DFA which recognises <span class="math notranslate nohighlight">\(A_1 \circ A_2\)</span>, so it is regular.</p>
+</div>
+</details><p>Last, we can prove closure under the star operation by adding a new initial state, as well as <span class="math notranslate nohighlight">\(\epsilon\)</span> transitions from the final states of the machine to the old initial state of the machine.</p>
+<div class="proof theorem thm-reg-lang-star-closure admonition" id="theorem-15">
+<p class="admonition-title"><span class="caption-number">Theorem 5 </span> (Closure under star)</p>
+<section class="theorem-content" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(A\)</span> be a regular language.
+Then so is <span class="math notranslate nohighlight">\(A^*\)</span>.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof (Closure under star)<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">If <span class="math notranslate nohighlight">\(A\)</span> is a regular language, then there exists a DFA <span class="math notranslate nohighlight">\(M = (Q, \Sigma, \delta, q_0, F)\)</span> which recognises it.</p>
+<p class="sd-card-text">Let the NFA <span class="math notranslate nohighlight">\(M' = (Q', \Sigma, \delta, q_0', F')\)</span> be defined as follows.
+Let <span class="math notranslate nohighlight">\(q_0'\)</span> be a new initial state, the state space be <span class="math notranslate nohighlight">\(Q' = Q \cup \{q_0'\}\)</span>, the set of final states be <span class="math notranslate nohighlight">\(F' = F \cup \{q_0\}\)</span>, and the transition function be</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \delta(q, a) = \begin{cases}
+q_0 &amp; q = q_0', a = \epsilon \\
+\delta(q, a) &amp; q \in Q, a \neq \epsilon \\
+q_0 &amp; q \in F, a = \epsilon
+\end{cases}\end{split}\]</div>
+<p class="sd-card-text">This NFA accepts exactly those strings in <span class="math notranslate nohighlight">\(A^*\)</span> and, since every <span class="xref std std-ref">NFA has an equivalent DFA</span>, there exists a DFA which recognises <span class="math notranslate nohighlight">\(A^*\)</span>, so it is regular.</p>
+</div>
+</details></section>
+<section id="regular-languages-equiv-regular-expressions">
+<h2>Regular languages <span class="math notranslate nohighlight">\(\equiv\)</span> Regular expressions<a class="headerlink" href="#regular-languages-equiv-regular-expressions" title="Permalink to this heading">#</a></h2>
+<p>It turns out that NFAs are equivalent to regular expressions, in the sense that all regular expressions are regular languages and all regular languages can be written as regular expressions.
+We break this result up in the two aforementioned parts.
+The first part shows that the language written as a regular expression is regular.</p>
+<div class="proof lemma admonition" id="lemma-16">
+<p class="admonition-title"><span class="caption-number">Lemma 1 </span> (Regular expressions yield regular languages)</p>
+<section class="lemma-content" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(R\)</span> is a regular expression and <span class="math notranslate nohighlight">\(A = L(R)\)</span>, then <span class="math notranslate nohighlight">\(A\)</span> is a regular language</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof (Regular expressions yield regular languages)<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(R\)</span> is a regular expression.
+Then <span class="math notranslate nohighlight">\(R\)</span> can be written as a finite composition of other regular expressions, following the <span class="xref std std-ref">definition of regular expressions</span>.
+The languages represented by the atomic symbols <span class="math notranslate nohighlight">\(a \in \Sigma\)</span>, <span class="math notranslate nohighlight">\(\epsilon\)</span> and <span class="math notranslate nohighlight">\(\emptyset\)</span> can be recognised by the following NFAs:</p>
+<p class="sd-card-text"><strong>Language <span class="math notranslate nohighlight">\(\{a\}\)</span>:</strong>
+The language <span class="math notranslate nohighlight">\(\{a\}\)</span> can be recognised by an NFA with a single initial state, a different final state and a single <span class="math notranslate nohighlight">\(a\)</span> transition from the initial to the final state, so it is regular.</p>
+<p class="sd-card-text"><strong>Language <span class="math notranslate nohighlight">\(\{\epsilon\}\)</span>:</strong>
+The language <span class="math notranslate nohighlight">\(\{\epsilon\}\)</span> can be recognised by an NFA with a single state, which is both the initial and the final state, so it is regular.</p>
+<p class="sd-card-text"><strong>Language <span class="math notranslate nohighlight">\(\emptyset\)</span>:</strong>
+The language <span class="math notranslate nohighlight">\(\emptyset\)</span> can be recognised by an NFA with a single state, which is an initial state, and no final states, so it is regular.</p>
+<p class="sd-card-text"><strong>Regular expressions on languages:</strong>
+Then, since the class of regular languages is closed under the union, concatenation and star operations, applying these operations to the atomic languages above yields regular languages.
+Applying these rules recursively shows that the language represented by any regular expression is a regular language, showing the result.</p>
+</div>
+</details><p>The second part shows that if a language is regular, it can be written as a regular expression.
+Before showing this result we introduce the notion of generalised finite automata, which will make use of in the proof.</p>
+<div class="proof definition admonition" id="definition-17">
+<p class="admonition-title"><span class="caption-number">Definition 8 </span> (Generalised nondeterministic finite automaton)</p>
+<section class="definition-content" id="proof-content">
+<p>A generalised nondeterministic finite automaton (GNFA) is a <span class="math notranslate nohighlight">\(5\)</span>-tuple <span class="math notranslate nohighlight">\((Q, \Sigma, \delta, q_s, q_a)\)</span>, where</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Q\)</span> is a finite set of states,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Sigma\)</span> is a finite set of symbols,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\delta : (Q - \{q_a\}) \times (Q - \{q_s\}) \to \mathcal{R}\)</span> is the transition function, where <span class="math notranslate nohighlight">\(\mathcal{R}\)</span> is the set of regular expressions over <span class="math notranslate nohighlight">\(\Sigma\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(q_s \in Q\)</span> is the initial state,</p></li>
+<li><p><span class="math notranslate nohighlight">\(q_a \in Q\)</span> is the accept state.</p></li>
+</ul>
+<p>We say that the GNFA accepts a string <span class="math notranslate nohighlight">\(w \in \Sigma^*\)</span> if <span class="math notranslate nohighlight">\(w = w_1 \dots w_k\)</span> and there exists a sequence of states <span class="math notranslate nohighlight">\(q_0, q_1, \dots, q_k\)</span> exists, such that: <span class="math notranslate nohighlight">\(q_0 = q_s\)</span> is the start state, <span class="math notranslate nohighlight">\(q_k = q_a\)</span> is the accept state, and for each <span class="math notranslate nohighlight">\(i\)</span> we have <span class="math notranslate nohighlight">\(i \in L(R_i)\)</span>, where <span class="math notranslate nohighlight">\(R_i = \delta(q_{i-1}, q_i)\)</span>.</p>
+</section>
+</div><p>In order to show that a regular language can be written as a regular expression, the main idea is to start from a GNFA that is equivalent to a DFA that recognises the language, and incrementally remove states from this GNFA, while introducing transitions, appropriately annotated by regular expressions, to make up for the removed states.
+This procedure is repeated until a single transition between two states is left in the GNFA.
+The regular expression of this transition has the same language as the DFA we started with.</p>
+<div class="proof lemma admonition" id="lemma-18">
+<p class="admonition-title"><span class="caption-number">Lemma 2 </span> (Regular languages can be written as regular expressions)</p>
+<section class="lemma-content" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(A\)</span> is a regular language, then there exists a regular expression <span class="math notranslate nohighlight">\(R\)</span> such that <span class="math notranslate nohighlight">\(A = L(R)\)</span>.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof (Regular languages can be written as regular expressions)<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(A\)</span> is a regular language, so there exists a DFA, <span class="math notranslate nohighlight">\(M\)</span>, that recognises it.
+We will describe a way to convert this DFA into an equivalent regular expression, as follows.
+We will first convert the DFA into a GNFA.
+Then we will repeatedly apply a procedure which yields an equivalent GNFA with one fewer state, until we obtain a GNFA with just two states: an accept state and a reject state, with a single arrow pointing from one to the other, labelled by a regular expression <span class="math notranslate nohighlight">\(R\)</span> such that <span class="math notranslate nohighlight">\(A = L(R)\)</span>.</p>
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(M\)</span> has <span class="math notranslate nohighlight">\(k\)</span> states.
+Then let <span class="math notranslate nohighlight">\(G_k\)</span> be a GNFA with <span class="math notranslate nohighlight">\(k + 2\)</span> states, where we have modified <span class="math notranslate nohighlight">\(M\)</span> to have: a single initial state which points to the initial state of <span class="math notranslate nohighlight">\(M\)</span> with an <span class="math notranslate nohighlight">\(\epsilon\)</span> transition; a single accept state to which all accept states of <span class="math notranslate nohighlight">\(M\)</span> point with <span class="math notranslate nohighlight">\(\epsilon\)</span> transitions; additional <span class="math notranslate nohighlight">\(\emptyset\)</span> transitions from every state to every other state which do not already have a labelled transition between them.
+Let us define a procedure <span class="math notranslate nohighlight">\(\texttt{Convert}\)</span> on a GNFA <span class="math notranslate nohighlight">\(G\)</span> as follows.</p>
+<div class="proof algorithm admonition" id="algorithm-19">
+<p class="admonition-title"><span class="caption-number">Algorithm 1 </span> (<span class="math notranslate nohighlight">\(\texttt{Convert}\)</span>)</p>
+<section class="algorithm-content" id="proof-content">
+<p class="sd-card-text"><strong>Input:</strong>
+GNFA <span class="math notranslate nohighlight">\(G\)</span> with <span class="math notranslate nohighlight">\(m\)</span> states.</p>
+<p class="sd-card-text"><strong>Output:</strong>
+If <span class="math notranslate nohighlight">\(m &gt; 2\)</span>, returns GNFA <span class="math notranslate nohighlight">\(G'\)</span> with <span class="math notranslate nohighlight">\(m-1\)</span> states.
+Otherwise if <span class="math notranslate nohighlight">\(m = 2\)</span>, returns a regular expression <span class="math notranslate nohighlight">\(R\)</span> that is equivalent to <span class="math notranslate nohighlight">\(G\)</span>.</p>
+<ol class="arabic simple">
+<li><p class="sd-card-text">If <span class="math notranslate nohighlight">\(m = 2\)</span>, then <span class="math notranslate nohighlight">\(G\)</span> consists of a single initial state and a single accept state, with a single arrow connecting them, labelled by <span class="math notranslate nohighlight">\(R\)</span>.
+Return <span class="math notranslate nohighlight">\(R\)</span>.</p></li>
+<li><p class="sd-card-text">If <span class="math notranslate nohighlight">\(m &gt; 2\)</span>, then select <span class="math notranslate nohighlight">\(q' \in Q - \{q_a, q_s\}\)</span> and let <span class="math notranslate nohighlight">\(G' = (Q', \Sigma, \delta', q_s, q_a)\)</span>, where <span class="math notranslate nohighlight">\(Q' = Q - \{q'\}\)</span>.
+Also define <span class="math notranslate nohighlight">\(\delta'(q_i, q_j) = R_1R_2^* R_3 \cup R_4,\)</span> where <span class="math notranslate nohighlight">\(R_1 = \delta(q_i, q'), R_2 = \delta(q', q'), R_3 = \delta(q', q_j)\)</span> and <span class="math notranslate nohighlight">\(R_4 = \delta(q_i, q_j)\)</span>, for each <span class="math notranslate nohighlight">\(q_i \in Q' - \{q_a\}\)</span> and <span class="math notranslate nohighlight">\(q_j \in Q' - \{q_s\}\)</span>.</p></li>
+<li><p class="sd-card-text">Compute and return <span class="math notranslate nohighlight">\(\texttt{Convert}(G')\)</span>.</p></li>
+</ol>
+</section>
+</div><p class="sd-card-text">Applying <span class="math notranslate nohighlight">\(\texttt{Convert}\)</span> to the GNFA <span class="math notranslate nohighlight">\(G_{k+2}\)</span> is guaranteed to terminate, since the output at every step of the recursion has one fewer state.
+In addition, at each step of the algorithm, each GNFA recognises the same language as the previous GNFA, so they all recognise the same language, by induction.
+Therefore <span class="math notranslate nohighlight">\(A = L(M) = L(G) = L(\texttt{Convert}(G)) = L(R)\)</span> as required.</p>
+</div>
+</details><p>Putting the above lemmas, we obtain the result that regular languages are equivalent to regular expressions.</p>
+<div class="proof corollary admonition" id="corollary-20">
+<p class="admonition-title"><span class="caption-number">Corollary 1 </span> (Regular laguages <span class="math notranslate nohighlight">\(\equiv\)</span> regular expressions)</p>
+<section class="corollary-content" id="proof-content">
+<p>A language is regular if and only if it can be written as a regular expression.</p>
+</section>
+</div></section>
+<section id="regular-pumping-lemma">
+<h2>Regular pumping lemma<a class="headerlink" href="#regular-pumping-lemma" title="Permalink to this heading">#</a></h2>
+<p>So far we have a few results that help show that a language is regular.
+Now, we turn to a criterion that helps us show that a language is not regular, namely the regular pumping lemma.
+This result effectively shows that the expressive power of DFAs and NFAs is limited, and that if such a machine recognises an infinite language, then the strings of the language have to have repetitions of a particular kind.</p>
+<div class="proof lemma admonition" id="toc-dfa-pumping-lemma">
+<p class="admonition-title"><span class="caption-number">Lemma 3 </span> (Regular Pumping Lemma)</p>
+<section class="lemma-content" id="proof-content">
+<p>For any DFA <span class="math notranslate nohighlight">\(M\)</span>, there exists a positive integer <span class="math notranslate nohighlight">\(p\)</span> such that for any string <span class="math notranslate nohighlight">\(s \in L(M)\)</span>, the following properties hold</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(|y| \geq 1\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(s = xyz\)</span>, where <span class="math notranslate nohighlight">\(|xy| \leq p\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(s = xy^nz \in L(M)\)</span> for all <span class="math notranslate nohighlight">\(n \geq 1\)</span>.</p></li>
+</ol>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof (Regular Pumping Lemma)<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(M\)</span> is a DFA with <span class="math notranslate nohighlight">\(k\)</span> states.
+Let <span class="math notranslate nohighlight">\(p = k\)</span>.
+If <span class="math notranslate nohighlight">\(M\)</span> does not recognise any strings of length greater than or equal to <span class="math notranslate nohighlight">\(p\)</span>, the conditions of the lemma are satisfied vacuously.
+Suppose <span class="math notranslate nohighlight">\(M\)</span> recognses a string <span class="math notranslate nohighlight">\(s\)</span> of length greater than or equal to <span class="math notranslate nohighlight">\(p\)</span>.
+Then, when <span class="math notranslate nohighlight">\(M\)</span> takes <span class="math notranslate nohighlight">\(s\)</span> as input, it will enter a sequence <span class="math notranslate nohighlight">\(q_0q_1 \dots q_{|s|}\)</span>.
+By the pigeonhole principle, at least one of these states is repeated, say</p>
+<div class="math notranslate nohighlight">
+\[q_0q_1 \dots q_{|s|} = q_0q_1 \dots q_i \dots \underbrace{q_j}_{=~q_i} \dots q_{|s|}, \]</div>
+<p class="sd-card-text">for some <span class="math notranslate nohighlight">\(i, j\)</span>.
+Let <span class="math notranslate nohighlight">\(i\)</span> be the smallest index such that <span class="math notranslate nohighlight">\(q_{j'} = q_i\)</span> for some <span class="math notranslate nohighlight">\(j'\)</span>, and let <span class="math notranslate nohighlight">\(j &gt; i\)</span> be the smallest possible index such that <span class="math notranslate nohighlight">\(q_j = q_i\)</span>.
+Let <span class="math notranslate nohighlight">\(x, y\)</span> and <span class="math notranslate nohighlight">\(z\)</span> be the substrings corresponding to the transitions <span class="math notranslate nohighlight">\(q_0 \dots q_i\)</span>, <span class="math notranslate nohighlight">\(q_i \dots q_j\)</span> and <span class="math notranslate nohighlight">\(q_j \dots q_{|s|}\)</span>.
+Then, the strings <span class="math notranslate nohighlight">\(xy^nz\)</span> are in <span class="math notranslate nohighlight">\(M\)</span> for every <span class="math notranslate nohighlight">\(n \geq 1\)</span>, since the sequences of states</p>
+<div class="math notranslate nohighlight">
+\[q_0q_1 \dots (q_i \dots q_j)^n \dots q_{|s|}, \]</div>
+<p class="sd-card-text">can all be reached by the DFA.
+Because <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> are defined to be the indices correspondng to the earliest possible repetition it follows, again by the pigeonhole principle, that <span class="math notranslate nohighlight">\(|xy| \leq k = p\)</span>.
+Because <span class="math notranslate nohighlight">\(j &gt; i\)</span> it follows that <span class="math notranslate nohighlight">\(|y| \geq 1\)</span>.
+Put together, these properties prove the lemma.</p>
+</div>
+</details><p>We can use the regular pumping lemma to show that certain languages are not regular, such as the example considered earlier.</p>
+<div class="proof example admonition" id="example-22">
+<p class="admonition-title"><span class="caption-number">Example 5 </span></p>
+<section class="example-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(A\)</span> be the set of strings over <span class="math notranslate nohighlight">\(\{0, 1\}\)</span> which contain an equal number of zeros and ones.
+This language is not regular.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(A\)</span> be defined as above.
+If <span class="math notranslate nohighlight">\(A\)</span> is regular, it has a pumping length <span class="math notranslate nohighlight">\(p\)</span>
+Consider the string <span class="math notranslate nohighlight">\(s = 0^p 1^p \in A\)</span>.
+By the regular pumping lemma, <span class="math notranslate nohighlight">\(s = xyz\)</span> where <span class="math notranslate nohighlight">\(|xy| \leq p\)</span>.
+Therefore <span class="math notranslate nohighlight">\(y\)</span> is made up entirely of zeros.
+Also by the pumping lemma, <span class="math notranslate nohighlight">\(s_n = xy^nz \in A\)</span> for all <span class="math notranslate nohighlight">\(n \geq 1\)</span>.
+But <span class="math notranslate nohighlight">\(s_n\)</span> does not have an equal number of zeros and ones so it cannot be in <span class="math notranslate nohighlight">\(A,\)</span> reaching a contradiction.
+Therefore <span class="math notranslate nohighlight">\(A\)</span> cannot be regular.</p>
+</div>
+</details></section>
+</div></section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book/toc"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="000-intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Theory of Computation</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="002-cfl.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">PDAs and context-free grammars</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finite-state-automata">Finite State Automata</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regular-operations">Regular operations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#closure-properties-union">Closure properties: union</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nondeterminism">Nondeterminism</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#closure-properties">Closure properties</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regular-languages-equiv-regular-expressions">Regular languages <span class="math notranslate nohighlight">\(\equiv\)</span> Regular expressions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regular-pumping-lemma">Regular pumping lemma</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Stratis Markou
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

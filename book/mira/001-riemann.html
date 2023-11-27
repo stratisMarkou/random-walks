@@ -1,0 +1,843 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Riemann integration &#8212; Random Walks</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/mira/001-riemann';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Exercises" href="000-exercises.html" />
+    <link rel="prev" title="Masure, integration and real analysis" href="000-intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Random Walks</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Home
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Notes on books</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../toc/000-intro.html">Theory of Computation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../toc/001-fsa.html">FSAs and Regular Expressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../toc/002-cfl.html">PDAs and Context Free Grammars</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../toc/000-exercises.html">Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../prob-intro/intro.html">Probability: An introduction</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch01/content.html">Events and Probabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch02/content.html">Discrete random variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch03/content.html">Multivariate discrete distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch04/content.html">Probability generating functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch05/content.html">Distribution and density functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch06/content.html">Multivariate distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch07/content.html">Moment generating functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch08/content.html">Main limit theorems</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="000-intro.html">Measure Theory</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Riemann integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="000-exercises.html">Exercises</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Papers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../papers/intro.html">Stream of papers</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../papers/ais/ais.html">Annealed Importance Sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../papers/rff/rff.html">Random Fourier features</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/stratisMarkou/random-walks" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/stratisMarkou/random-walks/issues/new?title=Issue%20on%20page%20%2Fbook/mira/001-riemann.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/book/mira/001-riemann.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Riemann integration</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#riemann-integral">Riemann integral</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deficiencies-of-the-riemann-integral">Deficiencies of the Riemann integral</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="riemann-integration">
+<h1>Riemann integration<a class="headerlink" href="#riemann-integration" title="Permalink to this heading">#</a></h1>
+<p>The first part of the book introduces the Riemann integral.
+The Riemann integral is good enough for many use cases, but it also has important limitations.
+We first review the definition of the Riemann integral and its properties.
+Then we discuss the limitations of th Riemann integral and show important ways in which it falls short.
+This will lead to the idea of the outer measure as a more appropriate definition of length, however we will see that this too fails to capture important properties that we would like it to have.
+This leads on to the Lebesgue measure, the Lebesgue integral and more generally Lebesgue integration.</p>
+<section id="riemann-integral">
+<h2>Riemann integral<a class="headerlink" href="#riemann-integral" title="Permalink to this heading">#</a></h2>
+<p>We begin with a few definitions needed to write down the definition of the Riemann integral.
+Given a function <span class="math notranslate nohighlight">\(f: [a, b] \to \mathbb{R},\)</span> we will define its Riemann integral as the limit of an approximation of the area under the curve of <span class="math notranslate nohighlight">\(f\)</span> by rectangles which partition <span class="math notranslate nohighlight">\([a, b].\)</span>
+A partition of <span class="math notranslate nohighlight">\([a, b]\)</span> is defined as follows.</p>
+<div class="proof definition admonition" id="definition-0">
+<p class="admonition-title"><span class="caption-number">Definition 50 </span> (Partition)</p>
+<section class="definition-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\(a, b \in \mathbb{R}\)</span> with <span class="math notranslate nohighlight">\(a &lt; b\)</span>.
+A partition of <span class="math notranslate nohighlight">\([a, b]\)</span> is a list of the form <span class="math notranslate nohighlight">\(x_0, x_1, \ldots, x_n\)</span> where</p>
+<div class="math notranslate nohighlight">
+\[a = x_0 &lt; x_1 &lt; \ldots &lt; x_n = b.\]</div>
+</section>
+</div><p>We also need some notation for the infimum and supremum of a function in order to form our approximation.</p>
+<div class="proof definition admonition" id="definition-1">
+<p class="admonition-title"><span class="caption-number">Definition 51 </span> (Infimum and supremum)</p>
+<section class="definition-content" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(f\)</span> is a real valued function and <span class="math notranslate nohighlight">\(A\)</span> is a subset of its domain, then</p>
+<div class="math notranslate nohighlight">
+\[\inf_{x \in A} f(x) = \inf \{ f(x) : x \in A \}, \sup_{x \in A} f(x) = \sup \{ f(x) : x \in A \}.\]</div>
+</section>
+</div><p>With these definitions in place we can define upper and lower Riemann sums.
+A lower (upper) Riemann sum is an approximation of the area under the curve of <span class="math notranslate nohighlight">\(f\)</span> by rectangles below (above) the curve.</p>
+<div class="proof definition admonition" id="definition-2">
+<p class="admonition-title"><span class="caption-number">Definition 52 </span> (Upper and lower Riemann sums)</p>
+<section class="definition-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\(f: [a, b] \to \mathbb{R}\)</span> is a bounded function and <span class="math notranslate nohighlight">\(P\)</span> is a partition <span class="math notranslate nohighlight">\(x_0, x_1, \ldots, x_n\)</span> of <span class="math notranslate nohighlight">\([a, b]\)</span>.
+Then the lower Riemann sum <span class="math notranslate nohighlight">\(L(f, P, [a, b])\)</span> and the upper Riemann sum <span class="math notranslate nohighlight">\(U(f, P, [a, b])\)</span> are defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+L(f, P, [a, b]) &amp;= \sum_{i=1}^n (x_i - x_{i-1}) \inf_{x \in [x_{i-1}, x_i]} f, \\
+U(f, P, [a, b]) &amp;= \sum_{i=1}^n (x_i - x_{i-1}) \sup_{x \in [x_{i-1}, x_i]} f.
+\end{align}\end{split}\]</div>
+</section>
+</div><p>A very useful intermediate result is that refining a partition of <span class="math notranslate nohighlight">\([a, b],\)</span> i.e. adding more points to the partition, can only increase the lower Riemann sum and reduce the upper Riemann sum.</p>
+<div class="proof theorem admonition" id="mira-thm-refining-partitions">
+<p class="admonition-title"><span class="caption-number">Theorem 54 </span> (Inequalities with Riemann sums)</p>
+<section class="theorem-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\(f: [a, b] \to \mathbb{R}\)</span> is a bounded function and <span class="math notranslate nohighlight">\(P, P'\)</span> are partitions of <span class="math notranslate nohighlight">\([a, b],\)</span> such that all the points in <span class="math notranslate nohighlight">\(P\)</span> are also contained in <span class="math notranslate nohighlight">\(P'.\)</span>
+Then</p>
+<div class="math notranslate nohighlight">
+\[L(f, P, [a, b]) \leq L(f, P', [a, b]) \leq U(f, P', [a, b]) \leq U(f, P, [a, b]).\]</div>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof (Inequalities with Riemann sums)<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(f: [a, b] \to \mathbb{R}\)</span> is a bounded function and <span class="math notranslate nohighlight">\(P\)</span> is the partition <span class="math notranslate nohighlight">\(x_0, \dots, x_n\)</span> of <span class="math notranslate nohighlight">\([a, b]\)</span> and <span class="math notranslate nohighlight">\(P'\)</span> is the partition <span class="math notranslate nohighlight">\(x_0', \dots, x_N'\)</span> of <span class="math notranslate nohighlight">\([a, b].\)</span>
+Suppose that all the points in <span class="math notranslate nohighlight">\(P\)</span> are also contained in <span class="math notranslate nohighlight">\(P'.\)</span>
+Then for any <span class="math notranslate nohighlight">\(j = 1, \ldots, n,\)</span> there exists a <span class="math notranslate nohighlight">\(k \in \{0, \ldots, N - 1\}\)</span> and a positive integer <span class="math notranslate nohighlight">\(m\)</span> such that <span class="math notranslate nohighlight">\(x_{j-1} = x_k'\)</span> and <span class="math notranslate nohighlight">\(x_{j+1} = x_{k+m}'.\)</span>
+Then, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+(x_j - x_{j-1}) \inf_{x \in [x_{j-1}, x_j]} f &amp;= \sum_{i=1}^m (x_{k+i} - x_{k+i-1}) \inf_{x \in [x_{j-1}, x_j]} f \\
+&amp;\leq \sum_{i=1}^m (x_{k+i} - x_{k+i-1}) \inf_{x \in [x_{k+i-1}, x_{k+i}]} f,
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">which implies that <span class="math notranslate nohighlight">\(L(f, P, [a, b]) \leq L(f, P', [a, b]).\)</span>
+A similar argument shows that <span class="math notranslate nohighlight">\(U(f, P', [a, b]) \leq U(f, P, [a, b]).\)</span>
+The middle inequality follows from the fact that the infimum of a set is less than or equal to its supremum.
+Putting these inequalities together gives the result</p>
+<div class="math notranslate nohighlight">
+\[L(f, P, [a, b]) \leq L(f, P', [a, b]) \leq U(f, P', [a, b]) \leq U(f, P, [a, b]).\]</div>
+</div>
+</details><p>Another useful inequality which is derived directly from the previous one, is that any lower Riemann sum of a function is less than or equal to any of its upper Riemann sums.</p>
+<div class="proof theorem admonition" id="theorem-4">
+<p class="admonition-title"><span class="caption-number">Theorem 55 </span> (Lower Riemann sum <span class="math notranslate nohighlight">\(\leq\)</span> upper Riemann sum)</p>
+<section class="theorem-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\(f: [a, b] \to \mathbb{R}\)</span> is a bounded function and <span class="math notranslate nohighlight">\(P, P'\)</span> are partitions of <span class="math notranslate nohighlight">\([a, b].\)</span>
+Then</p>
+<div class="math notranslate nohighlight">
+\[L(f, P, [a, b]) \leq U(f, P', [a, b]).\]</div>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof (Lower Riemann sum <span class="math notranslate nohighlight">\(\leq\)</span> upper Riemann sum)<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(f: [a, b] \to \mathbb{R}\)</span> is a bounded function and <span class="math notranslate nohighlight">\(P, P'\)</span> are partitions of <span class="math notranslate nohighlight">\([a, b].\)</span>
+Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+L(f, P, [a, b]) &amp;\leq L(f, P \cup P', [a, b]) \\
+&amp;\leq U(f, P \cup P', [a, b]) \\
+&amp;\leq U(f, P', [a, b]),
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">where the first inequality follows from the <span class="xref std std-ref">refinement property of partitions</span>, the second inequality follows from the fact that the infimum of a set is less than or equal to its supremum, and the third inequality follows again from the refinement property.</p>
+</div>
+</details><p>With these definitions and results in place, we are ready to define lower and upper Riemann integrals.
+The lower and upper Riemann integral can be thought of as a bound to the best approximation to the area under the curve of <span class="math notranslate nohighlight">\(f\)</span> by rectangles below and above the curve, respectively.</p>
+<div class="proof definition admonition" id="definition-5">
+<p class="admonition-title"><span class="caption-number">Definition 53 </span> (Riemann integral)</p>
+<section class="definition-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\(f: [a, b] \to \mathbb{R}\)</span> is a bounded function.
+Then the lower Riemann integral <span class="math notranslate nohighlight">\(L(f, [a, b])\)</span> and the upper Riemann integral <span class="math notranslate nohighlight">\(U(f, [a, b])\)</span> of <span class="math notranslate nohighlight">\(f\)</span> are defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+L(f, [a, b]) &amp;= \sup_P L(f, P, [a, b]), \\
+U(f, [a, b]) &amp;= \inf_P U(f, P, [a, b]),
+\end{align}\end{split}\]</div>
+<p>where the supremum and infimum are taken over all partitions <span class="math notranslate nohighlight">\(P\)</span> of <span class="math notranslate nohighlight">\([a, b].\)</span></p>
+</section>
+</div><p>From the definition of the lower and upper Riemann integral, and our previous results, it follows that the lower Riemann integral is less than or equal to the upper Riemann integral.</p>
+<div class="proof theorem admonition" id="theorem-6">
+<p class="admonition-title"><span class="caption-number">Theorem 56 </span> (Lower Riemann integral <span class="math notranslate nohighlight">\(\leq\)</span> upper Riemann integral)</p>
+<section class="theorem-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\(f: [a, b] \to \mathbb{R}\)</span> is a bounded function.
+Then</p>
+<div class="math notranslate nohighlight">
+\[L(f, [a, b]) \leq U(f, [a, b]).\]</div>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof (Lower Riemann integral <span class="math notranslate nohighlight">\(~\leq~\)</span> upper Riemann integral)<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(f: [a, b] \to \mathbb{R}\)</span> is a bounded function.
+Then, for any partition <span class="math notranslate nohighlight">\(P\)</span> of <span class="math notranslate nohighlight">\([a, b],\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[L(f, [a, b]) = \sup_P L(f, P, [a, b]) \leq U(f, P, [a, b])\]</div>
+<p class="sd-card-text">and taking the infimum over all partitions <span class="math notranslate nohighlight">\(P\)</span> of <span class="math notranslate nohighlight">\([a, b]\)</span> gives</p>
+<div class="math notranslate nohighlight">
+\[L(f, [a, b]) \leq \sup_P L(f, P, [a, b]) \leq \inf_P U(f, P, [a, b]) = U(f, [a, b]).\]</div>
+</div>
+</details><p>With these definitions and results in place, we are ready to define the Riemann integral.</p>
+<div class="proof definition admonition" id="definition-7">
+<p class="admonition-title"><span class="caption-number">Definition 54 </span> (Riemann integral)</p>
+<section class="definition-content" id="proof-content">
+<ul class="simple">
+<li><p>A bounded function on a closed bounded interval is called Riemann integrable if its lower and upper Riemann integrals are equal.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(f: [a, b] \to \mathbb{R}\)</span> is Rieman integrable, then its Riemann integral <span class="math notranslate nohighlight">\(\int_a^b f\)</span> is defined by</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\int_a^b f = L(f, [a, b]) = U(f, [a, b]).\]</div>
+</section>
+</div><p>We conclude this section with two useful results about the Riemann integral.</p>
+<div class="proof theorem admonition" id="theorem-8">
+<p class="admonition-title"><span class="caption-number">Theorem 57 </span> (Continuous functions are Riemann integrable)</p>
+<section class="theorem-content" id="proof-content">
+<p>Every continuous function on a closed bounded interval is Riemann integrable.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof (Continuous functions are Riemann integrable)<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(f: [a, b] \to \mathbb{R}\)</span> is a continuous function.
+It follows that <span class="math notranslate nohighlight">\(f\)</span> is bounded and uniformly continuous on <span class="math notranslate nohighlight">\([a, b].\)</span>
+Let <span class="math notranslate nohighlight">\(\epsilon &gt; 0.\)</span>
+Because <span class="math notranslate nohighlight">\(f\)</span> is uniformly continuous on <span class="math notranslate nohighlight">\([a, b],\)</span> there exists a <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[|f(s) - f(t)| &lt; \epsilon \text{ for all } s, t \in [a, b] \text{ with } |s - t| &lt; \delta.\]</div>
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(n \in \mathbb{N}\)</span> be such that <span class="math notranslate nohighlight">\(\frac{b - a}{n} &lt; \delta.\)</span>
+Let <span class="math notranslate nohighlight">\(P\)</span> be the equally spaced partition <span class="math notranslate nohighlight">\(a = x_0 &lt; x_1 &lt; \ldots &lt; x_n = b\)</span> of <span class="math notranslate nohighlight">\([a, b]\)</span> with</p>
+<div class="math notranslate nohighlight">
+\[x_j - x_{j-1} = \frac{b - a}{n}\]</div>
+<p class="sd-card-text">for <span class="math notranslate nohighlight">\(j = 1, \ldots, n.\)</span>
+Then, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+U(f, [a, b]) - L(f, [a, b]) &amp;\leq U(f, P, [a, b]) - L(f, P, [a, b]) \\
+&amp;= \frac{b - a}{n} \sum_{j=1}^n \left( \sup_{x \in [x_{j-1}, x_j]} f - \inf_{x \in [x_{j-1}, x_j]} f \right) \\
+&amp;= (b - a) \epsilon,
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">where the first inequality follows from the definition of the upper and lower Riemann integral, the second equality follows from our definition of the uniform partition <span class="math notranslate nohighlight">\(P,\)</span> and the last equality follows from the uniform continuity of <span class="math notranslate nohighlight">\(f.\)</span>
+Since this holds for any <span class="math notranslate nohighlight">\(\epsilon &gt; 0,\)</span> we have <span class="math notranslate nohighlight">\(U(f, [a, b]) = L(f, [a, b])\)</span> and so <span class="math notranslate nohighlight">\(f\)</span> is Riemann integrable.</p>
+</div>
+</details><p>The last result in this section concerns a frequently used estimate for the Riemann integral of a function.</p>
+<div class="proof theorem admonition" id="theorem-9">
+<p class="admonition-title"><span class="caption-number">Theorem 58 </span> (Bounds on the Riemann integral)</p>
+<section class="theorem-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\(f: [a, b] \to \mathbb{R}\)</span> is Riemann integrable.
+Then</p>
+<div class="math notranslate nohighlight">
+\[(b - a) \inf_{x \in [a, b]} f \leq \int_a^b f \leq (b - a) \sup_{x \in [a, b]} f.\]</div>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof (Bounds on the Riemann integral)<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(f: [a, b] \to \mathbb{R}\)</span> is Riemann integrable.
+Let <span class="math notranslate nohighlight">\(P\)</span> be the partition <span class="math notranslate nohighlight">\(a = x_0 \leq x_1 = b\)</span> of <span class="math notranslate nohighlight">\([a, b].\)</span>
+Then, we have</p>
+<div class="math notranslate nohighlight">
+\[(b - a) \inf_{x \in [a, b]} f = L(f, P, [a, b]) \leq \int_a^b f.\]</div>
+<p class="sd-card-text">Similarly, we have</p>
+<div class="math notranslate nohighlight">
+\[\int_a^b f \leq U(f, P, [a, b]) = (b - a) \sup_{x \in [a, b]} f.\]</div>
+</div>
+</details></section>
+<section id="deficiencies-of-the-riemann-integral">
+<h2>Deficiencies of the Riemann integral<a class="headerlink" href="#deficiencies-of-the-riemann-integral" title="Permalink to this heading">#</a></h2>
+<p>While the Riemann integral is sufficient for a range of use cases, it has a number of deficiencies.
+These include the following three issues:</p>
+<ul class="simple">
+<li><p>Riemann integration does not handle functions with many discontinuities.
+While functions with a finite number of discontinuities are Riemann integrable, functions with an infinite number of discontinuities need not be.</p></li>
+<li><p>Riemann integration does not handle bounded functions.
+While the Riemann integral can be extended to handle some unbounded functions by taking limits of the integral endpoints, this does not work well for certain functions.</p></li>
+<li><p>Riemann integration does not work well with limits.
+In particular, the limit of a sequence of Riemann integrable functions need not be Riemann integrable, and even if it is, the integral of the limit need not be the limit of the integrals.</p></li>
+</ul>
+<p>The next four examples illustrate these issues.
+The first is an example of a bounded function which is not Riemann integrable.</p>
+<div class="proof example admonition" id="mira-eg-not-riemann-integrable">
+<p class="admonition-title"><span class="caption-number">Example 9 </span> (A function that is not Riemann integrable)</p>
+<section class="example-content" id="proof-content">
+<p>The function <span class="math notranslate nohighlight">\(f: [0, 1] \to \mathbb{R}\)</span> defined by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}f(x) = \begin{cases} 1 &amp; \text{if } x \in \mathbb{Q}, \\ 0 &amp; \text{if } x \in \mathbb{R} \setminus \mathbb{Q}, \end{cases}\end{split}\]</div>
+<p>is not Riemann integrable.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof (A function that is not Riemann integrable)<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(P\)</span> is a partition <span class="math notranslate nohighlight">\(x_0, \ldots, x_n\)</span> of <span class="math notranslate nohighlight">\([0, 1].\)</span>
+Then, we have</p>
+<div class="math notranslate nohighlight">
+\[U(f, P, [0, 1]) = \sum_{i=1}^n (x_i - x_{i-1}) \sup_{x \in [x_{i-1}, x_i]} f = \sum_{i=1}^n (x_i - x_{i-1}) = 1.\]</div>
+<p class="sd-card-text">On the other hand, we have</p>
+<div class="math notranslate nohighlight">
+\[L(f, P, [0, 1]) = \sum_{i=1}^n (x_i - x_{i-1}) \inf_{x \in [x_{i-1}, x_i]} f = \sum_{i=1}^n 0 = 0.\]</div>
+<p class="sd-card-text">Since this holds for any partition <span class="math notranslate nohighlight">\(P\)</span> of <span class="math notranslate nohighlight">\([0, 1],\)</span> we have <span class="math notranslate nohighlight">\(U(f, [0, 1]) = 1\)</span> and <span class="math notranslate nohighlight">\(L(f, [0, 1]) = 0.\)</span>
+Therefore, <span class="math notranslate nohighlight">\(f\)</span> is not Riemann integrable.</p>
+</div>
+</details></section>
+</div><p>As we saw, the function <span class="math notranslate nohighlight">\(f\)</span> in the previous example is bounded, but not Riemann integrable.
+Further, the Riemann integral does not work for functions which are unbounded, as shown by the next example.</p>
+<div class="proof example admonition" id="example-11">
+<p class="admonition-title"><span class="caption-number">Example 10 </span> (Riemann integration does not work with unbounded functions)</p>
+<section class="example-content" id="proof-content">
+<p>The function <span class="math notranslate nohighlight">\(f: [0, 1] \to \mathbb{R}\)</span> defined by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}f(x) = \begin{cases} \frac{1}{\sqrt{x}} &amp; \text{if } x \in (0, 1], \\ 0 &amp; \text{if } x = 0, \end{cases}\end{split}\]</div>
+<p>would give <span class="math notranslate nohighlight">\(U(f, [0, 1]) = \infty\)</span> for every partition <span class="math notranslate nohighlight">\(P\)</span> of <span class="math notranslate nohighlight">\([0, 1].\)</span>
+A standard way to handle unbounded functions with the Riemann integral is to take limits of the integral endpoints.
+For example, for this particular function, we could define</p>
+<div class="math notranslate nohighlight">
+\[\int_0^1 f \stackrel{\text{def}}{=} \lim_{a \downarrow 0} \int_a^1 f,\]</div>
+<p>where the limit <span class="math notranslate nohighlight">\(a \downarrow 0\)</span> means that <span class="math notranslate nohighlight">\(a\)</span> approaches <span class="math notranslate nohighlight">\(0\)</span> from above.
+Then, we would have</p>
+<div class="math notranslate nohighlight">
+\[\int_0^1 f = \lim_{a \downarrow 0} \int_a^1 f = \lim_{a \downarrow 0} \left( 2 - 2\sqrt{a}\right) = 2.\]</div>
+</section>
+</div><p>However, as the next example shows, the above approach does not always work.</p>
+<div class="proof example admonition" id="example-12">
+<p class="admonition-title"><span class="caption-number">Example 11 </span> (Riemann integration does not work with limits)</p>
+<section class="example-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(r_1, r_2, \ldots\)</span> be a sequence which includes all the rational numbers in <span class="math notranslate nohighlight">\((0, 1)\)</span> exactly once and that includes no other numbers.
+Define the functions <span class="math notranslate nohighlight">\(f_n: [0, 1] \to \mathbb{R}\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}f_n(x) = \begin{cases} \frac{1}{\sqrt{x - r_n}} &amp; \text{if } x \in \left(r_k, 1\right], \\ 0 &amp; \text{if } x \in [0, r_n], \end{cases}\end{split}\]</div>
+<p>and let <span class="math notranslate nohighlight">\(f: [0, 1] \to \mathbb{R}\)</span> be the function defined by</p>
+<div class="math notranslate nohighlight">
+\[f(x) = \sum_{n=1}^\infty \frac{f_n(x)}{2^n}.\]</div>
+<p>While each of the functions above has area less than <span class="math notranslate nohighlight">\(2,\)</span> looking at the expression that defines <span class="math notranslate nohighlight">\(f,\)</span> we would expect the area under the curve of <span class="math notranslate nohighlight">\(f\)</span> to be less than <span class="math notranslate nohighlight">\(2.\)</span>
+However, <span class="math notranslate nohighlight">\(f\)</span> is not Riemann integrable, and further, it is not handled by the approach we outlined in the previous example.
+That is because every nonempty open subinterval of <span class="math notranslate nohighlight">\([0, 1]\)</span> contains at least one rational number, so <span class="math notranslate nohighlight">\(f\)</span> is unbounded on every such subinterval.</p>
+</section>
+</div><p>Lastly, Riemann integration does not work well with pointwise limits of functions, as shown by the next example.</p>
+<div class="proof example admonition" id="example-13">
+<p class="admonition-title"><span class="caption-number">Example 12 </span> (Riemann integration does not work with pointwise limits)</p>
+<section class="example-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(r_1, r_2, \ldots\)</span> be a sequence which includes all the rational numbers in <span class="math notranslate nohighlight">\((0, 1)\)</span> exactly once and that includes no other numbers.
+Define the functions <span class="math notranslate nohighlight">\(f_n: [0, 1] \to \mathbb{R}\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}f_n(x) = \begin{cases} 1 &amp; \text{if } x \in \{r_1, \dots, r_n\}, \\ 0 &amp; \text{otherwise}, \end{cases}\end{split}\]</div>
+<p>and define <span class="math notranslate nohighlight">\(f: [0, 1] \to \mathbb{R}\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}f(x) = \begin{cases} 1 &amp; \text{if } x \in \mathbb{Q}, \\ 0 &amp; \text{otherwise}. \end{cases}\end{split}\]</div>
+<p>Each <span class="math notranslate nohighlight">\(f_n\)</span> is Riemann integrable and <span class="math notranslate nohighlight">\(f_n(x) \to f(x)\)</span> for all <span class="math notranslate nohighlight">\(x \in [0, 1],\)</span> but <span class="math notranslate nohighlight">\(f\)</span> is not Riemann integrable – this was shown in <a class="reference internal" href="#mira-eg-not-riemann-integrable">the first example</a> in this section.</p>
+</section>
+</div><p>In general, because analysis is concerned with results about limits, we would like to be able to exchange the order of limits and integrals.
+While, as shown above, we cannot do this with the Riemann integral in general, it is possible if the limit function exists and is Riemann integrable.</p>
+<div class="proof theorem admonition" id="theorem-14">
+<p class="admonition-title"><span class="caption-number">Theorem 59 </span> (Interchanging Riemann integral and limit)</p>
+<section class="theorem-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\(a, b, M \in \mathbb{R}\)</span> with <span class="math notranslate nohighlight">\(a &lt; b.\)</span>
+Suppose <span class="math notranslate nohighlight">\(f_1, f_2, \dots\)</span> is a sequence of Riemann integrable functions on <span class="math notranslate nohighlight">\([a, b]\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[|f_n(x)| \leq M,\]</div>
+<p>for all <span class="math notranslate nohighlight">\(k \in \mathbb{N}\)</span> and <span class="math notranslate nohighlight">\(x \in [a, b].\)</span>
+Suppose <span class="math notranslate nohighlight">\(\lim_{n \to \infty} f_n(x)\)</span> exists for each <span class="math notranslate nohighlight">\(x \in [a, b].\)</span>
+Define <span class="math notranslate nohighlight">\(f: [a, b] \to \mathbb{R}\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[f(x) = \lim_{n \to \infty} f_n(x).\]</div>
+<p>If <span class="math notranslate nohighlight">\(f\)</span> is Riemann integrable on <span class="math notranslate nohighlight">\([a, b],\)</span> then</p>
+<div class="math notranslate nohighlight">
+\[\int_a^b f = \lim_{n \to \infty} \int_a^b f_n.\]</div>
+</section>
+</div><p>We do not prove this result here.
+However, we note that this result suffers from the issue that the limit function <span class="math notranslate nohighlight">\(f\)</span> is required to be Riemann integrable.
+Ideally, given a good definition of integrals, we would like this to follow directly from the other assumptions in this theorem.
+The measure theoretic definition of the integral, which is developed in the next sections, yields an exchange theorem which does not suffer from this issue.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book/mira"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="000-intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Masure, integration and real analysis</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="000-exercises.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Exercises</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#riemann-integral">Riemann integral</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deficiencies-of-the-riemann-integral">Deficiencies of the Riemann integral</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Stratis Markou
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

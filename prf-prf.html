@@ -1,0 +1,928 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proof Index &#8212; Random Walks</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom_style.css" />
+    <link rel="stylesheet" type="text/css" href="_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'prf-prf';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+
+    <script>
+      DOCUMENTATION_OPTIONS.COLLAPSE_INDEX = true;
+    </script>
+
+
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Random Walks</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Home
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Notes on books</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="book/toc/000-intro.html">Theory of Computation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="book/toc/001-fsa.html">FSAs and Regular Expressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="book/toc/002-cfl.html">PDAs and Context Free Grammars</a></li>
+<li class="toctree-l2"><a class="reference internal" href="book/toc/000-exercises.html">Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="book/prob-intro/intro.html">Probability: An introduction</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="book/prob-intro/ch01/content.html">Events and Probabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="book/prob-intro/ch02/content.html">Discrete random variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="book/prob-intro/ch03/content.html">Multivariate discrete distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="book/prob-intro/ch04/content.html">Probability generating functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="book/prob-intro/ch05/content.html">Distribution and density functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="book/prob-intro/ch06/content.html">Multivariate distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="book/prob-intro/ch07/content.html">Moment generating functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="book/prob-intro/ch08/content.html">Main limit theorems</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="book/mira/000-intro.html">Measure Theory</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="book/mira/001-riemann.html">Riemann integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="book/mira/000-exercises.html">Exercises</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Papers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="book/papers/intro.html">Stream of papers</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="book/papers/ais/ais.html">Annealed Importance Sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="book/papers/rff/rff.html">Random Fourier features</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/stratisMarkou/random-walks" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/stratisMarkou/random-walks/issues/new?title=Issue%20on%20page%20%2Fprf-prf.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+
+   <h1>Proof Index</h1>
+
+   <div class="modindex-jumpbox">
+   <a href="#cap-algorithm-19"><strong>algorithm-19</strong></a> | 
+   <a href="#cap-corollary-20"><strong>corollary-20</strong></a> | 
+   <a href="#cap-definition-0"><strong>definition-0</strong></a> | 
+   <a href="#cap-definition-1"><strong>definition-1</strong></a> | 
+   <a href="#cap-definition-10"><strong>definition-10</strong></a> | 
+   <a href="#cap-definition-11"><strong>definition-11</strong></a> | 
+   <a href="#cap-definition-13"><strong>definition-13</strong></a> | 
+   <a href="#cap-definition-17"><strong>definition-17</strong></a> | 
+   <a href="#cap-definition-2"><strong>definition-2</strong></a> | 
+   <a href="#cap-definition-3"><strong>definition-3</strong></a> | 
+   <a href="#cap-definition-4"><strong>definition-4</strong></a> | 
+   <a href="#cap-definition-5"><strong>definition-5</strong></a> | 
+   <a href="#cap-definition-6"><strong>definition-6</strong></a> | 
+   <a href="#cap-definition-7"><strong>definition-7</strong></a> | 
+   <a href="#cap-definition-8"><strong>definition-8</strong></a> | 
+   <a href="#cap-definition-9"><strong>definition-9</strong></a> | 
+   <a href="#cap-example-11"><strong>example-11</strong></a> | 
+   <a href="#cap-example-12"><strong>example-12</strong></a> | 
+   <a href="#cap-example-13"><strong>example-13</strong></a> | 
+   <a href="#cap-example-22"><strong>example-22</strong></a> | 
+   <a href="#cap-example-3"><strong>example-3</strong></a> | 
+   <a href="#cap-example-4"><strong>example-4</strong></a> | 
+   <a href="#cap-example-5"><strong>example-5</strong></a> | 
+   <a href="#cap-example-6"><strong>example-6</strong></a> | 
+   <a href="#cap-example-9"><strong>example-9</strong></a> | 
+   <a href="#cap-finite-state-automaton"><strong>finite-state-automaton</strong></a> | 
+   <a href="#cap-lemma-0"><strong>lemma-0</strong></a> | 
+   <a href="#cap-lemma-13"><strong>lemma-13</strong></a> | 
+   <a href="#cap-lemma-16"><strong>lemma-16</strong></a> | 
+   <a href="#cap-lemma-18"><strong>lemma-18</strong></a> | 
+   <a href="#cap-lemma-2"><strong>lemma-2</strong></a> | 
+   <a href="#cap-lemma-3"><strong>lemma-3</strong></a> | 
+   <a href="#cap-lemma-8"><strong>lemma-8</strong></a> | 
+   <a href="#cap-mira-eg-not-riemann-integrable"><strong>mira-eg-not-riemann-integrable</strong></a> | 
+   <a href="#cap-mira-thm-refining-partitions"><strong>mira-thm-refining-partitions</strong></a> | 
+   <a href="#cap-theorem-0"><strong>theorem-0</strong></a> | 
+   <a href="#cap-theorem-1"><strong>theorem-1</strong></a> | 
+   <a href="#cap-theorem-10"><strong>theorem-10</strong></a> | 
+   <a href="#cap-theorem-11"><strong>theorem-11</strong></a> | 
+   <a href="#cap-theorem-12"><strong>theorem-12</strong></a> | 
+   <a href="#cap-theorem-13"><strong>theorem-13</strong></a> | 
+   <a href="#cap-theorem-14"><strong>theorem-14</strong></a> | 
+   <a href="#cap-theorem-15"><strong>theorem-15</strong></a> | 
+   <a href="#cap-theorem-16"><strong>theorem-16</strong></a> | 
+   <a href="#cap-theorem-2"><strong>theorem-2</strong></a> | 
+   <a href="#cap-theorem-3"><strong>theorem-3</strong></a> | 
+   <a href="#cap-theorem-4"><strong>theorem-4</strong></a> | 
+   <a href="#cap-theorem-5"><strong>theorem-5</strong></a> | 
+   <a href="#cap-theorem-6"><strong>theorem-6</strong></a> | 
+   <a href="#cap-theorem-7"><strong>theorem-7</strong></a> | 
+   <a href="#cap-theorem-8"><strong>theorem-8</strong></a> | 
+   <a href="#cap-theorem-9"><strong>theorem-9</strong></a> | 
+   <a href="#cap-toc-cfl-pumping-lemma"><strong>toc-cfl-pumping-lemma</strong></a> | 
+   <a href="#cap-toc-def-regex"><strong>toc-def-regex</strong></a> | 
+   <a href="#cap-toc-dfa-nfa-equivalence"><strong>toc-dfa-nfa-equivalence</strong></a> | 
+   <a href="#cap-toc-dfa-pumping-lemma"><strong>toc-dfa-pumping-lemma</strong></a>
+   </div>
+
+   <table class="indextable modindextable">
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-algorithm-19"><td></td><td>
+       <strong>algorithm-19</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/toc/001-fsa.html#algorithm-19"><code class="xref">algorithm-19</code></a> <em>(book/toc/001-fsa)</em></td><td>
+       <em>algorithm</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-corollary-20"><td></td><td>
+       <strong>corollary-20</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/toc/001-fsa.html#corollary-20"><code class="xref">corollary-20</code></a> <em>(book/toc/001-fsa)</em></td><td>
+       <em>corollary</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-definition-0"><td></td><td>
+       <strong>definition-0</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/toc/002-cfl.html#definition-0"><code class="xref">definition-0</code></a> <em>(book/toc/002-cfl)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-definition-1"><td></td><td>
+       <strong>definition-1</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/toc/002-cfl.html#definition-1"><code class="xref">definition-1</code></a> <em>(book/toc/002-cfl)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-definition-10"><td></td><td>
+       <strong>definition-10</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/toc/002-cfl.html#definition-10"><code class="xref">definition-10</code></a> <em>(book/toc/002-cfl)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-definition-11"><td></td><td>
+       <strong>definition-11</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/toc/001-fsa.html#definition-11"><code class="xref">definition-11</code></a> <em>(book/toc/001-fsa)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-definition-13"><td></td><td>
+       <strong>definition-13</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/prob-intro/ch07/content.html#definition-13"><code class="xref">definition-13</code></a> <em>(book/prob-intro/ch07/content)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-definition-17"><td></td><td>
+       <strong>definition-17</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/toc/001-fsa.html#definition-17"><code class="xref">definition-17</code></a> <em>(book/toc/001-fsa)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-definition-2"><td></td><td>
+       <strong>definition-2</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/toc/002-cfl.html#definition-2"><code class="xref">definition-2</code></a> <em>(book/toc/002-cfl)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-definition-3"><td></td><td>
+       <strong>definition-3</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/prob-intro/ch04/content.html#definition-3"><code class="xref">definition-3</code></a> <em>(book/prob-intro/ch04/content)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-definition-4"><td></td><td>
+       <strong>definition-4</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/toc/001-fsa.html#definition-4"><code class="xref">definition-4</code></a> <em>(book/toc/001-fsa)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-definition-5"><td></td><td>
+       <strong>definition-5</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/toc/002-cfl.html#definition-5"><code class="xref">definition-5</code></a> <em>(book/toc/002-cfl)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-definition-6"><td></td><td>
+       <strong>definition-6</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/toc/002-cfl.html#definition-6"><code class="xref">definition-6</code></a> <em>(book/toc/002-cfl)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-definition-7"><td></td><td>
+       <strong>definition-7</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/toc/002-cfl.html#definition-7"><code class="xref">definition-7</code></a> <em>(book/toc/002-cfl)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-definition-8"><td></td><td>
+       <strong>definition-8</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/prob-intro/ch08/content.html#definition-8"><code class="xref">definition-8</code></a> <em>(book/prob-intro/ch08/content)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-definition-9"><td></td><td>
+       <strong>definition-9</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/toc/002-cfl.html#definition-9"><code class="xref">definition-9</code></a> <em>(book/toc/002-cfl)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-example-11"><td></td><td>
+       <strong>example-11</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/mira/001-riemann.html#example-11"><code class="xref">example-11</code></a> <em>(book/mira/001-riemann)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-example-12"><td></td><td>
+       <strong>example-12</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/toc/002-cfl.html#example-12"><code class="xref">example-12</code></a> <em>(book/toc/002-cfl)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-example-13"><td></td><td>
+       <strong>example-13</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/mira/001-riemann.html#example-13"><code class="xref">example-13</code></a> <em>(book/mira/001-riemann)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-example-22"><td></td><td>
+       <strong>example-22</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/toc/001-fsa.html#example-22"><code class="xref">example-22</code></a> <em>(book/toc/001-fsa)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-example-3"><td></td><td>
+       <strong>example-3</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/toc/002-cfl.html#example-3"><code class="xref">example-3</code></a> <em>(book/toc/002-cfl)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-example-4"><td></td><td>
+       <strong>example-4</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/toc/002-cfl.html#example-4"><code class="xref">example-4</code></a> <em>(book/toc/002-cfl)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-example-5"><td></td><td>
+       <strong>example-5</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/toc/001-fsa.html#example-5"><code class="xref">example-5</code></a> <em>(book/toc/001-fsa)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-example-6"><td></td><td>
+       <strong>example-6</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/toc/001-fsa.html#example-6"><code class="xref">example-6</code></a> <em>(book/toc/001-fsa)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-example-9"><td></td><td>
+       <strong>example-9</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/toc/001-fsa.html#example-9"><code class="xref">example-9</code></a> <em>(book/toc/001-fsa)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-finite-state-automaton"><td></td><td>
+       <strong>finite-state-automaton</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/toc/001-fsa.html#finite-state-automaton"><code class="xref">finite-state-automaton</code></a> <em>(book/toc/001-fsa)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-lemma-0"><td></td><td>
+       <strong>lemma-0</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/papers/ais/ais.html#lemma-0"><code class="xref">lemma-0</code></a> <em>(book/papers/ais/ais)</em></td><td>
+       <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-lemma-13"><td></td><td>
+       <strong>lemma-13</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/toc/002-cfl.html#lemma-13"><code class="xref">lemma-13</code></a> <em>(book/toc/002-cfl)</em></td><td>
+       <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-lemma-16"><td></td><td>
+       <strong>lemma-16</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/toc/001-fsa.html#lemma-16"><code class="xref">lemma-16</code></a> <em>(book/toc/001-fsa)</em></td><td>
+       <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-lemma-18"><td></td><td>
+       <strong>lemma-18</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/toc/001-fsa.html#lemma-18"><code class="xref">lemma-18</code></a> <em>(book/toc/001-fsa)</em></td><td>
+       <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-lemma-2"><td></td><td>
+       <strong>lemma-2</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/papers/rff/rff.html#lemma-2"><code class="xref">lemma-2</code></a> <em>(book/papers/rff/rff)</em></td><td>
+       <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-lemma-3"><td></td><td>
+       <strong>lemma-3</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/papers/rff/rff.html#lemma-3"><code class="xref">lemma-3</code></a> <em>(book/papers/rff/rff)</em></td><td>
+       <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-lemma-8"><td></td><td>
+       <strong>lemma-8</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/toc/002-cfl.html#lemma-8"><code class="xref">lemma-8</code></a> <em>(book/toc/002-cfl)</em></td><td>
+       <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-mira-eg-not-riemann-integrable"><td></td><td>
+       <strong>mira-eg-not-riemann-integrable</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/mira/001-riemann.html#mira-eg-not-riemann-integrable"><code class="xref">mira-eg-not-riemann-integrable</code></a> <em>(book/mira/001-riemann)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-mira-thm-refining-partitions"><td></td><td>
+       <strong>mira-thm-refining-partitions</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/mira/001-riemann.html#mira-thm-refining-partitions"><code class="xref">mira-thm-refining-partitions</code></a> <em>(book/mira/001-riemann)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-theorem-0"><td></td><td>
+       <strong>theorem-0</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/prob-intro/ch07/content.html#theorem-0"><code class="xref">theorem-0</code></a> <em>(book/prob-intro/ch07/content)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-theorem-1"><td></td><td>
+       <strong>theorem-1</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/prob-intro/ch08/content.html#theorem-1"><code class="xref">theorem-1</code></a> <em>(book/prob-intro/ch08/content)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-theorem-10"><td></td><td>
+       <strong>theorem-10</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/toc/001-fsa.html#theorem-10"><code class="xref">theorem-10</code></a> <em>(book/toc/001-fsa)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-theorem-11"><td></td><td>
+       <strong>theorem-11</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/prob-intro/ch08/content.html#theorem-11"><code class="xref">theorem-11</code></a> <em>(book/prob-intro/ch08/content)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-theorem-12"><td></td><td>
+       <strong>theorem-12</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/prob-intro/ch08/content.html#theorem-12"><code class="xref">theorem-12</code></a> <em>(book/prob-intro/ch08/content)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-theorem-13"><td></td><td>
+       <strong>theorem-13</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/toc/001-fsa.html#theorem-13"><code class="xref">theorem-13</code></a> <em>(book/toc/001-fsa)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-theorem-14"><td></td><td>
+       <strong>theorem-14</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/toc/001-fsa.html#theorem-14"><code class="xref">theorem-14</code></a> <em>(book/toc/001-fsa)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-theorem-15"><td></td><td>
+       <strong>theorem-15</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/toc/001-fsa.html#theorem-15"><code class="xref">theorem-15</code></a> <em>(book/toc/001-fsa)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-theorem-16"><td></td><td>
+       <strong>theorem-16</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/prob-intro/ch07/content.html#theorem-16"><code class="xref">theorem-16</code></a> <em>(book/prob-intro/ch07/content)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-theorem-2"><td></td><td>
+       <strong>theorem-2</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/prob-intro/ch06/content.html#theorem-2"><code class="xref">theorem-2</code></a> <em>(book/prob-intro/ch06/content)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-theorem-3"><td></td><td>
+       <strong>theorem-3</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/prob-intro/ch08/content.html#theorem-3"><code class="xref">theorem-3</code></a> <em>(book/prob-intro/ch08/content)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-theorem-4"><td></td><td>
+       <strong>theorem-4</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/prob-intro/ch08/content.html#theorem-4"><code class="xref">theorem-4</code></a> <em>(book/prob-intro/ch08/content)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-theorem-5"><td></td><td>
+       <strong>theorem-5</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/prob-intro/ch08/content.html#theorem-5"><code class="xref">theorem-5</code></a> <em>(book/prob-intro/ch08/content)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-theorem-6"><td></td><td>
+       <strong>theorem-6</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/prob-intro/ch08/content.html#theorem-6"><code class="xref">theorem-6</code></a> <em>(book/prob-intro/ch08/content)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-theorem-7"><td></td><td>
+       <strong>theorem-7</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/prob-intro/ch08/content.html#theorem-7"><code class="xref">theorem-7</code></a> <em>(book/prob-intro/ch08/content)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-theorem-8"><td></td><td>
+       <strong>theorem-8</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/prob-intro/ch07/content.html#theorem-8"><code class="xref">theorem-8</code></a> <em>(book/prob-intro/ch07/content)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-theorem-9"><td></td><td>
+       <strong>theorem-9</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/prob-intro/ch08/content.html#theorem-9"><code class="xref">theorem-9</code></a> <em>(book/prob-intro/ch08/content)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-toc-cfl-pumping-lemma"><td></td><td>
+       <strong>toc-cfl-pumping-lemma</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/toc/002-cfl.html#toc-cfl-pumping-lemma"><code class="xref">toc-cfl-pumping-lemma</code></a> <em>(book/toc/002-cfl)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-toc-def-regex"><td></td><td>
+       <strong>toc-def-regex</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/toc/001-fsa.html#toc-def-regex"><code class="xref">toc-def-regex</code></a> <em>(book/toc/001-fsa)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-toc-dfa-nfa-equivalence"><td></td><td>
+       <strong>toc-dfa-nfa-equivalence</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/toc/001-fsa.html#toc-dfa-nfa-equivalence"><code class="xref">toc-dfa-nfa-equivalence</code></a> <em>(book/toc/001-fsa)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-toc-dfa-pumping-lemma"><td></td><td>
+       <strong>toc-dfa-pumping-lemma</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/toc/001-fsa.html#toc-dfa-pumping-lemma"><code class="xref">toc-dfa-pumping-lemma</code></a> <em>(book/toc/001-fsa)</em></td><td>
+       <em>lemma</em></td></tr>
+   </table>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Stratis Markou
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

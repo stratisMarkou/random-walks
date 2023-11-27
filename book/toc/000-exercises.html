@@ -1,0 +1,1243 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Excercises &#8212; Random Walks</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/toc/000-exercises';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Probability: An introduction" href="../prob-intro/intro.html" />
+    <link rel="prev" title="PDAs and context-free grammars" href="002-cfl.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Random Walks</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Home
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Notes on books</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="000-intro.html">Theory of Computation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="001-fsa.html">FSAs and Regular Expressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="002-cfl.html">PDAs and Context Free Grammars</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../prob-intro/intro.html">Probability: An introduction</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch01/content.html">Events and Probabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch02/content.html">Discrete random variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch03/content.html">Multivariate discrete distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch04/content.html">Probability generating functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch05/content.html">Distribution and density functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch06/content.html">Multivariate distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch07/content.html">Moment generating functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch08/content.html">Main limit theorems</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../mira/000-intro.html">Measure Theory</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mira/001-riemann.html">Riemann integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mira/000-exercises.html">Exercises</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Papers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../papers/intro.html">Stream of papers</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../papers/ais/ais.html">Annealed Importance Sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../papers/rff/rff.html">Random Fourier features</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/stratisMarkou/random-walks" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/stratisMarkou/random-walks/issues/new?title=Issue%20on%20page%20%2Fbook/toc/000-exercises.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/book/toc/000-exercises.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Excercises</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-1">Chapter 1</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="excercises">
+<h1>Excercises<a class="headerlink" href="#excercises" title="Permalink to this heading">#</a></h1>
+<p>The following are my solutions to exercises from the book Sipser, <em>Introduction to the Theory of Computation</em>.
+Here I repeat some exercise statements for completeness.
+Any mistakes in the exercise statements or the solutions are my own.</p>
+<section id="chapter-1">
+<h2>Chapter 1<a class="headerlink" href="#chapter-1" title="Permalink to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.1</p>
+<p>Consider the DFAs <span class="math notranslate nohighlight">\(M_1\)</span> and <span class="math notranslate nohighlight">\(M_2\)</span> (see book).
+For each DFA</p>
+<ol class="arabic simple">
+<li><p>What is the start state?</p></li>
+<li><p>What is the set of accept states?</p></li>
+<li><p>What sequence of steps does the machine go through on the input <span class="math notranslate nohighlight">\(aabb\)</span>?</p></li>
+<li><p>Does the machine accept the input <span class="math notranslate nohighlight">\(aabb\)</span>?</p></li>
+<li><p>Does the machine accept the empty string <span class="math notranslate nohighlight">\(\epsilon\)</span>?</p></li>
+</ol>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<ol class="arabic simple">
+<li><p class="sd-card-text">The start state of <span class="math notranslate nohighlight">\(M_1\)</span> is <span class="math notranslate nohighlight">\(q_1\)</span>. The start state of <span class="math notranslate nohighlight">\(M_2\)</span> is <span class="math notranslate nohighlight">\(q_1\)</span>.</p></li>
+<li><p class="sd-card-text">The set of accept states of <span class="math notranslate nohighlight">\(M_1\)</span> is <span class="math notranslate nohighlight">\(\{q_2\}\)</span>.
+The set of accept states of <span class="math notranslate nohighlight">\(M_2\)</span> is <span class="math notranslate nohighlight">\(\{q_1, q_4\}\)</span>.</p></li>
+<li><p class="sd-card-text">Given the input <span class="math notranslate nohighlight">\(aabb\)</span>, <span class="math notranslate nohighlight">\(M_1\)</span> goes through the sequence of states <span class="math notranslate nohighlight">\(q_1, q_2, q_3, q_1, q_1\)</span>.
+Given the same input, <span class="math notranslate nohighlight">\(M_2\)</span> goes through the sequence <span class="math notranslate nohighlight">\(q_1, q_1, q_1, q_2, q_4\)</span>.</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(M_1\)</span> does not accept <span class="math notranslate nohighlight">\(aabb\)</span>, because when it receives this input it finishes at state <span class="math notranslate nohighlight">\(q_1\)</span> which is not an accept state.
+By contrast <span class="math notranslate nohighlight">\(M_2\)</span> accepts <span class="math notranslate nohighlight">\(aabb\)</span> because it finishes at <span class="math notranslate nohighlight">\(q_4\)</span> which is an accept state.</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(M_1\)</span> does not accept <span class="math notranslate nohighlight">\(\epsilon\)</span>, since its initial state <span class="math notranslate nohighlight">\(q_1\)</span> is not an accept state.
+However, <span class="math notranslate nohighlight">\(M_2\)</span> accepts <span class="math notranslate nohighlight">\(\epsilon\)</span> since its initial state <span class="math notranslate nohighlight">\(q_1\)</span> is an accept state.</p></li>
+</ol>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.2</p>
+<p>Give formal descriptions for the FSAs in Excercise 1.1.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">The FSA <span class="math notranslate nohighlight">\(M_1 = (Q_1, \Sigma, \delta_1, q_1, F_1)\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+Q_1 &amp;= \{q_1, q_2, q_3\} \\
+\Sigma &amp;= \{a, b\} \\
+\delta_1(q, s) &amp;= \begin{cases}
+q_2 &amp; q = q_1, s = a \\
+q_1 &amp; q = q_1, s = b \\
+q_3 &amp; q = q_2 \\
+q_1 &amp; q = q_3, s = a \\
+q_1 &amp; q = q_3, s = b
+\end{cases} \\
+F_1 &amp;= \{q_2\}
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">The FSA <span class="math notranslate nohighlight">\(M_2 = (Q_2, \Sigma, \delta_2, q_2, F_2)\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+Q_1 &amp;= \{q_1, q_2, q_3, q_4\} \\
+\Sigma &amp;= \{a, b\} \\
+\delta_2(q, s) &amp;= \begin{cases}
+q_1 &amp; q = q_1, s = a \\
+q_2 &amp; q = q_1, s = b \\
+q_3 &amp; q = q_2, s = a \\
+q_4 &amp; q = q_2, s = b \\
+q_2 &amp; q = q_3, s = a \\
+q_1 &amp; q = q_3, s = b \\
+q_3 &amp; q = q_4, s = a \\
+q_4 &amp; q = q_4, s = b \\
+\end{cases} \\
+F_2 &amp;= \{q_1, q_4\}
+\end{align}\end{split}\]</div>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.11</p>
+<p>Prove that any NFA can be converted to an equivalent NFA with a singla accept state.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Given an NFA <span class="math notranslate nohighlight">\(M\)</span> with accept states <span class="math notranslate nohighlight">\(F\)</span>, we can define another NFA <span class="math notranslate nohighlight">\(M'\)</span> which has:</p>
+<ol class="arabic simple">
+<li><p class="sd-card-text">one additional state <span class="math notranslate nohighlight">\(q'\)</span></p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\epsilon\)</span> transitions pointing from all states in <span class="math notranslate nohighlight">\(F\)</span> to <span class="math notranslate nohighlight">\(q'\)</span></p></li>
+<li><p class="sd-card-text">accept state set <span class="math notranslate nohighlight">\(F' = \{q'\}\)</span>.</p></li>
+</ol>
+<p class="sd-card-text"><span class="math notranslate nohighlight">\(M'\)</span> and <span class="math notranslate nohighlight">\(M\)</span> accept the same strings, and has a single final state.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.20</p>
+<p>Let <span class="math notranslate nohighlight">\(\Sigma = \{a, b\}\)</span>.
+For each of the regular expressions below give two example strings which are in the language, and two which are not:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(a^* b^*\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(a(ba)^*b\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(a^* \cup b^*\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((aaa)^*\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\Sigma^*a\Sigma^*b\Sigma^*a\Sigma^*\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(aba \cup bab\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((\epsilon \cup a)b\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((a \cup ba \cup bb)\Sigma^*\)</span></p></li>
+</ol>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<ol class="arabic simple">
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> are in the language, but <span class="math notranslate nohighlight">\(ba\)</span> and <span class="math notranslate nohighlight">\(bab\)</span> are not.</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(ab\)</span> and <span class="math notranslate nohighlight">\(abab\)</span> are in the language, but <span class="math notranslate nohighlight">\(b\)</span> and <span class="math notranslate nohighlight">\(bb\)</span> are not.</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> are in the language, but <span class="math notranslate nohighlight">\(ba\)</span> and <span class="math notranslate nohighlight">\(bab\)</span> are not.</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\epsilon\)</span> and <span class="math notranslate nohighlight">\(aaa\)</span> are in the language, but <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(aa\)</span> are not.</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(aba\)</span> and <span class="math notranslate nohighlight">\(abba\)</span> are in the language but <span class="math notranslate nohighlight">\(b\)</span> and <span class="math notranslate nohighlight">\(bb\)</span> are not.</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(aba\)</span> and <span class="math notranslate nohighlight">\(bab\)</span> are in the language, but <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> are not.</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(b\)</span> and <span class="math notranslate nohighlight">\(ab\)</span> are in the language, but <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(ba\)</span> are not.</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(ba\)</span> are in the language, but <span class="math notranslate nohighlight">\(b\)</span> and <span class="math notranslate nohighlight">\(\epsilon\)</span> are not.</p></li>
+</ol>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.31</p>
+<p>For any string <span class="math notranslate nohighlight">\(w = w_1 w_2 \dots w_n\)</span>, the reverse of <span class="math notranslate nohighlight">\(w\)</span>, written <span class="math notranslate nohighlight">\(w^R\)</span>, is the string <span class="math notranslate nohighlight">\(w\)</span> in reverse order, <span class="math notranslate nohighlight">\(w_n \dots w_2 w_1\)</span>.
+For any language <span class="math notranslate nohighlight">\(A\)</span>, let <span class="math notranslate nohighlight">\(A^R = \{w^E | w \in A\}\)</span>.
+Show that if <span class="math notranslate nohighlight">\(A\)</span> is regular, so is <span class="math notranslate nohighlight">\(A^R\)</span>.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(A\)</span> is a regular language over <span class="math notranslate nohighlight">\(\Sigma\)</span>, so there exists a DFA <span class="math notranslate nohighlight">\(M = (Q, \Sigma, \delta, q_0, F)\)</span> that recognises it.
+Let <span class="math notranslate nohighlight">\(q_0'\)</span> be a new state and let <span class="math notranslate nohighlight">\(M' = (Q', \Sigma, \delta', q_0', F')\)</span> be an NFA with the state set <span class="math notranslate nohighlight">\(Q' = Q \cup \{q_0'\}\)</span>, the transition function <span class="math notranslate nohighlight">\(\delta'\)</span> defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\delta'(q, a) = \begin{cases}
+F &amp; q = q_0' \\
+\{r \in Q | \delta(r, a) = q\} &amp; q \neq q_0'
+\end{cases}\end{split}\]</div>
+<p class="sd-card-text">and the accept state set <span class="math notranslate nohighlight">\(F = \{q_0\}\)</span>.
+This NFA is equivalent to running <span class="math notranslate nohighlight">\(M\)</span> in reverse nondeterministically and it recognises <span class="math notranslate nohighlight">\(A^R\)</span>.
+Therefore <span class="math notranslate nohighlight">\(A^R\)</span> is regular.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.32</p>
+<p>Let</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \Sigma_3 = \left\{
+\begin{bmatrix}
+0 \\
+0 \\
+0
+\end{bmatrix},
+\begin{bmatrix}
+0 \\
+0 \\
+1
+\end{bmatrix},
+\begin{bmatrix}
+0 \\
+1 \\
+0
+\end{bmatrix},
+\dots,
+\begin{bmatrix}
+1 \\
+1 \\
+1
+\end{bmatrix}
+\right\} \end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(\Sigma_3\)</span> contains all size <span class="math notranslate nohighlight">\(3\)</span> columns of zeros and ones.
+A string of symbols in <span class="math notranslate nohighlight">\(\Sigma_3\)</span> gives three rows of zeros and ones.
+Consider each row to be a binary number and let</p>
+<div class="math notranslate nohighlight">
+\[ B = \{w \in \Sigma_3^* | \text{ the bottom row of } w \text{ is the sum of the top two rows}\}. \]</div>
+<p>Show that <span class="math notranslate nohighlight">\(B\)</span> is regular.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Consider the language <span class="math notranslate nohighlight">\(B^R\)</span>.
+We will describe an NFA <span class="math notranslate nohighlight">\(M = (Q, \Sigma_3, \delta, q_0, F)\)</span>, which will perform addition of the binary numbers represented by the symbols of <span class="math notranslate nohighlight">\(\Sigma_3\)</span>.
+Let <span class="math notranslate nohighlight">\(Q = \{q_0, q_1\}\)</span> be the set of states and <span class="math notranslate nohighlight">\(F = \{q_0\}\)</span>.
+We will use these states to keep track of the carry in the addition operation.
+For <span class="math notranslate nohighlight">\(a \in \Sigma_3\)</span>, we will use the notation <span class="math notranslate nohighlight">\(a_1, a_2\)</span> and <span class="math notranslate nohighlight">\(a_3\)</span> to denote the first, second and third entries of <span class="math notranslate nohighlight">\(a\)</span>.
+Then, let the transition function <span class="math notranslate nohighlight">\(\delta\)</span> be</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\delta(q, a) = \begin{cases}
+q_0 &amp; q = q_i, (i + a_1 + a_2) \mod 2 = a_3, (i + a_1 + a_2) // 2 = 0 \\
+q_1 &amp; q = q_i, (i + a_1 + a_2) \mod 2 = a_3, (i + a_1 + a_2) // 2 = 1
+\end{cases}\end{split}\]</div>
+<p class="sd-card-text">Where <span class="math notranslate nohighlight">\(//\)</span> denotes integer division.
+This NFA accepts exactly those strings in <span class="math notranslate nohighlight">\(B^R\)</span>, which is therefore regular.
+Since <span class="math notranslate nohighlight">\(B^R\)</span> is regular, so is <span class="math notranslate nohighlight">\(B\)</span>, which shows the required result.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.33</p>
+<p>Let</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \Sigma_2 = \left\{
+\begin{bmatrix}
+0 \\
+0
+\end{bmatrix},
+\begin{bmatrix}
+0 \\
+1
+\end{bmatrix},
+\begin{bmatrix}
+1 \\
+0
+\end{bmatrix},
+\dots,
+\begin{bmatrix}
+1 \\
+1
+\end{bmatrix}
+\right\} \end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(\Sigma_2\)</span> contains all size <span class="math notranslate nohighlight">\(2\)</span> columns of zeros and ones.
+A string of symbols in <span class="math notranslate nohighlight">\(\Sigma_2\)</span> gives three rows of zeros and ones.
+Consider each row to be a binary number and let</p>
+<div class="math notranslate nohighlight">
+\[ C = \{w \in \Sigma_2^* | \text{ the bottom row of } w \text{ is three times the bottom row}\}. \]</div>
+<p>Show that <span class="math notranslate nohighlight">\(C\)</span> is regular.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Consider the language <span class="math notranslate nohighlight">\(C^R\)</span>.
+We will describe an NFA <span class="math notranslate nohighlight">\(M = (Q, \Sigma_2, \delta, q_0, F)\)</span>, which will perform multiplication by <span class="math notranslate nohighlight">\(3\)</span>, checking if the bottom number is <span class="math notranslate nohighlight">\(3\)</span> times the top number.
+Let <span class="math notranslate nohighlight">\(Q = \{q_0, q_1, q_2\}\)</span> be the set of states and <span class="math notranslate nohighlight">\(F = \{q_0\}\)</span>.
+We will use these states to keep track of the carry.
+As with the previous exercise if <span class="math notranslate nohighlight">\(a \in \Sigma_2\)</span>, we will use the notation <span class="math notranslate nohighlight">\(a_1\)</span> and <span class="math notranslate nohighlight">\(a_2\)</span> to denote the first and second entries of <span class="math notranslate nohighlight">\(a\)</span>.
+Then, let the transition function <span class="math notranslate nohighlight">\(\delta\)</span> be</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\delta(q, a) = \begin{cases}
+q_0 &amp; q = q_i, (3a_1 + i) \mod 2 = a_2, (3a_1 + i) // 2 = 0 \\
+q_1 &amp; q = q_i, (3a_1 + i) \mod 2 = a_2, (3a_1 + i) // 2 = 1 \\
+q_2 &amp; q = q_i, (3a_1 + i) \mod 2 = a_2, (3a_1 + i) // 2 = 2
+\end{cases}\end{split}\]</div>
+<p class="sd-card-text">where <span class="math notranslate nohighlight">\(//\)</span> denotes integer division.
+This NFA accepts exactly those strings in <span class="math notranslate nohighlight">\(C^R\)</span>, which is therefore regular.
+Since <span class="math notranslate nohighlight">\(C^R\)</span> is regular, so is <span class="math notranslate nohighlight">\(C\)</span>, which shows the required result.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.34</p>
+<p>Let <span class="math notranslate nohighlight">\(\Sigma_2\)</span> be the same as in the previous problem.
+A string of symbols in <span class="math notranslate nohighlight">\(\Sigma_2\)</span> gives three rows of zeros and ones.
+Consider each row to be a binary number and let</p>
+<div class="math notranslate nohighlight">
+\[ D = \{w \in \Sigma_2^* | \text{ the bottom row of } w \text{ is a larger number than the bottom row}\}. \]</div>
+<p>Show that <span class="math notranslate nohighlight">\(D\)</span> is regular.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">We will describe an NFA <span class="math notranslate nohighlight">\(M = (Q, \Sigma_2, \delta, q_0, F)\)</span>, which will compare two numbers in <span class="math notranslate nohighlight">\(D\)</span> bit by bit.
+Let <span class="math notranslate nohighlight">\(Q = \{q_e, q_s, q_l\}\)</span> be the set of states and <span class="math notranslate nohighlight">\(F = \{q_l\}\)</span>.
+As with the previous exercise if <span class="math notranslate nohighlight">\(a \in \Sigma_2\)</span>, we will use the notation <span class="math notranslate nohighlight">\(a_1\)</span> and <span class="math notranslate nohighlight">\(a_2\)</span> to denote the first and second entries of <span class="math notranslate nohighlight">\(a\)</span>.
+Then, let the transition function <span class="math notranslate nohighlight">\(\delta\)</span> be</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\delta(q, a) = \begin{cases}
+q_e &amp; q = q_e, a_1 = a_2 \\
+q_s &amp; q = q_e, a_1 &lt; a_2 \\
+q_s &amp; q = q_s, \\
+q_l &amp; q = q_e, a_2 &gt; a_2 \\
+q_l &amp; q = q_l \\
+\end{cases}\end{split}\]</div>
+<p class="sd-card-text">This NFA accepts exactly those strings in <span class="math notranslate nohighlight">\(D\)</span>, which is therefore regular.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.36</p>
+<p>Let <span class="math notranslate nohighlight">\(B_n = \{a^k | k \text{ is a multiple of } n\}.\)</span>
+Show that for each <span class="math notranslate nohighlight">\(n \geq 1\)</span>, the language <span class="math notranslate nohighlight">\(B_n\)</span> is regular.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(n \geq 1\)</span> be an integer.
+Consider the DFA <span class="math notranslate nohighlight">\(M = (Q, \Sigma, \delta, q_0, F)\)</span> defined as follows.
+The state set is <span class="math notranslate nohighlight">\(Q = \{q_0, q_1, \dots, q_{n-1}\}\)</span>, the alphabet is <span class="math notranslate nohighlight">\(\Sigma = \{a\}\)</span>, the transition function is <span class="math notranslate nohighlight">\(\delta(q_i, a) = q_{i+1 \text{ mod } n}\)</span> and the set of final states is <span class="math notranslate nohighlight">\(F = \{q_0\}\)</span>.
+This DFA accepts exactly the strings <span class="math notranslate nohighlight">\(a^k\)</span> where <span class="math notranslate nohighlight">\(k\)</span> is a multiple of <span class="math notranslate nohighlight">\(n\)</span>, so the language <span class="math notranslate nohighlight">\(B_n\)</span>, defined above, is regular.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.41</p>
+<p>For languages <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>, let the perfect shuffle of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> be the language</p>
+<div class="math notranslate nohighlight">
+\[ \{w | w = a_1 b_1 \dots a_k b_k, \text{ where } a_1, \dots, a_k \in A \text{ and } b_1, \dots, b_k \in B, \text{ where } a_i, b_i \in \Sigma\}.\]</div>
+<p>Show that the class of regular languages is closed under the perfect shuffle.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are regular.
+Since they are regular, there exist DFAs <span class="math notranslate nohighlight">\(M_A = (Q_A, \Sigma, \delta_A, q_A, F_A)\)</span> and <span class="math notranslate nohighlight">\(B = (Q_B, \Sigma, \delta_B, q_B, F_B)\)</span> that recognise them respectively.
+Let <span class="math notranslate nohighlight">\(M = (Q, \Sigma, \delta, q_0, F)\)</span> be the NFA defined as follows.
+Let <span class="math notranslate nohighlight">\(a, b\)</span> be two new states and let <span class="math notranslate nohighlight">\(Q = Q_A \times Q_B \times \{a, b\}\)</span>.
+Let the initial state be <span class="math notranslate nohighlight">\(q_0 = (q_A, q_B, a)\)</span>, <span class="math notranslate nohighlight">\(F = F_A \times F_B \times \{b\}\)</span> and the transition function be</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\delta((q_A, q_B, q), s) = \begin{cases}
+(\delta_A(q_A, s), q_B, b) &amp; q = a \\
+(q_A, \delta_B(q_B, s), a) &amp; q = b
+\end{cases}.
+\end{split}\]</div>
+<p class="sd-card-text">This NFA accepts exactly those strings in the perfect shuffle of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>, so the class of regular languages is closed under the perfect shuffle.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.43</p>
+<p>Let <span class="math notranslate nohighlight">\(A\)</span> be any language.
+Define <span class="math notranslate nohighlight">\(\texttt{DROPOUT}(A)\)</span> to be the language containing all strings that can be obtain by removing one symbol from a string in <span class="math notranslate nohighlight">\(A\)</span>.
+Thus</p>
+<div class="math notranslate nohighlight">
+\[\texttt{DROPOUT}(A) = \{xz | xyz \in A \text{ where } x, z \in \Sigma^*, y \in \Sigma\}.\]</div>
+<p>Show that the class of regular languages is closed under the <span class="math notranslate nohighlight">\(\texttt{DROPOUT}\)</span> operation.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(A\)</span> be a regular language.
+Since <span class="math notranslate nohighlight">\(A\)</span> is regular, there exists a machine <span class="math notranslate nohighlight">\(M_A\)</span> that recognises it.
+Define a new NFA <span class="math notranslate nohighlight">\(M = (Q, \Sigma, q, \delta, F)\)</span>, by making two copies of <span class="math notranslate nohighlight">\(M_A\)</span>, called <span class="math notranslate nohighlight">\(M_1 = (Q_1, \Sigma, q_1, \delta_1, F)\)</span> and <span class="math notranslate nohighlight">\(M_2 = (Q_2, \Sigma, q_2, \delta_2, F_2)\)</span>, and combining them in the following way.
+Let the state space be <span class="math notranslate nohighlight">\(Q = Q_1 \cup Q_2\)</span>, the initial state be <span class="math notranslate nohighlight">\(q = q_1\)</span> and the set of final states be <span class="math notranslate nohighlight">\(F_2\)</span>, and the transition function be</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \delta(q_i, a) = \begin{cases}
+\delta_1(q_i, a) &amp; q_i \in Q_1, a \neq \epsilon \\
+\delta_2(q_i', a) &amp; q_i \in Q_1, a = \epsilon \\
+\delta_2(q_i, a) &amp; q_i \in Q_2 \\
+\end{cases} \end{split}\]</div>
+<p class="sd-card-text">where if <span class="math notranslate nohighlight">\(q_i \in Q\)</span>, we write <span class="math notranslate nohighlight">\(q_i'\)</span> to denote the state in <span class="math notranslate nohighlight">\(Q_2\)</span> which is the copy of <span class="math notranslate nohighlight">\(q_i\)</span>.
+The NFA <span class="math notranslate nohighlight">\(M\)</span> recognises exactly those strings which are equal to a string in <span class="math notranslate nohighlight">\(A\)</span>, except a single symbol has been replaced by an <span class="math notranslate nohighlight">\(\epsilon\)</span>.
+Therefore <span class="math notranslate nohighlight">\(A\)</span> is regular.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.44</p>
+<p>Let <span class="math notranslate nohighlight">\(B\)</span> and <span class="math notranslate nohighlight">\(C\)</span> be languages over <span class="math notranslate nohighlight">\(\Sigma = \{0, 1\}\)</span>. Define</p>
+<div class="math notranslate nohighlight">
+\[ B \overset{1}{\gets} C = \{w \in B | \text{ for some } y \in C, \text{ strings } w \text{ and } y \text{ contain equal numbers of } 1\text{s}\}\]</div>
+<p>Show that the class of regular languages is closed under the <span class="math notranslate nohighlight">\(\overset{1}{\gets}\)</span> operation.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(B\)</span> and <span class="math notranslate nohighlight">\(C\)</span> be regular languages over <span class="math notranslate nohighlight">\(\Sigma = \{0, 1\}\)</span>.
+We will describe an NFA that recognises <span class="math notranslate nohighlight">\(B \overset{1}{\gets} C\)</span>.
+Since <span class="math notranslate nohighlight">\(B\)</span> and <span class="math notranslate nohighlight">\(C\)</span> are regular, there exist DFAs <span class="math notranslate nohighlight">\(M_B\)</span> and <span class="math notranslate nohighlight">\(M_C\)</span> that recognise them.
+Modify the DFA <span class="math notranslate nohighlight">\(M_C\)</span> by replacing all its <span class="math notranslate nohighlight">\(0\)</span> transitions by <span class="math notranslate nohighlight">\(\epsilon\)</span> transitions and adding <span class="math notranslate nohighlight">\(0\)</span> transition self-loops to every state, to obtain an NFA <span class="math notranslate nohighlight">\(M_C'\)</span>.
+This NFA recognises the language</p>
+<div class="math notranslate nohighlight">
+\[ L(M_C') = \{w \in \{0, 1\}^* | \text{ for some } y \in C, \text{ strings } w \text{ and } y \text{ contain equal numbers of } 1\text{s}\}.\]</div>
+<p class="sd-card-text">Taking the intersection machine of <span class="math notranslate nohighlight">\(M_B\)</span> and <span class="math notranslate nohighlight">\(M_C'\)</span> produces a machine <span class="math notranslate nohighlight">\(M\)</span> which recognises <span class="math notranslate nohighlight">\(L(M_B) \cap L(M_C')\)</span>, which is the language <span class="math notranslate nohighlight">\(B \overset{1}{\gets} C\)</span>.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.45</p>
+<p>Let <span class="math notranslate nohighlight">\(A / B = \{w | wx \in A, x \in B\}\)</span>.
+If <span class="math notranslate nohighlight">\(A\)</span> is regular and <span class="math notranslate nohighlight">\(B\)</span> is any language, show that <span class="math notranslate nohighlight">\(A / B\)</span> is regular.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Since <span class="math notranslate nohighlight">\(A\)</span> is regular, there exists a DFA <span class="math notranslate nohighlight">\(M = (Q, \Sigma, \delta, q_0, F)\)</span> which recognises it.
+Now we describe an NFA <span class="math notranslate nohighlight">\(M'\)</span> which recognises <span class="math notranslate nohighlight">\(A / B\)</span>.
+Let <span class="math notranslate nohighlight">\(M' = (Q, \Sigma, \delta, q_0, F')\)</span>, where <span class="math notranslate nohighlight">\(F'\)</span> is the set of states in <span class="math notranslate nohighlight">\(Q\)</span> from which a state in <span class="math notranslate nohighlight">\(F\)</span> is reachable given an input <span class="math notranslate nohighlight">\(x\)</span> with <span class="math notranslate nohighlight">\(x \in B\)</span>.
+Therefore, the machine <span class="math notranslate nohighlight">\(M'\)</span> accepts a string <span class="math notranslate nohighlight">\(w\)</span> if and only if <span class="math notranslate nohighlight">\(wx \in A\)</span> for some <span class="math notranslate nohighlight">\(x \in B\)</span>, so <span class="math notranslate nohighlight">\(M'\)</span> recognises <span class="math notranslate nohighlight">\(L(A / B)\)</span>, which therefore is regular.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.46</p>
+<p>Prove that the following languages are not regular.</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\{0^n 1^m 0^n | m, n \geq 0\}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\{0^m 1^n | m \neq n\}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\{w | w \in \{0, 1\}^* \text{ is not a palindrome}\}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\{wtw | w, t \in \{0, 1\}^+\}\)</span></p></li>
+</ol>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><strong>Part 1:</strong>
+Suppose <span class="math notranslate nohighlight">\(A_1 = \{0^n 1^m 0^n | m, n \geq 0\}\)</span> is regular.
+Then by the pumping lemma, it has a pumping length <span class="math notranslate nohighlight">\(p\)</span>.
+Consider the string <span class="math notranslate nohighlight">\(s = 0^p 1^p 0^p\)</span>.
+Since <span class="math notranslate nohighlight">\(s \in A_1\)</span>, by the pumping lemma, it can be written as <span class="math notranslate nohighlight">\(s = xyz\)</span> with <span class="math notranslate nohighlight">\(|xy| &lt; p\)</span> and <span class="math notranslate nohighlight">\(|y| \geq q\)</span>, and <span class="math notranslate nohighlight">\(xy^nz \in A_1\)</span> for all <span class="math notranslate nohighlight">\(n = 1, 2, \dots\)</span>.
+Since <span class="math notranslate nohighlight">\(|xy| &lt; p\)</span>, both <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are made up entirely of zeros.
+So the string <span class="math notranslate nohighlight">\(xy^nz\)</span> contains an an unequal number of leading and trailing zeros, so it is not in <span class="math notranslate nohighlight">\(A_1\)</span>.
+This is a contradiction, so <span class="math notranslate nohighlight">\(A_1\)</span> cannot be regular.</p>
+<p class="sd-card-text"><strong>Part 2:</strong>
+Suppose <span class="math notranslate nohighlight">\(A_2 = \{0^m 1^n | m \neq n\}\)</span> is regular.
+Then, its complement <span class="math notranslate nohighlight">\(A_2'\)</span> is also regular.
+From here on, the solution is essentially the same as for part 1.
+By the pumping lemma, <span class="math notranslate nohighlight">\(A_2'\)</span> has a pumping length <span class="math notranslate nohighlight">\(p\)</span>.
+Consider the string <span class="math notranslate nohighlight">\(s = 0^p 1^p\)</span>.
+Since <span class="math notranslate nohighlight">\(s \in A_2\)</span>, by the pumping lemma, it can be written as <span class="math notranslate nohighlight">\(s = xyz\)</span> with <span class="math notranslate nohighlight">\(|xy| &lt; p\)</span> and <span class="math notranslate nohighlight">\(|y| \geq q\)</span>, and <span class="math notranslate nohighlight">\(xy^nz \in A_2\)</span> for all <span class="math notranslate nohighlight">\(n = 1, 2, \dots\)</span>.
+Since <span class="math notranslate nohighlight">\(|xy| &lt; p\)</span>, both <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are made up entirely of zeros.
+So the string <span class="math notranslate nohighlight">\(xy^nz\)</span> is of the form <span class="math notranslate nohighlight">\(0^k 1^m\)</span> with <span class="math notranslate nohighlight">\(k \neq m\)</span>, so it is not in <span class="math notranslate nohighlight">\(A_2'\)</span>.
+Therefore <span class="math notranslate nohighlight">\(A_2'\)</span> is not regular, and neither is <span class="math notranslate nohighlight">\(A_2\)</span>.</p>
+<p class="sd-card-text"><strong>Part 3:</strong>
+Suppose <span class="math notranslate nohighlight">\(A_3 = \{w | w \in \{0, 1\}^* \text{ is not a palindrome}\}\)</span> is regular.
+Then, its complement <span class="math notranslate nohighlight">\(A_3'\)</span> is also regular.
+By the pumping lemma, <span class="math notranslate nohighlight">\(A_3'\)</span> has a pumping length <span class="math notranslate nohighlight">\(p\)</span>.
+Consider the string <span class="math notranslate nohighlight">\(s = 0^p 1^p 0^p\)</span>.
+Since <span class="math notranslate nohighlight">\(s \in A_3\)</span>, by the pumping lemma, it can be written as <span class="math notranslate nohighlight">\(s = xyz\)</span> with <span class="math notranslate nohighlight">\(|xy| &lt; p\)</span> and <span class="math notranslate nohighlight">\(|y| \geq q\)</span>, and <span class="math notranslate nohighlight">\(xy^nz \in A_2\)</span> for all <span class="math notranslate nohighlight">\(n = 1, 2, \dots\)</span>.
+Since <span class="math notranslate nohighlight">\(|xy| &lt; p\)</span>, both <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are made up entirely of zeros.
+So the string <span class="math notranslate nohighlight">\(xy^nz\)</span> contains an an unequal number of leading and trailing zeros, so it is not a palindrome, and therefore cannot be in <span class="math notranslate nohighlight">\(A_3'\)</span>.
+Therefore, <span class="math notranslate nohighlight">\(A_3'\)</span> is not regular and neither is <span class="math notranslate nohighlight">\(A_3\)</span>.</p>
+<p class="sd-card-text"><strong>Part 4:</strong>
+Suppose <span class="math notranslate nohighlight">\(A_4 = \{wtw | w, t \in \{0, 1\}^+\}\)</span> is regular.
+By the pumping lemma, <span class="math notranslate nohighlight">\(A_4\)</span> has a pumping length <span class="math notranslate nohighlight">\(p\)</span>.
+Fix some <span class="math notranslate nohighlight">\(t = 1\)</span> and consider the string <span class="math notranslate nohighlight">\(s = 0^p 1^p t 0^p 1^p\)</span>.
+Since <span class="math notranslate nohighlight">\(s \in A_4\)</span>, by the pumping lemma, it can be written as <span class="math notranslate nohighlight">\(s = xyz\)</span> with <span class="math notranslate nohighlight">\(|xy| &lt; p\)</span> and <span class="math notranslate nohighlight">\(|y| \geq q\)</span>, and <span class="math notranslate nohighlight">\(xy^nz \in A_2\)</span> for all <span class="math notranslate nohighlight">\(n = 1, 2, \dots\)</span>.
+Since <span class="math notranslate nohighlight">\(|xy| &lt; p\)</span>, both <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are made up entirely of zeros.
+So if <span class="math notranslate nohighlight">\(|y| = k\)</span> the string <span class="math notranslate nohighlight">\(s_n = xy^{n+1}z\)</span> has the form <span class="math notranslate nohighlight">\(s_n = 0^{p + nk}  1^p t 0^p 1^p\)</span>.
+However, <span class="math notranslate nohighlight">\(s_n\)</span> cannot be written in the form <span class="math notranslate nohighlight">\(wt'w\)</span> for any <span class="math notranslate nohighlight">\(w, t' \in \{0, 1\}^+\)</span>, so <span class="math notranslate nohighlight">\(s_n \not \in A_4\)</span> for any <span class="math notranslate nohighlight">\(n \geq 1\)</span>.
+This is a contradiction, so <span class="math notranslate nohighlight">\(A_4\)</span> cannot be regular.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.47</p>
+<p>Let <span class="math notranslate nohighlight">\(\Sigma = \{0, \#\}\)</span> and let</p>
+<div class="math notranslate nohighlight">
+\[ Y = \{w | w = x_1 \# x_2 \# \dots \# x_k \text{ for } k \geq 0, \text{ each } x_i \in 1^*, \text{ and } x_i \neq x_j \text{ for } i \neq j\}.\]</div>
+<p>Prove that <span class="math notranslate nohighlight">\(Y\)</span> is not regular.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(Y\)</span> is regular.
+Then by the pumping lemma, it has a pumping length <span class="math notranslate nohighlight">\(p\)</span>.
+Fix an integer <span class="math notranslate nohighlight">\(k = 2p\)</span> and consider the string <span class="math notranslate nohighlight">\(s = x_1 \# x_2 \# \dots \# x_k \in Y\)</span> where <span class="math notranslate nohighlight">\(x_i = 1^i\)</span> for <span class="math notranslate nohighlight">\(i = 1, 2, \dots\)</span>.
+Since <span class="math notranslate nohighlight">\(s \in A_1\)</span>, by the pumping lemma, it can be written as <span class="math notranslate nohighlight">\(s = xyz\)</span> with <span class="math notranslate nohighlight">\(|xy| &lt; p\)</span> and <span class="math notranslate nohighlight">\(|y| \geq q\)</span>, and <span class="math notranslate nohighlight">\(xy^nz \in Y\)</span> for all <span class="math notranslate nohighlight">\(n = 1, 2, \dots\)</span>.
+There are two cases.</p>
+<p class="sd-card-text"><strong>Case 1:</strong>
+If <span class="math notranslate nohighlight">\(y\)</span> contains a <span class="math notranslate nohighlight">\(\#\)</span> it can be written as <span class="math notranslate nohighlight">\(w_1\#w_2\)</span>.
+Then <span class="math notranslate nohighlight">\(s = xy^3z = xw_1\#w_2w_1\#w_2w_1\#w_2z\)</span>, and the substring <span class="math notranslate nohighlight">\(w_2w_1\)</span> is repeated, so <span class="math notranslate nohighlight">\(s \not \in Y\)</span>.
+Therefore if <span class="math notranslate nohighlight">\(Y\)</span> is regular, <span class="math notranslate nohighlight">\(y\)</span> cannot contain a <span class="math notranslate nohighlight">\(\#\)</span>.</p>
+<p class="sd-card-text"><strong>Case 2:</strong>
+Since <span class="math notranslate nohighlight">\(y\)</span> does not contain a <span class="math notranslate nohighlight">\(\#\)</span> it can be written as <span class="math notranslate nohighlight">\(1^+\)</span>, and also it is a substring of <span class="math notranslate nohighlight">\(x_i\)</span> for some <span class="math notranslate nohighlight">\(i &lt; p\)</span>.
+Then <span class="math notranslate nohighlight">\(s = xy^2z\)</span> and <span class="math notranslate nohighlight">\(i + |y| &lt; p\)</span>, it follows that <span class="math notranslate nohighlight">\(s\)</span> contains the substring <span class="math notranslate nohighlight">\(\#x_i\# y = \#1^{i + |y|}\#\)</span> twice, which cannot occur, reaching a contradiction.
+Therefore <span class="math notranslate nohighlight">\(Y\)</span> cannot be regular.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.48</p>
+<p>Let <span class="math notranslate nohighlight">\(\Sigma = \{0, 1\}\)</span> and let</p>
+<div class="math notranslate nohighlight">
+\[ D = \{w | w \text{ contains an equal number of occurences of the substrings } 01 \text{ and } 10\}.\]</div>
+<p>Prove that <span class="math notranslate nohighlight">\(D\)</span> is regular.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(\Sigma = \{0, 1\}\)</span>.
+We will describe a DFA <span class="math notranslate nohighlight">\(M = (Q, \Sigma, \delta, q_0, F)\)</span>, that recognises <span class="math notranslate nohighlight">\(D\)</span>.
+Let <span class="math notranslate nohighlight">\(Q = \{q_0, q_1, q_2, q_3, q_4\}\)</span>, <span class="math notranslate nohighlight">\(F = \{q_1, q_3\}\)</span> and let the transition function <span class="math notranslate nohighlight">\(\delta\)</span> be</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{equation}
+\delta(q, a) = \begin{cases}
+q_1 &amp; q = q_0, a = 0 \\
+q_1 &amp; q = q_1, a = 0 \\
+q_2 &amp; q = q_1, a = 1 \\
+q_2 &amp; q = q_2, a = 1 \\
+q_1 &amp; q = q_2, a = 0 \\
+q_3 &amp; q = q_0, a = 1 \\
+q_3 &amp; q = q_3, a = 1 \\
+q_4 &amp; q = q_3, a = 0 \\
+q_4 &amp; q = q_4, a = 0 \\
+q_3 &amp; q = q_4, a = 1
+\end{cases}
+\end{equation}\end{split}\]</div>
+<p class="sd-card-text">This DFA recognises exactly those strings in <span class="math notranslate nohighlight">\(D\)</span>, which is therefore regular.</p>
+</div>
+</details></div>
+<div class="tip admonition" id="toc-ex-151">
+<p class="admonition-title">Exercise 1.51</p>
+<p>Let <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> be strings and <span class="math notranslate nohighlight">\(L\)</span> be any language.
+We say that <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are <em>distinguishable by <span class="math notranslate nohighlight">\(L\)</span></em> if some string <span class="math notranslate nohighlight">\(z\)</span> exists whereby exactly one of the strings <span class="math notranslate nohighlight">\(xz\)</span> and <span class="math notranslate nohighlight">\(yz\)</span> is a member of <span class="math notranslate nohighlight">\(L\)</span>;
+otherwise, for every string <span class="math notranslate nohighlight">\(z\)</span>, we have <span class="math notranslate nohighlight">\(xz \in L\)</span> whenever <span class="math notranslate nohighlight">\(yz \in L\)</span> and we say that <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are indistinguishable by <span class="math notranslate nohighlight">\(L\)</span>.
+If <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are indistinguishable by <span class="math notranslate nohighlight">\(L\)</span> we write <span class="math notranslate nohighlight">\(x \equiv_L y\)</span>.
+Show that <span class="math notranslate nohighlight">\(\equiv_L\)</span> is an equivalence relation.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">To show that <span class="math notranslate nohighlight">\(\equiv_L\)</span> is an equivalence relation, we must show that it satisfies the three properties of equivalence relations: reflexivty, symmetry and transitivity.
+Let <span class="math notranslate nohighlight">\(x, y, w\)</span> be strings.</p>
+<p class="sd-card-text"><strong>Reflexivity:</strong>
+We have that <span class="math notranslate nohighlight">\(x \equiv_L x\)</span> because <span class="math notranslate nohighlight">\(xz \in L\)</span> whenever <span class="math notranslate nohighlight">\(xz \in L\)</span> for any string <span class="math notranslate nohighlight">\(z\)</span>.
+So reflexivity is satisfied.</p>
+<p class="sd-card-text"><strong>Symmetry:</strong>
+Suppose <span class="math notranslate nohighlight">\(x \equiv_L y\)</span>, so <span class="math notranslate nohighlight">\(xz \in L \iff yz \in L\)</span> for all strings <span class="math notranslate nohighlight">\(z\)</span>, otherwise <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> would be distinguishable.
+Since <span class="math notranslate nohighlight">\(\iff\)</span> is symmetric we have <span class="math notranslate nohighlight">\(zx \in L \iff zy \in L\)</span>, and <span class="math notranslate nohighlight">\(\equiv_L\)</span> is symmetric.</p>
+<p class="sd-card-text"><strong>Transitivity:</strong>
+Supose <span class="math notranslate nohighlight">\(x \equiv_L y\)</span> and <span class="math notranslate nohighlight">\(y \equiv_L w\)</span>.
+Then <span class="math notranslate nohighlight">\(xz \in L \iff yz \in L\)</span> and <span class="math notranslate nohighlight">\(yz \in L \iff wz \in L\)</span> for all strings <span class="math notranslate nohighlight">\(z\)</span>.
+Therefore <span class="math notranslate nohighlight">\(xz \in L \iff wz \in L\)</span> for all strings <span class="math notranslate nohighlight">\(z\)</span>, and <span class="math notranslate nohighlight">\(\equiv_L\)</span> is transitive.</p>
+</div>
+</details></div>
+<div class="tip admonition" id="toc-myhill-nerode-theorem">
+<p class="admonition-title">Exercise 1.52 (Myhill-Nerode theorem)</p>
+<p>Let <span class="math notranslate nohighlight">\(L\)</span> be a language and let <span class="math notranslate nohighlight">\(X\)</span> be a set of strings.
+We say that <span class="math notranslate nohighlight">\(X\)</span> is pairwise distinguishable by <span class="math notranslate nohighlight">\(L\)</span> if every two distinct strings in <span class="math notranslate nohighlight">\(X\)</span> are distinguishable by <span class="math notranslate nohighlight">\(L\)</span>.
+Define the index of <span class="math notranslate nohighlight">\(L\)</span> to be the maximum number of elements in a set that is pairwise distinguishable by <span class="math notranslate nohighlight">\(L\)</span>.
+The index of <span class="math notranslate nohighlight">\(L\)</span> may be infinite or finite.</p>
+<ol class="arabic simple">
+<li><p>Show that, if <span class="math notranslate nohighlight">\(L\)</span> is recognised by a DFA with <span class="math notranslate nohighlight">\(k\)</span> states, <span class="math notranslate nohighlight">\(L\)</span> has index at most <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>Show that, if the index of <span class="math notranslate nohighlight">\(L\)</span> is a finite number <span class="math notranslate nohighlight">\(k\)</span>, it is recognised by a DFA with <span class="math notranslate nohighlight">\(k\)</span> states.</p></li>
+<li><p>Conclude that <span class="math notranslate nohighlight">\(L\)</span> is regular if and only if it has finite index.
+Moreover, its index is the size of the smallest DFA recognising it.</p></li>
+</ol>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><strong>Part 1:</strong>
+Let <span class="math notranslate nohighlight">\(L\)</span> be recognised by a DFA, <span class="math notranslate nohighlight">\(M\)</span>, with <span class="math notranslate nohighlight">\(k\)</span> states.
+Suppose that the index of <span class="math notranslate nohighlight">\(L\)</span> is greater than <span class="math notranslate nohighlight">\(k\)</span>.
+Then, there exists a set <span class="math notranslate nohighlight">\(S\)</span> containing <span class="math notranslate nohighlight">\(k + 1\)</span> distinct strings which are all pairwise distinguishable by <span class="math notranslate nohighlight">\(L\)</span>.
+Consider passing each of the strings in <span class="math notranslate nohighlight">\(S\)</span> as input to <span class="math notranslate nohighlight">\(M\)</span>.
+At the end of reading each of the strings, <span class="math notranslate nohighlight">\(M\)</span> will be in some state.
+By the pigeonhole principle, since there are more than <span class="math notranslate nohighlight">\(k\)</span> strings and only <span class="math notranslate nohighlight">\(k\)</span> states, two strings, say <span class="math notranslate nohighlight">\(s_1 \in S\)</span> and <span class="math notranslate nohighlight">\(s_1 \in S\)</span> must end up in the same final state.
+Then, for any string <span class="math notranslate nohighlight">\(z\)</span>, including the empty string, the strings <span class="math notranslate nohighlight">\(s_1 z\)</span> and <span class="math notranslate nohighlight">\(s_2 z\)</span> will end up in the same final states, so they are either both accepted or both rejected by <span class="math notranslate nohighlight">\(M\)</span>, which means they are indistinguishable.
+This is a contradiction, so <span class="math notranslate nohighlight">\(L\)</span> cannot have an index greater than <span class="math notranslate nohighlight">\(k\)</span>.</p>
+<p class="sd-card-text"><strong>Part 2:</strong>
+Suppose that <span class="math notranslate nohighlight">\(L\)</span> has a finite index <span class="math notranslate nohighlight">\(k\)</span>.
+Then, there exists a finite set of strings of size <span class="math notranslate nohighlight">\(k\)</span>, say <span class="math notranslate nohighlight">\(S = \{s_1, \dots, s_k\}\)</span>, which is pairwise distinguishable by <span class="math notranslate nohighlight">\(L\)</span>.
+We know, from <a class="reference internal" href="#toc-ex-151"><span class="std std-ref">Exercise 1.51</span></a>, that indistinguishability under <span class="math notranslate nohighlight">\(L\)</span> is an equivalence relation <span class="math notranslate nohighlight">\(\equiv_L\)</span>.
+Now note that any string <span class="math notranslate nohighlight">\(z\)</span> is indistiguishable from at least one string in <span class="math notranslate nohighlight">\(S\)</span> (because if not, then the index of <span class="math notranslate nohighlight">\(L\)</span> would be larger than <span class="math notranslate nohighlight">\(k\)</span>) and at most one string in <span class="math notranslate nohighlight">\(S\)</span> (beacuse if <span class="math notranslate nohighlight">\(z \equiv_L s_i, s_j \in S\)</span>, then <span class="math notranslate nohighlight">\(s_i \equiv_L s_j\)</span>), so any string <span class="math notranslate nohighlight">\(z\)</span> is indistinguishable from exactly one string in <span class="math notranslate nohighlight">\(L\)</span>.
+Therefore the equivalence relation <span class="math notranslate nohighlight">\(\equiv_L\)</span> forms exactly <span class="math notranslate nohighlight">\(k\)</span> equivalence classes over the set of all finite strings, and <span class="math notranslate nohighlight">\(s_1, \dots, s_k\)</span> are representatives of these classes.
+Let <span class="math notranslate nohighlight">\(\pi(x)\)</span> denote the equivalence class of a string <span class="math notranslate nohighlight">\(x\)</span>.
+Now, define a DFA <span class="math notranslate nohighlight">\(M = (Q, \Sigma, q_0, \delta, F)\)</span> as follows.
+Let <span class="math notranslate nohighlight">\(\Sigma\)</span> be the alphabet over which <span class="math notranslate nohighlight">\(L\)</span> is defined.
+Then, let <span class="math notranslate nohighlight">\(Q = \{\pi(s_1), \dots, \pi(s_n)\}\)</span> be the states, <span class="math notranslate nohighlight">\(q_0 = \pi(\epsilon)\)</span>, <span class="math notranslate nohighlight">\(\delta(q, a) = \pi(xa)\)</span> where <span class="math notranslate nohighlight">\(x\)</span> is any string that satisfies <span class="math notranslate nohighlight">\(\pi(x) = q\)</span> be the transition function, and <span class="math notranslate nohighlight">\(F = \{\pi(x) \in Q | x \in L\}\)</span> be the set of initial states.
+We need to show that this <span class="math notranslate nohighlight">\(M\)</span> is well defined, that is we need to show that <span class="math notranslate nohighlight">\(\delta(q, a) = \pi(xa)\)</span> gives the same answer regardless of which representative <span class="math notranslate nohighlight">\(x\)</span> of <span class="math notranslate nohighlight">\(q\)</span> we pick.
+To show this, let <span class="math notranslate nohighlight">\(x, y\)</span> be strings such that <span class="math notranslate nohighlight">\(\pi(x) = \pi(y) = q\)</span>.
+Then <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are in the same equivalence class so they are indistinguishable, so <span class="math notranslate nohighlight">\(xa\)</span> and <span class="math notranslate nohighlight">\(ya\)</span> are also indistinguishable, so <span class="math notranslate nohighlight">\(\pi(xa) = \pi(ya)\)</span> as required and <span class="math notranslate nohighlight">\(\delta\)</span> is well defined.
+This DFA accepts exactly the strings in <span class="math notranslate nohighlight">\(L\)</span> and no strings outside <span class="math notranslate nohighlight">\(L\)</span>, so it recognises <span class="math notranslate nohighlight">\(L\)</span>.</p>
+<p class="sd-card-text"><strong>Part 3:</strong>
+If <span class="math notranslate nohighlight">\(L\)</span> is regular, then it is recognised by a DFA with a finite number of states so, by part 1, the index of <span class="math notranslate nohighlight">\(L\)</span> is finite.
+Conversely, if the index of <span class="math notranslate nohighlight">\(L\)</span> if finite then, by part 2, it is recognised by a DFA, so it is regular.
+Therefore <span class="math notranslate nohighlight">\(L\)</span> is regular if and only if it has a finite index.
+In addition, the index of <span class="math notranslate nohighlight">\(L\)</span> is the size of the smallest DFA recognising it: part 2 implies that if the index of <span class="math notranslate nohighlight">\(L\)</span> is <span class="math notranslate nohighlight">\(k,\)</span> then it is recognised by a DFA with <span class="math notranslate nohighlight">\(k\)</span> states and part 1 implies that <span class="math notranslate nohighlight">\(L\)</span> cannot be recognised by a DFA with fewer than <span class="math notranslate nohighlight">\(k\)</span> states.</p>
+</div>
+</details></div>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>The problem in exercise 1.59 was first studied by Černý, who conjectured that a <span class="math notranslate nohighlight">\(k\)</span>-state synchronisable DFA has a synchronising sequence of length at most <span class="math notranslate nohighlight">\((k-1)^2\)</span>.
+The best known <a class="reference external" href="https://arxiv.org/pdf/1901.06542.pdf">upper bound</a>, by Shitov, is <span class="math notranslate nohighlight">\(\alpha O(k^3) + o(k^3)\)</span> with <span class="math notranslate nohighlight">\(\alpha \leq 0.1654\)</span>.
+Eppstein gave a <a class="reference external" href="https://www.ics.uci.edu/~eppstein/pubs/Epp-SJC-90.pdf">polynomial time algorithm</a> for finding synchronising strings with length cubic in <span class="math notranslate nohighlight">\(k\)</span> and Trahtman proved a <a class="reference external" href="https://arxiv.org/pdf/2105.09105.pdf">special case</a> of Černý’s conjecture for aperiodic DFAs.</p>
+</aside>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.59</p>
+<p>Let <span class="math notranslate nohighlight">\(M = (Q, \Sigma, \delta, q_0, F)\)</span> be a DFA and let <span class="math notranslate nohighlight">\(h\)</span> be a state of <span class="math notranslate nohighlight">\(M\)</span> called its <em>home</em>.
+A <em>synchronising sequence</em> for <span class="math notranslate nohighlight">\(M\)</span> and <span class="math notranslate nohighlight">\(h\)</span> is a string <span class="math notranslate nohighlight">\(s \in \Sigma^*\)</span>  where <span class="math notranslate nohighlight">\(\delta(q, s) = h\)</span> for every <span class="math notranslate nohighlight">\(q \in Q\)</span>.
+(Here we have extended <span class="math notranslate nohighlight">\(\delta\)</span> to strings, so that <span class="math notranslate nohighlight">\(\delta(q, s)\)</span> equals the state where <span class="math notranslate nohighlight">\(M\)</span> ends up when <span class="math notranslate nohighlight">\(M\)</span> starts at state <span class="math notranslate nohighlight">\(q\)</span> and reads input <span class="math notranslate nohighlight">\(s\)</span>.)
+Say that <span class="math notranslate nohighlight">\(M\)</span> is <em>synchronisable</em> if it has a synchronising sequence for some state <span class="math notranslate nohighlight">\(h\)</span>.
+Prove that if <span class="math notranslate nohighlight">\(M\)</span> is a <span class="math notranslate nohighlight">\(k\)</span>-state synchronisable DFA, then it has a synchronising sequence of length  at most <span class="math notranslate nohighlight">\(k^3\)</span>.
+Can you improve on this bound?</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(M = (Q, \Sigma, \delta, q_0, F)\)</span> be a <span class="math notranslate nohighlight">\(k\)</span>-state synchronisable DFA.
+Since it is synchronisable, there exists a synchronising sequence <span class="math notranslate nohighlight">\(s = s_1\dots s_N\)</span> where <span class="math notranslate nohighlight">\(s_1, \dots, s_N \in \Sigma\)</span>, with synchronising state <span class="math notranslate nohighlight">\(h\)</span>.
+Let <span class="math notranslate nohighlight">\(q_i \neq q_j \in Q\)</span> be two distinct states.
+Since <span class="math notranslate nohighlight">\(h\)</span> is a synchronising sequence, then <span class="math notranslate nohighlight">\(\{\delta(q_i, s), \delta(q_j, s)\} = \{h\}\)</span>.</p>
+<p class="sd-card-text">Now consider the sequence of sets <span class="math notranslate nohighlight">\(P_n = \{\delta(q_i, s_1\dots s_n), \delta(q_j, s_1\dots s_n)\}\)</span> for <span class="math notranslate nohighlight">\(n = 0, 1, \dots, N\)</span>.
+If <span class="math notranslate nohighlight">\(P_n = P_{n+k}\)</span> for any <span class="math notranslate nohighlight">\(0 \leq n \leq N - 1\)</span> and any <span class="math notranslate nohighlight">\(k &gt; 1\)</span>, we can obtain a shortened version of <span class="math notranslate nohighlight">\(s\)</span>, say <span class="math notranslate nohighlight">\(s'\)</span>,  with length <span class="math notranslate nohighlight">\(|s'| = N - k\)</span>, which still satisfies <span class="math notranslate nohighlight">\(\delta(q_i, s') = \delta(q_j, s') = h\)</span>, by removing the substring <span class="math notranslate nohighlight">\(s_{n+1} \dots s_{n+k}\)</span> from <span class="math notranslate nohighlight">\(s\)</span> to obtain <span class="math notranslate nohighlight">\(s' = s_1 \dots s_{n} s_{n+k+1} \dots s_N\)</span>.
+We can repeat this procedure to obtain a string <span class="math notranslate nohighlight">\(s'\)</span> which, when fed into <span class="math notranslate nohighlight">\(M\)</span>, produces a sequence of pairs of states such that no pair is repeated and the final pair is equal to <span class="math notranslate nohighlight">\(\{h\}\)</span>.
+Because no pair is repeated, the maximum length of <span class="math notranslate nohighlight">\(s'\)</span> is <span class="math notranslate nohighlight">\(k(k+1)/2\)</span> by the pigeonhole principle.
+Therefore for each pair of unique states <span class="math notranslate nohighlight">\(q_i \neq q_j \in Q,\)</span> there exists a sequence <span class="math notranslate nohighlight">\(s'_{ij}\)</span> which maps them both to <span class="math notranslate nohighlight">\(h\)</span>.</p>
+<p class="sd-card-text">Now consider placing a distinct marker on each state, which moves according to the transition function when an input is fed into <span class="math notranslate nohighlight">\(M\)</span>.
+Once two markers enter the same state, they cannot separate and stay joined.
+By the result above, we can join any two markers with at most <span class="math notranslate nohighlight">\(k(k+1)/2\)</span> symbols, regardless of the state from which state they are in, so we can join all of them with at most <span class="math notranslate nohighlight">\(k^2(k+1)/2\)</span> symbols (by joining the first and the second marker, then joining the third marker to the already joined first and second markers, and so on).
+This shows the required result, and slightly improves on it.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.63</p>
+<ol class="arabic simple">
+<li><p>Let <span class="math notranslate nohighlight">\(L\)</span> be an infinite regular language. Prove that <span class="math notranslate nohighlight">\(L\)</span> can be split into two disjoint infinite regular languages.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(B\)</span> and <span class="math notranslate nohighlight">\(D\)</span> be two languages. Write <span class="math notranslate nohighlight">\(B \Subset D\)</span> if <span class="math notranslate nohighlight">\(B \subset D\)</span> and <span class="math notranslate nohighlight">\(D\)</span> contains infinitely many strings not contained in <span class="math notranslate nohighlight">\(B\)</span>. Show that if <span class="math notranslate nohighlight">\(B\)</span> and <span class="math notranslate nohighlight">\(D\)</span> are two regular languages where <span class="math notranslate nohighlight">\(B \Subset D\)</span>, then we can find a regular language <span class="math notranslate nohighlight">\(C\)</span> where <span class="math notranslate nohighlight">\(B \Subset C \Subset D\)</span>.</p></li>
+</ol>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><strong>Part 1:</strong>
+Let <span class="math notranslate nohighlight">\(L\)</span> be an infinite regular language over <span class="math notranslate nohighlight">\(\Sigma\)</span>.
+Since it is regular, by the <span class="xref std std-ref">regular pumping lemma</span>, there exists a pumping length <span class="math notranslate nohighlight">\(p\)</span> for <span class="math notranslate nohighlight">\(L\)</span>.
+Since <span class="math notranslate nohighlight">\(L\)</span> is infinite, it must contain strings of arbitrarily large lengths.
+Choose a string <span class="math notranslate nohighlight">\(s \in L\)</span> longer than <span class="math notranslate nohighlight">\(p\)</span> which, by the pumping lemma can be written in the form <span class="math notranslate nohighlight">\(s = xyz\)</span> such that <span class="math notranslate nohighlight">\(|y| \geq 1\)</span> and <span class="math notranslate nohighlight">\(xy^nz \in L\)</span> for all <span class="math notranslate nohighlight">\(n \geq 1\)</span>.
+Therefore, <span class="math notranslate nohighlight">\(L\)</span> contains strings for each of the lengths <span class="math notranslate nohighlight">\(|x| + n|y| + |z|\)</span>.
+We will split <span class="math notranslate nohighlight">\(L\)</span> in two other regular languages, one which contains all strings in <span class="math notranslate nohighlight">\(L\)</span> that have length <span class="math notranslate nohighlight">\(|x| + 2n|y| + z\)</span>, and another which contains all the rest of the strings.</p>
+<p class="sd-card-text">To do this, we can build a DFA <span class="math notranslate nohighlight">\(M\)</span> which contains <span class="math notranslate nohighlight">\(N = |x| + 2|y| + |z| + 1\)</span> states, and accepts all strings of length <span class="math notranslate nohighlight">\(|x| + 2n|y| + |z|\)</span> for <span class="math notranslate nohighlight">\(n &gt; 1\)</span>.
+Let <span class="math notranslate nohighlight">\(M = (Q, \Sigma, \delta, q_1, F)\)</span> have states <span class="math notranslate nohighlight">\(Q = \{q_0, q_1, \dots q_N\}\)</span>, initial state <span class="math notranslate nohighlight">\(q_0\)</span>, final state set <span class="math notranslate nohighlight">\(F = \{q_N\}\)</span> and transition function</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\delta(q_n, a) = \begin{cases}
+q_{n+1} &amp; n &lt; N \\
+q_{|x| + |z| + 1} &amp; n = N
+\end{cases}.\end{split}\]</div>
+<p class="sd-card-text">The DFA <span class="math notranslate nohighlight">\(M\)</span> accepts all strings of length <span class="math notranslate nohighlight">\(N = |x| + 2n|y| + |z|\)</span> for <span class="math notranslate nohighlight">\(n \geq 1\)</span>.
+Since the class of regular languages is closed under intersections and complements, the language <span class="math notranslate nohighlight">\(L \cap L(M)\)</span> is regular and thus also <span class="math notranslate nohighlight">\(L \cap (L \cap L(M))'\)</span> is regular.
+Both <span class="math notranslate nohighlight">\(L \cap L(M)\)</span> and <span class="math notranslate nohighlight">\(L \cap L(M)'\)</span> are infinite, disjoint and their union equals <span class="math notranslate nohighlight">\(L\)</span>, as required.</p>
+<p class="sd-card-text"><strong>Part 2:</strong>
+Suppose <span class="math notranslate nohighlight">\(B\)</span> and <span class="math notranslate nohighlight">\(D\)</span> are two regular languages where <span class="math notranslate nohighlight">\(B \Subset D\)</span>.
+The assumption <span class="math notranslate nohighlight">\(B \Subset D\)</span> means that the language <span class="math notranslate nohighlight">\(G = D \cap B'\)</span>, which is regular, is also infinite.
+Then, by the previous result in part 1, we can split <span class="math notranslate nohighlight">\(G\)</span> into two infinite regular disjoint languages <span class="math notranslate nohighlight">\(G_1\)</span> and <span class="math notranslate nohighlight">\(G_2\)</span> such that <span class="math notranslate nohighlight">\(G_1 \cup G_2 = G\)</span>.
+Setting <span class="math notranslate nohighlight">\(C = B \cup G_1\)</span> shows the required result.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.67</p>
+<p>Let the rotational closure of language <span class="math notranslate nohighlight">\(A\)</span> be <span class="math notranslate nohighlight">\(\text{RC}(A) = \{yx | xy \in A\}\)</span>.</p>
+<ol class="arabic simple">
+<li><p>Show that for any language <span class="math notranslate nohighlight">\(A\)</span>, we have <span class="math notranslate nohighlight">\(\text{RC}(A) = \text{RC}(\text{RC}(A))\)</span>.</p></li>
+<li><p>Show that the class of regular languages is closed under rotational closure.</p></li>
+</ol>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><strong>Part 1:</strong>
+Let <span class="math notranslate nohighlight">\(A\)</span> be a language.
+If <span class="math notranslate nohighlight">\(x \in A\)</span>, then the image of <span class="math notranslate nohighlight">\(\{x\}\)</span> is the set of all strings which are cyclic permutations of the symbols in <span class="math notranslate nohighlight">\(x\)</span>.
+Since the set of all cyclic permutations of a string includes the string itself, <span class="math notranslate nohighlight">\(\text{RC}(A) \subseteq \text{RC}(\text{RC}(A)).\)</span>
+Conversely, applying two cyclic permutations to a string gives another cyclic permutation of the same string, so <span class="math notranslate nohighlight">\(\text{RC}(\text{RC}(A))\subseteq \text{RC}(A),\)</span> concluding that <span class="math notranslate nohighlight">\(\text{RC}(A) = \text{RC}(\text{RC}(A))\)</span>.</p>
+<p class="sd-card-text"><strong>Part 2:</strong>
+Suppose <span class="math notranslate nohighlight">\(A\)</span> is a regular language, so there exists an NFA <span class="math notranslate nohighlight">\(M = (Q, \Sigma, \delta, q_0, F)\)</span> which recognises it.
+We will describe an NFA <span class="math notranslate nohighlight">\(M' = (Q', \Sigma, \delta', q_0', F')\)</span> which recognises <span class="math notranslate nohighlight">\(\text{RC}(A)\)</span>, as follows.
+Suppose <span class="math notranslate nohighlight">\(|Q| = n\)</span>.
+Let <span class="math notranslate nohighlight">\(q_0'\)</span> be a new initial state, let <span class="math notranslate nohighlight">\(Q_0, Q_1, \dots Q_n\)</span> be copies of <span class="math notranslate nohighlight">\(Q\)</span>, and <span class="math notranslate nohighlight">\(\delta_0, \delta_1, \dots, \delta_n\)</span> be corresponding copied transition functions.
+Use the notation <span class="math notranslate nohighlight">\(q_{ij}\)</span> to denote the <span class="math notranslate nohighlight">\(j^{th}\)</span> state of <span class="math notranslate nohighlight">\(Q_i\)</span>.
+Then let us define <span class="math notranslate nohighlight">\(Q' = \{q_0'\} \cup Q_0 \cup Q_1 \cup \dots \cup Q_n\)</span> be the set of states, let <span class="math notranslate nohighlight">\(F = q_{11} \cup \dots \cup q_{nn}\)</span> be the set of final states and let the transition function be</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\delta(q, a) = \begin{cases}
+\{q_{i0} | i = 1, \dots, n\} &amp; q = q_0', a = \epsilon \\
+\{\delta_0(q_{0j}, a), q_{j0}\} &amp; q = q_{0j}, a = \epsilon \\
+\{\delta_0(q_{0j}, a)\} &amp; q = q_{0j}, a \neq \epsilon \\
+\delta_i(q_{ij}, a) &amp; q = q_{ij} \\
+\end{cases}
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">This NFA consists of an initial state <span class="math notranslate nohighlight">\(q_0'\)</span> with <span class="math notranslate nohighlight">\(\epsilon\)</span> transitions to every state in <span class="math notranslate nohighlight">\(Q_0\)</span>.
+Then for each state <span class="math notranslate nohighlight">\(q_{0j}\)</span> in <span class="math notranslate nohighlight">\(Q_0\)</span> there is an optional <span class="math notranslate nohighlight">\(\epsilon\)</span> transition to the initial state of <span class="math notranslate nohighlight">\(Q_j\)</span>.
+In turn, the only final state in <span class="math notranslate nohighlight">\(Q_j\)</span> is <span class="math notranslate nohighlight">\(q_{jj}\)</span>.
+This NFA recognises <span class="math notranslate nohighlight">\(\text{RC}(A)\)</span>, which is therefore regular.</p>
+</div>
+</details></div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "venv-rw"
+        },
+        kernelOptions: {
+            name: "venv-rw",
+            path: "./book/toc"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'venv-rw'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="002-cfl.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">PDAs and context-free grammars</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../prob-intro/intro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Probability: An introduction</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-1">Chapter 1</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Stratis Markou
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

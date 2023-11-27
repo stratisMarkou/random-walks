@@ -1,0 +1,1036 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Markov chains &#8212; Random Walks</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/prob-intro/ch12/content';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../../intro.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Random Walks</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../intro.html">
+                    Home
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Notes on books</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../toc/000-intro.html">Theory of Computation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../toc/001-fsa.html">FSAs and Regular Expressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../toc/002-cfl.html">PDAs and Context Free Grammars</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../toc/000-exercises.html">Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../intro.html">Probability: An introduction</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ch01/content.html">Events and Probabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ch02/content.html">Discrete random variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ch03/content.html">Multivariate discrete distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ch04/content.html">Probability generating functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ch05/content.html">Distribution and density functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ch06/content.html">Multivariate distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ch07/content.html">Moment generating functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ch08/content.html">Main limit theorems</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mira/000-intro.html">Measure Theory</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mira/001-riemann.html">Riemann integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mira/000-exercises.html">Exercises</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Papers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../papers/intro.html">Stream of papers</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../papers/ais/ais.html">Annealed Importance Sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../papers/rff/rff.html">Random Fourier features</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/stratisMarkou/random-walks" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/stratisMarkou/random-walks/issues/new?title=Issue%20on%20page%20%2Fbook/prob-intro/ch12/content.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/book/prob-intro/ch12/content.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Markov chains</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#markov-chain-and-property">Markov chain and property</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#strong-markov-property">Strong Markov property</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-of-states">Classification of states</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#invariant-distributions">Invariant distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convergence-to-equilibrium">Convergence to equilibrium</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-reversal">Time reversal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-walk-on-a-graph">Random walk on a graph</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="markov-chains">
+<h1>Markov chains<a class="headerlink" href="#markov-chains" title="Permalink to this heading">#</a></h1>
+<section id="markov-chain-and-property">
+<span id="prob-intro-mark-chain-prop"></span><h2>Markov chain and property<a class="headerlink" href="#markov-chain-and-property" title="Permalink to this heading">#</a></h2>
+<div class='definition'>
+<p><strong>Definition (Markov chain and markov property)</strong> The sequence <span class="math notranslate nohighlight">\(\mathbf{X} = X_0, X_1, ...\)</span> is called a Markov chain if it satisfies the Markov property</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{P}(X_{n + 1} = x_{n + 1} | X_0 = x_0, X_1 = x_1, ..., X_n = x_n) = \mathbb{P}(X_{n + 1} = x_{n + 1} | X_n = x_n)
+\end{align}\]</div>
+<p>for all <span class="math notranslate nohighlight">\(n \geq 0\)</span> and all <span class="math notranslate nohighlight">\(x_0, x_1, ..., x_{n + 1} \in S\)</span>. The Markov chain is called homogeneuous if for all <span class="math notranslate nohighlight">\(u, v \in S\)</span>, the conditional probability <span class="math notranslate nohighlight">\(\mathbb{P}(X_{n + 1} = x_{n + 1} | X_n = x_n)\)</span> does not depend on the value of <span class="math notranslate nohighlight">\(n\)</span>. In this case, we the <em>transition matrix</em> <span class="math notranslate nohighlight">\(P\)</span> and <em>initial distribution</em> <span class="math notranslate nohighlight">\(\lambda\)</span> of the chain are defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+P = (p_{i, j} : i, j \in S), \text{ where } p_{i, j} &amp;= \mathbb{P}(X_1 = j | X_0 = i)\\
+\lambda = (\lambda_i : i \in S), \text{ where } \lambda_i &amp;= \mathbb{P}(X_0 = i).
+\end{align}\end{split}\]</div>
+</div>
+<br>
+<p>Because they are probability distributions, <span class="math notranslate nohighlight">\(P\)</span> and <span class="math notranslate nohighlight">\(\lambda\)</span> satisfy</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\lambda \geq 0, &amp; \text{ and } \sum_{i \in S} \lambda_i = 1,\\
+p_{i, j} \geq 0, &amp; \text{ and } \sum_{j \in S} p_{i, j} = 1.
+\end{align}\end{split}\]</div>
+<p>Any matrix <span class="math notranslate nohighlight">\(P\)</span> which satisfies the above property is called a <strong>stochastic matrix</strong>. The book<span id="id1">[<a class="reference internal" href="../ch08/content.html#id5" title="G.R. Grimmett and D.R. Stirzaker. Probability and random processes. Number 391. Oxford university press, 2001.">Grimmett and Stirzaker, 2001</a>]</span> and these notes deal with homogeneous Markov chains only, although some of the definitions and theorems also apply to inhomogeneous Markov chains.</p>
+<div class='theorem'>
+<p><strong>Theorem (<span class="math notranslate nohighlight">\(\mathbf{X}\)</span> is a Markov chain <span class="math notranslate nohighlight">\(\iff\)</span> distribution factorises)</strong> Let <span class="math notranslate nohighlight">\(\lambda\)</span> be a distribution and <span class="math notranslate nohighlight">\(P\)</span> be a stochastic matrix. The random sequence <span class="math notranslate nohighlight">\(\mathbf{X} = (X_n : n \geq 0)\)</span> is a Markov chain with initial distribution <span class="math notranslate nohighlight">\(\lambda\)</span> and transition matrix <span class="math notranslate nohighlight">\(P\)</span> if and only if</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{P}(X_0 = x_0, X_1 = x_1, ..., X_n = x_n) = \lambda_{x_0} p_{x_0, x_1} ... p_{x_{n - 1}, x_n}
+\end{align}\]</div>
+<p>for all <span class="math notranslate nohighlight">\(n \geq 0\)</span> and <span class="math notranslate nohighlight">\(x_0, x_1, ..., x_n \in S\)</span>.</p>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: \(\mathbf{X}\) is a Markov chain \(\iff\) distribution factorises</summary>
+<p>Suppose <span class="math notranslate nohighlight">\(\mathbb{X} = (X_n : 0 \neq n)\)</span> is a Markov chain with initial distribution <span class="math notranslate nohighlight">\(\lambda = (\lambda_i : i \neq S)\)</span> and transition matrix <span class="math notranslate nohighlight">\(P = (p_{i, j} : i, j \neq S)\)</span>. From the definition of conditional probability and using the Markov property</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\mathbb{P}(X_0 = x_0, ..., X_n = x_n) &amp;= \mathbb{P}(X_n = x_n | X_0 = x_0, ..., X_{n - 1}) \mathbb{P}(X_0 = x_0, ..., X_{n - 1} = x_{n - 1}) \\
+&amp;= \mathbb{P}(X_n = x_n | X_{n - 1} = x_{n - 1}) \mathbb{P}(X_0 = x_0, ..., X_{n - 1} = x_{n - 1}) \\
+&amp;= p_{x_{n - 1}, x_n} \mathbb{P}(X_0 = x_0, ..., X_{n - 1} = x_{n - 1}),
+\end{align}\end{split}\]</div>
+<p>and proceeding recursively we obtain the required result, noting that <span class="math notranslate nohighlight">\(\mathbb{P}(X_0 = x_0) = \lambda_{x_0}\)</span>. Going the other way, suppose</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{P}(X_0 = x_0, ..., X_n = x_n) &amp;= \lambda_{x_0} p_{x_0, x_1} ... p_{x_{n - 1}, x_n}
+\end{align}\]</div>
+<p>for all <span class="math notranslate nohighlight">\(n \geq 0\)</span> and <span class="math notranslate nohighlight">\(x_0, x_1, ..., x_n \in S\)</span>. Then <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> satisfies the Markov property because</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\mathbb{P}(X_n = x_n | X_{n - 1} = x_{n - 1}, ..., X_0 = x_0) &amp;= \frac{\mathbb{P}(X_n = x_n, ..., X_0 = x_0)}{\mathbb{P}(X_{n - 1} = x_{n - 1}, ..., X_0 = x_0)}\\
+&amp;= p_{x_{n - 1}, x_n} \\
+&amp;= \frac{\mathbb{P}(X_n = x_n, X_{n - 1} = x_{n - 1})}{\mathbb{P}(X_{n - 1} = x_{n - 1})} \\
+&amp;= \mathbb{P}(X_n = x_n | X_{n - 1} = x_{n - 1})
+\end{align}\end{split}\]</div>
+</details>
+<br>
+<div class='theorem'>
+<p><strong>Theorem (Extended Markov property)</strong> Let <span class="math notranslate nohighlight">\(\mathbf{X} = (X_n : n \geq 0)\)</span> is a Markov chain. For <span class="math notranslate nohighlight">\(n \geq 0\)</span>, for any event <span class="math notranslate nohighlight">\(H\)</span> given in terms of <span class="math notranslate nohighlight">\(X_0, X_1, ..., X_{n - 1}\)</span> and any event given in terms of <span class="math notranslate nohighlight">\(X_{n + 1}, X_{n + 2}, ...\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{P}(F | X_n = x, H) = \mathbb{P}(F | X_n = x), \text{ for } x \in S.
+\end{align}\]</div>
+</div>
+<br>
+<details class="proof">
+<summary>Partial Proof: Extended Markov property</summary>
+<p>This is a proof of a restricted version the extended Markov property, in which <span class="math notranslate nohighlight">\(F\)</span> depends on a finite number of values of the Markov chain, although the infinite case also holds.</p>
+<p>Let <span class="math notranslate nohighlight">\(H\)</span> be an event <span class="math notranslate nohighlight">\(X_0, X_1, ..., X_{n - 1}\)</span> only, in that it is a function of these random variables only. Similarly, let <span class="math notranslate nohighlight">\(F\)</span> be a function of <span class="math notranslate nohighlight">\(X_{n + 1}, X_{n + 2}, ... X_{n + k}\)</span> for some <span class="math notranslate nohighlight">\(k \geq 0\)</span>, only. By the <a class="reference internal" href="#prob-intro-mark-chain-prop"><span class="std std-ref">Markov property</span></a> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+&amp;\mathbb{P}(X_0 = x_0, ..., X_{n - 1} = x_{n - 1}, X_{n + 1} = x_{n + 1}, ..., X_{n + k} = x_{n + k} | X_n = x_n) = \\
+&amp;~~~~~~~~~~~~=\mathbb{P}(X_0 = x_0, ..., X_{n - 1} = x_{n - 1} | X_n = x_n) \mathbb{P}(X_{n + k} = x_{n + k} | X_n = x_n).
+\end{align}\end{split}\]</div>
+<p>Then summing over all values of <span class="math notranslate nohighlight">\(x_0, ..., x_{n - 1}\)</span> corresponding to <span class="math notranslate nohighlight">\(H\)</span> and over all values of <span class="math notranslate nohighlight">\(x_{n + 1}, ..., x_{n + k}\)</span> corresponding to <span class="math notranslate nohighlight">\(F\)</span>, and dividing both sides by <span class="math notranslate nohighlight">\(\mathbb{P}(H | X_n = x_n)\)</span>, we obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{P}(F, H | X_n = x_n) &amp;= \mathbb{P}(F | X_n = x_n) \mathbb{P}(H | X_n = x_n) \implies \mathbb{P}(F | H, X_n = x_n) &amp;= \mathbb{P}(F | X_n = x_n),
+\end{align}\]</div>
+<p>arriving at the result.</p>
+</details>
+<br>
+<div class='theorem'>
+<p><strong>Theorem (Chapman-Kolmogorov equations)</strong> Let <span class="math notranslate nohighlight">\(\mathbf{X} = (X_n : n \geq 0)\)</span> be a Markov chain with initial distribution <span class="math notranslate nohighlight">\(\lambda\)</span> and transition matrix <span class="math notranslate nohighlight">\(P\)</span>. Then the <em>n-step transition probabilities</em> <span class="math notranslate nohighlight">\(p_{x_i, x_j}(n) = \mathbb{P}(X_n = x_j | X_0 = x_i)\)</span> satisfy</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+p_{x_i, x_j}(n + m) = \sum_{x_k \in S} p_{x_i, x_k}(n)p_{x_k, x_j}(m),
+\end{align}\]</div>
+<p>for <span class="math notranslate nohighlight">\(x_i, x_j \in S\)</span> and <span class="math notranslate nohighlight">\(n, m \geq 0\)</span>.</p>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Chapman-Holmogorov equations</summary>
+<p>From the definition of <span class="math notranslate nohighlight">\(p_{x_i, x_j}(n + m)\)</span> we see</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+p_{x_i, x_j}(n + m) &amp;= \mathbb{P}(X_{n + m} = x_j | X_0 = x_i)\\
+&amp;= \sum_{k \in S} \mathbb{P}(X_{n + m} = x_j | X_k = x_k, X_0 = x_0) \mahtbb{P}(X_k = x_k | X_0 = x_i) \\
+&amp;= \sum_{k \in S} \mathbb{P}(X_{n + m} = x_j | X_k = x_k) \mahtbb{P}(X_k = x_k | X_0 = x_i) \\
+&amp;= \sum_{k \in S} \mathbb{P}(X_{n + m} = x_j | X_k = x_k) \mahtbb{P}(X_k = x_k | X_0 = x_i) \\
+&amp;= \sum_{k \in S} p_{x_i, x_k}(n)p_{x_k, x_j}(m),
+\end{align}\end{split}\]</div>
+<p>where we have used the Markov property to go from the second to the third line.</p>
+</details>
+<br>
+<div class='definition'>
+<p><strong>Definition (Communicating states)</strong> Let <span class="math notranslate nohighlight">\(\mathbf{X} = X_0, X_1, ...\)</span> be a Markov chain with state space <span class="math notranslate nohighlight">\(S\)</span> and transition matrix <span class="math notranslate nohighlight">\(P\)</span>. For <span class="math notranslate nohighlight">\(i, j \in S\)</span>, we say that <span class="math notranslate nohighlight">\(i\)</span> leads to <span class="math notranslate nohighlight">\(j\)</span>, written <span class="math notranslate nohighlight">\(i \to j\)</span>, if <span class="math notranslate nohighlight">\(p_{i, j}(n) &gt; 0\)</span> for some <span class="math notranslate nohighlight">\(n \geq 0\)</span>. If <span class="math notranslate nohighlight">\(i \to j\)</span> and <span class="math notranslate nohighlight">\(j \to i\)</span>, we write <span class="math notranslate nohighlight">\(i \leftrightarrow j\)</span>, and say that <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> communicate.</p>
+</div>
+<br>
+<div class='lemma'>
+<p><strong>Lemma (Communication relation)</strong> The relation <span class="math notranslate nohighlight">\(\leftrightarrow\)</span> is an equivalence relation.</p>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Communication relation</summary>
+<p>A relation is an equivalence relation if it is reflexive, symmetric and transitive. First, for any <span class="math notranslate nohighlight">\(i \in S\)</span> we have <span class="math notranslate nohighlight">\(i \to i\)</span>, so <span class="math notranslate nohighlight">\(i \leftrightarrow i\)</span>, so communication is reflexive. Second, if <span class="math notranslate nohighlight">\(i \leftrightarrow j\)</span> we have <span class="math notranslate nohighlight">\(i \to j\)</span> and <span class="math notranslate nohighlight">\(j \to i\)</span>, from which it follows <span class="math notranslate nohighlight">\(j \to i\)</span>, so communication is symmetric. Finally, suppose <span class="math notranslate nohighlight">\(i \leftrightarrow j\)</span> and <span class="math notranslate nohighlight">\(j \leftrightarrow k\)</span>. Then, there exist <span class="math notranslate nohighlight">\(n, m \geq 0\)</span> such that <span class="math notranslate nohighlight">\(p_{i, j}(n) &gt; 0\)</span> and <span class="math notranslate nohighlight">\(p_{j, k}(m) &gt; 0\)</span>. By the Chapman-Kolmogorov equations</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+p_{i, k}(n + m) &amp;= \sum_{l \in S} p_{i, l}(n) p_{l, k}(m) \\
+&amp;= p_{i, j}(n) p_{j, k}(m) &gt; 0,
+\end{align}\end{split}\]</div>
+<p>from which it follows that <span class="math notranslate nohighlight">\(i \to k\)</span>. Similarly we have <span class="math notranslate nohighlight">\(k \to i\)</span>, thus <span class="math notranslate nohighlight">\(i \leftrightarrow k\)</span> and <span class="math notranslate nohighlight">\(\leftrightarrow\)</span> is transitive.</p>
+</details>
+<br>
+<div class='definition'>
+<p><strong>Definition (Communicating classes, irreducible chains, closed sets)</strong> The equivalence classes of <span class="math notranslate nohighlight">\(\leftrightarrow\)</span> are called communicating classes. A Markov chain <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> is called irreducible, if there is a single communicating class. A subset <span class="math notranslate nohighlight">\(C \subseteq S\)</span> is called closed if <span class="math notranslate nohighlight">\(i \in C, i \to j \implies j \in C\)</span>. If the singleton set <span class="math notranslate nohighlight">\(\{i\}\)</span> is closed, <span class="math notranslate nohighlight">\(i\)</span> is called an absorbing state.</p>
+</div>
+<br>
+<div class='definition'>
+<p><strong>Definition (First-passage times and probabilites)</strong> The first-passage time to state <span class="math notranslate nohighlight">\(j\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+T_j = \min \{n \geq 1 : X_n = j\},
+\end{align}\]</div>
+<p>and the first-passage probabilites are defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+f_{i, j}(n) = \mathbb{P}(T_j = n | X_0 = i).
+\end{align}\]</div>
+</div>
+<br>
+<div class='definition'>
+<p><strong>Definition (First-passage times and probabilites)</strong> A state <span class="math notranslate nohighlight">\(i\)</span> is called recurrent if <span class="math notranslate nohighlight">\(\mathbb{P}(T_j &lt; \infty | X_0 = i) = 1\)</span>, and it is called transient if it is not recurrent.</p>
+</div>
+<br>
+<div class='theorem'>
+<p><strong>Theorem (Recurrence <span class="math notranslate nohighlight">\(\iff\)</span> sum of return probabilities diverges)</strong> The state <span class="math notranslate nohighlight">\(i\)</span> is recurrent if and only if</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\sum^{\infty}_{n = 0} p_{i, i}(n) = \infty.
+\end{align}\]</div>
+</div>
+<br>
+<p>To prove this result we use the following theorem, which related the generating functions of the return probabilities and the first-passage times.</p>
+<details class="proof">
+<summary>Proof: Recurrence \(\iff\) sum of return probabilities diverges</summary>
+<p>Starting from the relation</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+P_{i, j} = \delta_{i, j} + F_{i, j}(s) P_{j, j}(s),
+\end{align}\]</div>
+<p>we set <span class="math notranslate nohighlight">\(j = i\)</span> and rearrange to obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+P_{j, j}(s) = \frac{1}{1 - F_{i, i}(s)}.
+\end{align}\]</div>
+<p>Then letting <span class="math notranslate nohighlight">\(s \to 1\)</span>, we obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\sum^{\infty}_{n = 0} p_{i, i}(n) = \lim_{s \to 1} P_{j, j}(s) = \lim_{s \to 1} \frac{1}{1 - F_{i, i}(s)}.
+\end{align}\]</div>
+<p>and considering <span class="math notranslate nohighlight">\(\lim_{s \to 1} F_{i, i}(s) = f_{i, i}\)</span>, we see that the sum on the left diverges if and only if <span class="math notranslate nohighlight">\(f_{i, i} = 1\)</span>, i.e. if the state is recurrent.</p>
+</details>
+<br>
+<div class='theorem'>
+<p><strong>Theorem (Gen. func. of return and first-passage probabilities)</strong> Let <span class="math notranslate nohighlight">\(P_{i, j}(s)\)</span> and <span class="math notranslate nohighlight">\(F_{i, j}(s)\)</span> be the generating functions</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+P_{i, j} &amp;= \sum_{n = 0}^\infty p_{i, j}(n) s^n, \\
+F_{i, j} &amp;= \sum_{n = 0}^\infty f_{i, j}(n) s^n.
+\end{align}\end{split}\]</div>
+<p>Then for any <span class="math notranslate nohighlight">\(i, j \in S\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+P_{i, j} = \delta_{i, j} + F_{i, j}(s) P_{j, j}(s).
+\end{align}\]</div>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Gen. func. of return and first-passage probabilities</summary>
+<p>First, we can write <span class="math notranslate nohighlight">\(p_{i, j}(n)\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+p_{i, j}(n) = \sum_{m = 1}^\infty \mathbb{P}(X_n = j | T_j = m, X_0 = i) \mathbb{P}(T_j = m | X_0 = i).
+\end{align}\]</div>
+<p>Writing <span class="math notranslate nohighlight">\(H = \{X_n \neq j \text{ for } 1 \leq n &lt; m\}\)</span> and using the extended Markov property</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{P}(X_n = j | T_j = m, X_0 = i) = \mathbb{P}(X_n = j | X_m = j, H, X_0 = i) = \mathbb{P}(X_n = j | X_m = j).
+\end{align}\]</div>
+<p>Using the fact that the chain is homogeneous</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+p_{i, j}(n) &amp;= \sum_{m = 1}^\infty \mathbb{P}(X_n = j | X_m = j) \mathbb{P}(T_j = m | X_0 = i), \\
+&amp;= \sum_{m = 1}^\infty f_{i, j}(m) p_{j, j}(n - m),
+\end{align}\end{split}\]</div>
+<p>and multiplying both sides by <span class="math notranslate nohighlight">\(s^n\)</span> and summing over <span class="math notranslate nohighlight">\(n\)</span>, we obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\sum_{n = 1}^\infty p_{i, j}(n) s^n &amp;= \sum_{n = 1}^\infty \sum_{m = 1}^\infty f_{i, j}(m) s^m p_{j, j}(n - m) s^{n - m}, \\
+&amp;= \sum_{m = 1}^\infty \sum_{n = m}^\infty f_{i, j}(m) s^m p_{j, j}(n - m) s^{n - m}, \\
+&amp;= \left[\sum_{m = 1}^\infty f_{i, j}(m) s^m \right] \left[\sum_{n = m}^\infty p_{j, j}(n - m) s^{n - m}\right],
+\end{align}\end{split}\]</div>
+<p>where we have used the fact <span class="math notranslate nohighlight">\(f_{i, j}(0) = 0\)</span>. Lastly, using the fact that <span class="math notranslate nohighlight">\(p_{i, j}(0) = \delta_{i, j}\)</span>, we arrive at the result</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+P_{i, j}(s) = \delta_{i, j} + F_{i, j}(s) P_{j, j}(s).
+\end{align}\]</div>
+</details>
+<br>
+<div class='theorem'>
+<p><strong>Theorem (Communicating class and recurrence/transience)</strong> Let <span class="math notranslate nohighlight">\(C\)</span> be a communicating class. Then</p>
+<ol class="arabic simple">
+<li><p>Either every state in <span class="math notranslate nohighlight">\(C\)</span> is recurrent or every state is transient.</p></li>
+<li><p>Suppose <span class="math notranslate nohighlight">\(C\)</span> contains some recurrent state. Then <span class="math notranslate nohighlight">\(C\)</span> is closed.</p></li>
+</ol>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Communicating class and recurrence/transience</summary>
+<p><strong>Part 1:</strong> Suppose <span class="math notranslate nohighlight">\(i \in C\)</span> is recurrent. Then from the Chapman-Kolmogorov equations, for any <span class="math notranslate nohighlight">\(j \in C\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\sum_{n = 1}^\infty p_{j, j}(n) \geq \sum_{l = 1}^\infty p_{j, j}(k + l + m) = p_{j, i}(k) \left[\sum_{l = 1}^\infty p_{i, i}(l)\right] p_{i, j}(m) = \infty,
+\end{align}\]</div>
+<p>so <span class="math notranslate nohighlight">\(j\)</span> is also recurrent.</p>
+<p><strong>Part 2:</strong> Suppose <span class="math notranslate nohighlight">\(i \in C\)</span> is recurrent and that <span class="math notranslate nohighlight">\(C\)</span> is not closed. Then there exist <span class="math notranslate nohighlight">\(j \in C\)</span> and <span class="math notranslate nohighlight">\(k \not \in C\)</span> such that <span class="math notranslate nohighlight">\(j \to k\)</span> and <span class="math notranslate nohighlight">\(k \not \to j\)</span>. From the previous part of this theorem, <span class="math notranslate nohighlight">\(j\)</span> is also recurrent. Using these facts we arrive at the contradiction</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{P}(X_n \neq j \text{ for } n \geq 1 | X_0 = j) \geq p_{j, k} &gt; 0,
+\end{align}\]</div>
+<p>where the first inequality follows because <span class="math notranslate nohighlight">\(k \not \to j\)</span>, so if the chain transitions from <span class="math notranslate nohighlight">\(j\)</span> to <span class="math notranslate nohighlight">\(k\)</span> in the first step, it cannot return to <span class="math notranslate nohighlight">\(j\)</span> in any number of steps. Therefore the assumption that <span class="math notranslate nohighlight">\(C\)</span> is not closed, is contradicted.</p>
+</details>
+<br>
+<div class='theorem'>
+<p><strong>Theorem (Communication and recurrence of finite <span class="math notranslate nohighlight">\(S\)</span>)</strong> Suppose that the state space <span class="math notranslate nohighlight">\(S\)</span> is finite</p>
+<ol class="arabic simple">
+<li><p>There exists at least one recurrent state.</p></li>
+<li><p>If the chain is irreducible, all states are recurrent.</p></li>
+</ol>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Communication and recurrence of finite \(S\)</summary>
+<p><strong>Part 1:</strong> Suppose <span class="math notranslate nohighlight">\(S\)</span> is finite and that all states are transient. Since all states are transient</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+P_{i, i}(1) &lt; \infty, F_{j, i}(1) \leq 1 \implies P_{j, i}(1) &lt; \infty
+\end{align}\]</div>
+<p>for any <span class="math notranslate nohighlight">\(i, j \in S\)</span>. Since <span class="math notranslate nohighlight">\(P_{j, i}(1) = \sum^\infty_{n = 1} p_{j, i}(n) &lt; \infty\)</span>, we must have <span class="math notranslate nohighlight">\(p_{j, i}(n) \to 0\)</span> as <span class="math notranslate nohighlight">\(n \to \infty\)</span>. Since <span class="math notranslate nohighlight">\(p_{i, j}(n)\)</span> is a distribution however</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\sum_{j \in S} p_{i, j}(n) = 1,
+\end{align}\]</div>
+<p>reaching a contradiction.</p>
+<p><strong>Part 2:</strong> Suppose that the chain is irreducible, so that all states belong to the same communicating class. From the first part of this theorem, there exists at least one recurrent state and since all states belonging to the same communicating class are either all recurrent or all transient, it follows that all states are recurrent.</p>
+</details>
+<br>
+<div class='theorem'>
+<p><strong>Theorem (Polya’s theorem)</strong> The symmetric random walk on <span class="math notranslate nohighlight">\(\mathbb{Z}^d\)</span> is recurrent if <span class="math notranslate nohighlight">\(d = 1, 2, ...\)</span> and transient if <span class="math notranslate nohighlight">\(d \geq 3\)</span>.</p>
+</div>
+<br>
+<div class='definition'>
+<p><strong>Definition (Hitting time, hitting and absorption probabilities)</strong> The hitting time of a subset <span class="math notranslate nohighlight">\(A \subseteq S\)</span> is the earliest time <span class="math notranslate nohighlight">\(n\)</span> at which <span class="math notranslate nohighlight">\(X_n \in A\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+H^A = \inf \{n \geq 0 : X_n \in A\}.
+\end{align}\]</div>
+<p>The hitting probability is defined in terms of the hitting time as</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+h^A_i = \mathbb{P}(H^A &lt; \infty | X_0 = i).
+\end{align}\]</div>
+<p>If <span class="math notranslate nohighlight">\(A\)</span> is closed, <span class="math notranslate nohighlight">\(h^A_i\)</span> is called an absorption probability.</p>
+</div>
+<br>
+<div class='theorem'>
+<p><strong>Theorem (Hitting probabilities)</strong> The vector of hitting probabilities <span class="math notranslate nohighlight">\(h^A = (h^A_i : i \in S)\)</span> is the minimal non-negative solution to</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+h^A_i = \begin{cases}
+1 &amp; \text{ for } i \in A, \\
+\sum_{j \in S} p_{i, j} h_j^A &amp; \text{ for } i \not \in A.
+\end{cases}
+\end{align}\end{split}\]</div>
+</div>
+<br>
+<div class='theorem'>
+<p><strong>Theorem (Expected hitting times)</strong> The vector of expected hitting times <span class="math notranslate nohighlight">\(k^A = (k_i^A = \mathbb{E}\left[H_i^A\right] : i \in S)\)</span> is the minimal non-negative solution to</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+k^A_i = \begin{cases}
+0 &amp; \text{ for } i \in A, \\
+1 + \sum_{j \in S} p_{i, j} k_j^A &amp; \text{ for } i \not \in A.
+\end{cases}
+\end{align}\end{split}\]</div>
+</div>
+<br>
+</section>
+<section id="strong-markov-property">
+<span id="prob-intro-strong-markov-prop"></span><h2>Strong Markov property<a class="headerlink" href="#strong-markov-property" title="Permalink to this heading">#</a></h2>
+<div class='definition'>
+<p><strong>Definition (Stopping time)</strong> The random variable <span class="math notranslate nohighlight">\(T : \Omega \to \{0, 1, 2, ...\} \cup \{\infty\}\)</span> is called a stopping time for the Markov chain <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>, if the event <span class="math notranslate nohighlight">\(\{T = n\}\)</span> is given in terms of <span class="math notranslate nohighlight">\(X_0, X_1, ..., X_n\)</span> only, for all <span class="math notranslate nohighlight">\(n \geq 0\)</span>.</p>
+</div>
+<br>
+<div class='theorem'>
+<p><strong>Theorem (Strong Markov property)</strong> Let <span class="math notranslate nohighlight">\(\mathbf{X} = X_0, X_1, ...\)</span> be a Markov chain with transition matrix <span class="math notranslate nohighlight">\(P\)</span>, and let <span class="math notranslate nohighlight">\(T\)</span> be a stopping time. Given <span class="math notranslate nohighlight">\(T &lt; \infty\)</span> and <span class="math notranslate nohighlight">\(X_T = i\)</span>, the sequence <span class="math notranslate nohighlight">\(\mathbf{Y} = Y_0, Y_1, ...\)</span>, given by <span class="math notranslate nohighlight">\(Y_k = X_{T + k}\)</span>, is a Markov chain with transition matrix <span class="math notranslate nohighlight">\(P\)</span> and initial state <span class="math notranslate nohighlight">\(Y_0 = i\)</span>. Further, given that <span class="math notranslate nohighlight">\(T &lt; \infty\)</span> and <span class="math notranslate nohighlight">\(X_T = i\)</span>, <span class="math notranslate nohighlight">\(\mathbf{Y}\)</span> is independent of <span class="math notranslate nohighlight">\(X_0, X_1, ..., X_{T - 1}\)</span>.</p>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: Strong Markov property</summary>
+<p>We want to show that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+&amp;\mathbb{P}(X_{T + 1} = i_1, X_{T + 2} = i_2, ..., X_{T + n} = i_n, H | T &lt; \infty, X_T = i) =\\
+&amp;~~~~~~~~= \mathbb{P}(X_1 = i_1, X_2 = i_2, ..., X_n = i_n | X_T = i) \mathbb{P}(H | T &lt; \infty, X_T = i),
+\end{align}\end{split}\]</div>
+<p>which follows from the Markov property, except we also need to take care conditioning on the event <span class="math notranslate nohighlight">\(\{T &lt; \infty\}\)</span> rather than <span class="math notranslate nohighlight">\(\{T &lt; \infty\} \cup \{T = \infty\}\)</span>. Let <span class="math notranslate nohighlight">\(0 \leq m &lt; \infty\)</span> and consider</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+&amp;\mathbb{P}(X_{T + 1} = i_1, X_{T + 2} = i_2, ..., X_{T + n} = i_n, H, T = m | X_T = i) = \\
+&amp;~~~~~~~~= \mathbb{P}(X_1 = i_1, X_2 = i_2, ..., X_n = i_n | X_0 = i) \mathbb{P}(H, T = m | X_T = i),
+\end{align}\end{split}\]</div>
+<p>which follows from the <a class="reference internal" href="#prob-intro-mark-chain-prop"><span class="std std-ref">Markov property</span></a> together with the facts that <span class="math notranslate nohighlight">\(T\)</span> is a stopping time and the chain is homogeneous. Now summing over <span class="math notranslate nohighlight">\(m = 0, 1, 2, ...\)</span> and dividing by <span class="math notranslate nohighlight">\(\mathbb{P}(T &lt; \infty | X_T = i)\)</span> on both sides we obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+&amp;\mathbb{P}(X_{T + 1} = i_1, X_{T + 2} = i_2, ..., X_{T + n} = i_n, H | T &lt; \infty, X_T = i) = \\
+&amp;~~~~~~~~= \mathbb{P}(X_1 = i_1, X_2 = i_2, ..., X_n = i_n | X_0 = i) \mathbb{P}(H | T &lt; \infty, X_T = i).
+\end{align}\end{split}\]</div>
+</details>
+<br>
+</section>
+<section id="classification-of-states">
+<h2>Classification of states<a class="headerlink" href="#classification-of-states" title="Permalink to this heading">#</a></h2>
+<div class='theorem'>
+<p><strong>Theorem (PDF of number of visits)</strong> Let <span class="math notranslate nohighlight">\(X_0 = i\)</span> and let <span class="math notranslate nohighlight">\(V_i = |\{n \geq 1 : X_n = i\}|\)</span> be the number of visits of the chain to state <span class="math notranslate nohighlight">\(i\)</span>. Then <span class="math notranslate nohighlight">\(V_i\)</span> has the geometric distribution</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{P}(V_i = r | X_0 = i) = (1 - f)f^r, \text{ for } r = 0, 1, 2, ...,
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(f = f_{i, i} = \mathbb{P}(X_n = i \text{ for some } n \geq 1)\)</span>, is the return probability. From this it follows that</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbb{P}(V_i = \infty | X_0 = i) = 1\)</span> if <span class="math notranslate nohighlight">\(i\)</span> is recurrent,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbb{P}(V_i &lt; \infty | X_0 = i) = 1\)</span> if <span class="math notranslate nohighlight">\(i\)</span> is transient.</p></li>
+</ol>
+</div>
+<br>
+<details class="proof">
+<summary>Proof: PDF of number of visits</summary>
+<p>Let <span class="math notranslate nohighlight">\(f_{i, i} = \mathbb{P}(T_i &lt; \infty | X_0 = i)\)</span> and write <span class="math notranslate nohighlight">\(T_i^r\)</span> for the time at which the chain visits state <span class="math notranslate nohighlight">\(i\)</span> for the <span class="math notranslate nohighlight">\(r^{th}\)</span> time. Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\mathbb{P}(V_i \geq r | X_0 = i) &amp;= \mathbb{P}(T_i^r &lt; \infty | X_0 = i) \\
+&amp;= \mathbb{P}(T_i^r &lt; \infty | T_i^{r - 1} &lt; \infty, X_0 = i) \mathbb{P}(T_i^{r - 1} &lt; \infty | X_0 = i) \\
+&amp;= f \mathbb{P}(T_i^{r - 1} &lt; \infty | X_0 = i)
+\end{align}\end{split}\]</div>
+<p>where we have used the <a class="reference internal" href="#prob-intro-strong-markov-prop"><span class="std std-ref">strong Markov property</span></a> and the fact that the chain is homogeneous. In particular <span class="math notranslate nohighlight">\(T_i^k\)</span> is a stopping time so</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\mathbb{P}(T_i^r &lt; \infty | T_i^{r - 1} &lt; \infty, X_0 = i) &amp;= \mathbb{P}(T_i^r &lt; \infty | X_{T_i^{r - 1}} = i, T_i^{r - 1} &lt; \infty, X_0 = i) &amp;&amp; \\
+&amp;= \mathbb{P}(T_i^r &lt; \infty | X_{T_i^{r - 1}} = i) &amp;&amp; \hspace{-1cm} \text{ strong Markov property,} \\
+&amp;= f_{i, i} &amp;&amp; \hspace{-1cm} \text{ homogeneity.} \\
+\end{align}\end{split}\]</div>
+<p>Proceeding recursively, we obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathbb{P}(V_i \geq r | X_0 = i) = f^r \implies \mathbb{P}(V_i = r | X_0 = i) = (1 - f) f^r.
+\end{align}\]</div>
+<p>For the limiting behaviour, we consider that <span class="math notranslate nohighlight">\(f_{i, i} = 1\)</span> if <span class="math notranslate nohighlight">\(i\)</span> is recurrent and <span class="math notranslate nohighlight">\(f_{i, i} = 0\)</span> if <span class="math notranslate nohighlight">\(i\)</span> is transient and let <span class="math notranslate nohighlight">\(r \to \infty\)</span>, arriving at the result.</p>
+</details>
+<br>
+<div class='definition'>
+<p><strong>Definition (Mean recurrence time)</strong> The mean recurrence time <span class="math notranslate nohighlight">\(\mu_i\)</span> of a state <span class="math notranslate nohighlight">\(i\)</span> is defined by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\mu_i = \mathbb{E}(T_i | X_0 = i) = \begin{cases}
+\sum_{n = 1}^\infty n f_{i, i} &amp; \text{ if } i \text{ is recurrent,}\\
+\infty &amp; \text{ if } i \text{ is transient.}
+\end{cases}
+\end{align}\end{split}\]</div>
+</div>
+<br>
+<div class='definition'>
+<p><strong>Definition (Null and positive states)</strong> If <span class="math notranslate nohighlight">\(i\)</span> is recurrent, we call it null if <span class="math notranslate nohighlight">\(\mu_i = \infty\)</span>, and positive if <span class="math notranslate nohighlight">\(\mu_i &lt; \infty\)</span>.</p>
+</div>
+<br>
+<div class='definition'>
+<p><strong>Definition (Period of a state)</strong> The period <span class="math notranslate nohighlight">\(d_i\)</span> of the state <span class="math notranslate nohighlight">\(i\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+d_i = \text{gcd}\{n : p_{i, i}(n) &gt; 0\}.
+\end{align}\]</div>
+<p>The state <span class="math notranslate nohighlight">\(i\)</span> is called aperiodic if <span class="math notranslate nohighlight">\(d_i = 1\)</span>, and periodic if <span class="math notranslate nohighlight">\(d_i &gt; 1\)</span>.</p>
+</div>
+<br>
+<div class='definition'>
+<p><strong>Definition (Ergodic states)</strong> State <span class="math notranslate nohighlight">\(i\)</span> is called ergodic if it is aperiodic and positive recurrent.</p>
+</div>
+<br>
+<div class='theorem'>
+<p><strong>Theorem (Implications of communication between states)</strong> If <span class="math notranslate nohighlight">\(i \leftrightarrow j\)</span>, then</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> have the same period,</p></li>
+<li><p><span class="math notranslate nohighlight">\(i\)</span> is recurrent if and only if <span class="math notranslate nohighlight">\(j\)</span> is recurrent,</p></li>
+<li><p><span class="math notranslate nohighlight">\(i\)</span> is positive recurrent if and only if <span class="math notranslate nohighlight">\(j\)</span> is positive recurrent,</p></li>
+<li><p><span class="math notranslate nohighlight">\(i\)</span> is ergodic if and only if <span class="math notranslate nohighlight">\(j\)</span> is ergodic.</p></li>
+</ol>
+</div>
+<br>
+</section>
+<section id="invariant-distributions">
+<h2>Invariant distributions<a class="headerlink" href="#invariant-distributions" title="Permalink to this heading">#</a></h2>
+<div class='definition'>
+<p><strong>Definition (Invariant distribution)</strong> Let <span class="math notranslate nohighlight">\(\mathbf{X} = X_0, X_1, ...\)</span> be a Markov chain with transition matrix <span class="math notranslate nohighlight">\(P\)</span>. The vector <span class="math notranslate nohighlight">\(\pi = (\pi_i : i \in S)\)</span> is called an invariant distribution of the chain if:</p>
+<ol class="arabic simple">
+<li><p>It is a distribution: <span class="math notranslate nohighlight">\(\pi_i \geq 0\)</span> for all <span class="math notranslate nohighlight">\(i \in S\)</span>, and <span class="math notranslate nohighlight">\(\sum_{i \in S} \pi_i = 1\)</span>,</p></li>
+<li><p>It is invariant under the transition matrix: <span class="math notranslate nohighlight">\(\pi_j = \sum_{i \in S} \pi_i P_{i, j}\)</span>.</p></li>
+</ol>
+</div>
+<br>
+<div class='theorem'>
+<p><strong>Theorem (Implications of communication between states)</strong> Consider an irreducible Markov chain.</p>
+<ol class="arabic simple">
+<li><p>There exists an invariant distribution <span class="math notranslate nohighlight">\(\pi\)</span> if and only if some state is positive recurrent.</p></li>
+<li><p>If there exists an invariant distribution <span class="math notranslate nohighlight">\(\pi\)</span>, then every state is positive recurrent and \begin{align}\pi_i = \frac{1}{\mu_i} \text{ for } i \in S,\end{align}
+where <span class="math notranslate nohighlight">\(\mu_i\)</span> is the mean recurrence time of state <span class="math notranslate nohighlight">\(i\)</span>. In particular, <span class="math notranslate nohighlight">\(\pi\)</span> is the unique invariant distribution.</p></li>
+</ol>
+</div>
+<br>
+</section>
+<section id="convergence-to-equilibrium">
+<h2>Convergence to equilibrium<a class="headerlink" href="#convergence-to-equilibrium" title="Permalink to this heading">#</a></h2>
+<div class='theorem'>
+<p><strong>Theorem (Convergence theorem for Markov chains)</strong> Consider a Markov chain that is aperiodic, irreducible and positive recurrent. For <span class="math notranslate nohighlight">\(i, j \in S\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+p_{i, j}(n) \to \pi_j \text{ as } n \to \infty,
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\pi\)</span> is the unique invariant distribution of the chain.</p>
+</div>
+<br>
+<div class='theorem'>
+<p><strong>Theorem (Irreducibility, recurrence and nullness)</strong> Let <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> be an irreducible, recurrent Markov chain. The following are equivalent</p>
+<ol class="arabic simple">
+<li><p>There exists a state <span class="math notranslate nohighlight">\(i\)</span> such that <span class="math notranslate nohighlight">\(p_{i, i}(n) \to 0\)</span> as <span class="math notranslate nohighlight">\(n \to \infty\)</span>.</p></li>
+<li><p>Every state is null recurrent.</p></li>
+</ol>
+</div>
+<br>
+<div class='theorem'>
+<p><strong>Theorem (Convergence of mean visitation)</strong> Let <span class="math notranslate nohighlight">\(i \in S\)</span>. If the chain is irreducible and positive recurrent,</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\frac{1}{n} V_i(n) \implies \frac{1}{\mu_i} \text{ as } n \to \infty,
+\end{align}\]</div>
+<p>irrespective of the initial distribution of the chain.</p>
+</div>
+<br>
+</section>
+<section id="time-reversal">
+<h2>Time reversal<a class="headerlink" href="#time-reversal" title="Permalink to this heading">#</a></h2>
+<div class='definition'>
+<p><strong>Definition (Reverse chain)</strong> Let <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> be an irreducible, positive recurrent Markov chain, with transition matrix <span class="math notranslate nohighlight">\(P\)</span> and initial distribution <span class="math notranslate nohighlight">\(\lambda = \pi\)</span> equal to its invariant distribution <span class="math notranslate nohighlight">\(\pi\)</span>. The reversed chain <span class="math notranslate nohighlight">\(\mathbf{Y} = (Y_n : 0 \leq n \leq N)\)</span> is given by <span class="math notranslate nohighlight">\(Y_n = X_{N - n}\)</span> for <span class="math notranslate nohighlight">\(0 \leq n \leq N\)</span>.</p>
+</div>
+<br>
+<div class='theorem'>
+<p><strong>Theorem (Reverse chain)</strong> Given a markov Chain <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>, its reversed chain <span class="math notranslate nohighlight">\(\mathbf{Y}\)</span> is an irreducible Markov chain with transition matrix <span class="math notranslate nohighlight">\(\hat{P} = (\hat{p} : i, j \in S)\)</span> given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\hat{p}_{i, j} = \frac{\pi_j}{\pi_i} p_{j, i} \text{ for } i, j \in S,
+\end{align}\]</div>
+<p>with an invariant distribution <span class="math notranslate nohighlight">\(\pi\)</span>.</p>
+</div>
+<br>
+<div class='definition'>
+<p><strong>Definition (Reversible chain)</strong> Let <span class="math notranslate nohighlight">\(\mathbf{X} = (X_n : 0 \leq n \leq N)\)</span> be an irreducible Markov chain such that <span class="math notranslate nohighlight">\(X_0\)</span> has the invariant distribution <span class="math notranslate nohighlight">\(\pi\)</span>. The chain is called reversible if <span class="math notranslate nohighlight">\(\mathbb{X}\)</span> and its time reversal <span class="math notranslate nohighlight">\(\mathbb{Y}\)</span> have the same distribution matrices, which is to say that</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\pi_i p_{i, j} = \pi_j p_{j, i} \text{ for } i, j \in S.
+\end{align}\]</div>
+</div>
+<br>
+<div class='theorem'>
+<p><strong>Theorem (Reverse chain)</strong> Let <span class="math notranslate nohighlight">\(P\)</span> be the transition matrix of an irreducible chain <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>, and suppose that <span class="math notranslate nohighlight">\(\pi\)</span> is a distribution statisfying</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\pi_i p_{i, j} = \pi_j p_{j, i} \text{ for } i, j \in S.
+\end{align}\]</div>
+<p>Then <span class="math notranslate nohighlight">\(\pi\)</span> is the unique invariant distribution of the chain. Furthermore, <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> is reversible in equilibrium.</p>
+</div>
+<br>
+</section>
+<section id="random-walk-on-a-graph">
+<h2>Random walk on a graph<a class="headerlink" href="#random-walk-on-a-graph" title="Permalink to this heading">#</a></h2>
+<div class='theorem'>
+<p><strong>Theorem (Random walk on a finite connected graph)</strong> The random walk on the finite connected graph <span class="math notranslate nohighlight">\(G = (V, E)\)</span> is an irreducible Markov chain with unique invariant distribution</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\pi_v = \frac{d(v)}{2 |E|} \text{ for } v \in V.
+\end{align}\]</div>
+<p>The chain is reversible in equilibrium.</p>
+</div>
+<br>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<span class="target" id="id2"></span></section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book/prob-intro/ch12"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#markov-chain-and-property">Markov chain and property</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#strong-markov-property">Strong Markov property</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-of-states">Classification of states</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#invariant-distributions">Invariant distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convergence-to-equilibrium">Convergence to equilibrium</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-reversal">Time reversal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-walk-on-a-graph">Random walk on a graph</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Stratis Markou
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
