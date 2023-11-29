@@ -1,7 +1,7 @@
 # Exercises
 
 This page gives solutions to the exercises from the book Measure, Integration and Real Analysis by Sheldon Axler.
-We have been working through the book and exercises with Adrian Goldwasser and Shreyas Padhy, and these solutions are a joint effort.
+We have been working through the book and exercises with Adrian Goldwaser and Shreyas Padhy, and these solutions are a joint effort.
 Please [email me](mailto:stratismar@gmail.com) if you find any errors in these solutions or have any other comments.
 
 ## Chapter 1.A
@@ -397,16 +397,17 @@ $$\{\mu(E): E \in S\} = \{\infty\} \cup \bigcup_{k = 0}^\infty [3k, 3k + 1].$$
 
 :::{dropdown} Solution
 
-Let $X = \mathbb{Q}$ and $S$ be the $\sigma$-algebra of subsets of $\mathbb{Q}$ which are either countable or have countable complements in $\mathbb{Q}.$
-Let $\mu$ be the measure on $(\mathbb{Q}, S)$ defined via
+Let $X = \mathbb{Z}$ and $S = 2^{\mathbb{Z}}.$
+Let $\mu$ be the measure on $(X, S)$ defined via
 
-$$\mu(x) = \begin{cases}
-2^{-n} & \text{if } x = \frac{1}{n} \text{ for } n = 1, 2, \dots, \\
-3& \text{if } x = n \text{ for } n = 2, 3, \dots, \\
-0 & \text{otherwise}.
+$$\mu(\{n\}) = \begin{cases}
+2^{n} & \text{if } n < 0, \\
+3& \text{if } n \geq 0. \\
 \end{cases}$$
 
-Then, for any $E \in S,$ we have $\mu(E) \in \{\infty\} \cup \bigcup_{k = 0}^\infty [3k, 3k + 1].$
+Then, for any $E \in S,$ we have
+
+$$\mu(E) \in \{\infty\} \cup \bigcup_{k = 0}^\infty [3k, 3k + 1].$$
 
 :::
 ::::
@@ -423,11 +424,12 @@ Prove that if $\mathcal{A}$ is a set of disjoint sets in $S$ such that $\mu(A) >
 
 Let $(X, S, \mu)$ be a measure space such that $\mu(X) < \infty.$
 Suppose $\mathcal{A}$ is a set of disjoint sets in $S$ such that $\mu(A) > 0$ for every $A \in \mathcal{A}.$
+For each $k \in \mathbb{Z},$ let 
 
-For each $k \in \mathcal{Z},$ let $\mathcal{A}_k = \{A \in \mathcal{A}: 2^k \leq \mu(A) < 2^{k+1}\}.$
+$$\mathcal{A}_k = \{A \in \mathcal{A}: 2^k \leq \mu(A) < 2^{k+1}\}.$$
+
 Suppose $\mathcal{A}$ is not countable.
 Then at least one of the sets $\mathcal{A}_k$ must have an infinite number of elements, which are all disjoint subsets of $X.$
-
 Let $A_1, A_2, \ldots$ be a sequence of elements in $\mathcal{A}_k.$
 By countable additivity, we have
 
@@ -435,6 +437,189 @@ $$\mu(X) \geq \mu\left(\bigcup_{A \in \mathcal{A}} A\right) \geq \mu\left(\bigcu
 
 which is a contradiction.
 Therefore, $\mathcal{A}$ must be countable.
+
+:::
+::::
+
+
+
+::::{admonition} Exercise 2.C.6
+:class: tip
+
+Find all $c \in [3, \infty)$ such that there exists a measure space $(X, S, \mu)$ with
+
+$$\{\mu(E): E \in S\} = [0, 1] \cup [3, c].$$
+
+:::{dropdown} Solution
+
+Suppose $(X, S, \mu)$ is a measure space such that $\text{im}(\mu) = \{\mu(E): E \in S\} = [0, 1] \cup [3, c].$
+Then, it must be the case that $\mu(X) = c.$
+Now, since $A$ is the range of $\mu,$ it holds that for each $x \in \text{im}(\mu),$ there exists $E \in S$ such that $\mu(E) = x.$
+Now, using the fact that
+
+$$\mu(X \setminus E) = \mu(X) - \mu(E) = c - x,$$
+
+we see that $c - x \in \text{im}(\mu).$
+Therefore, for any $x \in A,$ we have $c - x \in A,$ and the only $c \in [3, \infty)$ that satisfies this property is $c = 3.$
+
+:::
+::::
+
+
+
+
+::::{admonition} Exercise 2.C.7
+:class: tip
+
+Given an example of a measure space $(X, S, \mu)$ such that
+
+$$\{\mu(E): E \in S\} = \{\infty\} \cup [3, \infty].$$
+
+:::{dropdown} Solution
+
+Let $X = \mathbb{Z}$ and $S = 2^{\mathbb{Z}}.$
+Let $\mu$ be the measure on $(X, S)$ defined via
+
+$$\mu(\{n\}) = \begin{cases}
+2^{n} & \text{if } n < 0, \\
+n& \text{if } n \geq 0. \\
+\end{cases}$$
+
+Then, we have that
+
+$$\{\mu(E): E \in S\} = \{\infty\} \cup [3, \infty].$$
+
+:::
+::::
+
+
+
+::::{admonition} Exercise 2.C.8
+:class: tip
+
+Give an example of a set $X,$ a $\sigma$-algebra $S$ on $X,$ a set $\mathcal{A}$ of subsets of $X,$ such that $S$ is the smallest $\sigma$-algebra on $X$ containing $\mathcal{A},$ and two measures $\mu$ and $\nu$ on $(X, S)$ such that $\mu(A) = \nu(A)$ for every $A \in \mathcal{A},$ and $\mu(X) = \nu(X),$ but $\mu \neq \nu.$
+
+:::{dropdown} Solution
+
+Let $X = \{1, 2, 3, 4\},$ and let
+
+$$\mathcal{A} = \{\{1, 2\}, \{2, 3\}, \{3, 4\}, \{4, 1\}\}.$$
+
+Note that $S$ must contain all singleton sets, namely $\{1\}, \{2\}, \{3\}, \{4\}.$
+This is because, for example, $\{1\} = \{1, 2\} \cap \{4, 1\},$ and so on for the other singleton sets.
+Therefore $S$ must contain all subsets of $X.$
+
+Now, let $\mu$ be the measure on $(X, S)$ defined via
+
+$$\mu(\{1\}) = \mu(\{2\}) = \mu(\{3\}) = \mu(\{4\}) = 1,$$
+
+and let $\nu$ be the measure on $(X, S)$ defined via
+
+$$\nu(\{1\}) = \nu(\{3\}) = \frac{1}{2} \text{ and } \nu(\{2\}) = \nu(\{4\}) = \frac{3}{2}.$$
+
+Then, $\mu$ and $\nu$ agree on all elements of $\mathcal{A},$ and $\mu(X) = \nu(X) = 4,$ but $\mu \neq \nu.$
+
+:::
+::::
+
+
+
+
+::::{admonition} Exercise 2.C.9
+:class: tip
+
+Suppose $\mu$ and $\nu$ are measures on a measurable space $(X, S).$
+Prove that $\mu + \nu$ is a measure on $(X, S).$
+
+:::{dropdown} Solution
+
+Let $\mu$ and $\nu$ be measures on a measurable space $(X, S).$
+We need to show that $\mu + \nu$ is a measure on $(X, S).$
+First, note that $\mu + \nu$ is a function whose domain is $S$ and whose range is a subset of $[0, \infty].$
+Second, note that $(\mu + \nu)(\emptyset) = \mu(\emptyset) + \nu(\emptyset) = 0.$
+Third, suppose $A_1, A_2, \ldots$ is a sequence of disjoint sets in $S.$
+Then, we have
+
+$$\begin{align}
+(\mu + \nu)\left(\bigcup_{n=1}^\infty A_n\right) &= \mu\left(\bigcup_{n=1}^\infty A_n\right) + \nu\left(\bigcup_{n=1}^\infty A_n\right) \\
+&= \sum_{n=1}^\infty \mu(A_n) + \sum_{n=1}^\infty \nu(A_n) \\
+&= \sum_{n=1}^\infty \left[\mu(A_n) + \nu(A_n)\right] \\
+&= \sum_{n=1}^\infty (\mu + \nu)(A_n).
+\end{align}$$
+
+Therefore, $\mu + \nu$ is a measure on $(X, S).$
+
+:::
+::::
+
+
+
+
+::::{admonition} Exercise 2.C.10
+:class: tip
+
+Give an example of a measure space $(X, S, \mu)$ and a decreasing sequence $E_1 \subseteq E_2 \subseteq \cdots$ of sets in $S$ such that
+
+$$\mu\left(\bigcap_{n=1}^\infty E_n\right) \neq \lim_{n \to \infty} \mu(E_n).$$
+
+:::{dropdown} Solution
+
+Let $X = \mathbb{N}$ and $S = 2^{\mathbb{N}}.$
+Let $\mu$ be the measure on $(X, S)$ defined via $\mu(\{n\}) = \frac{1}{n},$ and let $E_n = \{n, n+1, \ldots\}.$
+Then, we have
+
+$$\mu\left(\bigcap_{n=1}^\infty E_n\right) = \mu(\emptyset) = 0,$$
+
+but also
+
+$$\lim_{n \to \infty} \mu(E_n) = \lim_{n \to \infty} \sum_{k = n}^{\infty} \frac{1}{k} = \infty.$$
+
+:::
+::::
+
+
+
+::::{admonition} Exercise 2.C.11
+:class: tip
+
+Suppose $(X, S, \mu)$ is a measure space and $C, D, E \in S$ are such that
+
+$$\mu(C \cap D) < \infty, \mu(C \cap E) < \infty, \mu(D \cap E) < \infty.$$
+
+Find and prove a formula for $\mu(C \cup D \cup E)$ in terms of $\mu(C),$ $\mu(D),$ $\mu(E),$ $\mu(C \cap D),$ $\mu(C \cap E),$ $\mu(D \cap E),$ and $\mu(C \cap D \cap E).$
+
+:::{dropdown} Solution
+
+Suppose $(X, S, \mu)$ is a measure space and $C, D, E \in S$ are such that
+
+$$\mu(C \cap D) < \infty, \mu(C \cap E) < \infty, \mu(D \cap E) < \infty.$$
+
+Then, we have
+
+$$\begin{align}
+\mu(C \cup D \cup E) &= \mu((C \cup D) \cup E) \\
+&= \mu(C \cup D) + \mu(E) - \mu((C \cup D) \cap E) \\
+&= \mu(C) + \mu(D) - \mu(C \cap D) + \mu(E) - \mu((C \cap E) \cup (D \cap E)) \\
+&= \mu(C) + \mu(D) + \mu(E) - \mu(C \cap D) - \mu(C \cap E) - \mu(D \cap E) + \\
+&~~~~+ \mu(C \cap D \cap E).
+\end{align}$$
+
+:::
+::::
+
+
+
+
+::::{admonition} Exercise 2.C.12
+:class: tip
+
+Suppose $X$ is a set and $S$ is the $\sigma$-algebra of all subsets $E$ of $X$ such that $E$ is countatble or $X \setminus E$ is countable.
+Give a complete description of the set of all measures $\mu$ on $(X, S).$
+
+:::{dropdown} Solution
+
+Suppose $X$ is a set and $S$ is the $\sigma$-algebra of all subsets $E$ of $X$ such that $E$ is countatble or $X \setminus E$ is countable.
+Then, a measure $\mu$ on $(X, S)$ is completely determined by the value of $\mu(\{x\})$ for each $x \in X,$ along with $\mu(X).$
 
 :::
 ::::

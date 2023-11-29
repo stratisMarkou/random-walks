@@ -413,7 +413,7 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="exercises">
 <h1>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h1>
 <p>This page gives solutions to the exercises from the book Measure, Integration and Real Analysis by Sheldon Axler.
-We have been working through the book and exercises with Adrian Goldwasser and Shreyas Padhy, and these solutions are a joint effort.
+We have been working through the book and exercises with Adrian Goldwaser and Shreyas Padhy, and these solutions are a joint effort.
 Please <a class="reference external" href="mailto:stratismar&#37;&#52;&#48;gmail&#46;com">email me</a> if you find any errors in these solutions or have any other comments.</p>
 <section id="chapter-1-a">
 <h2>Chapter 1.A<a class="headerlink" href="#chapter-1-a" title="Permalink to this heading">#</a></h2>
@@ -765,15 +765,16 @@ Solution<div class="sd-summary-down docutils">
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(X = \mathbb{Q}\)</span> and <span class="math notranslate nohighlight">\(S\)</span> be the <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra of subsets of <span class="math notranslate nohighlight">\(\mathbb{Q}\)</span> which are either countable or have countable complements in <span class="math notranslate nohighlight">\(\mathbb{Q}.\)</span>
-Let <span class="math notranslate nohighlight">\(\mu\)</span> be the measure on <span class="math notranslate nohighlight">\((\mathbb{Q}, S)\)</span> defined via</p>
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(X = \mathbb{Z}\)</span> and <span class="math notranslate nohighlight">\(S = 2^{\mathbb{Z}}.\)</span>
+Let <span class="math notranslate nohighlight">\(\mu\)</span> be the measure on <span class="math notranslate nohighlight">\((X, S)\)</span> defined via</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\mu(x) = \begin{cases}
-2^{-n} &amp; \text{if } x = \frac{1}{n} \text{ for } n = 1, 2, \dots, \\
-3&amp; \text{if } x = n \text{ for } n = 2, 3, \dots, \\
-0 &amp; \text{otherwise}.
+\[\begin{split}\mu(\{n\}) = \begin{cases}
+2^{n} &amp; \text{if } n &lt; 0, \\
+3&amp; \text{if } n \geq 0. \\
 \end{cases}\end{split}\]</div>
-<p class="sd-card-text">Then, for any <span class="math notranslate nohighlight">\(E \in S,\)</span> we have <span class="math notranslate nohighlight">\(\mu(E) \in \{\infty\} \cup \bigcup_{k = 0}^\infty [3k, 3k + 1].\)</span></p>
+<p class="sd-card-text">Then, for any <span class="math notranslate nohighlight">\(E \in S,\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\mu(E) \in \{\infty\} \cup \bigcup_{k = 0}^\infty [3k, 3k + 1].\]</div>
 </div>
 </details></div>
 <div class="tip admonition">
@@ -788,16 +789,180 @@ Solution<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">Let <span class="math notranslate nohighlight">\((X, S, \mu)\)</span> be a measure space such that <span class="math notranslate nohighlight">\(\mu(X) &lt; \infty.\)</span>
-Suppose <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> is a set of disjoint sets in <span class="math notranslate nohighlight">\(S\)</span> such that <span class="math notranslate nohighlight">\(\mu(A) &gt; 0\)</span> for every <span class="math notranslate nohighlight">\(A \in \mathcal{A}.\)</span></p>
-<p class="sd-card-text">For each <span class="math notranslate nohighlight">\(k \in \mathcal{Z},\)</span> let <span class="math notranslate nohighlight">\(\mathcal{A}_k = \{A \in \mathcal{A}: 2^k \leq \mu(A) &lt; 2^{k+1}\}.\)</span>
-Suppose <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> is not countable.
-Then at least one of the sets <span class="math notranslate nohighlight">\(\mathcal{A}_k\)</span> must have an infinite number of elements, which are all disjoint subsets of <span class="math notranslate nohighlight">\(X.\)</span></p>
-<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(A_1, A_2, \ldots\)</span> be a sequence of elements in <span class="math notranslate nohighlight">\(\mathcal{A}_k.\)</span>
+Suppose <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> is a set of disjoint sets in <span class="math notranslate nohighlight">\(S\)</span> such that <span class="math notranslate nohighlight">\(\mu(A) &gt; 0\)</span> for every <span class="math notranslate nohighlight">\(A \in \mathcal{A}.\)</span>
+For each <span class="math notranslate nohighlight">\(k \in \mathbb{Z},\)</span> let</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{A}_k = \{A \in \mathcal{A}: 2^k \leq \mu(A) &lt; 2^{k+1}\}.\]</div>
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> is not countable.
+Then at least one of the sets <span class="math notranslate nohighlight">\(\mathcal{A}_k\)</span> must have an infinite number of elements, which are all disjoint subsets of <span class="math notranslate nohighlight">\(X.\)</span>
+Let <span class="math notranslate nohighlight">\(A_1, A_2, \ldots\)</span> be a sequence of elements in <span class="math notranslate nohighlight">\(\mathcal{A}_k.\)</span>
 By countable additivity, we have</p>
 <div class="math notranslate nohighlight">
 \[\mu(X) \geq \mu\left(\bigcup_{A \in \mathcal{A}} A\right) \geq \mu\left(\bigcup_{A \in \mathcal{A}_k} A\right) \geq \mu\left(\bigcup_{n=1}^\infty A_n\right) = \sum_{n=1}^\infty \mu(A_n) \geq \sum_{n=1}^\infty 2^k = \infty,\]</div>
 <p class="sd-card-text">which is a contradiction.
 Therefore, <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> must be countable.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 2.C.6</p>
+<p>Find all <span class="math notranslate nohighlight">\(c \in [3, \infty)\)</span> such that there exists a measure space <span class="math notranslate nohighlight">\((X, S, \mu)\)</span> with</p>
+<div class="math notranslate nohighlight">
+\[\{\mu(E): E \in S\} = [0, 1] \cup [3, c].\]</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\((X, S, \mu)\)</span> is a measure space such that <span class="math notranslate nohighlight">\(\text{im}(\mu) = \{\mu(E): E \in S\} = [0, 1] \cup [3, c].\)</span>
+Then, it must be the case that <span class="math notranslate nohighlight">\(\mu(X) = c.\)</span>
+Now, since <span class="math notranslate nohighlight">\(A\)</span> is the range of <span class="math notranslate nohighlight">\(\mu,\)</span> it holds that for each <span class="math notranslate nohighlight">\(x \in \text{im}(\mu),\)</span> there exists <span class="math notranslate nohighlight">\(E \in S\)</span> such that <span class="math notranslate nohighlight">\(\mu(E) = x.\)</span>
+Now, using the fact that</p>
+<div class="math notranslate nohighlight">
+\[\mu(X \setminus E) = \mu(X) - \mu(E) = c - x,\]</div>
+<p class="sd-card-text">we see that <span class="math notranslate nohighlight">\(c - x \in \text{im}(\mu).\)</span>
+Therefore, for any <span class="math notranslate nohighlight">\(x \in A,\)</span> we have <span class="math notranslate nohighlight">\(c - x \in A,\)</span> and the only <span class="math notranslate nohighlight">\(c \in [3, \infty)\)</span> that satisfies this property is <span class="math notranslate nohighlight">\(c = 3.\)</span></p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 2.C.7</p>
+<p>Given an example of a measure space <span class="math notranslate nohighlight">\((X, S, \mu)\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[\{\mu(E): E \in S\} = \{\infty\} \cup [3, \infty].\]</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(X = \mathbb{Z}\)</span> and <span class="math notranslate nohighlight">\(S = 2^{\mathbb{Z}}.\)</span>
+Let <span class="math notranslate nohighlight">\(\mu\)</span> be the measure on <span class="math notranslate nohighlight">\((X, S)\)</span> defined via</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mu(\{n\}) = \begin{cases}
+2^{n} &amp; \text{if } n &lt; 0, \\
+n&amp; \text{if } n \geq 0. \\
+\end{cases}\end{split}\]</div>
+<p class="sd-card-text">Then, we have that</p>
+<div class="math notranslate nohighlight">
+\[\{\mu(E): E \in S\} = \{\infty\} \cup [3, \infty].\]</div>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 2.C.8</p>
+<p>Give an example of a set <span class="math notranslate nohighlight">\(X,\)</span> a <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra <span class="math notranslate nohighlight">\(S\)</span> on <span class="math notranslate nohighlight">\(X,\)</span> a set <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> of subsets of <span class="math notranslate nohighlight">\(X,\)</span> such that <span class="math notranslate nohighlight">\(S\)</span> is the smallest <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <span class="math notranslate nohighlight">\(X\)</span> containing <span class="math notranslate nohighlight">\(\mathcal{A},\)</span> and two measures <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\nu\)</span> on <span class="math notranslate nohighlight">\((X, S)\)</span> such that <span class="math notranslate nohighlight">\(\mu(A) = \nu(A)\)</span> for every <span class="math notranslate nohighlight">\(A \in \mathcal{A},\)</span> and <span class="math notranslate nohighlight">\(\mu(X) = \nu(X),\)</span> but <span class="math notranslate nohighlight">\(\mu \neq \nu.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(X = \{1, 2, 3, 4\},\)</span> and let</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{A} = \{\{1, 2\}, \{2, 3\}, \{3, 4\}, \{4, 1\}\}.\]</div>
+<p class="sd-card-text">Note that <span class="math notranslate nohighlight">\(S\)</span> must contain all singleton sets, namely <span class="math notranslate nohighlight">\(\{1\}, \{2\}, \{3\}, \{4\}.\)</span>
+This is because, for example, <span class="math notranslate nohighlight">\(\{1\} = \{1, 2\} \cap \{4, 1\},\)</span> and so on for the other singleton sets.
+Therefore <span class="math notranslate nohighlight">\(S\)</span> must contain all subsets of <span class="math notranslate nohighlight">\(X.\)</span></p>
+<p class="sd-card-text">Now, let <span class="math notranslate nohighlight">\(\mu\)</span> be the measure on <span class="math notranslate nohighlight">\((X, S)\)</span> defined via</p>
+<div class="math notranslate nohighlight">
+\[\mu(\{1\}) = \mu(\{2\}) = \mu(\{3\}) = \mu(\{4\}) = 1,\]</div>
+<p class="sd-card-text">and let <span class="math notranslate nohighlight">\(\nu\)</span> be the measure on <span class="math notranslate nohighlight">\((X, S)\)</span> defined via</p>
+<div class="math notranslate nohighlight">
+\[\nu(\{1\}) = \nu(\{3\}) = \frac{1}{2} \text{ and } \nu(\{2\}) = \nu(\{4\}) = \frac{3}{2}.\]</div>
+<p class="sd-card-text">Then, <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\nu\)</span> agree on all elements of <span class="math notranslate nohighlight">\(\mathcal{A},\)</span> and <span class="math notranslate nohighlight">\(\mu(X) = \nu(X) = 4,\)</span> but <span class="math notranslate nohighlight">\(\mu \neq \nu.\)</span></p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 2.C.9</p>
+<p>Suppose <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\nu\)</span> are measures on a measurable space <span class="math notranslate nohighlight">\((X, S).\)</span>
+Prove that <span class="math notranslate nohighlight">\(\mu + \nu\)</span> is a measure on <span class="math notranslate nohighlight">\((X, S).\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\nu\)</span> be measures on a measurable space <span class="math notranslate nohighlight">\((X, S).\)</span>
+We need to show that <span class="math notranslate nohighlight">\(\mu + \nu\)</span> is a measure on <span class="math notranslate nohighlight">\((X, S).\)</span>
+First, note that <span class="math notranslate nohighlight">\(\mu + \nu\)</span> is a function whose domain is <span class="math notranslate nohighlight">\(S\)</span> and whose range is a subset of <span class="math notranslate nohighlight">\([0, \infty].\)</span>
+Second, note that <span class="math notranslate nohighlight">\((\mu + \nu)(\emptyset) = \mu(\emptyset) + \nu(\emptyset) = 0.\)</span>
+Third, suppose <span class="math notranslate nohighlight">\(A_1, A_2, \ldots\)</span> is a sequence of disjoint sets in <span class="math notranslate nohighlight">\(S.\)</span>
+Then, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+(\mu + \nu)\left(\bigcup_{n=1}^\infty A_n\right) &amp;= \mu\left(\bigcup_{n=1}^\infty A_n\right) + \nu\left(\bigcup_{n=1}^\infty A_n\right) \\
+&amp;= \sum_{n=1}^\infty \mu(A_n) + \sum_{n=1}^\infty \nu(A_n) \\
+&amp;= \sum_{n=1}^\infty \left[\mu(A_n) + \nu(A_n)\right] \\
+&amp;= \sum_{n=1}^\infty (\mu + \nu)(A_n).
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">Therefore, <span class="math notranslate nohighlight">\(\mu + \nu\)</span> is a measure on <span class="math notranslate nohighlight">\((X, S).\)</span></p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 2.C.10</p>
+<p>Give an example of a measure space <span class="math notranslate nohighlight">\((X, S, \mu)\)</span> and a decreasing sequence <span class="math notranslate nohighlight">\(E_1 \subseteq E_2 \subseteq \cdots\)</span> of sets in <span class="math notranslate nohighlight">\(S\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[\mu\left(\bigcap_{n=1}^\infty E_n\right) \neq \lim_{n \to \infty} \mu(E_n).\]</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(X = \mathbb{N}\)</span> and <span class="math notranslate nohighlight">\(S = 2^{\mathbb{N}}.\)</span>
+Let <span class="math notranslate nohighlight">\(\mu\)</span> be the measure on <span class="math notranslate nohighlight">\((X, S)\)</span> defined via <span class="math notranslate nohighlight">\(\mu(\{n\}) = \frac{1}{n},\)</span> and let <span class="math notranslate nohighlight">\(E_n = \{n, n+1, \ldots\}.\)</span>
+Then, we have</p>
+<div class="math notranslate nohighlight">
+\[\mu\left(\bigcap_{n=1}^\infty E_n\right) = \mu(\emptyset) = 0,\]</div>
+<p class="sd-card-text">but also</p>
+<div class="math notranslate nohighlight">
+\[\lim_{n \to \infty} \mu(E_n) = \lim_{n \to \infty} \sum_{k = n}^{\infty} \frac{1}{k} = \infty.\]</div>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 2.C.11</p>
+<p>Suppose <span class="math notranslate nohighlight">\((X, S, \mu)\)</span> is a measure space and <span class="math notranslate nohighlight">\(C, D, E \in S\)</span> are such that</p>
+<div class="math notranslate nohighlight">
+\[\mu(C \cap D) &lt; \infty, \mu(C \cap E) &lt; \infty, \mu(D \cap E) &lt; \infty.\]</div>
+<p>Find and prove a formula for <span class="math notranslate nohighlight">\(\mu(C \cup D \cup E)\)</span> in terms of <span class="math notranslate nohighlight">\(\mu(C),\)</span> <span class="math notranslate nohighlight">\(\mu(D),\)</span> <span class="math notranslate nohighlight">\(\mu(E),\)</span> <span class="math notranslate nohighlight">\(\mu(C \cap D),\)</span> <span class="math notranslate nohighlight">\(\mu(C \cap E),\)</span> <span class="math notranslate nohighlight">\(\mu(D \cap E),\)</span> and <span class="math notranslate nohighlight">\(\mu(C \cap D \cap E).\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\((X, S, \mu)\)</span> is a measure space and <span class="math notranslate nohighlight">\(C, D, E \in S\)</span> are such that</p>
+<div class="math notranslate nohighlight">
+\[\mu(C \cap D) &lt; \infty, \mu(C \cap E) &lt; \infty, \mu(D \cap E) &lt; \infty.\]</div>
+<p class="sd-card-text">Then, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\mu(C \cup D \cup E) &amp;= \mu((C \cup D) \cup E) \\
+&amp;= \mu(C \cup D) + \mu(E) - \mu((C \cup D) \cap E) \\
+&amp;= \mu(C) + \mu(D) - \mu(C \cap D) + \mu(E) - \mu((C \cap E) \cup (D \cap E)) \\
+&amp;= \mu(C) + \mu(D) + \mu(E) - \mu(C \cap D) - \mu(C \cap E) - \mu(D \cap E) + \\
+&amp;~~~~+ \mu(C \cap D \cap E).
+\end{align}\end{split}\]</div>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 2.C.12</p>
+<p>Suppose <span class="math notranslate nohighlight">\(X\)</span> is a set and <span class="math notranslate nohighlight">\(S\)</span> is the <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra of all subsets <span class="math notranslate nohighlight">\(E\)</span> of <span class="math notranslate nohighlight">\(X\)</span> such that <span class="math notranslate nohighlight">\(E\)</span> is countatble or <span class="math notranslate nohighlight">\(X \setminus E\)</span> is countable.
+Give a complete description of the set of all measures <span class="math notranslate nohighlight">\(\mu\)</span> on <span class="math notranslate nohighlight">\((X, S).\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(X\)</span> is a set and <span class="math notranslate nohighlight">\(S\)</span> is the <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra of all subsets <span class="math notranslate nohighlight">\(E\)</span> of <span class="math notranslate nohighlight">\(X\)</span> such that <span class="math notranslate nohighlight">\(E\)</span> is countatble or <span class="math notranslate nohighlight">\(X \setminus E\)</span> is countable.
+Then, a measure <span class="math notranslate nohighlight">\(\mu\)</span> on <span class="math notranslate nohighlight">\((X, S)\)</span> is completely determined by the value of <span class="math notranslate nohighlight">\(\mu(\{x\})\)</span> for each <span class="math notranslate nohighlight">\(x \in X,\)</span> along with <span class="math notranslate nohighlight">\(\mu(X).\)</span></p>
 </div>
 </details></div>
 </section>
