@@ -371,7 +371,7 @@ If $f$ is Riemann integrable on $[a, b],$ then
 $$\int_a^b f = \lim_{n \to \infty} \int_a^b f_n.$$
 :::
 
-We do not prove this result here.
+We do not provide a proof for this result here.
 However, we note that this result suffers from the issue that the limit function $f$ is required to be Riemann integrable.
 Ideally, given a good definition of integrals, we would like this to follow directly from the other assumptions in this theorem.
 The measure theoretic definition of the integral, which is developed in the next sections, yields an exchange theorem which does not suffer from this issue.

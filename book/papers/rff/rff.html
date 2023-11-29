@@ -192,6 +192,7 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../mira/000-intro.html">Measure Theory</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../mira/001-riemann.html">Riemann integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mira/002-measures.html">Measures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mira/000-exercises.html">Exercises</a></li>
 </ul>
 </li>
@@ -433,7 +434,7 @@ Further, one can prove that the covariance function induced by RFF closely appro
 <h2>The RFF approximation<a class="headerlink" href="#the-rff-approximation" title="Permalink to this heading">#</a></h2>
 <p>The starting point for deriving RFF is Bochner’s theorem, which relates stationary kernels with probability distributions over frequencies via the Fourier transform.</p>
 <div class="proof theorem admonition" id="theorem-0">
-<p class="admonition-title"><span class="caption-number">Theorem 60 </span> (Bochner’s theorem)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 65 </span> (Bochner’s theorem)</p>
 <section class="theorem-content" id="proof-content">
 <p>A continuous function of the form <span class="math notranslate nohighlight">\(k(x, y) = k(x - y)\)</span> is positive definite if and only if <span class="math notranslate nohighlight">\(k(\delta)\)</span> is the Fourier transform of a non-negative measure.</p>
 </section>
@@ -478,7 +479,7 @@ In this way, we will be able to interpret this expectation as the covariance of 
 <p>This is also an unbiased estimate of the kernel, however its variance is lower than in the <span class="math notranslate nohighlight">\(M = 1\)</span> case, since the variance of the average of the sum of <span class="math notranslate nohighlight">\(K\)</span> i.i.d. random variables is lower than the variance of a single one of the variables.
 We therefore arrive at the following algorithm for estimating <span class="math notranslate nohighlight">\(k\)</span>.</p>
 <div class="proof definition admonition" id="definition-1">
-<p class="admonition-title"><span class="caption-number">Definition 57 </span> (Random Fourier Features)</p>
+<p class="admonition-title"><span class="caption-number">Definition 60 </span> (Random Fourier Features)</p>
 <section class="definition-content" id="proof-content">
 <p>Given a translation invariant kernel <span class="math notranslate nohighlight">\(k\)</span> that is the Fourier transform of a probability measure <span class="math notranslate nohighlight">\(p\)</span>, we have the unbiased real-valued estimator</p>
 <div class="math notranslate nohighlight">
@@ -613,7 +614,7 @@ The covariance function plots correspond to the RFF estimator of <span class="ma
 </div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/3d816574e985533bfcbaea8edb2fcca9c5596b0da33a8d4338f5bf683acd68e0.svg" src="../../../_images/3d816574e985533bfcbaea8edb2fcca9c5596b0da33a8d4338f5bf683acd68e0.svg" /></div>
+<img alt="../../../_images/3a60f47a8428036a5d2ea1a3f08f2b4e12c7c1d9a57c5aed0df4d4523832f22b.svg" src="../../../_images/3a60f47a8428036a5d2ea1a3f08f2b4e12c7c1d9a57c5aed0df4d4523832f22b.svg" /></div>
 </div>
 </section>
 <section id="regression-with-rff-features">
@@ -623,7 +624,7 @@ We place a gap in the data to observe the quality of the uncertainty estimates o
 We purposefully use a large number of datapoints, <span class="math notranslate nohighlight">\(N = 5000,\)</span> which would be quite slow to process with an exact GP model.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/9346552b41a5b91666fe24452b585dd1ff37d54f9b74c36950bba639f3b864a2.svg" src="../../../_images/9346552b41a5b91666fe24452b585dd1ff37d54f9b74c36950bba639f3b864a2.svg" /></div>
+<img alt="../../../_images/ea98a9e97ddc0d1a0ac805e13ccb2ca6cf786043aede918ca2e29b511f1bb7b8.svg" src="../../../_images/ea98a9e97ddc0d1a0ac805e13ccb2ca6cf786043aede918ca2e29b511f1bb7b8.svg" /></div>
 </div>
 <p>The function <code class="docutils literal notranslate"><span class="pre">rff_posterior</span></code> below implements Bayesian linear regression with randomly sampled Fourier features.
 For more details on Bayesian linear regression see Chapter 3 of Bishop’s PRML book.<span id="id4">[<a class="reference internal" href="#id12" title="Christopher M Bishop. Pattern recognition and machine learning. springer, 2006.">Bishop, 2006</a>]</span></p>
@@ -720,8 +721,8 @@ The <code class="docutils literal notranslate"><span class="pre">covariance</spa
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Timing exact GP regression:
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 10.9 s, sys: 1.54 s, total: 12.4 s
-Wall time: 4.6 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 12.6 s, sys: 1.75 s, total: 14.3 s
+Wall time: 5.78 s
 </pre></div>
 </div>
 </div>
@@ -730,15 +731,15 @@ Wall time: 4.6 s
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Timing exact approximate RFF regression:
 
-CPU times: user 193 ms, sys: 93.7 ms, total: 287 ms
-Wall time: 72 ms
+CPU times: user 251 ms, sys: 151 ms, total: 402 ms
+Wall time: 106 ms
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/1806fc92396805415eafac413d080ea87162e8f6198451746a6fe9fc487fc828.svg" src="../../../_images/1806fc92396805415eafac413d080ea87162e8f6198451746a6fe9fc487fc828.svg" /></div>
+<img alt="../../../_images/2bc67b561990613d07e228a03285271e57726f6169669fb911b4074361da53a0.svg" src="../../../_images/2bc67b561990613d07e228a03285271e57726f6169669fb911b4074361da53a0.svg" /></div>
 </div>
 <p>RFF has produced sensible regressors in each case, significantly faster than exact GP regression. The approximate posteriors roughly match the exact posteriors, while being significantly quicker to compute.</p>
 </section>
@@ -747,11 +748,11 @@ Wall time: 72 ms
 <p>One issue with the RFF is that - like all other finte basis function models - is that it has a limited amount of degrees of freedom. Therefore, in some situations the datapoints may be such that they pin down the RFF model and significantly reducing the variance of the approximate regressor. To illustrate this, we sample a slightly different dataset, with a smaller gap in between the two data clumps.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/bc86a9da1266ac82745cf5cf15e091fa3025e39dfe2c5b274285373fd8f8c6cb.svg" src="../../../_images/bc86a9da1266ac82745cf5cf15e091fa3025e39dfe2c5b274285373fd8f8c6cb.svg" /></div>
+<img alt="../../../_images/2e1c0e1fe6d884290b4897d5ce8771fa04a8fda94a1420489371d9bfbbb79a7e.svg" src="../../../_images/2e1c0e1fe6d884290b4897d5ce8771fa04a8fda94a1420489371d9bfbbb79a7e.svg" /></div>
 </div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/ee5c685e485f6acecedab02fcd6852794c8ee8cdf000a6677c43476648063400.svg" src="../../../_images/ee5c685e485f6acecedab02fcd6852794c8ee8cdf000a6677c43476648063400.svg" /></div>
+<img alt="../../../_images/4195b1040549dcc64db5a665b7120ede76c6cace7c1bee870fcf5490022bcc4c.svg" src="../../../_images/4195b1040549dcc64db5a665b7120ede76c6cace7c1bee870fcf5490022bcc4c.svg" /></div>
 </div>
 <p>The variance of the approximate estimator in between the data is (in some cases), signiticantly smaller than that of the exact posterior. So the speedup that the RFF gives does not come without a cost. In certain cases, we can end up with approximate posteriors which are significantly overfitted. This can be alleviated by increasing the number of RFF features. However this increases the computational cost of performing regression and may defeat the purpose of using RFF features in the first place.</p>
 </section>

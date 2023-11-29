@@ -193,6 +193,7 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../mira/000-intro.html">Measure Theory</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../mira/001-riemann.html">Riemann integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mira/002-measures.html">Measures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../mira/000-exercises.html">Exercises</a></li>
 </ul>
 </li>
@@ -497,7 +498,7 @@ q(x) = \mathcal{N}(x; \mu_q, \sigma_q^2).
 \end{equation}\]</div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/9c604f787eaccea0b8ce877adb66d17ce97cbce4e8ddd3774d42193850af656b.svg" src="../../../_images/9c604f787eaccea0b8ce877adb66d17ce97cbce4e8ddd3774d42193850af656b.svg" /></div>
+<img alt="../../../_images/e318a593e26b1a5bdbed6d803eca678d0ff60ce4d5a2a2aee593d9b8114e645c.svg" src="../../../_images/e318a593e26b1a5bdbed6d803eca678d0ff60ce4d5a2a2aee593d9b8114e645c.svg" /></div>
 </div>
 <p>Using importance sampling, we can obtain an estimate of this intergral.</p>
 <div class="cell tag_remove-input docutils container">
@@ -532,7 +533,7 @@ The point of this additional Monte Carlo estimate is to give us an idea of how m
 To see why, this occurs, let’s plot the raw samples drawn from <span class="math notranslate nohighlight">\(q\)</span> (in green) as well as the samples weighted according to their importance weights (in blue).</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/7ad43aac51d82c32ff3ae9541fcf089e22f27fda44882fc6bea279f200d451a3.svg" src="../../../_images/7ad43aac51d82c32ff3ae9541fcf089e22f27fda44882fc6bea279f200d451a3.svg" /></div>
+<img alt="../../../_images/fa756fb8202c4438e44ea1c41c8fd2137c5614914d688227a85926a9ec0058d4.svg" src="../../../_images/fa756fb8202c4438e44ea1c41c8fd2137c5614914d688227a85926a9ec0058d4.svg" /></div>
 </div>
 <p>First off, this plot illustrates how importance sampling works.
 Although <span class="math notranslate nohighlight">\(q\)</span> proposes many samples in the middle, these are down-weighted by the importance weights, since <span class="math notranslate nohighlight">\(p\)</span> has small density there.
@@ -544,7 +545,7 @@ Since this sample has a large importance weight, it greatly affects the overall 
 Looking at a histogram of the importance weights we see that most weights are very small, and it’s only a few large weights which dominate the value of the integral (note the <span class="math notranslate nohighlight">\(x\)</span>-axis has a log-scale).</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/9c1b888578ab32bea81432ae9fb9044e00206155976f26cb07312fbff429fd5c.svg" src="../../../_images/9c1b888578ab32bea81432ae9fb9044e00206155976f26cb07312fbff429fd5c.svg" /></div>
+<img alt="../../../_images/69e628a0b143f32c68a13d8eacf1e2cb4cd8b91de1809345f130f46c39101ba6.svg" src="../../../_images/69e628a0b143f32c68a13d8eacf1e2cb4cd8b91de1809345f130f46c39101ba6.svg" /></div>
 </div>
 <p>Going a little further, note that the expectation of the value of an importance weight is always equal to one since</p>
 <div class="math notranslate nohighlight">
@@ -614,7 +615,7 @@ Markov Chain Monte Carlo (MCMC) is a standard class of methods geared towards so
 So we could, in principle, use MCMC within an importance-weighted estimator to reduce its variance.
 The following algorithm is based on this intuition.</p>
 <div class="proof definition admonition" id="definition-1">
-<p class="admonition-title"><span class="caption-number">Definition 55 </span> (Importance weighted MCMC algorithm)</p>
+<p class="admonition-title"><span class="caption-number">Definition 58 </span> (Importance weighted MCMC algorithm)</p>
 <section class="definition-content" id="proof-content">
 <p>Given a proposal density <span class="math notranslate nohighlight">\(q\)</span>, a target density <span class="math notranslate nohighlight">\(p\)</span> and a sequence of transition kernels <span class="math notranslate nohighlight">\(T_1(x, x'), \dots, T_K(x, x')\)</span> be a sequence of transition kernels such that <span class="math notranslate nohighlight">\(T_k\)</span> leaves <span class="math notranslate nohighlight">\(p\)</span> invariant.
 Sampling <span class="math notranslate nohighlight">\(x_0 \sim q(x)\)</span> followed by</p>
@@ -702,7 +703,7 @@ However, unfortunately these importance weight are exactly the same as the impor
 <p>These distributions interpolate between <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(p\)</span> as we vary <span class="math notranslate nohighlight">\(\beta\)</span>.
 AIS then proceeds in a similar way to the importance weighted MCMC algorithm we highlighted above, except that it requires that each <span class="math notranslate nohighlight">\(T_k\)</span> leaves <span class="math notranslate nohighlight">\(\pi_k\)</span>, instead of <span class="math notranslate nohighlight">\(p\)</span>, invariant.</p>
 <div class="proof definition admonition" id="definition-2">
-<p class="admonition-title"><span class="caption-number">Definition 56 </span> (Annealed Importance Sampling)</p>
+<p class="admonition-title"><span class="caption-number">Definition 59 </span> (Annealed Importance Sampling)</p>
 <section class="definition-content" id="proof-content">
 <p>Given a target density <span class="math notranslate nohighlight">\(p\)</span>, a proposal density <span class="math notranslate nohighlight">\(q\)</span> and a sequence <span class="math notranslate nohighlight">\(0 = \beta_0 \leq \dots \leq \beta_K = 1\)</span>, define</p>
 <div class="math notranslate nohighlight">
@@ -986,14 +987,14 @@ This gives <span class="math notranslate nohighlight">\(\beta_k\)</span> which g
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../../../_images/37846f6afa9252ddcfd25936e4b5e7334cd8a222bd927a269ebb46cadb3ad119.svg" src="../../../_images/37846f6afa9252ddcfd25936e4b5e7334cd8a222bd927a269ebb46cadb3ad119.svg" /></div>
+<img alt="../../../_images/5fd88eaf30ae7008c566f937f65b58d5171bf69cefb71d379ab1f40441bdf5e4.svg" src="../../../_images/5fd88eaf30ae7008c566f937f65b58d5171bf69cefb71d379ab1f40441bdf5e4.svg" /></div>
 </div>
 <p>We observe that the distribution of the AIS samples (purple bars) is similar to the target distribution <span class="math notranslate nohighlight">\(p\)</span> (blue line).
 Further, weighing the AIS samples by their importance weights (blue bars) does not appear to significantly change the resulting distribution.
 This would suggest that moost of the importance weights are close to <span class="math notranslate nohighlight">\(1\)</span>, which we can verify by plotting them on a histogram.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/4d17cdb302c1456432bb98267c7b173d91373be89c065721a9f48a5c572cc725.svg" src="../../../_images/4d17cdb302c1456432bb98267c7b173d91373be89c065721a9f48a5c572cc725.svg" /></div>
+<img alt="../../../_images/8470fc193dc6fdb275e1c1c512a73b0057da1f9be5e7059986e9954a446eae0f.svg" src="../../../_images/8470fc193dc6fdb275e1c1c512a73b0057da1f9be5e7059986e9954a446eae0f.svg" /></div>
 </div>
 <p>As expected, most of the AIS importance weights are close to <span class="math notranslate nohighlight">\(1\)</span>.
 Further, they have a clearly smaller variance than standard importance sampling.
