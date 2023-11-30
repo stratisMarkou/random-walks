@@ -463,6 +463,7 @@ $$U(f, P, [a, b]) - L(f, P, [a, b]) < 2\epsilon.$$
 Since $\epsilon$ can be made arbitrarily small, it follows that $f$ is Riemann integrable on $[a, b].$
 
 :::
+::::
 
 
 
