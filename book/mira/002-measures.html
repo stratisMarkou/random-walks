@@ -400,7 +400,9 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#outer-measure">Outer measure</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-of-the-outer-measure">Definition of the outer measure</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#good-properties-of-the-outer-measure">Good properties of the outer measure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#good-properties">Good properties</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heine-borel-theorem">Heine-Borel theorem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nonadditivity-of-the-outer-measure">Nonadditivity of the outer measure</a></li>
 </ul>
 </li>
 </ul>
@@ -416,8 +418,21 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="measures">
 <h1>Measures<a class="headerlink" href="#measures" title="Permalink to this heading">#</a></h1>
+<p>This chapter builds up measures.
+First, we establish a notion of length on the real line, which we need in order to build up integration.
+This notion of length is described by the outer measure.
+The outer measure has several good properties which align with our expectations of what an appropriate definition of length on the real line should be.
+However, the outer measure lacks an important property, namely additivity: the outer measure of the union of two disjoint sets is not necessarily the sum of the outer measures of the two sets.
+This is a problem, because we need additivity in order to prove useful theorems about integration.
+We will see that this is not a fundamental limitation of our definition of the outer measure, and show that any function that satisfies the good properties of the outer measure and has domain equal to the power set of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> cannot be additive.</p>
+<p>A solution to this issue, which does not give up the good properties of the outer measure, is to relax the requirement that our notion of length is defined on all subsets of <span class="math notranslate nohighlight">\(\mathbb{R},\)</span> and instead only require that it is defined on a certain collection of subsets of <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span>
+This leads us to the definitions of <span class="math notranslate nohighlight">\(\sigma\)</span>-algebras, measurable sets, and measurable functions.
+We then introduce measures, and specifically the Lebesgue measure, which we will use later to define integration.</p>
 <section id="outer-measure">
 <h2>Outer measure<a class="headerlink" href="#outer-measure" title="Permalink to this heading">#</a></h2>
+<p>First, we define and study the outer measure, which is a notion of length on the real line.
+We will prove a few good properties that one would hope to hold for a notion of length on the real line.
+Then, we will show that the outer measure is not additive.</p>
 <section id="definition-of-the-outer-measure">
 <h3>Definition of the outer measure<a class="headerlink" href="#definition-of-the-outer-measure" title="Permalink to this heading">#</a></h3>
 <p>To define the outer measure, we first need a definition of the length of an open interval.</p>
@@ -444,9 +459,10 @@ b - a &amp; \text{if } I = (a, b) \text{ for some } a, b \in \mathbb{R} \text{ w
 \[|A| = \inf \left\{ \sum_{j=1}^\infty \ell(I_j) : A \subseteq \bigcup_{j=1}^\infty I_j \right\}.\]</div>
 </section>
 </div></section>
-<section id="good-properties-of-the-outer-measure">
-<h3>Good properties of the outer measure<a class="headerlink" href="#good-properties-of-the-outer-measure" title="Permalink to this heading">#</a></h3>
-<p>The outer measure has a number of good properties.</p>
+<section id="good-properties">
+<h3>Good properties<a class="headerlink" href="#good-properties" title="Permalink to this heading">#</a></h3>
+<p>The outer measure has a number of good properties.
+First, the outer measure of countable subsets of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> is zero.</p>
 <div class="proof theorem admonition" id="theorem-2">
 <p class="admonition-title"><span class="caption-number">Theorem 60 </span> (Countable sets have outer measure zero)</p>
 <section class="theorem-content" id="proof-content">
@@ -471,7 +487,8 @@ Because</p>
 <p class="sd-card-text">we have <span class="math notranslate nohighlight">\(|A| \leq 2\epsilon.\)</span>
 Because <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> is an arbitrary positive real number, this implies that <span class="math notranslate nohighlight">\(|A| = 0.\)</span></p>
 </div>
-</details><div class="proof theorem admonition" id="theorem-3">
+</details><p>Second, the outer measure preserves order, that is the outer measure of a subset of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> is less than or equal to the outer measure of any of its supersets.</p>
+<div class="proof theorem admonition" id="mira:thm:outer-measure-preserves-order">
 <p class="admonition-title"><span class="caption-number">Theorem 61 </span> (Outer measure preserves order)</p>
 <section class="theorem-content" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are subsets of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> with <span class="math notranslate nohighlight">\(A \subseteq B,\)</span> then <span class="math notranslate nohighlight">\(|A| \leq |B|.\)</span></p>
@@ -490,14 +507,18 @@ Therefore,</p>
 \[|A| \leq \sum_{j=1}^\infty \ell(I_j),\]</div>
 <p class="sd-card-text">and taking the infimum of both sides, over all sequences of open intervals whose union contains <span class="math notranslate nohighlight">\(B\)</span> gives <span class="math notranslate nohighlight">\(|A| \leq |B|.\)</span></p>
 </div>
-</details><div class="proof definition admonition" id="definition-4">
+</details><p>The third good property of the outer measure is translation invariance.
+To establish this property, we first need a definition of the translation of a set.</p>
+<div class="proof definition admonition" id="definition-4">
 <p class="admonition-title"><span class="caption-number">Definition 57 </span> (Translation)</p>
 <section class="definition-content" id="proof-content">
 <p>For <span class="math notranslate nohighlight">\(A \subseteq \mathbb{R}\)</span> and <span class="math notranslate nohighlight">\(t \in \mathbb{R},\)</span> the translation of <span class="math notranslate nohighlight">\(t + A\)</span> is defined by</p>
 <div class="math notranslate nohighlight">
 \[A + t = \{ a + t : a \in A \}.\]</div>
 </section>
-</div><div class="proof theorem admonition" id="theorem-5">
+</div><p>With this definition in place, we can now state the translation invariance property of the outer measure.
+Specifically, the outer measure of a set is the same as the outer measure of its translation.</p>
+<div class="proof theorem admonition" id="theorem-5">
 <p class="admonition-title"><span class="caption-number">Theorem 62 </span> (Outer measure is translation invariant)</p>
 <section class="theorem-content" id="proof-content">
 <p>For every subset <span class="math notranslate nohighlight">\(A\)</span> of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> and every <span class="math notranslate nohighlight">\(t \in \mathbb{R},\)</span> we have <span class="math notranslate nohighlight">\(|t + A| = |A|.\)</span></p>
@@ -521,7 +542,9 @@ Conversely, we can apply the same argument by noting that <span class="math notr
 \[|A| = |-t + (t + A)| \leq |t + A|.\]</div>
 <p class="sd-card-text">Putting these two inequalities together gives <span class="math notranslate nohighlight">\(|A| = |t + A|.\)</span></p>
 </div>
-</details><div class="proof theorem admonition" id="theorem-6">
+</details><p>Another useful property of the outer measure is countable subadditivity.
+This property will also turn out to be true of more general measures which we will define later.</p>
+<div class="proof theorem admonition" id="theorem-6">
 <p class="admonition-title"><span class="caption-number">Theorem 63 </span> (Outer measure is countably subadditive)</p>
 <section class="theorem-content" id="proof-content">
 <p>Suppose <span class="math notranslate nohighlight">\(A_1, A_2, \ldots\)</span> are subsets of <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span>
@@ -555,7 +578,21 @@ By the definition of infimum, for each <span class="math notranslate nohighlight
 <div class="math notranslate nohighlight">
 \[\left| \bigcup_{k=1}^\infty A_k \right| \leq \sum_{k=1}^\infty |A_k|.\]</div>
 </div>
-</details><div class="proof theorem admonition" id="theorem-7">
+</details></section>
+<section id="heine-borel-theorem">
+<h3>Heine-Borel theorem<a class="headerlink" href="#heine-borel-theorem" title="Permalink to this heading">#</a></h3>
+<p>Another important property that we want to show for the outer measure is that its value on a closed (rather than open) value on a bounded interval is equal to the difference between the endpoints of the interval, that is <span class="math notranslate nohighlight">\(|[a, b]| = b - a\)</span> for <span class="math notranslate nohighlight">\(a, b \in \mathbb{R}\)</span> with <span class="math notranslate nohighlight">\(a &lt; b.\)</span>
+To show this, we will use the Heine-Borel theorem, which is a theorem of independent interest beyond measure theory.
+The Heine-Borel theorem is a statement about open covers, an idea which we now define.</p>
+<div class="proof definition admonition" id="definition-7">
+<p class="admonition-title"><span class="caption-number">Definition 58 </span> (Open cover, finite subcover)</p>
+<section class="definition-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\(A \subseteq \mathbb{R}.\)</span>
+A collection <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> of open intervals is called an open cover of <span class="math notranslate nohighlight">\(A\)</span> if <span class="math notranslate nohighlight">\(A\)</span> is contained in the union of the intervals in <span class="math notranslate nohighlight">\(\mathcal{C}.\)</span>
+An open cover <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> of <span class="math notranslate nohighlight">\(A\)</span> is said to have a finite subcover if <span class="math notranslate nohighlight">\(A\)</span> is contained in the union of some finite list of sets in <span class="math notranslate nohighlight">\(\mathcal{C}.\)</span></p>
+</section>
+</div><p>The Heine-Borel theorem states that every open cover of a closed bounded subset of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> has a finite subcover.</p>
+<div class="proof theorem admonition" id="mira:thm:heine-borel">
 <p class="admonition-title"><span class="caption-number">Theorem 64 </span> (Heine-Borel)</p>
 <section class="theorem-content" id="proof-content">
 <p>Every open cover of a closed bounded subset of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> has a finite subcover.</p>
@@ -600,7 +637,136 @@ Thus</p>
 \[F \subseteq \bigcup_{j=1}^n G_j,\]</div>
 <p class="sd-card-text">which shows that <span class="math notranslate nohighlight">\(F\)</span> has a finite subcover from <span class="math notranslate nohighlight">\(\mathcal{C}.\)</span></p>
 </div>
+</details><p>Using the Heine-Borel theorem, we can now show that the outer measure of a closed interval is equal to the difference between the endpoints of the interval.</p>
+<div class="proof theorem admonition" id="mira:thm:outer-measure-of-a-closed-interval">
+<p class="admonition-title"><span class="caption-number">Theorem 65 </span> (Outer measure of a closed interval)</p>
+<section class="theorem-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\(a, b \in \mathbb{R}\)</span> with <span class="math notranslate nohighlight">\(a &lt; b.\)</span>
+Then <span class="math notranslate nohighlight">\(|[a, b]| = b - a.\)</span></p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Outer measure of a closed interval<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">We will show the equality above via two inequalities, namely</p>
+<div class="math notranslate nohighlight" id="equation-mira-eq-outer-measure-of-closed-interval">
+<span class="eqno">(1)<a class="headerlink" href="#equation-mira-eq-outer-measure-of-closed-interval" title="Permalink to this equation">#</a></span>\[|[a, b]| \leq b - a   \text{ and }  b - a \leq |[a, b]|.\]</div>
+<p class="sd-card-text"><strong>First inequality:</strong>
+For the first inequality, consider that <span class="math notranslate nohighlight">\([a, b] \subseteq (a - \epsilon, b + \epsilon)\)</span> for all <span class="math notranslate nohighlight">\(\epsilon &gt; 0,\)</span> so using the <a class="reference internal" href="#mira:thm:outer-measure-preserves-order">order preserving property of the outer measure</a>, we have</p>
+<div class="math notranslate nohighlight">
+\[|[a, b]| \leq |(a - \epsilon, b + \epsilon)| = b - a + 2\epsilon,\]</div>
+<p class="sd-card-text">and since <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> is arbitrary, this implies that <span class="math notranslate nohighlight">\(|[a, b]| \leq b - a.\)</span></p>
+<p class="sd-card-text"><strong>Second inequality:</strong>
+For the second inequality, suppose that <span class="math notranslate nohighlight">\(I_1, I_2, \ldots\)</span> is a sequence of open intervals whose union contains <span class="math notranslate nohighlight">\([a, b].\)</span>
+Then <span class="math notranslate nohighlight">\(I_1, I_2, \ldots\)</span> is an open cover of <span class="math notranslate nohighlight">\([a, b],\)</span> so by the <a class="reference internal" href="#mira:thm:heine-borel">Heine-Borel theorem</a>, there exists an <span class="math notranslate nohighlight">\(n \in \mathbb{Z}^+\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[[a, b] \subseteq I_1 \cup \cdots \cup I_n.\]</div>
+<p class="sd-card-text">We will prove by induction that</p>
+<div class="math notranslate nohighlight" id="equation-mira-eq-outer-measure-of-closed-interval-induction">
+<span class="eqno">(2)<a class="headerlink" href="#equation-mira-eq-outer-measure-of-closed-interval-induction" title="Permalink to this equation">#</a></span>\[
+\sum_{j=1}^n \ell(I_j) \geq b - a,
+\]</div>
+<p class="sd-card-text">which will yield the result after taking the infimum over all sequences of open intervals whose union contains <span class="math notranslate nohighlight">\([a, b].\)</span>
+To show <a class="reference internal" href="#equation-mira-eq-outer-measure-of-closed-interval-induction">(2)</a>, we first note that the base case <span class="math notranslate nohighlight">\(n = 1\)</span> holds, because if <span class="math notranslate nohighlight">\([a, b] \subseteq I_1,\)</span> then by the <span class="xref std std-ref">order preserving property of the outer measure</span>, we have <span class="math notranslate nohighlight">\(|[a, b]| \leq \ell(I_1).\)</span>
+Now, suppose that <a class="reference internal" href="#equation-mira-eq-outer-measure-of-closed-interval-induction">(2)</a> holds for some <span class="math notranslate nohighlight">\(n \in \mathbb{Z}^+.\)</span>
+Suppose also that <span class="math notranslate nohighlight">\([a, b] \subseteq I_1 \cup \cdots \cup I_{n+1}.\)</span>
+Then, <span class="math notranslate nohighlight">\(b\)</span> is in at least one of these open intervals which, after relabelling, we can assume is <span class="math notranslate nohighlight">\(I_{n+1}.\)</span>
+Let us write <span class="math notranslate nohighlight">\(I_{n+1} = (c, d),\)</span> and note that <span class="math notranslate nohighlight">\(b &lt; d.\)</span>
+Then if <span class="math notranslate nohighlight">\(c \leq a,\)</span> we have that <span class="math notranslate nohighlight">\(\ell(I_{n+1}) = d - c \geq b - a,\)</span> which shows the inductive step.
+If <span class="math notranslate nohighlight">\(c &gt; a,\)</span> then <span class="math notranslate nohighlight">\(a &lt; c &lt; b &lt; d.\)</span>
+Since <span class="math notranslate nohighlight">\([a, b]\)</span> is has <span class="math notranslate nohighlight">\(I_1, \dots, I_n, I_{n+1}\)</span> as an open cover, it follows that <span class="math notranslate nohighlight">\([a, c]\)</span> has <span class="math notranslate nohighlight">\(I_1, \dots, I_n,\)</span> as an open cover, that is</p>
+<div class="math notranslate nohighlight">
+\[[a, c] \subseteq I_1 \cup \cdots \cup I_n.\]</div>
+<p class="sd-card-text">Therefore, by the inductive hypothesis, we have</p>
+<div class="math notranslate nohighlight">
+\[\sum_{j=1}^n \ell(I_j) \geq c - a.\]</div>
+<p class="sd-card-text">Adding <span class="math notranslate nohighlight">\(\ell(I_{n+1}) = d - c\)</span> to both sides of this inequality gives</p>
+<div class="math notranslate nohighlight">
+\[\sum_{j=1}^{n+1} \ell(I_j) \geq d - a = b - a,\]</div>
+<p class="sd-card-text">which completes the inductive step.</p>
+<p class="sd-card-text">Putting the two inequalities in <a class="reference internal" href="#equation-mira-eq-outer-measure-of-closed-interval">(1)</a> together gives the result.</p>
+</div>
+</details><p>A nice result from the previous theorems is that nontrivial intervals in <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> are uncountable.
+Interestingly, this proof does not use the <a class="reference external" href="https://en.wikipedia.org/wiki/Cantor's_diagonal_argument">diagonal argument</a>, which is the argument that is usually used to show that the real numbers are uncountable.</p>
+<div class="proof theorem admonition" id="theorem-10">
+<p class="admonition-title"><span class="caption-number">Theorem 66 </span> (Nontrivial intervals are uncountable)</p>
+<section class="theorem-content" id="proof-content">
+<p>Every inverval in <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> that contains at least two distinct elements is uncountable.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Nontrivial intervals are uncountable<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(I\)</span> is an interval that contains <span class="math notranslate nohighlight">\(a, b \in \mathbb{R}\)</span> with <span class="math notranslate nohighlight">\(a &lt; b.\)</span>
+Then</p>
+<div class="math notranslate nohighlight">
+\[ |I| \geq |[a, b]| = b - a &gt; 0,\]</div>
+<p class="sd-card-text">where the first inequality follows by the <a class="reference internal" href="#mira:thm:outer-measure-preserves-order">order preserving property of the outer measure</a>, and the equality follows by the previous theorem on the <a class="reference internal" href="#mira:thm:outer-measure-of-a-closed-interval">outer measure of a closed interval</a>.
+Since <code class="xref prf prf-ref docutils literal notranslate"><span class="pre">every</span> <span class="pre">countable</span> <span class="pre">subset</span> <span class="pre">of</span> <span class="pre">$\mathbb{R}$</span> <span class="pre">has</span> <span class="pre">outer</span> <span class="pre">measure</span> <span class="pre">zero</span></code> and <span class="math notranslate nohighlight">\(I\)</span> has nonzero measure, it follows that <span class="math notranslate nohighlight">\(I\)</span> is uncountable.</p>
+</div>
 </details></section>
+<section id="nonadditivity-of-the-outer-measure">
+<h3>Nonadditivity of the outer measure<a class="headerlink" href="#nonadditivity-of-the-outer-measure" title="Permalink to this heading">#</a></h3>
+<p>Now we come to the negative result of the outer measure, namely that it is not additive.
+Additivity is an important property that we would like our notion of length to have, because it allows us to prove good theorems about integration.</p>
+<div class="proof theorem admonition" id="theorem-11">
+<p class="admonition-title"><span class="caption-number">Theorem 67 </span> (Nonadditivity of the outer measure)</p>
+<section class="theorem-content" id="proof-content">
+<p>There exist disjoint subsets <span class="math notranslate nohighlight">\(A, B\)</span> of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[|A \cup B| \neq |A| + |B|.\]</div>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Nonadditivity of the outer measure<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><strong>Proof idea:</strong>
+We will show this result as follows.
+We will define a countable collection of disjoint sets whose union is contained in an closed interval of <span class="math notranslate nohighlight">\(\mathbb{R},\)</span> and which have all equal outer measure.
+Then, we will show that the outer measure of each of these sets is nonzero, which contradicts the assumption that the outer measure is additive.</p>
+<p class="sd-card-text"><strong>Proof:</strong>
+Let <span class="math notranslate nohighlight">\(\sim\)</span> be the binary relation defined by</p>
+<div class="math notranslate nohighlight">
+\[a \sim b \iff a - b \in \mathbb{Q}.\]</div>
+<p class="sd-card-text">Note that <span class="math notranslate nohighlight">\(\sim\)</span> is an equivalence relation on <span class="math notranslate nohighlight">\(\mathbb{R},\)</span> because it is:</p>
+<ul class="simple">
+<li><p class="sd-card-text">reflexive: <span class="math notranslate nohighlight">\(a - a = 0 \in \mathbb{Q};\)</span></p></li>
+<li><p class="sd-card-text">symmetric: If <span class="math notranslate nohighlight">\(a - b \in \mathbb{Q},\)</span> then <span class="math notranslate nohighlight">\(b - a = -(a - b) \in \mathbb{Q};\)</span></p></li>
+<li><p class="sd-card-text">transitive: If <span class="math notranslate nohighlight">\(a - b \in \mathbb{Q}\)</span> and <span class="math notranslate nohighlight">\(b - c \in \mathbb{Q},\)</span> then <span class="math notranslate nohighlight">\(a - c = (a - b) + (b - c) \in \mathbb{Q}.\)</span></p></li>
+</ul>
+<p class="sd-card-text">For <span class="math notranslate nohighlight">\(a \in [-1, 1],\)</span> let <span class="math notranslate nohighlight">\(\tilde{a}\)</span> be the equivalence class of <span class="math notranslate nohighlight">\(a\)</span> under <span class="math notranslate nohighlight">\(\sim.\)</span>
+Then, for any <span class="math notranslate nohighlight">\(a \in [-1, 1],\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[[-1, 1] = \bigcup_{a \in [-1, 1]} \tilde{a}.\]</div>
+<p class="sd-card-text">Now, let <span class="math notranslate nohighlight">\(V\)</span> be a set that contains exactly one element from each of the equivalence classes of <span class="math notranslate nohighlight">\(\sim\)</span> on <span class="math notranslate nohighlight">\([-1, 1].\)</span>
+Let also <span class="math notranslate nohighlight">\(r_1, r_2, \ldots\)</span> be a sequence which contains all the rational numbers in <span class="math notranslate nohighlight">\([-2, 2]\)</span> exactly once.
+Then</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}[-1, 1] \subseteq \bigcup_{k=1}^\infty (r_k + V),$\\because for each $a \in [-1, 1],$ there is a unique element $v \in V$ that is in the same equivalence class as $a,$ namely $v = \tilde{a} \cap V,$ so $a - v \in \mathbb{Q},$ from which it follows that $a - v = r_k$ for some $k \in \mathbb{Z}^+,$ and therefore $a \in r_k + V.$
+The set inclusion above together with the {prf:ref}`order preserving property &lt;mira:thm:outer-measure-preserves-order&gt;` of the outer measure, and the {prf:ref}`translation invariance &lt;mira:thm:outer-measure-is-translation-invariant&gt;` of the outer measure imply that\\$$|[-1, 1]| = 2 \leq \sum_{k=1}^\infty |r_k + V| = \sum_{k=1}^\infty |V|\end{aligned}\end{align} \]</div>
+<p class="sd-card-text">Thus <span class="math notranslate nohighlight">\(|V| &gt; 0.\)</span>
+Now, note that the sets <span class="math notranslate nohighlight">\((r_1 + V), (r_2 + V), \ldots, (r_K + V)\)</span> are disjoint for any <span class="math notranslate nohighlight">\(K \in \mathbb{Z}^+.\)</span>
+Note also that for any <span class="math notranslate nohighlight">\(K \in \mathbb{Z}^+,\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[ \bigcup_{k=1}^K (r_k + V) \subseteq [-3, 3] \implies \left| \bigcup_{k=1}^K (r_k + V) \right| \leq 6.\]</div>
+<p class="sd-card-text">Now, suppose that the outer measure is additive.
+Then, applying the additivity property <span class="math notranslate nohighlight">\(K - 1\)</span> times gives</p>
+<div class="math notranslate nohighlight">
+\[\left| \bigcup_{k=1}^K (r_k + V) \right| = \sum_{k=1}^K |r_k + V| = K|V| &lt; 6,\]</div>
+<p class="sd-card-text">reaching a contradiction, because <span class="math notranslate nohighlight">\(|V| &gt; 0,\)</span> so the above inequality cannot hold for any <span class="math notranslate nohighlight">\(K.\)</span></p>
+</div>
+</details><p>Shortly, we will show that this negative result is not a fundamental limitation of our definition of the outer measure.
+As explained earlier, any function that satisfies some of the aforementioned properties of the outer measure and has domain equal to the power set of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> cannot be additive.</p>
+</section>
 </section>
 </section>
 
@@ -669,7 +835,9 @@ Thus</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#outer-measure">Outer measure</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-of-the-outer-measure">Definition of the outer measure</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#good-properties-of-the-outer-measure">Good properties of the outer measure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#good-properties">Good properties</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heine-borel-theorem">Heine-Borel theorem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nonadditivity-of-the-outer-measure">Nonadditivity of the outer measure</a></li>
 </ul>
 </li>
 </ul>
