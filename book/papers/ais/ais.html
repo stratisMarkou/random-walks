@@ -203,6 +203,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Stream of papers</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Annealed Importance Sampling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../rff/rff.html">Random Fourier features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../svgd/svgd.html">Stein variational gradient descent</a></li>
 </ul>
 </li>
 </ul>
@@ -498,7 +499,7 @@ q(x) = \mathcal{N}(x; \mu_q, \sigma_q^2).
 \end{equation}\]</div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/e318a593e26b1a5bdbed6d803eca678d0ff60ce4d5a2a2aee593d9b8114e645c.svg" src="../../../_images/e318a593e26b1a5bdbed6d803eca678d0ff60ce4d5a2a2aee593d9b8114e645c.svg" /></div>
+<img alt="../../../_images/7b729774839b9ee1fbb3bcc5d271a17e293d9d852647d4f137e40a046a9a2dc4.svg" src="../../../_images/7b729774839b9ee1fbb3bcc5d271a17e293d9d852647d4f137e40a046a9a2dc4.svg" /></div>
 </div>
 <p>Using importance sampling, we can obtain an estimate of this intergral.</p>
 <div class="cell tag_remove-input docutils container">
@@ -533,7 +534,7 @@ The point of this additional Monte Carlo estimate is to give us an idea of how m
 To see why, this occurs, let’s plot the raw samples drawn from <span class="math notranslate nohighlight">\(q\)</span> (in green) as well as the samples weighted according to their importance weights (in blue).</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/fa756fb8202c4438e44ea1c41c8fd2137c5614914d688227a85926a9ec0058d4.svg" src="../../../_images/fa756fb8202c4438e44ea1c41c8fd2137c5614914d688227a85926a9ec0058d4.svg" /></div>
+<img alt="../../../_images/ecad6b0ebf7733ff1c5f198f7d3f636377621e9e275b41f4c553d0d0a0b12d3f.svg" src="../../../_images/ecad6b0ebf7733ff1c5f198f7d3f636377621e9e275b41f4c553d0d0a0b12d3f.svg" /></div>
 </div>
 <p>First off, this plot illustrates how importance sampling works.
 Although <span class="math notranslate nohighlight">\(q\)</span> proposes many samples in the middle, these are down-weighted by the importance weights, since <span class="math notranslate nohighlight">\(p\)</span> has small density there.
@@ -545,7 +546,7 @@ Since this sample has a large importance weight, it greatly affects the overall 
 Looking at a histogram of the importance weights we see that most weights are very small, and it’s only a few large weights which dominate the value of the integral (note the <span class="math notranslate nohighlight">\(x\)</span>-axis has a log-scale).</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/69e628a0b143f32c68a13d8eacf1e2cb4cd8b91de1809345f130f46c39101ba6.svg" src="../../../_images/69e628a0b143f32c68a13d8eacf1e2cb4cd8b91de1809345f130f46c39101ba6.svg" /></div>
+<img alt="../../../_images/c872198d83795cebba3994ae59dabbb9ffb9432b2ce1984294faf38353934399.svg" src="../../../_images/c872198d83795cebba3994ae59dabbb9ffb9432b2ce1984294faf38353934399.svg" /></div>
 </div>
 <p>Going a little further, note that the expectation of the value of an importance weight is always equal to one since</p>
 <div class="math notranslate nohighlight">
@@ -987,14 +988,14 @@ This gives <span class="math notranslate nohighlight">\(\beta_k\)</span> which g
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../../../_images/5fd88eaf30ae7008c566f937f65b58d5171bf69cefb71d379ab1f40441bdf5e4.svg" src="../../../_images/5fd88eaf30ae7008c566f937f65b58d5171bf69cefb71d379ab1f40441bdf5e4.svg" /></div>
+<img alt="../../../_images/22ab34997b520e85c45ee1f95cc30418df67c61d99f4ece9defffcf1575b75b7.svg" src="../../../_images/22ab34997b520e85c45ee1f95cc30418df67c61d99f4ece9defffcf1575b75b7.svg" /></div>
 </div>
 <p>We observe that the distribution of the AIS samples (purple bars) is similar to the target distribution <span class="math notranslate nohighlight">\(p\)</span> (blue line).
 Further, weighing the AIS samples by their importance weights (blue bars) does not appear to significantly change the resulting distribution.
 This would suggest that moost of the importance weights are close to <span class="math notranslate nohighlight">\(1\)</span>, which we can verify by plotting them on a histogram.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/8470fc193dc6fdb275e1c1c512a73b0057da1f9be5e7059986e9954a446eae0f.svg" src="../../../_images/8470fc193dc6fdb275e1c1c512a73b0057da1f9be5e7059986e9954a446eae0f.svg" /></div>
+<img alt="../../../_images/a23a9fb40383965a93ec476faa6780bcce98650d19b7a52165c4c5e9f8f7d80b.svg" src="../../../_images/a23a9fb40383965a93ec476faa6780bcce98650d19b7a52165c4c5e9f8f7d80b.svg" /></div>
 </div>
 <p>As expected, most of the AIS importance weights are close to <span class="math notranslate nohighlight">\(1\)</span>.
 Further, they have a clearly smaller variance than standard importance sampling.

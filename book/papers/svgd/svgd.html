@@ -1,0 +1,775 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Stein variational gradient descent &#8212; Random Walks</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-HP14V4DGEF"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-HP14V4DGEF');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/papers/svgd/svgd';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="prev" title="Random Fourier features" href="../rff/rff.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../../intro.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Random Walks</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../intro.html">
+                    Home
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Notes on books</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../toc/000-intro.html">Theory of Computation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../toc/001-fsa.html">FSAs and Regular Expressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../toc/002-cfl.html">PDAs and Context Free Grammars</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../toc/000-exercises.html">Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../prob-intro/intro.html">Probability: An introduction</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../prob-intro/ch01/content.html">Events and Probabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../prob-intro/ch02/content.html">Discrete random variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../prob-intro/ch03/content.html">Multivariate discrete distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../prob-intro/ch04/content.html">Probability generating functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../prob-intro/ch05/content.html">Distribution and density functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../prob-intro/ch06/content.html">Multivariate distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../prob-intro/ch07/content.html">Moment generating functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../prob-intro/ch08/content.html">Main limit theorems</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mira/000-intro.html">Measure Theory</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mira/001-riemann.html">Riemann integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mira/002-measures.html">Measures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mira/000-exercises.html">Exercises</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Papers</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Stream of papers</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../ais/ais.html">Annealed Importance Sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rff/rff.html">Random Fourier features</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Stein variational gradient descent</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/stratisMarkou/random-walks" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/stratisMarkou/random-walks/issues/new?title=Issue%20on%20page%20%2Fbook/papers/svgd/svgd.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/book/papers/svgd/svgd.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Stein variational gradient descent</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivation-of-svgd">Derivation of SVGD</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#invertible-transformations">Invertible transformations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#direction-of-steepest-descent">Direction of steepest descent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#empirical-approximation">Empirical approximation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#demo-on-mixture-of-gaussians">Demo on mixture of Gaussians</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#failure-mode-on-mixture-of-gaussians">Failure mode on mixture of Gaussians</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="stein-variational-gradient-descent">
+<h1>Stein variational gradient descent<a class="headerlink" href="#stein-variational-gradient-descent" title="Permalink to this heading">#</a></h1>
+<p>One central challenge in Statistics and Bayesian machine learning is dealing with intractable distributions.
+In many cases, our models involve complicated distributions, which can be difficult to integrate out or sample from - consider for example the posterior distribution over the parameters of a Bayesian neural network.
+A great deal of approaches have been devised to enable efficient handling of complicated distributions, broadly falling in two categories: Variational Inference (VI) and Markov Chain Monte Carlo (MCMC) - we focus on the former only here.</p>
+<p>Suppose we are working with an intractable distribution <span class="math notranslate nohighlight">\(p\)</span>.
+VI seeks to approximate <span class="math notranslate nohighlight">\(p\)</span> by another approximate distribution <span class="math notranslate nohighlight">\(q\)</span>, constrained to be in a tractable family of distributions - such as an independent Gaussian.
+By optimising a similarity metric between <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(p\)</span>, such as the KL-divergence, VI produces a (hopefully) decent approximation which captures some of the important aspects of the target.
+VI can be much faster than MCMC, but it is an approximate method. The severity of approximation involved in VI is largely affected by the family of the approximate distribution, and can be very large for many applications of interest.</p>
+<p>Stein Variational Gradient Descent (SVGD) <span id="id1">[<a class="reference internal" href="#id12" title="Qiang Liu and Dilin Wang. Stein variational gradient descent: a general purpose bayesian inference algorithm. 2019. arXiv:1608.04471.">Liu and Wang, 2019</a>]</span> is an algorithm which enables approximate inference for intractable distributions, wihtout the severe constraints of the approximating family of VI.
+Much like VI, it minimises the KL divergence between <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(p\)</span>, but unlike VI it does not involve heavy assumptions on the family of <span class="math notranslate nohighlight">\(q\)</span>.
+Instead, SVGD evolves a finite set of particles, which approximates <span class="math notranslate nohighlight">\(q\)</span>, by a sequence of transformations such that <span class="math notranslate nohighlight">\(q\)</span> gets progressively closer to <span class="math notranslate nohighlight">\(p\)</span>.</p>
+<section id="derivation-of-svgd">
+<h2>Derivation of SVGD<a class="headerlink" href="#derivation-of-svgd" title="Permalink to this heading">#</a></h2>
+<p>The idea SVGD is to approximate a target distribution <span class="math notranslate nohighlight">\(p\)</span> by an approximate distribution <span class="math notranslate nohighlight">\(q\)</span>, by applying a sequence of transformations to <span class="math notranslate nohighlight">\(q\)</span> which will bring it closer to <span class="math notranslate nohighlight">\(p\)</span>. By applying the transformation (from a restricted family of transformations) which most rapidly reduces the KL divergence, we will obtain an algorithm that looks much like steepest-direction gradient descent.</p>
+<section id="invertible-transformations">
+<h3>Invertible transformations<a class="headerlink" href="#invertible-transformations" title="Permalink to this heading">#</a></h3>
+<p>Suppose we have an initial distribution <span class="math notranslate nohighlight">\(q\)</span>, which we pass through a transformation <span class="math notranslate nohighlight">\(T : \mathbb{R}^N \to \mathbb{R}^N\)</span>, that is</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+z = T(x),~~\text{ where } x \sim q(x).
+\end{align}\]</div>
+<p>If the map <span class="math notranslate nohighlight">\(T\)</span> is invertible, we can easily compute the density of the transformed variable <span class="math notranslate nohighlight">\(z\)</span> via the change of variables formula. To ensure <span class="math notranslate nohighlight">\(T\)</span> is invertible, let us set <span class="math notranslate nohighlight">\(T(x) = x + \epsilon \phi(x)\)</span>, where <span class="math notranslate nohighlight">\(\epsilon\)</span> is a small coefficient and <span class="math notranslate nohighlight">\(\phi : \mathbb{R}^N \to \mathbb{R}^N\)</span>. If <span class="math notranslate nohighlight">\(\phi\)</span> is smooth and <span class="math notranslate nohighlight">\(\epsilon\)</span> is sufficiently small, then <span class="math notranslate nohighlight">\(T\)</span> is invertible, which which means we can easily compute the density of <span class="math notranslate nohighlight">\(z\)</span>. We turn to the question of how to pick an appropriate <span class="math notranslate nohighlight">\(\phi\)</span>.</p>
+</section>
+<section id="direction-of-steepest-descent">
+<h3>Direction of steepest descent<a class="headerlink" href="#direction-of-steepest-descent" title="Permalink to this heading">#</a></h3>
+<p>Let us use the subscript notation <span class="math notranslate nohighlight">\(q_{[T]}\)</span> to denote the distribution obtained by passing <span class="math notranslate nohighlight">\(q\)</span> through <span class="math notranslate nohighlight">\(T\)</span>. Then we are interested in picking a <span class="math notranslate nohighlight">\(T\)</span> which minimises <span class="math notranslate nohighlight">\(\text{KL}(q_{[T]} || p)\)</span>. First, we compute the derivative of the KL w.r.t. <span class="math notranslate nohighlight">\(\epsilon\)</span>, which we obtain in closed form.</p>
+<div class="proof theorem admonition" id="theorem-0">
+<p class="admonition-title"><span class="caption-number">Theorem 69 </span> (Proof: Gradient of KL is the KSD)</p>
+<section class="theorem-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(x \sim q(x)\)</span>, and <span class="math notranslate nohighlight">\(T(x) = x + \epsilon \phi(x)\)</span>, where <span class="math notranslate nohighlight">\(\phi\)</span> is a smooth function. Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\nabla_{\epsilon}\text{KL}(q_{[T]} || p) \big|_{\epsilon = 0} = - \mathbb{E}_{x \sim q}\left[\text{trace} \mathcal{A}_p \phi(x) \right],
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(q_{[T]}\)</span> is the density of <span class="math notranslate nohighlight">\(T(x)\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mathcal{A}_p \phi(x) = \nabla_x \log p(x)\phi^\top(x) + \nabla_x \phi(x).
+\end{align}\]</div>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Gradient of KL is the KSD<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(p_{\left[T^{-1}\right]}(x)\)</span> denote the density of <span class="math notranslate nohighlight">\(z = T^{-1}(x)\)</span> when <span class="math notranslate nohighlight">\(x \sim p(x)\)</span>. By changing the variable of integration from <span class="math notranslate nohighlight">\(z\)</span> to <span class="math notranslate nohighlight">\(x = T^{-1}(x)\)</span>, we obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\text{KL}(q_{[T]} || p) &amp;= \int q_{[T]}(z) \log \frac{q_{[T]}(z)}{p(z)} dz \\
+                        &amp;= \int q(x) \left[ \log q(x) - \log p_{\left[T^{-1}\right]}(x) \right] dx.
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">This change of variables is convenient because now only one term in the integral depends on <span class="math notranslate nohighlight">\(\epsilon\)</span>, that is <span class="math notranslate nohighlight">\(p_{\left[T^{-1}\right]}(x)\)</span>. Now taking the derivative with respect to <span class="math notranslate nohighlight">\(\epsilon\)</span> we obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\nabla_{\epsilon} \text{KL}(q_{[T]} || p) &amp;= - \int q(x) \nabla_{\epsilon} \log p_{\left[T^{-1}\right]}(x) dx, \\
+                                          &amp;= - \int q(x) \nabla_{\epsilon} \log p_{\left[T^{-1}\right]}(x) dx,
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">and using the fact that</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\log p_{\left[T^{-1}\right]}(x) &amp;= \log p(T(x)) + \log |\nabla_x T(x)|,
+\end{align}\]</div>
+<p class="sd-card-text">we obtain the expression</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\nabla_{\epsilon} \log p_{\left[T^{-1}\right]}(x) &amp;= \nabla \log p(T(x))^\top \nabla_\epsilon T(x) + \nabla_\epsilon \log |\nabla_x T(x)|, \\
+                                                  &amp;= \nabla \log p(T(x))^\top \nabla_\epsilon T(x) + \text{trace}\left[(\nabla_x T(x))^{-1} \nabla_\epsilon \nabla_x T(x)\right],
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">where we have used the identity</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\nabla_{\epsilon} \log |\det A| = \text{trace} A^{-1} \nabla_{\epsilon} A,
+\end{align}\]</div>
+<p class="sd-card-text">we arrive at the following expression for the derivative</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\nabla_{\epsilon} \text{KL}(q_{[T]} || p) &amp;= - \mathbb{E}_{x \sim q} \left[\nabla \log p(T(x))^\top \nabla_\epsilon T(x) + \text{trace} (\nabla_x T(x))^{-1} \nabla_\epsilon \nabla_x T(x)\right].
+\end{align}\]</div>
+<p class="sd-card-text">Setting <span class="math notranslate nohighlight">\(T(x) = x + \epsilon \phi(x)\)</span> yields the result</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\nabla_{\epsilon} \text{KL}(q_{[T]} || p) &amp;= - \mathbb{E}_{x \sim q} \left[\nabla \log p(x)^\top \phi(x) + \text{trace}\left[\nabla_x \phi(x) \right]\right], \\
+                                          &amp;= - \mathbb{E}_{x \sim q} \left[\text{trace} \mathcal{A}_p \phi(x) \right].
+\end{align}\end{split}\]</div>
+</div>
+</details><p>This result gives us the rate of change of the KL as <span class="math notranslate nohighlight">\(\epsilon\)</span> increases, for given <span class="math notranslate nohighlight">\(\phi\)</span>. Now, we want to pick <span class="math notranslate nohighlight">\(\phi\)</span> such that <span class="math notranslate nohighlight">\(-\mathbb{E}_{x \sim q} \left[\text{trace} \mathcal{A}_p \phi(x) \right]\)</span> is as negative as possible. However, this minimisation is not well defined, because one can scale <span class="math notranslate nohighlight">\(\phi\)</span> by an arbitrary scalar making the expectation unbounded. Further, the minimisation is not analytically or computationally tractable either. This issue can be resolved by considering a constrained version of this optimisation problem instead, using Reproducing Kernel Hilbert Spaces (RKHS).</p>
+<p>Let <span class="math notranslate nohighlight">\(k\)</span> be a positive-definite kernel, defining a corresponding RKHS <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> with inner product <span class="math notranslate nohighlight">\(\langle\cdot, \cdot \rangle_{\mathcal{H}}\)</span>. Let also <span class="math notranslate nohighlight">\(\mathcal{H}_D = \mathcal{H} \times ... \times \mathcal{H}\)</span> be the Hilbert space of <span class="math notranslate nohighlight">\(D\)</span>-dimensional vector valued functions <span class="math notranslate nohighlight">\(f = (f_1, ..., f_D) : f_1, ..., f_D \in \mathcal{H}\)</span> with corresponding inner product</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\langle f, g \rangle_{\mathcal{H}_D} = \sqrt{\sum_{d = 1}^D \langle f_d, g_d \rangle_{\mathcal{H}_D}^2}.
+\end{align}\]</div>
+<p>If we now constrain <span class="math notranslate nohighlight">\(\phi \in \mathcal{H}_D\)</span> and <span class="math notranslate nohighlight">\(|| \phi ||_{\mathcal{H}_D} \leq 1\)</span> we obtain<span id="id2">[<a class="reference internal" href="#id13" title="Qiang Liu, Jason Lee, and Michael Jordan. A kernelized stein discrepancy for goodness-of-fit tests. In International conference on machine learning, 276–284. PMLR, 2016.">Liu <em>et al.</em>, 2016</a>]</span> the following analytic expression for the direction of steepest descent.</p>
+<div class="proof theorem admonition" id="theorem-1">
+<p class="admonition-title"><span class="caption-number">Theorem 70 </span> (Direction of steepest descent)</p>
+<section class="theorem-content" id="proof-content">
+<p>The function <span class="math notranslate nohighlight">\(\phi^* \in \mathcal{H}_D, || \phi^* ||_{\mathcal{H}_D} \leq 1\)</span> which maximises the rate of decrease KL-divergence is</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\phi^*(\cdot) = \beta / ||\beta||_{\mathcal{H}_d} ,~~\beta(\cdot) = \mathbb{E}_{x \sim q}\left[ k(x, \cdot) \nabla_x \log p(x) + \nabla_x k(x, \cdot)\right].
+\end{align}\]</div>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Direction of steepest descent<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">For <span class="math notranslate nohighlight">\(f \in \mathcal{H}_D\)</span> we have the following equality</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\langle f, \beta \rangle_{\mathcal{H}_D} &amp;= \sum_{d = 1}^D \langle f_d(\cdot), \beta_d \rangle_{\mathcal{H}} \\
+                                          &amp;= \sum_{d = 1}^D \left \langle f_d(\cdot), \mathbb{E}_{x \sim q}\left[k(x, \cdot) \nabla_{x_d} \log p(x) + \nabla_{x_d} k(x, \cdot)\right] \right\rangle_{\mathcal{H}} \\
+                                          &amp;= \sum_{d = 1}^D \mathbb{E}_{x \sim q}\left[\nabla_{x_d} \log p(x) \langle f_d(\cdot), k(x, \cdot) \rangle + \langle f_d(\cdot), \nabla_{x_d} k(x, \cdot) \rangle \right] \rangle_{\mathcal{H}} \\
+                                          &amp;= \sum_{d = 1}^D \mathbb{E}_{x \sim q}\left[\nabla_{x_d} \log p(x) f_d(x) + \nabla_{x_d} f_d(x) \right] \\
+                                          &amp;= \mathbb{E}_{x \sim p}\left[\mathcal{A}_q f(x)\right].
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">Therefore, the <span class="math notranslate nohighlight">\(f \in \mathcal{H}_D\)</span> which maximises <span class="math notranslate nohighlight">\(\mathbb{E}_{x \sim p}\left[\mathcal{A}_q f(x)\right]\)</span> is the one which maximises the inner product <span class="math notranslate nohighlight">\(\langle f, \beta \rangle_{\mathcal{H}_D}\)</span>, which occurs when <span class="math notranslate nohighlight">\(f\)</span> is proportional to <span class="math notranslate nohighlight">\(\beta\)</span>.</p>
+</div>
+</details></section>
+<section id="empirical-approximation">
+<h3>Empirical approximation<a class="headerlink" href="#empirical-approximation" title="Permalink to this heading">#</a></h3>
+<p>Now, if we approximate <span class="math notranslate nohighlight">\(q\)</span> by a finite set of <span class="math notranslate nohighlight">\(N\)</span> particles at locations <span class="math notranslate nohighlight">\(x_n^{(i)}, n = 1, ..., N\)</span>, at the <span class="math notranslate nohighlight">\(i^{th}\)</span> iteration, we obtain at the following iterative algorithm.</p>
+<div class="proof definition admonition" id="definition-2">
+<p class="admonition-title"><span class="caption-number">Definition 62 </span> (Stein variational gradient descent)</p>
+<section class="definition-content" id="proof-content">
+<p>Given a distribution <span class="math notranslate nohighlight">\(p(x)\)</span>, a postive definite kernel <span class="math notranslate nohighlight">\(k(x, x')\)</span> and a set of particles with initial positions <span class="math notranslate nohighlight">\(\{x_n^{(0)}\}_{n=1}^N\)</span>, Stein variational gradient descent evolves the particles according to</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+x^{(i + 1)}_n = x^{(i)}_n + \frac{\epsilon^{(i)}}{N}\sum_{m = 1}^N \left[ k(x_n, x_m) \nabla_x \log p(x)|_{x_n} + \nabla_x k(x_m, x) |_{x_n}\right].
+\end{align}\]</div>
+</section>
+</div></section>
+</section>
+<section id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this heading">#</a></h2>
+<p>The SVGD algorithm is surprisingly easy to implement, while also each step is quite cheap to evaluate.
+We will use SVGD to approximate a mixture-of-gaussians distribution, to allow for multiple modes.</p>
+<div class="cell tag_center-output tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../../_images/3c3c61e71171096ce53f22a00f6622b2270883732a7c57554983d47aafa3ffc5.svg" src="../../../_images/3c3c61e71171096ce53f22a00f6622b2270883732a7c57554983d47aafa3ffc5.svg" /></div>
+</div>
+<p>Although SVGD can use any positive-semidefinite kernel, we will focus our attention to the standard EQ kernel</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+k(x, x') = \exp\left(-\frac{1}{2\ell^2} (x - x')^2\right),
+\end{align}\]</div>
+<p>implemented by the <code class="docutils literal notranslate"><span class="pre">eq</span></code> function below. The <code class="docutils literal notranslate"><span class="pre">svgd_grad</span></code> computes the SVGD gradients for a set of particles, using Tensorflow’s batch jacobians.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">eq</span><span class="p">(</span><span class="n">lengthscales</span><span class="p">):</span>
+    
+    <span class="k">def</span> <span class="nf">kernel</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_</span><span class="p">):</span>
+    
+        <span class="n">diff</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">x_</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+        <span class="n">quad</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">((</span><span class="n">diff</span> <span class="o">/</span> <span class="n">lengthscales</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">exp</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">quad</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">exp</span>
+    
+    <span class="k">return</span> <span class="n">kernel</span>
+
+
+<span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
+<span class="k">def</span> <span class="nf">svgd_grad</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">logprob</span><span class="p">,</span> <span class="n">kernel</span><span class="p">):</span>
+    
+    <span class="n">x_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">(</span><span class="n">x</span><span class="p">[:],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">(</span><span class="n">persistent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+        
+        <span class="n">tape</span><span class="o">.</span><span class="n">watch</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        
+        <span class="n">logp</span> <span class="o">=</span> <span class="n">logprob</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">kernel</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_</span><span class="p">)</span>
+    
+    <span class="n">dlogp</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">logp</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">dk</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">batch_jacobian</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    
+    <span class="n">svg</span> <span class="o">=</span> <span class="p">(</span><span class="n">k</span> <span class="o">@</span> <span class="n">dlogp</span> <span class="o">+</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">dk</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span> <span class="o">/</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">svg</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="demo-on-mixture-of-gaussians">
+<h3>Demo on mixture of Gaussians<a class="headerlink" href="#demo-on-mixture-of-gaussians" title="Permalink to this heading">#</a></h3>
+<p>We can now run SVGD using a modest number of particles initialised in between the two modes.</p>
+<div class="cell tag_center-output tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../../_images/2790cd2d2b3fad65c8abe4da7fb5e4ff1bcfc839d72d4bce9e37cc2d4c3d059e.svg" src="../../../_images/2790cd2d2b3fad65c8abe4da7fb5e4ff1bcfc839d72d4bce9e37cc2d4c3d059e.svg" /></div>
+</div>
+<p>We observe that some of the particles fall into each of the two modes, capturing the bimodality of the target, something which VI with a mean-field Gaussian <span class="math notranslate nohighlight">\(q\)</span> cannot do.</p>
+</section>
+<section id="failure-mode-on-mixture-of-gaussians">
+<h3>Failure mode on mixture of Gaussians<a class="headerlink" href="#failure-mode-on-mixture-of-gaussians" title="Permalink to this heading">#</a></h3>
+<p>However, SVGD also has failure modes, as illustrated below.
+If we initialise the particles on one mode of two well-separated Gaussians, then the optimisation gets stuck at a local optimum which fails to capture one of the two modes of the mixture of Gaussians.
+Even though SVGD may be able to express more expressive approximate distributions than mean-field VI, it is not guaranteed that the optimisation will be able to find such a distribution.</p>
+<div class="cell tag_center-output tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../../_images/5adbe816d08f438204d668d9df6b31f440db84757dbab42c4b92e3c4bbac755e.svg" src="../../../_images/5adbe816d08f438204d668d9df6b31f440db84757dbab42c4b92e3c4bbac755e.svg" /></div>
+</div>
+</section>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<p>This section presented SVGD, a very interesting general-purpose algorithm for approximate inference.
+SVGD works by simulating a set of particles, regarded as an empirical approximation of a distribution <span class="math notranslate nohighlight">\(q\)</span> which itself approximates the target distribution <span class="math notranslate nohighlight">\(p\)</span>.
+By evolving <span class="math notranslate nohighlight">\(q\)</span> according to a sequence of transformations, each of which is determined as the direction of steepest decrease in the KL between <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(p\)</span>, SVGD can produce a flexible approximation to the target <span class="math notranslate nohighlight">\(p\)</span>.</p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<div class="docutils container" id="id3">
+<dl class="citation">
+<dt class="label" id="id13"><span class="brackets"><a class="fn-backref" href="#id2">LLJ16</a></span></dt>
+<dd><p>Qiang Liu, Jason Lee, and Michael Jordan. A kernelized stein discrepancy for goodness-of-fit tests. In <em>International conference on machine learning</em>, 276–284. PMLR, 2016.</p>
+</dd>
+<dt class="label" id="id12"><span class="brackets"><a class="fn-backref" href="#id1">LW19</a></span></dt>
+<dd><p>Qiang Liu and Dilin Wang. Stein variational gradient descent: a general purpose bayesian inference algorithm. 2019. <a class="reference external" href="https://arxiv.org/abs/1608.04471">arXiv:1608.04471</a>.</p>
+</dd>
+</dl>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book/papers/svgd"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../rff/rff.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Random Fourier features</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivation-of-svgd">Derivation of SVGD</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#invertible-transformations">Invertible transformations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#direction-of-steepest-descent">Direction of steepest descent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#empirical-approximation">Empirical approximation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#demo-on-mixture-of-gaussians">Demo on mixture of Gaussians</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#failure-mode-on-mixture-of-gaussians">Failure mode on mixture of Gaussians</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Stratis Markou
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
