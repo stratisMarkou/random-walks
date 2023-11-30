@@ -267,6 +267,7 @@ $$\int_a^b g = \int_a^b f - \int_a^b h = \int_a^b f.$$
 
 ::::{admonition} Exercise 1.A.7
 :class: tip
+:name: mira-ex-1a7
 
 Suppose $f: [a, b] \to \mathbb{R}$ is a bounded function.
 For $n \in \mathbb{N},$ let $P_n$ denote the partition that divides $[a, b]$ into $2^n$ intervals of equal size.
@@ -282,7 +283,7 @@ By the definition of supremum, for every $\epsilon > 0$ there exists a partition
 
 $$L(f, [a, b]) - L(f, R_\epsilon, [a, b]) < \epsilon.$$
 
-Let $\delta(R_\epsilon)$ be the size of the smallest subinterval of $R_\epsilon,$ and let $E_{R_\epsilon, k}$ be the partition of $[a, b]$ into $2^{n+k}$ intervals of equal size, such that $\frac{(b-a)}{2^n} \leq \delta(R_\epsilon).$
+Let $\delta(R_\epsilon)$ be the size of the smallest subinterval of $R_\epsilon,$ and let $E_{R_\epsilon, k}$ be the partition of $[a, b]$ into $2^{n+k}$ intervals of equal size, where $n \in \mathbb{Z}^+$ is the smallest positive integer such that $\frac{(b-a)}{2^n} \leq \delta(R_\epsilon).$
 Now, note that
 
 $$\begin{align}
@@ -309,6 +310,159 @@ $$\lim_{n \to \infty} L(f, P_n, [a, b]) = L(f, [a, b]) \text{ and } \lim_{n \to 
 
 :::
 ::::
+
+
+
+::::{admonition} Exercise 1.A.8
+:class: tip
+
+Suppose $f: [a, b] \to \mathbb{R}$ is Rieman integrable.
+Prove that
+
+$$\int_a^b f = \lim_{n \to \infty} \frac{b - a}{n} \sum_{j=1}^n f\left(a + \frac{j(b - a)}{n}\right).$$
+
+:::{dropdown} Solution
+
+This exercise follows the a similar argument to {ref}`exercise 1.A.7<mira-ex-1a7>`.
+Suppose $f: [a, b] \to \mathbb{R}$ is Riemann integrable.
+Since $f$ is Riemann integrable, it is bounded, so there exists $C > 0$ such that $|f(x)| \leq C$ for all $x \in [a, b].$
+By the definition of supremum, for any $\epsilon > 0,$ there exists a partition $R_\epsilon$ of $[a, b]$ such that
+
+$$L(f, [a, b]) - L(f, R_\epsilon, [a, b]) < \epsilon.$$
+
+Let $\delta(R_\epsilon)$ be the size of the smallest subinterval of $R_\epsilon,$ let $n_\epsilon \in \mathbb{Z}^+$ be the smallest integer such that $(b - a)/n_\epsilon \leq \delta(R_\epsilon),$ and let $E_{R_\epsilon, k}$ be the partition of $[a, b]$ into $n_\epsilon + k$ intervals of equal size.
+Then, we have that
+
+$$|L(f, R_\epsilon, [a, b]) - L(f, E_{R_\epsilon, k}, [a, b])| \leq \frac{|R_\epsilon|}{n_\epsilon + k} 2C,$$
+
+where $|R_\epsilon|$ is the number of points in the partition $R_\epsilon.$
+Let $k_\epsilon$ be the smallest integer such that
+
+$$\frac{|R_\epsilon|}{n_\epsilon + k_\epsilon} 2C < \epsilon.$$
+
+Then, for any $k \geq k_\epsilon,$ we have
+
+$$\begin{align}
+\left|L(f, [a, b]) - L(f, E_{R_\epsilon, k}, [a, b])\right| < \epsilon.
+\end{align}$$
+
+Therefore, any partition $P_n$ of $[a, b]$ into $n > n_\epsilon + k_\epsilon$ intervals of equal size satisfies 
+
+$$\left|L(f, [a, b]) - L(f, P_n, [a, b])\right| < \epsilon,$$
+
+and $L(f, P_n, [a, b])$ converges to $L(f, [a, b])$ as $n \to \infty.$
+Now, note that for any such partition $P_n$ of $[a, b],$ we have
+
+$$\begin{align}
+L(f, [a, b]) \geq \frac{b - a}{n} \sum_{j=1}^n f\left(a + \frac{j(b - a)}{n}\right) \geq \frac{b - a}{n} \sum_{j=1}^n \inf_{x \in [x_{j-1}, x_j]} f(x) = L(f, P_n, [a, b]),
+\end{align}$$
+
+where $x_j = a + j(b - a)/n,$ so taking the limit as $n \to \infty,$ we obtain
+
+$$\lim_{n \to \infty} \frac{b - a}{n} \sum_{j=1}^n f\left(a + \frac{j(b - a)}{n}\right) = L(f, [a, b]) = \int_a^b f.$$
+
+:::
+::::
+
+
+
+::::{admonition} Exercise 1.A.9
+:class: tip
+
+Suppose $f: [a, b] \to \mathbb{R}$ is Rieman integrable.
+Prove that if $c, d \in [a, b]$ and $a \leq c < d \leq b,$ then $f$ is Riemann integrable on $[c, d].$
+
+:::{dropdown} Solution
+
+Suppose $f: [a, b] \to \mathbb{R}$ is Riemann integrable, and let $c, d \in [a, b]$ such that $a \leq c < d \leq b.$
+Since $f$ is Riemann integrable, by {ref}`exercise 1.A.3<mira-ex-1a3>`, for any $\epsilon > 0,$ there exists a partition $P_\epsilon$ of $[a, b]$ such that
+
+$$U(f, P_\epsilon, [a, b]) - L(f, P_\epsilon, [a, b]) < \epsilon.$$
+
+Now, let $P_\epsilon'$ be the partition of $[a, b]$ obtained by adding the points $c$ and $d$ to $P_\epsilon.$
+Then, by the {prf:ref}`property of refined partitions <mira-thm-refining-partitions>`, we have
+
+$$U(f, P_\epsilon', [a, b]) - L(f, P_\epsilon', [a, b]) \leq U(f, P_\epsilon, [a, b]) - L(f, P_\epsilon, [a, b]) < \epsilon,$$
+
+and letting $P_\epsilon''$ be the partition of $[c, d]$ containing all points of $P_\epsilon'$ in $[c, d],$ we have
+
+$$U(f, P_\epsilon'', [c, d]) - L(f, P_\epsilon'', [c, d]) \leq U(f, P_\epsilon', [a, b]) - L(f, P_\epsilon', [a, b]) < \epsilon.$$
+
+Therefore, for each $\epsilon,$ there exists a partition $P_\epsilon''$ of $[c, d]$ such that
+
+$$U(f, P_\epsilon'', [c, d]) - L(f, P_\epsilon'', [c, d]) < \epsilon,$$
+
+and using {ref}`exercise 1.A.3<mira-ex-1a3>` again, we conclude that $f$ is Riemann integrable on $[c, d].$
+
+:::
+::::
+
+
+
+
+::::{admonition} Exercise 1.A.10
+:class: tip
+
+Suppose $f: [a, b] \to \mathbb{R}$ is a bounded function and $c \in (a, b).$
+Prove that $f$ is Riemann integrable on $[a, b]$ if and only if $f$ is Riemann integrable on $[a, c]$ and $f$ is Riemann integrable on $[c, b].$
+Furthermore, prove that if these conditions hold, then
+
+$$\int_a^b f = \int_a^c f + \int_c^b f.$$
+
+:::{dropdown} Solution
+
+Suppose $f: [a, b] \to \mathbb{R}$ is a bounded function and $c \in (a, b).$
+
+__Part 1:__
+If $f$ is Rieman integrable on $[a, b],$ then by {ref}`exercise 1.A.3<mira-ex-1a3>`, for any $\epsilon > 0,$ there exists a partition $P_\epsilon$ of $[a, b]$ such that
+
+$$U(f, P_\epsilon, [a, b]) - L(f, P_\epsilon, [a, b]) < \epsilon.$$
+
+Let $P_\epsilon'$ be the partition of $[a, b]$ obtained by adding the point $c$ to $P_\epsilon.$
+Then, by the {prf:ref}`property of refined partitions <mira-thm-refining-partitions>`, we have
+
+$$U(f, P_\epsilon', [a, b]) - L(f, P_\epsilon', [a, b]) \leq U(f, P_\epsilon, [a, b]) - L(f, P_\epsilon, [a, b]) < \epsilon,$$
+
+and defining $P|_{[x_1, x_2]}$ to be the partition of $[x_1, x_2]$ containing all points of $P$ in $[x_1, x_2],$ we have
+
+$$\begin{align}
+U(f, P_\epsilon'|_{[a, c]}, [a, c]) + U(f, P_\epsilon'|_{[c, b]}, [c, b]) &= U(f, P_\epsilon', [a, b]) \\
+L(f, P_\epsilon'|_{[a, c]}, [a, c]) + L(f, P_\epsilon'|_{[c, b]}, [c, b]) &= L(f, P_\epsilon', [a, b])
+\end{align}$$
+
+from which, we arrive at
+
+$$\begin{align}
+U(f, P_\epsilon'|_{[a, c]}, [a, c]) - L(f, P_\epsilon'|_{[a, c]}, [a, c]) &\leq U(f, P_\epsilon', [a, b]) - L(f, P_\epsilon', [a, b]) < \epsilon, \\
+U(f, P_\epsilon'|_{[c, b]}, [c, b]) - L(f, P_\epsilon'|_{[c, b]}, [c, b]) &\leq U(f, P_\epsilon', [a, b]) - L(f, P_\epsilon', [a, b]) < \epsilon.
+\end{align}$$
+
+So $f$ is Riemann integrable on $[a, c]$ and $f$ is Riemann integrable on $[c, b],$ with
+
+$$\int_a^b f = \int_a^c f + \int_c^b f.$$
+
+__Part 2:__
+Going the other direction, if $f$ is Riemann integrable on $[a, c]$ and $f$ is Riemann integrable on $[c, b],$ then there exist partitions $P_1$ and $P_2$ of $[a, c]$ and $[c, b]$ respectively such that
+
+$$\begin{align}
+U(f, P_1, [a, c]) - L(f, P_1, [a, c]) &< \epsilon, \\
+U(f, P_2, [c, b]) - L(f, P_2, [c, b]) &< \epsilon.
+\end{align}$$
+
+Letting $P$ be the partition of $[a, b]$ containing all points of $P_1$ and $P_2,$ we have
+
+$$\begin{align}
+U(f, P, [a, b]) = U(f, P_1, [a, c]) + U(f, P_2, [c, b]) \\
+L(f, P, [a, b]) = L(f, P_1, [a, c]) + L(f, P_2, [c, b])
+\end{align}$$
+
+and combining these with the inequalities above, we obtain
+
+$$U(f, P, [a, b]) - L(f, P, [a, b]) < 2\epsilon.$$
+
+Since $\epsilon$ can be made arbitrarily small, it follows that $f$ is Riemann integrable on $[a, b].$
+
+:::
 
 
 
