@@ -4,6 +4,7 @@ This chapter builds up measures.
 First, we establish a notion of length on the real line, which we need in order to build up integration.
 This notion of length is described by the outer measure.
 The outer measure has several good properties which align with our expectations of what an appropriate definition of length on the real line should be.
+
 However, the outer measure lacks an important property, namely additivity: the outer measure of the union of two disjoint sets is not necessarily the sum of the outer measures of the two sets.
 This is a problem, because we need additivity in order to prove useful theorems about integration.
 We will see that this is not a fundamental limitation of our definition of the outer measure, and show that any function that satisfies the good properties of the outer measure and has domain equal to the power set of $\mathbb{R}$ cannot be additive.
