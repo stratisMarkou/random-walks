@@ -399,7 +399,6 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-1-a">Chapter 1.A</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-c">Chapter 2.C</a></li>
 </ul>
             </nav>
         </div>
@@ -644,7 +643,7 @@ Therefore, <span class="math notranslate nohighlight">\(g = f - h\)</span> is al
 \[\int_a^b g = \int_a^b f - \int_a^b h = \int_a^b f.\]</div>
 </div>
 </details></div>
-<div class="tip admonition">
+<div class="tip admonition" id="mira-ex-1a7">
 <p class="admonition-title">Exercise 1.A.7</p>
 <p>Suppose <span class="math notranslate nohighlight">\(f: [a, b] \to \mathbb{R}\)</span> is a bounded function.
 For <span class="math notranslate nohighlight">\(n \in \mathbb{N},\)</span> let <span class="math notranslate nohighlight">\(P_n\)</span> denote the partition that divides <span class="math notranslate nohighlight">\([a, b]\)</span> into <span class="math notranslate nohighlight">\(2^n\)</span> intervals of equal size.
@@ -662,7 +661,7 @@ Solution<div class="sd-summary-down docutils">
 By the definition of supremum, for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> there exists a partition <span class="math notranslate nohighlight">\(R_\epsilon\)</span> of <span class="math notranslate nohighlight">\([a, b]\)</span> such that</p>
 <div class="math notranslate nohighlight">
 \[L(f, [a, b]) - L(f, R_\epsilon, [a, b]) &lt; \epsilon.\]</div>
-<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(\delta(R_\epsilon)\)</span> be the size of the smallest subinterval of <span class="math notranslate nohighlight">\(R_\epsilon,\)</span> and let <span class="math notranslate nohighlight">\(E_{R_\epsilon, k}\)</span> be the partition of <span class="math notranslate nohighlight">\([a, b]\)</span> into <span class="math notranslate nohighlight">\(2^{n+k}\)</span> intervals of equal size, such that <span class="math notranslate nohighlight">\(\frac{(b-a)}{2^n} \leq \delta(R_\epsilon).\)</span>
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(\delta(R_\epsilon)\)</span> be the size of the smallest subinterval of <span class="math notranslate nohighlight">\(R_\epsilon,\)</span> and let <span class="math notranslate nohighlight">\(E_{R_\epsilon, k}\)</span> be the partition of <span class="math notranslate nohighlight">\([a, b]\)</span> into <span class="math notranslate nohighlight">\(2^{n+k}\)</span> intervals of equal size, where <span class="math notranslate nohighlight">\(n \in \mathbb{Z}^+\)</span> is the smallest positive integer such that <span class="math notranslate nohighlight">\(\frac{(b-a)}{2^n} \leq \delta(R_\epsilon).\)</span>
 Now, note that</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
@@ -685,9 +684,137 @@ Thefore, we have</p>
 \[\lim_{n \to \infty} L(f, P_n, [a, b]) = L(f, [a, b]) \text{ and } \lim_{n \to \infty} U(f, P_n, [a, b]) = U(f, [a, b]).\]</div>
 </div>
 </details></div>
-</section>
-<section id="chapter-2-c">
-<h2>Chapter 2.C<a class="headerlink" href="#chapter-2-c" title="Permalink to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.A.8</p>
+<p>Suppose <span class="math notranslate nohighlight">\(f: [a, b] \to \mathbb{R}\)</span> is Rieman integrable.
+Prove that</p>
+<div class="math notranslate nohighlight">
+\[\int_a^b f = \lim_{n \to \infty} \frac{b - a}{n} \sum_{j=1}^n f\left(a + \frac{j(b - a)}{n}\right).\]</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">This exercise follows the a similar argument to <a class="reference internal" href="#mira-ex-1a7"><span class="std std-ref">exercise 1.A.7</span></a>.
+Suppose <span class="math notranslate nohighlight">\(f: [a, b] \to \mathbb{R}\)</span> is Riemann integrable.
+Since <span class="math notranslate nohighlight">\(f\)</span> is Riemann integrable, it is bounded, so there exists <span class="math notranslate nohighlight">\(C &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(|f(x)| \leq C\)</span> for all <span class="math notranslate nohighlight">\(x \in [a, b].\)</span>
+By the definition of supremum, for any <span class="math notranslate nohighlight">\(\epsilon &gt; 0,\)</span> there exists a partition <span class="math notranslate nohighlight">\(R_\epsilon\)</span> of <span class="math notranslate nohighlight">\([a, b]\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[L(f, [a, b]) - L(f, R_\epsilon, [a, b]) &lt; \epsilon.\]</div>
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(\delta(R_\epsilon)\)</span> be the size of the smallest subinterval of <span class="math notranslate nohighlight">\(R_\epsilon,\)</span> let <span class="math notranslate nohighlight">\(n_\epsilon \in \mathbb{Z}^+\)</span> be the smallest integer such that <span class="math notranslate nohighlight">\((b - a)/n_\epsilon \leq \delta(R_\epsilon),\)</span> and let <span class="math notranslate nohighlight">\(E_{R_\epsilon, k}\)</span> be the partition of <span class="math notranslate nohighlight">\([a, b]\)</span> into <span class="math notranslate nohighlight">\(n_\epsilon + k\)</span> intervals of equal size.
+Then, we have that</p>
+<div class="math notranslate nohighlight">
+\[|L(f, R_\epsilon, [a, b]) - L(f, E_{R_\epsilon, k}, [a, b])| \leq \frac{|R_\epsilon|}{n_\epsilon + k} 2C,\]</div>
+<p class="sd-card-text">where <span class="math notranslate nohighlight">\(|R_\epsilon|\)</span> is the number of points in the partition <span class="math notranslate nohighlight">\(R_\epsilon.\)</span>
+Let <span class="math notranslate nohighlight">\(k_\epsilon\)</span> be the smallest integer such that</p>
+<div class="math notranslate nohighlight">
+\[\frac{|R_\epsilon|}{n_\epsilon + k_\epsilon} 2C &lt; \epsilon.\]</div>
+<p class="sd-card-text">Then, for any <span class="math notranslate nohighlight">\(k \geq k_\epsilon,\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\left|L(f, [a, b]) - L(f, E_{R_\epsilon, k}, [a, b])\right| &lt; \epsilon.
+\end{align}\]</div>
+<p class="sd-card-text">Therefore, any partition <span class="math notranslate nohighlight">\(P_n\)</span> of <span class="math notranslate nohighlight">\([a, b]\)</span> into <span class="math notranslate nohighlight">\(n &gt; n_\epsilon + k_\epsilon\)</span> intervals of equal size satisfies</p>
+<div class="math notranslate nohighlight">
+\[\left|L(f, [a, b]) - L(f, P_n, [a, b])\right| &lt; \epsilon,\]</div>
+<p class="sd-card-text">and <span class="math notranslate nohighlight">\(L(f, P_n, [a, b])\)</span> converges to <span class="math notranslate nohighlight">\(L(f, [a, b])\)</span> as <span class="math notranslate nohighlight">\(n \to \infty.\)</span>
+Now, note that for any such partition <span class="math notranslate nohighlight">\(P_n\)</span> of <span class="math notranslate nohighlight">\([a, b],\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+L(f, [a, b]) \geq \frac{b - a}{n} \sum_{j=1}^n f\left(a + \frac{j(b - a)}{n}\right) \geq \frac{b - a}{n} \sum_{j=1}^n \inf_{x \in [x_{j-1}, x_j]} f(x) = L(f, P_n, [a, b]),
+\end{align}\]</div>
+<p class="sd-card-text">where <span class="math notranslate nohighlight">\(x_j = a + j(b - a)/n,\)</span> so taking the limit as <span class="math notranslate nohighlight">\(n \to \infty,\)</span> we obtain</p>
+<div class="math notranslate nohighlight">
+\[\lim_{n \to \infty} \frac{b - a}{n} \sum_{j=1}^n f\left(a + \frac{j(b - a)}{n}\right) = L(f, [a, b]) = \int_a^b f.\]</div>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.A.9</p>
+<p>Suppose <span class="math notranslate nohighlight">\(f: [a, b] \to \mathbb{R}\)</span> is Rieman integrable.
+Prove that if <span class="math notranslate nohighlight">\(c, d \in [a, b]\)</span> and <span class="math notranslate nohighlight">\(a \leq c &lt; d \leq b,\)</span> then <span class="math notranslate nohighlight">\(f\)</span> is Riemann integrable on <span class="math notranslate nohighlight">\([c, d].\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(f: [a, b] \to \mathbb{R}\)</span> is Riemann integrable, and let <span class="math notranslate nohighlight">\(c, d \in [a, b]\)</span> such that <span class="math notranslate nohighlight">\(a \leq c &lt; d \leq b.\)</span>
+Since <span class="math notranslate nohighlight">\(f\)</span> is Riemann integrable, by <a class="reference internal" href="#mira-ex-1a3"><span class="std std-ref">exercise 1.A.3</span></a>, for any <span class="math notranslate nohighlight">\(\epsilon &gt; 0,\)</span> there exists a partition <span class="math notranslate nohighlight">\(P_\epsilon\)</span> of <span class="math notranslate nohighlight">\([a, b]\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[U(f, P_\epsilon, [a, b]) - L(f, P_\epsilon, [a, b]) &lt; \epsilon.\]</div>
+<p class="sd-card-text">Now, let <span class="math notranslate nohighlight">\(P_\epsilon'\)</span> be the partition of <span class="math notranslate nohighlight">\([a, b]\)</span> obtained by adding the points <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(d\)</span> to <span class="math notranslate nohighlight">\(P_\epsilon.\)</span>
+Then, by the <a class="reference internal" href="001-riemann.html#mira-thm-refining-partitions">property of refined partitions</a>, we have</p>
+<div class="math notranslate nohighlight">
+\[U(f, P_\epsilon', [a, b]) - L(f, P_\epsilon', [a, b]) \leq U(f, P_\epsilon, [a, b]) - L(f, P_\epsilon, [a, b]) &lt; \epsilon,\]</div>
+<p class="sd-card-text">and letting <span class="math notranslate nohighlight">\(P_\epsilon''\)</span> be the partition of <span class="math notranslate nohighlight">\([c, d]\)</span> containing all points of <span class="math notranslate nohighlight">\(P_\epsilon'\)</span> in <span class="math notranslate nohighlight">\([c, d],\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[U(f, P_\epsilon'', [c, d]) - L(f, P_\epsilon'', [c, d]) \leq U(f, P_\epsilon', [a, b]) - L(f, P_\epsilon', [a, b]) &lt; \epsilon.\]</div>
+<p class="sd-card-text">Therefore, for each <span class="math notranslate nohighlight">\(\epsilon,\)</span> there exists a partition <span class="math notranslate nohighlight">\(P_\epsilon''\)</span> of <span class="math notranslate nohighlight">\([c, d]\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[U(f, P_\epsilon'', [c, d]) - L(f, P_\epsilon'', [c, d]) &lt; \epsilon,\]</div>
+<p class="sd-card-text">and using <a class="reference internal" href="#mira-ex-1a3"><span class="std std-ref">exercise 1.A.3</span></a> again, we conclude that <span class="math notranslate nohighlight">\(f\)</span> is Riemann integrable on <span class="math notranslate nohighlight">\([c, d].\)</span></p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.A.10</p>
+<p>Suppose <span class="math notranslate nohighlight">\(f: [a, b] \to \mathbb{R}\)</span> is a bounded function and <span class="math notranslate nohighlight">\(c \in (a, b).\)</span>
+Prove that <span class="math notranslate nohighlight">\(f\)</span> is Riemann integrable on <span class="math notranslate nohighlight">\([a, b]\)</span> if and only if <span class="math notranslate nohighlight">\(f\)</span> is Riemann integrable on <span class="math notranslate nohighlight">\([a, c]\)</span> and <span class="math notranslate nohighlight">\(f\)</span> is Riemann integrable on <span class="math notranslate nohighlight">\([c, b].\)</span>
+Furthermore, prove that if these conditions hold, then</p>
+<div class="math notranslate nohighlight">
+\[\int_a^b f = \int_a^c f + \int_c^b f.\]</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(f: [a, b] \to \mathbb{R}\)</span> is a bounded function and <span class="math notranslate nohighlight">\(c \in (a, b).\)</span></p>
+<p class="sd-card-text"><strong>Part 1:</strong>
+If <span class="math notranslate nohighlight">\(f\)</span> is Rieman integrable on <span class="math notranslate nohighlight">\([a, b],\)</span> then by <a class="reference internal" href="#mira-ex-1a3"><span class="std std-ref">exercise 1.A.3</span></a>, for any <span class="math notranslate nohighlight">\(\epsilon &gt; 0,\)</span> there exists a partition <span class="math notranslate nohighlight">\(P_\epsilon\)</span> of <span class="math notranslate nohighlight">\([a, b]\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[U(f, P_\epsilon, [a, b]) - L(f, P_\epsilon, [a, b]) &lt; \epsilon.\]</div>
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(P_\epsilon'\)</span> be the partition of <span class="math notranslate nohighlight">\([a, b]\)</span> obtained by adding the point <span class="math notranslate nohighlight">\(c\)</span> to <span class="math notranslate nohighlight">\(P_\epsilon.\)</span>
+Then, by the <a class="reference internal" href="001-riemann.html#mira-thm-refining-partitions">property of refined partitions</a>, we have</p>
+<div class="math notranslate nohighlight">
+\[U(f, P_\epsilon', [a, b]) - L(f, P_\epsilon', [a, b]) \leq U(f, P_\epsilon, [a, b]) - L(f, P_\epsilon, [a, b]) &lt; \epsilon,\]</div>
+<p class="sd-card-text">and defining <span class="math notranslate nohighlight">\(P|_{[x_1, x_2]}\)</span> to be the partition of <span class="math notranslate nohighlight">\([x_1, x_2]\)</span> containing all points of <span class="math notranslate nohighlight">\(P\)</span> in <span class="math notranslate nohighlight">\([x_1, x_2],\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+U(f, P_\epsilon'|_{[a, c]}, [a, c]) + U(f, P_\epsilon'|_{[c, b]}, [c, b]) &amp;= U(f, P_\epsilon', [a, b]) \\
+L(f, P_\epsilon'|_{[a, c]}, [a, c]) + L(f, P_\epsilon'|_{[c, b]}, [c, b]) &amp;= L(f, P_\epsilon', [a, b])
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">from which, we arrive at</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+U(f, P_\epsilon'|_{[a, c]}, [a, c]) - L(f, P_\epsilon'|_{[a, c]}, [a, c]) &amp;\leq U(f, P_\epsilon', [a, b]) - L(f, P_\epsilon', [a, b]) &lt; \epsilon, \\
+U(f, P_\epsilon'|_{[c, b]}, [c, b]) - L(f, P_\epsilon'|_{[c, b]}, [c, b]) &amp;\leq U(f, P_\epsilon', [a, b]) - L(f, P_\epsilon', [a, b]) &lt; \epsilon.
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">So <span class="math notranslate nohighlight">\(f\)</span> is Riemann integrable on <span class="math notranslate nohighlight">\([a, c]\)</span> and <span class="math notranslate nohighlight">\(f\)</span> is Riemann integrable on <span class="math notranslate nohighlight">\([c, b],\)</span> with</p>
+<div class="math notranslate nohighlight">
+\[\int_a^b f = \int_a^c f + \int_c^b f.\]</div>
+<p class="sd-card-text"><strong>Part 2:</strong>
+Going the other direction, if <span class="math notranslate nohighlight">\(f\)</span> is Riemann integrable on <span class="math notranslate nohighlight">\([a, c]\)</span> and <span class="math notranslate nohighlight">\(f\)</span> is Riemann integrable on <span class="math notranslate nohighlight">\([c, b],\)</span> then there exist partitions <span class="math notranslate nohighlight">\(P_1\)</span> and <span class="math notranslate nohighlight">\(P_2\)</span> of <span class="math notranslate nohighlight">\([a, c]\)</span> and <span class="math notranslate nohighlight">\([c, b]\)</span> respectively such that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+U(f, P_1, [a, c]) - L(f, P_1, [a, c]) &amp;&lt; \epsilon, \\
+U(f, P_2, [c, b]) - L(f, P_2, [c, b]) &amp;&lt; \epsilon.
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">Letting <span class="math notranslate nohighlight">\(P\)</span> be the partition of <span class="math notranslate nohighlight">\([a, b]\)</span> containing all points of <span class="math notranslate nohighlight">\(P_1\)</span> and <span class="math notranslate nohighlight">\(P_2,\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+U(f, P, [a, b]) = U(f, P_1, [a, c]) + U(f, P_2, [c, b]) \\
+L(f, P, [a, b]) = L(f, P_1, [a, c]) + L(f, P_2, [c, b])
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">and combining these with the inequalities above, we obtain</p>
+<div class="math notranslate nohighlight">
+\[U(f, P, [a, b]) - L(f, P, [a, b]) &lt; 2\epsilon.\]</div>
+<p class="sd-card-text">Since <span class="math notranslate nohighlight">\(\epsilon\)</span> can be made arbitrarily small, it follows that <span class="math notranslate nohighlight">\(f\)</span> is Riemann integrable on <span class="math notranslate nohighlight">\([a, b].\)</span></p>
+</div>
+</details><p class="rubric">Chapter 2.C</p>
 <div class="tip admonition">
 <p class="admonition-title">Exercise 2.C.1</p>
 <p>Explain why there does not exist a measure space <span class="math notranslate nohighlight">\((X, S, \mu)\)</span> with the property that</p>
@@ -707,6 +834,7 @@ Then, there exists <span class="math notranslate nohighlight">\(\epsilon &gt; 0\
 Therefore, <span class="math notranslate nohighlight">\(\{\mu(E) : E \in S\} \subseteq [0, 1 - \epsilon) \neq [0, 1).\)</span></p>
 </div>
 </details></div>
+</div>
 <div class="tip admonition">
 <p class="admonition-title">Exercise 2.C.2</p>
 <p>Suppose <span class="math notranslate nohighlight">\(\mu\)</span> is a measure on <span class="math notranslate nohighlight">\((\mathbb{Z}^+, 2^{\mathbb{Z}^+}).\)</span>
@@ -1033,7 +1161,6 @@ Then, a measure <span class="math notranslate nohighlight">\(\mu\)</span> on <sp
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-1-a">Chapter 1.A</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-c">Chapter 2.C</a></li>
 </ul>
   </nav></div>
 
