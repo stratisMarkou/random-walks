@@ -77,8 +77,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/papers/rff/rff';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Stein variational gradient descent" href="../svgd/svgd.html" />
-    <link rel="prev" title="Annealed Importance Sampling" href="../ais/ais.html" />
+    <link rel="next" title="Estimation by score matching" href="../score-matching/score-matching.html" />
+    <link rel="prev" title="Annealed importance sampling" href="../ais/ais.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -201,8 +201,9 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Papers</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Stream of papers</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../ais/ais.html">Annealed Importance Sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ais/ais.html">Annealed importance sampling</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Random Fourier features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../score-matching/score-matching.html">Estimation by score matching</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../svgd/svgd.html">Stein variational gradient descent</a></li>
 </ul>
 </li>
@@ -616,7 +617,7 @@ The covariance function plots correspond to the RFF estimator of <span class="ma
 </div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/24ff2eca0196f9a1e73fbb231877e6ba4230fde57047ab91e2e9674d5d7ff3e0.svg" src="../../../_images/24ff2eca0196f9a1e73fbb231877e6ba4230fde57047ab91e2e9674d5d7ff3e0.svg" /></div>
+<img alt="../../../_images/457f0570c9596bcc50bb2fd17d799237548eb438776fedcd12d74af56b226a13.svg" src="../../../_images/457f0570c9596bcc50bb2fd17d799237548eb438776fedcd12d74af56b226a13.svg" /></div>
 </div>
 </section>
 <section id="regression-with-rff-features">
@@ -626,7 +627,7 @@ We place a gap in the data to observe the quality of the uncertainty estimates o
 We purposefully use a large number of datapoints, <span class="math notranslate nohighlight">\(N = 5000,\)</span> which would be quite slow to process with an exact GP model.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/bc2245663b7c0054aec60851a528b797ef600cf08b6c5cafbe788f9aa00d86e7.svg" src="../../../_images/bc2245663b7c0054aec60851a528b797ef600cf08b6c5cafbe788f9aa00d86e7.svg" /></div>
+<img alt="../../../_images/622db13216ca8383e03ca6d79601a7d981d2441fa0e8acc61844e8fc7f01f3f9.svg" src="../../../_images/622db13216ca8383e03ca6d79601a7d981d2441fa0e8acc61844e8fc7f01f3f9.svg" /></div>
 </div>
 <p>The function <code class="docutils literal notranslate"><span class="pre">rff_posterior</span></code> below implements Bayesian linear regression with randomly sampled Fourier features.
 For more details on Bayesian linear regression see Chapter 3 of Bishop’s PRML book.<span id="id4">[<a class="reference internal" href="#id12" title="Christopher M Bishop. Pattern recognition and machine learning. springer, 2006.">Bishop, 2006</a>]</span></p>
@@ -723,8 +724,8 @@ The <code class="docutils literal notranslate"><span class="pre">covariance</spa
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Timing exact GP regression:
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 10.9 s, sys: 1.55 s, total: 12.4 s
-Wall time: 4.65 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 10.5 s, sys: 1.25 s, total: 11.7 s
+Wall time: 4.64 s
 </pre></div>
 </div>
 </div>
@@ -733,15 +734,15 @@ Wall time: 4.65 s
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Timing exact approximate RFF regression:
 
-CPU times: user 195 ms, sys: 97.2 ms, total: 292 ms
-Wall time: 73.8 ms
+CPU times: user 194 ms, sys: 93.7 ms, total: 288 ms
+Wall time: 72.7 ms
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/8aa17e932ded6d0800e1d917f67b75cd33fad29f21b8ebb02d9935d7efb872d1.svg" src="../../../_images/8aa17e932ded6d0800e1d917f67b75cd33fad29f21b8ebb02d9935d7efb872d1.svg" /></div>
+<img alt="../../../_images/f6f2f7ba05c9a7c36576a32e6dee1cd0e676e3b93f545ceb5709cd043c3cd6e5.svg" src="../../../_images/f6f2f7ba05c9a7c36576a32e6dee1cd0e676e3b93f545ceb5709cd043c3cd6e5.svg" /></div>
 </div>
 <p>RFF has produced sensible regressors in each case, significantly faster than exact GP regression. The approximate posteriors roughly match the exact posteriors, while being significantly quicker to compute.</p>
 </section>
@@ -750,11 +751,11 @@ Wall time: 73.8 ms
 <p>One issue with the RFF is that - like all other finte basis function models - is that it has a limited amount of degrees of freedom. Therefore, in some situations the datapoints may be such that they pin down the RFF model and significantly reducing the variance of the approximate regressor. To illustrate this, we sample a slightly different dataset, with a smaller gap in between the two data clumps.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/8391827fba8525c61831ab615738f0d9a7b280a9e5f2719ba05af0ce90916876.svg" src="../../../_images/8391827fba8525c61831ab615738f0d9a7b280a9e5f2719ba05af0ce90916876.svg" /></div>
+<img alt="../../../_images/cf196a8a6c46eb6a9c23b721db4bcd967d48d87ec165792c7747b08f08d627a5.svg" src="../../../_images/cf196a8a6c46eb6a9c23b721db4bcd967d48d87ec165792c7747b08f08d627a5.svg" /></div>
 </div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/a096776729185a93a93d7dd8dcb58b591e8cd14aed4f8f232cbf4fd98bacf475.svg" src="../../../_images/a096776729185a93a93d7dd8dcb58b591e8cd14aed4f8f232cbf4fd98bacf475.svg" /></div>
+<img alt="../../../_images/bcda9b5dc8887d92ea2d3b309b587de295180b31c4df87ecb4cd34f6169c77ca.svg" src="../../../_images/bcda9b5dc8887d92ea2d3b309b587de295180b31c4df87ecb4cd34f6169c77ca.svg" /></div>
 </div>
 <p>The variance of the approximate estimator in between the data is (in some cases), signiticantly smaller than that of the exact posterior. So the speedup that the RFF gives does not come without a cost. In certain cases, we can end up with approximate posteriors which are significantly overfitted. This can be alleviated by increasing the number of RFF features. However this increases the computational cost of performing regression and may defeat the purpose of using RFF features in the first place.</p>
 </section>
@@ -823,15 +824,15 @@ Wall time: 73.8 ms
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Annealed Importance Sampling</p>
+        <p class="prev-next-title">Annealed importance sampling</p>
       </div>
     </a>
     <a class="right-next"
-       href="../svgd/svgd.html"
+       href="../score-matching/score-matching.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Stein variational gradient descent</p>
+        <p class="prev-next-title">Estimation by score matching</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

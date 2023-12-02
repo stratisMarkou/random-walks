@@ -1,0 +1,681 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Estimation by score matching &#8212; Random Walks</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-HP14V4DGEF"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-HP14V4DGEF');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/papers/score-matching/score-matching';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Stein variational gradient descent" href="../svgd/svgd.html" />
+    <link rel="prev" title="Random Fourier features" href="../rff/rff.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../../intro.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Random Walks</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../intro.html">
+                    Home
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Notes on books</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../toc/000-intro.html">Theory of Computation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../toc/001-fsa.html">FSAs and Regular Expressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../toc/002-cfl.html">PDAs and Context Free Grammars</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../toc/000-exercises.html">Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../prob-intro/intro.html">Probability: An introduction</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../prob-intro/ch01/content.html">Events and Probabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../prob-intro/ch02/content.html">Discrete random variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../prob-intro/ch03/content.html">Multivariate discrete distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../prob-intro/ch04/content.html">Probability generating functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../prob-intro/ch05/content.html">Distribution and density functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../prob-intro/ch06/content.html">Multivariate distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../prob-intro/ch07/content.html">Moment generating functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../prob-intro/ch08/content.html">Main limit theorems</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mira/000-intro.html">Measure Theory</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mira/001-riemann.html">Riemann integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mira/002-measures.html">Measures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mira/000-exercises.html">Exercises</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Papers</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Stream of papers</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../ais/ais.html">Annealed importance sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rff/rff.html">Random Fourier features</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Estimation by score matching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../svgd/svgd.html">Stein variational gradient descent</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/stratisMarkou/random-walks" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/stratisMarkou/random-walks/issues/new?title=Issue%20on%20page%20%2Fbook/papers/score-matching/score-matching.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/book/papers/score-matching/score-matching.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Estimation by score matching</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-score-matching-trick">The score matching trick</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="estimation-by-score-matching">
+<h1>Estimation by score matching<a class="headerlink" href="#estimation-by-score-matching" title="Permalink to this heading">#</a></h1>
+<p>Score matching a useful trick due to Hyvarinen<span id="id1">[<a class="reference internal" href="#id14" title="Aapo Hyvärinen and Peter Dayan. Estimation of non-normalized statistical models by score matching. Journal of Machine Learning Research, 2005.">Hyvärinen and Dayan, 2005</a>]</span> for learning the parameters of intractable probabilistic models.
+Score matching can be used to train probabilistic models whose likelihood function takes the form</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+p_\theta(x) = \frac{1}{Z_\theta} q_\theta(x),
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(q_\theta(x)\)</span> is a positive function we can evaluate, but <span class="math notranslate nohighlight">\(Z_\theta\)</span> is a normalising constant which we cannot evaluate in closed form.
+Non-gaussian Markov random fields are examples of such models.</p>
+<section id="the-score-matching-trick">
+<h2>The score matching trick<a class="headerlink" href="#the-score-matching-trick" title="Permalink to this heading">#</a></h2>
+<p>The first step for the score-matching trick is to notice that taking the log and then the gradient with respect to <span class="math notranslate nohighlight">\(x\)</span> of both sides eliminates the intractable <span class="math notranslate nohighlight">\(Z_\theta\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\nabla \log p_\theta(x) = \nabla \log q_\theta(x),
+\end{align}\]</div>
+<p>since <span class="math notranslate nohighlight">\(Z_\theta\)</span> does not depend on <span class="math notranslate nohighlight">\(x\)</span>.
+The gradient of the log-likelihood is called the score function</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\nabla \log p_\theta(x) = \psi_\theta(x).
+\end{align}\]</div>
+<p>The second step is to find a way to use the score function <span class="math notranslate nohighlight">\(\psi_\theta(x)\)</span> along with some observed data, to estimate the parameters <span class="math notranslate nohighlight">\(\theta\)</span>.
+We can achieve this by defining the following score matching objective.</p>
+<div class="proof definition admonition" id="definition-0">
+<p class="admonition-title"><span class="caption-number">Definition 62 </span> (Score matching objective)</p>
+<section class="definition-content" id="proof-content">
+<p>Given a data distribution <span class="math notranslate nohighlight">\(p_d(x)\)</span> and an approximating distribution <span class="math notranslate nohighlight">\(p_\theta(x)\)</span> with parameters <span class="math notranslate nohighlight">\(\theta\)</span>, we define the score matching objective as</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+J(\theta) = \frac{1}{2} \int p_d(x) || \psi_\theta(x) - \psi_d(x)||^2 dx,
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\psi_\theta(x) = \nabla p_\theta(x)\)</span> and <span class="math notranslate nohighlight">\(\psi_d(x) = \nabla p_d(x)\)</span> and the derivatives are with respect to <span class="math notranslate nohighlight">\(x\)</span>.</p>
+</section>
+</div><p>We observe that if <span class="math notranslate nohighlight">\(J(\theta) = 0\)</span>, then <span class="math notranslate nohighlight">\(\psi_\theta(x) = \psi_d(x)\)</span> almost always.
+So we might expect that in this case the model distribution <span class="math notranslate nohighlight">\(p_\theta(x)\)</span> and <span class="math notranslate nohighlight">\(p_d(x)\)</span> will also be equal.
+This intuition is formalised by the following result.</p>
+<div class="proof theorem admonition" id="theorem-1">
+<p class="admonition-title"><span class="caption-number">Theorem 69 </span> (Matching scores <span class="math notranslate nohighlight">\(\iff\)</span> matching distributions)</p>
+<section class="theorem-content" id="proof-content">
+<p>Suppose that the probability density function of <span class="math notranslate nohighlight">\(x\)</span> satisfies <span class="math notranslate nohighlight">\(p_d(x) = p_\theta(x)\)</span> for some <span class="math notranslate nohighlight">\(\theta^*\)</span> and also that if <span class="math notranslate nohighlight">\(\theta^* \neq \theta\)</span> then <span class="math notranslate nohighlight">\(p_\theta(x) \neq p_d(x)\)</span>.
+Suppose also that <span class="math notranslate nohighlight">\(p_\theta(x) &gt; 0\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+J(\theta) = 0 \iff \theta = \theta^*.
+\end{align}\]</div>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Score matching <span class="math notranslate nohighlight">\(\iff\)</span> maximum likelihood<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><strong>Is implied by:</strong>
+We can see that <span class="math notranslate nohighlight">\(\theta = \theta^* \implies J(\theta) = 0\)</span> by substituting <span class="math notranslate nohighlight">\(p_d(x) = p_\theta(x)\)</span> into <span class="math notranslate nohighlight">\(J(\theta^*)\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+J(\theta^*) &amp;= \frac{1}{2} \int p_d(x) || \psi_{\theta^*}(x) - \psi_d(x)||^2 dx \\
+            &amp;= \frac{1}{2} \int p_\theta(x) || \psi_{\theta^*}(x) - \psi_{\theta^*}(x)||^2 dx \\
+            &amp;= 0.
+\end{align}\end{split}\]</div>
+<p class="sd-card-text"><strong>Implies:</strong>
+Going the other direction, we can show that <span class="math notranslate nohighlight">\(J(\theta) = 0 \implies \theta = \theta^*\)</span> by considering</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+J(\theta) &amp;= \frac{1}{2} \int p_\theta(x) || \psi_\theta(x) - \psi_{\theta^*}(x)||^2 dx = 0.
+\end{align}\]</div>
+<p class="sd-card-text">Since <span class="math notranslate nohighlight">\(p_\theta(x) &gt; 0\)</span>, the above can hold only if <span class="math notranslate nohighlight">\(\psi_\theta(x) = \psi_{\theta^*}(x)\)</span> for every <span class="math notranslate nohighlight">\(x\)</span>. This means that</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\psi_\theta(x) = \psi_{\theta^*}(x) + \text{const.} \implies p_\theta(x) \propto p_\theta(x),
+\end{align}\]</div>
+<p class="sd-card-text">and since <span class="math notranslate nohighlight">\(p_\theta(x)\)</span> is a normalised probability distribution, we arrive at <span class="math notranslate nohighlight">\(p_\theta(x) = p_\theta(x)\)</span>. Now since the <span class="math notranslate nohighlight">\(p_\theta(x)\)</span> is unique for the particular <span class="math notranslate nohighlight">\(\theta^*\)</span>, we have that <span class="math notranslate nohighlight">\(\theta = \theta^*\)</span>.</p>
+</div>
+</details><p>This result confirms the intuition that if the score functions (of the data distribution and the model) are equal, then the distributions equal as well.
+However, we note that this theorem assumes that <span class="math notranslate nohighlight">\(p_d(x) = p_\theta(x)\)</span> for some <span class="math notranslate nohighlight">\(\theta\)</span>.
+In other words, it is assumed that the true model <span class="math notranslate nohighlight">\(p_d(x)\)</span> is within the space of models we have hypothesised.
+In general this will not be true for true data, but at least the present result confirms that the expected behaviour is recovered in this idealised setting.</p>
+<p>The last challenge is that in its definition <span class="math notranslate nohighlight">\(J(\theta)\)</span> depends explicitly on <span class="math notranslate nohighlight">\(\psi_d(x)\)</span>, a function we do not have access to.
+In particular, expanding the term in the norm, we see that</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+|| \psi_\theta(x) - \psi_{\theta^*}(x)||^2 = ||\psi_\theta(x)^\top\psi_\theta(x) - 2\psi_\theta(x)^\top\psi_d(x) + \psi_d(x)^\top\psi_d(x)||.
+\end{align}\]</div>
+<p>The first term is computable because we have access to <span class="math notranslate nohighlight">\(\psi_\theta(x)\)</span>.
+The latter term does not depend on <span class="math notranslate nohighlight">\(\theta\)</span> and is therefore irrelevant for the optimisation of <span class="math notranslate nohighlight">\(J(\theta)\)</span>.
+However the middle term both depends on <span class="math notranslate nohighlight">\(\theta\)</span> as well as the inaccessible score function of the data <span class="math notranslate nohighlight">\(\psi_d(x)\)</span>.
+Therefore this term must be considered in the optimisation of <span class="math notranslate nohighlight">\(J(\theta)\)</span> but is also not directly computable.
+By using integration by parts, one can show<span id="id2">[<a class="reference internal" href="#id14" title="Aapo Hyvärinen and Peter Dayan. Estimation of non-normalized statistical models by score matching. Journal of Machine Learning Research, 2005.">Hyvärinen and Dayan, 2005</a>]</span> that this term can be rewritten in a way such that <span class="math notranslate nohighlight">\(J(\theta)\)</span> can be estimated empirically.</p>
+<div class="proof theorem admonition" id="theorem-2">
+<p class="admonition-title"><span class="caption-number">Theorem 70 </span> (Equivalent form of <span class="math notranslate nohighlight">\(J\)</span>)</p>
+<section class="theorem-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\psi_\theta(x)\)</span> be a score function which is differentiable with respect to <span class="math notranslate nohighlight">\(x.\)</span>
+Then, under some weak regularity conditions on <span class="math notranslate nohighlight">\(\psi_\theta(x),\)</span> the score-matching function <span class="math notranslate nohighlight">\(J\)</span> can be writtten as</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+J(\theta) = \int p_d(x) \sum^N_{i = 1}\left[ \partial_i \psi_i(x; \theta) + \frac{1}{2} \psi_{d, i}(x; \theta)^2 \right] dx + \text{const.},
+\end{align}\]</div>
+<p>where the <span class="math notranslate nohighlight">\(i\)</span>-subscript denotes the <span class="math notranslate nohighlight">\(i^{th}\)</span> entry of vector being indexed and <span class="math notranslate nohighlight">\(\partial_i\)</span> denotes the partial derivative with respect to <span class="math notranslate nohighlight">\(x_i\)</span>. The constant term is independent of <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Equivalent form of <span class="math notranslate nohighlight">\(~J\)</span><div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Writing out <span class="math notranslate nohighlight">\(J\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+J(\theta) = \frac{1}{2} \int p_d(x) \left[ \psi_\theta(x)^\top\psi_\theta(x) - 2\psi_\theta(x)^\top\psi_d(x) + \psi_d(x)^\top\psi_d(x)\right] dx,
+\end{align}\]</div>
+<p class="sd-card-text">we see that the last term in the brackets evaluates to a constant that is independent of <span class="math notranslate nohighlight">\(\theta\)</span>. Using the fact that</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+p_d(x) \psi_d(x) = p_d(x) \nabla \log p_d(x) = \nabla p_d(x),
+\end{align}\]</div>
+<p class="sd-card-text">and applying integration by parts, we obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\int p_d(x) \psi_\theta(x)^\top\psi_d(x) dx &amp;= \int \psi_\theta(x)^\top \nabla p_d(x) dx \\
+&amp;= \big[p_d(x) \psi_\theta(x) \big]_{-\infty}^{\infty} - \int p_d(x) \partial_i \psi_{d, i}(x; \theta) dx.
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">Substituting this into the expression for <span class="math notranslate nohighlight">\(J\)</span> we arrive at</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+J(\theta) = \int p_d(x) \sum^N_{i = 1}\left[ \partial_i \psi_i(x; \theta) + \frac{1}{2} \psi_{d, i}(x; \theta)^2 \right] dx + \text{const.}
+\end{align}\]</div>
+</div>
+</details><p>The proof has used integration by parts to replace the intractable <span class="math notranslate nohighlight">\(\psi_d(x)\)</span> term by a <span class="math notranslate nohighlight">\(p_d(x)\)</span> term.
+This expression can be easily estimated if samples of <span class="math notranslate nohighlight">\(x\)</span> are available, by replacing the expectation with respect to <span class="math notranslate nohighlight">\(p_d(x)\)</span> by the empirical average over the samples.
+In this way, we can estimate the parameters <span class="math notranslate nohighlight">\(\theta\)</span> of a non-normalised model, without resorting to computing estimates of the density <span class="math notranslate nohighlight">\(p_d(x)\)</span>.</p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<div class="docutils container" id="id3">
+<dl class="citation">
+<dt class="label" id="id14"><span class="brackets">HyvarinenD05</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>)</span></dt>
+<dd><p>Aapo Hyvärinen and Peter Dayan. Estimation of non-normalized statistical models by score matching. <em>Journal of Machine Learning Research</em>, 2005.</p>
+</dd>
+</dl>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book/papers/score-matching"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../rff/rff.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Random Fourier features</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../svgd/svgd.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Stein variational gradient descent</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-score-matching-trick">The score matching trick</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Stratis Markou
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

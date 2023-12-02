@@ -77,7 +77,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/papers/svgd/svgd';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="prev" title="Random Fourier features" href="../rff/rff.html" />
+    <link rel="prev" title="Estimation by score matching" href="../score-matching/score-matching.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -200,8 +200,9 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Papers</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Stream of papers</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../ais/ais.html">Annealed Importance Sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ais/ais.html">Annealed importance sampling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../rff/rff.html">Random Fourier features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../score-matching/score-matching.html">Estimation by score matching</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Stein variational gradient descent</a></li>
 </ul>
 </li>
@@ -450,7 +451,7 @@ z = T(x),~~\text{ where } x \sim q(x).
 <h3>Direction of steepest descent<a class="headerlink" href="#direction-of-steepest-descent" title="Permalink to this heading">#</a></h3>
 <p>Let us use the subscript notation <span class="math notranslate nohighlight">\(q_{[T]}\)</span> to denote the distribution obtained by passing <span class="math notranslate nohighlight">\(q\)</span> through <span class="math notranslate nohighlight">\(T\)</span>. Then we are interested in picking a <span class="math notranslate nohighlight">\(T\)</span> which minimises <span class="math notranslate nohighlight">\(\text{KL}(q_{[T]} || p)\)</span>. First, we compute the derivative of the KL w.r.t. <span class="math notranslate nohighlight">\(\epsilon\)</span>, which we obtain in closed form.</p>
 <div class="proof theorem admonition" id="theorem-0">
-<p class="admonition-title"><span class="caption-number">Theorem 69 </span> (Proof: Gradient of KL is the KSD)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 71 </span> (Proof: Gradient of KL is the KSD)</p>
 <section class="theorem-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(x \sim q(x)\)</span>, and <span class="math notranslate nohighlight">\(T(x) = x + \epsilon \phi(x)\)</span>, where <span class="math notranslate nohighlight">\(\phi\)</span> is a smooth function. Then</p>
 <div class="math notranslate nohighlight">
@@ -518,7 +519,7 @@ Gradient of KL is the KSD<div class="sd-summary-down docutils">
 \end{align}\]</div>
 <p>If we now constrain <span class="math notranslate nohighlight">\(\phi \in \mathcal{H}_D\)</span> and <span class="math notranslate nohighlight">\(|| \phi ||_{\mathcal{H}_D} \leq 1\)</span> we obtain<span id="id2">[<a class="reference internal" href="#id13" title="Qiang Liu, Jason Lee, and Michael Jordan. A kernelized stein discrepancy for goodness-of-fit tests. In International conference on machine learning, 276–284. PMLR, 2016.">Liu <em>et al.</em>, 2016</a>]</span> the following analytic expression for the direction of steepest descent.</p>
 <div class="proof theorem admonition" id="theorem-1">
-<p class="admonition-title"><span class="caption-number">Theorem 70 </span> (Direction of steepest descent)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 72 </span> (Direction of steepest descent)</p>
 <section class="theorem-content" id="proof-content">
 <p>The function <span class="math notranslate nohighlight">\(\phi^* \in \mathcal{H}_D, || \phi^* ||_{\mathcal{H}_D} \leq 1\)</span> which maximises the rate of decrease KL-divergence is</p>
 <div class="math notranslate nohighlight">
@@ -549,7 +550,7 @@ Proof: Direction of steepest descent<div class="sd-summary-down docutils">
 <h3>Empirical approximation<a class="headerlink" href="#empirical-approximation" title="Permalink to this heading">#</a></h3>
 <p>Now, if we approximate <span class="math notranslate nohighlight">\(q\)</span> by a finite set of <span class="math notranslate nohighlight">\(N\)</span> particles at locations <span class="math notranslate nohighlight">\(x_n^{(i)}, n = 1, ..., N\)</span>, at the <span class="math notranslate nohighlight">\(i^{th}\)</span> iteration, we obtain at the following iterative algorithm.</p>
 <div class="proof definition admonition" id="definition-2">
-<p class="admonition-title"><span class="caption-number">Definition 62 </span> (Stein variational gradient descent)</p>
+<p class="admonition-title"><span class="caption-number">Definition 63 </span> (Stein variational gradient descent)</p>
 <section class="definition-content" id="proof-content">
 <p>Given a distribution <span class="math notranslate nohighlight">\(p(x)\)</span>, a postive definite kernel <span class="math notranslate nohighlight">\(k(x, x')\)</span> and a set of particles with initial positions <span class="math notranslate nohighlight">\(\{x_n^{(0)}\}_{n=1}^N\)</span>, Stein variational gradient descent evolves the particles according to</p>
 <div class="math notranslate nohighlight">
@@ -565,7 +566,7 @@ x^{(i + 1)}_n = x^{(i)}_n + \frac{\epsilon^{(i)}}{N}\sum_{m = 1}^N \left[ k(x_n,
 We will use SVGD to approximate a mixture-of-gaussians distribution, to allow for multiple modes.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/3c3c61e71171096ce53f22a00f6622b2270883732a7c57554983d47aafa3ffc5.svg" src="../../../_images/3c3c61e71171096ce53f22a00f6622b2270883732a7c57554983d47aafa3ffc5.svg" /></div>
+<img alt="../../../_images/632b2d6d42df515f0ed220b669503f398fd4b3d02da91684e29f0c2fdf4b7be8.svg" src="../../../_images/632b2d6d42df515f0ed220b669503f398fd4b3d02da91684e29f0c2fdf4b7be8.svg" /></div>
 </div>
 <p>Although SVGD can use any positive-semidefinite kernel, we will focus our attention to the standard EQ kernel</p>
 <div class="math notranslate nohighlight">
@@ -616,7 +617,7 @@ k(x, x') = \exp\left(-\frac{1}{2\ell^2} (x - x')^2\right),
 <p>We can now run SVGD using a modest number of particles initialised in between the two modes.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/2790cd2d2b3fad65c8abe4da7fb5e4ff1bcfc839d72d4bce9e37cc2d4c3d059e.svg" src="../../../_images/2790cd2d2b3fad65c8abe4da7fb5e4ff1bcfc839d72d4bce9e37cc2d4c3d059e.svg" /></div>
+<img alt="../../../_images/4067876f919fa3e17e525ccca6ae2530adc685ccd4d0d9a7a52a2601b78fb45b.svg" src="../../../_images/4067876f919fa3e17e525ccca6ae2530adc685ccd4d0d9a7a52a2601b78fb45b.svg" /></div>
 </div>
 <p>We observe that some of the particles fall into each of the two modes, capturing the bimodality of the target, something which VI with a mean-field Gaussian <span class="math notranslate nohighlight">\(q\)</span> cannot do.</p>
 </section>
@@ -627,7 +628,7 @@ If we initialise the particles on one mode of two well-separated Gaussians, then
 Even though SVGD may be able to express more expressive approximate distributions than mean-field VI, it is not guaranteed that the optimisation will be able to find such a distribution.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/5adbe816d08f438204d668d9df6b31f440db84757dbab42c4b92e3c4bbac755e.svg" src="../../../_images/5adbe816d08f438204d668d9df6b31f440db84757dbab42c4b92e3c4bbac755e.svg" /></div>
+<img alt="../../../_images/da3d59a6b7b14c8b233e262228394b9e22b4e99514cb15f47b335c87fdcae63e.svg" src="../../../_images/da3d59a6b7b14c8b233e262228394b9e22b4e99514cb15f47b335c87fdcae63e.svg" /></div>
 </div>
 </section>
 </section>
@@ -683,12 +684,12 @@ By evolving <span class="math notranslate nohighlight">\(q\)</span> according to
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../rff/rff.html"
+       href="../score-matching/score-matching.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Random Fourier features</p>
+        <p class="prev-next-title">Estimation by score matching</p>
       </div>
     </a>
 </div>
