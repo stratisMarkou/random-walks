@@ -618,7 +618,7 @@ The covariance function plots correspond to the RFF estimator of <span class="ma
 </div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/457f0570c9596bcc50bb2fd17d799237548eb438776fedcd12d74af56b226a13.svg" src="../../../_images/457f0570c9596bcc50bb2fd17d799237548eb438776fedcd12d74af56b226a13.svg" /></div>
+<img alt="../../../_images/249a2f52e57041997978bd42009bc438d3a24050babad8a71c0281c0830b5271.svg" src="../../../_images/249a2f52e57041997978bd42009bc438d3a24050babad8a71c0281c0830b5271.svg" /></div>
 </div>
 </section>
 <section id="regression-with-rff-features">
@@ -628,7 +628,7 @@ We place a gap in the data to observe the quality of the uncertainty estimates o
 We purposefully use a large number of datapoints, <span class="math notranslate nohighlight">\(N = 5000,\)</span> which would be quite slow to process with an exact GP model.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/622db13216ca8383e03ca6d79601a7d981d2441fa0e8acc61844e8fc7f01f3f9.svg" src="../../../_images/622db13216ca8383e03ca6d79601a7d981d2441fa0e8acc61844e8fc7f01f3f9.svg" /></div>
+<img alt="../../../_images/785c411f84738fd372dc0c8efb56733b8bc63dc8f8cd5fa080ddcfa6613f73a1.svg" src="../../../_images/785c411f84738fd372dc0c8efb56733b8bc63dc8f8cd5fa080ddcfa6613f73a1.svg" /></div>
 </div>
 <p>The function <code class="docutils literal notranslate"><span class="pre">rff_posterior</span></code> below implements Bayesian linear regression with randomly sampled Fourier features.
 For more details on Bayesian linear regression see Chapter 3 of Bishop’s PRML book.<span id="id4">[<a class="reference internal" href="#id12" title="Christopher M Bishop. Pattern recognition and machine learning. springer, 2006.">Bishop, 2006</a>]</span></p>
@@ -725,8 +725,8 @@ The <code class="docutils literal notranslate"><span class="pre">covariance</spa
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Timing exact GP regression:
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 10.5 s, sys: 1.25 s, total: 11.7 s
-Wall time: 4.64 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 13.6 s, sys: 1.44 s, total: 15.1 s
+Wall time: 6.05 s
 </pre></div>
 </div>
 </div>
@@ -735,15 +735,15 @@ Wall time: 4.64 s
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Timing exact approximate RFF regression:
 
-CPU times: user 194 ms, sys: 93.7 ms, total: 288 ms
-Wall time: 72.7 ms
+CPU times: user 264 ms, sys: 146 ms, total: 410 ms
+Wall time: 110 ms
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/f6f2f7ba05c9a7c36576a32e6dee1cd0e676e3b93f545ceb5709cd043c3cd6e5.svg" src="../../../_images/f6f2f7ba05c9a7c36576a32e6dee1cd0e676e3b93f545ceb5709cd043c3cd6e5.svg" /></div>
+<img alt="../../../_images/0f68170721c2c5e9fdab631312c0797193c2532ec2924fad696b1d49f4bbb277.svg" src="../../../_images/0f68170721c2c5e9fdab631312c0797193c2532ec2924fad696b1d49f4bbb277.svg" /></div>
 </div>
 <p>RFF has produced sensible regressors in each case, significantly faster than exact GP regression. The approximate posteriors roughly match the exact posteriors, while being significantly quicker to compute.</p>
 </section>
@@ -752,11 +752,11 @@ Wall time: 72.7 ms
 <p>One issue with the RFF is that - like all other finte basis function models - is that it has a limited amount of degrees of freedom. Therefore, in some situations the datapoints may be such that they pin down the RFF model and significantly reducing the variance of the approximate regressor. To illustrate this, we sample a slightly different dataset, with a smaller gap in between the two data clumps.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/cf196a8a6c46eb6a9c23b721db4bcd967d48d87ec165792c7747b08f08d627a5.svg" src="../../../_images/cf196a8a6c46eb6a9c23b721db4bcd967d48d87ec165792c7747b08f08d627a5.svg" /></div>
+<img alt="../../../_images/9322e9737c569791d3b02aff2059323d1a5ecfc0ffcc278a782096fb3e68c612.svg" src="../../../_images/9322e9737c569791d3b02aff2059323d1a5ecfc0ffcc278a782096fb3e68c612.svg" /></div>
 </div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/bcda9b5dc8887d92ea2d3b309b587de295180b31c4df87ecb4cd34f6169c77ca.svg" src="../../../_images/bcda9b5dc8887d92ea2d3b309b587de295180b31c4df87ecb4cd34f6169c77ca.svg" /></div>
+<img alt="../../../_images/b819c38f3dc40437857a147a16d7a2f0136b2c79327b72ac07031f221f1650a6.svg" src="../../../_images/b819c38f3dc40437857a147a16d7a2f0136b2c79327b72ac07031f221f1650a6.svg" /></div>
 </div>
 <p>The variance of the approximate estimator in between the data is (in some cases), signiticantly smaller than that of the exact posterior. So the speedup that the RFF gives does not come without a cost. In certain cases, we can end up with approximate posteriors which are significantly overfitted. This can be alleviated by increasing the number of RFF features. However this increases the computational cost of performing regression and may defeat the purpose of using RFF features in the first place.</p>
 </section>

@@ -57,7 +57,7 @@ $$L(f, P, [a, b]) \leq L(f, P', [a, b]) \leq U(f, P', [a, b]) \leq U(f, P, [a, b
 
 :::
 
-:::{dropdown} Proof (Inequalities with Riemann sums)
+:::{dropdown} Proof: Inequalities with Riemann sums
 
 Suppose $f: [a, b] \to \mathbb{R}$ is a bounded function and $P$ is the partition $x_0, \dots, x_n$ of $[a, b]$ and $P'$ is the partition $x_0', \dots, x_N'$ of $[a, b].$
 Suppose that all the points in $P$ are also contained in $P'.$
@@ -91,7 +91,7 @@ $$L(f, P, [a, b]) \leq U(f, P', [a, b]).$$
 
 :::
 
-:::{dropdown} Proof (Lower Riemann sum $\leq$ upper Riemann sum)
+:::{dropdown} Proof: Lower Riemann sum $\leq$ upper Riemann sum
 
 Suppose $f: [a, b] \to \mathbb{R}$ is a bounded function and $P, P'$ are partitions of $[a, b].$
 Then
@@ -139,7 +139,7 @@ $$L(f, [a, b]) \leq U(f, [a, b]).$$
 
 :::
 
-:::{dropdown} Proof (Lower Riemann integral $~\leq~$ upper Riemann integral)
+:::{dropdown} Proof: Lower Riemann integral $~\leq~$ upper Riemann integral
 
 Suppose $f: [a, b] \to \mathbb{R}$ is a bounded function.
 Then, for any partition $P$ of $[a, b],$ we have
@@ -181,7 +181,7 @@ Every continuous function on a closed bounded interval is Riemann integrable.
 :::
 
 
-:::{dropdown} Proof (Continuous functions are Riemann integrable)
+:::{dropdown} Proof: Continuous functions are Riemann integrable
 
 Suppose $f: [a, b] \to \mathbb{R}$ is a continuous function.
 It follows that $f$ is bounded and uniformly continuous on $[a, b].$
@@ -222,7 +222,7 @@ $$(b - a) \inf_{x \in [a, b]} f \leq \int_a^b f \leq (b - a) \sup_{x \in [a, b]}
 
 :::
 
-:::{dropdown} Proof (Bounds on the Riemann integral)
+:::{dropdown} Proof: Bounds on the Riemann integral
 
 Suppose $f: [a, b] \to \mathbb{R}$ is Riemann integrable.
 Let $P$ be the partition $a = x_0 \leq x_1 = b$ of $[a, b].$
@@ -263,7 +263,7 @@ $$f(x) = \begin{cases} 1 & \text{if } x \in \mathbb{Q}, \\ 0 & \text{if } x \in 
 
 is not Riemann integrable.
 
-:::{dropdown} Proof (A function that is not Riemann integrable)
+:::{dropdown} Proof: A function that is not Riemann integrable
 
 Suppose $P$ is a partition $x_0, \ldots, x_n$ of $[0, 1].$
 Then, we have

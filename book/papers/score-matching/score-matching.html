@@ -512,7 +512,7 @@ By using integration by parts, one can show<span id="id2">[<a class="reference i
 Then, under some weak regularity conditions on <span class="math notranslate nohighlight">\(\psi_\theta(x),\)</span> the score-matching function <span class="math notranslate nohighlight">\(J\)</span> can be writtten as</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
-J(\theta) = \int p_d(x) \sum^N_{i = 1}\left[ \partial_i \psi_i(x; \theta) + \frac{1}{2} \psi_{d, i}(x; \theta)^2 \right] dx + \text{const.},
+J(\theta) = \int p_d(x) \sum^N_{i = 1}\left[ \partial_i \psi_{\theta, i}(x) + \frac{1}{2} \psi_{\theta, i}(x)^2 \right] dx + \text{const.},
 \end{align}\]</div>
 <p>where the <span class="math notranslate nohighlight">\(i\)</span>-subscript denotes the <span class="math notranslate nohighlight">\(i^{th}\)</span> entry of vector being indexed and <span class="math notranslate nohighlight">\(\partial_i\)</span> denotes the partial derivative with respect to <span class="math notranslate nohighlight">\(x_i\)</span>. The constant term is independent of <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
 </section>
@@ -537,12 +537,12 @@ p_d(x) \psi_d(x) = p_d(x) \nabla \log p_d(x) = \nabla p_d(x),
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
 \int p_d(x) \psi_\theta(x)^\top\psi_d(x) dx &amp;= \int \psi_\theta(x)^\top \nabla p_d(x) dx \\
-&amp;= \big[p_d(x) \psi_\theta(x) \big]_{-\infty}^{\infty} - \int p_d(x) \partial_i \psi_{d, i}(x; \theta) dx.
+&amp;= \big[p_d(x) \psi_\theta(x) \big]_{-\infty}^{\infty} - \int p_d(x) \partial_i \psi_{\theta, i}(x) dx.
 \end{align}\end{split}\]</div>
 <p class="sd-card-text">Substituting this into the expression for <span class="math notranslate nohighlight">\(J\)</span> we arrive at</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
-J(\theta) = \int p_d(x) \sum^N_{i = 1}\left[ \partial_i \psi_i(x; \theta) + \frac{1}{2} \psi_{d, i}(x; \theta)^2 \right] dx + \text{const.}
+J(\theta) = \int p_d(x) \sum^N_{i = 1}\left[ \partial_i \psi_{\theta, i}(x) + \frac{1}{2} \psi_{\theta, i}(x)^2 \right] dx + \text{const.}
 \end{align}\]</div>
 </div>
 </details><p>The proof has used integration by parts to replace the intractable <span class="math notranslate nohighlight">\(\psi_d(x)\)</span> term by a <span class="math notranslate nohighlight">\(p_d(x)\)</span> term.
