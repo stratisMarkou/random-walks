@@ -108,7 +108,7 @@ Let $\psi_\theta(x)$ be a score function which is differentiable with respect to
 Then, under some weak regularity conditions on $\psi_\theta(x),$ the score-matching function $J$ can be writtten as
     
 $$\begin{align}
-J(\theta) = \int p_d(x) \sum^N_{i = 1}\left[ \partial_i \psi_i(x; \theta) + \frac{1}{2} \psi_{d, i}(x; \theta)^2 \right] dx + \text{const.},
+J(\theta) = \int p_d(x) \sum^N_{i = 1}\left[ \partial_i \psi_{\theta, i}(x) + \frac{1}{2} \psi_{\theta, i}(x)^2 \right] dx + \text{const.},
 \end{align}$$
     
 where the $i$-subscript denotes the $i^{th}$ entry of vector being indexed and $\partial_i$ denotes the partial derivative with respect to $x_i$. The constant term is independent of $\theta$.
@@ -134,13 +134,13 @@ and applying integration by parts, we obtain
 
 $$\begin{align}
 \int p_d(x) \psi_\theta(x)^\top\psi_d(x) dx &= \int \psi_\theta(x)^\top \nabla p_d(x) dx \\
-&= \big[p_d(x) \psi_\theta(x) \big]_{-\infty}^{\infty} - \int p_d(x) \partial_i \psi_{d, i}(x; \theta) dx.
+&= \big[p_d(x) \psi_\theta(x) \big]_{-\infty}^{\infty} - \int p_d(x) \partial_i \psi_{\theta, i}(x) dx.
 \end{align}$$
     
 Substituting this into the expression for $J$ we arrive at
     
 $$\begin{align}
-J(\theta) = \int p_d(x) \sum^N_{i = 1}\left[ \partial_i \psi_i(x; \theta) + \frac{1}{2} \psi_{d, i}(x; \theta)^2 \right] dx + \text{const.}
+J(\theta) = \int p_d(x) \sum^N_{i = 1}\left[ \partial_i \psi_{\theta, i}(x) + \frac{1}{2} \psi_{\theta, i}(x)^2 \right] dx + \text{const.}
 \end{align}$$
     
 :::
