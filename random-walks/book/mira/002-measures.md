@@ -107,7 +107,8 @@ and taking the infimum of both sides, over all sequences of open intervals whose
 The third good property of the outer measure is translation invariance.
 To establish this property, we first need a definition of the translation of a set.
 
-:::{prf:definition} Translation
+:::{prf:definition} Translation invariance
+:label: mira:thm:outer-measure-is-translation-invariant
 
 For $A \subseteq \mathbb{R}$ and $t \in \mathbb{R},$ the translation of $t + A$ is defined by
 
@@ -351,6 +352,7 @@ Now we come to the negative result of the outer measure, namely that it is not a
 Additivity is an important property that we would like our notion of length to have, because it allows us to prove good theorems about integration.
 
 :::{prf:theorem} Nonadditivity of the outer measure
+:label: mira:thm:non-additivity-of-outer-measure
 
 There exist disjoint subsets $A, B$ of $\mathbb{R}$ such that
 
@@ -358,8 +360,8 @@ $$|A \cup B| \neq |A| + |B|.$$
 
 :::
 
-:::{dropdown} Proof: Nonadditivity of the outer measure
 
+:::{dropdown} Proof: Nonadditivity of the outer measure
 
 __Proof idea:__
 We will show this result as follows.
@@ -386,12 +388,12 @@ Now, let $V$ be a set that contains exactly one element from each of the equival
 Let also $r_1, r_2, \ldots$ be a sequence which contains all the rational numbers in $[-2, 2]$ exactly once.
 Then
 
-$$[-1, 1] \subseteq \bigcup_{k=1}^\infty (r_k + V),$
+$$[-1, 1] \subseteq \bigcup_{k=1}^\infty (r_k + V),$$
 
 because for each $a \in [-1, 1],$ there is a unique element $v \in V$ that is in the same equivalence class as $a,$ namely $v = \tilde{a} \cap V,$ so $a - v \in \mathbb{Q},$ from which it follows that $a - v = r_k$ for some $k \in \mathbb{Z}^+,$ and therefore $a \in r_k + V.$
 The set inclusion above together with the {prf:ref}`order preserving property <mira:thm:outer-measure-preserves-order>` of the outer measure, and the {prf:ref}`translation invariance <mira:thm:outer-measure-is-translation-invariant>` of the outer measure imply that
 
-$$|[-1, 1]| = 2 \leq \sum_{k=1}^\infty |r_k + V| = \sum_{k=1}^\infty |V|$$
+$$2 = |[-1, 1]| \leq \sum_{k=1}^\infty |r_k + V| = \sum_{k=1}^\infty |V|$$
 
 Thus $|V| > 0.$
 Now, note that the sets $(r_1 + V), (r_2 + V), \ldots, (r_K + V)$ are disjoint for any $K \in \mathbb{Z}^+.$
@@ -409,3 +411,328 @@ reaching a contradiction, because $|V| > 0,$ so the above inequality cannot hold
 
 Shortly, we will show that this negative result is not a fundamental limitation of our definition of the outer measure.
 As explained earlier, any function that satisfies some of the aforementioned properties of the outer measure and has domain equal to the power set of $\mathbb{R}$ cannot be additive.
+
+
+
+
+
+## Measurable spaces and functions
+
+
+:::{prf:theorem} Nonexistence of extension of length to all subsets of $\mathbb{R}$
+
+There does not exist a function $\mu$ with the following properties:
+
+(a) $\mu$ is a function fromm the set of subsets of $\mathbb{R}$ to $[0, \infty],$
+
+(b) $\mu(I) = \ell(I)$ for all open intervals $I \subseteq \mathbb{R},$
+
+(c) For every disjoint sequence $A_1, A_2, \ldots$ of subsets of $\mathbb{R},$ $\mu \left( \cup_{k=1}^\infty A_k \right) = \sum_{k=1}^\infty \mu(A_k),$
+
+(d) $\mu(t + A) = \mu(A)$ for all $A \subseteq \mathbb{R}$ and $t \in \mathbb{R}.$
+
+:::
+
+:::{dropdown} Proof: Nonexistence of extension of length to all subsets of $~\mathbb{R}$
+
+Suppose there exists a function $\mu$ with all the properties listed in the statement of this theorem.
+We will show that $\mu$ has all the properties that were used in our proof of the {prf:ref}`nonadditivity of the outer measure <mira:thm:non-additivity-of-outer-measure>`, and we can then repeat the argument used there.
+
+__Showing the relevant properties:__
+First, observe that $\mu(\emptyset) = 0,$ because $\emptyset$ is an open interval with length $0.$
+Now, $\mu$ has the order preserving property, bevause if $A \subseteq B \subseteq \mathbb{R},$ then $\mu(A) \subseteq \mu(B),$ because considering the sequence $A, B \setminus A, \emptyset, \emptyset, \dots$ and applying property (c), we arrive at
+
+$$\mu(B) = \mu(A) + \mu(B \setminus A) + 0 + 0 + \dots = \mu(A) + \mu(B \setminus A) \geq \mu(A).$$
+
+In addition, if $a, b \in \mathbb{R}$ with $a < b,$ then 
+
+$$(a, b) \subseteq [a, b] \subseteq (a - \epsilon, b + \epsilon)$$
+
+for every $\epsilon > 0,$ so
+
+$$\mu((a, b)) \leq \mu([a, b]) \leq \mu((a - \epsilon, b + \epsilon)) = b - a + 2\epsilon,$$
+
+and since $\epsilon > 0$ is arbitrary, this implies that 
+
+$$\mu([a, b]) = b - a.$$ (mira:eq:mu-of-closed-interval)
+
+Finally, if $A_1, A_2, \dots$ is a sequence of disjoint subsets of $\mathbb{R},$ then
+
+$$A_1, A_2 \setminus A_1, A_3 \setminus (A_1 \cup A_2), \ldots$$
+
+is a sequence of disjoint subsets of $\mathbb{R},$ so by property (c), we have
+
+$$\begin{align}
+\mu\left( \bigcup_{k=1}^\infty A_k \right) &= \mu\left( A_1 \cup (A_2 \setminus A_1) \cup (A_3 \setminus (A_1 \cup A_2)) \cup \dots \right) \\
+&= \mu(A_1) + \mu(A_2 \setminus A_1) + \mu(A_3 \setminus (A_1 \cup A_2)) + \cdots \\
+&\leq \sum_{k=1}^\infty \mu(A_k).
+\end{align}$$ (mira:eq:mu-is-countably-subadditive)
+
+Therefore $\mu$ is countably subadditive.
+
+__Repeating the argument:__
+Now, define the set $V$ in the same way that it was defined in the proof of the {prf:ref}`nonadditivity of the outer measure <mira:thm:non-additivity-of-outer-measure>`.
+Specifically, let $\sim$ be the equivalence relation such that for $x, y \in [-1, 1]$ we have $x \sim y$ if $x$ and $y$ differ by a rational number.
+Let $V$ be the set which contains exactly one representative from each equivalence clss of $\sim.$
+Let $r_1, r_2, \dots$ be a sequence that contains each rational number in $[-2, 2]$ exactly once.
+Then, by properties {eq}`mira:eq:mu-of-closed-interval` and {eq}`mira:eq:mu-is-countably-subadditive` of $\mu,$ as well as the translation invariance of $\mu$, property (d), we have
+
+$$2 = \mu([-1, 1]) = \mu\left(\bigcup_{k = 1}^\infty r_k + V\right) = \sum_{k=1}^\infty \mu(r_k + V) = \sum_{k=1}^\infty \mu(V)$$
+
+Thus $\mu(V) > 0.$
+Now, note that the sets $(r_1 + V), (r_2 + V), \ldots, (r_K + V)$ are disjoint for any $K \in \mathbb{Z}^+.$
+Note also that for any $K \in \mathbb{Z}^+,$ we have
+
+$$ \bigcup_{k=1}^K (r_k + V) \subseteq [-3, 3] \implies \mu\left( \bigcup_{k=1}^K (r_k + V) \right) \leq 6.$$
+
+Now, using the additivity and the translation invariance of $\mu$, properties (c) and (d), we have 
+
+$$\mu\left( \bigcup_{k=1}^K (r_k + V) \right) = \sum_{k=1}^K \mu(r_k + V) = K \mu(V) < 6,$$
+
+reaching a contradiction, because $|V| > 0,$ so the above inequality cannot hold for any $K.$
+
+:::
+
+
+### $\sigma$-algebras
+
+:::{prf:definition} $\sigma$-algebra
+
+Suppose $X$ is a set and $S$ is a set of subsets of $X.$
+Then $S$ is called a $\sigma$-algebra on $X$ if it satisfies:
+
+- $\emptyset \in S,$
+- if $E \in S,$ then $X \setminus E \in S,$
+- if $E_1, E_2, \dots$ is a sequnece of elements of $S,$ then $\bigcup_{k=1}^\infty E_k \in S.$
+
+:::
+
+
+
+:::{prf:theorem} Other properties of $\sigma$-algebras
+
+Suppose $S$ is a $\sigma$-algebra on a set $X.$
+Then
+
+(a) $X \in S,$
+
+(b) if $D, E \in S,$ then $D \cup E \in S, D \cap E \in S$ and $D \setminus E \in S,$
+
+(c) if $E_1, E_2, \dots$ is a sequence of elements of $S,$ then $\cap_{k = 1}^\infty E_k \in S.$
+
+:::
+
+
+:::{dropdown} Proof: Other properties of $~\sigma$-algebras
+
+Because $\emptyset \in S$ and $X = X \setminus \emptyset,$ we have $X \in S.$
+Suppose $D, E \in S.$
+Then $D \cup E \in S$ because this is the union of the sequence $D, E, \emptyset, \emptyset, \dots \in S.$
+In addition,
+
+$$D \cap E = X \setminus ((X \setminus D) \cup (X \setminus E)) \in S,$$
+
+and also $D \setminus (X \setminus E) = D \cap E \in S.$
+Lastly, if $E_1, E_2, \dots$ is a sequence of elements of $S,$ then
+
+$$\bigcap_{k=1}^\infty E_k = X \setminus \bigcup_{k=1}^\infty (X \setminus E_k) \in S.$$
+
+:::
+
+
+
+:::{prf:definition} Measurable space, measurable set
+
+A measurable space is an ordered pair $(X, S),$ where $X$ is a set and $S$ is a $\sigma$-algebra on $X.$
+An element of $S$ is called a $S$-measurable set, or simply a measurable set if $S$ is clear from the context.
+
+:::
+
+
+
+:::{prf:theorem} Smallest $\sigma$-algebra containing a collection of subsets
+
+Suppose $X$ is a set and $A$ is a set of subsets of $X.$
+Then, the intersection of all $\sigma$-algebras on $X$ that contain $A$ is a $\sigma$-algebra on $X.$
+
+:::
+
+:::{dropdown} Proof: Smallest $~\sigma$-algebra containing a collection of subsets
+
+There is at least one $\sigma$-algebra on $X$ that contains $A,$ because the power set of $X$ is a $\sigma$-algebra on $X$ that contains $A.$
+Let $S$ be the intersection of all $\sigma$-algebras on $X$ that contain $A.$
+
+First, $\emptyset \in S,$ because $\emptyset$ is in every $\sigma$-algebra on $X.$
+Second, if $E \in S,$ then $E$ is in every $\sigma$-algebra on $X$ that contains $A,$ so $X \setminus E$ is in every $\sigma$-algebra on $X$ that contains $A,$ so $X \setminus E \in S.$
+Third, if $E_1, E_2, \dots$ is a sequence of elements of $S,$ then $E_1, E_2, \dots$ is a sequence of elements of every $\sigma$-algebra on $X$ that contains $A,$ so $\bigcup_{k=1}^\infty E_k$ is in every $\sigma$-algebra on $X$ that contains $A,$ so $\bigcup_{k=1}^\infty E_k \in S.$
+
+:::
+
+
+
+:::{prf:definition} Borel set
+
+The smallest $\sigma$-algebra on $\mathbb{R}$ that contains all the open subsets of $\mathbb{R}$ is called the collection of Borel subsets on $\mathbb{R}.$
+An element of this $\sigma$-algebra is called a Borel set.
+
+:::
+
+
+:::{prf:definition} Inverse image
+
+If $f: X \in Y$ is a function and $A \subseteq Y,$ then the inverse image of $A$ under $f$ is defined by
+
+$$f^{-1}(A) = \{ x \in X : f(x) \in A \}.$$
+
+:::
+
+
+:::{def:theorem} Algebra of inverse images
+
+Suppose $f: X \to Y$ is a function.
+Then
+
+(a) $f^{-1}(Y \setminus A) = X \setminus f^{-1}(A)$ for all $A \subseteq Y,$
+
+(b) $f^{-1}(\cup_{A \in \mathcal{A}} A) = \cup_{A \in \mathcal{A}} f^{-1}(A)$ for all $\mathcal{A} \subseteq \mathcal{P}(Y),$
+
+(c) $f^{-1}(\cap_{A \in \mathcal{A}} A) = \cap_{A \in \mathcal{A}} f^{-1}(A)$ for all $\mathcal{A} \subseteq \mathcal{P}(Y).$
+
+:::
+
+:::{dropdown} Proof: Algebra of inverse images
+
+__Part (a):__
+Suppose $A \subseteq Y.$
+For $x \in X$ we have
+
+$$\begin{align}
+x \in f^{-1}(Y \setminus A) &\iff f(x) \in Y \setminus A \\
+&\iff f(x) \notin A \\
+&\iff x \notin f^{-1}(A) \\
+&\iff x \in X \setminus f^{-1}(A).
+\end{align}$$
+
+Thus $f^{-1}(Y \setminus A) = X \setminus f^{-1}(A).$
+
+__Part (b):__
+Suppose $\mathcal{A} \subseteq \mathcal{P}(Y).$
+Then
+
+$$\begin{align}
+x \in f^{-1}\left(\bigcup_{A \in \mathcal{A}} A\right) &\iff f(x) \in \bigcup_{A \in \mathcal{A}} A \\
+&\iff f(x) \in A \text{ for some } A \in \mathcal{A} \\
+&\iff x \in f^{-1}(A) \text{ for some } A \in \mathcal{A} \\
+&\iff x \in \bigcup_{A \in \mathcal{A}} f^{-1}(A).
+\end{align}$$
+
+Thus $f^{-1}\left(\bigcup_{A \in \mathcal{A}} A\right) = \bigcup_{A \in \mathcal{A}} f^{-1}(A).$
+
+
+__Part (c):__
+Suppose $\mathcal{A} \subseteq \mathcal{P}(Y).$
+Then
+
+$$\begin{align}
+x \in f^{-1}\left(\bigcap_{A \in \mathcal{A}} A\right) &\iff f(x) \in \bigcap_{A \in \mathcal{A}} A \\
+&\iff f(x) \in A \text{ for all } A \in \mathcal{A} \\
+&\iff x \in f^{-1}(A) \text{ for all } A \in \mathcal{A} \\
+&\iff x \in \bigcap_{A \in \mathcal{A}} f^{-1}(A).
+\end{align}$$
+
+Thus $f^{-1}\left(\bigcap_{A \in \mathcal{A}} A\right) = \bigcap_{A \in \mathcal{A}} f^{-1}(A).$
+
+:::
+
+
+:::{prf:theorem} Inverse image of a composition
+
+Suppose $f: X \to Y$ and $g: Y \to Z$ are functions.
+Then
+
+$$(g \circ f)^{-1}(A) = f^{-1}(g^{-1}(A))$$
+
+for all $A \subseteq Z.$
+
+:::
+
+:::{dropdown} Proof: Inverse image of a composition
+
+Suppose $A \subseteq Z.$
+For $x \in X$ we have
+
+$$\begin{align}
+x \in (g \circ f)^{-1}(A) &\iff (g \circ f)(x) \in A \\
+&\iff g(f(x)) \in A \\
+&\iff f(x) \in g^{-1}(A) \\
+&\iff x \in f^{-1}(g^{-1}(A)).
+\end{align}$$
+
+Thus $(g \circ f)^{-1}(A) = f^{-1}(g^{-1}(A)).$
+
+:::
+
+
+
+:::{prf:definition} Measurable function
+
+Suppose $(X, S)$ is a measurable space.
+A function $f: X \to \mathbb{R}$ is called $S$-measurable if
+
+$$f^{-1}(B) \in S$$
+
+for all Borel sets $B \subseteq \mathbb{R}.$
+
+:::
+
+
+
+
+:::{prf:defintion} Characteristic function
+
+Suppose $E$ is a subset of a set $X.$
+The characteristic function of $E$ is the function $\chi_E: X \to \mathbb{R}$ defined by
+
+$$\chi_E(x) = \begin{cases} 1 & \text{if } x \in E \\ 0 & \text{if } x \notin E. \end{cases}$$
+
+:::
+
+
+
+:::{prf:theorem} Condition for measurable function
+
+Suppose $(X, S)$ is a measurable space and $f: X \to \mathbb{R}$ is a function such that
+
+$$f^{-1}((a, \infty)) \in S$$
+
+for all $a \in \mathbb{R}.$
+Then $f$ is $S$-measurable.
+
+:::
+
+:::{dropdown} Proof: Condition for measurable function
+
+Consider the set
+
+$$T = \{A \subseteq \mathbb{R} : f^{-1}(A) \in S \}.$$
+
+We will show that every Borel subset of $\mathbb{R}$ is in $T.$
+To do this, we will first show that $T$ is a $\sigma$-algebra on $\mathbb{R}.$
+Then, we will show that $T$ contains all the open intervals of $\mathbb{R},$ which will imply that $T$ contains all the Borel subsets of $\mathbb{R}.$
+
+__$T$ is a $\sigma$-algebra on $\mathbb{R}$:__
+First, $\emptyset \in T,$ because $f^{-1}(\emptyset) = \emptyset \in S.$
+Second, if $A \in T,$ then $f^{-1}(A) \in S,$ so $f^{-1}(X \setminus A) = X \setminus f^{-1}(A) \in S,$ so $X \setminus A \in T.$
+Third, if $A_1, A_2, \dots \in T,$ then $f^{-1}(A_1), f^{-1}(A_2), \dots \in S,$ so 
+
+$$f^{-1}\left(\bigcup_{k=1}^\infty A_k\right) = \bigcup_{k=1}^\infty f^{-1}(A_k) \in S,$$
+
+so $\cup_{k=1}^\infty A_k \in T.$
+Thus $T$ is a $\sigma$-algebra on $\mathbb{R}.$
+
+__Every open interval is in $T$:__
+By the hypothesis in the theorem statement, it follows that $f^{-1}((a, \infty)) \in S$ for all $a \in \mathbb{R},$ so $(a, \infty) \in T$ for all $a \in \mathbb{R}.$
+Since $T$ is a $\sigma$-algebra on $\mathbb{R},$ it is closed under complementation and intersection so $(-\infty, b] \in T$ for all $b \in \mathbb{R},$ and $(a, b) \in T$ for all $a, b \in \mathbb{R}.$
+Therefore $T$ contains all the open intervals of $\mathbb{R},$ so $T$ contains all the Borel subsets of $\mathbb{R}.$
+
+:::
