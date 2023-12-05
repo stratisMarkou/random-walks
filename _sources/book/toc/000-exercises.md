@@ -798,7 +798,7 @@ During this second stage, the NFA reads a sequence of symbols $y_1, \dots, y_q$ 
 
 __Conclusion:__
 Threfore, the NFA reads a sequence of symbols $x_1\dots x_p y_1 \dots y_q$ if and only if: (1) starting from state $q_n,$ the DFA $M$ would end up in a final state after reading $x_1\dots x_p$ and also (2) the DFA $M$ would end up in state $q_n$ after reading $y_1 \dots y_q.$
-Therefore, the NFA accepts a string $s$ if and only if it can be written as $s = y_1\dots y_q x_1\dots x_q$ where $x_1\dots x_p y_1 \dots y_q \in A,$ so it recognises $\text{RC}(A).$
+Therefore, the NFA accepts a string $s$ if and only if it can be written as $s = xy$ where $yx \in A,$ so it recognises $\text{RC}(A).$
 
 :::
 ::::
