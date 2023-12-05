@@ -309,7 +309,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../../_sources/book/toc/000-exercises.ipynb" target="_blank"
+      <li><a href="../../_sources/book/toc/000-exercises.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -319,7 +319,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.ipynb</span>
+<span class="btn__text-container">.md</span>
 </a>
 </li>
       
@@ -710,9 +710,13 @@ q_l &amp; q = q_l \\
 </div>
 </details></div>
 <div class="tip admonition">
-<p class="admonition-title">Exercise 1.36</p>
-<p>Let <span class="math notranslate nohighlight">\(B_n = \{a^k | k \text{ is a multiple of } n\}.\)</span>
-Show that for each <span class="math notranslate nohighlight">\(n \geq 1\)</span>, the language <span class="math notranslate nohighlight">\(B_n\)</span> is regular.</p>
+<p class="admonition-title">Exercise 1.34</p>
+<p>Let <span class="math notranslate nohighlight">\(\Sigma_2\)</span> be the same as in the previous problem.
+A string of symbols in <span class="math notranslate nohighlight">\(\Sigma_2\)</span> gives three rows of zeros and ones.
+Consider each row to be a binary number and let</p>
+<div class="math notranslate nohighlight">
+\[ D = \{w \in \Sigma_2^* | \text{ the bottom row of } w \text{ is a larger number than the bottom row}\}. \]</div>
+<p>Show that <span class="math notranslate nohighlight">\(D\)</span> is regular.</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
 Solution<div class="sd-summary-down docutils">
@@ -720,10 +724,19 @@ Solution<div class="sd-summary-down docutils">
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(n \geq 1\)</span> be an integer.
-Consider the DFA <span class="math notranslate nohighlight">\(M = (Q, \Sigma, \delta, q_0, F)\)</span> defined as follows.
-The state set is <span class="math notranslate nohighlight">\(Q = \{q_0, q_1, \dots, q_{n-1}\}\)</span>, the alphabet is <span class="math notranslate nohighlight">\(\Sigma = \{a\}\)</span>, the transition function is <span class="math notranslate nohighlight">\(\delta(q_i, a) = q_{i+1 \text{ mod } n}\)</span> and the set of final states is <span class="math notranslate nohighlight">\(F = \{q_0\}\)</span>.
-This DFA accepts exactly the strings <span class="math notranslate nohighlight">\(a^k\)</span> where <span class="math notranslate nohighlight">\(k\)</span> is a multiple of <span class="math notranslate nohighlight">\(n\)</span>, so the language <span class="math notranslate nohighlight">\(B_n\)</span>, defined above, is regular.</p>
+<p class="sd-card-text">We will describe an NFA <span class="math notranslate nohighlight">\(M = (Q, \Sigma_2, \delta, q_0, F)\)</span>, which will compare two numbers in <span class="math notranslate nohighlight">\(D\)</span> bit by bit.
+Let <span class="math notranslate nohighlight">\(Q = \{q_e, q_s, q_l\}\)</span> be the set of states and <span class="math notranslate nohighlight">\(F = \{q_l\}\)</span>.
+As with the previous exercise if <span class="math notranslate nohighlight">\(a \in \Sigma_2\)</span>, we will use the notation <span class="math notranslate nohighlight">\(a_1\)</span> and <span class="math notranslate nohighlight">\(a_2\)</span> to denote the first and second entries of <span class="math notranslate nohighlight">\(a\)</span>.
+Then, let the transition function <span class="math notranslate nohighlight">\(\delta\)</span> be</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\delta(q, a) = \begin{cases}
+q_e &amp; q = q_e, a_1 = a_2 \\
+q_s &amp; q = q_e, a_1 &lt; a_2 \\
+q_s &amp; q = q_s, \\
+q_l &amp; q = q_e, a_2 &gt; a_2 \\
+q_l &amp; q = q_l \\
+\end{cases}\end{split}\]</div>
+<p class="sd-card-text">This NFA accepts exactly those strings in <span class="math notranslate nohighlight">\(D\)</span>, which is therefore regular.</p>
 </div>
 </details></div>
 <div class="tip admonition">
@@ -1110,25 +1123,27 @@ If <span class="math notranslate nohighlight">\(x \in A\)</span>, then the image
 Since the set of all cyclic permutations of a string includes the string itself, <span class="math notranslate nohighlight">\(\text{RC}(A) \subseteq \text{RC}(\text{RC}(A)).\)</span>
 Conversely, applying two cyclic permutations to a string gives another cyclic permutation of the same string, so <span class="math notranslate nohighlight">\(\text{RC}(\text{RC}(A))\subseteq \text{RC}(A),\)</span> concluding that <span class="math notranslate nohighlight">\(\text{RC}(A) = \text{RC}(\text{RC}(A))\)</span>.</p>
 <p class="sd-card-text"><strong>Part 2:</strong>
-Suppose <span class="math notranslate nohighlight">\(A\)</span> is a regular language, so there exists an NFA <span class="math notranslate nohighlight">\(M = (Q, \Sigma, \delta, q_0, F)\)</span> which recognises it.
-We will describe an NFA <span class="math notranslate nohighlight">\(M' = (Q', \Sigma, \delta', q_0', F')\)</span> which recognises <span class="math notranslate nohighlight">\(\text{RC}(A)\)</span>, as follows.
-Suppose <span class="math notranslate nohighlight">\(|Q| = n\)</span>.
-Let <span class="math notranslate nohighlight">\(q_0'\)</span> be a new initial state, let <span class="math notranslate nohighlight">\(Q_0, Q_1, \dots Q_n\)</span> be copies of <span class="math notranslate nohighlight">\(Q\)</span>, and <span class="math notranslate nohighlight">\(\delta_0, \delta_1, \dots, \delta_n\)</span> be corresponding copied transition functions.
-Use the notation <span class="math notranslate nohighlight">\(q_{ij}\)</span> to denote the <span class="math notranslate nohighlight">\(j^{th}\)</span> state of <span class="math notranslate nohighlight">\(Q_i\)</span>.
-Then let us define <span class="math notranslate nohighlight">\(Q' = \{q_0'\} \cup Q_0 \cup Q_1 \cup \dots \cup Q_n\)</span> be the set of states, let <span class="math notranslate nohighlight">\(F = q_{11} \cup \dots \cup q_{nn}\)</span> be the set of final states and let the transition function be</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{align}
-\delta(q, a) = \begin{cases}
-\{q_{i0} | i = 1, \dots, n\} &amp; q = q_0', a = \epsilon \\
-\{\delta_0(q_{0j}, a), q_{j0}\} &amp; q = q_{0j}, a = \epsilon \\
-\{\delta_0(q_{0j}, a)\} &amp; q = q_{0j}, a \neq \epsilon \\
-\delta_i(q_{ij}, a) &amp; q = q_{ij} \\
-\end{cases}
-\end{align}\end{split}\]</div>
-<p class="sd-card-text">This NFA consists of an initial state <span class="math notranslate nohighlight">\(q_0'\)</span> with <span class="math notranslate nohighlight">\(\epsilon\)</span> transitions to every state in <span class="math notranslate nohighlight">\(Q_0\)</span>.
-Then for each state <span class="math notranslate nohighlight">\(q_{0j}\)</span> in <span class="math notranslate nohighlight">\(Q_0\)</span> there is an optional <span class="math notranslate nohighlight">\(\epsilon\)</span> transition to the initial state of <span class="math notranslate nohighlight">\(Q_j\)</span>.
-In turn, the only final state in <span class="math notranslate nohighlight">\(Q_j\)</span> is <span class="math notranslate nohighlight">\(q_{jj}\)</span>.
-This NFA recognises <span class="math notranslate nohighlight">\(\text{RC}(A)\)</span>, which is therefore regular.</p>
+Suppose <span class="math notranslate nohighlight">\(A\)</span> is a regular language, so there exists a DFA <span class="math notranslate nohighlight">\(M = (Q, \Sigma, \delta, q_0, F)\)</span> which recognises it.
+Suppose <span class="math notranslate nohighlight">\(|Q| = N.\)</span>
+Let <span class="math notranslate nohighlight">\(q_0'\)</span> be a new initial state, and <span class="math notranslate nohighlight">\(Q_{n, 1}, Q_{n, 2}\)</span> be copies of <span class="math notranslate nohighlight">\(Q\)</span> for <span class="math notranslate nohighlight">\(n = 1, \dots, N.\)</span>
+Let the <span class="math notranslate nohighlight">\(m^{th}\)</span> state in <span class="math notranslate nohighlight">\(Q\)</span> be denoted <span class="math notranslate nohighlight">\(q_m,\)</span> and let the corresponding copies in <span class="math notranslate nohighlight">\(Q_{n, 1}\)</span> and <span class="math notranslate nohighlight">\(Q_{n, 2}\)</span> be <span class="math notranslate nohighlight">\(q_{n, m, 1}\)</span> and <span class="math notranslate nohighlight">\(q_{n, m, 2}\)</span> respectively.
+Similarly, let the <span class="math notranslate nohighlight">\(k^{th}\)</span> final state in <span class="math notranslate nohighlight">\(F\)</span> be <span class="math notranslate nohighlight">\(f_k\)</span> and let the corresponding copies in <span class="math notranslate nohighlight">\(Q_{n, 1}\)</span> and <span class="math notranslate nohighlight">\(Q_{n, 2}\)</span> be <span class="math notranslate nohighlight">\(f_{n, k, 1}\)</span> and <span class="math notranslate nohighlight">\(f_{n, k, 2}\)</span> respectively.
+Finally, let <span class="math notranslate nohighlight">\(\delta_{n, 1}, \delta_{n, 2}\)</span> be copies of <span class="math notranslate nohighlight">\(\delta\)</span> for <span class="math notranslate nohighlight">\(n = 1, \dots, N.\)</span></p>
+<p class="sd-card-text">Now, <span class="math notranslate nohighlight">\(\epsilon\)</span> transitions from <span class="math notranslate nohighlight">\(q_0'\)</span> to each <span class="math notranslate nohighlight">\(q_{n, n, 1}.\)</span>
+Also, add <span class="math notranslate nohighlight">\(\epsilon\)</span> transitions from each <span class="math notranslate nohighlight">\(f_{n, k, 1}\)</span> to <span class="math notranslate nohighlight">\(q_{n, 0, 2}.\)</span>
+Let the states <span class="math notranslate nohighlight">\(q_{n, n, 2}\)</span> for <span class="math notranslate nohighlight">\(n = 1, \dots, N\)</span> be the final states, and let the transition function be the collection of the <span class="math notranslate nohighlight">\(\epsilon\)</span> transitions described above, together with the individual transition functions <span class="math notranslate nohighlight">\(\delta_{n, 1}\)</span> and <span class="math notranslate nohighlight">\(\delta_{n, 2}\)</span> for <span class="math notranslate nohighlight">\(n = 1, \dots, N.\)</span>
+Let us determine the language recognised by this NFA, by breaking down the transition into two stages.</p>
+<p class="sd-card-text"><strong>First stage:</strong>
+In the first stage, the NFA can first make a transition to any <span class="math notranslate nohighlight">\(q_{n, n, 1},\)</span> without reading in a symbol.
+Then, in the first stage, the NFA can make any sequence of transitions in <span class="math notranslate nohighlight">\(Q_{n, 1},\)</span> according to <span class="math notranslate nohighlight">\(\delta_{n, 1}\)</span> until it reaches a state <span class="math notranslate nohighlight">\(f_{n, k, 1}\)</span> which is a copy of the final state <span class="math notranslate nohighlight">\(f_k\)</span> from <span class="math notranslate nohighlight">\(F.\)</span>
+At this point, the NFA has read a sequence of symbols <span class="math notranslate nohighlight">\(x_1\dots x_p\)</span> that is a suffix of a string in <span class="math notranslate nohighlight">\(A,\)</span> and it cannot have reached a terminal state.</p>
+<p class="sd-card-text"><strong>Second stage:</strong>
+Then, in the second stage, the NFA can make a transition to <span class="math notranslate nohighlight">\(q_{n, 0, 2},\)</span> which is a copy of the initial state <span class="math notranslate nohighlight">\(q_0\)</span> from <span class="math notranslate nohighlight">\(Q,\)</span> without reading a symbol.
+Then, the NFA can make a sequence of transitions in <span class="math notranslate nohighlight">\(Q_{n, 2}\)</span> according to <span class="math notranslate nohighlight">\(\delta_{n, 2}\)</span> until it reaches a final state <span class="math notranslate nohighlight">\(q_{n, n, 2},\)</span> which is a copy of the state <span class="math notranslate nohighlight">\(q_n\)</span> from <span class="math notranslate nohighlight">\(Q.\)</span>
+During this second stage, the NFA reads a sequence of symbols <span class="math notranslate nohighlight">\(y_1, \dots, y_q\)</span> if and only if it is a prefix of a string in <span class="math notranslate nohighlight">\(A,\)</span> and also if after reading it, the original DFA <span class="math notranslate nohighlight">\(M\)</span> would end up in state <span class="math notranslate nohighlight">\(q_n.\)</span></p>
+<p class="sd-card-text"><strong>Conclusion:</strong>
+Threfore, the NFA reads a sequence of symbols <span class="math notranslate nohighlight">\(x_1\dots x_p y_1 \dots y_q\)</span> if and only if: (1) starting from state <span class="math notranslate nohighlight">\(q_n,\)</span> the DFA <span class="math notranslate nohighlight">\(M\)</span> would end up in a final state after reading <span class="math notranslate nohighlight">\(x_1\dots x_p\)</span> and also (2) the DFA <span class="math notranslate nohighlight">\(M\)</span> would end up in state <span class="math notranslate nohighlight">\(q_n\)</span> after reading <span class="math notranslate nohighlight">\(y_1 \dots y_q.\)</span>
+Therefore, the NFA accepts a string <span class="math notranslate nohighlight">\(s\)</span> if and only if it can be written as <span class="math notranslate nohighlight">\(s = y_1\dots y_q x_1\dots x_q\)</span> where <span class="math notranslate nohighlight">\(x_1\dots x_p y_1 \dots y_q \in A,\)</span> so it recognises <span class="math notranslate nohighlight">\(\text{RC}(A).\)</span></p>
 </div>
 </details></div>
 </section>
@@ -1143,16 +1158,16 @@ This NFA recognises <span class="math notranslate nohighlight">\(\text{RC}(A)\)<
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "venv-rw"
+            mode: "python"
         },
         kernelOptions: {
-            name: "venv-rw",
+            name: "python3",
             path: "./book/toc"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'venv-rw'</script>
+    <script>kernelName = 'python3'</script>
 
                 </article>
               

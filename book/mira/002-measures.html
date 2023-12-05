@@ -408,6 +408,10 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nonadditivity-of-the-outer-measure">Nonadditivity of the outer measure</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measurable-spaces-and-functions">Measurable spaces and functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sigma-algebras"><span class="math notranslate nohighlight">\(\sigma\)</span>-algebras</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -512,8 +516,8 @@ Therefore,</p>
 </div>
 </details><p>The third good property of the outer measure is translation invariance.
 To establish this property, we first need a definition of the translation of a set.</p>
-<div class="proof definition admonition" id="definition-4">
-<p class="admonition-title"><span class="caption-number">Definition 57 </span> (Translation)</p>
+<div class="proof definition admonition" id="mira:thm:outer-measure-is-translation-invariant">
+<p class="admonition-title"><span class="caption-number">Definition 57 </span> (Translation invariance)</p>
 <section class="definition-content" id="proof-content">
 <p>For <span class="math notranslate nohighlight">\(A \subseteq \mathbb{R}\)</span> and <span class="math notranslate nohighlight">\(t \in \mathbb{R},\)</span> the translation of <span class="math notranslate nohighlight">\(t + A\)</span> is defined by</p>
 <div class="math notranslate nohighlight">
@@ -718,7 +722,7 @@ Since <code class="xref prf prf-ref docutils literal notranslate"><span class="p
 <h3>Nonadditivity of the outer measure<a class="headerlink" href="#nonadditivity-of-the-outer-measure" title="Permalink to this heading">#</a></h3>
 <p>Now we come to the negative result of the outer measure, namely that it is not additive.
 Additivity is an important property that we would like our notion of length to have, because it allows us to prove good theorems about integration.</p>
-<div class="proof theorem admonition" id="theorem-11">
+<div class="proof theorem admonition" id="mira:thm:non-additivity-of-outer-measure">
 <p class="admonition-title"><span class="caption-number">Theorem 67 </span> (Nonadditivity of the outer measure)</p>
 <section class="theorem-content" id="proof-content">
 <p>There exist disjoint subsets <span class="math notranslate nohighlight">\(A, B\)</span> of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> such that</p>
@@ -754,8 +758,11 @@ Then, for any <span class="math notranslate nohighlight">\(a \in [-1, 1],\)</spa
 Let also <span class="math notranslate nohighlight">\(r_1, r_2, \ldots\)</span> be a sequence which contains all the rational numbers in <span class="math notranslate nohighlight">\([-2, 2]\)</span> exactly once.
 Then</p>
 <div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}[-1, 1] \subseteq \bigcup_{k=1}^\infty (r_k + V),$\\because for each $a \in [-1, 1],$ there is a unique element $v \in V$ that is in the same equivalence class as $a,$ namely $v = \tilde{a} \cap V,$ so $a - v \in \mathbb{Q},$ from which it follows that $a - v = r_k$ for some $k \in \mathbb{Z}^+,$ and therefore $a \in r_k + V.$
-The set inclusion above together with the {prf:ref}`order preserving property &lt;mira:thm:outer-measure-preserves-order&gt;` of the outer measure, and the {prf:ref}`translation invariance &lt;mira:thm:outer-measure-is-translation-invariant&gt;` of the outer measure imply that\\$$|[-1, 1]| = 2 \leq \sum_{k=1}^\infty |r_k + V| = \sum_{k=1}^\infty |V|\end{aligned}\end{align} \]</div>
+\[[-1, 1] \subseteq \bigcup_{k=1}^\infty (r_k + V),\]</div>
+<p class="sd-card-text">because for each <span class="math notranslate nohighlight">\(a \in [-1, 1],\)</span> there is a unique element <span class="math notranslate nohighlight">\(v \in V\)</span> that is in the same equivalence class as <span class="math notranslate nohighlight">\(a,\)</span> namely <span class="math notranslate nohighlight">\(v = \tilde{a} \cap V,\)</span> so <span class="math notranslate nohighlight">\(a - v \in \mathbb{Q},\)</span> from which it follows that <span class="math notranslate nohighlight">\(a - v = r_k\)</span> for some <span class="math notranslate nohighlight">\(k \in \mathbb{Z}^+,\)</span> and therefore <span class="math notranslate nohighlight">\(a \in r_k + V.\)</span>
+The set inclusion above together with the <a class="reference internal" href="#mira:thm:outer-measure-preserves-order">order preserving property</a> of the outer measure, and the <a class="reference internal" href="#mira:thm:outer-measure-is-translation-invariant">translation invariance</a> of the outer measure imply that</p>
+<div class="math notranslate nohighlight">
+\[2 = |[-1, 1]| \leq \sum_{k=1}^\infty |r_k + V| = \sum_{k=1}^\infty |V|\]</div>
 <p class="sd-card-text">Thus <span class="math notranslate nohighlight">\(|V| &gt; 0.\)</span>
 Now, note that the sets <span class="math notranslate nohighlight">\((r_1 + V), (r_2 + V), \ldots, (r_K + V)\)</span> are disjoint for any <span class="math notranslate nohighlight">\(K \in \mathbb{Z}^+.\)</span>
 Note also that for any <span class="math notranslate nohighlight">\(K \in \mathbb{Z}^+,\)</span> we have</p>
@@ -770,6 +777,261 @@ Then, applying the additivity property <span class="math notranslate nohighlight
 </details><p>Shortly, we will show that this negative result is not a fundamental limitation of our definition of the outer measure.
 As explained earlier, any function that satisfies some of the aforementioned properties of the outer measure and has domain equal to the power set of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> cannot be additive.</p>
 </section>
+</section>
+<section id="measurable-spaces-and-functions">
+<h2>Measurable spaces and functions<a class="headerlink" href="#measurable-spaces-and-functions" title="Permalink to this heading">#</a></h2>
+<div class="proof theorem admonition" id="theorem-12">
+<p class="admonition-title"><span class="caption-number">Theorem 68 </span> (Nonexistence of extension of length to all subsets of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>)</p>
+<section class="theorem-content" id="proof-content">
+<p>There does not exist a function <span class="math notranslate nohighlight">\(\mu\)</span> with the following properties:</p>
+<p>(a) <span class="math notranslate nohighlight">\(\mu\)</span> is a function fromm the set of subsets of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> to <span class="math notranslate nohighlight">\([0, \infty],\)</span></p>
+<p>(b) <span class="math notranslate nohighlight">\(\mu(I) = \ell(I)\)</span> for all open intervals <span class="math notranslate nohighlight">\(I \subseteq \mathbb{R},\)</span></p>
+<p>(c) For every disjoint sequence <span class="math notranslate nohighlight">\(A_1, A_2, \ldots\)</span> of subsets of <span class="math notranslate nohighlight">\(\mathbb{R},\)</span> <span class="math notranslate nohighlight">\(\mu \left( \cup_{k=1}^\infty A_k \right) = \sum_{k=1}^\infty \mu(A_k),\)</span></p>
+<p>(d) <span class="math notranslate nohighlight">\(\mu(t + A) = \mu(A)\)</span> for all <span class="math notranslate nohighlight">\(A \subseteq \mathbb{R}\)</span> and <span class="math notranslate nohighlight">\(t \in \mathbb{R}.\)</span></p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Nonexistence of extension of length to all subsets of <span class="math notranslate nohighlight">\(~\mathbb{R}\)</span><div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose there exists a function <span class="math notranslate nohighlight">\(\mu\)</span> with all the properties listed in the statement of this theorem.
+We will show that <span class="math notranslate nohighlight">\(\mu\)</span> has all the properties that were used in our proof of the <a class="reference internal" href="#mira:thm:non-additivity-of-outer-measure">nonadditivity of the outer measure</a>, and we can then repeat the argument used there.</p>
+<p class="sd-card-text"><strong>Showing the relevant properties:</strong>
+First, observe that <span class="math notranslate nohighlight">\(\mu(\emptyset) = 0,\)</span> because <span class="math notranslate nohighlight">\(\emptyset\)</span> is an open interval with length <span class="math notranslate nohighlight">\(0.\)</span>
+Now, <span class="math notranslate nohighlight">\(\mu\)</span> has the order preserving property, bevause if <span class="math notranslate nohighlight">\(A \subseteq B \subseteq \mathbb{R},\)</span> then <span class="math notranslate nohighlight">\(\mu(A) \subseteq \mu(B),\)</span> because considering the sequence <span class="math notranslate nohighlight">\(A, B \setminus A, \emptyset, \emptyset, \dots\)</span> and applying property (c), we arrive at</p>
+<div class="math notranslate nohighlight">
+\[\mu(B) = \mu(A) + \mu(B \setminus A) + 0 + 0 + \dots = \mu(A) + \mu(B \setminus A) \geq \mu(A).\]</div>
+<p class="sd-card-text">In addition, if <span class="math notranslate nohighlight">\(a, b \in \mathbb{R}\)</span> with <span class="math notranslate nohighlight">\(a &lt; b,\)</span> then</p>
+<div class="math notranslate nohighlight">
+\[(a, b) \subseteq [a, b] \subseteq (a - \epsilon, b + \epsilon)\]</div>
+<p class="sd-card-text">for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0,\)</span> so</p>
+<div class="math notranslate nohighlight">
+\[\mu((a, b)) \leq \mu([a, b]) \leq \mu((a - \epsilon, b + \epsilon)) = b - a + 2\epsilon,\]</div>
+<p class="sd-card-text">and since <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> is arbitrary, this implies that</p>
+<div class="math notranslate nohighlight" id="equation-mira-eq-mu-of-closed-interval">
+<span class="eqno">(3)<a class="headerlink" href="#equation-mira-eq-mu-of-closed-interval" title="Permalink to this equation">#</a></span>\[\mu([a, b]) = b - a.\]</div>
+<p class="sd-card-text">Finally, if <span class="math notranslate nohighlight">\(A_1, A_2, \dots\)</span> is a sequence of disjoint subsets of <span class="math notranslate nohighlight">\(\mathbb{R},\)</span> then</p>
+<div class="math notranslate nohighlight">
+\[A_1, A_2 \setminus A_1, A_3 \setminus (A_1 \cup A_2), \ldots\]</div>
+<p class="sd-card-text">is a sequence of disjoint subsets of <span class="math notranslate nohighlight">\(\mathbb{R},\)</span> so by property (c), we have</p>
+<div class="math notranslate nohighlight" id="equation-mira-eq-mu-is-countably-subadditive">
+<span class="eqno">(4)<a class="headerlink" href="#equation-mira-eq-mu-is-countably-subadditive" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
+\mu\left( \bigcup_{k=1}^\infty A_k \right) &amp;= \mu\left( A_1 \cup (A_2 \setminus A_1) \cup (A_3 \setminus (A_1 \cup A_2)) \cup \dots \right) \\
+&amp;= \mu(A_1) + \mu(A_2 \setminus A_1) + \mu(A_3 \setminus (A_1 \cup A_2)) + \cdots \\
+&amp;\leq \sum_{k=1}^\infty \mu(A_k).
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">Therefore <span class="math notranslate nohighlight">\(\mu\)</span> is countably subadditive.</p>
+<p class="sd-card-text"><strong>Repeating the argument:</strong>
+Now, define the set <span class="math notranslate nohighlight">\(V\)</span> in the same way that it was defined in the proof of the <a class="reference internal" href="#mira:thm:non-additivity-of-outer-measure">nonadditivity of the outer measure</a>.
+Specifically, let <span class="math notranslate nohighlight">\(\sim\)</span> be the equivalence relation such that for <span class="math notranslate nohighlight">\(x, y \in [-1, 1]\)</span> we have <span class="math notranslate nohighlight">\(x \sim y\)</span> if <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> differ by a rational number.
+Let <span class="math notranslate nohighlight">\(V\)</span> be the set which contains exactly one representative from each equivalence clss of <span class="math notranslate nohighlight">\(\sim.\)</span>
+Let <span class="math notranslate nohighlight">\(r_1, r_2, \dots\)</span> be a sequence that contains each rational number in <span class="math notranslate nohighlight">\([-2, 2]\)</span> exactly once.
+Then, by properties <a class="reference internal" href="#equation-mira-eq-mu-of-closed-interval">(3)</a> and <a class="reference internal" href="#equation-mira-eq-mu-is-countably-subadditive">(4)</a> of <span class="math notranslate nohighlight">\(\mu,\)</span> as well as the translation invariance of <span class="math notranslate nohighlight">\(\mu\)</span>, property (d), we have</p>
+<div class="math notranslate nohighlight">
+\[2 = \mu([-1, 1]) = \mu\left(\bigcup_{k = 1}^\infty r_k + V\right) = \sum_{k=1}^\infty \mu(r_k + V) = \sum_{k=1}^\infty \mu(V)\]</div>
+<p class="sd-card-text">Thus <span class="math notranslate nohighlight">\(\mu(V) &gt; 0.\)</span>
+Now, note that the sets <span class="math notranslate nohighlight">\((r_1 + V), (r_2 + V), \ldots, (r_K + V)\)</span> are disjoint for any <span class="math notranslate nohighlight">\(K \in \mathbb{Z}^+.\)</span>
+Note also that for any <span class="math notranslate nohighlight">\(K \in \mathbb{Z}^+,\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[ \bigcup_{k=1}^K (r_k + V) \subseteq [-3, 3] \implies \mu\left( \bigcup_{k=1}^K (r_k + V) \right) \leq 6.\]</div>
+<p class="sd-card-text">Now, using the additivity and the translation invariance of <span class="math notranslate nohighlight">\(\mu\)</span>, properties (c) and (d), we have</p>
+<div class="math notranslate nohighlight">
+\[\mu\left( \bigcup_{k=1}^K (r_k + V) \right) = \sum_{k=1}^K \mu(r_k + V) = K \mu(V) &lt; 6,\]</div>
+<p class="sd-card-text">reaching a contradiction, because <span class="math notranslate nohighlight">\(|V| &gt; 0,\)</span> so the above inequality cannot hold for any <span class="math notranslate nohighlight">\(K.\)</span></p>
+</div>
+</details><section id="sigma-algebras">
+<h3><span class="math notranslate nohighlight">\(\sigma\)</span>-algebras<a class="headerlink" href="#sigma-algebras" title="Permalink to this heading">#</a></h3>
+<div class="proof definition admonition" id="definition-13">
+<p class="admonition-title"><span class="caption-number">Definition 59 </span> (<span class="math notranslate nohighlight">\(\sigma\)</span>-algebra)</p>
+<section class="definition-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\(X\)</span> is a set and <span class="math notranslate nohighlight">\(S\)</span> is a set of subsets of <span class="math notranslate nohighlight">\(X.\)</span>
+Then <span class="math notranslate nohighlight">\(S\)</span> is called a <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <span class="math notranslate nohighlight">\(X\)</span> if it satisfies:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\emptyset \in S,\)</span></p></li>
+<li><p>if <span class="math notranslate nohighlight">\(E \in S,\)</span> then <span class="math notranslate nohighlight">\(X \setminus E \in S,\)</span></p></li>
+<li><p>if <span class="math notranslate nohighlight">\(E_1, E_2, \dots\)</span> is a sequnece of elements of <span class="math notranslate nohighlight">\(S,\)</span> then <span class="math notranslate nohighlight">\(\bigcup_{k=1}^\infty E_k \in S.\)</span></p></li>
+</ul>
+</section>
+</div><div class="proof theorem admonition" id="theorem-14">
+<p class="admonition-title"><span class="caption-number">Theorem 69 </span> (Other properties of <span class="math notranslate nohighlight">\(\sigma\)</span>-algebras)</p>
+<section class="theorem-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\(S\)</span> is a <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on a set <span class="math notranslate nohighlight">\(X.\)</span>
+Then</p>
+<p>(a) <span class="math notranslate nohighlight">\(X \in S,\)</span></p>
+<p>(b) if <span class="math notranslate nohighlight">\(D, E \in S,\)</span> then <span class="math notranslate nohighlight">\(D \cup E \in S, D \cap E \in S\)</span> and <span class="math notranslate nohighlight">\(D \setminus E \in S,\)</span></p>
+<p>(c) if <span class="math notranslate nohighlight">\(E_1, E_2, \dots\)</span> is a sequence of elements of <span class="math notranslate nohighlight">\(S,\)</span> then <span class="math notranslate nohighlight">\(\cap_{k = 1}^\infty E_k \in S.\)</span></p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Other properties of <span class="math notranslate nohighlight">\(~\sigma\)</span>-algebras<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Because <span class="math notranslate nohighlight">\(\emptyset \in S\)</span> and <span class="math notranslate nohighlight">\(X = X \setminus \emptyset,\)</span> we have <span class="math notranslate nohighlight">\(X \in S.\)</span>
+Suppose <span class="math notranslate nohighlight">\(D, E \in S.\)</span>
+Then <span class="math notranslate nohighlight">\(D \cup E \in S\)</span> because this is the union of the sequence <span class="math notranslate nohighlight">\(D, E, \emptyset, \emptyset, \dots \in S.\)</span>
+In addition,</p>
+<div class="math notranslate nohighlight">
+\[D \cap E = X \setminus ((X \setminus D) \cup (X \setminus E)) \in S,\]</div>
+<p class="sd-card-text">and also <span class="math notranslate nohighlight">\(D \setminus (X \setminus E) = D \cap E \in S.\)</span>
+Lastly, if <span class="math notranslate nohighlight">\(E_1, E_2, \dots\)</span> is a sequence of elements of <span class="math notranslate nohighlight">\(S,\)</span> then</p>
+<div class="math notranslate nohighlight">
+\[\bigcap_{k=1}^\infty E_k = X \setminus \bigcup_{k=1}^\infty (X \setminus E_k) \in S.\]</div>
+</div>
+</details><div class="proof definition admonition" id="definition-15">
+<p class="admonition-title"><span class="caption-number">Definition 60 </span> (Measurable space, measurable set)</p>
+<section class="definition-content" id="proof-content">
+<p>A measurable space is an ordered pair <span class="math notranslate nohighlight">\((X, S),\)</span> where <span class="math notranslate nohighlight">\(X\)</span> is a set and <span class="math notranslate nohighlight">\(S\)</span> is a <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <span class="math notranslate nohighlight">\(X.\)</span>
+An element of <span class="math notranslate nohighlight">\(S\)</span> is called a <span class="math notranslate nohighlight">\(S\)</span>-measurable set, or simply a measurable set if <span class="math notranslate nohighlight">\(S\)</span> is clear from the context.</p>
+</section>
+</div><div class="proof theorem admonition" id="theorem-16">
+<p class="admonition-title"><span class="caption-number">Theorem 70 </span> (Smallest <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra containing a collection of subsets)</p>
+<section class="theorem-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\(X\)</span> is a set and <span class="math notranslate nohighlight">\(A\)</span> is a set of subsets of <span class="math notranslate nohighlight">\(X.\)</span>
+Then, the intersection of all <span class="math notranslate nohighlight">\(\sigma\)</span>-algebras on <span class="math notranslate nohighlight">\(X\)</span> that contain <span class="math notranslate nohighlight">\(A\)</span> is a <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <span class="math notranslate nohighlight">\(X.\)</span></p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Smallest <span class="math notranslate nohighlight">\(~\sigma\)</span>-algebra containing a collection of subsets<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">There is at least one <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <span class="math notranslate nohighlight">\(X\)</span> that contains <span class="math notranslate nohighlight">\(A,\)</span> because the power set of <span class="math notranslate nohighlight">\(X\)</span> is a <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <span class="math notranslate nohighlight">\(X\)</span> that contains <span class="math notranslate nohighlight">\(A.\)</span>
+Let <span class="math notranslate nohighlight">\(S\)</span> be the intersection of all <span class="math notranslate nohighlight">\(\sigma\)</span>-algebras on <span class="math notranslate nohighlight">\(X\)</span> that contain <span class="math notranslate nohighlight">\(A.\)</span></p>
+<p class="sd-card-text">First, <span class="math notranslate nohighlight">\(\emptyset \in S,\)</span> because <span class="math notranslate nohighlight">\(\emptyset\)</span> is in every <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <span class="math notranslate nohighlight">\(X.\)</span>
+Second, if <span class="math notranslate nohighlight">\(E \in S,\)</span> then <span class="math notranslate nohighlight">\(E\)</span> is in every <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <span class="math notranslate nohighlight">\(X\)</span> that contains <span class="math notranslate nohighlight">\(A,\)</span> so <span class="math notranslate nohighlight">\(X \setminus E\)</span> is in every <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <span class="math notranslate nohighlight">\(X\)</span> that contains <span class="math notranslate nohighlight">\(A,\)</span> so <span class="math notranslate nohighlight">\(X \setminus E \in S.\)</span>
+Third, if <span class="math notranslate nohighlight">\(E_1, E_2, \dots\)</span> is a sequence of elements of <span class="math notranslate nohighlight">\(S,\)</span> then <span class="math notranslate nohighlight">\(E_1, E_2, \dots\)</span> is a sequence of elements of every <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <span class="math notranslate nohighlight">\(X\)</span> that contains <span class="math notranslate nohighlight">\(A,\)</span> so <span class="math notranslate nohighlight">\(\bigcup_{k=1}^\infty E_k\)</span> is in every <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <span class="math notranslate nohighlight">\(X\)</span> that contains <span class="math notranslate nohighlight">\(A,\)</span> so <span class="math notranslate nohighlight">\(\bigcup_{k=1}^\infty E_k \in S.\)</span></p>
+</div>
+</details><div class="proof definition admonition" id="definition-17">
+<p class="admonition-title"><span class="caption-number">Definition 61 </span> (Borel set)</p>
+<section class="definition-content" id="proof-content">
+<p>The smallest <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> that contains all the open subsets of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> is called the collection of Borel subsets on <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span>
+An element of this <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra is called a Borel set.</p>
+</section>
+</div><div class="proof definition admonition" id="definition-18">
+<p class="admonition-title"><span class="caption-number">Definition 62 </span> (Inverse image)</p>
+<section class="definition-content" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(f: X \in Y\)</span> is a function and <span class="math notranslate nohighlight">\(A \subseteq Y,\)</span> then the inverse image of <span class="math notranslate nohighlight">\(A\)</span> under <span class="math notranslate nohighlight">\(f\)</span> is defined by</p>
+<div class="math notranslate nohighlight">
+\[f^{-1}(A) = \{ x \in X : f(x) \in A \}.\]</div>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Algebra of inverse images<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><strong>Part (a):</strong>
+Suppose <span class="math notranslate nohighlight">\(A \subseteq Y.\)</span>
+For <span class="math notranslate nohighlight">\(x \in X\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+x \in f^{-1}(Y \setminus A) &amp;\iff f(x) \in Y \setminus A \\
+&amp;\iff f(x) \notin A \\
+&amp;\iff x \notin f^{-1}(A) \\
+&amp;\iff x \in X \setminus f^{-1}(A).
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">Thus <span class="math notranslate nohighlight">\(f^{-1}(Y \setminus A) = X \setminus f^{-1}(A).\)</span></p>
+<p class="sd-card-text"><strong>Part (b):</strong>
+Suppose <span class="math notranslate nohighlight">\(\mathcal{A} \subseteq \mathcal{P}(Y).\)</span>
+Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+x \in f^{-1}\left(\bigcup_{A \in \mathcal{A}} A\right) &amp;\iff f(x) \in \bigcup_{A \in \mathcal{A}} A \\
+&amp;\iff f(x) \in A \text{ for some } A \in \mathcal{A} \\
+&amp;\iff x \in f^{-1}(A) \text{ for some } A \in \mathcal{A} \\
+&amp;\iff x \in \bigcup_{A \in \mathcal{A}} f^{-1}(A).
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">Thus <span class="math notranslate nohighlight">\(f^{-1}\left(\bigcup_{A \in \mathcal{A}} A\right) = \bigcup_{A \in \mathcal{A}} f^{-1}(A).\)</span></p>
+<p class="sd-card-text"><strong>Part (c):</strong>
+Suppose <span class="math notranslate nohighlight">\(\mathcal{A} \subseteq \mathcal{P}(Y).\)</span>
+Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+x \in f^{-1}\left(\bigcap_{A \in \mathcal{A}} A\right) &amp;\iff f(x) \in \bigcap_{A \in \mathcal{A}} A \\
+&amp;\iff f(x) \in A \text{ for all } A \in \mathcal{A} \\
+&amp;\iff x \in f^{-1}(A) \text{ for all } A \in \mathcal{A} \\
+&amp;\iff x \in \bigcap_{A \in \mathcal{A}} f^{-1}(A).
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">Thus <span class="math notranslate nohighlight">\(f^{-1}\left(\bigcap_{A \in \mathcal{A}} A\right) = \bigcap_{A \in \mathcal{A}} f^{-1}(A).\)</span></p>
+</div>
+</details><div class="proof theorem admonition" id="theorem-19">
+<p class="admonition-title"><span class="caption-number">Theorem 71 </span> (Inverse image of a composition)</p>
+<section class="theorem-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\(f: X \to Y\)</span> and <span class="math notranslate nohighlight">\(g: Y \to Z\)</span> are functions.
+Then</p>
+<div class="math notranslate nohighlight">
+\[(g \circ f)^{-1}(A) = f^{-1}(g^{-1}(A))\]</div>
+<p>for all <span class="math notranslate nohighlight">\(A \subseteq Z.\)</span></p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Inverse image of a composition<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(A \subseteq Z.\)</span>
+For <span class="math notranslate nohighlight">\(x \in X\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+x \in (g \circ f)^{-1}(A) &amp;\iff (g \circ f)(x) \in A \\
+&amp;\iff g(f(x)) \in A \\
+&amp;\iff f(x) \in g^{-1}(A) \\
+&amp;\iff x \in f^{-1}(g^{-1}(A)).
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">Thus <span class="math notranslate nohighlight">\((g \circ f)^{-1}(A) = f^{-1}(g^{-1}(A)).\)</span></p>
+</div>
+</details><div class="proof definition admonition" id="definition-20">
+<p class="admonition-title"><span class="caption-number">Definition 63 </span> (Measurable function)</p>
+<section class="definition-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\((X, S)\)</span> is a measurable space.
+A function <span class="math notranslate nohighlight">\(f: X \to \mathbb{R}\)</span> is called <span class="math notranslate nohighlight">\(S\)</span>-measurable if</p>
+<div class="math notranslate nohighlight">
+\[f^{-1}(B) \in S\]</div>
+<p>for all Borel sets <span class="math notranslate nohighlight">\(B \subseteq \mathbb{R}.\)</span></p>
+</section>
+</div><div class="proof theorem admonition" id="theorem-21">
+<p class="admonition-title"><span class="caption-number">Theorem 72 </span> (Condition for measurable function)</p>
+<section class="theorem-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\((X, S)\)</span> is a measurable space and <span class="math notranslate nohighlight">\(f: X \to \mathbb{R}\)</span> is a function such that</p>
+<div class="math notranslate nohighlight">
+\[f^{-1}((a, \infty)) \in S\]</div>
+<p>for all <span class="math notranslate nohighlight">\(a \in \mathbb{R}.\)</span>
+Then <span class="math notranslate nohighlight">\(f\)</span> is <span class="math notranslate nohighlight">\(S\)</span>-measurable.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Condition for measurable function<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Consider the set</p>
+<div class="math notranslate nohighlight">
+\[T = \{A \subseteq \mathbb{R} : f^{-1}(A) \in S \}.\]</div>
+<p class="sd-card-text">We will show that every Borel subset of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> is in <span class="math notranslate nohighlight">\(T.\)</span>
+To do this, we will first show that <span class="math notranslate nohighlight">\(T\)</span> is a <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span>
+Then, we will show that <span class="math notranslate nohighlight">\(T\)</span> contains all the open intervals of <span class="math notranslate nohighlight">\(\mathbb{R},\)</span> which will imply that <span class="math notranslate nohighlight">\(T\)</span> contains all the Borel subsets of <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span></p>
+<p class="sd-card-text"><strong><span class="math notranslate nohighlight">\(T\)</span> is a <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>:</strong>
+First, <span class="math notranslate nohighlight">\(\emptyset \in T,\)</span> because <span class="math notranslate nohighlight">\(f^{-1}(\emptyset) = \emptyset \in S.\)</span>
+Second, if <span class="math notranslate nohighlight">\(A \in T,\)</span> then <span class="math notranslate nohighlight">\(f^{-1}(A) \in S,\)</span> so <span class="math notranslate nohighlight">\(f^{-1}(X \setminus A) = X \setminus f^{-1}(A) \in S,\)</span> so <span class="math notranslate nohighlight">\(X \setminus A \in T.\)</span>
+Third, if <span class="math notranslate nohighlight">\(A_1, A_2, \dots \in T,\)</span> then <span class="math notranslate nohighlight">\(f^{-1}(A_1), f^{-1}(A_2), \dots \in S,\)</span> so</p>
+<div class="math notranslate nohighlight">
+\[f^{-1}\left(\bigcup_{k=1}^\infty A_k\right) = \bigcup_{k=1}^\infty f^{-1}(A_k) \in S,\]</div>
+<p class="sd-card-text">so <span class="math notranslate nohighlight">\(\cup_{k=1}^\infty A_k \in T.\)</span>
+Thus <span class="math notranslate nohighlight">\(T\)</span> is a <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span></p>
+<p class="sd-card-text"><strong>Every open interval is in <span class="math notranslate nohighlight">\(T\)</span>:</strong>
+By the hypothesis in the theorem statement, it follows that <span class="math notranslate nohighlight">\(f^{-1}((a, \infty)) \in S\)</span> for all <span class="math notranslate nohighlight">\(a \in \mathbb{R},\)</span> so <span class="math notranslate nohighlight">\((a, \infty) \in T\)</span> for all <span class="math notranslate nohighlight">\(a \in \mathbb{R}.\)</span>
+Since <span class="math notranslate nohighlight">\(T\)</span> is a <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <span class="math notranslate nohighlight">\(\mathbb{R},\)</span> it is closed under complementation and intersection so <span class="math notranslate nohighlight">\((-\infty, b] \in T\)</span> for all <span class="math notranslate nohighlight">\(b \in \mathbb{R},\)</span> and <span class="math notranslate nohighlight">\((a, b) \in T\)</span> for all <span class="math notranslate nohighlight">\(a, b \in \mathbb{R}.\)</span>
+Therefore <span class="math notranslate nohighlight">\(T\)</span> contains all the open intervals of <span class="math notranslate nohighlight">\(\mathbb{R},\)</span> so <span class="math notranslate nohighlight">\(T\)</span> contains all the Borel subsets of <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span></p>
+</div>
+</details></section>
 </section>
 </section>
 
@@ -841,6 +1103,10 @@ As explained earlier, any function that satisfies some of the aforementioned pro
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#good-properties">Good properties</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heine-borel-theorem">Heine-Borel theorem</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nonadditivity-of-the-outer-measure">Nonadditivity of the outer measure</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measurable-spaces-and-functions">Measurable spaces and functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sigma-algebras"><span class="math notranslate nohighlight">\(\sigma\)</span>-algebras</a></li>
 </ul>
 </li>
 </ul>
