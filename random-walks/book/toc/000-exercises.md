@@ -797,7 +797,7 @@ Then, the NFA can make a sequence of transitions in $Q_{n, 2}$ according to $\de
 During this second stage, the NFA reads a sequence of symbols $y_1, \dots, y_q$ if and only if it is a prefix of a string in $A,$ and also if after reading it, the original DFA $M$ would end up in state $q_n.$
 
 __Conclusion:__
-Threfore, the NFA reads a sequence of symbols $x_1\dots x_p y_1 \dots y_q$ if and only if: (1) starting from state $q_n,$ the DFA $M$ would end up in a final state after reading $x_1\dots x_p$ and also (2) the DFA $M$ would end up in state $q_n$ after reading $y_1 \dots y_q.$
+Threfore, the NFA reads a sequence of symbols $x_1\dots x_p y_1 \dots y_q$ if and only if: (1) starting from state $q_n,$ the DFA $M$ would end up in a final state after reading $x_1\dots x_p$ and also (2) starting from $q_0,$ the DFA $M$ would end up in state $q_n$ after reading $y_1 \dots y_q.$
 Therefore, the NFA accepts a string $s$ if and only if it can be written as $s = xy$ where $yx \in A,$ so it recognises $\text{RC}(A).$
 
 :::
