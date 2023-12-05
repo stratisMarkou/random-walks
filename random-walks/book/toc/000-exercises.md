@@ -774,26 +774,31 @@ Since the set of all cyclic permutations of a string includes the string itself,
 Conversely, applying two cyclic permutations to a string gives another cyclic permutation of the same string, so $\text{RC}(\text{RC}(A))\subseteq \text{RC}(A),$ concluding that $\text{RC}(A) = \text{RC}(\text{RC}(A))$.
 
 __Part 2:__ 
-Suppose $A$ is a regular language, so there exists an NFA $M = (Q, \Sigma, \delta, q_0, F)$ which recognises it.
-We will describe an NFA $M' = (Q', \Sigma, \delta', q_0', F')$ which recognises $\text{RC}(A)$, as follows.
-Suppose $|Q| = n$.
-Let $q_0'$ be a new initial state, let $Q_0, Q_1, \dots Q_n$ be copies of $Q$, and $\delta_0, \delta_1, \dots, \delta_n$ be corresponding copied transition functions.
-Use the notation $q_{ij}$ to denote the $j^{th}$ state of $Q_i$.
-Then let us define $Q' = \{q_0'\} \cup Q_0 \cup Q_1 \cup \dots \cup Q_n$ be the set of states, let $F = q_{11} \cup \dots \cup q_{nn}$ be the set of final states and let the transition function be
+Suppose $A$ is a regular language, so there exists a DFA $M = (Q, \Sigma, \delta, q_0, F)$ which recognises it.
+Suppose $|Q| = N.$
+Let $q_0'$ be a new initial state, and $Q_{n, 1}, Q_{n, 2}$ be copies of $Q$ for $n = 1, \dots, N.$
+Let the $m^{th}$ state in $Q$ be denoted $q_m,$ and let the corresponding copies in $Q_{n, 1}$ and $Q_{n, 2}$ be $q_{n, m, 1}$ and $q_{n, m, 2}$ respectively.
+Similarly, let the $k^{th}$ final state in $F$ be $f_k$ and let the corresponding copies in $Q_{n, 1}$ and $Q_{n, 2}$ be $f_{n, k, 1}$ and $f_{n, k, 2}$ respectively.
+Finally, let $\delta_{n, 1}, \delta_{n, 2}$ be copies of $\delta$ for $n = 1, \dots, N.$
 
-$$\begin{align}
-\delta(q, a) = \begin{cases}
-\{q_{i0} | i = 1, \dots, n\} & q = q_0', a = \epsilon \\
-\{\delta_0(q_{0j}, a), q_{j0}\} & q = q_{0j}, a = \epsilon \\
-\{\delta_0(q_{0j}, a)\} & q = q_{0j}, a \neq \epsilon \\
-\delta_i(q_{ij}, a) & q = q_{ij} \\
-\end{cases}
-\end{align}$$
+Now, $\epsilon$ transitions from $q_0'$ to each $q_{n, n, 1}.$
+Also, add $\epsilon$ transitions from each $f_{n, k, 1}$ to $q_{n, 0, 2}.$
+Let the states $q_{n, n, 2}$ for $n = 1, \dots, N$ be the final states, and let the transition function be the collection of the $\epsilon$ transitions described above, together with the individual transition functions $\delta_{n, 1}$ and $\delta_{n, 2}$ for $n = 1, \dots, N.$
+Let us determine the language recognised by this NFA, by breaking down the transition into two stages.
 
-This NFA consists of an initial state $q_0'$ with $\epsilon$ transitions to every state in $Q_0$.
-Then for each state $q_{0j}$ in $Q_0$ there is an optional $\epsilon$ transition to the initial state of $Q_j$.
-In turn, the only final state in $Q_j$ is $q_{jj}$.
-This NFA recognises $\text{RC}(A)$, which is therefore regular.
+__First stage:__
+In the first stage, the NFA can first make a transition to any $q_{n, n, 1},$ without reading in a symbol.
+Then, in the first stage, the NFA can make any sequence of transitions in $Q_{n, 1},$ according to $\delta_{n, 1}$ until it reaches a state $f_{n, k, 1}$ which is a copy of the final state $f_k$ from $F.$
+At this point, the NFA has read a sequence of symbols $x_1\dots x_p$ that is a suffix of a string in $A,$ and it cannot have reached a terminal state.
+
+__Second stage:__
+Then, in the second stage, the NFA can make a transition to $q_{n, 0, 2},$ which is a copy of the initial state $q_0$ from $Q,$ without reading a symbol.
+Then, the NFA can make a sequence of transitions in $Q_{n, 2}$ according to $\delta_{n, 2}$ until it reaches a final state $q_{n, n, 2},$ which is a copy of the state $q_n$ from $Q.$
+During this second stage, the NFA reads a sequence of symbols $y_1, \dots, y_q$ if and only if it is a prefix of a string in $A,$ and also if after reading it, the original DFA $M$ would end up in state $q_n.$
+
+__Conclusion:__
+Threfore, the NFA reads a sequence of symbols $x_1\dots x_p y_1 \dots y_q$ if and only if: (1) starting from state $q_n,$ the DFA $M$ would end up in a final state after reading $x_1\dots x_p$ and also (2) the DFA $M$ would end up in state $q_n$ after reading $y_1 \dots y_q.$
+Therefore, the NFA accepts a string $s$ if and only if it can be written as $s = y_1\dots y_q x_1\dots x_q$ where $x_1\dots x_p y_1 \dots y_q \in A,$ so it recognises $\text{RC}(A).$
 
 :::
 ::::
