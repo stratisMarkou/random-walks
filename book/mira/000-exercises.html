@@ -403,6 +403,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-1-a">Chapter 1.A</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-c">Chapter 2.C</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-d">Chapter 2.D</a></li>
 </ul>
             </nav>
         </div>
@@ -1101,6 +1102,127 @@ Then, a measure <span class="math notranslate nohighlight">\(\mu\)</span> on <sp
 </div>
 </details></div>
 </section>
+<section id="chapter-2-d">
+<h2>Chapter 2.D<a class="headerlink" href="#chapter-2-d" title="Permalink to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 2.D.1</p>
+<p>Show that the set consisting of those numbers in <span class="math notranslate nohighlight">\((0, 1)\)</span> that have a decimal expansion containing one hundred consecutive 4s is a Borel subset of <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span>
+What is the Lebesgue measure of this set?</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><strong>Showing the set is Borel:</strong>
+Let <span class="math notranslate nohighlight">\(A\)</span> be the set consisting of those numbers in <span class="math notranslate nohighlight">\((0, 1)\)</span> that have a decimal expansion containing one hundred consecutive 4s.
+We can write <span class="math notranslate nohighlight">\(A\)</span> as the union</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+A = \bigcup_{n=1}^\infty \bigcup_{x_1 \dots x_n \in D} \left(\sum_{k=1}^n x_k \cdot 10^k\right) + 10^{-n-1} \cdot \left[\sum_{m=1}^{100} 4 \cdot 10^{-m}, 10^{-100} + \sum_{m=1}^{100} 4 \cdot 10^{-m} \right)
+\end{align},\]</div>
+<p class="sd-card-text">where <span class="math notranslate nohighlight">\(D\)</span> is the set of integers from 0 to 9.
+This is a countable union of closed-open intervals and is therefore a Borel set.</p>
+<p class="sd-card-text"><strong>Computing the measure:</strong>
+Let <span class="math notranslate nohighlight">\(C(n, k)\)</span> the number of rational numbers in <span class="math notranslate nohighlight">\((0, 1)\)</span> whose decimal expansion has <span class="math notranslate nohighlight">\(n\)</span> digits, such that these <span class="math notranslate nohighlight">\(n\)</span> digits do not contain one hundred consecutive 4s and also such that the <span class="math notranslate nohighlight">\(k\)</span> last digits in the expansion are all 4s.
+Then, <span class="math notranslate nohighlight">\(C(1, 0) = 9\)</span> and <span class="math notranslate nohighlight">\(C(1, 1) = 1.\)</span>
+By its definition, we can set up a recursive relation for <span class="math notranslate nohighlight">\(C(n, k)\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+C(n, k) = \begin{cases}
+9 \sum_{k' = 0}^{99} C(n-1, k') &amp;\text{if } k = 0 \\
+C(n-1, k-1) &amp;\text{if } 1 \leq k \leq 98
+\end{cases}
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">Letting <span class="math notranslate nohighlight">\(C_n = (C_{n, 0}, C_{n, 1}, \dots, C_{n, 99})\)</span> we can write this as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}C_n = \begin{bmatrix}
+9 &amp; 9 &amp; 9 &amp; \dots &amp; 9 &amp; 9 \\
+1 &amp; 0 &amp; 0 &amp; \dots &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 &amp; \dots &amp; 0 &amp; 0 \\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; \dots &amp; 1 &amp; 0 \\
+\end{bmatrix}C_{n-1}.\end{split}\]</div>
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(A_n\)</span> be the set of real numbers in <span class="math notranslate nohighlight">\((0, 1)\)</span> whose decimal expansion does not contain one hundred consecutive 4s up to and including the <span class="math notranslate nohighlight">\(n^{th}\)</span> digit.
+Then</p>
+<div class="math notranslate nohighlight">
+\[|A_n| = \frac{1}{10^{n+1}} \sum_{k = 0}^{99} C(n, k),\]</div>
+<p class="sd-card-text">which, using the recursion derived earlier can be expressed as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+|A_n| = \begin{bmatrix}
+0.9 &amp; 0.9 &amp; 0.9 &amp; \dots &amp; 0.9 &amp; 0.9 \\
+0.1 &amp; 0 &amp; 0 &amp; \dots &amp; 0 &amp; 0 \\
+0 &amp; 0.1 &amp; 0 &amp; \dots &amp; 0 &amp; 0 \\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; \dots &amp; 0.1 &amp; 0 \\
+\end{bmatrix}^{n-1} \begin{bmatrix}
+0.9 \\
+0.1 \\
+0 \\
+\vdots \\
+0 
+\end{bmatrix}
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">Noting that <span class="math notranslate nohighlight">\(A_n\)</span> is a decreasing sequence of sets and that <span class="math notranslate nohighlight">\(\cap_{n = 1}^\infty = A,\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}|A| = \lim_{n \to \infty} |A_n| = \lim_{n \to \infty} \left|\begin{bmatrix}
+0.9 &amp; 0.9 &amp; 0.9 &amp; \dots &amp; 0.9 &amp; 0.9 \\
+0.1 &amp; 0 &amp; 0 &amp; \dots &amp; 0 &amp; 0 \\
+0 &amp; 0.1 &amp; 0 &amp; \dots &amp; 0 &amp; 0 \\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; \dots &amp; 0.1 &amp; 0 \\
+\end{bmatrix}^{n-1} \begin{bmatrix}
+0.9 \\
+0.1 \\
+0 \\
+\vdots \\
+0 
+\end{bmatrix}\right|\end{split}\]</div>
+<p class="sd-card-text">where <span class="math notranslate nohighlight">\(| \cdot |\)</span> denotes the summation of the elements of a vector.
+Finally, moving the limit inside the <span class="math notranslate nohighlight">\(| \cdot |,\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}|A| = \left|\lim_{n \to \infty} \begin{bmatrix}
+0.9 &amp; 0.9 &amp; 0.9 &amp; \dots &amp; 0.9 &amp; 0.9 \\
+0.1 &amp; 0 &amp; 0 &amp; \dots &amp; 0 &amp; 0 \\
+0 &amp; 0.1 &amp; 0 &amp; \dots &amp; 0 &amp; 0 \\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; \dots &amp; 0.1 &amp; 0 \\
+\end{bmatrix}^{n-1} \begin{bmatrix}
+0.9 \\
+0.1 \\
+0 \\
+\vdots \\
+0 
+\end{bmatrix}\right|\end{split}\]</div>
+<p class="sd-card-text">Now, noting that the limit of the matrix power above is the zero matrix, so <span class="math notranslate nohighlight">\(|A| = 0.\)</span>
+Therefore, the set of numbers in <span class="math notranslate nohighlight">\((0, 1)\)</span> whose decimal expansion does not contain one hundred consecutive 4s has Lebesgue measure 0.
+We conclude that the set of numbers in <span class="math notranslate nohighlight">\((0, 1)\)</span> whose decimal expansion contains one hundred consecutive 4s has Lebesgue measure 1.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 2.D.2</p>
+<p>Prove that there exists a bounded set <span class="math notranslate nohighlight">\(A \subseteq \mathbb{R}\)</span> such that <span class="math notranslate nohighlight">\(|F| \leq |A| - 1\)</span> for every closed set <span class="math notranslate nohighlight">\(F \subseteq A.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(E \subseteq [0, 1]\)</span> be a set that is not Borel.
+Then, there exists <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> such that for any closed <span class="math notranslate nohighlight">\(F \subseteq E\)</span> we have <span class="math notranslate nohighlight">\(|E \setminus F| \geq \epsilon.\)</span>
+The set <span class="math notranslate nohighlight">\(E \cdot \lceil 1/\epsilon \rceil\)</span> is not Borel, and also</p>
+<div class="math notranslate nohighlight">
+\[|E \cdot \lceil 1/\epsilon \rceil \setminus F| \geq 1 \text{ for all closed } F \subseteq E \cdot \lceil 1/\epsilon \rceil.\]</div>
+<p class="sd-card-text">Defining <span class="math notranslate nohighlight">\(A = E \cdot \lceil 1/\epsilon \rceil,\)</span> and letting <span class="math notranslate nohighlight">\(F\)</span> be any closed subset of <span class="math notranslate nohighlight">\(A,\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[|A \setminus F| = |A| - |F| \geq 1 \text{ for every closed set } F \subseteq A,\]</div>
+<p class="sd-card-text">which shows the result.</p>
+</div>
+</details></div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1168,6 +1290,7 @@ Then, a measure <span class="math notranslate nohighlight">\(\mu\)</span> on <sp
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-1-a">Chapter 1.A</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-c">Chapter 2.C</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-d">Chapter 2.D</a></li>
 </ul>
   </nav></div>
 
