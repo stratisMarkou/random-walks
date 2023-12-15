@@ -778,3 +778,136 @@ Then, a measure $\mu$ on $(X, S)$ is completely determined by the value of $\mu(
 
 :::
 ::::
+
+
+
+## Chapter 2.D
+
+::::{admonition} Exercise 2.D.1
+:class: tip
+
+Show that the set consisting of those numbers in $(0, 1)$ that have a decimal expansion containing one hundred consecutive 4s is a Borel subset of $\mathbb{R}.$
+What is the Lebesgue measure of this set?
+
+:::{dropdown} Solution
+
+__Showing the set is Borel:__
+Let $A$ be the set consisting of those numbers in $(0, 1)$ that have a decimal expansion containing one hundred consecutive 4s.
+We can write $A$ as the union
+
+$$\begin{align}
+A = \bigcup_{n=1}^\infty \bigcup_{x_1 \dots x_n \in D} \left(\sum_{k=1}^n x_k \cdot 10^k\right) + 10^{-n-1} \cdot \left[\sum_{m=1}^{100} 4 \cdot 10^{-m}, 10^{-100} + \sum_{m=1}^{100} 4 \cdot 10^{-m} \right)
+\end{align},$$
+
+where $D$ is the set of integers from 0 to 9.
+This is a countable union of closed-open intervals and is therefore a Borel set.
+
+
+__Computing the measure:__
+Let $C(n, k)$ the number of rational numbers in $(0, 1)$ whose decimal expansion has $n$ digits, such that these $n$ digits do not contain one hundred consecutive 4s and also such that the $k$ last digits in the expansion are all 4s.
+Then, $C(1, 0) = 9$ and $C(1, 1) = 1.$
+By its definition, we can set up a recursive relation for $C(n, k)$ as
+
+$$\begin{align}
+C(n, k) = \begin{cases}
+9 \sum_{k' = 0}^{99} C(n-1, k') &\text{if } k = 0 \\
+C(n-1, k-1) &\text{if } 1 \leq k \leq 98
+\end{cases}
+\end{align}$$
+
+Letting $C_n = (C_{n, 0}, C_{n, 1}, \dots, C_{n, 99})$ we can write this as
+
+$$C_n = \begin{bmatrix}
+9 & 9 & 9 & \dots & 9 & 9 \\
+1 & 0 & 0 & \dots & 0 & 0 \\
+0 & 1 & 0 & \dots & 0 & 0 \\
+\vdots & \vdots & \vdots & \ddots & 0 & 0 \\
+0 & 0 & 0 & \dots & 1 & 0 \\
+\end{bmatrix}C_{n-1}.$$
+
+Let $A_n$ be the set of real numbers in $(0, 1)$ whose decimal expansion does not contain one hundred consecutive 4s up to and including the $n^{th}$ digit.
+Then
+
+$$|A_n| = \frac{1}{10^{n+1}} \sum_{k = 0}^{99} C(n, k),$$
+
+which, using the recursion derived earlier can be expressed as
+
+$$\begin{align}
+|A_n| = \begin{bmatrix}
+0.9 & 0.9 & 0.9 & \dots & 0.9 & 0.9 \\
+0.1 & 0 & 0 & \dots & 0 & 0 \\
+0 & 0.1 & 0 & \dots & 0 & 0 \\
+\vdots & \vdots & \vdots & \ddots & 0 & 0 \\
+0 & 0 & 0 & \dots & 0.1 & 0 \\
+\end{bmatrix}^{n-1} \begin{bmatrix}
+0.9 \\
+0.1 \\
+0 \\
+\vdots \\
+0 
+\end{bmatrix}
+\end{align}$$
+
+Noting that $A_n$ is a decreasing sequence of sets and that $\cap_{n = 1}^\infty = A,$ we have
+
+$$|A| = \lim_{n \to \infty} |A_n| = \lim_{n \to \infty} \left|\begin{bmatrix}
+0.9 & 0.9 & 0.9 & \dots & 0.9 & 0.9 \\
+0.1 & 0 & 0 & \dots & 0 & 0 \\
+0 & 0.1 & 0 & \dots & 0 & 0 \\
+\vdots & \vdots & \vdots & \ddots & 0 & 0 \\
+0 & 0 & 0 & \dots & 0.1 & 0 \\
+\end{bmatrix}^{n-1} \begin{bmatrix}
+0.9 \\
+0.1 \\
+0 \\
+\vdots \\
+0 
+\end{bmatrix}\right|$$
+
+where $| \cdot |$ denotes the summation of the elements of a vector.
+Finally, moving the limit inside the $| \cdot |,$ we have 
+
+$$|A| = \left|\lim_{n \to \infty} \begin{bmatrix}
+0.9 & 0.9 & 0.9 & \dots & 0.9 & 0.9 \\
+0.1 & 0 & 0 & \dots & 0 & 0 \\
+0 & 0.1 & 0 & \dots & 0 & 0 \\
+\vdots & \vdots & \vdots & \ddots & 0 & 0 \\
+0 & 0 & 0 & \dots & 0.1 & 0 \\
+\end{bmatrix}^{n-1} \begin{bmatrix}
+0.9 \\
+0.1 \\
+0 \\
+\vdots \\
+0 
+\end{bmatrix}\right|$$
+
+Now, noting that the limit of the matrix power above is the zero matrix, so $|A| = 0.$
+Therefore, the set of numbers in $(0, 1)$ whose decimal expansion does not contain one hundred consecutive 4s has Lebesgue measure 0.
+We conclude that the set of numbers in $(0, 1)$ whose decimal expansion contains one hundred consecutive 4s has Lebesgue measure 1.
+
+:::
+::::
+
+
+
+::::{admonition} Exercise 2.D.2
+:class: tip
+
+Prove that there exists a bounded set $A \subseteq \mathbb{R}$ such that $|F| \leq |A| - 1$ for every closed set $F \subseteq A.$
+
+:::{dropdown} Solution
+
+Let $E \subseteq [0, 1]$ be a set that is not Borel.
+Then, there exists $\epsilon > 0$ such that for any closed $F \subseteq E$ we have $|E \setminus F| \geq \epsilon.$
+The set $E \cdot \lceil 1/\epsilon \rceil$ is not Borel, and also
+
+$$|E \cdot \lceil 1/\epsilon \rceil \setminus F| \geq 1 \text{ for all closed } F \subseteq E \cdot \lceil 1/\epsilon \rceil.$$
+
+Defining $A = E \cdot \lceil 1/\epsilon \rceil,$ and letting $F$ be any closed subset of $A,$ we have
+
+$$|A \setminus F| = |A| - |F| \geq 1 \text{ for every closed set } F \subseteq A,$$
+
+which shows the result.
+
+:::
+::::
