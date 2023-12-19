@@ -876,3 +876,46 @@ Then $1/g = r \circ g$ is a composition of Borel measurable functions, so it is 
 Lastly, $f/g$ is a product of two Borel measurable functions, $f$ and $1 / g,$ so it is a Borel measurable function.
 
 :::
+
+
+
+:::{prf:theorem} Pointwise limit of $S$-measurable functions is $S$-measurable
+
+Suppose $(X, S)$ is a measurable space and $f_1, f_2, \dots$ are $S$-measurable functions from $X$ to $\mathbb{R}.$
+Suppose $\lim_{k \to \infty} f_k(x)$ exists for each $x \in X.$
+Define $f: X \to \mathbb{R}$ by
+
+$$f(x) = \lim_{k \to \infty} f_k(x).$$
+
+Then $f$ is a $S$-measurable function.
+
+:::
+
+
+
+
+:::{dropdown} Proof: Pointwise limit of $S$-measurable functions is $S$-measurable
+
+Suppose $(X, S)$ is a measurable space and $f_1, f_2, \dots$ are $S$-measurable functions from $X$ to $\mathbb{R}.$
+Suppose $\lim_{k \to \infty} f_k(x)$ exists for each $x \in X.$
+Define $f: X \to \mathbb{R}$ by
+
+$$f(x) = \lim_{k \to \infty} f_k(x).$$
+
+Suppose $a \in \mathbb{R}.$
+We will show that
+
+$$f^{-1}((a, \infty)) = \bigcup_{j = 1}^\infty \bigcup_{m = 1}^\infty \bigcap_{k = m}^\infty f_k^{-1}\left( \left(a + \frac{1}{j}, \infty \right) \right).$$
+
+Suppose $x \in f^{-1}((a, \infty)).$
+Then $f(x) > a,$ so there exists $j \in \mathbb{Z}^+$ such that $f(x) > a + 1/j.$
+Then, by the definition of limits, there exists $m \in \mathbb{Z}^+$ such that $f_k(x) > a + 1/j$ for all $k \geq m.$
+Thus $x$ is in the right hand side of the equation above.
+Conversely, suppose $x$ is in the right hand side of the equation above.
+Then there exists $j \in \mathbb{Z}^+$ and $m \in \mathbb{Z}^+$ such that $f_k(x) > a + 1/j$ for all $k \geq m.$
+Taking the limit as $k \to \infty,$ we have $f(x) \geq a + 1/j > a,$ so $x \in f^{-1}((a, \infty)).$
+
+We conclude that $f^{-1}((a, \infty))$ is a Borel set and by our earlier {prf:ref}`condition for measurable functions<mira-thm-condition-measurable>`, $f$ is a Borel measurable function.
+
+:::
+

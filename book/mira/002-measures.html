@@ -1142,6 +1142,41 @@ Note that the function <span class="math notranslate nohighlight">\(r: \mathbb{R
 Then <span class="math notranslate nohighlight">\(1/g = r \circ g\)</span> is a composition of Borel measurable functions, so it is a Borel measurable function.
 Lastly, <span class="math notranslate nohighlight">\(f/g\)</span> is a product of two Borel measurable functions, <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(1 / g,\)</span> so it is a Borel measurable function.</p>
 </div>
+</details><div class="proof theorem admonition" id="theorem-27">
+<p class="admonition-title"><span class="caption-number">Theorem 77 </span> (Pointwise limit of <span class="math notranslate nohighlight">\(S\)</span>-measurable functions is <span class="math notranslate nohighlight">\(S\)</span>-measurable)</p>
+<section class="theorem-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\((X, S)\)</span> is a measurable space and <span class="math notranslate nohighlight">\(f_1, f_2, \dots\)</span> are <span class="math notranslate nohighlight">\(S\)</span>-measurable functions from <span class="math notranslate nohighlight">\(X\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span>
+Suppose <span class="math notranslate nohighlight">\(\lim_{k \to \infty} f_k(x)\)</span> exists for each <span class="math notranslate nohighlight">\(x \in X.\)</span>
+Define <span class="math notranslate nohighlight">\(f: X \to \mathbb{R}\)</span> by</p>
+<div class="math notranslate nohighlight">
+\[f(x) = \lim_{k \to \infty} f_k(x).\]</div>
+<p>Then <span class="math notranslate nohighlight">\(f\)</span> is a <span class="math notranslate nohighlight">\(S\)</span>-measurable function.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Pointwise limit of <span class="math notranslate nohighlight">\(S\)</span>-measurable functions is <span class="math notranslate nohighlight">\(S\)</span>-measurable<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\((X, S)\)</span> is a measurable space and <span class="math notranslate nohighlight">\(f_1, f_2, \dots\)</span> are <span class="math notranslate nohighlight">\(S\)</span>-measurable functions from <span class="math notranslate nohighlight">\(X\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span>
+Suppose <span class="math notranslate nohighlight">\(\lim_{k \to \infty} f_k(x)\)</span> exists for each <span class="math notranslate nohighlight">\(x \in X.\)</span>
+Define <span class="math notranslate nohighlight">\(f: X \to \mathbb{R}\)</span> by</p>
+<div class="math notranslate nohighlight">
+\[f(x) = \lim_{k \to \infty} f_k(x).\]</div>
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(a \in \mathbb{R}.\)</span>
+We will show that</p>
+<div class="math notranslate nohighlight">
+\[f^{-1}((a, \infty)) = \bigcup_{j = 1}^\infty \bigcup_{m = 1}^\infty \bigcap_{k = m}^\infty f_k^{-1}\left( \left(a + \frac{1}{j}, \infty \right) \right).\]</div>
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(x \in f^{-1}((a, \infty)).\)</span>
+Then <span class="math notranslate nohighlight">\(f(x) &gt; a,\)</span> so there exists <span class="math notranslate nohighlight">\(j \in \mathbb{Z}^+\)</span> such that <span class="math notranslate nohighlight">\(f(x) &gt; a + 1/j.\)</span>
+Then, by the definition of limits, there exists <span class="math notranslate nohighlight">\(m \in \mathbb{Z}^+\)</span> such that <span class="math notranslate nohighlight">\(f_k(x) &gt; a + 1/j\)</span> for all <span class="math notranslate nohighlight">\(k \geq m.\)</span>
+Thus <span class="math notranslate nohighlight">\(x\)</span> is in the right hand side of the equation above.
+Conversely, suppose <span class="math notranslate nohighlight">\(x\)</span> is in the right hand side of the equation above.
+Then there exists <span class="math notranslate nohighlight">\(j \in \mathbb{Z}^+\)</span> and <span class="math notranslate nohighlight">\(m \in \mathbb{Z}^+\)</span> such that <span class="math notranslate nohighlight">\(f_k(x) &gt; a + 1/j\)</span> for all <span class="math notranslate nohighlight">\(k \geq m.\)</span>
+Taking the limit as <span class="math notranslate nohighlight">\(k \to \infty,\)</span> we have <span class="math notranslate nohighlight">\(f(x) \geq a + 1/j &gt; a,\)</span> so <span class="math notranslate nohighlight">\(x \in f^{-1}((a, \infty)).\)</span></p>
+<p class="sd-card-text">We conclude that <span class="math notranslate nohighlight">\(f^{-1}((a, \infty))\)</span> is a Borel set and by our earlier <a class="reference internal" href="#mira-thm-condition-measurable">condition for measurable functions</a>, <span class="math notranslate nohighlight">\(f\)</span> is a Borel measurable function.</p>
+</div>
 </details></section>
 </section>
 </section>
