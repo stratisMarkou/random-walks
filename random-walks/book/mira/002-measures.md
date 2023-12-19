@@ -420,6 +420,7 @@ As explained earlier, any function that satisfies some of the aforementioned pro
 
 
 :::{prf:theorem} Nonexistence of extension of length to all subsets of $\mathbb{R}$
+:label: mira-thm-nonexistence-length
 
 There does not exist a function $\mu$ with the following properties:
 
@@ -700,6 +701,7 @@ $$\chi_E(x) = \begin{cases} 1 & \text{if } x \in E \\ 0 & \text{if } x \notin E.
 
 
 :::{prf:theorem} Condition for measurable function
+:label: mira-thm-condition-measurable
 
 Suppose $(X, S)$ is a measurable space and $f: X \to \mathbb{R}$ is a function such that
 
@@ -734,5 +736,144 @@ __Every open interval is in $T$:__
 By the hypothesis in the theorem statement, it follows that $f^{-1}((a, \infty)) \in S$ for all $a \in \mathbb{R},$ so $(a, \infty) \in T$ for all $a \in \mathbb{R}.$
 Since $T$ is a $\sigma$-algebra on $\mathbb{R},$ it is closed under complementation and intersection so $(-\infty, b] \in T$ for all $b \in \mathbb{R},$ and $(a, b) \in T$ for all $a, b \in \mathbb{R}.$
 Therefore $T$ contains all the open intervals of $\mathbb{R},$ so $T$ contains all the Borel subsets of $\mathbb{R}.$
+
+:::
+
+
+
+In the special case that $X$ is a subset of the reals and $S$ is the set of Borel subsets of $\mathbb{R},$ we use the term Borel measurable to refer to $S$-measurable functions.
+
+:::{prf:definition} Borel measurable function
+
+Suppose $X \subseteq \mathbb{R}.$
+A function $f: X \to \mathbb{R}$ is called Borel measurable if $f^{-1}(B)$ is a Borel set for every Borel set $B \subseteq \mathbb{R}.$
+
+:::
+
+
+
+
+:::{prf:theorem} Every continuous function is Borel measurable
+
+Every continuous real-valued function defined on a Borel subset of $\mathbb{R}$ is a Borel measurable function.
+
+:::
+
+:::{dropdown} Proof: Every continuous function is Borel measurable
+
+Suppose that $X \subseteq \mathbb{R}$ is a Borel set and $f: X \to \mathbb{R}$ is a Borel measurable function.
+Suppose $a \in \mathbb{R}.$
+If $x \in X$ such that $f(x) > a,$ then by the continuity of $f,$ there exists $\delta_x > 0$ such that $f(y) > a$ for all $y \in (x - \delta_x, x + \delta_x).$
+Thus, we have
+
+$$\begin{equation}
+f^{-1}((a, \infty)) = \left( \bigcup_{x \in f^{-1}((a, \infty))} (x - \delta_x, x + \delta_x) \right) \cap X.
+\end{equation}$$
+
+The above union is a union of open sets, which is therefore also open, so its intersection with $X$ is a Bore set.
+By our earlier {prf:ref}`condition for measurable functions<mira-thm-condition-measurable>`, $f$ is Borel measurable.
+
+:::
+
+
+:::{prf:defintion} Increasing function; strictly increasing function
+
+Suppose $X \subseteq \mathbb{R}$ and $f: X \to \mathbb{R}$ is a function.
+Then $f$ is called increasing if $f(x) \leq f(y)$ for all $x, y \in X$ with $x < y.$
+If $f(x) < f(y)$ for all $x, y \in X$ with $x < y,$ then $f$ is called strictly increasing.
+
+:::
+
+
+
+
+:::{prf:theorem} Every increasing function is Borel measurable
+
+Every increasing function defined on a Borel subset of $\mathbb{R}$ is a Borel measurable function.
+
+:::
+
+:::{dropdown} Proof: Every increasing function is Borel measurable
+
+Suppose that $X \subseteq \mathbb{R}$ is a Borel set and $f: X \to \mathbb{R}$ is an increasing function.
+Suppose $a \in \mathbb{R}.$
+Let $b = \inf f^{-1}((a, \infty)).$
+Then
+
+$$f^{-1}((a, \infty)) = (b, \infty) \cap X \text{ or } f^{-1}((a, \infty)) = [b, \infty) \cap X$$
+
+holds.
+Since $X$ is a Borel set, and both $(b, \infty)$ and $[b, \infty)$ are Borel sets, it follows that $f^{-1}((a, \infty))$ is a Borel set.
+By our earlier {prf:ref}`condition for measurable functions<mira-thm-condition-measurable>`, $f$ is Borel measurable.
+
+:::
+
+
+
+
+
+:::{prf:theorem} Composition of measurable functions
+
+Suppose $(X, S)$ is a measurable space and $f: X \to \mathbb{R}$ is a measurable function.
+Suppose that $g$ is a real-valued Borel measurable function defined on a subset of $\mathbb{R}$ that includes the range of $f.$
+Then $g \circ f: X \to \mathbb{R}$ is a measurable function.
+
+:::
+
+:::{dropdown} Proof: Composition of measurable functions
+
+Suppose $(X, S)$ is a measurable space and $f: X \to \mathbb{R}$ is a measurable function.
+Suppose that $g$ is a real-valued Borel measurable function defined on a subset of $\mathbb{R}$ that includes the range of $f.$
+Let $B \subseteq \mathbb{R}$ be a Borel set.
+Because $g$ is a Borel measurable function, and $B$ is a Borel set, $g^{-1}(B)$ is also a Borel set.
+Because $f$ is a measurable function, and $g^{-1}(B)$ is a Borel set, $f^{-1}(g^{-1}(B))$ is in $S,$ so $g \circ f$ is Borel measurable.
+
+:::
+
+
+
+
+:::{prf:theorem} Algebraic operations with measurable functions
+
+Suppose $(X, S)$ is a measurable space and $f, g: X \to \mathbb{R}$ are $S$-measurable functions.
+Then
+
+(a) $f + g, f - g, f g$ are $S$-measurable functions,
+
+(b) if $g(x) \neq 0$ for all $x \in X,$ then $f / g$ is a $S$-measurable function.
+
+:::
+
+:::{dropdown} Proof: Algebraic operations with measurable functions
+
+Suppose $(X, S)$ is a measurable space and $f, g: X \to \mathbb{R}$ are $S$-measurable functions.
+
+__Part (a):__
+Fix $a \in \mathbb{R}.$
+We will first show that
+
+$$(f + g)^{-1}((a, \infty)) = \bigcup_{q \in \mathbb{Q}} \left( f^{-1}((q, \infty)) \cap g^{-1}((a - q, \infty)) \right) \in S.$$
+
+Suppose $x \in (f+g)^{-1}((a, \infty)).$
+Then $f(x) + g(x) > a,$ so the open interval $(a - g(x), f(x))$ is non-empty, and thus it contains a rational number $q.$
+This implies that $q < f(x)$ and $a - q < g(x),$ so $x \in f^{-1}((q, \infty)) \cap g^{-1}((a - q, \infty)).$
+So $x$ is in the right hand side of the equation above.
+Conversely, if $x \in \left( f^{-1}((q, \infty)) \cap g^{-1}((a - q, \infty)) \right)$ for some $q \in \mathbb{Q},$ then $f(x) > q$ and $g(x) > a - q,$ so $f(x) + g(x) > a,$ so $x \in (f + g)^{-1}((a, \infty)).$
+We conclude that $(f + g)^{-1}((a, \infty))$ is a countable union of intersections of pairs of Borel sets, so it is a Borel set, so $f + g$ is a Borel measurable function.
+
+Noting that if $g$ is a Borel measurable function, then $-g$ is also a Borel measurable function, we have that $f - g = f + (-g)$ is a Borel measurable function.
+
+To show that $fg$ is a Borel measurable function, consider that
+
+$$fg = \frac{(f+g)^2 - f^2 - g^2}{2},$$
+
+and that $(f+g)^2, f^2, g^2$ are all Borel measurable functions because they are compositions of Borel measurable functions with $x \mapsto x^2,$ which is a Borel measurable function.
+Therefore, also considering that halfing is a Borel measurable function, we have that $fg$ is a Borel measurable function.
+
+__Part (b):__
+Suppose $g(x) \neq 0$ for all $x \in X.$
+Note that the function $r: \mathbb{R} \setminus \{0\} \to \mathbb{R}$ defined by $r(x) = 1/x$ is a Borel measurable function, because it is continuous on its domain.
+Then $1/g = r \circ g$ is a composition of Borel measurable functions, so it is a Borel measurable function.
+Lastly, $f/g = f(1/g)$ is a product of Borel measurable functions, so it is a Borel measurable function.
 
 :::
