@@ -895,7 +895,7 @@ $$|A| = \left|\lim_{n \to \infty} \begin{bmatrix}
 0 
 \end{bmatrix}\right|$$
 
-Now, noting that the limit of the matrix power above is the zero matrix, so $|A| = 0.$
+Now, note that the limit of the matrix power above is the zero matrix, so $|A| = 0.$
 Therefore, the set of numbers in $(0, 1)$ whose decimal expansion does not contain one hundred consecutive 4s has Lebesgue measure 0.
 We conclude that the set of numbers in $(0, 1)$ whose decimal expansion contains one hundred consecutive 4s has Lebesgue measure 1.
 
