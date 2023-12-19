@@ -796,22 +796,35 @@ Let $A$ be the set consisting of those numbers in $(0, 1)$ that have a decimal e
 We can write $A$ as the union
 
 $$\begin{align}
-A = \bigcup_{n=1}^\infty \bigcup_{x_1 \dots x_n \in D} \left(\sum_{k=1}^n x_k \cdot 10^k\right) + 10^{-n-1} \cdot \left[\sum_{m=1}^{100} 4 \cdot 10^{-m}, 10^{-100} + \sum_{m=1}^{100} 4 \cdot 10^{-m} \right)
-\end{align},$$
+A = \bigcup_{n=1}^\infty \bigcup_{x_1 \dots x_n \in D} \left(\sum_{k=1}^n x_k \cdot 10^{-k}\right) + 10^{-n} \cdot \left[\sum_{m=1}^{100} 4 \cdot 10^{-m}, 10^{-100} + \sum_{m=1}^{100} 4 \cdot 10^{-m} \right)
+\end{align}$$
 
-where $D$ is the set of integers from 0 to 9.
+where $D$ is the set of integers from 0 to 9, together with the set
+
+$$\begin{align}
+\left[\sum_{m=1}^{100} 4 \cdot 10^{-m}, 10^{-100} + \sum_{m=1}^{100} 4 \cdot 10^{-m} \right).
+\end{align}$$
+
 This is a countable union of closed-open intervals and is therefore a Borel set.
 
 
 __Computing the measure:__
 Let $C(n, k)$ the number of rational numbers in $(0, 1)$ whose decimal expansion has $n$ digits, such that these $n$ digits do not contain one hundred consecutive 4s and also such that the $k$ last digits in the expansion are all 4s.
 Then, $C(1, 0) = 9$ and $C(1, 1) = 1.$
-By its definition, we can set up a recursive relation for $C(n, k)$ as
+By its definition, we can set up a recursive relation for $C(n, k)$ as follows.
+
+For each rational number whose expansion has $n-1$ digits, such that these $n-1$ digits do not contain one hundred consecutive 4s, there are ten possible digits we can append to the end of the expansion to obtain a rational number whose expansion has $n$ digits.
+If we append a digit that is not 4, then the resulting rational number with $n$ digits will not contain one hundred consecutive 4s and also, the last digit will not be 4.
+Therefore, $C(n, 0) = 9 \sum_{k' = 0}^{99} C(n-1, k').$
+If we append a digit that is 4, then the resulting rational number with $n$ digits will contain fewer than one hundred consecutive 4s if and only if there are fewer than $99$ consecutive 4s in the last digits of the expansion.
+Also, we would be increasing the number of consecutive 4s in the last digits of the expansion by 1.
+Therefore, $C(n, k) = C(n-1, k-1)$ if and only if $1 \leq k < 99.$
+We can collect this information into the following recursion
 
 $$\begin{align}
 C(n, k) = \begin{cases}
 9 \sum_{k' = 0}^{99} C(n-1, k') &\text{if } k = 0 \\
-C(n-1, k-1) &\text{if } 1 \leq k \leq 98
+C(n-1, k-1) &\text{if } 1 \leq k < 99
 \end{cases}
 \end{align}$$
 
@@ -828,12 +841,13 @@ $$C_n = \begin{bmatrix}
 Let $A_n$ be the set of real numbers in $(0, 1)$ whose decimal expansion does not contain one hundred consecutive 4s up to and including the $n^{th}$ digit.
 Then
 
-$$|A_n| = \frac{1}{10^{n+1}} \sum_{k = 0}^{99} C(n, k),$$
+$$|A_n| = \frac{1}{10^n} \sum_{k = 0}^{99} C(n, k),$$
 
-which, using the recursion derived earlier can be expressed as
+because $A_n$ consists of $C(n, k)$ intervals of size $10^{-n},$ each corresponding to each of the $C(n, k)$ ways to choose the first $n$ digits of a rational number in $(0, 1)$ whose decimal expansion does not contain one hundred consecutive 4s and also such that the last $k$ digits are all 4s, followed by an arbitrary sequnce of digits.
+Now, using the recursion derived earlier, the above equality can be expressed as
 
 $$\begin{align}
-|A_n| = \begin{bmatrix}
+|A_n| = \left|\begin{bmatrix}
 0.9 & 0.9 & 0.9 & \dots & 0.9 & 0.9 \\
 0.1 & 0 & 0 & \dots & 0 & 0 \\
 0 & 0.1 & 0 & \dots & 0 & 0 \\
@@ -845,9 +859,10 @@ $$\begin{align}
 0 \\
 \vdots \\
 0 
-\end{bmatrix}
+\end{bmatrix}\right|
 \end{align}$$
 
+where $| \cdot |$ denotes the summation of the elements of a vector.
 Noting that $A_n$ is a decreasing sequence of sets and that $\cap_{n = 1}^\infty = A,$ we have
 
 $$|A| = \lim_{n \to \infty} |A_n| = \lim_{n \to \infty} \left|\begin{bmatrix}
@@ -864,7 +879,6 @@ $$|A| = \lim_{n \to \infty} |A_n| = \lim_{n \to \infty} \left|\begin{bmatrix}
 0 
 \end{bmatrix}\right|$$
 
-where $| \cdot |$ denotes the summation of the elements of a vector.
 Finally, moving the limit inside the $| \cdot |,$ we have 
 
 $$|A| = \left|\lim_{n \to \infty} \begin{bmatrix}
