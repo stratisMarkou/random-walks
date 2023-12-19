@@ -1120,19 +1120,30 @@ Let <span class="math notranslate nohighlight">\(A\)</span> be the set consistin
 We can write <span class="math notranslate nohighlight">\(A\)</span> as the union</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
-A = \bigcup_{n=1}^\infty \bigcup_{x_1 \dots x_n \in D} \left(\sum_{k=1}^n x_k \cdot 10^k\right) + 10^{-n-1} \cdot \left[\sum_{m=1}^{100} 4 \cdot 10^{-m}, 10^{-100} + \sum_{m=1}^{100} 4 \cdot 10^{-m} \right)
-\end{align},\]</div>
-<p class="sd-card-text">where <span class="math notranslate nohighlight">\(D\)</span> is the set of integers from 0 to 9.
-This is a countable union of closed-open intervals and is therefore a Borel set.</p>
+A = \bigcup_{n=1}^\infty \bigcup_{x_1 \dots x_n \in D} \left(\sum_{k=1}^n x_k \cdot 10^{-k}\right) + 10^{-n} \cdot \left[\sum_{m=1}^{100} 4 \cdot 10^{-m}, 10^{-100} + \sum_{m=1}^{100} 4 \cdot 10^{-m} \right)
+\end{align}\]</div>
+<p class="sd-card-text">where <span class="math notranslate nohighlight">\(D\)</span> is the set of integers from 0 to 9, together with the set</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\left[\sum_{m=1}^{100} 4 \cdot 10^{-m}, 10^{-100} + \sum_{m=1}^{100} 4 \cdot 10^{-m} \right).
+\end{align}\]</div>
+<p class="sd-card-text">This is a countable union of closed-open intervals and is therefore a Borel set.</p>
 <p class="sd-card-text"><strong>Computing the measure:</strong>
 Let <span class="math notranslate nohighlight">\(C(n, k)\)</span> the number of rational numbers in <span class="math notranslate nohighlight">\((0, 1)\)</span> whose decimal expansion has <span class="math notranslate nohighlight">\(n\)</span> digits, such that these <span class="math notranslate nohighlight">\(n\)</span> digits do not contain one hundred consecutive 4s and also such that the <span class="math notranslate nohighlight">\(k\)</span> last digits in the expansion are all 4s.
 Then, <span class="math notranslate nohighlight">\(C(1, 0) = 9\)</span> and <span class="math notranslate nohighlight">\(C(1, 1) = 1.\)</span>
-By its definition, we can set up a recursive relation for <span class="math notranslate nohighlight">\(C(n, k)\)</span> as</p>
+By its definition, we can set up a recursive relation for <span class="math notranslate nohighlight">\(C(n, k)\)</span> as follows.</p>
+<p class="sd-card-text">For each rational number whose expansion has <span class="math notranslate nohighlight">\(n-1\)</span> digits, such that these <span class="math notranslate nohighlight">\(n-1\)</span> digits do not contain one hundred consecutive 4s, there are ten possible digits we can append to the end of the expansion to obtain a rational number whose expansion has <span class="math notranslate nohighlight">\(n\)</span> digits.
+If we append a digit that is not 4, then the resulting rational number with <span class="math notranslate nohighlight">\(n\)</span> digits will not contain one hundred consecutive 4s and also, the last digit will not be 4.
+Therefore, <span class="math notranslate nohighlight">\(C(n, 0) = 9 \sum_{k' = 0}^{99} C(n-1, k').\)</span>
+If we append a digit that is 4, then the resulting rational number with <span class="math notranslate nohighlight">\(n\)</span> digits will contain fewer than one hundred consecutive 4s if and only if there are fewer than <span class="math notranslate nohighlight">\(99\)</span> consecutive 4s in the last digits of the expansion.
+Also, we would be increasing the number of consecutive 4s in the last digits of the expansion by 1.
+Therefore, <span class="math notranslate nohighlight">\(C(n, k) = C(n-1, k-1)\)</span> if and only if <span class="math notranslate nohighlight">\(1 \leq k &lt; 99.\)</span>
+We can collect this information into the following recursion</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
 C(n, k) = \begin{cases}
 9 \sum_{k' = 0}^{99} C(n-1, k') &amp;\text{if } k = 0 \\
-C(n-1, k-1) &amp;\text{if } 1 \leq k \leq 98
+C(n-1, k-1) &amp;\text{if } 1 \leq k &lt; 99
 \end{cases}
 \end{align}\end{split}\]</div>
 <p class="sd-card-text">Letting <span class="math notranslate nohighlight">\(C_n = (C_{n, 0}, C_{n, 1}, \dots, C_{n, 99})\)</span> we can write this as</p>
@@ -1147,11 +1158,12 @@ C(n-1, k-1) &amp;\text{if } 1 \leq k \leq 98
 <p class="sd-card-text">Let <span class="math notranslate nohighlight">\(A_n\)</span> be the set of real numbers in <span class="math notranslate nohighlight">\((0, 1)\)</span> whose decimal expansion does not contain one hundred consecutive 4s up to and including the <span class="math notranslate nohighlight">\(n^{th}\)</span> digit.
 Then</p>
 <div class="math notranslate nohighlight">
-\[|A_n| = \frac{1}{10^{n+1}} \sum_{k = 0}^{99} C(n, k),\]</div>
-<p class="sd-card-text">which, using the recursion derived earlier can be expressed as</p>
+\[|A_n| = \frac{1}{10^n} \sum_{k = 0}^{99} C(n, k),\]</div>
+<p class="sd-card-text">because <span class="math notranslate nohighlight">\(A_n\)</span> consists of <span class="math notranslate nohighlight">\(C(n, k)\)</span> intervals of size <span class="math notranslate nohighlight">\(10^{-n},\)</span> each corresponding to each of the <span class="math notranslate nohighlight">\(C(n, k)\)</span> ways to choose the first <span class="math notranslate nohighlight">\(n\)</span> digits of a rational number in <span class="math notranslate nohighlight">\((0, 1)\)</span> whose decimal expansion does not contain one hundred consecutive 4s and also such that the last <span class="math notranslate nohighlight">\(k\)</span> digits are all 4s, followed by an arbitrary sequnce of digits.
+Now, using the recursion derived earlier, the above equality can be expressed as</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
-|A_n| = \begin{bmatrix}
+|A_n| = \left|\begin{bmatrix}
 0.9 &amp; 0.9 &amp; 0.9 &amp; \dots &amp; 0.9 &amp; 0.9 \\
 0.1 &amp; 0 &amp; 0 &amp; \dots &amp; 0 &amp; 0 \\
 0 &amp; 0.1 &amp; 0 &amp; \dots &amp; 0 &amp; 0 \\
@@ -1163,9 +1175,10 @@ Then</p>
 0 \\
 \vdots \\
 0 
-\end{bmatrix}
+\end{bmatrix}\right|
 \end{align}\end{split}\]</div>
-<p class="sd-card-text">Noting that <span class="math notranslate nohighlight">\(A_n\)</span> is a decreasing sequence of sets and that <span class="math notranslate nohighlight">\(\cap_{n = 1}^\infty = A,\)</span> we have</p>
+<p class="sd-card-text">where <span class="math notranslate nohighlight">\(| \cdot |\)</span> denotes the summation of the elements of a vector.
+Noting that <span class="math notranslate nohighlight">\(A_n\)</span> is a decreasing sequence of sets and that <span class="math notranslate nohighlight">\(\cap_{n = 1}^\infty = A,\)</span> we have</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}|A| = \lim_{n \to \infty} |A_n| = \lim_{n \to \infty} \left|\begin{bmatrix}
 0.9 &amp; 0.9 &amp; 0.9 &amp; \dots &amp; 0.9 &amp; 0.9 \\
@@ -1180,8 +1193,7 @@ Then</p>
 \vdots \\
 0 
 \end{bmatrix}\right|\end{split}\]</div>
-<p class="sd-card-text">where <span class="math notranslate nohighlight">\(| \cdot |\)</span> denotes the summation of the elements of a vector.
-Finally, moving the limit inside the <span class="math notranslate nohighlight">\(| \cdot |,\)</span> we have</p>
+<p class="sd-card-text">Finally, moving the limit inside the <span class="math notranslate nohighlight">\(| \cdot |,\)</span> we have</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}|A| = \left|\lim_{n \to \infty} \begin{bmatrix}
 0.9 &amp; 0.9 &amp; 0.9 &amp; \dots &amp; 0.9 &amp; 0.9 \\
