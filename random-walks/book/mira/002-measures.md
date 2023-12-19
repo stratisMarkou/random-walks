@@ -862,18 +862,17 @@ Conversely, if $x \in \left( f^{-1}((q, \infty)) \cap g^{-1}((a - q, \infty)) \r
 We conclude that $(f + g)^{-1}((a, \infty))$ is a countable union of intersections of pairs of Borel sets, so it is a Borel set, so $f + g$ is a Borel measurable function.
 
 Noting that if $g$ is a Borel measurable function, then $-g$ is also a Borel measurable function, we have that $f - g = f + (-g)$ is a Borel measurable function.
-
 To show that $fg$ is a Borel measurable function, consider that
 
 $$fg = \frac{(f+g)^2 - f^2 - g^2}{2},$$
 
-and that $(f+g)^2, f^2, g^2$ are all Borel measurable functions because they are compositions of Borel measurable functions with $x \mapsto x^2,$ which is a Borel measurable function.
+and that $(f+g)^2, f^2, g^2$ are all Borel measurable functions because they are compositions of Borel measurable functions with the function $s: \mathbb{R} \to \mathbb{R}$ where $s(x) = x^2,$ which is a Borel measurable function.
 Therefore, also considering that halfing is a Borel measurable function, we have that $fg$ is a Borel measurable function.
 
 __Part (b):__
 Suppose $g(x) \neq 0$ for all $x \in X.$
 Note that the function $r: \mathbb{R} \setminus \{0\} \to \mathbb{R}$ defined by $r(x) = 1/x$ is a Borel measurable function, because it is continuous on its domain.
 Then $1/g = r \circ g$ is a composition of Borel measurable functions, so it is a Borel measurable function.
-Lastly, $f/g = f(1/g)$ is a product of Borel measurable functions, so it is a Borel measurable function.
+Lastly, $f/g$ is a product of two Borel measurable functions, $f$ and $1 / g,$ so it is a Borel measurable function.
 
 :::
