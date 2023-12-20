@@ -926,3 +926,28 @@ which shows the result.
 :::
 ::::
 
+
+
+
+::::{admonition} Exercise 2.D.3
+:class: tip
+
+Prove that there exists a set $A \subseteq \mathbb{R}$ such that $|G \setminus A| = \infty$ for every open set $G$ that contains $A.$
+
+:::{dropdown} Solution
+
+Let $\sim$ be the {prf:ref}`rational difference equivalence relation <mira:def:rational-difference-equivalence-relation>` on $\mathbb{R},$ and let $V$ be a set containing exactly one element from each equivalence class of $\sim$ on $[-1, 1].$
+In the proof of the {prf:ref}`nonadditivity of the outer measure<mira:thm:non-additivity-of-outer-measure>` we showed that $|V| > 0,$ and that $V$ is not Borel.
+Since $V \subseteq \mathbb{R}$ is not Borel, there must exist some $\epsilon > 0$ such that for any open set $G \subseteq \mathbb{R}$ we have $|G \setminus V| \geq \epsilon.$
+Now, note that the set
+
+$$A = \bigcup_{n \in \mathbb{Z}} 2n + V$$
+
+is not Borel.
+Then for any open set $G \subseteq \mathbb{R},$ we have
+
+$$|G \setminus A| = \left|\bigcup_{n \in \mathbb{Z}} ([2n-1, 2n+1] \setminus (2n + V))\right| = \sum_{n \in \mathbb{Z}} |(2n-1, 2n+1) \setminus (2n + V)| = \infty,$$
+
+where in the last line we have used the fact that $|(2n, 2n+2) \setminus (2n + V)| \geq \epsilon.$
+
+:::

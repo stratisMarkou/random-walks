@@ -409,7 +409,8 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measurable-spaces-and-functions">Measurable spaces and functions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sigma-algebras"><span class="math notranslate nohighlight">\(\sigma\)</span>-algebras</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sigma-algebras">Sigma algebras</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#measurable-functions">Measurable functions</a></li>
 </ul>
 </li>
 </ul>
@@ -722,7 +723,33 @@ Since <code class="xref prf prf-ref docutils literal notranslate"><span class="p
 <h3>Nonadditivity of the outer measure<a class="headerlink" href="#nonadditivity-of-the-outer-measure" title="Permalink to this heading">#</a></h3>
 <p>Now we come to the negative result of the outer measure, namely that it is not additive.
 Additivity is an important property that we would like our notion of length to have, because it allows us to prove good theorems about integration.</p>
-<div class="proof theorem admonition" id="mira:thm:non-additivity-of-outer-measure">
+<p>The proof of nonadditivity of the outer measure relies on defining a subset of a closed interval.
+Similar sets are used beyond the subadditivity of the outer measure, so we give it a special name.</p>
+<div class="proof definition admonition" id="mira:def:rational-difference-equivalence-relation">
+<p class="admonition-title"><span class="caption-number">Definition 59 </span> (Rational difference equivalence relation)</p>
+<section class="definition-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\(S \in \mathbb{R}.\)</span>
+Let <span class="math notranslate nohighlight">\(\sim\)</span> be the equivalence relation defined by <span class="math notranslate nohighlight">\(x \sim y \iff x - y \in \mathbb{Q},\)</span> for any <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span>
+We call this the rational difference equivalence relation.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Detail: Rational difference is an equivalence relation<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(\sim\)</span> be the binary relation defined by</p>
+<div class="math notranslate nohighlight">
+\[a \sim b \iff a - b \in \mathbb{Q}.\]</div>
+<p class="sd-card-text">Note that <span class="math notranslate nohighlight">\(\sim\)</span> is an equivalence relation on <span class="math notranslate nohighlight">\(\mathbb{R},\)</span> because it is:</p>
+<ul class="simple">
+<li><p class="sd-card-text">reflexive: <span class="math notranslate nohighlight">\(a - a = 0 \in \mathbb{Q};\)</span></p></li>
+<li><p class="sd-card-text">symmetric: If <span class="math notranslate nohighlight">\(a - b \in \mathbb{Q},\)</span> then <span class="math notranslate nohighlight">\(b - a = -(a - b) \in \mathbb{Q};\)</span></p></li>
+<li><p class="sd-card-text">transitive: If <span class="math notranslate nohighlight">\(a - b \in \mathbb{Q}\)</span> and <span class="math notranslate nohighlight">\(b - c \in \mathbb{Q},\)</span> then <span class="math notranslate nohighlight">\(a - c = (a - b) + (b - c) \in \mathbb{Q}.\)</span></p></li>
+</ul>
+</div>
+</details><div class="proof theorem admonition" id="mira:thm:non-additivity-of-outer-measure">
 <p class="admonition-title"><span class="caption-number">Theorem 67 </span> (Nonadditivity of the outer measure)</p>
 <section class="theorem-content" id="proof-content">
 <p>There exist disjoint subsets <span class="math notranslate nohighlight">\(A, B\)</span> of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> such that</p>
@@ -738,23 +765,15 @@ Proof: Nonadditivity of the outer measure<div class="sd-summary-down docutils">
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text"><strong>Proof idea:</strong>
 We will show this result as follows.
-We will define a countable collection of disjoint sets whose union is contained in an closed interval of <span class="math notranslate nohighlight">\(\mathbb{R},\)</span> and which have all equal outer measure.
-Then, we will show that the outer measure of each of these sets is nonzero, which contradicts the assumption that the outer measure is additive.</p>
+We will define a countable collection of disjoint sets.
+We will set up these sets so that their union is contained in an closed bounded interval of <span class="math notranslate nohighlight">\(\mathbb{R},\)</span> and they all have equal outer measure.
+Then, we will show that the outer measure of each of these sets is nonzero, which leads to a contradiction.</p>
 <p class="sd-card-text"><strong>Proof:</strong>
-Let <span class="math notranslate nohighlight">\(\sim\)</span> be the binary relation defined by</p>
-<div class="math notranslate nohighlight">
-\[a \sim b \iff a - b \in \mathbb{Q}.\]</div>
-<p class="sd-card-text">Note that <span class="math notranslate nohighlight">\(\sim\)</span> is an equivalence relation on <span class="math notranslate nohighlight">\(\mathbb{R},\)</span> because it is:</p>
-<ul class="simple">
-<li><p class="sd-card-text">reflexive: <span class="math notranslate nohighlight">\(a - a = 0 \in \mathbb{Q};\)</span></p></li>
-<li><p class="sd-card-text">symmetric: If <span class="math notranslate nohighlight">\(a - b \in \mathbb{Q},\)</span> then <span class="math notranslate nohighlight">\(b - a = -(a - b) \in \mathbb{Q};\)</span></p></li>
-<li><p class="sd-card-text">transitive: If <span class="math notranslate nohighlight">\(a - b \in \mathbb{Q}\)</span> and <span class="math notranslate nohighlight">\(b - c \in \mathbb{Q},\)</span> then <span class="math notranslate nohighlight">\(a - c = (a - b) + (b - c) \in \mathbb{Q}.\)</span></p></li>
-</ul>
-<p class="sd-card-text">For <span class="math notranslate nohighlight">\(a \in [-1, 1],\)</span> let <span class="math notranslate nohighlight">\(\tilde{a}\)</span> be the equivalence class of <span class="math notranslate nohighlight">\(a\)</span> under <span class="math notranslate nohighlight">\(\sim.\)</span>
-Then, for any <span class="math notranslate nohighlight">\(a \in [-1, 1],\)</span> we have</p>
+Let <span class="math notranslate nohighlight">\(\sim\)</span> be the equivalence class of <span class="math notranslate nohighlight">\(a\)</span> under the <a class="reference internal" href="#mira:def:rational-difference-equivalence-relation">rational difference equivalence relation</a>, and for each <span class="math notranslate nohighlight">\(a \in [-1, 1]\)</span> let <span class="math notranslate nohighlight">\(\mathtilde{a}\)</span> be the equivalence class of <span class="math notranslate nohighlight">\(a\)</span> under <span class="math notranslate nohighlight">\(\sim.\)</span>
+Then</p>
 <div class="math notranslate nohighlight">
 \[[-1, 1] = \bigcup_{a \in [-1, 1]} \tilde{a}.\]</div>
-<p class="sd-card-text">Now, let <span class="math notranslate nohighlight">\(V\)</span> be a set that contains exactly one element from each of the equivalence classes of <span class="math notranslate nohighlight">\(\sim\)</span> on <span class="math notranslate nohighlight">\([-1, 1].\)</span>
+<p class="sd-card-text">Now, let <span class="math notranslate nohighlight">\(V\)</span> be a representer set, containing exactly one element from each equivalence class of <span class="math notranslate nohighlight">\(\tilde\)</span> on <span class="math notranslate nohighlight">\([-1, 1].\)</span>
 Let also <span class="math notranslate nohighlight">\(r_1, r_2, \ldots\)</span> be a sequence which contains all the rational numbers in <span class="math notranslate nohighlight">\([-2, 2]\)</span> exactly once.
 Then</p>
 <div class="math notranslate nohighlight">
@@ -780,11 +799,11 @@ As explained earlier, any function that satisfies some of the aforementioned pro
 </section>
 <section id="measurable-spaces-and-functions">
 <h2>Measurable spaces and functions<a class="headerlink" href="#measurable-spaces-and-functions" title="Permalink to this heading">#</a></h2>
-<div class="proof theorem admonition" id="mira-thm-nonexistence-length">
+<div class="proof theorem admonition" id="mira:thm:nonexistence-length">
 <p class="admonition-title"><span class="caption-number">Theorem 68 </span> (Nonexistence of extension of length to all subsets of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>)</p>
 <section class="theorem-content" id="proof-content">
 <p>There does not exist a function <span class="math notranslate nohighlight">\(\mu\)</span> with the following properties:</p>
-<p>(a) <span class="math notranslate nohighlight">\(\mu\)</span> is a function fromm the set of subsets of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> to <span class="math notranslate nohighlight">\([0, \infty],\)</span></p>
+<p>(a) <span class="math notranslate nohighlight">\(\mu\)</span> is a function from the set of subsets of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> to <span class="math notranslate nohighlight">\([0, \infty],\)</span></p>
 <p>(b) <span class="math notranslate nohighlight">\(\mu(I) = \ell(I)\)</span> for all open intervals <span class="math notranslate nohighlight">\(I \subseteq \mathbb{R},\)</span></p>
 <p>(c) For every disjoint sequence <span class="math notranslate nohighlight">\(A_1, A_2, \ldots\)</span> of subsets of <span class="math notranslate nohighlight">\(\mathbb{R},\)</span> <span class="math notranslate nohighlight">\(\mu \left( \cup_{k=1}^\infty A_k \right) = \sum_{k=1}^\infty \mu(A_k),\)</span></p>
 <p>(d) <span class="math notranslate nohighlight">\(\mu(t + A) = \mu(A)\)</span> for all <span class="math notranslate nohighlight">\(A \subseteq \mathbb{R}\)</span> and <span class="math notranslate nohighlight">\(t \in \mathbb{R}.\)</span></p>
@@ -842,9 +861,9 @@ Note also that for any <span class="math notranslate nohighlight">\(K \in \mathb
 <p class="sd-card-text">reaching a contradiction, because <span class="math notranslate nohighlight">\(|V| &gt; 0,\)</span> so the above inequality cannot hold for any <span class="math notranslate nohighlight">\(K.\)</span></p>
 </div>
 </details><section id="sigma-algebras">
-<h3><span class="math notranslate nohighlight">\(\sigma\)</span>-algebras<a class="headerlink" href="#sigma-algebras" title="Permalink to this heading">#</a></h3>
-<div class="proof definition admonition" id="definition-13">
-<p class="admonition-title"><span class="caption-number">Definition 59 </span> (<span class="math notranslate nohighlight">\(\sigma\)</span>-algebra)</p>
+<h3>Sigma algebras<a class="headerlink" href="#sigma-algebras" title="Permalink to this heading">#</a></h3>
+<div class="proof definition admonition" id="definition-14">
+<p class="admonition-title"><span class="caption-number">Definition 60 </span> (<span class="math notranslate nohighlight">\(\sigma\)</span>-algebra)</p>
 <section class="definition-content" id="proof-content">
 <p>Suppose <span class="math notranslate nohighlight">\(X\)</span> is a set and <span class="math notranslate nohighlight">\(S\)</span> is a set of subsets of <span class="math notranslate nohighlight">\(X.\)</span>
 Then <span class="math notranslate nohighlight">\(S\)</span> is called a <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <span class="math notranslate nohighlight">\(X\)</span> if it satisfies:</p>
@@ -854,7 +873,7 @@ Then <span class="math notranslate nohighlight">\(S\)</span> is called a <span c
 <li><p>if <span class="math notranslate nohighlight">\(E_1, E_2, \dots\)</span> is a sequnece of elements of <span class="math notranslate nohighlight">\(S,\)</span> then <span class="math notranslate nohighlight">\(\bigcup_{k=1}^\infty E_k \in S.\)</span></p></li>
 </ul>
 </section>
-</div><div class="proof theorem admonition" id="theorem-14">
+</div><div class="proof theorem admonition" id="theorem-15">
 <p class="admonition-title"><span class="caption-number">Theorem 69 </span> (Other properties of <span class="math notranslate nohighlight">\(\sigma\)</span>-algebras)</p>
 <section class="theorem-content" id="proof-content">
 <p>Suppose <span class="math notranslate nohighlight">\(S\)</span> is a <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on a set <span class="math notranslate nohighlight">\(X.\)</span>
@@ -881,13 +900,13 @@ Lastly, if <span class="math notranslate nohighlight">\(E_1, E_2, \dots\)</span>
 <div class="math notranslate nohighlight">
 \[\bigcap_{k=1}^\infty E_k = X \setminus \bigcup_{k=1}^\infty (X \setminus E_k) \in S.\]</div>
 </div>
-</details><div class="proof definition admonition" id="definition-15">
-<p class="admonition-title"><span class="caption-number">Definition 60 </span> (Measurable space, measurable set)</p>
+</details><div class="proof definition admonition" id="definition-16">
+<p class="admonition-title"><span class="caption-number">Definition 61 </span> (Measurable space, measurable set)</p>
 <section class="definition-content" id="proof-content">
 <p>A measurable space is an ordered pair <span class="math notranslate nohighlight">\((X, S),\)</span> where <span class="math notranslate nohighlight">\(X\)</span> is a set and <span class="math notranslate nohighlight">\(S\)</span> is a <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <span class="math notranslate nohighlight">\(X.\)</span>
 An element of <span class="math notranslate nohighlight">\(S\)</span> is called a <span class="math notranslate nohighlight">\(S\)</span>-measurable set, or simply a measurable set if <span class="math notranslate nohighlight">\(S\)</span> is clear from the context.</p>
 </section>
-</div><div class="proof theorem admonition" id="theorem-16">
+</div><div class="proof theorem admonition" id="theorem-17">
 <p class="admonition-title"><span class="caption-number">Theorem 70 </span> (Smallest <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra containing a collection of subsets)</p>
 <section class="theorem-content" id="proof-content">
 <p>Suppose <span class="math notranslate nohighlight">\(X\)</span> is a set and <span class="math notranslate nohighlight">\(A\)</span> is a set of subsets of <span class="math notranslate nohighlight">\(X.\)</span>
@@ -906,14 +925,14 @@ Let <span class="math notranslate nohighlight">\(S\)</span> be the intersection 
 Second, if <span class="math notranslate nohighlight">\(E \in S,\)</span> then <span class="math notranslate nohighlight">\(E\)</span> is in every <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <span class="math notranslate nohighlight">\(X\)</span> that contains <span class="math notranslate nohighlight">\(A,\)</span> so <span class="math notranslate nohighlight">\(X \setminus E\)</span> is in every <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <span class="math notranslate nohighlight">\(X\)</span> that contains <span class="math notranslate nohighlight">\(A,\)</span> so <span class="math notranslate nohighlight">\(X \setminus E \in S.\)</span>
 Third, if <span class="math notranslate nohighlight">\(E_1, E_2, \dots\)</span> is a sequence of elements of <span class="math notranslate nohighlight">\(S,\)</span> then <span class="math notranslate nohighlight">\(E_1, E_2, \dots\)</span> is a sequence of elements of every <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <span class="math notranslate nohighlight">\(X\)</span> that contains <span class="math notranslate nohighlight">\(A,\)</span> so <span class="math notranslate nohighlight">\(\bigcup_{k=1}^\infty E_k\)</span> is in every <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <span class="math notranslate nohighlight">\(X\)</span> that contains <span class="math notranslate nohighlight">\(A,\)</span> so <span class="math notranslate nohighlight">\(\bigcup_{k=1}^\infty E_k \in S.\)</span></p>
 </div>
-</details><div class="proof definition admonition" id="definition-17">
-<p class="admonition-title"><span class="caption-number">Definition 61 </span> (Borel set)</p>
+</details><div class="proof definition admonition" id="definition-18">
+<p class="admonition-title"><span class="caption-number">Definition 62 </span> (Borel set)</p>
 <section class="definition-content" id="proof-content">
 <p>The smallest <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> that contains all the open subsets of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> is called the collection of Borel subsets on <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span>
 An element of this <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra is called a Borel set.</p>
 </section>
-</div><div class="proof definition admonition" id="definition-18">
-<p class="admonition-title"><span class="caption-number">Definition 62 </span> (Inverse image)</p>
+</div><div class="proof definition admonition" id="definition-19">
+<p class="admonition-title"><span class="caption-number">Definition 63 </span> (Inverse image)</p>
 <section class="definition-content" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(f: X \in Y\)</span> is a function and <span class="math notranslate nohighlight">\(A \subseteq Y,\)</span> then the inverse image of <span class="math notranslate nohighlight">\(A\)</span> under <span class="math notranslate nohighlight">\(f\)</span> is defined by</p>
 <div class="math notranslate nohighlight">
@@ -960,7 +979,7 @@ x \in f^{-1}\left(\bigcap_{A \in \mathcal{A}} A\right) &amp;\iff f(x) \in \bigca
 \end{align}\end{split}\]</div>
 <p class="sd-card-text">Thus <span class="math notranslate nohighlight">\(f^{-1}\left(\bigcap_{A \in \mathcal{A}} A\right) = \bigcap_{A \in \mathcal{A}} f^{-1}(A).\)</span></p>
 </div>
-</details><div class="proof theorem admonition" id="theorem-19">
+</details><div class="proof theorem admonition" id="theorem-20">
 <p class="admonition-title"><span class="caption-number">Theorem 71 </span> (Inverse image of a composition)</p>
 <section class="theorem-content" id="proof-content">
 <p>Suppose <span class="math notranslate nohighlight">\(f: X \to Y\)</span> and <span class="math notranslate nohighlight">\(g: Y \to Z\)</span> are functions.
@@ -987,8 +1006,11 @@ x \in (g \circ f)^{-1}(A) &amp;\iff (g \circ f)(x) \in A \\
 \end{align}\end{split}\]</div>
 <p class="sd-card-text">Thus <span class="math notranslate nohighlight">\((g \circ f)^{-1}(A) = f^{-1}(g^{-1}(A)).\)</span></p>
 </div>
-</details><div class="proof definition admonition" id="definition-20">
-<p class="admonition-title"><span class="caption-number">Definition 63 </span> (Measurable function)</p>
+</details></section>
+<section id="measurable-functions">
+<h3>Measurable functions<a class="headerlink" href="#measurable-functions" title="Permalink to this heading">#</a></h3>
+<div class="proof definition admonition" id="definition-21">
+<p class="admonition-title"><span class="caption-number">Definition 64 </span> (Measurable function)</p>
 <section class="definition-content" id="proof-content">
 <p>Suppose <span class="math notranslate nohighlight">\((X, S)\)</span> is a measurable space.
 A function <span class="math notranslate nohighlight">\(f: X \to \mathbb{R}\)</span> is called <span class="math notranslate nohighlight">\(S\)</span>-measurable if</p>
@@ -1032,13 +1054,13 @@ Since <span class="math notranslate nohighlight">\(T\)</span> is a <span class="
 Therefore <span class="math notranslate nohighlight">\(T\)</span> contains all the open intervals of <span class="math notranslate nohighlight">\(\mathbb{R},\)</span> so <span class="math notranslate nohighlight">\(T\)</span> contains all the Borel subsets of <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span></p>
 </div>
 </details><p>In the special case that <span class="math notranslate nohighlight">\(X\)</span> is a subset of the reals and <span class="math notranslate nohighlight">\(S\)</span> is the set of Borel subsets of <span class="math notranslate nohighlight">\(\mathbb{R},\)</span> we use the term Borel measurable to refer to <span class="math notranslate nohighlight">\(S\)</span>-measurable functions.</p>
-<div class="proof definition admonition" id="definition-22">
-<p class="admonition-title"><span class="caption-number">Definition 64 </span> (Borel measurable function)</p>
+<div class="proof definition admonition" id="definition-23">
+<p class="admonition-title"><span class="caption-number">Definition 65 </span> (Borel measurable function)</p>
 <section class="definition-content" id="proof-content">
 <p>Suppose <span class="math notranslate nohighlight">\(X \subseteq \mathbb{R}.\)</span>
 A function <span class="math notranslate nohighlight">\(f: X \to \mathbb{R}\)</span> is called Borel measurable if <span class="math notranslate nohighlight">\(f^{-1}(B)\)</span> is a Borel set for every Borel set <span class="math notranslate nohighlight">\(B \subseteq \mathbb{R}.\)</span></p>
 </section>
-</div><div class="proof theorem admonition" id="theorem-23">
+</div><div class="proof theorem admonition" id="theorem-24">
 <p class="admonition-title"><span class="caption-number">Theorem 73 </span> (Every continuous function is Borel measurable)</p>
 <section class="theorem-content" id="proof-content">
 <p>Every continuous real-valued function defined on a Borel subset of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> is a Borel measurable function.</p>
@@ -1061,7 +1083,7 @@ f^{-1}((a, \infty)) = \left( \bigcup_{x \in f^{-1}((a, \infty))} (x - \delta_x, 
 <p class="sd-card-text">The above union is a union of open sets, which is therefore also open, so its intersection with <span class="math notranslate nohighlight">\(X\)</span> is a Bore set.
 By our earlier <a class="reference internal" href="#mira-thm-condition-measurable">condition for measurable functions</a>, <span class="math notranslate nohighlight">\(f\)</span> is Borel measurable.</p>
 </div>
-</details><div class="proof theorem admonition" id="theorem-24">
+</details><div class="proof theorem admonition" id="theorem-25">
 <p class="admonition-title"><span class="caption-number">Theorem 74 </span> (Every increasing function is Borel measurable)</p>
 <section class="theorem-content" id="proof-content">
 <p>Every increasing function defined on a Borel subset of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> is a Borel measurable function.</p>
@@ -1083,7 +1105,7 @@ Then</p>
 Since <span class="math notranslate nohighlight">\(X\)</span> is a Borel set, and both <span class="math notranslate nohighlight">\((b, \infty)\)</span> and <span class="math notranslate nohighlight">\([b, \infty)\)</span> are Borel sets, it follows that <span class="math notranslate nohighlight">\(f^{-1}((a, \infty))\)</span> is a Borel set.
 By our earlier <a class="reference internal" href="#mira-thm-condition-measurable">condition for measurable functions</a>, <span class="math notranslate nohighlight">\(f\)</span> is Borel measurable.</p>
 </div>
-</details><div class="proof theorem admonition" id="theorem-25">
+</details><div class="proof theorem admonition" id="theorem-26">
 <p class="admonition-title"><span class="caption-number">Theorem 75 </span> (Composition of measurable functions)</p>
 <section class="theorem-content" id="proof-content">
 <p>Suppose <span class="math notranslate nohighlight">\((X, S)\)</span> is a measurable space and <span class="math notranslate nohighlight">\(f: X \to \mathbb{R}\)</span> is a measurable function.
@@ -1103,7 +1125,7 @@ Let <span class="math notranslate nohighlight">\(B \subseteq \mathbb{R}\)</span>
 Because <span class="math notranslate nohighlight">\(g\)</span> is a Borel measurable function, and <span class="math notranslate nohighlight">\(B\)</span> is a Borel set, <span class="math notranslate nohighlight">\(g^{-1}(B)\)</span> is also a Borel set.
 Because <span class="math notranslate nohighlight">\(f\)</span> is a measurable function, and <span class="math notranslate nohighlight">\(g^{-1}(B)\)</span> is a Borel set, <span class="math notranslate nohighlight">\(f^{-1}(g^{-1}(B))\)</span> is in <span class="math notranslate nohighlight">\(S,\)</span> so <span class="math notranslate nohighlight">\(g \circ f\)</span> is Borel measurable.</p>
 </div>
-</details><div class="proof theorem admonition" id="theorem-26">
+</details><div class="proof theorem admonition" id="theorem-27">
 <p class="admonition-title"><span class="caption-number">Theorem 76 </span> (Algebraic operations with measurable functions)</p>
 <section class="theorem-content" id="proof-content">
 <p>Suppose <span class="math notranslate nohighlight">\((X, S)\)</span> is a measurable space and <span class="math notranslate nohighlight">\(f, g: X \to \mathbb{R}\)</span> are <span class="math notranslate nohighlight">\(S\)</span>-measurable functions.
@@ -1142,7 +1164,7 @@ Note that the function <span class="math notranslate nohighlight">\(r: \mathbb{R
 Then <span class="math notranslate nohighlight">\(1/g = r \circ g\)</span> is a composition of Borel measurable functions, so it is a Borel measurable function.
 Lastly, <span class="math notranslate nohighlight">\(f/g\)</span> is a product of two Borel measurable functions, <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(1 / g,\)</span> so it is a Borel measurable function.</p>
 </div>
-</details><div class="proof theorem admonition" id="theorem-27">
+</details><div class="proof theorem admonition" id="theorem-28">
 <p class="admonition-title"><span class="caption-number">Theorem 77 </span> (Pointwise limit of <span class="math notranslate nohighlight">\(S\)</span>-measurable functions is <span class="math notranslate nohighlight">\(S\)</span>-measurable)</p>
 <section class="theorem-content" id="proof-content">
 <p>Suppose <span class="math notranslate nohighlight">\((X, S)\)</span> is a measurable space and <span class="math notranslate nohighlight">\(f_1, f_2, \dots\)</span> are <span class="math notranslate nohighlight">\(S\)</span>-measurable functions from <span class="math notranslate nohighlight">\(X\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span>
@@ -1154,7 +1176,7 @@ Define <span class="math notranslate nohighlight">\(f: X \to \mathbb{R}\)</span>
 </section>
 </div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
-Proof: Pointwise limit of <span class="math notranslate nohighlight">\(S\)</span>-measurable functions is <span class="math notranslate nohighlight">\(S\)</span>-measurable<div class="sd-summary-down docutils">
+Proof: Pointwise limit of <span class="math notranslate nohighlight">\(~S\)</span>-measurable functions is <span class="math notranslate nohighlight">\(~S\)</span>-measurable<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
@@ -1252,7 +1274,8 @@ Taking the limit as <span class="math notranslate nohighlight">\(k \to \infty,\)
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measurable-spaces-and-functions">Measurable spaces and functions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sigma-algebras"><span class="math notranslate nohighlight">\(\sigma\)</span>-algebras</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sigma-algebras">Sigma algebras</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#measurable-functions">Measurable functions</a></li>
 </ul>
 </li>
 </ul>

@@ -1234,6 +1234,29 @@ The set <span class="math notranslate nohighlight">\(E \cdot \lceil 1/\epsilon \
 <p class="sd-card-text">which shows the result.</p>
 </div>
 </details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 2.D.3</p>
+<p>Prove that there exists a set <span class="math notranslate nohighlight">\(A \subseteq \mathbb{R}\)</span> such that <span class="math notranslate nohighlight">\(|G \setminus A| = \infty\)</span> for every open set <span class="math notranslate nohighlight">\(G\)</span> that contains <span class="math notranslate nohighlight">\(A.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(\sim\)</span> be the <a class="reference internal" href="002-measures.html#mira:def:rational-difference-equivalence-relation">rational difference equivalence relation</a> on <span class="math notranslate nohighlight">\(\mathbb{R},\)</span> and let <span class="math notranslate nohighlight">\(V\)</span> be a set containing exactly one element from each equivalence class of <span class="math notranslate nohighlight">\(\sim\)</span> on <span class="math notranslate nohighlight">\([-1, 1].\)</span>
+In the proof of the <a class="reference internal" href="002-measures.html#mira:thm:non-additivity-of-outer-measure">nonadditivity of the outer measure</a> we showed that <span class="math notranslate nohighlight">\(|V| &gt; 0,\)</span> and that <span class="math notranslate nohighlight">\(V\)</span> is not Borel.
+Since <span class="math notranslate nohighlight">\(V \subseteq \mathbb{R}\)</span> is not Borel, there must exist some <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> such that for any open set <span class="math notranslate nohighlight">\(G \subseteq \mathbb{R}\)</span> we have <span class="math notranslate nohighlight">\(|G \setminus V| \geq \epsilon.\)</span>
+Now, note that the set</p>
+<div class="math notranslate nohighlight">
+\[A = \bigcup_{n \in \mathbb{Z}} 2n + V\]</div>
+<p class="sd-card-text">is not Borel.
+Then for any open set <span class="math notranslate nohighlight">\(G \subseteq \mathbb{R},\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[|G \setminus A| = \left|\bigcup_{n \in \mathbb{Z}} ([2n-1, 2n+1] \setminus (2n + V))\right| = \sum_{n \in \mathbb{Z}} |(2n-1, 2n+1) \setminus (2n + V)| = \infty,\]</div>
+<p class="sd-card-text">where in the last line we have used the fact that <span class="math notranslate nohighlight">\(|(2n, 2n+2) \setminus (2n + V)| \geq \epsilon.\)</span></p>
+</div>
+</details></div>
 </section>
 </section>
 

@@ -351,6 +351,39 @@ Since {prf:ref}`every countable subset of $\mathbb{R}$ has outer measure zero <m
 Now we come to the negative result of the outer measure, namely that it is not additive.
 Additivity is an important property that we would like our notion of length to have, because it allows us to prove good theorems about integration.
 
+The proof of nonadditivity of the outer measure relies on defining a subset of a closed interval.
+Similar sets are used beyond the subadditivity of the outer measure, so we give it a special name.
+
+
+
+
+
+:::{prf:definition} Rational difference equivalence relation
+:label: mira:def:rational-difference-equivalence-relation
+
+Suppose $S \in \mathbb{R}.$
+Let $\sim$ be the equivalence relation defined by $x \sim y \iff x - y \in \mathbb{Q},$ for any $\mathbb{R}.$
+We call this the rational difference equivalence relation.
+
+:::
+
+:::{dropdown} Detail: Rational difference is an equivalence relation
+
+Let $\sim$ be the binary relation defined by
+
+$$a \sim b \iff a - b \in \mathbb{Q}.$$
+
+Note that $\sim$ is an equivalence relation on $\mathbb{R},$ because it is:
+
+- reflexive: $a - a = 0 \in \mathbb{Q};$
+- symmetric: If $a - b \in \mathbb{Q},$ then $b - a = -(a - b) \in \mathbb{Q};$
+- transitive: If $a - b \in \mathbb{Q}$ and $b - c \in \mathbb{Q},$ then $a - c = (a - b) + (b - c) \in \mathbb{Q}.$
+
+:::
+
+
+
+
 :::{prf:theorem} Nonadditivity of the outer measure
 :label: mira:thm:non-additivity-of-outer-measure
 
@@ -365,26 +398,17 @@ $$|A \cup B| \neq |A| + |B|.$$
 
 __Proof idea:__
 We will show this result as follows.
-We will define a countable collection of disjoint sets whose union is contained in an closed interval of $\mathbb{R},$ and which have all equal outer measure.
-Then, we will show that the outer measure of each of these sets is nonzero, which contradicts the assumption that the outer measure is additive. 
+We will define a countable collection of disjoint sets.
+We will set up these sets so that their union is contained in an closed bounded interval of $\mathbb{R},$ and they all have equal outer measure.
+Then, we will show that the outer measure of each of these sets is nonzero, which leads to a contradiction.
 
 __Proof:__
-Let $\sim$ be the binary relation defined by
-
-$$a \sim b \iff a - b \in \mathbb{Q}.$$
-
-Note that $\sim$ is an equivalence relation on $\mathbb{R},$ because it is:
-
-- reflexive: $a - a = 0 \in \mathbb{Q};$
-- symmetric: If $a - b \in \mathbb{Q},$ then $b - a = -(a - b) \in \mathbb{Q};$
-- transitive: If $a - b \in \mathbb{Q}$ and $b - c \in \mathbb{Q},$ then $a - c = (a - b) + (b - c) \in \mathbb{Q}.$
-
-For $a \in [-1, 1],$ let $\tilde{a}$ be the equivalence class of $a$ under $\sim.$
-Then, for any $a \in [-1, 1],$ we have
+Let $\sim$ be the equivalence class of $a$ under the {prf:ref}`rational difference equivalence relation<mira:def:rational-difference-equivalence-relation>`, and for each $a \in [-1, 1]$ let $\mathtilde{a}$ be the equivalence class of $a$ under $\sim.$
+Then
 
 $$[-1, 1] = \bigcup_{a \in [-1, 1]} \tilde{a}.$$
 
-Now, let $V$ be a set that contains exactly one element from each of the equivalence classes of $\sim$ on $[-1, 1].$
+Now, let $V$ be a representer set, containing exactly one element from each equivalence class of $\tilde$ on $[-1, 1].$
 Let also $r_1, r_2, \ldots$ be a sequence which contains all the rational numbers in $[-2, 2]$ exactly once.
 Then
 
@@ -415,16 +439,15 @@ As explained earlier, any function that satisfies some of the aforementioned pro
 
 
 
-
 ## Measurable spaces and functions
 
 
 :::{prf:theorem} Nonexistence of extension of length to all subsets of $\mathbb{R}$
-:label: mira-thm-nonexistence-length
+:label: mira:thm:nonexistence-length
 
 There does not exist a function $\mu$ with the following properties:
 
-(a) $\mu$ is a function fromm the set of subsets of $\mathbb{R}$ to $[0, \infty],$
+(a) $\mu$ is a function from the set of subsets of $\mathbb{R}$ to $[0, \infty],$
 
 (b) $\mu(I) = \ell(I)$ for all open intervals $I \subseteq \mathbb{R},$
 
@@ -495,7 +518,7 @@ reaching a contradiction, because $|V| > 0,$ so the above inequality cannot hold
 :::
 
 
-### $\sigma$-algebras
+### Sigma algebras
 
 :::{prf:definition} $\sigma$-algebra
 
@@ -673,6 +696,10 @@ Thus $(g \circ f)^{-1}(A) = f^{-1}(g^{-1}(A)).$
 
 :::
 
+
+
+
+### Measurable functions
 
 
 :::{prf:definition} Measurable function
@@ -879,6 +906,7 @@ Lastly, $f/g$ is a product of two Borel measurable functions, $f$ and $1 / g,$ s
 
 
 
+
 :::{prf:theorem} Pointwise limit of $S$-measurable functions is $S$-measurable
 
 Suppose $(X, S)$ is a measurable space and $f_1, f_2, \dots$ are $S$-measurable functions from $X$ to $\mathbb{R}.$
@@ -894,7 +922,7 @@ Then $f$ is a $S$-measurable function.
 
 
 
-:::{dropdown} Proof: Pointwise limit of $S$-measurable functions is $S$-measurable
+:::{dropdown} Proof: Pointwise limit of $~S$-measurable functions is $~S$-measurable
 
 Suppose $(X, S)$ is a measurable space and $f_1, f_2, \dots$ are $S$-measurable functions from $X$ to $\mathbb{R}.$
 Suppose $\lim_{k \to \infty} f_k(x)$ exists for each $x \in X.$
