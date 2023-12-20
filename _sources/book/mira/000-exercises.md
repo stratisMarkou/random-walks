@@ -951,3 +951,105 @@ $$|G \setminus A| = \left|\bigcup_{n \in \mathbb{Z}} ([2n-1, 2n+1] \setminus (2n
 where in the last line we have used the fact that $|(2n, 2n+2) \setminus (2n + V)| \geq \epsilon.$
 
 :::
+::::
+
+
+
+
+::::{admonition} Exercise 2.D.4
+:class: tip
+
+The phrase nontrivial interval is used to denote an interval of $\mathbb{R}$ that contains more than one element.
+Recall that an interval might be open, closed, or neither.
+
+(a) Prove that the union of each collection of nontrivial intervals of $\mathbb{R}$ is the union of a countable subset of that collection.
+
+(b) Prove that the union of each collection of nontrivial intervals of $\mathbb{R}$ is a Borel set.
+
+(c) Prove that there exists a collection of closed intervals of $\mathbb{R}$ whose union is not a Borel set.
+
+
+:::{dropdown} Solution
+
+__Part a:__
+Let $C$ be a collection of nontrivial intervals of $\mathbb{R},$ and define
+
+$$\bar{C} = \bigcup_{I \in C} I.$$
+
+Suppose $x \in I$ for some $I \in C,$ and define
+
+$$U(x) = \sup\{\sup I: x \in I \in C\}.$$
+
+In other words, if $x \in \bar{C},$ then $U(x)$ is the largest number among all right endpoints of all intervals in $C$ that contain $x.$
+There are two possibilities, namely $U(x) < \infty$ or $U(x) = \infty.$
+Define $R: \bar{C} \times \mathbb{N} \to C$ as follows:
+
+- $U(x) < \infty$:
+If there does not exist $I \in C$ such that $x \in I$ and $\sup I = U(x),$ then let $R(x, n) = A$ where $x \in A \in C$ such that $\sup A \geq U(x) - 1/n.$
+Otherwise, if there exists $I \in C$ such that $x \in I$ and $\sup I = U(x),$ then let $R(x, n) = I.$
+- $U(x) = \infty$:
+Let $R(x, n) = I$ where $x \in I \in C$ and $\sup I \geq x + 1.$ 
+
+Similarly, we can define $L(x) = \inf\{\inf I: x \in I \in C\},$ for which there are two possibilities, namely $L(x) > -\infty$ or $L(x) = -\infty.$
+Define $S: \bar{C} \times \mathbb{N} \to C$ as follows:
+
+- $L(x) > -\infty$:
+If there does not exist $I \in C$ such that $x \in I$ and $\inf I = L(x),$ then let $S(x, n) = A$ where $x \in A \in C$ such that $\inf A \leq L(x) + 1/n.$
+Otherwise, if there exists $I \in C$ such that $x \in I$ and $\inf I = L(x),$ then let $S(x, n) = I.$
+- $L(x) = -\infty$:
+Let $S(x, n) = I$ where $x \in I \in C$ and $\inf I \leq x - 1.$
+
+Now, define
+
+$$T = \bigcup_{q \in \mathbb{Q} \cap \bar{C}, n \in \mathbb{N}} (R(q, n) \cup S(q, n)).$$
+
+Now, note that if $x \in \bar{C} \cap \mathbb{Q},$ then $x \in T.$
+Suppose that $x \in \bar{C} \setminus \mathbb{Q}.$
+Then, $x \in I$ for some $I \in C.$
+Because the rationals are dense in $I$ and $I$ is a nontrivial interval, we can find $y \in \mathbb{Q} \cap I$ such that $|y - x|$ is arbitrarily small.
+From this, and our definition of $R$ and $S$ it follows that $x \in R(y, n) \cup S(y, n)$ for some $y \in \mathbb{Q} \cap I$ and some $n \in \mathbb{N}.$
+Therefore $\bar{C} \subseteq T.$
+By definition, $T \subseteq \bar{C},$ so we conclude that $T = \bar{C}.$
+Lastly, note that $T$ is a countable union of subsets of $C,$ proving the result.
+
+
+__Part b:__
+Since all nontrivial intervals are intervals, they are Borel.
+Since, as we showed in part (a), the union of a collection of nontrivial intervals is a countable union of subsets of that collection, which are themselves Borel, so the union is also Borel.
+
+__Part c:__
+Let $\sim$ be the {prf:ref}`rational difference equivalence relation <mira:def:rational-difference-equivalence-relation>` on $\mathbb{R},$ and let $V$ be a set containing exactly one element from each equivalence class of $\sim$ on $[-1, 1].$
+This set is a union of closed intervals, specifically it is the union of singleton closed intervals.
+As shown in the proof of the {prf:ref}`nonadditivity of the outer measure<mira:thm:non-additivity-of-outer-measure>`, $V$ is not a Borel set.
+
+:::
+::::
+
+
+
+
+::::{admonition} Exercise 2.D.5
+:class: tip
+
+Prove that if $A \subseteq \mathbb{R}$ is a Lebesgue measurable, then there exists an increasing sequence $F_1 \subseteq F_2 \subseteq \cdots$ of closed sets contained in $A$ such that
+
+$$\left| A \setminus \bigcup_{n=1}^\infty F_n \right| = 0.$$
+
+:::{dropdown} Solution
+
+Suppose $A \subseteq \mathbb{R}$ is Lebesgue measurable.
+Then, for each $n\in \mathbb{N},$ there exists a closed set $C_n \subseteq A$ such that $|A \setminus C_n| < 1/n.$
+Let $F_n = \bigcup_{k=1}^n C_k,$ and note that $F_1 \subseteq F_2 \subseteq \cdots$ is an increasing sequence of closed sets contained in $A,$ and also that
+
+$$|A \setminus F_n| < |A \setminus C_n| < \frac{1}{n}.$$
+
+Therefore, for each $n \in \mathbb{N},$ we have
+
+$$\left|A \setminus \bigcup_{n=1}^\infty F_n\right| \leq \left|A \setminus F_n\right| < \frac{1}{n},$$
+
+and taking $n \to \infty,$ we obtain
+
+$$\left|A \setminus \bigcup_{n=1}^\infty F_n\right| = 0.$$
+
+:::
+::::
