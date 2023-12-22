@@ -440,7 +440,7 @@ Specifically, we will show that given a sequence of sets that are contained by d
 :::{prf:theorem} Outer measure is additive if sets are contained by disjoint open intervals
 :label: mira:thm:outer-measure-is-additive-if-sets-are-separable
 
-If $S_1, S_2, \ldots \subseteq \mathbb{R}$ is a sequence of sets such that there exists a sequence open disjoint intervals $A_1, A_2, \ldots,$ with $S_k \subseteq A_k,$ then
+Suppose $S_1, S_2, \ldots$ is a sequence of sets and $A_1, A_2, \ldots$ is a sequence of disjoint open intervals with $S_k \subseteq A_k,$ then
 
 $$\left|\bigcup_{n=1}^\infty S_n\right| = \sum_{n=1}^\infty |S_n|.$$
 :::
