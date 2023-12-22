@@ -48,7 +48,7 @@ Prove that $f$ is Riemann integrable on $[a, b]$ and that $\int_a^b f = t - s.$
 
 :::{dropdown} Solution
 
-Let $P_N$ be the partition $x_0, \dots x_{3n}$ of $[a, b]$ with $x_n = s$ and $x_{2n} = t,$ defined as
+Let $P_N$ be the partition $x_0, \ldots x_{3n}$ of $[a, b]$ with $x_n = s$ and $x_{2n} = t,$ defined as
 
 $$x_i - x_{i-1} = \begin{cases}
 \frac{s - a}{n} \text{ if } 1 \leq i \leq n, \\
@@ -529,7 +529,7 @@ This definition determines the measure on all subsets of $\mathbb{Z}^+$ because
 $$\mu(E) = \mu\left(\bigcup_{n \in E} \{n\} \right) = \sum_{n \in E} \mu(\{n\}) = \sum_{n \in E} 2^{-n}.$$
 
 Then, for any $E \subseteq \mathbb{Z}^+,$ we have $\mu(E) \in [0, 1].$
-Conversely, if $x \in [0, 1],$ then writing the binary expansion of $x$ as $x = 0.x_1x_2\dots$, we see that
+Conversely, if $x \in [0, 1],$ then writing the binary expansion of $x$ as $x = 0.x_1x_2\ldots$, we see that
 
 $$x = \sum_{n=1}^\infty 2^{-n} \mathbf{1}(x_n = 1) = \sum_{n \in E} 2^{-n},$$
 
@@ -796,7 +796,7 @@ Let $A$ be the set consisting of those numbers in $(0, 1)$ that have a decimal e
 We can write $A$ as the union
 
 $$\begin{align}
-A = \bigcup_{n=1}^\infty \bigcup_{x_1 \dots x_n \in D} \left(\sum_{k=1}^n x_k \cdot 10^{-k}\right) + 10^{-n} \cdot \left[\sum_{m=1}^{100} 4 \cdot 10^{-m}, 10^{-100} + \sum_{m=1}^{100} 4 \cdot 10^{-m} \right)
+A = \bigcup_{n=1}^\infty \bigcup_{x_1 \ldots x_n \in D} \left(\sum_{k=1}^n x_k \cdot 10^{-k}\right) + 10^{-n} \cdot \left[\sum_{m=1}^{100} 4 \cdot 10^{-m}, 10^{-100} + \sum_{m=1}^{100} 4 \cdot 10^{-m} \right)
 \end{align}$$
 
 where $D$ is the set of integers from 0 to 9, together with the set
@@ -828,7 +828,7 @@ C(n-1, k-1) &\text{if } 1 \leq k < 99
 \end{cases}
 \end{align}$$
 
-Letting $C_n = (C_{n, 0}, C_{n, 1}, \dots, C_{n, 99})$ we can write this as
+Letting $C_n = (C_{n, 0}, C_{n, 1}, \ldots, C_{n, 99})$ we can write this as
 
 $$C_n = \begin{bmatrix}
 9 & 9 & 9 & \dots & 9 & 9 \\
@@ -936,6 +936,7 @@ Prove that there exists a set $A \subseteq \mathbb{R}$ such that $|G \setminus A
 
 :::{dropdown} Solution
 
+
 Let $\sim$ be the {prf:ref}`rational difference equivalence relation <mira:def:rational-difference-equivalence-relation>` on $\mathbb{R},$ and let $V$ be a set containing exactly one element from each equivalence class of $\sim$ on $[-1, 1].$
 In the proof of the {prf:ref}`nonadditivity of the outer measure<mira:thm:non-additivity-of-outer-measure>` we showed that $|V| > 0,$ and that $V$ is not Borel.
 Since $V \subseteq \mathbb{R}$ is not Borel, there must exist some $\epsilon > 0$ such that for any open set $G \subseteq \mathbb{R}$ we have $|G \setminus V| \geq \epsilon.$
@@ -946,8 +947,100 @@ $$A = \bigcup_{n \in \mathbb{Z}} 2n + V$$
 is not Borel.
 Then for any open set $G \subseteq \mathbb{R},$ we have
 
-$$|G \setminus A| = \left|\bigcup_{n \in \mathbb{Z}} ([2n-1, 2n+1] \setminus (2n + V))\right| = \sum_{n \in \mathbb{Z}} |(2n-1, 2n+1) \setminus (2n + V)| = \infty,$$
+$$\begin{align}
+|G \setminus A| &= \left|\bigcup_{n \in \mathbb{Z}} (G \cap [2n-1, 2n+1]) \setminus (2n + V)\right| \\
+&= \sum_{n \in \mathbb{Z}} |(G \cap (2n-1, 2n+1)) \setminus (2n + V)| \\
+&= \infty,
+\end{align}$$
 
-where in the last line we have used the fact that $|(2n, 2n+2) \setminus (2n + V)| \geq \epsilon.$
+where in the last line we have used the preliminary result, and in the last line we have used the fact that the sets $(G \cap [2n-1, 2n+1]) \setminus (2n + V)$ are contained in disjoint open intervals $(2n-1, 2n+1),$ so {prf:ref}`the outer measure of their union is the sum of their outer measures <mira:thm:outer-measure-is-additive-if-sets-are-separable>`.
 
 :::
+::::
+
+
+
+
+::::{admonition} Exercise 2.D.4
+:class: tip
+
+The phrase nontrivial interval is used to denote an interval of $\mathbb{R}$ that contains more than one element.
+Recall that an interval might be open, closed, or neither.
+
+(a) Prove that the union of each collection of nontrivial intervals of $\mathbb{R}$ is the union of a countable subset of that collection.
+
+(b) Prove that the union of each collection of nontrivial intervals of $\mathbb{R}$ is a Borel set.
+
+(c) Prove that there exists a collection of closed intervals of $\mathbb{R}$ whose union is not a Borel set.
+
+
+:::{dropdown} Solution
+
+__Part a:__
+Given a nontrivial interval $I,$ let $I'$ denote the interval minus its supremum and infimum, that is
+
+$$I' = (I \setminus \{\sup I\}) \setminus \{\inf I\}.$$
+
+Then, note that the set $\cup_{I \in C} I'$ is a union of open sets and is therefore open, so it can be written as the union of a countable collection of disjoint open intervals, say $U_1, U_2, \ldots.$
+Now, note that the sets $\cup_{I \in C} I$ and $\cup_{n=1}^\infty U_n$ differ by, at most, the endpoints of each interval $U_n,$ of which there are countably many.
+Each of the endpoints of each of the $U_n$ that is contained in $\cup_{I \in C} I$ must be contained in at least one $I \in C.$
+Therefore, $\cup_{I \in C} I$ can be written as a countable union of the sets $U_n$ and the corresponding sets $I \in C$ containing their endpoints.
+Now, we will show that each $U_n$ can be written as a countable union of nontrivial intervals in $C.$
+
+Consider the case where $U_n$ is bounded, and let $\inf U_n = a$ and $\sup U_n = b.$
+Then, for each $k \in \mathbb{Z},$ we have $[a + 1/k, b - 1/k] \subseteq U_n.$
+Note that $\{I' : I \in C\}$ is an open cover of $U_n,$ so it is also an open cover of $[a + 1/k, b - 1/k].$
+By the {prf:ref}`Heine-Borel theorem <mira:thm:heine-borel>`, there exists a finite open subcover of $[a + 1/k, b - 1/k]$ from $\{I' : I \in C\},$ so there exists a finite set of nontrivial intervals in $C$ whose union contains $[a + 1/k, b - 1/k].$
+The union of all such sets over $k = 1, 2, \ldots$ is a countable union of nontrivial intervals in $C$ whose union contains $U_n.$
+
+Consider the case where $U_n$ is bounded below but not above, and let $\inf U_n = a.$
+Then, for each $k \in \mathbb{Z},$ we have $[a + 1/k, a + k] \subseteq U_n.$
+Similarly to the reasoning above, $[a + 1/k, a + k]$ can be covered by a finite number of nontrivial intervals in $C,$ and the union of all such sets over $k = 1, 2, \ldots$ is a countable union of nontrivial intervals in $C$ whose union contains $U_n.$
+The same reasoning applies to the case where $U_n$ is bounded above but not below, using instead the intervals $[b - k, b - 1/k]$ for $k = 1, 2, \ldots,$ where $b = \sup U_n.$
+Lastly, to deal with the case where $U_n$ is unbounded, we apply the same argument considering instead intervals of the form $[-k, k]$ for $k = 1, 2, \ldots.$
+
+We therefore conclude that $\cup_{I \in C} I$ can be written as a countable union of open intervals $U_n$ and a countable union of nontrivial intervals in $C$ containing any endpoints of the $U_n$ that are missing from $\cup_{I \in C} I.$
+In addition, each $U_n$ can be written as a countable union of nontrivial intervals in $C.$
+Therefore the entire union consists of nontrivial intervals in $C,$ and is countable.
+
+
+__Part b:__
+Since all nontrivial intervals are intervals, they are Borel.
+Since, as we showed in part (a), the union of a collection of nontrivial intervals is a countable union of subsets of that collection, which are themselves Borel, so the union is also Borel.
+
+__Part c:__
+Let $\sim$ be the {prf:ref}`rational difference equivalence relation <mira:def:rational-difference-equivalence-relation>` on $\mathbb{R},$ and let $V$ be a set containing exactly one element from each equivalence class of $\sim$ on $[-1, 1].$
+This set is a union of closed intervals, specifically it is the union of singleton closed intervals.
+As shown in the proof of the {prf:ref}`nonadditivity of the outer measure<mira:thm:non-additivity-of-outer-measure>`, $V$ is not a Borel set.
+
+:::
+::::
+
+
+
+
+::::{admonition} Exercise 2.D.5
+:class: tip
+
+Prove that if $A \subseteq \mathbb{R}$ is a Lebesgue measurable, then there exists an increasing sequence $F_1 \subseteq F_2 \subseteq \cdots$ of closed sets contained in $A$ such that
+
+$$\left| A \setminus \bigcup_{n=1}^\infty F_n \right| = 0.$$
+
+:::{dropdown} Solution
+
+Suppose $A \subseteq \mathbb{R}$ is Lebesgue measurable.
+Then, for each $n\in \mathbb{N},$ there exists a closed set $C_n \subseteq A$ such that $|A \setminus C_n| < 1/n.$
+Let $F_n = \bigcup_{k=1}^n C_k,$ and note that $F_1 \subseteq F_2 \subseteq \cdots$ is an increasing sequence of closed sets contained in $A,$ and also that
+
+$$|A \setminus F_n| < |A \setminus C_n| < \frac{1}{n}.$$
+
+Therefore, for each $n \in \mathbb{N},$ we have
+
+$$\left|A \setminus \bigcup_{n=1}^\infty F_n\right| \leq \left|A \setminus F_n\right| < \frac{1}{n},$$
+
+and taking $n \to \infty,$ we obtain
+
+$$\left|A \setminus \bigcup_{n=1}^\infty F_n\right| = 0.$$
+
+:::
+::::
