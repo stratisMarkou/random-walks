@@ -552,7 +552,7 @@ Conversely, we can apply the same argument by noting that <span class="math notr
 </div>
 </details><p>Another useful property of the outer measure is countable subadditivity.
 This property will also turn out to be true of more general measures which we will define later.</p>
-<div class="proof theorem admonition" id="theorem-6">
+<div class="proof theorem admonition" id="mira:thm:outer-measure-is-countably-subadditive">
 <p class="admonition-title"><span class="caption-number">Theorem 63 </span> (Outer measure is countably subadditive)</p>
 <section class="theorem-content" id="proof-content">
 <p>Suppose <span class="math notranslate nohighlight">\(A_1, A_2, \ldots\)</span> are subsets of <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span>
@@ -685,7 +685,7 @@ Then, <span class="math notranslate nohighlight">\(b\)</span> is in at least one
 Let us write <span class="math notranslate nohighlight">\(I_{n+1} = (c, d),\)</span> and note that <span class="math notranslate nohighlight">\(b &lt; d.\)</span>
 Then if <span class="math notranslate nohighlight">\(c \leq a,\)</span> we have that <span class="math notranslate nohighlight">\(\ell(I_{n+1}) = d - c \geq b - a,\)</span> which shows the inductive step.
 If <span class="math notranslate nohighlight">\(c &gt; a,\)</span> then <span class="math notranslate nohighlight">\(a &lt; c &lt; b &lt; d.\)</span>
-Since <span class="math notranslate nohighlight">\([a, b]\)</span> is has <span class="math notranslate nohighlight">\(I_1, \dots, I_n, I_{n+1}\)</span> as an open cover, it follows that <span class="math notranslate nohighlight">\([a, c]\)</span> has <span class="math notranslate nohighlight">\(I_1, \dots, I_n,\)</span> as an open cover, that is</p>
+Since <span class="math notranslate nohighlight">\([a, b]\)</span> is has <span class="math notranslate nohighlight">\(I_1, \ldots, I_n, I_{n+1}\)</span> as an open cover, it follows that <span class="math notranslate nohighlight">\([a, c]\)</span> has <span class="math notranslate nohighlight">\(I_1, \ldots, I_n,\)</span> as an open cover, that is</p>
 <div class="math notranslate nohighlight">
 \[[a, c] \subseteq I_1 \cup \cdots \cup I_n.\]</div>
 <p class="sd-card-text">Therefore, by the inductive hypothesis, we have</p>
@@ -794,13 +794,46 @@ Then, applying the additivity property <span class="math notranslate nohighlight
 <p class="sd-card-text">reaching a contradiction, because <span class="math notranslate nohighlight">\(|V| &gt; 0,\)</span> so the above inequality cannot hold for any <span class="math notranslate nohighlight">\(K.\)</span></p>
 </div>
 </details><p>Shortly, we will show that this negative result is not a fundamental limitation of our definition of the outer measure.
-As explained earlier, any function that satisfies some of the aforementioned properties of the outer measure and has domain equal to the power set of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> cannot be additive.</p>
+Before doing so however, we will give a positive result that is useful in some contexts.
+Specifically, we will show that given a sequence of sets that are contained by disjoint open intervals, the outer measure of the union of the sets is equal to the sum of the outer measures of the sets.</p>
+<div class="proof theorem admonition" id="mira:thm:outer-measure-is-additive-if-sets-are-separable">
+<p class="admonition-title"><span class="caption-number">Theorem 68 </span> (Outer measure is additive if sets are contained by disjoint open intervals)</p>
+<section class="theorem-content" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(S_1, S_2, \ldots \subseteq \mathbb{R}\)</span> is a sequence of sets such that there exists a sequence open disjoint intervals <span class="math notranslate nohighlight">\(A_1, A_2, \ldots,\)</span> with <span class="math notranslate nohighlight">\(S_k \subseteq A_k,\)</span> then</p>
+<div class="math notranslate nohighlight">
+\[\left|\bigcup_{n=1}^\infty S_n\right| = \sum_{n=1}^\infty |S_n|.\]</div>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Outer measure is additive if sets are contained by disjoint open intervals<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">First, by the <a class="reference internal" href="#mira:thm:outer-measure-is-countably-subadditive">subadditivity of the outer measure</a>, we have</p>
+<div class="math notranslate nohighlight">
+\[\left|\bigcup_{n=1}^\infty S_n\right| \leq \sum_{n=1}^\infty |S_n|.\]</div>
+<p class="sd-card-text">We will now show the inequality in the other direction.
+Suppose that <span class="math notranslate nohighlight">\(I_1, I_2, \ldots\)</span> is a sequence of open intervals whose union contains <span class="math notranslate nohighlight">\(\cup_{n=1}^\infty S_n.\)</span>
+Since the sets <span class="math notranslate nohighlight">\(A_n\)</span> are disjoint, for each <span class="math notranslate nohighlight">\(k \in \mathbb{N},\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\ell(I_k) \geq \sum_{n=1}^\infty \ell(I_k \cap A_n).\]</div>
+<p class="sd-card-text">Therefore, we have</p>
+<div class="math notranslate nohighlight">
+\[\sum_{k=1}^\infty \ell(I_k) \geq \sum_{k=1}^\infty \sum_{n=1}^\infty \ell(I_k \cap A_n) = \sum_{n=1}^\infty \sum_{k=1}^\infty\ell(I_k \cap A_n) \geq \sum_{n=1}^\infty |S_n|\]</div>
+<p class="sd-card-text">where the last equality follows from the fact that for a fixed <span class="math notranslate nohighlight">\(n \in \mathbb{N},\)</span> the sets <span class="math notranslate nohighlight">\(I_1 \cap A_n, I_2 \cap A_n, \ldots\)</span> are open intervals whose union contains <span class="math notranslate nohighlight">\(S_n.\)</span>
+Taking the infimum over all sequences of all open intervals whose union contains <span class="math notranslate nohighlight">\(\cup_{n=1}^\infty S_n,\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\left|\bigcup_{n=1}^\infty S_n\right| \geq \sum_{n=1}^\infty |S_n|,\]</div>
+<p class="sd-card-text">completing the result.</p>
+</div>
+</details><p>This result highlights that if there is a sequence of sets on which the outer measure is not additive, then the sets cannot be separable in the sense described above.</p>
 </section>
 </section>
 <section id="measurable-spaces-and-functions">
 <h2>Measurable spaces and functions<a class="headerlink" href="#measurable-spaces-and-functions" title="Permalink to this heading">#</a></h2>
 <div class="proof theorem admonition" id="mira:thm:nonexistence-length">
-<p class="admonition-title"><span class="caption-number">Theorem 68 </span> (Nonexistence of extension of length to all subsets of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 69 </span> (Nonexistence of extension of length to all subsets of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>)</p>
 <section class="theorem-content" id="proof-content">
 <p>There does not exist a function <span class="math notranslate nohighlight">\(\mu\)</span> with the following properties:</p>
 <p>(a) <span class="math notranslate nohighlight">\(\mu\)</span> is a function from the set of subsets of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> to <span class="math notranslate nohighlight">\([0, \infty],\)</span></p>
@@ -819,9 +852,9 @@ Proof: Nonexistence of extension of length to all subsets of <span class="math n
 We will show that <span class="math notranslate nohighlight">\(\mu\)</span> has all the properties that were used in our proof of the <a class="reference internal" href="#mira:thm:non-additivity-of-outer-measure">nonadditivity of the outer measure</a>, and we can then repeat the argument used there.</p>
 <p class="sd-card-text"><strong>Showing the relevant properties:</strong>
 First, observe that <span class="math notranslate nohighlight">\(\mu(\emptyset) = 0,\)</span> because <span class="math notranslate nohighlight">\(\emptyset\)</span> is an open interval with length <span class="math notranslate nohighlight">\(0.\)</span>
-Now, <span class="math notranslate nohighlight">\(\mu\)</span> has the order preserving property, bevause if <span class="math notranslate nohighlight">\(A \subseteq B \subseteq \mathbb{R},\)</span> then <span class="math notranslate nohighlight">\(\mu(A) \subseteq \mu(B),\)</span> because considering the sequence <span class="math notranslate nohighlight">\(A, B \setminus A, \emptyset, \emptyset, \dots\)</span> and applying property (c), we arrive at</p>
+Now, <span class="math notranslate nohighlight">\(\mu\)</span> has the order preserving property, bevause if <span class="math notranslate nohighlight">\(A \subseteq B \subseteq \mathbb{R},\)</span> then <span class="math notranslate nohighlight">\(\mu(A) \subseteq \mu(B),\)</span> because considering the sequence <span class="math notranslate nohighlight">\(A, B \setminus A, \emptyset, \emptyset, \ldots\)</span> and applying property (c), we arrive at</p>
 <div class="math notranslate nohighlight">
-\[\mu(B) = \mu(A) + \mu(B \setminus A) + 0 + 0 + \dots = \mu(A) + \mu(B \setminus A) \geq \mu(A).\]</div>
+\[\mu(B) = \mu(A) + \mu(B \setminus A) + 0 + 0 + \ldots = \mu(A) + \mu(B \setminus A) \geq \mu(A).\]</div>
 <p class="sd-card-text">In addition, if <span class="math notranslate nohighlight">\(a, b \in \mathbb{R}\)</span> with <span class="math notranslate nohighlight">\(a &lt; b,\)</span> then</p>
 <div class="math notranslate nohighlight">
 \[(a, b) \subseteq [a, b] \subseteq (a - \epsilon, b + \epsilon)\]</div>
@@ -831,13 +864,13 @@ Now, <span class="math notranslate nohighlight">\(\mu\)</span> has the order pre
 <p class="sd-card-text">and since <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> is arbitrary, this implies that</p>
 <div class="math notranslate nohighlight" id="equation-mira-eq-mu-of-closed-interval">
 <span class="eqno">(3)<a class="headerlink" href="#equation-mira-eq-mu-of-closed-interval" title="Permalink to this equation">#</a></span>\[\mu([a, b]) = b - a.\]</div>
-<p class="sd-card-text">Finally, if <span class="math notranslate nohighlight">\(A_1, A_2, \dots\)</span> is a sequence of disjoint subsets of <span class="math notranslate nohighlight">\(\mathbb{R},\)</span> then</p>
+<p class="sd-card-text">Finally, if <span class="math notranslate nohighlight">\(A_1, A_2, \ldots\)</span> is a sequence of disjoint subsets of <span class="math notranslate nohighlight">\(\mathbb{R},\)</span> then</p>
 <div class="math notranslate nohighlight">
 \[A_1, A_2 \setminus A_1, A_3 \setminus (A_1 \cup A_2), \ldots\]</div>
 <p class="sd-card-text">is a sequence of disjoint subsets of <span class="math notranslate nohighlight">\(\mathbb{R},\)</span> so by property (c), we have</p>
 <div class="math notranslate nohighlight" id="equation-mira-eq-mu-is-countably-subadditive">
 <span class="eqno">(4)<a class="headerlink" href="#equation-mira-eq-mu-is-countably-subadditive" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
-\mu\left( \bigcup_{k=1}^\infty A_k \right) &amp;= \mu\left( A_1 \cup (A_2 \setminus A_1) \cup (A_3 \setminus (A_1 \cup A_2)) \cup \dots \right) \\
+\mu\left( \bigcup_{k=1}^\infty A_k \right) &amp;= \mu\left( A_1 \cup (A_2 \setminus A_1) \cup (A_3 \setminus (A_1 \cup A_2)) \cup \ldots \right) \\
 &amp;= \mu(A_1) + \mu(A_2 \setminus A_1) + \mu(A_3 \setminus (A_1 \cup A_2)) + \cdots \\
 &amp;\leq \sum_{k=1}^\infty \mu(A_k).
 \end{align}\end{split}\]</div>
@@ -846,7 +879,7 @@ Now, <span class="math notranslate nohighlight">\(\mu\)</span> has the order pre
 Now, define the set <span class="math notranslate nohighlight">\(V\)</span> in the same way that it was defined in the proof of the <a class="reference internal" href="#mira:thm:non-additivity-of-outer-measure">nonadditivity of the outer measure</a>.
 Specifically, let <span class="math notranslate nohighlight">\(\sim\)</span> be the equivalence relation such that for <span class="math notranslate nohighlight">\(x, y \in [-1, 1]\)</span> we have <span class="math notranslate nohighlight">\(x \sim y\)</span> if <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> differ by a rational number.
 Let <span class="math notranslate nohighlight">\(V\)</span> be the set which contains exactly one representative from each equivalence clss of <span class="math notranslate nohighlight">\(\sim.\)</span>
-Let <span class="math notranslate nohighlight">\(r_1, r_2, \dots\)</span> be a sequence that contains each rational number in <span class="math notranslate nohighlight">\([-2, 2]\)</span> exactly once.
+Let <span class="math notranslate nohighlight">\(r_1, r_2, \ldots\)</span> be a sequence that contains each rational number in <span class="math notranslate nohighlight">\([-2, 2]\)</span> exactly once.
 Then, by properties <a class="reference internal" href="#equation-mira-eq-mu-of-closed-interval">(3)</a> and <a class="reference internal" href="#equation-mira-eq-mu-is-countably-subadditive">(4)</a> of <span class="math notranslate nohighlight">\(\mu,\)</span> as well as the translation invariance of <span class="math notranslate nohighlight">\(\mu\)</span>, property (d), we have</p>
 <div class="math notranslate nohighlight">
 \[2 = \mu([-1, 1]) = \mu\left(\bigcup_{k = 1}^\infty r_k + V\right) = \sum_{k=1}^\infty \mu(r_k + V) = \sum_{k=1}^\infty \mu(V)\]</div>
@@ -862,7 +895,7 @@ Note also that for any <span class="math notranslate nohighlight">\(K \in \mathb
 </div>
 </details><section id="sigma-algebras">
 <h3>Sigma algebras<a class="headerlink" href="#sigma-algebras" title="Permalink to this heading">#</a></h3>
-<div class="proof definition admonition" id="definition-14">
+<div class="proof definition admonition" id="definition-15">
 <p class="admonition-title"><span class="caption-number">Definition 60 </span> (<span class="math notranslate nohighlight">\(\sigma\)</span>-algebra)</p>
 <section class="definition-content" id="proof-content">
 <p>Suppose <span class="math notranslate nohighlight">\(X\)</span> is a set and <span class="math notranslate nohighlight">\(S\)</span> is a set of subsets of <span class="math notranslate nohighlight">\(X.\)</span>
@@ -870,17 +903,17 @@ Then <span class="math notranslate nohighlight">\(S\)</span> is called a <span c
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\emptyset \in S,\)</span></p></li>
 <li><p>if <span class="math notranslate nohighlight">\(E \in S,\)</span> then <span class="math notranslate nohighlight">\(X \setminus E \in S,\)</span></p></li>
-<li><p>if <span class="math notranslate nohighlight">\(E_1, E_2, \dots\)</span> is a sequnece of elements of <span class="math notranslate nohighlight">\(S,\)</span> then <span class="math notranslate nohighlight">\(\bigcup_{k=1}^\infty E_k \in S.\)</span></p></li>
+<li><p>if <span class="math notranslate nohighlight">\(E_1, E_2, \ldots\)</span> is a sequnece of elements of <span class="math notranslate nohighlight">\(S,\)</span> then <span class="math notranslate nohighlight">\(\bigcup_{k=1}^\infty E_k \in S.\)</span></p></li>
 </ul>
 </section>
-</div><div class="proof theorem admonition" id="theorem-15">
-<p class="admonition-title"><span class="caption-number">Theorem 69 </span> (Other properties of <span class="math notranslate nohighlight">\(\sigma\)</span>-algebras)</p>
+</div><div class="proof theorem admonition" id="theorem-16">
+<p class="admonition-title"><span class="caption-number">Theorem 70 </span> (Other properties of <span class="math notranslate nohighlight">\(\sigma\)</span>-algebras)</p>
 <section class="theorem-content" id="proof-content">
 <p>Suppose <span class="math notranslate nohighlight">\(S\)</span> is a <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on a set <span class="math notranslate nohighlight">\(X.\)</span>
 Then</p>
 <p>(a) <span class="math notranslate nohighlight">\(X \in S,\)</span></p>
 <p>(b) if <span class="math notranslate nohighlight">\(D, E \in S,\)</span> then <span class="math notranslate nohighlight">\(D \cup E \in S, D \cap E \in S\)</span> and <span class="math notranslate nohighlight">\(D \setminus E \in S,\)</span></p>
-<p>(c) if <span class="math notranslate nohighlight">\(E_1, E_2, \dots\)</span> is a sequence of elements of <span class="math notranslate nohighlight">\(S,\)</span> then <span class="math notranslate nohighlight">\(\cap_{k = 1}^\infty E_k \in S.\)</span></p>
+<p>(c) if <span class="math notranslate nohighlight">\(E_1, E_2, \ldots\)</span> is a sequence of elements of <span class="math notranslate nohighlight">\(S,\)</span> then <span class="math notranslate nohighlight">\(\cap_{k = 1}^\infty E_k \in S.\)</span></p>
 </section>
 </div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -891,23 +924,23 @@ Proof: Other properties of <span class="math notranslate nohighlight">\(~\sigma\
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">Because <span class="math notranslate nohighlight">\(\emptyset \in S\)</span> and <span class="math notranslate nohighlight">\(X = X \setminus \emptyset,\)</span> we have <span class="math notranslate nohighlight">\(X \in S.\)</span>
 Suppose <span class="math notranslate nohighlight">\(D, E \in S.\)</span>
-Then <span class="math notranslate nohighlight">\(D \cup E \in S\)</span> because this is the union of the sequence <span class="math notranslate nohighlight">\(D, E, \emptyset, \emptyset, \dots \in S.\)</span>
+Then <span class="math notranslate nohighlight">\(D \cup E \in S\)</span> because this is the union of the sequence <span class="math notranslate nohighlight">\(D, E, \emptyset, \emptyset, \ldots \in S.\)</span>
 In addition,</p>
 <div class="math notranslate nohighlight">
 \[D \cap E = X \setminus ((X \setminus D) \cup (X \setminus E)) \in S,\]</div>
 <p class="sd-card-text">and also <span class="math notranslate nohighlight">\(D \setminus (X \setminus E) = D \cap E \in S.\)</span>
-Lastly, if <span class="math notranslate nohighlight">\(E_1, E_2, \dots\)</span> is a sequence of elements of <span class="math notranslate nohighlight">\(S,\)</span> then</p>
+Lastly, if <span class="math notranslate nohighlight">\(E_1, E_2, \ldots\)</span> is a sequence of elements of <span class="math notranslate nohighlight">\(S,\)</span> then</p>
 <div class="math notranslate nohighlight">
 \[\bigcap_{k=1}^\infty E_k = X \setminus \bigcup_{k=1}^\infty (X \setminus E_k) \in S.\]</div>
 </div>
-</details><div class="proof definition admonition" id="definition-16">
+</details><div class="proof definition admonition" id="definition-17">
 <p class="admonition-title"><span class="caption-number">Definition 61 </span> (Measurable space, measurable set)</p>
 <section class="definition-content" id="proof-content">
 <p>A measurable space is an ordered pair <span class="math notranslate nohighlight">\((X, S),\)</span> where <span class="math notranslate nohighlight">\(X\)</span> is a set and <span class="math notranslate nohighlight">\(S\)</span> is a <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <span class="math notranslate nohighlight">\(X.\)</span>
 An element of <span class="math notranslate nohighlight">\(S\)</span> is called a <span class="math notranslate nohighlight">\(S\)</span>-measurable set, or simply a measurable set if <span class="math notranslate nohighlight">\(S\)</span> is clear from the context.</p>
 </section>
-</div><div class="proof theorem admonition" id="theorem-17">
-<p class="admonition-title"><span class="caption-number">Theorem 70 </span> (Smallest <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra containing a collection of subsets)</p>
+</div><div class="proof theorem admonition" id="theorem-18">
+<p class="admonition-title"><span class="caption-number">Theorem 71 </span> (Smallest <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra containing a collection of subsets)</p>
 <section class="theorem-content" id="proof-content">
 <p>Suppose <span class="math notranslate nohighlight">\(X\)</span> is a set and <span class="math notranslate nohighlight">\(A\)</span> is a set of subsets of <span class="math notranslate nohighlight">\(X.\)</span>
 Then, the intersection of all <span class="math notranslate nohighlight">\(\sigma\)</span>-algebras on <span class="math notranslate nohighlight">\(X\)</span> that contain <span class="math notranslate nohighlight">\(A\)</span> is a <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <span class="math notranslate nohighlight">\(X.\)</span></p>
@@ -923,15 +956,15 @@ Proof: Smallest <span class="math notranslate nohighlight">\(~\sigma\)</span>-al
 Let <span class="math notranslate nohighlight">\(S\)</span> be the intersection of all <span class="math notranslate nohighlight">\(\sigma\)</span>-algebras on <span class="math notranslate nohighlight">\(X\)</span> that contain <span class="math notranslate nohighlight">\(A.\)</span></p>
 <p class="sd-card-text">First, <span class="math notranslate nohighlight">\(\emptyset \in S,\)</span> because <span class="math notranslate nohighlight">\(\emptyset\)</span> is in every <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <span class="math notranslate nohighlight">\(X.\)</span>
 Second, if <span class="math notranslate nohighlight">\(E \in S,\)</span> then <span class="math notranslate nohighlight">\(E\)</span> is in every <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <span class="math notranslate nohighlight">\(X\)</span> that contains <span class="math notranslate nohighlight">\(A,\)</span> so <span class="math notranslate nohighlight">\(X \setminus E\)</span> is in every <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <span class="math notranslate nohighlight">\(X\)</span> that contains <span class="math notranslate nohighlight">\(A,\)</span> so <span class="math notranslate nohighlight">\(X \setminus E \in S.\)</span>
-Third, if <span class="math notranslate nohighlight">\(E_1, E_2, \dots\)</span> is a sequence of elements of <span class="math notranslate nohighlight">\(S,\)</span> then <span class="math notranslate nohighlight">\(E_1, E_2, \dots\)</span> is a sequence of elements of every <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <span class="math notranslate nohighlight">\(X\)</span> that contains <span class="math notranslate nohighlight">\(A,\)</span> so <span class="math notranslate nohighlight">\(\bigcup_{k=1}^\infty E_k\)</span> is in every <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <span class="math notranslate nohighlight">\(X\)</span> that contains <span class="math notranslate nohighlight">\(A,\)</span> so <span class="math notranslate nohighlight">\(\bigcup_{k=1}^\infty E_k \in S.\)</span></p>
+Third, if <span class="math notranslate nohighlight">\(E_1, E_2, \ldots\)</span> is a sequence of elements of <span class="math notranslate nohighlight">\(S,\)</span> then <span class="math notranslate nohighlight">\(E_1, E_2, \ldots\)</span> is a sequence of elements of every <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <span class="math notranslate nohighlight">\(X\)</span> that contains <span class="math notranslate nohighlight">\(A,\)</span> so <span class="math notranslate nohighlight">\(\bigcup_{k=1}^\infty E_k\)</span> is in every <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <span class="math notranslate nohighlight">\(X\)</span> that contains <span class="math notranslate nohighlight">\(A,\)</span> so <span class="math notranslate nohighlight">\(\bigcup_{k=1}^\infty E_k \in S.\)</span></p>
 </div>
-</details><div class="proof definition admonition" id="definition-18">
+</details><div class="proof definition admonition" id="definition-19">
 <p class="admonition-title"><span class="caption-number">Definition 62 </span> (Borel set)</p>
 <section class="definition-content" id="proof-content">
 <p>The smallest <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> that contains all the open subsets of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> is called the collection of Borel subsets on <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span>
 An element of this <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra is called a Borel set.</p>
 </section>
-</div><div class="proof definition admonition" id="definition-19">
+</div><div class="proof definition admonition" id="definition-20">
 <p class="admonition-title"><span class="caption-number">Definition 63 </span> (Inverse image)</p>
 <section class="definition-content" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(f: X \in Y\)</span> is a function and <span class="math notranslate nohighlight">\(A \subseteq Y,\)</span> then the inverse image of <span class="math notranslate nohighlight">\(A\)</span> under <span class="math notranslate nohighlight">\(f\)</span> is defined by</p>
@@ -979,8 +1012,8 @@ x \in f^{-1}\left(\bigcap_{A \in \mathcal{A}} A\right) &amp;\iff f(x) \in \bigca
 \end{align}\end{split}\]</div>
 <p class="sd-card-text">Thus <span class="math notranslate nohighlight">\(f^{-1}\left(\bigcap_{A \in \mathcal{A}} A\right) = \bigcap_{A \in \mathcal{A}} f^{-1}(A).\)</span></p>
 </div>
-</details><div class="proof theorem admonition" id="theorem-20">
-<p class="admonition-title"><span class="caption-number">Theorem 71 </span> (Inverse image of a composition)</p>
+</details><div class="proof theorem admonition" id="theorem-21">
+<p class="admonition-title"><span class="caption-number">Theorem 72 </span> (Inverse image of a composition)</p>
 <section class="theorem-content" id="proof-content">
 <p>Suppose <span class="math notranslate nohighlight">\(f: X \to Y\)</span> and <span class="math notranslate nohighlight">\(g: Y \to Z\)</span> are functions.
 Then</p>
@@ -1009,7 +1042,7 @@ x \in (g \circ f)^{-1}(A) &amp;\iff (g \circ f)(x) \in A \\
 </details></section>
 <section id="measurable-functions">
 <h3>Measurable functions<a class="headerlink" href="#measurable-functions" title="Permalink to this heading">#</a></h3>
-<div class="proof definition admonition" id="definition-21">
+<div class="proof definition admonition" id="definition-22">
 <p class="admonition-title"><span class="caption-number">Definition 64 </span> (Measurable function)</p>
 <section class="definition-content" id="proof-content">
 <p>Suppose <span class="math notranslate nohighlight">\((X, S)\)</span> is a measurable space.
@@ -1019,7 +1052,7 @@ A function <span class="math notranslate nohighlight">\(f: X \to \mathbb{R}\)</s
 <p>for all Borel sets <span class="math notranslate nohighlight">\(B \subseteq \mathbb{R}.\)</span></p>
 </section>
 </div><div class="proof theorem admonition" id="mira-thm-condition-measurable">
-<p class="admonition-title"><span class="caption-number">Theorem 72 </span> (Condition for measurable function)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 73 </span> (Condition for measurable function)</p>
 <section class="theorem-content" id="proof-content">
 <p>Suppose <span class="math notranslate nohighlight">\((X, S)\)</span> is a measurable space and <span class="math notranslate nohighlight">\(f: X \to \mathbb{R}\)</span> is a function such that</p>
 <div class="math notranslate nohighlight">
@@ -1043,7 +1076,7 @@ Then, we will show that <span class="math notranslate nohighlight">\(T\)</span> 
 <p class="sd-card-text"><strong><span class="math notranslate nohighlight">\(T\)</span> is a <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>:</strong>
 First, <span class="math notranslate nohighlight">\(\emptyset \in T,\)</span> because <span class="math notranslate nohighlight">\(f^{-1}(\emptyset) = \emptyset \in S.\)</span>
 Second, if <span class="math notranslate nohighlight">\(A \in T,\)</span> then <span class="math notranslate nohighlight">\(f^{-1}(A) \in S,\)</span> so <span class="math notranslate nohighlight">\(f^{-1}(X \setminus A) = X \setminus f^{-1}(A) \in S,\)</span> so <span class="math notranslate nohighlight">\(X \setminus A \in T.\)</span>
-Third, if <span class="math notranslate nohighlight">\(A_1, A_2, \dots \in T,\)</span> then <span class="math notranslate nohighlight">\(f^{-1}(A_1), f^{-1}(A_2), \dots \in S,\)</span> so</p>
+Third, if <span class="math notranslate nohighlight">\(A_1, A_2, \ldots \in T,\)</span> then <span class="math notranslate nohighlight">\(f^{-1}(A_1), f^{-1}(A_2), \ldots \in S,\)</span> so</p>
 <div class="math notranslate nohighlight">
 \[f^{-1}\left(\bigcup_{k=1}^\infty A_k\right) = \bigcup_{k=1}^\infty f^{-1}(A_k) \in S,\]</div>
 <p class="sd-card-text">so <span class="math notranslate nohighlight">\(\cup_{k=1}^\infty A_k \in T.\)</span>
@@ -1054,14 +1087,14 @@ Since <span class="math notranslate nohighlight">\(T\)</span> is a <span class="
 Therefore <span class="math notranslate nohighlight">\(T\)</span> contains all the open intervals of <span class="math notranslate nohighlight">\(\mathbb{R},\)</span> so <span class="math notranslate nohighlight">\(T\)</span> contains all the Borel subsets of <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span></p>
 </div>
 </details><p>In the special case that <span class="math notranslate nohighlight">\(X\)</span> is a subset of the reals and <span class="math notranslate nohighlight">\(S\)</span> is the set of Borel subsets of <span class="math notranslate nohighlight">\(\mathbb{R},\)</span> we use the term Borel measurable to refer to <span class="math notranslate nohighlight">\(S\)</span>-measurable functions.</p>
-<div class="proof definition admonition" id="definition-23">
+<div class="proof definition admonition" id="definition-24">
 <p class="admonition-title"><span class="caption-number">Definition 65 </span> (Borel measurable function)</p>
 <section class="definition-content" id="proof-content">
 <p>Suppose <span class="math notranslate nohighlight">\(X \subseteq \mathbb{R}.\)</span>
 A function <span class="math notranslate nohighlight">\(f: X \to \mathbb{R}\)</span> is called Borel measurable if <span class="math notranslate nohighlight">\(f^{-1}(B)\)</span> is a Borel set for every Borel set <span class="math notranslate nohighlight">\(B \subseteq \mathbb{R}.\)</span></p>
 </section>
-</div><div class="proof theorem admonition" id="theorem-24">
-<p class="admonition-title"><span class="caption-number">Theorem 73 </span> (Every continuous function is Borel measurable)</p>
+</div><div class="proof theorem admonition" id="theorem-25">
+<p class="admonition-title"><span class="caption-number">Theorem 74 </span> (Every continuous function is Borel measurable)</p>
 <section class="theorem-content" id="proof-content">
 <p>Every continuous real-valued function defined on a Borel subset of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> is a Borel measurable function.</p>
 </section>
@@ -1083,8 +1116,8 @@ f^{-1}((a, \infty)) = \left( \bigcup_{x \in f^{-1}((a, \infty))} (x - \delta_x, 
 <p class="sd-card-text">The above union is a union of open sets, which is therefore also open, so its intersection with <span class="math notranslate nohighlight">\(X\)</span> is a Bore set.
 By our earlier <a class="reference internal" href="#mira-thm-condition-measurable">condition for measurable functions</a>, <span class="math notranslate nohighlight">\(f\)</span> is Borel measurable.</p>
 </div>
-</details><div class="proof theorem admonition" id="theorem-25">
-<p class="admonition-title"><span class="caption-number">Theorem 74 </span> (Every increasing function is Borel measurable)</p>
+</details><div class="proof theorem admonition" id="theorem-26">
+<p class="admonition-title"><span class="caption-number">Theorem 75 </span> (Every increasing function is Borel measurable)</p>
 <section class="theorem-content" id="proof-content">
 <p>Every increasing function defined on a Borel subset of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> is a Borel measurable function.</p>
 </section>
@@ -1105,8 +1138,8 @@ Then</p>
 Since <span class="math notranslate nohighlight">\(X\)</span> is a Borel set, and both <span class="math notranslate nohighlight">\((b, \infty)\)</span> and <span class="math notranslate nohighlight">\([b, \infty)\)</span> are Borel sets, it follows that <span class="math notranslate nohighlight">\(f^{-1}((a, \infty))\)</span> is a Borel set.
 By our earlier <a class="reference internal" href="#mira-thm-condition-measurable">condition for measurable functions</a>, <span class="math notranslate nohighlight">\(f\)</span> is Borel measurable.</p>
 </div>
-</details><div class="proof theorem admonition" id="theorem-26">
-<p class="admonition-title"><span class="caption-number">Theorem 75 </span> (Composition of measurable functions)</p>
+</details><div class="proof theorem admonition" id="theorem-27">
+<p class="admonition-title"><span class="caption-number">Theorem 76 </span> (Composition of measurable functions)</p>
 <section class="theorem-content" id="proof-content">
 <p>Suppose <span class="math notranslate nohighlight">\((X, S)\)</span> is a measurable space and <span class="math notranslate nohighlight">\(f: X \to \mathbb{R}\)</span> is a measurable function.
 Suppose that <span class="math notranslate nohighlight">\(g\)</span> is a real-valued Borel measurable function defined on a subset of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> that includes the range of <span class="math notranslate nohighlight">\(f.\)</span>
@@ -1125,8 +1158,8 @@ Let <span class="math notranslate nohighlight">\(B \subseteq \mathbb{R}\)</span>
 Because <span class="math notranslate nohighlight">\(g\)</span> is a Borel measurable function, and <span class="math notranslate nohighlight">\(B\)</span> is a Borel set, <span class="math notranslate nohighlight">\(g^{-1}(B)\)</span> is also a Borel set.
 Because <span class="math notranslate nohighlight">\(f\)</span> is a measurable function, and <span class="math notranslate nohighlight">\(g^{-1}(B)\)</span> is a Borel set, <span class="math notranslate nohighlight">\(f^{-1}(g^{-1}(B))\)</span> is in <span class="math notranslate nohighlight">\(S,\)</span> so <span class="math notranslate nohighlight">\(g \circ f\)</span> is Borel measurable.</p>
 </div>
-</details><div class="proof theorem admonition" id="theorem-27">
-<p class="admonition-title"><span class="caption-number">Theorem 76 </span> (Algebraic operations with measurable functions)</p>
+</details><div class="proof theorem admonition" id="theorem-28">
+<p class="admonition-title"><span class="caption-number">Theorem 77 </span> (Algebraic operations with measurable functions)</p>
 <section class="theorem-content" id="proof-content">
 <p>Suppose <span class="math notranslate nohighlight">\((X, S)\)</span> is a measurable space and <span class="math notranslate nohighlight">\(f, g: X \to \mathbb{R}\)</span> are <span class="math notranslate nohighlight">\(S\)</span>-measurable functions.
 Then</p>
@@ -1164,10 +1197,10 @@ Note that the function <span class="math notranslate nohighlight">\(r: \mathbb{R
 Then <span class="math notranslate nohighlight">\(1/g = r \circ g\)</span> is a composition of Borel measurable functions, so it is a Borel measurable function.
 Lastly, <span class="math notranslate nohighlight">\(f/g\)</span> is a product of two Borel measurable functions, <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(1 / g,\)</span> so it is a Borel measurable function.</p>
 </div>
-</details><div class="proof theorem admonition" id="theorem-28">
-<p class="admonition-title"><span class="caption-number">Theorem 77 </span> (Pointwise limit of <span class="math notranslate nohighlight">\(S\)</span>-measurable functions is <span class="math notranslate nohighlight">\(S\)</span>-measurable)</p>
+</details><div class="proof theorem admonition" id="theorem-29">
+<p class="admonition-title"><span class="caption-number">Theorem 78 </span> (Pointwise limit of <span class="math notranslate nohighlight">\(S\)</span>-measurable functions is <span class="math notranslate nohighlight">\(S\)</span>-measurable)</p>
 <section class="theorem-content" id="proof-content">
-<p>Suppose <span class="math notranslate nohighlight">\((X, S)\)</span> is a measurable space and <span class="math notranslate nohighlight">\(f_1, f_2, \dots\)</span> are <span class="math notranslate nohighlight">\(S\)</span>-measurable functions from <span class="math notranslate nohighlight">\(X\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span>
+<p>Suppose <span class="math notranslate nohighlight">\((X, S)\)</span> is a measurable space and <span class="math notranslate nohighlight">\(f_1, f_2, \ldots\)</span> are <span class="math notranslate nohighlight">\(S\)</span>-measurable functions from <span class="math notranslate nohighlight">\(X\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span>
 Suppose <span class="math notranslate nohighlight">\(\lim_{k \to \infty} f_k(x)\)</span> exists for each <span class="math notranslate nohighlight">\(x \in X.\)</span>
 Define <span class="math notranslate nohighlight">\(f: X \to \mathbb{R}\)</span> by</p>
 <div class="math notranslate nohighlight">
@@ -1181,7 +1214,7 @@ Proof: Pointwise limit of <span class="math notranslate nohighlight">\(~S\)</spa
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\((X, S)\)</span> is a measurable space and <span class="math notranslate nohighlight">\(f_1, f_2, \dots\)</span> are <span class="math notranslate nohighlight">\(S\)</span>-measurable functions from <span class="math notranslate nohighlight">\(X\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span>
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\((X, S)\)</span> is a measurable space and <span class="math notranslate nohighlight">\(f_1, f_2, \ldots\)</span> are <span class="math notranslate nohighlight">\(S\)</span>-measurable functions from <span class="math notranslate nohighlight">\(X\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span>
 Suppose <span class="math notranslate nohighlight">\(\lim_{k \to \infty} f_k(x)\)</span> exists for each <span class="math notranslate nohighlight">\(x \in X.\)</span>
 Define <span class="math notranslate nohighlight">\(f: X \to \mathbb{R}\)</span> by</p>
 <div class="math notranslate nohighlight">

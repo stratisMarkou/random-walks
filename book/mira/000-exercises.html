@@ -462,7 +462,7 @@ Solution<div class="sd-summary-down docutils">
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(P_N\)</span> be the partition <span class="math notranslate nohighlight">\(x_0, \dots x_{3n}\)</span> of <span class="math notranslate nohighlight">\([a, b]\)</span> with <span class="math notranslate nohighlight">\(x_n = s\)</span> and <span class="math notranslate nohighlight">\(x_{2n} = t,\)</span> defined as</p>
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(P_N\)</span> be the partition <span class="math notranslate nohighlight">\(x_0, \ldots x_{3n}\)</span> of <span class="math notranslate nohighlight">\([a, b]\)</span> with <span class="math notranslate nohighlight">\(x_n = s\)</span> and <span class="math notranslate nohighlight">\(x_{2n} = t,\)</span> defined as</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}x_i - x_{i-1} = \begin{cases}
 \frac{s - a}{n} \text{ if } 1 \leq i \leq n, \\
@@ -881,7 +881,7 @@ This definition determines the measure on all subsets of <span class="math notra
 <div class="math notranslate nohighlight">
 \[\mu(E) = \mu\left(\bigcup_{n \in E} \{n\} \right) = \sum_{n \in E} \mu(\{n\}) = \sum_{n \in E} 2^{-n}.\]</div>
 <p class="sd-card-text">Then, for any <span class="math notranslate nohighlight">\(E \subseteq \mathbb{Z}^+,\)</span> we have <span class="math notranslate nohighlight">\(\mu(E) \in [0, 1].\)</span>
-Conversely, if <span class="math notranslate nohighlight">\(x \in [0, 1],\)</span> then writing the binary expansion of <span class="math notranslate nohighlight">\(x\)</span> as <span class="math notranslate nohighlight">\(x = 0.x_1x_2\dots\)</span>, we see that</p>
+Conversely, if <span class="math notranslate nohighlight">\(x \in [0, 1],\)</span> then writing the binary expansion of <span class="math notranslate nohighlight">\(x\)</span> as <span class="math notranslate nohighlight">\(x = 0.x_1x_2\ldots\)</span>, we see that</p>
 <div class="math notranslate nohighlight">
 \[x = \sum_{n=1}^\infty 2^{-n} \mathbf{1}(x_n = 1) = \sum_{n \in E} 2^{-n},\]</div>
 <p class="sd-card-text">where <span class="math notranslate nohighlight">\(E = \{n \in \mathbb{Z}^+: x_n = 1\}.\)</span>
@@ -1120,7 +1120,7 @@ Let <span class="math notranslate nohighlight">\(A\)</span> be the set consistin
 We can write <span class="math notranslate nohighlight">\(A\)</span> as the union</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
-A = \bigcup_{n=1}^\infty \bigcup_{x_1 \dots x_n \in D} \left(\sum_{k=1}^n x_k \cdot 10^{-k}\right) + 10^{-n} \cdot \left[\sum_{m=1}^{100} 4 \cdot 10^{-m}, 10^{-100} + \sum_{m=1}^{100} 4 \cdot 10^{-m} \right)
+A = \bigcup_{n=1}^\infty \bigcup_{x_1 \ldots x_n \in D} \left(\sum_{k=1}^n x_k \cdot 10^{-k}\right) + 10^{-n} \cdot \left[\sum_{m=1}^{100} 4 \cdot 10^{-m}, 10^{-100} + \sum_{m=1}^{100} 4 \cdot 10^{-m} \right)
 \end{align}\]</div>
 <p class="sd-card-text">where <span class="math notranslate nohighlight">\(D\)</span> is the set of integers from 0 to 9, together with the set</p>
 <div class="math notranslate nohighlight">
@@ -1146,7 +1146,7 @@ C(n, k) = \begin{cases}
 C(n-1, k-1) &amp;\text{if } 1 \leq k &lt; 99
 \end{cases}
 \end{align}\end{split}\]</div>
-<p class="sd-card-text">Letting <span class="math notranslate nohighlight">\(C_n = (C_{n, 0}, C_{n, 1}, \dots, C_{n, 99})\)</span> we can write this as</p>
+<p class="sd-card-text">Letting <span class="math notranslate nohighlight">\(C_n = (C_{n, 0}, C_{n, 1}, \ldots, C_{n, 99})\)</span> we can write this as</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}C_n = \begin{bmatrix}
 9 &amp; 9 &amp; 9 &amp; \dots &amp; 9 &amp; 9 \\
@@ -1253,8 +1253,12 @@ Now, note that the set</p>
 <p class="sd-card-text">is not Borel.
 Then for any open set <span class="math notranslate nohighlight">\(G \subseteq \mathbb{R},\)</span> we have</p>
 <div class="math notranslate nohighlight">
-\[|G \setminus A| = \left|\bigcup_{n \in \mathbb{Z}} ([2n-1, 2n+1] \setminus (2n + V))\right| = \sum_{n \in \mathbb{Z}} |(2n-1, 2n+1) \setminus (2n + V)| = \infty,\]</div>
-<p class="sd-card-text">where in the last line we have used the fact that <span class="math notranslate nohighlight">\(|(2n, 2n+2) \setminus (2n + V)| \geq \epsilon.\)</span></p>
+\[\begin{split}\begin{align}
+|G \setminus A| &amp;= \left|\bigcup_{n \in \mathbb{Z}} (G \cap [2n-1, 2n+1]) \setminus (2n + V)\right| \\
+&amp;= \sum_{n \in \mathbb{Z}} |(G \cap (2n-1, 2n+1)) \setminus (2n + V)| \\
+&amp;= \infty,
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">where in the last line we have used the preliminary result, and in the last line we have used the fact that the sets <span class="math notranslate nohighlight">\((G \cap [2n-1, 2n+1]) \setminus (2n + V)\)</span> are contained in disjoint open intervals <span class="math notranslate nohighlight">\((2n-1, 2n+1),\)</span> so <a class="reference internal" href="002-measures.html#mira:thm:outer-measure-is-additive-if-sets-are-separable">the outer measure of their union is the sum of their outer measures</a>.</p>
 </div>
 </details></div>
 <div class="tip admonition">
@@ -1272,42 +1276,27 @@ Solution<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text"><strong>Part a:</strong>
-Let <span class="math notranslate nohighlight">\(C\)</span> be a collection of nontrivial intervals of <span class="math notranslate nohighlight">\(\mathbb{R},\)</span> and define</p>
+Given a nontrivial interval <span class="math notranslate nohighlight">\(I,\)</span> let <span class="math notranslate nohighlight">\(I'\)</span> denote the interval minus its supremum and infimum, that is</p>
 <div class="math notranslate nohighlight">
-\[\bar{C} = \bigcup_{I \in C} I.\]</div>
-<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(x \in I\)</span> for some <span class="math notranslate nohighlight">\(I \in C,\)</span> and define</p>
-<div class="math notranslate nohighlight">
-\[U(x) = \sup\{\sup I: x \in I \in C\}.\]</div>
-<p class="sd-card-text">In other words, if <span class="math notranslate nohighlight">\(x \in \bar{C},\)</span> then <span class="math notranslate nohighlight">\(U(x)\)</span> is the largest number among all right endpoints of all intervals in <span class="math notranslate nohighlight">\(C\)</span> that contain <span class="math notranslate nohighlight">\(x.\)</span>
-There are two possibilities, namely <span class="math notranslate nohighlight">\(U(x) &lt; \infty\)</span> or <span class="math notranslate nohighlight">\(U(x) = \infty.\)</span>
-Define <span class="math notranslate nohighlight">\(R: \bar{C} \times \mathbb{N} \to C\)</span> as follows:</p>
-<ul class="simple">
-<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(U(x) &lt; \infty\)</span>:
-If there does not exist <span class="math notranslate nohighlight">\(I \in C\)</span> such that <span class="math notranslate nohighlight">\(x \in I\)</span> and <span class="math notranslate nohighlight">\(\sup I = U(x),\)</span> then let <span class="math notranslate nohighlight">\(R(x, n) = A\)</span> where <span class="math notranslate nohighlight">\(x \in A \in C\)</span> such that <span class="math notranslate nohighlight">\(\sup A \geq U(x) - 1/n.\)</span>
-Otherwise, if there exists <span class="math notranslate nohighlight">\(I \in C\)</span> such that <span class="math notranslate nohighlight">\(x \in I\)</span> and <span class="math notranslate nohighlight">\(\sup I = U(x),\)</span> then let <span class="math notranslate nohighlight">\(R(x, n) = I.\)</span></p></li>
-<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(U(x) = \infty\)</span>:
-Let <span class="math notranslate nohighlight">\(R(x, n) = I\)</span> where <span class="math notranslate nohighlight">\(x \in I \in C\)</span> and <span class="math notranslate nohighlight">\(\sup I \geq x + 1.\)</span></p></li>
-</ul>
-<p class="sd-card-text">Similarly, we can define <span class="math notranslate nohighlight">\(L(x) = \inf\{\inf I: x \in I \in C\},\)</span> for which there are two possibilities, namely <span class="math notranslate nohighlight">\(L(x) &gt; -\infty\)</span> or <span class="math notranslate nohighlight">\(L(x) = -\infty.\)</span>
-Define <span class="math notranslate nohighlight">\(S: \bar{C} \times \mathbb{N} \to C\)</span> as follows:</p>
-<ul class="simple">
-<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(L(x) &gt; -\infty\)</span>:
-If there does not exist <span class="math notranslate nohighlight">\(I \in C\)</span> such that <span class="math notranslate nohighlight">\(x \in I\)</span> and <span class="math notranslate nohighlight">\(\inf I = L(x),\)</span> then let <span class="math notranslate nohighlight">\(S(x, n) = A\)</span> where <span class="math notranslate nohighlight">\(x \in A \in C\)</span> such that <span class="math notranslate nohighlight">\(\inf A \leq L(x) + 1/n.\)</span>
-Otherwise, if there exists <span class="math notranslate nohighlight">\(I \in C\)</span> such that <span class="math notranslate nohighlight">\(x \in I\)</span> and <span class="math notranslate nohighlight">\(\inf I = L(x),\)</span> then let <span class="math notranslate nohighlight">\(S(x, n) = I.\)</span></p></li>
-<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(L(x) = -\infty\)</span>:
-Let <span class="math notranslate nohighlight">\(S(x, n) = I\)</span> where <span class="math notranslate nohighlight">\(x \in I \in C\)</span> and <span class="math notranslate nohighlight">\(\inf I \leq x - 1.\)</span></p></li>
-</ul>
-<p class="sd-card-text">Now, define</p>
-<div class="math notranslate nohighlight">
-\[T = \bigcup_{q \in \mathbb{Q} \cap \bar{C}, n \in \mathbb{N}} (R(q, n) \cup S(q, n)).\]</div>
-<p class="sd-card-text">Now, note that if <span class="math notranslate nohighlight">\(x \in \bar{C} \cap \mathbb{Q},\)</span> then <span class="math notranslate nohighlight">\(x \in T.\)</span>
-Suppose that <span class="math notranslate nohighlight">\(x \in \bar{C} \setminus \mathbb{Q}.\)</span>
-Then, <span class="math notranslate nohighlight">\(x \in I\)</span> for some <span class="math notranslate nohighlight">\(I \in C.\)</span>
-Because the rationals are dense in <span class="math notranslate nohighlight">\(I\)</span> and <span class="math notranslate nohighlight">\(I\)</span> is a nontrivial interval, we can find <span class="math notranslate nohighlight">\(y \in \mathbb{Q} \cap I\)</span> such that <span class="math notranslate nohighlight">\(|y - x|\)</span> is arbitrarily small.
-From this, and our definition of <span class="math notranslate nohighlight">\(R\)</span> and <span class="math notranslate nohighlight">\(S\)</span> it follows that <span class="math notranslate nohighlight">\(x \in R(y, n) \cup S(y, n)\)</span> for some <span class="math notranslate nohighlight">\(y \in \mathbb{Q} \cap I\)</span> and some <span class="math notranslate nohighlight">\(n \in \mathbb{N}.\)</span>
-Therefore <span class="math notranslate nohighlight">\(\bar{C} \subseteq T.\)</span>
-By definition, <span class="math notranslate nohighlight">\(T \subseteq \bar{C},\)</span> so we conclude that <span class="math notranslate nohighlight">\(T = \bar{C}.\)</span>
-Lastly, note that <span class="math notranslate nohighlight">\(T\)</span> is a countable union of subsets of <span class="math notranslate nohighlight">\(C,\)</span> proving the result.</p>
+\[I' = (I \setminus \{\sup I\}) \setminus \{\inf I\}.\]</div>
+<p class="sd-card-text">Then, note that the set <span class="math notranslate nohighlight">\(\cup_{I \in C} I'\)</span> is a union of open sets and is therefore open, so it can be written as the union of a countable collection of disjoint open intervals, say <span class="math notranslate nohighlight">\(U_1, U_2, \ldots.\)</span>
+Now, note that the sets <span class="math notranslate nohighlight">\(\cup_{I \in C} I\)</span> and <span class="math notranslate nohighlight">\(\cup_{n=1}^\infty U_n\)</span> differ by, at most, the endpoints of each interval <span class="math notranslate nohighlight">\(U_n,\)</span> of which there are countably many.
+Each of the endpoints of each of the <span class="math notranslate nohighlight">\(U_n\)</span> that is contained in <span class="math notranslate nohighlight">\(\cup_{I \in C} I\)</span> must be contained in at least one <span class="math notranslate nohighlight">\(I \in C.\)</span>
+Therefore, <span class="math notranslate nohighlight">\(\cup_{I \in C} I\)</span> can be written as a countable union of the sets <span class="math notranslate nohighlight">\(U_n\)</span> and the corresponding sets <span class="math notranslate nohighlight">\(I \in C\)</span> containing their endpoints.
+Now, we will show that each <span class="math notranslate nohighlight">\(U_n\)</span> can be written as a countable union of nontrivial intervals in <span class="math notranslate nohighlight">\(C.\)</span></p>
+<p class="sd-card-text">Consider the case where <span class="math notranslate nohighlight">\(U_n\)</span> is bounded, and let <span class="math notranslate nohighlight">\(\inf U_n = a\)</span> and <span class="math notranslate nohighlight">\(\sup U_n = b.\)</span>
+Then, for each <span class="math notranslate nohighlight">\(k \in \mathbb{Z},\)</span> we have <span class="math notranslate nohighlight">\([a + 1/k, b - 1/k] \subseteq U_n.\)</span>
+Note that <span class="math notranslate nohighlight">\(\{I' : I \in C\}\)</span> is an open cover of <span class="math notranslate nohighlight">\(U_n,\)</span> so it is also an open cover of <span class="math notranslate nohighlight">\([a + 1/k, b - 1/k].\)</span>
+By the <a class="reference internal" href="002-measures.html#mira:thm:heine-borel">Heine-Borel theorem</a>, there exists a finite open subcover of <span class="math notranslate nohighlight">\([a + 1/k, b - 1/k]\)</span> from <span class="math notranslate nohighlight">\(\{I' : I \in C\},\)</span> so there exists a finite set of nontrivial intervals in <span class="math notranslate nohighlight">\(C\)</span> whose union contains <span class="math notranslate nohighlight">\([a + 1/k, b - 1/k].\)</span>
+The union of all such sets over <span class="math notranslate nohighlight">\(k = 1, 2, \ldots\)</span> is a countable union of nontrivial intervals in <span class="math notranslate nohighlight">\(C\)</span> whose union contains <span class="math notranslate nohighlight">\(U_n.\)</span></p>
+<p class="sd-card-text">Consider the case where <span class="math notranslate nohighlight">\(U_n\)</span> is bounded below but not above, and let <span class="math notranslate nohighlight">\(\inf U_n = a.\)</span>
+Then, for each <span class="math notranslate nohighlight">\(k \in \mathbb{Z},\)</span> we have <span class="math notranslate nohighlight">\([a + 1/k, a + k] \subseteq U_n.\)</span>
+Similarly to the reasoning above, <span class="math notranslate nohighlight">\([a + 1/k, a + k]\)</span> can be covered by a finite number of nontrivial intervals in <span class="math notranslate nohighlight">\(C,\)</span> and the union of all such sets over <span class="math notranslate nohighlight">\(k = 1, 2, \ldots\)</span> is a countable union of nontrivial intervals in <span class="math notranslate nohighlight">\(C\)</span> whose union contains <span class="math notranslate nohighlight">\(U_n.\)</span>
+The same reasoning applies to the case where <span class="math notranslate nohighlight">\(U_n\)</span> is bounded above but not below, using instead the intervals <span class="math notranslate nohighlight">\([b - k, b - 1/k]\)</span> for <span class="math notranslate nohighlight">\(k = 1, 2, \ldots,\)</span> where <span class="math notranslate nohighlight">\(b = \sup U_n.\)</span>
+Lastly, to deal with the case where <span class="math notranslate nohighlight">\(U_n\)</span> is unbounded, we apply the same argument considering instead intervals of the form <span class="math notranslate nohighlight">\([-k, k]\)</span> for <span class="math notranslate nohighlight">\(k = 1, 2, \ldots.\)</span></p>
+<p class="sd-card-text">We therefore conclude that <span class="math notranslate nohighlight">\(\cup_{I \in C} I\)</span> can be written as a countable union of open intervals <span class="math notranslate nohighlight">\(U_n\)</span> and a countable union of nontrivial intervals in <span class="math notranslate nohighlight">\(C\)</span> containing any endpoints of the <span class="math notranslate nohighlight">\(U_n\)</span> that are missing from <span class="math notranslate nohighlight">\(\cup_{I \in C} I.\)</span>
+In addition, each <span class="math notranslate nohighlight">\(U_n\)</span> can be written as a countable union of nontrivial intervals in <span class="math notranslate nohighlight">\(C.\)</span>
+Therefore the entire union consists of nontrivial intervals in <span class="math notranslate nohighlight">\(C,\)</span> and is countable.</p>
 <p class="sd-card-text"><strong>Part b:</strong>
 Since all nontrivial intervals are intervals, they are Borel.
 Since, as we showed in part (a), the union of a collection of nontrivial intervals is a countable union of subsets of that collection, which are themselves Borel, so the union is also Borel.</p>

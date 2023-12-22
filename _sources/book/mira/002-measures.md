@@ -151,6 +151,7 @@ Another useful property of the outer measure is countable subadditivity.
 This property will also turn out to be true of more general measures which we will define later.
 
 :::{prf:theorem} Outer measure is countably subadditive
+:label: mira:thm:outer-measure-is-countably-subadditive
 
 Suppose $A_1, A_2, \ldots$ are subsets of $\mathbb{R}.$
 Then
@@ -303,7 +304,7 @@ Then, $b$ is in at least one of these open intervals which, after relabelling, w
 Let us write $I_{n+1} = (c, d),$ and note that $b < d.$
 Then if $c \leq a,$ we have that $\ell(I_{n+1}) = d - c \geq b - a,$ which shows the inductive step.
 If $c > a,$ then $a < c < b < d.$
-Since $[a, b]$ is has $I_1, \dots, I_n, I_{n+1}$ as an open cover, it follows that $[a, c]$ has $I_1, \dots, I_n,$ as an open cover, that is
+Since $[a, b]$ is has $I_1, \ldots, I_n, I_{n+1}$ as an open cover, it follows that $[a, c]$ has $I_1, \ldots, I_n,$ as an open cover, that is
 
 $$[a, c] \subseteq I_1 \cup \cdots \cup I_n.$$
 
@@ -345,16 +346,14 @@ Since {prf:ref}`every countable subset of $\mathbb{R}$ has outer measure zero <m
 
 
 
-
 ### Nonadditivity of the outer measure
+
 
 Now we come to the negative result of the outer measure, namely that it is not additive.
 Additivity is an important property that we would like our notion of length to have, because it allows us to prove good theorems about integration.
 
 The proof of nonadditivity of the outer measure relies on defining a subset of a closed interval.
 Similar sets are used beyond the subadditivity of the outer measure, so we give it a special name.
-
-
 
 
 
@@ -434,8 +433,45 @@ reaching a contradiction, because $|V| > 0,$ so the above inequality cannot hold
 :::
 
 Shortly, we will show that this negative result is not a fundamental limitation of our definition of the outer measure.
-As explained earlier, any function that satisfies some of the aforementioned properties of the outer measure and has domain equal to the power set of $\mathbb{R}$ cannot be additive.
+Before doing so however, we will give a positive result that is useful in some contexts.
+Specifically, we will show that given a sequence of sets that are contained by disjoint open intervals, the outer measure of the union of the sets is equal to the sum of the outer measures of the sets.
 
+
+:::{prf:theorem} Outer measure is additive if sets are contained by disjoint open intervals
+:label: mira:thm:outer-measure-is-additive-if-sets-are-separable
+
+If $S_1, S_2, \ldots \subseteq \mathbb{R}$ is a sequence of sets such that there exists a sequence open disjoint intervals $A_1, A_2, \ldots,$ with $S_k \subseteq A_k,$ then
+
+$$\left|\bigcup_{n=1}^\infty S_n\right| = \sum_{n=1}^\infty |S_n|.$$
+:::
+
+
+:::{dropdown} Proof: Outer measure is additive if sets are contained by disjoint open intervals
+
+First, by the {prf:ref}`subadditivity of the outer measure<mira:thm:outer-measure-is-countably-subadditive>`, we have 
+
+$$\left|\bigcup_{n=1}^\infty S_n\right| \leq \sum_{n=1}^\infty |S_n|.$$
+
+We will now show the inequality in the other direction.
+Suppose that $I_1, I_2, \ldots$ is a sequence of open intervals whose union contains $\cup_{n=1}^\infty S_n.$
+Since the sets $A_n$ are disjoint, for each $k \in \mathbb{N},$ we have
+
+$$\ell(I_k) \geq \sum_{n=1}^\infty \ell(I_k \cap A_n).$$
+
+Therefore, we have
+
+$$\sum_{k=1}^\infty \ell(I_k) \geq \sum_{k=1}^\infty \sum_{n=1}^\infty \ell(I_k \cap A_n) = \sum_{n=1}^\infty \sum_{k=1}^\infty\ell(I_k \cap A_n) \geq \sum_{n=1}^\infty |S_n|$$
+
+where the last equality follows from the fact that for a fixed $n \in \mathbb{N},$ the sets $I_1 \cap A_n, I_2 \cap A_n, \ldots$ are open intervals whose union contains $S_n.$
+Taking the infimum over all sequences of all open intervals whose union contains $\cup_{n=1}^\infty S_n,$ we have
+
+$$\left|\bigcup_{n=1}^\infty S_n\right| \geq \sum_{n=1}^\infty |S_n|,$$ 
+
+completing the result.
+
+:::
+
+This result highlights that if there is a sequence of sets on which the outer measure is not additive, then the sets cannot be separable in the sense described above.
 
 
 
@@ -464,9 +500,9 @@ We will show that $\mu$ has all the properties that were used in our proof of th
 
 __Showing the relevant properties:__
 First, observe that $\mu(\emptyset) = 0,$ because $\emptyset$ is an open interval with length $0.$
-Now, $\mu$ has the order preserving property, bevause if $A \subseteq B \subseteq \mathbb{R},$ then $\mu(A) \subseteq \mu(B),$ because considering the sequence $A, B \setminus A, \emptyset, \emptyset, \dots$ and applying property (c), we arrive at
+Now, $\mu$ has the order preserving property, bevause if $A \subseteq B \subseteq \mathbb{R},$ then $\mu(A) \subseteq \mu(B),$ because considering the sequence $A, B \setminus A, \emptyset, \emptyset, \ldots$ and applying property (c), we arrive at
 
-$$\mu(B) = \mu(A) + \mu(B \setminus A) + 0 + 0 + \dots = \mu(A) + \mu(B \setminus A) \geq \mu(A).$$
+$$\mu(B) = \mu(A) + \mu(B \setminus A) + 0 + 0 + \ldots = \mu(A) + \mu(B \setminus A) \geq \mu(A).$$
 
 In addition, if $a, b \in \mathbb{R}$ with $a < b,$ then 
 
@@ -480,14 +516,14 @@ and since $\epsilon > 0$ is arbitrary, this implies that
 
 $$\mu([a, b]) = b - a.$$ (mira:eq:mu-of-closed-interval)
 
-Finally, if $A_1, A_2, \dots$ is a sequence of disjoint subsets of $\mathbb{R},$ then
+Finally, if $A_1, A_2, \ldots$ is a sequence of disjoint subsets of $\mathbb{R},$ then
 
 $$A_1, A_2 \setminus A_1, A_3 \setminus (A_1 \cup A_2), \ldots$$
 
 is a sequence of disjoint subsets of $\mathbb{R},$ so by property (c), we have
 
 $$\begin{align}
-\mu\left( \bigcup_{k=1}^\infty A_k \right) &= \mu\left( A_1 \cup (A_2 \setminus A_1) \cup (A_3 \setminus (A_1 \cup A_2)) \cup \dots \right) \\
+\mu\left( \bigcup_{k=1}^\infty A_k \right) &= \mu\left( A_1 \cup (A_2 \setminus A_1) \cup (A_3 \setminus (A_1 \cup A_2)) \cup \ldots \right) \\
 &= \mu(A_1) + \mu(A_2 \setminus A_1) + \mu(A_3 \setminus (A_1 \cup A_2)) + \cdots \\
 &\leq \sum_{k=1}^\infty \mu(A_k).
 \end{align}$$ (mira:eq:mu-is-countably-subadditive)
@@ -498,7 +534,7 @@ __Repeating the argument:__
 Now, define the set $V$ in the same way that it was defined in the proof of the {prf:ref}`nonadditivity of the outer measure <mira:thm:non-additivity-of-outer-measure>`.
 Specifically, let $\sim$ be the equivalence relation such that for $x, y \in [-1, 1]$ we have $x \sim y$ if $x$ and $y$ differ by a rational number.
 Let $V$ be the set which contains exactly one representative from each equivalence clss of $\sim.$
-Let $r_1, r_2, \dots$ be a sequence that contains each rational number in $[-2, 2]$ exactly once.
+Let $r_1, r_2, \ldots$ be a sequence that contains each rational number in $[-2, 2]$ exactly once.
 Then, by properties {eq}`mira:eq:mu-of-closed-interval` and {eq}`mira:eq:mu-is-countably-subadditive` of $\mu,$ as well as the translation invariance of $\mu$, property (d), we have
 
 $$2 = \mu([-1, 1]) = \mu\left(\bigcup_{k = 1}^\infty r_k + V\right) = \sum_{k=1}^\infty \mu(r_k + V) = \sum_{k=1}^\infty \mu(V)$$
@@ -527,7 +563,7 @@ Then $S$ is called a $\sigma$-algebra on $X$ if it satisfies:
 
 - $\emptyset \in S,$
 - if $E \in S,$ then $X \setminus E \in S,$
-- if $E_1, E_2, \dots$ is a sequnece of elements of $S,$ then $\bigcup_{k=1}^\infty E_k \in S.$
+- if $E_1, E_2, \ldots$ is a sequnece of elements of $S,$ then $\bigcup_{k=1}^\infty E_k \in S.$
 
 :::
 
@@ -542,7 +578,7 @@ Then
 
 (b) if $D, E \in S,$ then $D \cup E \in S, D \cap E \in S$ and $D \setminus E \in S,$
 
-(c) if $E_1, E_2, \dots$ is a sequence of elements of $S,$ then $\cap_{k = 1}^\infty E_k \in S.$
+(c) if $E_1, E_2, \ldots$ is a sequence of elements of $S,$ then $\cap_{k = 1}^\infty E_k \in S.$
 
 :::
 
@@ -551,13 +587,13 @@ Then
 
 Because $\emptyset \in S$ and $X = X \setminus \emptyset,$ we have $X \in S.$
 Suppose $D, E \in S.$
-Then $D \cup E \in S$ because this is the union of the sequence $D, E, \emptyset, \emptyset, \dots \in S.$
+Then $D \cup E \in S$ because this is the union of the sequence $D, E, \emptyset, \emptyset, \ldots \in S.$
 In addition,
 
 $$D \cap E = X \setminus ((X \setminus D) \cup (X \setminus E)) \in S,$$
 
 and also $D \setminus (X \setminus E) = D \cap E \in S.$
-Lastly, if $E_1, E_2, \dots$ is a sequence of elements of $S,$ then
+Lastly, if $E_1, E_2, \ldots$ is a sequence of elements of $S,$ then
 
 $$\bigcap_{k=1}^\infty E_k = X \setminus \bigcup_{k=1}^\infty (X \setminus E_k) \in S.$$
 
@@ -588,7 +624,7 @@ Let $S$ be the intersection of all $\sigma$-algebras on $X$ that contain $A.$
 
 First, $\emptyset \in S,$ because $\emptyset$ is in every $\sigma$-algebra on $X.$
 Second, if $E \in S,$ then $E$ is in every $\sigma$-algebra on $X$ that contains $A,$ so $X \setminus E$ is in every $\sigma$-algebra on $X$ that contains $A,$ so $X \setminus E \in S.$
-Third, if $E_1, E_2, \dots$ is a sequence of elements of $S,$ then $E_1, E_2, \dots$ is a sequence of elements of every $\sigma$-algebra on $X$ that contains $A,$ so $\bigcup_{k=1}^\infty E_k$ is in every $\sigma$-algebra on $X$ that contains $A,$ so $\bigcup_{k=1}^\infty E_k \in S.$
+Third, if $E_1, E_2, \ldots$ is a sequence of elements of $S,$ then $E_1, E_2, \ldots$ is a sequence of elements of every $\sigma$-algebra on $X$ that contains $A,$ so $\bigcup_{k=1}^\infty E_k$ is in every $\sigma$-algebra on $X$ that contains $A,$ so $\bigcup_{k=1}^\infty E_k \in S.$
 
 :::
 
@@ -752,7 +788,7 @@ Then, we will show that $T$ contains all the open intervals of $\mathbb{R},$ whi
 __$T$ is a $\sigma$-algebra on $\mathbb{R}$:__
 First, $\emptyset \in T,$ because $f^{-1}(\emptyset) = \emptyset \in S.$
 Second, if $A \in T,$ then $f^{-1}(A) \in S,$ so $f^{-1}(X \setminus A) = X \setminus f^{-1}(A) \in S,$ so $X \setminus A \in T.$
-Third, if $A_1, A_2, \dots \in T,$ then $f^{-1}(A_1), f^{-1}(A_2), \dots \in S,$ so 
+Third, if $A_1, A_2, \ldots \in T,$ then $f^{-1}(A_1), f^{-1}(A_2), \ldots \in S,$ so 
 
 $$f^{-1}\left(\bigcup_{k=1}^\infty A_k\right) = \bigcup_{k=1}^\infty f^{-1}(A_k) \in S,$$
 
@@ -909,7 +945,7 @@ Lastly, $f/g$ is a product of two Borel measurable functions, $f$ and $1 / g,$ s
 
 :::{prf:theorem} Pointwise limit of $S$-measurable functions is $S$-measurable
 
-Suppose $(X, S)$ is a measurable space and $f_1, f_2, \dots$ are $S$-measurable functions from $X$ to $\mathbb{R}.$
+Suppose $(X, S)$ is a measurable space and $f_1, f_2, \ldots$ are $S$-measurable functions from $X$ to $\mathbb{R}.$
 Suppose $\lim_{k \to \infty} f_k(x)$ exists for each $x \in X.$
 Define $f: X \to \mathbb{R}$ by
 
@@ -924,7 +960,7 @@ Then $f$ is a $S$-measurable function.
 
 :::{dropdown} Proof: Pointwise limit of $~S$-measurable functions is $~S$-measurable
 
-Suppose $(X, S)$ is a measurable space and $f_1, f_2, \dots$ are $S$-measurable functions from $X$ to $\mathbb{R}.$
+Suppose $(X, S)$ is a measurable space and $f_1, f_2, \ldots$ are $S$-measurable functions from $X$ to $\mathbb{R}.$
 Suppose $\lim_{k \to \infty} f_k(x)$ exists for each $x \in X.$
 Define $f: X \to \mathbb{R}$ by
 
