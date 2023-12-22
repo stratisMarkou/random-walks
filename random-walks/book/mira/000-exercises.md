@@ -979,7 +979,7 @@ Recall that an interval might be open, closed, or neither.
 __Part a:__
 Given a nontrivial interval $I,$ let $I'$ denote the interval minus its supremum and infimum, that is
 
-$$I' = (I \setminus \{\sup I\}) \setminus \{\inf I\}.$$
+$$I' = I \setminus \{\sup I, \inf I\}.$$
 
 Then, note that the set $\cup_{I \in C} I'$ is a union of open sets and is therefore open, so it can be written as the union of a countable collection of disjoint open intervals, say $U_1, U_2, \ldots.$
 Now, note that the sets $\cup_{I \in C} I$ and $\cup_{n=1}^\infty U_n$ differ by, at most, the endpoints of each interval $U_n,$ of which there are countably many.
