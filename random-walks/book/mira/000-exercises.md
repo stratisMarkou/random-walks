@@ -1063,7 +1063,7 @@ Suppose $A$ is Lebesgue measurable.
 Let $\epsilon > 0.$
 Then, there exists an open set $B$ such that
 
-$$A \subseteq B$ and $|B \setminus A| < \epsilon/2.$$ (mira:eq:2d6:1)
+$$A \subseteq B \text{ and } |B \setminus A| < \epsilon/2.$$ (mira:eq:2d6:1)
 
 Since $B$ is an open set, it is equal to a countable union of disjoint open intervals, say $B = \cup_{n=1}^\infty I_n.$
 Note that $|B| \leq |A| + |B \setminus A| < \infty,$ so 
