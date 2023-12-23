@@ -979,10 +979,10 @@ Recall that an interval might be open, closed, or neither.
 __Part a:__
 Given a nontrivial interval $I,$ let $I'$ denote the interval minus its supremum and infimum, that is
 
-$$I' = I \setminus \{\sup I, \inf I\}.$$
+$$I' = I \setminus \{\inf I, \sup I\}.$$
 
 Then, note that the set $\cup_{I \in C} I'$ is a union of open sets and is therefore open, so it can be written as the union of a countable collection of disjoint open intervals, say $U_1, U_2, \ldots.$
-Now, note that the sets $\cup_{I \in C} I$ and $\cup_{n=1}^\infty U_n$ differ by, at most, the endpoints of each interval $U_n,$ of which there are countably many.
+The sets $\cup_{I \in C} I$ and $\cup_{n=1}^\infty U_n$ differ by at most the infimum and supremum of each interval $U_n,$ of which there are countably many.
 Each of the endpoints of each of the $U_n$ that is contained in $\cup_{I \in C} I$ must be contained in at least one $I \in C.$
 Therefore, $\cup_{I \in C} I$ can be written as a countable union of the sets $U_n$ and the corresponding sets $I \in C$ containing their endpoints.
 Now, we will show that each $U_n$ can be written as a countable union of nontrivial intervals in $C.$
