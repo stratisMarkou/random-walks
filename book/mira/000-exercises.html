@@ -1278,9 +1278,9 @@ Solution<div class="sd-summary-down docutils">
 <p class="sd-card-text"><strong>Part a:</strong>
 Given a nontrivial interval <span class="math notranslate nohighlight">\(I,\)</span> let <span class="math notranslate nohighlight">\(I'\)</span> denote the interval minus its supremum and infimum, that is</p>
 <div class="math notranslate nohighlight">
-\[I' = (I \setminus \{\sup I\}) \setminus \{\inf I\}.\]</div>
+\[I' = I \setminus \{\inf I, \sup I\}.\]</div>
 <p class="sd-card-text">Then, note that the set <span class="math notranslate nohighlight">\(\cup_{I \in C} I'\)</span> is a union of open sets and is therefore open, so it can be written as the union of a countable collection of disjoint open intervals, say <span class="math notranslate nohighlight">\(U_1, U_2, \ldots.\)</span>
-Now, note that the sets <span class="math notranslate nohighlight">\(\cup_{I \in C} I\)</span> and <span class="math notranslate nohighlight">\(\cup_{n=1}^\infty U_n\)</span> differ by, at most, the endpoints of each interval <span class="math notranslate nohighlight">\(U_n,\)</span> of which there are countably many.
+The sets <span class="math notranslate nohighlight">\(\cup_{I \in C} I\)</span> and <span class="math notranslate nohighlight">\(\cup_{n=1}^\infty U_n\)</span> differ by at most the infimum and supremum of each interval <span class="math notranslate nohighlight">\(U_n,\)</span> of which there are countably many.
 Each of the endpoints of each of the <span class="math notranslate nohighlight">\(U_n\)</span> that is contained in <span class="math notranslate nohighlight">\(\cup_{I \in C} I\)</span> must be contained in at least one <span class="math notranslate nohighlight">\(I \in C.\)</span>
 Therefore, <span class="math notranslate nohighlight">\(\cup_{I \in C} I\)</span> can be written as a countable union of the sets <span class="math notranslate nohighlight">\(U_n\)</span> and the corresponding sets <span class="math notranslate nohighlight">\(I \in C\)</span> containing their endpoints.
 Now, we will show that each <span class="math notranslate nohighlight">\(U_n\)</span> can be written as a countable union of nontrivial intervals in <span class="math notranslate nohighlight">\(C.\)</span></p>
@@ -1329,6 +1329,72 @@ Let <span class="math notranslate nohighlight">\(F_n = \bigcup_{k=1}^n C_k,\)</s
 <p class="sd-card-text">and taking <span class="math notranslate nohighlight">\(n \to \infty,\)</span> we obtain</p>
 <div class="math notranslate nohighlight">
 \[\left|A \setminus \bigcup_{n=1}^\infty F_n\right| = 0.\]</div>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 2.D.6</p>
+<p>Suppose <span class="math notranslate nohighlight">\(A \subseteq \mathbb{R}\)</span> and <span class="math notranslate nohighlight">\(|A| &lt; \infty.\)</span>
+Prove that <span class="math notranslate nohighlight">\(A\)</span> is Lebesgue measurable if and only if for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> there exists a set <span class="math notranslate nohighlight">\(G\)</span> that is the union of finitely many disjoint open intervals such that <span class="math notranslate nohighlight">\(|A \setminus G| + |G \setminus A| &lt; \epsilon.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(A \subseteq \mathbb{R}\)</span> and <span class="math notranslate nohighlight">\(|A| &lt; \infty.\)</span>
+We prove the result in two parts.</p>
+<p class="sd-card-text"><strong>Part 1:</strong>
+Suppose <span class="math notranslate nohighlight">\(A\)</span> is Lebesgue measurable.
+Let <span class="math notranslate nohighlight">\(\epsilon &gt; 0.\)</span>
+Then, there exists an open set <span class="math notranslate nohighlight">\(B\)</span> such that</p>
+<div class="math notranslate nohighlight" id="equation-mira-eq-2d6-1">
+<span class="eqno">(5)<a class="headerlink" href="#equation-mira-eq-2d6-1" title="Permalink to this equation">#</a></span>\[A \subseteq B$ and $|B \setminus A| &lt; \epsilon/2.\]</div>
+<p class="sd-card-text">Since <span class="math notranslate nohighlight">\(B\)</span> is an open set, it is equal to a countable union of disjoint open intervals, say <span class="math notranslate nohighlight">\(B = \cup_{n=1}^\infty I_n.\)</span>
+Note that <span class="math notranslate nohighlight">\(|B| \leq |A| + |B \setminus A| &lt; \infty,\)</span> so</p>
+<div class="math notranslate nohighlight" id="equation-mira-eq-2d6-2">
+<span class="eqno">(6)<a class="headerlink" href="#equation-mira-eq-2d6-2" title="Permalink to this equation">#</a></span>\[|B| = \left|\bigcup_{n=1}^\infty I_n\right| = \sum_{n=1}^\infty |I_n| &lt; \infty.\]</div>
+<p class="sd-card-text">Therefore, the sequence <span class="math notranslate nohighlight">\(|I_1|, |I_2|, \ldots\)</span> is bounded and attains its supremum.
+By relabelling, we can order the <span class="math notranslate nohighlight">\(I_n\)</span> in order of decreasing outer measure.
+From <a class="reference internal" href="#equation-mira-eq-2d6-2">(6)</a>, we know that the series of <span class="math notranslate nohighlight">\(|I_n|\)</span> converges, so there exists <span class="math notranslate nohighlight">\(N \in \mathbb{N}\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[\sum_{n=1}^\infty |I_n| - \sum_{n=1}^N |I_n| &lt; \epsilon/2,\]</div>
+<p class="sd-card-text">which, together with the fact that <span class="math notranslate nohighlight">\(\sum_{n=1}^N I_N \subseteq B,\)</span> implies</p>
+<div class="math notranslate nohighlight">
+\[\left| B \setminus \bigcup_{n=1}^N I_n \right| = \left| \bigcup_{n=1}^\infty I_n \setminus \bigcup_{n=1}^N I_n \right| = \left| \bigcup_{n=N+1}^\infty I_n\right| = \sum_{n=N+1}^\infty |I_n| &lt; \epsilon/2.\]</div>
+<p class="sd-card-text">Therefore, letting <span class="math notranslate nohighlight">\(G = \sum_{n=1}^N I_n,\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\left|A \setminus G\right| &amp;= \left|A \cap G'\right| \\
+&amp;= \left|(A \cap B \cap G') \cup (A \cap B' \cap G')\right| \\
+&amp;\leq \frac{\epsilon}{2} + \left|A \cap B'\right| \\
+&amp;= \frac{\epsilon}{2}
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">where in the last line we have used the fact that <span class="math notranslate nohighlight">\(|A \cap B'| = 0\)</span> because <span class="math notranslate nohighlight">\(A \subseteq B.\)</span>
+Therefore, putting the inequalities in <a class="reference internal" href="#equation-mira-eq-2d6-1">(5)</a> and <a class="reference internal" href="#equation-mira-eq-2d6-2">(6)</a> together, we have</p>
+<div class="math notranslate nohighlight">
+\[|G \setminus A| + |A \setminus G| &lt; \epsilon.\]</div>
+<p class="sd-card-text"><strong>Part 2:</strong>
+Conversely, suppose that for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> there exists a set <span class="math notranslate nohighlight">\(B\)</span> that is the union of finitely many disjoint open intervals such that</p>
+<div class="math notranslate nohighlight">
+\[|B \setminus A| + |A \setminus B| &lt; \epsilon.\]</div>
+<p class="sd-card-text">Fix <span class="math notranslate nohighlight">\(\epsilon &gt; 0,\)</span> and let <span class="math notranslate nohighlight">\(B\)</span> be a set that satisfies the above conditions, and</p>
+<div class="math notranslate nohighlight" id="equation-mira-eq-2d6-3">
+<span class="eqno">(7)<a class="headerlink" href="#equation-mira-eq-2d6-3" title="Permalink to this equation">#</a></span>\[|B \setminus A| + |A \setminus B| &lt; \epsilon / 2.\]</div>
+<p class="sd-card-text">Then, by <a class="reference internal" href="#equation-mira-eq-2d6-3">(7)</a> and the definition of the outer measure, there exists a sequence of open intervals <span class="math notranslate nohighlight">\(I_1, I_2, \ldots,\)</span> such that <span class="math notranslate nohighlight">\(\cup_{n=1}^\infty I_n \subseteq A \setminus B\)</span> and</p>
+<div class="math notranslate nohighlight" id="equation-mira-eq-2d6-4">
+<span class="eqno">(8)<a class="headerlink" href="#equation-mira-eq-2d6-4" title="Permalink to this equation">#</a></span>\[\sum_{n=1}^\infty |I_n| &lt; \epsilon / 2.\]</div>
+<p class="sd-card-text">Now, let <span class="math notranslate nohighlight">\(I = \cup_{n=1}^\infty I_n.\)</span>
+Then, the set <span class="math notranslate nohighlight">\(B \cup I\)</span> is open and</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}|(G \cup I) \setminus A| &amp;= |(G \cap A') \cup (I \cap A')| \\
+&amp;\leq |G \cap A'| + |I \cap A'| \\
+&amp;\leq |G \setminus A| + |I| \\
+&amp;&lt; \epsilon
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">where in the last line we have used <a class="reference internal" href="#equation-mira-eq-2d6-3">(7)</a> and <a class="reference internal" href="#equation-mira-eq-2d6-4">(8)</a>.
+Therefore the set <span class="math notranslate nohighlight">\(G = B \cup I\)</span> is an open set that contains <span class="math notranslate nohighlight">\(A\)</span> and satisfies <span class="math notranslate nohighlight">\(|G \setminus A| &lt; \epsilon.\)</span>
+It follows that <span class="math notranslate nohighlight">\(A\)</span> is Lebesgue measurable.</p>
 </div>
 </details></div>
 </section>

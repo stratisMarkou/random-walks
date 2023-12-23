@@ -979,10 +979,10 @@ Recall that an interval might be open, closed, or neither.
 __Part a:__
 Given a nontrivial interval $I,$ let $I'$ denote the interval minus its supremum and infimum, that is
 
-$$I' = (I \setminus \{\sup I\}) \setminus \{\inf I\}.$$
+$$I' = I \setminus \{\inf I, \sup I\}.$$
 
 Then, note that the set $\cup_{I \in C} I'$ is a union of open sets and is therefore open, so it can be written as the union of a countable collection of disjoint open intervals, say $U_1, U_2, \ldots.$
-Now, note that the sets $\cup_{I \in C} I$ and $\cup_{n=1}^\infty U_n$ differ by, at most, the endpoints of each interval $U_n,$ of which there are countably many.
+The sets $\cup_{I \in C} I$ and $\cup_{n=1}^\infty U_n$ differ by at most the infimum and supremum of each interval $U_n,$ of which there are countably many.
 Each of the endpoints of each of the $U_n$ that is contained in $\cup_{I \in C} I$ must be contained in at least one $I \in C.$
 Therefore, $\cup_{I \in C} I$ can be written as a countable union of the sets $U_n$ and the corresponding sets $I \in C$ containing their endpoints.
 Now, we will show that each $U_n$ can be written as a countable union of nontrivial intervals in $C.$
@@ -1041,6 +1041,85 @@ $$\left|A \setminus \bigcup_{n=1}^\infty F_n\right| \leq \left|A \setminus F_n\r
 and taking $n \to \infty,$ we obtain
 
 $$\left|A \setminus \bigcup_{n=1}^\infty F_n\right| = 0.$$
+
+:::
+::::
+
+
+
+::::{admonition} Exercise 2.D.6
+:class: tip
+
+Suppose $A \subseteq \mathbb{R}$ and $|A| < \infty.$
+Prove that $A$ is Lebesgue measurable if and only if for every $\epsilon > 0$ there exists a set $G$ that is the union of finitely many disjoint open intervals such that $|A \setminus G| + |G \setminus A| < \epsilon.$
+
+:::{dropdown} Solution
+
+Suppose $A \subseteq \mathbb{R}$ and $|A| < \infty.$
+We prove the result in two parts.
+
+__Part 1:__
+Suppose $A$ is Lebesgue measurable.
+Let $\epsilon > 0.$
+Then, there exists an open set $B$ such that
+
+$$A \subseteq B$ and $|B \setminus A| < \epsilon/2.$$ (mira:eq:2d6:1)
+
+Since $B$ is an open set, it is equal to a countable union of disjoint open intervals, say $B = \cup_{n=1}^\infty I_n.$
+Note that $|B| \leq |A| + |B \setminus A| < \infty,$ so 
+
+$$|B| = \left|\bigcup_{n=1}^\infty I_n\right| = \sum_{n=1}^\infty |I_n| < \infty.$$ (mira:eq:2d6:2)
+
+Therefore, the sequence $|I_1|, |I_2|, \ldots$ is bounded and attains its supremum.
+By relabelling, we can order the $I_n$ in order of decreasing outer measure.
+From {eq}`mira:eq:2d6:2`, we know that the series of $|I_n|$ converges, so there exists $N \in \mathbb{N}$ such that
+
+$$\sum_{n=1}^\infty |I_n| - \sum_{n=1}^N |I_n| < \epsilon/2,$$
+
+which, together with the fact that $\sum_{n=1}^N I_N \subseteq B,$ implies
+
+$$\left| B \setminus \bigcup_{n=1}^N I_n \right| = \left| \bigcup_{n=1}^\infty I_n \setminus \bigcup_{n=1}^N I_n \right| = \left| \bigcup_{n=N+1}^\infty I_n\right| = \sum_{n=N+1}^\infty |I_n| < \epsilon/2.$$
+
+Therefore, letting $G = \sum_{n=1}^N I_n,$ we have
+
+$$\begin{align}
+\left|A \setminus G\right| &= \left|A \cap G'\right| \\
+&= \left|(A \cap B \cap G') \cup (A \cap B' \cap G')\right| \\
+&\leq \frac{\epsilon}{2} + \left|A \cap B'\right| \\
+&= \frac{\epsilon}{2}
+\end{align}$$
+
+where in the last line we have used the fact that $|A \cap B'| = 0$ because $A \subseteq B.$
+Therefore, putting the inequalities in {eq}`mira:eq:2d6:1` and {eq}`mira:eq:2d6:2` together, we have
+
+$$|G \setminus A| + |A \setminus G| < \epsilon.$$
+
+
+__Part 2:__
+Conversely, suppose that for every $\epsilon > 0$ there exists a set $B$ that is the union of finitely many disjoint open intervals such that
+
+$$|B \setminus A| + |A \setminus B| < \epsilon.$$
+
+Fix $\epsilon > 0,$ and let $B$ be a set that satisfies the above conditions, and 
+
+$$|B \setminus A| + |A \setminus B| < \epsilon / 2.$$ (mira:eq:2d6:3)
+
+Then, by {eq}`mira:eq:2d6:3` and the definition of the outer measure, there exists a sequence of open intervals $I_1, I_2, \ldots,$ such that $\cup_{n=1}^\infty I_n \subseteq A \setminus B$ and
+
+$$\sum_{n=1}^\infty |I_n| < \epsilon / 2.$$ (mira:eq:2d6:4)
+
+Now, let $I = \cup_{n=1}^\infty I_n.$
+Then, the set $B \cup I$ is open and
+
+$$\begin{align}|(G \cup I) \setminus A| &= |(G \cap A') \cup (I \cap A')| \\
+&\leq |G \cap A'| + |I \cap A'| \\
+&\leq |G \setminus A| + |I| \\
+&< \epsilon
+\end{align}$$
+
+where in the last line we have used {eq}`mira:eq:2d6:3` and {eq}`mira:eq:2d6:4`.
+Therefore the set $G = B \cup I$ is an open set that contains $A$ and satisfies $|G \setminus A| < \epsilon.$
+It follows that $A$ is Lebesgue measurable.
 
 :::
 ::::
