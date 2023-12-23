@@ -1078,7 +1078,7 @@ $$\sum_{n=1}^\infty |I_n| - \sum_{n=1}^N |I_n| < \epsilon/2,$$
 
 which, together with the fact that $\sum_{n=1}^N I_N \subseteq B,$ implies
 
-$$\left| B \setminus \bigcup_{n=1}^N I_n \right| = \left| \bigcup_{n=1}^\infty I_n \setminus \bigcup_{n=1}^N I_n \right| = \left| \bigcup_{n=N+1}^\infty I_n\right| = \sum_{n=N+1}^\infty |I_n| < \epsilon/2.$$
+$$\left| B \setminus \bigcup_{n=1}^N I_n \right| = \left| \bigcup_{n=N+1}^\infty I_n\right| = \sum_{n=N+1}^\infty |I_n| < \epsilon/2.$$
 
 Therefore, letting $G = \sum_{n=1}^N I_n,$ we have
 
