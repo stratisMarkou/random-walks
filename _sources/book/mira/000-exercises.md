@@ -1203,6 +1203,8 @@ so $tA$ is Lebesgue measurable.
 
 
 ::::{admonition} Exercise 2.D.10
+:class: tip
+
 
 Prove that if $A$ and $B$ are disjoint subsets of $\mathbb{R}$ and $B$ is Lebesgue measurable, then $|A \cup B| = |A| + |B|.$
 
@@ -1221,6 +1223,7 @@ $$|A \cup B| = |A \cup C \cup (B \setminus C)| = |A \cup C| = |A| + |C| = |A| + 
 
 
 ::::{admonition} Exercise 2.D.11
+:class: tip
 
 Prove that if $A \subseteq \mathbb{R}$ and $|A| > 0,$ then there exists a subset of $A$ that is not Lebesgue measurable.
 
@@ -1231,7 +1234,7 @@ Suppose $A$ is Lebesgue measurable.
 Then, each of the sets $A \cap (n, n+1), n \in \mathcal{N}$ is Lebesgue measurable.
 In addition
 
-$$0 < |A| = |\cup_{n \in \mathbb{Z}} (n, n+1) \cap A| \leq \sum_{n \in \mathbb{Z}} |(n, n+1) \cap A|,$$
+$$0 < |A| = |\bigcup_{n \in \mathbb{Z}} (n, n+1) \cap A| \leq \sum_{n \in \mathbb{Z}} |(n, n+1) \cap A|,$$
 
 so $|(n, n+1) \cap A| > 0$ for some $n \in \mathbb{Z}.$
 Now, let $\sim$ be the {prf:ref}`rational difference equivalence relation <mira:def:rational-difference-equivalence-relation>` on $\mathbb{R},$ and let $V$ be a set containing exactly one element from each equivalence class of $\sim$ on $(n, n+1) \cap A.$
