@@ -1156,7 +1156,7 @@ for all $n \in \mathbb{N}.$
 :class: tip
 
 Prove that the collection of Lebesgue measurable subsets of $\mathbb{R}$ is translation invariant.
-More precisely, prove that if $A \subseteq \mathbb{R}$ is Lebesgue measurable and $t \in \mathbb{R},$ then $t + A$ is Lebesgue measurable and $|t + A| = |A|.$
+More precisely, prove that if $A \subseteq \mathbb{R}$ is Lebesgue measurable and $t \in \mathbb{R},$ then $t + A$ is Lebesgue measurable.
 
 :::{dropdown} Solution
 
@@ -1164,11 +1164,92 @@ Suppose $A$ is Lebesgue measurable and $t \in \mathbb{R}.$
 Since $A$ is Lebesgue measurable, there exists a Borel set $B$ such that $A \subseteq B$ and $|B \setminus A| = 0.$
 Since addition is a continuous function, the pre-image of any Borel set under the function $f: \mathbb{R} \to \mathbb{R}$ defined as $f(x) = x - t$ is a Borel set.
 Therefore $f^{-1}(B) = t + B$ is a Borel set.
-Because addition leaves the outer measure invariant, we have $|t + A| = |A|$ and also
+Because addition leaves the outer measure invariant, we have
 
 $$|(t + A) \setminus (t + B)| = |t + (A \setminus B)| = |A \setminus B| = 0,$$
 
-from which it follows that $t + A$ is Lebesgue measurable.
+so $t + A$ is Lebesgue measurable.
+
+:::
+::::
+
+
+
+
+::::{admonition} Exercise 2.D.9
+:class: tip
+
+Prove that the collection of Lebesgue measurable subsets of $\mathbb{R}$ is dilation invariant.
+More precisely, prove that if $A \subseteq \mathbb{R}$ is Lebesgue measurable and $t \in \mathbb{R},$ then $tA$ is Lebesgue measurable.
+
+:::{dropdown} Solution
+
+Suppose $A$ is Lebesgue measurable and $t \in \mathbb{R}.$
+If $t = 0,$ then $tA = \{0\},$ which is Lebesgue measurable.
+Suppose $t \neq 0.$
+Since $A$ is Lebesgue measurable, there exists a Borel set $B$ such that $A \subseteq B$ and $|B \setminus A| = 0.$
+Since multiplication by a constant is a continuous function, the pre-image of any Borel set under the function $f: \mathbb{R} \to \mathbb{R}$ defined as $f(x) = t^{-1}x$ is a Borel set.
+Therefore $f^{-1}(B) = tB$ is a Borel set.
+Since multiplication by a constant is equivalent to scaling the outer measure by the absolute value of the constant, we have
+
+$$|tA \setminus tB| = |t(A \setminus B)| = |t| |A \setminus B| = 0,$$
+
+so $tA$ is Lebesgue measurable.
+
+:::
+::::
+
+
+
+
+::::{admonition} Exercise 2.D.10
+
+Prove that if $A$ and $B$ are disjoint subsets of $\mathbb{R}$ and $B$ is Lebesgue measurable, then $|A \cup B| = |A| + |B|.$
+
+:::{dropdown} Solution
+
+Suppose $A$ and $B$ are disjoint subsets of $\mathbb{R}$ and $B$ is Lebesgue measurable.
+Then, there exists a Borel set $C \subseteq B$ such that $|B \setminus C| = 0.$
+Then
+
+$$|A \cup B| = |A \cup C \cup (B \setminus C)| = |A \cup C| = |A| + |C| = |A| + |B|.$$
+
+:::
+::::
+
+
+
+
+::::{admonition} Exercise 2.D.11
+
+Prove that if $A \subseteq \mathbb{R}$ and $|A| > 0,$ then there exists a subset of $A$ that is not Lebesgue measurable.
+
+:::{dropdown} Solution
+
+If $A \subseteq \mathbb{R}$ is not Lebesgue measurable, then we are done.
+Suppose $A$ is Lebesgue measurable.
+Then, each of the sets $A \cap (n, n+1), n \in \mathcal{N}$ is Lebesgue measurable.
+In addition
+
+$$0 < |A| = |\cup_{n \in \mathbb{Z}} (n, n+1) \cap A| \leq \sum_{n \in \mathbb{Z}} |(n, n+1) \cap A|,$$
+
+so $|(n, n+1) \cap A| > 0$ for some $n \in \mathbb{Z}.$
+Now, let $\sim$ be the {prf:ref}`rational difference equivalence relation <mira:def:rational-difference-equivalence-relation>` on $\mathbb{R},$ and let $V$ be a set containing exactly one element from each equivalence class of $\sim$ on $(n, n+1) \cap A.$
+If $V$ is not Lebesgue measurable then we are done, so suppose it is not Borel.
+Let $r_1, r_2, \dots$ be a sequence that contains each rational in $[-1, 1]$ exactly once.
+By the definition of $\sim,$ we have $(r_i + V) \cap (r_j + V) = \emptyset$ for $i \neq j.$
+Then, note that
+
+$$|A \cap (n, n+1)| \leq \left| \bigcup_{i=1}^\infty (r_i + V) \right| \leq \sum_{i=1}^\infty |(r_i + [n, n+1])| = 3.$$
+
+Since $V$ is Lebesgue measurable, so is $r_i + V$ for each $i \in \mathbb{N}.$
+Thus by the {prf:ref}`countable subadditivity of the outer measure <mira:thm:countable-subadditivity-of-outer-measure>`, we have
+
+$$ 3 \geq \left| \bigcup_{i=1}^\infty (r_i + V) \right| = \sum_{i=1}^n |r_i + V| \geq \sum_{i=1}^n |V| = n |V|$$
+
+for all $n \in \mathbb{N},$ which can only hold if $|V| = 0.$
+But this implies $|\cup_{i=1}^\infty (r_i + V)| = 0,$ which in turn implies $|A \cap (n, n+1)| = 0,$ which is a contradiction.
+Therefore, $V \subseteq A$ is not Lebesgue measurable.
 
 :::
 ::::
