@@ -1123,3 +1123,52 @@ It follows that $A$ is Lebesgue measurable.
 
 :::
 ::::
+
+
+
+
+::::{admonition} Exercise 2.D.7
+:class: tip
+
+Prove that if $A \subseteq \mathbb{R}$ is a Lebesgue measurable set, then there exists a decreasing sequence $G_1 \supseteq G_2 \supseteq \cdots$ of open sets containing $A$ such that
+
+$$\left| \bigcap_{n=1}^\infty G_n \setminus A \right| = 0.$$
+
+
+:::{dropdown} Solution
+
+Suppose $A \subseteq \mathbb{R}$ is a Lebesgue measurable set.
+Then for each $n \in \mathbb{N},$ there exists an open set $U_n$ such that $|U_n \setminus A| < 1/n.$
+Let $G_n = \cap_{k=1}^n U_k.$
+Then, $G_1 \supseteq G_2 \supseteq \cdots$ is a decreasing sequence of open sets containing $A,$ and also
+
+$$\left| \left( \bigcup_{k=1}^\infty U_k \right) \setminus A \right| \leq \left| G_n \setminus A \right| < \frac{1}{n}$$
+
+for all $n \in \mathbb{N}.$
+
+:::
+::::
+
+
+
+
+::::{admonition} Exercise 2.D.8
+:class: tip
+
+Prove that the collection of Lebesgue measurable subsets of $\mathbb{R}$ is translation invariant.
+More precisely, prove that if $A \subseteq \mathbb{R}$ is Lebesgue measurable and $t \in \mathbb{R},$ then $t + A$ is Lebesgue measurable and $|t + A| = |A|.$
+
+:::{dropdown} Solution
+
+Suppose $A$ is Lebesgue measurable and $t \in \mathbb{R}.$
+Since $A$ is Lebesgue measurable, there exists a Borel set $B$ such that $A \subseteq B$ and $|B \setminus A| = 0.$
+Since addition is a continuous function, the pre-image of any Borel set under the function $f: \mathbb{R} \to \mathbb{R}$ defined as $f(x) = x - t$ is a Borel set.
+Therefore $f^{-1}(B) = t + B$ is a Borel set.
+Because addition leaves the outer measure invariant, we have $|t + A| = |A|$ and also
+
+$$|(t + A) \setminus (t + B)| = |t + (A \setminus B)| = |A \setminus B| = 0,$$
+
+from which it follows that $t + A$ is Lebesgue measurable.
+
+:::
+::::
