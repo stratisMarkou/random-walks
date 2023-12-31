@@ -206,6 +206,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Random Fourier features</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../score-matching/score-matching.html">Estimation by score matching</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../svgd/svgd.html">Stein variational gradient descent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../num-sde/num-sde.html">Numerical simulation of SDEs</a></li>
 </ul>
 </li>
 </ul>
@@ -618,7 +619,7 @@ The covariance function plots correspond to the RFF estimator of <span class="ma
 </div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/a66bf1c66c5de9536b10c2a60a069074322b607491e53585c193c530e982a9b7.svg" src="../../../_images/a66bf1c66c5de9536b10c2a60a069074322b607491e53585c193c530e982a9b7.svg" /></div>
+<img alt="../../../_images/bfa31b6e6c26666b226d8c9b40da2c0c45c4e528e9ff14ab1e0ee404658e3899.svg" src="../../../_images/bfa31b6e6c26666b226d8c9b40da2c0c45c4e528e9ff14ab1e0ee404658e3899.svg" /></div>
 </div>
 </section>
 <section id="regression-with-rff-features">
@@ -628,7 +629,7 @@ We place a gap in the data to observe the quality of the uncertainty estimates o
 We purposefully use a large number of datapoints, <span class="math notranslate nohighlight">\(N = 5000,\)</span> which would be quite slow to process with an exact GP model.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/3499941b0dddeba4af3def1e73d620006a4fb4a889d2c0a8a494492c42817d53.svg" src="../../../_images/3499941b0dddeba4af3def1e73d620006a4fb4a889d2c0a8a494492c42817d53.svg" /></div>
+<img alt="../../../_images/387fe0e4d7e33968a5f193975249681071c31af151cbf6db0dd5277f2909dd3c.svg" src="../../../_images/387fe0e4d7e33968a5f193975249681071c31af151cbf6db0dd5277f2909dd3c.svg" /></div>
 </div>
 <p>The function <code class="docutils literal notranslate"><span class="pre">rff_posterior</span></code> below implements Bayesian linear regression with randomly sampled Fourier features.
 For more details on Bayesian linear regression see Chapter 3 of Bishop’s PRML book.<span id="id4">[<a class="reference internal" href="#id12" title="Christopher M Bishop. Pattern recognition and machine learning. springer, 2006.">Bishop, 2006</a>]</span></p>
@@ -725,8 +726,8 @@ The <code class="docutils literal notranslate"><span class="pre">covariance</spa
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Timing exact GP regression:
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 13 s, sys: 1.82 s, total: 14.8 s
-Wall time: 6.35 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 11.9 s, sys: 929 ms, total: 12.8 s
+Wall time: 4.83 s
 </pre></div>
 </div>
 </div>
@@ -735,15 +736,15 @@ Wall time: 6.35 s
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Timing exact approximate RFF regression:
 
-CPU times: user 231 ms, sys: 123 ms, total: 353 ms
-Wall time: 90.6 ms
+CPU times: user 165 ms, sys: 84.3 ms, total: 250 ms
+Wall time: 85.5 ms
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/43ca4bb7d92611f8932c5369f664c54dcb3a2ff3037c6d5dc726f05741662ed9.svg" src="../../../_images/43ca4bb7d92611f8932c5369f664c54dcb3a2ff3037c6d5dc726f05741662ed9.svg" /></div>
+<img alt="../../../_images/5bbd445f29441a6dfef113050e41ac87dd3df48b228d1b842c3b24887de8e6e9.svg" src="../../../_images/5bbd445f29441a6dfef113050e41ac87dd3df48b228d1b842c3b24887de8e6e9.svg" /></div>
 </div>
 <p>RFF has produced sensible regressors in each case, significantly faster than exact GP regression. The approximate posteriors roughly match the exact posteriors, while being significantly quicker to compute.</p>
 </section>
@@ -752,11 +753,11 @@ Wall time: 90.6 ms
 <p>One issue with the RFF is that - like all other finte basis function models - is that it has a limited amount of degrees of freedom. Therefore, in some situations the datapoints may be such that they pin down the RFF model and significantly reducing the variance of the approximate regressor. To illustrate this, we sample a slightly different dataset, with a smaller gap in between the two data clumps.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/7a48303d5a8a4e2fb0b08f923265b2381bbf96641d665fa1ba10286cc96260e1.svg" src="../../../_images/7a48303d5a8a4e2fb0b08f923265b2381bbf96641d665fa1ba10286cc96260e1.svg" /></div>
+<img alt="../../../_images/6dd215c916b470d4a4940490fd9f8c8ce11a7a2cecc1129c26a2bad82c3b2174.svg" src="../../../_images/6dd215c916b470d4a4940490fd9f8c8ce11a7a2cecc1129c26a2bad82c3b2174.svg" /></div>
 </div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/0247bc912a8f5921659f8a1e36c382fd1663c0619b2e3e7d7f497f4c41b0b274.svg" src="../../../_images/0247bc912a8f5921659f8a1e36c382fd1663c0619b2e3e7d7f497f4c41b0b274.svg" /></div>
+<img alt="../../../_images/54556549b6c61834acb7992b4c758aba610998861995ac507628991e01b94c65.svg" src="../../../_images/54556549b6c61834acb7992b4c758aba610998861995ac507628991e01b94c65.svg" /></div>
 </div>
 <p>The variance of the approximate estimator in between the data is (in some cases), signiticantly smaller than that of the exact posterior. So the speedup that the RFF gives does not come without a cost. In certain cases, we can end up with approximate posteriors which are significantly overfitted. This can be alleviated by increasing the number of RFF features. However this increases the computational cost of performing regression and may defeat the purpose of using RFF features in the first place.</p>
 </section>

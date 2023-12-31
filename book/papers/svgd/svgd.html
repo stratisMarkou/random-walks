@@ -78,6 +78,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../../../_static/dicefav.png"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Numerical simulation of SDEs" href="../num-sde/num-sde.html" />
     <link rel="prev" title="Estimation by score matching" href="../score-matching/score-matching.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -205,6 +206,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../rff/rff.html">Random Fourier features</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../score-matching/score-matching.html">Estimation by score matching</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Stein variational gradient descent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../num-sde/num-sde.html">Numerical simulation of SDEs</a></li>
 </ul>
 </li>
 </ul>
@@ -567,7 +569,7 @@ x^{(i + 1)}_n = x^{(i)}_n + \frac{\epsilon^{(i)}}{N}\sum_{m = 1}^N \left[ k(x_n,
 We will use SVGD to approximate a mixture-of-gaussians distribution, to allow for multiple modes.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/6369d721b20d8243101ae7e63f814f121bcf2864907994af98df000177ff8747.svg" src="../../../_images/6369d721b20d8243101ae7e63f814f121bcf2864907994af98df000177ff8747.svg" /></div>
+<img alt="../../../_images/27d7b69123bbe90da90275c4403fe79b7aaab3acca482243e80be9d79b32525a.svg" src="../../../_images/27d7b69123bbe90da90275c4403fe79b7aaab3acca482243e80be9d79b32525a.svg" /></div>
 </div>
 <p>Although SVGD can use any positive-semidefinite kernel, we will focus our attention to the standard EQ kernel</p>
 <div class="math notranslate nohighlight">
@@ -618,7 +620,7 @@ k(x, x') = \exp\left(-\frac{1}{2\ell^2} (x - x')^2\right),
 <p>We can now run SVGD using a modest number of particles initialised in between the two modes.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/25cdcc117c4eb6b6d061acf047f85b3d3bb470d0a89d6e2ae98c1c25f1bc5e1c.svg" src="../../../_images/25cdcc117c4eb6b6d061acf047f85b3d3bb470d0a89d6e2ae98c1c25f1bc5e1c.svg" /></div>
+<img alt="../../../_images/fbe446e9f00e881e169e8239ed7b804de2c66576ab93444afd7de8c1d716b474.svg" src="../../../_images/fbe446e9f00e881e169e8239ed7b804de2c66576ab93444afd7de8c1d716b474.svg" /></div>
 </div>
 <p>We observe that some of the particles fall into each of the two modes, capturing the bimodality of the target, something which VI with a mean-field Gaussian <span class="math notranslate nohighlight">\(q\)</span> cannot do.</p>
 </section>
@@ -629,7 +631,7 @@ If we initialise the particles on one mode of two well-separated Gaussians, then
 Even though SVGD may be able to express more expressive approximate distributions than mean-field VI, it is not guaranteed that the optimisation will be able to find such a distribution.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/015469ddde98bf92b42576a8e98c5ca34738094b9b51976b79a1b6fca9c63cbf.svg" src="../../../_images/015469ddde98bf92b42576a8e98c5ca34738094b9b51976b79a1b6fca9c63cbf.svg" /></div>
+<img alt="../../../_images/c0eb4f0c2a55e604228c3e05e0b81eed8fba0da268ca60f8d3e48a871468df97.svg" src="../../../_images/c0eb4f0c2a55e604228c3e05e0b81eed8fba0da268ca60f8d3e48a871468df97.svg" /></div>
 </div>
 </section>
 </section>
@@ -692,6 +694,15 @@ By evolving <span class="math notranslate nohighlight">\(q\)</span> according to
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Estimation by score matching</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="../num-sde/num-sde.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Numerical simulation of SDEs</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>

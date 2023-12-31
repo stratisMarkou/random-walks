@@ -1161,7 +1161,7 @@ More precisely, prove that if $A \subseteq \mathbb{R}$ is Lebesgue measurable an
 :::{dropdown} Solution
 
 Suppose $A$ is Lebesgue measurable and $t \in \mathbb{R}.$
-Since $A$ is Lebesgue measurable, there exists a Borel set $B$ such that $A \subseteq B$ and $|B \setminus A| = 0.$
+Since $A$ is Lebesgue measurable, there exists a Borel set $B$ such that $B \subseteq A$ and $|A \setminus B| = 0.$
 Since addition is a continuous function, the pre-image of any Borel set under the function $f: \mathbb{R} \to \mathbb{R}$ defined as $f(x) = x - t$ is a Borel set.
 Therefore $f^{-1}(B) = t + B$ is a Borel set.
 Because addition leaves the outer measure invariant, we have

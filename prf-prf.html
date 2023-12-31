@@ -208,6 +208,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="book/papers/rff/rff.html">Random Fourier features</a></li>
 <li class="toctree-l2"><a class="reference internal" href="book/papers/score-matching/score-matching.html">Estimation by score matching</a></li>
 <li class="toctree-l2"><a class="reference internal" href="book/papers/svgd/svgd.html">Stein variational gradient descent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="book/papers/num-sde/num-sde.html">Numerical simulation of SDEs</a></li>
 </ul>
 </li>
 </ul>
@@ -390,9 +391,11 @@ document.write(`
    <a href="#cap-example-6"><strong>example-6</strong></a> | 
    <a href="#cap-example-9"><strong>example-9</strong></a> | 
    <a href="#cap-finite-state-automaton"><strong>finite-state-automaton</strong></a> | 
+   <a href="#cap-lemma-0"><strong>lemma-0</strong></a> | 
    <a href="#cap-lemma-13"><strong>lemma-13</strong></a> | 
    <a href="#cap-lemma-16"><strong>lemma-16</strong></a> | 
    <a href="#cap-lemma-18"><strong>lemma-18</strong></a> | 
+   <a href="#cap-lemma-2"><strong>lemma-2</strong></a> | 
    <a href="#cap-lemma-3"><strong>lemma-3</strong></a> | 
    <a href="#cap-lemma-8"><strong>lemma-8</strong></a> | 
    <a href="#cap-mira-eg-not-riemann-integrable"><strong>mira-eg-not-riemann-integrable</strong></a> | 
@@ -408,6 +411,7 @@ document.write(`
    <a href="#cap-mira:thm:outer-measure-of-a-closed-interval"><strong>mira:thm:outer-measure-of-a-closed-interval</strong></a> | 
    <a href="#cap-mira:thm:outer-measure-preserves-order"><strong>mira:thm:outer-measure-preserves-order</strong></a> | 
    <a href="#cap-theorem-0"><strong>theorem-0</strong></a> | 
+   <a href="#cap-theorem-1"><strong>theorem-1</strong></a> | 
    <a href="#cap-theorem-10"><strong>theorem-10</strong></a> | 
    <a href="#cap-theorem-11"><strong>theorem-11</strong></a> | 
    <a href="#cap-theorem-12"><strong>theorem-12</strong></a> | 
@@ -421,8 +425,10 @@ document.write(`
    <a href="#cap-theorem-27"><strong>theorem-27</strong></a> | 
    <a href="#cap-theorem-28"><strong>theorem-28</strong></a> | 
    <a href="#cap-theorem-29"><strong>theorem-29</strong></a> | 
+   <a href="#cap-theorem-3"><strong>theorem-3</strong></a> | 
    <a href="#cap-theorem-4"><strong>theorem-4</strong></a> | 
    <a href="#cap-theorem-5"><strong>theorem-5</strong></a> | 
+   <a href="#cap-theorem-6"><strong>theorem-6</strong></a> | 
    <a href="#cap-theorem-7"><strong>theorem-7</strong></a> | 
    <a href="#cap-theorem-8"><strong>theorem-8</strong></a> | 
    <a href="#cap-theorem-9"><strong>theorem-9</strong></a> | 
@@ -455,7 +461,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="book/mira/002-measures.html#definition-0"><code class="xref">definition-0</code></a> <em>(book/mira/002-measures)</em></td><td>
+       <a href="book/papers/num-sde/num-sde.html#definition-0"><code class="xref">definition-0</code></a> <em>(book/papers/num-sde/num-sde)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-1"><td></td><td>
@@ -463,7 +469,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="book/mira/002-measures.html#definition-1"><code class="xref">definition-1</code></a> <em>(book/mira/002-measures)</em></td><td>
+       <a href="book/papers/num-sde/num-sde.html#definition-1"><code class="xref">definition-1</code></a> <em>(book/papers/num-sde/num-sde)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-10"><td></td><td>
@@ -471,7 +477,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="book/toc/002-cfl.html#definition-10"><code class="xref">definition-10</code></a> <em>(book/toc/002-cfl)</em></td><td>
+       <a href="book/prob-intro/ch08/content.html#definition-10"><code class="xref">definition-10</code></a> <em>(book/prob-intro/ch08/content)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-15"><td></td><td>
@@ -503,7 +509,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="book/toc/002-cfl.html#definition-2"><code class="xref">definition-2</code></a> <em>(book/toc/002-cfl)</em></td><td>
+       <a href="book/papers/num-sde/num-sde.html#definition-2"><code class="xref">definition-2</code></a> <em>(book/papers/num-sde/num-sde)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-20"><td></td><td>
@@ -535,7 +541,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="book/prob-intro/ch04/content.html#definition-3"><code class="xref">definition-3</code></a> <em>(book/prob-intro/ch04/content)</em></td><td>
+       <a href="book/papers/num-sde/num-sde.html#definition-3"><code class="xref">definition-3</code></a> <em>(book/papers/num-sde/num-sde)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-4"><td></td><td>
@@ -543,7 +549,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="book/toc/001-fsa.html#definition-4"><code class="xref">definition-4</code></a> <em>(book/toc/001-fsa)</em></td><td>
+       <a href="book/papers/num-sde/num-sde.html#definition-4"><code class="xref">definition-4</code></a> <em>(book/papers/num-sde/num-sde)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-5"><td></td><td>
@@ -666,6 +672,14 @@ document.write(`
        <a href="book/toc/001-fsa.html#finite-state-automaton"><code class="xref">finite-state-automaton</code></a> <em>(book/toc/001-fsa)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-lemma-0"><td></td><td>
+       <strong>lemma-0</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/papers/ais/ais.html#lemma-0"><code class="xref">lemma-0</code></a> <em>(book/papers/ais/ais)</em></td><td>
+       <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-lemma-13"><td></td><td>
        <strong>lemma-13</strong></td><td></td></tr>
      <tr>
@@ -688,6 +702,14 @@ document.write(`
        <td></td>
        <td>
        <a href="book/toc/001-fsa.html#lemma-18"><code class="xref">lemma-18</code></a> <em>(book/toc/001-fsa)</em></td><td>
+       <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-lemma-2"><td></td><td>
+       <strong>lemma-2</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/papers/rff/rff.html#lemma-2"><code class="xref">lemma-2</code></a> <em>(book/papers/rff/rff)</em></td><td>
        <em>lemma</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-lemma-3"><td></td><td>
@@ -807,7 +829,15 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="book/prob-intro/ch07/content.html#theorem-0"><code class="xref">theorem-0</code></a> <em>(book/prob-intro/ch07/content)</em></td><td>
+       <a href="book/papers/svgd/svgd.html#theorem-0"><code class="xref">theorem-0</code></a> <em>(book/papers/svgd/svgd)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-theorem-1"><td></td><td>
+       <strong>theorem-1</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/prob-intro/ch08/content.html#theorem-1"><code class="xref">theorem-1</code></a> <em>(book/prob-intro/ch08/content)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-theorem-10"><td></td><td>
@@ -839,7 +869,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="book/toc/001-fsa.html#theorem-13"><code class="xref">theorem-13</code></a> <em>(book/toc/001-fsa)</em></td><td>
+       <a href="book/prob-intro/ch08/content.html#theorem-13"><code class="xref">theorem-13</code></a> <em>(book/prob-intro/ch08/content)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-theorem-16"><td></td><td>
@@ -863,7 +893,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="book/mira/002-measures.html#theorem-2"><code class="xref">theorem-2</code></a> <em>(book/mira/002-measures)</em></td><td>
+       <a href="book/papers/score-matching/score-matching.html#theorem-2"><code class="xref">theorem-2</code></a> <em>(book/papers/score-matching/score-matching)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-theorem-21"><td></td><td>
@@ -914,6 +944,14 @@ document.write(`
        <a href="book/mira/002-measures.html#theorem-29"><code class="xref">theorem-29</code></a> <em>(book/mira/002-measures)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-theorem-3"><td></td><td>
+       <strong>theorem-3</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/prob-intro/ch08/content.html#theorem-3"><code class="xref">theorem-3</code></a> <em>(book/prob-intro/ch08/content)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-theorem-4"><td></td><td>
        <strong>theorem-4</strong></td><td></td></tr>
      <tr>
@@ -927,7 +965,15 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="book/mira/002-measures.html#theorem-5"><code class="xref">theorem-5</code></a> <em>(book/mira/002-measures)</em></td><td>
+       <a href="book/papers/num-sde/num-sde.html#theorem-5"><code class="xref">theorem-5</code></a> <em>(book/papers/num-sde/num-sde)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-theorem-6"><td></td><td>
+       <strong>theorem-6</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/prob-intro/ch08/content.html#theorem-6"><code class="xref">theorem-6</code></a> <em>(book/prob-intro/ch08/content)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-theorem-7"><td></td><td>
