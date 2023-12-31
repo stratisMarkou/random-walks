@@ -484,7 +484,7 @@ W(t_{n+1}) = W(t_{n}) + \Delta W(t_{n}), \text{ where } \Delta W(t_{n}) \sim \ma
 </div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/8a63f187373674d43bce899f13380ded0444bed7232e5333ded362de3e099451.svg" src="../../../_images/8a63f187373674d43bce899f13380ded0444bed7232e5333ded362de3e099451.svg" /></div>
+<img alt="../../../_images/2c6d0fe4feefa81989a58ebe389d6d2f6cc94d7f87f5d56e12e68e88c58ffcae.svg" src="../../../_images/2c6d0fe4feefa81989a58ebe389d6d2f6cc94d7f87f5d56e12e68e88c58ffcae.svg" /></div>
 </div>
 <p>So even though we can’t represent the entirety of the path, we can sample it to arbitrary precision.</p>
 </section>
@@ -533,7 +533,7 @@ X(t) = \exp\left(t + \frac{1}{2}W(t)\right).
 </div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/9f921815004dcbb3094afde86d2a7b13e2a67232eab4b0dfb0717cb88f73b43a.svg" src="../../../_images/9f921815004dcbb3094afde86d2a7b13e2a67232eab4b0dfb0717cb88f73b43a.svg" /></div>
+<img alt="../../../_images/6de2fcbf2e91da119ad33b1bfa8f2ac7a880cb53130a5bd67b9664b1ca490c28.svg" src="../../../_images/6de2fcbf2e91da119ad33b1bfa8f2ac7a880cb53130a5bd67b9664b1ca490c28.svg" /></div>
 </div>
 </section>
 <section id="evaluating-a-stochastic-integral">
@@ -707,7 +707,7 @@ X_t = X_0 \exp \left[\Big(\lambda - \frac{1}{2} \mu^2\Big)~t + \mu W(t)\right],
 <p>We are can now run the EM method and compare it aginst the exact solution below.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/cdcd710fd913e67bb5c3b0a4f66e60c26ef958cee76b498acd0b0b44d8b5d622.svg" src="../../../_images/cdcd710fd913e67bb5c3b0a4f66e60c26ef958cee76b498acd0b0b44d8b5d622.svg" /></div>
+<img alt="../../../_images/48a445b0849f6da211476c1032500bc9fd6dd1f6371e32875d9e27e52c2fa287.svg" src="../../../_images/48a445b0849f6da211476c1032500bc9fd6dd1f6371e32875d9e27e52c2fa287.svg" /></div>
 </div>
 <p>We can change the accuracy of the solution by adjusting <span class="math notranslate nohighlight">\(N\)</span>. As a fun aside, what if we try out a different drift term? One nice choice is</p>
 <div class="math notranslate nohighlight">
@@ -733,7 +733,7 @@ g(x, t) &amp;= \mu x.\\
 </div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/396ac3e2f56ecc4de38e7519e34d70dd4dddc732b1f3355d343cfdf1ad5a2ef0.svg" src="../../../_images/396ac3e2f56ecc4de38e7519e34d70dd4dddc732b1f3355d343cfdf1ad5a2ef0.svg" /></div>
+<img alt="../../../_images/2b467b5192ef2e43b255a428391e931c069d4520db668e68e5da16673b9ef778.svg" src="../../../_images/2b467b5192ef2e43b255a428391e931c069d4520db668e68e5da16673b9ef778.svg" /></div>
 </div>
 </section>
 <section id="strong-and-weak-convergence">
@@ -762,7 +762,7 @@ g(x, t) &amp;= \mu x.\\
 We do not provide a proof for any of the above statements, but instead evaluate the rate of convergence empirically.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/ff707b5968462044d72db11453e41814f8beaf7e5733d23a42ca22374ed8ff34.svg" src="../../../_images/ff707b5968462044d72db11453e41814f8beaf7e5733d23a42ca22374ed8ff34.svg" /></div>
+<img alt="../../../_images/a29a189f9a0a105d64b381e44e97b64f67d856619c61d23539b4a37585db4afa.svg" src="../../../_images/a29a189f9a0a105d64b381e44e97b64f67d856619c61d23539b4a37585db4afa.svg" /></div>
 </div>
 </section>
 <section id="milstein-s-higher-order-method">
@@ -786,13 +786,13 @@ dX(t) = f(X(t))dt + g(X(t)) dW(t),
 <p>Let’s first use Milstein’s method to get a single solution of the Black-Scholes model, as we did for EM.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/41043ec4b93148fb0e8f9c9226d5dc584e40b8ddcc7bdc6c05c57ad7ced5c312.svg" src="../../../_images/41043ec4b93148fb0e8f9c9226d5dc584e40b8ddcc7bdc6c05c57ad7ced5c312.svg" /></div>
+<img alt="../../../_images/feff75142d812541a2d6fd5e4e7f7021c3a45b231f5e3a32fcc3edec2924c238.svg" src="../../../_images/feff75142d812541a2d6fd5e4e7f7021c3a45b231f5e3a32fcc3edec2924c238.svg" /></div>
 </div>
 <p>We can also look at the strong and weak rates of convergence for Milstein’s method.
 Milstein’s method achieves a strong convergence rate of <span class="math notranslate nohighlight">\(1\)</span> as oposed to the <span class="math notranslate nohighlight">\(1/2\)</span> strong rate of Euler Maruyama.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/120f8e3d4b384dc99918a5235053ff13ff5af0de165cfd3eaec3234fabaa0677.svg" src="../../../_images/120f8e3d4b384dc99918a5235053ff13ff5af0de165cfd3eaec3234fabaa0677.svg" /></div>
+<img alt="../../../_images/c8e715b155aebd30bd88c381ea45130905c57684e121b25ee1aea0ef76aecd58.svg" src="../../../_images/c8e715b155aebd30bd88c381ea45130905c57684e121b25ee1aea0ef76aecd58.svg" /></div>
 </div>
 </section>
 <section id="stochastic-chain-rule">
@@ -842,13 +842,17 @@ Informal argument: Ito’s result for one dimension<div class="sd-summary-down d
 \[\begin{align}
 dY_t = \frac{\partial V}{\partial t} dt + \frac{\partial V}{\partial X} dX_t + \frac{1}{2} \left[\frac{\partial^2 V}{\partial X^2} dX_t^2 + 2 \frac{\partial^2 V}{\partial X \partial t} dt dX_t + \frac{\partial^2 V}{\partial t^2} dt^2 \right] + o(dt^2),
 \end{align}\]</div>
-<p class="sd-card-text">where the <span class="math notranslate nohighlight">\(o(dt^n)\)</span> notation means that the ratio of the term being ommited, to the infinitesimal <span class="math notranslate nohighlight">\(dt^n\)</span> goes to 0 as <span class="math notranslate nohighlight">\(dt \to 0\)</span>. Now since <span class="math notranslate nohighlight">\(dX_t = U_t dt + H_t dW_t\)</span> and <span class="math notranslate nohighlight">\(dW_t\)</span> is of order <span class="math notranslate nohighlight">\(dt^{1/2}\)</span>, the last two terms in the square brackets are <span class="math notranslate nohighlight">\(o(dt^{3/2})\)</span> and we can neglect them. The reference provides a formal argument for neglecting these terms, showing that their contribution to the Ito integral has zero mean and a variance that tends to 0 as <span class="math notranslate nohighlight">\(dt \to 0\)</span> - these contributions converge to <span class="math notranslate nohighlight">\(0\)</span> in the sense of mean square convergence.</p>
-<p class="sd-card-text">However, the first term is of order <span class="math notranslate nohighlight">\(dt\)</span> and does not vanish. In particular</p>
+<p class="sd-card-text">where the <span class="math notranslate nohighlight">\(o(dt^n)\)</span> notation means that the ratio of the term being ommited, up to and including the infinitesimal <span class="math notranslate nohighlight">\(dt^n\)</span> goes to 0 as <span class="math notranslate nohighlight">\(dt \to 0\)</span>.
+Now since <span class="math notranslate nohighlight">\(dX_t = U_t dt + H_t dW_t\)</span> and <span class="math notranslate nohighlight">\(dW_t\)</span> is of order <span class="math notranslate nohighlight">\(dt^{1/2}\)</span>, the last two terms in the square brackets are <span class="math notranslate nohighlight">\(o(dt^{3/2})\)</span> and we can neglect them.
+The reference provides a formal argument for neglecting these terms, showing that their contribution to the Ito integral has zero mean and a variance that tends to 0 as <span class="math notranslate nohighlight">\(dt \to 0\)</span> - these contributions converge to <span class="math notranslate nohighlight">\(0\)</span> in mean square.
+However, the first term in the brackets is of order <span class="math notranslate nohighlight">\(dt\)</span> and does not vanish. In particular</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
 dX_t^2 = U_t^2 dt^2 + 2 U_tH_t dW_t dt + H_t^2 dW_t^2.
 \end{align}\]</div>
-<p class="sd-card-text">In the above expression, we can neglect the first two terms which are of order <span class="math notranslate nohighlight">\(dt^{3/2}\)</span> and larger. Again, here the formal argument is that their associated contributions to the Ito integral converge to 0 in mean square. This yields the expression</p>
+<p class="sd-card-text">In the above expression, we can neglect the first two terms which are of order <span class="math notranslate nohighlight">\(dt^2\)</span> and <span class="math notranslate nohighlight">\(dt^{3/2}.\)</span>
+Again, here the formal argument is that their associated contributions to the Ito integral converge to 0 in mean square.
+This yields the expression</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
 dY_t = \frac{\partial V}{\partial X} U_t dt + \frac{1}{2}\frac{\partial^2 V}{\partial X^2} H_t^2 dW_t^2 + \frac{\partial V}{\partial X}H_t dW_t. 
