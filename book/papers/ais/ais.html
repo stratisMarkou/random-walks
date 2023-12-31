@@ -79,7 +79,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="Random Fourier features" href="../rff/rff.html" />
-    <link rel="prev" title="Stream of papers" href="../intro.html" />
+    <link rel="prev" title="Stream" href="../intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -199,9 +199,9 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Papers</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Papers &amp; Miscellanous</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Stream of papers</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Stream</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Annealed importance sampling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../rff/rff.html">Random Fourier features</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../score-matching/score-matching.html">Estimation by score matching</a></li>
@@ -502,7 +502,7 @@ q(x) = \mathcal{N}(x; \mu_q, \sigma_q^2).
 \end{equation}\]</div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/800d9aa42f6093a0de4318b34ff2b35b013dabff5fcef36cfdbab6355eae92dd.svg" src="../../../_images/800d9aa42f6093a0de4318b34ff2b35b013dabff5fcef36cfdbab6355eae92dd.svg" /></div>
+<img alt="../../../_images/5e80915ab319ecad9cb790f28280998a615d0443665f8f704f5e85d3a78bdd88.svg" src="../../../_images/5e80915ab319ecad9cb790f28280998a615d0443665f8f704f5e85d3a78bdd88.svg" /></div>
 </div>
 <p>Using importance sampling, we can obtain an estimate of this intergral.</p>
 <div class="cell tag_remove-input docutils container">
@@ -537,7 +537,7 @@ The point of this additional Monte Carlo estimate is to give us an idea of how m
 To see why, this occurs, let’s plot the raw samples drawn from <span class="math notranslate nohighlight">\(q\)</span> (in green) as well as the samples weighted according to their importance weights (in blue).</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/a5b7f84dcc43a54525f7eed28087bb74419e7cae640ff8b483d120d7f17bc70c.svg" src="../../../_images/a5b7f84dcc43a54525f7eed28087bb74419e7cae640ff8b483d120d7f17bc70c.svg" /></div>
+<img alt="../../../_images/07dafba2897ea95553e3b03831aeda4b05e1fc9b87ed2c1e521519e2f9e78936.svg" src="../../../_images/07dafba2897ea95553e3b03831aeda4b05e1fc9b87ed2c1e521519e2f9e78936.svg" /></div>
 </div>
 <p>First off, this plot illustrates how importance sampling works.
 Although <span class="math notranslate nohighlight">\(q\)</span> proposes many samples in the middle, these are down-weighted by the importance weights, since <span class="math notranslate nohighlight">\(p\)</span> has small density there.
@@ -549,7 +549,7 @@ Since this sample has a large importance weight, it greatly affects the overall 
 Looking at a histogram of the importance weights we see that most weights are very small, and it’s only a few large weights which dominate the value of the integral (note the <span class="math notranslate nohighlight">\(x\)</span>-axis has a log-scale).</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/549717e311353f91702b03f4587d9b917458bb1bb6e6aed73e81378e972763e4.svg" src="../../../_images/549717e311353f91702b03f4587d9b917458bb1bb6e6aed73e81378e972763e4.svg" /></div>
+<img alt="../../../_images/83b468c9741f3d429e8d80aa72d5d142e0ec7171842ff68bcd687e4031ed0717.svg" src="../../../_images/83b468c9741f3d429e8d80aa72d5d142e0ec7171842ff68bcd687e4031ed0717.svg" /></div>
 </div>
 <p>Going a little further, note that the expectation of the value of an importance weight is always equal to one since</p>
 <div class="math notranslate nohighlight">
@@ -991,14 +991,14 @@ This gives <span class="math notranslate nohighlight">\(\beta_k\)</span> which g
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../../../_images/e7b0200f2aaaea2a3ace3f14389774d22b4f2086eaaf7701f2abdc174f6cfeed.svg" src="../../../_images/e7b0200f2aaaea2a3ace3f14389774d22b4f2086eaaf7701f2abdc174f6cfeed.svg" /></div>
+<img alt="../../../_images/97af474d82eace59ed4f057ff72162064950dac9b71913cdf48d0759f5cdc705.svg" src="../../../_images/97af474d82eace59ed4f057ff72162064950dac9b71913cdf48d0759f5cdc705.svg" /></div>
 </div>
 <p>We observe that the distribution of the AIS samples (purple bars) is similar to the target distribution <span class="math notranslate nohighlight">\(p\)</span> (blue line).
 Further, weighing the AIS samples by their importance weights (blue bars) does not appear to significantly change the resulting distribution.
 This would suggest that moost of the importance weights are close to <span class="math notranslate nohighlight">\(1\)</span>, which we can verify by plotting them on a histogram.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/4d0a45e9ee0698c3b01ec951442acb022042705a19db974351deff5f365c9186.svg" src="../../../_images/4d0a45e9ee0698c3b01ec951442acb022042705a19db974351deff5f365c9186.svg" /></div>
+<img alt="../../../_images/d9ad02478413108719ccec1c7839033226b790ebda6bb6e70baffefeff9a02f0.svg" src="../../../_images/d9ad02478413108719ccec1c7839033226b790ebda6bb6e70baffefeff9a02f0.svg" /></div>
 </div>
 <p>As expected, most of the AIS importance weights are close to <span class="math notranslate nohighlight">\(1\)</span>.
 Further, they have a clearly smaller variance than standard importance sampling.
@@ -1070,7 +1070,7 @@ For more details, Radford Neal’s original paper introducing AIS<span id="id3">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Stream of papers</p>
+        <p class="prev-next-title">Stream</p>
       </div>
     </a>
     <a class="right-next"

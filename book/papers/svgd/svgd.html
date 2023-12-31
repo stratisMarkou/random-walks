@@ -199,9 +199,9 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Papers</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Papers &amp; Miscellanous</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Stream of papers</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Stream</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../ais/ais.html">Annealed importance sampling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../rff/rff.html">Random Fourier features</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../score-matching/score-matching.html">Estimation by score matching</a></li>
@@ -569,7 +569,7 @@ x^{(i + 1)}_n = x^{(i)}_n + \frac{\epsilon^{(i)}}{N}\sum_{m = 1}^N \left[ k(x_n,
 We will use SVGD to approximate a mixture-of-gaussians distribution, to allow for multiple modes.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/27d7b69123bbe90da90275c4403fe79b7aaab3acca482243e80be9d79b32525a.svg" src="../../../_images/27d7b69123bbe90da90275c4403fe79b7aaab3acca482243e80be9d79b32525a.svg" /></div>
+<img alt="../../../_images/5f0d06eb7c288f1ad4b9b7fc53663cda1ebf1e82cabbaa3fc7168e5f3d99cad2.svg" src="../../../_images/5f0d06eb7c288f1ad4b9b7fc53663cda1ebf1e82cabbaa3fc7168e5f3d99cad2.svg" /></div>
 </div>
 <p>Although SVGD can use any positive-semidefinite kernel, we will focus our attention to the standard EQ kernel</p>
 <div class="math notranslate nohighlight">
@@ -620,7 +620,7 @@ k(x, x') = \exp\left(-\frac{1}{2\ell^2} (x - x')^2\right),
 <p>We can now run SVGD using a modest number of particles initialised in between the two modes.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/fbe446e9f00e881e169e8239ed7b804de2c66576ab93444afd7de8c1d716b474.svg" src="../../../_images/fbe446e9f00e881e169e8239ed7b804de2c66576ab93444afd7de8c1d716b474.svg" /></div>
+<img alt="../../../_images/71dd588c0178169ba837cea4cb0fccef6ce481c7868ce843ad0c61ac19973a2d.svg" src="../../../_images/71dd588c0178169ba837cea4cb0fccef6ce481c7868ce843ad0c61ac19973a2d.svg" /></div>
 </div>
 <p>We observe that some of the particles fall into each of the two modes, capturing the bimodality of the target, something which VI with a mean-field Gaussian <span class="math notranslate nohighlight">\(q\)</span> cannot do.</p>
 </section>
@@ -631,7 +631,7 @@ If we initialise the particles on one mode of two well-separated Gaussians, then
 Even though SVGD may be able to express more expressive approximate distributions than mean-field VI, it is not guaranteed that the optimisation will be able to find such a distribution.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/c0eb4f0c2a55e604228c3e05e0b81eed8fba0da268ca60f8d3e48a871468df97.svg" src="../../../_images/c0eb4f0c2a55e604228c3e05e0b81eed8fba0da268ca60f8d3e48a871468df97.svg" /></div>
+<img alt="../../../_images/8e16a6779e29a53bde1c3e17b452222cf1ed4414d87fc6c3182356254212d52e.svg" src="../../../_images/8e16a6779e29a53bde1c3e17b452222cf1ed4414d87fc6c3182356254212d52e.svg" /></div>
 </div>
 </section>
 </section>
