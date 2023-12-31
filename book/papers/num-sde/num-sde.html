@@ -484,7 +484,7 @@ W(t_{n+1}) = W(t_{n}) + \Delta W(t_{n}), \text{ where } \Delta W(t_{n}) \sim \ma
 </div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/26355c1b9c091a6622b9d1931424b8cdc5dde5c5e6373fbd12faf6994d61aa08.svg" src="../../../_images/26355c1b9c091a6622b9d1931424b8cdc5dde5c5e6373fbd12faf6994d61aa08.svg" /></div>
+<img alt="../../../_images/8a63f187373674d43bce899f13380ded0444bed7232e5333ded362de3e099451.svg" src="../../../_images/8a63f187373674d43bce899f13380ded0444bed7232e5333ded362de3e099451.svg" /></div>
 </div>
 <p>So even though we can’t represent the entirety of the path, we can sample it to arbitrary precision.</p>
 </section>
@@ -533,7 +533,7 @@ X(t) = \exp\left(t + \frac{1}{2}W(t)\right).
 </div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/7a2867800d9dd91864940b23f172977ff145851f1177f93b721b8955338e84d7.svg" src="../../../_images/7a2867800d9dd91864940b23f172977ff145851f1177f93b721b8955338e84d7.svg" /></div>
+<img alt="../../../_images/9f921815004dcbb3094afde86d2a7b13e2a67232eab4b0dfb0717cb88f73b43a.svg" src="../../../_images/9f921815004dcbb3094afde86d2a7b13e2a67232eab4b0dfb0717cb88f73b43a.svg" /></div>
 </div>
 </section>
 <section id="evaluating-a-stochastic-integral">
@@ -707,7 +707,7 @@ X_t = X_0 \exp \left[\Big(\lambda - \frac{1}{2} \mu^2\Big)~t + \mu W(t)\right],
 <p>We are can now run the EM method and compare it aginst the exact solution below.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/222abd64820002571f000cfee1630e3c68e921ec36270cad88e4726469429c27.svg" src="../../../_images/222abd64820002571f000cfee1630e3c68e921ec36270cad88e4726469429c27.svg" /></div>
+<img alt="../../../_images/cdcd710fd913e67bb5c3b0a4f66e60c26ef958cee76b498acd0b0b44d8b5d622.svg" src="../../../_images/cdcd710fd913e67bb5c3b0a4f66e60c26ef958cee76b498acd0b0b44d8b5d622.svg" /></div>
 </div>
 <p>We can change the accuracy of the solution by adjusting <span class="math notranslate nohighlight">\(N\)</span>. As a fun aside, what if we try out a different drift term? One nice choice is</p>
 <div class="math notranslate nohighlight">
@@ -733,7 +733,7 @@ g(x, t) &amp;= \mu x.\\
 </div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/93d6943a97ded8b2e089b7c8cfbec1094e804c7796c07b8e20e37bd4860cb928.svg" src="../../../_images/93d6943a97ded8b2e089b7c8cfbec1094e804c7796c07b8e20e37bd4860cb928.svg" /></div>
+<img alt="../../../_images/396ac3e2f56ecc4de38e7519e34d70dd4dddc732b1f3355d343cfdf1ad5a2ef0.svg" src="../../../_images/396ac3e2f56ecc4de38e7519e34d70dd4dddc732b1f3355d343cfdf1ad5a2ef0.svg" /></div>
 </div>
 </section>
 <section id="strong-and-weak-convergence">
@@ -762,7 +762,7 @@ g(x, t) &amp;= \mu x.\\
 We do not provide a proof for any of the above statements, but instead evaluate the rate of convergence empirically.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/5c6f9c93234a2f808c2216cfc1c170006b41bc29208f7e235cc9ff8bf54c453e.svg" src="../../../_images/5c6f9c93234a2f808c2216cfc1c170006b41bc29208f7e235cc9ff8bf54c453e.svg" /></div>
+<img alt="../../../_images/ff707b5968462044d72db11453e41814f8beaf7e5733d23a42ca22374ed8ff34.svg" src="../../../_images/ff707b5968462044d72db11453e41814f8beaf7e5733d23a42ca22374ed8ff34.svg" /></div>
 </div>
 </section>
 <section id="milstein-s-higher-order-method">
@@ -783,56 +783,16 @@ dX(t) = f(X(t))dt + g(X(t)) dW(t),
 <p>where <span class="math notranslate nohighlight">\(\Delta t &gt; 0\)</span> is the time step, <span class="math notranslate nohighlight">\(X_j = X(\tau_j), W_j = W(\tau_j)\)</span> and <span class="math notranslate nohighlight">\(\tau_j = j\Delta t\)</span>.</p>
 </section>
 </div><p>Milstein’s method achieves a strong convergence rate of <span class="math notranslate nohighlight">\(1\)</span> and a weak convergence rate of <span class="math notranslate nohighlight">\(1\)</span>.</p>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">parallel_milstein</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span> <span class="n">num_paths</span><span class="p">,</span> <span class="n">X0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
-    
-    <span class="c1"># Set the random seed</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
-    
-    <span class="c1"># Time increment</span>
-    <span class="n">dt</span> <span class="o">=</span> <span class="n">T</span> <span class="o">/</span> <span class="n">N</span>
-    
-    <span class="c1"># Set initial X values</span>
-    <span class="n">X</span> <span class="o">=</span> <span class="n">X0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">num_paths</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
-    
-    <span class="c1"># Times at which to evaluate the integral</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-    
-    <span class="c1"># Wiener process samples</span>
-    <span class="n">dW</span> <span class="o">=</span> <span class="n">dt</span> <span class="o">**</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">num_paths</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span>
-    
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-        
-        <span class="c1"># Compute the EM term and the higher order correction term</span>
-        <span class="n">dX</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">+</span> <span class="n">g</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="n">dW</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span>
-        <span class="n">dX</span> <span class="o">=</span> <span class="n">dX</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">g</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="n">g</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">dW</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">dt</span><span class="p">)</span>
-        
-        <span class="n">X</span><span class="p">[:,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">dX</span>
-        
-    <span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">num_paths</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">dW</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    
-    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">W</span>
-</pre></div>
-</div>
-</div>
-</details>
-</div>
 <p>Let’s first use Milstein’s method to get a single solution of the Black-Scholes model, as we did for EM.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/7d01eb2e51703e53d3e4cee9eaceec87c5e2b84ca8c8159834ebc8763c656149.svg" src="../../../_images/7d01eb2e51703e53d3e4cee9eaceec87c5e2b84ca8c8159834ebc8763c656149.svg" /></div>
+<img alt="../../../_images/41043ec4b93148fb0e8f9c9226d5dc584e40b8ddcc7bdc6c05c57ad7ced5c312.svg" src="../../../_images/41043ec4b93148fb0e8f9c9226d5dc584e40b8ddcc7bdc6c05c57ad7ced5c312.svg" /></div>
 </div>
 <p>We can also look at the strong and weak rates of convergence for Milstein’s method.
 Milstein’s method achieves a strong convergence rate of <span class="math notranslate nohighlight">\(1\)</span> as oposed to the <span class="math notranslate nohighlight">\(1/2\)</span> strong rate of Euler Maruyama.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/7f279836e70206b8cad21360c3d86074b212e9f692c976454f1a555fdcefaeca.svg" src="../../../_images/7f279836e70206b8cad21360c3d86074b212e9f692c976454f1a555fdcefaeca.svg" /></div>
+<img alt="../../../_images/120f8e3d4b384dc99918a5235053ff13ff5af0de165cfd3eaec3234fabaa0677.svg" src="../../../_images/120f8e3d4b384dc99918a5235053ff13ff5af0de165cfd3eaec3234fabaa0677.svg" /></div>
 </div>
 </section>
 <section id="stochastic-chain-rule">
