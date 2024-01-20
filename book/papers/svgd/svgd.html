@@ -57,6 +57,7 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/buttons.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../../../_static/design-tabs.js"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-HP14V4DGEF"></script>
@@ -569,7 +570,7 @@ x^{(i + 1)}_n = x^{(i)}_n + \frac{\epsilon^{(i)}}{N}\sum_{m = 1}^N \left[ k(x_n,
 We will use SVGD to approximate a mixture-of-gaussians distribution, to allow for multiple modes.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/5f0d06eb7c288f1ad4b9b7fc53663cda1ebf1e82cabbaa3fc7168e5f3d99cad2.svg" src="../../../_images/5f0d06eb7c288f1ad4b9b7fc53663cda1ebf1e82cabbaa3fc7168e5f3d99cad2.svg" /></div>
+<img alt="../../../_images/33022b2dab9be61d788643a07aa25c0c42e1436a4534d7069881976f50df8f5a.svg" src="../../../_images/33022b2dab9be61d788643a07aa25c0c42e1436a4534d7069881976f50df8f5a.svg" /></div>
 </div>
 <p>Although SVGD can use any positive-semidefinite kernel, we will focus our attention to the standard EQ kernel</p>
 <div class="math notranslate nohighlight">
@@ -620,7 +621,7 @@ k(x, x') = \exp\left(-\frac{1}{2\ell^2} (x - x')^2\right),
 <p>We can now run SVGD using a modest number of particles initialised in between the two modes.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/71dd588c0178169ba837cea4cb0fccef6ce481c7868ce843ad0c61ac19973a2d.svg" src="../../../_images/71dd588c0178169ba837cea4cb0fccef6ce481c7868ce843ad0c61ac19973a2d.svg" /></div>
+<img alt="../../../_images/f07386e1daff3dc08a340a57ae5d3993961b74c9baecd98c6003031f3a8597f6.svg" src="../../../_images/f07386e1daff3dc08a340a57ae5d3993961b74c9baecd98c6003031f3a8597f6.svg" /></div>
 </div>
 <p>We observe that some of the particles fall into each of the two modes, capturing the bimodality of the target, something which VI with a mean-field Gaussian <span class="math notranslate nohighlight">\(q\)</span> cannot do.</p>
 </section>
@@ -631,7 +632,7 @@ If we initialise the particles on one mode of two well-separated Gaussians, then
 Even though SVGD may be able to express more expressive approximate distributions than mean-field VI, it is not guaranteed that the optimisation will be able to find such a distribution.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/8e16a6779e29a53bde1c3e17b452222cf1ed4414d87fc6c3182356254212d52e.svg" src="../../../_images/8e16a6779e29a53bde1c3e17b452222cf1ed4414d87fc6c3182356254212d52e.svg" /></div>
+<img alt="../../../_images/5a7f29cad48ff229214ea76cca0a6886bd041b0471aa196cd5b45133ef75abd0.svg" src="../../../_images/5a7f29cad48ff229214ea76cca0a6886bd041b0471aa196cd5b45133ef75abd0.svg" /></div>
 </div>
 </section>
 </section>
