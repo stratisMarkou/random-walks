@@ -59,9 +59,10 @@ It is not possible in general to define a precision function $r : \mathbb{R}^{d}
 
 :::
 
-Since GP models are defined by covariance functions with input-pair arguments, this rules out the possibility of defining a GP using a precision function.
+Since GP models are defined by covariance functions with input-pair arguments, this rules out the possibility of defining a GP using a precision function which takes pairs of input points.
 We also observe that whereas the covariance of two random variables is a pair-wise quantity (by definition), the precision of two random variables is a set-wise or global quantity, because it depends on all other inputs.
-There is a slightly subtler point here that's worth clarifying however.
+There is a slightly subtler point here that's worth clarifying.
+
 Consider a positive definite matrix $H.$
 Because $H$ is positive definite, it is invertible and its inverse $H^{-1}$ is also positive definite.
 Now, what if we just write down the entries of $H^{-1}$ and define $r(x_i, x_j) = H_{ij}$ to be the precision of $x_i$ and $x_j.$ 
