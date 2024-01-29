@@ -47,7 +47,7 @@ A\phantom{^\top} & B\\
 B^\top & C
 \end{pmatrix}^{-1} = \begin{pmatrix}
 M & -MBC^{-1}\\
-C^{-1}B^\topM & C^{-1} + C^{-1} B^\top MBC^{-1}
+C^{-1}B^\top M & C^{-1} + C^{-1} B^\top MBC^{-1}
 \end{pmatrix}, \text{ where } M = (A - B C^{-1}B^\top)^{-1},
 \end{align}$$
 

@@ -448,7 +448,7 @@ A\phantom{^\top} &amp; B\\
 B^\top &amp; C
 \end{pmatrix}^{-1} = \begin{pmatrix}
 M &amp; -MBC^{-1}\\
-C^{-1}B^\topM &amp; C^{-1} + C^{-1} B^\top MBC^{-1}
+C^{-1}B^\top M &amp; C^{-1} + C^{-1} B^\top MBC^{-1}
 \end{pmatrix}, \text{ where } M = (A - B C^{-1}B^\top)^{-1},
 \end{align}\end{split}\]</div>
 <p>and oberving that the entry <span class="math notranslate nohighlight">\(M_{ij}\)</span> is a function of all the <span class="math notranslate nohighlight">\(x_{1:N}\)</span> inputs and not just <span class="math notranslate nohighlight">\(x_i\)</span> and <span class="math notranslate nohighlight">\(x_j\)</span>. Thus, the precision function cannot be self-consistent if it takes pairs of inputs as its argument. In other words, the precision matrix depends on the whole set of inputs we are conditioning on, and any precision function that takes <strong>pairs of inputs</strong> as its arguments will be inconsistent in general - perhaps with some trivial exceptions. We therefore have the following informal observation.</p>
