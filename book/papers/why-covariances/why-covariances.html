@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Estimation by score matching &#8212; Random Walks</title>
+    <title>Why covariance functions? &#8212; Random Walks</title>
   
   
   
@@ -74,12 +74,12 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../../../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'book/papers/score-matching/score-matching';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/papers/why-covariances/why-covariances';</script>
     <link rel="shortcut icon" href="../../../_static/dicefav.png"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Stein variational gradient descent" href="../svgd/svgd.html" />
-    <link rel="prev" title="Random Fourier features" href="../rff/rff.html" />
+    <link rel="next" title="Annealed importance sampling" href="../ais/ais.html" />
+    <link rel="prev" title="Stream" href="../intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -202,10 +202,10 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Papers &amp; Miscellanous</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Stream</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../why-covariances/why-covariances.html">Why covariance functions?</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Why covariance functions?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ais/ais.html">Annealed importance sampling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../rff/rff.html">Random Fourier features</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Estimation by score matching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../score-matching/score-matching.html">Estimation by score matching</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../svgd/svgd.html">Stein variational gradient descent</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../num-sde/num-sde.html">Numerical simulation of SDEs</a></li>
 </ul>
@@ -281,7 +281,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/stratisMarkou/random-walks/issues/new?title=Issue%20on%20page%20%2Fbook/papers/score-matching/score-matching.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/stratisMarkou/random-walks/issues/new?title=Issue%20on%20page%20%2Fbook/papers/why-covariances/why-covariances.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -311,7 +311,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../../../_sources/book/papers/score-matching/score-matching.md" target="_blank"
+      <li><a href="../../../_sources/book/papers/why-covariances/why-covariances.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -380,9 +380,7 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
+
 </div></div>
       
     </div>
@@ -393,20 +391,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Estimation by score matching</h1>
+    <h1>Why covariance functions?</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-score-matching-trick">The score matching trick</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -416,151 +405,71 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="estimation-by-score-matching">
-<h1>Estimation by score matching<a class="headerlink" href="#estimation-by-score-matching" title="Permalink to this heading">#</a></h1>
-<p>Score matching a useful trick due to Hyvarinen<span id="id1">[<a class="reference internal" href="#id14" title="Aapo Hyvärinen and Peter Dayan. Estimation of non-normalized statistical models by score matching. Journal of Machine Learning Research, 2005.">Hyvärinen and Dayan, 2005</a>]</span> for learning the parameters of intractable probabilistic models.
-Score matching can be used to train probabilistic models whose likelihood function takes the form</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="why-covariance-functions">
+<h1>Why covariance functions?<a class="headerlink" href="#why-covariance-functions" title="Permalink to this heading">#</a></h1>
+<p>One question about GPs that I couldn’t wrap my head around for a while was: why do we always work with covariance and never precision functions?
+After all, one central limitation of GPs is the cost of inverting matrices, which we could perhaps cut down on if we worked with precision instead of covariance functions.</p>
+<p>The reason we don’t work with precision functions is because it’s not possible to define a function which maps pairs of inputs to entries in a precision matrix, such that the precision matrices produced by it are consistent with one another.
+In particular, given a set of inputs <span class="math notranslate nohighlight">\(x_{1:N}\)</span>, we can define a covariance function <span class="math notranslate nohighlight">\(k : \mathbb{R}^d \times \mathbb{R}^d \to \mathbb{R}\)</span>, mapping pairs of inputs <span class="math notranslate nohighlight">\((x_i, x_j)\)</span> to the respective entries of a covariance matrix <span class="math notranslate nohighlight">\(\Sigma_{y_{1:N} | x_{1:N}}\)</span>, and that the covariance matrices produced by this <span class="math notranslate nohighlight">\(k\)</span> are consistent with each other.
+However, it is not possible in general to define a precision function <span class="math notranslate nohighlight">\(r : \mathbb{R}^d \times \mathbb{R}^d \to \mathbb{R}\)</span>, mapping pairs of inputs <span class="math notranslate nohighlight">\((x_i, x_j)\)</span> to the repsective entries of a covariance matrix <span class="math notranslate nohighlight">\(R_{y_{1:N} | x_{1:N}}\)</span>, such that the corresponding precision matrices are consistent with one another.</p>
+<p>Consider set of input-output pairs <span class="math notranslate nohighlight">\(x_{1:N}, y_{1:N}\)</span>.
+We will show two ways of computing the marginal distribution of a subset of these variables, <span class="math notranslate nohighlight">\(y_{1:M}\)</span> where <span class="math notranslate nohighlight">\(M &lt; N\)</span> and show that the covariance function produces consistent covariance matrices, while the precision function is not guaranteed to produce consistent precision matrices.</p>
+<p>The first way of obtaining the marginal <span class="math notranslate nohighlight">\(p(y_{1:M} | x_{1:M})\)</span> is to simply apply <span class="math notranslate nohighlight">\(k : \mathbb{R}^d \times \mathbb{R}^d \to \mathbb{R}\)</span> or <span class="math notranslate nohighlight">\(r : \mathbb{R}^d \times \mathbb{R}^d \to \mathbb{R}\)</span> to the subset <span class="math notranslate nohighlight">\(x_{1 : M}\)</span> of input variables, to obtain the covariance or precision matrix respectively.</p>
+<p>The other way to obtain the marginal distribution is to compute the integral</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
-p_\theta(x) = \frac{1}{Z_\theta} q_\theta(x),
+p(y_{1:M} | x_{1:M}) = \int p(y_{1:N} | x_{1:N}) dy_{M+1:N} = \int \mathcal{N}\left(y_{1:N}; \boldsymbol{\mu}_{y_{1:N} | x_{1:N}}, \Sigma_{y_{1:N} | x_{1:N}} \right) dy_{M+1:N}.
 \end{align}\]</div>
-<p>where <span class="math notranslate nohighlight">\(q_\theta(x)\)</span> is a positive function we can evaluate, but <span class="math notranslate nohighlight">\(Z_\theta\)</span> is a normalising constant which we cannot evaluate in closed form.
-Non-gaussian Markov random fields are examples of such models.</p>
-<section id="the-score-matching-trick">
-<h2>The score matching trick<a class="headerlink" href="#the-score-matching-trick" title="Permalink to this heading">#</a></h2>
-<p>The first step for the score-matching trick is to notice that taking the log and then the gradient with respect to <span class="math notranslate nohighlight">\(x\)</span> of both sides eliminates the intractable <span class="math notranslate nohighlight">\(Z_\theta\)</span></p>
+<p>Regardless of whether we use <span class="math notranslate nohighlight">\(k\)</span> or <span class="math notranslate nohighlight">\(r\)</span>, the distributions obtained through (a) direct computation or (b) marginalisation, better be the same.
+From the marginalisation property of multivariate Gaussians we have</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
-\nabla \log p_\theta(x) = \nabla \log q_\theta(x),
+p(y_{1:M} | x_{1:M}) = \mathcal{N}\left(y_{1:M}; \mathbf{a}, A \right),
 \end{align}\]</div>
-<p>since <span class="math notranslate nohighlight">\(Z_\theta\)</span> does not depend on <span class="math notranslate nohighlight">\(x\)</span>.
-The gradient of the log-likelihood is called the score function</p>
-<div class="math notranslate nohighlight">
-\[\begin{align}
-\nabla \log p_\theta(x) = \psi_\theta(x).
-\end{align}\]</div>
-<p>The second step is to find a way to use the score function <span class="math notranslate nohighlight">\(\psi_\theta(x)\)</span> along with some observed data, to estimate the parameters <span class="math notranslate nohighlight">\(\theta\)</span>.
-We can achieve this by defining the following score matching objective.</p>
-<div class="proof definition admonition" id="definition-0">
-<p class="admonition-title"><span class="caption-number">Definition 69 </span> (Score matching objective)</p>
-<section class="definition-content" id="proof-content">
-<p>Given a data distribution <span class="math notranslate nohighlight">\(p_d(x)\)</span> and an approximating distribution <span class="math notranslate nohighlight">\(p_\theta(x)\)</span> with parameters <span class="math notranslate nohighlight">\(\theta\)</span>, we define the score matching objective as</p>
-<div class="math notranslate nohighlight">
-\[\begin{align}
-J(\theta) = \frac{1}{2} \int p_d(x) || \psi_\theta(x) - \psi_d(x)||^2 dx,
-\end{align}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\psi_\theta(x) = \nabla p_\theta(x)\)</span> and <span class="math notranslate nohighlight">\(\psi_d(x) = \nabla p_d(x)\)</span> and the derivatives are with respect to <span class="math notranslate nohighlight">\(x\)</span>.</p>
-</section>
-</div><p>We observe that if <span class="math notranslate nohighlight">\(J(\theta) = 0\)</span>, then <span class="math notranslate nohighlight">\(\psi_\theta(x) = \psi_d(x)\)</span> almost always.
-So we might expect that in this case the model distribution <span class="math notranslate nohighlight">\(p_\theta(x)\)</span> and <span class="math notranslate nohighlight">\(p_d(x)\)</span> will also be equal.
-This intuition is formalised by the following result.</p>
-<div class="proof theorem admonition" id="theorem-1">
-<p class="admonition-title"><span class="caption-number">Theorem 80 </span> (Matching scores <span class="math notranslate nohighlight">\(\iff\)</span> matching distributions)</p>
-<section class="theorem-content" id="proof-content">
-<p>Suppose that the probability density function of <span class="math notranslate nohighlight">\(x\)</span> satisfies <span class="math notranslate nohighlight">\(p_d(x) = p_\theta(x)\)</span> for some <span class="math notranslate nohighlight">\(\theta^*\)</span> and also that if <span class="math notranslate nohighlight">\(\theta^* \neq \theta\)</span> then <span class="math notranslate nohighlight">\(p_\theta(x) \neq p_d(x)\)</span>.
-Suppose also that <span class="math notranslate nohighlight">\(p_\theta(x) &gt; 0\)</span>. Then</p>
-<div class="math notranslate nohighlight">
-\[\begin{align}
-J(\theta) = 0 \iff \theta = \theta^*.
-\end{align}\]</div>
-</section>
-</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
-<summary class="sd-summary-title sd-card-header">
-Proof: Score matching <span class="math notranslate nohighlight">\(\iff\)</span> maximum likelihood<div class="sd-summary-down docutils">
-<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="sd-summary-up docutils">
-<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text"><strong>Is implied by:</strong>
-We can see that <span class="math notranslate nohighlight">\(\theta = \theta^* \implies J(\theta) = 0\)</span> by substituting <span class="math notranslate nohighlight">\(p_d(x) = p_\theta(x)\)</span> into <span class="math notranslate nohighlight">\(J(\theta^*)\)</span></p>
+<p>where we have partitioned the mean <span class="math notranslate nohighlight">\(\boldsymbol{\mu}_{y_{1:N} | x_{1:N}}\)</span> and covariance <span class="math notranslate nohighlight">\(\Sigma_{y_{1:N} | x_{1:N}}\)</span> of the joint distribution as</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
-J(\theta^*) &amp;= \frac{1}{2} \int p_d(x) || \psi_{\theta^*}(x) - \psi_d(x)||^2 dx \\
-            &amp;= \frac{1}{2} \int p_\theta(x) || \psi_{\theta^*}(x) - \psi_{\theta^*}(x)||^2 dx \\
-            &amp;= 0.
+p(y_{1:N} | x_{1:N}) = \mathcal{N}\left(y_{1:N}; \boldsymbol{\mu}_{y_{1:N} | x_{1:N}}, \Sigma_{y_{1:N} | x_{1:N}} \right) = \mathcal{N}\left(\begin{bmatrix} y_{1:M} \\ y_{M+1:N}
+\end{bmatrix}; \begin{bmatrix} \mathbf{a} \\ \mathbf{b}
+\end{bmatrix},
+\begin{bmatrix}
+A\phantom{^\top} &amp; B\\
+B^\top &amp; C
+\end{bmatrix}\right).
 \end{align}\end{split}\]</div>
-<p class="sd-card-text"><strong>Implies:</strong>
-Going the other direction, we can show that <span class="math notranslate nohighlight">\(J(\theta) = 0 \implies \theta = \theta^*\)</span> by considering</p>
-<div class="math notranslate nohighlight">
-\[\begin{align}
-J(\theta) &amp;= \frac{1}{2} \int p_\theta(x) || \psi_\theta(x) - \psi_{\theta^*}(x)||^2 dx = 0.
-\end{align}\]</div>
-<p class="sd-card-text">Since <span class="math notranslate nohighlight">\(p_\theta(x) &gt; 0\)</span>, the above can hold only if <span class="math notranslate nohighlight">\(\psi_\theta(x) = \psi_{\theta^*}(x)\)</span> for every <span class="math notranslate nohighlight">\(x\)</span>. This means that</p>
-<div class="math notranslate nohighlight">
-\[\begin{align}
-\psi_\theta(x) = \psi_{\theta^*}(x) + \text{const.} \implies p_\theta(x) \propto p_\theta(x),
-\end{align}\]</div>
-<p class="sd-card-text">and since <span class="math notranslate nohighlight">\(p_\theta(x)\)</span> is a normalised probability distribution, we arrive at <span class="math notranslate nohighlight">\(p_\theta(x) = p_\theta(x)\)</span>. Now since the <span class="math notranslate nohighlight">\(p_\theta(x)\)</span> is unique for the particular <span class="math notranslate nohighlight">\(\theta^*\)</span>, we have that <span class="math notranslate nohighlight">\(\theta = \theta^*\)</span>.</p>
-</div>
-</details><p>This result confirms the intuition that if the score functions (of the data distribution and the model) are equal, then the distributions equal as well.
-However, we note that this theorem assumes that <span class="math notranslate nohighlight">\(p_d(x) = p_\theta(x)\)</span> for some <span class="math notranslate nohighlight">\(\theta\)</span>.
-In other words, it is assumed that the true model <span class="math notranslate nohighlight">\(p_d(x)\)</span> is within the space of models we have hypothesised.
-In general this will not be true for true data, but at least the present result confirms that the expected behaviour is recovered in this idealised setting.</p>
-<p>The last challenge is that in its definition <span class="math notranslate nohighlight">\(J(\theta)\)</span> depends explicitly on <span class="math notranslate nohighlight">\(\psi_d(x)\)</span>, a function we do not have access to.
-In particular, expanding the term in the norm, we see that</p>
-<div class="math notranslate nohighlight">
-\[\begin{align}
-|| \psi_\theta(x) - \psi_{\theta^*}(x)||^2 = ||\psi_\theta(x)^\top\psi_\theta(x) - 2\psi_\theta(x)^\top\psi_d(x) + \psi_d(x)^\top\psi_d(x)||.
-\end{align}\]</div>
-<p>The first term is computable because we have access to <span class="math notranslate nohighlight">\(\psi_\theta(x)\)</span>.
-The latter term does not depend on <span class="math notranslate nohighlight">\(\theta\)</span> and is therefore irrelevant for the optimisation of <span class="math notranslate nohighlight">\(J(\theta)\)</span>.
-However the middle term both depends on <span class="math notranslate nohighlight">\(\theta\)</span> as well as the inaccessible score function of the data <span class="math notranslate nohighlight">\(\psi_d(x)\)</span>.
-Therefore this term must be considered in the optimisation of <span class="math notranslate nohighlight">\(J(\theta)\)</span> but is also not directly computable.
-By using integration by parts, one can show<span id="id2">[<a class="reference internal" href="#id14" title="Aapo Hyvärinen and Peter Dayan. Estimation of non-normalized statistical models by score matching. Journal of Machine Learning Research, 2005.">Hyvärinen and Dayan, 2005</a>]</span> that this term can be rewritten in a way such that <span class="math notranslate nohighlight">\(J(\theta)\)</span> can be estimated empirically.</p>
-<div class="proof theorem admonition" id="theorem-2">
-<p class="admonition-title"><span class="caption-number">Theorem 81 </span> (Equivalent form of <span class="math notranslate nohighlight">\(J\)</span>)</p>
-<section class="theorem-content" id="proof-content">
-<p>Let <span class="math notranslate nohighlight">\(\psi_\theta(x)\)</span> be a score function which is differentiable with respect to <span class="math notranslate nohighlight">\(x.\)</span>
-Then, under some weak regularity conditions on <span class="math notranslate nohighlight">\(\psi_\theta(x),\)</span> the score-matching function <span class="math notranslate nohighlight">\(J\)</span> can be writtten as</p>
-<div class="math notranslate nohighlight">
-\[\begin{align}
-J(\theta) = \int p_d(x) \sum^N_{i = 1}\left[ \partial_i \psi_{\theta, i}(x) + \frac{1}{2} \psi_{\theta, i}(x)^2 \right] dx + \text{const.},
-\end{align}\]</div>
-<p>where the <span class="math notranslate nohighlight">\(i\)</span>-subscript denotes the <span class="math notranslate nohighlight">\(i^{th}\)</span> entry of vector being indexed and <span class="math notranslate nohighlight">\(\partial_i\)</span> denotes the partial derivative with respect to <span class="math notranslate nohighlight">\(x_i\)</span>. The constant term is independent of <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
-</section>
-</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
-<summary class="sd-summary-title sd-card-header">
-Proof: Equivalent form of <span class="math notranslate nohighlight">\(~J\)</span><div class="sd-summary-down docutils">
-<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="sd-summary-up docutils">
-<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">Writing out <span class="math notranslate nohighlight">\(J\)</span></p>
-<div class="math notranslate nohighlight">
-\[\begin{align}
-J(\theta) = \frac{1}{2} \int p_d(x) \left[ \psi_\theta(x)^\top\psi_\theta(x) - 2\psi_\theta(x)^\top\psi_d(x) + \psi_d(x)^\top\psi_d(x)\right] dx,
-\end{align}\]</div>
-<p class="sd-card-text">we see that the last term in the brackets evaluates to a constant that is independent of <span class="math notranslate nohighlight">\(\theta\)</span>. Using the fact that</p>
-<div class="math notranslate nohighlight">
-\[\begin{align}
-p_d(x) \psi_d(x) = p_d(x) \nabla \log p_d(x) = \nabla p_d(x),
-\end{align}\]</div>
-<p class="sd-card-text">and applying integration by parts, we obtain</p>
+<p>A covariance function <span class="math notranslate nohighlight">\(k : \mathbb{R}^d \times \mathbb{R}^d \to \mathbb{R}\)</span> taking pairs of inputs <span class="math notranslate nohighlight">\((x_i, x_j)\)</span> as arguments, is consistent in the sense that (a) applying <span class="math notranslate nohighlight">\(k\)</span> to all pairs in <span class="math notranslate nohighlight">\(x_{1 : N}\)</span> and then marginalising over <span class="math notranslate nohighlight">\(x_{M+1:N}\)</span>, and (b) applying <span class="math notranslate nohighlight">\(k\)</span> to the pairs in <span class="math notranslate nohighlight">\(x_{M+1:N}\)</span>; will produce the same covariance matrix. This model is self-consistent in this respect.</p>
+<p>On the other hand, if the precision function <span class="math notranslate nohighlight">\(r\)</span> takes pairs of inputs <span class="math notranslate nohighlight">\((x_i, x_j)\)</span> as its argument, then it cannot be self-consistent. We can see this by considering</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
-\int p_d(x) \psi_\theta(x)^\top\psi_d(x) dx &amp;= \int \psi_\theta(x)^\top \nabla p_d(x) dx \\
-&amp;= \big[p_d(x) \psi_\theta(x) \big]_{-\infty}^{\infty} - \int p_d(x) \partial_i \psi_{\theta, i}(x) dx.
+R_{y_{1:N} | x_{1:N}} &amp;= \begin{pmatrix}
+A\phantom{^\top} &amp; B\\
+B^\top &amp; C
+\end{pmatrix}^{-1} = \begin{pmatrix}
+M &amp; -MBC^{-1}\\
+C^{-1}B^\topM &amp; C^{-1} + C^{-1} B^\top MBC^{-1}
+\end{pmatrix}, \text{ where } M = (A - B C^{-1}B^\top)^{-1},
 \end{align}\end{split}\]</div>
-<p class="sd-card-text">Substituting this into the expression for <span class="math notranslate nohighlight">\(J\)</span> we arrive at</p>
-<div class="math notranslate nohighlight">
-\[\begin{align}
-J(\theta) = \int p_d(x) \sum^N_{i = 1}\left[ \partial_i \psi_{\theta, i}(x) + \frac{1}{2} \psi_{\theta, i}(x)^2 \right] dx + \text{const.}
-\end{align}\]</div>
-</div>
-</details><p>The proof has used integration by parts to replace the intractable <span class="math notranslate nohighlight">\(\psi_d(x)\)</span> term by a <span class="math notranslate nohighlight">\(p_d(x)\)</span> term.
-This expression can be easily estimated if samples of <span class="math notranslate nohighlight">\(x\)</span> are available, by replacing the expectation with respect to <span class="math notranslate nohighlight">\(p_d(x)\)</span> by the empirical average over the samples.
-In this way, we can estimate the parameters <span class="math notranslate nohighlight">\(\theta\)</span> of a non-normalised model, without resorting to computing estimates of the density <span class="math notranslate nohighlight">\(p_d(x)\)</span>.</p>
+<p>and oberving that the entry <span class="math notranslate nohighlight">\(M_{ij}\)</span> is a function of all the <span class="math notranslate nohighlight">\(x_{1:N}\)</span> inputs and not just <span class="math notranslate nohighlight">\(x_i\)</span> and <span class="math notranslate nohighlight">\(x_j\)</span>. Thus, the precision function cannot be self-consistent if it takes pairs of inputs as its argument. In other words, the precision matrix depends on the whole set of inputs we are conditioning on, and any precision function that takes <strong>pairs of inputs</strong> as its arguments will be inconsistent in general - perhaps with some trivial exceptions. We therefore have the following informal observation.</p>
+<div class="proof remark admonition" id="remark-0">
+<p class="admonition-title"><span class="caption-number">Remark 1 </span> (Precision functions and consistency)</p>
+<section class="remark-content" id="proof-content">
+<p>It is not possible in general to define a precision function <span class="math notranslate nohighlight">\(r : \mathbb{R}^{d} \times \mathbb{R}^{d} \to \mathbb{R},\)</span> mapping pairs of <span class="math notranslate nohighlight">\(d\)</span>-dimensional vectors to real numbers, such that it produces precision matrices which are consistent under marginalisation.</p>
 </section>
-<section id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
-<div class="docutils container" id="id3">
-<dl class="citation">
-<dt class="label" id="id14"><span class="brackets">HyvarinenD05</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>)</span></dt>
-<dd><p>Aapo Hyvärinen and Peter Dayan. Estimation of non-normalized statistical models by score matching. <em>Journal of Machine Learning Research</em>, 2005.</p>
-</dd>
-</dl>
-</div>
-</section>
+</div><p>Since GP models are defined by covariance functions with input-pair arguments, this rules out the possibility of defining a GP using a precision function.
+We also observe that whereas the covariance of two random variables is a pair-wise quantity (by definition), the precision of two random variables is a set-wise or global quantity, because it depends on all other inputs.</p>
+<p>There is a slightly subtler point here that’s worth clarifying however.
+Consider a positive definite matrix <span class="math notranslate nohighlight">\(H.\)</span>
+Because <span class="math notranslate nohighlight">\(H\)</span> is positive definite, it is invertible and its inverse <span class="math notranslate nohighlight">\(H^{-1}\)</span> is also positive definite.
+Now, what if we just write down the entries of <span class="math notranslate nohighlight">\(H^{-1}\)</span> and define <span class="math notranslate nohighlight">\(r(x_i, x_j) = H_{ij}\)</span> to be the precision of <span class="math notranslate nohighlight">\(x_i\)</span> and <span class="math notranslate nohighlight">\(x_j.\)</span>
+Is there something wrong with that?
+The answer is no, there is no problem with this, but it’s important to note that this precision function gives us the precisions associated with the entire covariance matrix <span class="math notranslate nohighlight">\(H^{-1}.\)</span>
+In other words, it would not give us the precision associated with say a submatrix of <span class="math notranslate nohighlight">\(H^{-1},\)</span> say the submatrix <span class="math notranslate nohighlight">\(H_{2:N, 2:N}^{-1},\)</span> by the argument we considered above.
+However, we could augment the precision function to take a third argument, which is the subset of elements we are interested in querying the GP at, say <span class="math notranslate nohighlight">\(\{x_{n_1}, \dots, x_{n_l}\},\)</span> and instead define <span class="math notranslate nohighlight">\(r(x_i, x_j, \mathcal{S})\)</span> to be equal to the inverse of <span class="math notranslate nohighlight">\(H^{-1}_{[n_1, \dots, n_l]},\)</span> where this subscript notation means the submatrix containing the <span class="math notranslate nohighlight">\(n_i\)</span>-th rows and columns of <span class="math notranslate nohighlight">\(H^{-1}.\)</span>
+In other words, we can define a precision function for the entire input space, and whenever we want to evaluate it for a subset of the space, we would have to go through the covariance, select the appropriate submatrix, and invert it.
+This is consistent with our previous discussion, because this augmented defintion does not depend on just pairs of inputs, but also on the subset of inputs that we are querying the GP at.
+Note also, that for this approach to work, we would need to evaluate this master-precision matrix on the entire input space <span class="math notranslate nohighlight">\(\mathcal{X},\)</span> such that we are then able to select the appropriate submatrix for any subset of inputs.
+This is clearly very expensive for large input spaces, and clearly very challenging if the space <span class="math notranslate nohighlight">\(\mathcal{X}\)</span> is infinite.
+Nevertheless, there are cases where this approach is useful, such as when defining GPs on graphs, where the <span class="math notranslate nohighlight">\(\mathcal{X}\)</span> is the set of nodes in the graph, and the edges of the graph define the structure of the precision matrix.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -576,7 +485,7 @@ In this way, we can estimate the parameters <span class="math notranslate nohigh
         },
         kernelOptions: {
             name: "python3",
-            path: "./book/papers/score-matching"
+            path: "./book/papers/why-covariances"
         },
         predefinedOutput: true
     }
@@ -594,20 +503,20 @@ In this way, we can estimate the parameters <span class="math notranslate nohigh
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../rff/rff.html"
+       href="../intro.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Random Fourier features</p>
+        <p class="prev-next-title">Stream</p>
       </div>
     </a>
     <a class="right-next"
-       href="../svgd/svgd.html"
+       href="../ais/ais.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Stein variational gradient descent</p>
+        <p class="prev-next-title">Annealed importance sampling</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -617,21 +526,6 @@ In this way, we can estimate the parameters <span class="math notranslate nohigh
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-score-matching-trick">The score matching trick</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>
