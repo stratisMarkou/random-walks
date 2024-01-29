@@ -11,7 +11,6 @@ However, it is not possible in general to define a precision function $r : \math
 Consider a set of input points $x_{1:N} = (x_1, \dots, x_N) \in \mathcal{X}^N$ and a GP which takes values in $\mathbb{R}.$
 Let the random variables that correspond to sampling the GP at the inputs above be $y_{1:N} = (y_1, \dots, y_N) \in \mathbb{R}^N$.
 We will show two ways of computing the marginal distribution of a subset of these variables, $y_{1:M}$ where $M < N$ and show that the covariance function produces consistent covariance matrices, while the precision function is not guaranteed to produce consistent precision matrices.
-
 The first way of obtaining the marginal $p(y_{1:M} | x_{1:M})$ is to simply apply $k : \mathbb{R}^d \times \mathbb{R}^d \to \mathbb{R}$ or $r : \mathbb{R}^d \times \mathbb{R}^d \to \mathbb{R}$ to the subset $x_{1 : M}$ of input variables, to obtain the covariance or precision matrix respectively.
 The other way to obtain the marginal distribution is to compute the integral
 
