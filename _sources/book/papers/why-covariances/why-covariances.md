@@ -2,16 +2,17 @@
 
 One question about GPs that I couldn't wrap my head around for a while was: why do we always work with covariance and never precision functions?
 After all, one central limitation of GPs is the cost of inverting matrices, which we could perhaps cut down on if we worked with precision instead of covariance functions.
-
 The reason we don't work with precision functions is because it's not possible to define a function which maps pairs of inputs to entries in a precision matrix, such that the precision matrices produced by it are consistent with one another.
-In particular, given a set of inputs $x_{1:N}$, we can define a covariance function $k : \mathbb{R}^d \times \mathbb{R}^d \to \mathbb{R}$, mapping pairs of inputs $(x_i, x_j)$ to the respective entries of a covariance matrix $\Sigma_{y_{1:N} | x_{1:N}}$, and that the covariance matrices produced by this $k$ are consistent with each other.
+
+Suppose $\mathcal{X}$ is an input space.
+We can define a covariance function $k : \mathbb{R}^d \times \mathbb{R}^d \to \mathbb{R}$, mapping pairs of inputs $x_i, x_j \in \mathcal{X}$ to the respective entries of a covariance matrix, such that the covariance matrices produced by this $k$ are consistent with each other.
 However, it is not possible in general to define a precision function $r : \mathbb{R}^d \times \mathbb{R}^d \to \mathbb{R}$, mapping pairs of inputs $(x_i, x_j)$ to the repsective entries of a covariance matrix $R_{y_{1:N} | x_{1:N}}$, such that the corresponding precision matrices are consistent with one another.
 
-Consider set of input-output pairs $x_{1:N}, y_{1:N}$.
+Consider a set of input points $x_{1:N} = (x_1, \dots, x_N) \in \mathcal{X}^N$ and a GP which takes values in $\mathbb{R}.$
+Let the random variables that correspond to sampling the GP at the inputs above be $y_{1:N} = (y_1, \dots, y_N) \in \mathbb{R}^N$.
 We will show two ways of computing the marginal distribution of a subset of these variables, $y_{1:M}$ where $M < N$ and show that the covariance function produces consistent covariance matrices, while the precision function is not guaranteed to produce consistent precision matrices.
 
 The first way of obtaining the marginal $p(y_{1:M} | x_{1:M})$ is to simply apply $k : \mathbb{R}^d \times \mathbb{R}^d \to \mathbb{R}$ or $r : \mathbb{R}^d \times \mathbb{R}^d \to \mathbb{R}$ to the subset $x_{1 : M}$ of input variables, to obtain the covariance or precision matrix respectively.
-
 The other way to obtain the marginal distribution is to compute the integral
 
 $$\begin{align}
@@ -38,7 +39,6 @@ B^\top & C
 \end{align}$$
 
 A covariance function $k : \mathbb{R}^d \times \mathbb{R}^d \to \mathbb{R}$ taking pairs of inputs $(x_i, x_j)$ as arguments, is consistent in the sense that (a) applying $k$ to all pairs in $x_{1 : N}$ and then marginalising over $x_{M+1:N}$, and (b) applying $k$ to the pairs in $x_{M+1:N}$; will produce the same covariance matrix. This model is self-consistent in this respect.
-
 On the other hand, if the precision function $r$ takes pairs of inputs $(x_i, x_j)$ as its argument, then it cannot be self-consistent. We can see this by considering
 
 $$\begin{align}
@@ -53,7 +53,6 @@ C^{-1}B^\topM & C^{-1} + C^{-1} B^\top MBC^{-1}
 
 and oberving that the entry $M_{ij}$ is a function of all the $x_{1:N}$ inputs and not just $x_i$ and $x_j$. Thus, the precision function cannot be self-consistent if it takes pairs of inputs as its argument. In other words, the precision matrix depends on the whole set of inputs we are conditioning on, and any precision function that takes **pairs of inputs** as its arguments will be inconsistent in general - perhaps with some trivial exceptions. We therefore have the following informal observation.
 
-
 :::{prf:remark} Precision functions and consistency
 
 It is not possible in general to define a precision function $r : \mathbb{R}^{d} \times \mathbb{R}^{d} \to \mathbb{R},$ mapping pairs of $d$-dimensional vectors to real numbers, such that it produces precision matrices which are consistent under marginalisation.
@@ -62,7 +61,6 @@ It is not possible in general to define a precision function $r : \mathbb{R}^{d}
 
 Since GP models are defined by covariance functions with input-pair arguments, this rules out the possibility of defining a GP using a precision function.
 We also observe that whereas the covariance of two random variables is a pair-wise quantity (by definition), the precision of two random variables is a set-wise or global quantity, because it depends on all other inputs.
-
 There is a slightly subtler point here that's worth clarifying however.
 Consider a positive definite matrix $H.$
 Because $H$ is positive definite, it is invertible and its inverse $H^{-1}$ is also positive definite.
