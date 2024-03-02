@@ -442,7 +442,7 @@ The gradient of the log-likelihood is called the score function</p>
 <p>The second step is to find a way to use the score function <span class="math notranslate nohighlight">\(\psi_\theta(x)\)</span> along with some observed data, to estimate the parameters <span class="math notranslate nohighlight">\(\theta\)</span>.
 We can achieve this by defining the following score matching objective.</p>
 <div class="proof definition admonition" id="definition-0">
-<p class="admonition-title"><span class="caption-number">Definition 69 </span> (Score matching objective)</p>
+<p class="admonition-title"><span class="caption-number">Definition 70 </span> (Score matching objective)</p>
 <section class="definition-content" id="proof-content">
 <p>Given a data distribution <span class="math notranslate nohighlight">\(p_d(x)\)</span> and an approximating distribution <span class="math notranslate nohighlight">\(p_\theta(x)\)</span> with parameters <span class="math notranslate nohighlight">\(\theta\)</span>, we define the score matching objective as</p>
 <div class="math notranslate nohighlight">
@@ -455,7 +455,7 @@ J(\theta) = \frac{1}{2} \int p_d(x) || \psi_\theta(x) - \psi_d(x)||^2 dx,
 So we might expect that in this case the model distribution <span class="math notranslate nohighlight">\(p_\theta(x)\)</span> and <span class="math notranslate nohighlight">\(p_d(x)\)</span> will also be equal.
 This intuition is formalised by the following result.</p>
 <div class="proof theorem admonition" id="theorem-1">
-<p class="admonition-title"><span class="caption-number">Theorem 80 </span> (Matching scores <span class="math notranslate nohighlight">\(\iff\)</span> matching distributions)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 82 </span> (Matching scores <span class="math notranslate nohighlight">\(\iff\)</span> matching distributions)</p>
 <section class="theorem-content" id="proof-content">
 <p>Suppose that the probability density function of <span class="math notranslate nohighlight">\(x\)</span> satisfies <span class="math notranslate nohighlight">\(p_d(x) = p_\theta(x)\)</span> for some <span class="math notranslate nohighlight">\(\theta^*\)</span> and also that if <span class="math notranslate nohighlight">\(\theta^* \neq \theta\)</span> then <span class="math notranslate nohighlight">\(p_\theta(x) \neq p_d(x)\)</span>.
 Suppose also that <span class="math notranslate nohighlight">\(p_\theta(x) &gt; 0\)</span>. Then</p>
@@ -508,7 +508,7 @@ However the middle term both depends on <span class="math notranslate nohighligh
 Therefore this term must be considered in the optimisation of <span class="math notranslate nohighlight">\(J(\theta)\)</span> but is also not directly computable.
 By using integration by parts, one can show<span id="id2">[<a class="reference internal" href="#id14" title="Aapo Hyvärinen and Peter Dayan. Estimation of non-normalized statistical models by score matching. Journal of Machine Learning Research, 2005.">Hyvärinen and Dayan, 2005</a>]</span> that this term can be rewritten in a way such that <span class="math notranslate nohighlight">\(J(\theta)\)</span> can be estimated empirically.</p>
 <div class="proof theorem admonition" id="theorem-2">
-<p class="admonition-title"><span class="caption-number">Theorem 81 </span> (Equivalent form of <span class="math notranslate nohighlight">\(J\)</span>)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 83 </span> (Equivalent form of <span class="math notranslate nohighlight">\(J\)</span>)</p>
 <section class="theorem-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\psi_\theta(x)\)</span> be a score function which is differentiable with respect to <span class="math notranslate nohighlight">\(x.\)</span>
 Then, under some weak regularity conditions on <span class="math notranslate nohighlight">\(\psi_\theta(x),\)</span> the score-matching function <span class="math notranslate nohighlight">\(J\)</span> can be writtten as</p>

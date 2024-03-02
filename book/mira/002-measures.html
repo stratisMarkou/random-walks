@@ -1234,6 +1234,56 @@ Then there exists <span class="math notranslate nohighlight">\(j \in \mathbb{Z}^
 Taking the limit as <span class="math notranslate nohighlight">\(k \to \infty,\)</span> we have <span class="math notranslate nohighlight">\(f(x) \geq a + 1/j &gt; a,\)</span> so <span class="math notranslate nohighlight">\(x \in f^{-1}((a, \infty)).\)</span></p>
 <p class="sd-card-text">We conclude that <span class="math notranslate nohighlight">\(f^{-1}((a, \infty))\)</span> is a Borel set and by our earlier <a class="reference internal" href="#mira-thm-condition-measurable">condition for measurable functions</a>, <span class="math notranslate nohighlight">\(f\)</span> is a Borel measurable function.</p>
 </div>
+</details><div class="proof definition admonition" id="definition-30">
+<p class="admonition-title"><span class="caption-number">Definition 66 </span> (Borel subsets of <span class="math notranslate nohighlight">\([-infty, \infty]\)</span>)</p>
+<section class="definition-content" id="proof-content">
+<p>A subset of <span class="math notranslate nohighlight">\([-\infty, \infty]\)</span> is called a Borel subset if its intersection with <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> is a Borel set.</p>
+</section>
+</div><div class="proof theorem admonition" id="theorem-31">
+<p class="admonition-title"><span class="caption-number">Theorem 79 </span> (Measurable function on <span class="math notranslate nohighlight">\([-\infty, \infty]\)</span>)</p>
+<section class="theorem-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\((X, \mathcal{S})\)</span> is a measurable space.
+A function <span class="math notranslate nohighlight">\(f: X \to [-\infty, \infty]\)</span> is <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>-measurable if</p>
+<p><span class="math notranslate nohighlight">\(f^{-1}(B) \in \mathcal{S}\)</span></p>
+<p>for every Borel set <span class="math notranslate nohighlight">\(B \subseteq [-\infty, \infty].\)</span></p>
+</section>
+</div><div class="proof theorem admonition" id="theorem-32">
+<p class="admonition-title"><span class="caption-number">Theorem 80 </span> (Sufficient condition for measurable function)</p>
+<section class="theorem-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\((X, \mathcal{S})\)</span> is a measurable space and <span class="math notranslate nohighlight">\(f: X \to [-\infty, \infty]\)</span> is a function such that</p>
+<div class="math notranslate nohighlight">
+\[f^{-1}((a, \infty]) \in \mathcal{S}\]</div>
+<p>for all <span class="math notranslate nohighlight">\(a \in \mathbb{R}.\)</span>
+Then <span class="math notranslate nohighlight">\(f\)</span> is <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>-measurable.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Sufficient condition for measurable function<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\((X, \mathcal{S})\)</span> is a measurable space and <span class="math notranslate nohighlight">\(f: X \to [-\infty, \infty]\)</span> is a function such that</p>
+<div class="math notranslate nohighlight">
+\[f^{-1}((a, \infty]) \in \mathcal{S}\]</div>
+<p class="sd-card-text">for all <span class="math notranslate nohighlight">\(a \in \mathbb{R}.\)</span>
+Note that</p>
+<div class="math notranslate nohighlight">
+\[f^{-1}(\{\infty\}) = \bigcap_{n=1}^\infty f^{-1}((n, \infty]) \in \mathcal{S},\]</div>
+<p class="sd-card-text">and also similarly <span class="math notranslate nohighlight">\(f^{-1}(\{-\infty\}) \in \mathcal{S}.\)</span>
+From these it follows that</p>
+<div class="math notranslate nohighlight">
+\[f^{-1}((a, \infty)) = f^{-1}((a, \infty]) \setminus f^{-1}(\{\infty\}) \in \mathcal{S} \text{ for all } a \in \mathbb{R}.\]</div>
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(B\)</span> be a Borel set in <span class="math notranslate nohighlight">\([-\infty, \infty].\)</span>
+From our earlier <a class="reference internal" href="#mira-thm-condition-measurable">condition for measurable functions</a>, it follows that <span class="math notranslate nohighlight">\(f^{-1}(B \cap \mathbb{R}) \in \mathcal{S}\)</span> for any Borel set <span class="math notranslate nohighlight">\(B \subseteq [-\infty, \infty].\)</span>
+We therefore have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+f^{-1}(B) &amp;= f^{-1}((B \cap \mathbb{R}) \cup (B \cap \{\infty\}) \cup (B \cap \{-\infty\})) \\
+&amp;= f^{-1}(B \cap \mathbb{R}) \cup f^{-1}(\{\infty\}) \cup f^{-1}(\{-\infty\}) \in \mathcal{S}
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">so <span class="math notranslate nohighlight">\(f\)</span> is <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>-measurable.</p>
+</div>
 </details></section>
 </section>
 </section>
