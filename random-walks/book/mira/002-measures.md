@@ -983,3 +983,62 @@ We conclude that $f^{-1}((a, \infty))$ is a Borel set and by our earlier {prf:re
 
 :::
 
+
+
+:::{prf:definition} Borel subsets of $[-infty, \infty]$
+
+A subset of $[-\infty, \infty]$ is called a Borel subset if its intersection with $\mathbb{R}$ is a Borel set.
+
+:::
+
+
+
+:::{prf:theorem} Measurable function on $[-\infty, \infty]$
+
+Suppose $(X, \mathcal{S})$ is a measurable space.
+A function $f: X \to [-\infty, \infty]$ is $\mathcal{S}$-measurable if
+
+$f^{-1}(B) \in \mathcal{S}$
+
+for every Borel set $B \subseteq [-\infty, \infty].$
+
+:::
+
+
+
+:::{prf:theorem} Sufficient condition for measurable function
+
+Suppose $(X, \mathcal{S})$ is a measurable space and $f: X \to [-\infty, \infty]$ is a function such that
+
+$$f^{-1}((a, \infty]) \in \mathcal{S}$$
+
+for all $a \in \mathbb{R}.$
+Then $f$ is $\mathcal{S}$-measurable.
+
+:::
+
+:::{dropdown} Proof: Sufficient condition for measurable function
+
+Suppose $(X, \mathcal{S})$ is a measurable space and $f: X \to [-\infty, \infty]$ is a function such that
+
+$$f^{-1}((a, \infty]) \in \mathcal{S}$$
+
+for all $a \in \mathbb{R}.$
+Note that
+
+$$f^{-1}(\{\infty\}) = \bigcap_{n=1}^\infty f^{-1}((n, \infty]) \in \mathcal{S},$$
+
+and also similarly $f^{-1}(\{-\infty}) \in \mathcal{S}.$
+From these it follows that
+
+$$f^{-1}((a, \infty)) = f^{-1}((a, \infty]) \setminus f^{-1}(\{\infty\}) \in \mathcal{S} \text{ for all } a \in \mathbb{R}.$$
+
+Let $B$ be a Borel set in $[-\infty, \infty].$
+From our earlier {prf:ref}`condition for measurable functions<mira-thm-condition-measurable>`, it follows that $f^{-1}(B \cap \mathbb{R}) \in \mathcal{S}$ for any Borel set $B \subseteq [-\infty, \infty].$
+We therefore have
+
+$$f^{-1}(B) = f^{-1}((B \cap \mathbb{R}) \cup (B \cap \{\infty\}) \cup (B \cap \{-\infty\})) = f^{-1}(B \cap \mathbb{R}) \cup f^{-1}(\{\infty\}) \cup f^{-1}(\{-\infty\}) \in \mathcal{S},$$
+
+so $f$ is $\mathcal{S}$-measurable.
+
+:::
