@@ -1028,7 +1028,7 @@ Note that
 
 $$f^{-1}(\{\infty\}) = \bigcap_{n=1}^\infty f^{-1}((n, \infty]) \in \mathcal{S},$$
 
-and also similarly $f^{-1}(\{-\infty}) \in \mathcal{S}.$
+and also similarly $f^{-1}(\{-\infty\}) \in \mathcal{S}.$
 From these it follows that
 
 $$f^{-1}((a, \infty)) = f^{-1}((a, \infty]) \setminus f^{-1}(\{\infty\}) \in \mathcal{S} \text{ for all } a \in \mathbb{R}.$$
@@ -1037,7 +1037,10 @@ Let $B$ be a Borel set in $[-\infty, \infty].$
 From our earlier {prf:ref}`condition for measurable functions<mira-thm-condition-measurable>`, it follows that $f^{-1}(B \cap \mathbb{R}) \in \mathcal{S}$ for any Borel set $B \subseteq [-\infty, \infty].$
 We therefore have
 
-$$f^{-1}(B) = f^{-1}((B \cap \mathbb{R}) \cup (B \cap \{\infty\}) \cup (B \cap \{-\infty\})) = f^{-1}(B \cap \mathbb{R}) \cup f^{-1}(\{\infty\}) \cup f^{-1}(\{-\infty\}) \in \mathcal{S},$$
+$$\begin{align}
+f^{-1}(B) &= f^{-1}((B \cap \mathbb{R}) \cup (B \cap \{\infty\}) \cup (B \cap \{-\infty\})) \\
+&= f^{-1}(B \cap \mathbb{R}) \cup f^{-1}(\{\infty\}) \cup f^{-1}(\{-\infty\}) \in \mathcal{S}
+\end{align}$$
 
 so $f$ is $\mathcal{S}$-measurable.
 
