@@ -1,5 +1,11 @@
 # Why covariance functions?
 
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<a class="github-button" href="https://github.com/stratisMarkou/random-walks" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" aria-label="Star stratisMarkou/random-walks on GitHub" style="float: right;">Star</a>
+<a class="github-button" href="https://github.com/stratisMarkou/random-walks/issues" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-issue-opened" data-size="large" aria-label="Issue stratisMarkou/random-walks on GitHub">Issue</a>
+<a class="github-button" href="https://github.com/stratisMarkou/random-walks/subscription" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-eye" data-size="large" aria-label="Watch stratisMarkou/random-walks on GitHub">Watch</a>
+<a class="github-button" href="https://github.com/stratisMarkou" data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large" aria-label="Follow @stratisMarkou on GitHub">Follow</a>
+
 One question about GPs that I couldn't wrap my head around for a while was: why do we always work with covariance and never precision functions?
 After all, one central limitation of GPs is the cost of inverting matrices, which we could perhaps cut down on if we worked with precision instead of covariance functions.
 The reason we don't work with precision functions is because it's not possible to define a function which maps pairs of inputs to entries in a precision matrix, such that the precision matrices produced by it are consistent with one another.

@@ -201,7 +201,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Papers &amp; Miscellanous</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Stream</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Stream of papers</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../why-covariances/why-covariances.html">Why covariance functions?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ais/ais.html">Annealed importance sampling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../rff/rff.html">Random Fourier features</a></li>
@@ -429,6 +429,11 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="stein-variational-gradient-descent">
 <h1>Stein variational gradient descent<a class="headerlink" href="#stein-variational-gradient-descent" title="Permalink to this heading">#</a></h1>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<p><a class="github-button" href="https://github.com/stratisMarkou/random-walks" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" aria-label="Star stratisMarkou/random-walks on GitHub" style="float: right;">Star</a>
+<a class="github-button" href="https://github.com/stratisMarkou/random-walks/issues" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-issue-opened" data-size="large" aria-label="Issue stratisMarkou/random-walks on GitHub">Issue</a>
+<a class="github-button" href="https://github.com/stratisMarkou/random-walks/subscription" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-eye" data-size="large" aria-label="Watch stratisMarkou/random-walks on GitHub">Watch</a>
+<a class="github-button" href="https://github.com/stratisMarkou" data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large" aria-label="Follow @stratisMarkou on GitHub">Follow</a></p>
 <p>One central challenge in Statistics and Bayesian machine learning is dealing with intractable distributions.
 In many cases, our models involve complicated distributions, which can be difficult to integrate out or sample from - consider for example the posterior distribution over the parameters of a Bayesian neural network.
 A great deal of approaches have been devised to enable efficient handling of complicated distributions, broadly falling in two categories: Variational Inference (VI) and Markov Chain Monte Carlo (MCMC) - we focus on the former only here.</p>
@@ -570,7 +575,7 @@ x^{(i + 1)}_n = x^{(i)}_n + \frac{\epsilon^{(i)}}{N}\sum_{m = 1}^N \left[ k(x_n,
 We will use SVGD to approximate a mixture-of-gaussians distribution, to allow for multiple modes.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/33022b2dab9be61d788643a07aa25c0c42e1436a4534d7069881976f50df8f5a.svg" src="../../../_images/33022b2dab9be61d788643a07aa25c0c42e1436a4534d7069881976f50df8f5a.svg" /></div>
+<img alt="../../../_images/d97f5b8e5b8af7381c1822e2be052237dfb4f4e1eafa3626ce11f23ce5024e67.svg" src="../../../_images/d97f5b8e5b8af7381c1822e2be052237dfb4f4e1eafa3626ce11f23ce5024e67.svg" /></div>
 </div>
 <p>Although SVGD can use any positive-semidefinite kernel, we will focus our attention to the standard EQ kernel</p>
 <div class="math notranslate nohighlight">
@@ -621,7 +626,7 @@ k(x, x') = \exp\left(-\frac{1}{2\ell^2} (x - x')^2\right),
 <p>We can now run SVGD using a modest number of particles initialised in between the two modes.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/f07386e1daff3dc08a340a57ae5d3993961b74c9baecd98c6003031f3a8597f6.svg" src="../../../_images/f07386e1daff3dc08a340a57ae5d3993961b74c9baecd98c6003031f3a8597f6.svg" /></div>
+<img alt="../../../_images/1d29f3b69fad88ebc86053dae519c6c6c68b263ef03849e2a75fd584f808628f.svg" src="../../../_images/1d29f3b69fad88ebc86053dae519c6c6c68b263ef03849e2a75fd584f808628f.svg" /></div>
 </div>
 <p>We observe that some of the particles fall into each of the two modes, capturing the bimodality of the target, something which VI with a mean-field Gaussian <span class="math notranslate nohighlight">\(q\)</span> cannot do.</p>
 </section>
@@ -632,7 +637,7 @@ If we initialise the particles on one mode of two well-separated Gaussians, then
 Even though SVGD may be able to express more expressive approximate distributions than mean-field VI, it is not guaranteed that the optimisation will be able to find such a distribution.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/5a7f29cad48ff229214ea76cca0a6886bd041b0471aa196cd5b45133ef75abd0.svg" src="../../../_images/5a7f29cad48ff229214ea76cca0a6886bd041b0471aa196cd5b45133ef75abd0.svg" /></div>
+<img alt="../../../_images/bbe3cf626fcd26fefccbaec3f6263d2b226005283cbd1aa335e592673a99b560.svg" src="../../../_images/bbe3cf626fcd26fefccbaec3f6263d2b226005283cbd1aa335e592673a99b560.svg" /></div>
 </div>
 </section>
 </section>

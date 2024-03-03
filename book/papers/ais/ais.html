@@ -201,7 +201,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Papers &amp; Miscellanous</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Stream</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Stream of papers</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../why-covariances/why-covariances.html">Why covariance functions?</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Annealed importance sampling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../rff/rff.html">Random Fourier features</a></li>
@@ -425,6 +425,11 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="annealed-importance-sampling">
 <h1>Annealed importance sampling<a class="headerlink" href="#annealed-importance-sampling" title="Permalink to this heading">#</a></h1>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<p><a class="github-button" href="https://github.com/stratisMarkou/random-walks" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" aria-label="Star stratisMarkou/random-walks on GitHub" style="float: right;">Star</a>
+<a class="github-button" href="https://github.com/stratisMarkou/random-walks/issues" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-issue-opened" data-size="large" aria-label="Issue stratisMarkou/random-walks on GitHub">Issue</a>
+<a class="github-button" href="https://github.com/stratisMarkou/random-walks/subscription" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-eye" data-size="large" aria-label="Watch stratisMarkou/random-walks on GitHub">Watch</a>
+<a class="github-button" href="https://github.com/stratisMarkou" data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large" aria-label="Follow @stratisMarkou on GitHub">Follow</a></p>
 <p>Simulating samples from distributions is a central problem in Statistics and Machine Learning, because it enables estimating important quantities such as integrals.
 For example, we are often interested in evaluating integrals of the form</p>
 <div class="math notranslate nohighlight">
@@ -503,7 +508,7 @@ q(x) = \mathcal{N}(x; \mu_q, \sigma_q^2).
 \end{equation}\]</div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/61b4bcfc457d58f160300ee7b72d808723f0b23b133d0b4be1b69c2ddd02b0e2.svg" src="../../../_images/61b4bcfc457d58f160300ee7b72d808723f0b23b133d0b4be1b69c2ddd02b0e2.svg" /></div>
+<img alt="../../../_images/8021c49cff716e577cfaaad21e72fecf5c8c0af4d5becfaf4e57fd445e072896.svg" src="../../../_images/8021c49cff716e577cfaaad21e72fecf5c8c0af4d5becfaf4e57fd445e072896.svg" /></div>
 </div>
 <p>Using importance sampling, we can obtain an estimate of this intergral.</p>
 <div class="cell tag_remove-input docutils container">
@@ -538,7 +543,7 @@ The point of this additional Monte Carlo estimate is to give us an idea of how m
 To see why, this occurs, let’s plot the raw samples drawn from <span class="math notranslate nohighlight">\(q\)</span> (in green) as well as the samples weighted according to their importance weights (in blue).</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/22e61fb5414df871a0c287748ff9f0c3983a3ab0f86fee612f9f0c4f55584967.svg" src="../../../_images/22e61fb5414df871a0c287748ff9f0c3983a3ab0f86fee612f9f0c4f55584967.svg" /></div>
+<img alt="../../../_images/1c831da7a37ef291e0e3b97956960c678f23a3d7e2d1c321f76977536b5b185d.svg" src="../../../_images/1c831da7a37ef291e0e3b97956960c678f23a3d7e2d1c321f76977536b5b185d.svg" /></div>
 </div>
 <p>First off, this plot illustrates how importance sampling works.
 Although <span class="math notranslate nohighlight">\(q\)</span> proposes many samples in the middle, these are down-weighted by the importance weights, since <span class="math notranslate nohighlight">\(p\)</span> has small density there.
@@ -550,7 +555,7 @@ Since this sample has a large importance weight, it greatly affects the overall 
 Looking at a histogram of the importance weights we see that most weights are very small, and it’s only a few large weights which dominate the value of the integral (note the <span class="math notranslate nohighlight">\(x\)</span>-axis has a log-scale).</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/b9923449337d83ac47f4e490788b83adf5d529a9f096ec628e3ca0d39a0d884c.svg" src="../../../_images/b9923449337d83ac47f4e490788b83adf5d529a9f096ec628e3ca0d39a0d884c.svg" /></div>
+<img alt="../../../_images/def4f6e51721321d56be77082b3ec947a381839129c4afe31d6d92275c54fcb0.svg" src="../../../_images/def4f6e51721321d56be77082b3ec947a381839129c4afe31d6d92275c54fcb0.svg" /></div>
 </div>
 <p>Going a little further, note that the expectation of the value of an importance weight is always equal to one since</p>
 <div class="math notranslate nohighlight">
@@ -992,14 +997,14 @@ This gives <span class="math notranslate nohighlight">\(\beta_k\)</span> which g
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../../../_images/c6ed21f5373ab588271bd37bfd3faa43332da6c2e07fb10d33588f913c9dd0fb.svg" src="../../../_images/c6ed21f5373ab588271bd37bfd3faa43332da6c2e07fb10d33588f913c9dd0fb.svg" /></div>
+<img alt="../../../_images/fa972823924f441dfad4b427f22419594216aafe7465c0e0fd332ff7242ba241.svg" src="../../../_images/fa972823924f441dfad4b427f22419594216aafe7465c0e0fd332ff7242ba241.svg" /></div>
 </div>
 <p>We observe that the distribution of the AIS samples (purple bars) is similar to the target distribution <span class="math notranslate nohighlight">\(p\)</span> (blue line).
 Further, weighing the AIS samples by their importance weights (blue bars) does not appear to significantly change the resulting distribution.
 This would suggest that moost of the importance weights are close to <span class="math notranslate nohighlight">\(1\)</span>, which we can verify by plotting them on a histogram.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/43285dbf501f8f3f5ab1c8c5c8008a8a59e222c066ba4c6d2e960fa6a6a52d9a.svg" src="../../../_images/43285dbf501f8f3f5ab1c8c5c8008a8a59e222c066ba4c6d2e960fa6a6a52d9a.svg" /></div>
+<img alt="../../../_images/7c93bcc4e7e2567df2159ef2c9e0d686e7864df3ba3061731637d4d62279c0cd.svg" src="../../../_images/7c93bcc4e7e2567df2159ef2c9e0d686e7864df3ba3061731637d4d62279c0cd.svg" /></div>
 </div>
 <p>As expected, most of the AIS importance weights are close to <span class="math notranslate nohighlight">\(1\)</span>.
 Further, they have a clearly smaller variance than standard importance sampling.
@@ -1007,7 +1012,7 @@ This has a significant impact on the variance of AIS estimates.
 In the running example integral we’ve been using thus far, AIS reduces the variance of our Monte Carlo estimate by a factor of <span class="math notranslate nohighlight">\(\approx 6\)</span> over standard importance sampling, and gets close to the variance of an estimator that uses direct i.i.d. samples from <span class="math notranslate nohighlight">\(p\)</span>:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Annealed Importance Sampling over 100 trials I = 0.02 +/- 2.198.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Annealed Importance Sampling over 100 trials I = 0.30 +/- 2.218.
 </pre></div>
 </div>
 </div>
