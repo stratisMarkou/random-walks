@@ -1172,6 +1172,7 @@ Note that the countable additivity property of measures is crucial for the follo
 
 
 :::{prf:theorem} Measure of an increasing union
+:label: mira-thm-measure-increasing-union
 Suppose $(X, \mathcal{S}, \mu)$ is a measure space and $E_1, E_2, \ldots \in \mathcal{S}$ is an increasing sequence of sets in $\mathcal{S},$ that is $E_1 \subseteq E_2 \subseteq \cdots.$
 Then
 
@@ -1195,3 +1196,54 @@ $$\begin{align}
 &= \lim_{k \to \infty} \sum_{j=1}^k \mu(E_j \setminus E_{j-1}) \\
 &= \lim_{k \to \infty} \mu(E_k).
 \end{align}$$
+
+
+Just as with the earlier property we showed about limits of increasing sequences of sets, we also have an analogous result about limits of decreasing sequences of sets.
+
+:::{prf:theorem} Measure of a decreasing intersection
+Suppose $(X, \mathcal{S}, \mu)$ is a measure space and $E_1, E_2, \ldots \in \mathcal{S}$ is a decreasing sequence of sets in $\mathcal{S},$ that is $E_1 \supseteq E_2 \supseteq \cdots,$ with $\mu(E_1) < \infty.$
+Then
+
+$$\mu\left( \bigcap_{k=1}^\infty E_k \right) = \bigcup_{k=1}^\infty \mu(E_k).$$
+:::
+
+:::{dropdown} Proof: Measure of a decreasing intersection
+First, we have that
+
+$$E_1 \setminus \bigcap_{k=1}^\infty E_k = \bigcup_{k=1}^\infty (E_1 \setminus E_k),$$
+
+which is an increasing union, and by our earlier result on {prf:ref}`measures of increasing unions<mira-thm-measure-increasing-union>`, we have
+
+$$\mu\left( E_1 \setminus \bigcap_{k=1}^\infty E_k \right) = \lim_{k \to \infty} \mu(E_1 \setminus E_k).$$
+
+Using the countable additivity of measures, we have
+
+$$\mu(E_1) - \mu\left( \bigcap_{k=1}^\infty E_k \right) = \mu(E_1) - \lim_{k \to \infty} \mu(E_k)$$
+
+which proves the result.
+:::
+
+
+We conclude this section with another useful intuitive result, namely that the measure of the union of two sets is the sum of the measures of the sets minus the measure of their intersection, which has been counted twice.
+
+:::{prf:theorem} Measure of the union of two sets
+Suppose $(X, \mathcal{S}, \mu)$ is a measure space and $D, E \in \mathcal{S}.$
+Then
+
+$$\mu(D \cup E) = \mu(D) + \mu(E) - \mu(D \cap E).$$
+:::
+
+:::{dropdown} Proof: Measure of the union of two sets
+We have
+
+$$D \cup E = (D \setminus (D \cap E)) \cup (E \setminus (D \cap E)) \cup (D \cap E),$$
+
+which is a disjoint union.
+Therefore, by {prf:ref}`countable additivity of measures<mira-def-measure>`, we have
+
+$$\begin{align}
+\mu(D \cup E) &= \mu(D \setminus (D \cap E)) + \mu(E \setminus (D \cap E)) + \mu(D \cap E) \\
+&= \mu(D) - \mu(D \cap E) + \mu(E) - \mu(D \cap E) + \mu(D \cap E) \\
+&= \mu(D) + \mu(E) - \mu(D \cap E).
+\end{align}$$
+:::

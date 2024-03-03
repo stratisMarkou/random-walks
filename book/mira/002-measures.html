@@ -1409,7 +1409,7 @@ That is if <span class="math notranslate nohighlight">\(\mu\)</span> is a measur
 \[\mu(E_1 \cup \cdots \cup E_n) \leq \mu(E_1) + \cdots + \mu(E_n).\]</div>
 <p>Now we show two very useful results about limits on measures.
 Note that the countable additivity property of measures is crucial for the following results.</p>
-<div class="proof theorem admonition" id="theorem-38">
+<div class="proof theorem admonition" id="mira-thm-measure-increasing-union">
 <p class="admonition-title"><span class="caption-number">Theorem 84 </span> (Measure of an increasing union)</p>
 <section class="theorem-content" id="proof-content">
 <p>Suppose <span class="math notranslate nohighlight">\((X, \mathcal{S}, \mu)\)</span> is a measure space and <span class="math notranslate nohighlight">\(E_1, E_2, \ldots \in \mathcal{S}\)</span> is an increasing sequence of sets in <span class="math notranslate nohighlight">\(\mathcal{S},\)</span> that is <span class="math notranslate nohighlight">\(E_1 \subseteq E_2 \subseteq \cdots.\)</span>
@@ -1437,6 +1437,61 @@ Therefore, by <code class="xref prf prf-ref docutils literal notranslate"><span 
 \mu\left( \bigcup_{j=1}^\infty E_j \right) &amp;= \mu\left( \bigcup_{j=1}^\infty (E_j \setminus E_{j-1}) \right) \
 &amp;= \lim_{k \to \infty} \sum_{j=1}^k \mu(E_j \setminus E_{j-1}) \\
 &amp;= \lim_{k \to \infty} \mu(E_k).
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">Just as with the earlier property we showed about limits of increasing sequences of sets, we also have an analogous result about limits of decreasing sequences of sets.</p>
+<div class="proof theorem admonition" id="theorem-39">
+<p class="admonition-title"><span class="caption-number">Theorem 85 </span> (Measure of a decreasing intersection)</p>
+<section class="theorem-content" id="proof-content">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\((X, \mathcal{S}, \mu)\)</span> is a measure space and <span class="math notranslate nohighlight">\(E_1, E_2, \ldots \in \mathcal{S}\)</span> is a decreasing sequence of sets in <span class="math notranslate nohighlight">\(\mathcal{S},\)</span> that is <span class="math notranslate nohighlight">\(E_1 \supseteq E_2 \supseteq \cdots,\)</span> with <span class="math notranslate nohighlight">\(\mu(E_1) &lt; \infty.\)</span>
+Then</p>
+<div class="math notranslate nohighlight">
+\[\mu\left( \bigcap_{k=1}^\infty E_k \right) = \bigcup_{k=1}^\infty \mu(E_k).\]</div>
+</section>
+</div></div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Measure of a decreasing intersection<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">First, we have that</p>
+<div class="math notranslate nohighlight">
+\[E_1 \setminus \bigcap_{k=1}^\infty E_k = \bigcup_{k=1}^\infty (E_1 \setminus E_k),\]</div>
+<p class="sd-card-text">which is an increasing union, and by our earlier result on <a class="reference internal" href="#mira-thm-measure-increasing-union">measures of increasing unions</a>, we have</p>
+<div class="math notranslate nohighlight">
+\[\mu\left( E_1 \setminus \bigcap_{k=1}^\infty E_k \right) = \lim_{k \to \infty} \mu(E_1 \setminus E_k).\]</div>
+<p class="sd-card-text">Using the countable additivity of measures, we have</p>
+<div class="math notranslate nohighlight">
+\[\mu(E_1) - \mu\left( \bigcap_{k=1}^\infty E_k \right) = \mu(E_1) - \lim_{k \to \infty} \mu(E_k)\]</div>
+<p class="sd-card-text">which proves the result.</p>
+</div>
+</details><p>We conclude this section with another useful intuitive result, namely that the measure of the union of two sets is the sum of the measures of the sets minus the measure of their intersection, which has been counted twice.</p>
+<div class="proof theorem admonition" id="theorem-40">
+<p class="admonition-title"><span class="caption-number">Theorem 86 </span> (Measure of the union of two sets)</p>
+<section class="theorem-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\((X, \mathcal{S}, \mu)\)</span> is a measure space and <span class="math notranslate nohighlight">\(D, E \in \mathcal{S}.\)</span>
+Then</p>
+<div class="math notranslate nohighlight">
+\[\mu(D \cup E) = \mu(D) + \mu(E) - \mu(D \cap E).\]</div>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Measure of the union of two sets<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">We have</p>
+<div class="math notranslate nohighlight">
+\[D \cup E = (D \setminus (D \cap E)) \cup (E \setminus (D \cap E)) \cup (D \cap E),\]</div>
+<p class="sd-card-text">which is a disjoint union.
+Therefore, by <code class="xref prf prf-ref docutils literal notranslate"><span class="pre">countable</span> <span class="pre">additivity</span> <span class="pre">of</span> <span class="pre">measures</span></code>, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\mu(D \cup E) &amp;= \mu(D \setminus (D \cap E)) + \mu(E \setminus (D \cap E)) + \mu(D \cap E) \\
+&amp;= \mu(D) - \mu(D \cap E) + \mu(E) - \mu(D \cap E) + \mu(D \cap E) \\
+&amp;= \mu(D) + \mu(E) - \mu(D \cap E).
 \end{align}\end{split}\]</div>
 </div>
 </details></section>
