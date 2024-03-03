@@ -429,11 +429,11 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="random-fourier-features">
 <h1>Random Fourier features<a class="headerlink" href="#random-fourier-features" title="Permalink to this heading">#</a></h1>
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-<p><a class="github-button" href="https://github.com/stratisMarkou/random-walks" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" aria-label="Star stratisMarkou/random-walks on GitHub" style="float: right;">Star</a>
+<p><a class="github-button" href="https://github.com/stratisMarkou/random-walks" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="false" aria-label="Star stratisMarkou/random-walks on GitHub">Star</a>
 <a class="github-button" href="https://github.com/stratisMarkou/random-walks/issues" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-issue-opened" data-size="large" aria-label="Issue stratisMarkou/random-walks on GitHub">Issue</a>
 <a class="github-button" href="https://github.com/stratisMarkou/random-walks/subscription" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-eye" data-size="large" aria-label="Watch stratisMarkou/random-walks on GitHub">Watch</a>
 <a class="github-button" href="https://github.com/stratisMarkou" data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large" aria-label="Follow @stratisMarkou on GitHub">Follow</a></p>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
 <p>One central difficulty with Gaussian Processes (GPs), and more generally all kernel methods such as Support Vector Machines (SVMs), is their computational cost. Exact GP regression scales cubically <span class="math notranslate nohighlight">\(\mathcal{O}(N^3)\)</span> in the number of datapoints <span class="math notranslate nohighlight">\(N,\)</span> which is prohibitive for even modestly large datasets.
 Therefore we typically have to make approximations, of which there is a wealth of possible options. This page presents Random Fourier Features (RFF), <span id="id1">[<a class="reference internal" href="#id11" title="Ali Rahimi, Benjamin Recht, and others. Random features for large-scale kernel machines. In NIPS. 2007.">Rahimi <em>et al.</em>, 2007</a>]</span> an approximation which is applicable to stationary kernels.</p>
 <p>RFF relies on the fact that kernels of stationary processes can be expressed as the Fourier transform of a probability density function.
@@ -625,7 +625,7 @@ The covariance function plots correspond to the RFF estimator of <span class="ma
 </div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/0d52c17090e987bca5119998b6cb17ec8c9f2e7de33a158f7aeb5a225e98f396.svg" src="../../../_images/0d52c17090e987bca5119998b6cb17ec8c9f2e7de33a158f7aeb5a225e98f396.svg" /></div>
+<img alt="../../../_images/59dd7db9479748fbeb14212ef8202b0f319d95885cc60af672585d0491bfa309.svg" src="../../../_images/59dd7db9479748fbeb14212ef8202b0f319d95885cc60af672585d0491bfa309.svg" /></div>
 </div>
 </section>
 <section id="regression-with-rff-features">
@@ -635,7 +635,7 @@ We place a gap in the data to observe the quality of the uncertainty estimates o
 We purposefully use a large number of datapoints, <span class="math notranslate nohighlight">\(N = 5000,\)</span> which would be quite slow to process with an exact GP model.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/049c3cdb224db146ecc6247782819ed3b83ad6c87e748b6a7cd91ce6750416f7.svg" src="../../../_images/049c3cdb224db146ecc6247782819ed3b83ad6c87e748b6a7cd91ce6750416f7.svg" /></div>
+<img alt="../../../_images/55b57407bf62e81b290fde85f49eabc285831da1c469fc151ee587d52a47cf0c.svg" src="../../../_images/55b57407bf62e81b290fde85f49eabc285831da1c469fc151ee587d52a47cf0c.svg" /></div>
 </div>
 <p>The function <code class="docutils literal notranslate"><span class="pre">rff_posterior</span></code> below implements Bayesian linear regression with randomly sampled Fourier features.
 For more details on Bayesian linear regression see Chapter 3 of Bishop’s PRML book.<span id="id4">[<a class="reference internal" href="#id12" title="Christopher M Bishop. Pattern recognition and machine learning. springer, 2006.">Bishop, 2006</a>]</span></p>
@@ -732,8 +732,8 @@ The <code class="docutils literal notranslate"><span class="pre">covariance</spa
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Timing exact GP regression:
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 10.6 s, sys: 1.33 s, total: 11.9 s
-Wall time: 4.29 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 10.8 s, sys: 1.2 s, total: 12 s
+Wall time: 4.11 s
 </pre></div>
 </div>
 </div>
@@ -742,15 +742,15 @@ Wall time: 4.29 s
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Timing exact approximate RFF regression:
 
-CPU times: user 237 ms, sys: 139 ms, total: 375 ms
-Wall time: 96.5 ms
+CPU times: user 202 ms, sys: 105 ms, total: 308 ms
+Wall time: 78.7 ms
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/14fa6dfc78f73a6d7fe3e6e2a8e77d09802af8a9735bb8427c286a9e82a420ef.svg" src="../../../_images/14fa6dfc78f73a6d7fe3e6e2a8e77d09802af8a9735bb8427c286a9e82a420ef.svg" /></div>
+<img alt="../../../_images/6ea44423180a290649f9077f103717c39cdd6d2c88f2d5bebc9dbf95b6cd6918.svg" src="../../../_images/6ea44423180a290649f9077f103717c39cdd6d2c88f2d5bebc9dbf95b6cd6918.svg" /></div>
 </div>
 <p>RFF has produced sensible regressors in each case, significantly faster than exact GP regression. The approximate posteriors roughly match the exact posteriors, while being significantly quicker to compute.</p>
 </section>
@@ -759,11 +759,11 @@ Wall time: 96.5 ms
 <p>One issue with the RFF is that - like all other finte basis function models - is that it has a limited amount of degrees of freedom. Therefore, in some situations the datapoints may be such that they pin down the RFF model and significantly reducing the variance of the approximate regressor. To illustrate this, we sample a slightly different dataset, with a smaller gap in between the two data clumps.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/2bd00cbb0a1b0264dee9444fa9b3c10869c02e059c4248c06618bb4433d3eabe.svg" src="../../../_images/2bd00cbb0a1b0264dee9444fa9b3c10869c02e059c4248c06618bb4433d3eabe.svg" /></div>
+<img alt="../../../_images/5f7d86f792b91e8bb21c7c15594e6da669b251375cb4cefe3b673912eaf19c3c.svg" src="../../../_images/5f7d86f792b91e8bb21c7c15594e6da669b251375cb4cefe3b673912eaf19c3c.svg" /></div>
 </div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/4712213dcac9a64a5adb0a08a3a8ac33b1df131a4d7897bf4b4451f43b370943.svg" src="../../../_images/4712213dcac9a64a5adb0a08a3a8ac33b1df131a4d7897bf4b4451f43b370943.svg" /></div>
+<img alt="../../../_images/0d12a93b195058bc3b36ca70689970a2480a162fbdea91fc0457288013bc5385.svg" src="../../../_images/0d12a93b195058bc3b36ca70689970a2480a162fbdea91fc0457288013bc5385.svg" /></div>
 </div>
 <p>The variance of the approximate estimator in between the data is (in some cases), signiticantly smaller than that of the exact posterior. So the speedup that the RFF gives does not come without a cost. In certain cases, we can end up with approximate posteriors which are significantly overfitted. This can be alleviated by increasing the number of RFF features. However this increases the computational cost of performing regression and may defeat the purpose of using RFF features in the first place.</p>
 </section>
