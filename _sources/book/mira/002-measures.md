@@ -1007,18 +1007,16 @@ for every Borel set $B \subseteq [-\infty, \infty].$
 
 
 :::{prf:theorem} Sufficient condition for measurable function
-
+:label: mira-thm-sufficient-condition-measurable-with-infinity
 Suppose $(X, \mathcal{S})$ is a measurable space and $f: X \to [-\infty, \infty]$ is a function such that
 
 $$f^{-1}((a, \infty]) \in \mathcal{S}$$
 
 for all $a \in \mathbb{R}.$
 Then $f$ is $\mathcal{S}$-measurable.
-
 :::
 
 :::{dropdown} Proof: Sufficient condition for measurable function
-
 Suppose $(X, \mathcal{S})$ is a measurable space and $f: X \to [-\infty, \infty]$ is a function such that
 
 $$f^{-1}((a, \infty]) \in \mathcal{S}$$
@@ -1043,5 +1041,151 @@ f^{-1}(B) &= f^{-1}((B \cap \mathbb{R}) \cup (B \cap \{\infty\}) \cup (B \cap \{
 \end{align}$$
 
 so $f$ is $\mathcal{S}$-measurable.
+:::
+
+
+
+:::{prf:theorem} Infimum and supremum of a sequence of measurable functions is measurable
+Suppose $(X, \mathcal{S})$ is a measurable space and $f_1, f_2, \ldots$ is a sequence of $\mathcal{S}$-measurable functions from $X$ to $[-\infty, \infty].$
+Define $g, h: X \to [-\infty, \infty]$ by
+
+$$g(x) = \inf\{f_k(x) : k \in \mathbb{Z}^+\} \text{ and } h(x) = \sup\{f_k(x) : k \in \mathbb{Z}^+\}.$$
+
+Then $g$ and $h$ are $\mathcal{S}$-measurable functions.
+:::
+
+:::{dropdown} Proof: Infimum and supremum of a sequence of measurable functions is measurable
+Let $a \in \mathbb{R}.$
+The definition of the supremum implies that
+
+$$h^{-1}((a, \infty]) = \bigcup_{k=1}^\infty f_k^{-1}((a, \infty]) \in \mathcal{S},$$
+
+which, together with the earlier {prf:ref}`sufficient condition for measurable function<mira-thm-sufficient-condition-measurable-with-infinity>`, implies that $h$ is $\mathcal{S}$-measurable, that is, the supremum of a sequence of measurable functions is measurable.
+Now, note that
+
+$$g(x) = -\sup\{-f_k(x) : k \in \mathbb{Z}^+\},$$
+
+so $g$ is the supremum of a sequence of measurable functions, and is therefore measurable.
+Therefore, the infimum of a sequence of measurable functions is measurable.
+:::
+
+
+
+## Measures and their properties
+
+Now we come to the definition of measures.
+Our original motivation for the following definition came from trying to extend the notion of the length of an interval to the length of more general sets.
+However, the following definition is allows us to generalise a notion of size to other contexts, such as areas or volumes and beyond.
+
+:::{margin}
+The word *measure* allows us to use a single word for different notions of size such as length, area or volume.
+:::
+
+
+:::{prf:definition} Measure
+Suppose $X$ is a set and $\mathcal{S}$ is a $\sigma$-algebra on $X.$
+A measure on $(X, \mathcal{S})$ is a function $\mu: \mathcal{S} \to [0, \infty]$ such that $\mu(\emptyset) = 0$ and $\mu$ is countably additive, that is
+
+$$\mu\left( \bigcup_{k=1}^\infty E_k \right) = \sum_{k=1}^\infty \mu(E_k)$$
+
+for every disjoint sequence $E_1, E_2, \ldots$ of sets in $\mathcal{S}.$
+:::
+
+
+Countable additivity of measures is a key property that allows us to prove useful limit theorems.
+Note that countable additvity implies finite additivity, that is, if $\mu$ is a measure on $(X, \mathcal{S})$ and $E_1, \ldots, E_n$ are disjoint sets in $\mathcal{S},$ then
+
+$$\mu(E_1 \cup \cdots \cup E_n) = \mu(E_1) + \cdots + \mu(E_n).$$
+
+The following terminology is often very useful.
+
+
+:::{prf:definition} Measure space
+A measure space is an ordered triple $(X, \mathcal{S}, \mu),$ where $X$ is a set, $\mathcal{S}$ is a $\sigma$-algebra on $X$ and $\mu$ is a measure on $(X, \mathcal{S}).$
+:::
+
+
+### Properties of measures
+
+Now we discuss several useful properties of measures.
+
+:::{prf:theorem} Measure preserves order; measure of a set difference
+:label: mira-thm-measure-preserves-order
+Suppose $(X, \mathcal{S}, \mu)$ is a measure space and $D, E \in \mathcal{S}$ with $D \subseteq E.$
+Then
+
+(a) $\mu(D) \leq \mu(E),$
+
+(b) $\mu(E \setminus D) = \mu(E) - \mu(D)$ provided that $\mu(D) < \infty.$
+:::
+
+:::{dropdown} Proof: Measure preserves order; measure of a set difference
+Note that $E = D \cup (E \setminus D)$ is a disjoint union, so by {prf:ref}`countable additivity of measures<mira-def-measure>`, we have
+
+$$\mu(E) = \mu(D) + \mu(E \setminus D) \geq \mu(D),$$
+
+which proves part (a).
+If $\mu(D) < \infty,$ then part (b) follows by subtracting $\mu(D)$ from both sides of the equation above.
+:::
+
+
+The countable additivity property of measures applies to disjoint countable unions.
+The following countable _subadditivity_ property applies to countable unions that may not be disjoint unions.
+
+:::{prf:theorem} Countable subadditivity
+Suppose $(X, \mathcal{S}, \mu)$ is a measure space and $E_1, E_2, \ldots \in \mathcal{S}.$
+Then
+
+$$\mu\left( \bigcup_{k=1}^\infty E_k \right) \leq \sum_{k=1}^\infty \mu(E_k).$$
 
 :::
+
+:::{dropdown} Proof: Countable subadditivity
+Suppose $E_1, E_2, \ldots \in \mathcal{S}.$
+Let $D_1 = \emptyset$ and $D_k = E_1 \cup \cdots \cup E_{k-1}$ for $k \geq 2.$
+Then $E_1 \setminus D_1, E_2 \setminus D_2, \ldots$ is a sequence of disjoint sets in $\mathcal{S}$ whose union equals $\cup_{k=1}^\infty E_k.$
+Therefore
+
+$$\begin{align}
+\mu\left( \bigcup_{k=1}^\infty E_k \right) &= \mu\left( \bigcup_{k=1}^\infty (E_k \setminus D_k) \right) \\
+&= \sum_{k=1}^\infty \mu(E_k \setminus D_k) \\
+&\leq \sum_{k=1}^\infty \mu(E_k).
+\end{align}$$
+
+where the second equality follows from {prf:ref}`countable additivity of measures<mira-def-measure>` and the inequality follows from the fact that {prf:ref}`measures preserve order<mira-thm-measure-preserves-order>`.
+:::
+
+
+Just as countable additivity implies finite additivity, countable subadditivity implies finite subadditivity.
+That is if $\mu$ is a measure on $(X, \mathcal{S})$ and $E_1, \ldots, E_n$ are sets in $\mathcal{S},$ then
+
+$$\mu(E_1 \cup \cdots \cup E_n) \leq \mu(E_1) + \cdots + \mu(E_n).$$
+
+Now we show two very useful results about limits on measures.
+Note that the countable additivity property of measures is crucial for the following results.
+
+
+:::{prf:theorem} Measure of an increasing union
+Suppose $(X, \mathcal{S}, \mu)$ is a measure space and $E_1, E_2, \ldots \in \mathcal{S}$ is an increasing sequence of sets in $\mathcal{S},$ that is $E_1 \subseteq E_2 \subseteq \cdots.$
+Then
+
+$$\mu\left( \bigcup_{k=1}^\infty E_k \right) = \lim_{k \to \infty} \mu(E_k).$$
+:::
+
+:::{dropdown} Proof: Measure of an increasing union
+If $\mu(E_k) = \infty$ for some $k,$ then the equality holds because both sides are equal to $\infty.$
+Let us consider the case where $\mu(E_k) < \infty$ for all $k \in \mathbb{Z}^+.$
+
+For convenience, let $E_0 = \emptyset.$
+Then, using the fact that $E_1, E_2, \ldots$ is an increasing sequence of sets, we have
+
+$$\bigcup_{k=1}^\infty E_k = \bigcup_{k=1}^\infty (E_k \setminus E_{k-1}),$$
+
+which is a disjoint union.
+Therefore, by {prf:ref}`countable additivity of measures<mira-def-measure>`, we have
+
+$$\begin{align}
+\mu\left( \bigcup_{j=1}^\infty E_j \right) &= \mu\left( \bigcup_{j=1}^\infty (E_j \setminus E_{j-1}) \right) \
+&= \lim_{k \to \infty} \sum_{j=1}^k \mu(E_j \setminus E_{j-1}) \\
+&= \lim_{k \to \infty} \mu(E_k).
+\end{align}$$

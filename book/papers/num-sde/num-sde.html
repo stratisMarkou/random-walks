@@ -438,7 +438,7 @@ SDEs are therefore an appropriate model for systems whose dynamics involve some 
 <h2>The Wiener process<a class="headerlink" href="#the-wiener-process" title="Permalink to this heading">#</a></h2>
 <p>In order to define the stochastic component of the transition rule of a stochastic system, we must define an appropriate noise model. The Wiener process is a stochastic process that is commonly used for this purpose.</p>
 <div class="proof definition admonition" id="definition-0">
-<p class="admonition-title"><span class="caption-number">Definition 72 </span> (Wiener process)</p>
+<p class="admonition-title"><span class="caption-number">Definition 74 </span> (Wiener process)</p>
 <section class="definition-content" id="proof-content">
 <p>A standard Wiener process over [0, T] is a random variable <span class="math notranslate nohighlight">\(W(t)\)</span> that depends continuously on <span class="math notranslate nohighlight">\(t \in [0, T]\)</span> and satisfies:</p>
 <ol class="arabic simple">
@@ -621,7 +621,7 @@ Stratonovich approximation (exact): 1.917 (1.915)
 <h2>Euler-Maruyama method<a class="headerlink" href="#euler-maruyama-method" title="Permalink to this heading">#</a></h2>
 <p>The Euler-Maruyama method is the analoge of the Euler method for deterministic integrals, applied to the stochastic case.</p>
 <div class="proof definition admonition" id="definition-1">
-<p class="admonition-title"><span class="caption-number">Definition 73 </span> (Euler-Maruyama method)</p>
+<p class="admonition-title"><span class="caption-number">Definition 75 </span> (Euler-Maruyama method)</p>
 <section class="definition-content" id="proof-content">
 <p>Given a scalar SDE with drift and diffusion functions <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span></p>
 <div class="math notranslate nohighlight">
@@ -741,7 +741,7 @@ g(x, t) &amp;= \mu x.\\
 <h2>Strong and weak convergence<a class="headerlink" href="#strong-and-weak-convergence" title="Permalink to this heading">#</a></h2>
 <p>Since the choice of the number of bins <span class="math notranslate nohighlight">\(N\)</span> of the discretisation affects the accuracy of our method, we are interested in how quickly the approximation converges to the exact solution as a function of <span class="math notranslate nohighlight">\(N\)</span>. To do so, we must first define <em>what convergence means</em> in the stochastic case, which leads us to two disctinct notions of convergence, the strong sence and the weak sense.</p>
 <div class="proof definition admonition" id="definition-2">
-<p class="admonition-title"><span class="caption-number">Definition 74 </span> (Strong convergence)</p>
+<p class="admonition-title"><span class="caption-number">Definition 76 </span> (Strong convergence)</p>
 <section class="definition-content" id="proof-content">
 <p>A method for approximating a stochastic process <span class="math notranslate nohighlight">\(X(t)\)</span> is said to have strong order of convergence <span class="math notranslate nohighlight">\(\gamma\)</span> if there exists a constant such that</p>
 <div class="math notranslate nohighlight">
@@ -751,7 +751,7 @@ g(x, t) &amp;= \mu x.\\
 </section>
 </div><p>Strong convergence refers to the rate of convergence of the approximation <span class="math notranslate nohighlight">\(X_n\)</span> to the exact solution <span class="math notranslate nohighlight">\(X(\tau_n)\)</span> as <span class="math notranslate nohighlight">\(\Delta t \to 0\)</span>, in expectation. A weaker condition for convergence is rate at which the expected value of the approximation converges to the true expected value, as <span class="math notranslate nohighlight">\(\Delta t \to 0\)</span>, as given below.</p>
 <div class="proof definition admonition" id="definition-3">
-<p class="admonition-title"><span class="caption-number">Definition 75 </span> (Weak convergence)</p>
+<p class="admonition-title"><span class="caption-number">Definition 77 </span> (Weak convergence)</p>
 <section class="definition-content" id="proof-content">
 <p>A method for approximating a stochastic process <span class="math notranslate nohighlight">\(X(t)\)</span> is said to have weak order of convergence <span class="math notranslate nohighlight">\(\gamma\)</span> if there exists a constant such that</p>
 <div class="math notranslate nohighlight">
@@ -770,7 +770,7 @@ We do not provide a proof for any of the above statements, but instead evaluate 
 <h2>Milstein’s higher order method<a class="headerlink" href="#milstein-s-higher-order-method" title="Permalink to this heading">#</a></h2>
 <p>Just as higher order methods for ODEs exist for obtaining refined estimates of the solution, so do methods for SDEs, such as Milstein’s higher order method.</p>
 <div class="proof definition admonition" id="definition-4">
-<p class="admonition-title"><span class="caption-number">Definition 76 </span> (Milstein’s method)</p>
+<p class="admonition-title"><span class="caption-number">Definition 78 </span> (Milstein’s method)</p>
 <section class="definition-content" id="proof-content">
 <p>Given a scalar SDE with drift and diffusion functions <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span></p>
 <div class="math notranslate nohighlight">
@@ -810,7 +810,7 @@ dV &amp;= \frac{dV}{dX}dX = \frac{dV}{dX} f(t) dt, \text{ where } dX = f(t) dt,\
 \end{align}\]</div>
 <p>For an autonomous SDE however the chain rule takes a different form, which under the Ito definition is as follows.</p>
 <div class="proof theorem admonition" id="theorem-5">
-<p class="admonition-title"><span class="caption-number">Theorem 86 </span> (Ito’s result for one dimension)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 90 </span> (Ito’s result for one dimension)</p>
 <section class="theorem-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(X_t\)</span> be an Ito process given by</p>
 <div class="math notranslate nohighlight">

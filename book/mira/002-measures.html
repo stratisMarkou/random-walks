@@ -415,6 +415,10 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#measurable-functions">Measurable functions</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measures-and-their-properties">Measures and their properties</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-measures">Properties of measures</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -1247,7 +1251,7 @@ A function <span class="math notranslate nohighlight">\(f: X \to [-\infty, \inft
 <p><span class="math notranslate nohighlight">\(f^{-1}(B) \in \mathcal{S}\)</span></p>
 <p>for every Borel set <span class="math notranslate nohighlight">\(B \subseteq [-\infty, \infty].\)</span></p>
 </section>
-</div><div class="proof theorem admonition" id="theorem-32">
+</div><div class="proof theorem admonition" id="mira-thm-sufficient-condition-measurable-with-infinity">
 <p class="admonition-title"><span class="caption-number">Theorem 80 </span> (Sufficient condition for measurable function)</p>
 <section class="theorem-content" id="proof-content">
 <p>Suppose <span class="math notranslate nohighlight">\((X, \mathcal{S})\)</span> is a measurable space and <span class="math notranslate nohighlight">\(f: X \to [-\infty, \infty]\)</span> is a function such that</p>
@@ -1283,6 +1287,152 @@ f^{-1}(B) &amp;= f^{-1}((B \cap \mathbb{R}) \cup (B \cap \{\infty\}) \cup (B \ca
 &amp;= f^{-1}(B \cap \mathbb{R}) \cup f^{-1}(\{\infty\}) \cup f^{-1}(\{-\infty\}) \in \mathcal{S}
 \end{align}\end{split}\]</div>
 <p class="sd-card-text">so <span class="math notranslate nohighlight">\(f\)</span> is <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>-measurable.</p>
+</div>
+</details><div class="proof theorem admonition" id="theorem-33">
+<p class="admonition-title"><span class="caption-number">Theorem 81 </span> (Infimum and supremum of a sequence of measurable functions is measurable)</p>
+<section class="theorem-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\((X, \mathcal{S})\)</span> is a measurable space and <span class="math notranslate nohighlight">\(f_1, f_2, \ldots\)</span> is a sequence of <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>-measurable functions from <span class="math notranslate nohighlight">\(X\)</span> to <span class="math notranslate nohighlight">\([-\infty, \infty].\)</span>
+Define <span class="math notranslate nohighlight">\(g, h: X \to [-\infty, \infty]\)</span> by</p>
+<div class="math notranslate nohighlight">
+\[g(x) = \inf\{f_k(x) : k \in \mathbb{Z}^+\} \text{ and } h(x) = \sup\{f_k(x) : k \in \mathbb{Z}^+\}.\]</div>
+<p>Then <span class="math notranslate nohighlight">\(g\)</span> and <span class="math notranslate nohighlight">\(h\)</span> are <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>-measurable functions.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Infimum and supremum of a sequence of measurable functions is measurable<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(a \in \mathbb{R}.\)</span>
+The definition of the supremum implies that</p>
+<div class="math notranslate nohighlight">
+\[h^{-1}((a, \infty]) = \bigcup_{k=1}^\infty f_k^{-1}((a, \infty]) \in \mathcal{S},\]</div>
+<p class="sd-card-text">which, together with the earlier <a class="reference internal" href="#mira-thm-sufficient-condition-measurable-with-infinity">sufficient condition for measurable function</a>, implies that <span class="math notranslate nohighlight">\(h\)</span> is <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>-measurable, that is, the supremum of a sequence of measurable functions is measurable.
+Now, note that</p>
+<div class="math notranslate nohighlight">
+\[g(x) = -\sup\{-f_k(x) : k \in \mathbb{Z}^+\},\]</div>
+<p class="sd-card-text">so <span class="math notranslate nohighlight">\(g\)</span> is the supremum of a sequence of measurable functions, and is therefore measurable.
+Therefore, the infimum of a sequence of measurable functions is measurable.</p>
+</div>
+</details></section>
+</section>
+<section id="measures-and-their-properties">
+<h2>Measures and their properties<a class="headerlink" href="#measures-and-their-properties" title="Permalink to this heading">#</a></h2>
+<p>Now we come to the definition of measures.
+Our original motivation for the following definition came from trying to extend the notion of the length of an interval to the length of more general sets.
+However, the following definition is allows us to generalise a notion of size to other contexts, such as areas or volumes and beyond.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>The word <em>measure</em> allows us to use a single word for different notions of size such as length, area or volume.</p>
+</aside>
+<div class="proof definition admonition" id="definition-34">
+<p class="admonition-title"><span class="caption-number">Definition 67 </span> (Measure)</p>
+<section class="definition-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\(X\)</span> is a set and <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> is a <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <span class="math notranslate nohighlight">\(X.\)</span>
+A measure on <span class="math notranslate nohighlight">\((X, \mathcal{S})\)</span> is a function <span class="math notranslate nohighlight">\(\mu: \mathcal{S} \to [0, \infty]\)</span> such that <span class="math notranslate nohighlight">\(\mu(\emptyset) = 0\)</span> and <span class="math notranslate nohighlight">\(\mu\)</span> is countably additive, that is</p>
+<div class="math notranslate nohighlight">
+\[\mu\left( \bigcup_{k=1}^\infty E_k \right) = \sum_{k=1}^\infty \mu(E_k)\]</div>
+<p>for every disjoint sequence <span class="math notranslate nohighlight">\(E_1, E_2, \ldots\)</span> of sets in <span class="math notranslate nohighlight">\(\mathcal{S}.\)</span></p>
+</section>
+</div><p>Countable additivity of measures is a key property that allows us to prove useful limit theorems.
+Note that countable additvity implies finite additivity, that is, if <span class="math notranslate nohighlight">\(\mu\)</span> is a measure on <span class="math notranslate nohighlight">\((X, \mathcal{S})\)</span> and <span class="math notranslate nohighlight">\(E_1, \ldots, E_n\)</span> are disjoint sets in <span class="math notranslate nohighlight">\(\mathcal{S},\)</span> then</p>
+<div class="math notranslate nohighlight">
+\[\mu(E_1 \cup \cdots \cup E_n) = \mu(E_1) + \cdots + \mu(E_n).\]</div>
+<p>The following terminology is often very useful.</p>
+<div class="proof definition admonition" id="definition-35">
+<p class="admonition-title"><span class="caption-number">Definition 68 </span> (Measure space)</p>
+<section class="definition-content" id="proof-content">
+<p>A measure space is an ordered triple <span class="math notranslate nohighlight">\((X, \mathcal{S}, \mu),\)</span> where <span class="math notranslate nohighlight">\(X\)</span> is a set, <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> is a <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(\mu\)</span> is a measure on <span class="math notranslate nohighlight">\((X, \mathcal{S}).\)</span></p>
+</section>
+</div><section id="properties-of-measures">
+<h3>Properties of measures<a class="headerlink" href="#properties-of-measures" title="Permalink to this heading">#</a></h3>
+<p>Now we discuss several useful properties of measures.</p>
+<div class="proof theorem admonition" id="mira-thm-measure-preserves-order">
+<p class="admonition-title"><span class="caption-number">Theorem 82 </span> (Measure preserves order; measure of a set difference)</p>
+<section class="theorem-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\((X, \mathcal{S}, \mu)\)</span> is a measure space and <span class="math notranslate nohighlight">\(D, E \in \mathcal{S}\)</span> with <span class="math notranslate nohighlight">\(D \subseteq E.\)</span>
+Then</p>
+<p>(a) <span class="math notranslate nohighlight">\(\mu(D) \leq \mu(E),\)</span></p>
+<p>(b) <span class="math notranslate nohighlight">\(\mu(E \setminus D) = \mu(E) - \mu(D)\)</span> provided that <span class="math notranslate nohighlight">\(\mu(D) &lt; \infty.\)</span></p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Measure preserves order; measure of a set difference<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Note that <span class="math notranslate nohighlight">\(E = D \cup (E \setminus D)\)</span> is a disjoint union, so by <code class="xref prf prf-ref docutils literal notranslate"><span class="pre">countable</span> <span class="pre">additivity</span> <span class="pre">of</span> <span class="pre">measures</span></code>, we have</p>
+<div class="math notranslate nohighlight">
+\[\mu(E) = \mu(D) + \mu(E \setminus D) \geq \mu(D),\]</div>
+<p class="sd-card-text">which proves part (a).
+If <span class="math notranslate nohighlight">\(\mu(D) &lt; \infty,\)</span> then part (b) follows by subtracting <span class="math notranslate nohighlight">\(\mu(D)\)</span> from both sides of the equation above.</p>
+</div>
+</details><p>The countable additivity property of measures applies to disjoint countable unions.
+The following countable <em>subadditivity</em> property applies to countable unions that may not be disjoint unions.</p>
+<div class="proof theorem admonition" id="theorem-37">
+<p class="admonition-title"><span class="caption-number">Theorem 83 </span> (Countable subadditivity)</p>
+<section class="theorem-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\((X, \mathcal{S}, \mu)\)</span> is a measure space and <span class="math notranslate nohighlight">\(E_1, E_2, \ldots \in \mathcal{S}.\)</span>
+Then</p>
+<div class="math notranslate nohighlight">
+\[\mu\left( \bigcup_{k=1}^\infty E_k \right) \leq \sum_{k=1}^\infty \mu(E_k).\]</div>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Countable subadditivity<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(E_1, E_2, \ldots \in \mathcal{S}.\)</span>
+Let <span class="math notranslate nohighlight">\(D_1 = \emptyset\)</span> and <span class="math notranslate nohighlight">\(D_k = E_1 \cup \cdots \cup E_{k-1}\)</span> for <span class="math notranslate nohighlight">\(k \geq 2.\)</span>
+Then <span class="math notranslate nohighlight">\(E_1 \setminus D_1, E_2 \setminus D_2, \ldots\)</span> is a sequence of disjoint sets in <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> whose union equals <span class="math notranslate nohighlight">\(\cup_{k=1}^\infty E_k.\)</span>
+Therefore</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\mu\left( \bigcup_{k=1}^\infty E_k \right) &amp;= \mu\left( \bigcup_{k=1}^\infty (E_k \setminus D_k) \right) \\
+&amp;= \sum_{k=1}^\infty \mu(E_k \setminus D_k) \\
+&amp;\leq \sum_{k=1}^\infty \mu(E_k).
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">where the second equality follows from <code class="xref prf prf-ref docutils literal notranslate"><span class="pre">countable</span> <span class="pre">additivity</span> <span class="pre">of</span> <span class="pre">measures</span></code> and the inequality follows from the fact that <a class="reference internal" href="#mira-thm-measure-preserves-order">measures preserve order</a>.</p>
+</div>
+</details><p>Just as countable additivity implies finite additivity, countable subadditivity implies finite subadditivity.
+That is if <span class="math notranslate nohighlight">\(\mu\)</span> is a measure on <span class="math notranslate nohighlight">\((X, \mathcal{S})\)</span> and <span class="math notranslate nohighlight">\(E_1, \ldots, E_n\)</span> are sets in <span class="math notranslate nohighlight">\(\mathcal{S},\)</span> then</p>
+<div class="math notranslate nohighlight">
+\[\mu(E_1 \cup \cdots \cup E_n) \leq \mu(E_1) + \cdots + \mu(E_n).\]</div>
+<p>Now we show two very useful results about limits on measures.
+Note that the countable additivity property of measures is crucial for the following results.</p>
+<div class="proof theorem admonition" id="theorem-38">
+<p class="admonition-title"><span class="caption-number">Theorem 84 </span> (Measure of an increasing union)</p>
+<section class="theorem-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\((X, \mathcal{S}, \mu)\)</span> is a measure space and <span class="math notranslate nohighlight">\(E_1, E_2, \ldots \in \mathcal{S}\)</span> is an increasing sequence of sets in <span class="math notranslate nohighlight">\(\mathcal{S},\)</span> that is <span class="math notranslate nohighlight">\(E_1 \subseteq E_2 \subseteq \cdots.\)</span>
+Then</p>
+<div class="math notranslate nohighlight">
+\[\mu\left( \bigcup_{k=1}^\infty E_k \right) = \lim_{k \to \infty} \mu(E_k).\]</div>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Measure of an increasing union<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">If <span class="math notranslate nohighlight">\(\mu(E_k) = \infty\)</span> for some <span class="math notranslate nohighlight">\(k,\)</span> then the equality holds because both sides are equal to <span class="math notranslate nohighlight">\(\infty.\)</span>
+Let us consider the case where <span class="math notranslate nohighlight">\(\mu(E_k) &lt; \infty\)</span> for all <span class="math notranslate nohighlight">\(k \in \mathbb{Z}^+.\)</span></p>
+<p class="sd-card-text">For convenience, let <span class="math notranslate nohighlight">\(E_0 = \emptyset.\)</span>
+Then, using the fact that <span class="math notranslate nohighlight">\(E_1, E_2, \ldots\)</span> is an increasing sequence of sets, we have</p>
+<div class="math notranslate nohighlight">
+\[\bigcup_{k=1}^\infty E_k = \bigcup_{k=1}^\infty (E_k \setminus E_{k-1}),\]</div>
+<p class="sd-card-text">which is a disjoint union.
+Therefore, by <code class="xref prf prf-ref docutils literal notranslate"><span class="pre">countable</span> <span class="pre">additivity</span> <span class="pre">of</span> <span class="pre">measures</span></code>, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\mu\left( \bigcup_{j=1}^\infty E_j \right) &amp;= \mu\left( \bigcup_{j=1}^\infty (E_j \setminus E_{j-1}) \right) \
+&amp;= \lim_{k \to \infty} \sum_{j=1}^k \mu(E_j \setminus E_{j-1}) \\
+&amp;= \lim_{k \to \infty} \mu(E_k).
+\end{align}\end{split}\]</div>
 </div>
 </details></section>
 </section>
@@ -1361,6 +1511,10 @@ f^{-1}(B) &amp;= f^{-1}((B \cap \mathbb{R}) \cup (B \cap \{\infty\}) \cup (B \ca
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measurable-spaces-and-functions">Measurable spaces and functions</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sigma-algebras">Sigma algebras</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#measurable-functions">Measurable functions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measures-and-their-properties">Measures and their properties</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-measures">Properties of measures</a></li>
 </ul>
 </li>
 </ul>
