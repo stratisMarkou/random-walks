@@ -200,7 +200,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Papers &amp; Miscellanous</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Stream</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Stream of papers</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../why-covariances/why-covariances.html">Why covariance functions?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ais/ais.html">Annealed importance sampling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../rff/rff.html">Random Fourier features</a></li>
@@ -425,6 +425,11 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="numerical-simulation-of-sdes">
 <h1>Numerical simulation of SDEs<a class="headerlink" href="#numerical-simulation-of-sdes" title="Permalink to this heading">#</a></h1>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<p><a class="github-button" href="https://github.com/stratisMarkou/random-walks" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" aria-label="Star stratisMarkou/random-walks on GitHub" style="float: right;">Star</a>
+<a class="github-button" href="https://github.com/stratisMarkou/random-walks/issues" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-issue-opened" data-size="large" aria-label="Issue stratisMarkou/random-walks on GitHub">Issue</a>
+<a class="github-button" href="https://github.com/stratisMarkou/random-walks/subscription" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-eye" data-size="large" aria-label="Watch stratisMarkou/random-walks on GitHub">Watch</a>
+<a class="github-button" href="https://github.com/stratisMarkou" data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large" aria-label="Follow @stratisMarkou on GitHub">Follow</a></p>
 <p>This is a reproduction of certain scripts found in Higham, <em>An algorithmic Introduction to Numerical Simulation of Stochastic Differential Equations.</em><span id="id1">[<a class="reference internal" href="#id16" title="D.J. Higham. An algorithmic introduction to numerical simulation of stochastic differential equations. SIAM Review, 43(3):525–546, 2001.">Higham, 2001</a>]</span>
 This paper is an accessible introduction to SDEs, which is centered around ten scripts.
 Below are reproductions of these scripts (excluding two on linear stability) and some supplementary notes.</p>
@@ -485,7 +490,7 @@ W(t_{n+1}) = W(t_{n}) + \Delta W(t_{n}), \text{ where } \Delta W(t_{n}) \sim \ma
 </div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/73de9ea028ba69ee095f27dd24f75472e958151e6cdc1fb6b4c92047188dc3ae.svg" src="../../../_images/73de9ea028ba69ee095f27dd24f75472e958151e6cdc1fb6b4c92047188dc3ae.svg" /></div>
+<img alt="../../../_images/5897400d108280844a3c1b78c79b7944c73ded6021017e6588af52c1682ab516.svg" src="../../../_images/5897400d108280844a3c1b78c79b7944c73ded6021017e6588af52c1682ab516.svg" /></div>
 </div>
 <p>So even though we can’t represent the entirety of the path, we can sample it to arbitrary precision.</p>
 </section>
@@ -534,7 +539,7 @@ X(t) = \exp\left(t + \frac{1}{2}W(t)\right).
 </div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/b4b4579361d614f6621e7729aa1073e447984ee3d02e9662a52a852665731d17.svg" src="../../../_images/b4b4579361d614f6621e7729aa1073e447984ee3d02e9662a52a852665731d17.svg" /></div>
+<img alt="../../../_images/a266289ede38b7a0c4c6b9b159fe988980a96d6466b765c64187203f7b8cbc4d.svg" src="../../../_images/a266289ede38b7a0c4c6b9b159fe988980a96d6466b765c64187203f7b8cbc4d.svg" /></div>
 </div>
 </section>
 <section id="evaluating-a-stochastic-integral">
@@ -708,7 +713,7 @@ X_t = X_0 \exp \left[\Big(\lambda - \frac{1}{2} \mu^2\Big)~t + \mu W(t)\right],
 <p>We are can now run the EM method and compare it aginst the exact solution below.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/433d7a3f49de04ab34065d1873d493f153c6bd34992cc09b81c2ba7aea030252.svg" src="../../../_images/433d7a3f49de04ab34065d1873d493f153c6bd34992cc09b81c2ba7aea030252.svg" /></div>
+<img alt="../../../_images/808a8256d904061314b4a60b5e530e906f308ea5c2de20dfcb16e1d371f5e843.svg" src="../../../_images/808a8256d904061314b4a60b5e530e906f308ea5c2de20dfcb16e1d371f5e843.svg" /></div>
 </div>
 <p>We can change the accuracy of the solution by adjusting <span class="math notranslate nohighlight">\(N\)</span>. As a fun aside, what if we try out a different drift term? One nice choice is</p>
 <div class="math notranslate nohighlight">
@@ -734,7 +739,7 @@ g(x, t) &amp;= \mu x.\\
 </div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/86682159f13ee90aebf23a137f84a1eb757ebf85c485d3caab77e4a18cb9a61b.svg" src="../../../_images/86682159f13ee90aebf23a137f84a1eb757ebf85c485d3caab77e4a18cb9a61b.svg" /></div>
+<img alt="../../../_images/ecfb539273fb486f054dc248470732fc969949664d6819910c44547d9191c436.svg" src="../../../_images/ecfb539273fb486f054dc248470732fc969949664d6819910c44547d9191c436.svg" /></div>
 </div>
 </section>
 <section id="strong-and-weak-convergence">
@@ -763,7 +768,7 @@ g(x, t) &amp;= \mu x.\\
 We do not provide a proof for any of the above statements, but instead evaluate the rate of convergence empirically.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/49e7d9c82148a12b89797f7b01042ee9a4e00db666165d53d21d00cc53c5612b.svg" src="../../../_images/49e7d9c82148a12b89797f7b01042ee9a4e00db666165d53d21d00cc53c5612b.svg" /></div>
+<img alt="../../../_images/7362addfccf4605cf43c407b128697909f150ba5df8f8e821b1b18c61f7637dc.svg" src="../../../_images/7362addfccf4605cf43c407b128697909f150ba5df8f8e821b1b18c61f7637dc.svg" /></div>
 </div>
 </section>
 <section id="milstein-s-higher-order-method">
@@ -787,13 +792,13 @@ dX(t) = f(X(t))dt + g(X(t)) dW(t),
 <p>Let’s first use Milstein’s method to get a single solution of the Black-Scholes model, as we did for EM.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/9b8a68ab1757462b3f0a5d4b91d1a44fd3866e864f19d1d830642ccfdc3b4f94.svg" src="../../../_images/9b8a68ab1757462b3f0a5d4b91d1a44fd3866e864f19d1d830642ccfdc3b4f94.svg" /></div>
+<img alt="../../../_images/d558145cf72b58b3dc901eaa5cd6cfbed67e2f89bd63b3d7f4d1390736d5da78.svg" src="../../../_images/d558145cf72b58b3dc901eaa5cd6cfbed67e2f89bd63b3d7f4d1390736d5da78.svg" /></div>
 </div>
 <p>We can also look at the strong and weak rates of convergence for Milstein’s method.
 Milstein’s method achieves a strong convergence rate of <span class="math notranslate nohighlight">\(1\)</span> as oposed to the <span class="math notranslate nohighlight">\(1/2\)</span> strong rate of Euler Maruyama.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/a6da4dcbcd85d964ee3f789b169fbc1f1b9122be5f642a477a40a2bc1ed87ae8.svg" src="../../../_images/a6da4dcbcd85d964ee3f789b169fbc1f1b9122be5f642a477a40a2bc1ed87ae8.svg" /></div>
+<img alt="../../../_images/5d1860f114135fe51135a19e1acb86a2d0b7a33b975901aa910ed61dc163a0a3.svg" src="../../../_images/5d1860f114135fe51135a19e1acb86a2d0b7a33b975901aa910ed61dc163a0a3.svg" /></div>
 </div>
 </section>
 <section id="stochastic-chain-rule">

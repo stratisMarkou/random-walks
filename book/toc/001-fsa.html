@@ -201,7 +201,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Papers &amp; Miscellanous</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../papers/intro.html">Stream</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../papers/intro.html">Stream of papers</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../papers/why-covariances/why-covariances.html">Why covariance functions?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../papers/ais/ais.html">Annealed importance sampling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../papers/rff/rff.html">Random Fourier features</a></li>
@@ -423,6 +423,11 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="finite-automata-and-regular-expressions">
 <h1>Finite Automata and Regular Expressions<a class="headerlink" href="#finite-automata-and-regular-expressions" title="Permalink to this heading">#</a></h1>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<p><a class="github-button" href="https://github.com/stratisMarkou/random-walks" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" aria-label="Star stratisMarkou/random-walks on GitHub" style="float: right;">Star</a>
+<a class="github-button" href="https://github.com/stratisMarkou/random-walks/issues" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-issue-opened" data-size="large" aria-label="Issue stratisMarkou/random-walks on GitHub">Issue</a>
+<a class="github-button" href="https://github.com/stratisMarkou/random-walks/subscription" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-eye" data-size="large" aria-label="Watch stratisMarkou/random-walks on GitHub">Watch</a>
+<a class="github-button" href="https://github.com/stratisMarkou" data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large" aria-label="Follow @stratisMarkou on GitHub">Follow</a></p>
 <p>The course slowly builds up different models of computation of increasing complexity, starting with finite state automata (FSAs).
 This chapter introduces FSAs and regular expressions, which turn out to be equivalent in terms of expressiveness.</p>
 <section id="finite-state-automata">
@@ -452,7 +457,7 @@ In a state diagram, we use circles for the states, labeled arrows for the transi
 Below is an example of an FSA, with three states.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../_images/3dbf2b2d8bf53a8c734dc119cc503053bba474608b5d5bdaa825312fc7f86824.svg" src="../../_images/3dbf2b2d8bf53a8c734dc119cc503053bba474608b5d5bdaa825312fc7f86824.svg" /></div>
+<img alt="../../_images/6c77bdc8e20730afd695cc8524b043ee53e81f6fca1ee2641a892e2c0dc51d22.svg" src="../../_images/6c77bdc8e20730afd695cc8524b043ee53e81f6fca1ee2641a892e2c0dc51d22.svg" /></div>
 </div>
 <p>Now we define strings, which are sequences of symbols, and languages, which are sets of strings.</p>
 <div class="proof definition admonition" id="definition-1">
@@ -498,7 +503,7 @@ An FSA that recognises this language is shown below.</p>
 </section>
 </div><div class="cell tag_remove-input tag_center-output docutils container">
 <div class="cell_output docutils container">
-<img alt="../../_images/9d4b93f98e7ed277c99f5d3867a2ca7fe90bef5584e605b303ed8c7043d05d1f.svg" src="../../_images/9d4b93f98e7ed277c99f5d3867a2ca7fe90bef5584e605b303ed8c7043d05d1f.svg" /></div>
+<img alt="../../_images/26a65b60d936da372728bbc6b997f01baf31dfbb1b7a22e1876bf2e0015d33c3.svg" src="../../_images/26a65b60d936da372728bbc6b997f01baf31dfbb1b7a22e1876bf2e0015d33c3.svg" /></div>
 </div>
 <div class="proof example admonition" id="example-6">
 <p class="admonition-title"><span class="caption-number">Example 3 </span></p>
@@ -624,7 +629,7 @@ Below is an example of an NFA which differs from DFAs in two important ways:</p>
 <p>The NFA accepts a string if there is any valid path from the initial state to some finite state.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../_images/ccecb3a6b0e360e0f055cdf7112cd8bc3a787c862f1ca02e9a6a924ff95538f0.svg" src="../../_images/ccecb3a6b0e360e0f055cdf7112cd8bc3a787c862f1ca02e9a6a924ff95538f0.svg" /></div>
+<img alt="../../_images/209cf76eacc418be51b6ae3fe263695f3d8f5693bbfb7106a0c5f42abcbd5201.svg" src="../../_images/209cf76eacc418be51b6ae3fe263695f3d8f5693bbfb7106a0c5f42abcbd5201.svg" /></div>
 </div>
 <p>We can also look at a few example input strings, and whether this NFA accepts or rejects them.</p>
 <div class="cell tag_remove-input docutils container">
@@ -693,7 +698,7 @@ Then we define the transition function as</p>
 For example, we can convert the NFA from the previous example into the following equivalent DFA.</p>
 <div class="cell tag_remove-input tag_center-output docutils container">
 <div class="cell_output docutils container">
-<img alt="../../_images/eb58452b44a5c5b85ad6661da3cc3d8e074a808c5d87eaf2d406c16c67fc75e0.svg" src="../../_images/eb58452b44a5c5b85ad6661da3cc3d8e074a808c5d87eaf2d406c16c67fc75e0.svg" /></div>
+<img alt="../../_images/cef5facd3cb72206fb2e68a3bd86a6b41ebe2950cd2a4497288c4cc7bd7fc8d3.svg" src="../../_images/cef5facd3cb72206fb2e68a3bd86a6b41ebe2950cd2a4497288c4cc7bd7fc8d3.svg" /></div>
 </div>
 </section>
 <section id="closure-properties">
