@@ -406,6 +406,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-1-a">Chapter 1.A</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-c">Chapter 2.C</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-d">Chapter 2.D</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-4-a">Chapter 4.A</a></li>
 </ul>
             </nav>
         </div>
@@ -1520,6 +1521,112 @@ Therefore, <span class="math notranslate nohighlight">\(V \subseteq A\)</span> i
 </div>
 </details></div>
 </section>
+<section id="chapter-4-a">
+<h2>Chapter 4.A<a class="headerlink" href="#chapter-4-a" title="Permalink to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 4.A.3</p>
+<p>Suppose <span class="math notranslate nohighlight">\((X, \mathcal{S}, \mu)\)</span> is a measure space.
+Suppose <span class="math notranslate nohighlight">\(h \in \mathcal{L}^{1}(\mu)\)</span> and <span class="math notranslate nohighlight">\(||h||_1 &gt; 0.\)</span>
+Prove that there exists at most one number <span class="math notranslate nohighlight">\(c \in (0, \infty)\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[\mu\left(x \in X: |h(x)| \geq c \right) = \frac{||h||_1}{c}.\]</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">We have</p>
+<div class="math notranslate nohighlight">
+\[\mu(\{x \in X: |h(x)| \geq c\}) \leq \frac{1}{c} \int_{\{x \in X: |h(x)| \geq c\}} |h| d\mu \leq ||h||_1.\]</div>
+<p class="sd-card-text">Therefore, if the condition in the exercise holds, then we must have</p>
+<div class="math notranslate nohighlight">
+\[\mu(\{x \in X: |h(x)| \geq c\}) = \frac{1}{c} \int_{\{x \in X: |h(x)| \geq c\}} |h| d\mu.\]</div>
+<p class="sd-card-text">Define <span class="math notranslate nohighlight">\(A_c = \{x \in X: |h(x)| \geq c\}.\)</span>
+Then, we have</p>
+<div class="math notranslate nohighlight">
+\[c \mu(A_c) = \int_{A_c} |h| d\mu,\]</div>
+<p class="sd-card-text">which implies that <span class="math notranslate nohighlight">\(h\)</span> is equal to <span class="math notranslate nohighlight">\(c\)</span> on <span class="math notranslate nohighlight">\(A_c\)</span> <span class="math notranslate nohighlight">\(\mu\)</span>-almost everywhere.
+Note that, by the equation above, if <span class="math notranslate nohighlight">\(A_c\)</span> has zero measure, then <span class="math notranslate nohighlight">\(|h|\)</span> is zero <span class="math notranslate nohighlight">\(\mu\)</span>-almost everywhere on <span class="math notranslate nohighlight">\(X\)</span> so the condition <span class="math notranslate nohighlight">\(||h||_1 &gt; 0\)</span> is not satisfied.
+Therefore, <span class="math notranslate nohighlight">\(A_c\)</span> must have positive measure.
+Now, suppose there exists another number <span class="math notranslate nohighlight">\(c' &gt; c\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[\mu\left(x \in X: |h(x)| \geq c' \right) = \frac{||h||_1}{c'}.\]</div>
+<p class="sd-card-text">Then, <span class="math notranslate nohighlight">\(A_{c'} \subseteq A_c,\)</span> and <span class="math notranslate nohighlight">\(0 &lt; |A_{c'}| &lt; |A_c|.\)</span>
+Further, by the same argument as above, we have <span class="math notranslate nohighlight">\(h = c'\)</span> on <span class="math notranslate nohighlight">\(A_{c'}\)</span> <span class="math notranslate nohighlight">\(\mu\)</span>-almost everywhere.
+However, this is a contradiction, because <span class="math notranslate nohighlight">\(h = c\)</span> on <span class="math notranslate nohighlight">\(A_c\)</span> <span class="math notranslate nohighlight">\(\mu\)</span>-almost everywhere.
+Therefore, there cannot exist a second number <span class="math notranslate nohighlight">\(c' &gt; c\)</span> such that the condition in the exercise holds.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 4.A.4</p>
+<p>Show  that the constant <span class="math notranslate nohighlight">\(3\)</span> in the Vitali Covering Lemma cannot be replaced by a smaller positive constant.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Note that the constant <span class="math notranslate nohighlight">\(3\)</span> in the Vitali covering lemma (VCL) cannot be replaced by a number less than or equal to <span class="math notranslate nohighlight">\(1.\)</span>
+Suppose that it can be replaced by some constant <span class="math notranslate nohighlight">\(C\)</span> with <span class="math notranslate nohighlight">\(1 &lt; C &lt; 3.\)</span>
+Consider the list containing the two intervals <span class="math notranslate nohighlight">\((-2-\epsilon, \epsilon)\)</span> and <span class="math notranslate nohighlight">\((-\epsilon, 2+\epsilon)\)</span> for some <span class="math notranslate nohighlight">\(\epsilon &gt; 0.\)</span>
+Now, VCL requires that we select a subset of disjoint intervals from this list, so we can select at most one of them.
+In order for this interval to contain the union of both intervals, we must have</p>
+<div class="math notranslate nohighlight">
+\[\epsilon \geq \frac{3 - C}{C - 1}.\]</div>
+<p class="sd-card-text">Therefore, the conclusion of VCL would be violated for any <span class="math notranslate nohighlight">\(\epsilon &lt; (3 - C)(C - 1).\)</span>
+We conclude that the constant <span class="math notranslate nohighlight">\(3\)</span> in VCL cannot be replaced by a smaller positive constant.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 4.A.9</p>
+<p>Suppoose <span class="math notranslate nohighlight">\(h: \mathbb{R} \to \mathbb{R}\)</span> is Lebesgue measurable.
+Prove that</p>
+<div class="math notranslate nohighlight">
+\[\{b \in \mathbb{R}: h^*(b) &gt; c\}\]</div>
+<p>is an open subset of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> for every <span class="math notranslate nohighlight">\(c \in \mathbb{R}.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(h: \mathbb{R} \to \mathbb{R}\)</span> is Lebesgue measurable.
+Let <span class="math notranslate nohighlight">\(c &gt; 0\)</span> and define</p>
+<div class="math notranslate nohighlight">
+\[A_c = \{b \in \mathbb{R}: h^*(b) &gt; c\}.\]</div>
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(m: \mathbb{R} \times (0, \infty) \to \infty\)</span> be the function</p>
+<div class="math notranslate nohighlight">
+\[m(b, t) = \frac{1}{2t} \int_{b - t}^{b + t} |h| d\mu.\]</div>
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(a \in A_c.\)</span>
+By the definition of supremum, there exist <span class="math notranslate nohighlight">\(\epsilon &gt; 0, t_\epsilon &gt; 0\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[m(a, t_\epsilon) &gt; c + \epsilon.\]</div>
+<p class="sd-card-text">Because of the property thatt integrals on small sets are small, there exists <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[\int_B |h|d\mu &lt; \epsilon\]</div>
+<p class="sd-card-text">for every set <span class="math notranslate nohighlight">\(B \subseteq \mathcal{S}\)</span> such that <span class="math notranslate nohighlight">\(\mu(B) &lt; \delta.\)</span>
+Now, consider a ball of radius <span class="math notranslate nohighlight">\(\delta / 2\)</span> centered at <span class="math notranslate nohighlight">\(a.\)</span>
+Then, for any <span class="math notranslate nohighlight">\(a' \in B_{\delta/2}(a),\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\left|m(a', t_\epsilon) - m(a, t_\epsilon)\right| &amp;&lt; \left|\int_{a' - t_\epsilon}^{a' + t_\epsilon} |h| d\mu - \int_{a - t_\epsilon}^{a + t_\epsilon} |h| d\mu\right| \\
+&amp;\leq \left|\int_B |h| d\mu\right| \\
+&amp;&lt; \epsilon.
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">where <span class="math notranslate nohighlight">\(B = [a' - t_\epsilon, a' + t_\epsilon] \Delta [a - t_\epsilon, a + t_\epsilon],\)</span> where <span class="math notranslate nohighlight">\(\Delta\)</span> denotes the symmetric difference of two sets.
+Thus <span class="math notranslate nohighlight">\(\mu(B) &lt; \delta,\)</span> so <span class="math notranslate nohighlight">\(m(a', t_\epsilon) &gt; c\)</span> for all <span class="math notranslate nohighlight">\(a' \in B_{\delta/2}(a).\)</span>
+Therefore</p>
+<div class="math notranslate nohighlight">
+\[h^*(a') &gt; m(a', t_\epsilon) &gt; c\]</div>
+<p class="sd-card-text">which implies that <span class="math notranslate nohighlight">\(a' \in A_c\)</span> and <span class="math notranslate nohighlight">\(B_{\delta/2}(a) \subseteq A_c.\)</span>
+This means that <span class="math notranslate nohighlight">\(A_c\)</span> is open.</p>
+</div>
+</details></div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1588,6 +1695,7 @@ Therefore, <span class="math notranslate nohighlight">\(V \subseteq A\)</span> i
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-1-a">Chapter 1.A</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-c">Chapter 2.C</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-d">Chapter 2.D</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-4-a">Chapter 4.A</a></li>
 </ul>
   </nav></div>
 

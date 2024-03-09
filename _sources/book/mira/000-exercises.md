@@ -1262,3 +1262,158 @@ Therefore, $V \subseteq A$ is not Lebesgue measurable.
 
 :::
 ::::
+
+
+
+## Chapter 4.A
+
+::::{admonition} Exercise 4.A.1
+:class: tip
+:label: mira-ex-4a1
+Suppose $(X, \mathcal{S}, \mu)$ is a measure space and $h: X \to \mathbb{R}$ is an $\mathcal{S}$-measurable function.
+Prove that
+
+$$\mu\left(x \in X: |h(x)| \geq c \right) \leq \frac{1}{c^p} \int |h|^p d\mu$$
+
+for all positive numbers $c$ and $p.$
+
+:::{dropdown} Solution
+Note that for all positive numbers $c$ and $p,$ we have $|h(x)| > c$ if and only if $|h(x)|^p > c^p.$
+Therefore, applying Markov's inequality, we have
+
+$$\mu\left(x \in X: |h(x)| \geq c \right) = \mu\left(x \in X: |h(x)|^p \geq c^p \right) \leq \frac{1}{c^p} \int |h|^p d\mu.$$
+:::
+::::
+
+
+
+::::{admonition} Exercise 4.A.2 (Chebyshev's inequality)
+:class: tip
+:label: mira-ex-4a2
+Suppose $(X, \mathcal{S}, \mu)$ is a measure space with $\mu(X) = 1$ and $h \in \mathcal{L}^1(\mu).$
+Prove that
+
+$$\mu\left(x \in X: \left|h(x) - \int h d\mu\right| \geq c \right) \leq \frac{1}{c^2} \int \left|h - \int h d\mu\right|^2 d\mu$$
+
+for all $c > 0.$
+
+:::{dropdown} Solution
+Note that for all $c > 0,$ we have $\left|h(x) - \int h d\mu\right| \geq c$ if and only if $\left|h(x) - \int h d\mu\right|^2 \geq c^2.$
+Therefore, applying the result of {prf:ref}`Exercise 4.A.1 <mira-ex-4a1>`, we have
+
+$$\begin{align}
+\mu\left(x \in X: \left|h(x) - \int h d\mu\right| \geq c \right) &\leq \frac{1}{c^2} \int \left|h - \int h d\mu\right|^2 d\mu 
+&= \frac{1}{c^2} \int \left(h - \int h d\mu\right)^2 d\mu.
+&= \frac{1}{c^2} \left(\int h^2 d\mu - \left(\int h d\mu\right)^2\right).
+\end{align}$$
+:::
+::::
+
+
+
+::::{admonition} Exercise 4.A.3
+:class: tip
+Suppose $(X, \mathcal{S}, \mu)$ is a measure space.
+Suppose $h \in \mathcal{L}^{1}(\mu)$ and $||h||_1 > 0.$
+Prove that there exists at most one number $c \in (0, \infty)$ such that
+
+$$\mu\left(x \in X: |h(x)| \geq c \right) = \frac{||h||_1}{c}.$$
+
+:::{dropdown} Solution
+We have
+
+$$\mu(\{x \in X: |h(x)| \geq c\}) \leq \frac{1}{c} \int_{\{x \in X: |h(x)| \geq c\}} |h| d\mu \leq ||h||_1.$$
+
+Therefore, if the condition in the exercise holds, then we must have
+
+$$\mu(\{x \in X: |h(x)| \geq c\}) = \frac{1}{c} \int_{\{x \in X: |h(x)| \geq c\}} |h| d\mu.$$
+
+Define $A_c = \{x \in X: |h(x)| \geq c\}.$
+Then, we have
+
+$$c \mu(A_c) = \int_{A_c} |h| d\mu,$$
+
+which implies that $h$ is equal to $c$ on $A_c$ $\mu$-almost everywhere.
+Note that, by the equation above, if $A_c$ has zero measure, then $|h|$ is zero $\mu$-almost everywhere on $X$ so the condition $||h||_1 > 0$ is not satisfied.
+Therefore, $A_c$ must have positive measure.
+Now, suppose there exists another number $c' > c$ such that
+
+$$\mu\left(x \in X: |h(x)| \geq c' \right) = \frac{||h||_1}{c'}.$$
+
+Then, $A_{c'} \subseteq A_c,$ and $0 < |A_{c'}| < |A_c|.$
+Further, by the same argument as above, we have $h = c'$ on $A_{c'}$ $\mu$-almost everywhere.
+However, this is a contradiction, because $h = c$ on $A_c$ $\mu$-almost everywhere.
+Therefore, there cannot exist a second number $c' > c$ such that the condition in the exercise holds.
+:::
+::::
+
+
+
+::::{admonition} Exercise 4.A.4
+:class: tip
+Show  that the constant $3$ in the Vitali Covering Lemma cannot be replaced by a smaller positive constant.
+
+:::{dropdown} Solution
+Note that the constant $3$ in the Vitali covering lemma (VCL) cannot be replaced by a number less than or equal to $1.$
+Suppose that it can be replaced by some constant $C$ with $1 < C < 3.$
+Consider the list containing the two intervals $(-2-\epsilon, \epsilon)$ and $(-\epsilon, 2+\epsilon)$ for some $\epsilon > 0.$
+Now, VCL requires that we select a subset of disjoint intervals from this list, so we can select at most one of them.
+In order for this interval to contain the union of both intervals, we must have
+
+$$\epsilon \geq \frac{3 - C}{C - 1}.$$
+
+Therefore, the conclusion of VCL would be violated for any $\epsilon < (3 - C)(C - 1).$
+We conclude that the constant $3$ in VCL cannot be replaced by a smaller positive constant.
+:::
+::::
+
+
+
+::::{admonition} Exercise 4.A.9
+:class: tip
+Suppoose $h: \mathbb{R} \to \mathbb{R}$ is Lebesgue measurable.
+Prove that
+
+$$\{b \in \mathbb{R}: h^*(b) > c\}$$
+
+is an open subset of $\mathbb{R}$ for every $c \in \mathbb{R}.$
+
+:::{dropdown} Solution
+Suppose $h: \mathbb{R} \to \mathbb{R}$ is Lebesgue measurable.
+Let $c > 0$ and define
+
+$$A_c = \{b \in \mathbb{R}: h^*(b) > c\}.$$
+
+Let $m: \mathbb{R} \times (0, \infty) \to \infty$ be the function
+
+$$m(b, t) = \frac{1}{2t} \int_{b - t}^{b + t} |h| d\mu.$$
+
+Let $a \in A_c.$
+By the definition of supremum, there exist $\epsilon > 0, t_\epsilon > 0$ such that
+
+$$m(a, t_\epsilon) > c + \epsilon.$$
+
+Because of the property thatt integrals on small sets are small, there exists $\delta > 0$ such that
+
+$$\int_B |h|d\mu < \epsilon$$
+
+for every set $B \subseteq \mathcal{S}$ such that $\mu(B) < \delta.$
+Now, consider a ball of radius $\delta / 2$ centered at $a.$
+Then, for any $a' \in B_{\delta/2}(a),$ we have
+
+$$\begin{align}
+\left|m(a', t_\epsilon) - m(a, t_\epsilon)\right| &< \left|\int_{a' - t_\epsilon}^{a' + t_\epsilon} |h| d\mu - \int_{a - t_\epsilon}^{a + t_\epsilon} |h| d\mu\right| \\
+&\leq \left|\int_B |h| d\mu\right| \\
+&< \epsilon.
+\end{align}$$
+
+where $B = [a' - t_\epsilon, a' + t_\epsilon] \Delta [a - t_\epsilon, a + t_\epsilon],$ where $\Delta$ denotes the symmetric difference of two sets.
+Thus $\mu(B) < \delta,$ so $m(a', t_\epsilon) > c$ for all $a' \in B_{\delta/2}(a).$
+Therefore
+
+$$h^*(a') > m(a', t_\epsilon) > c$$
+
+which implies that $a' \in A_c$ and $B_{\delta/2}(a) \subseteq A_c.$
+This means that $A_c$ is open.
+:::
+::::
