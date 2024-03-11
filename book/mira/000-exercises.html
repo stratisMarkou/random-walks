@@ -1626,7 +1626,38 @@ Therefore</p>
 This means that <span class="math notranslate nohighlight">\(A_c\)</span> is open.</p>
 </div>
 </details></div>
-</section>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 4.A.11</p>
+<p>Give an example of a Borel meeasurable function <span class="math notranslate nohighlight">\(h: \mathbb{R} \to [0, \infty)\)</span> such that <span class="math notranslate nohighlight">\(h^*(b) &lt; \infty\)</span> for all <span class="math notranslate nohighlight">\(b \in \mathbb{R}\)</span> but <span class="math notranslate nohighlight">\(\sup\{h^*(b): b\in \mathbb{R}\} = \infty.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">We will give an example and a high-level justification for why it works without proving this.
+Consider the function <span class="math notranslate nohighlight">\(h: \mathbb{R} \to [0, \infty)\)</span> defined as</p>
+<div class="math notranslate nohighlight">
+\[h(x) = \sum_{n=1}^\infty n \chi_{[2^n, 2^n + 1]}.\]</div>
+<p class="sd-card-text">This is a countable sum of Borel measurable functions and is therefore Borel measurable.
+Note also that <span class="math notranslate nohighlight">\(h^*(2^n + 1/2) \to \infty\)</span> as <span class="math notranslate nohighlight">\(n \to \infty,\)</span> so <span class="math notranslate nohighlight">\(\sup\{h^*(b): b\in \mathbb{R}\} = \infty.\)</span>
+Finally, we note that since the gap between individual characteristic functions increases exponentially quickly, while the height of each characteristic function increases linearly, it follows that for any <span class="math notranslate nohighlight">\(b \in \mathbb{R},\)</span> the quantity <span class="math notranslate nohighlight">\(\int_{b - t}^{b + t} |h|\)</span> is bounded in <span class="math notranslate nohighlight">\(t\)</span> and therefore <span class="math notranslate nohighlight">\(h^*(b) &lt; \infty.\)</span></p>
+</div>
+</details></div>
+<!-- ::::{admonition} Exercise 4.A.12
+:class: tip
+Show that $|\{b \in \mathbb{R}: h^*(b) = \infty\}| = 0$ for every $h \in \mathcal{L}^1(\mathbb{R}).$
+
+:::{dropdown} Solution
+Let $A_{\infty} = \{b \in \mathbb{R}: h^*(b) = \infty\}.$
+Suppose $|A_\infty| > 0.$
+Then, there exists a closed interval $[a, b] \subseteq \mathbb{R}$ such that $|A_\infty \cap [a, b]| > 0.$
+Note that $A_\infty$ is closed, so $A = A_\infty \cap [a, b]$ is closed and bounded.
+Let $a \in A$ and $c > 0.$
+
+:::
+:::: --></section>
 </section>
 
     <script type="text/x-thebe-config">

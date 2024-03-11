@@ -1417,3 +1417,63 @@ which implies that $a' \in A_c$ and $B_{\delta/2}(a) \subseteq A_c.$
 This means that $A_c$ is open.
 :::
 ::::
+
+
+
+
+::::{admonition} Exercise 4.A.10
+:class: tip
+:label: mira-ex-4a10
+Prove or give a counterexample: if $h: \mathbb{R} \to [0, \infty)$ is an increasing function, then $h^*$ is also an increasing function.
+
+:::{dropdown} Solution
+Suppose $h: \mathbb{R} \to [0, \infty)$ is an increasing function, and let $a, b \in \mathbb{R}$ with $a < b.$
+For $x \in \mathbb{x}$ define $h_x$ as $h_x(c) = h(c)$ for all $c \in \mathbb{R}.$
+Then, since $h$ is increasing, $h_x > h$ for all $x \in \mathbb{R},$ so
+
+$$\int_{a - t}^{a + t} |h| \leq \int_{a - t}^{a + t} |h_x|$$
+
+for all $x \in \mathbb{R}$ and $t > 0.$
+Therefore
+
+$$\int_{a - t}^{a + t} |h| \leq \int_{a - t}^{a + t} |h_(b - a)| = \int_{b - t}^{b + t} |h|,$$
+
+and taking the supremum over $t > 0$ we arrive at the result.
+:::
+::::
+
+
+
+
+::::{admonition} Exercise 4.A.11
+:class: tip
+Give an example of a Borel meeasurable function $h: \mathbb{R} \to [0, \infty)$ such that $h^*(b) < \infty$ for all $b \in \mathbb{R}$ but $\sup\{h^*(b): b\in \mathbb{R}\} = \infty.$
+
+:::{dropdown} Solution
+We will give an example and a high-level justification for why it works without proving this.
+Consider the function $h: \mathbb{R} \to [0, \infty)$ defined as
+
+$$h(x) = \sum_{n=1}^\infty n \chi_{[2^n, 2^n + 1]}.$$
+
+This is a countable sum of Borel measurable functions and is therefore Borel measurable.
+Note also that $h^*(2^n + 1/2) \to \infty$ as $n \to \infty,$ so $\sup\{h^*(b): b\in \mathbb{R}\} = \infty.$
+Finally, we note that since the gap between individual characteristic functions increases exponentially quickly, while the height of each characteristic function increases linearly, it follows that for any $b \in \mathbb{R},$ the quantity $\int_{b - t}^{b + t} |h|$ is bounded in $t$ and therefore $h^*(b) < \infty.$
+:::
+::::
+
+
+
+
+<!-- ::::{admonition} Exercise 4.A.12
+:class: tip
+Show that $|\{b \in \mathbb{R}: h^*(b) = \infty\}| = 0$ for every $h \in \mathcal{L}^1(\mathbb{R}).$
+
+:::{dropdown} Solution
+Let $A_{\infty} = \{b \in \mathbb{R}: h^*(b) = \infty\}.$
+Suppose $|A_\infty| > 0.$
+Then, there exists a closed interval $[a, b] \subseteq \mathbb{R}$ such that $|A_\infty \cap [a, b]| > 0.$
+Note that $A_\infty$ is closed, so $A = A_\infty \cap [a, b]$ is closed and bounded.
+Let $a \in A$ and $c > 0.$
+
+:::
+:::: -->
