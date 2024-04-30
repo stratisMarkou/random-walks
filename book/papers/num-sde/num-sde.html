@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../../../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Numerical simulation of SDEs &#8212; Random Walks</title>
   
@@ -19,46 +18,43 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../../../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/proof.css?v=ca93fcec" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css?v=03c54da9" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
-  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/clipboard.min.js"></script>
-    <script src="../../../_static/copybutton.js"></script>
-    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../../_static/design-tabs.js"></script>
+    <script src="../../../_static/design-tabs.js?v=36754332"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-HP14V4DGEF"></script>
     <script>
                 window.dataLayer = window.dataLayer || [];
@@ -66,16 +62,20 @@
                 gtag('js', new Date());
                 gtag('config', 'G-HP14V4DGEF');
             </script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-HP14V4DGEF');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/papers/num-sde/num-sde';</script>
-    <link rel="shortcut icon" href="../../../_static/dicefav.png"/>
+    <link rel="icon" href="../../../_static/dicefav.png"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="prev" title="Stein variational gradient descent" href="../svgd/svgd.html" />
@@ -88,10 +88,9 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>
@@ -132,11 +131,14 @@ const thebe_selector_output = ".output, .cell_output"
 </form></div>
   </div>
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -151,6 +153,7 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../../../intro.html">
@@ -159,10 +162,22 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
+  
     <p class="title logo__title">Random Walks</p>
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -362,6 +377,7 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -371,6 +387,7 @@ document.write(`
   </button>
 `);
 </script>
+
 
 <script>
 document.write(`
@@ -421,10 +438,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="numerical-simulation-of-sdes">
-<h1>Numerical simulation of SDEs<a class="headerlink" href="#numerical-simulation-of-sdes" title="Permalink to this heading">#</a></h1>
+<h1>Numerical simulation of SDEs<a class="headerlink" href="#numerical-simulation-of-sdes" title="Link to this heading">#</a></h1>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <p><a class="github-button" href="https://github.com/stratisMarkou/random-walks" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" aria-label="Star stratisMarkou/random-walks on GitHub">Star</a>
 <a class="github-button" href="https://github.com/stratisMarkou/random-walks/issues" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-issue-opened" data-size="large" aria-label="Issue stratisMarkou/random-walks on GitHub">Issue</a>
@@ -434,13 +451,13 @@ document.write(`
 This paper is an accessible introduction to SDEs, which is centered around ten scripts.
 Below are reproductions of these scripts (excluding two on linear stability) and some supplementary notes.</p>
 <section id="why-stochastic-differential-equations">
-<h2>Why Stochastic differential equations<a class="headerlink" href="#why-stochastic-differential-equations" title="Permalink to this heading">#</a></h2>
+<h2>Why Stochastic differential equations<a class="headerlink" href="#why-stochastic-differential-equations" title="Link to this heading">#</a></h2>
 <p>We are often interested in modelling a system whose state takes values in a continuous range, and over a continuous time domain.
 Whereas ordinary differential equations (ODEs) describe variables which change according to a deterministic rule, SDEs describe variables whose change is governed partly by a deterministic component and partly by a stochastic component.
 SDEs are therefore an appropriate model for systems whose dynamics involve some true randomness, or some fine grained complexity which we cannot afford to or do not wish to model.</p>
 </section>
 <section id="the-wiener-process">
-<h2>The Wiener process<a class="headerlink" href="#the-wiener-process" title="Permalink to this heading">#</a></h2>
+<h2>The Wiener process<a class="headerlink" href="#the-wiener-process" title="Link to this heading">#</a></h2>
 <p>In order to define the stochastic component of the transition rule of a stochastic system, we must define an appropriate noise model. The Wiener process is a stochastic process that is commonly used for this purpose.</p>
 <div class="proof definition admonition" id="definition-0">
 <p class="admonition-title"><span class="caption-number">Definition 74 </span> (Wiener process)</p>
@@ -455,7 +472,7 @@ SDEs are therefore an appropriate model for systems whose dynamics involve some 
 </div><p>We can imagine the Wiener process as the path followed by a particle that experiences infinitely many, infinitesimal kicks. The size of these kicks, <span class="math notranslate nohighlight">\(W(t_2) - W(t_1)\)</span>, diminishes as the interval between them, <span class="math notranslate nohighlight">\(t_2 - t_1\)</span>, diminishes. The kicks are also independent from each other, so the future path of the particle is independent of its past path given its present position.</p>
 </section>
 <section id="sampling-from-a-wiener-process">
-<h2>Sampling from a Wiener process<a class="headerlink" href="#sampling-from-a-wiener-process" title="Permalink to this heading">#</a></h2>
+<h2>Sampling from a Wiener process<a class="headerlink" href="#sampling-from-a-wiener-process" title="Link to this heading">#</a></h2>
 <p>Before using the Wiener process to define an SDE, let’s look at the process itself. How can we draw a sample <span class="math notranslate nohighlight">\(W(t)\)</span> from it? Since a sample from the Wiener process takes a random value for every <span class="math notranslate nohighlight">\(t \in [0, \infty)\)</span>, the best we can do on a computer is to sample the process at a finite subset of time instances. We specify the times <span class="math notranslate nohighlight">\(t_1 &lt; t_2 &lt; ... &lt; t_N\)</span> at which to sample <span class="math notranslate nohighlight">\(W(t)\)</span>, and then use the definition of the Wiener process to see that we should sample as follows:</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
@@ -490,12 +507,12 @@ W(t_{n+1}) = W(t_{n}) + \Delta W(t_{n}), \text{ where } \Delta W(t_{n}) \sim \ma
 </div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/2c8ed282fb97ffa761bccdf90514f7ba81c06485ace979395abbe4b72d868925.svg" src="../../../_images/2c8ed282fb97ffa761bccdf90514f7ba81c06485ace979395abbe4b72d868925.svg" /></div>
+<img alt="../../../_images/ae3a95a3c8269c364958ca754061a1f177e0adcf5dc6fc3ac948d02575152e2c.svg" src="../../../_images/ae3a95a3c8269c364958ca754061a1f177e0adcf5dc6fc3ac948d02575152e2c.svg" /></div>
 </div>
 <p>So even though we can’t represent the entirety of the path, we can sample it to arbitrary precision.</p>
 </section>
 <section id="function-of-a-wiener-process">
-<h2>Function of a Wiener process<a class="headerlink" href="#function-of-a-wiener-process" title="Permalink to this heading">#</a></h2>
+<h2>Function of a Wiener process<a class="headerlink" href="#function-of-a-wiener-process" title="Link to this heading">#</a></h2>
 <p>Suppose we are interested in a stochastic process which is a function of a Wiener process, say</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
@@ -539,11 +556,11 @@ X(t) = \exp\left(t + \frac{1}{2}W(t)\right).
 </div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/221e3f0aec069f5414ad319c72b0676b73e5c36de00924b347e761a20b7245d7.svg" src="../../../_images/221e3f0aec069f5414ad319c72b0676b73e5c36de00924b347e761a20b7245d7.svg" /></div>
+<img alt="../../../_images/b754d420a631569004f932ad5b12cdb545071225b33ad82df92679d49ff76894.svg" src="../../../_images/b754d420a631569004f932ad5b12cdb545071225b33ad82df92679d49ff76894.svg" /></div>
 </div>
 </section>
 <section id="evaluating-a-stochastic-integral">
-<h2>Evaluating a stochastic integral<a class="headerlink" href="#evaluating-a-stochastic-integral" title="Permalink to this heading">#</a></h2>
+<h2>Evaluating a stochastic integral<a class="headerlink" href="#evaluating-a-stochastic-integral" title="Link to this heading">#</a></h2>
 <p>The next thing that we look at is the evaluation of a stochastic integral. Let’s consider the integral</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
@@ -623,7 +640,7 @@ Stratonovich approximation (exact): 1.917 (1.915)
 <p>The difference between the Ito and Stratonovich integrals does not vanish as <span class="math notranslate nohighlight">\(dt \to 0\)</span>, which you can verify by experimenting with <span class="math notranslate nohighlight">\(dt\)</span> above. The choice of definition has implications about the resulting integral (itself a stochastic process), which may be more or less appropriate for different applications. From here onwards we will work with the Ito integral exclusively, although much of the discussion is ammenable to the Stratonovich integral too.</p>
 </section>
 <section id="euler-maruyama-method">
-<h2>Euler-Maruyama method<a class="headerlink" href="#euler-maruyama-method" title="Permalink to this heading">#</a></h2>
+<h2>Euler-Maruyama method<a class="headerlink" href="#euler-maruyama-method" title="Link to this heading">#</a></h2>
 <p>The Euler-Maruyama method is the analoge of the Euler method for deterministic integrals, applied to the stochastic case.</p>
 <div class="proof definition admonition" id="definition-1">
 <p class="admonition-title"><span class="caption-number">Definition 75 </span> (Euler-Maruyama method)</p>
@@ -713,7 +730,7 @@ X_t = X_0 \exp \left[\Big(\lambda - \frac{1}{2} \mu^2\Big)~t + \mu W(t)\right],
 <p>We are can now run the EM method and compare it aginst the exact solution below.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/1797271346755fad1b990aef1685f3c73e629174c52508504cff2fb45e0cca94.svg" src="../../../_images/1797271346755fad1b990aef1685f3c73e629174c52508504cff2fb45e0cca94.svg" /></div>
+<img alt="../../../_images/9fcb782c9adc736274df7bb2e83d4932d6a8b22a127afd97c803882d715e2729.svg" src="../../../_images/9fcb782c9adc736274df7bb2e83d4932d6a8b22a127afd97c803882d715e2729.svg" /></div>
 </div>
 <p>We can change the accuracy of the solution by adjusting <span class="math notranslate nohighlight">\(N\)</span>. As a fun aside, what if we try out a different drift term? One nice choice is</p>
 <div class="math notranslate nohighlight">
@@ -739,11 +756,11 @@ g(x, t) &amp;= \mu x.\\
 </div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/bb8d80d0067a86117c3b4019048cd0846481953f8a12223e09358a6d2fc15b24.svg" src="../../../_images/bb8d80d0067a86117c3b4019048cd0846481953f8a12223e09358a6d2fc15b24.svg" /></div>
+<img alt="../../../_images/bc4623aae76767370411cf83d040ee23ec9466b402b85cabff332cef317f3849.svg" src="../../../_images/bc4623aae76767370411cf83d040ee23ec9466b402b85cabff332cef317f3849.svg" /></div>
 </div>
 </section>
 <section id="strong-and-weak-convergence">
-<h2>Strong and weak convergence<a class="headerlink" href="#strong-and-weak-convergence" title="Permalink to this heading">#</a></h2>
+<h2>Strong and weak convergence<a class="headerlink" href="#strong-and-weak-convergence" title="Link to this heading">#</a></h2>
 <p>Since the choice of the number of bins <span class="math notranslate nohighlight">\(N\)</span> of the discretisation affects the accuracy of our method, we are interested in how quickly the approximation converges to the exact solution as a function of <span class="math notranslate nohighlight">\(N\)</span>. To do so, we must first define <em>what convergence means</em> in the stochastic case, which leads us to two disctinct notions of convergence, the strong sence and the weak sense.</p>
 <div class="proof definition admonition" id="definition-2">
 <p class="admonition-title"><span class="caption-number">Definition 76 </span> (Strong convergence)</p>
@@ -768,11 +785,11 @@ g(x, t) &amp;= \mu x.\\
 We do not provide a proof for any of the above statements, but instead evaluate the rate of convergence empirically.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/1ccb429ca4010892b8b6c4eb5ac8f98ae5abf34e9e77692e4496845de6e4f265.svg" src="../../../_images/1ccb429ca4010892b8b6c4eb5ac8f98ae5abf34e9e77692e4496845de6e4f265.svg" /></div>
+<img alt="../../../_images/9bb4dbe691ae0657dc3312b8de87e5b3fea2fc1185d5ea16eb9f18d22a220d18.svg" src="../../../_images/9bb4dbe691ae0657dc3312b8de87e5b3fea2fc1185d5ea16eb9f18d22a220d18.svg" /></div>
 </div>
 </section>
 <section id="milstein-s-higher-order-method">
-<h2>Milstein’s higher order method<a class="headerlink" href="#milstein-s-higher-order-method" title="Permalink to this heading">#</a></h2>
+<h2>Milstein’s higher order method<a class="headerlink" href="#milstein-s-higher-order-method" title="Link to this heading">#</a></h2>
 <p>Just as higher order methods for ODEs exist for obtaining refined estimates of the solution, so do methods for SDEs, such as Milstein’s higher order method.</p>
 <div class="proof definition admonition" id="definition-4">
 <p class="admonition-title"><span class="caption-number">Definition 78 </span> (Milstein’s method)</p>
@@ -792,17 +809,17 @@ dX(t) = f(X(t))dt + g(X(t)) dW(t),
 <p>Let’s first use Milstein’s method to get a single solution of the Black-Scholes model, as we did for EM.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/29dfb774b9effc072a4e8fff3e2172b08a695d399995b59e9fbfb179a0c2c600.svg" src="../../../_images/29dfb774b9effc072a4e8fff3e2172b08a695d399995b59e9fbfb179a0c2c600.svg" /></div>
+<img alt="../../../_images/73660af0c8eaecb40a4dea11e69ded20350fdc56b1eafa278c69bd093cf78936.svg" src="../../../_images/73660af0c8eaecb40a4dea11e69ded20350fdc56b1eafa278c69bd093cf78936.svg" /></div>
 </div>
 <p>We can also look at the strong and weak rates of convergence for Milstein’s method.
 Milstein’s method achieves a strong convergence rate of <span class="math notranslate nohighlight">\(1\)</span> as oposed to the <span class="math notranslate nohighlight">\(1/2\)</span> strong rate of Euler Maruyama.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/ccf42558aea56d8929df70fe251c80955bcdf19356f3e5b7b90d28d184ab159b.svg" src="../../../_images/ccf42558aea56d8929df70fe251c80955bcdf19356f3e5b7b90d28d184ab159b.svg" /></div>
+<img alt="../../../_images/5116b669410cc2ce059413882d92489cd49fc4c7ab5595e8e7f15b2cf103662f.svg" src="../../../_images/5116b669410cc2ce059413882d92489cd49fc4c7ab5595e8e7f15b2cf103662f.svg" /></div>
 </div>
 </section>
 <section id="stochastic-chain-rule">
-<h2>Stochastic chain rule<a class="headerlink" href="#stochastic-chain-rule" title="Permalink to this heading">#</a></h2>
+<h2>Stochastic chain rule<a class="headerlink" href="#stochastic-chain-rule" title="Link to this heading">#</a></h2>
 <p>Suppose we want to evaluate a function <span class="math notranslate nohighlight">\(V(\cdot)\)</span> at various <span class="math notranslate nohighlight">\(X(t)\)</span>, i.e. <span class="math notranslate nohighlight">\(V(X(t))\)</span>. If <span class="math notranslate nohighlight">\(X(t)\)</span> were a deterministic quantity, such as the solution to an ODE, we could solve for <span class="math notranslate nohighlight">\(X(t)\)</span> and plug it into <span class="math notranslate nohighlight">\(V\)</span>. Alternatively, we could express the evolution of <span class="math notranslate nohighlight">\(V\)</span> itself as a differential equation using the chain rule:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
@@ -877,16 +894,18 @@ dY_t = \left(\frac{\partial V}{\partial X} U_t + \frac{1}{2}\frac{\partial^2 V}{
 </details><p>With this corrected rule, we can directly integrate the stochastic process for <span class="math notranslate nohighlight">\(V.\)</span></p>
 </section>
 <section id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
 <div class="docutils container" id="id3">
-<dl class="citation">
-<dt class="label" id="id16"><span class="brackets"><a class="fn-backref" href="#id1">Hig01</a></span></dt>
-<dd><p>D.J. Higham. An algorithmic introduction to numerical simulation of stochastic differential equations. <em>SIAM Review</em>, 43(3):525–546, 2001.</p>
-</dd>
-<dt class="label" id="id15"><span class="brackets"><a class="fn-backref" href="#id2">Oks92</a></span></dt>
-<dd><p>Bernt Oksendal. <em>Stochastic Differential Equations (3rd Ed.): An Introduction with Applications</em>. Springer-Verlag, Berlin, Heidelberg, 1992. ISBN 3387533354.</p>
-</dd>
-</dl>
+<div role="list" class="citation-list">
+<div class="citation" id="id16" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">Hig01</a><span class="fn-bracket">]</span></span>
+<p>D.J. Higham. An algorithmic introduction to numerical simulation of stochastic differential equations. <em>SIAM Review</em>, 43(3):525–546, 2001.</p>
+</div>
+<div class="citation" id="id15" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">Oks92</a><span class="fn-bracket">]</span></span>
+<p>Bernt Oksendal. <em>Stochastic Differential Equations (3rd Ed.): An Introduction with Applications</em>. Springer-Verlag, Berlin, Heidelberg, 1992. ISBN 3387533354.</p>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -919,7 +938,7 @@ dY_t = \left(\frac{\partial V}{\partial X} U_t + \frac{1}{2}\frac{\partial^2 V}{
               
               
                 <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                  
 <div class="prev-next-area">
     <a class="left-prev"
        href="../svgd/svgd.html"
@@ -938,6 +957,7 @@ dY_t = \left(\frac{\partial V}{\partial X} U_t + \frac{1}{2}\frac{\partial^2 V}{
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -976,9 +996,10 @@ By Stratis Markou
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -1002,8 +1023,8 @@ By Stratis Markou
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
-<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
+  <script src="../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>

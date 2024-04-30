@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../../../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Random Fourier features &#8212; Random Walks</title>
   
@@ -19,46 +18,43 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../../../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/proof.css?v=ca93fcec" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css?v=03c54da9" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
-  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/clipboard.min.js"></script>
-    <script src="../../../_static/copybutton.js"></script>
-    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../../_static/design-tabs.js"></script>
+    <script src="../../../_static/design-tabs.js?v=36754332"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-HP14V4DGEF"></script>
     <script>
                 window.dataLayer = window.dataLayer || [];
@@ -66,16 +62,20 @@
                 gtag('js', new Date());
                 gtag('config', 'G-HP14V4DGEF');
             </script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-HP14V4DGEF');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/papers/rff/rff';</script>
-    <link rel="shortcut icon" href="../../../_static/dicefav.png"/>
+    <link rel="icon" href="../../../_static/dicefav.png"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="Estimation by score matching" href="../score-matching/score-matching.html" />
@@ -89,10 +89,9 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>
@@ -133,11 +132,14 @@ const thebe_selector_output = ".output, .cell_output"
 </form></div>
   </div>
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -152,6 +154,7 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../../../intro.html">
@@ -160,10 +163,22 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
+  
     <p class="title logo__title">Random Walks</p>
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -363,6 +378,7 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -372,6 +388,7 @@ document.write(`
   </button>
 `);
 </script>
+
 
 <script>
 document.write(`
@@ -425,10 +442,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="random-fourier-features">
-<h1>Random Fourier features<a class="headerlink" href="#random-fourier-features" title="Permalink to this heading">#</a></h1>
+<h1>Random Fourier features<a class="headerlink" href="#random-fourier-features" title="Link to this heading">#</a></h1>
 <p><a class="github-button" href="https://github.com/stratisMarkou/random-walks" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="false" aria-label="Star stratisMarkou/random-walks on GitHub">Star</a>
 <a class="github-button" href="https://github.com/stratisMarkou/random-walks/issues" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-issue-opened" data-size="large" aria-label="Issue stratisMarkou/random-walks on GitHub">Issue</a>
 <a class="github-button" href="https://github.com/stratisMarkou/random-walks/subscription" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-eye" data-size="large" aria-label="Watch stratisMarkou/random-walks on GitHub">Watch</a>
@@ -442,7 +459,7 @@ The samples drawn to approximate this integral are called Random Fourier Feature
 The computational cost of Bayesian linear regression is <span class="math notranslate nohighlight">\(\mathcal{O}(\min\{N^3, M^3\})\)</span> where <span class="math notranslate nohighlight">\(M\)</span> is the number of regression features, so by using <span class="math notranslate nohighlight">\(M &lt; N\)</span> we can significantly reduce the cost of the algorithm.
 Further, one can prove that the covariance function induced by RFF closely approximates that of the exact GP with a relatively small number of samples. Lastly, RFF is rather easy to implement in practice.</p>
 <section id="the-rff-approximation">
-<h2>The RFF approximation<a class="headerlink" href="#the-rff-approximation" title="Permalink to this heading">#</a></h2>
+<h2>The RFF approximation<a class="headerlink" href="#the-rff-approximation" title="Link to this heading">#</a></h2>
 <p>The starting point for deriving RFF is Bochner’s theorem, which relates stationary kernels with probability distributions over frequencies via the Fourier transform.</p>
 <div class="proof theorem admonition" id="theorem-0">
 <p class="admonition-title"><span class="caption-number">Theorem 87 </span> (Bochner’s theorem)</p>
@@ -500,7 +517,7 @@ k(x - y) \approx \frac{1}{M} \sum_{m = 1}^M z_{\omega_m, \phi_m}(x) z_{\omega_m,
 <p>where we have used the notation <span class="math notranslate nohighlight">\(z(x) = \left[ z_{\omega_1, \phi_1}(x), ..., z_{\omega_M, \phi_M}(x) \right]^\top\)</span> and <span class="math notranslate nohighlight">\(\omega_m \sim p(\omega), \phi_m \sim \text{Uniform}[0, 2\pi]\)</span> are independent and identically distributed samples.</p>
 </section>
 </div><section id="rff-and-bayesian-regression">
-<h3>RFF and Bayesian regression<a class="headerlink" href="#rff-and-bayesian-regression" title="Permalink to this heading">#</a></h3>
+<h3>RFF and Bayesian regression<a class="headerlink" href="#rff-and-bayesian-regression" title="Link to this heading">#</a></h3>
 <p>Now we are in a position to interpret this expression in terms of a Bayesian regression model. Consider the regressor</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
@@ -509,7 +526,7 @@ f(x) = z^\top(x)w, \text{ where } w \sim \mathcal{N}(0, I),
 <p>where <span class="math notranslate nohighlight">\(z(x)\)</span> is as defined above. This is a Bayesian regression model which uses Random Fourier Features. Therefore we can approximate the exact GP regressor by a Bayesian linear regressor with Random Fourier Features.</p>
 </section>
 <section id="rates-of-convergence">
-<h3>Rates of convergence<a class="headerlink" href="#rates-of-convergence" title="Permalink to this heading">#</a></h3>
+<h3>Rates of convergence<a class="headerlink" href="#rates-of-convergence" title="Link to this heading">#</a></h3>
 <p>Now there remains the question of how large the error of the RFF estimator is. In other words, how closely does RFF estimate the exact kernel <span class="math notranslate nohighlight">\(k\)</span>? Since <span class="math notranslate nohighlight">\(-\sqrt{2} \leq z_{\omega, \phi} \leq \sqrt{2}\)</span>, we can use Hoeffding’s inequality<span id="id2">[<a class="reference internal" href="#id10" title="David Grimmett, Geoffrey Stirzaker. Probability and random processes. Oxford university press, 2020.">Grimmett, 2020</a>]</span> to obtain the following high-probability bound on the absolute error on our estimate of <span class="math notranslate nohighlight">\(k\)</span>.</p>
 <div class="proof lemma admonition" id="lemma-2">
 <p class="admonition-title"><span class="caption-number">Lemma 7 </span> (Hoeffding for RFF)</p>
@@ -535,7 +552,7 @@ p~\Bigg(\sup_{x, y \in \mathcal{M}}|z^\top(x)z(y) - k(x, y)| \geq \epsilon \Bigg
 </div></section>
 </section>
 <section id="implementation">
-<h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this heading">#</a></h2>
+<h2>Implementation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h2>
 <p>We now turn to an implementation of RFF.
 We consider approximating the same three kernels which were presented in the RFF paper, namely the EQ (or Gaussian) kernel, the Laplace kernel and the Cauchy kernel.</p>
 <div class="cell docutils container">
@@ -589,7 +606,7 @@ We consider approximating the same three kernels which were presented in the RFF
 </div>
 </div>
 <section id="sampling-from-the-prior">
-<h3>Sampling from the prior<a class="headerlink" href="#sampling-from-the-prior" title="Permalink to this heading">#</a></h3>
+<h3>Sampling from the prior<a class="headerlink" href="#sampling-from-the-prior" title="Link to this heading">#</a></h3>
 <p>We can now visualise functions sampled from the prior induced by RFF.
 Each function corresponds to a different sample set <span class="math notranslate nohighlight">\(\{(\omega_m, \phi_m)\}_{m = 1}^M\)</span> as well as a different weight vector <span class="math notranslate nohighlight">\(w\)</span>.
 The covariance function plots correspond to the RFF estimator of <span class="math notranslate nohighlight">\(k\)</span>, using a single sample of RFF parameters.</p>
@@ -625,17 +642,17 @@ The covariance function plots correspond to the RFF estimator of <span class="ma
 </div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/59dd7db9479748fbeb14212ef8202b0f319d95885cc60af672585d0491bfa309.svg" src="../../../_images/59dd7db9479748fbeb14212ef8202b0f319d95885cc60af672585d0491bfa309.svg" /></div>
+<img alt="../../../_images/6133d74bd4feec18367aeacf6e6f120ff940e53e1d024f8d1a55218d78c5d119.svg" src="../../../_images/6133d74bd4feec18367aeacf6e6f120ff940e53e1d024f8d1a55218d78c5d119.svg" /></div>
 </div>
 </section>
 <section id="regression-with-rff-features">
-<h3>Regression with RFF features<a class="headerlink" href="#regression-with-rff-features" title="Permalink to this heading">#</a></h3>
+<h3>Regression with RFF features<a class="headerlink" href="#regression-with-rff-features" title="Link to this heading">#</a></h3>
 <p>First we generate a toy dataset from a noisy sinusoid.
 We place a gap in the data to observe the quality of the uncertainty estimates of the RFF regressor.
 We purposefully use a large number of datapoints, <span class="math notranslate nohighlight">\(N = 5000,\)</span> which would be quite slow to process with an exact GP model.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/55b57407bf62e81b290fde85f49eabc285831da1c469fc151ee587d52a47cf0c.svg" src="../../../_images/55b57407bf62e81b290fde85f49eabc285831da1c469fc151ee587d52a47cf0c.svg" /></div>
+<img alt="../../../_images/78a0ec16c923ce6f7791c8e27de4390e5c053347f696e9685a4bbcdf69846593.svg" src="../../../_images/78a0ec16c923ce6f7791c8e27de4390e5c053347f696e9685a4bbcdf69846593.svg" /></div>
 </div>
 <p>The function <code class="docutils literal notranslate"><span class="pre">rff_posterior</span></code> below implements Bayesian linear regression with randomly sampled Fourier features.
 For more details on Bayesian linear regression see Chapter 3 of Bishop’s PRML book.<span id="id4">[<a class="reference internal" href="#id12" title="Christopher M Bishop. Pattern recognition and machine learning. springer, 2006.">Bishop, 2006</a>]</span></p>
@@ -732,8 +749,8 @@ The <code class="docutils literal notranslate"><span class="pre">covariance</spa
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Timing exact GP regression:
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 10.8 s, sys: 1.2 s, total: 12 s
-Wall time: 4.11 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 38.2 s, sys: 8.46 s, total: 46.7 s
+Wall time: 7.59 s
 </pre></div>
 </div>
 </div>
@@ -741,57 +758,64 @@ Wall time: 4.11 s
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Timing exact approximate RFF regression:
-
-CPU times: user 202 ms, sys: 105 ms, total: 308 ms
-Wall time: 78.7 ms
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 2.28 s, sys: 1.34 s, total: 3.62 s
+Wall time: 605 ms
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/6ea44423180a290649f9077f103717c39cdd6d2c88f2d5bebc9dbf95b6cd6918.svg" src="../../../_images/6ea44423180a290649f9077f103717c39cdd6d2c88f2d5bebc9dbf95b6cd6918.svg" /></div>
+<img alt="../../../_images/43468e55d2719f347113f346979df8036b4a036ce16133877a57f148928499e5.svg" src="../../../_images/43468e55d2719f347113f346979df8036b4a036ce16133877a57f148928499e5.svg" /></div>
 </div>
 <p>RFF has produced sensible regressors in each case, significantly faster than exact GP regression. The approximate posteriors roughly match the exact posteriors, while being significantly quicker to compute.</p>
 </section>
 <section id="variance-starvation">
-<h3>Variance starvation<a class="headerlink" href="#variance-starvation" title="Permalink to this heading">#</a></h3>
+<h3>Variance starvation<a class="headerlink" href="#variance-starvation" title="Link to this heading">#</a></h3>
 <p>One issue with the RFF is that - like all other finte basis function models - is that it has a limited amount of degrees of freedom. Therefore, in some situations the datapoints may be such that they pin down the RFF model and significantly reducing the variance of the approximate regressor. To illustrate this, we sample a slightly different dataset, with a smaller gap in between the two data clumps.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/5f7d86f792b91e8bb21c7c15594e6da669b251375cb4cefe3b673912eaf19c3c.svg" src="../../../_images/5f7d86f792b91e8bb21c7c15594e6da669b251375cb4cefe3b673912eaf19c3c.svg" /></div>
+<img alt="../../../_images/ee063a053d2de4145cb939b0abea99710fdf9f700386056cb17f8bfafbe70b4f.svg" src="../../../_images/ee063a053d2de4145cb939b0abea99710fdf9f700386056cb17f8bfafbe70b4f.svg" /></div>
 </div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/0d12a93b195058bc3b36ca70689970a2480a162fbdea91fc0457288013bc5385.svg" src="../../../_images/0d12a93b195058bc3b36ca70689970a2480a162fbdea91fc0457288013bc5385.svg" /></div>
+<img alt="../../../_images/9b7adfe685282b85524087998eb7b50ec47d76618db08e126c8cbbe6153d0f74.svg" src="../../../_images/9b7adfe685282b85524087998eb7b50ec47d76618db08e126c8cbbe6153d0f74.svg" /></div>
 </div>
 <p>The variance of the approximate estimator in between the data is (in some cases), signiticantly smaller than that of the exact posterior. So the speedup that the RFF gives does not come without a cost. In certain cases, we can end up with approximate posteriors which are significantly overfitted. This can be alleviated by increasing the number of RFF features. However this increases the computational cost of performing regression and may defeat the purpose of using RFF features in the first place.</p>
 </section>
 </section>
 <section id="conclusion">
-<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
 <p>Random Fourier Features are a cheap and efficient way to sample from a Gaussian Process (GP) prior. By using a finite number of features <span class="math notranslate nohighlight">\(M\)</span>, smaller than the number of datapoints <span class="math notranslate nohighlight">\(N\)</span>, allows us to perform approximate GP regression, reducing the computational complexity from <span class="math notranslate nohighlight">\(\mathcal{O}(N^3)\)</span> to <span class="math notranslate nohighlight">\(\mathcal{O}(NM^2)\)</span>, where <span class="math notranslate nohighlight">\(M\)</span> is the number of random features. Some interesting recent work<span id="id6">[<a class="reference internal" href="#id13" title="James T. Wilson, Viacheslav Borovitskiy, Alexander Terenin, Peter Mostowsky, and Marc Peter Deisenroth. Efficiently sampling functions from gaussian process posteriors. 2020.">Wilson <em>et al.</em>, 2020</a>]</span> combines RFF with sparse GP approximations to produce approximate GP regressors which are both cheap to train as well as to sample form their posteriors.</p>
 </section>
 <section id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
 <div class="docutils container" id="id7">
-<dl class="citation">
-<dt class="label" id="id12"><span class="brackets"><a class="fn-backref" href="#id4">Bis06</a></span></dt>
-<dd><p>Christopher M Bishop. <em>Pattern recognition and machine learning</em>. springer, 2006.</p>
-</dd>
-<dt class="label" id="id10"><span class="brackets"><a class="fn-backref" href="#id2">Gri20</a></span></dt>
-<dd><p>David Grimmett, Geoffrey Stirzaker. <em>Probability and random processes</em>. Oxford university press, 2020.</p>
-</dd>
-<dt class="label" id="id11"><span class="brackets">RR+07</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id3">2</a>)</span></dt>
-<dd><p>Ali Rahimi, Benjamin Recht, and others. Random features for large-scale kernel machines. In <em>NIPS</em>. 2007.</p>
-</dd>
-<dt class="label" id="id14"><span class="brackets"><a class="fn-backref" href="#id5">Ras03</a></span></dt>
-<dd><p>Carl Edward Rasmussen. Gaussian processes in machine learning. In <em>Summer school on machine learning</em>, 63–71. Springer, 2003.</p>
-</dd>
-<dt class="label" id="id13"><span class="brackets"><a class="fn-backref" href="#id6">WBT+20</a></span></dt>
-<dd><p>James T. Wilson, Viacheslav Borovitskiy, Alexander Terenin, Peter Mostowsky, and Marc Peter Deisenroth. Efficiently sampling functions from gaussian process posteriors. 2020.</p>
-</dd>
-</dl>
+<div role="list" class="citation-list">
+<div class="citation" id="id12" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">Bis06</a><span class="fn-bracket">]</span></span>
+<p>Christopher M Bishop. <em>Pattern recognition and machine learning</em>. springer, 2006.</p>
+</div>
+<div class="citation" id="id10" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">Gri20</a><span class="fn-bracket">]</span></span>
+<p>David Grimmett, Geoffrey Stirzaker. <em>Probability and random processes</em>. Oxford university press, 2020.</p>
+</div>
+<div class="citation" id="id11" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>RR+07<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id3">2</a>)</span>
+<p>Ali Rahimi, Benjamin Recht, and others. Random features for large-scale kernel machines. In <em>NIPS</em>. 2007.</p>
+</div>
+<div class="citation" id="id14" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">Ras03</a><span class="fn-bracket">]</span></span>
+<p>Carl Edward Rasmussen. Gaussian processes in machine learning. In <em>Summer school on machine learning</em>, 63–71. Springer, 2003.</p>
+</div>
+<div class="citation" id="id13" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">WBT+20</a><span class="fn-bracket">]</span></span>
+<p>James T. Wilson, Viacheslav Borovitskiy, Alexander Terenin, Peter Mostowsky, and Marc Peter Deisenroth. Efficiently sampling functions from gaussian process posteriors. 2020.</p>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -824,7 +848,7 @@ Wall time: 78.7 ms
               
               
                 <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                  
 <div class="prev-next-area">
     <a class="left-prev"
        href="../ais/ais.html"
@@ -852,6 +876,7 @@ Wall time: 78.7 ms
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -893,9 +918,10 @@ By Stratis Markou
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -919,8 +945,8 @@ By Stratis Markou
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
-<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
+  <script src="../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>

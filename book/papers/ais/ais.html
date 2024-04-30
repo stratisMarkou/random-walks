@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../../../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Annealed importance sampling &#8212; Random Walks</title>
   
@@ -19,46 +18,43 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../../../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/proof.css?v=ca93fcec" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css?v=03c54da9" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
-  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/clipboard.min.js"></script>
-    <script src="../../../_static/copybutton.js"></script>
-    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../../_static/design-tabs.js"></script>
+    <script src="../../../_static/design-tabs.js?v=36754332"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-HP14V4DGEF"></script>
     <script>
                 window.dataLayer = window.dataLayer || [];
@@ -66,16 +62,20 @@
                 gtag('js', new Date());
                 gtag('config', 'G-HP14V4DGEF');
             </script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-HP14V4DGEF');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/papers/ais/ais';</script>
-    <link rel="shortcut icon" href="../../../_static/dicefav.png"/>
+    <link rel="icon" href="../../../_static/dicefav.png"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="Random Fourier features" href="../rff/rff.html" />
@@ -89,10 +89,9 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>
@@ -133,11 +132,14 @@ const thebe_selector_output = ".output, .cell_output"
 </form></div>
   </div>
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -152,6 +154,7 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../../../intro.html">
@@ -160,10 +163,22 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
+  
     <p class="title logo__title">Random Walks</p>
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -363,6 +378,7 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -372,6 +388,7 @@ document.write(`
   </button>
 `);
 </script>
+
 
 <script>
 document.write(`
@@ -421,10 +438,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="annealed-importance-sampling">
-<h1>Annealed importance sampling<a class="headerlink" href="#annealed-importance-sampling" title="Permalink to this heading">#</a></h1>
+<h1>Annealed importance sampling<a class="headerlink" href="#annealed-importance-sampling" title="Link to this heading">#</a></h1>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <p><a class="github-button" href="https://github.com/stratisMarkou/random-walks" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" aria-label="Star stratisMarkou/random-walks on GitHub" style="float: right;">Star</a>
 <a class="github-button" href="https://github.com/stratisMarkou/random-walks/issues" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-issue-opened" data-size="large" aria-label="Issue stratisMarkou/random-walks on GitHub">Issue</a>
@@ -448,7 +465,7 @@ In this way, importance sampling yields an unbiased estimate of downstream integ
 <p>Unfortunately, if <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(p\)</span> are very dissimilar, the importance sampling estimator has a large random error because, as we will see, the variance in the random weights is large.
 Annealed importance sampling<span id="id1">[<a class="reference internal" href="#id12" title="Radford M Neal. Annealed importance sampling. Statistics and computing, 11:125–139, 2001.">Neal, 2001</a>]</span> is a method which circumvents this issue by using an annealing procedure which produces samples with more equally distributed importance weights while remaining unbiased, and can greatly reduce the variance of the resulting estimates.</p>
 <section id="importance-sampling">
-<h2>Importance sampling<a class="headerlink" href="#importance-sampling" title="Permalink to this heading">#</a></h2>
+<h2>Importance sampling<a class="headerlink" href="#importance-sampling" title="Link to this heading">#</a></h2>
 <p>Suppose we wish to evaluate an integral of the form</p>
 <div class="math notranslate nohighlight">
 \[\begin{equation}
@@ -508,7 +525,7 @@ q(x) = \mathcal{N}(x; \mu_q, \sigma_q^2).
 \end{equation}\]</div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/8021c49cff716e577cfaaad21e72fecf5c8c0af4d5becfaf4e57fd445e072896.svg" src="../../../_images/8021c49cff716e577cfaaad21e72fecf5c8c0af4d5becfaf4e57fd445e072896.svg" /></div>
+<img alt="../../../_images/61b4bcfc457d58f160300ee7b72d808723f0b23b133d0b4be1b69c2ddd02b0e2.svg" src="../../../_images/61b4bcfc457d58f160300ee7b72d808723f0b23b133d0b4be1b69c2ddd02b0e2.svg" /></div>
 </div>
 <p>Using importance sampling, we can obtain an estimate of this intergral.</p>
 <div class="cell tag_remove-input docutils container">
@@ -543,7 +560,7 @@ The point of this additional Monte Carlo estimate is to give us an idea of how m
 To see why, this occurs, let’s plot the raw samples drawn from <span class="math notranslate nohighlight">\(q\)</span> (in green) as well as the samples weighted according to their importance weights (in blue).</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/1c831da7a37ef291e0e3b97956960c678f23a3d7e2d1c321f76977536b5b185d.svg" src="../../../_images/1c831da7a37ef291e0e3b97956960c678f23a3d7e2d1c321f76977536b5b185d.svg" /></div>
+<img alt="../../../_images/22e61fb5414df871a0c287748ff9f0c3983a3ab0f86fee612f9f0c4f55584967.svg" src="../../../_images/22e61fb5414df871a0c287748ff9f0c3983a3ab0f86fee612f9f0c4f55584967.svg" /></div>
 </div>
 <p>First off, this plot illustrates how importance sampling works.
 Although <span class="math notranslate nohighlight">\(q\)</span> proposes many samples in the middle, these are down-weighted by the importance weights, since <span class="math notranslate nohighlight">\(p\)</span> has small density there.
@@ -555,7 +572,7 @@ Since this sample has a large importance weight, it greatly affects the overall 
 Looking at a histogram of the importance weights we see that most weights are very small, and it’s only a few large weights which dominate the value of the integral (note the <span class="math notranslate nohighlight">\(x\)</span>-axis has a log-scale).</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/def4f6e51721321d56be77082b3ec947a381839129c4afe31d6d92275c54fcb0.svg" src="../../../_images/def4f6e51721321d56be77082b3ec947a381839129c4afe31d6d92275c54fcb0.svg" /></div>
+<img alt="../../../_images/b9923449337d83ac47f4e490788b83adf5d529a9f096ec628e3ca0d39a0d884c.svg" src="../../../_images/b9923449337d83ac47f4e490788b83adf5d529a9f096ec628e3ca0d39a0d884c.svg" /></div>
 </div>
 <p>Going a little further, note that the expectation of the value of an importance weight is always equal to one since</p>
 <div class="math notranslate nohighlight">
@@ -618,7 +635,7 @@ To achieve this, instead of using samples from <span class="math notranslate noh
 This reduces the variability in the importance samples and thus the random error in the importance sampling estimator.</p>
 </section>
 <section id="importance-weighted-mcmc">
-<h2>Importance-weighted MCMC<a class="headerlink" href="#importance-weighted-mcmc" title="Permalink to this heading">#</a></h2>
+<h2>Importance-weighted MCMC<a class="headerlink" href="#importance-weighted-mcmc" title="Link to this heading">#</a></h2>
 <p>Motivated by the above intuition, given some initial samples from <span class="math notranslate nohighlight">\(q\)</span>, we want to transform them in a way such that the distribution of the transformed samples is as close as possible to <span class="math notranslate nohighlight">\(p\)</span>.
 This would reduce the variance of the importance weights and thus the error in our estimator.
 Markov Chain Monte Carlo (MCMC) is a standard class of methods geared towards solving this type of problem: an MCMC algorithm begins from an arbitrarily initialised distribution, and proceeds to transform this distribution acording to a randomised rule, such that the resulting distribution is closer to a target distribution.
@@ -704,7 +721,7 @@ w_n = \frac{\tilde{h}(x_{n, 0}, \dots, x_{n, K})}{h(x_{n, 0}, \dots, x_{n, K})} 
 However, unfortunately these importance weight are exactly the same as the importance weights of the standard importance sampling estimator, so this algorithm does not improve on the variance of the standard estimator at all! However, it is possible to modify this algorithm to obtain better importance weights, while still taking advantage of the cancellation of the transition kernels.</p>
 </section>
 <section id="id2">
-<h2>Annealed Importance Sampling<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<h2>Annealed Importance Sampling<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <p>Given a sequnece <span class="math notranslate nohighlight">\(0 = \beta_0 \leq \dots \leq \beta_K = 1\)</span>, AIS introduces a sequence of distributions with densities</p>
 <div class="math notranslate nohighlight">
 \[\begin{equation}
@@ -736,7 +753,7 @@ w = \frac{\pi_1(x_1)}{\pi_0(x_1)} \dots \frac{\pi_K(x_K)}{\pi_{K-1}(x_K)}.
 This is because the augmented sample <span class="math notranslate nohighlight">\((x_{n, 0}, \dots, x_{n, K})\)</span> is distributed acccording to <span class="math notranslate nohighlight">\(h\)</span> whose marginal, after integrating out all but the last variable, is <span class="math notranslate nohighlight">\(q\)</span>.
 Let’s implement this and see how it performs.</p>
 <section id="implementation">
-<h3>Implementation<a class="headerlink" href="#implementation" title="Permalink to this heading">#</a></h3>
+<h3>Implementation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h3>
 <p>To implement this procedure, we need to specify the transition kernels, and the sequence of annealing parameters <span class="math notranslate nohighlight">\(\beta_k\)</span>.
 For the transition kernel, we will use a standard <a class="reference external" href="https://en.wikipedia.org/wiki/Metropolis-Hastings_algorithm">Metropolis-Hastings</a> transition kernel, which itself uses a Gaussian distribution as its proposal distribution (not to be confused with the initial proposal distribution <span class="math notranslate nohighlight">\(p\)</span>).
 We’ll leave the <span class="math notranslate nohighlight">\(\beta_k\)</span> to be specified by the user.</p>
@@ -879,7 +896,7 @@ We’ll leave the <span class="math notranslate nohighlight">\(\beta_k\)</span> 
 </div>
 </section>
 <section id="toy-experiment">
-<h3>Toy experiment<a class="headerlink" href="#toy-experiment" title="Permalink to this heading">#</a></h3>
+<h3>Toy experiment<a class="headerlink" href="#toy-experiment" title="Link to this heading">#</a></h3>
 <p>Now we have an AIS sampler which can be used with arbitrary annealing parameters <span class="math notranslate nohighlight">\(\beta_k\)</span>.
 For this example, let’s set</p>
 <div class="math notranslate nohighlight">
@@ -997,14 +1014,14 @@ This gives <span class="math notranslate nohighlight">\(\beta_k\)</span> which g
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../../../_images/fa972823924f441dfad4b427f22419594216aafe7465c0e0fd332ff7242ba241.svg" src="../../../_images/fa972823924f441dfad4b427f22419594216aafe7465c0e0fd332ff7242ba241.svg" /></div>
+<img alt="../../../_images/c6ed21f5373ab588271bd37bfd3faa43332da6c2e07fb10d33588f913c9dd0fb.svg" src="../../../_images/c6ed21f5373ab588271bd37bfd3faa43332da6c2e07fb10d33588f913c9dd0fb.svg" /></div>
 </div>
 <p>We observe that the distribution of the AIS samples (purple bars) is similar to the target distribution <span class="math notranslate nohighlight">\(p\)</span> (blue line).
 Further, weighing the AIS samples by their importance weights (blue bars) does not appear to significantly change the resulting distribution.
 This would suggest that moost of the importance weights are close to <span class="math notranslate nohighlight">\(1\)</span>, which we can verify by plotting them on a histogram.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/7c93bcc4e7e2567df2159ef2c9e0d686e7864df3ba3061731637d4d62279c0cd.svg" src="../../../_images/7c93bcc4e7e2567df2159ef2c9e0d686e7864df3ba3061731637d4d62279c0cd.svg" /></div>
+<img alt="../../../_images/43285dbf501f8f3f5ab1c8c5c8008a8a59e222c066ba4c6d2e960fa6a6a52d9a.svg" src="../../../_images/43285dbf501f8f3f5ab1c8c5c8008a8a59e222c066ba4c6d2e960fa6a6a52d9a.svg" /></div>
 </div>
 <p>As expected, most of the AIS importance weights are close to <span class="math notranslate nohighlight">\(1\)</span>.
 Further, they have a clearly smaller variance than standard importance sampling.
@@ -1012,7 +1029,7 @@ This has a significant impact on the variance of AIS estimates.
 In the running example integral we’ve been using thus far, AIS reduces the variance of our Monte Carlo estimate by a factor of <span class="math notranslate nohighlight">\(\approx 6\)</span> over standard importance sampling, and gets close to the variance of an estimator that uses direct i.i.d. samples from <span class="math notranslate nohighlight">\(p\)</span>:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Annealed Importance Sampling over 100 trials I = 0.30 +/- 2.218.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Annealed Importance Sampling over 100 trials I = 0.02 +/- 2.198.
 </pre></div>
 </div>
 </div>
@@ -1020,7 +1037,7 @@ In the running example integral we’ve been using thus far, AIS reduces the var
 </section>
 </section>
 <section id="conclusion">
-<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
 <p>In importance sampling, using a proposal distribution that is significantly different from the target distribution results in a large variance of the resulting importance weights.
 Large variance in the importance weights typically induces large variance in downstream estimates obtained using these weights.
 AIS is a method which helps address this issue.
@@ -1029,13 +1046,15 @@ In this way, AIS typically reduces the variance in the importance weights, which
 For more details, Radford Neal’s original paper introducing AIS<span id="id3">[<a class="reference internal" href="#id12" title="Radford M Neal. Annealed importance sampling. Statistics and computing, 11:125–139, 2001.">Neal, 2001</a>]</span> is a classic worth reading.</p>
 </section>
 <section id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
 <div class="docutils container" id="id4">
-<dl class="citation">
-<dt class="label" id="id12"><span class="brackets">Nea01</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id3">2</a>)</span></dt>
-<dd><p>Radford M Neal. Annealed importance sampling. <em>Statistics and computing</em>, 11:125–139, 2001.</p>
-</dd>
-</dl>
+<div role="list" class="citation-list">
+<div class="citation" id="id12" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Nea01<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id3">2</a>)</span>
+<p>Radford M Neal. Annealed importance sampling. <em>Statistics and computing</em>, 11:125–139, 2001.</p>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -1068,7 +1087,7 @@ For more details, Radford Neal’s original paper introducing AIS<span id="id3">
               
               
                 <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                  
 <div class="prev-next-area">
     <a class="left-prev"
        href="../why-covariances/why-covariances.html"
@@ -1096,6 +1115,7 @@ For more details, Radford Neal’s original paper introducing AIS<span id="id3">
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -1133,9 +1153,10 @@ By Stratis Markou
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -1159,8 +1180,8 @@ By Stratis Markou
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
-<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
+  <script src="../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>

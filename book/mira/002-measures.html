@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Measures &#8212; Random Walks</title>
   
@@ -19,46 +18,43 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom_style.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css?v=ca93fcec" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom_style.css?v=03c54da9" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
-  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/clipboard.min.js"></script>
-    <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../_static/design-tabs.js"></script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-HP14V4DGEF"></script>
     <script>
                 window.dataLayer = window.dataLayer || [];
@@ -66,16 +62,20 @@
                 gtag('js', new Date());
                 gtag('config', 'G-HP14V4DGEF');
             </script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-HP14V4DGEF');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/mira/002-measures';</script>
-    <link rel="shortcut icon" href="../../_static/dicefav.png"/>
+    <link rel="icon" href="../../_static/dicefav.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Exercises" href="000-exercises.html" />
@@ -89,10 +89,9 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>
@@ -133,11 +132,14 @@ const thebe_selector_output = ".output, .cell_output"
 </form></div>
   </div>
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -152,6 +154,7 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../../intro.html">
@@ -160,10 +163,22 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
+  
     <p class="title logo__title">Random Walks</p>
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -363,6 +378,7 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -372,6 +388,7 @@ document.write(`
   </button>
 `);
 </script>
+
 
 <script>
 document.write(`
@@ -428,10 +445,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="measures">
-<h1>Measures<a class="headerlink" href="#measures" title="Permalink to this heading">#</a></h1>
+<h1>Measures<a class="headerlink" href="#measures" title="Link to this heading">#</a></h1>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <p><a class="github-button" href="https://github.com/stratisMarkou/random-walks" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" aria-label="Star stratisMarkou/random-walks on GitHub">Star</a>
 <a class="github-button" href="https://github.com/stratisMarkou/random-walks/issues" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-issue-opened" data-size="large" aria-label="Issue stratisMarkou/random-walks on GitHub">Issue</a>
@@ -448,12 +465,12 @@ We will see that this is not a fundamental limitation of our definition of the o
 This leads us to the definitions of <span class="math notranslate nohighlight">\(\sigma\)</span>-algebras, measurable sets, and measurable functions.
 We then introduce measures, and specifically the Lebesgue measure, which we will use later to define integration.</p>
 <section id="outer-measure">
-<h2>Outer measure<a class="headerlink" href="#outer-measure" title="Permalink to this heading">#</a></h2>
+<h2>Outer measure<a class="headerlink" href="#outer-measure" title="Link to this heading">#</a></h2>
 <p>First, we define and study the outer measure, which is a notion of length on the real line.
 We will prove a few good properties that one would hope to hold for a notion of length on the real line.
 Then, we will show that the outer measure is not additive.</p>
 <section id="definition-of-the-outer-measure">
-<h3>Definition of the outer measure<a class="headerlink" href="#definition-of-the-outer-measure" title="Permalink to this heading">#</a></h3>
+<h3>Definition of the outer measure<a class="headerlink" href="#definition-of-the-outer-measure" title="Link to this heading">#</a></h3>
 <p>To define the outer measure, we first need a definition of the length of an open interval.</p>
 <div class="proof definition admonition" id="definition-0">
 <p class="admonition-title"><span class="caption-number">Definition 55 </span> (Length of an open interval)</p>
@@ -479,7 +496,7 @@ b - a &amp; \text{if } I = (a, b) \text{ for some } a, b \in \mathbb{R} \text{ w
 </section>
 </div></section>
 <section id="good-properties">
-<h3>Good properties<a class="headerlink" href="#good-properties" title="Permalink to this heading">#</a></h3>
+<h3>Good properties<a class="headerlink" href="#good-properties" title="Link to this heading">#</a></h3>
 <p>The outer measure has a number of good properties.
 First, the outer measure of countable subsets of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> is zero.</p>
 <div class="proof theorem admonition" id="theorem-2">
@@ -599,7 +616,7 @@ By the definition of infimum, for each <span class="math notranslate nohighlight
 </div>
 </details></section>
 <section id="heine-borel-theorem">
-<h3>Heine-Borel theorem<a class="headerlink" href="#heine-borel-theorem" title="Permalink to this heading">#</a></h3>
+<h3>Heine-Borel theorem<a class="headerlink" href="#heine-borel-theorem" title="Link to this heading">#</a></h3>
 <p>Another important property that we want to show for the outer measure is that its value on a closed (rather than open) value on a bounded interval is equal to the difference between the endpoints of the interval, that is <span class="math notranslate nohighlight">\(|[a, b]| = b - a\)</span> for <span class="math notranslate nohighlight">\(a, b \in \mathbb{R}\)</span> with <span class="math notranslate nohighlight">\(a &lt; b.\)</span>
 To show this, we will use the Heine-Borel theorem, which is a theorem of independent interest beyond measure theory.
 The Heine-Borel theorem is a statement about open covers, an idea which we now define.</p>
@@ -672,7 +689,7 @@ Proof: Outer measure of a closed interval<div class="sd-summary-down docutils">
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">We will show the equality above via two inequalities, namely</p>
 <div class="math notranslate nohighlight" id="equation-mira-eq-outer-measure-of-closed-interval">
-<span class="eqno">(1)<a class="headerlink" href="#equation-mira-eq-outer-measure-of-closed-interval" title="Permalink to this equation">#</a></span>\[|[a, b]| \leq b - a   \text{ and }  b - a \leq |[a, b]|.\]</div>
+<span class="eqno">(1)<a class="headerlink" href="#equation-mira-eq-outer-measure-of-closed-interval" title="Link to this equation">#</a></span>\[|[a, b]| \leq b - a   \text{ and }  b - a \leq |[a, b]|.\]</div>
 <p class="sd-card-text"><strong>First inequality:</strong>
 For the first inequality, consider that <span class="math notranslate nohighlight">\([a, b] \subseteq (a - \epsilon, b + \epsilon)\)</span> for all <span class="math notranslate nohighlight">\(\epsilon &gt; 0,\)</span> so using the <a class="reference internal" href="#mira:thm:outer-measure-preserves-order">order preserving property of the outer measure</a>, we have</p>
 <div class="math notranslate nohighlight">
@@ -685,7 +702,7 @@ Then <span class="math notranslate nohighlight">\(I_1, I_2, \ldots\)</span> is a
 \[[a, b] \subseteq I_1 \cup \cdots \cup I_n.\]</div>
 <p class="sd-card-text">We will prove by induction that</p>
 <div class="math notranslate nohighlight" id="equation-mira-eq-outer-measure-of-closed-interval-induction">
-<span class="eqno">(2)<a class="headerlink" href="#equation-mira-eq-outer-measure-of-closed-interval-induction" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(2)<a class="headerlink" href="#equation-mira-eq-outer-measure-of-closed-interval-induction" title="Link to this equation">#</a></span>\[
 \sum_{j=1}^n \ell(I_j) \geq b - a,
 \]</div>
 <p class="sd-card-text">which will yield the result after taking the infimum over all sequences of open intervals whose union contains <span class="math notranslate nohighlight">\([a, b].\)</span>
@@ -731,7 +748,7 @@ Since <code class="xref prf prf-ref docutils literal notranslate"><span class="p
 </div>
 </details></section>
 <section id="nonadditivity-of-the-outer-measure">
-<h3>Nonadditivity of the outer measure<a class="headerlink" href="#nonadditivity-of-the-outer-measure" title="Permalink to this heading">#</a></h3>
+<h3>Nonadditivity of the outer measure<a class="headerlink" href="#nonadditivity-of-the-outer-measure" title="Link to this heading">#</a></h3>
 <p>Now we come to the negative result of the outer measure, namely that it is not additive.
 Additivity is an important property that we would like our notion of length to have, because it allows us to prove good theorems about integration.</p>
 <p>The proof of nonadditivity of the outer measure relies on defining a subset of a closed interval.
@@ -842,7 +859,7 @@ Taking the infimum over all sequences of all open intervals whose union contains
 </section>
 </section>
 <section id="measurable-spaces-and-functions">
-<h2>Measurable spaces and functions<a class="headerlink" href="#measurable-spaces-and-functions" title="Permalink to this heading">#</a></h2>
+<h2>Measurable spaces and functions<a class="headerlink" href="#measurable-spaces-and-functions" title="Link to this heading">#</a></h2>
 <div class="proof theorem admonition" id="mira:thm:nonexistence-length">
 <p class="admonition-title"><span class="caption-number">Theorem 69 </span> (Nonexistence of extension of length to all subsets of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>)</p>
 <section class="theorem-content" id="proof-content">
@@ -874,13 +891,13 @@ Now, <span class="math notranslate nohighlight">\(\mu\)</span> has the order pre
 \[\mu((a, b)) \leq \mu([a, b]) \leq \mu((a - \epsilon, b + \epsilon)) = b - a + 2\epsilon,\]</div>
 <p class="sd-card-text">and since <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> is arbitrary, this implies that</p>
 <div class="math notranslate nohighlight" id="equation-mira-eq-mu-of-closed-interval">
-<span class="eqno">(3)<a class="headerlink" href="#equation-mira-eq-mu-of-closed-interval" title="Permalink to this equation">#</a></span>\[\mu([a, b]) = b - a.\]</div>
+<span class="eqno">(3)<a class="headerlink" href="#equation-mira-eq-mu-of-closed-interval" title="Link to this equation">#</a></span>\[\mu([a, b]) = b - a.\]</div>
 <p class="sd-card-text">Finally, if <span class="math notranslate nohighlight">\(A_1, A_2, \ldots\)</span> is a sequence of disjoint subsets of <span class="math notranslate nohighlight">\(\mathbb{R},\)</span> then</p>
 <div class="math notranslate nohighlight">
 \[A_1, A_2 \setminus A_1, A_3 \setminus (A_1 \cup A_2), \ldots\]</div>
 <p class="sd-card-text">is a sequence of disjoint subsets of <span class="math notranslate nohighlight">\(\mathbb{R},\)</span> so by property (c), we have</p>
 <div class="math notranslate nohighlight" id="equation-mira-eq-mu-is-countably-subadditive">
-<span class="eqno">(4)<a class="headerlink" href="#equation-mira-eq-mu-is-countably-subadditive" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
+<span class="eqno">(4)<a class="headerlink" href="#equation-mira-eq-mu-is-countably-subadditive" title="Link to this equation">#</a></span>\[\begin{split}\begin{align}
 \mu\left( \bigcup_{k=1}^\infty A_k \right) &amp;= \mu\left( A_1 \cup (A_2 \setminus A_1) \cup (A_3 \setminus (A_1 \cup A_2)) \cup \ldots \right) \\
 &amp;= \mu(A_1) + \mu(A_2 \setminus A_1) + \mu(A_3 \setminus (A_1 \cup A_2)) + \cdots \\
 &amp;\leq \sum_{k=1}^\infty \mu(A_k).
@@ -905,7 +922,7 @@ Note also that for any <span class="math notranslate nohighlight">\(K \in \mathb
 <p class="sd-card-text">reaching a contradiction, because <span class="math notranslate nohighlight">\(|V| &gt; 0,\)</span> so the above inequality cannot hold for any <span class="math notranslate nohighlight">\(K.\)</span></p>
 </div>
 </details><section id="sigma-algebras">
-<h3>Sigma algebras<a class="headerlink" href="#sigma-algebras" title="Permalink to this heading">#</a></h3>
+<h3>Sigma algebras<a class="headerlink" href="#sigma-algebras" title="Link to this heading">#</a></h3>
 <div class="proof definition admonition" id="definition-15">
 <p class="admonition-title"><span class="caption-number">Definition 60 </span> (<span class="math notranslate nohighlight">\(\sigma\)</span>-algebra)</p>
 <section class="definition-content" id="proof-content">
@@ -1052,7 +1069,7 @@ x \in (g \circ f)^{-1}(A) &amp;\iff (g \circ f)(x) \in A \\
 </div>
 </details></section>
 <section id="measurable-functions">
-<h3>Measurable functions<a class="headerlink" href="#measurable-functions" title="Permalink to this heading">#</a></h3>
+<h3>Measurable functions<a class="headerlink" href="#measurable-functions" title="Link to this heading">#</a></h3>
 <div class="proof definition admonition" id="definition-22">
 <p class="admonition-title"><span class="caption-number">Definition 64 </span> (Measurable function)</p>
 <section class="definition-content" id="proof-content">
@@ -1323,7 +1340,7 @@ Therefore, the infimum of a sequence of measurable functions is measurable.</p>
 </details></section>
 </section>
 <section id="measures-and-their-properties">
-<h2>Measures and their properties<a class="headerlink" href="#measures-and-their-properties" title="Permalink to this heading">#</a></h2>
+<h2>Measures and their properties<a class="headerlink" href="#measures-and-their-properties" title="Link to this heading">#</a></h2>
 <p>Now we come to the definition of measures.
 Our original motivation for the following definition came from trying to extend the notion of the length of an interval to the length of more general sets.
 However, the following definition is allows us to generalise a notion of size to other contexts, such as areas or volumes and beyond.</p>
@@ -1351,7 +1368,7 @@ Note that countable additvity implies finite additivity, that is, if <span class
 <p>A measure space is an ordered triple <span class="math notranslate nohighlight">\((X, \mathcal{S}, \mu),\)</span> where <span class="math notranslate nohighlight">\(X\)</span> is a set, <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> is a <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(\mu\)</span> is a measure on <span class="math notranslate nohighlight">\((X, \mathcal{S}).\)</span></p>
 </section>
 </div><section id="properties-of-measures">
-<h3>Properties of measures<a class="headerlink" href="#properties-of-measures" title="Permalink to this heading">#</a></h3>
+<h3>Properties of measures<a class="headerlink" href="#properties-of-measures" title="Link to this heading">#</a></h3>
 <p>Now we discuss several useful properties of measures.</p>
 <div class="proof theorem admonition" id="mira-thm-measure-preserves-order">
 <p class="admonition-title"><span class="caption-number">Theorem 82 </span> (Measure preserves order; measure of a set difference)</p>
@@ -1526,7 +1543,7 @@ Therefore, by <code class="xref prf prf-ref docutils literal notranslate"><span 
               
               
                 <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                  
 <div class="prev-next-area">
     <a class="left-prev"
        href="001-riemann.html"
@@ -1554,6 +1571,7 @@ Therefore, by <code class="xref prf prf-ref docutils literal notranslate"><span 
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -1598,9 +1616,10 @@ By Stratis Markou
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -1624,8 +1643,8 @@ By Stratis Markou
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
-<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>

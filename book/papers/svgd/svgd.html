@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../../../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Stein variational gradient descent &#8212; Random Walks</title>
   
@@ -19,46 +18,43 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../../../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/proof.css?v=ca93fcec" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css?v=03c54da9" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
-  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/clipboard.min.js"></script>
-    <script src="../../../_static/copybutton.js"></script>
-    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../../_static/design-tabs.js"></script>
+    <script src="../../../_static/design-tabs.js?v=36754332"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-HP14V4DGEF"></script>
     <script>
                 window.dataLayer = window.dataLayer || [];
@@ -66,16 +62,20 @@
                 gtag('js', new Date());
                 gtag('config', 'G-HP14V4DGEF');
             </script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-HP14V4DGEF');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/papers/svgd/svgd';</script>
-    <link rel="shortcut icon" href="../../../_static/dicefav.png"/>
+    <link rel="icon" href="../../../_static/dicefav.png"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="Numerical simulation of SDEs" href="../num-sde/num-sde.html" />
@@ -89,10 +89,9 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>
@@ -133,11 +132,14 @@ const thebe_selector_output = ".output, .cell_output"
 </form></div>
   </div>
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -152,6 +154,7 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../../../intro.html">
@@ -160,10 +163,22 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
+  
     <p class="title logo__title">Random Walks</p>
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -363,6 +378,7 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -372,6 +388,7 @@ document.write(`
   </button>
 `);
 </script>
+
 
 <script>
 document.write(`
@@ -425,10 +442,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="stein-variational-gradient-descent">
-<h1>Stein variational gradient descent<a class="headerlink" href="#stein-variational-gradient-descent" title="Permalink to this heading">#</a></h1>
+<h1>Stein variational gradient descent<a class="headerlink" href="#stein-variational-gradient-descent" title="Link to this heading">#</a></h1>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <p><a class="github-button" href="https://github.com/stratisMarkou/random-walks" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" aria-label="Star stratisMarkou/random-walks on GitHub" style="float: right;">Star</a>
 <a class="github-button" href="https://github.com/stratisMarkou/random-walks/issues" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-issue-opened" data-size="large" aria-label="Issue stratisMarkou/random-walks on GitHub">Issue</a>
@@ -445,10 +462,10 @@ VI can be much faster than MCMC, but it is an approximate method. The severity o
 Much like VI, it minimises the KL divergence between <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(p\)</span>, but unlike VI it does not involve heavy assumptions on the family of <span class="math notranslate nohighlight">\(q\)</span>.
 Instead, SVGD evolves a finite set of particles, which approximates <span class="math notranslate nohighlight">\(q\)</span>, by a sequence of transformations such that <span class="math notranslate nohighlight">\(q\)</span> gets progressively closer to <span class="math notranslate nohighlight">\(p\)</span>.</p>
 <section id="derivation-of-svgd">
-<h2>Derivation of SVGD<a class="headerlink" href="#derivation-of-svgd" title="Permalink to this heading">#</a></h2>
+<h2>Derivation of SVGD<a class="headerlink" href="#derivation-of-svgd" title="Link to this heading">#</a></h2>
 <p>The idea SVGD is to approximate a target distribution <span class="math notranslate nohighlight">\(p\)</span> by an approximate distribution <span class="math notranslate nohighlight">\(q\)</span>, by applying a sequence of transformations to <span class="math notranslate nohighlight">\(q\)</span> which will bring it closer to <span class="math notranslate nohighlight">\(p\)</span>. By applying the transformation (from a restricted family of transformations) which most rapidly reduces the KL divergence, we will obtain an algorithm that looks much like steepest-direction gradient descent.</p>
 <section id="invertible-transformations">
-<h3>Invertible transformations<a class="headerlink" href="#invertible-transformations" title="Permalink to this heading">#</a></h3>
+<h3>Invertible transformations<a class="headerlink" href="#invertible-transformations" title="Link to this heading">#</a></h3>
 <p>Suppose we have an initial distribution <span class="math notranslate nohighlight">\(q\)</span>, which we pass through a transformation <span class="math notranslate nohighlight">\(T : \mathbb{R}^N \to \mathbb{R}^N\)</span>, that is</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
@@ -457,7 +474,7 @@ z = T(x),~~\text{ where } x \sim q(x).
 <p>If the map <span class="math notranslate nohighlight">\(T\)</span> is invertible, we can easily compute the density of the transformed variable <span class="math notranslate nohighlight">\(z\)</span> via the change of variables formula. To ensure <span class="math notranslate nohighlight">\(T\)</span> is invertible, let us set <span class="math notranslate nohighlight">\(T(x) = x + \epsilon \phi(x)\)</span>, where <span class="math notranslate nohighlight">\(\epsilon\)</span> is a small coefficient and <span class="math notranslate nohighlight">\(\phi : \mathbb{R}^N \to \mathbb{R}^N\)</span>. If <span class="math notranslate nohighlight">\(\phi\)</span> is smooth and <span class="math notranslate nohighlight">\(\epsilon\)</span> is sufficiently small, then <span class="math notranslate nohighlight">\(T\)</span> is invertible, which which means we can easily compute the density of <span class="math notranslate nohighlight">\(z\)</span>. We turn to the question of how to pick an appropriate <span class="math notranslate nohighlight">\(\phi\)</span>.</p>
 </section>
 <section id="direction-of-steepest-descent">
-<h3>Direction of steepest descent<a class="headerlink" href="#direction-of-steepest-descent" title="Permalink to this heading">#</a></h3>
+<h3>Direction of steepest descent<a class="headerlink" href="#direction-of-steepest-descent" title="Link to this heading">#</a></h3>
 <p>Let us use the subscript notation <span class="math notranslate nohighlight">\(q_{[T]}\)</span> to denote the distribution obtained by passing <span class="math notranslate nohighlight">\(q\)</span> through <span class="math notranslate nohighlight">\(T\)</span>. Then we are interested in picking a <span class="math notranslate nohighlight">\(T\)</span> which minimises <span class="math notranslate nohighlight">\(\text{KL}(q_{[T]} || p)\)</span>. First, we compute the derivative of the KL w.r.t. <span class="math notranslate nohighlight">\(\epsilon\)</span>, which we obtain in closed form.</p>
 <div class="proof theorem admonition" id="theorem-0">
 <p class="admonition-title"><span class="caption-number">Theorem 90 </span> (Proof: Gradient of KL is the KSD)</p>
@@ -556,7 +573,7 @@ Proof: Direction of steepest descent<div class="sd-summary-down docutils">
 </div>
 </details></section>
 <section id="empirical-approximation">
-<h3>Empirical approximation<a class="headerlink" href="#empirical-approximation" title="Permalink to this heading">#</a></h3>
+<h3>Empirical approximation<a class="headerlink" href="#empirical-approximation" title="Link to this heading">#</a></h3>
 <p>Now, if we approximate <span class="math notranslate nohighlight">\(q\)</span> by a finite set of <span class="math notranslate nohighlight">\(N\)</span> particles at locations <span class="math notranslate nohighlight">\(x_n^{(i)}, n = 1, ..., N\)</span>, at the <span class="math notranslate nohighlight">\(i^{th}\)</span> iteration, we obtain at the following iterative algorithm.</p>
 <div class="proof definition admonition" id="definition-2">
 <p class="admonition-title"><span class="caption-number">Definition 73 </span> (Stein variational gradient descent)</p>
@@ -570,12 +587,12 @@ x^{(i + 1)}_n = x^{(i)}_n + \frac{\epsilon^{(i)}}{N}\sum_{m = 1}^N \left[ k(x_n,
 </div></section>
 </section>
 <section id="implementation">
-<h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this heading">#</a></h2>
+<h2>Implementation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h2>
 <p>The SVGD algorithm is surprisingly easy to implement, while also each step is quite cheap to evaluate.
 We will use SVGD to approximate a mixture-of-gaussians distribution, to allow for multiple modes.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/d97f5b8e5b8af7381c1822e2be052237dfb4f4e1eafa3626ce11f23ce5024e67.svg" src="../../../_images/d97f5b8e5b8af7381c1822e2be052237dfb4f4e1eafa3626ce11f23ce5024e67.svg" /></div>
+<img alt="../../../_images/e0e985373f897cbd523ab6f47e3acc3d74c33757035831386b2ddd6f65cb6255.svg" src="../../../_images/e0e985373f897cbd523ab6f47e3acc3d74c33757035831386b2ddd6f65cb6255.svg" /></div>
 </div>
 <p>Although SVGD can use any positive-semidefinite kernel, we will focus our attention to the standard EQ kernel</p>
 <div class="math notranslate nohighlight">
@@ -622,42 +639,44 @@ k(x, x') = \exp\left(-\frac{1}{2\ell^2} (x - x')^2\right),
 </div>
 </div>
 <section id="demo-on-mixture-of-gaussians">
-<h3>Demo on mixture of Gaussians<a class="headerlink" href="#demo-on-mixture-of-gaussians" title="Permalink to this heading">#</a></h3>
+<h3>Demo on mixture of Gaussians<a class="headerlink" href="#demo-on-mixture-of-gaussians" title="Link to this heading">#</a></h3>
 <p>We can now run SVGD using a modest number of particles initialised in between the two modes.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/1d29f3b69fad88ebc86053dae519c6c6c68b263ef03849e2a75fd584f808628f.svg" src="../../../_images/1d29f3b69fad88ebc86053dae519c6c6c68b263ef03849e2a75fd584f808628f.svg" /></div>
+<img alt="../../../_images/b200622202155e607458eeb76856179dd470d3f94025a822e6d037d275e5ffa5.svg" src="../../../_images/b200622202155e607458eeb76856179dd470d3f94025a822e6d037d275e5ffa5.svg" /></div>
 </div>
 <p>We observe that some of the particles fall into each of the two modes, capturing the bimodality of the target, something which VI with a mean-field Gaussian <span class="math notranslate nohighlight">\(q\)</span> cannot do.</p>
 </section>
 <section id="failure-mode-on-mixture-of-gaussians">
-<h3>Failure mode on mixture of Gaussians<a class="headerlink" href="#failure-mode-on-mixture-of-gaussians" title="Permalink to this heading">#</a></h3>
+<h3>Failure mode on mixture of Gaussians<a class="headerlink" href="#failure-mode-on-mixture-of-gaussians" title="Link to this heading">#</a></h3>
 <p>However, SVGD also has failure modes, as illustrated below.
 If we initialise the particles on one mode of two well-separated Gaussians, then the optimisation gets stuck at a local optimum which fails to capture one of the two modes of the mixture of Gaussians.
 Even though SVGD may be able to express more expressive approximate distributions than mean-field VI, it is not guaranteed that the optimisation will be able to find such a distribution.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/bbe3cf626fcd26fefccbaec3f6263d2b226005283cbd1aa335e592673a99b560.svg" src="../../../_images/bbe3cf626fcd26fefccbaec3f6263d2b226005283cbd1aa335e592673a99b560.svg" /></div>
+<img alt="../../../_images/96bd6d87402103695e78b95b44b844c3c4dace42c5d179baf95de4a7cb60cf34.svg" src="../../../_images/96bd6d87402103695e78b95b44b844c3c4dace42c5d179baf95de4a7cb60cf34.svg" /></div>
 </div>
 </section>
 </section>
 <section id="conclusion">
-<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
 <p>This section presented SVGD, a very interesting general-purpose algorithm for approximate inference.
 SVGD works by simulating a set of particles, regarded as an empirical approximation of a distribution <span class="math notranslate nohighlight">\(q\)</span> which itself approximates the target distribution <span class="math notranslate nohighlight">\(p\)</span>.
 By evolving <span class="math notranslate nohighlight">\(q\)</span> according to a sequence of transformations, each of which is determined as the direction of steepest decrease in the KL between <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(p\)</span>, SVGD can produce a flexible approximation to the target <span class="math notranslate nohighlight">\(p\)</span>.</p>
 </section>
 <section id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
 <div class="docutils container" id="id3">
-<dl class="citation">
-<dt class="label" id="id13"><span class="brackets"><a class="fn-backref" href="#id2">LLJ16</a></span></dt>
-<dd><p>Qiang Liu, Jason Lee, and Michael Jordan. A kernelized stein discrepancy for goodness-of-fit tests. In <em>International conference on machine learning</em>, 276–284. PMLR, 2016.</p>
-</dd>
-<dt class="label" id="id12"><span class="brackets"><a class="fn-backref" href="#id1">LW19</a></span></dt>
-<dd><p>Qiang Liu and Dilin Wang. Stein variational gradient descent: a general purpose bayesian inference algorithm. 2019. <a class="reference external" href="https://arxiv.org/abs/1608.04471">arXiv:1608.04471</a>.</p>
-</dd>
-</dl>
+<div role="list" class="citation-list">
+<div class="citation" id="id13" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">LLJ16</a><span class="fn-bracket">]</span></span>
+<p>Qiang Liu, Jason Lee, and Michael Jordan. A kernelized stein discrepancy for goodness-of-fit tests. In <em>International conference on machine learning</em>, 276–284. PMLR, 2016.</p>
+</div>
+<div class="citation" id="id12" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">LW19</a><span class="fn-bracket">]</span></span>
+<p>Qiang Liu and Dilin Wang. Stein variational gradient descent: a general purpose bayesian inference algorithm. 2019. <a class="reference external" href="https://arxiv.org/abs/1608.04471">arXiv:1608.04471</a>.</p>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -690,7 +709,7 @@ By evolving <span class="math notranslate nohighlight">\(q\)</span> according to
               
               
                 <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                  
 <div class="prev-next-area">
     <a class="left-prev"
        href="../score-matching/score-matching.html"
@@ -718,6 +737,7 @@ By evolving <span class="math notranslate nohighlight">\(q\)</span> according to
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -759,9 +779,10 @@ By Stratis Markou
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -785,8 +806,8 @@ By Stratis Markou
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
-<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
+  <script src="../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>

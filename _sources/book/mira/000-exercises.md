@@ -1463,17 +1463,68 @@ Finally, we note that since the gap between individual characteristic functions 
 
 
 
+## Chapter 5.A
 
-<!-- ::::{admonition} Exercise 4.A.12
+::::{admonition} Exercise 5.A.1
 :class: tip
-Show that $|\{b \in \mathbb{R}: h^*(b) = \infty\}| = 0$ for every $h \in \mathcal{L}^1(\mathbb{R}).$
+Suppose $(X, S)$ and $(Y, T)$ are measurable spaces.
+Prove that if $A$ is a nonempty subset of $X$ and $B$ is a nonempty subset of $Y$ such that $A \times B \in S \otimes T,$ then $A \in S$ and $B \in T.$
 
 :::{dropdown} Solution
-Let $A_{\infty} = \{b \in \mathbb{R}: h^*(b) = \infty\}.$
-Suppose $|A_\infty| > 0.$
-Then, there exists a closed interval $[a, b] \subseteq \mathbb{R}$ such that $|A_\infty \cap [a, b]| > 0.$
-Note that $A_\infty$ is closed, so $A = A_\infty \cap [a, b]$ is closed and bounded.
-Let $a \in A$ and $c > 0.$
-
+Suppose $(X, S)$ and $(Y, T)$ are measurable spaces, and that if $A$ is a nonempty subset of $X$ and $B$ is a nonempty subset of $Y$ such that $A \times B \in S \otimes T.$
+Since $A$ and $B$ are nonempty, there exist $a \in A$ and $b \in B.$
+Since cross sections of measurable sets are measurable, we have $A = [A \times B]_a \in T$ and $B = [A \times B]^b \in S.$
 :::
-:::: -->
+::::
+
+::::{admonition} Exercise 5.A.10
+:class: tip
+Suppose $(X, S, \mu)$ and $(Y, T, \nu)$ are $\sigma$-finite measure spaces.
+Prove that if $\omega$ is a measure of $S \otimes T$ such that $\omega(A \times B) = \mu(A)\nu(B)$ for all $A \in S$ and all $B \in T,$ then $\omega = \mu \times \nu.$
+
+:::{dropdown} Solution
+Let $\mathcal{A}$ be the set of all finite unions of rectangles $A \times B$ where $A \in S$ and $B \in T,$ and note that $\mathcal{A}$ is an algebra.
+Since a finite union of rectangles can be expressed as a disjoint finite union of rectangles, from now on we will assume that the elements of $\mathcal{A}$ are disjoint finite unions of rectangles.
+Now, define the set
+
+$$\mathcal{M} = \left\{E \in S \otimes T: \omega(E) = (\mu \times \nu)(E)\right\}.$$
+
+Note that $\omega$ agrees with $\mu \times \nu$ on all rectangles.
+Therefore, they also agree on all disjoint unions of rectangles.
+So $\omega$ and $\mu \times \nu$ agree on every element of $\mathcal{A},$ so $\mathcal{A} \subseteq \mathcal{M}.$
+Now, we will show that $\mathcal{M}$ is a monotone class.
+First, suppose that $E_1 \subseteq E_2 \subseteq \dots$ is a sequence of sets in $\mathcal{M}.$
+Then, we have
+
+$$\lim_{n \to \infty} \omega(E_n) = \lim_{n \to \infty} (\mu \times \nu)(E_n) \implies \omega(E) = (\mu \times \nu)(E_n).$$
+
+Second, suppose that $E_1 \supseteq E_2 \supseteq \dots.$ 
+Since $(X, S, \mu)$ and $(Y, T, \nu)$ are $\sigma$-finite measure spaces, there exist disjoint sequences of sets $X_1, X_2 \dots$ and $Y_1 \subseteq Y_2 \dots,$ such that
+
+$$\bigcup_{n = 1}^\infty X_n = X ~~\text{ and }~~ \bigcup_{n = 1}^\infty Y_n = Y$$
+
+and also $\mu(X_n), \mu(Y_n) < \infty$ for all $k \in \mathbb{Z}^+.$
+Now define $R_1, R_2, \dots$ to be the sequence of rectangles
+
+$$X_1 \times Y_1, X_1 \times Y_2, X_2 \times Y_1, \dots.$$
+
+This sequence is disjoint and its union equals $S \times T.$
+Also, $\omega(R_k) = (\mu \times \nu)(R_k) < \infty$ for all $k \in \mathbb{R}.$
+Therefore, defining $E = \cap_{n = 1}^\infty,$ we have
+
+$$\begin{align}
+\omega(E) &= \sum_{j = 1}^\infty \omega(R_j \cap E) \\
+          &= \sum_{j = 1}^\infty \omega(\lim_{n \to \infty} R_j \cap E_n) \\
+          &= \sum_{j = 1}^\infty \lim_{n \to \infty} \omega(R_j \cap E_n) \\
+          &= \lim_{n \to \infty} \sum_{j = 1}^\infty \omega(R_j \cap E_n) \\
+          &= \lim_{n \to \infty} \omega(E_n),
+\end{align}$$
+
+and, by a similar argument, we have
+
+$$(\mu \times \nu)(E) = \lim_{n \to \infty} (\mu \times \nu)(E_n).$$
+
+Putting these results together, we have $\omega(E) = (\mu \times \nu)(E),$ so $\mathcal{M}$ is a monotone class.
+Since $\mathcal{M}$ is a monotone class that contains $\mathcal{A},$ it contains $S \otimes T$ so $\mathcal{M} = S \otimes T,$ and the two measures $\omega$ and $\mu \times \nu$ agree on all of $S \otimes T.$
+:::
+::::

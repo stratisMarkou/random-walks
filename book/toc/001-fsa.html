@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Finite Automata and Regular Expressions &#8212; Random Walks</title>
   
@@ -19,46 +18,43 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom_style.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css?v=ca93fcec" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom_style.css?v=03c54da9" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
-  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/clipboard.min.js"></script>
-    <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../_static/design-tabs.js"></script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-HP14V4DGEF"></script>
     <script>
                 window.dataLayer = window.dataLayer || [];
@@ -66,16 +62,20 @@
                 gtag('js', new Date());
                 gtag('config', 'G-HP14V4DGEF');
             </script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-HP14V4DGEF');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/toc/001-fsa';</script>
-    <link rel="shortcut icon" href="../../_static/dicefav.png"/>
+    <link rel="icon" href="../../_static/dicefav.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="PDAs and context-free grammars" href="002-cfl.html" />
@@ -89,10 +89,9 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>
@@ -133,11 +132,14 @@ const thebe_selector_output = ".output, .cell_output"
 </form></div>
   </div>
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -152,6 +154,7 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../../intro.html">
@@ -160,10 +163,22 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
+  
     <p class="title logo__title">Random Walks</p>
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -363,6 +378,7 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -372,6 +388,7 @@ document.write(`
   </button>
 `);
 </script>
+
 
 <script>
 document.write(`
@@ -419,10 +436,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="finite-automata-and-regular-expressions">
-<h1>Finite Automata and Regular Expressions<a class="headerlink" href="#finite-automata-and-regular-expressions" title="Permalink to this heading">#</a></h1>
+<h1>Finite Automata and Regular Expressions<a class="headerlink" href="#finite-automata-and-regular-expressions" title="Link to this heading">#</a></h1>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <p><a class="github-button" href="https://github.com/stratisMarkou/random-walks" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" aria-label="Star stratisMarkou/random-walks on GitHub">Star</a>
 <a class="github-button" href="https://github.com/stratisMarkou/random-walks/issues" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-issue-opened" data-size="large" aria-label="Issue stratisMarkou/random-walks on GitHub">Issue</a>
@@ -431,7 +448,7 @@ document.write(`
 <p>The course slowly builds up different models of computation of increasing complexity, starting with finite state automata (FSAs).
 This chapter introduces FSAs and regular expressions, which turn out to be equivalent in terms of expressiveness.</p>
 <section id="finite-state-automata">
-<h2>Finite State Automata<a class="headerlink" href="#finite-state-automata" title="Permalink to this heading">#</a></h2>
+<h2>Finite State Automata<a class="headerlink" href="#finite-state-automata" title="Link to this heading">#</a></h2>
 <p>Finite state automata (FSAs) are an abstraction for a kind of machine with finite memory.
 An FSA reads a sequence of symbol and either accepts or rejects it.
 We begin by defining finite state automata (FSAs) formally.</p>
@@ -457,7 +474,17 @@ In a state diagram, we use circles for the states, labeled arrows for the transi
 Below is an example of an FSA, with three states.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../_images/70b1b58fa11a99901303e0fa9f9e418f53ab5994e76839dfc1d85d6db75f884e.svg" src="../../_images/70b1b58fa11a99901303e0fa9f9e418f53ab5994e76839dfc1d85d6db75f884e.svg" /></div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">automata.fa.dfa</span> <span class="kn">import</span> <span class="n">DFA</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">A</span> <span class="o">=</span> <span class="s2">&quot;A&quot;</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">B</span> <span class="o">=</span> <span class="s2">&quot;B&quot;</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;automata&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <p>Now we define strings, which are sequences of symbols, and languages, which are sets of strings.</p>
 <div class="proof definition admonition" id="definition-1">
@@ -503,7 +530,7 @@ An FSA that recognises this language is shown below.</p>
 </section>
 </div><div class="cell tag_remove-input tag_center-output docutils container">
 <div class="cell_output docutils container">
-<img alt="../../_images/9f3fd81c84b3be2d79c4b025d3914442113fe471c0a17e2f532d78d25d5ab3cb.svg" src="../../_images/9f3fd81c84b3be2d79c4b025d3914442113fe471c0a17e2f532d78d25d5ab3cb.svg" /></div>
+<img alt="../../_images/d49e197b936c7dade6bd02d742338dd129fce90be67741cd72a4c3468d41668e.svg" src="../../_images/d49e197b936c7dade6bd02d742338dd129fce90be67741cd72a4c3468d41668e.svg" /></div>
 </div>
 <div class="proof example admonition" id="example-6">
 <p class="admonition-title"><span class="caption-number">Example 3 </span></p>
@@ -540,7 +567,7 @@ Contradiction.</p>
 </div><p>As this result suggests, FSAs are very limited in terms of the languages they can recognise and, more generally, are a limited model of computation.</p>
 </section>
 <section id="regular-operations">
-<h2>Regular operations<a class="headerlink" href="#regular-operations" title="Permalink to this heading">#</a></h2>
+<h2>Regular operations<a class="headerlink" href="#regular-operations" title="Link to this heading">#</a></h2>
 <p>Given existing languages, we can construct new ones.
 In particular, we will define two binary operations, namely union and concatenation, and a unary operation, namely star, which create new languages from existing ones.
 We give these operations the special name <em>regular operations</em> because, as we will see later, they preserve the closure of regular languages.</p>
@@ -586,7 +613,7 @@ The following are examples of regular expressions:</p>
 </section>
 </div></section>
 <section id="closure-properties-union">
-<h2>Closure properties: union<a class="headerlink" href="#closure-properties-union" title="Permalink to this heading">#</a></h2>
+<h2>Closure properties: union<a class="headerlink" href="#closure-properties-union" title="Link to this heading">#</a></h2>
 <p>We continue with proving three closure properties of regular languages, namely closure under union, concatenation and star operations.
 We will first prove closure under union.</p>
 <div class="proof theorem thm-reg-lang-union-closure-naive admonition" id="theorem-10">
@@ -619,7 +646,7 @@ It will also simplify the proof for closure under union and make it more intuiti
 More generally, nondeterminism is a recurring theme across the theory of computation.</p>
 </section>
 <section id="nondeterminism">
-<h2>Nondeterminism<a class="headerlink" href="#nondeterminism" title="Permalink to this heading">#</a></h2>
+<h2>Nondeterminism<a class="headerlink" href="#nondeterminism" title="Link to this heading">#</a></h2>
 <p>We introduce the nondeterministic finite automaton (NFA), which extends the finite automata we have been looking at up to now, which we will refer to as deterministic finite automata (DFA).
 Below is an example of an NFA which differs from DFAs in two important ways:</p>
 <ol class="arabic simple">
@@ -629,7 +656,7 @@ Below is an example of an NFA which differs from DFAs in two important ways:</p>
 <p>The NFA accepts a string if there is any valid path from the initial state to some finite state.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../_images/4774870575b6d09f0b47e7a5bad0782cf137f27dcae1049637ff62dd73ce1240.svg" src="../../_images/4774870575b6d09f0b47e7a5bad0782cf137f27dcae1049637ff62dd73ce1240.svg" /></div>
+<img alt="../../_images/4a24e67bfb9e60528f06510d7b9ef73deb520e84a277116971b82b3d4a421557.svg" src="../../_images/4a24e67bfb9e60528f06510d7b9ef73deb520e84a277116971b82b3d4a421557.svg" /></div>
 </div>
 <p>We can also look at a few example input strings, and whether this NFA accepts or rejects them.</p>
 <div class="cell tag_remove-input docutils container">
@@ -698,11 +725,11 @@ Then we define the transition function as</p>
 For example, we can convert the NFA from the previous example into the following equivalent DFA.</p>
 <div class="cell tag_remove-input tag_center-output docutils container">
 <div class="cell_output docutils container">
-<img alt="../../_images/f9b6b6e7da5b838a536bde68be42984b91a096e027bcb625abf6546baad75bae.svg" src="../../_images/f9b6b6e7da5b838a536bde68be42984b91a096e027bcb625abf6546baad75bae.svg" /></div>
+<img alt="../../_images/02bbfe37fdc8ef0ea98368c5cc25f241db51bd32a71f2a854b3f1ce6d84b8704.svg" src="../../_images/02bbfe37fdc8ef0ea98368c5cc25f241db51bd32a71f2a854b3f1ce6d84b8704.svg" /></div>
 </div>
 </section>
 <section id="closure-properties">
-<h2>Closure properties<a class="headerlink" href="#closure-properties" title="Permalink to this heading">#</a></h2>
+<h2>Closure properties<a class="headerlink" href="#closure-properties" title="Link to this heading">#</a></h2>
 <p>We can now use nondeterminism to prove closure under union, intersection and star, much more easily.
 The proof is based on the intuitive idea that we can make a larger NFA which is literally equivalent to running both machines in parallel.</p>
 <div class="proof theorem thm-reg-lang-union-closure admonition" id="theorem-13">
@@ -783,7 +810,7 @@ q_0 &amp; q \in F, a = \epsilon
 </div>
 </details></section>
 <section id="regular-languages-equiv-regular-expressions">
-<h2>Regular languages <span class="math notranslate nohighlight">\(\equiv\)</span> Regular expressions<a class="headerlink" href="#regular-languages-equiv-regular-expressions" title="Permalink to this heading">#</a></h2>
+<h2>Regular languages <span class="math notranslate nohighlight">\(\equiv\)</span> Regular expressions<a class="headerlink" href="#regular-languages-equiv-regular-expressions" title="Link to this heading">#</a></h2>
 <p>It turns out that NFAs are equivalent to regular expressions, in the sense that all regular expressions are regular languages and all regular languages can be written as regular expressions.
 We break this result up in the two aforementioned parts.
 The first part shows that the language written as a regular expression is regular.</p>
@@ -877,7 +904,7 @@ Therefore <span class="math notranslate nohighlight">\(A = L(M) = L(G) = L(\text
 </section>
 </div></section>
 <section id="regular-pumping-lemma">
-<h2>Regular pumping lemma<a class="headerlink" href="#regular-pumping-lemma" title="Permalink to this heading">#</a></h2>
+<h2>Regular pumping lemma<a class="headerlink" href="#regular-pumping-lemma" title="Link to this heading">#</a></h2>
 <p>So far we have a few results that help show that a language is regular.
 Now, we turn to a criterion that helps us show that a language is not regular, namely the regular pumping lemma.
 This result effectively shows that the expressive power of DFAs and NFAs is limited, and that if such a machine recognises an infinite language, then the strings of the language have to have repetitions of a particular kind.</p>
@@ -971,7 +998,7 @@ Therefore <span class="math notranslate nohighlight">\(A\)</span> cannot be regu
               
               
                 <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                  
 <div class="prev-next-area">
     <a class="left-prev"
        href="000-intro.html"
@@ -999,6 +1026,7 @@ Therefore <span class="math notranslate nohighlight">\(A\)</span> cannot be regu
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -1034,9 +1062,10 @@ By Stratis Markou
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -1060,8 +1089,8 @@ By Stratis Markou
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
-<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>

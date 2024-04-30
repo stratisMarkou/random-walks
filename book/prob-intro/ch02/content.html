@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../../../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Discrete random variables &#8212; Random Walks</title>
   
@@ -19,46 +18,43 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../../../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/proof.css?v=ca93fcec" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css?v=03c54da9" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
-  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/clipboard.min.js"></script>
-    <script src="../../../_static/copybutton.js"></script>
-    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../../_static/design-tabs.js"></script>
+    <script src="../../../_static/design-tabs.js?v=36754332"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-HP14V4DGEF"></script>
     <script>
                 window.dataLayer = window.dataLayer || [];
@@ -66,16 +62,20 @@
                 gtag('js', new Date());
                 gtag('config', 'G-HP14V4DGEF');
             </script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-HP14V4DGEF');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/prob-intro/ch02/content';</script>
-    <link rel="shortcut icon" href="../../../_static/dicefav.png"/>
+    <link rel="icon" href="../../../_static/dicefav.png"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="Multivariate discrete distributions" href="../ch03/content.html" />
@@ -89,10 +89,9 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>
@@ -133,11 +132,14 @@ const thebe_selector_output = ".output, .cell_output"
 </form></div>
   </div>
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -152,6 +154,7 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../../../intro.html">
@@ -160,10 +163,22 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
+  
     <p class="title logo__title">Random Walks</p>
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -201,7 +216,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Papers &amp; Miscellanous</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../papers/intro.html">Stream</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../papers/intro.html">Stream of papers</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../papers/why-covariances/why-covariances.html">Why covariance functions?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../papers/ais/ais.html">Annealed importance sampling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../papers/rff/rff.html">Random Fourier features</a></li>
@@ -363,6 +378,7 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -372,6 +388,7 @@ document.write(`
   </button>
 `);
 </script>
+
 
 <script>
 document.write(`
@@ -424,15 +441,15 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="discrete-random-variables">
-<h1>Discrete random variables<a class="headerlink" href="#discrete-random-variables" title="Permalink to this heading">#</a></h1>
+<h1>Discrete random variables<a class="headerlink" href="#discrete-random-variables" title="Link to this heading">#</a></h1>
 <p>Discrete random variables are random variables whose images are countable sets.
 We define discrete random variables and probability mass functions and present some examples.
 The (conditional) expectation and variance are important summary statistics of random variables.</p>
 <section id="id1">
-<h2>Discrete random variables<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<h2>Discrete random variables<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
 <p>We are often interested in the value of a function of elementary events. For example we might be interested in the profit of a gambling game as a function of the elementary outcomes of the game.</p>
 <div class="proof definition admonition" id="definition-0">
 <p class="admonition-title"><span class="caption-number">Definition 22 </span> (Discrete random variable)</p>
@@ -447,7 +464,7 @@ The (conditional) expectation and variance are important summary statistics of r
 <p>Condition (1) specifies that a discrete random variable can only take countably many values. Condition (2) specifies that every set that is mapped to a certain value <span class="math notranslate nohighlight">\(x \in \mathbb{R}\)</span> is contained in the event space <span class="math notranslate nohighlight">\(\mathcal{F}\)</span> and is therefore assigned a probability by any probability measure defined on <span class="math notranslate nohighlight">\(\mathcal{F}\)</span>.</p>
 </section>
 <section id="probability-mass-functions">
-<h2>Probability mass functions<a class="headerlink" href="#probability-mass-functions" title="Permalink to this heading">#</a></h2>
+<h2>Probability mass functions<a class="headerlink" href="#probability-mass-functions" title="Link to this heading">#</a></h2>
 <p>Once we have defined the continuous random variable, we can make statemets about the probability that it will take a certain value, using its probability mass function.</p>
 <div class="proof definition admonition" id="definition-1">
 <p class="admonition-title"><span class="caption-number">Definition 23 </span> (Probability mass function)</p>
@@ -485,11 +502,11 @@ p_X(s) &amp;= 0 &amp;&amp; \text{ if } s \not \in S
 </ol>
 </section>
 <section id="fundamental-discrete-distributions">
-<h2>Fundamental discrete distributions<a class="headerlink" href="#fundamental-discrete-distributions" title="Permalink to this heading">#</a></h2>
+<h2>Fundamental discrete distributions<a class="headerlink" href="#fundamental-discrete-distributions" title="Link to this heading">#</a></h2>
 <p>Here are some examples of fundamental discrete distributions.
 Appealing to the theorem above, we can forget about probability spaces and consider only the values taken by the pmf of the random variable in question.</p>
 <section id="bernoulli">
-<h3>Bernoulli<a class="headerlink" href="#bernoulli" title="Permalink to this heading">#</a></h3>
+<h3>Bernoulli<a class="headerlink" href="#bernoulli" title="Link to this heading">#</a></h3>
 <p>Also called the coin toss, the Bernoulli distribution is the simplest discrete distribution.
 A random variable <span class="math notranslate nohighlight">\(X\)</span> is Bernoulli-distributed with paramter <span class="math notranslate nohighlight">\(p \in [0, 1]\)</span> if <span class="math notranslate nohighlight">\(X\)</span> can take the values 0 or 1:</p>
 <div class="math notranslate nohighlight">
@@ -499,14 +516,14 @@ A random variable <span class="math notranslate nohighlight">\(X\)</span> is Ber
 \end{align}\end{split}\]</div>
 </section>
 <section id="binomial">
-<h3>Binomial<a class="headerlink" href="#binomial" title="Permalink to this heading">#</a></h3>
+<h3>Binomial<a class="headerlink" href="#binomial" title="Link to this heading">#</a></h3>
 <p>A random variable <span class="math notranslate nohighlight">\(X\)</span> is binomially distributed if</p>
 <div class="math notranslate nohighlight">
 \[ \mathbb{P}(X = k) = {n \choose k} p^k (1 - p)^{n - k} ~~\text{for}~~k = 0, 1, 2, ..., n.\]</div>
 <p>The sum of <span class="math notranslate nohighlight">\(n\)</span> independent and identically distributed coin tosses is Bernoulli distributed.</p>
 </section>
 <section id="poisson">
-<h3>Poisson<a class="headerlink" href="#poisson" title="Permalink to this heading">#</a></h3>
+<h3>Poisson<a class="headerlink" href="#poisson" title="Link to this heading">#</a></h3>
 <p>A random variable <span class="math notranslate nohighlight">\(X\)</span> is said to be Poisson-distributed with parameter <span class="math notranslate nohighlight">\(\lambda &gt; 0\)</span> if</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
@@ -526,7 +543,7 @@ A random variable <span class="math notranslate nohighlight">\(X\)</span> is Ber
 <p>then the number of events occuring within any time interval are Poisson-distributed.</p>
 </section>
 <section id="geometric">
-<h3>Geometric<a class="headerlink" href="#geometric" title="Permalink to this heading">#</a></h3>
+<h3>Geometric<a class="headerlink" href="#geometric" title="Link to this heading">#</a></h3>
 <p>A random variable <span class="math notranslate nohighlight">\(X\)</span> has the geometric distribution with parameter <span class="math notranslate nohighlight">\(p\)</span> if</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
@@ -535,7 +552,7 @@ A random variable <span class="math notranslate nohighlight">\(X\)</span> is Ber
 <p>The geometric distribution naturally models random variables such as “the number of i.i.d. trials up to and including the first occurence of A”. For example, the number of i.i.d. coin tosses required until heads is obtained the first time, is geometrically distributed.</p>
 </section>
 <section id="negative-binomial">
-<h3>Negative binomial<a class="headerlink" href="#negative-binomial" title="Permalink to this heading">#</a></h3>
+<h3>Negative binomial<a class="headerlink" href="#negative-binomial" title="Link to this heading">#</a></h3>
 <p>A random variable <span class="math notranslate nohighlight">\(X\)</span> has the negative binomial distribution with parameters <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(p \in [0, 1]\)</span> if</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
@@ -549,7 +566,7 @@ That leaves us with <span class="math notranslate nohighlight">\(k - 1\)</span> 
 </section>
 </section>
 <section id="expectations">
-<h2>Expectations<a class="headerlink" href="#expectations" title="Permalink to this heading">#</a></h2>
+<h2>Expectations<a class="headerlink" href="#expectations" title="Link to this heading">#</a></h2>
 <p>Although random variables are not perfectly determined, we can reason about the values they could attain.
 The expectation of a random variable captures the value that we expect the variable will have on average - as weighted by the probability measure.</p>
 <div class="proof definition admonition" id="definition-3">
@@ -600,7 +617,7 @@ The expectation of a random variable captures the value that we expect the varia
 </section>
 </div></section>
 <section id="conditional-expectations">
-<h2>Conditional expectations<a class="headerlink" href="#conditional-expectations" title="Permalink to this heading">#</a></h2>
+<h2>Conditional expectations<a class="headerlink" href="#conditional-expectations" title="Link to this heading">#</a></h2>
 <p>We are often interested in the expectation of a random variable conditioned on some event. For example, the event we are conditioning on could be some observed data, based on which we would like to update our beliefs about the random variable, and compute its expectation.</p>
 <div class="proof definition admonition" id="definition-7">
 <p class="admonition-title"><span class="caption-number">Definition 26 </span> (Conditional expectation)</p>
@@ -635,16 +652,16 @@ The expectation of a random variable captures the value that we expect the varia
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "venv-rw"
+            mode: "python"
         },
         kernelOptions: {
-            name: "venv-rw",
+            name: "python3",
             path: "./book/prob-intro/ch02"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'venv-rw'</script>
+    <script>kernelName = 'python3'</script>
 
                 </article>
               
@@ -654,7 +671,7 @@ The expectation of a random variable captures the value that we expect the varia
               
               
                 <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                  
 <div class="prev-next-area">
     <a class="left-prev"
        href="../ch01/content.html"
@@ -682,6 +699,7 @@ The expectation of a random variable captures the value that we expect the varia
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -722,9 +740,10 @@ By Stratis Markou
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -748,8 +767,8 @@ By Stratis Markou
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
-<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
+  <script src="../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>

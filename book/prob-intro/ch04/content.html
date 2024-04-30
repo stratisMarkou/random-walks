@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../../../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Probability generating functions &#8212; Random Walks</title>
   
@@ -19,46 +18,43 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../../../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/proof.css?v=ca93fcec" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css?v=03c54da9" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
-  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/clipboard.min.js"></script>
-    <script src="../../../_static/copybutton.js"></script>
-    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../../_static/design-tabs.js"></script>
+    <script src="../../../_static/design-tabs.js?v=36754332"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-HP14V4DGEF"></script>
     <script>
                 window.dataLayer = window.dataLayer || [];
@@ -66,16 +62,20 @@
                 gtag('js', new Date());
                 gtag('config', 'G-HP14V4DGEF');
             </script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-HP14V4DGEF');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/prob-intro/ch04/content';</script>
-    <link rel="shortcut icon" href="../../../_static/dicefav.png"/>
+    <link rel="icon" href="../../../_static/dicefav.png"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="Distribution and density functions" href="../ch05/content.html" />
@@ -89,10 +89,9 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>
@@ -133,11 +132,14 @@ const thebe_selector_output = ".output, .cell_output"
 </form></div>
   </div>
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -152,6 +154,7 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../../../intro.html">
@@ -160,10 +163,22 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
+  
     <p class="title logo__title">Random Walks</p>
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -201,7 +216,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Papers &amp; Miscellanous</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../papers/intro.html">Stream</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../papers/intro.html">Stream of papers</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../papers/why-covariances/why-covariances.html">Why covariance functions?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../papers/ais/ais.html">Annealed importance sampling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../papers/rff/rff.html">Random Fourier features</a></li>
@@ -363,6 +378,7 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -372,6 +388,7 @@ document.write(`
   </button>
 `);
 </script>
+
 
 <script>
 document.write(`
@@ -423,16 +440,16 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="probability-generating-functions">
-<h1>Probability generating functions<a class="headerlink" href="#probability-generating-functions" title="Permalink to this heading">#</a></h1>
+<h1>Probability generating functions<a class="headerlink" href="#probability-generating-functions" title="Link to this heading">#</a></h1>
 <p>Probability generating functions are a useful tool for studying discrete random variables, taking values in <span class="math notranslate nohighlight">\(n = 0, 1, 2 ...\)</span>.
 Each probability mass function has a unique probability generating function and vice versa.
 The moments of a random variable can be obtained straightforwardly from its probability generating function.
 Probability generating functions are useful when dealing with sums and random sums of independent random variables.</p>
 <section id="definition">
-<h2>Definition<a class="headerlink" href="#definition" title="Permalink to this heading">#</a></h2>
+<h2>Definition<a class="headerlink" href="#definition" title="Link to this heading">#</a></h2>
 <div class="proof definition admonition" id="definition-0">
 <p class="admonition-title"><span class="caption-number">Definition 30 </span> (Generating function)</p>
 <section class="definition-content" id="proof-content">
@@ -457,7 +474,7 @@ G_X(s) = \sum^\infty_{n = 0} p_n s^n = p_0 + p_1 s + p_2 s^2 + ...
 </section>
 </div></section>
 <section id="uniqueness-of-pgfs-and-examples">
-<h2>Uniqueness of PGFs and examples<a class="headerlink" href="#uniqueness-of-pgfs-and-examples" title="Permalink to this heading">#</a></h2>
+<h2>Uniqueness of PGFs and examples<a class="headerlink" href="#uniqueness-of-pgfs-and-examples" title="Link to this heading">#</a></h2>
 <p>One very useful result is that if two random variables have the same pgf, then they have the same pmf - and vice versa.</p>
 <div class="proof theorem admonition" id="theorem-2">
 <p class="admonition-title"><span class="caption-number">Theorem 19 </span> (Uniqueness of pgfs)</p>
@@ -472,7 +489,7 @@ G_X(s) = G_Y(s) \text{ for all } s \iff \mathbb{P}(X = k) = \mathbb{P}(Y = k
 </section>
 </div><p>One direction of this result follows by the definition of the pgf, whereas the other can be shown by taking the Taylor expansion of <span class="math notranslate nohighlight">\(G_X\)</span> and <span class="math notranslate nohighlight">\(G_Y\)</span>, and observing that all coefficients are equal, which shows that the pmfs of <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are identical.</p>
 <section id="bernoulli">
-<h3>Bernoulli<a class="headerlink" href="#bernoulli" title="Permalink to this heading">#</a></h3>
+<h3>Bernoulli<a class="headerlink" href="#bernoulli" title="Link to this heading">#</a></h3>
 <p>If <span class="math notranslate nohighlight">\(X\)</span> has the Bernoulli distribution with parameter <span class="math notranslate nohighlight">\(p\)</span>, then</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
@@ -480,7 +497,7 @@ G_X(s) = q + ps, \text{ where } q = 1 - p.
 \end{align}\]</div>
 </section>
 <section id="binomial-distribution">
-<h3>Binomial distribution<a class="headerlink" href="#binomial-distribution" title="Permalink to this heading">#</a></h3>
+<h3>Binomial distribution<a class="headerlink" href="#binomial-distribution" title="Link to this heading">#</a></h3>
 <p>If <span class="math notranslate nohighlight">\(X\)</span> has the binomial distribution with parameters <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(n\)</span>, then</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
@@ -488,7 +505,7 @@ G_X(s) = (q + ps)^n, \text{ where } q = 1 - p.
 \end{align}\]</div>
 </section>
 <section id="poisson-distribution">
-<h3>Poisson distribution<a class="headerlink" href="#poisson-distribution" title="Permalink to this heading">#</a></h3>
+<h3>Poisson distribution<a class="headerlink" href="#poisson-distribution" title="Link to this heading">#</a></h3>
 <p>If <span class="math notranslate nohighlight">\(X\)</span> has the binomial distribution with parameter <span class="math notranslate nohighlight">\(\lambda\)</span>, then</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
@@ -496,7 +513,7 @@ G_X(s) = e^{\lambda(s - 1)}.
 \end{align}\]</div>
 </section>
 <section id="geometric-distribution">
-<h3>Geometric distribution<a class="headerlink" href="#geometric-distribution" title="Permalink to this heading">#</a></h3>
+<h3>Geometric distribution<a class="headerlink" href="#geometric-distribution" title="Link to this heading">#</a></h3>
 <p>If <span class="math notranslate nohighlight">\(X\)</span> has the geometric distribution with parameter <span class="math notranslate nohighlight">\(p\)</span>, then</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
@@ -504,7 +521,7 @@ G_X(s) = \frac{ps}{1 - qs}, \text{ where } q = 1 - p.
 \end{align}\]</div>
 </section>
 <section id="negative-binomial-distribution">
-<h3>Negative binomial distribution<a class="headerlink" href="#negative-binomial-distribution" title="Permalink to this heading">#</a></h3>
+<h3>Negative binomial distribution<a class="headerlink" href="#negative-binomial-distribution" title="Link to this heading">#</a></h3>
 <p>If <span class="math notranslate nohighlight">\(X\)</span> has the negative binomial distribution with parameters <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(n\)</span>, then</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
@@ -513,7 +530,7 @@ G_X(s) = \left(\frac{ps}{1 - qs}\right)^n, \text{ where } q = 1 - p.
 </section>
 </section>
 <section id="moments">
-<h2>Moments<a class="headerlink" href="#moments" title="Permalink to this heading">#</a></h2>
+<h2>Moments<a class="headerlink" href="#moments" title="Link to this heading">#</a></h2>
 <p>We are often interested in the moments, such as the mean, of a random variable as these summarise certain aspects of its pmf.</p>
 <div class="proof definition admonition" id="definition-3">
 <p class="admonition-title"><span class="caption-number">Definition 32 </span> (Moment)</p>
@@ -534,7 +551,7 @@ G_X(s) = \left(\frac{ps}{1 - qs}\right)^n, \text{ where } q = 1 - p.
 </div><p>The above result is useful in computing  higher order moments of random variables, by first finding the pgf and taking derivatives.</p>
 </section>
 <section id="sums-of-independent-variables">
-<h2>Sums of independent variables<a class="headerlink" href="#sums-of-independent-variables" title="Permalink to this heading">#</a></h2>
+<h2>Sums of independent variables<a class="headerlink" href="#sums-of-independent-variables" title="Link to this heading">#</a></h2>
 <div class="proof theorem admonition" id="theorem-5">
 <p class="admonition-title"><span class="caption-number">Theorem 21 </span> (Independence <span class="math notranslate nohighlight">\(\implies\)</span> <span class="math notranslate nohighlight">\(G\)</span> factorises)</p>
 <section class="theorem-content" id="proof-content">
@@ -580,16 +597,16 @@ G_S(s) = G_N(G_X(s)).
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "venv-rw"
+            mode: "python"
         },
         kernelOptions: {
-            name: "venv-rw",
+            name: "python3",
             path: "./book/prob-intro/ch04"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'venv-rw'</script>
+    <script>kernelName = 'python3'</script>
 
                 </article>
               
@@ -599,7 +616,7 @@ G_S(s) = G_N(G_X(s)).
               
               
                 <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                  
 <div class="prev-next-area">
     <a class="left-prev"
        href="../ch03/content.html"
@@ -627,6 +644,7 @@ G_S(s) = G_N(G_X(s)).
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -666,9 +684,10 @@ By Stratis Markou
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -692,8 +711,8 @@ By Stratis Markou
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
-<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
+  <script src="../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>

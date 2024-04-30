@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Exercises &#8212; Random Walks</title>
   
@@ -19,46 +18,43 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom_style.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css?v=ca93fcec" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom_style.css?v=03c54da9" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
-  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/clipboard.min.js"></script>
-    <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../_static/design-tabs.js"></script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-HP14V4DGEF"></script>
     <script>
                 window.dataLayer = window.dataLayer || [];
@@ -66,16 +62,20 @@
                 gtag('js', new Date());
                 gtag('config', 'G-HP14V4DGEF');
             </script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-HP14V4DGEF');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/mira/000-exercises';</script>
-    <link rel="shortcut icon" href="../../_static/dicefav.png"/>
+    <link rel="icon" href="../../_static/dicefav.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Stream of papers" href="../papers/intro.html" />
@@ -89,10 +89,9 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>
@@ -133,11 +132,14 @@ const thebe_selector_output = ".output, .cell_output"
 </form></div>
   </div>
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -152,6 +154,7 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../../intro.html">
@@ -160,10 +163,22 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
+  
     <p class="title logo__title">Random Walks</p>
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -363,6 +378,7 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -372,6 +388,7 @@ document.write(`
   </button>
 `);
 </script>
+
 
 <script>
 document.write(`
@@ -407,6 +424,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-c">Chapter 2.C</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-d">Chapter 2.D</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-4-a">Chapter 4.A</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-5-a">Chapter 5.A</a></li>
 </ul>
             </nav>
         </div>
@@ -416,10 +434,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="exercises">
-<h1>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h1>
+<h1>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h1>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <p><a class="github-button" href="https://github.com/stratisMarkou/random-walks" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" aria-label="Star stratisMarkou/random-walks on GitHub">Star</a>
 <a class="github-button" href="https://github.com/stratisMarkou/random-walks/issues" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-issue-opened" data-size="large" aria-label="Issue stratisMarkou/random-walks on GitHub">Issue</a>
@@ -429,7 +447,7 @@ document.write(`
 We have been working through the book and exercises with Adrian Goldwaser and Shreyas Padhy, and these solutions are a joint effort.
 Please <a class="reference external" href="mailto:stratismar&#37;&#52;&#48;gmail&#46;com">email me</a> if you find any errors in these solutions or have any other comments.</p>
 <section id="chapter-1-a">
-<h2>Chapter 1.A<a class="headerlink" href="#chapter-1-a" title="Permalink to this heading">#</a></h2>
+<h2>Chapter 1.A<a class="headerlink" href="#chapter-1-a" title="Link to this heading">#</a></h2>
 <div class="tip admonition">
 <p class="admonition-title">Exercise 1.A.1</p>
 <p>Suppose <span class="math notranslate nohighlight">\(f: [a, b] \to \mathbb{R}\)</span> is a bounded function such that</p>
@@ -830,7 +848,7 @@ L(f, P, [a, b]) = L(f, P_1, [a, c]) + L(f, P_2, [c, b])
 </details></div>
 </section>
 <section id="chapter-2-c">
-<h2>Chapter 2.C<a class="headerlink" href="#chapter-2-c" title="Permalink to this heading">#</a></h2>
+<h2>Chapter 2.C<a class="headerlink" href="#chapter-2-c" title="Link to this heading">#</a></h2>
 <div class="tip admonition">
 <p class="admonition-title">Exercise 2.C.1</p>
 <p>Explain why there does not exist a measure space <span class="math notranslate nohighlight">\((X, S, \mu)\)</span> with the property that</p>
@@ -1111,7 +1129,7 @@ Then, a measure <span class="math notranslate nohighlight">\(\mu\)</span> on <sp
 </details></div>
 </section>
 <section id="chapter-2-d">
-<h2>Chapter 2.D<a class="headerlink" href="#chapter-2-d" title="Permalink to this heading">#</a></h2>
+<h2>Chapter 2.D<a class="headerlink" href="#chapter-2-d" title="Link to this heading">#</a></h2>
 <div class="tip admonition">
 <p class="admonition-title">Exercise 2.D.1</p>
 <p>Show that the set consisting of those numbers in <span class="math notranslate nohighlight">\((0, 1)\)</span> that have a decimal expansion containing one hundred consecutive 4s is a Borel subset of <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span>
@@ -1357,11 +1375,11 @@ Suppose <span class="math notranslate nohighlight">\(A\)</span> is Lebesgue meas
 Let <span class="math notranslate nohighlight">\(\epsilon &gt; 0.\)</span>
 Then, there exists an open set <span class="math notranslate nohighlight">\(B\)</span> such that</p>
 <div class="math notranslate nohighlight" id="equation-mira-eq-2d6-1">
-<span class="eqno">(5)<a class="headerlink" href="#equation-mira-eq-2d6-1" title="Permalink to this equation">#</a></span>\[A \subseteq B \text{ and } |B \setminus A| &lt; \epsilon/2.\]</div>
+<span class="eqno">(5)<a class="headerlink" href="#equation-mira-eq-2d6-1" title="Link to this equation">#</a></span>\[A \subseteq B \text{ and } |B \setminus A| &lt; \epsilon/2.\]</div>
 <p class="sd-card-text">Since <span class="math notranslate nohighlight">\(B\)</span> is an open set, it is equal to a countable union of disjoint open intervals, say <span class="math notranslate nohighlight">\(B = \cup_{n=1}^\infty I_n.\)</span>
 Note that <span class="math notranslate nohighlight">\(|B| \leq |A| + |B \setminus A| &lt; \infty,\)</span> so</p>
 <div class="math notranslate nohighlight" id="equation-mira-eq-2d6-2">
-<span class="eqno">(6)<a class="headerlink" href="#equation-mira-eq-2d6-2" title="Permalink to this equation">#</a></span>\[|B| = \left|\bigcup_{n=1}^\infty I_n\right| = \sum_{n=1}^\infty |I_n| &lt; \infty.\]</div>
+<span class="eqno">(6)<a class="headerlink" href="#equation-mira-eq-2d6-2" title="Link to this equation">#</a></span>\[|B| = \left|\bigcup_{n=1}^\infty I_n\right| = \sum_{n=1}^\infty |I_n| &lt; \infty.\]</div>
 <p class="sd-card-text">Therefore, the sequence <span class="math notranslate nohighlight">\(|I_1|, |I_2|, \ldots\)</span> is bounded and attains its supremum.
 By relabelling, we can order the <span class="math notranslate nohighlight">\(I_n\)</span> in order of decreasing outer measure.
 From <a class="reference internal" href="#equation-mira-eq-2d6-2">(6)</a>, we know that the series of <span class="math notranslate nohighlight">\(|I_n|\)</span> converges, so there exists <span class="math notranslate nohighlight">\(N \in \mathbb{N}\)</span> such that</p>
@@ -1388,10 +1406,10 @@ Conversely, suppose that for every <span class="math notranslate nohighlight">\(
 \[|B \setminus A| + |A \setminus B| &lt; \epsilon.\]</div>
 <p class="sd-card-text">Fix <span class="math notranslate nohighlight">\(\epsilon &gt; 0,\)</span> and let <span class="math notranslate nohighlight">\(B\)</span> be a set that satisfies the above conditions, and</p>
 <div class="math notranslate nohighlight" id="equation-mira-eq-2d6-3">
-<span class="eqno">(7)<a class="headerlink" href="#equation-mira-eq-2d6-3" title="Permalink to this equation">#</a></span>\[|B \setminus A| + |A \setminus B| &lt; \epsilon / 2.\]</div>
+<span class="eqno">(7)<a class="headerlink" href="#equation-mira-eq-2d6-3" title="Link to this equation">#</a></span>\[|B \setminus A| + |A \setminus B| &lt; \epsilon / 2.\]</div>
 <p class="sd-card-text">Then, by <a class="reference internal" href="#equation-mira-eq-2d6-3">(7)</a> and the definition of the outer measure, there exists a sequence of open intervals <span class="math notranslate nohighlight">\(I_1, I_2, \ldots,\)</span> such that <span class="math notranslate nohighlight">\(\cup_{n=1}^\infty I_n \subseteq A \setminus B\)</span> and</p>
 <div class="math notranslate nohighlight" id="equation-mira-eq-2d6-4">
-<span class="eqno">(8)<a class="headerlink" href="#equation-mira-eq-2d6-4" title="Permalink to this equation">#</a></span>\[\sum_{n=1}^\infty |I_n| &lt; \epsilon / 2.\]</div>
+<span class="eqno">(8)<a class="headerlink" href="#equation-mira-eq-2d6-4" title="Link to this equation">#</a></span>\[\sum_{n=1}^\infty |I_n| &lt; \epsilon / 2.\]</div>
 <p class="sd-card-text">Now, let <span class="math notranslate nohighlight">\(I = \cup_{n=1}^\infty I_n.\)</span>
 Then, the set <span class="math notranslate nohighlight">\(B \cup I\)</span> is open and</p>
 <div class="math notranslate nohighlight">
@@ -1522,7 +1540,51 @@ Therefore, <span class="math notranslate nohighlight">\(V \subseteq A\)</span> i
 </details></div>
 </section>
 <section id="chapter-4-a">
-<h2>Chapter 4.A<a class="headerlink" href="#chapter-4-a" title="Permalink to this heading">#</a></h2>
+<h2>Chapter 4.A<a class="headerlink" href="#chapter-4-a" title="Link to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 4.A.1</p>
+<p>Suppose <span class="math notranslate nohighlight">\((X, \mathcal{S}, \mu)\)</span> is a measure space and <span class="math notranslate nohighlight">\(h: X \to \mathbb{R}\)</span> is an <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>-measurable function.
+Prove that</p>
+<div class="math notranslate nohighlight">
+\[\mu\left(x \in X: |h(x)| \geq c \right) \leq \frac{1}{c^p} \int |h|^p d\mu\]</div>
+<p>for all positive numbers <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(p.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Note that for all positive numbers <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(p,\)</span> we have <span class="math notranslate nohighlight">\(|h(x)| &gt; c\)</span> if and only if <span class="math notranslate nohighlight">\(|h(x)|^p &gt; c^p.\)</span>
+Therefore, applying Markov’s inequality, we have</p>
+<div class="math notranslate nohighlight">
+\[\mu\left(x \in X: |h(x)| \geq c \right) = \mu\left(x \in X: |h(x)|^p \geq c^p \right) \leq \frac{1}{c^p} \int |h|^p d\mu.\]</div>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 4.A.2 (Chebyshev’s inequality)</p>
+<p>Suppose <span class="math notranslate nohighlight">\((X, \mathcal{S}, \mu)\)</span> is a measure space with <span class="math notranslate nohighlight">\(\mu(X) = 1\)</span> and <span class="math notranslate nohighlight">\(h \in \mathcal{L}^1(\mu).\)</span>
+Prove that</p>
+<div class="math notranslate nohighlight">
+\[\mu\left(x \in X: \left|h(x) - \int h d\mu\right| \geq c \right) \leq \frac{1}{c^2} \int \left|h - \int h d\mu\right|^2 d\mu\]</div>
+<p>for all <span class="math notranslate nohighlight">\(c &gt; 0.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Note that for all <span class="math notranslate nohighlight">\(c &gt; 0,\)</span> we have <span class="math notranslate nohighlight">\(\left|h(x) - \int h d\mu\right| \geq c\)</span> if and only if <span class="math notranslate nohighlight">\(\left|h(x) - \int h d\mu\right|^2 \geq c^2.\)</span>
+Therefore, applying the result of <code class="xref prf prf-ref docutils literal notranslate"><span class="pre">Exercise</span> <span class="pre">4.A.1</span></code>, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mu\left(x \in X: \left|h(x) - \int h d\mu\right| \geq c \right) &amp;\leq \frac{1}{c^2} \int \left|h - \int h d\mu\right|^2 d\mu 
+&amp;= \frac{1}{c^2} \int \left(h - \int h d\mu\right)^2 d\mu.
+&amp;= \frac{1}{c^2} \left(\int h^2 d\mu - \left(\int h d\mu\right)^2\right).
+\end{align}\]</div>
+</div>
+</details></div>
 <div class="tip admonition">
 <p class="admonition-title">Exercise 4.A.3</p>
 <p>Suppose <span class="math notranslate nohighlight">\((X, \mathcal{S}, \mu)\)</span> is a measure space.
@@ -1627,6 +1689,28 @@ This means that <span class="math notranslate nohighlight">\(A_c\)</span> is ope
 </div>
 </details></div>
 <div class="tip admonition">
+<p class="admonition-title">Exercise 4.A.10</p>
+<p>Prove or give a counterexample: if <span class="math notranslate nohighlight">\(h: \mathbb{R} \to [0, \infty)\)</span> is an increasing function, then <span class="math notranslate nohighlight">\(h^*\)</span> is also an increasing function.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(h: \mathbb{R} \to [0, \infty)\)</span> is an increasing function, and let <span class="math notranslate nohighlight">\(a, b \in \mathbb{R}\)</span> with <span class="math notranslate nohighlight">\(a &lt; b.\)</span>
+For <span class="math notranslate nohighlight">\(x \in \mathbb{x}\)</span> define <span class="math notranslate nohighlight">\(h_x\)</span> as <span class="math notranslate nohighlight">\(h_x(c) = h(c)\)</span> for all <span class="math notranslate nohighlight">\(c \in \mathbb{R}.\)</span>
+Then, since <span class="math notranslate nohighlight">\(h\)</span> is increasing, <span class="math notranslate nohighlight">\(h_x &gt; h\)</span> for all <span class="math notranslate nohighlight">\(x \in \mathbb{R},\)</span> so</p>
+<div class="math notranslate nohighlight">
+\[\int_{a - t}^{a + t} |h| \leq \int_{a - t}^{a + t} |h_x|\]</div>
+<p class="sd-card-text">for all <span class="math notranslate nohighlight">\(x \in \mathbb{R}\)</span> and <span class="math notranslate nohighlight">\(t &gt; 0.\)</span>
+Therefore</p>
+<div class="math notranslate nohighlight">
+\[\int_{a - t}^{a + t} |h| \leq \int_{a - t}^{a + t} |h_(b - a)| = \int_{b - t}^{b + t} |h|,\]</div>
+<p class="sd-card-text">and taking the supremum over <span class="math notranslate nohighlight">\(t &gt; 0\)</span> we arrive at the result.</p>
+</div>
+</details></div>
+<div class="tip admonition">
 <p class="admonition-title">Exercise 4.A.11</p>
 <p>Give an example of a Borel meeasurable function <span class="math notranslate nohighlight">\(h: \mathbb{R} \to [0, \infty)\)</span> such that <span class="math notranslate nohighlight">\(h^*(b) &lt; \infty\)</span> for all <span class="math notranslate nohighlight">\(b \in \mathbb{R}\)</span> but <span class="math notranslate nohighlight">\(\sup\{h^*(b): b\in \mathbb{R}\} = \infty.\)</span></p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
@@ -1645,19 +1729,76 @@ Note also that <span class="math notranslate nohighlight">\(h^*(2^n + 1/2) \to \
 Finally, we note that since the gap between individual characteristic functions increases exponentially quickly, while the height of each characteristic function increases linearly, it follows that for any <span class="math notranslate nohighlight">\(b \in \mathbb{R},\)</span> the quantity <span class="math notranslate nohighlight">\(\int_{b - t}^{b + t} |h|\)</span> is bounded in <span class="math notranslate nohighlight">\(t\)</span> and therefore <span class="math notranslate nohighlight">\(h^*(b) &lt; \infty.\)</span></p>
 </div>
 </details></div>
-<!-- ::::{admonition} Exercise 4.A.12
-:class: tip
-Show that $|\{b \in \mathbb{R}: h^*(b) = \infty\}| = 0$ for every $h \in \mathcal{L}^1(\mathbb{R}).$
-
-:::{dropdown} Solution
-Let $A_{\infty} = \{b \in \mathbb{R}: h^*(b) = \infty\}.$
-Suppose $|A_\infty| > 0.$
-Then, there exists a closed interval $[a, b] \subseteq \mathbb{R}$ such that $|A_\infty \cap [a, b]| > 0.$
-Note that $A_\infty$ is closed, so $A = A_\infty \cap [a, b]$ is closed and bounded.
-Let $a \in A$ and $c > 0.$
-
-:::
-:::: --></section>
+</section>
+<section id="chapter-5-a">
+<h2>Chapter 5.A<a class="headerlink" href="#chapter-5-a" title="Link to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 5.A.1</p>
+<p>Suppose <span class="math notranslate nohighlight">\((X, S)\)</span> and <span class="math notranslate nohighlight">\((Y, T)\)</span> are measurable spaces.
+Prove that if <span class="math notranslate nohighlight">\(A\)</span> is a nonempty subset of <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(B\)</span> is a nonempty subset of <span class="math notranslate nohighlight">\(Y\)</span> such that <span class="math notranslate nohighlight">\(A \times B \in S \otimes T,\)</span> then <span class="math notranslate nohighlight">\(A \in S\)</span> and <span class="math notranslate nohighlight">\(B \in T.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\((X, S)\)</span> and <span class="math notranslate nohighlight">\((Y, T)\)</span> are measurable spaces, and that if <span class="math notranslate nohighlight">\(A\)</span> is a nonempty subset of <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(B\)</span> is a nonempty subset of <span class="math notranslate nohighlight">\(Y\)</span> such that <span class="math notranslate nohighlight">\(A \times B \in S \otimes T.\)</span>
+Since <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are nonempty, there exist <span class="math notranslate nohighlight">\(a \in A\)</span> and <span class="math notranslate nohighlight">\(b \in B.\)</span>
+Since cross sections of measurable sets are measurable, we have <span class="math notranslate nohighlight">\(A = [A \times B]_a \in T\)</span> and <span class="math notranslate nohighlight">\(B = [A \times B]^b \in S.\)</span></p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 5.A.10</p>
+<p>Suppose <span class="math notranslate nohighlight">\((X, S, \mu)\)</span> and <span class="math notranslate nohighlight">\((Y, T, \nu)\)</span> are <span class="math notranslate nohighlight">\(\sigma\)</span>-finite measure spaces.
+Prove that if <span class="math notranslate nohighlight">\(\omega\)</span> is a measure of <span class="math notranslate nohighlight">\(S \otimes T\)</span> such that <span class="math notranslate nohighlight">\(\omega(A \times B) = \mu(A)\nu(B)\)</span> for all <span class="math notranslate nohighlight">\(A \in S\)</span> and all <span class="math notranslate nohighlight">\(B \in T,\)</span> then <span class="math notranslate nohighlight">\(\omega = \mu \times \nu.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> be the set of all finite unions of rectangles <span class="math notranslate nohighlight">\(A \times B\)</span> where <span class="math notranslate nohighlight">\(A \in S\)</span> and <span class="math notranslate nohighlight">\(B \in T,\)</span> and note that <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> is an algebra.
+Since a finite union of rectangles can be expressed as a disjoint finite union of rectangles, from now on we will assume that the elements of <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> are disjoint finite unions of rectangles.
+Now, define the set</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{M} = \left\{E \in S \otimes T: \omega(E) = (\mu \times \nu)(E)\right\}.\]</div>
+<p class="sd-card-text">Note that <span class="math notranslate nohighlight">\(\omega\)</span> agrees with <span class="math notranslate nohighlight">\(\mu \times \nu\)</span> on all rectangles.
+Therefore, they also agree on all disjoint unions of rectangles.
+So <span class="math notranslate nohighlight">\(\omega\)</span> and <span class="math notranslate nohighlight">\(\mu \times \nu\)</span> agree on every element of <span class="math notranslate nohighlight">\(\mathcal{A},\)</span> so <span class="math notranslate nohighlight">\(\mathcal{A} \subseteq \mathcal{M}.\)</span>
+Now, we will show that <span class="math notranslate nohighlight">\(\mathcal{M}\)</span> is a monotone class.
+First, suppose that <span class="math notranslate nohighlight">\(E_1 \subseteq E_2 \subseteq \dots\)</span> is a sequence of sets in <span class="math notranslate nohighlight">\(\mathcal{M}.\)</span>
+Then, we have</p>
+<div class="math notranslate nohighlight">
+\[\lim_{n \to \infty} \omega(E_n) = \lim_{n \to \infty} (\mu \times \nu)(E_n) \implies \omega(E) = (\mu \times \nu)(E_n).\]</div>
+<p class="sd-card-text">Second, suppose that <span class="math notranslate nohighlight">\(E_1 \supseteq E_2 \supseteq \dots.\)</span>
+Since <span class="math notranslate nohighlight">\((X, S, \mu)\)</span> and <span class="math notranslate nohighlight">\((Y, T, \nu)\)</span> are <span class="math notranslate nohighlight">\(\sigma\)</span>-finite measure spaces, there exist disjoint sequences of sets <span class="math notranslate nohighlight">\(X_1, X_2 \dots\)</span> and <span class="math notranslate nohighlight">\(Y_1 \subseteq Y_2 \dots,\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[\bigcup_{n = 1}^\infty X_n = X ~~\text{ and }~~ \bigcup_{n = 1}^\infty Y_n = Y\]</div>
+<p class="sd-card-text">and also <span class="math notranslate nohighlight">\(\mu(X_n), \mu(Y_n) &lt; \infty\)</span> for all <span class="math notranslate nohighlight">\(k \in \mathbb{Z}^+.\)</span>
+Now define <span class="math notranslate nohighlight">\(R_1, R_2, \dots\)</span> to be the sequence of rectangles</p>
+<div class="math notranslate nohighlight">
+\[X_1 \times Y_1, X_1 \times Y_2, X_2 \times Y_1, \dots.\]</div>
+<p class="sd-card-text">This sequence is disjoint and its union equals <span class="math notranslate nohighlight">\(S \times T.\)</span>
+Also, <span class="math notranslate nohighlight">\(\omega(R_k) = (\mu \times \nu)(R_k) &lt; \infty\)</span> for all <span class="math notranslate nohighlight">\(k \in \mathbb{R}.\)</span>
+Therefore, defining <span class="math notranslate nohighlight">\(E = \cap_{n = 1}^\infty,\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\omega(E) &amp;= \sum_{j = 1}^\infty \omega(R_j \cap E) \\
+          &amp;= \sum_{j = 1}^\infty \omega(\lim_{n \to \infty} R_j \cap E_n) \\
+          &amp;= \sum_{j = 1}^\infty \lim_{n \to \infty} \omega(R_j \cap E_n) \\
+          &amp;= \lim_{n \to \infty} \sum_{j = 1}^\infty \omega(R_j \cap E_n) \\
+          &amp;= \lim_{n \to \infty} \omega(E_n),
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">and, by a similar argument, we have</p>
+<div class="math notranslate nohighlight">
+\[(\mu \times \nu)(E) = \lim_{n \to \infty} (\mu \times \nu)(E_n).\]</div>
+<p class="sd-card-text">Putting these results together, we have <span class="math notranslate nohighlight">\(\omega(E) = (\mu \times \nu)(E),\)</span> so <span class="math notranslate nohighlight">\(\mathcal{M}\)</span> is a monotone class.
+Since <span class="math notranslate nohighlight">\(\mathcal{M}\)</span> is a monotone class that contains <span class="math notranslate nohighlight">\(\mathcal{A},\)</span> it contains <span class="math notranslate nohighlight">\(S \otimes T\)</span> so <span class="math notranslate nohighlight">\(\mathcal{M} = S \otimes T,\)</span> and the two measures <span class="math notranslate nohighlight">\(\omega\)</span> and <span class="math notranslate nohighlight">\(\mu \times \nu\)</span> agree on all of <span class="math notranslate nohighlight">\(S \otimes T.\)</span></p>
+</div>
+</details></div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1688,7 +1829,7 @@ Let $a \in A$ and $c > 0.$
               
               
                 <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                  
 <div class="prev-next-area">
     <a class="left-prev"
        href="002-measures.html"
@@ -1717,6 +1858,7 @@ Let $a \in A$ and $c > 0.$
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> Contents
@@ -1727,6 +1869,7 @@ Let $a \in A$ and $c > 0.$
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-c">Chapter 2.C</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-d">Chapter 2.D</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-4-a">Chapter 4.A</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-5-a">Chapter 5.A</a></li>
 </ul>
   </nav></div>
 
@@ -1748,9 +1891,10 @@ By Stratis Markou
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -1774,8 +1918,8 @@ By Stratis Markou
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
-<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>

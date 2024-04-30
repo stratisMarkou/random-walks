@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../../../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Main limit theorems &#8212; Random Walks</title>
   
@@ -19,46 +18,43 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../../../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/.ipynb_checkpoints/custom_style-checkpoint.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/proof.css?v=ca93fcec" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css?v=03c54da9" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
-  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/clipboard.min.js"></script>
-    <script src="../../../_static/copybutton.js"></script>
-    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../../_static/design-tabs.js"></script>
+    <script src="../../../_static/design-tabs.js?v=36754332"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-HP14V4DGEF"></script>
     <script>
                 window.dataLayer = window.dataLayer || [];
@@ -66,16 +62,20 @@
                 gtag('js', new Date());
                 gtag('config', 'G-HP14V4DGEF');
             </script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-HP14V4DGEF');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/prob-intro/ch08/content';</script>
-    <link rel="shortcut icon" href="../../../_static/dicefav.png"/>
+    <link rel="icon" href="../../../_static/dicefav.png"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="Masure, integration and real analysis" href="../../mira/000-intro.html" />
@@ -89,10 +89,9 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>
@@ -133,11 +132,14 @@ const thebe_selector_output = ".output, .cell_output"
 </form></div>
   </div>
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -152,6 +154,7 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../../../intro.html">
@@ -160,10 +163,22 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
+  
     <p class="title logo__title">Random Walks</p>
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -201,7 +216,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Papers &amp; Miscellanous</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../papers/intro.html">Stream</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../papers/intro.html">Stream of papers</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../papers/why-covariances/why-covariances.html">Why covariance functions?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../papers/ais/ais.html">Annealed importance sampling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../papers/rff/rff.html">Random Fourier features</a></li>
@@ -363,6 +378,7 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -372,6 +388,7 @@ document.write(`
   </button>
 `);
 </script>
+
 
 <script>
 document.write(`
@@ -419,16 +436,16 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="main-limit-theorems">
-<h1>Main limit theorems<a class="headerlink" href="#main-limit-theorems" title="Permalink to this heading">#</a></h1>
+<h1>Main limit theorems<a class="headerlink" href="#main-limit-theorems" title="Link to this heading">#</a></h1>
 <p>In this chapter we introduce the idea of convergence for random variables, which may be in either of the three senses: (1) in mean-square, (2) in probability or (3) in distribution.
 These three senses are non-equivalent and in fact one implies the next, in the order given above.
 We present important theorems involving limits of random variables, such as the law of large numbers, the central limit theorem and the large deviation theorem.
 We also present the continuity theorems for moment generating functions and characteristic functions.</p>
 <section id="convergence-in-mean-square">
-<h2>Convergence in mean-square<a class="headerlink" href="#convergence-in-mean-square" title="Permalink to this heading">#</a></h2>
+<h2>Convergence in mean-square<a class="headerlink" href="#convergence-in-mean-square" title="Link to this heading">#</a></h2>
 <p>We are often interested in the convergence of a sequence of random variables to another random variable.
 Unlike real sequences, where convergence has one meaning only, the convergence of a sequence of random variables can be defined in different ways.
 One such way is convergence in mean-square, as defined below.</p>
@@ -477,7 +494,7 @@ Therefore as <span class="math notranslate nohighlight">\(N \to \infty\)</span>,
 </div>
 </details></section>
 <section id="convergence-in-probability">
-<h2>Convergence in probability<a class="headerlink" href="#convergence-in-probability" title="Permalink to this heading">#</a></h2>
+<h2>Convergence in probability<a class="headerlink" href="#convergence-in-probability" title="Link to this heading">#</a></h2>
 <p>A weaker sense in which a sequence of random variables can converge is that of convergence in probability.</p>
 <div class="proof definition admonition" id="definition-2">
 <p class="admonition-title"><span class="caption-number">Definition 47 </span> (Convergence in probability)</p>
@@ -566,7 +583,7 @@ S_N = X_1 + X_2 + ... + X_N
 </details><p>Unlike the mean-square law of large numbers, the weak law holds even when <span class="math notranslate nohighlight">\(\sigma^2\)</span> is infinite, provided that the <span class="math notranslate nohighlight">\(X_n\)</span> all come from the same distribution.</p>
 </section>
 <section id="central-limit-theorem">
-<h2>Central limit theorem<a class="headerlink" href="#central-limit-theorem" title="Permalink to this heading">#</a></h2>
+<h2>Central limit theorem<a class="headerlink" href="#central-limit-theorem" title="Link to this heading">#</a></h2>
 <div class="proof theorem admonition" id="theorem-6">
 <p class="admonition-title"><span class="caption-number">Theorem 48 </span> (Central limit theorem)</p>
 <section class="theorem-content" id="proof-content">
@@ -637,7 +654,7 @@ M_{Z_N}(t) = \left[ 1 + \frac{1}{2} \frac{t^2}{N} + o\left(\frac{1}{N}\right) \r
 </div>
 </details></section>
 <section id="large-deviations">
-<h2>Large deviations<a class="headerlink" href="#large-deviations" title="Permalink to this heading">#</a></h2>
+<h2>Large deviations<a class="headerlink" href="#large-deviations" title="Link to this heading">#</a></h2>
 <p>We are sometimes interested in the probability that a sum of i.i.d. random variables <span class="math notranslate nohighlight">\(S_N = X_1 + X_2 + ... + X_N\)</span> will deviate from its mean by an amount proportional to <span class="math notranslate nohighlight">\(N\)</span>, i.e. <span class="math notranslate nohighlight">\(\mathbb{P}(S_N - \mu N &gt; aN).\)</span>
 The large deviation theorem relates the probability of a large deviation to a quantity called the Fenchel-Legendre transform, defined below.</p>
 <div class="proof definition admonition" id="definition-8">
@@ -698,7 +715,7 @@ Minimising over <span class="math notranslate nohighlight">\(t\)</span> we obtai
 </div>
 </details></section>
 <section id="convergence-in-distribution">
-<h2>Convergence in distribution<a class="headerlink" href="#convergence-in-distribution" title="Permalink to this heading">#</a></h2>
+<h2>Convergence in distribution<a class="headerlink" href="#convergence-in-distribution" title="Link to this heading">#</a></h2>
 <div class="proof definition admonition" id="definition-10">
 <p class="admonition-title"><span class="caption-number">Definition 49 </span> (Convergence in distribution)</p>
 <section class="definition-content" id="proof-content">
@@ -776,7 +793,7 @@ Therefore</p>
 <p><span class="caption-number">Fig. 1 </span><span class="caption-text">Illustration for the argument that convergence in probability implies convergence in distribution.
 The presence of a darker border indicates that the corresponding region contains the border itself.
 The cyan region does not contain its border.
-See text for explanation.</span><a class="headerlink" href="#conv-in-prob-proof" title="Permalink to this image">#</a></p>
+See text for explanation.</span><a class="headerlink" href="#conv-in-prob-proof" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -788,7 +805,7 @@ Then <span class="math notranslate nohighlight">\(X_n\)</span> converges to <spa
 </section>
 </div></section>
 <section id="limits-of-characteristic-functions">
-<span id="prob-intro-char-cont"></span><h2>Limits of characteristic functions<a class="headerlink" href="#limits-of-characteristic-functions" title="Permalink to this heading">#</a></h2>
+<span id="prob-intro-char-cont"></span><h2>Limits of characteristic functions<a class="headerlink" href="#limits-of-characteristic-functions" title="Link to this heading">#</a></h2>
 <div class="proof theorem admonition" id="theorem-13">
 <p class="admonition-title"><span class="caption-number">Theorem 53 </span> (Continuity theorem with characteristic functions)</p>
 <section class="theorem-content" id="proof-content">
@@ -801,16 +818,18 @@ Then <span class="math notranslate nohighlight">\(X_N \implies X\)</span> as <sp
 </section>
 </div></section>
 <section id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
 <div class="docutils container" id="id3">
-<dl class="citation">
-<dt class="label" id="id4"><span class="brackets"><a class="fn-backref" href="#id2">GWW86</a></span></dt>
-<dd><p>G. Grimmett, D.J.A. Welsh, and D. Welsh. <em>Probability: An Introduction</em>. Oxford University Press. Clarendon Press, 1986.</p>
-</dd>
-<dt class="label" id="id5"><span class="brackets"><a class="fn-backref" href="#id1">GS01</a></span></dt>
-<dd><p>G.R. Grimmett and D.R. Stirzaker. <em>Probability and random processes</em>. Number 391. Oxford university press, 2001.</p>
-</dd>
-</dl>
+<div role="list" class="citation-list">
+<div class="citation" id="id4" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">GWW86</a><span class="fn-bracket">]</span></span>
+<p>G. Grimmett, D.J.A. Welsh, and D. Welsh. <em>Probability: An Introduction</em>. Oxford University Press. Clarendon Press, 1986.</p>
+</div>
+<div class="citation" id="id5" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">GS01</a><span class="fn-bracket">]</span></span>
+<p>G.R. Grimmett and D.R. Stirzaker. <em>Probability and random processes</em>. Number 391. Oxford university press, 2001.</p>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -824,16 +843,16 @@ Then <span class="math notranslate nohighlight">\(X_N \implies X\)</span> as <sp
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "venv-rw"
+            mode: "python"
         },
         kernelOptions: {
-            name: "venv-rw",
+            name: "python3",
             path: "./book/prob-intro/ch08"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'venv-rw'</script>
+    <script>kernelName = 'python3'</script>
 
                 </article>
               
@@ -843,7 +862,7 @@ Then <span class="math notranslate nohighlight">\(X_N \implies X\)</span> as <sp
               
               
                 <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                  
 <div class="prev-next-area">
     <a class="left-prev"
        href="../ch07/content.html"
@@ -871,6 +890,7 @@ Then <span class="math notranslate nohighlight">\(X_N \implies X\)</span> as <sp
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -906,9 +926,10 @@ By Stratis Markou
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -932,8 +953,8 @@ By Stratis Markou
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
-<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
+  <script src="../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>
