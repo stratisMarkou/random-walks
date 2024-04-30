@@ -1510,7 +1510,7 @@ $$X_1 \times Y_1, X_1 \times Y_2, X_2 \times Y_1, \dots.$$
 
 This sequence is disjoint and its union equals $S \times T.$
 Also, $\omega(R_k) = (\mu \times \nu)(R_k) < \infty$ for all $k \in \mathbb{R}.$
-Therefore, defining $E = \cap_{n = 1}^\infty,$ we have
+Therefore, defining $E = \cap_{n = 1}^\infty E_n,$ we have
 
 $$\begin{align}
 \omega(E) &= \sum_{j = 1}^\infty \omega(R_j \cap E) \\
@@ -1520,7 +1520,8 @@ $$\begin{align}
           &= \lim_{n \to \infty} \omega(E_n),
 \end{align}$$
 
-and, by a similar argument, we have
+where in the third line we have used the bounded convergence theorem.
+By a similar argument, we have
 
 $$(\mu \times \nu)(E) = \lim_{n \to \infty} (\mu \times \nu)(E_n).$$
 
