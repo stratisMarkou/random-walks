@@ -500,7 +500,6 @@ Therefore, by picking $\delta < \epsilon / C$ we have $|F(t) - F(t_0)| < \epsilo
 
 ::::{admonition} Exercise 1.A.12
 :class: tip
-
 Suppose $f: [a, b] \to \mathbb{R}$ is Riemann integrable.
 Prove taht $|f|$ is Riemann integrable and that
 
@@ -515,8 +514,7 @@ $$U(f, P_\epsilon, [a, b]) - L(f, P_\epsilon, [a, b]) < \epsilon.$$
 Now since
 
 $$\begin{align}
-\sup_{y \in [x_{k-1}, x_k]} |f(y)| - \inf_{z \in [x_{k-1}, x_k]} |f(z)| &\leq \sup_{y \in [x_{k-1}, x_k]} f(y) - \inf_{z \in [x_{k-1}, x_k]} f(z) \\
-&\leq \sup_{y \in [x_{k-1}, x_k]} f(y) - \inf_{z \in [x_{k-1}, x_k]} f(z) \\
+\sup_{y \in [x_{k-1}, x_k]} |f(y)| - \inf_{z \in [x_{k-1}, x_k]} |f(z)| &\leq \sup_{y \in [x_{k-1}, x_k]} f(y) - \inf_{z \in [x_{k-1}, x_k]} f(z)
 \end{align}$$
 
 we have that
@@ -530,6 +528,35 @@ $$\left|\int_a^b f\right| \leq \int_a^b |f|.$$
 :::
 ::::
 
+
+
+::::{admonition} Exercise 1.A.13
+:class: tip
+Suppose $f: [a, b] \to \mathbb{R}$ is an increasing function, meaning that $c, d \in [a, b]$ with $c < d$ implies $f(c) \leq f(d).$
+Prove that $f$ is Riemann integrable on $[a, b].$
+
+:::{dropdown} Solution
+Let $P_n$ be the partition of $[a, b]$ into $2^n$ intervals of equal length.
+Fix $n \in \mathbb{Z}^+$ and let $x_0, x_1, \dots, x_{2^n}$ be the points in $P_n$ and $y_0, y_1, \dots, y_{2^{n+1}}$ be the points in $P_{n+1}.$
+Consider some fixed $0 \leq j \leq n.$
+We have
+
+$$\begin{align}
+~&\left(\sup_{[x_j, x_{j+1}]}f - \inf_{[x_j, x_{j+1}]}f \right) (x_{j+1} - x_j) = \\
+=~&\left(\sup_{[x_j, x_{j+1}]}f - \inf_{[x_j, x_{j+1}]}f \right) (y_{2j+1} - y_{2j}) + \left(\sup_{[x_j, x_{j+1}]}f - \inf_{[x_j, x_{j+1}]}f \right) (y_{2j+2} - y_{2j+1}) \\
+\geq~&\left(\sup_{[y_{2j}, x_{2j+1}]}f - \inf_{[y_{2j}, y_{2j+1}]}f \right) (y_{2j+1} - y_{2j}) + \left(\sup_{[y_{2j + 1}, y_{2j+2}]}f - \inf_{[y_{2j+1}, y_{2j+2}]}f \right) (y_{2j+2} - y_{2j+1}) \\
+=~&\left(\sup_{[y_{2j+1}, y_{2j+2}]}f - \inf_{[y_{2j}, y_{2j+1}]}f\right) \cdot 2^{-n-1} \\
+=~&\left(\sup_{[x_j, x_{j+1}]}f - \inf_{[x_j, x_{j+1}]}f \right) \cdot 2^{-n-1}
+\end{align}$$
+
+In other words, each time we increment $n,$ the difference between the upper and lower Riemann sums decreases by a factor of $2.$
+Therefore, by induction, we have
+
+$$U(f, P_n, [a, b]) - L(f, P_n, [a, b]) = 2^{-(n-1)} \cdot \left(U(f, P_1, [a, b]) - L(f, P_1, [a, b]) \right).$$
+
+so $f$ is Riemann integrable over $[a, b].$
+:::
+::::
 
 
 ## Chapter 2.C
