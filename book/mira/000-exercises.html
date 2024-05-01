@@ -890,10 +890,9 @@ Since <span class="math notranslate nohighlight">\(f\)</span> is Riemann integra
 \[U(f, P_\epsilon, [a, b]) - L(f, P_\epsilon, [a, b]) &lt; \epsilon.\]</div>
 <p class="sd-card-text">Now since</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{align}
-\sup_{y \in [x_{k-1}, x_k]} |f(y)| - \inf_{z \in [x_{k-1}, x_k]} |f(z)| &amp;\leq \sup_{y \in [x_{k-1}, x_k]} f(y) - \inf_{z \in [x_{k-1}, x_k]} f(z) \\
-&amp;\leq \sup_{y \in [x_{k-1}, x_k]} f(y) - \inf_{z \in [x_{k-1}, x_k]} f(z) \\
-\end{align}\end{split}\]</div>
+\[\begin{align}
+\sup_{y \in [x_{k-1}, x_k]} |f(y)| - \inf_{z \in [x_{k-1}, x_k]} |f(z)| &amp;\leq \sup_{y \in [x_{k-1}, x_k]} f(y) - \inf_{z \in [x_{k-1}, x_k]} f(z)
+\end{align}\]</div>
 <p class="sd-card-text">we have that</p>
 <div class="math notranslate nohighlight">
 \[U(|f|, P_\epsilon, [a, b]) - L(|f|, P_\epsilon, [a, b]) \leq U(f, P_\epsilon, [a, b]) - L(f, P_\epsilon, [a, b]) &lt; \epsilon\]</div>
@@ -901,6 +900,36 @@ Since <span class="math notranslate nohighlight">\(f\)</span> is Riemann integra
 Since <span class="math notranslate nohighlight">\(U(|f|, P_\epsilon, [a, b]) \geq U(f, P_\epsilon, [a, b]),\)</span> we have that</p>
 <div class="math notranslate nohighlight">
 \[\left|\int_a^b f\right| \leq \int_a^b |f|.\]</div>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.A.13</p>
+<p>Suppose <span class="math notranslate nohighlight">\(f: [a, b] \to \mathbb{R}\)</span> is an increasing function, meaning that <span class="math notranslate nohighlight">\(c, d \in [a, b]\)</span> with <span class="math notranslate nohighlight">\(c &lt; d\)</span> implies <span class="math notranslate nohighlight">\(f(c) \leq f(d).\)</span>
+Prove that <span class="math notranslate nohighlight">\(f\)</span> is Riemann integrable on <span class="math notranslate nohighlight">\([a, b].\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(P_n\)</span> be the partition of <span class="math notranslate nohighlight">\([a, b]\)</span> into <span class="math notranslate nohighlight">\(2^n\)</span> intervals of equal length.
+Fix <span class="math notranslate nohighlight">\(n \in \mathbb{Z}^+\)</span> and let <span class="math notranslate nohighlight">\(x_0, x_1, \dots, x_{2^n}\)</span> be the points in <span class="math notranslate nohighlight">\(P_n\)</span> and <span class="math notranslate nohighlight">\(y_0, y_1, \dots, y_{2^{n+1}}\)</span> be the points in <span class="math notranslate nohighlight">\(P_{n+1}.\)</span>
+Consider some fixed <span class="math notranslate nohighlight">\(0 \leq j \leq n.\)</span>
+We have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+~&amp;\left(\sup_{[x_j, x_{j+1}]}f - \inf_{[x_j, x_{j+1}]}f \right) (x_{j+1} - x_j) = \\
+=~&amp;\left(\sup_{[x_j, x_{j+1}]}f - \inf_{[x_j, x_{j+1}]}f \right) (y_{2j+1} - y_{2j}) + \left(\sup_{[x_j, x_{j+1}]}f - \inf_{[x_j, x_{j+1}]}f \right) (y_{2j+2} - y_{2j+1}) \\
+\geq~&amp;\left(\sup_{[y_{2j}, x_{2j+1}]}f - \inf_{[y_{2j}, y_{2j+1}]}f \right) (y_{2j+1} - y_{2j}) + \left(\sup_{[y_{2j + 1}, y_{2j+2}]}f - \inf_{[y_{2j+1}, y_{2j+2}]}f \right) (y_{2j+2} - y_{2j+1}) \\
+=~&amp;\left(\sup_{[y_{2j+1}, y_{2j+2}]}f - \inf_{[y_{2j}, y_{2j+1}]}f\right) \cdot 2^{-n-1} \\
+=~&amp;\left(\sup_{[x_j, x_{j+1}]}f - \inf_{[x_j, x_{j+1}]}f \right) \cdot 2^{-n-1}
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">In other words, each time we increment <span class="math notranslate nohighlight">\(n,\)</span> the difference between the upper and lower Riemann sums decreases by a factor of <span class="math notranslate nohighlight">\(2.\)</span>
+Therefore, by induction, we have</p>
+<div class="math notranslate nohighlight">
+\[U(f, P_n, [a, b]) - L(f, P_n, [a, b]) = 2^{-(n-1)} \cdot \left(U(f, P_1, [a, b]) - L(f, P_1, [a, b]) \right).\]</div>
+<p class="sd-card-text">so <span class="math notranslate nohighlight">\(f\)</span> is Riemann integrable over <span class="math notranslate nohighlight">\([a, b].\)</span></p>
 </div>
 </details></div>
 </section>
