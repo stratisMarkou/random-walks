@@ -559,6 +559,75 @@ so $f$ is Riemann integrable over $[a, b].$
 ::::
 
 
+::::{admonition} Exercise 1.A.14
+:class: tip
+Suppose $f_1, f_2, \dots$ is a sequence of Riemann integrable functions on $[a, b]$ such that $f_1, f_2, \dots$ converges uniformly to a function $f: [a, b] \to \mathbb{R}.$
+Prove that $f$ is Riemann integrable and
+
+$$\int_a^b f = \lim_{n \to \infty} \int_a^b f_n.$$
+
+:::{dropdown} Solution
+Let $\epsilon > 0.$
+Since $f_n \to f$ uniformly, there exists $N \in \mathbb{N}$ such that for all $n \geq N,$ we have
+
+$$|f_n(x) - f(x)| < \epsilon.$$
+
+Since $f_n$ is Riemann integrable for all $n \in \mathbb{Z}^+$ and $f_n \to f,$ it follows that $f$ is bounded.
+Then, for all $n \geq N$ and any partition $P$ of $[a, b],$ we have
+
+$$U(f, [a, b]) \leq U(f, P, [a, b]) \leq U(f_n, P, [a, b]) + \epsilon (b - a).$$
+
+Taking the infimum over $P$ we obtain
+
+$$U(f, [a, b]) \leq U(f_n, [a, b]) + \epsilon (b - a).$$
+
+We can also form a similar inequality for the lower Riemann sum, that is
+
+$$L(f, [a, b]) \geq L(f_n, [a, b]) - \epsilon (b - a).$$
+
+Putting these together we obtain
+
+$$L(f_n, [a, b]) - \epsilon (b - a) \leq L(f, [a, b]) \leq U(f, [a, b]) \leq U(f_n, [a, b]) + \epsilon (b - a),$$
+
+for all $n \geq N.$
+Since $\epsilon > 0$ can be chosen to be arbitrarily small, we conclude that $f$ is Riemann integrable and that
+
+$$\int_a^b f = \lim_{n \to \infty} \int_a^b f_n.$$
+:::
+::::
+
+
+## Chapter 1.B
+
+::::{admonition} Exercise 1.B.1
+:class: tip
+Define $f: [0, 1] \to \mathbb{R}$ as follows
+
+$$f(a) = \begin{cases}
+0 & \text{ if } a \not \in \mathbb{Q} \\
+\frac{1}{n} & \text{ if } a \in \mathbb{Q} \text{ and } n \in \mathbb{Z}^+ \text{ is the smallest } n \text{ such that } a = \frac{m}{n} \text{ for some } m \in \mathbb{Z}^+. \\
+\end{cases}$$
+
+Show that $f$ is Riemann integrable and compute $\int_0^1 f.$
+
+:::{dropdown} Solution
+Let $A_n$ be the set of all rationals $a$ in $[0, 1]$ such that $n$ is the smallest positive integer such that $a = m/n$ for some integer $m.$
+Then $A_n$ is finite for all $n.$
+Let
+
+$$f_n(a) = \begin{cases}
+0 & \text{ if } a \not \in \mathbb{Q} \text{ or } a \not \in \bigcup^n_{k = 1} A_k \\
+\frac{1}{k} & \text{ if } a \in \bigcup^n_{k = 1} A_k \text{ and } k \in \mathbb{Z}^+ \text{ is the smallest } k \text{ such that } a = \frac{m}{k} \text{ for some } m \in \mathbb{Z}^+. \\
+\end{cases}$$
+
+Then, $\int_a^b f_n = 0.$
+Also $f_n \to f$ uniformly and $\int_a^b f_n = 0,$ so
+
+$$\int_a^b f = \lim_{n \to \infty} \int_a^b f_n = 0.$$
+:::
+::::
+
+
 ## Chapter 2.C
 
 ::::{admonition} Exercise 2.C.1

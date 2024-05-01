@@ -421,6 +421,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-1-a">Chapter 1.A</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-1-b">Chapter 1.B</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-c">Chapter 2.C</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-d">Chapter 2.D</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-4-a">Chapter 4.A</a></li>
@@ -930,6 +931,75 @@ Therefore, by induction, we have</p>
 <div class="math notranslate nohighlight">
 \[U(f, P_n, [a, b]) - L(f, P_n, [a, b]) = 2^{-(n-1)} \cdot \left(U(f, P_1, [a, b]) - L(f, P_1, [a, b]) \right).\]</div>
 <p class="sd-card-text">so <span class="math notranslate nohighlight">\(f\)</span> is Riemann integrable over <span class="math notranslate nohighlight">\([a, b].\)</span></p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.A.14</p>
+<p>Suppose <span class="math notranslate nohighlight">\(f_1, f_2, \dots\)</span> is a sequence of Riemann integrable functions on <span class="math notranslate nohighlight">\([a, b]\)</span> such that <span class="math notranslate nohighlight">\(f_1, f_2, \dots\)</span> converges uniformly to a function <span class="math notranslate nohighlight">\(f: [a, b] \to \mathbb{R}.\)</span>
+Prove that <span class="math notranslate nohighlight">\(f\)</span> is Riemann integrable and</p>
+<div class="math notranslate nohighlight">
+\[\int_a^b f = \lim_{n \to \infty} \int_a^b f_n.\]</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(\epsilon &gt; 0.\)</span>
+Since <span class="math notranslate nohighlight">\(f_n \to f\)</span> uniformly, there exists <span class="math notranslate nohighlight">\(N \in \mathbb{N}\)</span> such that for all <span class="math notranslate nohighlight">\(n \geq N,\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[|f_n(x) - f(x)| &lt; \epsilon.\]</div>
+<p class="sd-card-text">Since <span class="math notranslate nohighlight">\(f_n\)</span> is Riemann integrable for all <span class="math notranslate nohighlight">\(n \in \mathbb{Z}^+\)</span> and <span class="math notranslate nohighlight">\(f_n \to f,\)</span> it follows that <span class="math notranslate nohighlight">\(f\)</span> is bounded.
+Then, for all <span class="math notranslate nohighlight">\(n \geq N\)</span> and any partition <span class="math notranslate nohighlight">\(P\)</span> of <span class="math notranslate nohighlight">\([a, b],\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[U(f, [a, b]) \leq U(f, P, [a, b]) \leq U(f_n, P, [a, b]) + \epsilon (b - a).\]</div>
+<p class="sd-card-text">Taking the infimum over <span class="math notranslate nohighlight">\(P\)</span> we obtain</p>
+<div class="math notranslate nohighlight">
+\[U(f, [a, b]) \leq U(f_n, [a, b]) + \epsilon (b - a).\]</div>
+<p class="sd-card-text">We can also form a similar inequality for the lower Riemann sum, that is</p>
+<div class="math notranslate nohighlight">
+\[L(f, [a, b]) \geq L(f_n, [a, b]) - \epsilon (b - a).\]</div>
+<p class="sd-card-text">Putting these together we obtain</p>
+<div class="math notranslate nohighlight">
+\[L(f_n, [a, b]) - \epsilon (b - a) \leq L(f, [a, b]) \leq U(f, [a, b]) \leq U(f_n, [a, b]) + \epsilon (b - a),\]</div>
+<p class="sd-card-text">for all <span class="math notranslate nohighlight">\(n \geq N.\)</span>
+Since <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> can be chosen to be arbitrarily small, we conclude that <span class="math notranslate nohighlight">\(f\)</span> is Riemann integrable and that</p>
+<div class="math notranslate nohighlight">
+\[\int_a^b f = \lim_{n \to \infty} \int_a^b f_n.\]</div>
+</div>
+</details></div>
+</section>
+<section id="chapter-1-b">
+<h2>Chapter 1.B<a class="headerlink" href="#chapter-1-b" title="Link to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.B.1</p>
+<p>Define <span class="math notranslate nohighlight">\(f: [0, 1] \to \mathbb{R}\)</span> as follows</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}f(a) = \begin{cases}
+0 &amp; \text{ if } a \not \in \mathbb{Q} \\
+\frac{1}{n} &amp; \text{ if } a \in \mathbb{Q} \text{ and } n \in \mathbb{Z}^+ \text{ is the smallest } n \text{ such that } a = \frac{m}{n} \text{ for some } m \in \mathbb{Z}^+. \\
+\end{cases}\end{split}\]</div>
+<p>Show that <span class="math notranslate nohighlight">\(f\)</span> is Riemann integrable and compute <span class="math notranslate nohighlight">\(\int_0^1 f.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(A_n\)</span> be the set of all rationals <span class="math notranslate nohighlight">\(a\)</span> in <span class="math notranslate nohighlight">\([0, 1]\)</span> such that <span class="math notranslate nohighlight">\(n\)</span> is the smallest positive integer such that <span class="math notranslate nohighlight">\(a = m/n\)</span> for some integer <span class="math notranslate nohighlight">\(m.\)</span>
+Then <span class="math notranslate nohighlight">\(A_n\)</span> is finite for all <span class="math notranslate nohighlight">\(n.\)</span>
+Let</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}f_n(a) = \begin{cases}
+0 &amp; \text{ if } a \not \in \mathbb{Q} \text{ or } a \not \in \bigcup^n_{k = 1} A_k \\
+\frac{1}{k} &amp; \text{ if } a \in \bigcup^n_{k = 1} A_k \text{ and } k \in \mathbb{Z}^+ \text{ is the smallest } k \text{ such that } a = \frac{m}{k} \text{ for some } m \in \mathbb{Z}^+. \\
+\end{cases}\end{split}\]</div>
+<p class="sd-card-text">Then, <span class="math notranslate nohighlight">\(\int_a^b f_n = 0.\)</span>
+Also <span class="math notranslate nohighlight">\(f_n \to f\)</span> uniformly and <span class="math notranslate nohighlight">\(\int_a^b f_n = 0,\)</span> so</p>
+<div class="math notranslate nohighlight">
+\[\int_a^b f = \lim_{n \to \infty} \int_a^b f_n = 0.\]</div>
 </div>
 </details></div>
 </section>
@@ -1953,6 +2023,7 @@ Since <span class="math notranslate nohighlight">\(\mathcal{M}\)</span> is a mon
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-1-a">Chapter 1.A</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-1-b">Chapter 1.B</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-c">Chapter 2.C</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-d">Chapter 2.D</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-4-a">Chapter 4.A</a></li>
