@@ -559,6 +559,42 @@ so $f$ is Riemann integrable over $[a, b].$
 ::::
 
 
+::::{admonition} Exercise 1.A.14
+:class: tip
+Suppose $f_1, f_2, \dots$ is a sequence of Riemann integrable functions on $[a, b]$ such that $f_1, f_2, \dots$ converges uniformly to a function $f: [a, b] \to \mathbb{R}.$
+Prove that $f$ is Riemann integrable and
+
+$$\int_a^b f = \lim_{n \to \infty} \int_a^b f_n.$$
+
+:::{dropdown} Solution
+Let $\epsilon > 0.$
+Since $f_n \to f$ uniformly, there exists $N \in \mathbb{N}$ such that for all $n \geq N,$ we have
+
+$$|f_n(x) - f(x)| < \epsilon.$$
+
+Since $f_n$ is Riemann integrable for all $n \in \mathbb{Z}^+$ and $f_n \to f,$ it follows that $f$ is bounded.
+Then, for all $n \geq N$ and any partition $P$ of $[a, b],$ we have
+
+$$U(f, [a, b]) \leq U(f, P, [a, b]) \leq U(f_n, P, [a, b]) + \epsilon (b - a).$$
+
+Taking the infimum over $P$ we obtain
+
+$$U(f, [a, b]) \leq U(f_n, [a, b]) + \epsilon (b - a).$$
+
+We can also form a similar inequality for the lower Riemann sum, that is
+
+$$L(f, [a, b]) \geq L(f_n, [a, b]) - \epsilon (b - a).$$
+
+Putting these together we obtain
+
+$$L(f_n, [a, b]) - \epsilon (b - a) \leq L(f, [a, b]) \leq U(f, [a, b]) \leq U(f_n, [a, b]) + \epsilon (b - a),$$
+
+for all $n \geq N.$
+Since $\epsilon > 0$ can be chosen to be arbitrarily small, we conclude that $f$ is Riemann integrable and that
+
+$$\int_a^b f = \lim_{n \to \infty} \int_a^b f_n.$$
+
+
 ## Chapter 2.C
 
 ::::{admonition} Exercise 2.C.1
