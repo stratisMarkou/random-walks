@@ -593,6 +593,8 @@ for all $n \geq N.$
 Since $\epsilon > 0$ can be chosen to be arbitrarily small, we conclude that $f$ is Riemann integrable and that
 
 $$\int_a^b f = \lim_{n \to \infty} \int_a^b f_n.$$
+:::
+::::
 
 
 ## Chapter 2.C
