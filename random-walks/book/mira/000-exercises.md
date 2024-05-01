@@ -597,6 +597,37 @@ $$\int_a^b f = \lim_{n \to \infty} \int_a^b f_n.$$
 ::::
 
 
+## Chapter 1.B
+
+::::{admonition} Exercise 1.B.1
+:class: tip
+Define $f: [0, 1] \to \mathbb{R}$ as follows
+
+$$f(a) = \begin{cases}
+0 & \text{ if } a \not \in \mathbb{Q} \\
+\frac{1}{n} & \text{ if } a \in \mathbb{Q} \text{ and } n \in \mathbb{Z}^+ \text{ is the smallest } n \text{ such that } a = \frac{m}{n} \text{ for some } m \in \mathbb{Z}^+. \\
+\end{cases}$$
+
+Show that $f$ is Riemann integrable and compute $\int_0^1 f.$
+
+:::{dropdown} Solution
+Let $A_n$ be the set of all rationals $a$ in $[0, 1]$ such that $n$ is the smallest positive integer such that $a = m/n$ for some integer $m.$
+Then $A_n$ is finite for all $n.$
+Let
+
+$$f_n(a) = \begin{cases}
+0 & \text{ if } a \not \in \mathbb{Q} \text{ or } a \not \in \bigcup^n_{k = 1} A_k \\
+\frac{1}{k} & \text{ if } a \in \bigcup^n_{k = 1} A_k \text{ and } k \in \mathbb{Z}^+ \text{ is the smallest } k \text{ such that } a = \frac{m}{k} \text{ for some } m \in \mathbb{Z}^+. \\
+\end{cases}$$
+
+Then, $\int_a^b f_n = 0.$
+Also $f_n \to f$ uniformly and $\int_a^b f_n = 0,$ so
+
+$$\int_a^b f = \lim_{n \to \infty} \int_a^b f_n = 0.$$
+:::
+::::
+
+
 ## Chapter 2.C
 
 ::::{admonition} Exercise 2.C.1
