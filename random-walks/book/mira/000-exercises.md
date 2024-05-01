@@ -473,6 +473,56 @@ Since $\epsilon$ can be made arbitrarily small, it follows that $f$ is Riemann i
 
 
 
+::::{admonition} Exercise 1.A.11
+:class: tip
+
+Suppose $f: [a, b] \to \mathbb{R}$ is Riemann integrable.
+Define $F: [a, b] \to \mathbb{R}$ by
+
+$$F(t) = \begin{cases}
+0 & \text{ if } t = a \\
+\int_a^t & \text{ if } t \in (a, b].
+\end{cases}$$
+
+Prove that $F$ is continuous on $[a, b].$
+
+:::{dropdown} Solution
+Let $t_0 \in [a, b]$ and $\epsilon > 0.$
+Since $f$ is Riemann integrable, it {prf:ref}`is boundedd<mira-bounds-on-riemann-integral>` by some $C \in \mathbb{R}.$
+For any $\delta > 0$ and $x \in [a, b],$ if $|t - t_0| < \delta,$ then
+
+$$|F(t) - F(t_0)| = \left|\int^t_{t_0} f\right| < \delta C.$$
+
+Therefore, by picking $\delta < \epsilon / C$ we have $|F(t) - F(t_0)| < \epsilon,$ showing that $F$ is continuous.
+:::
+::::
+
+
+::::{admonition} Exercise 1.A.12
+:class: tip
+
+Suppose $f: [a, b] \to \mathbb{R}$ is Riemann integrable.
+Prove taht $|f|$ is Riemann integrable and that
+
+$$\left|\int_a^b f\right| \leq \int_a^b |f|.$$
+
+:::{dropdown} Solution
+Let $\epsilon > 0.$
+Since $f$ is Riemann integrable, there exists a partition $P = (x_0, x_1, \dots, x_n)$ of $[a, b]$ such that
+
+$$|U(f, P, [a, b]) - L(f, P, [a, b])| < \epsilon.$$
+
+Now consider the fact that
+
+$$\begin{align}
+\sup_{y \in [x_{k-1}, x_k]} |f(y)| - \inf_{z \in [x_{k-1}, x_k]} |f(z)| &= \sup_{y, z \in [x_{k-1}, x_k]} (|f(y)| - |f(z)|) \\
+&< \sup_{y, z \in [x_{k-1}, x_k]} |f(y) - f(z)| \\
+\end{align}$$
+:::
+::::
+
+
+
 ## Chapter 2.C
 
 ::::{admonition} Exercise 2.C.1
