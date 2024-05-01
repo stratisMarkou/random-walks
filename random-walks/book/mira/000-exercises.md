@@ -508,16 +508,25 @@ $$\left|\int_a^b f\right| \leq \int_a^b |f|.$$
 
 :::{dropdown} Solution
 Let $\epsilon > 0.$
-Since $f$ is Riemann integrable, there exists a partition $P = (x_0, x_1, \dots, x_n)$ of $[a, b]$ such that
+Since $f$ is Riemann integrable, there exists a partition $P_\epsilon = (x_0, x_1, \dots, x_n)$ of $[a, b]$ such that
 
-$$|U(f, P, [a, b]) - L(f, P, [a, b])| < \epsilon.$$
+$$U(f, P_\epsilon, [a, b]) - L(f, P_\epsilon, [a, b]) < \epsilon.$$
 
-Now consider the fact that
+Now since
 
 $$\begin{align}
-\sup_{y \in [x_{k-1}, x_k]} |f(y)| - \inf_{z \in [x_{k-1}, x_k]} |f(z)| &= \sup_{y, z \in [x_{k-1}, x_k]} (|f(y)| - |f(z)|) \\
-&< \sup_{y, z \in [x_{k-1}, x_k]} |f(y) - f(z)| \\
+\sup_{y \in [x_{k-1}, x_k]} |f(y)| - \inf_{z \in [x_{k-1}, x_k]} |f(z)| &\leq \sup_{y \in [x_{k-1}, x_k]} f(y) - \inf_{z \in [x_{k-1}, x_k]} f(z) \\
+&\leq \sup_{y \in [x_{k-1}, x_k]} f(y) - \inf_{z \in [x_{k-1}, x_k]} f(z) \\
 \end{align}$$
+
+we have that
+
+$$U(|f|, P_\epsilon, [a, b]) - L(|f|, P_\epsilon, [a, b]) \leq U(f, P_\epsilon, [a, b]) - L(f, P_\epsilon, [a, b]) < \epsilon$$
+
+so $|f|$ is Riemann integrable.
+Since $U(|f|, P_\epsilon, [a, b]) \geq U(f, P_\epsilon, [a, b]),$ we have that
+
+$$\left|\int_a^b f\right| \leq \int_a^b |f|.$$
 :::
 ::::
 
