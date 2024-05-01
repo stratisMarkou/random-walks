@@ -220,6 +220,7 @@ Since this holds for any $\epsilon > 0,$ we have $U(f, [a, b]) = L(f, [a, b])$ a
 The last result in this section concerns a frequently used estimate for the Riemann integral of a function.
 
 :::{prf:theorem} Bounds on the Riemann integral
+:label: mira-bounds-on-riemann-integral
 
 Suppose $f: [a, b] \to \mathbb{R}$ is Riemann integrable.
 Then

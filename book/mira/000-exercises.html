@@ -846,6 +846,63 @@ L(f, P, [a, b]) = L(f, P_1, [a, c]) + L(f, P_2, [c, b])
 <p class="sd-card-text">Since <span class="math notranslate nohighlight">\(\epsilon\)</span> can be made arbitrarily small, it follows that <span class="math notranslate nohighlight">\(f\)</span> is Riemann integrable on <span class="math notranslate nohighlight">\([a, b].\)</span></p>
 </div>
 </details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.A.11</p>
+<p>Suppose <span class="math notranslate nohighlight">\(f: [a, b] \to \mathbb{R}\)</span> is Riemann integrable.
+Define <span class="math notranslate nohighlight">\(F: [a, b] \to \mathbb{R}\)</span> by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}F(t) = \begin{cases}
+0 &amp; \text{ if } t = a \\
+\int_a^t &amp; \text{ if } t \in (a, b].
+\end{cases}\end{split}\]</div>
+<p>Prove that <span class="math notranslate nohighlight">\(F\)</span> is continuous on <span class="math notranslate nohighlight">\([a, b].\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(t_0 \in [a, b]\)</span> and <span class="math notranslate nohighlight">\(\epsilon &gt; 0.\)</span>
+Since <span class="math notranslate nohighlight">\(f\)</span> is Riemann integrable, it <a class="reference internal" href="001-riemann.html#mira-bounds-on-riemann-integral">is boundedd</a> by some <span class="math notranslate nohighlight">\(C \in \mathbb{R}.\)</span>
+For any <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> and <span class="math notranslate nohighlight">\(x \in [a, b],\)</span> if <span class="math notranslate nohighlight">\(|t - t_0| &lt; \delta,\)</span> then</p>
+<div class="math notranslate nohighlight">
+\[|F(t) - F(t_0)| = \left|\int^t_{t_0} f\right| &lt; \delta C.\]</div>
+<p class="sd-card-text">Therefore, by picking <span class="math notranslate nohighlight">\(\delta &lt; \epsilon / C\)</span> we have <span class="math notranslate nohighlight">\(|F(t) - F(t_0)| &lt; \epsilon,\)</span> showing that <span class="math notranslate nohighlight">\(F\)</span> is continuous.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.A.12</p>
+<p>Suppose <span class="math notranslate nohighlight">\(f: [a, b] \to \mathbb{R}\)</span> is Riemann integrable.
+Prove taht <span class="math notranslate nohighlight">\(|f|\)</span> is Riemann integrable and that</p>
+<div class="math notranslate nohighlight">
+\[\left|\int_a^b f\right| \leq \int_a^b |f|.\]</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(\epsilon &gt; 0.\)</span>
+Since <span class="math notranslate nohighlight">\(f\)</span> is Riemann integrable, there exists a partition <span class="math notranslate nohighlight">\(P_\epsilon = (x_0, x_1, \dots, x_n)\)</span> of <span class="math notranslate nohighlight">\([a, b]\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[U(f, P_\epsilon, [a, b]) - L(f, P_\epsilon, [a, b]) &lt; \epsilon.\]</div>
+<p class="sd-card-text">Now since</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\sup_{y \in [x_{k-1}, x_k]} |f(y)| - \inf_{z \in [x_{k-1}, x_k]} |f(z)| &amp;\leq \sup_{y \in [x_{k-1}, x_k]} f(y) - \inf_{z \in [x_{k-1}, x_k]} f(z) \\
+&amp;\leq \sup_{y \in [x_{k-1}, x_k]} f(y) - \inf_{z \in [x_{k-1}, x_k]} f(z) \\
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">we have that</p>
+<div class="math notranslate nohighlight">
+\[U(|f|, P_\epsilon, [a, b]) - L(|f|, P_\epsilon, [a, b]) \leq U(f, P_\epsilon, [a, b]) - L(f, P_\epsilon, [a, b]) &lt; \epsilon\]</div>
+<p class="sd-card-text">so <span class="math notranslate nohighlight">\(|f|\)</span> is Riemann integrable.
+Since <span class="math notranslate nohighlight">\(U(|f|, P_\epsilon, [a, b]) \geq U(f, P_\epsilon, [a, b]),\)</span> we have that</p>
+<div class="math notranslate nohighlight">
+\[\left|\int_a^b f\right| \leq \int_a^b |f|.\]</div>
+</div>
+</details></div>
 </section>
 <section id="chapter-2-c">
 <h2>Chapter 2.C<a class="headerlink" href="#chapter-2-c" title="Link to this heading">#</a></h2>
