@@ -978,7 +978,7 @@ Since <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> can 
 <div class="math notranslate nohighlight">
 \[\begin{split}f(a) = \begin{cases}
 0 &amp; \text{ if } a \not \in \mathbb{Q} \\
-\frac{1}{n} &amp; \text{ if } a \in \mathbb{Q} \text{ and } n \in \mathbb{Z}^+ \text{ is the smallest } n \text{ such that } a = \frac{m}{n} \text{ for some } m \in \mathbb{Z}^+. \\
+\frac{1}{n} &amp; \text{ if } a \in \mathbb{Q} \text{ and } n \in \mathbb{Z}^+ \text{ smallest } n \text{ s.t. } a = \frac{m}{n} \text{ for some } m \in \mathbb{Z}^+. \\
 \end{cases}\end{split}\]</div>
 <p>Show that <span class="math notranslate nohighlight">\(f\)</span> is Riemann integrable and compute <span class="math notranslate nohighlight">\(\int_0^1 f.\)</span></p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
@@ -994,12 +994,50 @@ Let</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}f_n(a) = \begin{cases}
 0 &amp; \text{ if } a \not \in \mathbb{Q} \text{ or } a \not \in \bigcup^n_{k = 1} A_k \\
-\frac{1}{k} &amp; \text{ if } a \in \bigcup^n_{k = 1} A_k \text{ and } k \in \mathbb{Z}^+ \text{ is the smallest } k \text{ such that } a = \frac{m}{k} \text{ for some } m \in \mathbb{Z}^+. \\
+\frac{1}{k} &amp; \text{ if } a \in \bigcup^n_{k = 1} A_k \text{ and } k \in \mathbb{Z}^+ \text{ is the smallest } k \text{ s.t. } a = \frac{m}{k} \text{ for some } m \in \mathbb{Z}^+. \\
 \end{cases}\end{split}\]</div>
 <p class="sd-card-text">Then, <span class="math notranslate nohighlight">\(\int_a^b f_n = 0.\)</span>
 Also <span class="math notranslate nohighlight">\(f_n \to f\)</span> uniformly and <span class="math notranslate nohighlight">\(\int_a^b f_n = 0,\)</span> so</p>
 <div class="math notranslate nohighlight">
 \[\int_a^b f = \lim_{n \to \infty} \int_a^b f_n = 0.\]</div>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.B.2</p>
+<p>Suppose <span class="math notranslate nohighlight">\(f: [a, b] \to \mathbb{R}\)</span> is a bounded function.
+Prove that <span class="math notranslate nohighlight">\(f\)</span> is Riemann integrable if and only if</p>
+<div class="math notranslate nohighlight">
+\[L(-f, [a, b]) = - L(f, [a, b])\]</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(f: [a, b] \to \mathbb{R}\)</span> is a bounded function.
+If <span class="math notranslate nohighlight">\(f\)</span> is Riemann integrable, then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+L(-f, [a, b]) &amp;= \sup_P L(-f, P, [a, b]) \\
+&amp;= \sup_P -U(f, P, [a, b]) \\
+&amp;= - \inf_P U(f, P, [a, b]) \\
+&amp;= - U(f, [a, b]) \\
+&amp;= - L(f, [a, b]).
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">Conversely, if</p>
+<div class="math notranslate nohighlight">
+\[L(-f, [a, b]) = - L(f, [a, b]),\]</div>
+<p class="sd-card-text">then we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+L(-f, [a, b]) &amp;= - L(f, [a, b]) \\
+&amp;= - \sup_P L(f, P, [a, b]) \\
+&amp;= \inf_P -L(f, P, [a, b]) \\
+&amp;= \inf_P U(-f, P, [a, b]) \\
+&amp;= U(-f, P, [a, b]),
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">so <span class="math notranslate nohighlight">\(-f\)</span> is Riemann integrable, which means <span class="math notranslate nohighlight">\(f\)</span> must also be Riemann integrable.</p>
 </div>
 </details></div>
 </section>
