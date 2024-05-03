@@ -654,7 +654,7 @@ $$L(-f, [a, b]) = - L(f, [a, b]),$$
 then we have
 
 $$\begin{align}
-L(-f, [a, b]) = - L(f, [a, b]) \\
+L(-f, [a, b]) &= - L(f, [a, b]) \\
 &= - \sup_P L(f, P, [a, b]) \\
 &= \inf_P -L(f, P, [a, b]) \\
 &= \inf_P U(-f, P, [a, b]) \\
