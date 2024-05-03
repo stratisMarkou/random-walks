@@ -605,7 +605,7 @@ Define $f: [0, 1] \to \mathbb{R}$ as follows
 
 $$f(a) = \begin{cases}
 0 & \text{ if } a \not \in \mathbb{Q} \\
-\frac{1}{n} & \text{ if } a \in \mathbb{Q} \text{ and } n \in \mathbb{Z}^+ \text{ is the smallest } n \text{ s.t. } a = \frac{m}{n} \text{ for some } m \in \mathbb{Z}^+. \\
+\frac{1}{n} & \text{ if } a \in \mathbb{Q} \text{ and } n \in \mathbb{Z}^+ \text{ smallest } n \text{ s.t. } a = \frac{m}{n} \text{ for some } m \in \mathbb{Z}^+. \\
 \end{cases}$$
 
 Show that $f$ is Riemann integrable and compute $\int_0^1 f.$
@@ -639,7 +639,13 @@ $$L(-f, [a, b]) = - L(f, [a, b])$$
 Suppose $f: [a, b] \to \mathbb{R}$ is a bounded function.
 If $f$ is Riemann integrable, then
 
-$$L(-f, [a, b]) = \sup_P L(-f, P, [a, b]) = \sup_P -U(f, P, [a, b]) = - \inf_P U(f, P, [a, b]) = - U(f, [a, b]) = - L(f, [a, b]).$$
+$$\begin{align}
+L(-f, [a, b]) &= \sup_P L(-f, P, [a, b]) \\
+&= \sup_P -U(f, P, [a, b]) \\
+&= - \inf_P U(f, P, [a, b]) \\
+&= - U(f, [a, b]) \\
+&= - L(f, [a, b]).
+\end{align}$$
 
 Conversely, if 
 
@@ -647,7 +653,13 @@ $$L(-f, [a, b]) = - L(f, [a, b]),$$
 
 then we have
 
-$$L(-f, [a, b]) = - L(f, [a, b]) = - \sup_P L(f, P, [a, b]) = \inf_P -L(f, P, [a, b]) = \inf_P U(-f, P, [a, b]) = U(-f, P, [a, b]),$$
+$$\begin{align}
+L(-f, [a, b]) = - L(f, [a, b]) \\
+&= - \sup_P L(f, P, [a, b]) \\
+&= \inf_P -L(f, P, [a, b]) \\
+&= \inf_P U(-f, P, [a, b]) \\
+&= U(-f, P, [a, b]),
+\end{align}$$
 
 so $-f$ is Riemann integrable, which means $f$ must also be Riemann integrable.
 :::
