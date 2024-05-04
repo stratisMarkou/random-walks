@@ -730,7 +730,7 @@ $$\int_0^1 f \neq \lim_{k \to \infty} \int_0^1 f_k.$$
 Consider the functions $f_1, f_2, \dots$ defined as
 
 $$f_k(x) = \begin{cases}
-k - k^2 x & \text{ if } 0 < x \leq k
+k - k^2 x & \text{ if } 0 < x \leq k \\ 
 0 & \text{ otherwise.}
 \end{cases}$$
 
