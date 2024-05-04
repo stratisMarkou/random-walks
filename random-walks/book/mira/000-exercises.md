@@ -737,7 +737,7 @@ k - k^2 x & \text{ if } 0 < x \leq k \\
 Note that $\lim_{k \to \infty} f_k = 0,$ and also for all $k \in \mathbb{Z}^+,$ we have $\int_0^1 f_k = 1.$
 Thus
 
-$$\int_0^1 f \neq \lim_{k \to \infty} \int_0^1 f_k.
+$$\int_0^1 f \neq \lim_{k \to \infty} \int_0^1 f_k.$$
 :::
 ::::
 
