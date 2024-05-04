@@ -666,6 +666,82 @@ so $-f$ is Riemann integrable, which means $f$ must also be Riemann integrable.
 ::::
 
 
+::::{admonition} Excercise 1.B.3
+:class: tip
+Suppose $f, g: [a, b] \to \mathbb{R}$ are bounded functions.
+Prove that
+
+$$L(f, [a, b]) + L(g, [a, b]) \leq L(f + g, [a, b]),$$
+
+and
+
+$$U(f + g, [a, b]) \leq U(f, [a, b]) + U(g, [a, b]).$$
+
+:::{dropdown} Solution
+Let $P_1$ and $P_2$ be partitions of $[a, b].$
+Then, letting $P$ be a partition of $[a, b]$ which includes all points included in $P_1$ and $P_2,$ we have
+
+$$L(f, P_1, [a, b]) + L(g, P_2, [a, b]) \leq L(f + g, P, [a, b]).$$
+
+Taking the supremum of both sides with respect to $P_1$ and $P_2,$ we obtain
+
+$$L(f, [a, b]) + L(g, [a, b]) \leq L(f + g, [a, b]).$$
+
+Repeating the same argument for the upper Riemann sum completes the proof.
+:::
+::::
+
+
+::::{admonition} Exercise 1.B.4
+:class: tip
+Given en example of bounded functions $f, g: [0, 1] \to \mathbb{R}$ such that
+
+$$L(f, [a, b]) + L(g, [a, b]) < L(f + g, [a, b]),$$
+
+and
+
+$$U(f + g, [a, b]) < U(f, [a, b]) + U(g, [a, b]).$$
+
+:::{dropdown} Solution
+Consider the functions $f(x) = \mathbb{1}_{x \in \mathbb{Q}}$ and $g(x) = \mathbb{1}_{x \not \in \mathbb{Q}}.$
+First, we have that $f + g = 1$ so $U(f, [0, 1]) = L(f, [0, 1]) = 1.$
+On the other hand, any subinterval of $[0, 1]$ of nonzero length contains at least one rational and at least one irrational number.
+Therefore for any partition $P$ of $[0, 1],$ we have
+
+$$L(f, P, [0, 1]) = L(g, P, [0, 1]) = 0 ~~\text{ and }~~ U(f, P, [0, 1]) = U(g, P, [0, 1]) = 1.$$
+
+Therefore, these functions satisfy the requirements of the problem statement.
+:::
+::::
+
+
+
+::::{admonition} Exercise 1.B.5
+:class: tip
+Give an example of a sequence of continuous real-valued functions $f_1, f_2, \dots$ on $[0, 1]$ and a continuous real-valued function $f$ on $[0, 1]$ such that
+
+$$f(x) = \lim_{k \to \infty} f_k(x)$$
+
+for each $x \in [0, 1]$ but
+
+$$\int_0^1 f \neq \lim_{k \to \infty} \int_0^1 f_k.$$
+
+:::{dropdown} Solution
+Consider the functions $f_1, f_2, \dots$ defined as
+
+$$f_k(x) = \begin{cases}
+k - k^2 x & \text{ if } 0 < x \leq k
+0 & \text{ otherwise.}
+\end{cases}$$
+
+Note that $\lim_{k \to \infty} f_k = 0,$ and also for all $k \in \mathbb{Z}^+,$ we have $\int_0^1 f_k = 1.$
+Thus
+
+$$\int_0^1 f \neq \lim_{k \to \infty} \int_0^1 f_k.
+:::
+::::
+
+
 ## Chapter 2.C
 
 ::::{admonition} Exercise 2.C.1

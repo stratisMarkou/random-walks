@@ -1040,6 +1040,82 @@ L(-f, [a, b]) &amp;= - L(f, [a, b]) \\
 <p class="sd-card-text">so <span class="math notranslate nohighlight">\(-f\)</span> is Riemann integrable, which means <span class="math notranslate nohighlight">\(f\)</span> must also be Riemann integrable.</p>
 </div>
 </details></div>
+<div class="tip admonition">
+<p class="admonition-title">Excercise 1.B.3</p>
+<p>Suppose <span class="math notranslate nohighlight">\(f, g: [a, b] \to \mathbb{R}\)</span> are bounded functions.
+Prove that</p>
+<div class="math notranslate nohighlight">
+\[L(f, [a, b]) + L(g, [a, b]) \leq L(f + g, [a, b]),\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[U(f + g, [a, b]) \leq U(f, [a, b]) + U(g, [a, b]).\]</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(P_1\)</span> and <span class="math notranslate nohighlight">\(P_2\)</span> be partitions of <span class="math notranslate nohighlight">\([a, b].\)</span>
+Then, letting <span class="math notranslate nohighlight">\(P\)</span> be a partition of <span class="math notranslate nohighlight">\([a, b]\)</span> which includes all points included in <span class="math notranslate nohighlight">\(P_1\)</span> and <span class="math notranslate nohighlight">\(P_2,\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[L(f, P_1, [a, b]) + L(g, P_2, [a, b]) \leq L(f + g, P, [a, b]).\]</div>
+<p class="sd-card-text">Taking the supremum of both sides with respect to <span class="math notranslate nohighlight">\(P_1\)</span> and <span class="math notranslate nohighlight">\(P_2,\)</span> we obtain</p>
+<div class="math notranslate nohighlight">
+\[L(f, [a, b]) + L(g, [a, b]) \leq L(f + g, [a, b]).\]</div>
+<p class="sd-card-text">Repeating the same argument for the upper Riemann sum completes the proof.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.B.4</p>
+<p>Given en example of bounded functions <span class="math notranslate nohighlight">\(f, g: [0, 1] \to \mathbb{R}\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[L(f, [a, b]) + L(g, [a, b]) &lt; L(f + g, [a, b]),\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[U(f + g, [a, b]) &lt; U(f, [a, b]) + U(g, [a, b]).\]</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Consider the functions <span class="math notranslate nohighlight">\(f(x) = \mathbb{1}_{x \in \mathbb{Q}}\)</span> and <span class="math notranslate nohighlight">\(g(x) = \mathbb{1}_{x \not \in \mathbb{Q}}.\)</span>
+First, we have that <span class="math notranslate nohighlight">\(f + g = 1\)</span> so <span class="math notranslate nohighlight">\(U(f, [0, 1]) = L(f, [0, 1]) = 1.\)</span>
+On the other hand, any subinterval of <span class="math notranslate nohighlight">\([0, 1]\)</span> of nonzero length contains at least one rational and at least one irrational number.
+Therefore for any partition <span class="math notranslate nohighlight">\(P\)</span> of <span class="math notranslate nohighlight">\([0, 1],\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[L(f, P, [0, 1]) = L(g, P, [0, 1]) = 0 ~~\text{ and }~~ U(f, P, [0, 1]) = U(g, P, [0, 1]) = 1.\]</div>
+<p class="sd-card-text">Therefore, these functions satisfy the requirements of the problem statement.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.B.5</p>
+<p>Give an example of a sequence of continuous real-valued functions <span class="math notranslate nohighlight">\(f_1, f_2, \dots\)</span> on <span class="math notranslate nohighlight">\([0, 1]\)</span> and a continuous real-valued function <span class="math notranslate nohighlight">\(f\)</span> on <span class="math notranslate nohighlight">\([0, 1]\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[f(x) = \lim_{k \to \infty} f_k(x)\]</div>
+<p>for each <span class="math notranslate nohighlight">\(x \in [0, 1]\)</span> but</p>
+<div class="math notranslate nohighlight">
+\[\int_0^1 f \neq \lim_{k \to \infty} \int_0^1 f_k.\]</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Consider the functions <span class="math notranslate nohighlight">\(f_1, f_2, \dots\)</span> defined as</p>
+<div class="math notranslate nohighlight">
+\[f_k(x) = \begin{cases}
+k - k^2 x &amp; \text{ if } 0 &lt; x \leq k
+0 &amp; \text{ otherwise.}
+\end{cases}\]</div>
+<p class="sd-card-text">Note that <span class="math notranslate nohighlight">\(\lim_{k \to \infty} f_k = 0,\)</span> and also for all <span class="math notranslate nohighlight">\(k \in \mathbb{Z}^+,\)</span> we have <span class="math notranslate nohighlight">\(\int_0^1 f_k = 1.\)</span>
+Thus</p>
+<p class="sd-card-text">$$\int_0^1 f \neq \lim_{k \to \infty} \int_0^1 f_k.</p>
+</div>
+</details></div>
 </section>
 <section id="chapter-2-c">
 <h2>Chapter 2.C<a class="headerlink" href="#chapter-2-c" title="Link to this heading">#</a></h2>
