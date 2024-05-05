@@ -422,6 +422,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-1-a">Chapter 1.A</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-1-b">Chapter 1.B</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-a">Chapter 2.A</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-c">Chapter 2.C</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-d">Chapter 2.D</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-4-a">Chapter 4.A</a></li>
@@ -1115,6 +1116,37 @@ k - k^2 x &amp; \text{ if } 0 &lt; x \leq k \\
 Thus</p>
 <div class="math notranslate nohighlight">
 \[\int_0^1 f \neq \lim_{k \to \infty} \int_0^1 f_k.\]</div>
+</div>
+</details></div>
+</section>
+<section id="chapter-2-a">
+<h2>Chapter 2.A<a class="headerlink" href="#chapter-2-a" title="Link to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 2.A.1</p>
+<p>Prove that if <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are subsets of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> and <span class="math notranslate nohighlight">\(|B| = 0,\)</span> then <span class="math notranslate nohighlight">\(|A \cup B| = |A|.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose that <span class="math notranslate nohighlight">\(|B| = 0.\)</span>
+If <span class="math notranslate nohighlight">\(|A| = \infty,\)</span> then <span class="math notranslate nohighlight">\(|A \cup B| = \infty = |A|.\)</span>
+Instead, suppose that <span class="math notranslate nohighlight">\(|A| &lt; \infty.\)</span>
+Let <span class="math notranslate nohighlight">\(\epsilon &gt; 0.\)</span>
+Then, there exist sequences of open intervals <span class="math notranslate nohighlight">\(I_1, I_2, \dots\)</span> and <span class="math notranslate nohighlight">\(J_1, J_2, \dots\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[A \subseteq \bigcup_{n = 1}^\infty I_n ~\text{ and }~ \sum_{n = 1}^\infty \ell(I_n) \leq |A| + \frac{\epsilon}{2}\]</div>
+<p class="sd-card-text">and similarly</p>
+<div class="math notranslate nohighlight">
+\[B \subseteq \bigcup_{n = 1}^\infty J_n ~\text{ and }~ \sum_{n = 1}^\infty \ell(J_n) \leq \frac{\epsilon}{2}.\]</div>
+<p class="sd-card-text">Define the sequence <span class="math notranslate nohighlight">\(K_1, K_2, \dots\)</span> to be the sequence of intervals <span class="math notranslate nohighlight">\(I_1, J_1, I_2, J_2, \dots.\)</span>
+Then</p>
+<div class="math notranslate nohighlight">
+\[A \cup B \subseteq \bigcup_{n = 1}^\infty K_n ~\text{ and }~ \sum_{n = 1}^\infty \ell(K_n) \leq |A| + \epsilon,\]</div>
+<p class="sd-card-text">and since <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> was arbitrary, we have <span class="math notranslate nohighlight">\(|A \cup B| \leq |A|.\)</span>
+By the <a class="reference internal" href="002-measures.html#mira:thm:outer-measure-preserves-order">measure preserving property of the outer measure</a> we have <span class="math notranslate nohighlight">\(|A \cup B| \geq |B|\)</span> and thus <span class="math notranslate nohighlight">\(|A \cup B| = |A|.\)</span></p>
 </div>
 </details></div>
 </section>
@@ -2139,6 +2171,7 @@ Since <span class="math notranslate nohighlight">\(\mathcal{M}\)</span> is a mon
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-1-a">Chapter 1.A</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-1-b">Chapter 1.B</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-a">Chapter 2.A</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-c">Chapter 2.C</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-d">Chapter 2.D</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-4-a">Chapter 4.A</a></li>

@@ -742,6 +742,36 @@ $$\int_0^1 f \neq \lim_{k \to \infty} \int_0^1 f_k.$$
 ::::
 
 
+## Chapter 2.A
+
+::::{admonition} Exercise 2.A.1
+:class: tip
+Prove that if $A$ and $B$ are subsets of $\mathbb{R}$ and $|B| = 0,$ then $|A \cup B| = |A|.$
+
+:::{dropdown} Solution
+Suppose that $|B| = 0.$
+If $|A| = \infty,$ then $|A \cup B| = \infty = |A|.$
+Instead, suppose that $|A| < \infty.$
+Let $\epsilon > 0.$
+Then, there exist sequences of open intervals $I_1, I_2, \dots$ and $J_1, J_2, \dots$ such that
+
+$$A \subseteq \bigcup_{n = 1}^\infty I_n ~\text{ and }~ \sum_{n = 1}^\infty \ell(I_n) \leq |A| + \frac{\epsilon}{2}$$
+
+and similarly
+
+$$B \subseteq \bigcup_{n = 1}^\infty J_n ~\text{ and }~ \sum_{n = 1}^\infty \ell(J_n) \leq \frac{\epsilon}{2}.$$
+
+Define the sequence $K_1, K_2, \dots$ to be the sequence of intervals $I_1, J_1, I_2, J_2, \dots.$
+Then
+
+$$A \cup B \subseteq \bigcup_{n = 1}^\infty K_n ~\text{ and }~ \sum_{n = 1}^\infty \ell(K_n) \leq |A| + \epsilon,$$
+
+and since $\epsilon > 0$ was arbitrary, we have $|A \cup B| \leq |A|.$
+By the {prf:ref}`measure preserving property of the outer measure<mira:thm:outer-measure-preserves-order>` we have $|A \cup B| \geq |B|$ and thus $|A \cup B| = |A|.$
+:::
+::::
+
+
 ## Chapter 2.C
 
 ::::{admonition} Exercise 2.C.1
