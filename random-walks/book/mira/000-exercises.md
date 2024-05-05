@@ -767,7 +767,45 @@ Then
 $$A \cup B \subseteq \bigcup_{n = 1}^\infty K_n ~\text{ and }~ \sum_{n = 1}^\infty \ell(K_n) \leq |A| + \epsilon,$$
 
 and since $\epsilon > 0$ was arbitrary, we have $|A \cup B| \leq |A|.$
-By the {prf:ref}`measure preserving property of the outer measure<mira:thm:outer-measure-preserves-order>` we have $|A \cup B| \geq |B|$ and thus $|A \cup B| = |A|.$
+By the {prf:ref}`order preserving property of the outer measure<mira:thm:outer-measure-preserves-order>` we have $|A \cup B| \geq |B|$ and thus $|A \cup B| = |A|.$
+:::
+::::
+
+
+::::{admonition} Exercises 2.A.2
+:class: tip
+Suppose $A \subseteq \mathbb{R}$ and $t \in \mathbb{R}.$
+Let $tA = \{ta: a \in A\}.$
+Prove that $|tA| = |t||A|.$
+
+\[Assume that $0 \cdot \infty$ is defined to be 0.\]
+
+:::{dropdown} Solution
+If $t = 0,$ then $tA = \{0\}$ so $|tA| = 0.$
+Also, irrespective of the value of $|A|,$ we have $|t||A| = 0,$ so $|tA| = |t||A|.$
+Instead suppose that $t \neq 0.$
+Also, suppose that $|A|< \infty.$
+Then, there exists a sequence of open intervals $I_1, I_2, \dots$ such that $\cup_{n=1}^\infty I_n \subseteq A$ and also $\sum_{n=1}^\infty |A| + \epsilon.$
+Now, note that
+
+$$\bigcup_{n=1}^\infty tI_n = t \bigcup^\infty_{n=1} I_n \subseteq tA,$$
+
+and also 
+
+$$\sum_{n=1}^\infty \ell(tI_n) = |t| \sum_{n=1}^\infty \ell(I_n) \leq |t| |A| + |t| \epsilon.$$
+
+And since $\epsilon > 0$ was arbitrary, we have $|tA| \leq |t||A|.$
+To get the unequality the other way, consider that
+
+$$|A| = |t^{-1} (tA)| \leq |t^{-1}| |tA| \implies |t||A| \leq |tA|,$$
+
+where we have used the assumption $t \neq 0.$
+Therefore $|tA| = |t||A|$ whenever $|A| < \infty.$
+
+Finally, consider the case $|A| = \infty$ and $t \neq 0.$
+Then, we have that $|t||A| = \infty.$
+Also, we must have $|tA| = \infty,$ because if we did not, then we could use the previous result with a factor of $t^{-1}$ to show that $|A| < \infty,$ which would lead to a contradiction.
+This completes all parts of the proof.
 :::
 ::::
 
