@@ -810,6 +810,20 @@ This completes all parts of the proof.
 ::::
 
 
+
+::::{admonition} Exercise 2.A.3
+:class: tip
+Prove that if $A, B \subseteq{R}$ and $|A| < \infty,$ then $|B \setminus A| \geq |B| - |A|.$
+
+:::{dropdown} Solution
+Suppose that $A, B \subseteq{R}$ and $|A| < \infty.$
+By the {prf:ref}`subadditivity of the outer measure<mira:thm:outer-measure-preserves-order>` and the {prf:ref}`order preserving property of the outer measure<mira:thm:outer-measure-preserves-order>`.
+
+$$|B \setminus A| + |A| \geq |A \cup B| \geq |B| \implies |B \setminus A| \geq |B| - |A|.$$
+:::
+::::
+
+
 ## Chapter 2.C
 
 ::::{admonition} Exercise 2.C.1
