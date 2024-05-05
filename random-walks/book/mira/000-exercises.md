@@ -824,6 +824,72 @@ $$|B \setminus A| + |A| \geq |A \cup B| \geq |B| \implies |B \setminus A| \geq |
 ::::
 
 
+
+::::{admonition} Exercise 2.A.4
+:class: tip
+Suppose that $F$ is a subset of $\mathbb{R}$ with the property that every open sucover of $F$ has a finite subcover.
+Prove that $F$ is closed and bounded.
+
+:::{dropdown} Solution
+Suppose that $F$ is a subset of $\mathbb{R}$ with the property that every open sucover of $F$ has a finite subcover.
+First, we show $F$ is bounded.
+The collection of sets $(n-1, n+1)$ for $n \in \mathbb{Z}^+$ is an open cover of $\mathbb{R}$ and therefore it is an open cover of $F.$
+By assumption, this set has a finite subcover on $F,$ say $I_{n_1}, \dots, I_{n_k},$ whose union has a finite infimum and a finite supremum.
+Therefore $F$ is a bounded set.
+Let $a = \inf F$ and $b = \sup F.$
+
+We will show that $F$ is a closed set by showing that it contains all its limit points, by way of contradiction.
+Suppose $x_n \in F$ is a sequence of points in $F$ which converges to a limit $x.$
+Suppose $x \not \in F.$
+Then, define the following two base-case open intervals
+
+$$\begin{align}
+I_1 = \left(a - 1, \frac{a + x}{2}\right) = (c_1, d_1) \\
+I_2 = \left(\frac{b + x}{2}, b + 1\right) = (c_2, d_2) \\
+\end{align}$$
+
+as well as the intervals
+
+$$\begin{align}
+I_{2n+1} = \left(\frac{c_{2n-1} + d_{2n-1}}{2}, \frac{d_{2n-1} + x}{2}\right) \\
+I_{2n+2} = \left(\frac{c_{2n} + x}{2}, \frac{d_{2n} + d_{2n}}{2}\right).
+\end{align}$$
+
+This sequence is an open cover of $F,$ so it has a finite subcover.
+But that means that there exists $k \in \mathbb{Z}^+$ such that
+
+$$\inf\{|x - y| \in \mathbb{R}: y \in \cup^\infty_{n = 1} I_n\} \geq \delta.$$
+
+But since $x_n \in x$ and $x_n \in F$ for all $n \in \mathbb{Z}^+,$ this leads to a contradiction.
+:::
+::::
+
+
+
+::::{admonition} Exercise 2.A.5
+:class: tip
+Suppose $\mathcal{A}$ is a set of closed subsets of $\mathbb{R}$ such that $\cap_{F \in \mathcal{A}} F = \emptyset.$
+Prove that if $\mathcal{A}$ contains at least one bounded set, then there exist $n \in \mathbb{Z}^+$ and $F_1, \dots, F_n \in \mathcal{A}$ such that $F_1 \cap \dots \cap F_n = \emptyset.$
+
+:::{dropdown} Solution
+Suppose $\mathcal{A}$ is a set of closed subsets of $\mathbb{R}$ such that $\cap_{F \in \mathcal{A}} F = \emptyset.$
+Further, suppose that $\mathcal{A}$ contains at least one closed bounded set $F_0.$
+Since $\cap_{F \in \mathcal{A}} F = \emptyset,$ we have
+
+$$\left(\bigcap_{F \in \mathcal{A}} F\right)' = \bigcup_{F \in \mathcal{A}} F' = \mathbb{R},$$
+
+so we have
+
+$$F_0 \subseteq \bigcup_{F \in \mathcal{A}: F \neq F_0} F'.$$
+
+The union above is an open cover of $F_0,$ so it has a finite subcover on $F_0,$ say $F_1', \dots, F_n'.$
+Since $F_0 \subseteq F_1' \cup \dots \cup F_n'$ we have
+
+$$F_0 \cap (F_1' \cup \dots \cup F_n')' = F_0 \cap F_1 \cap \dots \cap F_n = \emptyset.$$
+:::
+::::
+
+
 ## Chapter 2.C
 
 ::::{admonition} Exercise 2.C.1
