@@ -1146,7 +1146,43 @@ Then</p>
 <div class="math notranslate nohighlight">
 \[A \cup B \subseteq \bigcup_{n = 1}^\infty K_n ~\text{ and }~ \sum_{n = 1}^\infty \ell(K_n) \leq |A| + \epsilon,\]</div>
 <p class="sd-card-text">and since <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> was arbitrary, we have <span class="math notranslate nohighlight">\(|A \cup B| \leq |A|.\)</span>
-By the <a class="reference internal" href="002-measures.html#mira:thm:outer-measure-preserves-order">measure preserving property of the outer measure</a> we have <span class="math notranslate nohighlight">\(|A \cup B| \geq |B|\)</span> and thus <span class="math notranslate nohighlight">\(|A \cup B| = |A|.\)</span></p>
+By the <a class="reference internal" href="002-measures.html#mira:thm:outer-measure-preserves-order">order preserving property of the outer measure</a> we have <span class="math notranslate nohighlight">\(|A \cup B| \geq |B|\)</span> and thus <span class="math notranslate nohighlight">\(|A \cup B| = |A|.\)</span></p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercises 2.A.2</p>
+<p>Suppose <span class="math notranslate nohighlight">\(A \subseteq \mathbb{R}\)</span> and <span class="math notranslate nohighlight">\(t \in \mathbb{R}.\)</span>
+Let <span class="math notranslate nohighlight">\(tA = \{ta: a \in A\}.\)</span>
+Prove that <span class="math notranslate nohighlight">\(|tA| = |t||A|.\)</span></p>
+<p>[Assume that <span class="math notranslate nohighlight">\(0 \cdot \infty\)</span> is defined to be 0.]</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">If <span class="math notranslate nohighlight">\(t = 0,\)</span> then <span class="math notranslate nohighlight">\(tA = \{0\}\)</span> so <span class="math notranslate nohighlight">\(|tA| = 0.\)</span>
+Also, irrespective of the value of <span class="math notranslate nohighlight">\(|A|,\)</span> we have <span class="math notranslate nohighlight">\(|t||A| = 0,\)</span> so <span class="math notranslate nohighlight">\(|tA| = |t||A|.\)</span>
+Instead suppose that <span class="math notranslate nohighlight">\(t \neq 0.\)</span>
+Also, suppose that <span class="math notranslate nohighlight">\(|A|&lt; \infty.\)</span>
+Then, there exists a sequence of open intervals <span class="math notranslate nohighlight">\(I_1, I_2, \dots\)</span> such that <span class="math notranslate nohighlight">\(\cup_{n=1}^\infty I_n \subseteq A\)</span> and also <span class="math notranslate nohighlight">\(\sum_{n=1}^\infty |A| + \epsilon.\)</span>
+Now, note that</p>
+<div class="math notranslate nohighlight">
+\[\bigcup_{n=1}^\infty tI_n = t \bigcup^\infty_{n=1} I_n \subseteq tA,\]</div>
+<p class="sd-card-text">and also</p>
+<div class="math notranslate nohighlight">
+\[\sum_{n=1}^\infty \ell(tI_n) = |t| \sum_{n=1}^\infty \ell(I_n) \leq |t| |A| + |t| \epsilon.\]</div>
+<p class="sd-card-text">And since <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> was arbitrary, we have <span class="math notranslate nohighlight">\(|tA| \leq |t||A|.\)</span>
+To get the unequality the other way, consider that</p>
+<div class="math notranslate nohighlight">
+\[|A| = |t^{-1} (tA)| \leq |t^{-1}| |tA| \implies |t||A| \leq |tA|,\]</div>
+<p class="sd-card-text">where we have used the assumption <span class="math notranslate nohighlight">\(t \neq 0.\)</span>
+Therefore <span class="math notranslate nohighlight">\(|tA| = |t||A|\)</span> whenever <span class="math notranslate nohighlight">\(|A| &lt; \infty.\)</span></p>
+<p class="sd-card-text">Finally, consider the case <span class="math notranslate nohighlight">\(|A| = \infty\)</span> and <span class="math notranslate nohighlight">\(t \neq 0.\)</span>
+Then, we have that <span class="math notranslate nohighlight">\(|t||A| = \infty.\)</span>
+Also, we must have <span class="math notranslate nohighlight">\(|tA| = \infty,\)</span> because if we did not, then we could use the previous result with a factor of <span class="math notranslate nohighlight">\(t^{-1}\)</span> to show that <span class="math notranslate nohighlight">\(|A| &lt; \infty,\)</span> which would lead to a contradiction.
+This completes all parts of the proof.</p>
 </div>
 </details></div>
 </section>
