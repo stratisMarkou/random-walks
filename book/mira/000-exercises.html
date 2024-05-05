@@ -1201,6 +1201,70 @@ By the <a class="reference internal" href="002-measures.html#mira:thm:outer-meas
 \[|B \setminus A| + |A| \geq |A \cup B| \geq |B| \implies |B \setminus A| \geq |B| - |A|.\]</div>
 </div>
 </details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 2.A.4</p>
+<p>Suppose that <span class="math notranslate nohighlight">\(F\)</span> is a subset of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> with the property that every open sucover of <span class="math notranslate nohighlight">\(F\)</span> has a finite subcover.
+Prove that <span class="math notranslate nohighlight">\(F\)</span> is closed and bounded.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose that <span class="math notranslate nohighlight">\(F\)</span> is a subset of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> with the property that every open sucover of <span class="math notranslate nohighlight">\(F\)</span> has a finite subcover.
+First, we show <span class="math notranslate nohighlight">\(F\)</span> is bounded.
+The collection of sets <span class="math notranslate nohighlight">\((n-1, n+1)\)</span> for <span class="math notranslate nohighlight">\(n \in \mathbb{Z}^+\)</span> is an open cover of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> and therefore it is an open cover of <span class="math notranslate nohighlight">\(F.\)</span>
+By assumption, this set has a finite subcover on <span class="math notranslate nohighlight">\(F,\)</span> say <span class="math notranslate nohighlight">\(I_{n_1}, \dots, I_{n_k},\)</span> whose union has a finite infimum and a finite supremum.
+Therefore <span class="math notranslate nohighlight">\(F\)</span> is a bounded set.
+Let <span class="math notranslate nohighlight">\(a = \inf F\)</span> and <span class="math notranslate nohighlight">\(b = \sup F.\)</span></p>
+<p class="sd-card-text">We will show that <span class="math notranslate nohighlight">\(F\)</span> is a closed set by showing that it contains all its limit points, by way of contradiction.
+Suppose <span class="math notranslate nohighlight">\(x_n \in F\)</span> is a sequence of points in <span class="math notranslate nohighlight">\(F\)</span> which converges to a limit <span class="math notranslate nohighlight">\(x.\)</span>
+Suppose <span class="math notranslate nohighlight">\(x \not \in F.\)</span>
+Then, define the following two base-case open intervals</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+I_1 = \left(a - 1, \frac{a + x}{2}\right) = (c_1, d_1) \\
+I_2 = \left(\frac{b + x}{2}, b + 1\right) = (c_2, d_2) \\
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">as well as the intervals</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+I_{2n+1} = \left(\frac{c_{2n-1} + d_{2n-1}}{2}, \frac{d_{2n-1} + x}{2}\right) \\
+I_{2n+2} = \left(\frac{c_{2n} + x}{2}, \frac{d_{2n} + d_{2n}}{2}\right).
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">This sequence is an open cover of <span class="math notranslate nohighlight">\(F,\)</span> so it has a finite subcover.
+But that means that there exists <span class="math notranslate nohighlight">\(k \in \mathbb{Z}^+\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[\inf\{|x - y| \in \mathbb{R}: y \in \cup^\infty_{n = 1} I_n\} \geq \delta.\]</div>
+<p class="sd-card-text">But since <span class="math notranslate nohighlight">\(x_n \in x\)</span> and <span class="math notranslate nohighlight">\(x_n \in F\)</span> for all <span class="math notranslate nohighlight">\(n \in \mathbb{Z}^+,\)</span> this leads to a contradiction.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 2.A.5</p>
+<p>Suppose <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> is a set of closed subsets of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> such that <span class="math notranslate nohighlight">\(\cap_{F \in \mathcal{A}} F = \emptyset.\)</span>
+Prove that if <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> contains at least one bounded set, then there exist <span class="math notranslate nohighlight">\(n \in \mathbb{Z}^+\)</span> and <span class="math notranslate nohighlight">\(F_1, \dots, F_n \in \mathcal{A}\)</span> such that <span class="math notranslate nohighlight">\(F_1 \cap \dots \cap F_n = \emptyset.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> is a set of closed subsets of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> such that <span class="math notranslate nohighlight">\(\cap_{F \in \mathcal{A}} F = \emptyset.\)</span>
+Further, suppose that <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> contains at least one closed bounded set <span class="math notranslate nohighlight">\(F_0.\)</span>
+Since <span class="math notranslate nohighlight">\(\cap_{F \in \mathcal{A}} F = \emptyset,\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\left(\bigcap_{F \in \mathcal{A}} F\right)' = \bigcup_{F \in \mathcal{A}} F' = \mathbb{R},\]</div>
+<p class="sd-card-text">so we have</p>
+<div class="math notranslate nohighlight">
+\[F_0 \subseteq \bigcup_{F \in \mathcal{A}: F \neq F_0} F'.\]</div>
+<p class="sd-card-text">The union above is an open cover of <span class="math notranslate nohighlight">\(F_0,\)</span> so it has a finite subcover on <span class="math notranslate nohighlight">\(F_0,\)</span> say <span class="math notranslate nohighlight">\(F_1', \dots, F_n'.\)</span>
+Since <span class="math notranslate nohighlight">\(F_0 \subseteq F_1' \cup \dots \cup F_n'\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[F_0 \cap (F_1' \cup \dots \cup F_n')' = F_0 \cap F_1 \cap \dots \cap F_n = \emptyset.\]</div>
+</div>
+</details></div>
 </section>
 <section id="chapter-2-c">
 <h2>Chapter 2.C<a class="headerlink" href="#chapter-2-c" title="Link to this heading">#</a></h2>
