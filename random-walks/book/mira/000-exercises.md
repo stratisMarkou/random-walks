@@ -890,6 +890,57 @@ $$F_0 \cap (F_1' \cup \dots \cup F_n')' = F_0 \cap F_1 \cap \dots \cap F_n = \em
 ::::
 
 
+::::{admonition} Exercise 2.A.6
+:class: tip
+Prove that if $a, b \in \mathbb{R}$ and $a < b,$ then
+
+$$|(a, b)| = |[a, b)| = |(a, b]| = b - a.$$
+
+:::{dropdown} Solution
+Using the fact that $|[a, b]| = b - a,$ together with the {prf:ref}`order preserving property of the outer measure<mira:thm:outer-measure-preserves-order>` we have that
+
+$$b - a = |[a, b]| \geq |[a, b)| \geq |(a, b)| = b - a$$
+
+so $|[a, b)| = b - a.$
+Similarly, $|(a, b]| = b - a,$ concluding the proof.
+:::
+::::
+
+
+::::{admonition} Exercise 2.A.7
+:class: tip
+Suppose $a, b, c, d$ are real numbers with $a < b$ and $c < d.$
+Prove that
+
+$$|(a, b) \cup (c, d)| = (b - a) + (d - c)$$
+
+if and only if $(a, b) \cap (c, d) = \emptyset.$
+
+:::{dropdown} Solution
+Suppose $a, b, c, d$ are real numbers with $a < b$ and $c < d.$
+By the {prf:ref}`countable subadditivity of the outer measure<mira:thm:countable-subadditivity-of-outer-measure>`
+
+$$|(a, b) \cup (c, d)| \leq (b - a) + (d - c)$$
+
+always holds.
+It remains to show that the opposite inequality holds if and only if $(a, b) \cap (c, d) = \emptyset.$
+First, suppose $(a, b) \cap (c, d) \neq \emptyset,$ and assume without loss of generality that $d > b.$
+Then, we have that $c < b,$ so
+
+$$|(a, b) \cup (c, d)| = d - \min(a, c) = d - (c + \min(a - c, 0)) = (d - c) - \min(a - c, 0) < (d - c) + (b - a).$$
+
+Therefore $|(a, b) \cup (c, d)| \geq (b - a) + (d - c)$ holds only if the two intervals are disjoint.
+Going the other way, suppose that the two intervals are disjoint, again assuming that $d > b$ without loss of generality.
+Let $I_1, I_2, \dots$ be a sequence of open intervals whose union contains $(a, b) \cup (c, d).$
+Then, the union of the open intervals $I_1 \cap (a, b), I_2 \cap (a, b), \dots$ contains $(a, b)$ and similarly, the union of the open intervals $I_1 \cap (c, d), I_2 \cap (c, d), \dots$ contains $(c, d).$
+
+$$
+:::
+::::
+
+
+
+
 ## Chapter 2.C
 
 ::::{admonition} Exercise 2.C.1
