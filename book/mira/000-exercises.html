@@ -1265,6 +1265,55 @@ Since <span class="math notranslate nohighlight">\(F_0 \subseteq F_1' \cup \dots
 \[F_0 \cap (F_1' \cup \dots \cup F_n')' = F_0 \cap F_1 \cap \dots \cap F_n = \emptyset.\]</div>
 </div>
 </details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 2.A.6</p>
+<p>Prove that if <span class="math notranslate nohighlight">\(a, b \in \mathbb{R}\)</span> and <span class="math notranslate nohighlight">\(a &lt; b,\)</span> then</p>
+<div class="math notranslate nohighlight">
+\[|(a, b)| = |[a, b)| = |(a, b]| = b - a.\]</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Using the fact that <span class="math notranslate nohighlight">\(|[a, b]| = b - a,\)</span> together with the <a class="reference internal" href="002-measures.html#mira:thm:outer-measure-preserves-order">order preserving property of the outer measure</a> we have that</p>
+<div class="math notranslate nohighlight">
+\[b - a = |[a, b]| \geq |[a, b)| \geq |(a, b)| = b - a\]</div>
+<p class="sd-card-text">so <span class="math notranslate nohighlight">\(|[a, b)| = b - a.\)</span>
+Similarly, <span class="math notranslate nohighlight">\(|(a, b]| = b - a,\)</span> concluding the proof.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 2.A.7</p>
+<p>Suppose <span class="math notranslate nohighlight">\(a, b, c, d\)</span> are real numbers with <span class="math notranslate nohighlight">\(a &lt; b\)</span> and <span class="math notranslate nohighlight">\(c &lt; d.\)</span>
+Prove that</p>
+<div class="math notranslate nohighlight">
+\[|(a, b) \cup (c, d)| = (b - a) + (d - c)\]</div>
+<p>if and only if <span class="math notranslate nohighlight">\((a, b) \cap (c, d) = \emptyset.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(a, b, c, d\)</span> are real numbers with <span class="math notranslate nohighlight">\(a &lt; b\)</span> and <span class="math notranslate nohighlight">\(c &lt; d.\)</span>
+By the <code class="xref prf prf-ref docutils literal notranslate"><span class="pre">countable</span> <span class="pre">subadditivity</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">outer</span> <span class="pre">measure</span></code></p>
+<div class="math notranslate nohighlight">
+\[|(a, b) \cup (c, d)| \leq (b - a) + (d - c)\]</div>
+<p class="sd-card-text">always holds.
+It remains to show that the opposite inequality holds if and only if <span class="math notranslate nohighlight">\((a, b) \cap (c, d) = \emptyset.\)</span>
+First, suppose <span class="math notranslate nohighlight">\((a, b) \cap (c, d) \neq \emptyset,\)</span> and assume without loss of generality that <span class="math notranslate nohighlight">\(d &gt; b.\)</span>
+Then, we have that <span class="math notranslate nohighlight">\(c &lt; b,\)</span> so</p>
+<div class="math notranslate nohighlight">
+\[|(a, b) \cup (c, d)| = d - \min(a, c) = d - (c + \min(a - c, 0)) = (d - c) - \min(a - c, 0) &lt; (d - c) + (b - a).\]</div>
+<p class="sd-card-text">Therefore <span class="math notranslate nohighlight">\(|(a, b) \cup (c, d)| \geq (b - a) + (d - c)\)</span> holds only if the two intervals are disjoint.
+Going the other way, suppose that the two intervals are disjoint, again assuming that <span class="math notranslate nohighlight">\(d &gt; b\)</span> without loss of generality.
+Let <span class="math notranslate nohighlight">\(I_1, I_2, \dots\)</span> be a sequence of open intervals whose union contains <span class="math notranslate nohighlight">\((a, b) \cup (c, d).\)</span>
+Then, the union of the open intervals <span class="math notranslate nohighlight">\(I_1 \cap (a, b), I_2 \cap (a, b), \dots\)</span> contains <span class="math notranslate nohighlight">\((a, b)\)</span> and similarly, the union of the open intervals <span class="math notranslate nohighlight">\(I_1 \cap (c, d), I_2 \cap (c, d), \dots\)</span> contains <span class="math notranslate nohighlight">\((c, d).\)</span></p>
+</div>
+</details></div>
 </section>
 <section id="chapter-2-c">
 <h2>Chapter 2.C<a class="headerlink" href="#chapter-2-c" title="Link to this heading">#</a></h2>
