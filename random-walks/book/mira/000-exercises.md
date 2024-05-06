@@ -934,7 +934,6 @@ Going the other way, suppose that the two intervals are disjoint, again assuming
 Let $I_1, I_2, \dots$ be a sequence of open intervals whose union contains $(a, b) \cup (c, d).$
 Then, the union of the open intervals $I_1 \cap (a, b), I_2 \cap (a, b), \dots$ contains $(a, b)$ and similarly, the union of the open intervals $I_1 \cap (c, d), I_2 \cap (c, d), \dots$ contains $(c, d).$
 
-$$
 :::
 ::::
 
