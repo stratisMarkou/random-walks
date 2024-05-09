@@ -507,7 +507,7 @@ W(t_{n+1}) = W(t_{n}) + \Delta W(t_{n}), \text{ where } \Delta W(t_{n}) \sim \ma
 </div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/ae3a95a3c8269c364958ca754061a1f177e0adcf5dc6fc3ac948d02575152e2c.svg" src="../../../_images/ae3a95a3c8269c364958ca754061a1f177e0adcf5dc6fc3ac948d02575152e2c.svg" /></div>
+<img alt="../../../_images/04546b4aac2d0d25e3cf4b9917b8f1f003aa34fc9605c04d3e85becf400fdb45.svg" src="../../../_images/04546b4aac2d0d25e3cf4b9917b8f1f003aa34fc9605c04d3e85becf400fdb45.svg" /></div>
 </div>
 <p>So even though we can’t represent the entirety of the path, we can sample it to arbitrary precision.</p>
 </section>
@@ -556,7 +556,7 @@ X(t) = \exp\left(t + \frac{1}{2}W(t)\right).
 </div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/b754d420a631569004f932ad5b12cdb545071225b33ad82df92679d49ff76894.svg" src="../../../_images/b754d420a631569004f932ad5b12cdb545071225b33ad82df92679d49ff76894.svg" /></div>
+<img alt="../../../_images/fe525ccf3b091d27ca6932ac7b1c61d5d444fa6002628f4e7742a510a60264fc.svg" src="../../../_images/fe525ccf3b091d27ca6932ac7b1c61d5d444fa6002628f4e7742a510a60264fc.svg" /></div>
 </div>
 </section>
 <section id="evaluating-a-stochastic-integral">
@@ -730,7 +730,7 @@ X_t = X_0 \exp \left[\Big(\lambda - \frac{1}{2} \mu^2\Big)~t + \mu W(t)\right],
 <p>We are can now run the EM method and compare it aginst the exact solution below.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/9fcb782c9adc736274df7bb2e83d4932d6a8b22a127afd97c803882d715e2729.svg" src="../../../_images/9fcb782c9adc736274df7bb2e83d4932d6a8b22a127afd97c803882d715e2729.svg" /></div>
+<img alt="../../../_images/c933cf505312fb1dda37cc7a8802194e17b51a7e5d51ce8fcf4a6bdc0ffe5a71.svg" src="../../../_images/c933cf505312fb1dda37cc7a8802194e17b51a7e5d51ce8fcf4a6bdc0ffe5a71.svg" /></div>
 </div>
 <p>We can change the accuracy of the solution by adjusting <span class="math notranslate nohighlight">\(N\)</span>. As a fun aside, what if we try out a different drift term? One nice choice is</p>
 <div class="math notranslate nohighlight">
@@ -756,7 +756,7 @@ g(x, t) &amp;= \mu x.\\
 </div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/bc4623aae76767370411cf83d040ee23ec9466b402b85cabff332cef317f3849.svg" src="../../../_images/bc4623aae76767370411cf83d040ee23ec9466b402b85cabff332cef317f3849.svg" /></div>
+<img alt="../../../_images/d7f972105e705a8f48ac140e2b5ed1daba281721225d5c64343fec41adafaade.svg" src="../../../_images/d7f972105e705a8f48ac140e2b5ed1daba281721225d5c64343fec41adafaade.svg" /></div>
 </div>
 </section>
 <section id="strong-and-weak-convergence">
@@ -785,7 +785,7 @@ g(x, t) &amp;= \mu x.\\
 We do not provide a proof for any of the above statements, but instead evaluate the rate of convergence empirically.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/9bb4dbe691ae0657dc3312b8de87e5b3fea2fc1185d5ea16eb9f18d22a220d18.svg" src="../../../_images/9bb4dbe691ae0657dc3312b8de87e5b3fea2fc1185d5ea16eb9f18d22a220d18.svg" /></div>
+<img alt="../../../_images/004673865151f4ae98fbf01b753ea3c03382f5621a549899d742daf40a93ce29.svg" src="../../../_images/004673865151f4ae98fbf01b753ea3c03382f5621a549899d742daf40a93ce29.svg" /></div>
 </div>
 </section>
 <section id="milstein-s-higher-order-method">
@@ -809,13 +809,13 @@ dX(t) = f(X(t))dt + g(X(t)) dW(t),
 <p>Let’s first use Milstein’s method to get a single solution of the Black-Scholes model, as we did for EM.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/73660af0c8eaecb40a4dea11e69ded20350fdc56b1eafa278c69bd093cf78936.svg" src="../../../_images/73660af0c8eaecb40a4dea11e69ded20350fdc56b1eafa278c69bd093cf78936.svg" /></div>
+<img alt="../../../_images/90988ef778395cc9f928f9c8e2e561f4f346631293004eaccde222090f5a7bff.svg" src="../../../_images/90988ef778395cc9f928f9c8e2e561f4f346631293004eaccde222090f5a7bff.svg" /></div>
 </div>
 <p>We can also look at the strong and weak rates of convergence for Milstein’s method.
 Milstein’s method achieves a strong convergence rate of <span class="math notranslate nohighlight">\(1\)</span> as oposed to the <span class="math notranslate nohighlight">\(1/2\)</span> strong rate of Euler Maruyama.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/5116b669410cc2ce059413882d92489cd49fc4c7ab5595e8e7f15b2cf103662f.svg" src="../../../_images/5116b669410cc2ce059413882d92489cd49fc4c7ab5595e8e7f15b2cf103662f.svg" /></div>
+<img alt="../../../_images/8117a1cadf4cce5ebe6fe1e7678c01eddf1ed7c418f2ef13dfe1ad669716f814.svg" src="../../../_images/8117a1cadf4cce5ebe6fe1e7678c01eddf1ed7c418f2ef13dfe1ad669716f814.svg" /></div>
 </div>
 </section>
 <section id="stochastic-chain-rule">
