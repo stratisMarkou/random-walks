@@ -947,6 +947,28 @@ Putting these results together arrive at the required conclusion.
 ::::
 
 
+::::{admonition} Excercise 2.A.8
+:class: tip
+Prove that if $A \subseteq \mathbb{R}$ and $t > 0,$ then $|A| = |A \cap (-t, t)| + |A \cap (\mathbb{R} \setminus (-t, t))|.$
+
+:::{dropdown} Solution
+First, by the {prf:ref}`countable subadditivity of the outer measure<mira:thm:countable-subadditivity-of-outer-measure>` we have
+
+$$|A| \leq |A \cap (-t, t)| + |A \cap (\mathbb{R} \setminus (-t, t))|$$
+
+for all $t > 0.$
+To prove the inequality the other way, suppose $I_1, I_2, \dots$ is a sequence of open intervals whose union contains $A.$
+Then, we have
+
+$$\begin{align}
+\sum_{n = 1}^\infty \ell(I_n) &= \sum_{n = 1}^\infty \ell(I_n \cap (-t, t)) + \ell(I_n \cap (-\infty, t)) + \ell(I_n \cap (\mathbb{R} \setminus (t, \infty))) \\
+&\geq |A \cap (-t, t)| + |A \cap (\mathbb{R} \setminus (-t, t))|
+\end{align}$$
+
+which is the required result.
+:::
+::::
+
 
 
 ## Chapter 2.C
