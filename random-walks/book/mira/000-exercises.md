@@ -666,6 +666,289 @@ so $-f$ is Riemann integrable, which means $f$ must also be Riemann integrable.
 ::::
 
 
+::::{admonition} Excercise 1.B.3
+:class: tip
+Suppose $f, g: [a, b] \to \mathbb{R}$ are bounded functions.
+Prove that
+
+$$L(f, [a, b]) + L(g, [a, b]) \leq L(f + g, [a, b]),$$
+
+and
+
+$$U(f + g, [a, b]) \leq U(f, [a, b]) + U(g, [a, b]).$$
+
+:::{dropdown} Solution
+Let $P_1$ and $P_2$ be partitions of $[a, b].$
+Then, letting $P$ be a partition of $[a, b]$ which includes all points included in $P_1$ and $P_2,$ we have
+
+$$L(f, P_1, [a, b]) + L(g, P_2, [a, b]) \leq L(f + g, P, [a, b]).$$
+
+Taking the supremum of both sides with respect to $P_1$ and $P_2,$ we obtain
+
+$$L(f, [a, b]) + L(g, [a, b]) \leq L(f + g, [a, b]).$$
+
+Repeating the same argument for the upper Riemann sum completes the proof.
+:::
+::::
+
+
+::::{admonition} Exercise 1.B.4
+:class: tip
+Given en example of bounded functions $f, g: [0, 1] \to \mathbb{R}$ such that
+
+$$L(f, [a, b]) + L(g, [a, b]) < L(f + g, [a, b]),$$
+
+and
+
+$$U(f + g, [a, b]) < U(f, [a, b]) + U(g, [a, b]).$$
+
+:::{dropdown} Solution
+Consider the functions $f(x) = \mathbb{1}_{x \in \mathbb{Q}}$ and $g(x) = \mathbb{1}_{x \not \in \mathbb{Q}}.$
+First, we have that $f + g = 1$ so $U(f, [0, 1]) = L(f, [0, 1]) = 1.$
+On the other hand, any subinterval of $[0, 1]$ of nonzero length contains at least one rational and at least one irrational number.
+Therefore for any partition $P$ of $[0, 1],$ we have
+
+$$L(f, P, [0, 1]) = L(g, P, [0, 1]) = 0 ~~\text{ and }~~ U(f, P, [0, 1]) = U(g, P, [0, 1]) = 1.$$
+
+Therefore, these functions satisfy the requirements of the problem statement.
+:::
+::::
+
+
+
+::::{admonition} Exercise 1.B.5
+:class: tip
+Give an example of a sequence of continuous real-valued functions $f_1, f_2, \dots$ on $[0, 1]$ and a continuous real-valued function $f$ on $[0, 1]$ such that
+
+$$f(x) = \lim_{k \to \infty} f_k(x)$$
+
+for each $x \in [0, 1]$ but
+
+$$\int_0^1 f \neq \lim_{k \to \infty} \int_0^1 f_k.$$
+
+:::{dropdown} Solution
+Consider the functions $f_1, f_2, \dots$ defined as
+
+$$f_k(x) = \begin{cases}
+k - k^2 x & \text{ if } 0 < x \leq k \\ 
+0 & \text{ otherwise.}
+\end{cases}$$
+
+Note that $\lim_{k \to \infty} f_k = 0,$ and also for all $k \in \mathbb{Z}^+,$ we have $\int_0^1 f_k = 1.$
+Thus
+
+$$\int_0^1 f \neq \lim_{k \to \infty} \int_0^1 f_k.$$
+:::
+::::
+
+
+## Chapter 2.A
+
+::::{admonition} Exercise 2.A.1
+:class: tip
+Prove that if $A$ and $B$ are subsets of $\mathbb{R}$ and $|B| = 0,$ then $|A \cup B| = |A|.$
+
+:::{dropdown} Solution
+Suppose that $|B| = 0.$
+If $|A| = \infty,$ then $|A \cup B| = \infty = |A|.$
+Instead, suppose that $|A| < \infty.$
+Let $\epsilon > 0.$
+Then, there exist sequences of open intervals $I_1, I_2, \dots$ and $J_1, J_2, \dots$ such that
+
+$$A \subseteq \bigcup_{n = 1}^\infty I_n ~\text{ and }~ \sum_{n = 1}^\infty \ell(I_n) \leq |A| + \frac{\epsilon}{2}$$
+
+and similarly
+
+$$B \subseteq \bigcup_{n = 1}^\infty J_n ~\text{ and }~ \sum_{n = 1}^\infty \ell(J_n) \leq \frac{\epsilon}{2}.$$
+
+Define the sequence $K_1, K_2, \dots$ to be the sequence of intervals $I_1, J_1, I_2, J_2, \dots.$
+Then
+
+$$A \cup B \subseteq \bigcup_{n = 1}^\infty K_n ~\text{ and }~ \sum_{n = 1}^\infty \ell(K_n) \leq |A| + \epsilon,$$
+
+and since $\epsilon > 0$ was arbitrary, we have $|A \cup B| \leq |A|.$
+By the {prf:ref}`order preserving property of the outer measure<mira:thm:outer-measure-preserves-order>` we have $|A \cup B| \geq |B|$ and thus $|A \cup B| = |A|.$
+:::
+::::
+
+
+::::{admonition} Exercises 2.A.2
+:class: tip
+Suppose $A \subseteq \mathbb{R}$ and $t \in \mathbb{R}.$
+Let $tA = \{ta: a \in A\}.$
+Prove that $|tA| = |t||A|.$
+
+\[Assume that $0 \cdot \infty$ is defined to be 0.\]
+
+:::{dropdown} Solution
+If $t = 0,$ then $tA = \{0\}$ so $|tA| = 0.$
+Also, irrespective of the value of $|A|,$ we have $|t||A| = 0,$ so $|tA| = |t||A|.$
+Instead suppose that $t \neq 0.$
+Also, suppose that $|A|< \infty.$
+Then, there exists a sequence of open intervals $I_1, I_2, \dots$ such that $\cup_{n=1}^\infty I_n \subseteq A$ and also $\sum_{n=1}^\infty |A| + \epsilon.$
+Now, note that
+
+$$\bigcup_{n=1}^\infty tI_n = t \bigcup^\infty_{n=1} I_n \subseteq tA,$$
+
+and also 
+
+$$\sum_{n=1}^\infty \ell(tI_n) = |t| \sum_{n=1}^\infty \ell(I_n) \leq |t| |A| + |t| \epsilon.$$
+
+And since $\epsilon > 0$ was arbitrary, we have $|tA| \leq |t||A|.$
+To get the unequality the other way, consider that
+
+$$|A| = |t^{-1} (tA)| \leq |t^{-1}| |tA| \implies |t||A| \leq |tA|,$$
+
+where we have used the assumption $t \neq 0.$
+Therefore $|tA| = |t||A|$ whenever $|A| < \infty.$
+
+Finally, consider the case $|A| = \infty$ and $t \neq 0.$
+Then, we have that $|t||A| = \infty.$
+Also, we must have $|tA| = \infty,$ because if we did not, then we could use the previous result with a factor of $t^{-1}$ to show that $|A| < \infty,$ which would lead to a contradiction.
+This completes all parts of the proof.
+:::
+::::
+
+
+
+::::{admonition} Exercise 2.A.3
+:class: tip
+Prove that if $A, B \subseteq{R}$ and $|A| < \infty,$ then $|B \setminus A| \geq |B| - |A|.$
+
+:::{dropdown} Solution
+Suppose that $A, B \subseteq{R}$ and $|A| < \infty.$
+By the {prf:ref}`subadditivity of the outer measure<mira:thm:outer-measure-preserves-order>` and the {prf:ref}`order preserving property of the outer measure<mira:thm:outer-measure-preserves-order>`.
+
+$$|B \setminus A| + |A| \geq |A \cup B| \geq |B| \implies |B \setminus A| \geq |B| - |A|.$$
+:::
+::::
+
+
+
+::::{admonition} Exercise 2.A.4
+:class: tip
+Suppose that $F$ is a subset of $\mathbb{R}$ with the property that every open sucover of $F$ has a finite subcover.
+Prove that $F$ is closed and bounded.
+
+:::{dropdown} Solution
+Suppose that $F$ is a subset of $\mathbb{R}$ with the property that every open sucover of $F$ has a finite subcover.
+First, we show $F$ is bounded.
+The collection of sets $(n-1, n+1)$ for $n \in \mathbb{Z}^+$ is an open cover of $\mathbb{R}$ and therefore it is an open cover of $F.$
+By assumption, this set has a finite subcover on $F,$ say $I_{n_1}, \dots, I_{n_k},$ whose union has a finite infimum and a finite supremum.
+Therefore $F$ is a bounded set.
+Let $a = \inf F$ and $b = \sup F.$
+
+We will show that $F$ is a closed set by showing that it contains all its limit points, by way of contradiction.
+Suppose $x_n \in F$ is a sequence of points in $F$ which converges to a limit $x.$
+Suppose $x \not \in F.$
+Then, define the following two base-case open intervals
+
+$$\begin{align}
+I_1 = \left(a - 1, \frac{a + x}{2}\right) = (c_1, d_1) \\
+I_2 = \left(\frac{b + x}{2}, b + 1\right) = (c_2, d_2) \\
+\end{align}$$
+
+as well as the intervals
+
+$$\begin{align}
+I_{2n+1} = \left(\frac{c_{2n-1} + d_{2n-1}}{2}, \frac{d_{2n-1} + x}{2}\right) \\
+I_{2n+2} = \left(\frac{c_{2n} + x}{2}, \frac{d_{2n} + d_{2n}}{2}\right).
+\end{align}$$
+
+This sequence is an open cover of $F,$ so it has a finite subcover.
+But that means that there exists $k \in \mathbb{Z}^+$ such that
+
+$$\inf\{|x - y| \in \mathbb{R}: y \in \cup^\infty_{n = 1} I_n\} \geq \delta.$$
+
+But since $x_n \in x$ and $x_n \in F$ for all $n \in \mathbb{Z}^+,$ this leads to a contradiction.
+:::
+::::
+
+
+
+::::{admonition} Exercise 2.A.5
+:class: tip
+Suppose $\mathcal{A}$ is a set of closed subsets of $\mathbb{R}$ such that $\cap_{F \in \mathcal{A}} F = \emptyset.$
+Prove that if $\mathcal{A}$ contains at least one bounded set, then there exist $n \in \mathbb{Z}^+$ and $F_1, \dots, F_n \in \mathcal{A}$ such that $F_1 \cap \dots \cap F_n = \emptyset.$
+
+:::{dropdown} Solution
+Suppose $\mathcal{A}$ is a set of closed subsets of $\mathbb{R}$ such that $\cap_{F \in \mathcal{A}} F = \emptyset.$
+Further, suppose that $\mathcal{A}$ contains at least one closed bounded set $F_0.$
+Since $\cap_{F \in \mathcal{A}} F = \emptyset,$ we have
+
+$$\left(\bigcap_{F \in \mathcal{A}} F\right)' = \bigcup_{F \in \mathcal{A}} F' = \mathbb{R},$$
+
+so we have
+
+$$F_0 \subseteq \bigcup_{F \in \mathcal{A}: F \neq F_0} F'.$$
+
+The union above is an open cover of $F_0,$ so it has a finite subcover on $F_0,$ say $F_1', \dots, F_n'.$
+Since $F_0 \subseteq F_1' \cup \dots \cup F_n'$ we have
+
+$$F_0 \cap (F_1' \cup \dots \cup F_n')' = F_0 \cap F_1 \cap \dots \cap F_n = \emptyset.$$
+:::
+::::
+
+
+::::{admonition} Exercise 2.A.6
+:class: tip
+Prove that if $a, b \in \mathbb{R}$ and $a < b,$ then
+
+$$|(a, b)| = |[a, b)| = |(a, b]| = b - a.$$
+
+:::{dropdown} Solution
+Using the fact that $|[a, b]| = b - a,$ together with the {prf:ref}`order preserving property of the outer measure<mira:thm:outer-measure-preserves-order>` we have that
+
+$$b - a = |[a, b]| \geq |[a, b)| \geq |(a, b)| = b - a$$
+
+so $|[a, b)| = b - a.$
+Similarly, $|(a, b]| = b - a,$ concluding the proof.
+:::
+::::
+
+
+::::{admonition} Exercise 2.A.7
+:class: tip
+Suppose $a, b, c, d$ are real numbers with $a < b$ and $c < d.$
+Prove that
+
+$$|(a, b) \cup (c, d)| = (b - a) + (d - c)$$
+
+if and only if $(a, b) \cap (c, d) = \emptyset.$
+
+:::{dropdown} Solution
+Suppose $a, b, c, d$ are real numbers with $a < b$ and $c < d.$
+By the {prf:ref}`countable subadditivity of the outer measure<mira:thm:countable-subadditivity-of-outer-measure>`
+
+$$|(a, b) \cup (c, d)| \leq (b - a) + (d - c)$$
+
+always holds.
+It remains to show that the opposite inequality holds if and only if $(a, b) \cap (c, d) = \emptyset.$
+First, suppose $(a, b) \cap (c, d) \neq \emptyset,$ and assume without loss of generality that $d > b.$
+Then, we have that $c < b,$ so
+
+$$|(a, b) \cup (c, d)| = d - \min(a, c) = d - (c + \min(a - c, 0)) = (d - c) - \min(a - c, 0) < (d - c) + (b - a).$$
+
+Therefore $|(a, b) \cup (c, d)| \geq (b - a) + (d - c)$ holds only if the two intervals are disjoint.
+Going the other way, suppose that the two intervals are disjoint, again assuming that $d > b$ without loss of generality.
+Let $I_1, I_2, \dots$ be a sequence of open intervals whose union contains $(a, b) \cup (c, d).$
+Then, the union of the open intervals $I_1 \cap (a, b), I_2 \cap (a, b), \dots$ contains $(a, b)$ and similarly, the union of the open intervals $I_1 \cap (c, d), I_2 \cap (c, d), \dots$ contains $(c, d).$
+Finally, using the fact that $(a, b)$ and $(c, d)$ are disjoint, we have
+
+$$\sum_{n = 1}^\infty \ell(I_n) \geq \sum_{n = 1}^\infty \ell(I_n \cap (a, b)) + \ell(I_n \cap (c, d))$$
+
+which implies that
+
+$$|(a, b) \cup (c, d)| \geq |(a, b)| + |(c, d)|.$$
+
+Putting these results together arrive at the required conclusion.
+
+:::
+::::
+
+
+
+
 ## Chapter 2.C
 
 ::::{admonition} Exercise 2.C.1
