@@ -965,10 +965,56 @@ $$\begin{align}
 &\geq |A \cap (-t, t)| + |A \cap (\mathbb{R} \setminus (-t, t))|
 \end{align}$$
 
-which is the required result.
+where we have used the fact that the sequence of sets
+
+$$I_1 \cap (-\infty, t], I_1 \cap [t, \infty), I_2 \cap (-\infty, t], \dots$$
+
+has a union that contains $A \cap (\mathbb{R} \setminus (-t, t)),$ and the outer measures of these sets are equal to
+
+$$\ell(I_1 \cap (-\infty, t)), \ell(I_1 \cap (t, \infty)), \ell(I_2 \cap (-\infty, t)), \dots,$$
+
+completing the proof.
 :::
 ::::
 
+
+::::{admonition} Exercise 2.A.9
+:class: tip
+Prove that $|A| = \lim_{t \to \infty} |A \cap (-t, t)|$ for all $A \subseteq \mathbb{R}.$
+
+:::{dropdown} Solution
+First, by the {prf:ref}`countable subadditivity of the outer measure<mira:thm:countable-subadditivity-of-outer-measure>` we have
+
+$$\begin{align}
+|A| &= \left|\bigcup_{n = 1}^\infty (A \cap (n-1, n)) \cup (A \cap (-n, -n + 1)) \cup \{-n-1, n-1\} \right| \\
+&\leq \sum_{n = 1}^\infty \left|(A \cap (n-1, n)) \cup (A \cap (-n, -n+1)) \cup \{-n-1, n-1\} \right| \\
+&= \lim_{N \to \infty} \sum_{n = 1}^N \left|(A \cap (n-1, n)) \cup (A \cap (-n, -n+1)) \cup \{-n-1, n-1\} \right| \\
+&= \lim_{N \to \infty} \left|A \cap (-N, N)\right|.
+\end{align}$$
+
+Note that since $\left|A \cap (-t, t)\right|$ is non-decreasing in $t \in \mathbb{Z}^+,$ the limit above is unchanged even if $N \not \in \mathbb{Z}^+.$
+In addition, we have $|A| \geq |A \cap (-t, t)|$ for all $t \in \mathbb{R},$ and putting these two inequalities together, we conclude that
+
+$$|A| = \lim_{t \to \infty} |A \cap (-t, t)|.$$
+:::
+::::
+
+
+::::{admonition} Exercise 2.A.10
+:class: tip
+Prove that $|[0, 1] \setminus \mathbb{Q}| = 1.$
+
+:::{dropdown} Solution
+First, by the {prf:ref}`countable subadditivity of the outer measure<mira:thm:countable-subadditivity-of-outer-measure>` we have
+
+$$\begin{equation}
+|[0, 1] \setminus \mathbb{Q}| \geq |[0, 1]| - |\mathbb{Q}| = |[0, 1]| = 1,
+\end{equation}$$
+
+where we have used the fact that {prf:ref}`countable sets have measure zero<mira:thm:countable-sets-have-measure-zero>`.
+Using the fact that the {prf:ref}`outer measure preserves order<mira:thm:outer-measure-preserves-order>` we have $|[0, 1] \setminus \mathbb{Q}| \leq |[0, 1]| = 1,$ concluding the proof.
+:::
+::::
 
 
 ## Chapter 2.C

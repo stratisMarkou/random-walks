@@ -63,6 +63,7 @@ The outer measure has a number of good properties.
 First, the outer measure of countable subsets of $\mathbb{R}$ is zero.
 
 :::{prf:theorem} Countable sets have outer measure zero
+:label: mira:thm:countable-sets-have-measure-zero
 
 Every countable subset of $\mathbb{R}$ has outer measure $0.$
 
