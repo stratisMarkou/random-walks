@@ -216,6 +216,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Papers &amp; Miscellanous</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Stream of papers</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../transformers/transformers.html">Introduction to transformers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../why-covariances/why-covariances.html">Why covariance functions?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ais/ais.html">Annealed importance sampling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../rff/rff.html">Random Fourier features</a></li>
@@ -507,7 +508,7 @@ W(t_{n+1}) = W(t_{n}) + \Delta W(t_{n}), \text{ where } \Delta W(t_{n}) \sim \ma
 </div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/04546b4aac2d0d25e3cf4b9917b8f1f003aa34fc9605c04d3e85becf400fdb45.svg" src="../../../_images/04546b4aac2d0d25e3cf4b9917b8f1f003aa34fc9605c04d3e85becf400fdb45.svg" /></div>
+<img alt="../../../_images/849a977312ae440f760b8c5f732c2112e1663eefe90fb571e08f718340565de5.svg" src="../../../_images/849a977312ae440f760b8c5f732c2112e1663eefe90fb571e08f718340565de5.svg" /></div>
 </div>
 <p>So even though we can’t represent the entirety of the path, we can sample it to arbitrary precision.</p>
 </section>
@@ -556,7 +557,7 @@ X(t) = \exp\left(t + \frac{1}{2}W(t)\right).
 </div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/fe525ccf3b091d27ca6932ac7b1c61d5d444fa6002628f4e7742a510a60264fc.svg" src="../../../_images/fe525ccf3b091d27ca6932ac7b1c61d5d444fa6002628f4e7742a510a60264fc.svg" /></div>
+<img alt="../../../_images/d41fdf1e2df3452e758b4a804786d58b3c7fccb8fcd1ab34a3e536c4519b8cd1.svg" src="../../../_images/d41fdf1e2df3452e758b4a804786d58b3c7fccb8fcd1ab34a3e536c4519b8cd1.svg" /></div>
 </div>
 </section>
 <section id="evaluating-a-stochastic-integral">
@@ -730,7 +731,7 @@ X_t = X_0 \exp \left[\Big(\lambda - \frac{1}{2} \mu^2\Big)~t + \mu W(t)\right],
 <p>We are can now run the EM method and compare it aginst the exact solution below.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/c933cf505312fb1dda37cc7a8802194e17b51a7e5d51ce8fcf4a6bdc0ffe5a71.svg" src="../../../_images/c933cf505312fb1dda37cc7a8802194e17b51a7e5d51ce8fcf4a6bdc0ffe5a71.svg" /></div>
+<img alt="../../../_images/249e12571071c3e1cd91679adda32261bcc8bcb4b4adfdb986edd966f3582367.svg" src="../../../_images/249e12571071c3e1cd91679adda32261bcc8bcb4b4adfdb986edd966f3582367.svg" /></div>
 </div>
 <p>We can change the accuracy of the solution by adjusting <span class="math notranslate nohighlight">\(N\)</span>. As a fun aside, what if we try out a different drift term? One nice choice is</p>
 <div class="math notranslate nohighlight">
@@ -756,7 +757,7 @@ g(x, t) &amp;= \mu x.\\
 </div>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/d7f972105e705a8f48ac140e2b5ed1daba281721225d5c64343fec41adafaade.svg" src="../../../_images/d7f972105e705a8f48ac140e2b5ed1daba281721225d5c64343fec41adafaade.svg" /></div>
+<img alt="../../../_images/1635afa10559e29787e11cecd39ff147f22c29b149b5517602dec19b625d1cf7.svg" src="../../../_images/1635afa10559e29787e11cecd39ff147f22c29b149b5517602dec19b625d1cf7.svg" /></div>
 </div>
 </section>
 <section id="strong-and-weak-convergence">
@@ -785,7 +786,7 @@ g(x, t) &amp;= \mu x.\\
 We do not provide a proof for any of the above statements, but instead evaluate the rate of convergence empirically.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/004673865151f4ae98fbf01b753ea3c03382f5621a549899d742daf40a93ce29.svg" src="../../../_images/004673865151f4ae98fbf01b753ea3c03382f5621a549899d742daf40a93ce29.svg" /></div>
+<img alt="../../../_images/373eb09fe7e0b367dd446804414d7d4d94fb049ce32e958de50e4706f1575eb0.svg" src="../../../_images/373eb09fe7e0b367dd446804414d7d4d94fb049ce32e958de50e4706f1575eb0.svg" /></div>
 </div>
 </section>
 <section id="milstein-s-higher-order-method">
@@ -809,13 +810,13 @@ dX(t) = f(X(t))dt + g(X(t)) dW(t),
 <p>Let’s first use Milstein’s method to get a single solution of the Black-Scholes model, as we did for EM.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/90988ef778395cc9f928f9c8e2e561f4f346631293004eaccde222090f5a7bff.svg" src="../../../_images/90988ef778395cc9f928f9c8e2e561f4f346631293004eaccde222090f5a7bff.svg" /></div>
+<img alt="../../../_images/583d3821272c91236d5eca263f578740f48bd55b383489c2a0f508e4b0b8d721.svg" src="../../../_images/583d3821272c91236d5eca263f578740f48bd55b383489c2a0f508e4b0b8d721.svg" /></div>
 </div>
 <p>We can also look at the strong and weak rates of convergence for Milstein’s method.
 Milstein’s method achieves a strong convergence rate of <span class="math notranslate nohighlight">\(1\)</span> as oposed to the <span class="math notranslate nohighlight">\(1/2\)</span> strong rate of Euler Maruyama.</p>
 <div class="cell tag_center-output tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/8117a1cadf4cce5ebe6fe1e7678c01eddf1ed7c418f2ef13dfe1ad669716f814.svg" src="../../../_images/8117a1cadf4cce5ebe6fe1e7678c01eddf1ed7c418f2ef13dfe1ad669716f814.svg" /></div>
+<img alt="../../../_images/ee31bc11ba427d6552a7d23b6ab492cc507f13c47e1d5774c9aaacb2f004dcbd.svg" src="../../../_images/ee31bc11ba427d6552a7d23b6ab492cc507f13c47e1d5774c9aaacb2f004dcbd.svg" /></div>
 </div>
 </section>
 <section id="stochastic-chain-rule">

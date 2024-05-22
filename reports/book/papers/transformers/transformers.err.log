@@ -1,0 +1,269 @@
+Traceback (most recent call last):
+  File "/Users/stratismarkou/miniconda3/envs/rw/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Users/stratismarkou/miniconda3/envs/rw/lib/python3.10/site-packages/nbclient/client.py", line 1314, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Users/stratismarkou/miniconda3/envs/rw/lib/python3.10/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+  File "/Users/stratismarkou/miniconda3/envs/rw/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/Users/stratismarkou/miniconda3/envs/rw/lib/python3.10/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/Users/stratismarkou/miniconda3/envs/rw/lib/python3.10/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/stratismarkou/miniconda3/envs/rw/lib/python3.10/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# Model parameters
+token_dimension = 128
+patch_size = 4
+num_mlp_hidden = 64
+num_mlp_layers = 2
+num_heads = 4
+num_blocks = 6
+num_classes = 10
+
+# Training parameters
+batch_size = 32
+num_epochs = 100
+learning_rate = 1e-3
+weight_decay = 1e-4
+
+#
+seeds = tfp.random.split_seed([0, 0], 3)
+
+tokeniser = ImageTokeniser(
+    seeds[0],
+    token_dimension=token_dimension,
+    patch_size=patch_size,
+)
+
+embedding = PositionEmbedding(
+    seeds[1],
+    token_dimension=token_dimension,
+    sequence_length=(32 // patch_size)**2,
+)
+
+# Create a transformer
+transformer = TinyVisionTransformer(
+    seeds[2],
+    tokeniser=tokeniser,
+    embedding=embedding,
+    token_dimension=token_dimension,
+    mlp_num_hidden=num_mlp_hidden,
+    mlp_num_layers=num_mlp_layers,
+    num_heads=num_heads,
+    num_blocks=num_blocks,
+    num_classes=num_classes,
+)
+
+optimizer = tf.optimizers.Adam(
+    learning_rate=learning_rate,
+    weight_decay=weight_decay,
+)
+
+from tqdm import tqdm
+
+for i in range(20):
+    progress_bar = tqdm(get_batches(batch_size, "train"))
+    train_losses = []
+    train_accuracies = []
+    for x, y in progress_bar:
+        loss = make_step(transformer, optimizer, x, y)
+        train_losses.append(loss)
+        train_accuracies.append(
+            tf.reduce_mean(tf.cast(tf.argmax(transformer(x), axis=1) == y, tf.float32))
+        )
+        progress_bar.set_description(
+            f"Epoch {i:03d}: loss {tf.reduce_mean(train_losses):.3f} accuracy {tf.reduce_mean(train_accuracies):.3f}"
+        )
+    
+    progress_bar = tqdm(get_batches(batch_size, "test"))
+    test_losses = []
+    test_accuracies = []
+    for x, y in progress_bar:
+        logits = transformer(x)
+        loss = cross_entropy_loss(logits, y)
+        test_losses.append(loss)
+        test_accuracies.append(
+            tf.reduce_mean(tf.cast(tf.argmax(logits, axis=1) == y, tf.float32))
+        )
+
+        progress_bar.set_description(
+            f"Epoch {i:03d}: loss {tf.reduce_mean(test_losses):.3f} accuracy {tf.reduce_mean(test_accuracies):.3f}"
+        )
+------------------
+
+----- stderr -----
+0it [00:00, ?it/s]
+----- stderr -----
+Epoch 000: loss 8.073 accuracy 0.000: : 0it [00:07, ?it/s]
+----- stderr -----
+Epoch 000: loss 8.073 accuracy 0.000: : 1it [00:07,  7.73s/it]
+----- stderr -----
+Epoch 000: loss 6.712 accuracy 0.031: : 1it [00:08,  7.73s/it]
+----- stderr -----
+Epoch 000: loss 6.712 accuracy 0.031: : 2it [00:08,  3.42s/it]
+----- stderr -----
+Epoch 000: loss 6.279 accuracy 0.031: : 2it [00:08,  3.42s/it]
+----- stderr -----
+Epoch 000: loss 6.279 accuracy 0.031: : 3it [00:08,  2.02s/it]
+----- stderr -----
+Epoch 000: loss 6.255 accuracy 0.047: : 3it [00:08,  2.02s/it]
+----- stderr -----
+Epoch 000: loss 6.255 accuracy 0.047: : 4it [00:08,  1.40s/it]
+----- stderr -----
+Epoch 000: loss 5.786 accuracy 0.094: : 4it [00:09,  1.40s/it]
+----- stderr -----
+Epoch 000: loss 5.786 accuracy 0.094: : 5it [00:09,  1.05s/it]
+----- stderr -----
+Epoch 000: loss 5.538 accuracy 0.089: : 5it [00:09,  1.05s/it]
+----- stderr -----
+Epoch 000: loss 5.538 accuracy 0.089: : 6it [00:09,  1.19it/s]
+----- stderr -----
+Epoch 000: loss 5.289 accuracy 0.085: : 6it [00:10,  1.19it/s]
+----- stderr -----
+Epoch 000: loss 5.289 accuracy 0.085: : 7it [00:10,  1.39it/s]
+----- stderr -----
+Epoch 000: loss 5.086 accuracy 0.090: : 7it [00:10,  1.39it/s]
+----- stderr -----
+Epoch 000: loss 5.086 accuracy 0.090: : 8it [00:10,  1.60it/s]
+----- stderr -----
+Epoch 000: loss 4.899 accuracy 0.090: : 8it [00:11,  1.60it/s]
+----- stderr -----
+Epoch 000: loss 4.899 accuracy 0.090: : 9it [00:11,  1.88it/s]
+----- stderr -----
+Epoch 000: loss 4.709 accuracy 0.109: : 9it [00:11,  1.88it/s]
+----- stderr -----
+Epoch 000: loss 4.709 accuracy 0.109: : 10it [00:11,  2.01it/s]
+----- stderr -----
+Epoch 000: loss 4.555 accuracy 0.119: : 10it [00:11,  2.01it/s]
+----- stderr -----
+Epoch 000: loss 4.555 accuracy 0.119: : 11it [00:11,  2.12it/s]
+----- stderr -----
+Epoch 000: loss 4.476 accuracy 0.109: : 11it [00:12,  2.12it/s]
+----- stderr -----
+Epoch 000: loss 4.476 accuracy 0.109: : 12it [00:12,  2.19it/s]
+----- stderr -----
+Epoch 000: loss 4.366 accuracy 0.118: : 12it [00:12,  2.19it/s]
+----- stderr -----
+Epoch 000: loss 4.366 accuracy 0.118: : 13it [00:12,  2.25it/s]
+----- stderr -----
+Epoch 000: loss 4.273 accuracy 0.121: : 13it [00:13,  2.25it/s]
+----- stderr -----
+Epoch 000: loss 4.273 accuracy 0.121: : 14it [00:13,  2.31it/s]
+----- stderr -----
+Epoch 000: loss 4.188 accuracy 0.129: : 14it [00:13,  2.31it/s]
+----- stderr -----
+Epoch 000: loss 4.188 accuracy 0.129: : 15it [00:13,  2.41it/s]
+----- stderr -----
+Epoch 000: loss 4.107 accuracy 0.125: : 15it [00:13,  2.41it/s]
+----- stderr -----
+Epoch 000: loss 4.107 accuracy 0.125: : 16it [00:13,  2.39it/s]
+----- stderr -----
+Epoch 000: loss 4.031 accuracy 0.125: : 16it [00:14,  2.39it/s]
+----- stderr -----
+Epoch 000: loss 4.031 accuracy 0.125: : 17it [00:14,  2.37it/s]
+----- stderr -----
+Epoch 000: loss 3.963 accuracy 0.123: : 17it [00:14,  2.37it/s]
+----- stderr -----
+Epoch 000: loss 3.963 accuracy 0.123: : 18it [00:14,  2.36it/s]
+----- stderr -----
+Epoch 000: loss 3.921 accuracy 0.127: : 18it [00:15,  2.36it/s]
+----- stderr -----
+Epoch 000: loss 3.921 accuracy 0.127: : 19it [00:15,  2.30it/s]
+----- stderr -----
+Epoch 000: loss 3.862 accuracy 0.131: : 19it [00:15,  2.30it/s]
+----- stderr -----
+Epoch 000: loss 3.862 accuracy 0.131: : 20it [00:15,  2.30it/s]
+----- stderr -----
+Epoch 000: loss 3.799 accuracy 0.137: : 20it [00:16,  2.30it/s]
+----- stderr -----
+Epoch 000: loss 3.799 accuracy 0.137: : 21it [00:16,  2.36it/s]
+----- stderr -----
+Epoch 000: loss 3.747 accuracy 0.138: : 21it [00:16,  2.36it/s]
+----- stderr -----
+Epoch 000: loss 3.747 accuracy 0.138: : 22it [00:16,  2.45it/s]
+----- stderr -----
+Epoch 000: loss 3.702 accuracy 0.137: : 22it [00:16,  2.45it/s]
+----- stderr -----
+Epoch 000: loss 3.702 accuracy 0.137: : 23it [00:16,  2.39it/s]
+----- stderr -----
+Epoch 000: loss 3.653 accuracy 0.138: : 23it [00:17,  2.39it/s]
+----- stderr -----
+Epoch 000: loss 3.653 accuracy 0.138: : 24it [00:17,  2.38it/s]
+----- stderr -----
+Epoch 000: loss 3.611 accuracy 0.136: : 24it [00:17,  2.38it/s]
+----- stderr -----
+Epoch 000: loss 3.611 accuracy 0.136: : 25it [00:17,  2.36it/s]
+----- stderr -----
+Epoch 000: loss 3.569 accuracy 0.136: : 25it [00:18,  2.36it/s]
+----- stderr -----
+Epoch 000: loss 3.569 accuracy 0.136: : 26it [00:18,  2.38it/s]
+----- stderr -----
+Epoch 000: loss 3.520 accuracy 0.142: : 26it [00:18,  2.38it/s]
+----- stderr -----
+Epoch 000: loss 3.520 accuracy 0.142: : 27it [00:18,  2.36it/s]
+----- stderr -----
+Epoch 000: loss 3.485 accuracy 0.146: : 27it [00:18,  2.36it/s]
+----- stderr -----
+Epoch 000: loss 3.485 accuracy 0.146: : 28it [00:18,  2.44it/s]
+----- stderr -----
+Epoch 000: loss 3.449 accuracy 0.145: : 28it [00:19,  2.44it/s]
+----- stderr -----
+Epoch 000: loss 3.449 accuracy 0.145: : 29it [00:19,  2.35it/s]
+----- stderr -----
+Epoch 000: loss 3.409 accuracy 0.148: : 29it [00:19,  2.35it/s]
+----- stderr -----
+Epoch 000: loss 3.409 accuracy 0.148: : 30it [00:19,  2.29it/s]
+----- stderr -----
+Epoch 000: loss 3.369 accuracy 0.149: : 30it [00:20,  2.29it/s]
+----- stderr -----
+Epoch 000: loss 3.369 accuracy 0.149: : 31it [00:20,  2.27it/s]
+----- stderr -----
+Epoch 000: loss 3.328 accuracy 0.152: : 31it [00:20,  2.27it/s]
+----- stderr -----
+Epoch 000: loss 3.328 accuracy 0.152: : 32it [00:20,  2.32it/s]
+----- stderr -----
+Epoch 000: loss 3.300 accuracy 0.153: : 32it [00:21,  2.32it/s]
+----- stderr -----
+Epoch 000: loss 3.300 accuracy 0.153: : 33it [00:21,  2.32it/s]
+----- stderr -----
+Epoch 000: loss 3.269 accuracy 0.156: : 33it [00:21,  2.32it/s]
+----- stderr -----
+Epoch 000: loss 3.269 accuracy 0.156: : 34it [00:21,  2.44it/s]
+----- stderr -----
+Epoch 000: loss 3.248 accuracy 0.157: : 34it [00:21,  2.44it/s]
+----- stderr -----
+Epoch 000: loss 3.248 accuracy 0.157: : 35it [00:21,  2.41it/s]
+----- stderr -----
+Epoch 000: loss 3.221 accuracy 0.159: : 35it [00:22,  2.41it/s]
+----- stderr -----
+Epoch 000: loss 3.221 accuracy 0.159: : 36it [00:22,  2.38it/s]
+----- stderr -----
+Epoch 000: loss 3.195 accuracy 0.160: : 36it [00:22,  2.38it/s]
+----- stderr -----
+Epoch 000: loss 3.195 accuracy 0.160: : 37it [00:22,  2.40it/s]
+----- stderr -----
+Epoch 000: loss 3.172 accuracy 0.159: : 37it [00:23,  2.40it/s]
+----- stderr -----
+Epoch 000: loss 3.172 accuracy 0.159: : 38it [00:23,  2.40it/s]
+----- stderr -----
+Epoch 000: loss 3.148 accuracy 0.161: : 38it [00:23,  2.40it/s]
+----- stderr -----
+Epoch 000: loss 3.148 accuracy 0.161: : 39it [00:23,  2.39it/s]
+----- stderr -----
+Epoch 000: loss 3.123 accuracy 0.162: : 39it [00:24,  2.39it/s]
+----- stderr -----
+Epoch 000: loss 3.123 accuracy 0.162: : 40it [00:24,  2.37it/s]
+----- stderr -----
+Epoch 000: loss 3.123 accuracy 0.162: : 40it [00:24,  1.65it/s]
+----- stderr -----
+
+
+KeyboardInterrupt
+------------------
+
+
+

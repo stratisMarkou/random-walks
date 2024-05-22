@@ -63,7 +63,6 @@ The outer measure has a number of good properties.
 First, the outer measure of countable subsets of $\mathbb{R}$ is zero.
 
 :::{prf:theorem} Countable sets have outer measure zero
-:label: mira:thm:countable-sets-have-measure-zero
 
 Every countable subset of $\mathbb{R}$ has outer measure $0.$
 
@@ -158,7 +157,7 @@ Another useful property of the outer measure is countable subadditivity.
 This property will also turn out to be true of more general measures which we will define later.
 
 :::{prf:theorem} Outer measure is countably subadditive
-:label: mira:thm:countable-subadditivity-of-outer-measure
+:label: mira:thm:outer-measure-is-countably-subadditive
 
 Suppose $A_1, A_2, \ldots$ are subsets of $\mathbb{R}.$
 Then
@@ -455,7 +454,7 @@ $$\left|\bigcup_{n=1}^\infty S_n\right| = \sum_{n=1}^\infty |S_n|.$$
 
 :::{dropdown} Proof: Outer measure is additive if sets are contained by disjoint open intervals
 
-First, by the {prf:ref}`subadditivity of the outer measure<mira:thm:countable-subadditivity-of-outer-measure>`, we have 
+First, by the {prf:ref}`subadditivity of the outer measure<mira:thm:outer-measure-is-countably-subadditive>`, we have 
 
 $$\left|\bigcup_{n=1}^\infty S_n\right| \leq \sum_{n=1}^\infty |S_n|.$$
 

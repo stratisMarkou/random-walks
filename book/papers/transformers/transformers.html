@@ -421,17 +421,26 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sequence-modelling">Sequence modelling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling-with-tokens">Modelling with tokens</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformer-block">Transformer block</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#self-attention">Self-attention</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-layer-perceptron">Multi-layer perceptron</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#skip-connections-and-normalisation">Skip connections and normalisation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#positional-embeddings">Positional embeddings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#residuals-and-normalisation">Residuals and normalisation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#putting-it-together">Putting it together</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tokens-and-embeddings">Tokens and embeddings</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extensions">Extensions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-head-self-attention">(Multi head) self-attention</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">Multi-layer perceptron</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">Transformer block</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">Tokens and embeddings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">Putting it together</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training">Training</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
             </nav>
@@ -446,52 +455,145 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-transformers">
 <h1>Introduction to transformers<a class="headerlink" href="#introduction-to-transformers" title="Link to this heading">#</a></h1>
-<p>The transformer architecture <span id="id1">[<a class="reference internal" href="#id18" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Lukasz Kaiser, and Illia Polosukhin. Attention is all you need. arXiv preprint arXiv:1706.03762, 2017.">Vaswani <em>et al.</em>, 2017</a>]</span> is a deep learning architecture, which has powered many of the recent advances across a range of deep learning applications, including text modelling, image modelling <span id="id2">[<a class="reference internal" href="#id20" title="Alexey Dosovitskiy, Lucas Beyer, Alexander Kolesnikov, Dirk Weissenborn, Xiaohua Zhai, Thomas Unterthiner, Mostafa Dehghani, Matthias Minderer, Georg Heigold, Sylvain Gelly, Jakob Uszkoreit, and Neil Houlsby. An image is worth 16x16 words: transformers for image recognition at scale. 2021. arXiv:2010.11929.">Dosovitskiy <em>et al.</em>, 2021</a>]</span>, and many others.
+<p>The transformer <span id="id1">[<a class="reference internal" href="#id29" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Lukasz Kaiser, and Illia Polosukhin. Attention is all you need. arXiv preprint arXiv:1706.03762, 2017.">Vaswani <em>et al.</em>, 2017</a>]</span> is a deep learning architecture which has powered many of the recent advances across a range of machine learning applications, including text modelling, image modelling <span id="id2">[<a class="reference internal" href="#id31" title="Alexey Dosovitskiy, Lucas Beyer, Alexander Kolesnikov, Dirk Weissenborn, Xiaohua Zhai, Thomas Unterthiner, Mostafa Dehghani, Matthias Minderer, Georg Heigold, Sylvain Gelly, Jakob Uszkoreit, and Neil Houlsby. An image is worth 16x16 words: transformers for image recognition at scale. 2021.">Dosovitskiy <em>et al.</em>, 2021</a>]</span>, and many others.
 This is an overview of the transformer architecture, including a self-contained mathematical description of the architectural details, and a concise implementation.
-All of this exposition is based off an excellent introduction paper on transformers by Rich Turner <span id="id3">[<a class="reference internal" href="#id19" title="Richard E Turner. An introduction to transformers. arXiv preprint arXiv:2304.10557, 2023.">Turner, 2023</a>]</span>.</p>
-<section id="sequence-modelling">
-<h2>Sequence modelling<a class="headerlink" href="#sequence-modelling" title="Link to this heading">#</a></h2>
+All of this exposition is based off an excellent introduction paper on transformers by Rich Turner <span id="id3">[<a class="reference internal" href="#id30" title="Richard E Turner. An introduction to transformers. arXiv preprint arXiv:2304.10557, 2023.">Turner, 2023</a>]</span>.</p>
+<section id="modelling-with-tokens">
+<h2>Modelling with tokens<a class="headerlink" href="#modelling-with-tokens" title="Link to this heading">#</a></h2>
+<p><strong>One architecture, many applications.</strong>
+The purpose of the transformer architecture was, originally, to model sequence data such as text.
+The approach for achieving this was to first convert individual words, or characters, into one-dimensional arrays called <em>tokens</em>, and then operate on these tokens with a neural network.
+This approach however extends beyond word modelling.
+For example, the transformer can be applied to tasks as diverse as modelling of images and video, proteins, or weather.
+In all these applications, the data are first converted into sets of tokens.
+After this step, the transformer can be applied in roughly the same way, irrespective of the original representation of the data.
+This versatility, together with their empirical performance, are some of the main appealing features of the transformer.</p>
+<p><strong>Inputs as tokens.</strong>
+In particular, for the moment, we will assume that the input data have already been converted into tokens and defer the details of this tokenisation for later.
+More concretely, let us assume that each data example, e.g. a sentence, image, or protein,  has been conerted into a set of tokens <span class="math notranslate nohighlight">\(\{x_n\}_{n=1}^N,\)</span> where each <span class="math notranslate nohighlight">\(x_n\)</span> is a <span class="math notranslate nohighlight">\(D\)</span> dimensional array <span class="math notranslate nohighlight">\(x_n \in \mathbb{R}^D.\)</span>
+We can collect these tokens into a single <span class="math notranslate nohighlight">\(D \times N\)</span> array <span class="math notranslate nohighlight">\(X^{(0)} \in \mathbb{R}^{D \times N},\)</span> forming a single data input for the transformer.</p>
 </section>
 <section id="transformer-block">
 <h2>Transformer block<a class="headerlink" href="#transformer-block" title="Link to this heading">#</a></h2>
-<p>Much like in other deep architectures, such as residual networks, the transformer architecture maintains a representation of the input data, and progressively refines it using a sequence of so-called transformer blocks.
-In particular, given an initial representation <span class="math notranslate nohighlight">\(X^{(0)}\)</span> the archtecture comprises of <span class="math notranslate nohighlight">\(M\)</span> transformer blocks</p>
+<p>Much like in other deep architectures, the transformer maintains a representation of the input data, and progressively refines it using a sequence of so-called <em>transformer blocks</em>.
+In particular, given an initial representation <span class="math notranslate nohighlight">\(X^{(0)}\)</span> the archtecture comprises of <span class="math notranslate nohighlight">\(M\)</span> transformer blocks, i.e. for each <span class="math notranslate nohighlight">\(m = 1, \dots, M,\)</span> it computes</p>
 <div class="math notranslate nohighlight">
 \[X^{(m)} = \texttt{TransformerBlock}(X^{(m-1)}).\]</div>
-<p>Each of these blocks consists of two main operations, namely a self-attention operation and a pointwise multi-layer perceptron (MLP) operation.
+<p>Each of these blocks consists of two main operations, namely a self-attention operation and a token-wise multi-layer perceptron (MLP) operation.
 The self-attention operation has the role of combining the representations of different tokens in a sequence, in order to model dependencies between the tokens.
 It is applied collectively to all tokens within the transformer block.
 The MLP operation has the role of refining the representation of each token.
-It is applied separately to each token and is shared across all tokens within a transformer block.</p>
+It is applied separately to each token and is shared across all tokens within a transformer block.
+Let’s look at these two operations in detail.</p>
 <section id="self-attention">
 <h3>Self-attention<a class="headerlink" href="#self-attention" title="Link to this heading">#</a></h3>
-<p><strong>Attention:</strong>
-The role of the first operation in a transformer block is to combine the representations of different tokens in order to model dependencies between the tokens.
+<p><strong>Attention.</strong>
+The role of the first operation in a transformer block is to combine the representations of different tokens in order to model dependencies between them.
 Given a <span class="math notranslate nohighlight">\(D \times N\)</span> input array <span class="math notranslate nohighlight">\(X^{(m)} = (x_1, \dots, x_N^{(m)})\)</span> the output of the self-attention layer is another <span class="math notranslate nohighlight">\(D \times N\)</span> array <span class="math notranslate nohighlight">\(Y^{(m)} = (y_1, \dots, y_N^{(m)}),\)</span> where each column is simply a weighted average of the input features, that is</p>
-<div class="math notranslate nohighlight">
-\[y^{(m)}_n = \sum_{n' = 1}^N x^{(m - 1)}_{n'} A_{n', n}^{(m)}.\]</div>
+<div class="math notranslate nohighlight" id="equation-papers-eq-attention-sum">
+<span class="eqno">(9)<a class="headerlink" href="#equation-papers-eq-attention-sum" title="Link to this equation">#</a></span>\[
+y^{(m)}_n = \sum_{n' = 1}^N x^{(m - 1)}_{n'} A_{n', n}^{(m)}.
+\]</div>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p><strong>Relation to CNNs:</strong>
+If we constrain the weights to have a single index that depends on the difference of <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(n',\)</span> i.e. to have the form <span class="math notranslate nohighlight">\(A_{n', n}^{(m)} = A_{n'-n}^{(m)},\)</span> then the sum in equation <a class="reference internal" href="#equation-papers-eq-attention-sum">(9)</a> can be viewed as a convolution with zero padding.
+One difference to standard CNNs is that their convolutions are local, meaning they have a limited kernel size and do not see the entire input, whereas here we would have a kernel that sees the entire input, i.e. <span class="math notranslate nohighlight">\(y^{(m)}_n\)</span> would depend on all of the <span class="math notranslate nohighlight">\(x^{(m - 1)}_{n'}.\)</span>
+Another important difference to standard CNNs is that the weights do not depend on the inputs <span class="math notranslate nohighlight">\(x^{(m - 1)}_n,\)</span> whereas in a transformer they do.
+This is gives significant additional flexibility to the transformer architecture.</p>
+</aside>
 <p>The weighting array <span class="math notranslate nohighlight">\(A_{n', n}^{(m)}\)</span> is of size <span class="math notranslate nohighlight">\(N \times N\)</span> and has the property that its columns normalise to one, that is <span class="math notranslate nohighlight">\(\sum_{n'=1}^N A_{n', n}^{(m)} = 1.\)</span>
-It is referred to the attention matrix because, intuitively speaking, it weights the extent to which the feature <span class="math notranslate nohighlight">\(y^{(m)}_n\)</span> should depend on each <span class="math notranslate nohighlight">\(x^{(m)}_{n'},\)</span> i.e. it determines the extent to which each <span class="math notranslate nohighlight">\(y^{(m)}_n\)</span> should attend to each <span class="math notranslate nohighlight">\(x^{(m)}_{n'}.\)</span>
+It is referred to the attention matrix because it weighs the extent to which the feature <span class="math notranslate nohighlight">\(y^{(m)}_n\)</span> should depend on each <span class="math notranslate nohighlight">\(x^{(m)}_{n'},\)</span> i.e. it determines the extent to which each <span class="math notranslate nohighlight">\(y^{(m)}_n\)</span> should attend to each <span class="math notranslate nohighlight">\(x^{(m)}_{n'}.\)</span>
 For compactness, we can collect these equations to a single linear operation, that is</p>
 <div class="math notranslate nohighlight">
 \[Y^{(m)} = X^{(m - 1)} A^{(m)}.\]</div>
-<p><strong>Self-attention:</strong>
-Now we turn to how the attention weights are themselves computed.
+<p>But what about the attention weights themselves?
+We have not specified how these are computed and, their precise definition is going to be one important factor that differentiates transformers from other architectures.
+In fact, many other operations forming the core of other archictectures, such as convolution layers in convolutional neural networks (CNNs), can be written as similar weighted sums.
+Let’s next look at the specifics of the transformer attention weights.</p>
+<p><strong>Self-attention.</strong>
 One of the innovations within the transformer architecture is that the attention weights are adaptive, meaning that they are computed based on the input itself.
-This is in contrast with other deep learning architectures such as convolutional neural networks (CNNs) where weighted sums are also used, but these weights are fixed and shared across all inputs.</p>
+This is in contrast with other deep learning architectures such CNNs, where weighted sums are also used, but these weights are fixed and shared across all inputs.
+One straightforward way to compute attention weights would be to compare them by a simple similarity metric, such as an inner product.
+For example, given two tokens <span class="math notranslate nohighlight">\(x_i\)</span> and <span class="math notranslate nohighlight">\(x_j,\)</span> we can compute a dot-product between them, which acts as a similarity metric, exponetiate the result to make it positive and then normalise the result to ensure that each column sums to one, that is</p>
+<div class="math notranslate nohighlight">
+\[A^{(m)}_{n, n'} = \frac{\exp(x_n^\top x_{n'})}{\sum_{n'' = 1}^N \exp(x_{n''}^\top x_{n'})}.\]</div>
+<p>An alternative, slightly more flexible approach is to transform each token in the sequence by a linear map, say by applying a matrix <span class="math notranslate nohighlight">\(U \in \mathbb{R}^{K \times D}\)</span> to each token first, that is</p>
+<div class="math notranslate nohighlight">
+\[A^{(m)}_{n, n'} = \frac{\exp(x_n^\top U^\top U x_{n'})}{\sum_{n'' = 1}^N \exp(x_{n''}^\top U^\top U x_{n'})}.\]</div>
+<p>This allows the tokens to be compared in a different space.
+For example, if <span class="math notranslate nohighlight">\(K &lt; D\)</span> this approach automatically projects out some of the components of the tokens, comparing them in a lower-dimensional space.
+However, this approach still has an important limitation, namely symmetry.
+Specifically, the attention matrix above would be symmetric, which means that any two tokens would attend to each other with equal strengths.
+This might be undesirable because, for example, we could imagine that one token might be important for informing the representation of another token, but not the other way around.
+To address this, we can apply different linear operations, say <span class="math notranslate nohighlight">\(U_k\)</span> and <span class="math notranslate nohighlight">\(U_q\)</span> to each of the tokens being compared, and instead compute</p>
+<div class="math notranslate nohighlight">
+\[A^{(m)}_{n, n'} = \frac{\exp(x_n^\top U_k^\top U_q x_{n'})}{\sum_{n'' = 1}^N \exp(x_{n''}^\top U_k^\top U_q x_{n'})}.\]</div>
+<p>In this way, the resulting attention matrix that is not necessarily symmetric and an overall more expressive architecture.
+Tokens no longer have to attend to each other with the same strength.
+This weighting is known as self-attention, since each token in the sequence attends to every other token of the same sequence.
+It is also possible to generalise this to attention between different sequences, which might be useful for some applications such as, for example joint modelling of text and images.
+This generalisation is called cross-attention, and we defer its discussion for later.</p>
+<p><strong>Multi-head self-attention.</strong>
+In order to increase the capacity of the self-attention layer, the transformer block includes <span class="math notranslate nohighlight">\(H\)</span> separate self-attention operations with different parameters, in parallel.
+The results of these operations are then projected down to a single <span class="math notranslate nohighlight">\(D \times N\)</span> array again, which is required for further processing.
+In particular, we have</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>As a recap to the notation in these equations: the <span class="math notranslate nohighlight">\(m\)</span> superscript runs from <span class="math notranslate nohighlight">\(1\)</span> to <span class="math notranslate nohighlight">\(M\)</span> and is the index of the transformer block, the <span class="math notranslate nohighlight">\(n, n'\)</span> and <span class="math notranslate nohighlight">\(n''\)</span> superscripts run from <span class="math notranslate nohighlight">\(1\)</span> to <span class="math notranslate nohighlight">\(N\)</span> and index the tokens in the sequence within the current block, the <span class="math notranslate nohighlight">\(h\)</span> subscript runs from <span class="math notranslate nohighlight">\(1\)</span> to <span class="math notranslate nohighlight">\(H\)</span> and denotes a particular self-attention head in the block.
+Finally the <span class="math notranslate nohighlight">\(k\)</span> and <span class="math notranslate nohighlight">\(q\)</span> subscripts are not indices, but symbols distinguishing the two different kinds of matrices <span class="math notranslate nohighlight">\(U_k\)</span> and <span class="math notranslate nohighlight">\(U_q.\)</span></p>
+</aside>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+Y^{(m)} = \texttt{MHSA}(X^{(m - 1)}) &amp;= \sum^H_{h = 1} V_h^{(m)} X^{(m - 1)} A_h^{(m)}, \text{ where } \\
+\left[A^{(m)}_h\right]_{n, n'} &amp;= \frac{\exp\left(k_{h, n}^{(m)\top} q_{h, n'}^{(m)}\right)}{\sum_{n'' = 1}^N \exp\left(k_{h, n''}^{(m)\top} q_{h, n'}^{(m)}\right)} 
+\end{align}\end{split}\]</div>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Note that the matrices <span class="math notranslate nohighlight">\(U_{h, k},\)</span> <span class="math notranslate nohighlight">\(U_{h, k}\)</span> and <span class="math notranslate nohighlight">\(V_h\)</span> correspond to the key, query and value matrices in the standard exposition of transformers.
+Here we have taken a bottom-down approach without introducing these terms, but use this notation to make the relationship to the standard exposition clear.</p>
+</aside>
+<p>where <span class="math notranslate nohighlight">\(q_{h, n}^{(m)} = U^{(m)}_{q, h} x_n^{(m-1)}\)</span> and <span class="math notranslate nohighlight">\(k_{h, n}^{(m)} = U^{(m)}_{k, h} x_n^{(m-1)}.\)</span>
+At this point we should note that, due to the nonlinearity of <span class="math notranslate nohighlight">\(A^{(m)},\)</span> together with the multiplication by <span class="math notranslate nohighlight">\(V^{(m)}_h\)</span> and summation across <span class="math notranslate nohighlight">\(h,\)</span> multi-head cross attention performs not just inter-feature but also intra-feature processing, i.e. each token interacts with and changes its own representation.
+However, the capacity of this intra-feature processing is limited, and it is the job of the second stage, the MLP, to address this.
+Let’s next look at the MLP stage.</p>
 </section>
 <section id="multi-layer-perceptron">
 <h3>Multi-layer perceptron<a class="headerlink" href="#multi-layer-perceptron" title="Link to this heading">#</a></h3>
+<p>The self-attention layer has the role of aggregating information across tokens in a sequence to model joint dependencies.
+In order to refine the representations themselves, a simple MLP is applied to each token in isolation, in a relatively simple step</p>
+<div class="math notranslate nohighlight">
+\[x^{(m)}_n = \texttt{MLP}(y^{(m)}_n).\]</div>
+<p>Note that this MLP is shared across all input locations, i.e. all tokens, within a given layer.</p>
 </section>
-<section id="skip-connections-and-normalisation">
-<h3>Skip connections and normalisation<a class="headerlink" href="#skip-connections-and-normalisation" title="Link to this heading">#</a></h3>
-</section>
-<section id="positional-embeddings">
-<h3>Positional embeddings<a class="headerlink" href="#positional-embeddings" title="Link to this heading">#</a></h3>
+<section id="residuals-and-normalisation">
+<h3>Residuals and normalisation<a class="headerlink" href="#residuals-and-normalisation" title="Link to this heading">#</a></h3>
+<p>Before putting together the <span class="math notranslate nohighlight">\(\texttt{MHSA}\)</span> and <span class="math notranslate nohighlight">\(\texttt{MLP}\)</span> operations, we will add two ubiquitous deep learning operations to improve the stability and ease of training of the model, namely residual connections and normalisation.</p>
+<p><strong>Residual connections.</strong>
+Residual connections <span id="id4">[<a class="reference internal" href="#id33" title="Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. 2015. arXiv:1512.03385.">He <em>et al.</em>, 2015</a>]</span> are widely used across deep learning architectures, because they simplify model initialisation, stabilise learning and provide a useful inductive bias toward simpler functions.<span id="id5">[<a class="reference internal" href="#id32" title="Christian Szegedy, Sergey Ioffe, Vincent Vanhoucke, and Alexander Alemi. Inception-v4, inception-resnet and the impact of residual connections on learning. In Proceedings of the AAAI conference on artificial intelligence, volume 31. 2017.">Szegedy <em>et al.</em>, 2017</a>]</span>
+Instead of specifying a mapping of the form <span class="math notranslate nohighlight">\(x^{(m)} = f(x^{(m)}),\)</span> a residual connection amounts to specifying a function involving an identity function plus a residual term</p>
+<div class="math notranslate nohighlight">
+\[x^{(m)} = x^{(m-1)} + g(x^{(m)}).\]</div>
+<p>This can be equivalently thought of as learning to model differences between the representations at different blocks, that is <span class="math notranslate nohighlight">\(x^{(m)} - x^{(m-1)} = g(x^{(m)}).\)</span>
+If we do not use residual connections and compose multiple blocks together, the activations in each can become more extreme as we go deeper in the network, resulting in either zero or extremely large gradients, which can be problematic during training.
+One motivation for using residual connections is that, if we initialise the parameters of <span class="math notranslate nohighlight">\(g\)</span> such that its outputs are close to zero, then <span class="math notranslate nohighlight">\(x^{(m)}\)</span> will be approximately constant across <span class="math notranslate nohighlight">\(m = 1, \dots, M.\)</span>
+This can improve training ease and stability because all blocks in the network, even the deeper ones, receive an input close to <span class="math notranslate nohighlight">\(x^{(0)},\)</span> and the gradients will tend to receive less extreme gradients.
+Residual connections are used both in the <span class="math notranslate nohighlight">\(\texttt{MHSA}\)</span> and <span class="math notranslate nohighlight">\(\texttt{MLP}\)</span> layers of the transformer.</p>
+<p><strong>Token normalisation.</strong>
+Another ubiquitous and extremely useful operation in deep learning is normalisation.
+There are various different kinds of normalisation, including LayerNorm <span id="id6">[<a class="reference internal" href="#id34" title="Jimmy Lei Ba, Jamie Ryan Kiros, and Geoffrey E. Hinton. Layer normalization. 2016. arXiv:1607.06450.">Ba <em>et al.</em>, 2016</a>]</span>, BatchNorm <span id="id7">[<a class="reference internal" href="#id35" title="Sergey Ioffe and Christian Szegedy. Batch normalization: accelerating deep network training by reducing internal covariate shift. 2015. arXiv:1502.03167.">Ioffe and Szegedy, 2015</a>]</span>, GroupNorm <span id="id8">[<a class="reference internal" href="#id37" title="Yuxin Wu and Kaiming He. Group normalization. 2018. arXiv:1803.08494.">Wu and He, 2018</a>]</span> and InstanceNorm <span id="id9">[<a class="reference internal" href="#id36" title="Dmitry Ulyanov, Andrea Vedaldi, and Victor Lempitsky. Instance normalization: the missing ingredient for fast stylization. arXiv preprint arXiv:1607.08022, 2016.">Ulyanov <em>et al.</em>, 2016</a>]</span>.
+Normalisation has been widely found to improve learning stability and overall model performance.
+One reason for this is that normalisation typically prevents the inputs to a layer from becoming extremely large, which can result into extreme or staturated outputs, which in turn mean that the gradients with respect to the network parameters can be close to zero or extremely large.
+The transformer architecture uses LayerNorm which, when applied to the tokens, amounts to per-token normalisation.
+Specifically, when applied to an array <span class="math notranslate nohighlight">\(X\)</span> of input tokens, LayerNorm amounts to</p>
+<div class="math notranslate nohighlight">
+\[\bar{x}_{d, n} = \texttt{LayerNorm}(X)_{d, n} = \gamma_d \frac{x_{d, n} - \mu(x_n)}{\sigma(x_n)} + \beta_d,\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> denote operations that compute the mean and the standard deviation respectively, and <span class="math notranslate nohighlight">\(\gamma_d\)</span> and <span class="math notranslate nohighlight">\(\beta_d\)</span> are a learnt scale and a learnt shift.
+In other words, within a transformer, LayerNorm separately normalises each token within each sequence within each batch.</p>
 </section>
 <section id="putting-it-together">
 <h3>Putting it together<a class="headerlink" href="#putting-it-together" title="Link to this heading">#</a></h3>
-<p>In summary, we can collect</p>
+<p>In summary, we can collect these operations into the following equations</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
 \bar{X}^{(m-1)} &amp;= \texttt{LayerNorm}\left(X^{(m-1)}\right) \\
@@ -499,29 +601,680 @@ Y^{(m)} &amp;= \bar{X}^{(m-1)} + \texttt{MHSA}\left(\bar{X}^{(m-1)}\right) \\
 \bar{Y}^{(m)} &amp;= \texttt{LayerNorm}\left(Y^{(m)}\right) \\
 X^{(m)} &amp;= Y^{(m)} + \texttt{MLP}(\bar{Y}^{(m)})
 \end{align}\end{split}\]</div>
+<p>These make up the entirety of the transformer block, which is repeated <span class="math notranslate nohighlight">\(M\)</span> times to compute the output of the transformer.
+An important detail we have not discussed thus far is how to build the tokens themselves.</p>
+</section>
+<section id="tokens-and-embeddings">
+<h3>Tokens and embeddings<a class="headerlink" href="#tokens-and-embeddings" title="Link to this heading">#</a></h3>
+<p><strong>Tokenisation.</strong>
+Tokenisation is an application-specific detail but, generally, there are two main approaches, depending on whether the inputs are continuous or discrete.
+As a reminder, in both cases, we want convert each input element in our sequence, say <span class="math notranslate nohighlight">\(s_n,\)</span> to a <span class="math notranslate nohighlight">\(D\)</span>-dimensional array <span class="math notranslate nohighlight">\(x^{(0)}_n.\)</span>
+We will specify a map <span class="math notranslate nohighlight">\(\texttt{tokenise}\)</span> that performs the operation <span class="math notranslate nohighlight">\(s_n = \texttt{tokenise}(x^{(0)}_n)\)</span> separately for the case where the inputs <span class="math notranslate nohighlight">\(s_n\)</span> are discrete or continuous.</p>
+<p><strong>Discrete or continuous inputs.</strong>
+In text modelling the raw inputs are integers representing unique words or characters.
+In such applications, i.e. whenever we have discrete inputs, we can use a look-up table containing learnable vectors.
+That is, if <span class="math notranslate nohighlight">\(s_n \in \{1, \dots, K\},\)</span> we can define <span class="math notranslate nohighlight">\(K\)</span> arrays, each of length <span class="math notranslate nohighlight">\(D\)</span>, say <span class="math notranslate nohighlight">\(z_0, \dots, z_K \in \mathbb{R}^D,\)</span> and let</p>
+<div class="math notranslate nohighlight">
+\[x^{(0)}_n = \texttt{tokenise}(s_n) = z_{s_n}.\]</div>
+<p>This allows us to map each word into a continuous space and operate on the resulting arrays with the transformer architecture.
+In other applications, such as vision, the inputs are typically treated as continuous, that is <span class="math notranslate nohighlight">\(s_n \in \mathbb{R}^{D_s}.\)</span>
+In such cases, we can simply apply a simple operation such as a linear transformation, to map each <span class="math notranslate nohighlight">\(s_n\)</span> into a <span class="math notranslate nohighlight">\(D\)</span>-dimensional array.
+For example, letting <span class="math notranslate nohighlight">\(W \in \mathbb{R}^{D\times D_s},\)</span> we can define</p>
+<div class="math notranslate nohighlight">
+\[x^{(0)}_n = W s_n,\]</div>
+<p>giving a <span class="math notranslate nohighlight">\(D\)</span>-dimensional token which is ready for use in the transformer.
+We have now covered almost all parts of the transformer, except one final, but very important point concerning the embeddings.
+Thus far, we have glossed over the fact that the transformer block has no notion of position, which is a very important issue that we look into next.</p>
+<p><strong>Positional embeddings.</strong>
+Specifically, the <span class="math notranslate nohighlight">\(\texttt{MHSA}\)</span> operation, the token-wise <span class="math notranslate nohighlight">\(\texttt{MLP}\)</span> operation, as well as <span class="math notranslate nohighlight">\(\texttt{LayerNorm}\)</span> and residual additions are all examples of permutation equivariant: permuting the tokens and applying any one of these operations gives the same result as first applying the operation and then permuting the resulting tokens.
+Composing these operations retains permutation equivariance, meaning that permuting the elements of the original sequence and applying the transformer will yield exactly the same result as first applying the transformer and then permuting the resulting features.
+This is undesirable because, for example in text modelling, the phrases “Arsenal bets Chelsea” and “Chelsea beats Arsenal” are composed of identical words but have opposite meanings, and we would like the resulting features produced by the transformer to reflect this.
+One way to get around this issue is augmenting the tokens with information about the position of an input feature within the sequence.
+For example, we could set up an additional embedding which directly maps each position to a learnable array and concatentate the result with the tokenised feature, that is</p>
+<div class="math notranslate nohighlight">
+\[x^{(0)}_n = \texttt{tokenise}_1(s_n) \odot \texttt{tokenise}_2(n),\]</div>
+<p>where <span class="math notranslate nohighlight">\(\odot\)</span> denotes concatenation, and we have used different tokenisation functions for the sequence features and the positions.
+This approach is often used in vision transformers.
+Another approach is applying, for example, sinusoidal functions with different frequencies on the input, for example</p>
+<div class="math notranslate nohighlight">
+\[\texttt{tokenise}(n) = [\sin(\omega_1 n), \dots, \sin{\omega_D n}],\]</div>
+<p>which are then concatentated to the tokenised features as described above.
+Other approaches bake in positional information directly into the <span class="math notranslate nohighlight">\(\texttt{MHSA}\)</span> layer, for example by making the attention weights depend on the position difference of pairs of tokens.</p>
 </section>
 </section>
 <section id="implementation">
 <h2>Implementation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h2>
+<p>Now that we’ve covered all the details, let’s implement a small transformer!</p>
+<section id="multi-head-self-attention">
+<h3>(Multi head) self-attention<a class="headerlink" href="#multi-head-self-attention" title="Link to this heading">#</a></h3>
+<p>First, we turn to the <span class="math notranslate nohighlight">\(\texttt{MHSA}\)</span> layer, which consists of self attention layers, one for each attention head.
+Let’s first define the self attention layers.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Note that, the softmax operation used in the <code class="docutils literal notranslate"><span class="pre">self_attention_weights</span></code> method exponentiates the entries of an array and divides them by the sum of the resulting entries, in one step.</p>
+</aside>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SelfAttention</span><span class="p">(</span><span class="n">tfk</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">seed</span><span class="p">:</span> <span class="n">Seed</span><span class="p">,</span>
+        <span class="n">projection_dim</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;self_attention&quot;</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="c1"># Split the seed and set up the dense layers</span>
+        <span class="n">seed1</span><span class="p">,</span> <span class="n">seed2</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split_seed</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">Uk</span> <span class="o">=</span> <span class="n">tfk</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span>
+            <span class="n">projection_dim</span><span class="p">,</span>
+            <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;gelu&quot;</span><span class="p">,</span>
+            <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">kernel_initializer</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">initializers</span><span class="o">.</span><span class="n">GlorotNormal</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">seed1</span><span class="p">[</span><span class="mi">0</span><span class="p">])),</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">Uq</span> <span class="o">=</span> <span class="n">tfk</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span>
+            <span class="n">projection_dim</span><span class="p">,</span>
+            <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;gelu&quot;</span><span class="p">,</span>
+            <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">kernel_initializer</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">initializers</span><span class="o">.</span><span class="n">GlorotNormal</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">seed2</span><span class="p">[</span><span class="mi">0</span><span class="p">])),</span>
+        <span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">self_attention_weights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute self-attention weights for tokens in a sequence</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x: input sequence of tokens, shape (B, N, D)</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            attention weights, shape (B, N, N)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Uk</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Uq</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="n">dot_product</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">transpose_b</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">dot_product</span> <span class="o">/=</span> <span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">k</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">dot_product</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Apply self-attention to a sequence of tokens</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x: input sequence of tokens, shape (B, N, D)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            output sequence of tokens, shape (B, N, D)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">self_attention_weights</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">,</span> <span class="n">transpose_a</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Self-attention is remarkably simple!
+Now, we can define multi-head self attention.
+This is a simple extension of our existing self-attention module.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MultiHeadSelfAttention</span><span class="p">(</span><span class="n">tfk</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">seed</span><span class="p">:</span> <span class="n">Seed</span><span class="p">,</span>
+        <span class="n">token_dim</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">projection_dim</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">num_heads</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;multi_head_self_attention&quot;</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="n">keys</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split_seed</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">num_heads</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">self_attention</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">SelfAttention</span><span class="p">(</span>
+                <span class="n">seed</span><span class="o">=</span><span class="n">key</span><span class="p">,</span>
+                <span class="n">projection_dim</span><span class="o">=</span><span class="n">projection_dim</span><span class="p">,</span>
+            <span class="p">)</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">[::</span><span class="mi">2</span><span class="p">]</span>
+        <span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">linear</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">tfk</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span>
+                <span class="n">token_dim</span><span class="p">,</span>
+                <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">activation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">kernel_initializer</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">initializers</span><span class="o">.</span><span class="n">GlorotNormal</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">])),</span>
+            <span class="p">)</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span>
+        <span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Apply multi-head self-attention to a sequence of tokens</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x: input sequence of tokens, shape (B, N, D)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            output sequence of tokens, shape (B, N, D)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+            
+        <span class="c1"># Compute tokens for each head and apply linear </span>
+        <span class="n">heads</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">linear</span><span class="p">(</span><span class="n">sa</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">sa</span><span class="p">,</span> <span class="n">linear</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">self_attention</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">linear</span><span class="p">)</span>
+        <span class="p">]</span>
+
+        <span class="c1"># Stack and sum across heads</span>
+        <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">heads</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
-<section id="extensions">
-<h2>Extensions<a class="headerlink" href="#extensions" title="Link to this heading">#</a></h2>
+<section id="id10">
+<h3>Multi-layer perceptron<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
+<p>Now we turn to the MLP.
+This is also a very simple implementation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MLP</span><span class="p">(</span><span class="n">tfk</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">seed</span><span class="p">:</span> <span class="n">Seed</span><span class="p">,</span>
+        <span class="n">num_hidden</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">num_layers</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">num_output</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;mlp&quot;</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="c1"># Set up output dimensions of linear layers</span>
+        <span class="n">out_feats</span> <span class="o">=</span> <span class="p">[</span><span class="n">num_hidden</span><span class="p">]</span> <span class="o">*</span> <span class="n">num_layers</span> <span class="o">+</span> <span class="p">[</span><span class="n">num_output</span><span class="p">]</span>
+
+        <span class="c1"># Split the random key into sub-keys for each layer</span>
+        <span class="n">seeds</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split_seed</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span> <span class="n">num_layers</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">linear</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">tfk</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span>
+                <span class="n">out_feat</span><span class="p">,</span>
+                <span class="n">activation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">kernel_initializer</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">initializers</span><span class="o">.</span><span class="n">GlorotNormal</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">seed</span><span class="p">[</span><span class="mi">0</span><span class="p">])),</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">seed</span><span class="p">,</span> <span class="n">out_feat</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">seeds</span><span class="p">,</span> <span class="n">out_feats</span><span class="p">)</span>
+        <span class="p">]</span>
+
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute forward pass through the MLP.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x: input tensor of shape (..., feature_dim,)</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            output tensor of shape (..., feature_dim,)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">linear</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">layer</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">gelu</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">linear</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">](</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id11">
+<h3>Transformer block<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
+<p>Now we’re ready to define the transformer block, which consists of the multi-head self attention and mlp operations, as well as two normalisation layers, connected with residual connections.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TransformerBlock</span><span class="p">(</span><span class="n">tfk</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">seed</span><span class="p">:</span> <span class="n">Seed</span><span class="p">,</span>
+        <span class="n">token_dimension</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">mlp_num_hidden</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">mlp_num_layers</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">num_heads</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;transformer_block&quot;</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="n">key1</span><span class="p">,</span> <span class="n">key2</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split_seed</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mhsa</span> <span class="o">=</span> <span class="n">MultiHeadSelfAttention</span><span class="p">(</span>
+            <span class="n">seed</span><span class="o">=</span><span class="n">key1</span><span class="p">,</span>
+            <span class="n">token_dim</span><span class="o">=</span><span class="n">token_dimension</span><span class="p">,</span>
+            <span class="n">projection_dim</span><span class="o">=</span><span class="n">token_dimension</span><span class="p">,</span>
+            <span class="n">num_heads</span><span class="o">=</span><span class="n">num_heads</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">mlp</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">(</span>
+            <span class="n">seed</span><span class="o">=</span><span class="n">key2</span><span class="p">,</span>
+            <span class="n">num_hidden</span><span class="o">=</span><span class="n">mlp_num_hidden</span><span class="p">,</span>
+            <span class="n">num_layers</span><span class="o">=</span><span class="n">mlp_num_layers</span><span class="p">,</span>
+            <span class="n">num_output</span><span class="o">=</span><span class="n">token_dimension</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ln1</span> <span class="o">=</span> <span class="n">tfk</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">LayerNormalization</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ln2</span> <span class="o">=</span> <span class="n">tfk</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">LayerNormalization</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+    
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Apply the transformer block to input tokens `x`.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            x: input tensor of shape (B, N, D)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            output tensor of shape (B, N, D)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">mhsa</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ln1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">mlp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ln2</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id12">
+<h3>Tokens and embeddings<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
+<p>Next up, we’ll need to also define how to tokenise a sequence and and generate positional embeddings.
+First, let us consider an image classification task for the moment, and use the vision transformer (ViT) <span id="id13">[<a class="reference internal" href="#id31" title="Alexey Dosovitskiy, Lucas Beyer, Alexander Kolesnikov, Dirk Weissenborn, Xiaohua Zhai, Thomas Unterthiner, Mostafa Dehghani, Matthias Minderer, Georg Heigold, Sylvain Gelly, Jakob Uszkoreit, and Neil Houlsby. An image is worth 16x16 words: transformers for image recognition at scale. 2021.">Dosovitskiy <em>et al.</em>, 2021</a>]</span> embedding style.
+In ViT, an image is split into smaller sub-images called patches, each of which is linearly projected to form an embedding.
+Convolutions are very handy here:
+We can split an image into patches and project these, in one go, using convolutions with a stride equal to the kernel size.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Conv2D</span></code> layer here splits the image into patches and linearly embeds each one, doing both steps in one go.
+Specifically, convolution is a linear operation on a patch of size <code class="docutils literal notranslate"><span class="pre">(k,</span> <span class="pre">k)</span></code> where <code class="docutils literal notranslate"><span class="pre">k</span></code> is the kernel size.
+By using striding (with a stride equal to the kernel size), we ensure each patch is processed separately, resulting in an image of size <code class="docutils literal notranslate"><span class="pre">(k/p,</span> <span class="pre">k/p)</span></code> where <code class="docutils literal notranslate"><span class="pre">p</span></code> is the patch size, which is then reshaped into one long sequence of tokens.</p>
+</aside>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ImageTokeniser</span><span class="p">(</span><span class="n">tfk</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">seed</span><span class="p">:</span> <span class="n">Seed</span><span class="p">,</span>
+        <span class="n">token_dimension</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">patch_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;image_tokeniser&quot;</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">assert</span> <span class="n">patch_size</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Patch size must be even&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv</span> <span class="o">=</span> <span class="n">tfk</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Conv2D</span><span class="p">(</span>
+            <span class="n">filters</span><span class="o">=</span><span class="n">token_dimension</span><span class="p">,</span>
+            <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="n">patch_size</span><span class="p">,</span> <span class="n">patch_size</span><span class="p">),</span>
+            <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="n">patch_size</span><span class="p">,</span> <span class="n">patch_size</span><span class="p">),</span>
+            <span class="n">padding</span><span class="o">=</span><span class="s2">&quot;VALID&quot;</span><span class="p">,</span>
+            <span class="n">activation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">data_format</span><span class="o">=</span><span class="s2">&quot;channels_last&quot;</span><span class="p">,</span>
+            <span class="n">kernel_initializer</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">initializers</span><span class="o">.</span><span class="n">GlorotNormal</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">seed</span><span class="p">[</span><span class="mi">0</span><span class="p">])),</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Tokenise the image `x`, applying a strided convolution.</span>
+<span class="sd">        This is equivalent to splitting the image into patches,</span>
+<span class="sd">        and then linearly projecting each one of these using a</span>
+<span class="sd">        shared linear projection.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            x: image input tensor of shape (B, W, H, C)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            output tensor of shape (B, N, D)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">assert</span> <span class="p">(</span>
+            <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="o">.</span><span class="n">kernel_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span>
+            <span class="ow">and</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="o">.</span><span class="n">kernel_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="p">),</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Input dimensions must be divisible by patch size, &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;found </span><span class="si">{</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="si">=}</span><span class="s2"> and </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="o">.</span><span class="n">kernel_size</span><span class="si">}</span><span class="s2">.&quot;</span>
+        <span class="p">)</span>
+
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we turn to position embeddings.
+For simplicity, let us assume that all sequences have a fixed length, i.e. all images we will process will process images of a fixed height and width.
+We’ll adopt a fairly general approach, by letting each embedding be a learnable array, and using a different such array for each position in the sequence.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PositionEmbedding</span><span class="p">(</span><span class="n">tfk</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">seed</span><span class="p">:</span> <span class="n">Seed</span><span class="p">,</span>
+        <span class="n">token_dimension</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">sequence_length</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;position_embedding&quot;</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">embeddings</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span>
+            <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span>
+                <span class="p">(</span><span class="n">sequence_length</span><span class="p">,</span> <span class="n">token_dimension</span><span class="p">),</span>
+                <span class="n">seed</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">seed</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add position embeddings to input tensor.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            x: input tensor of shape (B, N, D)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            output tensor of shape (B, N, D)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">embeddings</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id14">
+<h3>Putting it together<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
+<p>Finally, we’re ready to put together the full transformer architecture.
+We’ll build a little ViT using our transformer blocks, image tokeniser and position embeddings.
+Note that in order to obtain class probability logits from a ViT, we typically use an additional token <span class="math notranslate nohighlight">\(x_0^{(m)}\)</span> called the class token.
+This token initially does not depend on the input, i.e. <span class="math notranslate nohighlight">\(x_0^{(0)}\)</span> is fixed.
+By attending to the other tokens however, <span class="math notranslate nohighlight">\(x_0^{(m)}\)</span> incorporates information about the input.
+Once the transformer blocks have been applied, we take the resulting class token <span class="math notranslate nohighlight">\(x_0^{(M)}\)</span> and pass it through a final MLP to obtain class logits.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TinyVisionTransformer</span><span class="p">(</span><span class="n">tfk</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">seed</span><span class="p">:</span> <span class="n">Seed</span><span class="p">,</span>
+        <span class="n">tokeniser</span><span class="p">:</span> <span class="n">ImageTokeniser</span><span class="p">,</span>
+        <span class="n">embedding</span><span class="p">:</span> <span class="n">PositionEmbedding</span><span class="p">,</span>
+        <span class="n">token_dimension</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">mlp_num_hidden</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">mlp_num_layers</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">num_heads</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">num_blocks</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">num_classes</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;tiny_vision_transformer&quot;</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="n">seeds</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split_seed</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span> <span class="n">num_blocks</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">blocks</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">TransformerBlock</span><span class="p">(</span>
+                <span class="n">seed</span><span class="o">=</span><span class="n">seeds</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                <span class="n">token_dimension</span><span class="o">=</span><span class="n">token_dimension</span><span class="p">,</span>
+                <span class="n">mlp_num_hidden</span><span class="o">=</span><span class="n">mlp_num_hidden</span><span class="p">,</span>
+                <span class="n">mlp_num_layers</span><span class="o">=</span><span class="n">mlp_num_layers</span><span class="p">,</span>
+                <span class="n">num_heads</span><span class="o">=</span><span class="n">num_heads</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_blocks</span><span class="p">)</span>
+        <span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">final_mlp</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">(</span>
+            <span class="n">seed</span><span class="o">=</span><span class="n">seeds</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+            <span class="n">num_hidden</span><span class="o">=</span><span class="n">mlp_num_hidden</span><span class="p">,</span>
+            <span class="n">num_layers</span><span class="o">=</span><span class="n">mlp_num_layers</span><span class="p">,</span>
+            <span class="n">num_output</span><span class="o">=</span><span class="n">num_classes</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">tokeniser</span> <span class="o">=</span> <span class="n">tokeniser</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span> <span class="o">=</span> <span class="n">embedding</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">class_token</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span>
+            <span class="n">tf</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span>
+                <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">token_dimension</span><span class="p">),</span>
+                <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Apply vision transformer to batch of images.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            x: input image tensor of shape (B, W, H, C)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            output logits tensor of shape (B, num_classes)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">class_token</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">class_token</span><span class="p">,</span>
+            <span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+        <span class="p">)</span>
+
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tokeniser</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">class_token</span><span class="p">,</span> <span class="n">x</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">block</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">blocks</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">block</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">final_mlp</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:])</span>
+        <span class="k">return</span> <span class="n">x</span> <span class="o">-</span> <span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">reduce_logsumexp</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="dataset">
+<h3>Dataset<a class="headerlink" href="#dataset" title="Link to this heading">#</a></h3>
+<p>Because this is meant to be a demo that should run on a laptop, we’ll use the MNIST dataset.
+We’ll use <a class="reference external" href="https://www.tensorflow.org/datasets/api_docs/python/tfds">tensorflow datasets</a> to load the data and preprocess it.</p>
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">tensorflow_datasets</span> <span class="k">as</span> <span class="nn">tfds</span>
+
+<span class="k">def</span> <span class="nf">preprocess_image</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="mf">2.</span> <span class="o">*</span> <span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="o">/</span> <span class="mf">255.</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.</span>
+    <span class="k">return</span> <span class="n">image</span><span class="p">,</span> <span class="n">label</span>
+
+<span class="k">def</span> <span class="nf">get_batches</span><span class="p">(</span><span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">split</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data_dir</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s2">&quot;/tmp/tfds&quot;</span><span class="p">):</span>
+
+    <span class="c1"># Conversion from labels to one-hot</span>
+    <span class="k">def</span> <span class="nf">one_hot</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">image</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">one_hot</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="n">split</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">,</span> <span class="s2">&quot;test&quot;</span><span class="p">],</span> <span class="s2">&quot;Split must be &#39;train&#39; or &#39;test&#39;&quot;</span>
+    <span class="n">ds</span> <span class="o">=</span> <span class="n">tfds</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;mnist&quot;</span><span class="p">,</span>
+        <span class="n">split</span><span class="o">=</span><span class="n">split</span><span class="p">,</span>
+        <span class="n">as_supervised</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">,</span>
+        <span class="n">shuffle_files</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">preprocess_image</span><span class="p">)</span>
+    <span class="n">ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="n">batch_size</span><span class="p">)</span>
+    <span class="n">ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">prefetch</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">AUTOTUNE</span><span class="p">)</span>
+    <span class="n">ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">one_hot</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">ds</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+<section id="training">
+<h3>Training<a class="headerlink" href="#training" title="Link to this heading">#</a></h3>
+<p>Now let’s train the network.
+In general, when training a ViT, a few tricks are typically used, including for example, learning rate scheduling and data augmentation.
+Dropout is also sometimes used in the architecture itself.
+We won’t use any of these techniques here to keep it simple.</p>
+<div class="cell tag_hide-input tag_hide-output docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
+<span class="k">def</span> <span class="nf">train_step</span><span class="p">(</span>
+    <span class="n">model</span><span class="p">:</span> <span class="n">tfk</span><span class="o">.</span><span class="n">Model</span><span class="p">,</span>
+    <span class="n">images</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span>
+    <span class="n">labels</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span>
+    <span class="n">loss_fn</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">Loss</span><span class="p">,</span>
+    <span class="n">optimizer</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Optimizer</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+    
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+        <span class="n">logits</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">logits</span><span class="p">)</span>
+
+    <span class="n">gradients</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">trainable_variables</span><span class="p">)</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">apply_gradients</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">gradients</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">trainable_variables</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">loss</span><span class="p">,</span> <span class="n">logits</span>
+
+<span class="c1"># Model parameters</span>
+<span class="n">token_dimension</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="n">patch_size</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">num_mlp_hidden</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="n">num_mlp_layers</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">num_heads</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">num_blocks</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">num_classes</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c1"># Training parameters</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="n">num_epochs</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">1e-3</span>
+<span class="n">weight_decay</span> <span class="o">=</span> <span class="mf">1e-4</span>
+
+<span class="c1"># Create the tokeniser and embeddings</span>
+<span class="n">seeds</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split_seed</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="n">tokeniser</span> <span class="o">=</span> <span class="n">ImageTokeniser</span><span class="p">(</span>
+    <span class="n">seeds</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+    <span class="n">token_dimension</span><span class="o">=</span><span class="n">token_dimension</span><span class="p">,</span>
+    <span class="n">patch_size</span><span class="o">=</span><span class="n">patch_size</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">embedding</span> <span class="o">=</span> <span class="n">PositionEmbedding</span><span class="p">(</span>
+    <span class="n">seeds</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+    <span class="n">token_dimension</span><span class="o">=</span><span class="n">token_dimension</span><span class="p">,</span>
+    <span class="n">sequence_length</span><span class="o">=</span><span class="p">(</span><span class="mi">28</span> <span class="o">//</span> <span class="n">patch_size</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Create a transformer</span>
+<span class="n">transformer</span> <span class="o">=</span> <span class="n">TinyVisionTransformer</span><span class="p">(</span>
+    <span class="n">seeds</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+    <span class="n">tokeniser</span><span class="o">=</span><span class="n">tokeniser</span><span class="p">,</span>
+    <span class="n">embedding</span><span class="o">=</span><span class="n">embedding</span><span class="p">,</span>
+    <span class="n">token_dimension</span><span class="o">=</span><span class="n">token_dimension</span><span class="p">,</span>
+    <span class="n">mlp_num_hidden</span><span class="o">=</span><span class="n">num_mlp_hidden</span><span class="p">,</span>
+    <span class="n">mlp_num_layers</span><span class="o">=</span><span class="n">num_mlp_layers</span><span class="p">,</span>
+    <span class="n">num_heads</span><span class="o">=</span><span class="n">num_heads</span><span class="p">,</span>
+    <span class="n">num_blocks</span><span class="o">=</span><span class="n">num_blocks</span><span class="p">,</span>
+    <span class="n">num_classes</span><span class="o">=</span><span class="n">num_classes</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Create optimizer</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span>
+    <span class="n">learning_rate</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">,</span>
+    <span class="n">weight_decay</span><span class="o">=</span><span class="n">weight_decay</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Create loss function and accuracy helpers</span>
+<span class="n">loss_fn</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">CategoricalCrossentropy</span><span class="p">(</span><span class="n">from_logits</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">accuracy</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">CategoricalAccuracy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "33335881af3840d6973f29c009aca614", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "797f41a2e88947debc5e23980547166a", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "2fc2502c43a84c42938bc2a71c244180", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "c96dbae11a0f485ba49b0cc667ae6871", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "198bd8508bbc4a2aab46c5519ec1fa08", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "c8fe11d04c0b4ccfb44652a361b04a62", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "fca83109aa5140dca2f969672c71354d", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "716f3ce8af1546d4867c200f7989ff59", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "0cbc514874df467daf835f75f8ddedd7", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "7718f66e620346ec8ad80ff973bf75dd", "version_major": 2, "version_minor": 0}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 10: loss 0.090 (train 0.082), acc. 0.957 (train 0.956)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_remove-input tag_center-output docutils container">
+<div class="cell_output docutils container">
+<img alt="../../../_images/4f62da4f4e830bd208b3eac5b005989dcb3f36b1bd527a31b16b27544b7b4d27.svg" src="../../../_images/4f62da4f4e830bd208b3eac5b005989dcb3f36b1bd527a31b16b27544b7b4d27.svg" /></div>
+</div>
+</section>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>We have looked at the details of the transformer architecture.
+It consists of identical blocks, each of which contains a self-attention and a multi-layer perceptron operation, together with normalisation layers and residual connections.
+Coupling these together with position embeddings and an appropriate tokenisation layer makes up the entire transformer architecture.
+We looked at a specific example for computer vision, the ViT, and trained it on MNIST.</p>
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
-<div class="docutils container" id="id4">
+<div class="docutils container" id="id15">
 <div role="list" class="citation-list">
-<div class="citation" id="id20" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">DBK+21</a><span class="fn-bracket">]</span></span>
-<p>Alexey Dosovitskiy, Lucas Beyer, Alexander Kolesnikov, Dirk Weissenborn, Xiaohua Zhai, Thomas Unterthiner, Mostafa Dehghani, Matthias Minderer, Georg Heigold, Sylvain Gelly, Jakob Uszkoreit, and Neil Houlsby. An image is worth 16x16 words: transformers for image recognition at scale. 2021. <a class="reference external" href="https://arxiv.org/abs/2010.11929">arXiv:2010.11929</a>.</p>
+<div class="citation" id="id34" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">BKH16</a><span class="fn-bracket">]</span></span>
+<p>Jimmy Lei Ba, Jamie Ryan Kiros, and Geoffrey E. Hinton. Layer normalization. 2016. <a class="reference external" href="https://arxiv.org/abs/1607.06450">arXiv:1607.06450</a>.</p>
 </div>
-<div class="citation" id="id19" role="doc-biblioentry">
+<div class="citation" id="id31" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>DBK+21<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id2">1</a>,<a role="doc-backlink" href="#id13">2</a>)</span>
+<p>Alexey Dosovitskiy, Lucas Beyer, Alexander Kolesnikov, Dirk Weissenborn, Xiaohua Zhai, Thomas Unterthiner, Mostafa Dehghani, Matthias Minderer, Georg Heigold, Sylvain Gelly, Jakob Uszkoreit, and Neil Houlsby. An image is worth 16x16 words: transformers for image recognition at scale. 2021.</p>
+</div>
+<div class="citation" id="id33" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">HZRS15</a><span class="fn-bracket">]</span></span>
+<p>Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. 2015. <a class="reference external" href="https://arxiv.org/abs/1512.03385">arXiv:1512.03385</a>.</p>
+</div>
+<div class="citation" id="id35" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">IS15</a><span class="fn-bracket">]</span></span>
+<p>Sergey Ioffe and Christian Szegedy. Batch normalization: accelerating deep network training by reducing internal covariate shift. 2015. <a class="reference external" href="https://arxiv.org/abs/1502.03167">arXiv:1502.03167</a>.</p>
+</div>
+<div class="citation" id="id32" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">SIVA17</a><span class="fn-bracket">]</span></span>
+<p>Christian Szegedy, Sergey Ioffe, Vincent Vanhoucke, and Alexander Alemi. Inception-v4, inception-resnet and the impact of residual connections on learning. In <em>Proceedings of the AAAI conference on artificial intelligence</em>, volume 31. 2017.</p>
+</div>
+<div class="citation" id="id30" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">Tur23</a><span class="fn-bracket">]</span></span>
 <p>Richard E Turner. An introduction to transformers. <em>arXiv preprint arXiv:2304.10557</em>, 2023.</p>
 </div>
-<div class="citation" id="id18" role="doc-biblioentry">
+<div class="citation" id="id36" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id9">UVL16</a><span class="fn-bracket">]</span></span>
+<p>Dmitry Ulyanov, Andrea Vedaldi, and Victor Lempitsky. Instance normalization: the missing ingredient for fast stylization. <em>arXiv preprint arXiv:1607.08022</em>, 2016.</p>
+</div>
+<div class="citation" id="id29" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">VSP+17</a><span class="fn-bracket">]</span></span>
 <p>Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Lukasz Kaiser, and Illia Polosukhin. Attention is all you need. <em>arXiv preprint arXiv:1706.03762</em>, 2017.</p>
+</div>
+<div class="citation" id="id37" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">WH18</a><span class="fn-bracket">]</span></span>
+<p>Yuxin Wu and Kaiming He. Group normalization. 2018. <a class="reference external" href="https://arxiv.org/abs/1803.08494">arXiv:1803.08494</a>.</p>
 </div>
 </div>
 </div>
@@ -592,17 +1345,26 @@ X^{(m)} &amp;= Y^{(m)} + \texttt{MLP}(\bar{Y}^{(m)})
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sequence-modelling">Sequence modelling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling-with-tokens">Modelling with tokens</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformer-block">Transformer block</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#self-attention">Self-attention</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-layer-perceptron">Multi-layer perceptron</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#skip-connections-and-normalisation">Skip connections and normalisation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#positional-embeddings">Positional embeddings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#residuals-and-normalisation">Residuals and normalisation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#putting-it-together">Putting it together</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tokens-and-embeddings">Tokens and embeddings</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extensions">Extensions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-head-self-attention">(Multi head) self-attention</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">Multi-layer perceptron</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">Transformer block</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">Tokens and embeddings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">Putting it together</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training">Training</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
   </nav></div>
