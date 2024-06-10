@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/proof.css?v=ca93fcec" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css?v=03c54da9" />
   
@@ -421,8 +421,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#local-self-attention">Local self-attention</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#attention-vs-convolutions">Attention vs convolutions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#putting-it-together">Putting it together</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training">Training</a></li>
 </ul>
@@ -442,9 +442,158 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="shifted-window-transformers">
 <h1>Shifted window transformers<a class="headerlink" href="#shifted-window-transformers" title="Link to this heading">#</a></h1>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<p><a class="github-button" href="https://github.com/stratisMarkou/random-walks" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" aria-label="Star stratisMarkou/random-walks on GitHub" style="float: right;">Star</a>
+<a class="github-button" href="https://github.com/stratisMarkou/random-walks/issues" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-issue-opened" data-size="large" aria-label="Issue stratisMarkou/random-walks on GitHub">Issue</a>
+<a class="github-button" href="https://github.com/stratisMarkou/random-walks/subscription" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-eye" data-size="large" aria-label="Watch stratisMarkou/random-walks on GitHub">Watch</a>
+<a class="github-button" href="https://github.com/stratisMarkou" data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large" aria-label="Follow @stratisMarkou on GitHub">Follow</a></p>
+<p><a class="reference internal" href="../transformers/transformers.html"><span class="std std-doc">Transformers</span></a> are an extremely flexible deep learning architecture which has greatly impacted a range of machine learning applications.
+Arguably, the impact of the transformer is due to its high modelling capacity, and its applicability to different data modalities with minimal changes to its implementation.
+The distinguishing feature which gives the transformer these advantages is its attention layer.
+Attention allows the transformer block to update the features of its input tokens in an adaptive way that depends on the features themselves, making the overall architecture extremely flexible.
+Further, attention can be straightforwardly applied to data of various kinds, such as text, images, graphs and many more.
+Arguably, due to these factors, transformers have been used across a range of applications with widespread success.</p>
+<p>However, one important limitation of atention is that its computation and memory costs scale quadratically with the number of tokens in a sequence.
+This makes standard transformers difficult to scale to inputs with many tokens such as, for example, long sentences or large images.
+The shifted window transformer (Swin) is an architecture which helps address the computational and memory complexity issues of transformers by modifying the attention operation.
+Swin was originally formulated to tackle image data, on which we focus here, but note that the main idea behind Swin is also applicable to other data modalities such as text or, more generally, any kind of gridded data.
+The innovation of the Swin transformer is to apply attention in a local way, such that only tokens which are near each other (in some appropriate sense of closeness) affect each other in the attention operation.
+In this sense Swin transformers are somewhat similar to convolutional neural networks (CNNs), where each input pixel affects only a local neighbourhood of output pixels at each layer of the network.
+This reduces the computational cost of the Swin transformer from quadratic to linear in the number of input tokens allowing scaling to large numbers of tokens.</p>
+<section id="local-self-attention">
+<h2>Local self-attention<a class="headerlink" href="#local-self-attention" title="Link to this heading">#</a></h2>
+<p>The main bottleneck in scaling transformers to large numbers of tokens is the self-attention operation.
+Given <span class="math notranslate nohighlight">\(N\)</span> tokens, simply building an <span class="math notranslate nohighlight">\(N \times N\)</span> attention matrix requires <span class="math notranslate nohighlight">\(\mathcal{O}(N^2)\)</span> compute and memory, which quickly gets very expensive for large images.
+The idea behind the Swin transformer is to modify the self-attention operation, by breaking up an input image into smaller chunks, or windows, and having each token attend to all other tokens within its window, and to no other tokens outside it, as illustrated by the following image.</p>
+<figure class="align-default" id="vit-vs-swin">
+<a class="reference internal image-reference" href="../../../_images/vit_vs_swin.png"><img alt="../../../_images/vit_vs_swin.png" src="../../../_images/vit_vs_swin.png" style="height: 150px;" /></a>
+<figcaption>
+<p><span class="caption-text">Comparison of the self-attention operations in a standard vision transformer (left) and a Swin transformer (right).
+Each gray square corresponds to a token.
+The red boxes mark groups of tokens over which attention is applied.</span><a class="headerlink" href="#vit-vs-swin" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Whereas in a standard vision transformer (left) each token (gray squares) attends to every other token in the image (large red square), in a Swin transformer each token attends only to those tokens within its window (smaller red squares), and none outside it.
+This significantly reduces the size of the attention matrices that need to be calculated.
+For example in the ViT in the illustration above, we have <span class="math notranslate nohighlight">\(64\)</span> tokens, resulting in a <span class="math notranslate nohighlight">\(64 \times 64\)</span> attention matrix which has <span class="math notranslate nohighlight">\(4096\)</span> entries.
+Breaking these up into four independent windows means each attention window contains <span class="math notranslate nohighlight">\(16\)</span> tokens, resulting in four <span class="math notranslate nohighlight">\(16 \times 16\)</span> attention matrices with <span class="math notranslate nohighlight">\(256\)</span> entries, for a total of <span class="math notranslate nohighlight">\(1024\)</span> entries across all four windows - a factor of <span class="math notranslate nohighlight">\(4\)</span> lower.
+These savings become much more significant for larger images.
+So far so good.
+However, this approach has a problem: tokens across different windows do not affect each other, which means that</p>
+</section>
 <section id="attention-vs-convolutions">
 <h2>Attention vs convolutions<a class="headerlink" href="#attention-vs-convolutions" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+An aside: reverse of patch extraction as transpose operation<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><strong>Invertibility.</strong>
+Under certain conditions patch extraction can be undone, leveraging the fact that the reverse operation is actually its transpose.
+However, there are exaples of patch extraction which cannot be reversed.
+For example, if we use large strides and small patch sizes, or if we use dilation (also known as à trous; this is the <code class="docutils literal notranslate"><span class="pre">rate</span></code> argument in <code class="docutils literal notranslate"><span class="pre">tf.image.extract_patches</span></code>), then some of the pixels of the input image may be skipped over, and not affect the output at all.
+This means the patch extraction operation cannot be undone.
+From now on, we will assume that the patch extraction is performed using a combination of patch size, striding and dilation such that every pixel in the input affects the output, and no pixels are skipped over.</p>
+<p class="sd-card-text"><strong>Matrix view.</strong>
+Suppose the input image <span class="math notranslate nohighlight">\(x\)</span> is an array of shape <span class="math notranslate nohighlight">\((H, W, C),\)</span> where <span class="math notranslate nohighlight">\(H\)</span> is its height, <span class="math notranslate nohighlight">\(W\)</span> is its width and <span class="math notranslate nohighlight">\(C\)</span> is the number of channels.
+We can view patch extraction as a linear operation <span class="math notranslate nohighlight">\(P\)</span> which maps the image <span class="math notranslate nohighlight">\(x\)</span> to another image <span class="math notranslate nohighlight">\(y = P(x),\)</span> of shape <span class="math notranslate nohighlight">\((I, J, K),\)</span> where the dimensions denote the horizontal patch index, vertical patch index and patch dimension respectively.
+Note that by the definition of patch extraction, each pixel in the output is affected by exactly one pixel in the input (though each pixel in the input may affect more than one pixel in the output).
+For now, let us assume that each pixel in the input affects exactly one pixel in the output, i.e. each <span class="math notranslate nohighlight">\(x_{hwc}\)</span> affects exactly one <span class="math notranslate nohighlight">\(y_{ijk}.\)</span>
+Let’s define <span class="math notranslate nohighlight">\(\texttt{flat}\)</span> to be the operation that takes a multi-dimensional array and flattens it into a single-dimensional array.
+Since <span class="math notranslate nohighlight">\(\texttt{flat}\)</span> is an invertible linear operation, and patch extraction is also an invertible linear operation, then their composition is also an invertible linear opeartion <span class="math notranslate nohighlight">\(P'.\)</span>
+Let <span class="math notranslate nohighlight">\(\mathcal{M}(P')\)</span> be the matrix corresponding to <span class="math notranslate nohighlight">\(P',\)</span> so that</p>
+<div class="math notranslate nohighlight">
+\[\texttt{flat}(y) = \mathcal{M}(P') \texttt{flat}(x).\]</div>
+<p class="sd-card-text">Now note that since each element of <span class="math notranslate nohighlight">\(\texttt{flat}(x)\)</span> affects precisely one element of <span class="math notranslate nohighlight">\(\texttt{flat}(y),\)</span> the matrix <span class="math notranslate nohighlight">\(\mathcal{M}(P')\)</span> is actually a permutation matrix, i.e. it contains exactly one <span class="math notranslate nohighlight">\(1\)</span> in each row and in each column, and all other entries are <span class="math notranslate nohighlight">\(0.\)</span>
+Now, the inverse of a permutation matrix is its transpose, that is</p>
+<div class="math notranslate nohighlight">
+\[\texttt{flat}(x) = \mathcal{M}(P')^\top \texttt{flat}(y).\]</div>
+<p class="sd-card-text">So the inverse of the patch embedding operation is actually its transpose operation, and that’s because the patch embedding is actually a permutation!</p>
+<p class="sd-card-text"><strong>General case.</strong>
+But what happens in the more general case where some <span class="math notranslate nohighlight">\(x_{hwc}\)</span> affect more than one <span class="math notranslate nohighlight">\(y_{ijk}\)</span>?
+The equation <span class="math notranslate nohighlight">\(\texttt{flat}(y) = \mathcal{M}(P') \texttt{flat}(x)\)</span> still holds, and the matrix <span class="math notranslate nohighlight">\(\mathcal{M}(P')\)</span> stil contains a single <span class="math notranslate nohighlight">\(1\)</span> per row.
+However, <span class="math notranslate nohighlight">\(\mathcal{M}(P')\)</span> may now contain multiple <span class="math notranslate nohighlight">\(1\)</span> entries in each column.
+Therefore, it is no longer a permutation matrix, and <span class="math notranslate nohighlight">\(\texttt{flat}(x) \neq \mathcal{M}(P')^\top \texttt{flat}(y).\)</span>
+In particular, when we multiply <span class="math notranslate nohighlight">\(\texttt{flat}(y)\)</span> by <span class="math notranslate nohighlight">\(\mathcal{M}(P')^\top,\)</span> each entry of <span class="math notranslate nohighlight">\(\texttt{flat}(x)\)</span> which affects <span class="math notranslate nohighlight">\(n\)</span> entries in <span class="math notranslate nohighlight">\(\texttt{flat}(y)\)</span> will be counted <span class="math notranslate nohighlight">\(n\)</span> times.
+To illustrate this problem, suppose consider the following vectors and matrices (which do not correspond to patch extraction, and are just an illustration of the problem) and the following matrix-vector multiplication</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+u = \begin{bmatrix}
+u_1 \\
+u_2
+\end{bmatrix}, M = \begin{bmatrix}
+1 &amp; 0 \\
+0 &amp; 1 \\
+0 &amp; 1
+\end{bmatrix} \implies v = Mu = \begin{bmatrix}
+u_1 \\
+u_2 \\
+u_2
+\end{bmatrix}.
+\end{split}\]</div>
+<p class="sd-card-text">If we multiply <span class="math notranslate nohighlight">\(v = Mu\)</span> by <span class="math notranslate nohighlight">\(M^\top\)</span> we obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+M^\top v = M^\top Mu = \begin{bmatrix}
+1 &amp; 0 &amp; 0\\
+0 &amp; 1 &amp; 1
+\end{bmatrix} \begin{bmatrix}
+u_1 \\
+u_2 \\
+u_2
+\end{bmatrix} = \begin{bmatrix}
+u_1 \\
+2u_2
+\end{bmatrix},
+\end{split}\]</div>
+<p class="sd-card-text">i.e. we have double-counted <span class="math notranslate nohighlight">\(u_2.\)</span>
+If instead we divide each row of <span class="math notranslate nohighlight">\(M^\top\)</span> by its sum before multiplying we obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+M^\top v = \begin{bmatrix}
+1 &amp; 0 &amp; 0\\
+0 &amp; \frac{1}{2} &amp; \frac{1}{2}
+\end{bmatrix} \begin{bmatrix}
+u_1 \\
+u_2 \\
+u_2
+\end{bmatrix} = \begin{bmatrix}
+u_1 \\
+u_2
+\end{bmatrix},
+\end{split}\]</div>
+<p class="sd-card-text">which is the desired result.
+Therefore, all we have to do is divide each row of <span class="math notranslate nohighlight">\(M^\top\)</span> by its sum, or alternatively divide each entry of <span class="math notranslate nohighlight">\(M^\top v\)</span> by the sum of each row of <span class="math notranslate nohighlight">\(M^\top.\)</span></p>
+<p class="sd-card-text"><strong>Implementation.</strong>
+We can perform all of the above in a few lines in Tensorflow, or a similar autodiff framework, as shown above.
+First, the command</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tf</span><span class="o">.</span><span class="n">gradients</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">grad_ys</span><span class="o">=</span><span class="n">y</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p class="sd-card-text">computes the gradients of the scalar <code class="docutils literal notranslate"><span class="pre">sum(y)</span></code> with respect to <code class="docutils literal notranslate"><span class="pre">x</span></code> and multiplies these gradients together with the corresponding entries in <code class="docutils literal notranslate"><span class="pre">grad_ys</span></code>, as performed in revrse mode differentiation.
+This is equivalent to the multiplication <span class="math notranslate nohighlight">\(\mathcal{M}(P')^\top \texttt{flat}(y)\)</span> except the tensors are not actually flattened, but retain their original shapes.
+Then, the command</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tf</span><span class="o">.</span><span class="n">gradients</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p class="sd-card-text">computes the derivative of <code class="docutils literal notranslate"><span class="pre">sum(y)</span></code> with respect to <code class="docutils literal notranslate"><span class="pre">x</span></code>.
+If an entry in <code class="docutils literal notranslate"><span class="pre">x</span></code> affects <span class="math notranslate nohighlight">\(n\)</span> entries in <code class="docutils literal notranslate"><span class="pre">y</span></code>, then the gradient of <code class="docutils literal notranslate"><span class="pre">sum(y)</span></code> with respect to that entry of <code class="docutils literal notranslate"><span class="pre">x</span></code> will be <span class="math notranslate nohighlight">\(n,\)</span> so the division</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tf</span><span class="o">.</span><span class="n">gradients</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">grad_ys</span><span class="o">=</span><span class="n">y</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">tf</span><span class="o">.</span><span class="n">gradients</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p class="sd-card-text">gives the result we were after.</p>
+</div>
+</details><p>Here is an illustration of the application of a shifted multi-head self-attention layer.</p>
+<p><img alt="" src="../../../_images/cyclic_shifts.png" /></p>
+<p>Most of the implementation for a Swin transformer is identical to that of a standard transformer, so we will reuse most of the code from the <a class="reference internal" href="../transformers/transformers.html"><span class="std std-doc">introduction to transformers example</span></a>.</p>
+<div class="cell tag_remove-output tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SelfAttention</span><span class="p">(</span><span class="n">tfk</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
 
@@ -505,8 +654,8 @@ document.write(`
 <span class="sd">            output sequence of tokens, shape (B, N, D)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">self_attention_weights</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">,</span> <span class="n">transpose_a</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    
-    
+
+
 <span class="k">class</span> <span class="nc">MultiHeadSelfAttention</span><span class="p">(</span><span class="n">tfk</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
@@ -602,13 +751,9 @@ document.write(`
             <span class="n">x</span> <span class="o">=</span> <span class="n">layer</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
             <span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">gelu</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">linear</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">](</span><span class="n">x</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TransformerBlock</span><span class="p">(</span><span class="n">tfk</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+
+
+<span class="k">class</span> <span class="nc">TransformerBlock</span><span class="p">(</span><span class="n">tfk</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -617,7 +762,7 @@ document.write(`
         <span class="n">mlp_num_hidden</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">mlp_num_layers</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">num_heads</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;transformer_block&quot;</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;swin_transformer_block&quot;</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -655,13 +800,9 @@ document.write(`
         <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">mlp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ln2</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 
         <span class="k">return</span> <span class="n">x</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ImageTokeniser</span><span class="p">(</span><span class="n">tfk</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    
+
+<span class="k">class</span> <span class="nc">ImageTokeniser</span><span class="p">(</span><span class="n">tfk</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -673,7 +814,7 @@ document.write(`
     <span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-        <span class="k">assert</span> <span class="n">patch_size</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Patch size must be even&quot;</span>
+        <span class="k">assert</span> <span class="n">patch_size</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">patch_size</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Patch size must be one or even&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">conv</span> <span class="o">=</span> <span class="n">tfk</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Conv2D</span><span class="p">(</span>
             <span class="n">filters</span><span class="o">=</span><span class="n">token_dimension</span><span class="p">,</span>
@@ -707,24 +848,17 @@ document.write(`
             <span class="sa">f</span><span class="s2">&quot;found </span><span class="si">{</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="si">=}</span><span class="s2"> and </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="o">.</span><span class="n">kernel_size</span><span class="si">}</span><span class="s2">.&quot;</span>
         <span class="p">)</span>
 
-        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Now we turn to position embeddings.
-For simplicity, let us assume that all sequences have a fixed length, i.e. all images we will process will process images of a fixed height and width.
-We’ll adopt a fairly general approach, by letting each embedding be a learnable array, and using a different such array for each position in the sequence.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PositionEmbedding</span><span class="p">(</span><span class="n">tfk</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    
+
+<span class="k">class</span> <span class="nc">PositionEmbedding</span><span class="p">(</span><span class="n">tfk</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">seed</span><span class="p">:</span> <span class="n">Seed</span><span class="p">,</span>
         <span class="n">token_dimension</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="n">sequence_length</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">height</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;position_embedding&quot;</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">):</span>
@@ -732,7 +866,7 @@ We’ll adopt a fairly general approach, by letting each embedding be a learnabl
         
         <span class="bp">self</span><span class="o">.</span><span class="n">embeddings</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span>
             <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span>
-                <span class="p">(</span><span class="n">sequence_length</span><span class="p">,</span> <span class="n">token_dimension</span><span class="p">),</span>
+                <span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">token_dimension</span><span class="p">),</span>
                 <span class="n">seed</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">seed</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
             <span class="p">)</span>
         <span class="p">)</span>
@@ -742,27 +876,202 @@ We’ll adopt a fairly general approach, by letting each embedding be a learnabl
 <span class="sd">        Add position embeddings to input tensor.</span>
 
 <span class="sd">        Arguments:</span>
-<span class="sd">            x: input tensor of shape (B, N, D)</span>
+<span class="sd">            x: input tensor of shape (B, H, W, D)</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            output tensor of shape (B, N, D)</span>
+<span class="sd">            output tensor of shape (B, H, W, D)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">embeddings</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+        <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">embeddings</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:,</span> <span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">shift_horizontally_and_vertically</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">shift</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Shift windows in the input tensor `x` by shift along its width and height.</span>
+<span class="sd">    For example, using shift == 1 (and neglecting the B and D dimensions),</span>
+<span class="sd">    the H and W dimensions would change as follows:</span>
+<span class="sd">    </span>
+<span class="sd">                      Original                Shifted</span>
+<span class="sd">                 -----------------       -----------------</span>
+<span class="sd">                |  x   x   x   o  |     |  *   +   +   +  |</span>
+<span class="sd">                |  x   x   x   o  |     |  o   x   x   x  |</span>
+<span class="sd">                |  x   x   x   o  |     |  o   x   x   x  |</span>
+<span class="sd">                |  +   +   +   *  |     |  o   x   x   x  |</span>
+<span class="sd">                 -----------------       -----------------</span>
+<span class="sd">    </span>
+<span class="sd">    Arguments:</span>
+<span class="sd">        x: input tensor of shape (B, H, W, D)</span>
+<span class="sd">        shift: amount of shift to apply</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        output tensor of shape (B, H, W, D)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">shift</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">shift</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">extract_windows</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extract non-overlapping windows from input tensor `x`.</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">        x: input tensor of shape</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        output tensor of shape (B*(H//2)*(W//2), 4, D)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">W</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">3</span><span class="p">]</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="n">B</span><span class="p">,</span> <span class="n">H</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">W</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">D</span><span class="p">])</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>  <span class="c1"># (B, H//2, W//2, 2, 2, D)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="n">B</span><span class="o">*</span><span class="n">H</span><span class="o">//</span><span class="mi">2</span><span class="o">*</span><span class="n">W</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">D</span><span class="p">])</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">D</span><span class="p">),</span> <span class="n">x</span>
+
+
+<span class="k">def</span> <span class="nf">combine_windows</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">original_shape</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Combine windows extracted from input tensor `x`.</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">        x: input tensor of shape (B*(H//2)*(W//2), 4, D)</span>
+<span class="sd">        x_shape: shape of original tensor</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        output tensor of shape (B, H, W, D)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">B</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">D</span> <span class="o">=</span> <span class="n">original_shape</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="n">B</span><span class="p">,</span> <span class="n">H</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">W</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">D</span><span class="p">])</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>  <span class="c1"># (B, H//2, 2, W//2, 2, D)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="n">B</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">D</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">x</span>
 </pre></div>
 </div>
 </div>
 </div>
-<section id="putting-it-together">
-<h3>Putting it together<a class="headerlink" href="#putting-it-together" title="Link to this heading">#</a></h3>
-<p>Finally, we’re ready to put together the full transformer architecture.
-We’ll build a little ViT using our transformer blocks, image tokeniser and position embeddings.
-Note that in order to obtain class probability logits from a ViT, we typically use an additional token <span class="math notranslate nohighlight">\(x_0^{(m)}\)</span> called the class token.
-This token initially does not depend on the input, i.e. <span class="math notranslate nohighlight">\(x_0^{(0)}\)</span> is fixed.
-By attending to the other tokens however, <span class="math notranslate nohighlight">\(x_0^{(m)}\)</span> incorporates information about the input.
-Once the transformer blocks have been applied, we take the resulting class token <span class="math notranslate nohighlight">\(x_0^{(M)}\)</span> and pass it through a final MLP to obtain class logits.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TinyVisionTransformer</span><span class="p">(</span><span class="n">tfk</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PatchMergingLayer</span><span class="p">(</span><span class="n">tfk</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">seed</span><span class="p">:</span> <span class="n">Seed</span><span class="p">,</span>
+        <span class="n">num_out_features</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;patch_merging&quot;</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">linear</span> <span class="o">=</span> <span class="n">tfk</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span>
+            <span class="n">num_out_features</span><span class="p">,</span>
+            <span class="n">activation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">kernel_initializer</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">initializers</span><span class="o">.</span><span class="n">GlorotNormal</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">seed</span><span class="p">[</span><span class="mi">0</span><span class="p">])),</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_out_features</span> <span class="o">=</span> <span class="n">num_out_features</span>
+    
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Apply patch merging to input tensor `x`.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            x: input tensor of shape (B, H, W, D)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            output tensor of shape (B, H//2, W//2, 2*D)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">extract_patches</span><span class="p">(</span>
+            <span class="n">x</span><span class="p">,</span>
+            <span class="n">sizes</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+            <span class="n">strides</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+            <span class="n">rates</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+            <span class="n">padding</span><span class="o">=</span><span class="s2">&quot;VALID&quot;</span><span class="p">,</span>
+        <span class="p">)</span>  <span class="c1"># (B, H//2, W//2, 4*D)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">linear</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># (B, H//2, W//2, 2*D)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SwinTransformerBlockStage</span><span class="p">(</span><span class="n">tfk</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">seed</span><span class="p">:</span> <span class="n">Seed</span><span class="p">,</span>
+        <span class="n">token_dimension</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">mlp_num_hidden</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">mlp_num_layers</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">num_heads</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">num_block_pairs</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;swin_transformer_block&quot;</span><span class="p">,</span> 
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="n">seeds</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split_seed</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">num_block_pairs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">first_blocks</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">TransformerBlock</span><span class="p">(</span>
+                <span class="n">seed</span><span class="o">=</span><span class="n">seeds</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">],</span>
+                <span class="n">token_dimension</span><span class="o">=</span><span class="n">token_dimension</span><span class="p">,</span>
+                <span class="n">mlp_num_hidden</span><span class="o">=</span><span class="n">mlp_num_hidden</span><span class="p">,</span>
+                <span class="n">mlp_num_layers</span><span class="o">=</span><span class="n">mlp_num_layers</span><span class="p">,</span>
+                <span class="n">num_heads</span><span class="o">=</span><span class="n">num_heads</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_block_pairs</span><span class="p">)</span>
+        <span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">second_blocks</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">TransformerBlock</span><span class="p">(</span>
+                <span class="n">seed</span><span class="o">=</span><span class="n">seeds</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">token_dimension</span><span class="o">=</span><span class="n">token_dimension</span><span class="p">,</span>
+                <span class="n">mlp_num_hidden</span><span class="o">=</span><span class="n">mlp_num_hidden</span><span class="p">,</span>
+                <span class="n">mlp_num_layers</span><span class="o">=</span><span class="n">mlp_num_layers</span><span class="p">,</span>
+                <span class="n">num_heads</span><span class="o">=</span><span class="n">num_heads</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_block_pairs</span><span class="p">)</span>
+        <span class="p">]</span>
+
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Apply the Swin Transformer block to input tokens `x`.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            x: input tensor of shape (B, H, W, D)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            output tensor of shape (B, H, W, D)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">for</span> <span class="n">first_block</span><span class="p">,</span> <span class="n">second_block</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">first_blocks</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">second_blocks</span><span class="p">):</span>
+
+            <span class="n">original_shape</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">extract_windows</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># (B*H//2*W//2, 4, D)</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">first_block</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># (B*H//2*W//2, 4, D)</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">combine_windows</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">original_shape</span><span class="p">)</span>  <span class="c1"># (B, H, W, D)</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">shift_horizontally_and_vertically</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># (B, H, W, D)</span>
+
+            <span class="n">original_shape</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">extract_windows</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># (B*H//2*W//2, 4, D)</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">second_block</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># (B*H//2*W//2, 4, D)</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">combine_windows</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">original_shape</span><span class="p">)</span>  <span class="c1"># (B, H, W, D)</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">shift_horizontally_and_vertically</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># (B, H, W, D)</span>
+
+        <span class="n">x</span> <span class="o">=</span> <span class="n">combine_windows</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">original_shape</span><span class="p">)</span>  <span class="c1"># (B, H, W, D)</span>
+
+        <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TinySwinTransformer</span><span class="p">(</span><span class="n">tfk</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -773,24 +1082,36 @@ Once the transformer blocks have been applied, we take the resulting class token
         <span class="n">mlp_num_hidden</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">mlp_num_layers</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">num_heads</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="n">num_blocks</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">num_classes</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;tiny_vision_transformer&quot;</span><span class="p">,</span>
+        <span class="n">num_blocks_per_stage</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;tiny_swin_transformer&quot;</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-        <span class="n">seeds</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split_seed</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span> <span class="n">num_blocks</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">blocks</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="n">TransformerBlock</span><span class="p">(</span>
-                <span class="n">seed</span><span class="o">=</span><span class="n">seeds</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
-                <span class="n">token_dimension</span><span class="o">=</span><span class="n">token_dimension</span><span class="p">,</span>
-                <span class="n">mlp_num_hidden</span><span class="o">=</span><span class="n">mlp_num_hidden</span><span class="p">,</span>
-                <span class="n">mlp_num_layers</span><span class="o">=</span><span class="n">mlp_num_layers</span><span class="p">,</span>
-                <span class="n">num_heads</span><span class="o">=</span><span class="n">num_heads</span><span class="p">,</span>
+        <span class="n">num_stages</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">num_blocks_per_stage</span><span class="p">)</span>
+        <span class="n">seeds</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split_seed</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">num_stages</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">stages</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">patch_merging_layers</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">num_blocks_per_stage</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">patch_merging_layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">PatchMergingLayer</span><span class="p">(</span>
+                    <span class="n">seed</span><span class="o">=</span><span class="n">seeds</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span>
+                    <span class="n">num_out_features</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">i</span><span class="p">)</span><span class="o">*</span><span class="n">token_dimension</span><span class="p">,</span>
+                <span class="p">)</span>
             <span class="p">)</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_blocks</span><span class="p">)</span>
-        <span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">SwinTransformerBlockStage</span><span class="p">(</span>
+                    <span class="n">seed</span><span class="o">=</span><span class="n">seeds</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">],</span>
+                    <span class="n">token_dimension</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">i</span><span class="p">)</span><span class="o">*</span><span class="n">token_dimension</span><span class="p">,</span>
+                    <span class="n">mlp_num_hidden</span><span class="o">=</span><span class="n">mlp_num_hidden</span><span class="p">,</span>
+                    <span class="n">mlp_num_layers</span><span class="o">=</span><span class="n">mlp_num_layers</span><span class="p">,</span>
+                    <span class="n">num_heads</span><span class="o">=</span><span class="n">num_heads</span><span class="p">,</span>
+                    <span class="n">num_block_pairs</span><span class="o">=</span><span class="n">n</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">final_mlp</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">(</span>
             <span class="n">seed</span><span class="o">=</span><span class="n">seeds</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
@@ -801,13 +1122,6 @@ Once the transformer blocks have been applied, we take the resulting class token
 
         <span class="bp">self</span><span class="o">.</span><span class="n">tokeniser</span> <span class="o">=</span> <span class="n">tokeniser</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span> <span class="o">=</span> <span class="n">embedding</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">class_token</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span>
-            <span class="n">tf</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span>
-                <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">token_dimension</span><span class="p">),</span>
-                <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span>
-            <span class="p">)</span>
-        <span class="p">)</span>
-
 
     <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -820,25 +1134,20 @@ Once the transformer blocks have been applied, we take the resulting class token
 <span class="sd">            output logits tensor of shape (B, num_classes)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="n">class_token</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">class_token</span><span class="p">,</span>
-            <span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">)</span>
-
         <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tokeniser</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">class_token</span><span class="p">,</span> <span class="n">x</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-        <span class="k">for</span> <span class="n">block</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">blocks</span><span class="p">:</span>
-            <span class="n">x</span> <span class="o">=</span> <span class="n">block</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">patch_merging</span><span class="p">,</span> <span class="n">stage</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">patch_merging_layers</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stages</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">patch_merging</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">stage</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
-        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">final_mlp</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:])</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">final_mlp</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">x</span> <span class="o">-</span> <span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">reduce_logsumexp</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-</section>
 <section id="dataset">
 <h3>Dataset<a class="headerlink" href="#dataset" title="Link to this heading">#</a></h3>
 <p>Because this is meant to be a demo that should run on a laptop, we’ll use the MNIST dataset.
@@ -855,6 +1164,7 @@ We’ll use <a class="reference external" href="https://www.tensorflow.org/datas
 
 <span class="k">def</span> <span class="nf">preprocess_image</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
     <span class="n">image</span> <span class="o">=</span> <span class="mf">2.</span> <span class="o">*</span> <span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="o">/</span> <span class="mf">255.</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="p">[</span><span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">image</span><span class="p">,</span> <span class="n">label</span>
 
 <span class="k">def</span> <span class="nf">get_batches</span><span class="p">(</span><span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">split</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data_dir</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s2">&quot;/tmp/tfds&quot;</span><span class="p">):</span>
@@ -915,19 +1225,19 @@ We won’t use any of these techniques here to keep it simple.</p>
     <span class="k">return</span> <span class="n">loss</span><span class="p">,</span> <span class="n">logits</span>
 
 <span class="c1"># Model parameters</span>
-<span class="n">token_dimension</span> <span class="o">=</span> <span class="mi">128</span>
-<span class="n">patch_size</span> <span class="o">=</span> <span class="mi">4</span>
-<span class="n">num_mlp_hidden</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="n">token_dimension</span> <span class="o">=</span> <span class="mi">64</span>
+<span class="n">patch_size</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">num_mlp_hidden</span> <span class="o">=</span> <span class="mi">64</span>
 <span class="n">num_mlp_layers</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">num_heads</span> <span class="o">=</span> <span class="mi">8</span>
-<span class="n">num_blocks</span> <span class="o">=</span> <span class="mi">8</span>
 <span class="n">num_classes</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">num_blocks_per_stage</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 
 <span class="c1"># Training parameters</span>
-<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">32</span>
 <span class="n">num_epochs</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">1e-3</span>
-<span class="n">weight_decay</span> <span class="o">=</span> <span class="mf">1e-4</span>
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">1e-4</span>
+<span class="n">weight_decay</span> <span class="o">=</span> <span class="mf">1e-6</span>
 
 <span class="c1"># Create the tokeniser and embeddings</span>
 <span class="n">seeds</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split_seed</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">3</span><span class="p">)</span>
@@ -941,11 +1251,12 @@ We won’t use any of these techniques here to keep it simple.</p>
 <span class="n">embedding</span> <span class="o">=</span> <span class="n">PositionEmbedding</span><span class="p">(</span>
     <span class="n">seeds</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
     <span class="n">token_dimension</span><span class="o">=</span><span class="n">token_dimension</span><span class="p">,</span>
-    <span class="n">sequence_length</span><span class="o">=</span><span class="p">(</span><span class="mi">28</span> <span class="o">//</span> <span class="n">patch_size</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
+    <span class="n">width</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="c1"># Create a transformer</span>
-<span class="n">transformer</span> <span class="o">=</span> <span class="n">TinyVisionTransformer</span><span class="p">(</span>
+<span class="n">transformer</span> <span class="o">=</span> <span class="n">TinySwinTransformer</span><span class="p">(</span>
     <span class="n">seeds</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
     <span class="n">tokeniser</span><span class="o">=</span><span class="n">tokeniser</span><span class="p">,</span>
     <span class="n">embedding</span><span class="o">=</span><span class="n">embedding</span><span class="p">,</span>
@@ -953,8 +1264,8 @@ We won’t use any of these techniques here to keep it simple.</p>
     <span class="n">mlp_num_hidden</span><span class="o">=</span><span class="n">num_mlp_hidden</span><span class="p">,</span>
     <span class="n">mlp_num_layers</span><span class="o">=</span><span class="n">num_mlp_layers</span><span class="p">,</span>
     <span class="n">num_heads</span><span class="o">=</span><span class="n">num_heads</span><span class="p">,</span>
-    <span class="n">num_blocks</span><span class="o">=</span><span class="n">num_blocks</span><span class="p">,</span>
     <span class="n">num_classes</span><span class="o">=</span><span class="n">num_classes</span><span class="p">,</span>
+    <span class="n">num_blocks_per_stage</span><span class="o">=</span><span class="n">num_blocks_per_stage</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="c1"># Create optimizer</span>
@@ -973,14 +1284,14 @@ We won’t use any of these techniques here to keep it simple.</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "33335881af3840d6973f29c009aca614", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "797f41a2e88947debc5e23980547166a", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "2fc2502c43a84c42938bc2a71c244180", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "c96dbae11a0f485ba49b0cc667ae6871", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "198bd8508bbc4a2aab46c5519ec1fa08", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "c8fe11d04c0b4ccfb44652a361b04a62", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "fca83109aa5140dca2f969672c71354d", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "716f3ce8af1546d4867c200f7989ff59", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "0cbc514874df467daf835f75f8ddedd7", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "7718f66e620346ec8ad80ff973bf75dd", "version_major": 2, "version_minor": 0}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 10: loss 0.090 (train 0.082), acc. 0.957 (train 0.956)
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "db81c9ae1ece4e4e8aae5015311cd800", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "5d994592c82746b3b7cbd91004ae8db8", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "414378247fee43b99303f0e3e9e63aa0", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "b3224cf642c84356961c7c5e8c28b182", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "31a1d95291db4bf685277244b6104a75", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "fc638e5b9731407ca4281e40699e6641", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "705b39fc26064483bf3a93e6a7046175", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "9cbec332b7bb4d799dc306fb05e17bbf", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "0095bd4551014018808667bc26b395e0", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "77c391fd18ae463aba43a499f35e1e2d", "version_major": 2, "version_minor": 0}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 10: loss 0.089 (train 0.024), acc. 0.973 (train 0.972)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell tag_remove-input tag_center-output docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/4f62da4f4e830bd208b3eac5b005989dcb3f36b1bd527a31b16b27544b7b4d27.svg" src="../../../_images/4f62da4f4e830bd208b3eac5b005989dcb3f36b1bd527a31b16b27544b7b4d27.svg" /></div>
+<img alt="../../../_images/5b555565b39c4a5f1f1d65d51458d0ce8dfec8a60ba62cc51cb301d287ecd9e5.svg" src="../../../_images/5b555565b39c4a5f1f1d65d51458d0ce8dfec8a60ba62cc51cb301d287ecd9e5.svg" /></div>
 </div>
 </section>
 </section>
@@ -1042,8 +1353,8 @@ We looked at a specific example for computer vision, the ViT, and trained it on 
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#local-self-attention">Local self-attention</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#attention-vs-convolutions">Attention vs convolutions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#putting-it-together">Putting it together</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training">Training</a></li>
 </ul>

@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/proof.css?v=ca93fcec" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css?v=03c54da9" />
   
@@ -424,7 +424,9 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling-with-tokens">Modelling with tokens</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformer-block">Transformer block</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#self-attention">Self-attention</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-layer-perceptron">Multi-layer perceptron</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-layer-perceptron">Multi-layer perceptron</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#residuals-and-normalisation">Residuals and normalisation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#putting-it-together">Putting it together</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tokens-and-embeddings">Tokens and embeddings</a></li>
@@ -455,6 +457,11 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-transformers">
 <h1>Introduction to transformers<a class="headerlink" href="#introduction-to-transformers" title="Link to this heading">#</a></h1>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<p><a class="github-button" href="https://github.com/stratisMarkou/random-walks" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" aria-label="Star stratisMarkou/random-walks on GitHub" style="float: right;">Star</a>
+<a class="github-button" href="https://github.com/stratisMarkou/random-walks/issues" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-issue-opened" data-size="large" aria-label="Issue stratisMarkou/random-walks on GitHub">Issue</a>
+<a class="github-button" href="https://github.com/stratisMarkou/random-walks/subscription" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-eye" data-size="large" aria-label="Watch stratisMarkou/random-walks on GitHub">Watch</a>
+<a class="github-button" href="https://github.com/stratisMarkou" data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large" aria-label="Follow @stratisMarkou on GitHub">Follow</a></p>
 <p>The transformer <span id="id1">[<a class="reference internal" href="#id29" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Lukasz Kaiser, and Illia Polosukhin. Attention is all you need. arXiv preprint arXiv:1706.03762, 2017.">Vaswani <em>et al.</em>, 2017</a>]</span> is a deep learning architecture which has powered many of the recent advances across a range of machine learning applications, including text modelling, image modelling <span id="id2">[<a class="reference internal" href="#id31" title="Alexey Dosovitskiy, Lucas Beyer, Alexander Kolesnikov, Dirk Weissenborn, Xiaohua Zhai, Thomas Unterthiner, Mostafa Dehghani, Matthias Minderer, Georg Heigold, Sylvain Gelly, Jakob Uszkoreit, and Neil Houlsby. An image is worth 16x16 words: transformers for image recognition at scale. 2021.">Dosovitskiy <em>et al.</em>, 2021</a>]</span>, and many others.
 This is an overview of the transformer architecture, including a self-contained mathematical description of the architectural details, and a concise implementation.
 All of this exposition is based off an excellent introduction paper on transformers by Rich Turner <span id="id3">[<a class="reference internal" href="#id30" title="Richard E Turner. An introduction to transformers. arXiv preprint arXiv:2304.10557, 2023.">Turner, 2023</a>]</span>.</p>
@@ -558,14 +565,14 @@ At this point we should note that, due to the nonlinearity of <span class="math 
 However, the capacity of this intra-feature processing is limited, and it is the job of the second stage, the MLP, to address this.
 Let’s next look at the MLP stage.</p>
 </section>
+</section>
 <section id="multi-layer-perceptron">
-<h3>Multi-layer perceptron<a class="headerlink" href="#multi-layer-perceptron" title="Link to this heading">#</a></h3>
+<h2>Multi-layer perceptron<a class="headerlink" href="#multi-layer-perceptron" title="Link to this heading">#</a></h2>
 <p>The self-attention layer has the role of aggregating information across tokens in a sequence to model joint dependencies.
 In order to refine the representations themselves, a simple MLP is applied to each token in isolation, in a relatively simple step</p>
 <div class="math notranslate nohighlight">
 \[x^{(m)}_n = \texttt{MLP}(y^{(m)}_n).\]</div>
 <p>Note that this MLP is shared across all input locations, i.e. all tokens, within a given layer.</p>
-</section>
 <section id="residuals-and-normalisation">
 <h3>Residuals and normalisation<a class="headerlink" href="#residuals-and-normalisation" title="Link to this heading">#</a></h3>
 <p>Before putting together the <span class="math notranslate nohighlight">\(\texttt{MHSA}\)</span> and <span class="math notranslate nohighlight">\(\texttt{MLP}\)</span> operations, we will add two ubiquitous deep learning operations to improve the stability and ease of training of the model, namely residual connections and normalisation.</p>
@@ -598,9 +605,8 @@ In other words, within a transformer, LayerNorm separately normalises each token
 <p><strong>Relationship to GNNs:</strong>
 As highlighted by these equations, transformers are very similar in spirit to graph neural networks (GNNs).
 Both architectures consist of interleaving local and aggregation operations.
-Just as in transformers, the local operations in a GNN are MLPs, applied to the features corresponding to nodes of a graph.
-Similarly, just as in transformers the self-attention operation aggregates information across tokens, in a GNN a pooling operation aggregates information from all neighbours and edges of each node in a graph.
-One key difference is that the aggregation operation in a GNN typically only incorporates information across the neighbours of each node, whereas self-attention in transformers incorporates information across all tokens in a single forward pass.</p>
+In a GNN there are local transformations in the form of MLPs applied to the features corresponding to nodes of a graph, and there are also aggregation operations in the form of pooling, which aggregate information from all neighbours and edges of each node in a graph.
+One key difference between transformers and GNNs is that the aggregation operation in a GNN typically only incorporates information across the neighbours of each node, whereas self-attention in transformers incorporates information across all tokens in a single forward pass.</p>
 </aside>
 <p>In summary, we can collect these operations into the following equations</p>
 <div class="math notranslate nohighlight">
@@ -624,13 +630,13 @@ In text modelling the raw inputs are integers representing unique words or chara
 In such applications, i.e. whenever we have discrete inputs, we can use a look-up table containing learnable vectors.
 That is, if <span class="math notranslate nohighlight">\(s_n \in \{1, \dots, K\},\)</span> we can define <span class="math notranslate nohighlight">\(K\)</span> arrays, each of length <span class="math notranslate nohighlight">\(D\)</span>, say <span class="math notranslate nohighlight">\(z_0, \dots, z_K \in \mathbb{R}^D,\)</span> and let</p>
 <div class="math notranslate nohighlight">
-\[x^{(0)}_n = \texttt{tokenise\_discrete}(s_n) = z_{s_n}.\]</div>
+\[x^{(0)}_n = \texttt{tokenise-discrete}(s_n) = z_{s_n}.\]</div>
 <p>This allows us to map each word into a continuous space and operate on the resulting arrays with the transformer architecture.
 In other applications, such as vision, the inputs are typically treated as continuous, that is <span class="math notranslate nohighlight">\(s_n \in \mathbb{R}^{D_s}.\)</span>
 In such cases, we can simply apply a simple operation such as a linear transformation, to map each <span class="math notranslate nohighlight">\(s_n\)</span> into a <span class="math notranslate nohighlight">\(D\)</span>-dimensional array.
 For example, letting <span class="math notranslate nohighlight">\(W \in \mathbb{R}^{D\times D_s},\)</span> we can define</p>
 <div class="math notranslate nohighlight">
-\[x^{(0)}_n = \texttt{tokenise\_continuous}(s_n) = W s_n,\]</div>
+\[x^{(0)}_n = \texttt{tokenise-continuous}(s_n) = W s_n,\]</div>
 <p>giving a <span class="math notranslate nohighlight">\(D\)</span>-dimensional token which is ready for use in the transformer.
 We have now covered almost all parts of the transformer, except one final, but very important point concerning the embeddings.
 Thus far, we have glossed over the fact that the transformer block has no notion of position, which is a very important issue that we look into next.</p>
@@ -641,16 +647,16 @@ This is undesirable because, for example in text modelling, the phrases “Arsen
 One way to get around this issue is augmenting the tokens with information about the position of an input feature within the sequence.
 For example, we could set up an additional embedding which directly maps each position to a learnable array and concatentate the result with the tokenised feature, that is</p>
 <div class="math notranslate nohighlight">
-\[x^{(0)}_n = \texttt{tokenise}(s_n) \odot \texttt{tokenise\_discrete}(n),\]</div>
+\[x^{(0)}_n = \texttt{tokenise}(s_n) \odot \texttt{tokenise-discrete}(n),\]</div>
 <p>where <span class="math notranslate nohighlight">\(\odot\)</span> denotes concatenation, and we have used different tokenisation functions for the sequence elements and their positions.
 A variant of this approach is, instead of concatenating, to add the position embedding to the input tokens, that is</p>
 <div class="math notranslate nohighlight">
-\[x^{(0)}_n = \texttt{tokenise}(s_n) + \texttt{tokenise\_discrete}(n).\]</div>
+\[x^{(0)}_n = \texttt{tokenise}(s_n) + \texttt{tokenise-discrete}(n).\]</div>
 <p>This approach can be viewed as a special case of the concatenation approach, followed by a fixed linear projection.
 It is the standard approach used, for example, in vision transformers.
 Another approach is applying, for example, sinusoidal functions with different frequencies on the input, for example</p>
 <div class="math notranslate nohighlight">
-\[\texttt{tokenise\_discrete}(n) = [\sin(\omega_1 n), \dots, \sin(\omega_D n)],\]</div>
+\[\texttt{tokenise-discrete}(n) = [\sin(\omega_1 n), \dots, \sin(\omega_D n)],\]</div>
 <p>which are then concatentated to the tokenised features as described above.
 Other approaches bake in positional information directly into the <span class="math notranslate nohighlight">\(\texttt{MHSA}\)</span> layer, for example by making the attention weights depend on the position difference of pairs of tokens.</p>
 </section>
@@ -1361,7 +1367,9 @@ We looked at a specific example for computer vision, the ViT, and trained it on 
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling-with-tokens">Modelling with tokens</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformer-block">Transformer block</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#self-attention">Self-attention</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-layer-perceptron">Multi-layer perceptron</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-layer-perceptron">Multi-layer perceptron</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#residuals-and-normalisation">Residuals and normalisation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#putting-it-together">Putting it together</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tokens-and-embeddings">Tokens and embeddings</a></li>
