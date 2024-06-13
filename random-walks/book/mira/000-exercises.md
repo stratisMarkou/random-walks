@@ -1286,7 +1286,6 @@ $$\lim_{n \to \infty} \mu(E_n) = \lim_{n \to \infty} \sum_{k = n}^{\infty} \frac
 
 ::::{admonition} Exercise 2.C.11
 :class: tip
-
 Suppose $(X, S, \mu)$ is a measure space and $C, D, E \in S$ are such that
 
 $$\mu(C \cap D) < \infty, \mu(C \cap E) < \infty, \mu(D \cap E) < \infty.$$
@@ -1294,7 +1293,6 @@ $$\mu(C \cap D) < \infty, \mu(C \cap E) < \infty, \mu(D \cap E) < \infty.$$
 Find and prove a formula for $\mu(C \cup D \cup E)$ in terms of $\mu(C),$ $\mu(D),$ $\mu(E),$ $\mu(C \cap D),$ $\mu(C \cap E),$ $\mu(D \cap E),$ and $\mu(C \cap D \cap E).$
 
 :::{dropdown} Solution
-
 Suppose $(X, S, \mu)$ is a measure space and $C, D, E \in S$ are such that
 
 $$\mu(C \cap D) < \infty, \mu(C \cap E) < \infty, \mu(D \cap E) < \infty.$$
@@ -1308,24 +1306,19 @@ $$\begin{align}
 &= \mu(C) + \mu(D) + \mu(E) - \mu(C \cap D) - \mu(C \cap E) - \mu(D \cap E) + \\
 &~~~~+ \mu(C \cap D \cap E).
 \end{align}$$
-
 :::
 ::::
 
 
 
-
 ::::{admonition} Exercise 2.C.12
 :class: tip
-
 Suppose $X$ is a set and $S$ is the $\sigma$-algebra of all subsets $E$ of $X$ such that $E$ is countable or $X \setminus E$ is countable.
 Give a complete description of the set of all measures $\mu$ on $(X, S).$
 
 :::{dropdown} Solution
-
 Suppose $X$ is a set and $S$ is the $\sigma$-algebra of all subsets $E$ of $X$ such that $E$ is countable or $X \setminus E$ is countable.
 Then, a measure $\mu$ on $(X, S)$ is completely determined by the value of $\mu(\{x\})$ for each $x \in X,$ along with $\mu(X).$
-
 :::
 ::::
 

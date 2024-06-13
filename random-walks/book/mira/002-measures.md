@@ -1219,3 +1219,123 @@ $$\begin{align}
 &= \mu(D) + \mu(E) - \mu(D \cap E).
 \end{align}$$
 :::
+
+
+## Lebesgue measure
+```{margin}
+Despite the name "outer measure", the outer measure is not in fact a measure, because it is not additive.
+Restricting its domain to the set of all subsets of $\mathbb{R}$ gives the Lebesgue measure, which is in fact a measure.
+```
+Now we move to define the Lebesgue measure which is central in measure theory.
+In short the Lebesgue measure is the modified notion of length we have been building up towards.
+Specifically, it will be the outer measure restricted (from the set of all subsets of $\mathbb{R}$) to the Borel sets of $\mathbb{R}.$
+The main result in this section will be proving that the outer measure, when restricted to the Borel sets of $\mathbb{R},$ is in fact a measure.
+
+### Additivity of outer measure on Borel sets
+We build up to the proof that the outer measure restricted to Borel sets is in fact a measure, in a few different steps.
+
+:::{prf:theorem} Additivity of outer measure if one of the sets is open
+:label: mira:thm:additivity-of-outer-measure-if-one-set-is-open
+Suppose $A$ and $G$ are disjoint subsets of $\mathbb{R}$ and $G$ is open.
+Then
+
+$$|A \cup G| = |A| + |G|.$$
+:::
+
+```{dropdown} Proof: additivity of outer measure if one of the sets is open
+First, we can assume that $|G| < \infty,$ because otherwise both sides of the equation above are equal to $\infty.$
+
+The {prf:ref}`subadditivity of the outer measure<mira:thm:countable-subadditivity-of-outer-measure>` implies that $|A \cup G| \leq |A| + |G|.$
+It therefore remains to show the inequality in the opposite direction.
+
+Consider the special case where $G = (a, b),$ for some $a, b \in \mathbb{R}$ with $a < b.$
+Further, we can assume that $a, b \neq A,$ because changing a set by at most two points does not change its outer measure.
+Let $I_1, I_2, \dots$ be a sequence of open intervals whose union contains $A \cup G.$
+For each $n \in \mathbb{Z}^+,$ let
+
+$$J_n = I_n \cap (-\infty, a), K_n = I_n \cap (a, b), L_n = I_n \cap (b, \infty).$$
+
+From this definition, we have that
+
+$$\ell(I_n) = \ell(J_n) + \ell(K_n) + \ell(L_n).$$
+
+Note that $J_1, L_1, J_2, L_2, \dots$ is a sequence of open intervals whose union contains $A,$ and $K_1, K_2, \dots$ is a sequence of open intervals whose union contains $G.$
+Thus
+
+$$\begin{align}
+\sum_{n = 1}^\infty \ell(I_n) &= \sum_{n = 1}^\infty (\ell(J_n) + \ell(K_n)) + \sum_{n = 1}^\infty \ell(L_n) \\
+&\geq |A| + |G|.
+\end{align}$$
+
+This inequality implies that $|A \cup G| \geq |A| + |G|$ in the special case that $G$ is an open interval.
+Using induction on $m$ we conclude that if $m \in \mathbb{Z}^+$ and $G$ is a union of $m$ disjoint open intervals that are all disjoint from $A,$ then $|A \cup G| = |A| + |G|.$
+Now, suppose that $G$ is an arbitrary open subset of $\mathbb{R}$ that is disjoint from $A.$
+Then $G = \cup_{n=1}^\infty I_n$ for some sequence of disjoint open intervals $I_1, I_2, \dots,$ each of which is disjoint from $A.$
+For each $m \in \mathbb{Z}^+$ we have
+
+$$\begin{align}
+|A \cup G| &\geq \left| A \cup \left(\bigcup_{n=1}^\infty I_n \right) \right| \\
+&\geq |A| + \sum_{n=1}^\infty \ell(I_n)
+\end{align}$$
+
+which in turn implies that
+
+$$\begin{align}
+|A \cup G| &\geq |A| + \sum_{n=1}^\infty \ell(I_n) \\
+&\geq |A| + |G|
+\end{align}$$
+
+completing the proof that $|A \cup G| = |A| + |G|$ for the case of a general open set $G.$
+```
+
+```{prf:theorem} Additivity of outer measure if one of the sets is closed
+Suppose $A$ and $F$ are disjoint subsets of $\mathbb{R}$ and $F$ is closed.
+Then
+
+$$|A \cup F| = |A| + |F|.$$
+```
+
+```{dropdown} Proof: additivity of outer measure if one of the sets is closed
+Suppose $I_1, I_2, \dots$ is a sequence of open intervals whose union contains $A \cup F.$
+Let $G = \cup_{n = 1}^\infty I_n.$
+Then $G$ is an open set which contains $A \cup F.$
+Now, note that $G \setminus F = G \cap (\mathbb{R} \setminus F)$ is an intersection of two open sets and is therefore an open set.
+Applying our previous result showing that the {prf:ref}`outer measure is additive if one of the sets is open<mira:thm:additivity-of-outer-measure-if-one-set-is-open>` we have that 
+
+$$|G| = |F| + |G \setminus F|.$$
+
+Using the fact that $A \subseteq G \setminus F,$ and the above equation, we have that
+
+$$|G| \geq |F| + |A|,$$
+
+which in turn implies that
+
+$$|F \cup A| \geq |F| + |A|,$$
+
+from which we conclude that $|F \cup A| = |F| + |A|.$
+```
+
+```{prf:theorem} Approximation of Borel sets from below by closed sets
+Suppose $B \subseteq \mathbb{R}$ is a Borel set.
+Then, for every $\epsilon > 0,$ there exists a closed set $F \subseteq B$ such that $|B \setminus F| < \epsilon.$
+```
+
+```{dropdown} Proof: approximation of Borel sets from below by closed sets
+Consider the set
+
+$$\mathcal{L} = \{D \subseteq \mathbb{R}: \text{ for every } \epsilon > 0, \text{ there exists a closed set } F \subseteq D \text{ such that } |D \setminus F| < \epsilon \}.$$
+
+This is the set of all subsets of $\mathbb{R}$ which can be approximated below with closed sets.
+Our approach to proving the result will be to show that $\mathcal{L}$ is a $\sigma$-algebra.
+Then, noting that $\mathcal{L}$ contains all closed subsets of $\mathbb{R},$ by taking complements we conclude that it must contain all open subsets of $\mathbb{R},$ so it also contains every Borel subset of $\mathbb{R},$ which will complete the proof.
+
+To show that $\mathcal{L}$ is a $\sigma$-algebra, we will first show that it is closed under countable intersections.
+Suppose $D_1, D_2, \cdot \subseteq \mathcal{L}.$
+Let $\epsilon > 0.$
+For each $k \in mathbb{Z}^+,$ there exists a closed set $F_k$ such that
+
+$$F_k \subseteq D_k \text{ and } |D_k \setminus F_k| < \frac{\epsilon}{2^k}.$$
+
+Thus $\cap_{k=1}^\infty F_k$ is a closed set and
+
+```
