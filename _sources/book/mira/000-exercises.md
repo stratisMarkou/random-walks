@@ -947,6 +947,74 @@ Putting these results together arrive at the required conclusion.
 ::::
 
 
+::::{admonition} Excercise 2.A.8
+:class: tip
+Prove that if $A \subseteq \mathbb{R}$ and $t > 0,$ then $|A| = |A \cap (-t, t)| + |A \cap (\mathbb{R} \setminus (-t, t))|.$
+
+:::{dropdown} Solution
+First, by the {prf:ref}`countable subadditivity of the outer measure<mira:thm:countable-subadditivity-of-outer-measure>` we have
+
+$$|A| \leq |A \cap (-t, t)| + |A \cap (\mathbb{R} \setminus (-t, t))|$$
+
+for all $t > 0.$
+To prove the inequality the other way, suppose $I_1, I_2, \dots$ is a sequence of open intervals whose union contains $A.$
+Then, we have
+
+$$\begin{align}
+\sum_{n = 1}^\infty \ell(I_n) &= \sum_{n = 1}^\infty \ell(I_n \cap (-t, t)) + \ell(I_n \cap (-\infty, t)) + \ell(I_n \cap (\mathbb{R} \setminus (t, \infty))) \\
+&\geq |A \cap (-t, t)| + |A \cap (\mathbb{R} \setminus (-t, t))|
+\end{align}$$
+
+where we have used the fact that the sequence of sets
+
+$$I_1 \cap (-\infty, t], I_1 \cap [t, \infty), I_2 \cap (-\infty, t], \dots$$
+
+has a union that contains $A \cap (\mathbb{R} \setminus (-t, t)),$ and the outer measures of these sets are equal to
+
+$$\ell(I_1 \cap (-\infty, t)), \ell(I_1 \cap (t, \infty)), \ell(I_2 \cap (-\infty, t)), \dots,$$
+
+completing the proof.
+:::
+::::
+
+
+::::{admonition} Exercise 2.A.9
+:class: tip
+Prove that $|A| = \lim_{t \to \infty} |A \cap (-t, t)|$ for all $A \subseteq \mathbb{R}.$
+
+:::{dropdown} Solution
+First, by the {prf:ref}`countable subadditivity of the outer measure<mira:thm:countable-subadditivity-of-outer-measure>` we have
+
+$$\begin{align}
+|A| &= \left|\bigcup_{n = 1}^\infty (A \cap (n-1, n)) \cup (A \cap (-n, -n + 1)) \cup \{-n-1, n-1\} \right| \\
+&\leq \sum_{n = 1}^\infty \left|(A \cap (n-1, n)) \cup (A \cap (-n, -n+1)) \cup \{-n-1, n-1\} \right| \\
+&= \lim_{N \to \infty} \sum_{n = 1}^N \left|(A \cap (n-1, n)) \cup (A \cap (-n, -n+1)) \cup \{-n-1, n-1\} \right| \\
+&= \lim_{N \to \infty} \left|A \cap (-N, N)\right|.
+\end{align}$$
+
+Note that since $\left|A \cap (-t, t)\right|$ is non-decreasing in $t \in \mathbb{Z}^+,$ the limit above is unchanged even if $N \not \in \mathbb{Z}^+.$
+In addition, we have $|A| \geq |A \cap (-t, t)|$ for all $t \in \mathbb{R},$ and putting these two inequalities together, we conclude that
+
+$$|A| = \lim_{t \to \infty} |A \cap (-t, t)|.$$
+:::
+::::
+
+
+::::{admonition} Exercise 2.A.10
+:class: tip
+Prove that $|[0, 1] \setminus \mathbb{Q}| = 1.$
+
+:::{dropdown} Solution
+First, by the {prf:ref}`countable subadditivity of the outer measure<mira:thm:countable-subadditivity-of-outer-measure>` we have
+
+$$\begin{equation}
+|[0, 1] \setminus \mathbb{Q}| \geq |[0, 1]| - |\mathbb{Q}| = |[0, 1]| = 1,
+\end{equation}$$
+
+where we have used the fact that {prf:ref}`countable sets have measure zero<mira:thm:countable-sets-have-measure-zero>`.
+Using the fact that the {prf:ref}`outer measure preserves order<mira:thm:outer-measure-preserves-order>` we have $|[0, 1] \setminus \mathbb{Q}| \leq |[0, 1]| = 1,$ concluding the proof.
+:::
+::::
 
 
 ## Chapter 2.C
@@ -1218,7 +1286,6 @@ $$\lim_{n \to \infty} \mu(E_n) = \lim_{n \to \infty} \sum_{k = n}^{\infty} \frac
 
 ::::{admonition} Exercise 2.C.11
 :class: tip
-
 Suppose $(X, S, \mu)$ is a measure space and $C, D, E \in S$ are such that
 
 $$\mu(C \cap D) < \infty, \mu(C \cap E) < \infty, \mu(D \cap E) < \infty.$$
@@ -1226,7 +1293,6 @@ $$\mu(C \cap D) < \infty, \mu(C \cap E) < \infty, \mu(D \cap E) < \infty.$$
 Find and prove a formula for $\mu(C \cup D \cup E)$ in terms of $\mu(C),$ $\mu(D),$ $\mu(E),$ $\mu(C \cap D),$ $\mu(C \cap E),$ $\mu(D \cap E),$ and $\mu(C \cap D \cap E).$
 
 :::{dropdown} Solution
-
 Suppose $(X, S, \mu)$ is a measure space and $C, D, E \in S$ are such that
 
 $$\mu(C \cap D) < \infty, \mu(C \cap E) < \infty, \mu(D \cap E) < \infty.$$
@@ -1240,24 +1306,19 @@ $$\begin{align}
 &= \mu(C) + \mu(D) + \mu(E) - \mu(C \cap D) - \mu(C \cap E) - \mu(D \cap E) + \\
 &~~~~+ \mu(C \cap D \cap E).
 \end{align}$$
-
 :::
 ::::
 
 
 
-
 ::::{admonition} Exercise 2.C.12
 :class: tip
-
-Suppose $X$ is a set and $S$ is the $\sigma$-algebra of all subsets $E$ of $X$ such that $E$ is countatble or $X \setminus E$ is countable.
+Suppose $X$ is a set and $S$ is the $\sigma$-algebra of all subsets $E$ of $X$ such that $E$ is countable or $X \setminus E$ is countable.
 Give a complete description of the set of all measures $\mu$ on $(X, S).$
 
 :::{dropdown} Solution
-
-Suppose $X$ is a set and $S$ is the $\sigma$-algebra of all subsets $E$ of $X$ such that $E$ is countatble or $X \setminus E$ is countable.
+Suppose $X$ is a set and $S$ is the $\sigma$-algebra of all subsets $E$ of $X$ such that $E$ is countable or $X \setminus E$ is countable.
 Then, a measure $\mu$ on $(X, S)$ is completely determined by the value of $\mu(\{x\})$ for each $x \in X,$ along with $\mu(X).$
-
 :::
 ::::
 

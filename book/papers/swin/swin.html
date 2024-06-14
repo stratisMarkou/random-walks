@@ -421,7 +421,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#local-self-attention">Local self-attention</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#windowed-self-attention">Windowed self-attention</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shifted-windows">Shifted windows</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#patch-merging">Patch merging</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#attention-vs-convolutions">Attention vs convolutions</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training">Training</a></li>
@@ -447,39 +449,68 @@ document.write(`
 <a class="github-button" href="https://github.com/stratisMarkou/random-walks/issues" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-issue-opened" data-size="large" aria-label="Issue stratisMarkou/random-walks on GitHub">Issue</a>
 <a class="github-button" href="https://github.com/stratisMarkou/random-walks/subscription" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-eye" data-size="large" aria-label="Watch stratisMarkou/random-walks on GitHub">Watch</a>
 <a class="github-button" href="https://github.com/stratisMarkou" data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large" aria-label="Follow @stratisMarkou on GitHub">Follow</a></p>
-<p><a class="reference internal" href="../transformers/transformers.html"><span class="std std-doc">Transformers</span></a> are an extremely flexible deep learning architecture which has greatly impacted a range of machine learning applications.
-Arguably, the impact of the transformer is due to its high modelling capacity, and its applicability to different data modalities with minimal changes to its implementation.
+<p><a class="reference internal" href="../transformers/transformers.html"><span class="std std-doc">Transformers</span></a> are an extremely flexible deep architecture which has greatly impacted a range of machine learning applications.
+Arguably, the impact of the transformer is due to its high modelling capacity and the fact that it can easily be applied to different data modalities with minimal implementation changes.
 The distinguishing feature which gives the transformer these advantages is its attention layer.
 Attention allows the transformer block to update the features of its input tokens in an adaptive way that depends on the features themselves, making the overall architecture extremely flexible.
-Further, attention can be straightforwardly applied to data of various kinds, such as text, images, graphs and many more.
-Arguably, due to these factors, transformers have been used across a range of applications with widespread success.</p>
-<p>However, one important limitation of atention is that its computation and memory costs scale quadratically with the number of tokens in a sequence.
+Further, after the data have been converted into tokens, attention can be straightforwardly applied and many of the details of the data can be abstracted away, which means that the transformer can be easily applied to a range of modalities such as text, images, graphs and many more.</p>
+<p>However, one important limitation of atention is that its computation and memory costs scale quadratically with the number of tokens.
 This makes standard transformers difficult to scale to inputs with many tokens such as, for example, long sentences or large images.
-The shifted window transformer (Swin) is an architecture which helps address the computational and memory complexity issues of transformers by modifying the attention operation.
-Swin was originally formulated to tackle image data, on which we focus here, but note that the main idea behind Swin is also applicable to other data modalities such as text or, more generally, any kind of gridded data.
-The innovation of the Swin transformer is to apply attention in a local way, such that only tokens which are near each other (in some appropriate sense of closeness) affect each other in the attention operation.
+The shifted window transformer (Swin) is an architecture which helps mitigate the issues of computational and memory complexity.
+Swin was originally formulated to tackle image data, on which we focus here, but note that the main idea behind Swin is also applicable to other data modalities such as text or, more generally, any kind of gridded data.</p>
+<p>The innovation of the Swin transformer is to apply attention in a local way, such that only tokens which are near each other (in some appropriate sense of closeness) are allowed to attend to one another.
 In this sense Swin transformers are somewhat similar to convolutional neural networks (CNNs), where each input pixel affects only a local neighbourhood of output pixels at each layer of the network.
 This reduces the computational cost of the Swin transformer from quadratic to linear in the number of input tokens allowing scaling to large numbers of tokens.</p>
-<section id="local-self-attention">
-<h2>Local self-attention<a class="headerlink" href="#local-self-attention" title="Link to this heading">#</a></h2>
+<section id="windowed-self-attention">
+<h2>Windowed self-attention<a class="headerlink" href="#windowed-self-attention" title="Link to this heading">#</a></h2>
 <p>The main bottleneck in scaling transformers to large numbers of tokens is the self-attention operation.
 Given <span class="math notranslate nohighlight">\(N\)</span> tokens, simply building an <span class="math notranslate nohighlight">\(N \times N\)</span> attention matrix requires <span class="math notranslate nohighlight">\(\mathcal{O}(N^2)\)</span> compute and memory, which quickly gets very expensive for large images.
-The idea behind the Swin transformer is to modify the self-attention operation, by breaking up an input image into smaller chunks, or windows, and having each token attend to all other tokens within its window, and to no other tokens outside it, as illustrated by the following image.</p>
-<figure class="align-default" id="vit-vs-swin">
-<a class="reference internal image-reference" href="../../../_images/vit_vs_swin.png"><img alt="../../../_images/vit_vs_swin.png" src="../../../_images/vit_vs_swin.png" style="height: 150px;" /></a>
+The idea behind the Swin transformer is to modify the self-attention operation, by breaking up an input image into smaller chunks, or windows, and having each token attend to all other tokens within its window, and to no other tokens outside it, as illustrated in <code class="xref std std-numref docutils literal notranslate"><span class="pre">swin:vit_vs_swin</span></code>.</p>
+<figure class="align-default" id="swin-vit-vs-swin">
+<a class="reference internal image-reference" href="../../../_images/swin_vs_vit.png"><img alt="../../../_images/swin_vs_vit.png" src="../../../_images/swin_vs_vit.png" style="height: 150px;" /></a>
 <figcaption>
 <p><span class="caption-text">Comparison of the self-attention operations in a standard vision transformer (left) and a Swin transformer (right).
-Each gray square corresponds to a token.
-The red boxes mark groups of tokens over which attention is applied.</span><a class="headerlink" href="#vit-vs-swin" title="Link to this image">#</a></p>
+Each gray square corresponds to a token, and red boxes mark groups of tokens over which attention is applied.</span><a class="headerlink" href="#swin-vit-vs-swin" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Whereas in a standard vision transformer (left) each token (gray squares) attends to every other token in the image (large red square), in a Swin transformer each token attends only to those tokens within its window (smaller red squares), and none outside it.
 This significantly reduces the size of the attention matrices that need to be calculated.
 For example in the ViT in the illustration above, we have <span class="math notranslate nohighlight">\(64\)</span> tokens, resulting in a <span class="math notranslate nohighlight">\(64 \times 64\)</span> attention matrix which has <span class="math notranslate nohighlight">\(4096\)</span> entries.
-Breaking these up into four independent windows means each attention window contains <span class="math notranslate nohighlight">\(16\)</span> tokens, resulting in four <span class="math notranslate nohighlight">\(16 \times 16\)</span> attention matrices with <span class="math notranslate nohighlight">\(256\)</span> entries, for a total of <span class="math notranslate nohighlight">\(1024\)</span> entries across all four windows - a factor of <span class="math notranslate nohighlight">\(4\)</span> lower.
-These savings become much more significant for larger images.
-So far so good.
-However, this approach has a problem: tokens across different windows do not affect each other, which means that</p>
+Breaking these up into four independent windows means each attention window contains <span class="math notranslate nohighlight">\(16\)</span> tokens, resulting in four <span class="math notranslate nohighlight">\(16 \times 16\)</span> attention matrices with <span class="math notranslate nohighlight">\(256\)</span> entries, for a total of <span class="math notranslate nohighlight">\(1024\)</span> attention matrix entries across all four windows - a factor of <span class="math notranslate nohighlight">\(4\)</span> lower.
+These savings become much more significant for larger images, and increase as the window size is reduced.
+However, this approach has a problem: tokens across different windows do not affect each other, which is a problem.
+Swin gets around this issue by shifting the windows.</p>
+</section>
+<section id="shifted-windows">
+<h2>Shifted windows<a class="headerlink" href="#shifted-windows" title="Link to this heading">#</a></h2>
+<p>In order to allow information to propagate across windows, Swin uses shifted windows.
+Specifically, each windowed transformer block is followed by another transformer block with shifted windows, where the amount of shift is set to be half the window size, as illustrated by <code class="xref std std-numref docutils literal notranslate"><span class="pre">swin:shifting</span></code>.
+Since the original and shifted windows overlap, information can propagate across them.</p>
+<figure class="align-default" id="swin-shifting">
+<a class="reference internal image-reference" href="../../../_images/swin_two_windows.png"><img alt="../../../_images/swin_two_windows.png" src="../../../_images/swin_two_windows.png" style="height: 160px;" /></a>
+<figcaption>
+<p><span class="caption-text">Illustration of shifted attention layers in Swin.
+Transformer blocks with standard attention windows (first) are interleaved with blocks using shifted windows (second).
+This enables information to propagate across windows.</span><a class="headerlink" href="#swin-shifting" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The question then becomes how to handle windows which are cut short across the border of the image.
+Swin handles this by grouping these edge windows together by using cyclic shifts.
+First, the input image is shifted vertically and horizontally by half the window size.
+This aligns</p>
+<figure class="align-default" id="swin-cyclic">
+<a class="reference internal image-reference" href="../../../_images/cyclic_shifts.png"><img alt="../../../_images/cyclic_shifts.png" src="../../../_images/cyclic_shifts.png" style="height: 160px;" /></a>
+<figcaption>
+<p><span class="caption-text">Illustration of a shifted window block in Swin.
+Colours illustrate the groups of tokens which attend to one another.
+The first shift here is two pixels (half the window size of four pixels) downwards and rightwards.
+The windowed transformer block is applied in the shifted space modifying the values of the tokens (indicated by heavier coloured entries).
+The second, reverse, shift here is two pixels up</span><a class="headerlink" href="#swin-cyclic" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="patch-merging">
+<h2>Patch merging<a class="headerlink" href="#patch-merging" title="Link to this heading">#</a></h2>
 </section>
 <section id="attention-vs-convolutions">
 <h2>Attention vs convolutions<a class="headerlink" href="#attention-vs-convolutions" title="Link to this heading">#</a></h2>
@@ -586,7 +617,6 @@ If an entry in <code class="docutils literal notranslate"><span class="pre">x</s
 <p class="sd-card-text">gives the result we were after.</p>
 </div>
 </details><p>Here is an illustration of the application of a shifted multi-head self-attention layer.</p>
-<p><img alt="" src="../../../_images/cyclic_shifts.png" /></p>
 <p>Most of the implementation for a Swin transformer is identical to that of a standard transformer, so we will reuse most of the code from the <a class="reference internal" href="../transformers/transformers.html"><span class="std std-doc">introduction to transformers example</span></a>.</p>
 <div class="cell tag_remove-output tag_hide-input docutils container">
 <details class="hide above-input">
@@ -1353,7 +1383,9 @@ We looked at a specific example for computer vision, the ViT, and trained it on 
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#local-self-attention">Local self-attention</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#windowed-self-attention">Windowed self-attention</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shifted-windows">Shifted windows</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#patch-merging">Patch merging</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#attention-vs-convolutions">Attention vs convolutions</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training">Training</a></li>

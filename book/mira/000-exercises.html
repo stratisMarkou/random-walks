@@ -1300,7 +1300,7 @@ Solution<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(a, b, c, d\)</span> are real numbers with <span class="math notranslate nohighlight">\(a &lt; b\)</span> and <span class="math notranslate nohighlight">\(c &lt; d.\)</span>
-By the <code class="xref prf prf-ref docutils literal notranslate"><span class="pre">countable</span> <span class="pre">subadditivity</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">outer</span> <span class="pre">measure</span></code></p>
+By the <a class="reference internal" href="002-measures.html#mira:thm:countable-subadditivity-of-outer-measure">countable subadditivity of the outer measure</a></p>
 <div class="math notranslate nohighlight">
 \[|(a, b) \cup (c, d)| \leq (b - a) + (d - c)\]</div>
 <p class="sd-card-text">always holds.
@@ -1320,6 +1320,79 @@ Finally, using the fact that <span class="math notranslate nohighlight">\((a, b)
 <div class="math notranslate nohighlight">
 \[|(a, b) \cup (c, d)| \geq |(a, b)| + |(c, d)|.\]</div>
 <p class="sd-card-text">Putting these results together arrive at the required conclusion.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Excercise 2.A.8</p>
+<p>Prove that if <span class="math notranslate nohighlight">\(A \subseteq \mathbb{R}\)</span> and <span class="math notranslate nohighlight">\(t &gt; 0,\)</span> then <span class="math notranslate nohighlight">\(|A| = |A \cap (-t, t)| + |A \cap (\mathbb{R} \setminus (-t, t))|.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">First, by the <a class="reference internal" href="002-measures.html#mira:thm:countable-subadditivity-of-outer-measure">countable subadditivity of the outer measure</a> we have</p>
+<div class="math notranslate nohighlight">
+\[|A| \leq |A \cap (-t, t)| + |A \cap (\mathbb{R} \setminus (-t, t))|\]</div>
+<p class="sd-card-text">for all <span class="math notranslate nohighlight">\(t &gt; 0.\)</span>
+To prove the inequality the other way, suppose <span class="math notranslate nohighlight">\(I_1, I_2, \dots\)</span> is a sequence of open intervals whose union contains <span class="math notranslate nohighlight">\(A.\)</span>
+Then, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\sum_{n = 1}^\infty \ell(I_n) &amp;= \sum_{n = 1}^\infty \ell(I_n \cap (-t, t)) + \ell(I_n \cap (-\infty, t)) + \ell(I_n \cap (\mathbb{R} \setminus (t, \infty))) \\
+&amp;\geq |A \cap (-t, t)| + |A \cap (\mathbb{R} \setminus (-t, t))|
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">where we have used the fact that the sequence of sets</p>
+<div class="math notranslate nohighlight">
+\[I_1 \cap (-\infty, t], I_1 \cap [t, \infty), I_2 \cap (-\infty, t], \dots\]</div>
+<p class="sd-card-text">has a union that contains <span class="math notranslate nohighlight">\(A \cap (\mathbb{R} \setminus (-t, t)),\)</span> and the outer measures of these sets are equal to</p>
+<div class="math notranslate nohighlight">
+\[\ell(I_1 \cap (-\infty, t)), \ell(I_1 \cap (t, \infty)), \ell(I_2 \cap (-\infty, t)), \dots,\]</div>
+<p class="sd-card-text">completing the proof.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 2.A.9</p>
+<p>Prove that <span class="math notranslate nohighlight">\(|A| = \lim_{t \to \infty} |A \cap (-t, t)|\)</span> for all <span class="math notranslate nohighlight">\(A \subseteq \mathbb{R}.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">First, by the <a class="reference internal" href="002-measures.html#mira:thm:countable-subadditivity-of-outer-measure">countable subadditivity of the outer measure</a> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+|A| &amp;= \left|\bigcup_{n = 1}^\infty (A \cap (n-1, n)) \cup (A \cap (-n, -n + 1)) \cup \{-n-1, n-1\} \right| \\
+&amp;\leq \sum_{n = 1}^\infty \left|(A \cap (n-1, n)) \cup (A \cap (-n, -n+1)) \cup \{-n-1, n-1\} \right| \\
+&amp;= \lim_{N \to \infty} \sum_{n = 1}^N \left|(A \cap (n-1, n)) \cup (A \cap (-n, -n+1)) \cup \{-n-1, n-1\} \right| \\
+&amp;= \lim_{N \to \infty} \left|A \cap (-N, N)\right|.
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">Note that since <span class="math notranslate nohighlight">\(\left|A \cap (-t, t)\right|\)</span> is non-decreasing in <span class="math notranslate nohighlight">\(t \in \mathbb{Z}^+,\)</span> the limit above is unchanged even if <span class="math notranslate nohighlight">\(N \not \in \mathbb{Z}^+.\)</span>
+In addition, we have <span class="math notranslate nohighlight">\(|A| \geq |A \cap (-t, t)|\)</span> for all <span class="math notranslate nohighlight">\(t \in \mathbb{R},\)</span> and putting these two inequalities together, we conclude that</p>
+<div class="math notranslate nohighlight">
+\[|A| = \lim_{t \to \infty} |A \cap (-t, t)|.\]</div>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 2.A.10</p>
+<p>Prove that <span class="math notranslate nohighlight">\(|[0, 1] \setminus \mathbb{Q}| = 1.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">First, by the <a class="reference internal" href="002-measures.html#mira:thm:countable-subadditivity-of-outer-measure">countable subadditivity of the outer measure</a> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+|[0, 1] \setminus \mathbb{Q}| \geq |[0, 1]| - |\mathbb{Q}| = |[0, 1]| = 1,
+\end{equation}\]</div>
+<p class="sd-card-text">where we have used the fact that <a class="reference internal" href="002-measures.html#mira:thm:countable-sets-have-measure-zero">countable sets have measure zero</a>.
+Using the fact that the <a class="reference internal" href="002-measures.html#mira:thm:outer-measure-preserves-order">outer measure preserves order</a> we have <span class="math notranslate nohighlight">\(|[0, 1] \setminus \mathbb{Q}| \leq |[0, 1]| = 1,\)</span> concluding the proof.</p>
 </div>
 </details></div>
 </section>
@@ -1590,7 +1663,7 @@ Solution<div class="sd-summary-down docutils">
 </details></div>
 <div class="tip admonition">
 <p class="admonition-title">Exercise 2.C.12</p>
-<p>Suppose <span class="math notranslate nohighlight">\(X\)</span> is a set and <span class="math notranslate nohighlight">\(S\)</span> is the <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra of all subsets <span class="math notranslate nohighlight">\(E\)</span> of <span class="math notranslate nohighlight">\(X\)</span> such that <span class="math notranslate nohighlight">\(E\)</span> is countatble or <span class="math notranslate nohighlight">\(X \setminus E\)</span> is countable.
+<p>Suppose <span class="math notranslate nohighlight">\(X\)</span> is a set and <span class="math notranslate nohighlight">\(S\)</span> is the <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra of all subsets <span class="math notranslate nohighlight">\(E\)</span> of <span class="math notranslate nohighlight">\(X\)</span> such that <span class="math notranslate nohighlight">\(E\)</span> is countable or <span class="math notranslate nohighlight">\(X \setminus E\)</span> is countable.
 Give a complete description of the set of all measures <span class="math notranslate nohighlight">\(\mu\)</span> on <span class="math notranslate nohighlight">\((X, S).\)</span></p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -1599,7 +1672,7 @@ Solution<div class="sd-summary-down docutils">
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(X\)</span> is a set and <span class="math notranslate nohighlight">\(S\)</span> is the <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra of all subsets <span class="math notranslate nohighlight">\(E\)</span> of <span class="math notranslate nohighlight">\(X\)</span> such that <span class="math notranslate nohighlight">\(E\)</span> is countatble or <span class="math notranslate nohighlight">\(X \setminus E\)</span> is countable.
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(X\)</span> is a set and <span class="math notranslate nohighlight">\(S\)</span> is the <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra of all subsets <span class="math notranslate nohighlight">\(E\)</span> of <span class="math notranslate nohighlight">\(X\)</span> such that <span class="math notranslate nohighlight">\(E\)</span> is countable or <span class="math notranslate nohighlight">\(X \setminus E\)</span> is countable.
 Then, a measure <span class="math notranslate nohighlight">\(\mu\)</span> on <span class="math notranslate nohighlight">\((X, S)\)</span> is completely determined by the value of <span class="math notranslate nohighlight">\(\mu(\{x\})\)</span> for each <span class="math notranslate nohighlight">\(x \in X,\)</span> along with <span class="math notranslate nohighlight">\(\mu(X).\)</span></p>
 </div>
 </details></div>
@@ -2006,7 +2079,7 @@ Then, note that</p>
 <div class="math notranslate nohighlight">
 \[|A \cap (n, n+1)| \leq \left| \bigcup_{i=1}^\infty (r_i + V) \right| \leq \sum_{i=1}^\infty |(r_i + [n, n+1])| = 3.\]</div>
 <p class="sd-card-text">Since <span class="math notranslate nohighlight">\(V\)</span> is Lebesgue measurable, so is <span class="math notranslate nohighlight">\(r_i + V\)</span> for each <span class="math notranslate nohighlight">\(i \in \mathbb{N}.\)</span>
-Thus by the <code class="xref prf prf-ref docutils literal notranslate"><span class="pre">countable</span> <span class="pre">subadditivity</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">outer</span> <span class="pre">measure</span></code>, we have</p>
+Thus by the <a class="reference internal" href="002-measures.html#mira:thm:countable-subadditivity-of-outer-measure">countable subadditivity of the outer measure</a>, we have</p>
 <div class="math notranslate nohighlight">
 \[ 3 \geq \left| \bigcup_{i=1}^\infty (r_i + V) \right| = \sum_{i=1}^n |r_i + V| \geq \sum_{i=1}^n |V| = n |V|\]</div>
 <p class="sd-card-text">for all <span class="math notranslate nohighlight">\(n \in \mathbb{N},\)</span> which can only hold if <span class="math notranslate nohighlight">\(|V| = 0.\)</span>
