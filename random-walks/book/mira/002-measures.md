@@ -1232,7 +1232,9 @@ Specifically, it will be the outer measure restricted (from the set of all subse
 The main result in this section will be proving that the outer measure, when restricted to the Borel sets of $\mathbb{R},$ is in fact a measure.
 
 ### Additivity of outer measure on Borel sets
-We build up to the proof that the outer measure restricted to Borel sets is in fact a measure, in a few different steps.
+The main task for showing that the outer measure is a measure, when restricted to Borel sets, is to show that the outer measure is additive on the borel $\sigma$-algebra.
+We break up this proof into intermediate results, including some results that are useful in subsequent chapters.
+First, we show that the outer measure is additive if one of the sets is open.
 
 :::{prf:theorem} Additivity of outer measure if one of the sets is open
 :label: mira:thm:additivity-of-outer-measure-if-one-set-is-open
@@ -1288,6 +1290,8 @@ $$\begin{align}
 completing the proof that $|A \cup G| = |A| + |G|$ for the case of a general open set $G.$
 ```
 
+Then we show that the outer measure is additive if one of the sets is closed.
+
 ```{prf:theorem} Additivity of outer measure if one of the sets is closed
 Suppose $A$ and $F$ are disjoint subsets of $\mathbb{R}$ and $F$ is closed.
 Then
@@ -1315,6 +1319,12 @@ $$|F \cup A| \geq |F| + |A|,$$
 from which we conclude that $|F \cup A| = |F| + |A|.$
 ```
 
+Now we turn to a very useful result, which says that any Borel set can be approximated by a closed subset arbitrarily well.
+
+```{margin}
+Note that this result would not hold if we replaced closed sets by open sets.
+For example, if $B = [0, 1] \setminus \mathbb{Q},$ then the only open subset of $B$ is the empty set, and thus $B$ cannot be approximated arbitrarily well by open subsets.
+```
 ```{prf:theorem} Approximation of Borel sets from below by closed sets
 Suppose $B \subseteq \mathbb{R}$ is a Borel set.
 Then, for every $\epsilon > 0,$ there exists a closed set $F \subseteq B$ such that $|B \setminus F| < \epsilon.$
