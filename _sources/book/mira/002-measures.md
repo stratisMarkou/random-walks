@@ -1319,12 +1319,12 @@ $$|F \cup A| \geq |F| + |A|,$$
 from which we conclude that $|F \cup A| = |F| + |A|.$
 ```
 
+Now we turn to a very useful result, which says that any Borel set can be approximated by a closed subset arbitrarily well.
+
 ```{margin}
 Note that this result would not hold if we replaced closed sets by open sets.
 For example, if $B = [0, 1] \setminus \mathbb{Q},$ then the only open subset of $B$ is the empty set, and thus $B$ cannot be approximated arbitrarily well by open subsets.
 ```
-Now we turn to a very useful result, which says that any Borel set can be approximated by a closed subset arbitrarily well.
-
 ```{prf:theorem} Approximation of Borel sets from below by closed sets
 Suppose $B \subseteq \mathbb{R}$ is a Borel set.
 Then, for every $\epsilon > 0,$ there exists a closed set $F \subseteq B$ such that $|B \setminus F| < \epsilon.$
