@@ -1332,10 +1332,55 @@ Then, noting that $\mathcal{L}$ contains all closed subsets of $\mathbb{R},$ by 
 To show that $\mathcal{L}$ is a $\sigma$-algebra, we will first show that it is closed under countable intersections.
 Suppose $D_1, D_2, \cdot \subseteq \mathcal{L}.$
 Let $\epsilon > 0.$
-For each $k \in mathbb{Z}^+,$ there exists a closed set $F_k$ such that
+For each $k \in \mathbb{Z}^+,$ there exists a closed set $F_k$ such that
 
 $$F_k \subseteq D_k \text{ and } |D_k \setminus F_k| < \frac{\epsilon}{2^k}.$$
 
 Thus $\cap_{k=1}^\infty F_k$ is a closed set and
 
+$$\begin{align}
+\left(\bigcap_{n = 1}^\infty D_k\right) \setminus \left(\bigcap_{n = 1}^\infty F_k\right) \subseteq \bigcap_{n = 1}^\infty (D_k \setminus F_k)
+\end{align}$$
+
+from which it follows that 
+
+$$\begin{align}
+\left|\left(\bigcap^\infty_{n = 1} D_k\right) \setminus \left(\bigcap^\infty_{n = 1} F_k\right) \right| < \epsilon.
+\end{align}$$
+
+Thus $\cap_{n=1}^\infty D_k \in \mathcal{L},$ proving that $\mathcal{L}$ is closed under countable intersections.
+Now we turn to proving that $\mathcal{L}$ is closed under complementation.
+Suppose $D \in \mathcal{L}$ and $\epsilon > 0.$
+We will first consider the case $|D| < \infty.$
+Let $F \subseteq D$ be a closed set such that $|D \setminus F| < \frac{\epsilon}{2}.$
+The definition of outer measure implies that there exists an open set $G$ such that $D \subseteq G$ and $|G| < |D| + \frac{\epsilon}{2}.$
+Therefore we have
+
+$$\begin{equation}
+(\mathbb{R} \setminus D) \setminus (\mathbb{R} \setminus G) \subseteq G \setminus F.
+\end{equation}$$
+
+Now, the set $G \setminus F$ is open, and using the fact that $|F| > |D| - |D \setminus F|,$ we have
+
+$$\begin{equation}
+|G \setminus F| = |G| - |F| < \left(|D| + \frac{\epsilon}{2}\right) - \left(|D| - \frac{\epsilon}{2}\right) = \epsilon,
+\end{equation}$$
+
+from which we conclude
+
+$$\begin{equation}
+\left|(\mathbb{R} \setminus D)\right| \setminus (\mathbb{R} \setminus G) \leq \epsilon.
+\end{equation}$$
+
+Therefore $\mathbb{R} \setminus D$ in the case $|D| < \infty.$
+Now, for general $D,$ let $\epsilon > 0$ and define the sets $D_k = D \cap [-k, k]$ for $k \in \mathbb{Z}^+.$
+The previous case implies that $\mathbb{R} \setminus D_k \in \mathcal{L}.$
+Using the fact that $\mathcal{L}$ is closed under intersections and that
+
+$$\begin{equation}
+\mathbb{R} \setminus D = \mathbb{R} \setminus \left(\bigcup_{k=1}^\infty D_k\right) = \bigcap_{n = 1}^\infty (\mathbb{R} \setminus D_k), 
+\end{equation}$$
+
+we conclude that $\mathbb{R} \setminus D \in \mathcal{L}.$
+Thus $\mathcal{L}$ is a $\sigma$-algebra, which concludes the proof.
 ```
