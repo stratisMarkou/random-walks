@@ -2066,3 +2066,231 @@ Putting these results together, we have $\omega(E) = (\mu \times \nu)(E),$ so $\
 Since $\mathcal{M}$ is a monotone class that contains $\mathcal{A},$ it contains $S \otimes T$ so $\mathcal{M} = S \otimes T,$ and the two measures $\omega$ and $\mu \times \nu$ agree on all of $S \otimes T.$
 :::
 ::::
+
+
+## Chapter 6.A
+
+::::{admonition} Exercise 6.A.1
+:class: tip
+Verify that each of the following examples are indeed metric spaces.
+
+1. Suppose $V$ is a nonempty set.
+Define $d$ on $V \times V$ by setting $d(f, g)$ to be $1$ if $f \neq g$ and to be $0$ if $f = g.$
+
+2. Let $V = \mathbb{R}.$
+Define $d$ on $V \times V$ by $d(x, y) = |x - y|.$
+
+3. Let $V = \mathbb{R}.$
+For $n \in \mathbb{Z}^+,$ define $d$ on $V \times V$ by
+$$\begin{equation}
+d((x_1, \dots, x_n), (y_1, \dots, y_n)) = \max\{\|x_1 - y_1|, \dots, |x_n - y_n|\}.
+\end{equation}$$
+
+4. Let $V = C([0, 1]),$ the set of continuous real-valued functions on $[0, 1].$
+Define $d$ on $V \times V$ by $d(f, g) = \sup\{|f(t) - g(t)|: t \in [0, 1]|\}.$
+
+5. Let $V$ be the set of sequences $(a_1, a_2, \dots)$ of real numbers such that $\sum_{n=1}^\infty |a_k| < \infty.$
+Define $d$ on $\ell^1 \times \ell^1$ by $d((a_1, a_2, \dots), (b_1, b_2, \dots)) = \sum_{n=1}^\infty |a_k - b_k|.$
+
+
+:::{dropdown} Solution
+For all the definitions above, $d(f, g) \geq 0$ and equality with zero holds only if $f, g.$
+Further, $d(f, g) = d(g, f).$
+It remains to show the triangle inequality
+
+$$\begin{equation}
+d(f, h) \leq d(f, g) + d(g, h) \text{ for all } f, g, h \in V
+\end{equation}$$
+
+holds for each example.
+
+__Example 1:__
+Suppose $f, g, h \in \mathbb{V}.$
+If $f = h,$ then the triangle inequality holds since
+
+$$\begin{equation}
+d(f, h) = 0 \leq d(f, g) + d(g, h),
+\end{equation}$$
+
+holds.
+If $f \neq h,$ then at least one of $f \neq g$ and $g \neq h$ must hold, so the triangle inequality holds because
+
+$$\begin{equation}
+d(f, h) = 1 \leq d(f, g) + d(g, h).
+\end{equation}$$
+
+__Example 2:__
+Suppose $f, g, h \in \mathbb{R}.$
+Then the triangle inequality holds because
+
+$$\begin{equation}
+d(f, h) = |f - h| = |(f - g) + (g - h)| \leq |f - g| + |g - h| \leq d(f, g) + d(g, h).
+\end{equation}$$
+
+__Example 3:__
+Suppose $n \in \mathbb{Z}^+$ and $(x_1, \dots, x_n), (y_1, \dots, y_n), (z_1, \dots, z_n) \in \mathbb{R}^n.$
+Then the triangle inequality holds because
+
+$$\begin{align}
+d((x_1, \dots, x_n), (z_1, \dots, z_n)) &= \max\{\|x_1 - z_1|, \dots, |x_n - z_n|\} \\
+&= \max\{\|(x_1 - y_1) + (y_1 - z_1)|, \dots, |(x_n - y_n) + (y_n - z_n)|\} \\
+&\leq \max\{\|x_1 - y_1| + |y_1 - z_1|, \dots, |x_n - y_n| + |y_n - z_n|\} \\
+&\leq \max\{\|x_1 - y_1|, \dots, |x_n - y_n|\} + \max\{\|y_1 - z_1|, \dots, |y_n - z_n|\} \\
+&\leq d((x_1, \dots, x_n), (y_1, \dots, y_n)) + d((y_1, \dots, y_n), (z_1, \dots, z_n)).
+\end{align}$$
+
+__Example 4:__
+Suppose $f, g, h \in C([0, 1]).$
+Then, the triangle inequality holds because
+
+$$\begin{align}
+d(f, h) &= \sup\{|f(t) - h(t)|: t \in [0, 1]|\} \\
+&= \sup\{|(f(t) - g(t)) + (g(t) - h(t))|: t \in [0, 1]|\} \\
+&\leq \sup\{|f(t) - g(t)| + |g(t) - h(t)|: t \in [0, 1]|\} \\
+&\leq \sup\{|f(t) - g(t)|: t \in [0, 1]|\} + \sup\{|g(t) - h(t)|: t \in [0, 1]|\} \\
+&= d(f, g) + d(g, h).
+\end{align}$$
+
+__Example 5:__
+Suppose $(f_1, f_2, \dots), (g_1, g_2, \dots), (h_1, h_2, \dots) \in V,$ where $V$ is the set of sequences $(a_1, a_2, \dots)$ of real numbers such that $\sum_{n=1}^\infty |a_k| < \infty.$
+Then, the triangle inequality holds because
+
+$$\begin{align}
+d((f_1, f_2, \dots), (h_1, h_2, \dots)) &= \sum_{n=1}^\infty |f_k - h_k| \\
+&= \sum_{n=1}^\infty |(f_k - g_k) + (g_k - h_k)| \\
+&\leq \sum_{n=1}^\infty |f_k - g_k| + |g_k - h_k| \\
+&= d((f_1, f_2, \dots), (g_1, g_2, \dots)) + d((g_1, g_2, \dots), (h_1, h_2, \dots)).
+\end{align}$$
+
+:::
+::::
+
+
+::::{admonition} Exercise 6.A.2
+:class: tip
+Prove that every finite subset of a metric space is closed.
+
+:::{dropdown} Solution
+Suppose $(V, d)$ is a metric space and let $A$ be a finite subset of $V.$
+Let $x \in A'.$
+Since $A$ is finite, the set $\{d(x, y) \in \mathbb{R}^+: y \in A\}$ has a minimum element, and this minimum element is non-zero, say equal to some positive $m \in \mathbb{R}$
+Therefore, any open ball centered on $x$ with radius less than or equal to $m$ is contained in $A'.$
+Since $x$ was arbitrary, $A'$ is open, so $A$ is closed.
+:::
+::::
+
+::::{admonition} Exercise 6.A.3
+:class: tip
+Prove that every closed ball in a metric space is closed.
+
+:::{dropdown} Solution
+Suppose $(V, d)$ is a metric space.
+Let $r \in \mathbb{R}^+$ and $f \in V.$
+Let $g \in \bar{B}(f, r)'.$
+Then, $d(f, g) > r$ so the open ball $B(g, r - d(f, g))$ does not intersect the closed ball $\bar{B}(f, r):$ otherwise there would exist a common element $h \in B(g, r - d(f, g)) \cap \bar{B}(f, r)$ which lead to a contradiction via the triangle inequality since $d(f, g) \leq d(f, h) + d(h, g) < r.$
+Since the two balls do not intersect, $B(g, r - d(f, g)) \subseteq \bar{B}(f, r)',$ which means that $\bar{B}(f, r)'$ is an open set, so $\bar{B}(f, r)$ is a closed set.
+:::
+::::
+
+::::{admonition} Exercise 6.A.4
+:class: tip
+
+Suppose $V$ is a metric space.
+
+1. Prove that the union of each collection of open subsets of $V$ is an open subset of $V.$
+2. Prove that the intersection of each finite collection of open subsets of $V$ is an open subset of $V.$
+
+:::{dropdown} Solution
+In the following parts, $V$ is a metric space and $\mathcal{A}$ is a collection of subsets of $V.$
+
+__Part 1:__
+Let $S = \cup_{A \in \mathcal{A}} A.$
+If $s \in S,$ there exists some $A \in \mathcal{A}$ such that $s \in A.$
+Since every $A \in \mathcal{A}$ is open, there exists an open ball centered on $s$ that is contained in $A.$
+This open ball is also contained in $S,$ so $S$ is open.
+
+__Part 2:__
+Now suppose that, in addition, $\mathcal{A} = \{A_1, \dots A_N\}$ is finite.
+If $s \in S,$ then $s \in A_n$ for $n = 1, \dots, N.$
+Since each $A$ is open, for each $A_n \in \mathcal{A},$ there exists an open ball centered on $s$ with radius $r_n,$ which is contained in $A_n.$
+Now, letting $r = \min\{r_1, \dots, r_N\}$ we see that the open ball centered on $s$ with radius $r$ is contained in each $A_n$ and therefore it is also contained in their intersection, i.e. it is contained in $S.$
+Therefore there exists an open ball centered on $s \in S,$ which implies that $S$ is open.
+:::
+::::
+
+
+::::{admonition} Exercise 6.A.5
+:class: tip
+
+Suppose $V$ is a metric space.
+
+1. Prove that the intersection of each collection of closed subsets of $V$ is an open subset of $V.$
+2. Prove that the union of each finite collection of open subsets of $V$ is an open subset of $V.$
+
+:::{dropdown} Solution
+The complement of an intersection of a collection of sets is equal to the union of the complements of the sets in the collection.
+Similarly, the complement of a union of a collection of sets is equal to the intersection of the complements of the sets in the collection.
+Therefore, applying the result of the previous exercise we arrive at the two required results.
+:::
+::::
+
+::::{admonition} Exercise 6.A.6
+:class: tip
+
+1. Prove that if $V$ is a metric space, $f \in V,$ and $r > 0,$ then $\bar{B(f, r)} \subseteq \bar{B}(f, r).$
+2. Give an example of a metric space $V,$ $f \in V,$ and $r > 0$ such that $\bar{B(f, r)} \neq \bar{B}(f, r).$
+
+:::{dropdown} Solution
+
+__Part 1:__
+First, note that $B(f, r) \subseteq \bar{B}(f, r).$
+Second $\bar{B}(f, r)$ is a closed set, and the closure of a set is the intersection of all closed sets that contain it, so $\bar{B(f, r)}$ is contained in any closed set that contains $B(f, r),$ so $\bar{B(f, r)} \subseteq \bar{B}(f, r).$
+
+__Part 2:__
+Let $V = \mathbb{Z}$ with the metric $d: \mathbb{Z} \times \mathbb{Z} \to \mathbb{R}^+$ defined as $d(f, g) = |f - g|.$
+Also let $f = 0$ and $r = 1.$
+Then $B(f, r) = \{0\}$ and so $\bar{B(f, r)} = \{0\}.$
+However, $\bar{B}(f, r) = \{-1, 0, 1\}$ so $\bar{B(f, r)} \neq \bar{B}(f, r)$ as required.
+:::
+::::
+
+::::{admonition} Exercise 6.A.7
+:class: tip
+Show that each sequence in a metric space has at most one limit.
+
+:::{dropdown} Solution
+Let $(V, d)$ be a metric space.
+Suppose $f_1, f_2, \dots \in V$ is a sequence in $V.$
+If $a, b \in V$ are limits of $f_1, f_2, \dots,$ then
+
+$$\begin{equation}
+\lim_{n \to \infty} d(f_n, a) = 0 \text{ and } \lim_{n \to \infty} d(f_n, b) = 0.
+\end{equation}$$
+
+From the triangle inequality, $d(a, b) \leq d(a, f_n) + d(f_n, b),$ and taking limits of both sides, we conclude that $d(a, b) = 0,$ which implies that $a = b.$
+Therefore the sequence can have at most one limit in $V.$
+:::
+::::
+
+::::{admonition} Exercise 6.A.8
+:class: tip
+Prove that each open subset of a metric space $V$ is the union of some sequence of closed subsets of $V.$
+
+:::{dropdown} Solution
+Let $V$ be a metric space, let $U$ be an open subset of $V$ and define
+
+$$\begin{equation}
+U_r = \{f \in V: d(f, g) \geq r \text{ for all } g \in U'\}.
+\end{equation}$$
+
+Therefore $U_r$ is the set of elements in $U$ that are at least a distance $r$ away from $V.$
+Note also that $U_r \subseteq U.$
+Now, note that for fixed $g \in U',$ the set $\{f \in V: d(f, g) \geq r\}$ is closed, because it is the complement of the open set $\{f \in V: d(f, g) < r\}.$
+The intersection of a collection of closed sets is closed, so $U_r$ is closed.
+
+Now, note that for each $n \in \mathbb{Z}^+,$ we have $U_{\frac{1}{n}} \subseteq U,$ from which it follows that $\bigcup_{n = 1}^\infty U_{\frac{1}{n}} \subseteq U.$
+Conversely, if $x \in U,$ since $U$ is open there exists a ball of radius $\frac{1}{n}$ for some $n \in \mathbb{Z}^+$ contained in $U,$ so $x \in U_{\frac{1}{n}},$ from which it follows that $U \subseteq \bigcup_{n = 1}^\infty U_{\frac{1}{n}}.$
+Therefore $U$ is the union of a sequence of closed sets in $V,$ as required.
+
+:::
+::::
