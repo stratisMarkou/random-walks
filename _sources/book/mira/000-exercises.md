@@ -7,7 +7,7 @@
 <a class="github-button" href="https://github.com/stratisMarkou" data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large" aria-label="Follow @stratisMarkou on GitHub">Follow</a>
 
 This page gives solutions to the exercises from the book Measure, Integration and Real Analysis by Sheldon Axler.
-We have been working through the book and exercises with Adrian Goldwaser and Shreyas Padhy, and these solutions are a joint effort.
+We have been working through the book and exercises with Adrian Goldwaser, Bruno Mlodozeniec and Shreyas Padhy, and these solutions are a joint effort.
 Please [email me](mailto:stratismar@gmail.com) if you find any errors in these solutions or have any other comments.
 
 ## Chapter 1.A
@@ -2064,5 +2064,488 @@ $$(\mu \times \nu)(E) = \lim_{n \to \infty} (\mu \times \nu)(E_n).$$
 
 Putting these results together, we have $\omega(E) = (\mu \times \nu)(E),$ so $\mathcal{M}$ is a monotone class.
 Since $\mathcal{M}$ is a monotone class that contains $\mathcal{A},$ it contains $S \otimes T$ so $\mathcal{M} = S \otimes T,$ and the two measures $\omega$ and $\mu \times \nu$ agree on all of $S \otimes T.$
+:::
+::::
+
+
+## Chapter 6.A
+
+::::{admonition} Exercise 6.A.1
+:class: tip
+Verify that each of the following examples of sets $V$ and functions $d: V \times V \to \mathbb{R}$ are indeed metric spaces.
+
+1. Suppose $V$ is a nonempty set.
+Define $d$ as
+
+$$\begin{equation}
+d(f, g) = \begin{cases}
+1 &\text{ if } f = g \\
+0 &\text{ if } f \neq g
+\end{cases}
+\end{equation}$$
+
+2. Let $V = \mathbb{R}.$
+Define $d$ as
+
+$$\begin{equation}
+d(x, y) = |x - y|.
+\end{equation}$$
+
+3. Let $V = \mathbb{R}.$
+For $n \in \mathbb{Z}^+,$ define $d$ as
+
+$$\begin{equation}
+d((x_1, \dots, x_n), (y_1, \dots, y_n)) = \max\{\|x_1 - y_1|, \dots, |x_n - y_n|\}.
+\end{equation}$$
+
+4. Let $V = C([0, 1]),$ the set of continuous real-valued functions on $[0, 1].$
+Define $d$ as
+
+$$\begin{equation}
+d(f, g) = \sup\{|f(t) - g(t)|: t \in [0, 1]|\}.
+\end{equation}$$
+
+5. Let $V$ be the set of sequences $(a_1, a_2, \dots)$ with $a_k \in \mathbb{R}$ and $\sum_{n=1}^\infty |a_k| < \infty.$
+Define $d$ as
+
+$$\begin{equation}
+d((a_1, a_2, \dots), (b_1, b_2, \dots)) = \sum_{n=1}^\infty |a_k - b_k|.
+\end{equation}$$
+
+
+:::{dropdown} Solution
+For all the definitions above, $d(f, g) \geq 0$ and equality with zero holds only if $f, g.$
+Further, $d(f, g) = d(g, f).$
+It remains to show the triangle inequality
+
+$$\begin{equation}
+d(f, h) \leq d(f, g) + d(g, h) \text{ for all } f, g, h \in V
+\end{equation}$$
+
+holds for each example.
+
+__Example 1:__
+Suppose $f, g, h \in \mathbb{V}.$
+If $f = h,$ then the triangle inequality holds since
+
+$$\begin{equation}
+d(f, h) = 0 \leq d(f, g) + d(g, h),
+\end{equation}$$
+
+holds.
+If $f \neq h,$ then at least one of $f \neq g$ and $g \neq h$ must hold, so the triangle inequality holds because
+
+$$\begin{equation}
+d(f, h) = 1 \leq d(f, g) + d(g, h).
+\end{equation}$$
+
+__Example 2:__
+Suppose $f, g, h \in \mathbb{R}.$
+Then the triangle inequality holds because
+
+$$\begin{equation}
+d(f, h) = |f - h| = |(f - g) + (g - h)| \leq |f - g| + |g - h| \leq d(f, g) + d(g, h).
+\end{equation}$$
+
+__Example 3:__
+Suppose $n \in \mathbb{Z}^+$ and $(x_1, \dots, x_n), (y_1, \dots, y_n), (z_1, \dots, z_n) \in \mathbb{R}^n.$
+Then the triangle inequality holds because
+
+$$\begin{align}
+&~~~~d((x_1, \dots, x_n), (z_1, \dots, z_n)) = \\
+&= \max\{|x_1 - z_1|, \dots, |x_n - z_n|\} \\
+&= \max\{|(x_1 - y_1) + (y_1 - z_1)|, \dots, |(x_n - y_n) + (y_n - z_n)|\} \\
+&\leq \max\{|x_1 - y_1| + |y_1 - z_1|, \dots, |x_n - y_n| + |y_n - z_n|\} \\
+&\leq \max\{|x_1 - y_1|, \dots, |x_n - y_n|\} + \max\{|y_1 - z_1|, \dots, |y_n - z_n|\} \\
+&\leq d((x_1, \dots, x_n), (y_1, \dots, y_n)) + d((y_1, \dots, y_n), (z_1, \dots, z_n)).
+\end{align}$$
+
+__Example 4:__
+Suppose $f, g, h \in C([0, 1]).$
+Then, the triangle inequality holds because
+
+$$\begin{align}
+d(f, h) &= \sup\{|f(t) - h(t)|: t \in [0, 1]|\} \\
+&= \sup\{|(f(t) - g(t)) + (g(t) - h(t))|: t \in [0, 1]|\} \\
+&\leq \sup\{|f(t) - g(t)| + |g(t) - h(t)|: t \in [0, 1]|\} \\
+&\leq \sup\{|f(t) - g(t)|: t \in [0, 1]|\} + \sup\{|g(t) - h(t)|: t \in [0, 1]|\} \\
+&= d(f, g) + d(g, h).
+\end{align}$$
+
+__Example 5:__
+Suppose $(f_1, f_2, \dots), (g_1, g_2, \dots), (h_1, h_2, \dots) \in V,$ where $V$ is the set of sequences $(a_1, a_2, \dots)$ of real numbers such that $\sum_{n=1}^\infty |a_k| < \infty.$
+Then, the triangle inequality holds because
+
+$$\begin{align}
+&~~~~d((f_1, f_2, \dots), (h_1, h_2, \dots)) = \\
+&= \sum_{n=1}^\infty |f_k - h_k| \\
+&= \sum_{n=1}^\infty |(f_k - g_k) + (g_k - h_k)| \\
+&\leq \sum_{n=1}^\infty |f_k - g_k| + |g_k - h_k| \\
+&= d((f_1, f_2, \dots), (g_1, g_2, \dots)) + d((g_1, g_2, \dots), (h_1, h_2, \dots)).
+\end{align}$$
+
+:::
+::::
+
+
+::::{admonition} Exercise 6.A.2
+:class: tip
+Prove that every finite subset of a metric space is closed.
+
+:::{dropdown} Solution
+Suppose $(V, d)$ is a metric space and let $A$ be a finite subset of $V.$
+Let $x \in A'.$
+Since $A$ is finite, the set $\{d(x, y) \in \mathbb{R}^+: y \in A\}$ has a minimum element, and this minimum element is non-zero, say equal to some positive $m \in \mathbb{R}$
+Therefore, any open ball centered on $x$ with radius less than or equal to $m$ is contained in $A'.$
+Since $x$ was arbitrary, $A'$ is open, so $A$ is closed.
+:::
+::::
+
+::::{admonition} Exercise 6.A.3
+:class: tip
+Prove that every closed ball in a metric space is closed.
+
+:::{dropdown} Solution
+Suppose $(V, d)$ is a metric space.
+Let $r \in \mathbb{R}^+$ and $f \in V.$
+Let $g \in \overline{B}(f, r)'.$
+Then, $d(f, g) > r$ so the open ball $B(g, d(f, g) - r)$ does not intersect the closed ball $\overline{B}(f, r).$
+[Otherwise there would exist a common element $h \in B(g, d(f, g) - r) \cap \overline{B}(f, r)$ which leads to a contradiction via the triangle inequality since $d(f, g) \leq d(f, h) + d(h, g) < r.$]
+Since the two balls do not intersect, $B(g, r - d(f, g)) \subseteq \overline{B}(f, r)',$ which means that $\overline{B}(f, r)'$ is an open set, so $\overline{B}(f, r)$ is a closed set.
+:::
+::::
+
+::::{admonition} Exercise 6.A.4
+:class: tip
+
+Suppose $V$ is a metric space.
+
+1. Prove that the union of each collection of open subsets of $V$ is an open subset of $V.$
+2. Prove that the intersection of each finite collection of open subsets of $V$ is an open subset of $V.$
+
+:::{dropdown} Solution
+In the following parts, $V$ is a metric space and $\mathcal{A}$ is a collection of subsets of $V.$
+
+__Part 1:__
+Let $S = \cup_{A \in \mathcal{A}} A.$
+If $s \in S,$ there exists some $A \in \mathcal{A}$ such that $s \in A.$
+Since every $A \in \mathcal{A}$ is open, there exists an open ball centered on $s$ that is contained in $A.$
+This open ball is also contained in $S,$ so $S$ is open.
+
+__Part 2:__
+Now suppose that, in addition, $\mathcal{A} = \{A_1, \dots A_N\}$ is finite.
+If $s \in S,$ then $s \in A_n$ for $n = 1, \dots, N.$
+Since each $A$ is open, for each $A_n \in \mathcal{A},$ there exists an open ball centered on $s$ with radius $r_n,$ which is contained in $A_n.$
+Now, letting $r = \min\{r_1, \dots, r_N\}$ we see that the open ball centered on $s$ with radius $r$ is contained in each $A_n$ and therefore it is also contained in their intersection, i.e. it is contained in $S.$
+Therefore there exists an open ball centered on $s \in S,$ which implies that $S$ is open.
+:::
+::::
+
+
+::::{admonition} Exercise 6.A.5
+:class: tip
+
+Suppose $V$ is a metric space.
+
+1. Prove that the intersection of each collection of closed subsets of $V$ is an open subset of $V.$
+2. Prove that the union of each finite collection of open subsets of $V$ is an open subset of $V.$
+
+:::{dropdown} Solution
+The complement of an intersection of a collection of sets is equal to the union of the complements of the sets in the collection.
+Similarly, the complement of a union of a collection of sets is equal to the intersection of the complements of the sets in the collection.
+Therefore, applying the result of the previous exercise we arrive at the two required results.
+:::
+::::
+
+
+::::{admonition} Exercise 6.A.6
+:class: tip
+
+1. Prove that if $V$ is a metric space, $f \in V,$ and $r > 0,$ then $\overline{B(f, r)} \subseteq \overline{B}(f, r).$
+2. Give an example of a metric space $V,$ $f \in V,$ and $r > 0$ such that $\overline{B(f, r)} \neq \overline{B}(f, r).$
+
+:::{dropdown} Solution
+
+__Part 1:__
+First, note that $B(f, r) \subseteq \overline{B}(f, r).$
+Second $\overline{B}(f, r)$ is a closed set, and the closure of a set is the intersection of all closed sets that contain it, so $\overline{B(f, r)}$ is contained in any closed set that contains $B(f, r),$ so $\overline{B(f, r)} \subseteq \overline{B}(f, r).$
+
+__Part 2:__
+Let $V = \mathbb{Z}$ with the metric $d: \mathbb{Z} \times \mathbb{Z} \to \mathbb{R}^+$ defined as $d(f, g) = |f - g|.$
+Also let $f = 0$ and $r = 1.$
+Then $B(f, r) = \{0\}$ and so $\overline{B(f, r)} = \{0\}.$
+However, $\overline{B}(f, r) = \{-1, 0, 1\}$ so $\overline{B(f, r)} \neq \overline{B}(f, r)$ as required.
+:::
+::::
+
+::::{admonition} Exercise 6.A.7
+:class: tip
+Show that each sequence in a metric space has at most one limit.
+
+:::{dropdown} Solution
+Let $(V, d)$ be a metric space.
+Suppose $f_1, f_2, \dots \in V$ is a sequence in $V.$
+If $a, b \in V$ are limits of $f_1, f_2, \dots,$ then
+
+$$\begin{equation}
+\lim_{n \to \infty} d(f_n, a) = 0 \text{ and } \lim_{n \to \infty} d(f_n, b) = 0.
+\end{equation}$$
+
+From the triangle inequality, $d(a, b) \leq d(a, f_n) + d(f_n, b),$ and taking limits of both sides, we conclude that $d(a, b) = 0,$ which implies that $a = b.$
+Therefore the sequence can have at most one limit in $V.$
+:::
+::::
+
+
+::::{admonition} Exercise 6.A.8
+:class: tip
+Prove that each open subset of a metric space $V$ is the union of some sequence of closed subsets of $V.$
+
+:::{dropdown} Solution
+Let $V$ be a metric space, let $U$ be an open subset of $V$ and define
+
+$$\begin{equation}
+U_r = \{f \in V: d(f, g) \geq r \text{ for all } g \in U'\}.
+\end{equation}$$
+
+Therefore $U_r$ is the set of elements in $U$ that are at least a distance $r$ away from $V.$
+Note also that $U_r \subseteq U.$
+Now, note that for fixed $g \in U',$ the set $\{f \in V: d(f, g) \geq r\}$ is closed, because it is the complement of the open set $\{f \in V: d(f, g) < r\}.$
+The intersection of a collection of closed sets is closed, so $U_r$ is closed.
+
+Now, note that for each $n \in \mathbb{Z}^+,$ we have $U_{\frac{1}{n}} \subseteq U,$ from which it follows that $\bigcup_{n = 1}^\infty U_{\frac{1}{n}} \subseteq U.$
+Conversely, if $x \in U,$ since $U$ is open there exists a ball of radius $\frac{1}{n}$ for some $n \in \mathbb{Z}^+$ contained in $U,$ so $x \in U_{\frac{1}{n}},$ from which it follows that $U \subseteq \bigcup_{n = 1}^\infty U_{\frac{1}{n}}.$
+Therefore $U$ is the union of a sequence of closed sets in $V,$ as required.
+
+:::
+::::
+
+
+::::{admonition} Exercise 6.A.10
+:class: tip
+Prove or give a counterexample:
+If $V$ is a metric space and $U, W$ are subserts of $V,$ then $\overline{U} \cup \overline{W} = \overline{U \cup W}.$
+
+:::{dropdown} Solution
+If $v \in \overline{U},$ then there exists a sequence of elements in $U$ whose limit is $v.$
+Therefore there exists a sequence of elements in $U \cup W$ whose limit is $v,$ so $v \in \overline{U \cup W}.$
+Similarly, if $v \in \overline{W},$ it follows that $v \in \overline{U \cup W}.$
+We conclude that $\overline{U} \cup \overline{W} \subseteq \overline{U \cup W}.$
+
+If $v \in \overline{U \cup W},$ then $v$ must be the limit of a sequence of elements in $U \cup W.$
+This sequence must have a infinite subsequence of elements in at least one of $U$ or $W$ with $v$ as its limit, so $v \in \overline{U} \cup \overline{W}.$
+We conclude that $\overline{U \cup W} \subseteq \overline{U} \cup \overline{W},$ which completes the proof.
+:::
+::::
+
+
+::::{admonition} Exercise 6.A.11
+:class: tip
+Prove or give a counterexample:
+If $V$ is a metric space and $U, W$ are subsets of $V,$ then $\overline{U} \cap \overline{W} = \overline{U \cap W}.$
+
+:::{dropdown} Solution
+The equation does not hold.
+As a counterexample, consider $\mathbb{R}$ with the metric
+
+$$d(f, g) = |f - g|,$$
+
+and let $U = (-1, 0), W = (0, 1).$
+Then we have $\overline{U} = [-1, 0]$ and $\overline{W} = [0, 1].$
+Therefore, we have $\overline{U} \cap \overline{W} = \{0\},$ but $U \cap W = \emptyset$ so $\overline{U \cap W} = \emptyset.$
+:::
+::::
+
+
+::::{admonition} Exercise 6.A.12
+:class: tip
+Suppose $(U, d_U), (V, d_V)$ and $(W, d_W)$ are metric spaces.
+Suppose also that $T: U \to V$ and $S: V \to W$ are continuous functions.
+
+1. Using the definition of continuity, show that $S \circ T: U \to W$ is continuous.
+2. Using the equivalence of continuity with the property that the limit of a function is equal to the function of its limit, show that $S \circ T: U \to W$ is continuous.
+3. Using the equivalence of continuity with the property that the inverse image of an open set under a function is open, show that $S \circ T: U \to W$ is continuous.
+
+:::{dropdown} Solution
+__Part 1:__
+Let $v \in V$ and $\epsilon > 0.$
+Since $S$ is continuous, there exists $\delta_S > 0$ such that $d_W(S(v), S(v')) < \epsilon$ for all $v' \in V$ such that $d_V(v, v') < \delta_S.$
+Let $u \in U.$
+Since $T$ is continuous, there exists $\delta_T > 0$ such that $d_V(T(u), T(u')) < \delta_S$ for all $u' \in U$ such that $d_U(u, u') < \delta_T.$
+Letting $v = T(u)$ and putting together these facts, we see that $d_W(S \circ T(u), S \circ T(u')) < \epsilon$ for all $u' \in U$ such that $d_U(u, u') < \delta_T,$ which shows that $S \circ T$ is continuous.
+
+__Part 2:__
+Suppose $u_1, u_2, \dots$ is a sequence in $U$ with limit $u \in U.$
+Since $S$ and $T$ are both continuous
+
+$$\begin{align}
+S \circ T(u) &= S(T(u)) \\
+&= S\left(T\left(\lim_{k \to \infty} u_k\right)\right) \\
+&= S\left(\lim_{k \to \infty} T(u_k)\right) \\
+&= \lim_{k \to \infty} S\left(T(u_k)\right) \\
+&= \lim_{k \to \infty} S \circ T (u_k)
+\end{align}$$
+
+Therefore $S \circ T$ is continuous.
+
+__Part 3:__
+Suppose $G$ is an open subset in $W.$
+Since $S$ is continuous, $S^{-1}(G)$ is open in $V$ and since $T$ is continuous, $T^{-1}(S^{-1}(G)) = (S \circ T)^{-1}(G)$ is open in $U,$ so $S \circ T$ is continuous.
+:::
+::::
+
+::::{admonition} Exercise 6.A.14
+:class: tip
+Suppose a Cauchy sequence in a metric space has a convergent subsequence.
+Prove that the Cauchy sequence converges.
+
+:::{dropdown} Solution
+Let $(V, d)$ be a metric space and $v_1, v_2, \dots$ be a Cauchy sequence in $V.$
+Suppose that $v_{k_1}, v_{k_2}, \dots$ is a subsequence which converges to $v \in V.$
+Let $\epsilon > 0.$
+Since the sequence $v_1, v_2, \dots$ is Cauchy, there exists $K$ such that for all $k, k' \geq K$ we have $d(v_k, v_{k'}) < \frac{\epsilon}{2}.$
+In addition, by our earlier assumption, there exists $N$ such that for all $n \geq N$ we have $d(v_{k_n}, v) < \frac{\epsilon}{2}.$
+Then, letting $L$ be the maximum of $K$ and $k_N$ we see that for any $l \geq L$ it holds that $d(v_l, v) \leq d(v_l, v_k) + d(v_k, v) < \epsilon,$ concluding the proof.
+:::
+::::
+
+
+::::{admonition} Exercise 6.A.16
+:class: tip
+Suppose $(U, d)$ is a metric space.
+Let $W$ denote the set of all Cauchy sequences of elements of $U.$
+
+1. For $(f_1, f_2, \dots)$ and $(g_1, g_2, \dots)$ in $W,$ define $(f_1, f_2, \dots) \equiv (g_1, g_2, \dots)$ to mean that $\lim_{k \to \infty} d(f_k, g_k) = 0.$
+Show that $\equiv$ is an equivalence relation on $W.$
+
+2. Let $V$ denote the set of equivalence classses of elements of $W$ under the equivalence relation above.
+For $(f_1, f_2, \dots) \in W,$ let $(f_1, f_2, \dots)\hat{~}$ denote the equivalence class of $(f_1, f_2, \dots).$
+Show that the following definition of $d_V: V \times V \to [0, \infty)$ makes sense and that $d_V$ is a metric on $V$
+
+$$\begin{equation}
+d_V((f_1, f_2, \dots)\hat{~}, (g_1, g_2, \dots)\hat{~}) = \lim_{k \to \infty} d(f_k, g_k).
+\end{equation}$$
+
+3. Show that $(V, d_V)$ is a complete metric space.
+
+4. Show that the map from $U$ to $V$ that takes $f \in U$ to $(f, f, f, \dots)\hat{~}$ preserves distances, meaning that for all $f, g \in U,$ we have
+
+$$d(f, g) = d_V((f, f, f, \dots)\hat{~}, (g, g, g, \dots)\hat{~})$$
+
+5. Explain why (4) shows that every metric space is a subset of some complete metric space.
+
+
+:::{dropdown} Solution
+__Part 1:__
+First, we have that $d(f_k, f_k) = 0$ so $(f_1, f_2, \dots) \equiv (f_1, f_2, \dots).$
+Second, if $(f_1, f_2, \dots) \equiv (g_1, g_2, \dots),$ we have
+
+$$\lim_{k \to \infty} d(f_k, g_k) = 0 \implies \lim_{k \to \infty} d(g_k, f_k) = 0,$$
+
+so it follows that $(g_1, g_2, \dots) \equiv (f_1, f_2, \dots).$
+Third, if $(f_1, f_2, \dots) \equiv (g_1, g_2, \dots),$ and $(g_1, g_2, \dots) \equiv (h_1, h_2, \dots),$ we have that
+
+$$\lim_{k \to \infty} d(f_k, h_k) \leq \lim_{k \to \infty} (d(f_k, g_k) + d(g_k, h_k)) = 0,$$
+
+which means that $(f_1, f_2, \dots) \equiv (h_1, h_2, \dots).$
+Therefore $\equiv$ is an equivalence relation.
+
+__Part 2:__
+First, for $d_V$ to be well-defined, it should not matter which representative elements of $(f_1, f_2, \dots)\hat{~}$ and $(g_1, g_2, \dots)\hat{~}$ we pick in the right hand side of the equation that defines $d_V.$
+In particular, suppose $(\tilde{f}_1, \tilde{f}_2, \dots) \in (f_1, f_2, \dots)\hat{~}.$
+Then
+
+$$\begin{equation}
+\lim_{k \to \infty} d(\tilde{f}_k, g_k) \leq \lim_{k \to \infty} (d(f_k, g_k) + d(f_k, \tilde{f}_k)) = \lim_{k \to \infty} d(f_k, g_k),
+\end{equation}$$
+
+so it does not matter which representative element of $(f_1, f_2, \dots)\hat{~}$ we pick when defining $d_V.$
+The same holds for $(g_1, g_2, \dots)\hat{~},$ so $d_V$ is well-defined.
+
+Second, we show that $d_V$ is a metric.
+By the definition of $d_V,$ we have that
+
+$$d_V((f_1, f_2, \dots)\hat{~}, (g_1, g_2, \dots)\hat{~}) \geq 0,$$
+
+with equality holding if and only if $\lim_{k \to \infty} d(f_k, g_k) = 0,$ which in turn holds if and only if $(f_1, f_2, \dots) \equiv (g_1, g_2, \dots),$ which is equivalent to $(f_1, f_2, \dots)\hat{~} = (g_1, g_2, \dots)\hat{~}.$
+In addition, we have that
+
+$$\begin{equation}
+d_V((f_1, f_2, \dots)\hat{~}, (g_1, g_2, \dots)\hat{~}) = d_V((g_1, g_2, \dots)\hat{~}, (f_1, f_2, \dots)\hat{~})
+\end{equation}$$
+
+because $d(f_k, g_k) = d(g_k, f_k).$
+Lastly, if $(h_1, h_2, \dots) \in W,$ we have that
+
+$$\begin{align}
+&~~~~d_V((f_1, f_2, \dots)\hat{~}, (h_1, h_2, \dots)\hat{~}) =\\
+&= \lim_{k \to \infty} d(f_k, h_k) \\
+&\leq\lim_{k \to \infty} (d(f_k, g_k) + d(g_k, h_k)) \\
+&= d_V((f_1, f_2, \dots)\hat{~}, (g_1, g_2, \dots)\hat{~}) + d_V((g_1, g_2, \dots)\hat{~}, (h_1, h_2, \dots)\hat{~}),
+\end{align}$$
+
+so $d_V$ satisfies the triangle inequality, completing the proof that it is a metric.
+
+__Part 3:__
+Suppose that $(v_1, v_2, \dots)$ is a Cauchy sequence in $V.$
+We will show that there exists an element $w \in V$ and $K \in \mathbb{Z}^+$ such that for all $k \geq K$ we have $\lim_{i \to \infty} d((v_k)_i, w_i) = 0.$
+Since each sequence $v_k$ is itself Cauchy, there exists $N_k \in \mathbb{Z}^+$ such that $N_k \geq k$ and for all $i, j \geq N_k,$ we have $d(v_i, v_j) < \frac{1}{k}.$
+Define the terms of the sequence $w$ to be $w_k = (v_k)_{N_k}.$
+We now show that $w$ is in fact the limit of $(v_1, v_2, \dots).$
+
+Let $\epsilon > 0.$
+Since $(v_1, v_2, \dots)$ is Cauchy, there exists $N_{\epsilon}^{(1)} \in \mathbb{Z}^+$ such that for all $i, j \geq N_{\epsilon}^{(1)},$ we have 
+
+$$\lim_{k \to \infty} d((v_i)_k, (v_j)_k) < \frac{\epsilon}{3}.$$
+
+In addition, for fixed $k \in \mathbb{Z}^+$ since each sequence $v_k$ is Cauchy, there exists $N_{k, \epsilon}^{(2)} \in \mathbb{Z}^+$ such that for all $i, j \geq N_{k, \epsilon}^{(2)},$ we have
+
+$$\lim_{k \to \infty} d((v_k)_i, (v_k)_j) < \frac{\epsilon}{3}.$$
+
+Now, we have that
+
+$$\begin{align}
+d((v_k)_i, w_i) &\leq d((v_k)_i, (v_k)_j) + d((v_k)_j, w_i) \\
+&= d((v_k)_i, (v_k)_j) + d((v_k)_j, (v_i)_{N_i}) \\
+&\leq d((v_k)_i, (v_k)_j) + d((v_k)_j, (v_i)_j) + d((v_i)_j, (v_i)_{N_i})
+\end{align}$$
+
+where in the first line we have applied the triangle inequality, in the second line we have substituted the definition $w_i = (v_i)_{N_i}$ and in the third line we have again used the triangle inequality again.
+Now, letting $i, k \geq N_{\epsilon}^{(1)}$ means that the limit of the second term in the inequality, as $j \to \infty$, is smaller than $\epsilon / 3.$
+In addition, letting $i, j \geq \max(N_{\epsilon}^{(1)}, N_{k, \epsilon}^{(2)})$ means that the first term in the inequality is smaller than $\epsilon / 3.$
+Lastly, by the definition of $N_i,$ letting $j \geq \max(N_{\epsilon}^{(1)}, N_{k, \epsilon}^{(2)}, N_i)$ means that the last term in the inequality is smaller than $\frac{1}{i}.$
+We therefore obtain
+
+$$\begin{align}
+d((v_k)_i, w_i) &\leq \lim_{j \to \infty} d((v_k)_i, (v_k)_j) + \lim_{j \to \infty} d((v_k)_j, (v_i)_j) + \lim_{j \to \infty} d((v_i)_j, (v_i)_{N_i}) \\
+&< \frac{2\epsilon}{3} + \frac{1}{i}
+\end{align}$$
+
+so for all $i > \frac{3}{\epsilon}$ we have $d((v_k)_i, w_i) < \epsilon.$
+This means that $d_V(v_k\hat{~}, w\hat{~}) < \epsilon$ for all $k \geq N_{\epsilon}^{(1)}$ which means that $w\hat{~}$ is the limit of the sequence $(v_1\hat{~}, v_2\hat{~}, \dots),$ so $V$ is a complete metric space.
+
+__Part 4:__
+By part (2), defining $f_k = f$ and $g_k = g$ for all $k \in \mathbb{Z}^+,$ we have that
+
+$$d_V((f, f, f, \dots)\hat{~}, (g, g, g, \dots)\hat{~}) = \lim_{k \to \infty} d(f_k, g_k) = d(f, g),$$
+
+as required.
+
+__Part 5:__
+We can add elements to the set $U$ to ensure that the resulting set is complete.
+Specifically, we add to $U$ the set
+
+$S = \left\{w \in W | w \neq (f, f, f, \dots)\hat{~} \text{ for any } f \in U \right\},$
+
+to obtain the larger set $\hat{U} = U \cup S.$
+Now, for $u \in \hat{U},$ we define $\hat{u}$ to be equal to $(u, u, \dots)\hat{~}$ if $u \in U$ and equal to $u$ otherwise.
+Then, define the function $d_\hat{U}: \hat{U} \times \hat{U} \to \mathbb{R}$ as
+
+$$d_\hat{U}(u, v) = d_V(\hat{u}, \hat{v}).$$
+
+This function is a metric over $\hat{U}.$
+Further, if $(u_1, u_2, \dots)$ is a Cauchy sequence of elements of $U,$ then $(\hat{u_1}, \hat{u_2}, \dots)$ is a Cauchy sequence of equivalence classes in $V.$
+Since $V$ is complete, the sequence $(\hat{u_1}, \hat{u_2}, \dots)$ has a limit, denoted $\hat{u},$ in $V.$
+Therefore the sequence $(u_1, u_2, \dots)$ converges to $\hat{u}$ in the metric space $(\hat{U}, d_{hat{U}}).$
 :::
 ::::
