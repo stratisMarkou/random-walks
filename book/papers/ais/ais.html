@@ -217,6 +217,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Papers &amp; Miscellanous</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Stream of papers</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../swin/swin.html">Shifted window transformers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../transformers/transformers.html">Introduction to transformers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../why-covariances/why-covariances.html">Why covariance functions?</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Annealed importance sampling</a></li>
@@ -643,7 +644,7 @@ Markov Chain Monte Carlo (MCMC) is a standard class of methods geared towards so
 So we could, in principle, use MCMC within an importance-weighted estimator to reduce its variance.
 The following algorithm is based on this intuition.</p>
 <div class="proof definition admonition" id="definition-1">
-<p class="admonition-title"><span class="caption-number">Definition 70 </span> (Importance weighted MCMC algorithm)</p>
+<p class="admonition-title"><span class="caption-number">Definition 69 </span> (Importance weighted MCMC algorithm)</p>
 <section class="definition-content" id="proof-content">
 <p>Given a proposal density <span class="math notranslate nohighlight">\(q\)</span>, a target density <span class="math notranslate nohighlight">\(p\)</span> and a sequence of transition kernels <span class="math notranslate nohighlight">\(T_1(x, x'), \dots, T_K(x, x')\)</span> be a sequence of transition kernels such that <span class="math notranslate nohighlight">\(T_k\)</span> leaves <span class="math notranslate nohighlight">\(p\)</span> invariant.
 Sampling <span class="math notranslate nohighlight">\(x_0 \sim q(x)\)</span> followed by</p>
@@ -731,7 +732,7 @@ However, unfortunately these importance weight are exactly the same as the impor
 <p>These distributions interpolate between <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(p\)</span> as we vary <span class="math notranslate nohighlight">\(\beta\)</span>.
 AIS then proceeds in a similar way to the importance weighted MCMC algorithm we highlighted above, except that it requires that each <span class="math notranslate nohighlight">\(T_k\)</span> leaves <span class="math notranslate nohighlight">\(\pi_k\)</span>, instead of <span class="math notranslate nohighlight">\(p\)</span>, invariant.</p>
 <div class="proof definition admonition" id="definition-2">
-<p class="admonition-title"><span class="caption-number">Definition 71 </span> (Annealed Importance Sampling)</p>
+<p class="admonition-title"><span class="caption-number">Definition 70 </span> (Annealed Importance Sampling)</p>
 <section class="definition-content" id="proof-content">
 <p>Given a target density <span class="math notranslate nohighlight">\(p\)</span>, a proposal density <span class="math notranslate nohighlight">\(q\)</span> and a sequence <span class="math notranslate nohighlight">\(0 = \beta_0 \leq \dots \leq \beta_K = 1\)</span>, define</p>
 <div class="math notranslate nohighlight">

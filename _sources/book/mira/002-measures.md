@@ -63,7 +63,6 @@ The outer measure has a number of good properties.
 First, the outer measure of countable subsets of $\mathbb{R}$ is zero.
 
 :::{prf:theorem} Countable sets have outer measure zero
-:label: mira:thm:countable-sets-have-measure-zero
 
 Every countable subset of $\mathbb{R}$ has outer measure $0.$
 
@@ -158,7 +157,7 @@ Another useful property of the outer measure is countable subadditivity.
 This property will also turn out to be true of more general measures which we will define later.
 
 :::{prf:theorem} Outer measure is countably subadditive
-:label: mira:thm:countable-subadditivity-of-outer-measure
+:label: mira:thm:outer-measure-is-countably-subadditive
 
 Suppose $A_1, A_2, \ldots$ are subsets of $\mathbb{R}.$
 Then
@@ -455,7 +454,7 @@ $$\left|\bigcup_{n=1}^\infty S_n\right| = \sum_{n=1}^\infty |S_n|.$$
 
 :::{dropdown} Proof: Outer measure is additive if sets are contained by disjoint open intervals
 
-First, by the {prf:ref}`subadditivity of the outer measure<mira:thm:countable-subadditivity-of-outer-measure>`, we have 
+First, by the {prf:ref}`subadditivity of the outer measure<mira:thm:outer-measure-is-countably-subadditive>`, we have 
 
 $$\left|\bigcup_{n=1}^\infty S_n\right| \leq \sum_{n=1}^\infty |S_n|.$$
 
@@ -483,9 +482,6 @@ This result highlights that if there is a sequence of sets on which the outer me
 
 
 ## Measurable spaces and functions
-
-A natural question is whether the {prf:ref}`nonadditivity of the outer measure <mira:thm:non-additivity-of-outer-measure>` is due to a flaw in our definition.
-However, this next result shows that any notion of length that satisfies certain intuitive properties cannot be additive.
 
 
 :::{prf:theorem} Nonexistence of extension of length to all subsets of $\mathbb{R}$
@@ -566,40 +562,35 @@ reaching a contradiction, because $|V| > 0,$ so the above inequality cannot hold
 
 ### Sigma algebras
 
-{prf:ref}`mira:thm:nonexistence-length` shows that there does not exist a notion of length that satisfies all four intuitive properties that we would like length to satisfy.
-We therefore need to relax at least one of these properties to proceed.
-We cannot relax (b), because we want all open intervals to have the length one would expect.
-We also cannot give up (c), because we want length to be additive.
-Finally, we cannot give up (d) either, because we want length to be translation invariant.
-Therefore, our only option is to relax (a).
-This is where $\sigma$-algebras come in: instead of using all subsets of $\mathbb{R}$ as the domain of $\mu,$ we will restrict the domain to be a certain collection of subsets, which circumvents the issue of non-measurable sets.
-
 :::{prf:definition} $\sigma$-algebra
-:label: mira:def:sigma-algebra
 
-Suppose $X$ is a set and $\mathcal{S}$ is a set of subsets of $X.$
-Then $\mathcal{S}$ is called a $\sigma$-algebra on $X$ if it satisfies:
+Suppose $X$ is a set and $S$ is a set of subsets of $X.$
+Then $S$ is called a $\sigma$-algebra on $X$ if it satisfies:
 
-- $\emptyset \in \mathcal{S},$
-- if $E \in \mathcal{S},$ then $X \setminus E \in \mathcal{S},$
-- if $E_1, E_2, \ldots$ is a sequnece of elements of $\mathcal{S},$ then $\bigcup_{k=1}^\infty E_k \in S.$
+- $\emptyset \in S,$
+- if $E \in S,$ then $X \setminus E \in S,$
+- if $E_1, E_2, \ldots$ is a sequnece of elements of $S,$ then $\bigcup_{k=1}^\infty E_k \in S.$
 
 :::
 
-From this definition, a number of basic properties of $\sigma$ algebras follow immediately.
+
 
 :::{prf:theorem} Other properties of $\sigma$-algebras
-Suppose $\mathcal{S}$ is a $\sigma$-algebra on a set $X.$
+
+Suppose $S$ is a $\sigma$-algebra on a set $X.$
 Then
 
-(a) $X \in \mathcal{S},$
+(a) $X \in S,$
 
-(b) if $D, E \in \mathcal{S},$ then $D \cup E \in \mathcal{S}, D \cap E \in \mathcal{S}$ and $D \setminus E \in \mathcal{S},$
+(b) if $D, E \in S,$ then $D \cup E \in S, D \cap E \in S$ and $D \setminus E \in S,$
 
-(c) if $E_1, E_2, \ldots$ is a sequence of elements of $\mathcal{S},$ then $\cap_{k = 1}^\infty E_k \in \mathcal{S}.$
+(c) if $E_1, E_2, \ldots$ is a sequence of elements of $S,$ then $\cap_{k = 1}^\infty E_k \in S.$
+
 :::
 
+
 :::{dropdown} Proof: Other properties of $~\sigma$-algebras
+
 Because $\emptyset \in S$ and $X = X \setminus \emptyset,$ we have $X \in S.$
 Suppose $D, E \in S.$
 Then $D \cup E \in S$ because this is the union of the sequence $D, E, \emptyset, \emptyset, \ldots \in S.$
@@ -611,57 +602,58 @@ and also $D \setminus (X \setminus E) = D \cap E \in S.$
 Lastly, if $E_1, E_2, \ldots$ is a sequence of elements of $S,$ then
 
 $$\bigcap_{k=1}^\infty E_k = X \setminus \bigcup_{k=1}^\infty (X \setminus E_k) \in S.$$
+
 :::
 
 
-We will later define measures, which will be functions that take values on $\sigma$-algebras over sets rather than entire powersets.
-The fact that $\sigma$-algebras are closed under complements, as well as countable unions and intersections will allow us to prove useful theorems about limits of measures.
-For this, we first define measurable spaces and measurable sets.
 
 :::{prf:definition} Measurable space, measurable set
+
 A measurable space is an ordered pair $(X, S),$ where $X$ is a set and $S$ is a $\sigma$-algebra on $X.$
 An element of $S$ is called a $S$-measurable set, or simply a measurable set if $S$ is clear from the context.
+
 :::
 
-One very useful theorem for proving results about $\sigma$-algebras is that given a set $X$ and a set of subsets of $X,$ say $A,$ the intersection of all $\sigma$-algebras on $X$ that contain $A$ is also a sigma algebra.
+
 
 :::{prf:theorem} Smallest $\sigma$-algebra containing a collection of subsets
+
 Suppose $X$ is a set and $A$ is a set of subsets of $X.$
 Then, the intersection of all $\sigma$-algebras on $X$ that contain $A$ is a $\sigma$-algebra on $X.$
+
 :::
 
 :::{dropdown} Proof: Smallest $~\sigma$-algebra containing a collection of subsets
+
 There is at least one $\sigma$-algebra on $X$ that contains $A,$ because the power set of $X$ is a $\sigma$-algebra on $X$ that contains $A.$
 Let $S$ be the intersection of all $\sigma$-algebras on $X$ that contain $A.$
 
 First, $\emptyset \in S,$ because $\emptyset$ is in every $\sigma$-algebra on $X.$
-
 Second, if $E \in S,$ then $E$ is in every $\sigma$-algebra on $X$ that contains $A,$ so $X \setminus E$ is in every $\sigma$-algebra on $X$ that contains $A,$ so $X \setminus E \in S.$
-
 Third, if $E_1, E_2, \ldots$ is a sequence of elements of $S,$ then $E_1, E_2, \ldots$ is a sequence of elements of every $\sigma$-algebra on $X$ that contains $A,$ so $\bigcup_{k=1}^\infty E_k$ is in every $\sigma$-algebra on $X$ that contains $A,$ so $\bigcup_{k=1}^\infty E_k \in S.$
+
 :::
 
-The intersection of all $\sigma$-algebras containing a collection of sets $A$ is sometimes also referred to as the $\sigma$-algebra generated by $A.$
-We now come to the definition of an important $\sigma$-algebra, the Borel $\sigma$-algebra over $\mathbb{R}.$
-This is the $\sigma$-algebra generated by the open subsets of $\mathbb{R}.$
+
 
 :::{prf:definition} Borel set
+
 The smallest $\sigma$-algebra on $\mathbb{R}$ that contains all the open subsets of $\mathbb{R}$ is called the collection of Borel subsets on $\mathbb{R}.$
 An element of this $\sigma$-algebra is called a Borel set.
+
 :::
 
-Before moving to measurable functions, we will define inverse images of functions.
 
 :::{prf:definition} Inverse image
+
 If $f: X \in Y$ is a function and $A \subseteq Y,$ then the inverse image of $A$ under $f$ is defined by
 
 $$f^{-1}(A) = \{ x \in X : f(x) \in A \}.$$
+
 :::
 
-We now prove certain useful properties that inverse images have
-This will allow us to prove some very useful results about measurable functions.
 
-:::{prf:theorem} Algebra of inverse images
+:::{def:theorem} Algebra of inverse images
 
 Suppose $f: X \to Y$ is a function.
 Then
@@ -750,42 +742,43 @@ Thus $(g \circ f)^{-1}(A) = f^{-1}(g^{-1}(A)).$
 
 
 ### Measurable functions
-Now we introduce measurable functions.
-As the name suggests, measurable functions are functions such that the inverse images of Borel sets under these functions are measurable sets.
+
 
 :::{prf:definition} Measurable function
+
 Suppose $(X, S)$ is a measurable space.
 A function $f: X \to \mathbb{R}$ is called $S$-measurable if
 
 $$f^{-1}(B) \in S$$
 
 for all Borel sets $B \subseteq \mathbb{R}.$
+
 :::
 
-One important kind of function is the characteristic function, a function which is equal to one on a given set and zero everywhere else.
+
+
 
 :::{prf:defintion} Characteristic function
+
 Suppose $E$ is a subset of a set $X.$
 The characteristic function of $E$ is the function $\chi_E: X \to \mathbb{R}$ defined by
 
 $$\chi_E(x) = \begin{cases} 1 & \text{if } x \in E \\ 0 & \text{if } x \notin E. \end{cases}$$
+
 :::
 
-## Conditions for measurable functions
-Now we show one very useful result on measurable functions.
-Naively showing a function to be measurable would be tricky because we would have to check that the inverse image of any Borel set under the function is measurable.
-Since there are lots of Borel sets, this approach would not be possible.
-The following result gives a sufficient condition for a function to be measurable, which is far easier to work with.
 
 
 :::{prf:theorem} Condition for measurable function
 :label: mira-thm-condition-measurable
+
 Suppose $(X, S)$ is a measurable space and $f: X \to \mathbb{R}$ is a function such that
 
 $$f^{-1}((a, \infty)) \in S$$
 
 for all $a \in \mathbb{R}.$
 Then $f$ is $S$-measurable.
+
 :::
 
 :::{dropdown} Proof: Condition for measurable function
@@ -812,24 +805,31 @@ __Every open interval is in $T$:__
 By the hypothesis in the theorem statement, it follows that $f^{-1}((a, \infty)) \in S$ for all $a \in \mathbb{R},$ so $(a, \infty) \in T$ for all $a \in \mathbb{R}.$
 Since $T$ is a $\sigma$-algebra on $\mathbb{R},$ it is closed under complementation and intersection so $(-\infty, b] \in T$ for all $b \in \mathbb{R},$ and $(a, b) \in T$ for all $a, b \in \mathbb{R}.$
 Therefore $T$ contains all the open intervals of $\mathbb{R},$ so $T$ contains all the Borel subsets of $\mathbb{R}.$
+
 :::
 
 
-## Properties of measurable functions
-In the special case that $X$ is a subset of $\mathbb{R}$ and $S$ is the set of Borel subsets of $\mathbb{R},$ we use the term Borel measurable to refer to $S$-measurable functions.
+
+In the special case that $X$ is a subset of the reals and $S$ is the set of Borel subsets of $\mathbb{R},$ we use the term Borel measurable to refer to $S$-measurable functions.
 
 :::{prf:definition} Borel measurable function
+
 Suppose $X \subseteq \mathbb{R}.$
 A function $f: X \to \mathbb{R}$ is called Borel measurable if $f^{-1}(B)$ is a Borel set for every Borel set $B \subseteq \mathbb{R}.$
+
 :::
 
-Now we prove a number a few results on sufficient conditions for Borel measurable functions.
+
+
 
 :::{prf:theorem} Every continuous function is Borel measurable
+
 Every continuous real-valued function defined on a Borel subset of $\mathbb{R}$ is a Borel measurable function.
+
 :::
 
 :::{dropdown} Proof: Every continuous function is Borel measurable
+
 Suppose that $X \subseteq \mathbb{R}$ is a Borel set and $f: X \to \mathbb{R}$ is a Borel measurable function.
 Suppose $a \in \mathbb{R}.$
 If $x \in X$ such that $f(x) > a,$ then by the continuity of $f,$ there exists $\delta_x > 0$ such that $f(y) > a$ for all $y \in (x - \delta_x, x + \delta_x).$
@@ -841,21 +841,29 @@ f^{-1}((a, \infty)) = \left( \bigcup_{x \in f^{-1}((a, \infty))} (x - \delta_x, 
 
 The above union is a union of open sets, which is therefore also open, so its intersection with $X$ is a Bore set.
 By our earlier {prf:ref}`condition for measurable functions<mira-thm-condition-measurable>`, $f$ is Borel measurable.
+
 :::
 
 
 :::{prf:defintion} Increasing function; strictly increasing function
+
 Suppose $X \subseteq \mathbb{R}$ and $f: X \to \mathbb{R}$ is a function.
 Then $f$ is called increasing if $f(x) \leq f(y)$ for all $x, y \in X$ with $x < y.$
 If $f(x) < f(y)$ for all $x, y \in X$ with $x < y,$ then $f$ is called strictly increasing.
+
 :::
+
+
 
 
 :::{prf:theorem} Every increasing function is Borel measurable
+
 Every increasing function defined on a Borel subset of $\mathbb{R}$ is a Borel measurable function.
+
 :::
 
 :::{dropdown} Proof: Every increasing function is Borel measurable
+
 Suppose that $X \subseteq \mathbb{R}$ is a Borel set and $f: X \to \mathbb{R}$ is an increasing function.
 Suppose $a \in \mathbb{R}.$
 Let $b = \inf f^{-1}((a, \infty)).$
@@ -866,7 +874,12 @@ $$f^{-1}((a, \infty)) = (b, \infty) \cap X \text{ or } f^{-1}((a, \infty)) = [b,
 holds.
 Since $X$ is a Borel set, and both $(b, \infty)$ and $[b, \infty)$ are Borel sets, it follows that $f^{-1}((a, \infty))$ is a Borel set.
 By our earlier {prf:ref}`condition for measurable functions<mira-thm-condition-measurable>`, $f$ is Borel measurable.
+
 :::
+
+
+
+
 
 :::{prf:theorem} Composition of measurable functions
 
@@ -877,25 +890,31 @@ Then $g \circ f: X \to \mathbb{R}$ is a measurable function.
 :::
 
 :::{dropdown} Proof: Composition of measurable functions
+
 Suppose $(X, S)$ is a measurable space and $f: X \to \mathbb{R}$ is a measurable function.
 Suppose that $g$ is a real-valued Borel measurable function defined on a subset of $\mathbb{R}$ that includes the range of $f.$
 Let $B \subseteq \mathbb{R}$ be a Borel set.
 Because $g$ is a Borel measurable function, and $B$ is a Borel set, $g^{-1}(B)$ is also a Borel set.
 Because $f$ is a measurable function, and $g^{-1}(B)$ is a Borel set, $f^{-1}(g^{-1}(B))$ is in $S,$ so $g \circ f$ is Borel measurable.
+
 :::
 
-Measurable functions also satisfy intuitive algebraic properties that are very useful for proving measurability.
+
+
 
 :::{prf:theorem} Algebraic operations with measurable functions
+
 Suppose $(X, S)$ is a measurable space and $f, g: X \to \mathbb{R}$ are $S$-measurable functions.
 Then
 
 (a) $f + g, f - g, f g$ are $S$-measurable functions,
 
 (b) if $g(x) \neq 0$ for all $x \in X,$ then $f / g$ is a $S$-measurable function.
+
 :::
 
 :::{dropdown} Proof: Algebraic operations with measurable functions
+
 Suppose $(X, S)$ is a measurable space and $f, g: X \to \mathbb{R}$ are $S$-measurable functions.
 
 __Part (a):__
@@ -924,12 +943,14 @@ Suppose $g(x) \neq 0$ for all $x \in X.$
 Note that the function $r: \mathbb{R} \setminus \{0\} \to \mathbb{R}$ defined by $r(x) = 1/x$ is a Borel measurable function, because it is continuous on its domain.
 Then $1/g = r \circ g$ is a composition of Borel measurable functions, so it is a Borel measurable function.
 Lastly, $f/g$ is a product of two Borel measurable functions, $f$ and $1 / g,$ so it is a Borel measurable function.
+
 :::
 
-We now prove a very useful result, namely that pointwise limits of measurable functions are measurable.
-This is a highly desirable property, and perhaps somewhat surprising that it holds: recall that the pointwise limit of Riemann integrable functions on some interval is not closed under taking pointwise limits.
+
+
 
 :::{prf:theorem} Pointwise limit of $S$-measurable functions is $S$-measurable
+
 Suppose $(X, S)$ is a measurable space and $f_1, f_2, \ldots$ are $S$-measurable functions from $X$ to $\mathbb{R}.$
 Suppose $\lim_{k \to \infty} f_k(x)$ exists for each $x \in X.$
 Define $f: X \to \mathbb{R}$ by
@@ -937,9 +958,14 @@ Define $f: X \to \mathbb{R}$ by
 $$f(x) = \lim_{k \to \infty} f_k(x).$$
 
 Then $f$ is a $S$-measurable function.
+
 :::
 
+
+
+
 :::{dropdown} Proof: Pointwise limit of $~S$-measurable functions is $~S$-measurable
+
 Suppose $(X, S)$ is a measurable space and $f_1, f_2, \ldots$ are $S$-measurable functions from $X$ to $\mathbb{R}.$
 Suppose $\lim_{k \to \infty} f_k(x)$ exists for each $x \in X.$
 Define $f: X \to \mathbb{R}$ by
@@ -960,28 +986,31 @@ Then there exists $j \in \mathbb{Z}^+$ and $m \in \mathbb{Z}^+$ such that $f_k(x
 Taking the limit as $k \to \infty,$ we have $f(x) \geq a + 1/j > a,$ so $x \in f^{-1}((a, \infty)).$
 
 We conclude that $f^{-1}((a, \infty))$ is a Borel set and by our earlier {prf:ref}`condition for measurable functions<mira-thm-condition-measurable>`, $f$ is a Borel measurable function.
+
 :::
 
-Sometimes, we may need to consider functions which take values in $[-\infty, \infty].$
-We therefore extend the notion of Vorel sets to subsets of $[-\infty, \infty]$ in the following way.
 
-:::{prf:definition} Borel subsets of $[-\infty, \infty]$
+
+:::{prf:definition} Borel subsets of $[-infty, \infty]$
+
 A subset of $[-\infty, \infty]$ is called a Borel subset if its intersection with $\mathbb{R}$ is a Borel set.
+
 :::
 
-With the above definition in place, we can also extend the definition of measurable functions.
 
-:::{prf:definition} Measurable function on $[-\infty, \infty]$
-:label: mira:def:measurable-function-infinity
+
+:::{prf:theorem} Measurable function on $[-\infty, \infty]$
+
 Suppose $(X, \mathcal{S})$ is a measurable space.
 A function $f: X \to [-\infty, \infty]$ is $\mathcal{S}$-measurable if
 
 $f^{-1}(B) \in \mathcal{S}$
 
 for every Borel set $B \subseteq [-\infty, \infty].$
+
 :::
 
-The following result is the counterpart of our earlier {prf:ref}`sufficient condition for measurability<mira-thm-condition-measurable>`, but with infinities included in the range of the function.
+
 
 :::{prf:theorem} Sufficient condition for measurable function
 :label: mira-thm-sufficient-condition-measurable-with-infinity
@@ -1020,8 +1049,7 @@ f^{-1}(B) &= f^{-1}((B \cap \mathbb{R}) \cup (B \cap \{\infty\}) \cup (B \cap \{
 so $f$ is $\mathcal{S}$-measurable.
 :::
 
-Concluding this section, we show that pointwise infimuma and pointwise supremuma of measurable functions are measurable.
-Note that this result would not have made sense before modifying the {prf:ref}`definition of measurability to include infinity<mira:def:measurable-function-infinity>`, because the supremum and infimum can be $\infty$ and $- \infty.$
+
 
 :::{prf:theorem} Infimum and supremum of a sequence of measurable functions is measurable
 Suppose $(X, \mathcal{S})$ is a measurable space and $f_1, f_2, \ldots$ is a sequence of $\mathcal{S}$-measurable functions from $X$ to $[-\infty, \infty].$
@@ -1219,178 +1247,3 @@ $$\begin{align}
 &= \mu(D) + \mu(E) - \mu(D \cap E).
 \end{align}$$
 :::
-
-
-## Lebesgue measure
-```{margin}
-Despite the name "outer measure", the outer measure is not in fact a measure, because it is not additive.
-Restricting its domain to the set of all subsets of $\mathbb{R}$ gives the Lebesgue measure, which is in fact a measure.
-```
-Now we move to define the Lebesgue measure which is central in measure theory.
-In short the Lebesgue measure is the modified notion of length we have been building up towards.
-Specifically, it will be the outer measure restricted (from the set of all subsets of $\mathbb{R}$) to the Borel sets of $\mathbb{R}.$
-The main result in this section will be proving that the outer measure, when restricted to the Borel sets of $\mathbb{R},$ is in fact a measure.
-
-### Additivity of outer measure on Borel sets
-The main task for showing that the outer measure is a measure, when restricted to Borel sets, is to show that the outer measure is additive on the borel $\sigma$-algebra.
-We break up this proof into intermediate results, including some results that are useful in subsequent chapters.
-First, we show that the outer measure is additive if one of the sets is open.
-
-:::{prf:theorem} Additivity of outer measure if one of the sets is open
-:label: mira:thm:additivity-of-outer-measure-if-one-set-is-open
-Suppose $A$ and $G$ are disjoint subsets of $\mathbb{R}$ and $G$ is open.
-Then
-
-$$|A \cup G| = |A| + |G|.$$
-:::
-
-```{dropdown} Proof: additivity of outer measure if one of the sets is open
-First, we can assume that $|G| < \infty,$ because otherwise both sides of the equation above are equal to $\infty.$
-
-The {prf:ref}`subadditivity of the outer measure<mira:thm:countable-subadditivity-of-outer-measure>` implies that $|A \cup G| \leq |A| + |G|.$
-It therefore remains to show the inequality in the opposite direction.
-
-Consider the special case where $G = (a, b),$ for some $a, b \in \mathbb{R}$ with $a < b.$
-Further, we can assume that $a, b \neq A,$ because changing a set by at most two points does not change its outer measure.
-Let $I_1, I_2, \dots$ be a sequence of open intervals whose union contains $A \cup G.$
-For each $n \in \mathbb{Z}^+,$ let
-
-$$J_n = I_n \cap (-\infty, a), K_n = I_n \cap (a, b), L_n = I_n \cap (b, \infty).$$
-
-From this definition, we have that
-
-$$\ell(I_n) = \ell(J_n) + \ell(K_n) + \ell(L_n).$$
-
-Note that $J_1, L_1, J_2, L_2, \dots$ is a sequence of open intervals whose union contains $A,$ and $K_1, K_2, \dots$ is a sequence of open intervals whose union contains $G.$
-Thus
-
-$$\begin{align}
-\sum_{n = 1}^\infty \ell(I_n) &= \sum_{n = 1}^\infty (\ell(J_n) + \ell(K_n)) + \sum_{n = 1}^\infty \ell(L_n) \\
-&\geq |A| + |G|.
-\end{align}$$
-
-This inequality implies that $|A \cup G| \geq |A| + |G|$ in the special case that $G$ is an open interval.
-Using induction on $m$ we conclude that if $m \in \mathbb{Z}^+$ and $G$ is a union of $m$ disjoint open intervals that are all disjoint from $A,$ then $|A \cup G| = |A| + |G|.$
-Now, suppose that $G$ is an arbitrary open subset of $\mathbb{R}$ that is disjoint from $A.$
-Then $G = \cup_{n=1}^\infty I_n$ for some sequence of disjoint open intervals $I_1, I_2, \dots,$ each of which is disjoint from $A.$
-For each $m \in \mathbb{Z}^+$ we have
-
-$$\begin{align}
-|A \cup G| &\geq \left| A \cup \left(\bigcup_{n=1}^\infty I_n \right) \right| \\
-&\geq |A| + \sum_{n=1}^\infty \ell(I_n)
-\end{align}$$
-
-which in turn implies that
-
-$$\begin{align}
-|A \cup G| &\geq |A| + \sum_{n=1}^\infty \ell(I_n) \\
-&\geq |A| + |G|
-\end{align}$$
-
-completing the proof that $|A \cup G| = |A| + |G|$ for the case of a general open set $G.$
-```
-
-Then we show that the outer measure is additive if one of the sets is closed.
-
-```{prf:theorem} Additivity of outer measure if one of the sets is closed
-Suppose $A$ and $F$ are disjoint subsets of $\mathbb{R}$ and $F$ is closed.
-Then
-
-$$|A \cup F| = |A| + |F|.$$
-```
-
-```{dropdown} Proof: additivity of outer measure if one of the sets is closed
-Suppose $I_1, I_2, \dots$ is a sequence of open intervals whose union contains $A \cup F.$
-Let $G = \cup_{n = 1}^\infty I_n.$
-Then $G$ is an open set which contains $A \cup F.$
-Now, note that $G \setminus F = G \cap (\mathbb{R} \setminus F)$ is an intersection of two open sets and is therefore an open set.
-Applying our previous result showing that the {prf:ref}`outer measure is additive if one of the sets is open<mira:thm:additivity-of-outer-measure-if-one-set-is-open>` we have that 
-
-$$|G| = |F| + |G \setminus F|.$$
-
-Using the fact that $A \subseteq G \setminus F,$ and the above equation, we have that
-
-$$|G| \geq |F| + |A|,$$
-
-which in turn implies that
-
-$$|F \cup A| \geq |F| + |A|,$$
-
-from which we conclude that $|F \cup A| = |F| + |A|.$
-```
-
-Now we turn to a very useful result, which says that any Borel set can be approximated by a closed subset arbitrarily well.
-
-```{margin}
-Note that this result would not hold if we replaced closed sets by open sets.
-For example, if $B = [0, 1] \setminus \mathbb{Q},$ then the only open subset of $B$ is the empty set, and thus $B$ cannot be approximated arbitrarily well by open subsets.
-```
-```{prf:theorem} Approximation of Borel sets from below by closed sets
-Suppose $B \subseteq \mathbb{R}$ is a Borel set.
-Then, for every $\epsilon > 0,$ there exists a closed set $F \subseteq B$ such that $|B \setminus F| < \epsilon.$
-```
-
-```{dropdown} Proof: approximation of Borel sets from below by closed sets
-Consider the set
-
-$$\mathcal{L} = \{D \subseteq \mathbb{R}: \text{ for every } \epsilon > 0, \text{ there exists a closed set } F \subseteq D \text{ such that } |D \setminus F| < \epsilon \}.$$
-
-This is the set of all subsets of $\mathbb{R}$ which can be approximated below with closed sets.
-Our approach to proving the result will be to show that $\mathcal{L}$ is a $\sigma$-algebra.
-Then, noting that $\mathcal{L}$ contains all closed subsets of $\mathbb{R},$ by taking complements we conclude that it must contain all open subsets of $\mathbb{R},$ so it also contains every Borel subset of $\mathbb{R},$ which will complete the proof.
-
-To show that $\mathcal{L}$ is a $\sigma$-algebra, we will first show that it is closed under countable intersections.
-Suppose $D_1, D_2, \cdot \subseteq \mathcal{L}.$
-Let $\epsilon > 0.$
-For each $k \in \mathbb{Z}^+,$ there exists a closed set $F_k$ such that
-
-$$F_k \subseteq D_k \text{ and } |D_k \setminus F_k| < \frac{\epsilon}{2^k}.$$
-
-Thus $\cap_{k=1}^\infty F_k$ is a closed set and
-
-$$\begin{align}
-\left(\bigcap_{n = 1}^\infty D_k\right) \setminus \left(\bigcap_{n = 1}^\infty F_k\right) \subseteq \bigcap_{n = 1}^\infty (D_k \setminus F_k)
-\end{align}$$
-
-from which it follows that 
-
-$$\begin{align}
-\left|\left(\bigcap^\infty_{n = 1} D_k\right) \setminus \left(\bigcap^\infty_{n = 1} F_k\right) \right| < \epsilon.
-\end{align}$$
-
-Thus $\cap_{n=1}^\infty D_k \in \mathcal{L},$ proving that $\mathcal{L}$ is closed under countable intersections.
-Now we turn to proving that $\mathcal{L}$ is closed under complementation.
-Suppose $D \in \mathcal{L}$ and $\epsilon > 0.$
-We will first consider the case $|D| < \infty.$
-Let $F \subseteq D$ be a closed set such that $|D \setminus F| < \frac{\epsilon}{2}.$
-The definition of outer measure implies that there exists an open set $G$ such that $D \subseteq G$ and $|G| < |D| + \frac{\epsilon}{2}.$
-Therefore we have
-
-$$\begin{equation}
-(\mathbb{R} \setminus D) \setminus (\mathbb{R} \setminus G) \subseteq G \setminus F.
-\end{equation}$$
-
-Now, the set $G \setminus F$ is open, and using the fact that $|F| > |D| - |D \setminus F|,$ we have
-
-$$\begin{equation}
-|G \setminus F| = |G| - |F| < \left(|D| + \frac{\epsilon}{2}\right) - \left(|D| - \frac{\epsilon}{2}\right) = \epsilon,
-\end{equation}$$
-
-from which we conclude
-
-$$\begin{equation}
-\left|(\mathbb{R} \setminus D)\right| \setminus (\mathbb{R} \setminus G) \leq \epsilon.
-\end{equation}$$
-
-Therefore $\mathbb{R} \setminus D$ in the case $|D| < \infty.$
-Now, for general $D,$ let $\epsilon > 0$ and define the sets $D_k = D \cap [-k, k]$ for $k \in \mathbb{Z}^+.$
-The previous case implies that $\mathbb{R} \setminus D_k \in \mathcal{L}.$
-Using the fact that $\mathcal{L}$ is closed under intersections and that
-
-$$\begin{equation}
-\mathbb{R} \setminus D = \mathbb{R} \setminus \left(\bigcup_{k=1}^\infty D_k\right) = \bigcap_{n = 1}^\infty (\mathbb{R} \setminus D_k), 
-\end{equation}$$
-
-we conclude that $\mathbb{R} \setminus D \in \mathcal{L}.$
-Thus $\mathcal{L}$ is a $\sigma$-algebra, which concludes the proof.
-```

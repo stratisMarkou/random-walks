@@ -221,6 +221,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Papers &amp; Miscellanous</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="book/papers/intro.html">Stream of papers</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="book/papers/swin/swin.html">Shifted window transformers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="book/papers/transformers/transformers.html">Introduction to transformers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="book/papers/why-covariances/why-covariances.html">Why covariance functions?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="book/papers/ais/ais.html">Annealed importance sampling</a></li>
@@ -390,16 +391,17 @@ document.write(`
    <a href="#cap-definition-10"><strong>definition-10</strong></a> | 
    <a href="#cap-definition-11"><strong>definition-11</strong></a> | 
    <a href="#cap-definition-13"><strong>definition-13</strong></a> | 
+   <a href="#cap-definition-15"><strong>definition-15</strong></a> | 
    <a href="#cap-definition-17"><strong>definition-17</strong></a> | 
    <a href="#cap-definition-19"><strong>definition-19</strong></a> | 
    <a href="#cap-definition-2"><strong>definition-2</strong></a> | 
    <a href="#cap-definition-20"><strong>definition-20</strong></a> | 
-   <a href="#cap-definition-23"><strong>definition-23</strong></a> | 
-   <a href="#cap-definition-25"><strong>definition-25</strong></a> | 
+   <a href="#cap-definition-22"><strong>definition-22</strong></a> | 
+   <a href="#cap-definition-24"><strong>definition-24</strong></a> | 
    <a href="#cap-definition-3"><strong>definition-3</strong></a> | 
-   <a href="#cap-definition-31"><strong>definition-31</strong></a> | 
+   <a href="#cap-definition-30"><strong>definition-30</strong></a> | 
+   <a href="#cap-definition-34"><strong>definition-34</strong></a> | 
    <a href="#cap-definition-35"><strong>definition-35</strong></a> | 
-   <a href="#cap-definition-36"><strong>definition-36</strong></a> | 
    <a href="#cap-definition-4"><strong>definition-4</strong></a> | 
    <a href="#cap-definition-5"><strong>definition-5</strong></a> | 
    <a href="#cap-definition-6"><strong>definition-6</strong></a> | 
@@ -430,16 +432,12 @@ document.write(`
    <a href="#cap-mira-thm-measure-preserves-order"><strong>mira-thm-measure-preserves-order</strong></a> | 
    <a href="#cap-mira-thm-refining-partitions"><strong>mira-thm-refining-partitions</strong></a> | 
    <a href="#cap-mira-thm-sufficient-condition-measurable-with-infinity"><strong>mira-thm-sufficient-condition-measurable-with-infinity</strong></a> | 
-   <a href="#cap-mira:def:measurable-function-infinity"><strong>mira:def:measurable-function-infinity</strong></a> | 
    <a href="#cap-mira:def:rational-difference-equivalence-relation"><strong>mira:def:rational-difference-equivalence-relation</strong></a> | 
-   <a href="#cap-mira:def:sigma-algebra"><strong>mira:def:sigma-algebra</strong></a> | 
-   <a href="#cap-mira:thm:additivity-of-outer-measure-if-one-set-is-open"><strong>mira:thm:additivity-of-outer-measure-if-one-set-is-open</strong></a> | 
-   <a href="#cap-mira:thm:countable-sets-have-measure-zero"><strong>mira:thm:countable-sets-have-measure-zero</strong></a> | 
-   <a href="#cap-mira:thm:countable-subadditivity-of-outer-measure"><strong>mira:thm:countable-subadditivity-of-outer-measure</strong></a> | 
    <a href="#cap-mira:thm:heine-borel"><strong>mira:thm:heine-borel</strong></a> | 
    <a href="#cap-mira:thm:non-additivity-of-outer-measure"><strong>mira:thm:non-additivity-of-outer-measure</strong></a> | 
    <a href="#cap-mira:thm:nonexistence-length"><strong>mira:thm:nonexistence-length</strong></a> | 
    <a href="#cap-mira:thm:outer-measure-is-additive-if-sets-are-separable"><strong>mira:thm:outer-measure-is-additive-if-sets-are-separable</strong></a> | 
+   <a href="#cap-mira:thm:outer-measure-is-countably-subadditive"><strong>mira:thm:outer-measure-is-countably-subadditive</strong></a> | 
    <a href="#cap-mira:thm:outer-measure-is-translation-invariant"><strong>mira:thm:outer-measure-is-translation-invariant</strong></a> | 
    <a href="#cap-mira:thm:outer-measure-of-a-closed-interval"><strong>mira:thm:outer-measure-of-a-closed-interval</strong></a> | 
    <a href="#cap-mira:thm:outer-measure-preserves-order"><strong>mira:thm:outer-measure-preserves-order</strong></a> | 
@@ -456,20 +454,18 @@ document.write(`
    <a href="#cap-theorem-18"><strong>theorem-18</strong></a> | 
    <a href="#cap-theorem-2"><strong>theorem-2</strong></a> | 
    <a href="#cap-theorem-21"><strong>theorem-21</strong></a> | 
-   <a href="#cap-theorem-22"><strong>theorem-22</strong></a> | 
+   <a href="#cap-theorem-25"><strong>theorem-25</strong></a> | 
    <a href="#cap-theorem-26"><strong>theorem-26</strong></a> | 
    <a href="#cap-theorem-27"><strong>theorem-27</strong></a> | 
    <a href="#cap-theorem-28"><strong>theorem-28</strong></a> | 
    <a href="#cap-theorem-29"><strong>theorem-29</strong></a> | 
    <a href="#cap-theorem-3"><strong>theorem-3</strong></a> | 
-   <a href="#cap-theorem-30"><strong>theorem-30</strong></a> | 
-   <a href="#cap-theorem-34"><strong>theorem-34</strong></a> | 
-   <a href="#cap-theorem-38"><strong>theorem-38</strong></a> | 
+   <a href="#cap-theorem-31"><strong>theorem-31</strong></a> | 
+   <a href="#cap-theorem-33"><strong>theorem-33</strong></a> | 
+   <a href="#cap-theorem-37"><strong>theorem-37</strong></a> | 
+   <a href="#cap-theorem-39"><strong>theorem-39</strong></a> | 
    <a href="#cap-theorem-4"><strong>theorem-4</strong></a> | 
    <a href="#cap-theorem-40"><strong>theorem-40</strong></a> | 
-   <a href="#cap-theorem-41"><strong>theorem-41</strong></a> | 
-   <a href="#cap-theorem-43"><strong>theorem-43</strong></a> | 
-   <a href="#cap-theorem-44"><strong>theorem-44</strong></a> | 
    <a href="#cap-theorem-5"><strong>theorem-5</strong></a> | 
    <a href="#cap-theorem-6"><strong>theorem-6</strong></a> | 
    <a href="#cap-theorem-7"><strong>theorem-7</strong></a> | 
@@ -539,12 +535,20 @@ document.write(`
        <a href="book/prob-intro/ch07/content.html#definition-13"><code class="xref">definition-13</code></a> <em>(book/prob-intro/ch07/content)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-definition-15"><td></td><td>
+       <strong>definition-15</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/mira/002-measures.html#definition-15"><code class="xref">definition-15</code></a> <em>(book/mira/002-measures)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-17"><td></td><td>
        <strong>definition-17</strong></td><td></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="book/mira/002-measures.html#definition-17"><code class="xref">definition-17</code></a> <em>(book/mira/002-measures)</em></td><td>
+       <a href="book/toc/001-fsa.html#definition-17"><code class="xref">definition-17</code></a> <em>(book/toc/001-fsa)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-19"><td></td><td>
@@ -571,20 +575,20 @@ document.write(`
        <a href="book/mira/002-measures.html#definition-20"><code class="xref">definition-20</code></a> <em>(book/mira/002-measures)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-definition-23"><td></td><td>
-       <strong>definition-23</strong></td><td></td></tr>
+     <tr class="cap" id="cap-definition-22"><td></td><td>
+       <strong>definition-22</strong></td><td></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="book/mira/002-measures.html#definition-23"><code class="xref">definition-23</code></a> <em>(book/mira/002-measures)</em></td><td>
+       <a href="book/mira/002-measures.html#definition-22"><code class="xref">definition-22</code></a> <em>(book/mira/002-measures)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-definition-25"><td></td><td>
-       <strong>definition-25</strong></td><td></td></tr>
+     <tr class="cap" id="cap-definition-24"><td></td><td>
+       <strong>definition-24</strong></td><td></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="book/mira/002-measures.html#definition-25"><code class="xref">definition-25</code></a> <em>(book/mira/002-measures)</em></td><td>
+       <a href="book/mira/002-measures.html#definition-24"><code class="xref">definition-24</code></a> <em>(book/mira/002-measures)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-3"><td></td><td>
@@ -595,12 +599,20 @@ document.write(`
        <a href="book/papers/num-sde/num-sde.html#definition-3"><code class="xref">definition-3</code></a> <em>(book/papers/num-sde/num-sde)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-definition-31"><td></td><td>
-       <strong>definition-31</strong></td><td></td></tr>
+     <tr class="cap" id="cap-definition-30"><td></td><td>
+       <strong>definition-30</strong></td><td></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="book/mira/002-measures.html#definition-31"><code class="xref">definition-31</code></a> <em>(book/mira/002-measures)</em></td><td>
+       <a href="book/mira/002-measures.html#definition-30"><code class="xref">definition-30</code></a> <em>(book/mira/002-measures)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-definition-34"><td></td><td>
+       <strong>definition-34</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/mira/002-measures.html#definition-34"><code class="xref">definition-34</code></a> <em>(book/mira/002-measures)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-35"><td></td><td>
@@ -609,14 +621,6 @@ document.write(`
        <td></td>
        <td>
        <a href="book/mira/002-measures.html#definition-35"><code class="xref">definition-35</code></a> <em>(book/mira/002-measures)</em></td><td>
-       <em>definition</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-definition-36"><td></td><td>
-       <strong>definition-36</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="book/mira/002-measures.html#definition-36"><code class="xref">definition-36</code></a> <em>(book/mira/002-measures)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-4"><td></td><td>
@@ -648,7 +652,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="book/mira/002-measures.html#definition-7"><code class="xref">definition-7</code></a> <em>(book/mira/002-measures)</em></td><td>
+       <a href="book/toc/002-cfl.html#definition-7"><code class="xref">definition-7</code></a> <em>(book/toc/002-cfl)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-8"><td></td><td>
@@ -859,14 +863,6 @@ document.write(`
        <a href="book/mira/002-measures.html#mira-thm-sufficient-condition-measurable-with-infinity"><code class="xref">mira-thm-sufficient-condition-measurable-with-infinity</code></a> <em>(book/mira/002-measures)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-mira:def:measurable-function-infinity"><td></td><td>
-       <strong>mira:def:measurable-function-infinity</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="book/mira/002-measures.html#mira:def:measurable-function-infinity"><code class="xref">mira:def:measurable-function-infinity</code></a> <em>(book/mira/002-measures)</em></td><td>
-       <em>definition</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-mira:def:rational-difference-equivalence-relation"><td></td><td>
        <strong>mira:def:rational-difference-equivalence-relation</strong></td><td></td></tr>
      <tr>
@@ -874,38 +870,6 @@ document.write(`
        <td>
        <a href="book/mira/002-measures.html#mira:def:rational-difference-equivalence-relation"><code class="xref">mira:def:rational-difference-equivalence-relation</code></a> <em>(book/mira/002-measures)</em></td><td>
        <em>definition</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-mira:def:sigma-algebra"><td></td><td>
-       <strong>mira:def:sigma-algebra</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="book/mira/002-measures.html#mira:def:sigma-algebra"><code class="xref">mira:def:sigma-algebra</code></a> <em>(book/mira/002-measures)</em></td><td>
-       <em>definition</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-mira:thm:additivity-of-outer-measure-if-one-set-is-open"><td></td><td>
-       <strong>mira:thm:additivity-of-outer-measure-if-one-set-is-open</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="book/mira/002-measures.html#mira:thm:additivity-of-outer-measure-if-one-set-is-open"><code class="xref">mira:thm:additivity-of-outer-measure-if-one-set-is-open</code></a> <em>(book/mira/002-measures)</em></td><td>
-       <em>theorem</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-mira:thm:countable-sets-have-measure-zero"><td></td><td>
-       <strong>mira:thm:countable-sets-have-measure-zero</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="book/mira/002-measures.html#mira:thm:countable-sets-have-measure-zero"><code class="xref">mira:thm:countable-sets-have-measure-zero</code></a> <em>(book/mira/002-measures)</em></td><td>
-       <em>theorem</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-mira:thm:countable-subadditivity-of-outer-measure"><td></td><td>
-       <strong>mira:thm:countable-subadditivity-of-outer-measure</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="book/mira/002-measures.html#mira:thm:countable-subadditivity-of-outer-measure"><code class="xref">mira:thm:countable-subadditivity-of-outer-measure</code></a> <em>(book/mira/002-measures)</em></td><td>
-       <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-mira:thm:heine-borel"><td></td><td>
        <strong>mira:thm:heine-borel</strong></td><td></td></tr>
@@ -937,6 +901,14 @@ document.write(`
        <td></td>
        <td>
        <a href="book/mira/002-measures.html#mira:thm:outer-measure-is-additive-if-sets-are-separable"><code class="xref">mira:thm:outer-measure-is-additive-if-sets-are-separable</code></a> <em>(book/mira/002-measures)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-mira:thm:outer-measure-is-countably-subadditive"><td></td><td>
+       <strong>mira:thm:outer-measure-is-countably-subadditive</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/mira/002-measures.html#mira:thm:outer-measure-is-countably-subadditive"><code class="xref">mira:thm:outer-measure-is-countably-subadditive</code></a> <em>(book/mira/002-measures)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-mira:thm:outer-measure-is-translation-invariant"><td></td><td>
@@ -992,7 +964,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="book/mira/002-measures.html#theorem-10"><code class="xref">theorem-10</code></a> <em>(book/mira/002-measures)</em></td><td>
+       <a href="book/toc/001-fsa.html#theorem-10"><code class="xref">theorem-10</code></a> <em>(book/toc/001-fsa)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-theorem-11"><td></td><td>
@@ -1040,7 +1012,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="book/mira/002-measures.html#theorem-16"><code class="xref">theorem-16</code></a> <em>(book/mira/002-measures)</em></td><td>
+       <a href="book/prob-intro/ch07/content.html#theorem-16"><code class="xref">theorem-16</code></a> <em>(book/prob-intro/ch07/content)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-theorem-18"><td></td><td>
@@ -1067,12 +1039,12 @@ document.write(`
        <a href="book/mira/002-measures.html#theorem-21"><code class="xref">theorem-21</code></a> <em>(book/mira/002-measures)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-theorem-22"><td></td><td>
-       <strong>theorem-22</strong></td><td></td></tr>
+     <tr class="cap" id="cap-theorem-25"><td></td><td>
+       <strong>theorem-25</strong></td><td></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="book/mira/002-measures.html#theorem-22"><code class="xref">theorem-22</code></a> <em>(book/mira/002-measures)</em></td><td>
+       <a href="book/mira/002-measures.html#theorem-25"><code class="xref">theorem-25</code></a> <em>(book/mira/002-measures)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-theorem-26"><td></td><td>
@@ -1115,28 +1087,36 @@ document.write(`
        <a href="book/prob-intro/ch08/content.html#theorem-3"><code class="xref">theorem-3</code></a> <em>(book/prob-intro/ch08/content)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-theorem-30"><td></td><td>
-       <strong>theorem-30</strong></td><td></td></tr>
+     <tr class="cap" id="cap-theorem-31"><td></td><td>
+       <strong>theorem-31</strong></td><td></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="book/mira/002-measures.html#theorem-30"><code class="xref">theorem-30</code></a> <em>(book/mira/002-measures)</em></td><td>
+       <a href="book/mira/002-measures.html#theorem-31"><code class="xref">theorem-31</code></a> <em>(book/mira/002-measures)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-theorem-34"><td></td><td>
-       <strong>theorem-34</strong></td><td></td></tr>
+     <tr class="cap" id="cap-theorem-33"><td></td><td>
+       <strong>theorem-33</strong></td><td></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="book/mira/002-measures.html#theorem-34"><code class="xref">theorem-34</code></a> <em>(book/mira/002-measures)</em></td><td>
+       <a href="book/mira/002-measures.html#theorem-33"><code class="xref">theorem-33</code></a> <em>(book/mira/002-measures)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-theorem-38"><td></td><td>
-       <strong>theorem-38</strong></td><td></td></tr>
+     <tr class="cap" id="cap-theorem-37"><td></td><td>
+       <strong>theorem-37</strong></td><td></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="book/mira/002-measures.html#theorem-38"><code class="xref">theorem-38</code></a> <em>(book/mira/002-measures)</em></td><td>
+       <a href="book/mira/002-measures.html#theorem-37"><code class="xref">theorem-37</code></a> <em>(book/mira/002-measures)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-theorem-39"><td></td><td>
+       <strong>theorem-39</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/mira/002-measures.html#theorem-39"><code class="xref">theorem-39</code></a> <em>(book/mira/002-measures)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-theorem-4"><td></td><td>
@@ -1153,30 +1133,6 @@ document.write(`
        <td></td>
        <td>
        <a href="book/mira/002-measures.html#theorem-40"><code class="xref">theorem-40</code></a> <em>(book/mira/002-measures)</em></td><td>
-       <em>theorem</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-theorem-41"><td></td><td>
-       <strong>theorem-41</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="book/mira/002-measures.html#theorem-41"><code class="xref">theorem-41</code></a> <em>(book/mira/002-measures)</em></td><td>
-       <em>theorem</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-theorem-43"><td></td><td>
-       <strong>theorem-43</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="book/mira/002-measures.html#theorem-43"><code class="xref">theorem-43</code></a> <em>(book/mira/002-measures)</em></td><td>
-       <em>theorem</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-theorem-44"><td></td><td>
-       <strong>theorem-44</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="book/mira/002-measures.html#theorem-44"><code class="xref">theorem-44</code></a> <em>(book/mira/002-measures)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-theorem-5"><td></td><td>
