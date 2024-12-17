@@ -2535,7 +2535,7 @@ __Part 5:__
 We can add elements to the set $U$ to ensure that the resulting set is complete.
 Specifically, we add to $U$ the set
 
-$S = \left\{w \in W | w \neq (f, f, f, \dots)\hat{~} \text{ for any } f \in U \right\},$
+$$S = \left\{w \in W | w \neq (f, f, f, \dots)\hat{~} \text{ for any } f \in U \right\},$$
 
 to obtain the larger set $\hat{U} = U \cup S.$
 Now, for $u \in \hat{U},$ we define $\hat{u}$ to be equal to $(u, u, \dots)\hat{~}$ if $u \in U$ and equal to $u$ otherwise.
@@ -2544,8 +2544,8 @@ Then, define the function $d_\hat{U}: \hat{U} \times \hat{U} \to \mathbb{R}$ as
 $$d_\hat{U}(u, v) = d_V(\hat{u}, \hat{v}).$$
 
 This function is a metric over $\hat{U}.$
-Further, if $(u_1, u_2, \dots)$ is a Cauchy sequence of elements of $U,$ then $(\hat{u_1}, \hat{u_2}, \dots)$ is a Cauchy sequence of equivalence classes in $V.$
-Since $V$ is complete, the sequence $(\hat{u_1}, \hat{u_2}, \dots)$ has a limit, denoted $\hat{u},$ in $V.$
-Therefore the sequence $(u_1, u_2, \dots)$ converges to $\hat{u}$ in the metric space $(\hat{U}, d_{hat{U}}).$
+Further, if $(u_1, u_2, \dots)$ is a Cauchy sequence of elements of $U,$ then $(\hat{u}_1, \hat{u}_2, \dots)$ is a Cauchy sequence of equivalence classes in $V.$
+Since $V$ is complete, the sequence $(\hat{u}_1, \hat{u}_2, \dots)$ has a limit, denoted $\hat{u},$ in $V.$
+Therefore the sequence $(u_1, u_2, \dots)$ converges to $\hat{u}$ in the metric space $(\hat{U}, d_{\hat{U}}).$
 :::
 ::::
