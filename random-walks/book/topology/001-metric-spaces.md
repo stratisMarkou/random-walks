@@ -44,7 +44,28 @@ We call $(Y, d_Y)$ a metric subspace of $X$ where $d_Y: Y \to \mathbb{R}$ is def
 With the definition of metric spaces in place, we are ready to define convergent sequences.
 This is a generalisation of convergence from the familiar definition in the context of the real numbers to more general metric spaces.
 
+
 :::{prf:definition} Convergent sequence
 Let $(x_n)$ be a sequence in a metric space $(X, d_X).$
 We say that $(x_n)$ converges to $x \in X,$ written $x_n \to x$ if for every $\epsilon > 0,$ there exists $N \in \mathbb{N}$ such that $d_X(x_n, x) < \epsilon$ for all $n > N.$
 :::
+
+Similar to analogous results in analysis, we can show that in a metric space, limits are unique.
+
+
+:::{prf:lemma} Limits in metric spaces are unique
+:label: topology-lemma-limits-in-metric-spaces-are-unique
+Suppose $(X, d_X)$ is a metric space and $(x_n)$ is a sequence in $X$ such that $x_n \to x$ and $x_n \to x'$ for some $x, x' \in X.$
+Then $x = x'.$
+:::
+
+:::{dropdown} Proof: Limits in metric spaces are unique
+Let $(X, d_X)$ be a metric space and $(x_n)$ be a sequence in $X$ such that $x_n \to x$ and $x_n \to x'$ for some $x, x' \in X.$
+By the {ref}`non-negativity and the triangle inequality of metrics<topology-def-metric-space>` we have that
+
+$$ 0 \leq d(x, x') \leq d(x, x_n) + d(x_n, x') $$
+
+and taking the limit $n \to \infty$ gives $d(x, x') = 0.$
+:::
+
+
