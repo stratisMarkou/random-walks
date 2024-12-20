@@ -78,7 +78,7 @@
     <link rel="icon" href="../../_static/dicefav.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Stream of papers" href="../papers/intro.html" />
+    <link rel="next" title="Metric and topological spaces" href="../topology/000-intro.html" />
     <link rel="prev" title="Measures" href="002-measures.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -213,10 +213,14 @@
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Exercises</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../topology/000-intro.html">Topology</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../topology/001-metric-spaces.html">Metric spaces</a></li>
+</ul>
+</li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Papers &amp; Miscellanous</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../papers/intro.html">Stream of papers</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../papers/intro.html">Stream of papers</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../papers/swin/swin.html">Shifted window transformers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../papers/transformers/transformers.html">Introduction to transformers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../papers/why-covariances/why-covariances.html">Why covariance functions?</a></li>
@@ -429,6 +433,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-d">Chapter 2.D</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-4-a">Chapter 4.A</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-5-a">Chapter 5.A</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-6-a">Chapter 6.A</a></li>
 </ul>
             </nav>
         </div>
@@ -448,7 +453,7 @@ document.write(`
 <a class="github-button" href="https://github.com/stratisMarkou/random-walks/subscription" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-eye" data-size="large" aria-label="Watch stratisMarkou/random-walks on GitHub">Watch</a>
 <a class="github-button" href="https://github.com/stratisMarkou" data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large" aria-label="Follow @stratisMarkou on GitHub">Follow</a></p>
 <p>This page gives solutions to the exercises from the book Measure, Integration and Real Analysis by Sheldon Axler.
-We have been working through the book and exercises with Adrian Goldwaser and Shreyas Padhy, and these solutions are a joint effort.
+We have been working through the book and exercises with Adrian Goldwaser, Bruno Mlodozeniec and Shreyas Padhy, and these solutions are a joint effort.
 Please <a class="reference external" href="mailto:stratismar&#37;&#52;&#48;gmail&#46;com">email me</a> if you find any errors in these solutions or have any other comments.</p>
 <section id="chapter-1-a">
 <h2>Chapter 1.A<a class="headerlink" href="#chapter-1-a" title="Link to this heading">#</a></h2>
@@ -1301,7 +1306,7 @@ Solution<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(a, b, c, d\)</span> are real numbers with <span class="math notranslate nohighlight">\(a &lt; b\)</span> and <span class="math notranslate nohighlight">\(c &lt; d.\)</span>
-By the <code class="xref prf prf-ref docutils literal notranslate"><span class="pre">countable</span> <span class="pre">subadditivity</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">outer</span> <span class="pre">measure</span></code></p>
+By the <a class="reference internal" href="002-measures.html#mira:thm:countable-subadditivity-of-outer-measure">countable subadditivity of the outer measure</a></p>
 <div class="math notranslate nohighlight">
 \[|(a, b) \cup (c, d)| \leq (b - a) + (d - c)\]</div>
 <p class="sd-card-text">always holds.
@@ -1321,6 +1326,79 @@ Finally, using the fact that <span class="math notranslate nohighlight">\((a, b)
 <div class="math notranslate nohighlight">
 \[|(a, b) \cup (c, d)| \geq |(a, b)| + |(c, d)|.\]</div>
 <p class="sd-card-text">Putting these results together arrive at the required conclusion.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Excercise 2.A.8</p>
+<p>Prove that if <span class="math notranslate nohighlight">\(A \subseteq \mathbb{R}\)</span> and <span class="math notranslate nohighlight">\(t &gt; 0,\)</span> then <span class="math notranslate nohighlight">\(|A| = |A \cap (-t, t)| + |A \cap (\mathbb{R} \setminus (-t, t))|.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">First, by the <a class="reference internal" href="002-measures.html#mira:thm:countable-subadditivity-of-outer-measure">countable subadditivity of the outer measure</a> we have</p>
+<div class="math notranslate nohighlight">
+\[|A| \leq |A \cap (-t, t)| + |A \cap (\mathbb{R} \setminus (-t, t))|\]</div>
+<p class="sd-card-text">for all <span class="math notranslate nohighlight">\(t &gt; 0.\)</span>
+To prove the inequality the other way, suppose <span class="math notranslate nohighlight">\(I_1, I_2, \dots\)</span> is a sequence of open intervals whose union contains <span class="math notranslate nohighlight">\(A.\)</span>
+Then, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\sum_{n = 1}^\infty \ell(I_n) &amp;= \sum_{n = 1}^\infty \ell(I_n \cap (-t, t)) + \ell(I_n \cap (-\infty, t)) + \ell(I_n \cap (\mathbb{R} \setminus (t, \infty))) \\
+&amp;\geq |A \cap (-t, t)| + |A \cap (\mathbb{R} \setminus (-t, t))|
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">where we have used the fact that the sequence of sets</p>
+<div class="math notranslate nohighlight">
+\[I_1 \cap (-\infty, t], I_1 \cap [t, \infty), I_2 \cap (-\infty, t], \dots\]</div>
+<p class="sd-card-text">has a union that contains <span class="math notranslate nohighlight">\(A \cap (\mathbb{R} \setminus (-t, t)),\)</span> and the outer measures of these sets are equal to</p>
+<div class="math notranslate nohighlight">
+\[\ell(I_1 \cap (-\infty, t)), \ell(I_1 \cap (t, \infty)), \ell(I_2 \cap (-\infty, t)), \dots,\]</div>
+<p class="sd-card-text">completing the proof.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 2.A.9</p>
+<p>Prove that <span class="math notranslate nohighlight">\(|A| = \lim_{t \to \infty} |A \cap (-t, t)|\)</span> for all <span class="math notranslate nohighlight">\(A \subseteq \mathbb{R}.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">First, by the <a class="reference internal" href="002-measures.html#mira:thm:countable-subadditivity-of-outer-measure">countable subadditivity of the outer measure</a> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+|A| &amp;= \left|\bigcup_{n = 1}^\infty (A \cap (n-1, n)) \cup (A \cap (-n, -n + 1)) \cup \{-n-1, n-1\} \right| \\
+&amp;\leq \sum_{n = 1}^\infty \left|(A \cap (n-1, n)) \cup (A \cap (-n, -n+1)) \cup \{-n-1, n-1\} \right| \\
+&amp;= \lim_{N \to \infty} \sum_{n = 1}^N \left|(A \cap (n-1, n)) \cup (A \cap (-n, -n+1)) \cup \{-n-1, n-1\} \right| \\
+&amp;= \lim_{N \to \infty} \left|A \cap (-N, N)\right|.
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">Note that since <span class="math notranslate nohighlight">\(\left|A \cap (-t, t)\right|\)</span> is non-decreasing in <span class="math notranslate nohighlight">\(t \in \mathbb{Z}^+,\)</span> the limit above is unchanged even if <span class="math notranslate nohighlight">\(N \not \in \mathbb{Z}^+.\)</span>
+In addition, we have <span class="math notranslate nohighlight">\(|A| \geq |A \cap (-t, t)|\)</span> for all <span class="math notranslate nohighlight">\(t \in \mathbb{R},\)</span> and putting these two inequalities together, we conclude that</p>
+<div class="math notranslate nohighlight">
+\[|A| = \lim_{t \to \infty} |A \cap (-t, t)|.\]</div>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 2.A.10</p>
+<p>Prove that <span class="math notranslate nohighlight">\(|[0, 1] \setminus \mathbb{Q}| = 1.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">First, by the <a class="reference internal" href="002-measures.html#mira:thm:countable-subadditivity-of-outer-measure">countable subadditivity of the outer measure</a> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+|[0, 1] \setminus \mathbb{Q}| \geq |[0, 1]| - |\mathbb{Q}| = |[0, 1]| = 1,
+\end{equation}\]</div>
+<p class="sd-card-text">where we have used the fact that <a class="reference internal" href="002-measures.html#mira:thm:countable-sets-have-measure-zero">countable sets have measure zero</a>.
+Using the fact that the <a class="reference internal" href="002-measures.html#mira:thm:outer-measure-preserves-order">outer measure preserves order</a> we have <span class="math notranslate nohighlight">\(|[0, 1] \setminus \mathbb{Q}| \leq |[0, 1]| = 1,\)</span> concluding the proof.</p>
 </div>
 </details></div>
 </section>
@@ -1591,7 +1669,7 @@ Solution<div class="sd-summary-down docutils">
 </details></div>
 <div class="tip admonition">
 <p class="admonition-title">Exercise 2.C.12</p>
-<p>Suppose <span class="math notranslate nohighlight">\(X\)</span> is a set and <span class="math notranslate nohighlight">\(S\)</span> is the <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra of all subsets <span class="math notranslate nohighlight">\(E\)</span> of <span class="math notranslate nohighlight">\(X\)</span> such that <span class="math notranslate nohighlight">\(E\)</span> is countatble or <span class="math notranslate nohighlight">\(X \setminus E\)</span> is countable.
+<p>Suppose <span class="math notranslate nohighlight">\(X\)</span> is a set and <span class="math notranslate nohighlight">\(S\)</span> is the <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra of all subsets <span class="math notranslate nohighlight">\(E\)</span> of <span class="math notranslate nohighlight">\(X\)</span> such that <span class="math notranslate nohighlight">\(E\)</span> is countable or <span class="math notranslate nohighlight">\(X \setminus E\)</span> is countable.
 Give a complete description of the set of all measures <span class="math notranslate nohighlight">\(\mu\)</span> on <span class="math notranslate nohighlight">\((X, S).\)</span></p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -1600,7 +1678,7 @@ Solution<div class="sd-summary-down docutils">
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(X\)</span> is a set and <span class="math notranslate nohighlight">\(S\)</span> is the <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra of all subsets <span class="math notranslate nohighlight">\(E\)</span> of <span class="math notranslate nohighlight">\(X\)</span> such that <span class="math notranslate nohighlight">\(E\)</span> is countatble or <span class="math notranslate nohighlight">\(X \setminus E\)</span> is countable.
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(X\)</span> is a set and <span class="math notranslate nohighlight">\(S\)</span> is the <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra of all subsets <span class="math notranslate nohighlight">\(E\)</span> of <span class="math notranslate nohighlight">\(X\)</span> such that <span class="math notranslate nohighlight">\(E\)</span> is countable or <span class="math notranslate nohighlight">\(X \setminus E\)</span> is countable.
 Then, a measure <span class="math notranslate nohighlight">\(\mu\)</span> on <span class="math notranslate nohighlight">\((X, S)\)</span> is completely determined by the value of <span class="math notranslate nohighlight">\(\mu(\{x\})\)</span> for each <span class="math notranslate nohighlight">\(x \in X,\)</span> along with <span class="math notranslate nohighlight">\(\mu(X).\)</span></p>
 </div>
 </details></div>
@@ -2007,7 +2085,7 @@ Then, note that</p>
 <div class="math notranslate nohighlight">
 \[|A \cap (n, n+1)| \leq \left| \bigcup_{i=1}^\infty (r_i + V) \right| \leq \sum_{i=1}^\infty |(r_i + [n, n+1])| = 3.\]</div>
 <p class="sd-card-text">Since <span class="math notranslate nohighlight">\(V\)</span> is Lebesgue measurable, so is <span class="math notranslate nohighlight">\(r_i + V\)</span> for each <span class="math notranslate nohighlight">\(i \in \mathbb{N}.\)</span>
-Thus by the <code class="xref prf prf-ref docutils literal notranslate"><span class="pre">countable</span> <span class="pre">subadditivity</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">outer</span> <span class="pre">measure</span></code>, we have</p>
+Thus by the <a class="reference internal" href="002-measures.html#mira:thm:countable-subadditivity-of-outer-measure">countable subadditivity of the outer measure</a>, we have</p>
 <div class="math notranslate nohighlight">
 \[ 3 \geq \left| \bigcup_{i=1}^\infty (r_i + V) \right| = \sum_{i=1}^n |r_i + V| \geq \sum_{i=1}^n |V| = n |V|\]</div>
 <p class="sd-card-text">for all <span class="math notranslate nohighlight">\(n \in \mathbb{N},\)</span> which can only hold if <span class="math notranslate nohighlight">\(|V| = 0.\)</span>
@@ -2277,6 +2355,498 @@ Since <span class="math notranslate nohighlight">\(\mathcal{M}\)</span> is a mon
 </div>
 </details></div>
 </section>
+<section id="chapter-6-a">
+<h2>Chapter 6.A<a class="headerlink" href="#chapter-6-a" title="Link to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 6.A.1</p>
+<p>Verify that each of the following examples of sets <span class="math notranslate nohighlight">\(V\)</span> and functions <span class="math notranslate nohighlight">\(d: V \times V \to \mathbb{R}\)</span> are indeed metric spaces.</p>
+<ol class="arabic simple">
+<li><p>Suppose <span class="math notranslate nohighlight">\(V\)</span> is a nonempty set.
+Define <span class="math notranslate nohighlight">\(d\)</span> as</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{equation}
+d(f, g) = \begin{cases}
+1 &amp;\text{ if } f = g \\
+0 &amp;\text{ if } f \neq g
+\end{cases}
+\end{equation}\end{split}\]</div>
+<ol class="arabic simple" start="2">
+<li><p>Let <span class="math notranslate nohighlight">\(V = \mathbb{R}.\)</span>
+Define <span class="math notranslate nohighlight">\(d\)</span> as</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+d(x, y) = |x - y|.
+\end{equation}\]</div>
+<ol class="arabic simple" start="3">
+<li><p>Let <span class="math notranslate nohighlight">\(V = \mathbb{R}.\)</span>
+For <span class="math notranslate nohighlight">\(n \in \mathbb{Z}^+,\)</span> define <span class="math notranslate nohighlight">\(d\)</span> as</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+d((x_1, \dots, x_n), (y_1, \dots, y_n)) = \max\{\|x_1 - y_1|, \dots, |x_n - y_n|\}.
+\end{equation}\]</div>
+<ol class="arabic simple" start="4">
+<li><p>Let <span class="math notranslate nohighlight">\(V = C([0, 1]),\)</span> the set of continuous real-valued functions on <span class="math notranslate nohighlight">\([0, 1].\)</span>
+Define <span class="math notranslate nohighlight">\(d\)</span> as</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+d(f, g) = \sup\{|f(t) - g(t)|: t \in [0, 1]|\}.
+\end{equation}\]</div>
+<ol class="arabic simple" start="5">
+<li><p>Let <span class="math notranslate nohighlight">\(V\)</span> be the set of sequences <span class="math notranslate nohighlight">\((a_1, a_2, \dots)\)</span> with <span class="math notranslate nohighlight">\(a_k \in \mathbb{R}\)</span> and <span class="math notranslate nohighlight">\(\sum_{n=1}^\infty |a_k| &lt; \infty.\)</span>
+Define <span class="math notranslate nohighlight">\(d\)</span> as</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+d((a_1, a_2, \dots), (b_1, b_2, \dots)) = \sum_{n=1}^\infty |a_k - b_k|.
+\end{equation}\]</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">For all the definitions above, <span class="math notranslate nohighlight">\(d(f, g) \geq 0\)</span> and equality with zero holds only if <span class="math notranslate nohighlight">\(f, g.\)</span>
+Further, <span class="math notranslate nohighlight">\(d(f, g) = d(g, f).\)</span>
+It remains to show the triangle inequality</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+d(f, h) \leq d(f, g) + d(g, h) \text{ for all } f, g, h \in V
+\end{equation}\]</div>
+<p class="sd-card-text">holds for each example.</p>
+<p class="sd-card-text"><strong>Example 1:</strong>
+Suppose <span class="math notranslate nohighlight">\(f, g, h \in \mathbb{V}.\)</span>
+If <span class="math notranslate nohighlight">\(f = h,\)</span> then the triangle inequality holds since</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+d(f, h) = 0 \leq d(f, g) + d(g, h),
+\end{equation}\]</div>
+<p class="sd-card-text">holds.
+If <span class="math notranslate nohighlight">\(f \neq h,\)</span> then at least one of <span class="math notranslate nohighlight">\(f \neq g\)</span> and <span class="math notranslate nohighlight">\(g \neq h\)</span> must hold, so the triangle inequality holds because</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+d(f, h) = 1 \leq d(f, g) + d(g, h).
+\end{equation}\]</div>
+<p class="sd-card-text"><strong>Example 2:</strong>
+Suppose <span class="math notranslate nohighlight">\(f, g, h \in \mathbb{R}.\)</span>
+Then the triangle inequality holds because</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+d(f, h) = |f - h| = |(f - g) + (g - h)| \leq |f - g| + |g - h| \leq d(f, g) + d(g, h).
+\end{equation}\]</div>
+<p class="sd-card-text"><strong>Example 3:</strong>
+Suppose <span class="math notranslate nohighlight">\(n \in \mathbb{Z}^+\)</span> and <span class="math notranslate nohighlight">\((x_1, \dots, x_n), (y_1, \dots, y_n), (z_1, \dots, z_n) \in \mathbb{R}^n.\)</span>
+Then the triangle inequality holds because</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+&amp;~~~~d((x_1, \dots, x_n), (z_1, \dots, z_n)) = \\
+&amp;= \max\{|x_1 - z_1|, \dots, |x_n - z_n|\} \\
+&amp;= \max\{|(x_1 - y_1) + (y_1 - z_1)|, \dots, |(x_n - y_n) + (y_n - z_n)|\} \\
+&amp;\leq \max\{|x_1 - y_1| + |y_1 - z_1|, \dots, |x_n - y_n| + |y_n - z_n|\} \\
+&amp;\leq \max\{|x_1 - y_1|, \dots, |x_n - y_n|\} + \max\{|y_1 - z_1|, \dots, |y_n - z_n|\} \\
+&amp;\leq d((x_1, \dots, x_n), (y_1, \dots, y_n)) + d((y_1, \dots, y_n), (z_1, \dots, z_n)).
+\end{align}\end{split}\]</div>
+<p class="sd-card-text"><strong>Example 4:</strong>
+Suppose <span class="math notranslate nohighlight">\(f, g, h \in C([0, 1]).\)</span>
+Then, the triangle inequality holds because</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+d(f, h) &amp;= \sup\{|f(t) - h(t)|: t \in [0, 1]|\} \\
+&amp;= \sup\{|(f(t) - g(t)) + (g(t) - h(t))|: t \in [0, 1]|\} \\
+&amp;\leq \sup\{|f(t) - g(t)| + |g(t) - h(t)|: t \in [0, 1]|\} \\
+&amp;\leq \sup\{|f(t) - g(t)|: t \in [0, 1]|\} + \sup\{|g(t) - h(t)|: t \in [0, 1]|\} \\
+&amp;= d(f, g) + d(g, h).
+\end{align}\end{split}\]</div>
+<p class="sd-card-text"><strong>Example 5:</strong>
+Suppose <span class="math notranslate nohighlight">\((f_1, f_2, \dots), (g_1, g_2, \dots), (h_1, h_2, \dots) \in V,\)</span> where <span class="math notranslate nohighlight">\(V\)</span> is the set of sequences <span class="math notranslate nohighlight">\((a_1, a_2, \dots)\)</span> of real numbers such that <span class="math notranslate nohighlight">\(\sum_{n=1}^\infty |a_k| &lt; \infty.\)</span>
+Then, the triangle inequality holds because</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+&amp;~~~~d((f_1, f_2, \dots), (h_1, h_2, \dots)) = \\
+&amp;= \sum_{n=1}^\infty |f_k - h_k| \\
+&amp;= \sum_{n=1}^\infty |(f_k - g_k) + (g_k - h_k)| \\
+&amp;\leq \sum_{n=1}^\infty |f_k - g_k| + |g_k - h_k| \\
+&amp;= d((f_1, f_2, \dots), (g_1, g_2, \dots)) + d((g_1, g_2, \dots), (h_1, h_2, \dots)).
+\end{align}\end{split}\]</div>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 6.A.2</p>
+<p>Prove that every finite subset of a metric space is closed.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\((V, d)\)</span> is a metric space and let <span class="math notranslate nohighlight">\(A\)</span> be a finite subset of <span class="math notranslate nohighlight">\(V.\)</span>
+Let <span class="math notranslate nohighlight">\(x \in A'.\)</span>
+Since <span class="math notranslate nohighlight">\(A\)</span> is finite, the set <span class="math notranslate nohighlight">\(\{d(x, y) \in \mathbb{R}^+: y \in A\}\)</span> has a minimum element, and this minimum element is non-zero, say equal to some positive <span class="math notranslate nohighlight">\(m \in \mathbb{R}\)</span>
+Therefore, any open ball centered on <span class="math notranslate nohighlight">\(x\)</span> with radius less than or equal to <span class="math notranslate nohighlight">\(m\)</span> is contained in <span class="math notranslate nohighlight">\(A'.\)</span>
+Since <span class="math notranslate nohighlight">\(x\)</span> was arbitrary, <span class="math notranslate nohighlight">\(A'\)</span> is open, so <span class="math notranslate nohighlight">\(A\)</span> is closed.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 6.A.3</p>
+<p>Prove that every closed ball in a metric space is closed.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\((V, d)\)</span> is a metric space.
+Let <span class="math notranslate nohighlight">\(r \in \mathbb{R}^+\)</span> and <span class="math notranslate nohighlight">\(f \in V.\)</span>
+Let <span class="math notranslate nohighlight">\(g \in \overline{B}(f, r)'.\)</span>
+Then, <span class="math notranslate nohighlight">\(d(f, g) &gt; r\)</span> so the open ball <span class="math notranslate nohighlight">\(B(g, d(f, g) - r)\)</span> does not intersect the closed ball <span class="math notranslate nohighlight">\(\overline{B}(f, r).\)</span>
+[Otherwise there would exist a common element <span class="math notranslate nohighlight">\(h \in B(g, d(f, g) - r) \cap \overline{B}(f, r)\)</span> which leads to a contradiction via the triangle inequality since <span class="math notranslate nohighlight">\(d(f, g) \leq d(f, h) + d(h, g) &lt; r.\)</span>]
+Since the two balls do not intersect, <span class="math notranslate nohighlight">\(B(g, r - d(f, g)) \subseteq \overline{B}(f, r)',\)</span> which means that <span class="math notranslate nohighlight">\(\overline{B}(f, r)'\)</span> is an open set, so <span class="math notranslate nohighlight">\(\overline{B}(f, r)\)</span> is a closed set.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 6.A.4</p>
+<p>Suppose <span class="math notranslate nohighlight">\(V\)</span> is a metric space.</p>
+<ol class="arabic simple">
+<li><p>Prove that the union of each collection of open subsets of <span class="math notranslate nohighlight">\(V\)</span> is an open subset of <span class="math notranslate nohighlight">\(V.\)</span></p></li>
+<li><p>Prove that the intersection of each finite collection of open subsets of <span class="math notranslate nohighlight">\(V\)</span> is an open subset of <span class="math notranslate nohighlight">\(V.\)</span></p></li>
+</ol>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">In the following parts, <span class="math notranslate nohighlight">\(V\)</span> is a metric space and <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> is a collection of subsets of <span class="math notranslate nohighlight">\(V.\)</span></p>
+<p class="sd-card-text"><strong>Part 1:</strong>
+Let <span class="math notranslate nohighlight">\(S = \cup_{A \in \mathcal{A}} A.\)</span>
+If <span class="math notranslate nohighlight">\(s \in S,\)</span> there exists some <span class="math notranslate nohighlight">\(A \in \mathcal{A}\)</span> such that <span class="math notranslate nohighlight">\(s \in A.\)</span>
+Since every <span class="math notranslate nohighlight">\(A \in \mathcal{A}\)</span> is open, there exists an open ball centered on <span class="math notranslate nohighlight">\(s\)</span> that is contained in <span class="math notranslate nohighlight">\(A.\)</span>
+This open ball is also contained in <span class="math notranslate nohighlight">\(S,\)</span> so <span class="math notranslate nohighlight">\(S\)</span> is open.</p>
+<p class="sd-card-text"><strong>Part 2:</strong>
+Now suppose that, in addition, <span class="math notranslate nohighlight">\(\mathcal{A} = \{A_1, \dots A_N\}\)</span> is finite.
+If <span class="math notranslate nohighlight">\(s \in S,\)</span> then <span class="math notranslate nohighlight">\(s \in A_n\)</span> for <span class="math notranslate nohighlight">\(n = 1, \dots, N.\)</span>
+Since each <span class="math notranslate nohighlight">\(A\)</span> is open, for each <span class="math notranslate nohighlight">\(A_n \in \mathcal{A},\)</span> there exists an open ball centered on <span class="math notranslate nohighlight">\(s\)</span> with radius <span class="math notranslate nohighlight">\(r_n,\)</span> which is contained in <span class="math notranslate nohighlight">\(A_n.\)</span>
+Now, letting <span class="math notranslate nohighlight">\(r = \min\{r_1, \dots, r_N\}\)</span> we see that the open ball centered on <span class="math notranslate nohighlight">\(s\)</span> with radius <span class="math notranslate nohighlight">\(r\)</span> is contained in each <span class="math notranslate nohighlight">\(A_n\)</span> and therefore it is also contained in their intersection, i.e. it is contained in <span class="math notranslate nohighlight">\(S.\)</span>
+Therefore there exists an open ball centered on <span class="math notranslate nohighlight">\(s \in S,\)</span> which implies that <span class="math notranslate nohighlight">\(S\)</span> is open.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 6.A.5</p>
+<p>Suppose <span class="math notranslate nohighlight">\(V\)</span> is a metric space.</p>
+<ol class="arabic simple">
+<li><p>Prove that the intersection of each collection of closed subsets of <span class="math notranslate nohighlight">\(V\)</span> is an open subset of <span class="math notranslate nohighlight">\(V.\)</span></p></li>
+<li><p>Prove that the union of each finite collection of open subsets of <span class="math notranslate nohighlight">\(V\)</span> is an open subset of <span class="math notranslate nohighlight">\(V.\)</span></p></li>
+</ol>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">The complement of an intersection of a collection of sets is equal to the union of the complements of the sets in the collection.
+Similarly, the complement of a union of a collection of sets is equal to the intersection of the complements of the sets in the collection.
+Therefore, applying the result of the previous exercise we arrive at the two required results.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 6.A.6</p>
+<ol class="arabic simple">
+<li><p>Prove that if <span class="math notranslate nohighlight">\(V\)</span> is a metric space, <span class="math notranslate nohighlight">\(f \in V,\)</span> and <span class="math notranslate nohighlight">\(r &gt; 0,\)</span> then <span class="math notranslate nohighlight">\(\overline{B(f, r)} \subseteq \overline{B}(f, r).\)</span></p></li>
+<li><p>Give an example of a metric space <span class="math notranslate nohighlight">\(V,\)</span> <span class="math notranslate nohighlight">\(f \in V,\)</span> and <span class="math notranslate nohighlight">\(r &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(\overline{B(f, r)} \neq \overline{B}(f, r).\)</span></p></li>
+</ol>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><strong>Part 1:</strong>
+First, note that <span class="math notranslate nohighlight">\(B(f, r) \subseteq \overline{B}(f, r).\)</span>
+Second <span class="math notranslate nohighlight">\(\overline{B}(f, r)\)</span> is a closed set, and the closure of a set is the intersection of all closed sets that contain it, so <span class="math notranslate nohighlight">\(\overline{B(f, r)}\)</span> is contained in any closed set that contains <span class="math notranslate nohighlight">\(B(f, r),\)</span> so <span class="math notranslate nohighlight">\(\overline{B(f, r)} \subseteq \overline{B}(f, r).\)</span></p>
+<p class="sd-card-text"><strong>Part 2:</strong>
+Let <span class="math notranslate nohighlight">\(V = \mathbb{Z}\)</span> with the metric <span class="math notranslate nohighlight">\(d: \mathbb{Z} \times \mathbb{Z} \to \mathbb{R}^+\)</span> defined as <span class="math notranslate nohighlight">\(d(f, g) = |f - g|.\)</span>
+Also let <span class="math notranslate nohighlight">\(f = 0\)</span> and <span class="math notranslate nohighlight">\(r = 1.\)</span>
+Then <span class="math notranslate nohighlight">\(B(f, r) = \{0\}\)</span> and so <span class="math notranslate nohighlight">\(\overline{B(f, r)} = \{0\}.\)</span>
+However, <span class="math notranslate nohighlight">\(\overline{B}(f, r) = \{-1, 0, 1\}\)</span> so <span class="math notranslate nohighlight">\(\overline{B(f, r)} \neq \overline{B}(f, r)\)</span> as required.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 6.A.7</p>
+<p>Show that each sequence in a metric space has at most one limit.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\((V, d)\)</span> be a metric space.
+Suppose <span class="math notranslate nohighlight">\(f_1, f_2, \dots \in V\)</span> is a sequence in <span class="math notranslate nohighlight">\(V.\)</span>
+If <span class="math notranslate nohighlight">\(a, b \in V\)</span> are limits of <span class="math notranslate nohighlight">\(f_1, f_2, \dots,\)</span> then</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+\lim_{n \to \infty} d(f_n, a) = 0 \text{ and } \lim_{n \to \infty} d(f_n, b) = 0.
+\end{equation}\]</div>
+<p class="sd-card-text">From the triangle inequality, <span class="math notranslate nohighlight">\(d(a, b) \leq d(a, f_n) + d(f_n, b),\)</span> and taking limits of both sides, we conclude that <span class="math notranslate nohighlight">\(d(a, b) = 0,\)</span> which implies that <span class="math notranslate nohighlight">\(a = b.\)</span>
+Therefore the sequence can have at most one limit in <span class="math notranslate nohighlight">\(V.\)</span></p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 6.A.8</p>
+<p>Prove that each open subset of a metric space <span class="math notranslate nohighlight">\(V\)</span> is the union of some sequence of closed subsets of <span class="math notranslate nohighlight">\(V.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(V\)</span> be a metric space, let <span class="math notranslate nohighlight">\(U\)</span> be an open subset of <span class="math notranslate nohighlight">\(V\)</span> and define</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+U_r = \{f \in V: d(f, g) \geq r \text{ for all } g \in U'\}.
+\end{equation}\]</div>
+<p class="sd-card-text">Therefore <span class="math notranslate nohighlight">\(U_r\)</span> is the set of elements in <span class="math notranslate nohighlight">\(U\)</span> that are at least a distance <span class="math notranslate nohighlight">\(r\)</span> away from <span class="math notranslate nohighlight">\(V.\)</span>
+Note also that <span class="math notranslate nohighlight">\(U_r \subseteq U.\)</span>
+Now, note that for fixed <span class="math notranslate nohighlight">\(g \in U',\)</span> the set <span class="math notranslate nohighlight">\(\{f \in V: d(f, g) \geq r\}\)</span> is closed, because it is the complement of the open set <span class="math notranslate nohighlight">\(\{f \in V: d(f, g) &lt; r\}.\)</span>
+The intersection of a collection of closed sets is closed, so <span class="math notranslate nohighlight">\(U_r\)</span> is closed.</p>
+<p class="sd-card-text">Now, note that for each <span class="math notranslate nohighlight">\(n \in \mathbb{Z}^+,\)</span> we have <span class="math notranslate nohighlight">\(U_{\frac{1}{n}} \subseteq U,\)</span> from which it follows that <span class="math notranslate nohighlight">\(\bigcup_{n = 1}^\infty U_{\frac{1}{n}} \subseteq U.\)</span>
+Conversely, if <span class="math notranslate nohighlight">\(x \in U,\)</span> since <span class="math notranslate nohighlight">\(U\)</span> is open there exists a ball of radius <span class="math notranslate nohighlight">\(\frac{1}{n}\)</span> for some <span class="math notranslate nohighlight">\(n \in \mathbb{Z}^+\)</span> contained in <span class="math notranslate nohighlight">\(U,\)</span> so <span class="math notranslate nohighlight">\(x \in U_{\frac{1}{n}},\)</span> from which it follows that <span class="math notranslate nohighlight">\(U \subseteq \bigcup_{n = 1}^\infty U_{\frac{1}{n}}.\)</span>
+Therefore <span class="math notranslate nohighlight">\(U\)</span> is the union of a sequence of closed sets in <span class="math notranslate nohighlight">\(V,\)</span> as required.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 6.A.10</p>
+<p>Prove or give a counterexample:
+If <span class="math notranslate nohighlight">\(V\)</span> is a metric space and <span class="math notranslate nohighlight">\(U, W\)</span> are subserts of <span class="math notranslate nohighlight">\(V,\)</span> then <span class="math notranslate nohighlight">\(\overline{U} \cup \overline{W} = \overline{U \cup W}.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">If <span class="math notranslate nohighlight">\(v \in \overline{U},\)</span> then there exists a sequence of elements in <span class="math notranslate nohighlight">\(U\)</span> whose limit is <span class="math notranslate nohighlight">\(v.\)</span>
+Therefore there exists a sequence of elements in <span class="math notranslate nohighlight">\(U \cup W\)</span> whose limit is <span class="math notranslate nohighlight">\(v,\)</span> so <span class="math notranslate nohighlight">\(v \in \overline{U \cup W}.\)</span>
+Similarly, if <span class="math notranslate nohighlight">\(v \in \overline{W},\)</span> it follows that <span class="math notranslate nohighlight">\(v \in \overline{U \cup W}.\)</span>
+We conclude that <span class="math notranslate nohighlight">\(\overline{U} \cup \overline{W} \subseteq \overline{U \cup W}.\)</span></p>
+<p class="sd-card-text">If <span class="math notranslate nohighlight">\(v \in \overline{U \cup W},\)</span> then <span class="math notranslate nohighlight">\(v\)</span> must be the limit of a sequence of elements in <span class="math notranslate nohighlight">\(U \cup W.\)</span>
+This sequence must have a infinite subsequence of elements in at least one of <span class="math notranslate nohighlight">\(U\)</span> or <span class="math notranslate nohighlight">\(W\)</span> with <span class="math notranslate nohighlight">\(v\)</span> as its limit, so <span class="math notranslate nohighlight">\(v \in \overline{U} \cup \overline{W}.\)</span>
+We conclude that <span class="math notranslate nohighlight">\(\overline{U \cup W} \subseteq \overline{U} \cup \overline{W},\)</span> which completes the proof.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 6.A.11</p>
+<p>Prove or give a counterexample:
+If <span class="math notranslate nohighlight">\(V\)</span> is a metric space and <span class="math notranslate nohighlight">\(U, W\)</span> are subsets of <span class="math notranslate nohighlight">\(V,\)</span> then <span class="math notranslate nohighlight">\(\overline{U} \cap \overline{W} = \overline{U \cap W}.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">The equation does not hold.
+As a counterexample, consider <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> with the metric</p>
+<div class="math notranslate nohighlight">
+\[d(f, g) = |f - g|,\]</div>
+<p class="sd-card-text">and let <span class="math notranslate nohighlight">\(U = (-1, 0), W = (0, 1).\)</span>
+Then we have <span class="math notranslate nohighlight">\(\overline{U} = [-1, 0]\)</span> and <span class="math notranslate nohighlight">\(\overline{W} = [0, 1].\)</span>
+Therefore, we have <span class="math notranslate nohighlight">\(\overline{U} \cap \overline{W} = \{0\},\)</span> but <span class="math notranslate nohighlight">\(U \cap W = \emptyset\)</span> so <span class="math notranslate nohighlight">\(\overline{U \cap W} = \emptyset.\)</span></p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 6.A.12</p>
+<p>Suppose <span class="math notranslate nohighlight">\((U, d_U), (V, d_V)\)</span> and <span class="math notranslate nohighlight">\((W, d_W)\)</span> are metric spaces.
+Suppose also that <span class="math notranslate nohighlight">\(T: U \to V\)</span> and <span class="math notranslate nohighlight">\(S: V \to W\)</span> are continuous functions.</p>
+<ol class="arabic simple">
+<li><p>Using the definition of continuity, show that <span class="math notranslate nohighlight">\(S \circ T: U \to W\)</span> is continuous.</p></li>
+<li><p>Using the equivalence of continuity with the property that the limit of a function is equal to the function of its limit, show that <span class="math notranslate nohighlight">\(S \circ T: U \to W\)</span> is continuous.</p></li>
+<li><p>Using the equivalence of continuity with the property that the inverse image of an open set under a function is open, show that <span class="math notranslate nohighlight">\(S \circ T: U \to W\)</span> is continuous.</p></li>
+</ol>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><strong>Part 1:</strong>
+Let <span class="math notranslate nohighlight">\(v \in V\)</span> and <span class="math notranslate nohighlight">\(\epsilon &gt; 0.\)</span>
+Since <span class="math notranslate nohighlight">\(S\)</span> is continuous, there exists <span class="math notranslate nohighlight">\(\delta_S &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(d_W(S(v), S(v')) &lt; \epsilon\)</span> for all <span class="math notranslate nohighlight">\(v' \in V\)</span> such that <span class="math notranslate nohighlight">\(d_V(v, v') &lt; \delta_S.\)</span>
+Let <span class="math notranslate nohighlight">\(u \in U.\)</span>
+Since <span class="math notranslate nohighlight">\(T\)</span> is continuous, there exists <span class="math notranslate nohighlight">\(\delta_T &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(d_V(T(u), T(u')) &lt; \delta_S\)</span> for all <span class="math notranslate nohighlight">\(u' \in U\)</span> such that <span class="math notranslate nohighlight">\(d_U(u, u') &lt; \delta_T.\)</span>
+Letting <span class="math notranslate nohighlight">\(v = T(u)\)</span> and putting together these facts, we see that <span class="math notranslate nohighlight">\(d_W(S \circ T(u), S \circ T(u')) &lt; \epsilon\)</span> for all <span class="math notranslate nohighlight">\(u' \in U\)</span> such that <span class="math notranslate nohighlight">\(d_U(u, u') &lt; \delta_T,\)</span> which shows that <span class="math notranslate nohighlight">\(S \circ T\)</span> is continuous.</p>
+<p class="sd-card-text"><strong>Part 2:</strong>
+Suppose <span class="math notranslate nohighlight">\(u_1, u_2, \dots\)</span> is a sequence in <span class="math notranslate nohighlight">\(U\)</span> with limit <span class="math notranslate nohighlight">\(u \in U.\)</span>
+Since <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span> are both continuous</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+S \circ T(u) &amp;= S(T(u)) \\
+&amp;= S\left(T\left(\lim_{k \to \infty} u_k\right)\right) \\
+&amp;= S\left(\lim_{k \to \infty} T(u_k)\right) \\
+&amp;= \lim_{k \to \infty} S\left(T(u_k)\right) \\
+&amp;= \lim_{k \to \infty} S \circ T (u_k)
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">Therefore <span class="math notranslate nohighlight">\(S \circ T\)</span> is continuous.</p>
+<p class="sd-card-text"><strong>Part 3:</strong>
+Suppose <span class="math notranslate nohighlight">\(G\)</span> is an open subset in <span class="math notranslate nohighlight">\(W.\)</span>
+Since <span class="math notranslate nohighlight">\(S\)</span> is continuous, <span class="math notranslate nohighlight">\(S^{-1}(G)\)</span> is open in <span class="math notranslate nohighlight">\(V\)</span> and since <span class="math notranslate nohighlight">\(T\)</span> is continuous, <span class="math notranslate nohighlight">\(T^{-1}(S^{-1}(G)) = (S \circ T)^{-1}(G)\)</span> is open in <span class="math notranslate nohighlight">\(U,\)</span> so <span class="math notranslate nohighlight">\(S \circ T\)</span> is continuous.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 6.A.14</p>
+<p>Suppose a Cauchy sequence in a metric space has a convergent subsequence.
+Prove that the Cauchy sequence converges.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\((V, d)\)</span> be a metric space and <span class="math notranslate nohighlight">\(v_1, v_2, \dots\)</span> be a Cauchy sequence in <span class="math notranslate nohighlight">\(V.\)</span>
+Suppose that <span class="math notranslate nohighlight">\(v_{k_1}, v_{k_2}, \dots\)</span> is a subsequence which converges to <span class="math notranslate nohighlight">\(v \in V.\)</span>
+Let <span class="math notranslate nohighlight">\(\epsilon &gt; 0.\)</span>
+Since the sequence <span class="math notranslate nohighlight">\(v_1, v_2, \dots\)</span> is Cauchy, there exists <span class="math notranslate nohighlight">\(K\)</span> such that for all <span class="math notranslate nohighlight">\(k, k' \geq K\)</span> we have <span class="math notranslate nohighlight">\(d(v_k, v_{k'}) &lt; \frac{\epsilon}{2}.\)</span>
+In addition, by our earlier assumption, there exists <span class="math notranslate nohighlight">\(N\)</span> such that for all <span class="math notranslate nohighlight">\(n \geq N\)</span> we have <span class="math notranslate nohighlight">\(d(v_{k_n}, v) &lt; \frac{\epsilon}{2}.\)</span>
+Then, letting <span class="math notranslate nohighlight">\(L\)</span> be the maximum of <span class="math notranslate nohighlight">\(K\)</span> and <span class="math notranslate nohighlight">\(k_N\)</span> we see that for any <span class="math notranslate nohighlight">\(l \geq L\)</span> it holds that <span class="math notranslate nohighlight">\(d(v_l, v) \leq d(v_l, v_k) + d(v_k, v) &lt; \epsilon,\)</span> concluding the proof.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 6.A.16</p>
+<p>Suppose <span class="math notranslate nohighlight">\((U, d)\)</span> is a metric space.
+Let <span class="math notranslate nohighlight">\(W\)</span> denote the set of all Cauchy sequences of elements of <span class="math notranslate nohighlight">\(U.\)</span></p>
+<ol class="arabic simple">
+<li><p>For <span class="math notranslate nohighlight">\((f_1, f_2, \dots)\)</span> and <span class="math notranslate nohighlight">\((g_1, g_2, \dots)\)</span> in <span class="math notranslate nohighlight">\(W,\)</span> define <span class="math notranslate nohighlight">\((f_1, f_2, \dots) \equiv (g_1, g_2, \dots)\)</span> to mean that <span class="math notranslate nohighlight">\(\lim_{k \to \infty} d(f_k, g_k) = 0.\)</span>
+Show that <span class="math notranslate nohighlight">\(\equiv\)</span> is an equivalence relation on <span class="math notranslate nohighlight">\(W.\)</span></p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(V\)</span> denote the set of equivalence classses of elements of <span class="math notranslate nohighlight">\(W\)</span> under the equivalence relation above.
+For <span class="math notranslate nohighlight">\((f_1, f_2, \dots) \in W,\)</span> let <span class="math notranslate nohighlight">\((f_1, f_2, \dots)\hat{~}\)</span> denote the equivalence class of <span class="math notranslate nohighlight">\((f_1, f_2, \dots).\)</span>
+Show that the following definition of <span class="math notranslate nohighlight">\(d_V: V \times V \to [0, \infty)\)</span> makes sense and that <span class="math notranslate nohighlight">\(d_V\)</span> is a metric on <span class="math notranslate nohighlight">\(V\)</span></p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+d_V((f_1, f_2, \dots)\hat{~}, (g_1, g_2, \dots)\hat{~}) = \lim_{k \to \infty} d(f_k, g_k).
+\end{equation}\]</div>
+<ol class="arabic simple" start="3">
+<li><p>Show that <span class="math notranslate nohighlight">\((V, d_V)\)</span> is a complete metric space.</p></li>
+<li><p>Show that the map from <span class="math notranslate nohighlight">\(U\)</span> to <span class="math notranslate nohighlight">\(V\)</span> that takes <span class="math notranslate nohighlight">\(f \in U\)</span> to <span class="math notranslate nohighlight">\((f, f, f, \dots)\hat{~}\)</span> preserves distances, meaning that for all <span class="math notranslate nohighlight">\(f, g \in U,\)</span> we have</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[d(f, g) = d_V((f, f, f, \dots)\hat{~}, (g, g, g, \dots)\hat{~})\]</div>
+<ol class="arabic simple" start="5">
+<li><p>Explain why (4) shows that every metric space is a subset of some complete metric space.</p></li>
+</ol>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><strong>Part 1:</strong>
+First, we have that <span class="math notranslate nohighlight">\(d(f_k, f_k) = 0\)</span> so <span class="math notranslate nohighlight">\((f_1, f_2, \dots) \equiv (f_1, f_2, \dots).\)</span>
+Second, if <span class="math notranslate nohighlight">\((f_1, f_2, \dots) \equiv (g_1, g_2, \dots),\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\lim_{k \to \infty} d(f_k, g_k) = 0 \implies \lim_{k \to \infty} d(g_k, f_k) = 0,\]</div>
+<p class="sd-card-text">so it follows that <span class="math notranslate nohighlight">\((g_1, g_2, \dots) \equiv (f_1, f_2, \dots).\)</span>
+Third, if <span class="math notranslate nohighlight">\((f_1, f_2, \dots) \equiv (g_1, g_2, \dots),\)</span> and <span class="math notranslate nohighlight">\((g_1, g_2, \dots) \equiv (h_1, h_2, \dots),\)</span> we have that</p>
+<div class="math notranslate nohighlight">
+\[\lim_{k \to \infty} d(f_k, h_k) \leq \lim_{k \to \infty} (d(f_k, g_k) + d(g_k, h_k)) = 0,\]</div>
+<p class="sd-card-text">which means that <span class="math notranslate nohighlight">\((f_1, f_2, \dots) \equiv (h_1, h_2, \dots).\)</span>
+Therefore <span class="math notranslate nohighlight">\(\equiv\)</span> is an equivalence relation.</p>
+<p class="sd-card-text"><strong>Part 2:</strong>
+First, for <span class="math notranslate nohighlight">\(d_V\)</span> to be well-defined, it should not matter which representative elements of <span class="math notranslate nohighlight">\((f_1, f_2, \dots)\hat{~}\)</span> and <span class="math notranslate nohighlight">\((g_1, g_2, \dots)\hat{~}\)</span> we pick in the right hand side of the equation that defines <span class="math notranslate nohighlight">\(d_V.\)</span>
+In particular, suppose <span class="math notranslate nohighlight">\((\tilde{f}_1, \tilde{f}_2, \dots) \in (f_1, f_2, \dots)\hat{~}.\)</span>
+Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+\lim_{k \to \infty} d(\tilde{f}_k, g_k) \leq \lim_{k \to \infty} (d(f_k, g_k) + d(f_k, \tilde{f}_k)) = \lim_{k \to \infty} d(f_k, g_k),
+\end{equation}\]</div>
+<p class="sd-card-text">so it does not matter which representative element of <span class="math notranslate nohighlight">\((f_1, f_2, \dots)\hat{~}\)</span> we pick when defining <span class="math notranslate nohighlight">\(d_V.\)</span>
+The same holds for <span class="math notranslate nohighlight">\((g_1, g_2, \dots)\hat{~},\)</span> so <span class="math notranslate nohighlight">\(d_V\)</span> is well-defined.</p>
+<p class="sd-card-text">Second, we show that <span class="math notranslate nohighlight">\(d_V\)</span> is a metric.
+By the definition of <span class="math notranslate nohighlight">\(d_V,\)</span> we have that</p>
+<div class="math notranslate nohighlight">
+\[d_V((f_1, f_2, \dots)\hat{~}, (g_1, g_2, \dots)\hat{~}) \geq 0,\]</div>
+<p class="sd-card-text">with equality holding if and only if <span class="math notranslate nohighlight">\(\lim_{k \to \infty} d(f_k, g_k) = 0,\)</span> which in turn holds if and only if <span class="math notranslate nohighlight">\((f_1, f_2, \dots) \equiv (g_1, g_2, \dots),\)</span> which is equivalent to <span class="math notranslate nohighlight">\((f_1, f_2, \dots)\hat{~} = (g_1, g_2, \dots)\hat{~}.\)</span>
+In addition, we have that</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+d_V((f_1, f_2, \dots)\hat{~}, (g_1, g_2, \dots)\hat{~}) = d_V((g_1, g_2, \dots)\hat{~}, (f_1, f_2, \dots)\hat{~})
+\end{equation}\]</div>
+<p class="sd-card-text">because <span class="math notranslate nohighlight">\(d(f_k, g_k) = d(g_k, f_k).\)</span>
+Lastly, if <span class="math notranslate nohighlight">\((h_1, h_2, \dots) \in W,\)</span> we have that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+&amp;~~~~d_V((f_1, f_2, \dots)\hat{~}, (h_1, h_2, \dots)\hat{~}) =\\
+&amp;= \lim_{k \to \infty} d(f_k, h_k) \\
+&amp;\leq\lim_{k \to \infty} (d(f_k, g_k) + d(g_k, h_k)) \\
+&amp;= d_V((f_1, f_2, \dots)\hat{~}, (g_1, g_2, \dots)\hat{~}) + d_V((g_1, g_2, \dots)\hat{~}, (h_1, h_2, \dots)\hat{~}),
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">so <span class="math notranslate nohighlight">\(d_V\)</span> satisfies the triangle inequality, completing the proof that it is a metric.</p>
+<p class="sd-card-text"><strong>Part 3:</strong>
+Suppose that <span class="math notranslate nohighlight">\((v_1, v_2, \dots)\)</span> is a Cauchy sequence in <span class="math notranslate nohighlight">\(V.\)</span>
+We will show that there exists an element <span class="math notranslate nohighlight">\(w \in V\)</span> and <span class="math notranslate nohighlight">\(K \in \mathbb{Z}^+\)</span> such that for all <span class="math notranslate nohighlight">\(k \geq K\)</span> we have <span class="math notranslate nohighlight">\(\lim_{i \to \infty} d((v_k)_i, w_i) = 0.\)</span>
+Since each sequence <span class="math notranslate nohighlight">\(v_k\)</span> is itself Cauchy, there exists <span class="math notranslate nohighlight">\(N_k \in \mathbb{Z}^+\)</span> such that <span class="math notranslate nohighlight">\(N_k \geq k\)</span> and for all <span class="math notranslate nohighlight">\(i, j \geq N_k,\)</span> we have <span class="math notranslate nohighlight">\(d(v_i, v_j) &lt; \frac{1}{k}.\)</span>
+Define the terms of the sequence <span class="math notranslate nohighlight">\(w\)</span> to be <span class="math notranslate nohighlight">\(w_k = (v_k)_{N_k}.\)</span>
+We now show that <span class="math notranslate nohighlight">\(w\)</span> is in fact the limit of <span class="math notranslate nohighlight">\((v_1, v_2, \dots).\)</span></p>
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(\epsilon &gt; 0.\)</span>
+Since <span class="math notranslate nohighlight">\((v_1, v_2, \dots)\)</span> is Cauchy, there exists <span class="math notranslate nohighlight">\(N_{\epsilon}^{(1)} \in \mathbb{Z}^+\)</span> such that for all <span class="math notranslate nohighlight">\(i, j \geq N_{\epsilon}^{(1)},\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\lim_{k \to \infty} d((v_i)_k, (v_j)_k) &lt; \frac{\epsilon}{3}.\]</div>
+<p class="sd-card-text">In addition, for fixed <span class="math notranslate nohighlight">\(k \in \mathbb{Z}^+\)</span> since each sequence <span class="math notranslate nohighlight">\(v_k\)</span> is Cauchy, there exists <span class="math notranslate nohighlight">\(N_{k, \epsilon}^{(2)} \in \mathbb{Z}^+\)</span> such that for all <span class="math notranslate nohighlight">\(i, j \geq N_{k, \epsilon}^{(2)},\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\lim_{k \to \infty} d((v_k)_i, (v_k)_j) &lt; \frac{\epsilon}{3}.\]</div>
+<p class="sd-card-text">Now, we have that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+d((v_k)_i, w_i) &amp;\leq d((v_k)_i, (v_k)_j) + d((v_k)_j, w_i) \\
+&amp;= d((v_k)_i, (v_k)_j) + d((v_k)_j, (v_i)_{N_i}) \\
+&amp;\leq d((v_k)_i, (v_k)_j) + d((v_k)_j, (v_i)_j) + d((v_i)_j, (v_i)_{N_i})
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">where in the first line we have applied the triangle inequality, in the second line we have substituted the definition <span class="math notranslate nohighlight">\(w_i = (v_i)_{N_i}\)</span> and in the third line we have again used the triangle inequality again.
+Now, letting <span class="math notranslate nohighlight">\(i, k \geq N_{\epsilon}^{(1)}\)</span> means that the limit of the second term in the inequality, as <span class="math notranslate nohighlight">\(j \to \infty\)</span>, is smaller than <span class="math notranslate nohighlight">\(\epsilon / 3.\)</span>
+In addition, letting <span class="math notranslate nohighlight">\(i, j \geq \max(N_{\epsilon}^{(1)}, N_{k, \epsilon}^{(2)})\)</span> means that the first term in the inequality is smaller than <span class="math notranslate nohighlight">\(\epsilon / 3.\)</span>
+Lastly, by the definition of <span class="math notranslate nohighlight">\(N_i,\)</span> letting <span class="math notranslate nohighlight">\(j \geq \max(N_{\epsilon}^{(1)}, N_{k, \epsilon}^{(2)}, N_i)\)</span> means that the last term in the inequality is smaller than <span class="math notranslate nohighlight">\(\frac{1}{i}.\)</span>
+We therefore obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+d((v_k)_i, w_i) &amp;\leq \lim_{j \to \infty} d((v_k)_i, (v_k)_j) + \lim_{j \to \infty} d((v_k)_j, (v_i)_j) + \lim_{j \to \infty} d((v_i)_j, (v_i)_{N_i}) \\
+&amp;&lt; \frac{2\epsilon}{3} + \frac{1}{i}
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">so for all <span class="math notranslate nohighlight">\(i &gt; \frac{3}{\epsilon}\)</span> we have <span class="math notranslate nohighlight">\(d((v_k)_i, w_i) &lt; \epsilon.\)</span>
+This means that <span class="math notranslate nohighlight">\(d_V(v_k\hat{~}, w\hat{~}) &lt; \epsilon\)</span> for all <span class="math notranslate nohighlight">\(k \geq N_{\epsilon}^{(1)}\)</span> which means that <span class="math notranslate nohighlight">\(w\hat{~}\)</span> is the limit of the sequence <span class="math notranslate nohighlight">\((v_1\hat{~}, v_2\hat{~}, \dots),\)</span> so <span class="math notranslate nohighlight">\(V\)</span> is a complete metric space.</p>
+<p class="sd-card-text"><strong>Part 4:</strong>
+By part (2), defining <span class="math notranslate nohighlight">\(f_k = f\)</span> and <span class="math notranslate nohighlight">\(g_k = g\)</span> for all <span class="math notranslate nohighlight">\(k \in \mathbb{Z}^+,\)</span> we have that</p>
+<div class="math notranslate nohighlight">
+\[d_V((f, f, f, \dots)\hat{~}, (g, g, g, \dots)\hat{~}) = \lim_{k \to \infty} d(f_k, g_k) = d(f, g),\]</div>
+<p class="sd-card-text">as required.</p>
+<p class="sd-card-text"><strong>Part 5:</strong>
+We can add elements to the set <span class="math notranslate nohighlight">\(U\)</span> to ensure that the resulting set is complete.
+Specifically, we add to <span class="math notranslate nohighlight">\(U\)</span> the set</p>
+<p class="sd-card-text"><span class="math notranslate nohighlight">\(S = \left\{w \in W | w \neq (f, f, f, \dots)\hat{~} \text{ for any } f \in U \right\},\)</span></p>
+<p class="sd-card-text">to obtain the larger set <span class="math notranslate nohighlight">\(\hat{U} = U \cup S.\)</span>
+Now, for <span class="math notranslate nohighlight">\(u \in \hat{U},\)</span> we define <span class="math notranslate nohighlight">\(\hat{u}\)</span> to be equal to <span class="math notranslate nohighlight">\((u, u, \dots)\hat{~}\)</span> if <span class="math notranslate nohighlight">\(u \in U\)</span> and equal to <span class="math notranslate nohighlight">\(u\)</span> otherwise.
+Then, define the function <span class="math notranslate nohighlight">\(d_\hat{U}: \hat{U} \times \hat{U} \to \mathbb{R}\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[d_\hat{U}(u, v) = d_V(\hat{u}, \hat{v}).\]</div>
+<p class="sd-card-text">This function is a metric over <span class="math notranslate nohighlight">\(\hat{U}.\)</span>
+Further, if <span class="math notranslate nohighlight">\((u_1, u_2, \dots)\)</span> is a Cauchy sequence of elements of <span class="math notranslate nohighlight">\(U,\)</span> then <span class="math notranslate nohighlight">\((\hat{u_1}, \hat{u_2}, \dots)\)</span> is a Cauchy sequence of equivalence classes in <span class="math notranslate nohighlight">\(V.\)</span>
+Since <span class="math notranslate nohighlight">\(V\)</span> is complete, the sequence <span class="math notranslate nohighlight">\((\hat{u_1}, \hat{u_2}, \dots)\)</span> has a limit, denoted <span class="math notranslate nohighlight">\(\hat{u},\)</span> in <span class="math notranslate nohighlight">\(V.\)</span>
+Therefore the sequence <span class="math notranslate nohighlight">\((u_1, u_2, \dots)\)</span> converges to <span class="math notranslate nohighlight">\(\hat{u}\)</span> in the metric space <span class="math notranslate nohighlight">\((\hat{U}, d_{hat{U}}).\)</span></p>
+</div>
+</details></div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -2319,11 +2889,11 @@ Since <span class="math notranslate nohighlight">\(\mathcal{M}\)</span> is a mon
       </div>
     </a>
     <a class="right-next"
-       href="../papers/intro.html"
+       href="../topology/000-intro.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Stream of papers</p>
+        <p class="prev-next-title">Metric and topological spaces</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -2350,6 +2920,7 @@ Since <span class="math notranslate nohighlight">\(\mathcal{M}\)</span> is a mon
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-d">Chapter 2.D</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-4-a">Chapter 4.A</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-5-a">Chapter 5.A</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-6-a">Chapter 6.A</a></li>
 </ul>
   </nav></div>
 

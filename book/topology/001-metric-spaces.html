@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Theory of Computation &#8212; Random Walks</title>
+    <title>Metric spaces &#8212; Random Walks</title>
   
   
   
@@ -74,12 +74,12 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'book/toc/000-intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/topology/001-metric-spaces';</script>
     <link rel="icon" href="../../_static/dicefav.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Finite Automata and Regular Expressions" href="001-fsa.html" />
-    <link rel="prev" title="Home" href="../../intro.html" />
+    <link rel="next" title="Stream of papers" href="../papers/intro.html" />
+    <link rel="prev" title="Metric and topological spaces" href="000-intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -190,10 +190,10 @@
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Notes on books</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Theory of Computation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="001-fsa.html">FSAs and Regular Expressions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="002-cfl.html">PDAs and Context Free Grammars</a></li>
-<li class="toctree-l2"><a class="reference internal" href="000-exercises.html">Exercises</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../toc/000-intro.html">Theory of Computation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../toc/001-fsa.html">FSAs and Regular Expressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../toc/002-cfl.html">PDAs and Context Free Grammars</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../toc/000-exercises.html">Exercises</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../prob-intro/intro.html">Probability: An introduction</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -213,8 +213,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../mira/000-exercises.html">Exercises</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../topology/000-intro.html">Topology</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../topology/001-metric-spaces.html">Metric spaces</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="000-intro.html">Topology</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Metric spaces</a></li>
 </ul>
 </li>
 </ul>
@@ -302,7 +302,7 @@
       
       
       
-      <li><a href="https://github.com/stratisMarkou/random-walks/issues/new?title=Issue%20on%20page%20%2Fbook/toc/000-intro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/stratisMarkou/random-walks/issues/new?title=Issue%20on%20page%20%2Fbook/topology/001-metric-spaces.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -332,7 +332,7 @@
       
       
       
-      <li><a href="../../_sources/book/toc/000-intro.md" target="_blank"
+      <li><a href="../../_sources/book/topology/001-metric-spaces.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -403,7 +403,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -414,11 +416,20 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Theory of Computation</h1>
+    <h1>Metric spaces</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Metric spaces</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#norms">Norms</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -428,19 +439,135 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="theory-of-computation">
-<h1>Theory of Computation<a class="headerlink" href="#theory-of-computation" title="Link to this heading">#</a></h1>
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-<p><a class="github-button" href="https://github.com/stratisMarkou/random-walks" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" aria-label="Star stratisMarkou/random-walks on GitHub">Star</a>
-<a class="github-button" href="https://github.com/stratisMarkou/random-walks/issues" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-issue-opened" data-size="large" aria-label="Issue stratisMarkou/random-walks on GitHub">Issue</a>
-<a class="github-button" href="https://github.com/stratisMarkou/random-walks/subscription" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-eye" data-size="large" aria-label="Watch stratisMarkou/random-walks on GitHub">Watch</a>
-<a class="github-button" href="https://github.com/stratisMarkou" data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large" aria-label="Follow @stratisMarkou on GitHub">Follow</a></p>
-<p>These are notes on the Theory of Computation course, lectured by Michael Sipser.
-<a class="reference external" href="https://www.youtube.com/watch?v=9syvZr-9xwk&amp;amp;list=PLUl4u3cNGP60_JNv2MmK3wkOt9syvfQWY">Video recordings</a> of the entire course lectures are available online, and Michael Sipser’s <a class="reference external" href="https://mog.dog/files/SP2019/Sipser_Introduction.to.the.Theory.of.Computation.3E.pdf">textbook</a>, which covers the course and beyond, is also freely available.
-Any mistakes in these notes are likely my fault.
-If you spot any please reach out to me.</p>
-<div class="toctree-wrapper compound">
+  <section class="tex2jax_ignore mathjax_ignore" id="metric-spaces">
+<h1>Metric spaces<a class="headerlink" href="#metric-spaces" title="Link to this heading">#</a></h1>
+<p>The first part of the course is about metric spaces.
+Metric spaces are sets equiped with a metric, which is a definition of distance.
+Metrics generalise the usual notion of distance that the absolute value has on the reals, to more general spaces, and allow us to generalise the notions of convergent sequences and continuity.
+However, we will later see that a function can be continuous under many different metrics.
+It will turn out that the important underlying structure that determines continuity is the set of open sets corresponding to the metric, and that many different metrics define the same open sets.
+This will give rise to the notion of a topology, which abstracts away the idea of a metric altogether and instead defines open sets directly.</p>
+<section id="id1">
+<h2>Metric spaces<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>We begin with the definition of metric spaces, which are sets equiped with a notion of distance, the metric.</p>
+<div class="proof definition admonition" id="topology-def-metric-space">
+<p class="admonition-title"><span class="caption-number">Definition 70 </span> (Metric space)</p>
+<section class="definition-content" id="proof-content">
+<p>A metric space is a pair <span class="math notranslate nohighlight">\((X, d_X)\)</span> of a set <span class="math notranslate nohighlight">\(X,\)</span> called the space, and a function <span class="math notranslate nohighlight">\(d_X: X \times X \to \mathbb{R},\)</span> called the metric, which satisfy</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(d(x, y) \geq 0\)</span> for all <span class="math notranslate nohighlight">\(x, y \in X,\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(d(x, x) = 0\)</span> if and only if <span class="math notranslate nohighlight">\(x \in X,\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(d(x, y) = d(y, x)\)</span> for all <span class="math notranslate nohighlight">\(x, y \in X,\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(d(x, z) \leq d(x, y) + d(y, z)\)</span> for all for all <span class="math notranslate nohighlight">\(x, y, z \in X.\)</span></p></li>
+</ol>
+</section>
+</div><div class="proof example admonition" id="example-1">
+<p class="admonition-title"><span class="caption-number">Example 13 </span> (Examples of metric spaces)</p>
+<section class="example-content" id="proof-content">
+<p><strong>Euclidean metric:</strong>
+Let <span class="math notranslate nohighlight">\(X = \mathbb{R}^N.\)</span>
+The Euclidean metric <span class="math notranslate nohighlight">\(d_X\)</span> on <span class="math notranslate nohighlight">\(X\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[ d_X(a, b) = \sqrt{\sum_{n = 1}^N (a_n - b_n)^2}, \text{ where } a, b \in X. \]</div>
+<p><strong>Discrete metric:</strong>
+Let <span class="math notranslate nohighlight">\(X\)</span> be any set.
+The discrete metric <span class="math notranslate nohighlight">\(d_X\)</span> on <span class="math notranslate nohighlight">\(X\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} d_X(a, b) = \begin{cases} 0 &amp; \text{ if } x = y \\ 1 &amp; \text{ if } x \neq y \\  \end{cases}, \text{ where } a, b \in X. \end{split}\]</div>
+</section>
+</div><div class="proof definition admonition" id="definition-2">
+<p class="admonition-title"><span class="caption-number">Definition 71 </span> (Metric subspace)</p>
+<section class="definition-content" id="proof-content">
+<p>Let a metric space <span class="math notranslate nohighlight">\((X, d_X),\)</span> and <span class="math notranslate nohighlight">\(Y \subseteq X.\)</span>
+We call <span class="math notranslate nohighlight">\((Y, d_Y)\)</span> a metric subspace of <span class="math notranslate nohighlight">\(X\)</span> where <span class="math notranslate nohighlight">\(d_Y: Y \to \mathbb{R}\)</span> is defined such that <span class="math notranslate nohighlight">\(d_Y(a, b) = d_X(a, b)\)</span> for all <span class="math notranslate nohighlight">\(a, b \in Y.\)</span></p>
+</section>
+</div><p>With the definition of metric spaces in place, we are ready to define convergent sequences.
+This is a generalisation of convergence from the familiar definition in the context of the real numbers to more general metric spaces.</p>
+<div class="proof definition admonition" id="definition-3">
+<p class="admonition-title"><span class="caption-number">Definition 72 </span> (Convergent sequence)</p>
+<section class="definition-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\((x_n)\)</span> be a sequence in a metric space <span class="math notranslate nohighlight">\((X, d_X).\)</span>
+We say that <span class="math notranslate nohighlight">\((x_n)\)</span> converges to <span class="math notranslate nohighlight">\(x \in X,\)</span> written <span class="math notranslate nohighlight">\(x_n \to x\)</span> if for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0,\)</span> there exists <span class="math notranslate nohighlight">\(N \in \mathbb{N}\)</span> such that <span class="math notranslate nohighlight">\(d_X(x_n, x) &lt; \epsilon\)</span> for all <span class="math notranslate nohighlight">\(n &gt; N.\)</span></p>
+</section>
+</div><p>Similar to analogous results in analysis, we can show that in a metric space, limits are unique.</p>
+<div class="proof lemma admonition" id="topology-lemma-limits-in-metric-spaces-are-unique">
+<p class="admonition-title"><span class="caption-number">Lemma 6 </span> (Limits in metric spaces are unique)</p>
+<section class="lemma-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\((X, d_X)\)</span> is a metric space and <span class="math notranslate nohighlight">\((x_n)\)</span> is a sequence in <span class="math notranslate nohighlight">\(X\)</span> such that <span class="math notranslate nohighlight">\(x_n \to x\)</span> and <span class="math notranslate nohighlight">\(x_n \to x'\)</span> for some <span class="math notranslate nohighlight">\(x, x' \in X.\)</span>
+Then <span class="math notranslate nohighlight">\(x = x'.\)</span></p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Limits in metric spaces are unique<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> be a metric space and <span class="math notranslate nohighlight">\((x_n)\)</span> be a sequence in <span class="math notranslate nohighlight">\(X\)</span> such that <span class="math notranslate nohighlight">\(x_n \to x\)</span> and <span class="math notranslate nohighlight">\(x_n \to x'\)</span> for some <span class="math notranslate nohighlight">\(x, x' \in X.\)</span>
+By the <span class="xref std std-ref">non-negativity, symmetry and the triangle inequality of metrics</span> we have that</p>
+<div class="math notranslate nohighlight">
+\[0 \leq d(x, x') \leq d(x, x_n) + d(x_n, x') = d(x_n, x) + d(x_n, x')\]</div>
+<p class="sd-card-text">and taking the limit <span class="math notranslate nohighlight">\(n \to \infty\)</span> gives <span class="math notranslate nohighlight">\(d(x, x') = 0.\)</span></p>
 </div>
+</details><p>With convergent sequences in place, we can define continuous functions.
+This definition appears slightly different than the <span class="math notranslate nohighlight">\(\epsilon-\delta\)</span> defnition in analysis, but we will shortly see the two are equivalent.</p>
+<div class="proof definition admonition" id="topology-def-continuous-function">
+<p class="admonition-title"><span class="caption-number">Definition 73 </span> (Continuous function)</p>
+<section class="definition-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> and <span class="math notranslate nohighlight">\((Y, d_Y)\)</span> be metric spaces.
+A function <span class="math notranslate nohighlight">\(f: X \to Y\)</span> is continuous if <span class="math notranslate nohighlight">\(f(x_n) \to f(x)\)</span> in <span class="math notranslate nohighlight">\(Y\)</span> whenever <span class="math notranslate nohighlight">\(x_n \to x\)</span> in <span class="math notranslate nohighlight">\(X.\)</span></p>
+</section>
+</div></section>
+<section id="norms">
+<h2>Norms<a class="headerlink" href="#norms" title="Link to this heading">#</a></h2>
+<p>We now introduce the idea of a norm, which is a definition of the length of a point in a vector space.</p>
+<div class="proof definition admonition" id="topology-def-norm">
+<p class="admonition-title"><span class="caption-number">Definition 74 </span> (Norm)</p>
+<section class="definition-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(V\)</span> be a vector space.
+A norm is a function <span class="math notranslate nohighlight">\(||\cdot||: V \to \mathbb{R}\)</span> which satisfies the following properties.</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(||v|| \geq 0\)</span> for all <span class="math notranslate nohighlight">\(v \in V,\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(||v|| = 0\)</span> if and only if <span class="math notranslate nohighlight">\(v = 0,\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(||\lambda v|| = |\lambda|||v||\)</span> for all <span class="math notranslate nohighlight">\(\lambda \in \mathbb{R}\)</span> and <span class="math notranslate nohighlight">\(v \in V,\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(||v + w|| \leq ||v|| + ||w||\)</span> for all <span class="math notranslate nohighlight">\(v, w \in V.\)</span></p></li>
+</ol>
+</section>
+</div><p>A norm can be used to define a metric on a vector space.</p>
+<div class="proof lemma admonition" id="topology-lemma-norms-induce-metrics">
+<p class="admonition-title"><span class="caption-number">Lemma 7 </span> (Norms induce metrics)</p>
+<section class="lemma-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(V\)</span> be a vector space with a norm <span class="math notranslate nohighlight">\(||\cdot||.\)</span>
+The function <span class="math notranslate nohighlight">\(d_V: V \times V \to \mathbb{R}\)</span> defined as <span class="math notranslate nohighlight">\(d_V(v, w) = ||v - w||\)</span> is a metric on <span class="math notranslate nohighlight">\(V.\)</span></p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Norms induce metrics<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(V\)</span> be a vector space with a norm <span class="math notranslate nohighlight">\(||\cdot||\)</span> and define <span class="math notranslate nohighlight">\(d_V: V \times V \to \mathbb{R}.\)</span>
+Using the <span class="xref std std-ref">properties of norms</span>, for any <span class="math notranslate nohighlight">\(v, w, u \in V,\)</span> we have</p>
+<ol class="arabic simple">
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(d_V(v, w) = ||v - w|| \geq 0,\)</span> by property 1 of norms,</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(d_V(v, v) = ||v|| = 0 \iff v = 0,\)</span> by property 2 norms,</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(d_V(v, w) = ||v - w|| = ||w - v|| = d_V(w, v),\)</span> by property 3 of norms,</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(d_V(v, u) = ||v - u|| \leq ||v - w|| + ||w - u|| = d_V(v, w) + d_V(w, u),\)</span> by property 4 of norms.</p></li>
+</ol>
+</div>
+</details><div class="proof example admonition" id="example-8">
+<p class="admonition-title"><span class="caption-number">Example 14 </span> (Examples of norms)</p>
+<section class="example-content" id="proof-content">
+<p>The following are examples of norms on <span class="math notranslate nohighlight">\(C[0, 1],\)</span> the vector space of continuous functions with domain <span class="math notranslate nohighlight">\([0, 1].\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+||\cdot||_1 &amp;= \int_0^1 |\cdot(x)| dx, \\
+||\cdot||_2 &amp;= \int_0^1 |\cdot(x)|^2 dx, \\
+||\cdot||_\infty &amp;= \max_{x \in [0, 1]} |\cdot(x)| dx.
+\end{align}\end{split}\]</div>
+</section>
+</div></section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -456,7 +583,7 @@ If you spot any please reach out to me.</p>
         },
         kernelOptions: {
             name: "python3",
-            path: "./book/toc"
+            path: "./book/topology"
         },
         predefinedOutput: true
     }
@@ -474,20 +601,20 @@ If you spot any please reach out to me.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../../intro.html"
+       href="000-intro.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Home</p>
+        <p class="prev-next-title">Metric and topological spaces</p>
       </div>
     </a>
     <a class="right-next"
-       href="001-fsa.html"
+       href="../papers/intro.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Finite Automata and Regular Expressions</p>
+        <p class="prev-next-title">Stream of papers</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -498,7 +625,21 @@ If you spot any please reach out to me.</p>
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"></div>
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Metric spaces</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#norms">Norms</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
