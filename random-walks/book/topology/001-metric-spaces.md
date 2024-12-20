@@ -10,6 +10,8 @@ This will give rise to the notion of a topology, which abstracts away the idea o
 
 ## Metric spaces
 
+We begin with the definition of metric spaces, which are sets equiped with a notion of distance, the metric.
+
 :::{prf:definition} Metric space
 :label: topology-def-metric-space
 A metric space is a pair $(X, d_X)$ of a set $X,$ called the space, and a function $d_X: X \times X \to \mathbb{R},$ called the metric, which satisfy
@@ -67,6 +69,9 @@ $$0 \leq d(x, x') \leq d(x, x_n) + d(x_n, x') = d(x_n, x) + d(x_n, x')$$
 
 and taking the limit $n \to \infty$ gives $d(x, x') = 0.$
 :::
+
+With convergent sequences in place, we can define continuous functions.
+This definition appears slightly different than the $\epsilon-\delta$ defnition in analysis, but we will shortly see the two are equivalent.
 
 
 :::{prf:definition} Continuous function
