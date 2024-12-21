@@ -428,6 +428,8 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Metric spaces</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#norms">Norms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inner-products">Inner products</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#open-and-closed-sets">Open and closed sets</a></li>
 </ul>
             </nav>
         </div>
@@ -480,7 +482,7 @@ The discrete metric <span class="math notranslate nohighlight">\(d_X\)</span> on
 </div><div class="proof definition admonition" id="definition-2">
 <p class="admonition-title"><span class="caption-number">Definition 71 </span> (Metric subspace)</p>
 <section class="definition-content" id="proof-content">
-<p>Let a metric space <span class="math notranslate nohighlight">\((X, d_X),\)</span> and <span class="math notranslate nohighlight">\(Y \subseteq X.\)</span>
+<p>Let a <a class="reference internal" href="#topology:def-metric-space">metric space</a> <span class="math notranslate nohighlight">\((X, d_X),\)</span> and <span class="math notranslate nohighlight">\(Y \subseteq X.\)</span>
 We call <span class="math notranslate nohighlight">\((Y, d_Y)\)</span> a metric subspace of <span class="math notranslate nohighlight">\(X\)</span> where <span class="math notranslate nohighlight">\(d_Y: Y \to \mathbb{R}\)</span> is defined such that <span class="math notranslate nohighlight">\(d_Y(a, b) = d_X(a, b)\)</span> for all <span class="math notranslate nohighlight">\(a, b \in Y.\)</span></p>
 </section>
 </div><p>With the definition of metric spaces in place, we are ready to define convergent sequences.
@@ -488,14 +490,14 @@ This is a generalisation of convergence from the familiar definition in the cont
 <div class="proof definition admonition" id="definition-3">
 <p class="admonition-title"><span class="caption-number">Definition 72 </span> (Convergent sequence)</p>
 <section class="definition-content" id="proof-content">
-<p>Let <span class="math notranslate nohighlight">\((x_n)\)</span> be a sequence in a metric space <span class="math notranslate nohighlight">\((X, d_X).\)</span>
+<p>Let <span class="math notranslate nohighlight">\((x_n)\)</span> be a sequence in a <a class="reference internal" href="#topology:def-metric-space">metric space</a> <span class="math notranslate nohighlight">\((X, d_X).\)</span>
 We say that <span class="math notranslate nohighlight">\((x_n)\)</span> converges to <span class="math notranslate nohighlight">\(x \in X,\)</span> written <span class="math notranslate nohighlight">\(x_n \to x\)</span> if for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0,\)</span> there exists <span class="math notranslate nohighlight">\(N \in \mathbb{N}\)</span> such that <span class="math notranslate nohighlight">\(d_X(x_n, x) &lt; \epsilon\)</span> for all <span class="math notranslate nohighlight">\(n &gt; N.\)</span></p>
 </section>
 </div><p>Similar to analogous results in analysis, we can show that in a metric space, limits are unique.</p>
 <div class="proof lemma admonition" id="topology:lemma-limits-in-metric-spaces-are-unique">
 <p class="admonition-title"><span class="caption-number">Lemma 6 </span> (Limits in metric spaces are unique)</p>
 <section class="lemma-content" id="proof-content">
-<p>Suppose <span class="math notranslate nohighlight">\((X, d_X)\)</span> is a metric space and <span class="math notranslate nohighlight">\((x_n)\)</span> is a sequence in <span class="math notranslate nohighlight">\(X\)</span> such that <span class="math notranslate nohighlight">\(x_n \to x\)</span> and <span class="math notranslate nohighlight">\(x_n \to x'\)</span> for some <span class="math notranslate nohighlight">\(x, x' \in X.\)</span>
+<p>Suppose <span class="math notranslate nohighlight">\((X, d_X)\)</span> is a <a class="reference internal" href="#topology:def-metric-space">metric space</a> and <span class="math notranslate nohighlight">\((x_n)\)</span> is a sequence in <span class="math notranslate nohighlight">\(X\)</span> such that <span class="math notranslate nohighlight">\(x_n \to x\)</span> and <span class="math notranslate nohighlight">\(x_n \to x'\)</span> for some <span class="math notranslate nohighlight">\(x, x' \in X.\)</span>
 Then <span class="math notranslate nohighlight">\(x = x'.\)</span></p>
 </section>
 </div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
@@ -516,7 +518,7 @@ This definition appears slightly different than the <span class="math notranslat
 <div class="proof definition admonition" id="topology:def-continuous-function">
 <p class="admonition-title"><span class="caption-number">Definition 73 </span> (Continuous function)</p>
 <section class="definition-content" id="proof-content">
-<p>Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> and <span class="math notranslate nohighlight">\((Y, d_Y)\)</span> be metric spaces.
+<p>Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> and <span class="math notranslate nohighlight">\((Y, d_Y)\)</span> be <a class="reference internal" href="#topology:def-metric-space">metric space</a>.
 A function <span class="math notranslate nohighlight">\(f: X \to Y\)</span> is continuous if <span class="math notranslate nohighlight">\(f(x_n) \to f(x)\)</span> in <span class="math notranslate nohighlight">\(Y\)</span> whenever <span class="math notranslate nohighlight">\(x_n \to x\)</span> in <span class="math notranslate nohighlight">\(X.\)</span></p>
 </section>
 </div></section>
@@ -646,6 +648,122 @@ For the fourth part, we have</p>
 <p class="sd-card-text">This concludes the proof showing that all four examples are norms.</p>
 </div>
 </details></section>
+<section id="inner-products">
+<h2>Inner products<a class="headerlink" href="#inner-products" title="Link to this heading">#</a></h2>
+<p>Now we turn to inner products.
+Inner products generalise the notion of angles between vectors to general vector spaces.</p>
+<div class="proof definition admonition" id="topology:inner-product-space">
+<p class="admonition-title"><span class="caption-number">Definition 75 </span> (Inner product)</p>
+<section class="definition-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(V\)</span> be a vector space.
+An inner product on <span class="math notranslate nohighlight">\(V\)</span> is a function <span class="math notranslate nohighlight">\(\langle \cdot, \cdot \rangle: V \times V \to \mathbb{R}\)</span> which satisfies:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\langle v, v \rangle \geq 0\)</span> for all <span class="math notranslate nohighlight">\(v \in V,\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\langle v, v \rangle = 0\)</span> if and only if <span class="math notranslate nohighlight">\(v = 0,\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\langle v, w \rangle = \langle w, v \rangle\)</span> for all <span class="math notranslate nohighlight">\(v, w \in V,\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\langle v_1 + \lambda v_2, w \rangle = \langle v_1, w \rangle + \lambda \langle v_2, w \rangle \)</span> for all <span class="math notranslate nohighlight">\(v_1, v_2, w \in V\)</span> and <span class="math notranslate nohighlight">\(\lambda \in \mathbb{R}.\)</span></p></li>
+</ol>
+</section>
+</div><p>The properties of an inner product look very similar to those of a norm.
+In fact an inner product can be used to define a norm on a vector space.
+To show this, we must first however show an intermediate result for inner products.</p>
+<div class="proof lemma admonition" id="topology:cauchy-schwarz">
+<p class="admonition-title"><span class="caption-number">Lemma 9 </span> (Cauchy-Schwarz inequality)</p>
+<section class="lemma-content" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(\langle \cdot, \cdot \rangle\)</span> is an <a class="reference internal" href="#topology:inner-product-space">inner product</a> on a vector space <span class="math notranslate nohighlight">\(V,\)</span> then for all <span class="math notranslate nohighlight">\(v, w \in V,\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\langle v, w \rangle^2 \leq \langle v, v \rangle \langle w, w \rangle.\]</div>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Cauchy-Schwarz inequality<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(v, w \in V\)</span> and <span class="math notranslate nohighlight">\(\lambda \in \mathbb{R}.\)</span>
+Then, by the <a class="reference internal" href="#topology:inner-product-space">properties of inner products</a>, we have</p>
+<div class="math notranslate nohighlight">
+\[\langle v + \lambda w, v + \lambda w \rangle \geq 0.\]</div>
+<p class="sd-card-text">Expanding the left-hand side, we obtain</p>
+<div class="math notranslate nohighlight">
+\[\langle v, v \rangle + 2\lambda \langle v, w \rangle + \lambda^2 \langle w, w \rangle \geq 0,\]</div>
+<p class="sd-card-text">and since the quadratic in <span class="math notranslate nohighlight">\(\lambda\)</span> is non-negative, the discriminant must be non-positive, giving</p>
+<div class="math notranslate nohighlight">
+\[4\langle v, w \rangle^2 - 4\langle v, v \rangle \langle w, w \rangle \leq 0,\]</div>
+<p class="sd-card-text">which rearranges to the Cauchy-Schwarz inequality.</p>
+</div>
+</details><p>We can now show that an inner product induces a norm.</p>
+<div class="proof lemma admonition" id="topology:lemma-inner-products-induce-norms">
+<p class="admonition-title"><span class="caption-number">Lemma 10 </span> (Inner products induce norms)</p>
+<section class="lemma-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(V\)</span> be a vector space with an <a class="reference internal" href="#topology:inner-product-space">inner product</a> <span class="math notranslate nohighlight">\(\langle \cdot, \cdot \rangle.\)</span>
+The function <span class="math notranslate nohighlight">\(||\cdot||: V \to \mathbb{R}\)</span> defined as</p>
+<div class="math notranslate nohighlight">
+\[||v|| = \sqrt{\langle v, v \rangle}\]</div>
+<p>is a norm on <span class="math notranslate nohighlight">\(V.\)</span></p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Inner products induce norms<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(V\)</span> be a vector space with an inner product <span class="math notranslate nohighlight">\(\langle \cdot, \cdot \rangle\)</span> and define <span class="math notranslate nohighlight">\(||\cdot||: V \to \mathbb{R}.\)</span>
+Using the <span class="xref std std-ref">properties of inner products</span>, for any <span class="math notranslate nohighlight">\(v, w \in V,\)</span> we have</p>
+<ol class="arabic simple">
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(||v|| = \sqrt{\langle v, v \rangle} \geq 0,\)</span> by property 1 of inner products,</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(||v|| = 0 \iff \langle v, v \rangle = 0 \iff v = 0,\)</span> by property 2 of inner products,</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(||\lambda v|| = \sqrt{\langle \lambda v, \lambda v \rangle} = \sqrt{\lambda^2 \langle v, v \rangle} = |\lambda|||v||,\)</span> by property 3 of inner products,</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(||v + w||^2 = \langle v, v \rangle + \langle v, w \rangle + \langle w, v \rangle + \langle w, w \rangle = ||v||^2 + 2\langle v, w \rangle + ||w||^2 \leq ||v||^2 + 2||v|| ||w|| + ||w||^2 = (||v|| + ||w||)^2,\)</span> by <a class="reference internal" href="#topology:cauchy-schwarz">Cauchy-Schwarz inequality</a>.</p></li>
+</ol>
+<p class="sd-card-text">Therefore <span class="math notranslate nohighlight">\(||\cdot||\)</span> is a norm on <span class="math notranslate nohighlight">\(V.\)</span></p>
+</div>
+</details></section>
+<section id="open-and-closed-sets">
+<h2>Open and closed sets<a class="headerlink" href="#open-and-closed-sets" title="Link to this heading">#</a></h2>
+<p>We now turn to open and closed sets in metric spaces.
+These will turn out to be the key objects that determine continuity of functions in metric spaces.
+We first define open and closed balls.</p>
+<div class="proof definition admonition" id="topology:def-open-and-closed-balls">
+<p class="admonition-title"><span class="caption-number">Definition 76 </span> (Open and closed balls)</p>
+<section class="definition-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> be a <a class="reference internal" href="#topology:def-metric-space">metric space</a>.
+For any <span class="math notranslate nohighlight">\(x \in X\)</span> and <span class="math notranslate nohighlight">\(r &gt; 0,\)</span> we define the open ball to be the set</p>
+<div class="math notranslate nohighlight">
+\[B_r(x) = \{ x' \in X : d_X(x, x') &lt; r \},\]</div>
+<p>and the closed ball to be the set</p>
+<div class="math notranslate nohighlight">
+\[\overline{B}_r(x) = \{ x' \in X : d_X(x, x') \leq r \}.\]</div>
+</section>
+</div><p>With open and closed balls defined, we can now define open and closed sets.</p>
+<div class="proof definition admonition" id="topology:def-open-and-closed-subsets">
+<p class="admonition-title"><span class="caption-number">Definition 77 </span> (Open and closed subsets)</p>
+<section class="definition-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> be a <a class="reference internal" href="#topology:def-metric-space">metric space</a>.
+A subset <span class="math notranslate nohighlight">\(U \subseteq X\)</span> is open if for every <span class="math notranslate nohighlight">\(x \in U,\)</span> there exists <span class="math notranslate nohighlight">\(r &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(B_r(x) \subseteq U.\)</span>
+A subset <span class="math notranslate nohighlight">\(C \subseteq X\)</span> is closed if its complement <span class="math notranslate nohighlight">\(X \setminus C\)</span> is open.</p>
+</section>
+</div><p>We can now show that the terms <em>open ball</em> and <em>closed ball</em> are in fact justified, by showing that open balls are open subsets and closed balls are closed subsets.</p>
+<div class="proof lemma admonition" id="topology:lemma-open-and-closed-balls-are-open-and-closed">
+<p class="admonition-title"><span class="caption-number">Lemma 11 </span> (Open (closed) balls are open (closed))</p>
+<section class="lemma-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> be a <a class="reference internal" href="#topology:def-metric-space">metric space</a>.
+Then, for any <span class="math notranslate nohighlight">\(x \in X\)</span> and <span class="math notranslate nohighlight">\(r &gt; 0,\)</span> the open ball <span class="math notranslate nohighlight">\(B_r(x)\)</span> is an open subset of <span class="math notranslate nohighlight">\(X\)</span> and the closed ball <span class="math notranslate nohighlight">\(\overline{B}_r(x)\)</span> is a closed subset of <span class="math notranslate nohighlight">\(X.\)</span></p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Open (closed) balls are open (closed)<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> be a metric space and <span class="math notranslate nohighlight">\(x \in X\)</span> and <span class="math notranslate nohighlight">\(r &gt; 0.\)</span>
+Then, for any <span class="math notranslate nohighlight">\(x' \in B_r(x),\)</span> we have <span class="math notranslate nohighlight">\(d_X(x, x') &lt; r,\)</span> so we can choose <span class="math notranslate nohighlight">\(\epsilon = r - d_X(x, x') &gt; 0.\)</span>
+By the <a class="reference internal" href="#topology:def-metric-space">triangle inequality</a>, we have that <span class="math notranslate nohighlight">\(B_\epsilon(x') \subseteq B_r(x),\)</span> so <span class="math notranslate nohighlight">\(B_r(x)\)</span> is open.</p>
+</div>
+</details></section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -714,6 +832,8 @@ For the fourth part, we have</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Metric spaces</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#norms">Norms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inner-products">Inner products</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#open-and-closed-sets">Open and closed sets</a></li>
 </ul>
   </nav></div>
 
