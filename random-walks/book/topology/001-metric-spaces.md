@@ -312,7 +312,7 @@ We can now show that the terms _open ball_ and _closed ball_ are in fact justifi
 
 :::{prf:lemma} Open (closed) balls are open (closed)
 :label: topology:lemma-open-and-closed-balls-are-open-and-closed
-Let $(X, d_X)$ be a {prf:ref}`metric space<topology:def-metric-space>.`
+Let $(X, d_X)$ be a {prf:ref}`metric space<topology:def-metric-space>`.
 Then, for any $x \in X$ and $r > 0,$ the open ball $B_r(x)$ is an open subset of $X$ and the closed ball $\overline{B}_r(x)$ is a closed subset of $X.$
 :::
 
