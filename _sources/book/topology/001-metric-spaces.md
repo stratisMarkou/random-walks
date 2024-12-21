@@ -320,5 +320,8 @@ Then, for any $x \in X$ and $r > 0,$ the open ball $B_r(x)$ is an open subset of
 Let $(X, d_X)$ be a metric space and $x \in X$ and $r > 0.$
 Then, for any $x' \in B_r(x),$ we have $d_X(x, x') < r,$ so we can choose $\epsilon = r - d_X(x, x') > 0.$
 By the {prf:ref}`triangle inequality<topology:def-metric-space>`, we have that $B_\epsilon(x') \subseteq B_r(x),$ so $B_r(x)$ is open.
+
+Similarly, suppose $x' \in X \setminus \overline{B}_r(x).$
+Then, $d_X(x, x') > r,$ so we can choose $\epsilon = d_X(x, x') - r > 0,$ and by the triangle inequality we have that $B_\epsilon(x') \subseteq X \setminus \overline{B}_r(x),$ so $X \setminus \overline{B}_r(x)$ is open.
 :::
 
