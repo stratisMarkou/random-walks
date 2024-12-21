@@ -10,10 +10,11 @@ This will give rise to the notion of a topology, which abstracts away the idea o
 
 ## Metric spaces
 
-We begin with the definition of metric spaces, which are sets equiped with a notion of distance, the metric.
+We begin with the definition of metric spaces.
+A metric space is a set that is equiped with a notion of distance between elements, the metric.
 
 :::{prf:definition} Metric space
-:label: topology-def-metric-space
+:label: topology:def-metric-space
 A metric space is a pair $(X, d_X)$ of a set $X,$ called the space, and a function $d_X: X \times X \to \mathbb{R},$ called the metric, which satisfy
 
 1. $d(x, y) \geq 0$ for all $x, y \in X,$
@@ -22,6 +23,8 @@ A metric space is a pair $(X, d_X)$ of a set $X,$ called the space, and a functi
 4. $d(x, z) \leq d(x, y) + d(y, z)$ for all for all $x, y, z \in X.$
 :::
 
+
+Two common examples of metrics, which we will use later on, are the familiar Euclidean metric and the discrete metric.
 
 :::{prf:example} Examples of metric spaces
 __Euclidean metric:__
@@ -56,14 +59,14 @@ Similar to analogous results in analysis, we can show that in a metric space, li
 
 
 :::{prf:lemma} Limits in metric spaces are unique
-:label: topology-lemma-limits-in-metric-spaces-are-unique
+:label: topology:lemma-limits-in-metric-spaces-are-unique
 Suppose $(X, d_X)$ is a metric space and $(x_n)$ is a sequence in $X$ such that $x_n \to x$ and $x_n \to x'$ for some $x, x' \in X.$
 Then $x = x'.$
 :::
 
 :::{dropdown} Proof: Limits in metric spaces are unique
 Let $(X, d_X)$ be a metric space and $(x_n)$ be a sequence in $X$ such that $x_n \to x$ and $x_n \to x'$ for some $x, x' \in X.$
-By the {ref}`non-negativity, symmetry and the triangle inequality of metrics<topology-def-metric-space>` we have that
+By the {ref}`non-negativity, symmetry and the triangle inequality of metrics<topology:def-metric-space>` we have that
 
 $$0 \leq d(x, x') \leq d(x, x_n) + d(x_n, x') = d(x_n, x) + d(x_n, x')$$
 
@@ -75,7 +78,7 @@ This definition appears slightly different than the $\epsilon-\delta$ defnition 
 
 
 :::{prf:definition} Continuous function
-:label: topology-def-continuous-function
+:label: topology:def-continuous-function
 Let $(X, d_X)$ and $(Y, d_Y)$ be metric spaces.
 A function $f: X \to Y$ is continuous if $f(x_n) \to f(x)$ in $Y$ whenever $x_n \to x$ in $X.$
 :::
@@ -87,7 +90,7 @@ We now introduce the idea of a norm, which is a definition of the length of a po
 
 
 :::{prf:definition} Norm
-:label: topology-def-norm
+:label: topology:def-norm
 Let $V$ be a vector space.
 A norm is a function $||\cdot||: V \to \mathbb{R}$ which satisfies the following properties.
 
@@ -100,16 +103,15 @@ A norm is a function $||\cdot||: V \to \mathbb{R}$ which satisfies the following
 
 A norm can be used to define a metric on a vector space.
 
-
 :::{prf:lemma} Norms induce metrics
-:label: topology-lemma-norms-induce-metrics
+:label: topology:lemma-norms-induce-metrics
 Let $V$ be a vector space with a norm $||\cdot||.$
 The function $d_V: V \times V \to \mathbb{R}$ defined as $d_V(v, w) = ||v - w||$ is a metric on $V.$
 :::
 
 :::{dropdown} Proof: Norms induce metrics
 Let $V$ be a vector space with a norm $||\cdot||$ and define $d_V: V \times V \to \mathbb{R}.$
-Using the {ref}`properties of norms<topology-def-norm>`, for any $v, w, u \in V,$ we have
+Using the {ref}`properties of norms<topology:def-norm>`, for any $v, w, u \in V,$ we have
 
 1. $d_V(v, w) = ||v - w|| \geq 0,$ by property 1 of norms,
 2. $d_V(v, v) = ||v|| = 0 \iff v = 0,$ by property 2 norms,
@@ -118,6 +120,7 @@ Using the {ref}`properties of norms<topology-def-norm>`, for any $v, w, u \in V,
 :::
 
 :::{prf:example} Examples of norms
+:label: topology:examples-of-norms
 The following are examples of norms on $C[0, 1],$ the vector space of continuous functions with domain $[0, 1].$
 
 $$\begin{align}
@@ -126,3 +129,81 @@ $$\begin{align}
 ||\cdot||_\infty &= \max_{x \in [0, 1]} |\cdot(x)| dx.
 \end{align}$$
 :::
+
+::::{dropdown} Proof: Examples above are norms
+Most of the properties of norms in {prf:ref}`topology:def-norm` follow from the definition of the examples but property 2, the identity of indiscernibles for norms, is a little more involved.
+For this, we need an intermediate result that we prove here.
+
+:::{prf:lemma} Non-constant positive continuous function has positive integral
+:label: topology:lemma-non-constant-positive-continuous-function-has-positive-integral
+Let $f \in C[0, 1]$ satisfy $f(x) \geq 0$ for all $x \in [0, 1].$
+If $f$ is not constantly $0,$ then $\int_0^1 f(x)dx > 0.$
+:::
+
+:::{dropdown} Proof: Non-constant positive continuous function has positive integral
+Suppose $f \in C[0, 1]$ satisfies $f(x) \geq 0$ for all $x \in [0, 1],$ and $f$ is not constantly $0.$
+Then, there exists $x_0 \in [0, 1]$ such that $f(x_0) > a$ for some $a > 0.$
+Since $f$ is continuous, there exists $\delta > 0$ such that $f(x) > a / 2$ for all $x \in (x_0 - \delta, x_0 + \delta).$
+Then, defining $g \in C[0, 1]$ as
+
+$$g(x) = \begin{cases}
+a / 2 & \text{ if } x \in (x_0 - \delta, x_0 + \delta), \\
+0 & \text{ otherwise}, \\
+\end{cases}$$
+
+we note that $f \geq g,$ and taking integrals we obtain
+
+$$\int_0^1 f(x)dx \geq \int_0^1 g(x)dx \geq \int_{\max(0,~x_0 - \delta)}^{\min(1,~x_0 + \delta)} \frac{a}{2} dx \geq \frac{a\delta}{2} > 0,$$
+
+which completes the proof.
+:::
+
+Now we can show that each of the examples is indeed a norm.
+In the following, assume that $f, g \in C[0, 1]$
+
+__Example 1:__
+First, $||f||_1 \geq 0$ so the first property is satisfied.
+Second, by {prf:ref}`topology:lemma-non-constant-positive-continuous-function-has-positive-integral` we have that $||f||_1 = 0$ only if $f = 0,$ so the second property is satisfied.
+Third, note that $||\lambda f||_1 = |\lambda|||f||_1.$
+Fourth, we have that
+
+$$\begin{align}
+||f + g||_1 &= \int_0^1 |f(x) + g(x)| dx \\
+&\leq \int_0^1 (|f(x)| + |g(x)|) dx \\
+&= \int_0^1 |f(x)|dx + \int_0^1|g(x)| dx \\
+&= ||f||_1 + ||g||_1 dx
+\end{align}$$
+
+where going from the first to the second line holds by the triangle inequality of absolute values.
+
+
+__Example 2:__
+The first three parts of the argument for example 1 hold also for example 2.
+For the fourth part, we have that
+
+$$\begin{align}
+||f + g||_2^2 &= \int_0^1 (f(x) + g(x))^2 dx \\
+&= \int_0^1 f(x)^2 + 2f(x)g(x) + g(x)^2 dx \\
+&= \int_0^1 f(x)^2 dx + 2\int_0^1 f(x)g(x)dx + \int_0^1 g(x)^2 dx \\
+&\leq ||f||_2^2 + 2||f||_2||g||_2 + ||g||_2^2 dx \\
+&= (||f||_2 + ||g||_2)^2 dx \\
+\end{align}$$
+
+where going from the third to the fourth line we have used the Cauchy-Schwarz inequality (which we have not proved yet, but will be given later).
+
+
+__Example 3:__
+Again, the first three parts of the argument for example 1 also hold for example 3.
+For the fourth part, we have
+
+$$\begin{align}
+||f + g||_\infty &= \max_{x \in [0, 1]} |f(x) + g(x)| \\
+&\leq \max_{x \in [0, 1]} |f(x)| + |g(x)| \\
+&\leq \max_{x \in [0, 1]} |f(x)| + \max_{x \in [0, 1]} |g(x)| \\ 
+&\leq ||f||_\infty + ||g||_\infty,
+\end{align}$$
+
+where from the first to the second line we have used the triangle inequality of the absolute value, and from the second to the third we have used the fact that the maximum of a sum of two functions is no greater than the sum of their maxima.
+
+This concludes the proof showing that all four examples are norms.
+::::
