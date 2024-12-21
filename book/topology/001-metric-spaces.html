@@ -449,8 +449,9 @@ It will turn out that the important underlying structure that determines continu
 This will give rise to the notion of a topology, which abstracts away the idea of a metric altogether and instead defines open sets directly.</p>
 <section id="id1">
 <h2>Metric spaces<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
-<p>We begin with the definition of metric spaces, which are sets equiped with a notion of distance, the metric.</p>
-<div class="proof definition admonition" id="topology-def-metric-space">
+<p>We begin with the definition of metric spaces.
+A metric space is a set that is equiped with a notion of distance between elements, the metric.</p>
+<div class="proof definition admonition" id="topology:def-metric-space">
 <p class="admonition-title"><span class="caption-number">Definition 70 </span> (Metric space)</p>
 <section class="definition-content" id="proof-content">
 <p>A metric space is a pair <span class="math notranslate nohighlight">\((X, d_X)\)</span> of a set <span class="math notranslate nohighlight">\(X,\)</span> called the space, and a function <span class="math notranslate nohighlight">\(d_X: X \times X \to \mathbb{R},\)</span> called the metric, which satisfy</p>
@@ -461,7 +462,8 @@ This will give rise to the notion of a topology, which abstracts away the idea o
 <li><p><span class="math notranslate nohighlight">\(d(x, z) \leq d(x, y) + d(y, z)\)</span> for all for all <span class="math notranslate nohighlight">\(x, y, z \in X.\)</span></p></li>
 </ol>
 </section>
-</div><div class="proof example admonition" id="example-1">
+</div><p>Two common examples of metrics, which we will use later on, are the familiar Euclidean metric and the discrete metric.</p>
+<div class="proof example admonition" id="example-1">
 <p class="admonition-title"><span class="caption-number">Example 13 </span> (Examples of metric spaces)</p>
 <section class="example-content" id="proof-content">
 <p><strong>Euclidean metric:</strong>
@@ -490,7 +492,7 @@ This is a generalisation of convergence from the familiar definition in the cont
 We say that <span class="math notranslate nohighlight">\((x_n)\)</span> converges to <span class="math notranslate nohighlight">\(x \in X,\)</span> written <span class="math notranslate nohighlight">\(x_n \to x\)</span> if for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0,\)</span> there exists <span class="math notranslate nohighlight">\(N \in \mathbb{N}\)</span> such that <span class="math notranslate nohighlight">\(d_X(x_n, x) &lt; \epsilon\)</span> for all <span class="math notranslate nohighlight">\(n &gt; N.\)</span></p>
 </section>
 </div><p>Similar to analogous results in analysis, we can show that in a metric space, limits are unique.</p>
-<div class="proof lemma admonition" id="topology-lemma-limits-in-metric-spaces-are-unique">
+<div class="proof lemma admonition" id="topology:lemma-limits-in-metric-spaces-are-unique">
 <p class="admonition-title"><span class="caption-number">Lemma 6 </span> (Limits in metric spaces are unique)</p>
 <section class="lemma-content" id="proof-content">
 <p>Suppose <span class="math notranslate nohighlight">\((X, d_X)\)</span> is a metric space and <span class="math notranslate nohighlight">\((x_n)\)</span> is a sequence in <span class="math notranslate nohighlight">\(X\)</span> such that <span class="math notranslate nohighlight">\(x_n \to x\)</span> and <span class="math notranslate nohighlight">\(x_n \to x'\)</span> for some <span class="math notranslate nohighlight">\(x, x' \in X.\)</span>
@@ -511,7 +513,7 @@ By the <span class="xref std std-ref">non-negativity, symmetry and the triangle 
 </div>
 </details><p>With convergent sequences in place, we can define continuous functions.
 This definition appears slightly different than the <span class="math notranslate nohighlight">\(\epsilon-\delta\)</span> defnition in analysis, but we will shortly see the two are equivalent.</p>
-<div class="proof definition admonition" id="topology-def-continuous-function">
+<div class="proof definition admonition" id="topology:def-continuous-function">
 <p class="admonition-title"><span class="caption-number">Definition 73 </span> (Continuous function)</p>
 <section class="definition-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> and <span class="math notranslate nohighlight">\((Y, d_Y)\)</span> be metric spaces.
@@ -521,7 +523,7 @@ A function <span class="math notranslate nohighlight">\(f: X \to Y\)</span> is c
 <section id="norms">
 <h2>Norms<a class="headerlink" href="#norms" title="Link to this heading">#</a></h2>
 <p>We now introduce the idea of a norm, which is a definition of the length of a point in a vector space.</p>
-<div class="proof definition admonition" id="topology-def-norm">
+<div class="proof definition admonition" id="topology:def-norm">
 <p class="admonition-title"><span class="caption-number">Definition 74 </span> (Norm)</p>
 <section class="definition-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(V\)</span> be a vector space.
@@ -534,7 +536,7 @@ A norm is a function <span class="math notranslate nohighlight">\(||\cdot||: V \
 </ol>
 </section>
 </div><p>A norm can be used to define a metric on a vector space.</p>
-<div class="proof lemma admonition" id="topology-lemma-norms-induce-metrics">
+<div class="proof lemma admonition" id="topology:lemma-norms-induce-metrics">
 <p class="admonition-title"><span class="caption-number">Lemma 7 </span> (Norms induce metrics)</p>
 <section class="lemma-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(V\)</span> be a vector space with a norm <span class="math notranslate nohighlight">\(||\cdot||.\)</span>
@@ -556,7 +558,7 @@ Using the <span class="xref std std-ref">properties of norms</span>, for any <sp
 <li><p class="sd-card-text"><span class="math notranslate nohighlight">\(d_V(v, u) = ||v - u|| \leq ||v - w|| + ||w - u|| = d_V(v, w) + d_V(w, u),\)</span> by property 4 of norms.</p></li>
 </ol>
 </div>
-</details><div class="proof example admonition" id="example-8">
+</details><div class="proof example admonition" id="topology:examples-of-norms">
 <p class="admonition-title"><span class="caption-number">Example 14 </span> (Examples of norms)</p>
 <section class="example-content" id="proof-content">
 <p>The following are examples of norms on <span class="math notranslate nohighlight">\(C[0, 1],\)</span> the vector space of continuous functions with domain <span class="math notranslate nohighlight">\([0, 1].\)</span></p>
@@ -567,7 +569,83 @@ Using the <span class="xref std std-ref">properties of norms</span>, for any <sp
 ||\cdot||_\infty &amp;= \max_{x \in [0, 1]} |\cdot(x)| dx.
 \end{align}\end{split}\]</div>
 </section>
-</div></section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Examples above are norms<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Most of the properties of norms in <a class="reference internal" href="#topology:def-norm">Definition 74</a> follow from the definition of the examples but property 2, the identity of indiscernibles for norms, is a little more involved.
+For this, we need an intermediate result that we prove here.</p>
+<div class="proof lemma admonition" id="topology:lemma-non-constant-positive-continuous-function-has-positive-integral">
+<p class="admonition-title"><span class="caption-number">Lemma 8 </span> (Non-constant positive continuous function has positive integral)</p>
+<section class="lemma-content" id="proof-content">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(f \in C[0, 1]\)</span> satisfy <span class="math notranslate nohighlight">\(f(x) \geq 0\)</span> for all <span class="math notranslate nohighlight">\(x \in [0, 1].\)</span>
+If <span class="math notranslate nohighlight">\(f\)</span> is not constantly <span class="math notranslate nohighlight">\(0,\)</span> then <span class="math notranslate nohighlight">\(\int_0^1 f(x)dx &gt; 0.\)</span></p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Non-constant positive continuous function has positive integral<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(f \in C[0, 1]\)</span> satisfies <span class="math notranslate nohighlight">\(f(x) \geq 0\)</span> for all <span class="math notranslate nohighlight">\(x \in [0, 1],\)</span> and <span class="math notranslate nohighlight">\(f\)</span> is not constantly <span class="math notranslate nohighlight">\(0.\)</span>
+Then, there exists <span class="math notranslate nohighlight">\(x_0 \in [0, 1]\)</span> such that <span class="math notranslate nohighlight">\(f(x_0) &gt; a\)</span> for some <span class="math notranslate nohighlight">\(a &gt; 0.\)</span>
+Since <span class="math notranslate nohighlight">\(f\)</span> is continuous, there exists <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(f(x) &gt; a / 2\)</span> for all <span class="math notranslate nohighlight">\(x \in (x_0 - \delta, x_0 + \delta).\)</span>
+Then, defining <span class="math notranslate nohighlight">\(g \in C[0, 1]\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}g(x) = \begin{cases}
+a / 2 &amp; \text{ if } x \in (x_0 - \delta, x_0 + \delta), \\
+0 &amp; \text{ otherwise}, \\
+\end{cases}\end{split}\]</div>
+<p class="sd-card-text">we note that <span class="math notranslate nohighlight">\(f \geq g,\)</span> and taking integrals we obtain</p>
+<div class="math notranslate nohighlight">
+\[\int_0^1 f(x)dx \geq \int_0^1 g(x)dx \geq \int_{\max(0,~x_0 - \delta)}^{\min(1,~x_0 + \delta)} \frac{a}{2} dx \geq \frac{a\delta}{2} &gt; 0,\]</div>
+<p class="sd-card-text">which completes the proof.</p>
+</div>
+</details><p class="sd-card-text">Now we can show that each of the examples is indeed a norm.
+In the following, assume that <span class="math notranslate nohighlight">\(f, g \in C[0, 1]\)</span></p>
+<p class="sd-card-text"><strong>Example 1:</strong>
+First, <span class="math notranslate nohighlight">\(||f||_1 \geq 0\)</span> so the first property is satisfied.
+Second, by <a class="reference internal" href="#topology:lemma-non-constant-positive-continuous-function-has-positive-integral">Lemma 8</a> we have that <span class="math notranslate nohighlight">\(||f||_1 = 0\)</span> only if <span class="math notranslate nohighlight">\(f = 0,\)</span> so the second property is satisfied.
+Third, note that <span class="math notranslate nohighlight">\(||\lambda f||_1 = |\lambda|||f||_1.\)</span>
+Fourth, we have that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+||f + g||_1 &amp;= \int_0^1 |f(x) + g(x)| dx \\
+&amp;\leq \int_0^1 (|f(x)| + |g(x)|) dx \\
+&amp;= \int_0^1 |f(x)|dx + \int_0^1|g(x)| dx \\
+&amp;= ||f||_1 + ||g||_1 dx
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">where going from the first to the second line holds by the triangle inequality of absolute values.</p>
+<p class="sd-card-text"><strong>Example 2:</strong>
+The first three parts of the argument for example 1 hold also for example 2.
+For the fourth part, we have that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+||f + g||_2^2 &amp;= \int_0^1 (f(x) + g(x))^2 dx \\
+&amp;= \int_0^1 f(x)^2 + 2f(x)g(x) + g(x)^2 dx \\
+&amp;= \int_0^1 f(x)^2 dx + 2\int_0^1 f(x)g(x)dx + \int_0^1 g(x)^2 dx \\
+&amp;\leq ||f||_2^2 + 2||f||_2||g||_2 + ||g||_2^2 dx \\
+&amp;= (||f||_2 + ||g||_2)^2 dx \\
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">where going from the third to the fourth line we have used the Cauchy-Schwarz inequality (which we have not proved yet, but will be given later).</p>
+<p class="sd-card-text"><strong>Example 3:</strong>
+Again, the first three parts of the argument for example 1 also hold for example 3.
+For the fourth part, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+||f + g||_\infty &amp;= \max_{x \in [0, 1]} |f(x) + g(x)| \\
+&amp;\leq \max_{x \in [0, 1]} |f(x)| + |g(x)| \\
+&amp;\leq \max_{x \in [0, 1]} |f(x)| + \max_{x \in [0, 1]} |g(x)| \\ 
+&amp;\leq ||f||_\infty + ||g||_\infty,
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">where from the first to the second line we have used the triangle inequality of the absolute value, and from the second to the third we have used the fact that the maximum of a sum of two functions is no greater than the sum of their maxima.</p>
+<p class="sd-card-text">This concludes the proof showing that all four examples are norms.</p>
+</div>
+</details></section>
 </section>
 
     <script type="text/x-thebe-config">
