@@ -443,6 +443,11 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="metric-spaces">
 <h1>Metric spaces<a class="headerlink" href="#metric-spaces" title="Link to this heading">#</a></h1>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<p><a class="github-button" href="https://github.com/stratisMarkou/random-walks" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" aria-label="Star stratisMarkou/random-walks on GitHub">Star</a>
+<a class="github-button" href="https://github.com/stratisMarkou/random-walks/issues" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-issue-opened" data-size="large" aria-label="Issue stratisMarkou/random-walks on GitHub">Issue</a>
+<a class="github-button" href="https://github.com/stratisMarkou/random-walks/subscription" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-eye" data-size="large" aria-label="Watch stratisMarkou/random-walks on GitHub">Watch</a>
+<a class="github-button" href="https://github.com/stratisMarkou" data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large" aria-label="Follow @stratisMarkou on GitHub">Follow</a></p>
 <p>The first part of the course is about metric spaces.
 Metric spaces are sets equiped with a metric, which is a definition of distance.
 Metrics generalise the usual notion of distance that the absolute value has on the reals, to more general spaces, and allow us to generalise the notions of convergent sequences and continuity.
@@ -750,7 +755,7 @@ A subset <span class="math notranslate nohighlight">\(C \subseteq X\)</span> is 
 <p class="admonition-title"><span class="caption-number">Lemma 11 </span> (Open (closed) balls are open (closed))</p>
 <section class="lemma-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> be a <a class="reference internal" href="#topology:def-metric-space">metric space</a>.
-Then, for any <span class="math notranslate nohighlight">\(x \in X\)</span> and <span class="math notranslate nohighlight">\(r &gt; 0,\)</span> the open ball <span class="math notranslate nohighlight">\(B_r(x)\)</span> is an open subset of <span class="math notranslate nohighlight">\(X\)</span> and the closed ball <span class="math notranslate nohighlight">\(\overline{B}_r(x)\)</span> is a closed subset of <span class="math notranslate nohighlight">\(X.\)</span></p>
+Then, for any <span class="math notranslate nohighlight">\(x \in X\)</span> and <span class="math notranslate nohighlight">\(r &gt; 0,\)</span> the <a class="reference internal" href="#topology:def-open-and-closed-balls">open ball</a> <span class="math notranslate nohighlight">\(B_r(x)\)</span> is an open subset of <span class="math notranslate nohighlight">\(X\)</span> and the <a class="reference internal" href="#topology:def-open-and-closed-balls">closed ball</a> <span class="math notranslate nohighlight">\(\overline{B}_r(x)\)</span> is a closed subset of <span class="math notranslate nohighlight">\(X.\)</span></p>
 </section>
 </div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -763,7 +768,70 @@ Proof: Open (closed) balls are open (closed)<div class="sd-summary-down docutils
 Then, for any <span class="math notranslate nohighlight">\(x' \in B_r(x),\)</span> we have <span class="math notranslate nohighlight">\(d_X(x, x') &lt; r,\)</span> so we can choose <span class="math notranslate nohighlight">\(\epsilon = r - d_X(x, x') &gt; 0.\)</span>
 By the <a class="reference internal" href="#topology:def-metric-space">triangle inequality</a>, we have that <span class="math notranslate nohighlight">\(B_\epsilon(x') \subseteq B_r(x),\)</span> so <span class="math notranslate nohighlight">\(B_r(x)\)</span> is open.</p>
 <p class="sd-card-text">Similarly, suppose <span class="math notranslate nohighlight">\(x' \in X \setminus \overline{B}_r(x).\)</span>
-Then, <span class="math notranslate nohighlight">\(d_X(x, x') &gt; r,\)</span> so we can choose <span class="math notranslate nohighlight">\(\epsilon = d_X(x, x') - r &gt; 0,\)</span> and by the triangle inequality we have that <span class="math notranslate nohighlight">\(B_\epsilon(x') \subseteq X \setminus \overline{B}_r(x),\)</span> so <span class="math notranslate nohighlight">\(X \setminus \overline{B}_r(x)\)</span> is open.</p>
+Then, <span class="math notranslate nohighlight">\(d_X(x, x') &gt; r,\)</span> so we can choose <span class="math notranslate nohighlight">\(\epsilon = d_X(x, x') - r &gt; 0,\)</span> and by the triangle inequality we have that <span class="math notranslate nohighlight">\(B_\epsilon(x') \subseteq X \setminus \overline{B}_r(x),\)</span> so <span class="math notranslate nohighlight">\(X \setminus \overline{B}_r(x)\)</span> is open and <span class="math notranslate nohighlight">\(\overline{B}_r(x)\)</span> is closed.</p>
+</div>
+</details><p>Sometimes it’s handy to have the following shorthand when talking about open sets.</p>
+<div class="proof definition admonition" id="topology:def-open-neighbourhood">
+<p class="admonition-title"><span class="caption-number">Definition 78 </span> (Open neighbourhood)</p>
+<section class="definition-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> be a <a class="reference internal" href="#topology:def-metric-space">metric space</a>.
+If <span class="math notranslate nohighlight">\(x \in X,\)</span> an open neighbourhood of <span class="math notranslate nohighlight">\(x\)</span> is an open set <span class="math notranslate nohighlight">\(U \subseteq X\)</span> such that <span class="math notranslate nohighlight">\(x \in U.\)</span></p>
+</section>
+</div><p>We can re-express convergence of sequences in terms of this shorthand.</p>
+<div class="proof lemma admonition" id="topology:lemma-convergence-implies-sequence-eventually-in-open-neighbourhood">
+<p class="admonition-title"><span class="caption-number">Lemma 12 </span> (Convergence implies sequence eventually in open neighbourhood)</p>
+<section class="lemma-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> be a <a class="reference internal" href="#topology:def-metric-space">metric space</a> and <span class="math notranslate nohighlight">\((x_n)\)</span> be a sequence in <span class="math notranslate nohighlight">\(X\)</span> that converges to <span class="math notranslate nohighlight">\(x \in X.\)</span>
+Then, for every <a class="reference internal" href="#topology:def-open-neighbourhood">open neighbourhood</a> <span class="math notranslate nohighlight">\(U\)</span> of <span class="math notranslate nohighlight">\(x,\)</span> there exists <span class="math notranslate nohighlight">\(N \in \mathbb{N}\)</span> such that <span class="math notranslate nohighlight">\(x_n \in U\)</span> for all <span class="math notranslate nohighlight">\(n &gt; N.\)</span></p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Convergence implies sequence eventually in open neighbourhood<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> be a metric space and <span class="math notranslate nohighlight">\((x_n)\)</span> be a sequence in <span class="math notranslate nohighlight">\(X\)</span> that converges to <span class="math notranslate nohighlight">\(x \in X.\)</span>
+Let <span class="math notranslate nohighlight">\(U\)</span> be an open neighbourhood of <span class="math notranslate nohighlight">\(x.\)</span>
+Since <span class="math notranslate nohighlight">\(U\)</span> is open, there exists <span class="math notranslate nohighlight">\(r &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(B_r(x) \subseteq U.\)</span>
+Since <span class="math notranslate nohighlight">\(x_n \to x,\)</span> there exists <span class="math notranslate nohighlight">\(N \in \mathbb{N}\)</span> such that <span class="math notranslate nohighlight">\(d_X(x_n, x) &lt; r\)</span> for all <span class="math notranslate nohighlight">\(n &gt; N,\)</span> so <span class="math notranslate nohighlight">\(x_n \in B_r(x) \subseteq U\)</span> for all <span class="math notranslate nohighlight">\(n &gt; N.\)</span></p>
+</div>
+</details><p>Now we define limit points of sets.
+Intuitively, a limit point of a set is a point that is the limit of some sequence in the set.
+Note that a limit point of a set need not itself be in the set.</p>
+<div class="proof definition admonition" id="topology:def-limit-point">
+<p class="admonition-title"><span class="caption-number">Definition 79 </span> (Limit point)</p>
+<section class="definition-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> be a <a class="reference internal" href="#topology:def-metric-space">metric space</a> and <span class="math notranslate nohighlight">\(A \subseteq X.\)</span>
+A point <span class="math notranslate nohighlight">\(x \in X\)</span> is a limit point of <span class="math notranslate nohighlight">\(A\)</span> if there exists a sequence <span class="math notranslate nohighlight">\((x_n)\)</span> in <span class="math notranslate nohighlight">\(A\)</span> such that <span class="math notranslate nohighlight">\(x_n \to x.\)</span></p>
+</section>
+</div><p>Limit points allow an equivalent definition of closed sets, as stated in the following lemma.</p>
+<div class="proof lemma admonition" id="topology:lemma-closed-set-iff-set-contains-all-its-limit-points">
+<p class="admonition-title"><span class="caption-number">Lemma 13 </span> (Closed set <span class="math notranslate nohighlight">\(\iff\)</span> set contains all its limit points)</p>
+<section class="lemma-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> be a <a class="reference internal" href="#topology:def-metric-space">metric space</a> and <span class="math notranslate nohighlight">\(A \subseteq X.\)</span>
+The set <span class="math notranslate nohighlight">\(A\)</span> is <a class="reference internal" href="#topology:def-open-and-closed-subsets">closed</a> if and only if <span class="math notranslate nohighlight">\(A\)</span> contains all its <a class="reference internal" href="#topology:def-limit-point">limit points</a>.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Closed set <span class="math notranslate nohighlight">\(\iff\)</span> set contains all its limit points<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> be a metric space and <span class="math notranslate nohighlight">\(C \subseteq X.\)</span></p>
+<p class="sd-card-text">(<span class="math notranslate nohighlight">\(\Rightarrow\)</span>) Suppose <span class="math notranslate nohighlight">\(C\)</span> is closed.
+Let <span class="math notranslate nohighlight">\(x\)</span> be a limit point of <span class="math notranslate nohighlight">\(C,\)</span> and suppose that <span class="math notranslate nohighlight">\(x \notin C.\)</span>
+Then, <span class="math notranslate nohighlight">\(x \in X \setminus C,\)</span> which is open by the definition of a closed set.
+Since <span class="math notranslate nohighlight">\(x\)</span> is a limit point of <span class="math notranslate nohighlight">\(C,\)</span> there exists a sequence <span class="math notranslate nohighlight">\((x_n)\)</span> in <span class="math notranslate nohighlight">\(C\)</span> such that <span class="math notranslate nohighlight">\(x_n \to x.\)</span>
+But since <span class="math notranslate nohighlight">\(X \setminus C\)</span> is an open neighbourhood of <span class="math notranslate nohighlight">\(x,\)</span> there exists <span class="math notranslate nohighlight">\(N \in \mathbb{N}\)</span> such that <span class="math notranslate nohighlight">\(x_n \in X \setminus C\)</span> for all <span class="math notranslate nohighlight">\(n &gt; N,\)</span> which contradicts the assumption that <span class="math notranslate nohighlight">\(x \notin C.\)</span></p>
+<p class="sd-card-text">(<span class="math notranslate nohighlight">\(\Leftarrow\)</span>) Suppose <span class="math notranslate nohighlight">\(C\)</span> contains all its limit points.
+We want to show that <span class="math notranslate nohighlight">\(X \setminus C\)</span> is open.
+For this, suppose <span class="math notranslate nohighlight">\(x \in X \setminus C.\)</span>
+We will show that there exists <span class="math notranslate nohighlight">\(n \in \mathbb{N}\)</span> such that <span class="math notranslate nohighlight">\(B_{1 / n}(x) \subseteq X \setminus C.\)</span>
+Suppose that this is not the case.
+Then, for each <span class="math notranslate nohighlight">\(n \in \mathbb{N},\)</span> we have <span class="math notranslate nohighlight">\(B_{1 / n}(x) \cap C \neq \emptyset,\)</span> so we can choose <span class="math notranslate nohighlight">\(x_n \in B_{1 / n}(x) \cap C.\)</span>
+Then, <span class="math notranslate nohighlight">\(x_n \to x,\)</span> so <span class="math notranslate nohighlight">\(x\)</span> is a limit point of <span class="math notranslate nohighlight">\(C\)</span> and since <span class="math notranslate nohighlight">\(C\)</span> contains all its limit points, it must also contain <span class="math notranslate nohighlight">\(x,\)</span> which contradicts the assumption that <span class="math notranslate nohighlight">\(x \in X \setminus C.\)</span></p>
 </div>
 </details></section>
 </section>

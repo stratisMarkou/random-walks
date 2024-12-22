@@ -1,5 +1,11 @@
 # Metric spaces
 
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<a class="github-button" href="https://github.com/stratisMarkou/random-walks" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" aria-label="Star stratisMarkou/random-walks on GitHub">Star</a>
+<a class="github-button" href="https://github.com/stratisMarkou/random-walks/issues" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-issue-opened" data-size="large" aria-label="Issue stratisMarkou/random-walks on GitHub">Issue</a>
+<a class="github-button" href="https://github.com/stratisMarkou/random-walks/subscription" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-eye" data-size="large" aria-label="Watch stratisMarkou/random-walks on GitHub">Watch</a>
+<a class="github-button" href="https://github.com/stratisMarkou" data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large" aria-label="Follow @stratisMarkou on GitHub">Follow</a>
+
 The first part of the course is about metric spaces.
 Metric spaces are sets equiped with a metric, which is a definition of distance.
 Metrics generalise the usual notion of distance that the absolute value has on the reals, to more general spaces, and allow us to generalise the notions of convergent sequences and continuity.
@@ -313,7 +319,7 @@ We can now show that the terms _open ball_ and _closed ball_ are in fact justifi
 :::{prf:lemma} Open (closed) balls are open (closed)
 :label: topology:lemma-open-and-closed-balls-are-open-and-closed
 Let $(X, d_X)$ be a {prf:ref}`metric space<topology:def-metric-space>`.
-Then, for any $x \in X$ and $r > 0,$ the open ball $B_r(x)$ is an open subset of $X$ and the closed ball $\overline{B}_r(x)$ is a closed subset of $X.$
+Then, for any $x \in X$ and $r > 0,$ the {prf:ref}`open ball<topology:def-open-and-closed-balls>` $B_r(x)$ is an open subset of $X$ and the {prf:ref}`closed ball<topology:def-open-and-closed-balls>` $\overline{B}_r(x)$ is a closed subset of $X.$
 :::
 
 :::{dropdown} Proof: Open (closed) balls are open (closed)
@@ -322,6 +328,68 @@ Then, for any $x' \in B_r(x),$ we have $d_X(x, x') < r,$ so we can choose $\epsi
 By the {prf:ref}`triangle inequality<topology:def-metric-space>`, we have that $B_\epsilon(x') \subseteq B_r(x),$ so $B_r(x)$ is open.
 
 Similarly, suppose $x' \in X \setminus \overline{B}_r(x).$
-Then, $d_X(x, x') > r,$ so we can choose $\epsilon = d_X(x, x') - r > 0,$ and by the triangle inequality we have that $B_\epsilon(x') \subseteq X \setminus \overline{B}_r(x),$ so $X \setminus \overline{B}_r(x)$ is open.
+Then, $d_X(x, x') > r,$ so we can choose $\epsilon = d_X(x, x') - r > 0,$ and by the triangle inequality we have that $B_\epsilon(x') \subseteq X \setminus \overline{B}_r(x),$ so $X \setminus \overline{B}_r(x)$ is open and $\overline{B}_r(x)$ is closed.
 :::
 
+
+Sometimes it's handy to have the following shorthand when talking about open sets.
+
+:::{prf:definition} Open neighbourhood
+:label: topology:def-open-neighbourhood
+Let $(X, d_X)$ be a {prf:ref}`metric space<topology:def-metric-space>`.
+If $x \in X,$ an open neighbourhood of $x$ is an open set $U \subseteq X$ such that $x \in U.$
+:::
+
+
+We can re-express convergence of sequences in terms of this shorthand.
+
+:::{prf:lemma} Convergence implies sequence eventually in open neighbourhood
+:label: topology:lemma-convergence-implies-sequence-eventually-in-open-neighbourhood
+Let $(X, d_X)$ be a {prf:ref}`metric space<topology:def-metric-space>` and $(x_n)$ be a sequence in $X$ that converges to $x \in X.$
+Then, for every {prf:ref}`open neighbourhood<topology:def-open-neighbourhood>` $U$ of $x,$ there exists $N \in \mathbb{N}$ such that $x_n \in U$ for all $n > N.$
+:::
+
+:::{dropdown} Proof: Convergence implies sequence eventually in open neighbourhood
+Let $(X, d_X)$ be a metric space and $(x_n)$ be a sequence in $X$ that converges to $x \in X.$
+Let $U$ be an open neighbourhood of $x.$
+Since $U$ is open, there exists $r > 0$ such that $B_r(x) \subseteq U.$
+Since $x_n \to x,$ there exists $N \in \mathbb{N}$ such that $d_X(x_n, x) < r$ for all $n > N,$ so $x_n \in B_r(x) \subseteq U$ for all $n > N.$
+:::
+
+
+Now we define limit points of sets.
+Intuitively, a limit point of a set is a point that is the limit of some sequence in the set.
+Note that a limit point of a set need not itself be in the set.
+
+:::{prf:definition} Limit point
+:label: topology:def-limit-point
+Let $(X, d_X)$ be a {prf:ref}`metric space<topology:def-metric-space>` and $A \subseteq X.$
+A point $x \in X$ is a limit point of $A$ if there exists a sequence $(x_n)$ in $A$ such that $x_n \to x.$
+:::
+
+
+Limit points allow an equivalent definition of closed sets, as stated in the following lemma.
+
+:::{prf:lemma} Closed set $\iff$ set contains all its limit points
+:label: topology:lemma-closed-set-iff-set-contains-all-its-limit-points
+Let $(X, d_X)$ be a {prf:ref}`metric space<topology:def-metric-space>` and $A \subseteq X.$
+The set $A$ is {prf:ref}`closed<topology:def-open-and-closed-subsets>` if and only if $A$ contains all its {prf:ref}`limit points<topology:def-limit-point>`.
+:::
+
+:::{dropdown} Proof: Closed set $\iff$ set contains all its limit points
+Let $(X, d_X)$ be a metric space and $C \subseteq X.$
+
+($\Rightarrow$) Suppose $C$ is closed.
+Let $x$ be a limit point of $C,$ and suppose that $x \notin C.$
+Then, $x \in X \setminus C,$ which is open by the definition of a closed set.
+Since $x$ is a limit point of $C,$ there exists a sequence $(x_n)$ in $C$ such that $x_n \to x.$
+But since $X \setminus C$ is an open neighbourhood of $x,$ there exists $N \in \mathbb{N}$ such that $x_n \in X \setminus C$ for all $n > N,$ which contradicts the assumption that $x \notin C.$
+
+($\Leftarrow$) Suppose $C$ contains all its limit points.
+We want to show that $X \setminus C$ is open.
+For this, suppose $x \in X \setminus C.$
+We will show that there exists $n \in \mathbb{N}$ such that $B_{1 / n}(x) \subseteq X \setminus C.$
+Suppose that this is not the case.
+Then, for each $n \in \mathbb{N},$ we have $B_{1 / n}(x) \cap C \neq \emptyset,$ so we can choose $x_n \in B_{1 / n}(x) \cap C.$
+Then, $x_n \to x,$ so $x$ is a limit point of $C$ and since $C$ contains all its limit points, it must also contain $x,$ which contradicts the assumption that $x \in X \setminus C.$
+:::
