@@ -833,6 +833,81 @@ Suppose that this is not the case.
 Then, for each <span class="math notranslate nohighlight">\(n \in \mathbb{N},\)</span> we have <span class="math notranslate nohighlight">\(B_{1 / n}(x) \cap C \neq \emptyset,\)</span> so we can choose <span class="math notranslate nohighlight">\(x_n \in B_{1 / n}(x) \cap C.\)</span>
 Then, <span class="math notranslate nohighlight">\(x_n \to x,\)</span> so <span class="math notranslate nohighlight">\(x\)</span> is a limit point of <span class="math notranslate nohighlight">\(C\)</span> and since <span class="math notranslate nohighlight">\(C\)</span> contains all its limit points, it must also contain <span class="math notranslate nohighlight">\(x,\)</span> which contradicts the assumption that <span class="math notranslate nohighlight">\(x \in X \setminus C.\)</span></p>
 </div>
+</details><p>Now we turn to the important result of the first part of the course.
+This result shows that the thing that determines whether a function is continuous is not the metric itself, but rather the collection of sets that are open under the metric.
+In particular, even if two metrics are different, if they define the same open sets, then the same functions will be continuous under both of them.</p>
+<div class="proof theorem admonition" id="topology:theorem-characterisation-of-continuity">
+<p class="admonition-title"><span class="caption-number">Theorem 90 </span> (Characterisation of continuity)</p>
+<section class="theorem-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> and <span class="math notranslate nohighlight">\((Y, d_Y)\)</span> be <a class="reference internal" href="#topology:def-metric-space">metric spaces</a> and <span class="math notranslate nohighlight">\(f: X \to Y\)</span> be a function.
+Then, the following are equivalent:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(f\)</span> is <a class="reference internal" href="#topology:def-continuous-function">continuous</a>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(f(x_n) \to f(x)\)</span> in <span class="math notranslate nohighlight">\(Y\)</span> whenever <span class="math notranslate nohighlight">\(x_n \to x\)</span> in <span class="math notranslate nohighlight">\(X,\)</span></p></li>
+<li><p>For every <a class="reference internal" href="#topology:def-open-and-closed-subsets">open set</a> <span class="math notranslate nohighlight">\(U \subseteq Y,\)</span> the preimage <span class="math notranslate nohighlight">\(f^{-1}(U)\)</span> is open in <span class="math notranslate nohighlight">\(X,\)</span></p></li>
+<li><p>For every <a class="reference internal" href="#topology:def-open-and-closed-subsets">closed set</a> <span class="math notranslate nohighlight">\(C \subseteq Y,\)</span> the preimage <span class="math notranslate nohighlight">\(f^{-1}(C)\)</span> is closed in <span class="math notranslate nohighlight">\(X,\)</span></p></li>
+<li><p>For every <span class="math notranslate nohighlight">\(x \in X\)</span> and <span class="math notranslate nohighlight">\(\epsilon &gt; 0,\)</span> there exists <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(f(B_\delta(x)) \subseteq B_\epsilon(f(x)).\)</span></p></li>
+</ol>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Characterisation of continuity<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">We break the proof down into a series of implications.</p>
+<p class="sd-card-text">(<span class="math notranslate nohighlight">\(1 \iff 2\)</span>) This is the definition of <a class="reference internal" href="#topology:def-continuous-function">continuity</a>.</p>
+<p class="sd-card-text">(<span class="math notranslate nohighlight">\(2 \Rightarrow 3\)</span>) Suppose <span class="math notranslate nohighlight">\(f(x_n) \to f(x)\)</span> in <span class="math notranslate nohighlight">\(Y\)</span> whenever <span class="math notranslate nohighlight">\(x_n \to x\)</span> in <span class="math notranslate nohighlight">\(X.\)</span>
+Suppose <span class="math notranslate nohighlight">\(U \subseteq Y\)</span> is open but <span class="math notranslate nohighlight">\(f^{-1}(U)\)</span> is not.
+Then, there exists <span class="math notranslate nohighlight">\(x \in f^{-1}(U)\)</span> such that for every <span class="math notranslate nohighlight">\(n \in \mathbb{N}\)</span> there exists <span class="math notranslate nohighlight">\(x_n \in B_{1 / n}(x)\)</span> such that <span class="math notranslate nohighlight">\(x_n \notin f^{-1}(U).\)</span>
+This implies that <span class="math notranslate nohighlight">\(f(x_n) \notin U\)</span> for any <span class="math notranslate nohighlight">\(n \in \mathbb{N}.\)</span>
+However, <span class="math notranslate nohighlight">\(x_n \to x\)</span> in <span class="math notranslate nohighlight">\(X,\)</span> so <span class="math notranslate nohighlight">\(f(x_n) \to f(x)\)</span> in <span class="math notranslate nohighlight">\(Y.\)</span>
+This is a contradiction because since <span class="math notranslate nohighlight">\(U\)</span> is open, any sequence that converges to a point in <span class="math notranslate nohighlight">\(U\)</span> must <a class="reference internal" href="#topology:lemma-convergence-implies-sequence-eventually-in-open-neighbourhood">eventually be</a> in <span class="math notranslate nohighlight">\(U\)</span>.</p>
+<p class="sd-card-text">(<span class="math notranslate nohighlight">\(3 \Rightarrow 4\)</span>) Suppose that for every open set <span class="math notranslate nohighlight">\(U \subseteq Y,\)</span> the preimage <span class="math notranslate nohighlight">\(f^{-1}(U)\)</span> is open in <span class="math notranslate nohighlight">\(X.\)</span>
+Then, for every closed set <span class="math notranslate nohighlight">\(C \subseteq Y,\)</span> the set <span class="math notranslate nohighlight">\(Y \setminus C\)</span> is open so the set <span class="math notranslate nohighlight">\(f^{-1}(Y \setminus C)\)</span> is open, so the preimage <span class="math notranslate nohighlight">\(f^{-1}(C) = X \setminus f^{-1}(Y \setminus C)\)</span> is closed in <span class="math notranslate nohighlight">\(X.\)</span></p>
+<p class="sd-card-text">(<span class="math notranslate nohighlight">\(4 \Rightarrow 5\)</span>) Suppose that for every closed set <span class="math notranslate nohighlight">\(C \subseteq Y,\)</span> the preimage <span class="math notranslate nohighlight">\(f^{-1}(C)\)</span> is closed in <span class="math notranslate nohighlight">\(X.\)</span>
+Let <span class="math notranslate nohighlight">\(x \in X\)</span> and <span class="math notranslate nohighlight">\(\epsilon &gt; 0.\)</span>
+Since <span class="math notranslate nohighlight">\(Y \setminus B_\epsilon(f(x))\)</span> is closed, <span class="math notranslate nohighlight">\(f^{-1}(Y \setminus B_\epsilon(f(x))) = X \setminus f^{-1}(B_\epsilon(f(x)))\)</span> is closed.
+Therefore, the set <span class="math notranslate nohighlight">\(f^{-1}(B_\epsilon(f(x)))\)</span> is open, so there exists <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(B_\delta(x) \subseteq f^{-1}(B_\epsilon(f(x))),\)</span> which implies that <span class="math notranslate nohighlight">\(f(B_\delta(x)) \subseteq B_\epsilon(f(x)).\)</span></p>
+<p class="sd-card-text">(<span class="math notranslate nohighlight">\(5 \Rightarrow 2\)</span>) Suppose that for every <span class="math notranslate nohighlight">\(x \in X\)</span> and <span class="math notranslate nohighlight">\(\epsilon &gt; 0,\)</span> there exists <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(f(B_\delta(x)) \subseteq B_\epsilon(f(x)).\)</span>
+Suppose <span class="math notranslate nohighlight">\((x_n)\)</span> is a sequence in <span class="math notranslate nohighlight">\(X\)</span> such that <span class="math notranslate nohighlight">\(x_n \to x.\)</span>
+Let <span class="math notranslate nohighlight">\(\epsilon &gt; 0.\)</span>
+Then, there exists <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(f(B_\delta(x)) \subseteq B_\epsilon(f(x)).\)</span>
+Since <span class="math notranslate nohighlight">\(x_n \to x,\)</span> there exists <span class="math notranslate nohighlight">\(N \in \mathbb{N}\)</span> such that <span class="math notranslate nohighlight">\(x_n \in B_\delta(x)\)</span> for all <span class="math notranslate nohighlight">\(n &gt; N,\)</span> so <span class="math notranslate nohighlight">\(f(x_n) \in f(B_\delta(x)) \subseteq B_\epsilon(f(x))\)</span> for all <span class="math notranslate nohighlight">\(n &gt; N,\)</span> which implies that <span class="math notranslate nohighlight">\(f(x_n) \to f(x).\)</span></p>
+</div>
+</details><p>We conclude with three properties of open sets that we will use to define toplogies in the next section.</p>
+<div class="proof lemma admonition" id="topology:lemma-properties-of-open-sets">
+<p class="admonition-title"><span class="caption-number">Lemma 14 </span> (Properties of open sets)</p>
+<section class="lemma-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> be a <a class="reference internal" href="#topology:def-metric-space">metric space</a>.
+Then</p>
+<ol class="arabic simple">
+<li><p>The empty set <span class="math notranslate nohighlight">\(\emptyset\)</span> and <span class="math notranslate nohighlight">\(X\)</span> are open,</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\{U_i\}_{i \in I}\)</span> is a collection of open sets, then <span class="math notranslate nohighlight">\(\cup{i \in I} U_i\)</span> is open,</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(U_1, \ldots, U_N\)</span> are open sets, then <span class="math notranslate nohighlight">\(\cap{n = 1}^N U_n\)</span> is open.</p></li>
+</ol>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Properties of open sets<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><strong>Property 1:</strong>
+The empty set is open vacuously.
+The whole space <span class="math notranslate nohighlight">\(X\)</span> is open because for every <span class="math notranslate nohighlight">\(x \in X,\)</span> we have <span class="math notranslate nohighlight">\(B_r(x) \subseteq X,\)</span> for any <span class="math notranslate nohighlight">\(r &gt; 0.\)</span></p>
+<p class="sd-card-text"><strong>Property 2:</strong>
+Let <span class="math notranslate nohighlight">\(\{U_i\}_{i \in I}\)</span> be a collection of open sets.
+Suppose <span class="math notranslate nohighlight">\(x \in \cup_{i \in I} U_i.\)</span>
+Then, there exists <span class="math notranslate nohighlight">\(i \in I\)</span> such that <span class="math notranslate nohighlight">\(x \in U_i,\)</span> so there exists <span class="math notranslate nohighlight">\(r &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(B_r(x) \subseteq U_i \subseteq \bigcup_{i \in I} U_i,\)</span> so <span class="math notranslate nohighlight">\(\bigcup_{i \in I} U_i\)</span> is open.</p>
+<p class="sd-card-text"><strong>Property 3:</strong>
+Let <span class="math notranslate nohighlight">\(U_1, \ldots, U_N\)</span> be open sets.
+Suppose <span class="math notranslate nohighlight">\(x \in \cap_{n = 1}^N U_n.\)</span>
+Then, <span class="math notranslate nohighlight">\(x \in U_n\)</span> for all <span class="math notranslate nohighlight">\(n = 1, \ldots, N,\)</span> so there exists <span class="math notranslate nohighlight">\(r_n &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(B_{r_n}(x) \subseteq U_n\)</span> for all <span class="math notranslate nohighlight">\(n = 1, \ldots, N.\)</span>
+Taking <span class="math notranslate nohighlight">\(r = \min\{r_1, \ldots, r_N\},\)</span> we have that <span class="math notranslate nohighlight">\(B_r(x) \subseteq U_n\)</span> for all <span class="math notranslate nohighlight">\(n = 1, \ldots, N,\)</span> so <span class="math notranslate nohighlight">\(\cap_{n = 1}^N U_n\)</span> is open.</p>
+</div>
 </details></section>
 </section>
 
