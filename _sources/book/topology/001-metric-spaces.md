@@ -447,8 +447,8 @@ Let $(X, d_X)$ be a {prf:ref}`metric space<topology:def-metric-space>`.
 Then
 
 1. The empty set $\emptyset$ and $X$ are open,
-2. If $\{U_i\}_{i \in I}$ is a collection of open sets, then $\cup{i \in I} U_i$ is open,
-3. If $U_1, \ldots, U_N$ are open sets, then $\cap{n = 1}^N U_n$ is open.
+2. If $\{U_i\}_{i \in I}$ is a collection of open sets, then $\bigcup{i \in I} U_i$ is open,
+3. If $U_1, \ldots, U_N$ are open sets, then $\bigcap{n = 1}^N U_n$ is open.
 :::
 
 :::{dropdown} Proof: Properties of open sets
