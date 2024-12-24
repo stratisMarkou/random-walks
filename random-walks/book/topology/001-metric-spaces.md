@@ -393,3 +393,77 @@ Suppose that this is not the case.
 Then, for each $n \in \mathbb{N},$ we have $B_{1 / n}(x) \cap C \neq \emptyset,$ so we can choose $x_n \in B_{1 / n}(x) \cap C.$
 Then, $x_n \to x,$ so $x$ is a limit point of $C$ and since $C$ contains all its limit points, it must also contain $x,$ which contradicts the assumption that $x \in X \setminus C.$
 :::
+
+
+Now we turn to the important result of the first part of the course.
+This result shows that the thing that determines whether a function is continuous is not the metric itself, but rather the collection of sets that are open under the metric.
+In particular, even if two metrics are different, if they define the same open sets, then the same functions will be continuous under both of them.
+
+:::{prf:theorem} Characterisation of continuity
+:label: topology:theorem-characterisation-of-continuity
+Let $(X, d_X)$ and $(Y, d_Y)$ be {prf:ref}`metric spaces<topology:def-metric-space>` and $f: X \to Y$ be a function.
+Then, the following are equivalent:
+
+1. $f$ is {prf:ref}`continuous<topology:def-continuous-function>`,
+2. $f(x_n) \to f(x)$ in $Y$ whenever $x_n \to x$ in $X,$
+3. For every {prf:ref}`open set<topology:def-open-and-closed-subsets>` $U \subseteq Y,$ the preimage $f^{-1}(U)$ is open in $X,$
+4. For every {prf:ref}`closed set<topology:def-open-and-closed-subsets>` $C \subseteq Y,$ the preimage $f^{-1}(C)$ is closed in $X,$
+5. For every $x \in X$ and $\epsilon > 0,$ there exists $\delta > 0$ such that $f(B_\delta(x)) \subseteq B_\epsilon(f(x)).$
+:::
+
+:::{dropdown} Proof: Characterisation of continuity
+We break the proof down into a series of implications.
+
+($1 \iff 2$) This is the definition of {prf:ref}`continuity<topology:def-continuous-function>`.
+
+($2 \Rightarrow 3$) Suppose $f(x_n) \to f(x)$ in $Y$ whenever $x_n \to x$ in $X.$
+Suppose $U \subseteq Y$ is open but $f^{-1}(U)$ is not.
+Then, there exists $x \in f^{-1}(U)$ such that for every $n \in \mathbb{N}$ there exists $x_n \in B_{1 / n}(x)$ such that $x_n \notin f^{-1}(U).$
+This implies that $f(x_n) \notin U$ for any $n \in \mathbb{N}.$
+However, $x_n \to x$ in $X,$ so $f(x_n) \to f(x)$ in $Y.$
+This is a contradiction because since $U$ is open, any sequence that converges to a point in $U$ must {prf:ref}`eventually be<topology:lemma-convergence-implies-sequence-eventually-in-open-neighbourhood>` in $U$.
+
+($3 \Rightarrow 4$) Suppose that for every open set $U \subseteq Y,$ the preimage $f^{-1}(U)$ is open in $X.$
+Then, for every closed set $C \subseteq Y,$ the set $Y \setminus C$ is open so the set $f^{-1}(Y \setminus C)$ is open, so the preimage $f^{-1}(C) = X \setminus f^{-1}(Y \setminus C)$ is closed in $X.$
+
+($4 \Rightarrow 5$) Suppose that for every closed set $C \subseteq Y,$ the preimage $f^{-1}(C)$ is closed in $X.$
+Let $x \in X$ and $\epsilon > 0.$
+Since $Y \setminus B_\epsilon(f(x))$ is closed, $f^{-1}(Y \setminus B_\epsilon(f(x))) = X \setminus f^{-1}(B_\epsilon(f(x)))$ is closed.
+Therefore, the set $f^{-1}(B_\epsilon(f(x)))$ is open, so there exists $\delta > 0$ such that $B_\delta(x) \subseteq f^{-1}(B_\epsilon(f(x))),$ which implies that $f(B_\delta(x)) \subseteq B_\epsilon(f(x)).$
+
+($5 \Rightarrow 2$) Suppose that for every $x \in X$ and $\epsilon > 0,$ there exists $\delta > 0$ such that $f(B_\delta(x)) \subseteq B_\epsilon(f(x)).$
+Suppose $(x_n)$ is a sequence in $X$ such that $x_n \to x.$
+Let $\epsilon > 0.$
+Then, there exists $\delta > 0$ such that $f(B_\delta(x)) \subseteq B_\epsilon(f(x)).$
+Since $x_n \to x,$ there exists $N \in \mathbb{N}$ such that $x_n \in B_\delta(x)$ for all $n > N,$ so $f(x_n) \in f(B_\delta(x)) \subseteq B_\epsilon(f(x))$ for all $n > N,$ which implies that $f(x_n) \to f(x).$
+:::
+
+
+We conclude with three properties of open sets that we will use to define toplogies in the next section.
+
+:::{prf:lemma} Properties of open sets
+:label: topology:lemma-properties-of-open-sets
+Let $(X, d_X)$ be a {prf:ref}`metric space<topology:def-metric-space>`.
+Then
+
+1. The empty set $\emptyset$ and $X$ are open,
+2. If $\{U_i\}_{i \in I}$ is a collection of open sets, then $\cup{i \in I} U_i$ is open,
+3. If $U_1, \ldots, U_N$ are open sets, then $\cap{n = 1}^N U_n$ is open.
+:::
+
+:::{dropdown} Proof: Properties of open sets
+__Property 1:__
+The empty set is open vacuously.
+The whole space $X$ is open because for every $x \in X,$ we have $B_r(x) \subseteq X,$ for any $r > 0.$
+
+__Property 2:__
+Let $\{U_i\}_{i \in I}$ be a collection of open sets.
+Suppose $x \in \cup_{i \in I} U_i.$
+Then, there exists $i \in I$ such that $x \in U_i,$ so there exists $r > 0$ such that $B_r(x) \subseteq U_i \subseteq \bigcup_{i \in I} U_i,$ so $\bigcup_{i \in I} U_i$ is open.
+
+__Property 3:__
+Let $U_1, \ldots, U_N$ be open sets.
+Suppose $x \in \cap_{n = 1}^N U_n.$
+Then, $x \in U_n$ for all $n = 1, \ldots, N,$ so there exists $r_n > 0$ such that $B_{r_n}(x) \subseteq U_n$ for all $n = 1, \ldots, N.$
+Taking $r = \min\{r_1, \ldots, r_N\},$ we have that $B_r(x) \subseteq U_n$ for all $n = 1, \ldots, N,$ so $\cap_{n = 1}^N U_n$ is open.
+:::
