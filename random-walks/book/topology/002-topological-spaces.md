@@ -106,7 +106,7 @@ In topological spaces, convergent sequences are defined directly in terms of ope
 
 :::{prf:definition} Convergent sequence
 :label: topology:def-convergent-sequence-topology
-A sequence $x_n \to x$ if for every open neighbourhood $U$ of $x,$ there exists $N \in \mathbb{N}$ such that $x_n \in U$ for all $n > N.$
+A sequence $x_n \to x$ if for every {prf:ref}`open neighbourhood<topology:def-open-neighbourhood-topology>` $U$ of $x,$ there exists $N \in \mathbb{N}$ such that $x_n \in U$ for all $n > N.$
 :::
 
 
