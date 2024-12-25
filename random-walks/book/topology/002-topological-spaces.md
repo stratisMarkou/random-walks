@@ -7,7 +7,7 @@
 <a class="github-button" href="https://github.com/stratisMarkou" data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large" aria-label="Follow @stratisMarkou on GitHub">Follow</a>
 
 In the previous chapter we saw that in a metric space, continuity of functions is only indirectly determined by the metric itself.
-Instead, the structure that determines continuity {prf:ref}`is the set of open sets<topology:theorem-characterisation-of-continuity>`.
+Instead, the structure that determines continuity {prf:ref}`is the collection open sets under the metric<topology:theorem-characterisation-of-continuity>`.
 This motivates the definition of a topological space, which abstracts the notion of open sets from metric spaces.
 
 ## Topologies
