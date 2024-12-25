@@ -448,7 +448,7 @@ document.write(`
 <a class="github-button" href="https://github.com/stratisMarkou/random-walks/subscription" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-eye" data-size="large" aria-label="Watch stratisMarkou/random-walks on GitHub">Watch</a>
 <a class="github-button" href="https://github.com/stratisMarkou" data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large" aria-label="Follow @stratisMarkou on GitHub">Follow</a></p>
 <p>In the previous chapter we saw that in a metric space, continuity of functions is only indirectly determined by the metric itself.
-Instead, the structure that determines continuity <a class="reference internal" href="001-metric-spaces.html#topology:theorem-characterisation-of-continuity">is the set of open sets</a>.
+Instead, the structure that determines continuity <a class="reference internal" href="001-metric-spaces.html#topology:theorem-characterisation-of-continuity">is the collection open sets under the metric</a>.
 This motivates the definition of a topological space, which abstracts the notion of open sets from metric spaces.</p>
 <section id="topologies">
 <h2>Topologies<a class="headerlink" href="#topologies" title="Link to this heading">#</a></h2>
@@ -539,7 +539,7 @@ First we re-define the following shorthand for open sets.</p>
 <div class="proof definition admonition" id="topology:def-convergent-sequence-topology">
 <p class="admonition-title"><span class="caption-number">Definition 85 </span> (Convergent sequence)</p>
 <section class="definition-content" id="proof-content">
-<p>A sequence <span class="math notranslate nohighlight">\(x_n \to x\)</span> if for every open neighbourhood <span class="math notranslate nohighlight">\(U\)</span> of <span class="math notranslate nohighlight">\(x,\)</span> there exists <span class="math notranslate nohighlight">\(N \in \mathbb{N}\)</span> such that <span class="math notranslate nohighlight">\(x_n \in U\)</span> for all <span class="math notranslate nohighlight">\(n &gt; N.\)</span></p>
+<p>A sequence <span class="math notranslate nohighlight">\(x_n \to x\)</span> if for every <a class="reference internal" href="#topology:def-open-neighbourhood-topology">open neighbourhood</a> <span class="math notranslate nohighlight">\(U\)</span> of <span class="math notranslate nohighlight">\(x,\)</span> there exists <span class="math notranslate nohighlight">\(N \in \mathbb{N}\)</span> such that <span class="math notranslate nohighlight">\(x_n \in U\)</span> for all <span class="math notranslate nohighlight">\(n &gt; N.\)</span></p>
 </section>
 </div><p>We now turn to uniqueness of limits.
 In general, in a topological space limits need not be unique.
@@ -548,7 +548,7 @@ However, further assumptions on the topology can result into unique limits.</p>
 <div class="proof definition admonition" id="topology:def-hausdorff-space">
 <p class="admonition-title"><span class="caption-number">Definition 86 </span> (Hausdorff space)</p>
 <section class="definition-content" id="proof-content">
-<p>A topological space <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span> is Hausdorff if for every pair of distinct points <span class="math notranslate nohighlight">\(x_1, x_2 \in X,\)</span> there exist open neighbourhoods <span class="math notranslate nohighlight">\(U_1, U_2\)</span> of <span class="math notranslate nohighlight">\(x_1, x_2\)</span> respectively such that <span class="math notranslate nohighlight">\(U_1 \cap U_2 = \emptyset.\)</span></p>
+<p>A <a class="reference internal" href="#topology:def-topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span> is Hausdorff if for every pair of distinct points <span class="math notranslate nohighlight">\(x_1, x_2 \in X,\)</span> there exist <a class="reference internal" href="#topology:def-open-neighbourhood-topology">open neighbourhoods</a> <span class="math notranslate nohighlight">\(U_1, U_2\)</span> of <span class="math notranslate nohighlight">\(x_1, x_2\)</span> respectively such that <span class="math notranslate nohighlight">\(U_1 \cap U_2 = \emptyset.\)</span></p>
 </section>
 </div><aside class="margin sidebar">
 <p class="sidebar-title"></p>

@@ -7,7 +7,7 @@
 <a class="github-button" href="https://github.com/stratisMarkou" data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large" aria-label="Follow @stratisMarkou on GitHub">Follow</a>
 
 In the previous chapter we saw that in a metric space, continuity of functions is only indirectly determined by the metric itself.
-Instead, the structure that determines continuity {prf:ref}`is the set of open sets<topology:theorem-characterisation-of-continuity>`.
+Instead, the structure that determines continuity {prf:ref}`is the collection open sets under the metric<topology:theorem-characterisation-of-continuity>`.
 This motivates the definition of a topological space, which abstracts the notion of open sets from metric spaces.
 
 ## Topologies
@@ -106,7 +106,7 @@ In topological spaces, convergent sequences are defined directly in terms of ope
 
 :::{prf:definition} Convergent sequence
 :label: topology:def-convergent-sequence-topology
-A sequence $x_n \to x$ if for every open neighbourhood $U$ of $x,$ there exists $N \in \mathbb{N}$ such that $x_n \in U$ for all $n > N.$
+A sequence $x_n \to x$ if for every {prf:ref}`open neighbourhood<topology:def-open-neighbourhood-topology>` $U$ of $x,$ there exists $N \in \mathbb{N}$ such that $x_n \in U$ for all $n > N.$
 :::
 
 
@@ -117,7 +117,7 @@ However, further assumptions on the topology can result into unique limits.
 
 :::{prf:definition} Hausdorff space
 :label: topology:def-hausdorff-space
-A topological space $(X, \mathcal{U})$ is Hausdorff if for every pair of distinct points $x_1, x_2 \in X,$ there exist open neighbourhoods $U_1, U_2$ of $x_1, x_2$ respectively such that $U_1 \cap U_2 = \emptyset.$
+A {prf:ref}`topological space<topology:def-topological-space>` $(X, \mathcal{U})$ is Hausdorff if for every pair of distinct points $x_1, x_2 \in X,$ there exist {prf:ref}`open neighbourhoods<topology:def-open-neighbourhood-topology>` $U_1, U_2$ of $x_1, x_2$ respectively such that $U_1 \cap U_2 = \emptyset.$
 :::
 
 :::{margin}
