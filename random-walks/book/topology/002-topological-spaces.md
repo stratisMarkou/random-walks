@@ -117,7 +117,7 @@ However, further assumptions on the topology can result into unique limits.
 
 :::{prf:definition} Hausdorff space
 :label: topology:def-hausdorff-space
-A topological space $(X, \mathcal{U})$ is Hausdorff if for every pair of distinct points $x_1, x_2 \in X,$ there exist open neighbourhoods $U_1, U_2$ of $x_1, x_2$ respectively such that $U_1 \cap U_2 = \emptyset.$
+A {prf:ref}`topological space<topology:def-topological-space>` $(X, \mathcal{U})$ is Hausdorff if for every pair of distinct points $x_1, x_2 \in X,$ there exist {prf:ref}`open neighbourhoods<topology:def-open-neighbourhood-topology>` $U_1, U_2$ of $x_1, x_2$ respectively such that $U_1 \cap U_2 = \emptyset.$
 :::
 
 :::{margin}
