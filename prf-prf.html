@@ -488,6 +488,9 @@ document.write(`
    <a href="#cap-topology:cauchy-schwarz"><strong>topology:cauchy-schwarz</strong></a> | 
    <a href="#cap-topology:def-continuous-function"><strong>topology:def-continuous-function</strong></a> | 
    <a href="#cap-topology:def-continuous-function-topology"><strong>topology:def-continuous-function-topology</strong></a> | 
+   <a href="#cap-topology:def-convergent-sequence-topology"><strong>topology:def-convergent-sequence-topology</strong></a> | 
+   <a href="#cap-topology:def-hausdorff-space"><strong>topology:def-hausdorff-space</strong></a> | 
+   <a href="#cap-topology:def-homeomorphism"><strong>topology:def-homeomorphism</strong></a> | 
    <a href="#cap-topology:def-induced-topology"><strong>topology:def-induced-topology</strong></a> | 
    <a href="#cap-topology:def-limit-point"><strong>topology:def-limit-point</strong></a> | 
    <a href="#cap-topology:def-metric-space"><strong>topology:def-metric-space</strong></a> | 
@@ -495,13 +498,17 @@ document.write(`
    <a href="#cap-topology:def-open-and-closed-balls"><strong>topology:def-open-and-closed-balls</strong></a> | 
    <a href="#cap-topology:def-open-and-closed-subsets"><strong>topology:def-open-and-closed-subsets</strong></a> | 
    <a href="#cap-topology:def-open-neighbourhood"><strong>topology:def-open-neighbourhood</strong></a> | 
+   <a href="#cap-topology:def-open-neighbourhood-topology"><strong>topology:def-open-neighbourhood-topology</strong></a> | 
    <a href="#cap-topology:def-topological-space"><strong>topology:def-topological-space</strong></a> | 
    <a href="#cap-topology:examples-of-norms"><strong>topology:examples-of-norms</strong></a> | 
    <a href="#cap-topology:inner-product-space"><strong>topology:inner-product-space</strong></a> | 
    <a href="#cap-topology:lemma-closed-set-iff-set-contains-all-its-limit-points"><strong>topology:lemma-closed-set-iff-set-contains-all-its-limit-points</strong></a> | 
+   <a href="#cap-topology:lemma-composition-preserves-continuity"><strong>topology:lemma-composition-preserves-continuity</strong></a> | 
    <a href="#cap-topology:lemma-convergence-implies-sequence-eventually-in-open-neighbourhood"><strong>topology:lemma-convergence-implies-sequence-eventually-in-open-neighbourhood</strong></a> | 
+   <a href="#cap-topology:lemma-homeomorphism-equivalence-relation"><strong>topology:lemma-homeomorphism-equivalence-relation</strong></a> | 
    <a href="#cap-topology:lemma-inner-products-induce-norms"><strong>topology:lemma-inner-products-induce-norms</strong></a> | 
    <a href="#cap-topology:lemma-limits-in-metric-spaces-are-unique"><strong>topology:lemma-limits-in-metric-spaces-are-unique</strong></a> | 
+   <a href="#cap-topology:lemma-limits-unique-hausdorff"><strong>topology:lemma-limits-unique-hausdorff</strong></a> | 
    <a href="#cap-topology:lemma-non-constant-positive-continuous-function-has-positive-integral"><strong>topology:lemma-non-constant-positive-continuous-function-has-positive-integral</strong></a> | 
    <a href="#cap-topology:lemma-norms-induce-metrics"><strong>topology:lemma-norms-induce-metrics</strong></a> | 
    <a href="#cap-topology:lemma-open-and-closed-balls-are-open-and-closed"><strong>topology:lemma-open-and-closed-balls-are-open-and-closed</strong></a> | 
@@ -1303,6 +1310,30 @@ document.write(`
        <a href="book/topology/002-topological-spaces.html#topology:def-continuous-function-topology"><code class="xref">topology:def-continuous-function-topology</code></a> <em>(book/topology/002-topological-spaces)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:def-convergent-sequence-topology"><td></td><td>
+       <strong>topology:def-convergent-sequence-topology</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/002-topological-spaces.html#topology:def-convergent-sequence-topology"><code class="xref">topology:def-convergent-sequence-topology</code></a> <em>(book/topology/002-topological-spaces)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:def-hausdorff-space"><td></td><td>
+       <strong>topology:def-hausdorff-space</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/002-topological-spaces.html#topology:def-hausdorff-space"><code class="xref">topology:def-hausdorff-space</code></a> <em>(book/topology/002-topological-spaces)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:def-homeomorphism"><td></td><td>
+       <strong>topology:def-homeomorphism</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/002-topological-spaces.html#topology:def-homeomorphism"><code class="xref">topology:def-homeomorphism</code></a> <em>(book/topology/002-topological-spaces)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-topology:def-induced-topology"><td></td><td>
        <strong>topology:def-induced-topology</strong></td><td></td></tr>
      <tr>
@@ -1359,6 +1390,14 @@ document.write(`
        <a href="book/topology/001-metric-spaces.html#topology:def-open-neighbourhood"><code class="xref">topology:def-open-neighbourhood</code></a> <em>(book/topology/001-metric-spaces)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:def-open-neighbourhood-topology"><td></td><td>
+       <strong>topology:def-open-neighbourhood-topology</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/002-topological-spaces.html#topology:def-open-neighbourhood-topology"><code class="xref">topology:def-open-neighbourhood-topology</code></a> <em>(book/topology/002-topological-spaces)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-topology:def-topological-space"><td></td><td>
        <strong>topology:def-topological-space</strong></td><td></td></tr>
      <tr>
@@ -1391,12 +1430,28 @@ document.write(`
        <a href="book/topology/001-metric-spaces.html#topology:lemma-closed-set-iff-set-contains-all-its-limit-points"><code class="xref">topology:lemma-closed-set-iff-set-contains-all-its-limit-points</code></a> <em>(book/topology/001-metric-spaces)</em></td><td>
        <em>lemma</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:lemma-composition-preserves-continuity"><td></td><td>
+       <strong>topology:lemma-composition-preserves-continuity</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/002-topological-spaces.html#topology:lemma-composition-preserves-continuity"><code class="xref">topology:lemma-composition-preserves-continuity</code></a> <em>(book/topology/002-topological-spaces)</em></td><td>
+       <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-topology:lemma-convergence-implies-sequence-eventually-in-open-neighbourhood"><td></td><td>
        <strong>topology:lemma-convergence-implies-sequence-eventually-in-open-neighbourhood</strong></td><td></td></tr>
      <tr>
        <td></td>
        <td>
        <a href="book/topology/001-metric-spaces.html#topology:lemma-convergence-implies-sequence-eventually-in-open-neighbourhood"><code class="xref">topology:lemma-convergence-implies-sequence-eventually-in-open-neighbourhood</code></a> <em>(book/topology/001-metric-spaces)</em></td><td>
+       <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:lemma-homeomorphism-equivalence-relation"><td></td><td>
+       <strong>topology:lemma-homeomorphism-equivalence-relation</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/002-topological-spaces.html#topology:lemma-homeomorphism-equivalence-relation"><code class="xref">topology:lemma-homeomorphism-equivalence-relation</code></a> <em>(book/topology/002-topological-spaces)</em></td><td>
        <em>lemma</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-topology:lemma-inner-products-induce-norms"><td></td><td>
@@ -1413,6 +1468,14 @@ document.write(`
        <td></td>
        <td>
        <a href="book/topology/001-metric-spaces.html#topology:lemma-limits-in-metric-spaces-are-unique"><code class="xref">topology:lemma-limits-in-metric-spaces-are-unique</code></a> <em>(book/topology/001-metric-spaces)</em></td><td>
+       <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:lemma-limits-unique-hausdorff"><td></td><td>
+       <strong>topology:lemma-limits-unique-hausdorff</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/002-topological-spaces.html#topology:lemma-limits-unique-hausdorff"><code class="xref">topology:lemma-limits-unique-hausdorff</code></a> <em>(book/topology/002-topological-spaces)</em></td><td>
        <em>lemma</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-topology:lemma-non-constant-positive-continuous-function-has-positive-integral"><td></td><td>

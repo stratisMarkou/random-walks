@@ -514,7 +514,7 @@ In this way, we will be able to interpret this expectation as the covariance of 
 <p>This is also an unbiased estimate of the kernel, however its variance is lower than in the <span class="math notranslate nohighlight">\(M = 1\)</span> case, since the variance of the average of the sum of <span class="math notranslate nohighlight">\(K\)</span> i.i.d. random variables is lower than the variance of a single one of the variables.
 We therefore arrive at the following algorithm for estimating <span class="math notranslate nohighlight">\(k\)</span>.</p>
 <div class="proof definition admonition" id="definition-1">
-<p class="admonition-title"><span class="caption-number">Definition 85 </span> (Random Fourier Features)</p>
+<p class="admonition-title"><span class="caption-number">Definition 89 </span> (Random Fourier Features)</p>
 <section class="definition-content" id="proof-content">
 <p>Given a translation invariant kernel <span class="math notranslate nohighlight">\(k\)</span> that is the Fourier transform of a probability measure <span class="math notranslate nohighlight">\(p\)</span>, we have the unbiased real-valued estimator</p>
 <div class="math notranslate nohighlight">
@@ -536,7 +536,7 @@ f(x) = z^\top(x)w, \text{ where } w \sim \mathcal{N}(0, I),
 <h3>Rates of convergence<a class="headerlink" href="#rates-of-convergence" title="Link to this heading">#</a></h3>
 <p>Now there remains the question of how large the error of the RFF estimator is. In other words, how closely does RFF estimate the exact kernel <span class="math notranslate nohighlight">\(k\)</span>? Since <span class="math notranslate nohighlight">\(-\sqrt{2} \leq z_{\omega, \phi} \leq \sqrt{2}\)</span>, we can use Hoeffding’s inequality<span id="id2">[<a class="reference internal" href="#id10" title="David Grimmett, Geoffrey Stirzaker. Probability and random processes. Oxford university press, 2020.">Grimmett, 2020</a>]</span> to obtain the following high-probability bound on the absolute error on our estimate of <span class="math notranslate nohighlight">\(k\)</span>.</p>
 <div class="proof lemma admonition" id="lemma-2">
-<p class="admonition-title"><span class="caption-number">Lemma 16 </span> (Hoeffding for RFF)</p>
+<p class="admonition-title"><span class="caption-number">Lemma 19 </span> (Hoeffding for RFF)</p>
 <section class="lemma-content" id="proof-content">
 <p>The RFF estimator of <span class="math notranslate nohighlight">\(k\)</span>, using <span class="math notranslate nohighlight">\(M\)</span> pairs of <span class="math notranslate nohighlight">\(\omega, \phi\)</span>, obeys</p>
 <div class="math notranslate nohighlight">
@@ -548,7 +548,7 @@ p\big(|z^\top(x)z(y) - k(x, y)| \geq \epsilon \big) \leq 2 \exp\left(-M \frac{\e
 Note that this is a statement about the closeness of <span class="math notranslate nohighlight">\(z^\top(x)z(y)\)</span> and <span class="math notranslate nohighlight">\(k(x, y)\)</span> for any two input pairs, rather than the closeness of these functions over the whole input space.
 In fact, it is possible<span id="id3">[<a class="reference internal" href="#id11" title="Ali Rahimi, Benjamin Recht, and others. Random features for large-scale kernel machines. In NIPS. 2007.">Rahimi <em>et al.</em>, 2007</a>]</span> to make a stronger statement about the uniform convergence of the estimator.</p>
 <div class="proof lemma admonition" id="lemma-3">
-<p class="admonition-title"><span class="caption-number">Lemma 17 </span> (Uniform convergence of RFF)</p>
+<p class="admonition-title"><span class="caption-number">Lemma 20 </span> (Uniform convergence of RFF)</p>
 <section class="lemma-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\mathcal{M}\)</span> be a compact subset of <span class="math notranslate nohighlight">\(\mathbb{R}^D\)</span>. Then the RFF estimator of <span class="math notranslate nohighlight">\(k\)</span>, using <span class="math notranslate nohighlight">\(M\)</span> pairs of <span class="math notranslate nohighlight">\(\omega, \phi\)</span> converges uniformly to <span class="math notranslate nohighlight">\(k\)</span> according to</p>
 <div class="math notranslate nohighlight">
