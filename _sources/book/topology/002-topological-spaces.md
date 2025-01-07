@@ -322,6 +322,8 @@ $$X \setminus \text{Int}(A) = X \setminus \bigcup_{U \in \mathcal{O}_A} U = \big
 ## New topologies from old
 
 Now we look into how existing topological spaces can be used to define new ones.
+
+### Subspace topology
 First, we define the subspace topology.
 
 :::{prf:definition} Subspace topology
