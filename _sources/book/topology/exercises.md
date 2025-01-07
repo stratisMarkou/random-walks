@@ -6,7 +6,14 @@
 <a class="github-button" href="https://github.com/stratisMarkou/random-walks/subscription" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-eye" data-size="large" aria-label="Watch stratisMarkou/random-walks on GitHub">Watch</a>
 <a class="github-button" href="https://github.com/stratisMarkou" data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large" aria-label="Follow @stratisMarkou on GitHub">Follow</a>
 
-::::{note} Exercise 1.1
+:::{margin}
+If $p$ is a prime number, the $p$-adic metric on $\mathbb{Z}$ is defined as
+
+$$|a - b|_p = p^{-n},$$
+
+where $n$ is the largest integer such that $p^n$ divides $a - b$.
+:::
+::::{admonition} Exercise 1.1
 Show that the sequence $2015, 20015, 200015, 2000015, \ldots$ converges in the 2-adic metric on $\mathbb{Z}$.
 
 :::{dropdown} Solution
