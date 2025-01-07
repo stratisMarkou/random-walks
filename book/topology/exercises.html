@@ -456,9 +456,52 @@ Solution<div class="sd-summary-down docutils">
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">We show that the sequence converges to <span class="math notranslate nohighlight">\(15\)</span> in the 2-adic metric.
 Let <span class="math notranslate nohighlight">\(a_n\)</span> be the <span class="math notranslate nohighlight">\(n\)</span>th term of the sequence.
-Then <span class="math notranslate nohighlight">\(a_n - 15 = 2 \times 10^{n + 3}.\)</span>
-Note that <span class="math notranslate nohighlight">\(2 \times 10^{n + 3}\)</span> is divisible by <span class="math notranslate nohighlight">\(2^{n + 4}.\)</span>
-Therefore, <span class="math notranslate nohighlight">\(|a_n - 15|_2 = 2^{-(n + 4)} \to 0\)</span> as <span class="math notranslate nohighlight">\(n \to \infty.\)</span></p>
+Then <span class="math notranslate nohighlight">\(a_n - 15 = 2 \times 10^{n + 2}.\)</span>
+Note that <span class="math notranslate nohighlight">\(2 \times 10^{n + 2}\)</span> is divisible by <span class="math notranslate nohighlight">\(2^{n + 3}.\)</span>
+Therefore, <span class="math notranslate nohighlight">\(|a_n - 15|_2 = 2^{-(n + 3)} \to 0\)</span> as <span class="math notranslate nohighlight">\(n \to \infty.\)</span></p>
+</div>
+</details></div>
+<div class="admonition-exercise-1-2 admonition">
+<p class="admonition-title">Exercise 1.2</p>
+<p>Determine whether the following subsets <span class="math notranslate nohighlight">\(A \subseteq \mathbb{R}^2\)</span> are open, closed or neither, under the standard topology on <span class="math notranslate nohighlight">\(\mathbb{R}^2.\)</span></p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(A = \{(x, y) \in \mathbb{R}^2 \vert x &lt; 0\} \cup \{(x, y) \in \mathbb{R}^2 \vert x &gt; 0, y &gt; 1 / x\}.\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(A = \{(x, \sin(1 / x)) \in \mathbb{R}^2 \vert x &gt; 0\} \cup \{(0, y) \in \mathbb{R}^2 \vert y \in [-1, 1]\}.\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(A = \{(x, y) \in \mathbb{R}^2 \vert x \in \mathbb{Q} \text{ and } x = y^n \text{ for some } n \in \mathbb{N}\}.\)</span></p></li>
+</ol>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><strong>Set 1:</strong>
+The set</p>
+<div class="math notranslate nohighlight">
+\[A = \{(x, y) \in x &lt; 0\} \cup \{(x, y) \in x &gt; 0, y &gt; 1 / x\}\]</div>
+<p class="sd-card-text">is open, because it is the union of two open sets</p>
+<div class="math notranslate nohighlight">
+\[\{(x, y) \in x &lt; 0\} ~\text{ and }~ \{(x, y) \in x &gt; 0, y &gt; 1 / x\}.\]</div>
+<p class="sd-card-text">Note that the set <span class="math notranslate nohighlight">\(A\)</span> cannot be closed, because the only sets that are both open and closed are the empty set and the entire space, and <span class="math notranslate nohighlight">\(A\)</span> is neither.</p>
+<p class="sd-card-text"><strong>Set 2:</strong>
+First, note that the set <span class="math notranslate nohighlight">\(S_z = \{(x, \sin(1/x)): x &gt; z\}\)</span> is closed in <span class="math notranslate nohighlight">\(\mathbb{R}^2\)</span> for any <span class="math notranslate nohighlight">\(z &gt; 0.\)</span>
+Therefore, its complement is open and the set</p>
+<div class="math notranslate nohighlight">
+\[T_z = S_z' \cap \{(x, y) \in \mathbb{R}^2 \vert x &gt; z\}\]</div>
+<p class="sd-card-text">is also open in <span class="math notranslate nohighlight">\(\mathbb{R}^2.\)</span>
+Then the set</p>
+<div class="math notranslate nohighlight">
+\[U_z = T_z \cap \{(x, y) \in \mathbb{R}^2 \vert |y| &gt; 1\} \cap \{(x, y) \in \mathbb{R}^2 \vert x \notin [0, z]\}\]</div>
+<p class="sd-card-text">is also open because it is the intersection of open sets.
+Since <span class="math notranslate nohighlight">\(A = \bigcup_{z &gt; 0} U_z,\)</span> the set <span class="math notranslate nohighlight">\(A\)</span> is open in <span class="math notranslate nohighlight">\(\mathbb{R}^2.\)</span></p>
+<p class="sd-card-text">Again, note that the set <span class="math notranslate nohighlight">\(A\)</span> cannot be closed, by the same reasoning that was used to argue for set 1.</p>
+<p class="sd-card-text"><strong>Set 3:</strong>
+The set <span class="math notranslate nohighlight">\(A\)</span> is not open because for any rational <span class="math notranslate nohighlight">\(x \in \mathbb{Q},\)</span> there exists an irrational <span class="math notranslate nohighlight">\(x' \in \mathbb{R} \setminus \mathbb{Q}\)</span> that is arbitrarily close to it, so for any <span class="math notranslate nohighlight">\((x, y) \in A,\)</span> there exists an <span class="math notranslate nohighlight">\((x', y)\)</span> that is aribtrarily close to it but is not in <span class="math notranslate nohighlight">\(A,\)</span> because <span class="math notranslate nohighlight">\(x'\)</span> is irrational.
+In addition, the set <span class="math notranslate nohighlight">\(A\)</span> is not closed because it does not contain all its <code class="xref prf prf-ref docutils literal notranslate"><span class="pre">limit</span> <span class="pre">points</span></code>.
+For example, consider the point <span class="math notranslate nohighlight">\((0, 1) \in \mathbb{R}^2.\)</span>
+This is a limit point of the set <span class="math notranslate nohighlight">\(A\)</span>: for any <span class="math notranslate nohighlight">\(\epsilon &gt; 0,\)</span> there exists a rational <span class="math notranslate nohighlight">\(q \in \mathbb{Q}\)</span> such that <span class="math notranslate nohighlight">\(0 &lt; |q| &lt; \epsilon / 2\)</span> and a sufficiently large <span class="math notranslate nohighlight">\(n \in \mathbb{N}\)</span> such that <span class="math notranslate nohighlight">\(|q^{1/n} - 1| &lt; \epsilon / 2.\)</span>
+Then <span class="math notranslate nohighlight">\(|(q, q^{1/n}) - (0, 1)|_\infty = |q| + |q^{1/n} - 1| &lt; \epsilon,\)</span> so <span class="math notranslate nohighlight">\((0, 1)\)</span> is a limit point of <span class="math notranslate nohighlight">\(A.\)</span></p>
 </div>
 </details></div>
 </section>
