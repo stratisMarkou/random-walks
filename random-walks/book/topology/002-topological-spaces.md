@@ -357,6 +357,105 @@ Putting these three parts together, we conclude that the subspace topology on $Y
 :::
 
 
+:::{prf:definition} Inclusion function
+:label: topology:def-inclusion-function
+Let $Y \subseteq X$ be a subset of a {prf:ref}`topological space<topology:def-topological-space>` $(X, \mathcal{U})$.
+Then, the inclusion function $\iota: Y \to X$ is the function defined by $\iota(y) = y$ for all $y \in Y.$
+:::
+
+
+:::{prf:lemma} Condition for continuity in subspace topology
+:label: topology:lemma-condition-for-continuity-subspace-topology
+Let $Y \subseteq X$ be a subset of a {prf:ref}`topological space<topology:def-topological-space>` $(X, \mathcal{U})$.
+Then, a function $f: Z \to Y$ is continuous if and only if the composition of $f$ with the {prf:ref}`inclusion function<topology:def-inclusion-function>` $\iota: Y \to X,$ is also continuous.
+:::
+
+:::{dropdown} Proof: Condition for continuity in subspace topology
+Let $Y \subseteq X$ be a subset of a topological space $(X, \mathcal{U}).$
+Let $f: Y \to Z$ be a function and $\iota: Y \to X$ be the inclusion function.
+
+To show the first part, suppose $f$ is continuous.
+Note that the inclusion function $\iota$ is continuous, and this follows directly from the {prf:ref}`definition of the subspace topology<topology:def-subspace-topology>`.
+In particular, if $U$ is open in $X,$ then $U \cap Y$ is open in the subspace topology on $Y,$ and since $\iota^{-1}(U) = U \cap Y,$ it follows that $\iota$ is continuous.
+Since $f$ is continuous, the composition $f \circ \iota: Y \to Z$ is continuous.
+
+Conversely, suppose $\iota \circ f$ is continuous and let $U \subseteq X$ be open in $X.$
+Note that $\iota^{-1}(U) = U \cap Y$ which is open in the subspace topology on $Y.$
+Because $\iota \circ f$ is continuous, it follows that $(\iota \circ f)^{-1}(U) = f^{-1}(U \cap Y)$ is open in $Z.$
+Therefore, since any open set in the subspace topology on $Y$ is of the form $U \cap Y$ for some open set $U$ in $X,$ it follows that $f$ is continuous.
+:::
+
+
+
+
+### Product topology
+Now we turn to defining product topologies.
+Before doing so, we define products of sets and projection functions.
+These may be familiar from other contexts, and are included for completeness.
+
+:::{prf:definition} Product of sets
+:label: topology:def-cartesian-product
+If $X$ and $Y$ are sets, then the product $X \times Y$ is the set of all ordered pairs $(x, y)$ with $x \in X$ and $y \in Y,$ that is
+
+$$X \times Y = \{(x, y) \mid x \in X, y \in Y\}.$$
+:::
+
+:::{prf:definition} Projection function
+:label: topology:def-projection-function
+Given sets $X$ and $Y,$ the projection functions $\pi_1 : X \times Y \to X$ and $\pi_2 : X \times Y \to Y$ are defined by
+
+$$\pi_1(x, y) = x \quad \text{and} \quad \pi_2(x, y) = y.$$
+:::
+
+
+Now we are ready to define the product topology.
+
+:::{prf:definition} Product topology
+:label: topology:def-product-topology
+Let $(X, \mathcal{U})$ and $(Y, \mathcal{V})$ be {prf:ref}`topological spaces<topology:def-topological-space>`.
+Then, the product topology on $X \times Y$ is the collection of subsets of $X \times Y$ given by: $U$ is open in $X \times Y$ if for every $(x, y) \in U,$ there exist open sets $U_x \in \mathcal{U}$ and $U_y \in \mathcal{V}$ such that $x \in U_x,$ $y \in U_y,$ and $U_x \times U_y \subseteq U.$
+:::
+
+The product topology can therefore be thought as a collection in which each open set is a union of products of open sets that is contained in the set.
+In particular, $U$ is open in $X \times Y$ then
+
+$$U = \bigcup_{(x, y) \in U} U_x \times U_y,$$
+
+where $U_x \times U_y \subseteq U$ for all $(x, y) \in U.$
+Conversely, if $U$ can be expressed in the form of the union above, it is open.
+In this sense, we can think of the sets over which we are taking the unions as a basis that generates the topology.
+
+:::{prf:defintion} Basis for a topology
+:label: topology:def-basis
+Let $(X, \mathcal{U})$ be a {prf:ref}`topological space<topology:def-topological-space>`.
+A basis for the topology $\mathcal{U}$ is a collection $\mathcal{B} \subseteq \mathcal{U}$ such that every open set in $\mathcal{U}$ can be expressed as a union of sets in $\mathcal{B}.$
+:::
+
+
+
+### Quotient topology
+Finally, we define the quotient topology.
+First, we define quotients and projections onto equivalence classes for completeness.
+
+:::{prf:definition} Equivalence classes and quotient
+:label: topology:def-quotient
+Let $X$ be a set and $\sim$ be an equivalence relation on $X.$
+Then, the quotient of $X / \sim$ is the set of equivalence classes of $\sim.$
+The projection $\pi: X \to X / \sim$ is defined by $\pi(x) = [x],$ where $[x]$ is the equivalence class of $x \in X.$
+:::
+
+
+Now we define the quotient topology.
+The quotient topology can be thought of as a topology on the shape that results when we identify, i.e. glue together, a subset of its points.
+
+:::{prf:definition} Quotient topology
+:label: topology:def-quotient-topology
+Let $(X, \mathcal{U})$ be a {prf:ref}`topological space<topology:def-topological-space>`, and let $\sim$ be an equivalence relation on $X.$
+The quotient topology on $X / \sim$ is the set of all subsets $U \subseteq X / \sim$ such that $\pi^{-1}(U)$ is open in $X.$
+:::
+
+
+
 :::{bibliography}
 :filter: docname in docnames
 
