@@ -68,7 +68,7 @@ The set $A$ is not open because for any rational $x \in \mathbb{Q},$ there exist
 In addition, the set $A$ is not closed because it does not contain all its {prf:ref}`limit points <topology:def-limit-point>`.
 For example, consider the point $(0, 1) \in \mathbb{R}^2.$
 This is a limit point of the set $A$: for any $\epsilon > 0,$ there exists a rational $q \in \mathbb{Q}$ such that $0 < |q| < \epsilon / 2$ and a sufficiently large $n \in \mathbb{N}$ such that $|q^{1/n} - 1| < \epsilon / 2.$
-Then $|(q, q^{1/n}) - (0, 1)|_\infty = |q| + |q^{1/n} - 1| < \epsilon,$ so $(0, 1)$ is a limit point of $A.$
+Then $|(q, q^{1/n}) - (0, 1)|_\infty = |q| + |q^{1/n} - 1| < \epsilon,$ from which it follows that $(0, 1)$ is a limit point of $A.$
 :::
 
 ::::
