@@ -437,7 +437,7 @@ A basis for the topology $\mathcal{U}$ is a collection $\mathcal{B} \subseteq \m
 Finally, we define the quotient topology.
 First, we define quotients and projections onto equivalence classes for completeness.
 
-:::{prf:remark} Equivalence classes and quotient
+:::{admonition} Equivalence classes and quotient
 :label: topology:def-quotient
 Let $X$ be a set and $\sim$ be an equivalence relation on $X.$
 Then, the quotient of $X / \sim$ is the set of equivalence classes of $\sim.$
