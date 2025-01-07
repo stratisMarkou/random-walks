@@ -215,6 +215,7 @@
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../topology/000-intro.html">Topology</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../topology/001-metric-spaces.html">Metric spaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../topology/002-topological-spaces.html">Topological Spaces</a></li>
 </ul>
 </li>
 </ul>
@@ -1068,7 +1069,111 @@ Patch merging combines a collection of patches by concatenating their features c
 </div>
 </details>
 </div>
-</section>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+An aside: inverse of patch extraction as transpose<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">While we do not need this, here is a neat aside on patch extraction, the <code class="docutils literal notranslate"><span class="pre">tf.image.extract_patches</span></code> operation in the <code class="docutils literal notranslate"><span class="pre">PatchMergingLayer</span></code> above.
+One might wonder what the inverse of a patch extraction operation is, or rather how to implement it efficiently.
+It turns out that patch extraction operations can’t always be inverted, i.e. not for all choices of striding, window sizes and dilation, but for those settings for which an inverse exists, the inverse can be expressed and implemented in a very neat way.</p>
+<p class="sd-card-text"><strong>Invertibility.</strong>
+Under certain conditions patch extraction can be inverted, leveraging the fact that the reverse operation is actually its transpose.
+However, there are exaples of patch extraction which are not invertible.
+For example, if we use large strides and small patch sizes, or if we use dilation (also known as à trous; this is the <code class="docutils literal notranslate"><span class="pre">rate</span></code> argument in <code class="docutils literal notranslate"><span class="pre">tf.image.extract_patches</span></code>), then some of the pixels of the input image may be skipped over, making patch extraction non-invertible.
+From now on, we will assume that the patch extraction is performed using a combination of patch size, striding and dilation such that every pixel in the input affects the output, and no pixels are skipped over.</p>
+<p class="sd-card-text"><strong>Matrix view.</strong>
+Suppose the input image <span class="math notranslate nohighlight">\(x\)</span> is an array of shape <span class="math notranslate nohighlight">\((H, W, C),\)</span> where <span class="math notranslate nohighlight">\(H\)</span> is its height, <span class="math notranslate nohighlight">\(W\)</span> is its width and <span class="math notranslate nohighlight">\(C\)</span> is the number of channels.
+We can view patch extraction as a linear operation <span class="math notranslate nohighlight">\(P\)</span> which maps the image <span class="math notranslate nohighlight">\(x\)</span> to another image <span class="math notranslate nohighlight">\(y = P(x),\)</span> of shape <span class="math notranslate nohighlight">\((I, J, K),\)</span> where the dimensions denote the horizontal patch index, vertical patch index and patch dimension respectively.
+Note that by the definition of patch extraction, each pixel in the output is affected by exactly one pixel in the input (though each pixel in the input may affect more than one pixel in the output).
+For now, let us assume that each pixel in the input affects exactly one pixel in the output, i.e. each <span class="math notranslate nohighlight">\(x_{hwc}\)</span> affects exactly one <span class="math notranslate nohighlight">\(y_{ijk}.\)</span>
+Let’s define <span class="math notranslate nohighlight">\(\texttt{flat}\)</span> to be the operation that takes a multi-dimensional array and flattens it into a single-dimensional array.
+Since <span class="math notranslate nohighlight">\(\texttt{flat}\)</span> is an invertible linear operation, and patch extraction is also an invertible linear operation, then their composition is also an invertible linear opeartion <span class="math notranslate nohighlight">\(P'.\)</span>
+Let <span class="math notranslate nohighlight">\(\mathcal{M}(P')\)</span> be the matrix corresponding to <span class="math notranslate nohighlight">\(P',\)</span> so that</p>
+<div class="math notranslate nohighlight">
+\[\texttt{flat}(y) = \mathcal{M}(P') \texttt{flat}(x).\]</div>
+<p class="sd-card-text">Now note that since each element of <span class="math notranslate nohighlight">\(\texttt{flat}(x)\)</span> affects precisely one element of <span class="math notranslate nohighlight">\(\texttt{flat}(y),\)</span> the matrix <span class="math notranslate nohighlight">\(\mathcal{M}(P')\)</span> is actually a permutation matrix, i.e. it contains exactly one <span class="math notranslate nohighlight">\(1\)</span> in each row and in each column, and all other entries are <span class="math notranslate nohighlight">\(0.\)</span>
+Now, the inverse of a permutation matrix is its transpose, that is</p>
+<div class="math notranslate nohighlight">
+\[\texttt{flat}(x) = \mathcal{M}(P')^\top \texttt{flat}(y).\]</div>
+<p class="sd-card-text">So the inverse of the patch embedding operation is actually its transpose operation, and that’s because the patch embedding is actually a permutation!</p>
+<p class="sd-card-text"><strong>General case.</strong>
+But what happens in the more general case where some <span class="math notranslate nohighlight">\(x_{hwc}\)</span> affect more than one <span class="math notranslate nohighlight">\(y_{ijk}\)</span>?
+The equation <span class="math notranslate nohighlight">\(\texttt{flat}(y) = \mathcal{M}(P') \texttt{flat}(x)\)</span> still holds, and the matrix <span class="math notranslate nohighlight">\(\mathcal{M}(P')\)</span> stil contains a single <span class="math notranslate nohighlight">\(1\)</span> per row.
+However, <span class="math notranslate nohighlight">\(\mathcal{M}(P')\)</span> may now contain multiple <span class="math notranslate nohighlight">\(1\)</span> entries in each column.
+Therefore, it is no longer a permutation matrix, and <span class="math notranslate nohighlight">\(\texttt{flat}(x) \neq \mathcal{M}(P')^\top \texttt{flat}(y).\)</span>
+In particular, when we multiply <span class="math notranslate nohighlight">\(\texttt{flat}(y)\)</span> by <span class="math notranslate nohighlight">\(\mathcal{M}(P')^\top,\)</span> each entry of <span class="math notranslate nohighlight">\(\texttt{flat}(x)\)</span> which affects <span class="math notranslate nohighlight">\(n\)</span> entries in <span class="math notranslate nohighlight">\(\texttt{flat}(y)\)</span> will be counted <span class="math notranslate nohighlight">\(n\)</span> times.
+To illustrate this problem, suppose consider the following vectors and matrices (which do not correspond to patch extraction, and are just an illustration of the problem) and the following matrix-vector multiplication</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+u = \begin{bmatrix}
+u_1 \\
+u_2
+\end{bmatrix}, M = \begin{bmatrix}
+1 &amp; 0 \\
+0 &amp; 1 \\
+0 &amp; 1
+\end{bmatrix} \implies v = Mu = \begin{bmatrix}
+u_1 \\
+u_2 \\
+u_2
+\end{bmatrix}.
+\end{split}\]</div>
+<p class="sd-card-text">If we multiply <span class="math notranslate nohighlight">\(v = Mu\)</span> by <span class="math notranslate nohighlight">\(M^\top\)</span> we obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+M^\top v = M^\top Mu = \begin{bmatrix}
+1 &amp; 0 &amp; 0\\
+0 &amp; 1 &amp; 1
+\end{bmatrix} \begin{bmatrix}
+u_1 \\
+u_2 \\
+u_2
+\end{bmatrix} = \begin{bmatrix}
+u_1 \\
+2u_2
+\end{bmatrix},
+\end{split}\]</div>
+<p class="sd-card-text">i.e. we have double-counted <span class="math notranslate nohighlight">\(u_2.\)</span>
+If instead we divide each row of <span class="math notranslate nohighlight">\(M^\top\)</span> by its sum before multiplying we obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+M^\top v = \begin{bmatrix}
+1 &amp; 0 &amp; 0\\
+0 &amp; \frac{1}{2} &amp; \frac{1}{2}
+\end{bmatrix} \begin{bmatrix}
+u_1 \\
+u_2 \\
+u_2
+\end{bmatrix} = \begin{bmatrix}
+u_1 \\
+u_2
+\end{bmatrix},
+\end{split}\]</div>
+<p class="sd-card-text">which is the desired result.
+Therefore, all we have to do is divide each row of <span class="math notranslate nohighlight">\(M^\top\)</span> by its sum, or alternatively divide each entry of <span class="math notranslate nohighlight">\(M^\top v\)</span> by the sum of each row of <span class="math notranslate nohighlight">\(M^\top.\)</span></p>
+<p class="sd-card-text"><strong>Implementation.</strong>
+We can perform all of the above in a few lines in Tensorflow, or a similar autodiff framework, as shown above.
+First, the command</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tf</span><span class="o">.</span><span class="n">gradients</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">grad_ys</span><span class="o">=</span><span class="n">y</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p class="sd-card-text">computes the gradients of the scalar <code class="docutils literal notranslate"><span class="pre">sum(y)</span></code> with respect to <code class="docutils literal notranslate"><span class="pre">x</span></code> and multiplies these gradients together with the corresponding entries in <code class="docutils literal notranslate"><span class="pre">grad_ys</span></code>, as performed in revrse mode differentiation.
+This is equivalent to the multiplication <span class="math notranslate nohighlight">\(\mathcal{M}(P')^\top \texttt{flat}(y)\)</span> except the tensors are not actually flattened, but retain their original shapes.
+Then, the command</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tf</span><span class="o">.</span><span class="n">gradients</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p class="sd-card-text">computes the derivative of <code class="docutils literal notranslate"><span class="pre">sum(y)</span></code> with respect to <code class="docutils literal notranslate"><span class="pre">x</span></code>.
+If an entry in <code class="docutils literal notranslate"><span class="pre">x</span></code> affects <span class="math notranslate nohighlight">\(n\)</span> entries in <code class="docutils literal notranslate"><span class="pre">y</span></code>, then the gradient of <code class="docutils literal notranslate"><span class="pre">sum(y)</span></code> with respect to that entry of <code class="docutils literal notranslate"><span class="pre">x</span></code> will be <span class="math notranslate nohighlight">\(n,\)</span> so the division</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tf</span><span class="o">.</span><span class="n">gradients</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">grad_ys</span><span class="o">=</span><span class="n">y</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">tf</span><span class="o">.</span><span class="n">gradients</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p class="sd-card-text">gives the result we were after.</p>
+</div>
+</details></section>
 <section id="putting-it-together">
 <h3>Putting it together<a class="headerlink" href="#putting-it-together" title="Link to this heading">#</a></h3>
 <p>We are now ready to put all of the above together into a <code class="docutils literal notranslate"><span class="pre">TinySwinTransformer</span></code> model which handles tokenisation and position embeddings, and then applies the <code class="docutils literal notranslate"><span class="pre">SwinTransformerBlock</span></code>.</p>

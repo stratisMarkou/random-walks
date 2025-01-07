@@ -219,6 +219,7 @@
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="book/topology/000-intro.html">Topology</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="book/topology/001-metric-spaces.html">Metric spaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="book/topology/002-topological-spaces.html">Topological Spaces</a></li>
 </ul>
 </li>
 </ul>
@@ -390,6 +391,7 @@ document.write(`
    <div class="modindex-jumpbox">
    <a href="#cap-algorithm-19"><strong>algorithm-19</strong></a> | 
    <a href="#cap-corollary-20"><strong>corollary-20</strong></a> | 
+   <a href="#cap-definition-0"><strong>definition-0</strong></a> | 
    <a href="#cap-definition-1"><strong>definition-1</strong></a> | 
    <a href="#cap-definition-10"><strong>definition-10</strong></a> | 
    <a href="#cap-definition-11"><strong>definition-11</strong></a> | 
@@ -419,7 +421,6 @@ document.write(`
    <a href="#cap-example-4"><strong>example-4</strong></a> | 
    <a href="#cap-example-5"><strong>example-5</strong></a> | 
    <a href="#cap-example-6"><strong>example-6</strong></a> | 
-   <a href="#cap-example-8"><strong>example-8</strong></a> | 
    <a href="#cap-example-9"><strong>example-9</strong></a> | 
    <a href="#cap-finite-state-automaton"><strong>finite-state-automaton</strong></a> | 
    <a href="#cap-lemma-0"><strong>lemma-0</strong></a> | 
@@ -485,11 +486,47 @@ document.write(`
    <a href="#cap-toc-def-regex"><strong>toc-def-regex</strong></a> | 
    <a href="#cap-toc-dfa-nfa-equivalence"><strong>toc-dfa-nfa-equivalence</strong></a> | 
    <a href="#cap-toc-dfa-pumping-lemma"><strong>toc-dfa-pumping-lemma</strong></a> | 
-   <a href="#cap-topology-def-continuous-function"><strong>topology-def-continuous-function</strong></a> | 
-   <a href="#cap-topology-def-metric-space"><strong>topology-def-metric-space</strong></a> | 
-   <a href="#cap-topology-def-norm"><strong>topology-def-norm</strong></a> | 
-   <a href="#cap-topology-lemma-limits-in-metric-spaces-are-unique"><strong>topology-lemma-limits-in-metric-spaces-are-unique</strong></a> | 
-   <a href="#cap-topology-lemma-norms-induce-metrics"><strong>topology-lemma-norms-induce-metrics</strong></a>
+   <a href="#cap-topology:cauchy-schwarz"><strong>topology:cauchy-schwarz</strong></a> | 
+   <a href="#cap-topology:def-closed-set-topology"><strong>topology:def-closed-set-topology</strong></a> | 
+   <a href="#cap-topology:def-closure"><strong>topology:def-closure</strong></a> | 
+   <a href="#cap-topology:def-complement-interior-closure-complement"><strong>topology:def-complement-interior-closure-complement</strong></a> | 
+   <a href="#cap-topology:def-continuous-function"><strong>topology:def-continuous-function</strong></a> | 
+   <a href="#cap-topology:def-continuous-function-topology"><strong>topology:def-continuous-function-topology</strong></a> | 
+   <a href="#cap-topology:def-convergent-sequence-topology"><strong>topology:def-convergent-sequence-topology</strong></a> | 
+   <a href="#cap-topology:def-dense-subset"><strong>topology:def-dense-subset</strong></a> | 
+   <a href="#cap-topology:def-hausdorff-space"><strong>topology:def-hausdorff-space</strong></a> | 
+   <a href="#cap-topology:def-homeomorphism"><strong>topology:def-homeomorphism</strong></a> | 
+   <a href="#cap-topology:def-induced-topology"><strong>topology:def-induced-topology</strong></a> | 
+   <a href="#cap-topology:def-interior"><strong>topology:def-interior</strong></a> | 
+   <a href="#cap-topology:def-limit-point"><strong>topology:def-limit-point</strong></a> | 
+   <a href="#cap-topology:def-metric-space"><strong>topology:def-metric-space</strong></a> | 
+   <a href="#cap-topology:def-norm"><strong>topology:def-norm</strong></a> | 
+   <a href="#cap-topology:def-open-and-closed-balls"><strong>topology:def-open-and-closed-balls</strong></a> | 
+   <a href="#cap-topology:def-open-and-closed-subsets"><strong>topology:def-open-and-closed-subsets</strong></a> | 
+   <a href="#cap-topology:def-open-neighbourhood"><strong>topology:def-open-neighbourhood</strong></a> | 
+   <a href="#cap-topology:def-open-neighbourhood-topology"><strong>topology:def-open-neighbourhood-topology</strong></a> | 
+   <a href="#cap-topology:def-subspace-topology"><strong>topology:def-subspace-topology</strong></a> | 
+   <a href="#cap-topology:def-topological-space"><strong>topology:def-topological-space</strong></a> | 
+   <a href="#cap-topology:examples-of-norms"><strong>topology:examples-of-norms</strong></a> | 
+   <a href="#cap-topology:inner-product-space"><strong>topology:inner-product-space</strong></a> | 
+   <a href="#cap-topology:lemma-closed-set-iff-it-contains-its-limit-points"><strong>topology:lemma-closed-set-iff-it-contains-its-limit-points</strong></a> | 
+   <a href="#cap-topology:lemma-closed-set-iff-set-contains-all-its-limit-points"><strong>topology:lemma-closed-set-iff-set-contains-all-its-limit-points</strong></a> | 
+   <a href="#cap-topology:lemma-closure-closed-set"><strong>topology:lemma-closure-closed-set</strong></a> | 
+   <a href="#cap-topology:lemma-composition-preserves-continuity"><strong>topology:lemma-composition-preserves-continuity</strong></a> | 
+   <a href="#cap-topology:lemma-convergence-implies-sequence-eventually-in-open-neighbourhood"><strong>topology:lemma-convergence-implies-sequence-eventually-in-open-neighbourhood</strong></a> | 
+   <a href="#cap-topology:lemma-homeomorphism-equivalence-relation"><strong>topology:lemma-homeomorphism-equivalence-relation</strong></a> | 
+   <a href="#cap-topology:lemma-inner-products-induce-norms"><strong>topology:lemma-inner-products-induce-norms</strong></a> | 
+   <a href="#cap-topology:lemma-interior-open-set"><strong>topology:lemma-interior-open-set</strong></a> | 
+   <a href="#cap-topology:lemma-limits-in-metric-spaces-are-unique"><strong>topology:lemma-limits-in-metric-spaces-are-unique</strong></a> | 
+   <a href="#cap-topology:lemma-limits-unique-hausdorff"><strong>topology:lemma-limits-unique-hausdorff</strong></a> | 
+   <a href="#cap-topology:lemma-non-constant-positive-continuous-function-has-positive-integral"><strong>topology:lemma-non-constant-positive-continuous-function-has-positive-integral</strong></a> | 
+   <a href="#cap-topology:lemma-norms-induce-metrics"><strong>topology:lemma-norms-induce-metrics</strong></a> | 
+   <a href="#cap-topology:lemma-open-and-closed-balls-are-open-and-closed"><strong>topology:lemma-open-and-closed-balls-are-open-and-closed</strong></a> | 
+   <a href="#cap-topology:lemma-properties-of-closed-sets"><strong>topology:lemma-properties-of-closed-sets</strong></a> | 
+   <a href="#cap-topology:lemma-properties-of-open-sets"><strong>topology:lemma-properties-of-open-sets</strong></a> | 
+   <a href="#cap-topology:lemma-singleton-set-closed-hausdorff"><strong>topology:lemma-singleton-set-closed-hausdorff</strong></a> | 
+   <a href="#cap-topology:lemma-subspace-topology"><strong>topology:lemma-subspace-topology</strong></a> | 
+   <a href="#cap-topology:theorem-characterisation-of-continuity"><strong>topology:theorem-characterisation-of-continuity</strong></a>
    </div>
 
    <table class="indextable modindextable">
@@ -510,12 +547,20 @@ document.write(`
        <a href="book/toc/001-fsa.html#corollary-20"><code class="xref">corollary-20</code></a> <em>(book/toc/001-fsa)</em></td><td>
        <em>corollary</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-definition-0"><td></td><td>
+       <strong>definition-0</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/prob-intro/ch08/content.html#definition-0"><code class="xref">definition-0</code></a> <em>(book/prob-intro/ch08/content)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-1"><td></td><td>
        <strong>definition-1</strong></td><td></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="book/toc/002-cfl.html#definition-1"><code class="xref">definition-1</code></a> <em>(book/toc/002-cfl)</em></td><td>
+       <a href="book/papers/rff/rff.html#definition-1"><code class="xref">definition-1</code></a> <em>(book/papers/rff/rff)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-10"><td></td><td>
@@ -523,7 +568,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="book/toc/002-cfl.html#definition-10"><code class="xref">definition-10</code></a> <em>(book/toc/002-cfl)</em></td><td>
+       <a href="book/prob-intro/ch08/content.html#definition-10"><code class="xref">definition-10</code></a> <em>(book/prob-intro/ch08/content)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-11"><td></td><td>
@@ -563,7 +608,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="book/topology/001-metric-spaces.html#definition-2"><code class="xref">definition-2</code></a> <em>(book/topology/001-metric-spaces)</em></td><td>
+       <a href="book/prob-intro/ch08/content.html#definition-2"><code class="xref">definition-2</code></a> <em>(book/prob-intro/ch08/content)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-20"><td></td><td>
@@ -595,7 +640,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="book/topology/001-metric-spaces.html#definition-3"><code class="xref">definition-3</code></a> <em>(book/topology/001-metric-spaces)</em></td><td>
+       <a href="book/papers/num-sde/num-sde.html#definition-3"><code class="xref">definition-3</code></a> <em>(book/papers/num-sde/num-sde)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-31"><td></td><td>
@@ -627,7 +672,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="book/toc/001-fsa.html#definition-4"><code class="xref">definition-4</code></a> <em>(book/toc/001-fsa)</em></td><td>
+       <a href="book/papers/num-sde/num-sde.html#definition-4"><code class="xref">definition-4</code></a> <em>(book/papers/num-sde/num-sde)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-5"><td></td><td>
@@ -740,14 +785,6 @@ document.write(`
        <td></td>
        <td>
        <a href="book/toc/001-fsa.html#example-6"><code class="xref">example-6</code></a> <em>(book/toc/001-fsa)</em></td><td>
-       <em>example</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-example-8"><td></td><td>
-       <strong>example-8</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="book/topology/001-metric-spaces.html#example-8"><code class="xref">example-8</code></a> <em>(book/topology/001-metric-spaces)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-9"><td></td><td>
@@ -995,7 +1032,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="book/prob-intro/ch07/content.html#theorem-0"><code class="xref">theorem-0</code></a> <em>(book/prob-intro/ch07/content)</em></td><td>
+       <a href="book/papers/svgd/svgd.html#theorem-0"><code class="xref">theorem-0</code></a> <em>(book/papers/svgd/svgd)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-theorem-1"><td></td><td>
@@ -1035,7 +1072,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="book/toc/001-fsa.html#theorem-13"><code class="xref">theorem-13</code></a> <em>(book/toc/001-fsa)</em></td><td>
+       <a href="book/prob-intro/ch08/content.html#theorem-13"><code class="xref">theorem-13</code></a> <em>(book/prob-intro/ch08/content)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-theorem-14"><td></td><td>
@@ -1075,7 +1112,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="book/prob-intro/ch06/content.html#theorem-2"><code class="xref">theorem-2</code></a> <em>(book/prob-intro/ch06/content)</em></td><td>
+       <a href="book/papers/score-matching/score-matching.html#theorem-2"><code class="xref">theorem-2</code></a> <em>(book/papers/score-matching/score-matching)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-theorem-21"><td></td><td>
@@ -1270,45 +1307,333 @@ document.write(`
        <a href="book/toc/001-fsa.html#toc-dfa-pumping-lemma"><code class="xref">toc-dfa-pumping-lemma</code></a> <em>(book/toc/001-fsa)</em></td><td>
        <em>lemma</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-topology-def-continuous-function"><td></td><td>
-       <strong>topology-def-continuous-function</strong></td><td></td></tr>
+     <tr class="cap" id="cap-topology:cauchy-schwarz"><td></td><td>
+       <strong>topology:cauchy-schwarz</strong></td><td></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="book/topology/001-metric-spaces.html#topology-def-continuous-function"><code class="xref">topology-def-continuous-function</code></a> <em>(book/topology/001-metric-spaces)</em></td><td>
-       <em>definition</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-topology-def-metric-space"><td></td><td>
-       <strong>topology-def-metric-space</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="book/topology/001-metric-spaces.html#topology-def-metric-space"><code class="xref">topology-def-metric-space</code></a> <em>(book/topology/001-metric-spaces)</em></td><td>
-       <em>definition</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-topology-def-norm"><td></td><td>
-       <strong>topology-def-norm</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="book/topology/001-metric-spaces.html#topology-def-norm"><code class="xref">topology-def-norm</code></a> <em>(book/topology/001-metric-spaces)</em></td><td>
-       <em>definition</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-topology-lemma-limits-in-metric-spaces-are-unique"><td></td><td>
-       <strong>topology-lemma-limits-in-metric-spaces-are-unique</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="book/topology/001-metric-spaces.html#topology-lemma-limits-in-metric-spaces-are-unique"><code class="xref">topology-lemma-limits-in-metric-spaces-are-unique</code></a> <em>(book/topology/001-metric-spaces)</em></td><td>
+       <a href="book/topology/001-metric-spaces.html#topology:cauchy-schwarz"><code class="xref">topology:cauchy-schwarz</code></a> <em>(book/topology/001-metric-spaces)</em></td><td>
        <em>lemma</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-topology-lemma-norms-induce-metrics"><td></td><td>
-       <strong>topology-lemma-norms-induce-metrics</strong></td><td></td></tr>
+     <tr class="cap" id="cap-topology:def-closed-set-topology"><td></td><td>
+       <strong>topology:def-closed-set-topology</strong></td><td></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="book/topology/001-metric-spaces.html#topology-lemma-norms-induce-metrics"><code class="xref">topology-lemma-norms-induce-metrics</code></a> <em>(book/topology/001-metric-spaces)</em></td><td>
+       <a href="book/topology/002-topological-spaces.html#topology:def-closed-set-topology"><code class="xref">topology:def-closed-set-topology</code></a> <em>(book/topology/002-topological-spaces)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:def-closure"><td></td><td>
+       <strong>topology:def-closure</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/002-topological-spaces.html#topology:def-closure"><code class="xref">topology:def-closure</code></a> <em>(book/topology/002-topological-spaces)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:def-complement-interior-closure-complement"><td></td><td>
+       <strong>topology:def-complement-interior-closure-complement</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/002-topological-spaces.html#topology:def-complement-interior-closure-complement"><code class="xref">topology:def-complement-interior-closure-complement</code></a> <em>(book/topology/002-topological-spaces)</em></td><td>
        <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:def-continuous-function"><td></td><td>
+       <strong>topology:def-continuous-function</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/001-metric-spaces.html#topology:def-continuous-function"><code class="xref">topology:def-continuous-function</code></a> <em>(book/topology/001-metric-spaces)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:def-continuous-function-topology"><td></td><td>
+       <strong>topology:def-continuous-function-topology</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/002-topological-spaces.html#topology:def-continuous-function-topology"><code class="xref">topology:def-continuous-function-topology</code></a> <em>(book/topology/002-topological-spaces)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:def-convergent-sequence-topology"><td></td><td>
+       <strong>topology:def-convergent-sequence-topology</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/002-topological-spaces.html#topology:def-convergent-sequence-topology"><code class="xref">topology:def-convergent-sequence-topology</code></a> <em>(book/topology/002-topological-spaces)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:def-dense-subset"><td></td><td>
+       <strong>topology:def-dense-subset</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/002-topological-spaces.html#topology:def-dense-subset"><code class="xref">topology:def-dense-subset</code></a> <em>(book/topology/002-topological-spaces)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:def-hausdorff-space"><td></td><td>
+       <strong>topology:def-hausdorff-space</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/002-topological-spaces.html#topology:def-hausdorff-space"><code class="xref">topology:def-hausdorff-space</code></a> <em>(book/topology/002-topological-spaces)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:def-homeomorphism"><td></td><td>
+       <strong>topology:def-homeomorphism</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/002-topological-spaces.html#topology:def-homeomorphism"><code class="xref">topology:def-homeomorphism</code></a> <em>(book/topology/002-topological-spaces)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:def-induced-topology"><td></td><td>
+       <strong>topology:def-induced-topology</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/002-topological-spaces.html#topology:def-induced-topology"><code class="xref">topology:def-induced-topology</code></a> <em>(book/topology/002-topological-spaces)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:def-interior"><td></td><td>
+       <strong>topology:def-interior</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/002-topological-spaces.html#topology:def-interior"><code class="xref">topology:def-interior</code></a> <em>(book/topology/002-topological-spaces)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:def-limit-point"><td></td><td>
+       <strong>topology:def-limit-point</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/002-topological-spaces.html#topology:def-limit-point"><code class="xref">topology:def-limit-point</code></a> <em>(book/topology/002-topological-spaces)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:def-metric-space"><td></td><td>
+       <strong>topology:def-metric-space</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/001-metric-spaces.html#topology:def-metric-space"><code class="xref">topology:def-metric-space</code></a> <em>(book/topology/001-metric-spaces)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:def-norm"><td></td><td>
+       <strong>topology:def-norm</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/001-metric-spaces.html#topology:def-norm"><code class="xref">topology:def-norm</code></a> <em>(book/topology/001-metric-spaces)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:def-open-and-closed-balls"><td></td><td>
+       <strong>topology:def-open-and-closed-balls</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/001-metric-spaces.html#topology:def-open-and-closed-balls"><code class="xref">topology:def-open-and-closed-balls</code></a> <em>(book/topology/001-metric-spaces)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:def-open-and-closed-subsets"><td></td><td>
+       <strong>topology:def-open-and-closed-subsets</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/001-metric-spaces.html#topology:def-open-and-closed-subsets"><code class="xref">topology:def-open-and-closed-subsets</code></a> <em>(book/topology/001-metric-spaces)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:def-open-neighbourhood"><td></td><td>
+       <strong>topology:def-open-neighbourhood</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/001-metric-spaces.html#topology:def-open-neighbourhood"><code class="xref">topology:def-open-neighbourhood</code></a> <em>(book/topology/001-metric-spaces)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:def-open-neighbourhood-topology"><td></td><td>
+       <strong>topology:def-open-neighbourhood-topology</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/002-topological-spaces.html#topology:def-open-neighbourhood-topology"><code class="xref">topology:def-open-neighbourhood-topology</code></a> <em>(book/topology/002-topological-spaces)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:def-subspace-topology"><td></td><td>
+       <strong>topology:def-subspace-topology</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/002-topological-spaces.html#topology:def-subspace-topology"><code class="xref">topology:def-subspace-topology</code></a> <em>(book/topology/002-topological-spaces)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:def-topological-space"><td></td><td>
+       <strong>topology:def-topological-space</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/002-topological-spaces.html#topology:def-topological-space"><code class="xref">topology:def-topological-space</code></a> <em>(book/topology/002-topological-spaces)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:examples-of-norms"><td></td><td>
+       <strong>topology:examples-of-norms</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/001-metric-spaces.html#topology:examples-of-norms"><code class="xref">topology:examples-of-norms</code></a> <em>(book/topology/001-metric-spaces)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:inner-product-space"><td></td><td>
+       <strong>topology:inner-product-space</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/001-metric-spaces.html#topology:inner-product-space"><code class="xref">topology:inner-product-space</code></a> <em>(book/topology/001-metric-spaces)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:lemma-closed-set-iff-it-contains-its-limit-points"><td></td><td>
+       <strong>topology:lemma-closed-set-iff-it-contains-its-limit-points</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/002-topological-spaces.html#topology:lemma-closed-set-iff-it-contains-its-limit-points"><code class="xref">topology:lemma-closed-set-iff-it-contains-its-limit-points</code></a> <em>(book/topology/002-topological-spaces)</em></td><td>
+       <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:lemma-closed-set-iff-set-contains-all-its-limit-points"><td></td><td>
+       <strong>topology:lemma-closed-set-iff-set-contains-all-its-limit-points</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/001-metric-spaces.html#topology:lemma-closed-set-iff-set-contains-all-its-limit-points"><code class="xref">topology:lemma-closed-set-iff-set-contains-all-its-limit-points</code></a> <em>(book/topology/001-metric-spaces)</em></td><td>
+       <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:lemma-closure-closed-set"><td></td><td>
+       <strong>topology:lemma-closure-closed-set</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/002-topological-spaces.html#topology:lemma-closure-closed-set"><code class="xref">topology:lemma-closure-closed-set</code></a> <em>(book/topology/002-topological-spaces)</em></td><td>
+       <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:lemma-composition-preserves-continuity"><td></td><td>
+       <strong>topology:lemma-composition-preserves-continuity</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/002-topological-spaces.html#topology:lemma-composition-preserves-continuity"><code class="xref">topology:lemma-composition-preserves-continuity</code></a> <em>(book/topology/002-topological-spaces)</em></td><td>
+       <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:lemma-convergence-implies-sequence-eventually-in-open-neighbourhood"><td></td><td>
+       <strong>topology:lemma-convergence-implies-sequence-eventually-in-open-neighbourhood</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/001-metric-spaces.html#topology:lemma-convergence-implies-sequence-eventually-in-open-neighbourhood"><code class="xref">topology:lemma-convergence-implies-sequence-eventually-in-open-neighbourhood</code></a> <em>(book/topology/001-metric-spaces)</em></td><td>
+       <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:lemma-homeomorphism-equivalence-relation"><td></td><td>
+       <strong>topology:lemma-homeomorphism-equivalence-relation</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/002-topological-spaces.html#topology:lemma-homeomorphism-equivalence-relation"><code class="xref">topology:lemma-homeomorphism-equivalence-relation</code></a> <em>(book/topology/002-topological-spaces)</em></td><td>
+       <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:lemma-inner-products-induce-norms"><td></td><td>
+       <strong>topology:lemma-inner-products-induce-norms</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/001-metric-spaces.html#topology:lemma-inner-products-induce-norms"><code class="xref">topology:lemma-inner-products-induce-norms</code></a> <em>(book/topology/001-metric-spaces)</em></td><td>
+       <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:lemma-interior-open-set"><td></td><td>
+       <strong>topology:lemma-interior-open-set</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/002-topological-spaces.html#topology:lemma-interior-open-set"><code class="xref">topology:lemma-interior-open-set</code></a> <em>(book/topology/002-topological-spaces)</em></td><td>
+       <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:lemma-limits-in-metric-spaces-are-unique"><td></td><td>
+       <strong>topology:lemma-limits-in-metric-spaces-are-unique</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/001-metric-spaces.html#topology:lemma-limits-in-metric-spaces-are-unique"><code class="xref">topology:lemma-limits-in-metric-spaces-are-unique</code></a> <em>(book/topology/001-metric-spaces)</em></td><td>
+       <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:lemma-limits-unique-hausdorff"><td></td><td>
+       <strong>topology:lemma-limits-unique-hausdorff</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/002-topological-spaces.html#topology:lemma-limits-unique-hausdorff"><code class="xref">topology:lemma-limits-unique-hausdorff</code></a> <em>(book/topology/002-topological-spaces)</em></td><td>
+       <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:lemma-non-constant-positive-continuous-function-has-positive-integral"><td></td><td>
+       <strong>topology:lemma-non-constant-positive-continuous-function-has-positive-integral</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/001-metric-spaces.html#topology:lemma-non-constant-positive-continuous-function-has-positive-integral"><code class="xref">topology:lemma-non-constant-positive-continuous-function-has-positive-integral</code></a> <em>(book/topology/001-metric-spaces)</em></td><td>
+       <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:lemma-norms-induce-metrics"><td></td><td>
+       <strong>topology:lemma-norms-induce-metrics</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/001-metric-spaces.html#topology:lemma-norms-induce-metrics"><code class="xref">topology:lemma-norms-induce-metrics</code></a> <em>(book/topology/001-metric-spaces)</em></td><td>
+       <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:lemma-open-and-closed-balls-are-open-and-closed"><td></td><td>
+       <strong>topology:lemma-open-and-closed-balls-are-open-and-closed</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/001-metric-spaces.html#topology:lemma-open-and-closed-balls-are-open-and-closed"><code class="xref">topology:lemma-open-and-closed-balls-are-open-and-closed</code></a> <em>(book/topology/001-metric-spaces)</em></td><td>
+       <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:lemma-properties-of-closed-sets"><td></td><td>
+       <strong>topology:lemma-properties-of-closed-sets</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/002-topological-spaces.html#topology:lemma-properties-of-closed-sets"><code class="xref">topology:lemma-properties-of-closed-sets</code></a> <em>(book/topology/002-topological-spaces)</em></td><td>
+       <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:lemma-properties-of-open-sets"><td></td><td>
+       <strong>topology:lemma-properties-of-open-sets</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/001-metric-spaces.html#topology:lemma-properties-of-open-sets"><code class="xref">topology:lemma-properties-of-open-sets</code></a> <em>(book/topology/001-metric-spaces)</em></td><td>
+       <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:lemma-singleton-set-closed-hausdorff"><td></td><td>
+       <strong>topology:lemma-singleton-set-closed-hausdorff</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/002-topological-spaces.html#topology:lemma-singleton-set-closed-hausdorff"><code class="xref">topology:lemma-singleton-set-closed-hausdorff</code></a> <em>(book/topology/002-topological-spaces)</em></td><td>
+       <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:lemma-subspace-topology"><td></td><td>
+       <strong>topology:lemma-subspace-topology</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/002-topological-spaces.html#topology:lemma-subspace-topology"><code class="xref">topology:lemma-subspace-topology</code></a> <em>(book/topology/002-topological-spaces)</em></td><td>
+       <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-topology:theorem-characterisation-of-continuity"><td></td><td>
+       <strong>topology:theorem-characterisation-of-continuity</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/001-metric-spaces.html#topology:theorem-characterisation-of-continuity"><code class="xref">topology:theorem-characterisation-of-continuity</code></a> <em>(book/topology/001-metric-spaces)</em></td><td>
+       <em>theorem</em></td></tr>
    </table>
 
 

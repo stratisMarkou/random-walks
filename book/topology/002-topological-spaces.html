@@ -1,0 +1,942 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Topological Spaces &#8212; Random Walks</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom_style.css?v=03c54da9" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-HP14V4DGEF"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-HP14V4DGEF');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-HP14V4DGEF');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/topology/002-topological-spaces';</script>
+    <link rel="icon" href="../../_static/dicefav.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Stream of papers" href="../papers/intro.html" />
+    <link rel="prev" title="Metric spaces" href="001-metric-spaces.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Random Walks</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Home
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Notes on books</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../toc/000-intro.html">Theory of Computation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../toc/001-fsa.html">FSAs and Regular Expressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../toc/002-cfl.html">PDAs and Context Free Grammars</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../toc/000-exercises.html">Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../prob-intro/intro.html">Probability: An introduction</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch01/content.html">Events and Probabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch02/content.html">Discrete random variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch03/content.html">Multivariate discrete distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch04/content.html">Probability generating functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch05/content.html">Distribution and density functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch06/content.html">Multivariate distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch07/content.html">Moment generating functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch08/content.html">Main limit theorems</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../mira/000-intro.html">Measure Theory</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mira/001-riemann.html">Riemann integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mira/002-measures.html">Measures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mira/000-exercises.html">Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="000-intro.html">Topology</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="001-metric-spaces.html">Metric spaces</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Topological Spaces</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Papers &amp; Miscellanous</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../papers/intro.html">Stream of papers</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../papers/swin/swin.html">Shifted window transformers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../papers/transformers/transformers.html">Introduction to transformers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../papers/why-covariances/why-covariances.html">Why covariance functions?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../papers/ais/ais.html">Annealed importance sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../papers/rff/rff.html">Random Fourier features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../papers/score-matching/score-matching.html">Estimation by score matching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../papers/svgd/svgd.html">Stein variational gradient descent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../papers/num-sde/num-sde.html">Numerical simulation of SDEs</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/stratisMarkou/random-walks" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/stratisMarkou/random-walks/issues/new?title=Issue%20on%20page%20%2Fbook/topology/002-topological-spaces.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/book/topology/002-topological-spaces.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Topological Spaces</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topologies">Topologies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sequences">Sequences</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#new-topologies-from-old">New topologies from old</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="topological-spaces">
+<h1>Topological Spaces<a class="headerlink" href="#topological-spaces" title="Link to this heading">#</a></h1>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<p><a class="github-button" href="https://github.com/stratisMarkou/random-walks" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" aria-label="Star stratisMarkou/random-walks on GitHub">Star</a>
+<a class="github-button" href="https://github.com/stratisMarkou/random-walks/issues" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-issue-opened" data-size="large" aria-label="Issue stratisMarkou/random-walks on GitHub">Issue</a>
+<a class="github-button" href="https://github.com/stratisMarkou/random-walks/subscription" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-eye" data-size="large" aria-label="Watch stratisMarkou/random-walks on GitHub">Watch</a>
+<a class="github-button" href="https://github.com/stratisMarkou" data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large" aria-label="Follow @stratisMarkou on GitHub">Follow</a></p>
+<p>In the previous chapter we saw that in a metric space, continuity of functions is only indirectly determined by the metric itself.
+Instead, the structure that determines continuity <a class="reference internal" href="001-metric-spaces.html#topology:theorem-characterisation-of-continuity">is the collection open sets under the metric</a>.
+This motivates the definition of a topological space, which abstracts the notion of open sets from metric spaces.</p>
+<section id="topologies">
+<h2>Topologies<a class="headerlink" href="#topologies" title="Link to this heading">#</a></h2>
+<p>First, we define topological spaces.
+These are sets equipped with a topology, a collection of subsets which we <em>define</em> to be open.
+Unlike in metric spaces, where we first defined open balls and then used them to define open sets, here we define open sets directly, and require they satisfy certain properties.</p>
+<div class="proof definition admonition" id="topology:def-topological-space">
+<p class="admonition-title"><span class="caption-number">Definition 80 </span> (Topological space)</p>
+<section class="definition-content" id="proof-content">
+<p>A topological space is a set <span class="math notranslate nohighlight">\(X,\)</span> called the space, together with a collection <span class="math notranslate nohighlight">\(\mathcal{U} \subseteq \mathcal{P}(X)\)</span> of subsets of <span class="math notranslate nohighlight">\(X,\)</span> called the topology on <span class="math notranslate nohighlight">\(X,\)</span> such that</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\emptyset, X \in \mathcal{U},\)</span></p></li>
+<li><p>If <span class="math notranslate nohighlight">\({U_i}_{i \in I} \subseteq \mathcal{U},\)</span> then <span class="math notranslate nohighlight">\(\bigcup_{i \in I} U_i \in \mathcal{U},\)</span></p></li>
+<li><p>If <span class="math notranslate nohighlight">\(U_1, \dots, U_n \in \mathcal{U},\)</span> then <span class="math notranslate nohighlight">\(\bigcap_{i=1}^n U_i \in \mathcal{U}.\)</span></p></li>
+</ol>
+<p>The elements of <span class="math notranslate nohighlight">\(X\)</span> are called points, and the elements of <span class="math notranslate nohighlight">\(\mathcal{U}\)</span> are called open sets.</p>
+</section>
+</div><p>When working with specific spaces, they will often be already be equipped with a metric.
+We refer to the topology associated with a given metric as the induced topology.</p>
+<div class="proof definition admonition" id="topology:def-induced-topology">
+<p class="admonition-title"><span class="caption-number">Definition 81 </span> (Induced topology)</p>
+<section class="definition-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\((X, d)\)</span> be a <a class="reference internal" href="001-metric-spaces.html#topology:def-metric-space">metric space</a>.
+Then, the topology induced by <span class="math notranslate nohighlight">\(d\)</span> is the set of all open sets in <span class="math notranslate nohighlight">\(X\)</span> with respect to the metric <span class="math notranslate nohighlight">\(d.\)</span></p>
+</section>
+</div><p>We now also re-define continuity in terms of open sets.</p>
+<div class="proof definition admonition" id="topology:def-continuous-function-topology">
+<p class="admonition-title"><span class="caption-number">Definition 82 </span> (Continuous function)</p>
+<section class="definition-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f: X \to Y\)</span> be a function between topological spaces.
+Then, <span class="math notranslate nohighlight">\(f\)</span> is continuous if for every open set <span class="math notranslate nohighlight">\(U \subseteq Y,\)</span> the pre-image <span class="math notranslate nohighlight">\(f^{-1}(U)\)</span> is an open set in <span class="math notranslate nohighlight">\(X.\)</span></p>
+</section>
+</div><div class="proof lemma admonition" id="topology:lemma-composition-preserves-continuity">
+<p class="admonition-title"><span class="caption-number">Lemma 15 </span> (Composition preserves continuity)</p>
+<section class="lemma-content" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(f: X \to Y\)</span> and <span class="math notranslate nohighlight">\(g: Y \to Z\)</span> are <a class="reference internal" href="#topology:def-continuous-function-topology">continuous functions</a> between <a class="reference internal" href="#topology:def-topological-space">topological spaces</a>, then the composition <span class="math notranslate nohighlight">\(g \circ f: X \to Z\)</span> is continuous.</p>
+</section>
+</div><p>In topology, we are interested in studying the properties of spaces that are preserved under continuous deformations.
+Therefore, from a topology perspective, two spaces are considered essentially the same up to a continuous bijection.
+This is captured by the notion of homeomorphism.</p>
+<div class="proof definition admonition" id="topology:def-homeomorphism">
+<p class="admonition-title"><span class="caption-number">Definition 83 </span> (Homeomorphism)</p>
+<section class="definition-content" id="proof-content">
+<p>A function <span class="math notranslate nohighlight">\(f: X \to Y\)</span> between <a class="reference internal" href="#topology:def-topological-space">topological spaces</a> is a <a class="reference internal" href="#topology:def-homeomorphism">homeomorphism</a> if it is bijective, <a class="reference internal" href="#topology:def-continuous-function-topology">continuous</a>, and its inverse <span class="math notranslate nohighlight">\(f^{-1}\)</span> is also continuous.
+Equivalently, <span class="math notranslate nohighlight">\(f\)</span> is a homeomorphism if <span class="math notranslate nohighlight">\(f\)</span> is a bijection and <span class="math notranslate nohighlight">\(U \subseteq X\)</span> is <a class="reference internal" href="#topology:def-topological-space">open</a> if and only if <span class="math notranslate nohighlight">\(f(U) \subseteq Y\)</span> is open.
+We say two spaces are homeomorphic if there exists a homeomorphism between them.</p>
+</section>
+</div><div class="proof lemma admonition" id="topology:lemma-homeomorphism-equivalence-relation">
+<p class="admonition-title"><span class="caption-number">Lemma 16 </span> (Homeomorphism is an equivalence relation)</p>
+<section class="lemma-content" id="proof-content">
+<p><a class="reference internal" href="#topology:def-homeomorphism">Homeomorphism</a> is an equivalence relation between topological spaces.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Homeomorphism is an equivalence relation<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><strong>Reflexivity:</strong>
+The identity map <span class="math notranslate nohighlight">\(I_X: X \to X\)</span> is a homeomorphism, because it is bijective, continuous, and its inverse is itself.
+Therefore <span class="math notranslate nohighlight">\(X \equiv X.\)</span></p>
+<p class="sd-card-text"><strong>Symmetry:</strong>
+If <span class="math notranslate nohighlight">\(f: X \to Y\)</span> is a homeomorphism, then <span class="math notranslate nohighlight">\(f^{-1}: Y \to X\)</span> is also a homeomorphism.
+Therefore <span class="math notranslate nohighlight">\(X \equiv Y\)</span> implies <span class="math notranslate nohighlight">\(Y \equiv X.\)</span></p>
+<p class="sd-card-text"><strong>Transitivity:</strong>
+If <span class="math notranslate nohighlight">\(f: X \to Y\)</span> and <span class="math notranslate nohighlight">\(g: Y \to Z\)</span> are homeomorphisms, then <span class="math notranslate nohighlight">\(g \circ f: X \to Z\)</span> is a homeomorphism.
+Therefore <span class="math notranslate nohighlight">\(X \equiv Y\)</span> and <span class="math notranslate nohighlight">\(Y \equiv Z\)</span> implies <span class="math notranslate nohighlight">\(X \equiv Z.\)</span></p>
+</div>
+</details><p>In general, the approach for showing that two spaces are homeomorphic is to find a homeomorphism between them.
+However, showing that two spaces are <em>not</em> homeomorphic is more difficult.
+In particular, there is no simple recipe for showing that two spaces are not homeomorphic.
+Instead, we resort to certain topological properties that are preserved under homeomorphisms.
+Whenever two spaces have different such properties, we can conclude that they are not homeomorphic.
+Two such properties are connectedness and compactness.
+In the remainder of this chapter we give definitions and results building up to these properties.</p>
+</section>
+<section id="sequences">
+<h2>Sequences<a class="headerlink" href="#sequences" title="Link to this heading">#</a></h2>
+<p>We now turn to re-defining concepts from metric spaces in terms of topological spaces, starting with sequences.
+First we re-define the following shorthand for open sets.</p>
+<div class="proof definition admonition" id="topology:def-open-neighbourhood-topology">
+<p class="admonition-title"><span class="caption-number">Definition 84 </span> (Open neighbourhood)</p>
+<section class="definition-content" id="proof-content">
+<p>An open neighbourhood of a point <span class="math notranslate nohighlight">\(x \in X\)</span> in a <a class="reference internal" href="#topology:def-topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span> is an open set <span class="math notranslate nohighlight">\(U \in \mathcal{U}\)</span> such that <span class="math notranslate nohighlight">\(x \in U.\)</span></p>
+</section>
+</div><p>In topological spaces, convergent sequences are defined directly in terms of open neighbourhoods, rather than using open balls.</p>
+<div class="proof definition admonition" id="topology:def-convergent-sequence-topology">
+<p class="admonition-title"><span class="caption-number">Definition 85 </span> (Convergent sequence)</p>
+<section class="definition-content" id="proof-content">
+<p>A sequence <span class="math notranslate nohighlight">\(x_n \to x\)</span> if for every <a class="reference internal" href="#topology:def-open-neighbourhood-topology">open neighbourhood</a> <span class="math notranslate nohighlight">\(U\)</span> of <span class="math notranslate nohighlight">\(x,\)</span> there exists <span class="math notranslate nohighlight">\(N \in \mathbb{N}\)</span> such that <span class="math notranslate nohighlight">\(x_n \in U\)</span> for all <span class="math notranslate nohighlight">\(n &gt; N.\)</span></p>
+</section>
+</div><p>We now turn to uniqueness of limits.
+In general, in a topological space limits need not be unique.
+For example, given a set <span class="math notranslate nohighlight">\(X\)</span> with the coarse topology <span class="math notranslate nohighlight">\(\mathcal{U} = \{\emptyset, X\},\)</span> every sequence converges to every point.
+However, further assumptions on the topology can result into unique limits.</p>
+<div class="proof definition admonition" id="topology:def-hausdorff-space">
+<p class="admonition-title"><span class="caption-number">Definition 86 </span> (Hausdorff space)</p>
+<section class="definition-content" id="proof-content">
+<p>A <a class="reference internal" href="#topology:def-topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span> is Hausdorff if for every pair of distinct points <span class="math notranslate nohighlight">\(x_1, x_2 \in X,\)</span> there exist <a class="reference internal" href="#topology:def-open-neighbourhood-topology">open neighbourhoods</a> <span class="math notranslate nohighlight">\(U_1, U_2\)</span> of <span class="math notranslate nohighlight">\(x_1, x_2\)</span> respectively such that <span class="math notranslate nohighlight">\(U_1 \cap U_2 = \emptyset.\)</span></p>
+</section>
+</div><aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Earlier, we proved that <a class="reference internal" href="001-metric-spaces.html#topology:lemma-limits-in-metric-spaces-are-unique">limits in metric spaces are unique</a>.
+The property we used in that proof was that, in a <a class="reference internal" href="001-metric-spaces.html#topology:def-metric-space">metric space</a>, open balls centered around distinct points are disjoint if their radii are small enough.
+This was the Hausdorff property in disguise.
+Metric spaces are always <a class="reference internal" href="#topology:def-hausdorff-space">Hausdorff</a>, and therefore have unique limits.</p>
+</aside>
+<div class="proof lemma admonition" id="topology:lemma-limits-unique-hausdorff">
+<p class="admonition-title"><span class="caption-number">Lemma 17 </span> (Limits are unique in Hausdorff spaces)</p>
+<section class="lemma-content" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is <a class="reference internal" href="#topology:def-hausdorff-space">Hausdorff</a> and <span class="math notranslate nohighlight">\((x_n)\)</span> is a sequence in <span class="math notranslate nohighlight">\(X\)</span> such that <span class="math notranslate nohighlight">\(x_n \to x\)</span> and <span class="math notranslate nohighlight">\(x_n \to x',\)</span> then <span class="math notranslate nohighlight">\(x = x'.\)</span></p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Limits are unique in Hausdorff spaces<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\((x_n)\)</span> be a sequence in <span class="math notranslate nohighlight">\(X\)</span> such that <span class="math notranslate nohighlight">\(x_n \to x\)</span> and <span class="math notranslate nohighlight">\(x_n \to x'.\)</span>
+Suppose <span class="math notranslate nohighlight">\(x \neq x'.\)</span>
+Since <span class="math notranslate nohighlight">\(X\)</span> is Hausdorff, there exist open neighbourhoods <span class="math notranslate nohighlight">\(U, U'\)</span> of <span class="math notranslate nohighlight">\(x, x'\)</span> respectively such that <span class="math notranslate nohighlight">\(U \cap U' = \emptyset.\)</span>
+Since <span class="math notranslate nohighlight">\(x_n \to x,\)</span> there exists <span class="math notranslate nohighlight">\(N \in \mathbb{N}\)</span> such that <span class="math notranslate nohighlight">\(x_n \in U\)</span> for all <span class="math notranslate nohighlight">\(n &gt; N.\)</span>
+Similarly, since <span class="math notranslate nohighlight">\(x_n \to x',\)</span> there exists <span class="math notranslate nohighlight">\(N' \in \mathbb{N}\)</span> such that <span class="math notranslate nohighlight">\(x_n \in U'\)</span> for all <span class="math notranslate nohighlight">\(n &gt; N'.\)</span>
+Then, for all <span class="math notranslate nohighlight">\(n &gt; \max(N, N'),\)</span> we have <span class="math notranslate nohighlight">\(x_n \in U \cap U' = \emptyset,\)</span> which is a contradiction.
+Therefore, <span class="math notranslate nohighlight">\(x = x'.\)</span></p>
+</div>
+</details><p>We now revisit closed sets and limit points, this time in topological spaces.</p>
+<div class="proof definition admonition" id="topology:def-closed-set-topology">
+<p class="admonition-title"><span class="caption-number">Definition 87 </span> (Closed set)</p>
+<section class="definition-content" id="proof-content">
+<p>A set <span class="math notranslate nohighlight">\(C \subseteq X\)</span> in a <a class="reference internal" href="#topology:def-topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span> is closed if its complement <span class="math notranslate nohighlight">\(X \setminus C\)</span> is open.</p>
+</section>
+</div><p>We now prove some properties of closed sets.</p>
+<div class="proof lemma admonition" id="topology:lemma-properties-of-closed-sets">
+<p class="admonition-title"><span class="caption-number">Lemma 18 </span> (Properties of closed sets)</p>
+<section class="lemma-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span> be a <a class="reference internal" href="#topology:def-topological-space">topological space</a>.
+Then,</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\emptyset\)</span> and <span class="math notranslate nohighlight">\(X\)</span> are <a class="reference internal" href="#topology:def-closed-set-topology">closed</a>,</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(C_1, \dots, C_n\)</span> are closed, then <span class="math notranslate nohighlight">\(\bigcup_{i=1}^n C_i\)</span> is closed,</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\{C_i\}_{i \in I}\)</span> are closed, then <span class="math notranslate nohighlight">\(\bigcap_{i \in I} C_i\)</span> is closed.</p></li>
+</ol>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Properties of closed sets<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><strong>Property 1:</strong>
+Since <span class="math notranslate nohighlight">\(\emptyset\)</span> is open, its complement <span class="math notranslate nohighlight">\(X\)</span> is closed.
+Similarly, since <span class="math notranslate nohighlight">\(X\)</span> is open, its complement <span class="math notranslate nohighlight">\(\emptyset\)</span> is closed.</p>
+<p class="sd-card-text"><strong>Property 2:</strong>
+If <span class="math notranslate nohighlight">\(C_1, \dots, C_n\)</span> are closed, then their complements <span class="math notranslate nohighlight">\(X \setminus C_1, \dots, X \setminus C_n\)</span> are open.
+Therefore, <span class="math notranslate nohighlight">\(\bigcup_{i = 1}^n (X \setminus C_i) = X \setminus \bigcap_{i = 1}^n C_i\)</span> is open, so <span class="math notranslate nohighlight">\(\bigcap_{i = 1}^n C_i\)</span> is closed.</p>
+<p class="sd-card-text"><strong>Property 3:</strong>
+If <span class="math notranslate nohighlight">\({C_i}_{i \in I}\)</span> are closed, then their complements <span class="math notranslate nohighlight">\({X \setminus C_i}_{i \in I}\)</span> are open.
+Therefore, <span class="math notranslate nohighlight">\(\bigcap_{i \in I} (X \setminus C_i) = X \setminus \bigcup_{i \in I} C_i\)</span> is open, so <span class="math notranslate nohighlight">\(\bigcup_{i \in I} C_i\)</span> is closed.</p>
+</div>
+</details><p>Note the similarity of the properties above to the defining properties of <a class="reference internal" href="#topology:def-topological-space">open sets</a>.
+In fact, we could have defined topologies in terms of closed sets rather than open sets.</p>
+<div class="proof lemma admonition" id="topology:lemma-singleton-set-closed-hausdorff">
+<p class="admonition-title"><span class="caption-number">Lemma 19 </span> (Singleton set in Hausdorff space is closed)</p>
+<section class="lemma-content" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is <a class="reference internal" href="#topology:def-hausdorff-space">Hausdorff</a> and <span class="math notranslate nohighlight">\(x \in X,\)</span> then <span class="math notranslate nohighlight">\(\{x\}\)</span> is closed.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Singleton set in Hausdorff space is closed<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><strong>Proof 1:</strong>
+Let <span class="math notranslate nohighlight">\(X\)</span> be Hausdorff and <span class="math notranslate nohighlight">\(x \in X.\)</span>
+We want to show that <span class="math notranslate nohighlight">\(\{x\}\)</span> is closed, which we can do by showing that <span class="math notranslate nohighlight">\(\{x\}\)</span> is an intersection of closed sets.
+Let <span class="math notranslate nohighlight">\(x' \in X \setminus \{x\}.\)</span>
+Since <span class="math notranslate nohighlight">\(X\)</span> is Hausdorff, there exist open neighbourhoods <span class="math notranslate nohighlight">\(U_x, U_{x'}\)</span> of <span class="math notranslate nohighlight">\(x, x'\)</span> respectively such that <span class="math notranslate nohighlight">\(U_x \cap U_{x'} = \emptyset.\)</span>
+Then, <span class="math notranslate nohighlight">\(X \setminus U_{x'}\)</span> is closed, and <span class="math notranslate nohighlight">\(\{x\} = X \setminus U_{x'}.\)</span>
+Finally, we have <span class="math notranslate nohighlight">\(\{x\} = \bigcap_{x' \in X \setminus \{x\}} (X \setminus U_{x'}),\)</span> so <span class="math notranslate nohighlight">\(\{x\}\)</span> is closed.</p>
+<p class="sd-card-text"><strong>Proof 2:</strong>
+Let <span class="math notranslate nohighlight">\(X\)</span> be Hausdorff and <span class="math notranslate nohighlight">\(x \in X.\)</span>
+We want to show that <span class="math notranslate nohighlight">\(X \setminus \{x\}\)</span> is open.
+Let <span class="math notranslate nohighlight">\(x' \in X \setminus \{x\}.\)</span>
+Then <span class="math notranslate nohighlight">\(x \neq x'.\)</span>
+Since <span class="math notranslate nohighlight">\(X\)</span> is Hausdorff and <span class="math notranslate nohighlight">\(x \neq x',\)</span> there exist open neighbourhoods <span class="math notranslate nohighlight">\(U, U'\)</span> of <span class="math notranslate nohighlight">\(x, x'\)</span> respectively such that <span class="math notranslate nohighlight">\(U \cap U' = \emptyset.\)</span>
+Then, <span class="math notranslate nohighlight">\(U' \subseteq X \setminus \{x\},\)</span> so <span class="math notranslate nohighlight">\(X \setminus \{x\}\)</span> is open.</p>
+</div>
+</details><div class="proof definition admonition" id="topology:def-closure">
+<p class="admonition-title"><span class="caption-number">Definition 88 </span> (Closure)</p>
+<section class="definition-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(A \subseteq X\)</span> be a subset of a <a class="reference internal" href="#topology:def-topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span>.
+Define</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{C}_A = \{C \subseteq X \mid A \subseteq C \text{ and } C \text{ is closed}\}.\]</div>
+<p>Then, the closure of <span class="math notranslate nohighlight">\(A,\)</span> written <span class="math notranslate nohighlight">\(\overline{A},\)</span> is defned as</p>
+<div class="math notranslate nohighlight">
+\[\overline{A} = \bigcap_{C \in \mathcal{C}_A} C.\]</div>
+</section>
+</div><div class="proof lemma admonition" id="topology:lemma-closure-closed-set">
+<p class="admonition-title"><span class="caption-number">Lemma 20 </span> (Closure of a set is the smallest closed set containing it)</p>
+<section class="lemma-content" id="proof-content">
+<p>Given a set <span class="math notranslate nohighlight">\(A \subseteq X\)</span> in a <a class="reference internal" href="#topology:def-topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U}),\)</span> its closure <span class="math notranslate nohighlight">\(\overline{A}\)</span> is the smallest closed set containing <span class="math notranslate nohighlight">\(A.\)</span></p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Closure of a set is the smallest closed set containing it<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(A \subseteq X\)</span> be a subset of a topological space <span class="math notranslate nohighlight">\((X, \mathcal{U}).\)</span>
+We want to show that <span class="math notranslate nohighlight">\(\overline{A}\)</span> is the smallest closed set containing <span class="math notranslate nohighlight">\(A.\)</span>
+First, <span class="math notranslate nohighlight">\(\overline{A}\)</span> is an intersection of closed sets containing <span class="math notranslate nohighlight">\(A,\)</span> so it contains <span class="math notranslate nohighlight">\(A\)</span> and <a class="reference internal" href="#topology:lemma-properties-of-closed-sets">it is closed</a>.
+Let <span class="math notranslate nohighlight">\(C\)</span> be a closed set containing <span class="math notranslate nohighlight">\(A.\)</span>
+Then <span class="math notranslate nohighlight">\(C \in \mathcal{C}_A,\)</span> so <span class="math notranslate nohighlight">\(\overline{A} \subseteq C.\)</span>
+We conclude, <span class="math notranslate nohighlight">\(\overline{A}\)</span> is the smallest closed set containing <span class="math notranslate nohighlight">\(A.\)</span></p>
+</div>
+</details><aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>The standard definition of limit point given here requires that the open neighbourhood includes a point different from the limit point itself.
+This is the standard definition of limit points, see e.g. <span id="id1">[<a class="reference internal" href="#id26" title="James Munkres. Topology. Pearson, 2nd edition, 2014.">Munkres, 2014</a>]</span>.
+Dexter Chua’s <a class="reference external" href="https://dec41.user.srcf.net/notes/IB_E/metric_and_topological_spaces.pdf#page=19.72">notes</a> for the Cambridge course on Metric and Topological Spaces, which I have been following, use a different definition of limit points, namely: a point in <span class="math notranslate nohighlight">\(X\)</span> is a limit point of <span class="math notranslate nohighlight">\(A,\)</span> if there exists a sequence <span class="math notranslate nohighlight">\((x_n)\)</span> in <span class="math notranslate nohighlight">\(A\)</span> such that <span class="math notranslate nohighlight">\(x_n \to x.\)</span>
+Under this definition, all elements of <span class="math notranslate nohighlight">\(A\)</span> are limit points of <span class="math notranslate nohighlight">\(A,\)</span> which does not match the standard defintion.
+I have chosen to follow the standard definition, ammending the results provided in the notes as needed.</p>
+</aside>
+<div class="proof definition admonition" id="topology:def-limit-point">
+<p class="admonition-title"><span class="caption-number">Definition 89 </span> (Limit point)</p>
+<section class="definition-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(A \subseteq X\)</span> be a subset of a <a class="reference internal" href="#topology:def-topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U}).\)</span>
+Then <span class="math notranslate nohighlight">\(x \in X\)</span> is a limit point of <span class="math notranslate nohighlight">\(A\)</span> if every open neighbourhood of <span class="math notranslate nohighlight">\(x\)</span> contains a point of <span class="math notranslate nohighlight">\(A\)</span> different from <span class="math notranslate nohighlight">\(x.\)</span></p>
+</section>
+</div><div class="proof lemma admonition" id="topology:lemma-closed-set-iff-it-contains-its-limit-points">
+<p class="admonition-title"><span class="caption-number">Lemma 21 </span> (Set is closed if and only if it contains its limit points)</p>
+<section class="lemma-content" id="proof-content">
+<p>Given a set <span class="math notranslate nohighlight">\(A \subseteq X\)</span> in a <a class="reference internal" href="#topology:def-topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U}),\)</span> the set <span class="math notranslate nohighlight">\(A\)</span> is <a class="reference internal" href="#topology:def-closed-set-topology">closed</a> if and only if <span class="math notranslate nohighlight">\(A\)</span> contains all its <a class="reference internal" href="#topology:def-limit-point">limit points</a>.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Set is closed if and only if it contains its limit points<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">First, suppose <span class="math notranslate nohighlight">\(A\)</span> is closed.
+We will show it contains all its limit points.
+Let <span class="math notranslate nohighlight">\(x\)</span> be a limit point of <span class="math notranslate nohighlight">\(A.\)</span>
+Suppose <span class="math notranslate nohighlight">\(x \notin A.\)</span>
+Since <span class="math notranslate nohighlight">\(A\)</span> is closed, <span class="math notranslate nohighlight">\(X \setminus A\)</span> is open, so there exists an open neighbourhood <span class="math notranslate nohighlight">\(U\)</span> of <span class="math notranslate nohighlight">\(x\)</span> such that <span class="math notranslate nohighlight">\(U \cap A = \emptyset.\)</span>
+However, since <span class="math notranslate nohighlight">\(x\)</span> is a limit point of <span class="math notranslate nohighlight">\(A,\)</span> every open neighbourhood of <span class="math notranslate nohighlight">\(x\)</span> contains a point of <span class="math notranslate nohighlight">\(A\)</span> different from <span class="math notranslate nohighlight">\(x,\)</span> which contradicts <span class="math notranslate nohighlight">\(U \cap A = \emptyset.\)</span></p>
+<p class="sd-card-text">Next, suppose <span class="math notranslate nohighlight">\(A\)</span> contains all its limit points.
+We will show it is closed.
+Suppose <span class="math notranslate nohighlight">\(x \in X \setminus A.\)</span>
+This means <span class="math notranslate nohighlight">\(x\)</span> is not a limit point of <span class="math notranslate nohighlight">\(A,\)</span> so there exists an open neighbourhood <span class="math notranslate nohighlight">\(U\)</span> of <span class="math notranslate nohighlight">\(x\)</span> such that <span class="math notranslate nohighlight">\(U \cap A\)</span> contains no points other than, possibly, <span class="math notranslate nohighlight">\(x.\)</span>
+Therefore, <span class="math notranslate nohighlight">\(U \subseteq X \setminus A,\)</span> so <span class="math notranslate nohighlight">\(X \setminus A\)</span> is open, and <span class="math notranslate nohighlight">\(A\)</span> is closed.</p>
+</div>
+</details><div class="proof definition admonition" id="topology:def-dense-subset">
+<p class="admonition-title"><span class="caption-number">Definition 90 </span> (Dense subset)</p>
+<section class="definition-content" id="proof-content">
+<p>A subset <span class="math notranslate nohighlight">\(A \subseteq X\)</span> of a <a class="reference internal" href="#topology:def-topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span> is dense in <span class="math notranslate nohighlight">\(X\)</span> if <span class="math notranslate nohighlight">\(\overline{A} = X.\)</span></p>
+</section>
+</div><div class="proof definition admonition" id="topology:def-interior">
+<p class="admonition-title"><span class="caption-number">Definition 91 </span> (Interior)</p>
+<section class="definition-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(A \subseteq X\)</span> be a subset of a <a class="reference internal" href="#topology:def-topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U}).\)</span>
+Define</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{O}_A = \{U \subseteq X \mid U \subseteq A \text{ and } U \text{ is open}\}.\]</div>
+<p>Then, the interior of <span class="math notranslate nohighlight">\(A,\)</span> written <span class="math notranslate nohighlight">\(\text{Int}(A),\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[\text{Int}(A) = \bigcup_{U \in \mathcal{O}_A} U.\]</div>
+</section>
+</div><div class="proof lemma admonition" id="topology:lemma-interior-open-set">
+<p class="admonition-title"><span class="caption-number">Lemma 22 </span> (Interior of a set is the largest open set contained in it)</p>
+<section class="lemma-content" id="proof-content">
+<p>Given a set <span class="math notranslate nohighlight">\(A \subseteq X\)</span> in a <a class="reference internal" href="#topology:def-topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U}),\)</span> its <a class="reference internal" href="#topology:def-interior">interior</a> <span class="math notranslate nohighlight">\(\text{Int}(A)\)</span> is the largest open set contained in <span class="math notranslate nohighlight">\(A.\)</span></p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Interior of a set is the largest open set contained in it<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(A \subseteq X\)</span> be a subset of a topological space <span class="math notranslate nohighlight">\((X, \mathcal{U}).\)</span>
+Then, since <span class="math notranslate nohighlight">\(\text{Int}(A)\)</span> is a union of open sets contained in <span class="math notranslate nohighlight">\(A,\)</span> it is open and contained in <span class="math notranslate nohighlight">\(A.\)</span>
+Suppose <span class="math notranslate nohighlight">\(U\)</span> is an open set contained in <span class="math notranslate nohighlight">\(A.\)</span>
+Then <span class="math notranslate nohighlight">\(U \in \mathcal{O}_A,\)</span> so <span class="math notranslate nohighlight">\(U \subseteq \text{Int}(A).\)</span>
+Therefore, <span class="math notranslate nohighlight">\(\text{Int}(A)\)</span> is the largest open set contained in <span class="math notranslate nohighlight">\(A.\)</span></p>
+</div>
+</details><div class="proof lemma admonition" id="topology:def-complement-interior-closure-complement">
+<p class="admonition-title"><span class="caption-number">Lemma 23 </span> (Complement of interior is closure of complement)</p>
+<section class="lemma-content" id="proof-content">
+<p>Given a set <span class="math notranslate nohighlight">\(A \subseteq X\)</span> in a <a class="reference internal" href="#topology:def-topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U}),\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[X \setminus \text{Int}(A) = \overline{X \setminus A}.\]</div>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Complement of interior is closure of complement<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(A \subseteq X\)</span> be a subset of a topological space <span class="math notranslate nohighlight">\((X, \mathcal{U}).\)</span>
+We have that</p>
+<div class="math notranslate nohighlight">
+\[X \setminus \text{Int}(A) = X \setminus \bigcup_{U \in \mathcal{O}_A} U = \bigcap_{U \in \mathcal{O}_A} (X \setminus U) = \bigcap_{C \in \mathcal{C}_{X \setminus A}} C = \overline{X \setminus A}.\]</div>
+</div>
+</details><section id="new-topologies-from-old">
+<h3>New topologies from old<a class="headerlink" href="#new-topologies-from-old" title="Link to this heading">#</a></h3>
+<p>Now we look into how existing topological spaces can be used to define new ones.
+First, we define the subspace topology.</p>
+<div class="proof definition admonition" id="topology:def-subspace-topology">
+<p class="admonition-title"><span class="caption-number">Definition 92 </span> (Subspace topology)</p>
+<section class="definition-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span> be a <a class="reference internal" href="#topology:def-topological-space">topological space</a>, and let <span class="math notranslate nohighlight">\(Y \subseteq X\)</span> be a subset.
+Then, the subspace topology on <span class="math notranslate nohighlight">\(Y\)</span> is the collection of subsets of <span class="math notranslate nohighlight">\(Y\)</span> given by: <span class="math notranslate nohighlight">\(V\)</span> is an open set in <span class="math notranslate nohighlight">\(Y\)</span> if there exists an open set <span class="math notranslate nohighlight">\(U \in \mathcal{U}\)</span> such that <span class="math notranslate nohighlight">\(V = U \cap Y.\)</span></p>
+</section>
+</div><div class="proof lemma admonition" id="topology:lemma-subspace-topology">
+<p class="admonition-title"><span class="caption-number">Lemma 24 </span> (Subspace topology is a topology)</p>
+<section class="lemma-content" id="proof-content">
+<p>The subspace topology on a subset <span class="math notranslate nohighlight">\(Y \subseteq X\)</span> of a <a class="reference internal" href="#topology:def-topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span> is a <a class="reference internal" href="#topology:def-topological-space">topology</a>.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Subspace topology is a topology<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span> be a topological space, and let <span class="math notranslate nohighlight">\(Y \subseteq X\)</span> be a subset.
+We want to show that the subspace topology on <span class="math notranslate nohighlight">\(Y\)</span> is a topology.
+Let <span class="math notranslate nohighlight">\(\mathcal{U}_Y\)</span> be the subspace topology on <span class="math notranslate nohighlight">\(Y.\)</span>
+We show each of the <a class="reference internal" href="#topology:def-topological-space">properties of a topology</a> are satisfied by the subspace topology.</p>
+<p class="sd-card-text">First, <span class="math notranslate nohighlight">\(\emptyset = \emptyset \cap Y\)</span> and <span class="math notranslate nohighlight">\(Y = X \cap Y,\)</span> so <span class="math notranslate nohighlight">\(\emptyset, Y \in \mathcal{U}_Y.\)</span>
+Second, suppose <span class="math notranslate nohighlight">\(V_\alpha \in \mathcal{U}_Y\)</span> for all <span class="math notranslate nohighlight">\(\alpha \in A.\)</span>
+Then, there exist open sets <span class="math notranslate nohighlight">\(U_\alpha \in \mathcal{U}\)</span> such that <span class="math notranslate nohighlight">\(V_\alpha = U_\alpha \cap Y.\)</span>
+Then</p>
+<div class="math notranslate nohighlight">
+\[\bigcup_{\alpha \in I} V_\alpha = \bigcup_{\alpha \in I} (U_\alpha \cap Y) = (\bigcup_{\alpha \in I} U_\alpha) \cap Y \in \mathcal{U}_Y.\]</div>
+<p class="sd-card-text">Finally, suppose <span class="math notranslate nohighlight">\(V_1, \dots, V_n \in \mathcal{U}_Y.\)</span>
+Then, there exist open sets <span class="math notranslate nohighlight">\(U_1, \dots, U_n \in \mathcal{U}\)</span> such that <span class="math notranslate nohighlight">\(V_i = U_i \cap Y.\)</span>
+Then</p>
+<div class="math notranslate nohighlight">
+\[\bigcap_{i=1}^n V_i = \bigcap_{i=1}^n (U_i \cap Y) = (\bigcap_{i=1}^n U_i) \cap Y \in \mathcal{U}_Y.\]</div>
+<p class="sd-card-text">Putting these three parts together, we conclude that the subspace topology on <span class="math notranslate nohighlight">\(Y\)</span> is a topology.</p>
+</div>
+</details><div class="docutils container" id="id2">
+<div role="list" class="citation-list">
+<div class="citation" id="id26" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">Mun14</a><span class="fn-bracket">]</span></span>
+<p>James Munkres. <em>Topology</em>. Pearson, 2nd edition, 2014.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book/topology"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="001-metric-spaces.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Metric spaces</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../papers/intro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Stream of papers</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topologies">Topologies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sequences">Sequences</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#new-topologies-from-old">New topologies from old</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Stratis Markou
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

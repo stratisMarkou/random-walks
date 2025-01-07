@@ -78,7 +78,7 @@
     <link rel="icon" href="../../_static/dicefav.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Stream of papers" href="../papers/intro.html" />
+    <link rel="next" title="Topological Spaces" href="002-topological-spaces.html" />
     <link rel="prev" title="Metric and topological spaces" href="000-intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -215,6 +215,7 @@
 </li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="000-intro.html">Topology</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Metric spaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="002-topological-spaces.html">Topological Spaces</a></li>
 </ul>
 </li>
 </ul>
@@ -428,6 +429,8 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Metric spaces</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#norms">Norms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inner-products">Inner products</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#open-and-closed-sets">Open and closed sets</a></li>
 </ul>
             </nav>
         </div>
@@ -441,6 +444,11 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="metric-spaces">
 <h1>Metric spaces<a class="headerlink" href="#metric-spaces" title="Link to this heading">#</a></h1>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<p><a class="github-button" href="https://github.com/stratisMarkou/random-walks" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" aria-label="Star stratisMarkou/random-walks on GitHub">Star</a>
+<a class="github-button" href="https://github.com/stratisMarkou/random-walks/issues" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-issue-opened" data-size="large" aria-label="Issue stratisMarkou/random-walks on GitHub">Issue</a>
+<a class="github-button" href="https://github.com/stratisMarkou/random-walks/subscription" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-eye" data-size="large" aria-label="Watch stratisMarkou/random-walks on GitHub">Watch</a>
+<a class="github-button" href="https://github.com/stratisMarkou" data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large" aria-label="Follow @stratisMarkou on GitHub">Follow</a></p>
 <p>The first part of the course is about metric spaces.
 Metric spaces are sets equiped with a metric, which is a definition of distance.
 Metrics generalise the usual notion of distance that the absolute value has on the reals, to more general spaces, and allow us to generalise the notions of convergent sequences and continuity.
@@ -449,8 +457,9 @@ It will turn out that the important underlying structure that determines continu
 This will give rise to the notion of a topology, which abstracts away the idea of a metric altogether and instead defines open sets directly.</p>
 <section id="id1">
 <h2>Metric spaces<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
-<p>We begin with the definition of metric spaces, which are sets equiped with a notion of distance, the metric.</p>
-<div class="proof definition admonition" id="topology-def-metric-space">
+<p>We begin with the definition of metric spaces.
+A metric space is a set that is equiped with a notion of distance between elements, the metric.</p>
+<div class="proof definition admonition" id="topology:def-metric-space">
 <p class="admonition-title"><span class="caption-number">Definition 70 </span> (Metric space)</p>
 <section class="definition-content" id="proof-content">
 <p>A metric space is a pair <span class="math notranslate nohighlight">\((X, d_X)\)</span> of a set <span class="math notranslate nohighlight">\(X,\)</span> called the space, and a function <span class="math notranslate nohighlight">\(d_X: X \times X \to \mathbb{R},\)</span> called the metric, which satisfy</p>
@@ -461,7 +470,8 @@ This will give rise to the notion of a topology, which abstracts away the idea o
 <li><p><span class="math notranslate nohighlight">\(d(x, z) \leq d(x, y) + d(y, z)\)</span> for all for all <span class="math notranslate nohighlight">\(x, y, z \in X.\)</span></p></li>
 </ol>
 </section>
-</div><div class="proof example admonition" id="example-1">
+</div><p>Two common examples of metrics, which we will use later on, are the familiar Euclidean metric and the discrete metric.</p>
+<div class="proof example admonition" id="example-1">
 <p class="admonition-title"><span class="caption-number">Example 13 </span> (Examples of metric spaces)</p>
 <section class="example-content" id="proof-content">
 <p><strong>Euclidean metric:</strong>
@@ -478,7 +488,7 @@ The discrete metric <span class="math notranslate nohighlight">\(d_X\)</span> on
 </div><div class="proof definition admonition" id="definition-2">
 <p class="admonition-title"><span class="caption-number">Definition 71 </span> (Metric subspace)</p>
 <section class="definition-content" id="proof-content">
-<p>Let a metric space <span class="math notranslate nohighlight">\((X, d_X),\)</span> and <span class="math notranslate nohighlight">\(Y \subseteq X.\)</span>
+<p>Let a <a class="reference internal" href="#topology:def-metric-space">metric space</a> <span class="math notranslate nohighlight">\((X, d_X),\)</span> and <span class="math notranslate nohighlight">\(Y \subseteq X.\)</span>
 We call <span class="math notranslate nohighlight">\((Y, d_Y)\)</span> a metric subspace of <span class="math notranslate nohighlight">\(X\)</span> where <span class="math notranslate nohighlight">\(d_Y: Y \to \mathbb{R}\)</span> is defined such that <span class="math notranslate nohighlight">\(d_Y(a, b) = d_X(a, b)\)</span> for all <span class="math notranslate nohighlight">\(a, b \in Y.\)</span></p>
 </section>
 </div><p>With the definition of metric spaces in place, we are ready to define convergent sequences.
@@ -486,14 +496,14 @@ This is a generalisation of convergence from the familiar definition in the cont
 <div class="proof definition admonition" id="definition-3">
 <p class="admonition-title"><span class="caption-number">Definition 72 </span> (Convergent sequence)</p>
 <section class="definition-content" id="proof-content">
-<p>Let <span class="math notranslate nohighlight">\((x_n)\)</span> be a sequence in a metric space <span class="math notranslate nohighlight">\((X, d_X).\)</span>
+<p>Let <span class="math notranslate nohighlight">\((x_n)\)</span> be a sequence in a <a class="reference internal" href="#topology:def-metric-space">metric space</a> <span class="math notranslate nohighlight">\((X, d_X).\)</span>
 We say that <span class="math notranslate nohighlight">\((x_n)\)</span> converges to <span class="math notranslate nohighlight">\(x \in X,\)</span> written <span class="math notranslate nohighlight">\(x_n \to x\)</span> if for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0,\)</span> there exists <span class="math notranslate nohighlight">\(N \in \mathbb{N}\)</span> such that <span class="math notranslate nohighlight">\(d_X(x_n, x) &lt; \epsilon\)</span> for all <span class="math notranslate nohighlight">\(n &gt; N.\)</span></p>
 </section>
 </div><p>Similar to analogous results in analysis, we can show that in a metric space, limits are unique.</p>
-<div class="proof lemma admonition" id="topology-lemma-limits-in-metric-spaces-are-unique">
+<div class="proof lemma admonition" id="topology:lemma-limits-in-metric-spaces-are-unique">
 <p class="admonition-title"><span class="caption-number">Lemma 6 </span> (Limits in metric spaces are unique)</p>
 <section class="lemma-content" id="proof-content">
-<p>Suppose <span class="math notranslate nohighlight">\((X, d_X)\)</span> is a metric space and <span class="math notranslate nohighlight">\((x_n)\)</span> is a sequence in <span class="math notranslate nohighlight">\(X\)</span> such that <span class="math notranslate nohighlight">\(x_n \to x\)</span> and <span class="math notranslate nohighlight">\(x_n \to x'\)</span> for some <span class="math notranslate nohighlight">\(x, x' \in X.\)</span>
+<p>Suppose <span class="math notranslate nohighlight">\((X, d_X)\)</span> is a <a class="reference internal" href="#topology:def-metric-space">metric space</a> and <span class="math notranslate nohighlight">\((x_n)\)</span> is a sequence in <span class="math notranslate nohighlight">\(X\)</span> such that <span class="math notranslate nohighlight">\(x_n \to x\)</span> and <span class="math notranslate nohighlight">\(x_n \to x'\)</span> for some <span class="math notranslate nohighlight">\(x, x' \in X.\)</span>
 Then <span class="math notranslate nohighlight">\(x = x'.\)</span></p>
 </section>
 </div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
@@ -511,17 +521,17 @@ By the <span class="xref std std-ref">non-negativity, symmetry and the triangle 
 </div>
 </details><p>With convergent sequences in place, we can define continuous functions.
 This definition appears slightly different than the <span class="math notranslate nohighlight">\(\epsilon-\delta\)</span> defnition in analysis, but we will shortly see the two are equivalent.</p>
-<div class="proof definition admonition" id="topology-def-continuous-function">
+<div class="proof definition admonition" id="topology:def-continuous-function">
 <p class="admonition-title"><span class="caption-number">Definition 73 </span> (Continuous function)</p>
 <section class="definition-content" id="proof-content">
-<p>Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> and <span class="math notranslate nohighlight">\((Y, d_Y)\)</span> be metric spaces.
+<p>Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> and <span class="math notranslate nohighlight">\((Y, d_Y)\)</span> be <a class="reference internal" href="#topology:def-metric-space">metric space</a>.
 A function <span class="math notranslate nohighlight">\(f: X \to Y\)</span> is continuous if <span class="math notranslate nohighlight">\(f(x_n) \to f(x)\)</span> in <span class="math notranslate nohighlight">\(Y\)</span> whenever <span class="math notranslate nohighlight">\(x_n \to x\)</span> in <span class="math notranslate nohighlight">\(X.\)</span></p>
 </section>
 </div></section>
 <section id="norms">
 <h2>Norms<a class="headerlink" href="#norms" title="Link to this heading">#</a></h2>
 <p>We now introduce the idea of a norm, which is a definition of the length of a point in a vector space.</p>
-<div class="proof definition admonition" id="topology-def-norm">
+<div class="proof definition admonition" id="topology:def-norm">
 <p class="admonition-title"><span class="caption-number">Definition 74 </span> (Norm)</p>
 <section class="definition-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(V\)</span> be a vector space.
@@ -534,7 +544,7 @@ A norm is a function <span class="math notranslate nohighlight">\(||\cdot||: V \
 </ol>
 </section>
 </div><p>A norm can be used to define a metric on a vector space.</p>
-<div class="proof lemma admonition" id="topology-lemma-norms-induce-metrics">
+<div class="proof lemma admonition" id="topology:lemma-norms-induce-metrics">
 <p class="admonition-title"><span class="caption-number">Lemma 7 </span> (Norms induce metrics)</p>
 <section class="lemma-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(V\)</span> be a vector space with a norm <span class="math notranslate nohighlight">\(||\cdot||.\)</span>
@@ -556,7 +566,7 @@ Using the <span class="xref std std-ref">properties of norms</span>, for any <sp
 <li><p class="sd-card-text"><span class="math notranslate nohighlight">\(d_V(v, u) = ||v - u|| \leq ||v - w|| + ||w - u|| = d_V(v, w) + d_V(w, u),\)</span> by property 4 of norms.</p></li>
 </ol>
 </div>
-</details><div class="proof example admonition" id="example-8">
+</details><div class="proof example admonition" id="topology:examples-of-norms">
 <p class="admonition-title"><span class="caption-number">Example 14 </span> (Examples of norms)</p>
 <section class="example-content" id="proof-content">
 <p>The following are examples of norms on <span class="math notranslate nohighlight">\(C[0, 1],\)</span> the vector space of continuous functions with domain <span class="math notranslate nohighlight">\([0, 1].\)</span></p>
@@ -567,7 +577,339 @@ Using the <span class="xref std std-ref">properties of norms</span>, for any <sp
 ||\cdot||_\infty &amp;= \max_{x \in [0, 1]} |\cdot(x)| dx.
 \end{align}\end{split}\]</div>
 </section>
-</div></section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Examples above are norms<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Most of the properties of norms in <a class="reference internal" href="#topology:def-norm">Definition 74</a> follow from the definition of the examples but property 2, the identity of indiscernibles for norms, is a little more involved.
+For this, we need an intermediate result that we prove here.</p>
+<div class="proof lemma admonition" id="topology:lemma-non-constant-positive-continuous-function-has-positive-integral">
+<p class="admonition-title"><span class="caption-number">Lemma 8 </span> (Non-constant positive continuous function has positive integral)</p>
+<section class="lemma-content" id="proof-content">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(f \in C[0, 1]\)</span> satisfy <span class="math notranslate nohighlight">\(f(x) \geq 0\)</span> for all <span class="math notranslate nohighlight">\(x \in [0, 1].\)</span>
+If <span class="math notranslate nohighlight">\(f\)</span> is not constantly <span class="math notranslate nohighlight">\(0,\)</span> then <span class="math notranslate nohighlight">\(\int_0^1 f(x)dx &gt; 0.\)</span></p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Non-constant positive continuous function has positive integral<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(f \in C[0, 1]\)</span> satisfies <span class="math notranslate nohighlight">\(f(x) \geq 0\)</span> for all <span class="math notranslate nohighlight">\(x \in [0, 1],\)</span> and <span class="math notranslate nohighlight">\(f\)</span> is not constantly <span class="math notranslate nohighlight">\(0.\)</span>
+Then, there exists <span class="math notranslate nohighlight">\(x_0 \in [0, 1]\)</span> such that <span class="math notranslate nohighlight">\(f(x_0) &gt; a\)</span> for some <span class="math notranslate nohighlight">\(a &gt; 0.\)</span>
+Since <span class="math notranslate nohighlight">\(f\)</span> is continuous, there exists <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(f(x) &gt; a / 2\)</span> for all <span class="math notranslate nohighlight">\(x \in (x_0 - \delta, x_0 + \delta).\)</span>
+Then, defining <span class="math notranslate nohighlight">\(g \in C[0, 1]\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}g(x) = \begin{cases}
+a / 2 &amp; \text{ if } x \in (x_0 - \delta, x_0 + \delta), \\
+0 &amp; \text{ otherwise}, \\
+\end{cases}\end{split}\]</div>
+<p class="sd-card-text">we note that <span class="math notranslate nohighlight">\(f \geq g,\)</span> and taking integrals we obtain</p>
+<div class="math notranslate nohighlight">
+\[\int_0^1 f(x)dx \geq \int_0^1 g(x)dx \geq \int_{\max(0,~x_0 - \delta)}^{\min(1,~x_0 + \delta)} \frac{a}{2} dx \geq \frac{a\delta}{2} &gt; 0,\]</div>
+<p class="sd-card-text">which completes the proof.</p>
+</div>
+</details><p class="sd-card-text">Now we can show that each of the examples is indeed a norm.
+In the following, assume that <span class="math notranslate nohighlight">\(f, g \in C[0, 1]\)</span></p>
+<p class="sd-card-text"><strong>Example 1:</strong>
+First, <span class="math notranslate nohighlight">\(||f||_1 \geq 0\)</span> so the first property is satisfied.
+Second, by <a class="reference internal" href="#topology:lemma-non-constant-positive-continuous-function-has-positive-integral">Lemma 8</a> we have that <span class="math notranslate nohighlight">\(||f||_1 = 0\)</span> only if <span class="math notranslate nohighlight">\(f = 0,\)</span> so the second property is satisfied.
+Third, note that <span class="math notranslate nohighlight">\(||\lambda f||_1 = |\lambda|||f||_1.\)</span>
+Fourth, we have that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+||f + g||_1 &amp;= \int_0^1 |f(x) + g(x)| dx \\
+&amp;\leq \int_0^1 (|f(x)| + |g(x)|) dx \\
+&amp;= \int_0^1 |f(x)|dx + \int_0^1|g(x)| dx \\
+&amp;= ||f||_1 + ||g||_1 dx
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">where going from the first to the second line holds by the triangle inequality of absolute values.</p>
+<p class="sd-card-text"><strong>Example 2:</strong>
+The first three parts of the argument for example 1 hold also for example 2.
+For the fourth part, we have that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+||f + g||_2^2 &amp;= \int_0^1 (f(x) + g(x))^2 dx \\
+&amp;= \int_0^1 f(x)^2 + 2f(x)g(x) + g(x)^2 dx \\
+&amp;= \int_0^1 f(x)^2 dx + 2\int_0^1 f(x)g(x)dx + \int_0^1 g(x)^2 dx \\
+&amp;\leq ||f||_2^2 + 2||f||_2||g||_2 + ||g||_2^2 dx \\
+&amp;= (||f||_2 + ||g||_2)^2 dx \\
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">where going from the third to the fourth line we have used the Cauchy-Schwarz inequality (which we have not proved yet, but will be given later).</p>
+<p class="sd-card-text"><strong>Example 3:</strong>
+Again, the first three parts of the argument for example 1 also hold for example 3.
+For the fourth part, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+||f + g||_\infty &amp;= \max_{x \in [0, 1]} |f(x) + g(x)| \\
+&amp;\leq \max_{x \in [0, 1]} |f(x)| + |g(x)| \\
+&amp;\leq \max_{x \in [0, 1]} |f(x)| + \max_{x \in [0, 1]} |g(x)| \\ 
+&amp;\leq ||f||_\infty + ||g||_\infty,
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">where from the first to the second line we have used the triangle inequality of the absolute value, and from the second to the third we have used the fact that the maximum of a sum of two functions is no greater than the sum of their maxima.</p>
+<p class="sd-card-text">This concludes the proof showing that all four examples are norms.</p>
+</div>
+</details></section>
+<section id="inner-products">
+<h2>Inner products<a class="headerlink" href="#inner-products" title="Link to this heading">#</a></h2>
+<p>Now we turn to inner products.
+Inner products generalise the notion of angles between vectors to general vector spaces.</p>
+<div class="proof definition admonition" id="topology:inner-product-space">
+<p class="admonition-title"><span class="caption-number">Definition 75 </span> (Inner product)</p>
+<section class="definition-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(V\)</span> be a vector space.
+An inner product on <span class="math notranslate nohighlight">\(V\)</span> is a function <span class="math notranslate nohighlight">\(\langle \cdot, \cdot \rangle: V \times V \to \mathbb{R}\)</span> which satisfies:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\langle v, v \rangle \geq 0\)</span> for all <span class="math notranslate nohighlight">\(v \in V,\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\langle v, v \rangle = 0\)</span> if and only if <span class="math notranslate nohighlight">\(v = 0,\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\langle v, w \rangle = \langle w, v \rangle\)</span> for all <span class="math notranslate nohighlight">\(v, w \in V,\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\langle v_1 + \lambda v_2, w \rangle = \langle v_1, w \rangle + \lambda \langle v_2, w \rangle \)</span> for all <span class="math notranslate nohighlight">\(v_1, v_2, w \in V\)</span> and <span class="math notranslate nohighlight">\(\lambda \in \mathbb{R}.\)</span></p></li>
+</ol>
+</section>
+</div><p>The properties of an inner product look very similar to those of a norm.
+In fact an inner product can be used to define a norm on a vector space.
+To show this, we must first however show an intermediate result for inner products.</p>
+<div class="proof lemma admonition" id="topology:cauchy-schwarz">
+<p class="admonition-title"><span class="caption-number">Lemma 9 </span> (Cauchy-Schwarz inequality)</p>
+<section class="lemma-content" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(\langle \cdot, \cdot \rangle\)</span> is an <a class="reference internal" href="#topology:inner-product-space">inner product</a> on a vector space <span class="math notranslate nohighlight">\(V,\)</span> then for all <span class="math notranslate nohighlight">\(v, w \in V,\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\langle v, w \rangle^2 \leq \langle v, v \rangle \langle w, w \rangle.\]</div>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Cauchy-Schwarz inequality<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(v, w \in V\)</span> and <span class="math notranslate nohighlight">\(\lambda \in \mathbb{R}.\)</span>
+Then, by the <a class="reference internal" href="#topology:inner-product-space">properties of inner products</a>, we have</p>
+<div class="math notranslate nohighlight">
+\[\langle v + \lambda w, v + \lambda w \rangle \geq 0.\]</div>
+<p class="sd-card-text">Expanding the left-hand side, we obtain</p>
+<div class="math notranslate nohighlight">
+\[\langle v, v \rangle + 2\lambda \langle v, w \rangle + \lambda^2 \langle w, w \rangle \geq 0,\]</div>
+<p class="sd-card-text">and since the quadratic in <span class="math notranslate nohighlight">\(\lambda\)</span> is non-negative, the discriminant must be non-positive, giving</p>
+<div class="math notranslate nohighlight">
+\[4\langle v, w \rangle^2 - 4\langle v, v \rangle \langle w, w \rangle \leq 0,\]</div>
+<p class="sd-card-text">which rearranges to the Cauchy-Schwarz inequality.</p>
+</div>
+</details><p>We can now show that an inner product induces a norm.</p>
+<div class="proof lemma admonition" id="topology:lemma-inner-products-induce-norms">
+<p class="admonition-title"><span class="caption-number">Lemma 10 </span> (Inner products induce norms)</p>
+<section class="lemma-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(V\)</span> be a vector space with an <a class="reference internal" href="#topology:inner-product-space">inner product</a> <span class="math notranslate nohighlight">\(\langle \cdot, \cdot \rangle.\)</span>
+The function <span class="math notranslate nohighlight">\(||\cdot||: V \to \mathbb{R}\)</span> defined as</p>
+<div class="math notranslate nohighlight">
+\[||v|| = \sqrt{\langle v, v \rangle}\]</div>
+<p>is a norm on <span class="math notranslate nohighlight">\(V.\)</span></p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Inner products induce norms<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(V\)</span> be a vector space with an inner product <span class="math notranslate nohighlight">\(\langle \cdot, \cdot \rangle\)</span> and define <span class="math notranslate nohighlight">\(||\cdot||: V \to \mathbb{R}.\)</span>
+Using the <span class="xref std std-ref">properties of inner products</span>, for any <span class="math notranslate nohighlight">\(v, w \in V,\)</span> we have</p>
+<ol class="arabic simple">
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(||v|| = \sqrt{\langle v, v \rangle} \geq 0,\)</span> by property 1 of inner products,</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(||v|| = 0 \iff \langle v, v \rangle = 0 \iff v = 0,\)</span> by property 2 of inner products,</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(||\lambda v|| = \sqrt{\langle \lambda v, \lambda v \rangle} = \sqrt{\lambda^2 \langle v, v \rangle} = |\lambda|||v||,\)</span> by property 3 of inner products,</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(||v + w||^2 = \langle v, v \rangle + \langle v, w \rangle + \langle w, v \rangle + \langle w, w \rangle = ||v||^2 + 2\langle v, w \rangle + ||w||^2 \leq ||v||^2 + 2||v|| ||w|| + ||w||^2 = (||v|| + ||w||)^2,\)</span> by <a class="reference internal" href="#topology:cauchy-schwarz">Cauchy-Schwarz inequality</a>.</p></li>
+</ol>
+<p class="sd-card-text">Therefore <span class="math notranslate nohighlight">\(||\cdot||\)</span> is a norm on <span class="math notranslate nohighlight">\(V.\)</span></p>
+</div>
+</details></section>
+<section id="open-and-closed-sets">
+<h2>Open and closed sets<a class="headerlink" href="#open-and-closed-sets" title="Link to this heading">#</a></h2>
+<p>We now turn to open and closed sets in metric spaces.
+These will turn out to be the key objects that determine continuity of functions in metric spaces.
+We first define open and closed balls.</p>
+<div class="proof definition admonition" id="topology:def-open-and-closed-balls">
+<p class="admonition-title"><span class="caption-number">Definition 76 </span> (Open and closed balls)</p>
+<section class="definition-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> be a <a class="reference internal" href="#topology:def-metric-space">metric space</a>.
+For any <span class="math notranslate nohighlight">\(x \in X\)</span> and <span class="math notranslate nohighlight">\(r &gt; 0,\)</span> we define the open ball to be the set</p>
+<div class="math notranslate nohighlight">
+\[B_r(x) = \{ x' \in X : d_X(x, x') &lt; r \},\]</div>
+<p>and the closed ball to be the set</p>
+<div class="math notranslate nohighlight">
+\[\overline{B}_r(x) = \{ x' \in X : d_X(x, x') \leq r \}.\]</div>
+</section>
+</div><p>With open and closed balls defined, we can now define open and closed sets.</p>
+<div class="proof definition admonition" id="topology:def-open-and-closed-subsets">
+<p class="admonition-title"><span class="caption-number">Definition 77 </span> (Open and closed subsets)</p>
+<section class="definition-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> be a <a class="reference internal" href="#topology:def-metric-space">metric space</a>.
+A subset <span class="math notranslate nohighlight">\(U \subseteq X\)</span> is open if for every <span class="math notranslate nohighlight">\(x \in U,\)</span> there exists <span class="math notranslate nohighlight">\(r &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(B_r(x) \subseteq U.\)</span>
+A subset <span class="math notranslate nohighlight">\(C \subseteq X\)</span> is closed if its complement <span class="math notranslate nohighlight">\(X \setminus C\)</span> is open.</p>
+</section>
+</div><p>We can now show that the terms <em>open ball</em> and <em>closed ball</em> are in fact justified, by showing that open balls are open subsets and closed balls are closed subsets.</p>
+<div class="proof lemma admonition" id="topology:lemma-open-and-closed-balls-are-open-and-closed">
+<p class="admonition-title"><span class="caption-number">Lemma 11 </span> (Open (closed) balls are open (closed))</p>
+<section class="lemma-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> be a <a class="reference internal" href="#topology:def-metric-space">metric space</a>.
+Then, for any <span class="math notranslate nohighlight">\(x \in X\)</span> and <span class="math notranslate nohighlight">\(r &gt; 0,\)</span> the <a class="reference internal" href="#topology:def-open-and-closed-balls">open ball</a> <span class="math notranslate nohighlight">\(B_r(x)\)</span> is an open subset of <span class="math notranslate nohighlight">\(X\)</span> and the <a class="reference internal" href="#topology:def-open-and-closed-balls">closed ball</a> <span class="math notranslate nohighlight">\(\overline{B}_r(x)\)</span> is a closed subset of <span class="math notranslate nohighlight">\(X.\)</span></p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Open (closed) balls are open (closed)<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> be a metric space and <span class="math notranslate nohighlight">\(x \in X\)</span> and <span class="math notranslate nohighlight">\(r &gt; 0.\)</span>
+Then, for any <span class="math notranslate nohighlight">\(x' \in B_r(x),\)</span> we have <span class="math notranslate nohighlight">\(d_X(x, x') &lt; r,\)</span> so we can choose <span class="math notranslate nohighlight">\(\epsilon = r - d_X(x, x') &gt; 0.\)</span>
+By the <a class="reference internal" href="#topology:def-metric-space">triangle inequality</a>, we have that <span class="math notranslate nohighlight">\(B_\epsilon(x') \subseteq B_r(x),\)</span> so <span class="math notranslate nohighlight">\(B_r(x)\)</span> is open.</p>
+<p class="sd-card-text">Similarly, suppose <span class="math notranslate nohighlight">\(x' \in X \setminus \overline{B}_r(x).\)</span>
+Then, <span class="math notranslate nohighlight">\(d_X(x, x') &gt; r,\)</span> so we can choose <span class="math notranslate nohighlight">\(\epsilon = d_X(x, x') - r &gt; 0,\)</span> and by the triangle inequality we have that <span class="math notranslate nohighlight">\(B_\epsilon(x') \subseteq X \setminus \overline{B}_r(x),\)</span> so <span class="math notranslate nohighlight">\(X \setminus \overline{B}_r(x)\)</span> is open and <span class="math notranslate nohighlight">\(\overline{B}_r(x)\)</span> is closed.</p>
+</div>
+</details><p>Sometimes it’s handy to have the following shorthand when talking about open sets.</p>
+<div class="proof definition admonition" id="topology:def-open-neighbourhood">
+<p class="admonition-title"><span class="caption-number">Definition 78 </span> (Open neighbourhood)</p>
+<section class="definition-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> be a <a class="reference internal" href="#topology:def-metric-space">metric space</a>.
+If <span class="math notranslate nohighlight">\(x \in X,\)</span> an open neighbourhood of <span class="math notranslate nohighlight">\(x\)</span> is an open set <span class="math notranslate nohighlight">\(U \subseteq X\)</span> such that <span class="math notranslate nohighlight">\(x \in U.\)</span></p>
+</section>
+</div><p>We can re-express convergence of sequences in terms of this shorthand.</p>
+<div class="proof lemma admonition" id="topology:lemma-convergence-implies-sequence-eventually-in-open-neighbourhood">
+<p class="admonition-title"><span class="caption-number">Lemma 12 </span> (Convergence implies sequence eventually in open neighbourhood)</p>
+<section class="lemma-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> be a <a class="reference internal" href="#topology:def-metric-space">metric space</a> and <span class="math notranslate nohighlight">\((x_n)\)</span> be a sequence in <span class="math notranslate nohighlight">\(X\)</span> that converges to <span class="math notranslate nohighlight">\(x \in X.\)</span>
+Then, for every <a class="reference internal" href="#topology:def-open-neighbourhood">open neighbourhood</a> <span class="math notranslate nohighlight">\(U\)</span> of <span class="math notranslate nohighlight">\(x,\)</span> there exists <span class="math notranslate nohighlight">\(N \in \mathbb{N}\)</span> such that <span class="math notranslate nohighlight">\(x_n \in U\)</span> for all <span class="math notranslate nohighlight">\(n &gt; N.\)</span></p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Convergence implies sequence eventually in open neighbourhood<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> be a metric space and <span class="math notranslate nohighlight">\((x_n)\)</span> be a sequence in <span class="math notranslate nohighlight">\(X\)</span> that converges to <span class="math notranslate nohighlight">\(x \in X.\)</span>
+Let <span class="math notranslate nohighlight">\(U\)</span> be an open neighbourhood of <span class="math notranslate nohighlight">\(x.\)</span>
+Since <span class="math notranslate nohighlight">\(U\)</span> is open, there exists <span class="math notranslate nohighlight">\(r &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(B_r(x) \subseteq U.\)</span>
+Since <span class="math notranslate nohighlight">\(x_n \to x,\)</span> there exists <span class="math notranslate nohighlight">\(N \in \mathbb{N}\)</span> such that <span class="math notranslate nohighlight">\(d_X(x_n, x) &lt; r\)</span> for all <span class="math notranslate nohighlight">\(n &gt; N,\)</span> so <span class="math notranslate nohighlight">\(x_n \in B_r(x) \subseteq U\)</span> for all <span class="math notranslate nohighlight">\(n &gt; N.\)</span></p>
+</div>
+</details><p>Now we define limit points of sets.
+Intuitively, a limit point of a set is a point that is the limit of some sequence in the set.
+Note that a limit point of a set need not itself be in the set.</p>
+<div class="proof definition admonition" id="topology:def-limit-point">
+<p class="admonition-title"><span class="caption-number">Definition 79 </span> (Limit point)</p>
+<section class="definition-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> be a <a class="reference internal" href="#topology:def-metric-space">metric space</a> and <span class="math notranslate nohighlight">\(A \subseteq X.\)</span>
+A point <span class="math notranslate nohighlight">\(x \in X\)</span> is a limit point of <span class="math notranslate nohighlight">\(A\)</span> if there exists a sequence <span class="math notranslate nohighlight">\((x_n)\)</span> in <span class="math notranslate nohighlight">\(A\)</span> such that <span class="math notranslate nohighlight">\(x_n \to x.\)</span></p>
+</section>
+</div><p>Limit points allow an equivalent definition of closed sets, as stated in the following lemma.</p>
+<div class="proof lemma admonition" id="topology:lemma-closed-set-iff-set-contains-all-its-limit-points">
+<p class="admonition-title"><span class="caption-number">Lemma 13 </span> (Closed set <span class="math notranslate nohighlight">\(\iff\)</span> set contains all its limit points)</p>
+<section class="lemma-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> be a <a class="reference internal" href="#topology:def-metric-space">metric space</a> and <span class="math notranslate nohighlight">\(A \subseteq X.\)</span>
+The set <span class="math notranslate nohighlight">\(A\)</span> is <a class="reference internal" href="#topology:def-open-and-closed-subsets">closed</a> if and only if <span class="math notranslate nohighlight">\(A\)</span> contains all its <a class="reference internal" href="002-topological-spaces.html#topology:def-limit-point">limit points</a>.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Closed set <span class="math notranslate nohighlight">\(\iff\)</span> set contains all its limit points<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> be a metric space and <span class="math notranslate nohighlight">\(C \subseteq X.\)</span></p>
+<p class="sd-card-text">(<span class="math notranslate nohighlight">\(\Rightarrow\)</span>) Suppose <span class="math notranslate nohighlight">\(C\)</span> is closed.
+Let <span class="math notranslate nohighlight">\(x\)</span> be a limit point of <span class="math notranslate nohighlight">\(C,\)</span> and suppose that <span class="math notranslate nohighlight">\(x \notin C.\)</span>
+Then, <span class="math notranslate nohighlight">\(x \in X \setminus C,\)</span> which is open by the definition of a closed set.
+Since <span class="math notranslate nohighlight">\(x\)</span> is a limit point of <span class="math notranslate nohighlight">\(C,\)</span> there exists a sequence <span class="math notranslate nohighlight">\((x_n)\)</span> in <span class="math notranslate nohighlight">\(C\)</span> such that <span class="math notranslate nohighlight">\(x_n \to x.\)</span>
+But since <span class="math notranslate nohighlight">\(X \setminus C\)</span> is an open neighbourhood of <span class="math notranslate nohighlight">\(x,\)</span> there exists <span class="math notranslate nohighlight">\(N \in \mathbb{N}\)</span> such that <span class="math notranslate nohighlight">\(x_n \in X \setminus C\)</span> for all <span class="math notranslate nohighlight">\(n &gt; N,\)</span> which contradicts the assumption that <span class="math notranslate nohighlight">\(x \notin C.\)</span></p>
+<p class="sd-card-text">(<span class="math notranslate nohighlight">\(\Leftarrow\)</span>) Suppose <span class="math notranslate nohighlight">\(C\)</span> contains all its limit points.
+We want to show that <span class="math notranslate nohighlight">\(X \setminus C\)</span> is open.
+For this, suppose <span class="math notranslate nohighlight">\(x \in X \setminus C.\)</span>
+We will show that there exists <span class="math notranslate nohighlight">\(n \in \mathbb{N}\)</span> such that <span class="math notranslate nohighlight">\(B_{1 / n}(x) \subseteq X \setminus C.\)</span>
+Suppose that this is not the case.
+Then, for each <span class="math notranslate nohighlight">\(n \in \mathbb{N},\)</span> we have <span class="math notranslate nohighlight">\(B_{1 / n}(x) \cap C \neq \emptyset,\)</span> so we can choose <span class="math notranslate nohighlight">\(x_n \in B_{1 / n}(x) \cap C.\)</span>
+Then, <span class="math notranslate nohighlight">\(x_n \to x,\)</span> so <span class="math notranslate nohighlight">\(x\)</span> is a limit point of <span class="math notranslate nohighlight">\(C\)</span> and since <span class="math notranslate nohighlight">\(C\)</span> contains all its limit points, it must also contain <span class="math notranslate nohighlight">\(x,\)</span> which contradicts the assumption that <span class="math notranslate nohighlight">\(x \in X \setminus C.\)</span></p>
+</div>
+</details><p>Now we turn to the important result of the first part of the course.
+This result shows that the thing that determines whether a function is continuous is not the metric itself, but rather the collection of sets that are open under the metric.
+In particular, even if two metrics are different, if they define the same open sets, then the same functions will be continuous under both of them.</p>
+<div class="proof theorem admonition" id="topology:theorem-characterisation-of-continuity">
+<p class="admonition-title"><span class="caption-number">Theorem 90 </span> (Characterisation of continuity)</p>
+<section class="theorem-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> and <span class="math notranslate nohighlight">\((Y, d_Y)\)</span> be <a class="reference internal" href="#topology:def-metric-space">metric spaces</a> and <span class="math notranslate nohighlight">\(f: X \to Y\)</span> be a function.
+Then, the following are equivalent:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(f\)</span> is <a class="reference internal" href="#topology:def-continuous-function">continuous</a>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(f(x_n) \to f(x)\)</span> in <span class="math notranslate nohighlight">\(Y\)</span> whenever <span class="math notranslate nohighlight">\(x_n \to x\)</span> in <span class="math notranslate nohighlight">\(X,\)</span></p></li>
+<li><p>For every <a class="reference internal" href="#topology:def-open-and-closed-subsets">open set</a> <span class="math notranslate nohighlight">\(U \subseteq Y,\)</span> the preimage <span class="math notranslate nohighlight">\(f^{-1}(U)\)</span> is open in <span class="math notranslate nohighlight">\(X,\)</span></p></li>
+<li><p>For every <a class="reference internal" href="#topology:def-open-and-closed-subsets">closed set</a> <span class="math notranslate nohighlight">\(C \subseteq Y,\)</span> the preimage <span class="math notranslate nohighlight">\(f^{-1}(C)\)</span> is closed in <span class="math notranslate nohighlight">\(X,\)</span></p></li>
+<li><p>For every <span class="math notranslate nohighlight">\(x \in X\)</span> and <span class="math notranslate nohighlight">\(\epsilon &gt; 0,\)</span> there exists <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(f(B_\delta(x)) \subseteq B_\epsilon(f(x)).\)</span></p></li>
+</ol>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Characterisation of continuity<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">We break the proof down into a series of implications.</p>
+<p class="sd-card-text">(<span class="math notranslate nohighlight">\(1 \iff 2\)</span>) This is the definition of <a class="reference internal" href="#topology:def-continuous-function">continuity</a>.</p>
+<p class="sd-card-text">(<span class="math notranslate nohighlight">\(2 \Rightarrow 3\)</span>) Suppose <span class="math notranslate nohighlight">\(f(x_n) \to f(x)\)</span> in <span class="math notranslate nohighlight">\(Y\)</span> whenever <span class="math notranslate nohighlight">\(x_n \to x\)</span> in <span class="math notranslate nohighlight">\(X.\)</span>
+Suppose <span class="math notranslate nohighlight">\(U \subseteq Y\)</span> is open but <span class="math notranslate nohighlight">\(f^{-1}(U)\)</span> is not.
+Then, there exists <span class="math notranslate nohighlight">\(x \in f^{-1}(U)\)</span> such that for every <span class="math notranslate nohighlight">\(n \in \mathbb{N}\)</span> there exists <span class="math notranslate nohighlight">\(x_n \in B_{1 / n}(x)\)</span> such that <span class="math notranslate nohighlight">\(x_n \notin f^{-1}(U).\)</span>
+This implies that <span class="math notranslate nohighlight">\(f(x_n) \notin U\)</span> for any <span class="math notranslate nohighlight">\(n \in \mathbb{N}.\)</span>
+However, <span class="math notranslate nohighlight">\(x_n \to x\)</span> in <span class="math notranslate nohighlight">\(X,\)</span> so <span class="math notranslate nohighlight">\(f(x_n) \to f(x)\)</span> in <span class="math notranslate nohighlight">\(Y.\)</span>
+This is a contradiction because since <span class="math notranslate nohighlight">\(U\)</span> is open, any sequence that converges to a point in <span class="math notranslate nohighlight">\(U\)</span> must <a class="reference internal" href="#topology:lemma-convergence-implies-sequence-eventually-in-open-neighbourhood">eventually be</a> in <span class="math notranslate nohighlight">\(U\)</span>.</p>
+<p class="sd-card-text">(<span class="math notranslate nohighlight">\(3 \Rightarrow 4\)</span>) Suppose that for every open set <span class="math notranslate nohighlight">\(U \subseteq Y,\)</span> the preimage <span class="math notranslate nohighlight">\(f^{-1}(U)\)</span> is open in <span class="math notranslate nohighlight">\(X.\)</span>
+Then, for every closed set <span class="math notranslate nohighlight">\(C \subseteq Y,\)</span> the set <span class="math notranslate nohighlight">\(Y \setminus C\)</span> is open so the set <span class="math notranslate nohighlight">\(f^{-1}(Y \setminus C)\)</span> is open, so the preimage <span class="math notranslate nohighlight">\(f^{-1}(C) = X \setminus f^{-1}(Y \setminus C)\)</span> is closed in <span class="math notranslate nohighlight">\(X.\)</span></p>
+<p class="sd-card-text">(<span class="math notranslate nohighlight">\(4 \Rightarrow 5\)</span>) Suppose that for every closed set <span class="math notranslate nohighlight">\(C \subseteq Y,\)</span> the preimage <span class="math notranslate nohighlight">\(f^{-1}(C)\)</span> is closed in <span class="math notranslate nohighlight">\(X.\)</span>
+Let <span class="math notranslate nohighlight">\(x \in X\)</span> and <span class="math notranslate nohighlight">\(\epsilon &gt; 0.\)</span>
+Since <span class="math notranslate nohighlight">\(Y \setminus B_\epsilon(f(x))\)</span> is closed, <span class="math notranslate nohighlight">\(f^{-1}(Y \setminus B_\epsilon(f(x))) = X \setminus f^{-1}(B_\epsilon(f(x)))\)</span> is closed.
+Therefore, the set <span class="math notranslate nohighlight">\(f^{-1}(B_\epsilon(f(x)))\)</span> is open, so there exists <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(B_\delta(x) \subseteq f^{-1}(B_\epsilon(f(x))),\)</span> which implies that <span class="math notranslate nohighlight">\(f(B_\delta(x)) \subseteq B_\epsilon(f(x)).\)</span></p>
+<p class="sd-card-text">(<span class="math notranslate nohighlight">\(5 \Rightarrow 2\)</span>) Suppose that for every <span class="math notranslate nohighlight">\(x \in X\)</span> and <span class="math notranslate nohighlight">\(\epsilon &gt; 0,\)</span> there exists <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(f(B_\delta(x)) \subseteq B_\epsilon(f(x)).\)</span>
+Suppose <span class="math notranslate nohighlight">\((x_n)\)</span> is a sequence in <span class="math notranslate nohighlight">\(X\)</span> such that <span class="math notranslate nohighlight">\(x_n \to x.\)</span>
+Let <span class="math notranslate nohighlight">\(\epsilon &gt; 0.\)</span>
+Then, there exists <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(f(B_\delta(x)) \subseteq B_\epsilon(f(x)).\)</span>
+Since <span class="math notranslate nohighlight">\(x_n \to x,\)</span> there exists <span class="math notranslate nohighlight">\(N \in \mathbb{N}\)</span> such that <span class="math notranslate nohighlight">\(x_n \in B_\delta(x)\)</span> for all <span class="math notranslate nohighlight">\(n &gt; N,\)</span> so <span class="math notranslate nohighlight">\(f(x_n) \in f(B_\delta(x)) \subseteq B_\epsilon(f(x))\)</span> for all <span class="math notranslate nohighlight">\(n &gt; N,\)</span> which implies that <span class="math notranslate nohighlight">\(f(x_n) \to f(x).\)</span></p>
+</div>
+</details><p>We conclude with three properties of open sets that we will use to define toplogies in the next section.</p>
+<div class="proof lemma admonition" id="topology:lemma-properties-of-open-sets">
+<p class="admonition-title"><span class="caption-number">Lemma 14 </span> (Properties of open sets)</p>
+<section class="lemma-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> be a <a class="reference internal" href="#topology:def-metric-space">metric space</a>.
+Then</p>
+<ol class="arabic simple">
+<li><p>The empty set <span class="math notranslate nohighlight">\(\emptyset\)</span> and <span class="math notranslate nohighlight">\(X\)</span> are open,</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\{U_i\}_{i \in I}\)</span> is a collection of open sets, then <span class="math notranslate nohighlight">\(\bigcup{i \in I} U_i\)</span> is open,</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(U_1, \ldots, U_N\)</span> are open sets, then <span class="math notranslate nohighlight">\(\bigcap{n = 1}^N U_n\)</span> is open.</p></li>
+</ol>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Properties of open sets<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><strong>Property 1:</strong>
+The empty set is open vacuously.
+The whole space <span class="math notranslate nohighlight">\(X\)</span> is open because for every <span class="math notranslate nohighlight">\(x \in X,\)</span> we have <span class="math notranslate nohighlight">\(B_r(x) \subseteq X,\)</span> for any <span class="math notranslate nohighlight">\(r &gt; 0.\)</span></p>
+<p class="sd-card-text"><strong>Property 2:</strong>
+Let <span class="math notranslate nohighlight">\(\{U_i\}_{i \in I}\)</span> be a collection of open sets.
+Suppose <span class="math notranslate nohighlight">\(x \in \cup_{i \in I} U_i.\)</span>
+Then, there exists <span class="math notranslate nohighlight">\(i \in I\)</span> such that <span class="math notranslate nohighlight">\(x \in U_i,\)</span> so there exists <span class="math notranslate nohighlight">\(r &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(B_r(x) \subseteq U_i \subseteq \bigcup_{i \in I} U_i,\)</span> so <span class="math notranslate nohighlight">\(\bigcup_{i \in I} U_i\)</span> is open.</p>
+<p class="sd-card-text"><strong>Property 3:</strong>
+Let <span class="math notranslate nohighlight">\(U_1, \ldots, U_N\)</span> be open sets.
+Suppose <span class="math notranslate nohighlight">\(x \in \cap_{n = 1}^N U_n.\)</span>
+Then, <span class="math notranslate nohighlight">\(x \in U_n\)</span> for all <span class="math notranslate nohighlight">\(n = 1, \ldots, N,\)</span> so there exists <span class="math notranslate nohighlight">\(r_n &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(B_{r_n}(x) \subseteq U_n\)</span> for all <span class="math notranslate nohighlight">\(n = 1, \ldots, N.\)</span>
+Taking <span class="math notranslate nohighlight">\(r = \min\{r_1, \ldots, r_N\},\)</span> we have that <span class="math notranslate nohighlight">\(B_r(x) \subseteq U_n\)</span> for all <span class="math notranslate nohighlight">\(n = 1, \ldots, N,\)</span> so <span class="math notranslate nohighlight">\(\cap_{n = 1}^N U_n\)</span> is open.</p>
+</div>
+</details></section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -610,11 +952,11 @@ Using the <span class="xref std std-ref">properties of norms</span>, for any <sp
       </div>
     </a>
     <a class="right-next"
-       href="../papers/intro.html"
+       href="002-topological-spaces.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Stream of papers</p>
+        <p class="prev-next-title">Topological Spaces</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -636,6 +978,8 @@ Using the <span class="xref std std-ref">properties of norms</span>, for any <sp
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Metric spaces</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#norms">Norms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inner-products">Inner products</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#open-and-closed-sets">Open and closed sets</a></li>
 </ul>
   </nav></div>
 
