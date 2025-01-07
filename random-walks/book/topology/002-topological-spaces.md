@@ -141,3 +141,223 @@ Similarly, since $x_n \to x',$ there exists $N' \in \mathbb{N}$ such that $x_n \
 Then, for all $n > \max(N, N'),$ we have $x_n \in U \cap U' = \emptyset,$ which is a contradiction.
 Therefore, $x = x'.$
 :::
+
+
+We now revisit closed sets and limit points, this time in topological spaces.
+
+:::{prf:definition} Closed set
+:label: topology:def-closed-set-topology
+A set $C \subseteq X$ in a {prf:ref}`topological space<topology:def-topological-space>` $(X, \mathcal{U})$ is closed if its complement $X \setminus C$ is open.
+:::
+
+
+We now prove some properties of closed sets.
+
+:::{prf:lemma} Properties of closed sets
+:label: topology:lemma-properties-of-closed-sets
+Let $(X, \mathcal{U})$ be a {prf:ref}`topological space<topology:def-topological-space>`.
+Then,
+
+1. $\emptyset$ and $X$ are {prf:ref}`closed<topology:def-closed-set-topology>`,
+2. If $C_1, \dots, C_n$ are closed, then $\bigcup_{i=1}^n C_i$ is closed,
+3. If $\{C_i\}_{i \in I}$ are closed, then $\bigcap_{i \in I} C_i$ is closed.
+:::
+
+:::{dropdown} Proof: Properties of closed sets
+__Property 1:__
+Since $\emptyset$ is open, its complement $X$ is closed.
+Similarly, since $X$ is open, its complement $\emptyset$ is closed.
+
+__Property 2:__
+If $C_1, \dots, C_n$ are closed, then their complements $X \setminus C_1, \dots, X \setminus C_n$ are open.
+Therefore, $\bigcup_{i = 1}^n (X \setminus C_i) = X \setminus \bigcap_{i = 1}^n C_i$ is open, so $\bigcap_{i = 1}^n C_i$ is closed.
+
+__Property 3:__
+If ${C_i}_{i \in I}$ are closed, then their complements ${X \setminus C_i}_{i \in I}$ are open.
+Therefore, $\bigcap_{i \in I} (X \setminus C_i) = X \setminus \bigcup_{i \in I} C_i$ is open, so $\bigcup_{i \in I} C_i$ is closed.
+:::
+
+Note the similarity of the properties above to the defining properties of {prf:ref}`open sets<topology:def-topological-space>`.
+In fact, we could have defined topologies in terms of closed sets rather than open sets.
+
+
+:::{prf:lemma} Singleton set in Hausdorff space is closed
+:label: topology:lemma-singleton-set-closed-hausdorff
+If $X$ is {prf:ref}`Hausdorff<topology:def-hausdorff-space>` and $x \in X,$ then $\{x\}$ is closed.
+:::
+
+:::{dropdown} Proof: Singleton set in Hausdorff space is closed
+__Proof 1:__
+Let $X$ be Hausdorff and $x \in X.$
+We want to show that $\{x\}$ is closed, which we can do by showing that $\{x\}$ is an intersection of closed sets.
+Let $x' \in X \setminus \{x\}.$
+Since $X$ is Hausdorff, there exist open neighbourhoods $U_x, U_{x'}$ of $x, x'$ respectively such that $U_x \cap U_{x'} = \emptyset.$
+Then, $X \setminus U_{x'}$ is closed, and $\{x\} = X \setminus U_{x'}.$
+Finally, we have $\{x\} = \bigcap_{x' \in X \setminus \{x\}} (X \setminus U_{x'}),$ so $\{x\}$ is closed.
+
+
+__Proof 2:__
+Let $X$ be Hausdorff and $x \in X.$
+We want to show that $X \setminus \{x\}$ is open.
+Let $x' \in X \setminus \{x\}.$
+Then $x \neq x'.$
+Since $X$ is Hausdorff and $x \neq x',$ there exist open neighbourhoods $U, U'$ of $x, x'$ respectively such that $U \cap U' = \emptyset.$
+Then, $U' \subseteq X \setminus \{x\},$ so $X \setminus \{x\}$ is open.
+:::
+
+
+:::{prf:definition} Closure
+:label: topology:def-closure
+Let $A \subseteq X$ be a subset of a {prf:ref}`topological space<topology:def-topological-space>` $(X, \mathcal{U})$.
+Define
+
+$$\mathcal{C}_A = \{C \subseteq X \mid A \subseteq C \text{ and } C \text{ is closed}\}.$$
+
+Then, the closure of $A,$ written $\overline{A},$ is defned as
+
+$$\overline{A} = \bigcap_{C \in \mathcal{C}_A} C.$$
+:::
+
+
+:::{prf:lemma} Closure of a set is the smallest closed set containing it
+:label: topology:lemma-closure-closed-set
+Given a set $A \subseteq X$ in a {prf:ref}`topological space<topology:def-topological-space>` $(X, \mathcal{U}),$ its closure $\overline{A}$ is the smallest closed set containing $A.$
+:::
+
+:::{dropdown} Proof: Closure of a set is the smallest closed set containing it
+Let $A \subseteq X$ be a subset of a topological space $(X, \mathcal{U}).$
+We want to show that $\overline{A}$ is the smallest closed set containing $A.$
+First, $\overline{A}$ is an intersection of closed sets containing $A,$ so it contains $A$ and {prf:ref}`it is closed<topology:lemma-properties-of-closed-sets>`.
+Let $C$ be a closed set containing $A.$
+Then $C \in \mathcal{C}_A,$ so $\overline{A} \subseteq C.$
+We conclude, $\overline{A}$ is the smallest closed set containing $A.$
+:::
+
+
+:::{margin}
+The standard definition of limit point given here requires that the open neighbourhood includes a point different from the limit point itself.
+This is the standard definition of limit points, see e.g. {cite}`munkrestopology`.
+Dexter Chua's [notes](https://dec41.user.srcf.net/notes/IB_E/metric_and_topological_spaces.pdf#page=19.72) for the Cambridge course on Metric and Topological Spaces, which I have been following, use a different definition of limit points, namely: a point in $X$ is a limit point of $A,$ if there exists a sequence $(x_n)$ in $A$ such that $x_n \to x.$
+Under this definition, all elements of $A$ are limit points of $A,$ which does not match the standard defintion.
+I have chosen to follow the standard definition, ammending the results provided in the notes as needed.
+:::
+:::{prf:definition} Limit point
+:label: topology:def-limit-point
+Let $A \subseteq X$ be a subset of a {prf:ref}`topological space<topology:def-topological-space>` $(X, \mathcal{U}).$
+Then $x \in X$ is a limit point of $A$ if every open neighbourhood of $x$ contains a point of $A$ different from $x.$
+:::
+
+
+:::{prf:lemma} Set is closed if and only if it contains its limit points
+:label: topology:lemma-closed-set-iff-it-contains-its-limit-points
+Given a set $A \subseteq X$ in a {prf:ref}`topological space<topology:def-topological-space>` $(X, \mathcal{U}),$ the set $A$ is {prf:ref}`closed<topology:def-closed-set-topology>` if and only if $A$ contains all its {prf:ref}`limit points<topology:def-limit-point>`.
+:::
+
+:::{dropdown} Proof: Set is closed if and only if it contains its limit points
+First, suppose $A$ is closed.
+We will show it contains all its limit points.
+Let $x$ be a limit point of $A.$
+Suppose $x \notin A.$
+Since $A$ is closed, $X \setminus A$ is open, so there exists an open neighbourhood $U$ of $x$ such that $U \cap A = \emptyset.$
+However, since $x$ is a limit point of $A,$ every open neighbourhood of $x$ contains a point of $A$ different from $x,$ which contradicts $U \cap A = \emptyset.$
+
+Next, suppose $A$ contains all its limit points.
+We will show it is closed.
+Suppose $x \in X \setminus A.$
+This means $x$ is not a limit point of $A,$ so there exists an open neighbourhood $U$ of $x$ such that $U \cap A$ contains no points other than, possibly, $x.$
+Therefore, $U \subseteq X \setminus A,$ so $X \setminus A$ is open, and $A$ is closed.
+:::
+
+
+:::{prf:definition} Dense subset
+:label: topology:def-dense-subset
+A subset $A \subseteq X$ of a {prf:ref}`topological space<topology:def-topological-space>` $(X, \mathcal{U})$ is dense in $X$ if $\overline{A} = X.$
+:::
+
+
+:::{prf:definition} Interior
+:label: topology:def-interior
+Let $A \subseteq X$ be a subset of a {prf:ref}`topological space<topology:def-topological-space>` $(X, \mathcal{U}).$
+Define
+
+$$\mathcal{O}_A = \{U \subseteq X \mid U \subseteq A \text{ and } U \text{ is open}\}.$$
+
+Then, the interior of $A,$ written $\text{Int}(A),$ is defined as
+
+$$\text{Int}(A) = \bigcup_{U \in \mathcal{O}_A} U.$$
+:::
+
+
+:::{prf:lemma} Interior of a set is the largest open set contained in it
+:label: topology:lemma-interior-open-set
+Given a set $A \subseteq X$ in a {prf:ref}`topological space<topology:def-topological-space>` $(X, \mathcal{U}),$ its {prf:ref}`interior<topology:def-interior>` $\text{Int}(A)$ is the largest open set contained in $A.$
+:::
+
+:::{dropdown} Proof: Interior of a set is the largest open set contained in it
+Let $A \subseteq X$ be a subset of a topological space $(X, \mathcal{U}).$
+Then, since $\text{Int}(A)$ is a union of open sets contained in $A,$ it is open and contained in $A.$
+Suppose $U$ is an open set contained in $A.$
+Then $U \in \mathcal{O}_A,$ so $U \subseteq \text{Int}(A).$
+Therefore, $\text{Int}(A)$ is the largest open set contained in $A.$
+:::
+
+
+:::{prf:lemma} Complement of interior is closure of complement
+:label: topology:def-complement-interior-closure-complement
+Given a set $A \subseteq X$ in a {prf:ref}`topological space<topology:def-topological-space>` $(X, \mathcal{U}),$ we have
+
+$$X \setminus \text{Int}(A) = \overline{X \setminus A}.$$
+:::
+
+:::{dropdown} Proof: Complement of interior is closure of complement
+Let $A \subseteq X$ be a subset of a topological space $(X, \mathcal{U}).$
+We have that
+
+$$X \setminus \text{Int}(A) = X \setminus \bigcup_{U \in \mathcal{O}_A} U = \bigcap_{U \in \mathcal{O}_A} (X \setminus U) = \bigcap_{C \in \mathcal{C}_{X \setminus A}} C = \overline{X \setminus A}.$$
+:::
+
+
+### New topologies from old
+
+Now we look into how existing topological spaces can be used to define new ones.
+First, we define the subspace topology.
+
+:::{prf:definition} Subspace topology
+:label: topology:def-subspace-topology
+Let $(X, \mathcal{U})$ be a {prf:ref}`topological space<topology:def-topological-space>`, and let $Y \subseteq X$ be a subset.
+Then, the subspace topology on $Y$ is the collection of subsets of $Y$ given by: $V$ is an open set in $Y$ if there exists an open set $U \in \mathcal{U}$ such that $V = U \cap Y.$
+:::
+
+
+:::{prf:lemma} Subspace topology is a topology
+:label: topology:lemma-subspace-topology
+The subspace topology on a subset $Y \subseteq X$ of a {prf:ref}`topological space<topology:def-topological-space>` $(X, \mathcal{U})$ is a {prf:ref}`topology<topology:def-topological-space>`.
+:::
+
+:::{dropdown} Proof: Subspace topology is a topology
+Let $(X, \mathcal{U})$ be a topological space, and let $Y \subseteq X$ be a subset.
+We want to show that the subspace topology on $Y$ is a topology.
+Let $\mathcal{U}_Y$ be the subspace topology on $Y.$
+We show each of the {prf:ref}`properties of a topology<topology:def-topological-space>` are satisfied by the subspace topology.
+
+First, $\emptyset = \emptyset \cap Y$ and $Y = X \cap Y,$ so $\emptyset, Y \in \mathcal{U}_Y.$
+Second, suppose $V_\alpha \in \mathcal{U}_Y$ for all $\alpha \in A.$
+Then, there exist open sets $U_\alpha \in \mathcal{U}$ such that $V_\alpha = U_\alpha \cap Y.$
+Then
+
+$$\bigcup_{\alpha \in I} V_\alpha = \bigcup_{\alpha \in I} (U_\alpha \cap Y) = (\bigcup_{\alpha \in I} U_\alpha) \cap Y \in \mathcal{U}_Y.$$
+
+Finally, suppose $V_1, \dots, V_n \in \mathcal{U}_Y.$
+Then, there exist open sets $U_1, \dots, U_n \in \mathcal{U}$ such that $V_i = U_i \cap Y.$
+Then
+
+$$\bigcap_{i=1}^n V_i = \bigcap_{i=1}^n (U_i \cap Y) = (\bigcap_{i=1}^n U_i) \cap Y \in \mathcal{U}_Y.$$
+
+Putting these three parts together, we conclude that the subspace topology on $Y$ is a topology.
+:::
+
+
+:::{bibliography}
+:filter: docname in docnames
+
+:::
