@@ -430,6 +430,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topologies">Topologies</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sequences">Sequences</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#new-topologies-from-old">New topologies from old</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#product-topology">Product topology</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quotient-topology">Quotient topology</a></li>
 </ul>
 </li>
 </ul>
@@ -804,7 +806,91 @@ Then</p>
 \[\bigcap_{i=1}^n V_i = \bigcap_{i=1}^n (U_i \cap Y) = (\bigcap_{i=1}^n U_i) \cap Y \in \mathcal{U}_Y.\]</div>
 <p class="sd-card-text">Putting these three parts together, we conclude that the subspace topology on <span class="math notranslate nohighlight">\(Y\)</span> is a topology.</p>
 </div>
-</details><div class="docutils container" id="id2">
+</details><div class="proof definition admonition" id="topology:def-inclusion-function">
+<p class="admonition-title"><span class="caption-number">Definition 93 </span> (Inclusion function)</p>
+<section class="definition-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(Y \subseteq X\)</span> be a subset of a <a class="reference internal" href="#topology:def-topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span>.
+Then, the inclusion function <span class="math notranslate nohighlight">\(\iota: Y \to X\)</span> is the function defined by <span class="math notranslate nohighlight">\(\iota(y) = y\)</span> for all <span class="math notranslate nohighlight">\(y \in Y.\)</span></p>
+</section>
+</div><div class="proof lemma admonition" id="topology:lemma-condition-for-continuity-subspace-topology">
+<p class="admonition-title"><span class="caption-number">Lemma 25 </span> (Condition for continuity in subspace topology)</p>
+<section class="lemma-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(Y \subseteq X\)</span> be a subset of a <a class="reference internal" href="#topology:def-topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span>.
+Then, a function <span class="math notranslate nohighlight">\(f: Z \to Y\)</span> is continuous if and only if the composition of <span class="math notranslate nohighlight">\(f\)</span> with the <a class="reference internal" href="#topology:def-inclusion-function">inclusion function</a> <span class="math notranslate nohighlight">\(\iota: Y \to X,\)</span> is also continuous.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Condition for continuity in subspace topology<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(Y \subseteq X\)</span> be a subset of a topological space <span class="math notranslate nohighlight">\((X, \mathcal{U}).\)</span>
+Let <span class="math notranslate nohighlight">\(f: Y \to Z\)</span> be a function and <span class="math notranslate nohighlight">\(\iota: Y \to X\)</span> be the inclusion function.</p>
+<p class="sd-card-text">To show the first part, suppose <span class="math notranslate nohighlight">\(f\)</span> is continuous.
+Note that the inclusion function <span class="math notranslate nohighlight">\(\iota\)</span> is continuous, and this follows directly from the <a class="reference internal" href="#topology:def-subspace-topology">definition of the subspace topology</a>.
+In particular, if <span class="math notranslate nohighlight">\(U\)</span> is open in <span class="math notranslate nohighlight">\(X,\)</span> then <span class="math notranslate nohighlight">\(U \cap Y\)</span> is open in the subspace topology on <span class="math notranslate nohighlight">\(Y,\)</span> and since <span class="math notranslate nohighlight">\(\iota^{-1}(U) = U \cap Y,\)</span> it follows that <span class="math notranslate nohighlight">\(\iota\)</span> is continuous.
+Since <span class="math notranslate nohighlight">\(f\)</span> is continuous, the composition <span class="math notranslate nohighlight">\(f \circ \iota: Y \to Z\)</span> is continuous.</p>
+<p class="sd-card-text">Conversely, suppose <span class="math notranslate nohighlight">\(\iota \circ f\)</span> is continuous and let <span class="math notranslate nohighlight">\(U \subseteq X\)</span> be open in <span class="math notranslate nohighlight">\(X.\)</span>
+Note that <span class="math notranslate nohighlight">\(\iota^{-1}(U) = U \cap Y\)</span> which is open in the subspace topology on <span class="math notranslate nohighlight">\(Y.\)</span>
+Because <span class="math notranslate nohighlight">\(\iota \circ f\)</span> is continuous, it follows that <span class="math notranslate nohighlight">\((\iota \circ f)^{-1}(U) = f^{-1}(U \cap Y)\)</span> is open in <span class="math notranslate nohighlight">\(Z.\)</span>
+Therefore, since any open set in the subspace topology on <span class="math notranslate nohighlight">\(Y\)</span> is of the form <span class="math notranslate nohighlight">\(U \cap Y\)</span> for some open set <span class="math notranslate nohighlight">\(U\)</span> in <span class="math notranslate nohighlight">\(X,\)</span> it follows that <span class="math notranslate nohighlight">\(f\)</span> is continuous.</p>
+</div>
+</details></section>
+<section id="product-topology">
+<h3>Product topology<a class="headerlink" href="#product-topology" title="Link to this heading">#</a></h3>
+<p>Now we turn to defining product topologies.
+Before doing so, we define products of sets and projection functions.
+These may be familiar from other contexts, and are included for completeness.</p>
+<div class="proof definition admonition" id="topology:def-cartesian-product">
+<p class="admonition-title"><span class="caption-number">Definition 94 </span> (Product of sets)</p>
+<section class="definition-content" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are sets, then the product <span class="math notranslate nohighlight">\(X \times Y\)</span> is the set of all ordered pairs <span class="math notranslate nohighlight">\((x, y)\)</span> with <span class="math notranslate nohighlight">\(x \in X\)</span> and <span class="math notranslate nohighlight">\(y \in Y,\)</span> that is</p>
+<div class="math notranslate nohighlight">
+\[X \times Y = \{(x, y) \mid x \in X, y \in Y\}.\]</div>
+</section>
+</div><div class="proof definition admonition" id="topology:def-projection-function">
+<p class="admonition-title"><span class="caption-number">Definition 95 </span> (Projection function)</p>
+<section class="definition-content" id="proof-content">
+<p>Given sets <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y,\)</span> the projection functions <span class="math notranslate nohighlight">\(\pi_1 : X \times Y \to X\)</span> and <span class="math notranslate nohighlight">\(\pi_2 : X \times Y \to Y\)</span> are defined by</p>
+<div class="math notranslate nohighlight">
+\[\pi_1(x, y) = x \quad \text{and} \quad \pi_2(x, y) = y.\]</div>
+</section>
+</div><p>Now we are ready to define the product topology.</p>
+<div class="proof definition admonition" id="topology:def-product-topology">
+<p class="admonition-title"><span class="caption-number">Definition 96 </span> (Product topology)</p>
+<section class="definition-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span> and <span class="math notranslate nohighlight">\((Y, \mathcal{V})\)</span> be <a class="reference internal" href="#topology:def-topological-space">topological spaces</a>.
+Then, the product topology on <span class="math notranslate nohighlight">\(X \times Y\)</span> is the collection of subsets of <span class="math notranslate nohighlight">\(X \times Y\)</span> given by: <span class="math notranslate nohighlight">\(U\)</span> is open in <span class="math notranslate nohighlight">\(X \times Y\)</span> if for every <span class="math notranslate nohighlight">\((x, y) \in U,\)</span> there exist open sets <span class="math notranslate nohighlight">\(U_x \in \mathcal{U}\)</span> and <span class="math notranslate nohighlight">\(U_y \in \mathcal{V}\)</span> such that <span class="math notranslate nohighlight">\(x \in U_x,\)</span> <span class="math notranslate nohighlight">\(y \in U_y,\)</span> and <span class="math notranslate nohighlight">\(U_x \times U_y \subseteq U.\)</span></p>
+</section>
+</div><p>The product topology can therefore be thought as a collection in which each open set is a union of products of open sets that is contained in the set.
+In particular, <span class="math notranslate nohighlight">\(U\)</span> is open in <span class="math notranslate nohighlight">\(X \times Y\)</span> then</p>
+<div class="math notranslate nohighlight">
+\[U = \bigcup_{(x, y) \in U} U_x \times U_y,\]</div>
+<p>where <span class="math notranslate nohighlight">\(U_x \times U_y \subseteq U\)</span> for all <span class="math notranslate nohighlight">\((x, y) \in U.\)</span>
+Conversely, if <span class="math notranslate nohighlight">\(U\)</span> can be expressed in the form of the union above, it is open.
+In this sense, we can think of the sets over which we are taking the unions as a basis that generates the topology.</p>
+</section>
+<section id="quotient-topology">
+<h3>Quotient topology<a class="headerlink" href="#quotient-topology" title="Link to this heading">#</a></h3>
+<p>Finally, we define the quotient topology.
+First, we define quotients and projections onto equivalence classes for completeness.</p>
+<div class="proof remark admonition" id="topology:def-quotient">
+<p class="admonition-title"><span class="caption-number">Remark 1 </span> (Equivalence classes and quotient)</p>
+<section class="remark-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> be a set and <span class="math notranslate nohighlight">\(\sim\)</span> be an equivalence relation on <span class="math notranslate nohighlight">\(X.\)</span>
+Then, the quotient of <span class="math notranslate nohighlight">\(X / \sim\)</span> is the set of equivalence classes of <span class="math notranslate nohighlight">\(\sim.\)</span>
+The projection <span class="math notranslate nohighlight">\(\pi: X \to X / \sim\)</span> is defined by <span class="math notranslate nohighlight">\(\pi(x) = [x],\)</span> where <span class="math notranslate nohighlight">\([x]\)</span> is the equivalence class of <span class="math notranslate nohighlight">\(x \in X.\)</span></p>
+</section>
+</div><p>Now we define the quotient topology.
+The quotient topology can be thought of as a topology on the shape that results when we identify, i.e. glue together, a subset of its points.</p>
+<div class="proof definition admonition" id="topology:def-quotient-topology">
+<p class="admonition-title"><span class="caption-number">Definition 97 </span> (Quotient topology)</p>
+<section class="definition-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span> be a <a class="reference internal" href="#topology:def-topological-space">topological space</a>, and let <span class="math notranslate nohighlight">\(\sim\)</span> be an equivalence relation on <span class="math notranslate nohighlight">\(X.\)</span>
+The quotient topology on <span class="math notranslate nohighlight">\(X / \sim\)</span> is the set of all subsets <span class="math notranslate nohighlight">\(U \subseteq X / \sim\)</span> such that <span class="math notranslate nohighlight">\(\pi^{-1}(U)\)</span> is open in <span class="math notranslate nohighlight">\(X.\)</span></p>
+</section>
+</div><div class="docutils container" id="id2">
 <div role="list" class="citation-list">
 <div class="citation" id="id26" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">Mun14</a><span class="fn-bracket">]</span></span>
@@ -883,6 +969,8 @@ Then</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topologies">Topologies</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sequences">Sequences</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#new-topologies-from-old">New topologies from old</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#product-topology">Product topology</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quotient-topology">Quotient topology</a></li>
 </ul>
 </li>
 </ul>
