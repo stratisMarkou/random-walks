@@ -428,8 +428,9 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topologies">Topologies</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sequences">Sequences</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#new-topologies-from-old">New topologies from old</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sequences">Sequences</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#closure-interior-and-limit-points">Closure, interior and limit points</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new-topologies-from-old">New topologies from old</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#product-topology">Product topology</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quotient-topology">Quotient topology</a></li>
 </ul>
@@ -646,7 +647,10 @@ Then <span class="math notranslate nohighlight">\(x \neq x'.\)</span>
 Since <span class="math notranslate nohighlight">\(X\)</span> is Hausdorff and <span class="math notranslate nohighlight">\(x \neq x',\)</span> there exist open neighbourhoods <span class="math notranslate nohighlight">\(U, U'\)</span> of <span class="math notranslate nohighlight">\(x, x'\)</span> respectively such that <span class="math notranslate nohighlight">\(U \cap U' = \emptyset.\)</span>
 Then, <span class="math notranslate nohighlight">\(U' \subseteq X \setminus \{x\},\)</span> so <span class="math notranslate nohighlight">\(X \setminus \{x\}\)</span> is open.</p>
 </div>
-</details><div class="proof definition admonition" id="topology:def-closure">
+</details></section>
+<section id="closure-interior-and-limit-points">
+<h2>Closure, interior and limit points<a class="headerlink" href="#closure-interior-and-limit-points" title="Link to this heading">#</a></h2>
+<div class="proof definition admonition" id="topology:def-closure">
 <p class="admonition-title"><span class="caption-number">Definition 88 </span> (Closure)</p>
 <section class="definition-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(A \subseteq X\)</span> be a subset of a <a class="reference internal" href="#topology:def-topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span>.
@@ -767,8 +771,9 @@ We have that</p>
 <div class="math notranslate nohighlight">
 \[X \setminus \text{Int}(A) = X \setminus \bigcup_{U \in \mathcal{O}_A} U = \bigcap_{U \in \mathcal{O}_A} (X \setminus U) = \bigcap_{C \in \mathcal{C}_{X \setminus A}} C = \overline{X \setminus A}.\]</div>
 </div>
-</details><section id="new-topologies-from-old">
-<h3>New topologies from old<a class="headerlink" href="#new-topologies-from-old" title="Link to this heading">#</a></h3>
+</details></section>
+<section id="new-topologies-from-old">
+<h2>New topologies from old<a class="headerlink" href="#new-topologies-from-old" title="Link to this heading">#</a></h2>
 <p>Now we look into how existing topological spaces can be used to define new ones.
 First, we define the subspace topology.</p>
 <div class="proof definition admonition" id="topology:def-subspace-topology">
@@ -836,8 +841,7 @@ Note that <span class="math notranslate nohighlight">\(\iota^{-1}(U) = U \cap Y\
 Because <span class="math notranslate nohighlight">\(\iota \circ f\)</span> is continuous, it follows that <span class="math notranslate nohighlight">\((\iota \circ f)^{-1}(U) = f^{-1}(U \cap Y)\)</span> is open in <span class="math notranslate nohighlight">\(Z.\)</span>
 Therefore, since any open set in the subspace topology on <span class="math notranslate nohighlight">\(Y\)</span> is of the form <span class="math notranslate nohighlight">\(U \cap Y\)</span> for some open set <span class="math notranslate nohighlight">\(U\)</span> in <span class="math notranslate nohighlight">\(X,\)</span> it follows that <span class="math notranslate nohighlight">\(f\)</span> is continuous.</p>
 </div>
-</details></section>
-<section id="product-topology">
+</details><section id="product-topology">
 <h3>Product topology<a class="headerlink" href="#product-topology" title="Link to this heading">#</a></h3>
 <p>Now we turn to defining product topologies.
 Before doing so, we define products of sets and projection functions.
@@ -967,8 +971,9 @@ The quotient topology on <span class="math notranslate nohighlight">\(X / \sim\)
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topologies">Topologies</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sequences">Sequences</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#new-topologies-from-old">New topologies from old</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sequences">Sequences</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#closure-interior-and-limit-points">Closure, interior and limit points</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new-topologies-from-old">New topologies from old</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#product-topology">Product topology</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quotient-topology">Quotient topology</a></li>
 </ul>
