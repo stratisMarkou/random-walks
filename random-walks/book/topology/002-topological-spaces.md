@@ -206,6 +206,8 @@ Then, $U' \subseteq X \setminus \{x\},$ so $X \setminus \{x\}$ is open.
 :::
 
 
+## Closure, interior and limit points
+
 :::{prf:definition} Closure
 :label: topology:def-closure
 Let $A \subseteq X$ be a subset of a {prf:ref}`topological space<topology:def-topological-space>` $(X, \mathcal{U})$.
@@ -317,7 +319,7 @@ $$X \setminus \text{Int}(A) = X \setminus \bigcup_{U \in \mathcal{O}_A} U = \big
 :::
 
 
-### New topologies from old
+## New topologies from old
 
 Now we look into how existing topological spaces can be used to define new ones.
 First, we define the subspace topology.
