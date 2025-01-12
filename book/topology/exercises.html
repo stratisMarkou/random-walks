@@ -561,6 +561,84 @@ However, this is a contradiction, because for any <span class="math notranslate 
 This is a contradiction, so <span class="math notranslate nohighlight">\(g^{-1}(U)\)</span> is not open in <span class="math notranslate nohighlight">\(X \times X,\)</span> and <span class="math notranslate nohighlight">\(g\)</span> is not continuous.</p>
 </div>
 </details></div>
+<div class="admonition-exercise-1-4 admonition">
+<p class="admonition-title">Exercise 1.4</p>
+<p>Let <span class="math notranslate nohighlight">\(C^1([0, 1])\)</span> be the set of continuously differentiable functions on <span class="math notranslate nohighlight">\([0, 1],\)</span> that is differentiable functions whose first derivative is continuous.
+For <span class="math notranslate nohighlight">\(f \in C^1([0, 1]),\)</span> define</p>
+<div class="math notranslate nohighlight">
+\[||f||_{1, 1} = \int_0^1 |f(x)| \, dx + \int_0^1 |f'(x)| \, dx.\]</div>
+<p>Show that <span class="math notranslate nohighlight">\(||\cdot||_{1, 1}\)</span> is a norm on <span class="math notranslate nohighlight">\(C^1([0, 1]).\)</span>
+If a sequence <span class="math notranslate nohighlight">\((f_n)\)</span> converges with respect to this norm, show that it also converges with respect to the uniform norm.
+Give an example to show that the converse statement does not hold.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><strong>First part:</strong>
+First, we show that <span class="math notranslate nohighlight">\(||\cdot||_{1, 1}\)</span> is a norm on <span class="math notranslate nohighlight">\(C^1([0, 1]),\)</span> by showing that it satisfies the <a class="reference internal" href="001-metric-spaces.html#topology:def-norm">properties of a norm</a>.</p>
+<p class="sd-card-text"><strong>Positive definiteness:</strong>
+By the definition of <span class="math notranslate nohighlight">\(||\cdot||_{1, 1},\)</span> we have <span class="math notranslate nohighlight">\(||f||_{1, 1} \geq 0,\)</span> for all <span class="math notranslate nohighlight">\(f \in C^1([0, 1]).\)</span></p>
+<p class="sd-card-text"><strong>Non-degeneracy:</strong>
+Let <span class="math notranslate nohighlight">\(f \in C^1([0, 1]).\)</span>
+If <span class="math notranslate nohighlight">\(f = 0,\)</span> then <span class="math notranslate nohighlight">\(||f||_{1, 1} = 0.\)</span>
+Conversely, suppose that <span class="math notranslate nohighlight">\(||f||_{1, 1} = 0.\)</span>
+Then it must be the case that <span class="math notranslate nohighlight">\(|f(x)|\)</span> is identically zero, because if it were not, then the integral <span class="math notranslate nohighlight">\(\int_0^1 |f(x)| \, dx\)</span> would be positive since <a class="reference internal" href="001-metric-spaces.html#topology:lemma-non-constant-positive-continuous-function-has-positive-integral">non-negative functions with zero integral are zero almost everywhere</a>.</p>
+<p class="sd-card-text"><strong>Homogeneity:</strong>
+Let <span class="math notranslate nohighlight">\(f \in C^1([0, 1])\)</span> and <span class="math notranslate nohighlight">\(\lambda \in \mathbb{R}.\)</span>
+Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+||\lambda f||_{1, 1} &amp;= \int_0^1 |\lambda f(x)| \, dx + \int_0^1 |\lambda f'(x)| \, dx \\
+&amp;= |\lambda| \int_0^1 |f(x)| \, dx + |\lambda| \int_0^1 |f'(x)| \, dx \\
+&amp;= |\lambda| ||f||_{1, 1}.
+\end{align}\end{split}\]</div>
+<p class="sd-card-text"><strong>Triangle inequality:</strong>
+Let <span class="math notranslate nohighlight">\(f, g \in C^1([0, 1]).\)</span>
+Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+||f + g||_{1, 1} &amp;= \int_0^1 |f(x) + g(x)| \, dx + \int_0^1 |f'(x) + g'(x)| \, dx \\
+&amp;\leq \int_0^1 |f(x)| + |g(x)| \, dx + \int_0^1 |f'(x)| + |g'(x)| \, dx \\
+&amp;= \int_0^1 |f(x)| \, dx + \int_0^1 |f'(x)| \, dx + \int_0^1 |g(x)| \, dx + \int_0^1 |g'(x)| \, dx \\
+&amp;= ||f||_{1, 1} + ||g||_{1, 1}.
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">Therefore, <span class="math notranslate nohighlight">\(||\cdot||_{1, 1}\)</span> is a norm on <span class="math notranslate nohighlight">\(C^1([0, 1]).\)</span></p>
+<p class="sd-card-text"><strong>Second part:</strong>
+Here, we want to show that if a sequence <span class="math notranslate nohighlight">\((f_n)\)</span> in <span class="math notranslate nohighlight">\(C^1([0, 1])\)</span> converges to some limit <span class="math notranslate nohighlight">\(f \in C^1([0, 1])\)</span> with respect to the norm <span class="math notranslate nohighlight">\(||\cdot||_{1, 1},\)</span> then it also converges to <span class="math notranslate nohighlight">\(f\)</span> with respect to the uniform norm.
+Without loss of generality, we can assume that <span class="math notranslate nohighlight">\(f = 0,\)</span> because if <span class="math notranslate nohighlight">\(f \neq 0,\)</span> then we can consider the sequence <span class="math notranslate nohighlight">\((f_n - f)\)</span> instead.</p>
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\((f_n)\)</span> be a sequence in <span class="math notranslate nohighlight">\(C^1([0, 1])\)</span> that converges with respect to the norm <span class="math notranslate nohighlight">\(||\cdot||_{1, 1}.\)</span>
+Let <span class="math notranslate nohighlight">\(\epsilon &gt; 0.\)</span>
+Then there exists an <span class="math notranslate nohighlight">\(N \in \mathbb{N}\)</span> such that for all <span class="math notranslate nohighlight">\(n \geq N,\)</span> we have <span class="math notranslate nohighlight">\(||f_n - f||_{1, 1} &lt; \epsilon / 2.\)</span>
+Now, for each <span class="math notranslate nohighlight">\(f_n,\)</span> with <span class="math notranslate nohighlight">\(n \geq N,\)</span> there must exist at least one <span class="math notranslate nohighlight">\(x_n \in [0, 1]\)</span> such that <span class="math notranslate nohighlight">\(|f(x_n)| &lt; \epsilon / 2,\)</span> because if not, then the integral <span class="math notranslate nohighlight">\(\int_0^1 |f(x_n)| \, dx\)</span> would be at least <span class="math notranslate nohighlight">\(\epsilon / 2,\)</span> which would be a contradiction.
+Since <span class="math notranslate nohighlight">\([0, 1]\)</span> is a closed interval and each <span class="math notranslate nohighlight">\(f_n\)</span> is continuous, each <span class="math notranslate nohighlight">\(f_n\)</span> attains its maximum at some <span class="math notranslate nohighlight">\(x_n' \in [0, 1].\)</span>
+Therefore, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+||f_n||_{\infty} &amp;= |f(x_n')| \\
+&amp;\leq |f(x_n)| + |f(x_n') - f(x_n)| \\
+&amp;&lt; \epsilon / 2 + |f(x_n') - f(x_n)| \\
+&amp;= \epsilon / 2 + \left| \int_{x_n}^{x_n'} f'(x) \, dx \right| \\
+&amp;\leq \epsilon / 2 + \int_{x_n}^{x_n'} |f'(x)| \, dx \\
+&amp;\leq \epsilon / 2 + ||f_n||_{1, 1} 
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">for all <span class="math notranslate nohighlight">\(n \geq N.\)</span>
+Therefore <span class="math notranslate nohighlight">\(||f_n||_{\infty} &lt; \epsilon\)</span> for all <span class="math notranslate nohighlight">\(n \geq N,\)</span> so <span class="math notranslate nohighlight">\((f_n)\)</span> converges to <span class="math notranslate nohighlight">\(f\)</span> with respect to the uniform norm.</p>
+<p class="sd-card-text">The converse statement does not hold.
+A counterexample is the sequence of functions <span class="math notranslate nohighlight">\((f_n)\)</span> defined by <span class="math notranslate nohighlight">\(f_n(x) = \sin(2 \pi n^2 x) / n\)</span> for <span class="math notranslate nohighlight">\(x \in [0, 1].\)</span>
+This sequence converges to the zero function with respect to the uniform norm, because <span class="math notranslate nohighlight">\(|f_n|\)</span> is bounded by <span class="math notranslate nohighlight">\(1 / n,\)</span> which converges to zero.
+However, the sequence does not converge to the zero function with respect to the norm <span class="math notranslate nohighlight">\(||\cdot||_{1, 1},\)</span> because</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+||f_n||_{1, 1} &amp;= \int_0^1 \left| \frac{\sin(2 \pi n^2 x)}{n} \right| \, dx + \int_0^1 \left|2 \pi  n \cos(2 \pi n^2 x) \right| \, dx \\
+&amp;\geq 2 \pi n \int_0^1 \left|\cos(2 \pi n^2 x) \right| \, dx.
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">Now, note that the integral on the right hand side is constant in <span class="math notranslate nohighlight">\(n,\)</span> so <span class="math notranslate nohighlight">\(||f_n||_{1, 1}\)</span> is unbounded as <span class="math notranslate nohighlight">\(n \to \infty.\)</span>
+Therefore, the sequence <span class="math notranslate nohighlight">\((f_n)\)</span> does not converge to the zero function with respect to the norm <span class="math notranslate nohighlight">\(||\cdot||_{1, 1}.\)</span></p>
+</div>
+</details></div>
 </section>
 
     <script type="text/x-thebe-config">

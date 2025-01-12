@@ -133,3 +133,90 @@ However, this is a contradiction, because for any $z = (x, y) \in G,$ there do n
 This is a contradiction, so $g^{-1}(U)$ is not open in $X \times X,$ and $g$ is not continuous.
 :::
 ::::
+
+
+::::{admonition} Exercise 1.4
+:label: topology:ex:1.4
+Let $C^1([0, 1])$ be the set of continuously differentiable functions on $[0, 1],$ that is differentiable functions whose first derivative is continuous.
+For $f \in C^1([0, 1]),$ define
+
+$$||f||_{1, 1} = \int_0^1 |f(x)| \, dx + \int_0^1 |f'(x)| \, dx.$$
+
+Show that $||\cdot||_{1, 1}$ is a norm on $C^1([0, 1]).$
+If a sequence $(f_n)$ converges with respect to this norm, show that it also converges with respect to the uniform norm.
+Give an example to show that the converse statement does not hold.
+
+:::{dropdown} Solution
+
+__First part:__
+First, we show that $||\cdot||_{1, 1}$ is a norm on $C^1([0, 1]),$ by showing that it satisfies the {prf:ref}`properties of a norm <topology:def-norm>`.
+
+__Positive definiteness:__
+By the definition of $||\cdot||_{1, 1},$ we have $||f||_{1, 1} \geq 0,$ for all $f \in C^1([0, 1]).$
+
+__Non-degeneracy:__
+Let $f \in C^1([0, 1]).$
+If $f = 0,$ then $||f||_{1, 1} = 0.$
+Conversely, suppose that $||f||_{1, 1} = 0.$
+Then it must be the case that $|f(x)|$ is identically zero, because if it were not, then the integral $\int_0^1 |f(x)| \, dx$ would be positive since {prf:ref}`non-negative functions with zero integral are zero almost everywhere <topology:lemma-non-constant-positive-continuous-function-has-positive-integral>`.
+
+__Homogeneity:__
+Let $f \in C^1([0, 1])$ and $\lambda \in \mathbb{R}.$
+Then
+
+$$\begin{align}
+||\lambda f||_{1, 1} &= \int_0^1 |\lambda f(x)| \, dx + \int_0^1 |\lambda f'(x)| \, dx \\
+&= |\lambda| \int_0^1 |f(x)| \, dx + |\lambda| \int_0^1 |f'(x)| \, dx \\
+&= |\lambda| ||f||_{1, 1}.
+\end{align}$$
+
+__Triangle inequality:__
+Let $f, g \in C^1([0, 1]).$
+Then
+
+$$\begin{align}
+||f + g||_{1, 1} &= \int_0^1 |f(x) + g(x)| \, dx + \int_0^1 |f'(x) + g'(x)| \, dx \\
+&\leq \int_0^1 |f(x)| + |g(x)| \, dx + \int_0^1 |f'(x)| + |g'(x)| \, dx \\
+&= \int_0^1 |f(x)| \, dx + \int_0^1 |f'(x)| \, dx + \int_0^1 |g(x)| \, dx + \int_0^1 |g'(x)| \, dx \\
+&= ||f||_{1, 1} + ||g||_{1, 1}.
+\end{align}$$
+
+Therefore, $||\cdot||_{1, 1}$ is a norm on $C^1([0, 1]).$
+
+__Second part:__
+Here, we want to show that if a sequence $(f_n)$ in $C^1([0, 1])$ converges to some limit $f \in C^1([0, 1])$ with respect to the norm $||\cdot||_{1, 1},$ then it also converges to $f$ with respect to the uniform norm.
+Without loss of generality, we can assume that $f = 0,$ because if $f \neq 0,$ then we can consider the sequence $(f_n - f)$ instead.
+
+Let $(f_n)$ be a sequence in $C^1([0, 1])$ that converges with respect to the norm $||\cdot||_{1, 1}.$
+Let $\epsilon > 0.$
+Then there exists an $N \in \mathbb{N}$ such that for all $n \geq N,$ we have $||f_n - f||_{1, 1} < \epsilon / 2.$
+Now, for each $f_n,$ with $n \geq N,$ there must exist at least one $x_n \in [0, 1]$ such that $|f(x_n)| < \epsilon / 2,$ because if not, then the integral $\int_0^1 |f(x_n)| \, dx$ would be at least $\epsilon / 2,$ which would be a contradiction.
+Since $[0, 1]$ is a closed interval and each $f_n$ is continuous, each $f_n$ attains its maximum at some $x_n' \in [0, 1].$
+Therefore, we have
+
+$$\begin{align}
+||f_n||_{\infty} &= |f(x_n')| \\
+&\leq |f(x_n)| + |f(x_n') - f(x_n)| \\
+&< \epsilon / 2 + |f(x_n') - f(x_n)| \\
+&= \epsilon / 2 + \left| \int_{x_n}^{x_n'} f'(x) \, dx \right| \\
+&\leq \epsilon / 2 + \int_{x_n}^{x_n'} |f'(x)| \, dx \\
+&\leq \epsilon / 2 + ||f_n||_{1, 1} 
+\end{align}$$
+
+for all $n \geq N.$
+Therefore $||f_n||_{\infty} < \epsilon$ for all $n \geq N,$ so $(f_n)$ converges to $f$ with respect to the uniform norm.
+
+The converse statement does not hold.
+A counterexample is the sequence of functions $(f_n)$ defined by $f_n(x) = \sin(2 \pi n^2 x) / n$ for $x \in [0, 1].$
+This sequence converges to the zero function with respect to the uniform norm, because $|f_n|$ is bounded by $1 / n,$ which converges to zero.
+However, the sequence does not converge to the zero function with respect to the norm $||\cdot||_{1, 1},$ because
+
+$$\begin{align}
+||f_n||_{1, 1} &= \int_0^1 \left| \frac{\sin(2 \pi n^2 x)}{n} \right| \, dx + \int_0^1 \left|2 \pi  n \cos(2 \pi n^2 x) \right| \, dx \\
+&\geq 2 \pi n \int_0^1 \left|\cos(2 \pi n^2 x) \right| \, dx.
+\end{align}$$
+
+Now, note that the integral on the right hand side is constant in $n,$ so $||f_n||_{1, 1}$ is unbounded as $n \to \infty.$
+Therefore, the sequence $(f_n)$ does not converge to the zero function with respect to the norm $||\cdot||_{1, 1}.$
+:::
+::::
