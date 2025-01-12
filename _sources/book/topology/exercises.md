@@ -200,7 +200,8 @@ $$\begin{align}
 &< \epsilon / 2 + |f(x_n') - f(x_n)| \\
 &= \epsilon / 2 + \left| \int_{x_n}^{x_n'} f'(x) \, dx \right| \\
 &\leq \epsilon / 2 + \int_{x_n}^{x_n'} |f'(x)| \, dx \\
-&\leq \epsilon / 2 + ||f_n||_{1, 1} 
+&\leq \epsilon / 2 + ||f_n||_{1, 1} \\
+&< \epsilon.
 \end{align}$$
 
 for all $n \geq N.$
@@ -213,7 +214,7 @@ However, the sequence does not converge to the zero function with respect to the
 
 $$\begin{align}
 ||f_n||_{1, 1} &= \int_0^1 \left| \frac{\sin(2 \pi n^2 x)}{n} \right| \, dx + \int_0^1 \left|2 \pi  n \cos(2 \pi n^2 x) \right| \, dx \\
-&\geq 2 \pi n \int_0^1 \left|\cos(2 \pi n^2 x) \right| \, dx.
+&> 2 \pi n \int_0^1 \left|\cos(2 \pi n^2 x) \right| \, dx.
 \end{align}$$
 
 Now, note that the integral on the right hand side is constant in $n,$ so $||f_n||_{1, 1}$ is unbounded as $n \to \infty.$

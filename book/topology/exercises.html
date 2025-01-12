@@ -622,7 +622,8 @@ Therefore, we have</p>
 &amp;&lt; \epsilon / 2 + |f(x_n') - f(x_n)| \\
 &amp;= \epsilon / 2 + \left| \int_{x_n}^{x_n'} f'(x) \, dx \right| \\
 &amp;\leq \epsilon / 2 + \int_{x_n}^{x_n'} |f'(x)| \, dx \\
-&amp;\leq \epsilon / 2 + ||f_n||_{1, 1} 
+&amp;\leq \epsilon / 2 + ||f_n||_{1, 1} \\
+&amp;&lt; \epsilon.
 \end{align}\end{split}\]</div>
 <p class="sd-card-text">for all <span class="math notranslate nohighlight">\(n \geq N.\)</span>
 Therefore <span class="math notranslate nohighlight">\(||f_n||_{\infty} &lt; \epsilon\)</span> for all <span class="math notranslate nohighlight">\(n \geq N,\)</span> so <span class="math notranslate nohighlight">\((f_n)\)</span> converges to <span class="math notranslate nohighlight">\(f\)</span> with respect to the uniform norm.</p>
@@ -633,7 +634,7 @@ However, the sequence does not converge to the zero function with respect to the
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
 ||f_n||_{1, 1} &amp;= \int_0^1 \left| \frac{\sin(2 \pi n^2 x)}{n} \right| \, dx + \int_0^1 \left|2 \pi  n \cos(2 \pi n^2 x) \right| \, dx \\
-&amp;\geq 2 \pi n \int_0^1 \left|\cos(2 \pi n^2 x) \right| \, dx.
+&amp;&gt; 2 \pi n \int_0^1 \left|\cos(2 \pi n^2 x) \right| \, dx.
 \end{align}\end{split}\]</div>
 <p class="sd-card-text">Now, note that the integral on the right hand side is constant in <span class="math notranslate nohighlight">\(n,\)</span> so <span class="math notranslate nohighlight">\(||f_n||_{1, 1}\)</span> is unbounded as <span class="math notranslate nohighlight">\(n \to \infty.\)</span>
 Therefore, the sequence <span class="math notranslate nohighlight">\((f_n)\)</span> does not converge to the zero function with respect to the norm <span class="math notranslate nohighlight">\(||\cdot||_{1, 1}.\)</span></p>
