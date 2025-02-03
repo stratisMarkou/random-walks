@@ -244,11 +244,7 @@ Therefore, by the triangle inequality for the metric $d,$ we have
 
 $$d(x, y) \leq d(x, x') + d(x', y') + d(y', y) = d(x', y').$$
 
-Similarly, we can exchange the roles of the $x, y$ and $x', y'$ to show that
-
-$$d(x', y') \leq d(x, y),$ so $d(x, y) = d(x', y'),$$
-
-from which we have that $d(x, y) = d(x', y'),$ which means that $\tilde{d}(x, y) = \tilde{d}(x', y').$
+Similarly, we can exchange the roles of the $x, y$ and $x', y'$ to show that $d(x', y') \leq d(x, y)$ from which we have that $d(x, y) = d(x', y'),$ which means that $\tilde{d}(x, y) = \tilde{d}(x', y').$
 Therefore the value of $\tilde{d}$ does not depend on the choice of representative we make, so $\tilde{d}$ is well-defined.
 
 Now we show that $\tilde{d}$ satisfies the properties of a metric.
