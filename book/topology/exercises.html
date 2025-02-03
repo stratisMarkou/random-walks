@@ -498,7 +498,7 @@ Since <span class="math notranslate nohighlight">\(A = \bigcup_{z &gt; 0} U_z,\)
 Again, note that the set <span class="math notranslate nohighlight">\(A\)</span> cannot be closed, by the same reasoning that was used to argue for set 1.</p>
 <p class="sd-card-text"><strong>Set 3:</strong>
 The set <span class="math notranslate nohighlight">\(A\)</span> is not open because for any rational <span class="math notranslate nohighlight">\(x \in \mathbb{Q},\)</span> there exists an irrational <span class="math notranslate nohighlight">\(x' \in \mathbb{R} \setminus \mathbb{Q}\)</span> that is arbitrarily close to it, so for any <span class="math notranslate nohighlight">\((x, y) \in A,\)</span> there exists an <span class="math notranslate nohighlight">\((x', y)\)</span> that is aribtrarily close to it but is not in <span class="math notranslate nohighlight">\(A,\)</span> because <span class="math notranslate nohighlight">\(x'\)</span> is irrational.
-In addition, the set <span class="math notranslate nohighlight">\(A\)</span> is not closed because it does not contain all its <a class="reference internal" href="002-topological-spaces.html#topology:def-limit-point">limit points</a>.
+In addition, the set <span class="math notranslate nohighlight">\(A\)</span> is not closed because it does not contain all its <a class="reference internal" href="001-metric-spaces.html#topology:def-limit-point">limit points</a>.
 For example, consider the point <span class="math notranslate nohighlight">\((0, 1) \in \mathbb{R}^2.\)</span>
 This is a limit point of the set <span class="math notranslate nohighlight">\(A\)</span>: for any <span class="math notranslate nohighlight">\(\epsilon &gt; 0,\)</span> there exists a rational <span class="math notranslate nohighlight">\(q \in \mathbb{Q}\)</span> such that <span class="math notranslate nohighlight">\(0 &lt; |q| &lt; \epsilon / 2\)</span> and a sufficiently large <span class="math notranslate nohighlight">\(n \in \mathbb{N}\)</span> such that <span class="math notranslate nohighlight">\(|q^{1/n} - 1| &lt; \epsilon / 2.\)</span>
 Then <span class="math notranslate nohighlight">\(|(q, q^{1/n}) - (0, 1)|_\infty = |q| + |q^{1/n} - 1| &lt; \epsilon,\)</span> from which it follows that <span class="math notranslate nohighlight">\((0, 1)\)</span> is a limit point of <span class="math notranslate nohighlight">\(A\)</span> that is not contained in <span class="math notranslate nohighlight">\(A.\)</span></p>
@@ -638,6 +638,47 @@ However, the sequence does not converge to the zero function with respect to the
 \end{align}\end{split}\]</div>
 <p class="sd-card-text">Now, note that the integral on the right hand side is constant in <span class="math notranslate nohighlight">\(n,\)</span> so <span class="math notranslate nohighlight">\(||f_n||_{1, 1}\)</span> is unbounded as <span class="math notranslate nohighlight">\(n \to \infty.\)</span>
 Therefore, the sequence <span class="math notranslate nohighlight">\((f_n)\)</span> does not converge to the zero function with respect to the norm <span class="math notranslate nohighlight">\(||\cdot||_{1, 1}.\)</span></p>
+</div>
+</details></div>
+<div class="admonition-exercise-1-5 admonition">
+<p class="admonition-title">Exercise 1.5</p>
+<p>Let <span class="math notranslate nohighlight">\(d: X \times X \to \mathbb{R}\)</span> be a function which satisfies all the axioms for a <code class="xref prf prf-ref docutils literal notranslate"><span class="pre">metric</span></code> except for the requirement that <span class="math notranslate nohighlight">\(d(x, y) = 0 \implies x = y.\)</span>
+For <span class="math notranslate nohighlight">\(x, y \in X,\)</span> define <span class="math notranslate nohighlight">\(x \sim y\)</span> if <span class="math notranslate nohighlight">\(d(x, y) = 0.\)</span>
+Show that <span class="math notranslate nohighlight">\(\sim\)</span> is an equivalence relation on <span class="math notranslate nohighlight">\(X,\)</span> and that <span class="math notranslate nohighlight">\(d\)</span> induces a metric on the quotient topology <span class="math notranslate nohighlight">\(X / \sim.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">First we show that <span class="math notranslate nohighlight">\(\sim\)</span> is an equivalence relation on <span class="math notranslate nohighlight">\(X.\)</span>
+For this, we need to show the three properties of an equivalence relation are satisfied, namely: reflexivity, symmetry, and transitivity.
+Reflexivity is satisfied because if <span class="math notranslate nohighlight">\(x \in X,\)</span> then by the triangle inequality for the metric <span class="math notranslate nohighlight">\(d,\)</span> we have <span class="math notranslate nohighlight">\(d(x, x) = 0,\)</span> which implies that <span class="math notranslate nohighlight">\(x \sim x.\)</span>
+Symmetry is satisfied because if <span class="math notranslate nohighlight">\(x, y \in X\)</span> and <span class="math notranslate nohighlight">\(d(x, y) = 0,\)</span> then <span class="math notranslate nohighlight">\(d(y, x) = 0\)</span> by the symmetry of the metric <span class="math notranslate nohighlight">\(d.\)</span>
+Transitivity is satisfied because if <span class="math notranslate nohighlight">\(x, y, z \in X\)</span> and <span class="math notranslate nohighlight">\(x \sim y\)</span> and <span class="math notranslate nohighlight">\(y \sim z,\)</span> then <span class="math notranslate nohighlight">\(d(x, y) = d(y, z) = 0,\)</span> so by the triangle inequality for the metric <span class="math notranslate nohighlight">\(d,\)</span> we have <span class="math notranslate nohighlight">\(d(x, z) = 0,\)</span> so <span class="math notranslate nohighlight">\(x \sim z.\)</span></p>
+<p class="sd-card-text">Next, we show that <span class="math notranslate nohighlight">\(d\)</span> induces a metric on the quotient topology <span class="math notranslate nohighlight">\(X / \sim.\)</span>
+For this, we need to show that the function <span class="math notranslate nohighlight">\(\tilde{d}: (X / \sim) \times (X / \sim) \to \mathbb{R}\)</span> defined by <span class="math notranslate nohighlight">\(\tilde{d}([x], [y]) = d(x, y)\)</span> is a metric on <span class="math notranslate nohighlight">\(X / \sim.\)</span>
+Before we start, we show that the function <span class="math notranslate nohighlight">\(\tilde{d}\)</span> is well-defined, meaning that no matter which representatives of the equivalence classes we use to compute <span class="math notranslate nohighlight">\(\tilde{d},\)</span> the result is the same.
+Let <span class="math notranslate nohighlight">\([x] = [x']\)</span> and <span class="math notranslate nohighlight">\([y] = [y'],\)</span> for some <span class="math notranslate nohighlight">\(x, x', y, y' \in X.\)</span>
+Since <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(x'\)</span> are in the same equivalence class, we have <span class="math notranslate nohighlight">\(d(x, x') = 0,\)</span> and similarly <span class="math notranslate nohighlight">\(d(y, y') = 0.\)</span>
+Therefore, by the triangle inequality for the metric <span class="math notranslate nohighlight">\(d,\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[d(x, y) \leq d(x, x') + d(x', y') + d(y', y) = d(x', y').\]</div>
+<p class="sd-card-text">Similarly, we can exchange the roles of the <span class="math notranslate nohighlight">\(x, y\)</span> and <span class="math notranslate nohighlight">\(x', y'\)</span> to show that <span class="math notranslate nohighlight">\(d(x', y') \leq d(x, y)\)</span> from which we have that <span class="math notranslate nohighlight">\(d(x, y) = d(x', y'),\)</span> which means that <span class="math notranslate nohighlight">\(\tilde{d}(x, y) = \tilde{d}(x', y').\)</span>
+Therefore the value of <span class="math notranslate nohighlight">\(\tilde{d}\)</span> does not depend on the choice of representative we make, so <span class="math notranslate nohighlight">\(\tilde{d}\)</span> is well-defined.</p>
+<p class="sd-card-text">Now we show that <span class="math notranslate nohighlight">\(\tilde{d}\)</span> satisfies the properties of a metric.
+Let <span class="math notranslate nohighlight">\(x, y, z \in X.\)</span>
+First, we have that <span class="math notranslate nohighlight">\(\tilde{d}([x], [y]) = d(x, y) \geq 0,\)</span> because <span class="math notranslate nohighlight">\(d\)</span> is a metric.
+Second, we have that</p>
+<div class="math notranslate nohighlight">
+\[\tilde{d}([x], [y]) = 0 \iff d(x, y) = 0 \iff x \sim y \iff [x] = [y].\]</div>
+<p class="sd-card-text">Third, we have that</p>
+<div class="math notranslate nohighlight">
+\[\tilde{d}([x], [y]) = d(x, y) = d(y, x) = \tilde{d}([y], [x]).\]</div>
+<p class="sd-card-text">Lastly, we have</p>
+<div class="math notranslate nohighlight">
+\[\tilde{d}([x], [y]) = d(x, y) \leq d(x, z) + d(z, y) = \tilde{d}([x], [z]) + \tilde{d}([z], [y]).\]</div>
 </div>
 </details></div>
 </section>

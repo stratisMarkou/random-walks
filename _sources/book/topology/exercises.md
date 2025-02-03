@@ -221,3 +221,45 @@ Now, note that the integral on the right hand side is constant in $n,$ so $||f_n
 Therefore, the sequence $(f_n)$ does not converge to the zero function with respect to the norm $||\cdot||_{1, 1}.$
 :::
 ::::
+
+
+::::{admonition} Exercise 1.5
+Let $d: X \times X \to \mathbb{R}$ be a function which satisfies all the axioms for a {prf:ref}`metric <topology:def-metric>` except for the requirement that $d(x, y) = 0 \implies x = y.$
+For $x, y \in X,$ define $x \sim y$ if $d(x, y) = 0.$
+Show that $\sim$ is an equivalence relation on $X,$ and that $d$ induces a metric on the quotient topology $X / \sim.$
+
+:::{dropdown} Solution
+First we show that $\sim$ is an equivalence relation on $X.$
+For this, we need to show the three properties of an equivalence relation are satisfied, namely: reflexivity, symmetry, and transitivity.
+Reflexivity is satisfied because if $x \in X,$ then by the triangle inequality for the metric $d,$ we have $d(x, x) = 0,$ which implies that $x \sim x.$
+Symmetry is satisfied because if $x, y \in X$ and $d(x, y) = 0,$ then $d(y, x) = 0$ by the symmetry of the metric $d.$
+Transitivity is satisfied because if $x, y, z \in X$ and $x \sim y$ and $y \sim z,$ then $d(x, y) = d(y, z) = 0,$ so by the triangle inequality for the metric $d,$ we have $d(x, z) = 0,$ so $x \sim z.$
+
+Next, we show that $d$ induces a metric on the quotient topology $X / \sim.$
+For this, we need to show that the function $\tilde{d}: (X / \sim) \times (X / \sim) \to \mathbb{R}$ defined by $\tilde{d}([x], [y]) = d(x, y)$ is a metric on $X / \sim.$
+Before we start, we show that the function $\tilde{d}$ is well-defined, meaning that no matter which representatives of the equivalence classes we use to compute $\tilde{d},$ the result is the same.
+Let $[x] = [x']$ and $[y] = [y'],$ for some $x, x', y, y' \in X.$
+Since $x$ and $x'$ are in the same equivalence class, we have $d(x, x') = 0,$ and similarly $d(y, y') = 0.$
+Therefore, by the triangle inequality for the metric $d,$ we have
+
+$$d(x, y) \leq d(x, x') + d(x', y') + d(y', y) = d(x', y').$$
+
+Similarly, we can exchange the roles of the $x, y$ and $x', y'$ to show that $d(x', y') \leq d(x, y)$ from which we have that $d(x, y) = d(x', y'),$ which means that $\tilde{d}(x, y) = \tilde{d}(x', y').$
+Therefore the value of $\tilde{d}$ does not depend on the choice of representative we make, so $\tilde{d}$ is well-defined.
+
+Now we show that $\tilde{d}$ satisfies the properties of a metric.
+Let $x, y, z \in X.$
+First, we have that $\tilde{d}([x], [y]) = d(x, y) \geq 0,$ because $d$ is a metric.
+Second, we have that
+
+$$\tilde{d}([x], [y]) = 0 \iff d(x, y) = 0 \iff x \sim y \iff [x] = [y].$$
+
+Third, we have that
+
+$$\tilde{d}([x], [y]) = d(x, y) = d(y, x) = \tilde{d}([y], [x]).$$
+
+Lastly, we have
+
+$$\tilde{d}([x], [y]) = d(x, y) \leq d(x, z) + d(z, y) = \tilde{d}([x], [z]) + \tilde{d}([z], [y]).$$
+:::
+::::
