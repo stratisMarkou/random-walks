@@ -21,12 +21,12 @@ A metric space is a set that is equiped with a notion of distance between elemen
 
 :::{prf:definition} Metric space
 :label: topology:def-metric-space
-A metric space is a pair $(X, d_X)$ of a set $X,$ called the space, and a function $d_X: X \times X \to \mathbb{R},$ called the metric, which satisfy
+A metric space is a pair $(X, d_X)$ of a set $X,$ called the space, and a function $d_X: X \times X \to \mathbb{R},$ called the metric, which for all $x, y, z \in X$ satisfies
 
-1. $d(x, y) \geq 0$ for all $x, y \in X,$
-2. $d(x, x) = 0$ if and only if $x \in X,$
-3. $d(x, y) = d(y, x)$ for all $x, y \in X,$
-4. $d(x, z) \leq d(x, y) + d(y, z)$ for all for all $x, y, z \in X.$
+1. $d(x, y) \geq 0,$
+2. $d(x, y) = 0$ if and only if $x = y,$
+3. $d(x, y) = d(y, x),$
+4. $d(x, z) \leq d(x, y) + d(y, z).$
 :::
 
 
