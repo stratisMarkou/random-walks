@@ -444,7 +444,7 @@ document.write(`
 \[|a - b|_p = p^{-n},\]</div>
 <p>where <span class="math notranslate nohighlight">\(n\)</span> is the largest integer such that <span class="math notranslate nohighlight">\(p^n\)</span> divides <span class="math notranslate nohighlight">\(a - b\)</span>.</p>
 </aside>
-<div class="admonition-exercise-1-1 admonition">
+<div class="tip admonition">
 <p class="admonition-title">Exercise 1.1</p>
 <p>Show that the sequence <span class="math notranslate nohighlight">\(2015, 20015, 200015, 2000015, \ldots\)</span> converges in the 2-adic metric on <span class="math notranslate nohighlight">\(\mathbb{Z}\)</span>.</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
@@ -461,7 +461,7 @@ Note that <span class="math notranslate nohighlight">\(2 \times 10^{n + 2}\)</sp
 Therefore, <span class="math notranslate nohighlight">\(|a_n - 15|_2 = 2^{-(n + 3)} \to 0\)</span> as <span class="math notranslate nohighlight">\(n \to \infty.\)</span></p>
 </div>
 </details></div>
-<div class="admonition-exercise-1-2 admonition">
+<div class="tip admonition">
 <p class="admonition-title">Exercise 1.2</p>
 <p>Determine whether the following subsets <span class="math notranslate nohighlight">\(A \subseteq \mathbb{R}^2\)</span> are open, closed or neither, under the standard topology on <span class="math notranslate nohighlight">\(\mathbb{R}^2.\)</span></p>
 <ol class="arabic simple">
@@ -504,7 +504,7 @@ This is a limit point of the set <span class="math notranslate nohighlight">\(A\
 Then <span class="math notranslate nohighlight">\(|(q, q^{1/n}) - (0, 1)|_\infty = |q| + |q^{1/n} - 1| &lt; \epsilon,\)</span> from which it follows that <span class="math notranslate nohighlight">\((0, 1)\)</span> is a limit point of <span class="math notranslate nohighlight">\(A\)</span> that is not contained in <span class="math notranslate nohighlight">\(A.\)</span></p>
 </div>
 </details></div>
-<div class="admonition-exercise-1-3 admonition">
+<div class="tip admonition">
 <p class="admonition-title">Exercise 1.3</p>
 <p>Show that the maps <span class="math notranslate nohighlight">\(f, g: \mathbb{R}^2 \to \mathbb{R}\)</span> given by <span class="math notranslate nohighlight">\(f(x, y) = x + y\)</span> and <span class="math notranslate nohighlight">\(g(x, y) = xy\)</span> are continuous with respect to the usual topology on <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span>
 Let <span class="math notranslate nohighlight">\(X\)</span> be <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> equipped with the topology whose open sets are intervals of the form <span class="math notranslate nohighlight">\((a, \infty).\)</span>
@@ -561,7 +561,7 @@ However, this is a contradiction, because for any <span class="math notranslate 
 This is a contradiction, so <span class="math notranslate nohighlight">\(g^{-1}(U)\)</span> is not open in <span class="math notranslate nohighlight">\(X \times X,\)</span> and <span class="math notranslate nohighlight">\(g\)</span> is not continuous.</p>
 </div>
 </details></div>
-<div class="admonition-exercise-1-4 admonition">
+<div class="tip admonition">
 <p class="admonition-title">Exercise 1.4</p>
 <p>Let <span class="math notranslate nohighlight">\(C^1([0, 1])\)</span> be the set of continuously differentiable functions on <span class="math notranslate nohighlight">\([0, 1],\)</span> that is differentiable functions whose first derivative is continuous.
 For <span class="math notranslate nohighlight">\(f \in C^1([0, 1]),\)</span> define</p>
@@ -640,9 +640,9 @@ However, the sequence does not converge to the zero function with respect to the
 Therefore, the sequence <span class="math notranslate nohighlight">\((f_n)\)</span> does not converge to the zero function with respect to the norm <span class="math notranslate nohighlight">\(||\cdot||_{1, 1}.\)</span></p>
 </div>
 </details></div>
-<div class="admonition-exercise-1-5 admonition">
+<div class="tip admonition">
 <p class="admonition-title">Exercise 1.5</p>
-<p>Let <span class="math notranslate nohighlight">\(d: X \times X \to \mathbb{R}\)</span> be a function which satisfies all the axioms for a <code class="xref prf prf-ref docutils literal notranslate"><span class="pre">metric</span></code> except for the requirement that <span class="math notranslate nohighlight">\(d(x, y) = 0 \implies x = y.\)</span>
+<p>Let <span class="math notranslate nohighlight">\(d: X \times X \to \mathbb{R}\)</span> be a function which satisfies all the axioms for a <a class="reference internal" href="001-metric-spaces.html#topology:def-metric-space">metric</a> except for the requirement that <span class="math notranslate nohighlight">\(d(x, y) = 0 \implies x = y.\)</span>
 For <span class="math notranslate nohighlight">\(x, y \in X,\)</span> define <span class="math notranslate nohighlight">\(x \sim y\)</span> if <span class="math notranslate nohighlight">\(d(x, y) = 0.\)</span>
 Show that <span class="math notranslate nohighlight">\(\sim\)</span> is an equivalence relation on <span class="math notranslate nohighlight">\(X,\)</span> and that <span class="math notranslate nohighlight">\(d\)</span> induces a metric on the quotient topology <span class="math notranslate nohighlight">\(X / \sim.\)</span></p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
@@ -679,6 +679,61 @@ Second, we have that</p>
 <p class="sd-card-text">Lastly, we have</p>
 <div class="math notranslate nohighlight">
 \[\tilde{d}([x], [y]) = d(x, y) \leq d(x, z) + d(z, y) = \tilde{d}([x], [z]) + \tilde{d}([z], [y]).\]</div>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.6</p>
+<p>Find a closed <span class="math notranslate nohighlight">\(A_1 \subseteq \mathbb{R}\)</span> (with the standard topology) such that <span class="math notranslate nohighlight">\(\overline{\text{Int}(A_1)} \neq A_1\)</span> and an open <span class="math notranslate nohighlight">\(A_2 \subseteq \mathbb{R}\)</span> such that <span class="math notranslate nohighlight">\(\text{Int}(\overline{A_2}) \neq \text{Int}(A_2).\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(A_1 = \{0\},\)</span> which is a closed set.
+Then <span class="math notranslate nohighlight">\(\text{Int}(A_1) = \emptyset\)</span> so <span class="math notranslate nohighlight">\(\overline{\text{Int}(A_1)} = \emptyset \neq \text{Int}(\overline{A_1}).\)</span></p>
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(A_2 = \mathbb{R} \setminus \{0\},\)</span> which is an open set.
+Then <span class="math notranslate nohighlight">\(\overline{A_2} = \mathbb{R}\)</span> so <span class="math notranslate nohighlight">\(\text{Int}(\overline{A_2}) = \mathbb{R} \neq A_2.\)</span></p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.7</p>
+<p>Let <span class="math notranslate nohighlight">\(f: X \to Y\)</span> be a map between topological spaces.
+Show that <span class="math notranslate nohighlight">\(f\)</span> is continuous if and only if <span class="math notranslate nohighlight">\(f(\overline{A}) \subseteq \overline{f(A)}\)</span> for all <span class="math notranslate nohighlight">\(A \subseteq X.\)</span>
+Deduce that if <span class="math notranslate nohighlight">\(f\)</span> is surjective and continuous, the image of a dense set in <span class="math notranslate nohighlight">\(X\)</span> is dense in <span class="math notranslate nohighlight">\(Y.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><strong>First part:</strong>
+Suppose <span class="math notranslate nohighlight">\(f\)</span> is continuous.
+Let <span class="math notranslate nohighlight">\(A \subseteq X.\)</span>
+Note that</p>
+<div class="math notranslate nohighlight">
+\[\overline{f(A)} = \bigcap_{C \in \mathcal{C}_{f(A)}} C,\]</div>
+<p class="sd-card-text">that is, the closure of <span class="math notranslate nohighlight">\(f(A)\)</span> is the intersection of all closed sets containing <span class="math notranslate nohighlight">\(f(A).\)</span>
+Now consider</p>
+<div class="math notranslate nohighlight">
+\[f^{-1}\left(\overline{f(A)}\right) = f^{-1}\left( \bigcap_{C \in \mathcal{C}_{f(A)}} C \right) \supseteq \bigcap_{C \in \mathcal{C}_{f(A)}} f^{-1}(C) = \bigcap_{C \in \mathcal{C}_{A}} C = f(\overline{A}).\]</div>
+<p class="sd-card-text">where in the second to last inequality we have used the fact that if a set <span class="math notranslate nohighlight">\(C\)</span> is closed and contains <span class="math notranslate nohighlight">\(f(A),\)</span> then <span class="math notranslate nohighlight">\(f^{-1}(C)\)</span> is closed (by the continuity of <span class="math notranslate nohighlight">\(f\)</span>) and contains <span class="math notranslate nohighlight">\(A.\)</span>
+Applying <span class="math notranslate nohighlight">\(f\)</span> to both sides of the above equation, we obtain <span class="math notranslate nohighlight">\(f(\overline{A}) \subseteq \overline{f(A)}.\)</span>
+Conversely suppose that <span class="math notranslate nohighlight">\(f(\overline{A}) \subseteq \overline{f(A)}\)</span> for all <span class="math notranslate nohighlight">\(A \subseteq X.\)</span>
+Let <span class="math notranslate nohighlight">\(B \subseteq Y\)</span> be closed, and let <span class="math notranslate nohighlight">\(A = f^{-1}(B).\)</span>
+Then we have</p>
+<div class="math notranslate nohighlight">
+\[f(\overline{A}) \subseteq \overline{f(A)} \implies f(\overline{f^{-1}(B)}) \subseteq \overline{B} = B.\]</div>
+<p class="sd-card-text">Now <span class="math notranslate nohighlight">\(f(\overline{f^{-1}(B)}) = B\)</span> can hold only if <span class="math notranslate nohighlight">\(\overline{f^{-1}(B)} = f^{-1}(B),\)</span> because otherwise the set <span class="math notranslate nohighlight">\(\overline{f^{-1}(B)} \setminus f^{-1}(B)\)</span> would be nonempty and that would imply that <span class="math notranslate nohighlight">\(f(\overline{f^{-1}(B)}) \neq B.\)</span>
+Finally, <span class="math notranslate nohighlight">\(\overline{f^{-1}(B)} = f^{-1}(B)\)</span> implies that <span class="math notranslate nohighlight">\(f^{-1}(B)\)</span> is closed, so <span class="math notranslate nohighlight">\(f\)</span> is continuous.</p>
+<p class="sd-card-text"><strong>Second part:</strong>
+Suppose <span class="math notranslate nohighlight">\(f\)</span> is surjective and continuous, and let <span class="math notranslate nohighlight">\(A \subseteq X\)</span> be dense.
+Since <span class="math notranslate nohighlight">\(f\)</span> is surjective, we have <span class="math notranslate nohighlight">\(f(X) = Y\)</span> so</p>
+<div class="math notranslate nohighlight">
+\[\overline{f(A)} \supset f(\overline{A}) = f(X) = Y.\]</div>
+<p class="sd-card-text">which implies <span class="math notranslate nohighlight">\(\overline{f(A)} = Y,\)</span> so <span class="math notranslate nohighlight">\(f(A)\)</span> is dense in <span class="math notranslate nohighlight">\(Y.\)</span></p>
 </div>
 </details></div>
 </section>

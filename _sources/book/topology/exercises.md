@@ -14,6 +14,7 @@ $$|a - b|_p = p^{-n},$$
 where $n$ is the largest integer such that $p^n$ divides $a - b$.
 :::
 ::::{admonition} Exercise 1.1
+:class: tip
 :label: topology:ex:1.1
 Show that the sequence $2015, 20015, 200015, 2000015, \ldots$ converges in the 2-adic metric on $\mathbb{Z}$.
 
@@ -28,6 +29,7 @@ Therefore, $|a_n - 15|_2 = 2^{-(n + 3)} \to 0$ as $n \to \infty.$
 
 
 ::::{admonition} Exercise 1.2
+:class: tip
 :label: topology:ex:1.2
 Determine whether the following subsets $A \subseteq \mathbb{R}^2$ are open, closed or neither, under the standard topology on $\mathbb{R}^2.$
 
@@ -73,6 +75,7 @@ Then $|(q, q^{1/n}) - (0, 1)|_\infty = |q| + |q^{1/n} - 1| < \epsilon,$ from whi
 ::::
 
 ::::{admonition} Exercise 1.3
+:class: tip
 Show that the maps $f, g: \mathbb{R}^2 \to \mathbb{R}$ given by $f(x, y) = x + y$ and $g(x, y) = xy$ are continuous with respect to the usual topology on $\mathbb{R}.$
 Let $X$ be $\mathbb{R}$ equipped with the topology whose open sets are intervals of the form $(a, \infty).$
 Are the maps $f, g: X \times X \to X$ continuous?
@@ -136,6 +139,7 @@ This is a contradiction, so $g^{-1}(U)$ is not open in $X \times X,$ and $g$ is 
 
 
 ::::{admonition} Exercise 1.4
+:class: tip
 :label: topology:ex:1.4
 Let $C^1([0, 1])$ be the set of continuously differentiable functions on $[0, 1],$ that is differentiable functions whose first derivative is continuous.
 For $f \in C^1([0, 1]),$ define
@@ -224,7 +228,8 @@ Therefore, the sequence $(f_n)$ does not converge to the zero function with resp
 
 
 ::::{admonition} Exercise 1.5
-Let $d: X \times X \to \mathbb{R}$ be a function which satisfies all the axioms for a {prf:ref}`metric <topology:def-metric>` except for the requirement that $d(x, y) = 0 \implies x = y.$
+:class: tip
+Let $d: X \times X \to \mathbb{R}$ be a function which satisfies all the axioms for a {prf:ref}`metric <topology:def-metric-space>` except for the requirement that $d(x, y) = 0 \implies x = y.$
 For $x, y \in X,$ define $x \sim y$ if $d(x, y) = 0.$
 Show that $\sim$ is an equivalence relation on $X,$ and that $d$ induces a metric on the quotient topology $X / \sim.$
 
@@ -261,5 +266,59 @@ $$\tilde{d}([x], [y]) = d(x, y) = d(y, x) = \tilde{d}([y], [x]).$$
 Lastly, we have
 
 $$\tilde{d}([x], [y]) = d(x, y) \leq d(x, z) + d(z, y) = \tilde{d}([x], [z]) + \tilde{d}([z], [y]).$$
+:::
+::::
+
+
+::::{admonition} Exercise 1.6
+:class: tip
+Find a closed $A_1 \subseteq \mathbb{R}$ (with the standard topology) such that $\overline{\text{Int}(A_1)} \neq A_1$ and an open $A_2 \subseteq \mathbb{R}$ such that $\text{Int}(\overline{A_2}) \neq \text{Int}(A_2).$
+
+:::{dropdown} Solution
+Let $A_1 = \{0\},$ which is a closed set.
+Then $\text{Int}(A_1) = \emptyset$ so $\overline{\text{Int}(A_1)} = \emptyset \neq \text{Int}(\overline{A_1}).$
+
+Let $A_2 = \mathbb{R} \setminus \{0\},$ which is an open set.
+Then $\overline{A_2} = \mathbb{R}$ so $\text{Int}(\overline{A_2}) = \mathbb{R} \neq A_2.$
+:::
+::::
+
+::::{admonition} Exercise 1.7
+:class: tip
+Let $f: X \to Y$ be a map between topological spaces.
+Show that $f$ is continuous if and only if $f(\overline{A}) \subseteq \overline{f(A)}$ for all $A \subseteq X.$
+Deduce that if $f$ is surjective and continuous, the image of a dense set in $X$ is dense in $Y.$
+
+:::{dropdown} Solution
+__First part:__
+Suppose $f$ is continuous.
+Let $A \subseteq X.$
+Note that
+
+$$\overline{f(A)} = \bigcap_{C \in \mathcal{C}_{f(A)}} C,$$
+
+that is, the closure of $f(A)$ is the intersection of all closed sets containing $f(A).$
+Now consider
+
+$$f^{-1}\left(\overline{f(A)}\right) = f^{-1}\left( \bigcap_{C \in \mathcal{C}_{f(A)}} C \right) \supseteq \bigcap_{C \in \mathcal{C}_{f(A)}} f^{-1}(C) = \bigcap_{C \in \mathcal{C}_{A}} C = f(\overline{A}).$$
+
+where in the second to last inequality we have used the fact that if a set $C$ is closed and contains $f(A),$ then $f^{-1}(C)$ is closed (by the continuity of $f$) and contains $A.$
+Applying $f$ to both sides of the above equation, we obtain $f(\overline{A}) \subseteq \overline{f(A)}.$
+Conversely suppose that $f(\overline{A}) \subseteq \overline{f(A)}$ for all $A \subseteq X.$ 
+Let $B \subseteq Y$ be closed, and let $A = f^{-1}(B).$
+Then we have
+
+$$f(\overline{A}) \subseteq \overline{f(A)} \implies f(\overline{f^{-1}(B)}) \subseteq \overline{B} = B.$$
+
+Now $f(\overline{f^{-1}(B)}) = B$ can hold only if $\overline{f^{-1}(B)} = f^{-1}(B),$ because otherwise the set $\overline{f^{-1}(B)} \setminus f^{-1}(B)$ would be nonempty and that would imply that $f(\overline{f^{-1}(B)}) \neq B.$
+Finally, $\overline{f^{-1}(B)} = f^{-1}(B)$ implies that $f^{-1}(B)$ is closed, so $f$ is continuous.
+
+__Second part:__
+Suppose $f$ is surjective and continuous, and let $A \subseteq X$ be dense.
+Since $f$ is surjective, we have $f(X) = Y$ so
+
+$$\overline{f(A)} \supset f(\overline{A}) = f(X) = Y.$$
+
+which implies $\overline{f(A)} = Y,$ so $f(A)$ is dense in $Y.$
 :::
 ::::
