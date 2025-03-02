@@ -373,10 +373,10 @@ If $X$ is a {prf:ref}`Haussdorff space <topology:def-hausdorff-space>`, show tha
 Let $X$ be a {prf:ref}`Hausdorff space <topology:def-hausdorff-space>`.
 We will show that the complement of $\Delta$ is open.
 
-Let $(x, y) \in X \times X \setminus \Delta.$
-Then $x \neq y.$
-Since $X$ is Hausdorff, there exist open sets $U_x$ and $U_y$ in $X$ such that $x \in U_x,$ $y \in U_y,$ and $U_x \cap U_y = \emptyset.$
-Then $U_x \times U_y$ is an open set in $X \times X$ that contains $(x, y),$ and $U_x \times U_y \cap \Delta = \emptyset.$
-Therefore, $X \times X \setminus \Delta$ is open, so $\Delta$ is closed.
+Let $(x_1, x_2) \in X \times X \setminus \Delta.$
+Then $x_1 \neq x_2.$
+Since $X$ is Hausdorff, there exist open sets $U_x$ and $U_y$ in $X$ such that $x_1 \in U_{x_1},$ $x_2 \in U_{x_2},$ and $U_{x_1} \cap U_{x_2} = \emptyset.$
+Then the set $U_{x_1} \times U_{x_2}$ is an open set in $X \times X$ that contains $(x_1, x_2)$ and $U_{x_1} \times U_{x_2} \cap \Delta = \emptyset,$ so $X \times X \setminus \Delta$ is open.
+Therefore $\Delta$ is closed.
 :::
 ::::
