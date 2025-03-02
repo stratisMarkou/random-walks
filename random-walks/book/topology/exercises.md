@@ -367,11 +367,12 @@ Therefore $U_1$ and $U_2$ are not disjoint, so the topology is not Hausdorff.
 ::::{admonition} Exercise 1.10
 :class: tip
 The diagonal in $X \times X$ is the set $\Delta = \{(x, x) \in X \times X | x \in X \}.$
-If $X$ is a {prf:ref}`Haussdorff space <topology:def-hausdorff-space>,$ show that $\Delta$ is a closed subset of $X \times X.$
+If $X$ is a {prf:ref}`Haussdorff space <topology:def-hausdorff-space>`, show that $\Delta$ is a closed subset of $X \times X.$
 
 :::{dropdown} Solution
 Let $X$ be a {prf:ref}`Hausdorff space <topology:def-hausdorff-space>`.
 We will show that the complement of $\Delta$ is open.
+
 Let $(x, y) \in X \times X \setminus \Delta.$
 Then $x \neq y.$
 Since $X$ is Hausdorff, there exist open sets $U_x$ and $U_y$ in $X$ such that $x \in U_x,$ $y \in U_y,$ and $U_x \cap U_y = \emptyset.$
