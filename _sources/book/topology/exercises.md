@@ -322,3 +322,60 @@ $$\overline{f(A)} \supset f(\overline{A}) = f(X) = Y.$$
 which implies $\overline{f(A)} = Y,$ so $f(A)$ is dense in $Y.$
 :::
 ::::
+
+
+::::{admonition} Exercise 1.8
+:class: tip
+Suppose $X$ is a topological space and $Z \subseteq Y \subseteq X.$
+If $Y$ is dense in $X$ and $Z$ is dense in $Y,$ must $Z$ be dense in $X$?
+
+:::{dropdown} Solution
+Suppose $C \subseteq X$ is closed and $Z \subseteq C.$
+Since $C$ is closed, $C \cap Y$ is closed in the subspace topology on $Y.$
+Since $Z$ is dense in $Y,$ and $C \cap Y$ is a closed set that contains $Z,$ we have $C \cap Y = Y.$
+Therefore $C \supseteq Y.$
+Finally, since $C$ is a closed set that contains $Y$ and $Y$ is dense in $X,$ we have $C = X,$ so $Z$ is dense in $X.$
+:::
+::::
+
+
+::::{admonition} Exercise 1.9
+:class: tip
+Define a topology on $\mathbb{R}$ by declaring the closed subsets to be those which are (1) closed in the usual topology and (2) either bounded or all of $\mathbb{R}.$
+Show that this is a topology, that all points of $\mathbb{R}$ are closed with respect to it, but that the topology is not Hausdorff.
+
+:::{dropdown} Solution
+__First part:__
+Suppose $x \in \mathbb{R}.$
+The set $\{x\}$ is closed in the usual topology on $\mathbb{R}$ and is bounded, so it is closed in the new topology.
+
+__Second part:__
+Suppose $x_1, x_2 \in \mathbb{R}$ and $x_1 \neq x_2.$
+Let $U_1$ and $U_2$ be open sets in the new topology such that $x_1 \in U_1$ and $x_2 \in U_2.$
+Now, $U_1$ and $U_2$ cannot be empty because they contain $x_1$ and $x_2,$ so their complements can't be all of $\mathbb{R}$ and must therefore be bounded.
+Since $\mathbb{R} \setminus U_1$ and $\mathbb{R} \setminus U_2$ are bounded, their union $(\mathbb{R} \setminus U_1) \cup (\mathbb{R} \setminus U_2)$ is also bounded.
+Therefore, the set
+
+$$U_1 \cap U_2 = \mathbb{R} \setminus ((\mathbb{R} \setminus U_1) \cup (\mathbb{R} \setminus U_2))$$
+
+is non-empty, because it is the complement of a bounded set.
+Therefore $U_1$ and $U_2$ are not disjoint, so the topology is not Hausdorff.
+:::
+::::
+
+
+::::{admonition} Exercise 1.10
+:class: tip
+The diagonal in $X \times X$ is the set $\Delta = \{(x, x) \in X \times X | x \in X \}.$
+If $X$ is a {prf:ref}`Haussdorff space <topology:def-hausdorff-space>,$ show that $\Delta$ is a closed subset of $X \times X.$
+
+:::{dropdown} Solution
+Let $X$ be a {prf:ref}`Hausdorff space <topology:def-hausdorff-space>`.
+We will show that the complement of $\Delta$ is open.
+Let $(x, y) \in X \times X \setminus \Delta.$
+Then $x \neq y.$
+Since $X$ is Hausdorff, there exist open sets $U_x$ and $U_y$ in $X$ such that $x \in U_x,$ $y \in U_y,$ and $U_x \cap U_y = \emptyset.$
+Then $U_x \times U_y$ is an open set in $X \times X$ that contains $(x, y),$ and $U_x \times U_y \cap \Delta = \emptyset.$
+Therefore, $X \times X \setminus \Delta$ is open, so $\Delta$ is closed.
+:::
+::::

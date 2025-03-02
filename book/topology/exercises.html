@@ -736,6 +736,70 @@ Since <span class="math notranslate nohighlight">\(f\)</span> is surjective, we 
 <p class="sd-card-text">which implies <span class="math notranslate nohighlight">\(\overline{f(A)} = Y,\)</span> so <span class="math notranslate nohighlight">\(f(A)\)</span> is dense in <span class="math notranslate nohighlight">\(Y.\)</span></p>
 </div>
 </details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.8</p>
+<p>Suppose <span class="math notranslate nohighlight">\(X\)</span> is a topological space and <span class="math notranslate nohighlight">\(Z \subseteq Y \subseteq X.\)</span>
+If <span class="math notranslate nohighlight">\(Y\)</span> is dense in <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Z\)</span> is dense in <span class="math notranslate nohighlight">\(Y,\)</span> must <span class="math notranslate nohighlight">\(Z\)</span> be dense in <span class="math notranslate nohighlight">\(X\)</span>?</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(C \subseteq X\)</span> is closed and <span class="math notranslate nohighlight">\(Z \subseteq C.\)</span>
+Since <span class="math notranslate nohighlight">\(C\)</span> is closed, <span class="math notranslate nohighlight">\(C \cap Y\)</span> is closed in the subspace topology on <span class="math notranslate nohighlight">\(Y.\)</span>
+Since <span class="math notranslate nohighlight">\(Z\)</span> is dense in <span class="math notranslate nohighlight">\(Y,\)</span> and <span class="math notranslate nohighlight">\(C \cap Y\)</span> is a closed set that contains <span class="math notranslate nohighlight">\(Z,\)</span> we have <span class="math notranslate nohighlight">\(C \cap Y = Y.\)</span>
+Therefore <span class="math notranslate nohighlight">\(C \supseteq Y.\)</span>
+Finally, since <span class="math notranslate nohighlight">\(C\)</span> is a closed set that contains <span class="math notranslate nohighlight">\(Y\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> is dense in <span class="math notranslate nohighlight">\(X,\)</span> we have <span class="math notranslate nohighlight">\(C = X,\)</span> so <span class="math notranslate nohighlight">\(Z\)</span> is dense in <span class="math notranslate nohighlight">\(X.\)</span></p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.9</p>
+<p>Define a topology on <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> by declaring the closed subsets to be those which are (1) closed in the usual topology and (2) either bounded or all of <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span>
+Show that this is a topology, that all points of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> are closed with respect to it, but that the topology is not Hausdorff.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><strong>First part:</strong>
+Suppose <span class="math notranslate nohighlight">\(x \in \mathbb{R}.\)</span>
+The set <span class="math notranslate nohighlight">\(\{x\}\)</span> is closed in the usual topology on <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> and is bounded, so it is closed in the new topology.</p>
+<p class="sd-card-text"><strong>Second part:</strong>
+Suppose <span class="math notranslate nohighlight">\(x_1, x_2 \in \mathbb{R}\)</span> and <span class="math notranslate nohighlight">\(x_1 \neq x_2.\)</span>
+Let <span class="math notranslate nohighlight">\(U_1\)</span> and <span class="math notranslate nohighlight">\(U_2\)</span> be open sets in the new topology such that <span class="math notranslate nohighlight">\(x_1 \in U_1\)</span> and <span class="math notranslate nohighlight">\(x_2 \in U_2.\)</span>
+Now, <span class="math notranslate nohighlight">\(U_1\)</span> and <span class="math notranslate nohighlight">\(U_2\)</span> cannot be empty because they contain <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2,\)</span> so their complements can’t be all of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> and must therefore be bounded.
+Since <span class="math notranslate nohighlight">\(\mathbb{R} \setminus U_1\)</span> and <span class="math notranslate nohighlight">\(\mathbb{R} \setminus U_2\)</span> are bounded, their union <span class="math notranslate nohighlight">\((\mathbb{R} \setminus U_1) \cup (\mathbb{R} \setminus U_2)\)</span> is also bounded.
+Therefore, the set</p>
+<div class="math notranslate nohighlight">
+\[U_1 \cap U_2 = \mathbb{R} \setminus ((\mathbb{R} \setminus U_1) \cup (\mathbb{R} \setminus U_2))\]</div>
+<p class="sd-card-text">is non-empty, because it is the complement of a bounded set.
+Therefore <span class="math notranslate nohighlight">\(U_1\)</span> and <span class="math notranslate nohighlight">\(U_2\)</span> are not disjoint, so the topology is not Hausdorff.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.10</p>
+<p>The diagonal in <span class="math notranslate nohighlight">\(X \times X\)</span> is the set <span class="math notranslate nohighlight">\(\Delta = \{(x, x) \in X \times X | x \in X \}.\)</span>
+If <span class="math notranslate nohighlight">\(X\)</span> is a {prf:ref}`Haussdorff space <a class="reference external" href="topology:def-hausdorff-space">topology:def-hausdorff-space</a>,<span class="math notranslate nohighlight">\( show that \)</span>\Delta<span class="math notranslate nohighlight">\( is a closed subset of \)</span>X \times X.$</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(X\)</span> be a <a class="reference internal" href="002-topological-spaces.html#topology:def-hausdorff-space">Hausdorff space</a>.
+We will show that the complement of <span class="math notranslate nohighlight">\(\Delta\)</span> is open.
+Let <span class="math notranslate nohighlight">\((x, y) \in X \times X \setminus \Delta.\)</span>
+Then <span class="math notranslate nohighlight">\(x \neq y.\)</span>
+Since <span class="math notranslate nohighlight">\(X\)</span> is Hausdorff, there exist open sets <span class="math notranslate nohighlight">\(U_x\)</span> and <span class="math notranslate nohighlight">\(U_y\)</span> in <span class="math notranslate nohighlight">\(X\)</span> such that <span class="math notranslate nohighlight">\(x \in U_x,\)</span> <span class="math notranslate nohighlight">\(y \in U_y,\)</span> and <span class="math notranslate nohighlight">\(U_x \cap U_y = \emptyset.\)</span>
+Then <span class="math notranslate nohighlight">\(U_x \times U_y\)</span> is an open set in <span class="math notranslate nohighlight">\(X \times X\)</span> that contains <span class="math notranslate nohighlight">\((x, y),\)</span> and <span class="math notranslate nohighlight">\(U_x \times U_y \cap \Delta = \emptyset.\)</span>
+Therefore, <span class="math notranslate nohighlight">\(X \times X \setminus \Delta\)</span> is open, so <span class="math notranslate nohighlight">\(\Delta\)</span> is closed.</p>
+</div>
+</details></div>
 </section>
 
     <script type="text/x-thebe-config">
