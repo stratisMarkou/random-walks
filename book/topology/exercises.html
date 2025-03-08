@@ -793,11 +793,33 @@ Solution<div class="sd-summary-down docutils">
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">Let <span class="math notranslate nohighlight">\(X\)</span> be a <a class="reference internal" href="002-topological-spaces.html#topology:def-hausdorff-space">Hausdorff space</a>.
 We will show that the complement of <span class="math notranslate nohighlight">\(\Delta\)</span> is open.</p>
-<p class="sd-card-text">Let <span class="math notranslate nohighlight">\((x, y) \in X \times X \setminus \Delta.\)</span>
-Then <span class="math notranslate nohighlight">\(x \neq y.\)</span>
-Since <span class="math notranslate nohighlight">\(X\)</span> is Hausdorff, there exist open sets <span class="math notranslate nohighlight">\(U_x\)</span> and <span class="math notranslate nohighlight">\(U_y\)</span> in <span class="math notranslate nohighlight">\(X\)</span> such that <span class="math notranslate nohighlight">\(x \in U_x,\)</span> <span class="math notranslate nohighlight">\(y \in U_y,\)</span> and <span class="math notranslate nohighlight">\(U_x \cap U_y = \emptyset.\)</span>
-Then <span class="math notranslate nohighlight">\(U_x \times U_y\)</span> is an open set in <span class="math notranslate nohighlight">\(X \times X\)</span> that contains <span class="math notranslate nohighlight">\((x, y),\)</span> and <span class="math notranslate nohighlight">\(U_x \times U_y \cap \Delta = \emptyset.\)</span>
-Therefore, <span class="math notranslate nohighlight">\(X \times X \setminus \Delta\)</span> is open, so <span class="math notranslate nohighlight">\(\Delta\)</span> is closed.</p>
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\((x_1, x_2) \in X \times X \setminus \Delta.\)</span>
+Then <span class="math notranslate nohighlight">\(x_1 \neq x_2.\)</span>
+Since <span class="math notranslate nohighlight">\(X\)</span> is Hausdorff, there exist open sets <span class="math notranslate nohighlight">\(U_x\)</span> and <span class="math notranslate nohighlight">\(U_y\)</span> in <span class="math notranslate nohighlight">\(X\)</span> such that <span class="math notranslate nohighlight">\(x_1 \in U_{x_1},\)</span> <span class="math notranslate nohighlight">\(x_2 \in U_{x_2},\)</span> and <span class="math notranslate nohighlight">\(U_{x_1} \cap U_{x_2} = \emptyset.\)</span>
+Then the set <span class="math notranslate nohighlight">\(U_{x_1} \times U_{x_2}\)</span> is an open set in <span class="math notranslate nohighlight">\(X \times X\)</span> that contains <span class="math notranslate nohighlight">\((x_1, x_2)\)</span> and <span class="math notranslate nohighlight">\(U_{x_1} \times U_{x_2} \cap \Delta = \emptyset,\)</span> so <span class="math notranslate nohighlight">\(X \times X \setminus \Delta\)</span> is open.
+Therefore <span class="math notranslate nohighlight">\(\Delta\)</span> is closed.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.11</p>
+<p>Exhibit a countable basis for the usual topology of <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">The set <span class="math notranslate nohighlight">\(B = \{(q_1, q_2): q_1, q_2 \in \mathbb{Q}\}\)</span> is countable.
+We will show that it is a basis for the usual topology of <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span></p>
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(U\)</span> be an open set in <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span>
+Then <span class="math notranslate nohighlight">\(U\)</span> is the union of countably many open intervals <span class="math notranslate nohighlight">\(U_1, U_2, \dots.\)</span>
+Each of these intervals can be written as <span class="math notranslate nohighlight">\(U_n = (a_n, b_n)\)</span> for some <span class="math notranslate nohighlight">\(a_n, b_n \in \mathbb{R}\)</span> and <span class="math notranslate nohighlight">\(n = 1, 2, \dots.\)</span>
+We will show that each such interval is a countable union of sets in <span class="math notranslate nohighlight">\(B.\)</span></p>
+<p class="sd-card-text">First, for each <span class="math notranslate nohighlight">\(a_n,\)</span> there exists a decreasing sequence <span class="math notranslate nohighlight">\(\tilde{a}_{n, 1} &gt; \tilde{a}_{n, 2}, \dots \in \mathbb{Q}\)</span> which converges to <span class="math notranslate nohighlight">\(a\)</span> from above.
+Similarly, for each <span class="math notranslate nohighlight">\(b_n,\)</span> there exists an increasing sequence <span class="math notranslate nohighlight">\(\tilde{b}_{n, 1} &lt; \tilde{b}_{n, 2}, \dots \in \mathbb{Q}\)</span> which converges to <span class="math notranslate nohighlight">\(b\)</span> from below.
+Then <span class="math notranslate nohighlight">\(U_n = \cup_{m = 1}^\infty (a_{n, m}, b_{n, m}),\)</span> which is a countable union of sets in <span class="math notranslate nohighlight">\(B.\)</span>
+Therefore <span class="math notranslate nohighlight">\(U\)</span> can also be written as a countable union of sets in <span class="math notranslate nohighlight">\(B,\)</span> and so <span class="math notranslate nohighlight">\(B\)</span> is a basis for <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span></p>
 </div>
 </details></div>
 </section>
