@@ -397,7 +397,7 @@ We will show that each such interval is a countable union of sets in $B.$
 
 First, for each $a_n,$ there exists a decreasing sequence $\tilde{a}_{n, 1} > \tilde{a}_{n, 2}, \dots \in \mathbb{Q}$ which converges to $a$ from above.
 Similarly, for each $b_n,$ there exists an increasing sequence $\tilde{b}_{n, 1} < \tilde{b}_{n, 2}, \dots \in \mathbb{Q}$ which converges to $b$ from below.
-Then $U_n = \cup_{m = 1}^\infty (a_{n, m}, b_{n, m}),$ which is a countable union of sets in $B.$
+Then $U_n = \cup_{m = 1}^\infty (\tilde{a}_{n, m}, \tilde{b}_{n, m}),$ which is a countable union of sets in $B.$
 Therefore $U$ can also be written as a countable union of sets in $B,$ and so $B$ is a basis for $\mathbb{R}.$
 :::
 ::::
