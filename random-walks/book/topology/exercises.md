@@ -380,3 +380,24 @@ Then the set $U_{x_1} \times U_{x_2}$ is an open set in $X \times X$ that contai
 Therefore $\Delta$ is closed.
 :::
 ::::
+
+
+::::{admonition} Exercise 1.11
+:class: tip
+Exhibit a countable basis for the usual topology of $\mathbb{R}.$
+
+:::{dropdown} Solution
+The set $B = \{(q_1, q_2): q_1, q_2 \in \mathbb{Q}\}$ is countable.
+We will show that it is a basis for the usual topology of $\mathbb{R}.$
+
+Let $U$ be an open set in $\mathbb{R}.$
+Then $U$ is the union of countably many open intervals $U_1, U_2, \dots.$
+Each of these intervals can be written as $U_n = (a_n, b_n)$ for some $a_n, b_n \in \mathbb{R}$ and $n = 1, 2, \dots.$
+We will show that each such interval is a countable union of sets in $B.$
+
+First, for each $a_n,$ there exists a decreasing sequence $\tilde{a}_{n, 1} > \tilde{a}_{n, 2}, \dots \in \mathbb{Q}$ which converges to $a$ from above.
+Similarly, for each $b_n,$ there exists an increasing sequence $\tilde{b}_{n, 1} < \tilde{b}_{n, 2}, \dots \in \mathbb{Q}$ which converges to $b$ from below.
+Then $U_n = \cup_{m = 1}^\infty (a_{n, m}, b_{n, m}),$ which is a countable union of sets in $B.$
+Therefore $U$ can also be written as a countable union of sets in $B,$ and so $B$ is a basis for $\mathbb{R}.$
+:::
+::::
