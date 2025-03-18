@@ -418,8 +418,8 @@ Let $f: X \to Y$ be the map defined as:
 
 $$\begin{equation}
 f(\pi_X(\{(\theta, \phi)\})) = \begin{cases}
-\{(\theta, \phi)\} & \text{if } x \neq \pi_X(A) \\
-\pi_Y(B) & \text{if } x = \pi_X(A)
+\{(\theta, \phi)\} & \text{if } \pi_X(\{(\theta, \phi)\}) \neq \pi_X(A) \\
+\pi_Y(B) & \text{if } \pi_X(\{(\theta, \phi)\}) = \pi_X(A)
 \end{cases}
 \end{equation}$$
 
