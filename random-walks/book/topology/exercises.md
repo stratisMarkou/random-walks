@@ -433,8 +433,10 @@ By inspecting the definition of $f$ we see that this can occur only if $\pi_X(\{
 Therefore $f$ is injective.
 
 __Surjectivity:__
-If $\pi_Y(\{(\theta, \phi)\}) = B,$ then we note $f(\pi_X(\{A\})) = B.$
-Otherwise if $\pi_Y(\{(\theta, \phi)\}) \neq B,$ then $f(\pi_X(\{(\theta, \phi)\})) = \pi_Y(\{(\theta, \phi)\}).$
+First, note $f(\pi_X(\{A\})) = \pi_Y(B).$
+The remaining equivalence classes in $Y$ that we have to show are in the image of $f$ are the singleton equivalence classes.
+Suppose $\{(\theta, \phi)\} \in Y$ is a singleton equivalence class.
+Then $\theta \neq 0$ so $f(\pi_X(\{(\theta, \phi)\})) = \{(\theta, \phi)\}.$
 Therefore $f$ is surjective.
 
 __Continuity:__
