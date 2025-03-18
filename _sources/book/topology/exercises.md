@@ -417,7 +417,7 @@ Let $\pi_X: S^2 \to X$ and $\pi_Y: T^2 \to Y$ be the quotient maps.
 Let $f: X \to Y$ be the map defined as:
 
 $$\begin{equation}
-f(\pi_X(\theta, \phi)) = \begin{cases}
+f(\pi_X(\{(\theta, \phi)\})) = \begin{cases}
 \{(\theta, \phi)\} & \text{if } x \neq \pi_X(A) \\
 \pi_Y(B) & \text{if } x = \pi_X(A)
 \end{cases}
