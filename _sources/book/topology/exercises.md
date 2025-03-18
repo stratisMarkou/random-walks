@@ -397,7 +397,87 @@ We will show that each such interval is a countable union of sets in $B.$
 
 First, for each $a_n,$ there exists a decreasing sequence $\tilde{a}_{n, 1} > \tilde{a}_{n, 2}, \dots \in \mathbb{Q}$ which converges to $a$ from above.
 Similarly, for each $b_n,$ there exists an increasing sequence $\tilde{b}_{n, 1} < \tilde{b}_{n, 2}, \dots \in \mathbb{Q}$ which converges to $b$ from below.
-Then $U_n = \cup_{m = 1}^\infty (a_{n, m}, b_{n, m}),$ which is a countable union of sets in $B.$
+Then $U_n = \cup_{m = 1}^\infty (\tilde{a}_{n, m}, \tilde{b}_{n, m}),$ which is a countable union of sets in $B.$
 Therefore $U$ can also be written as a countable union of sets in $B,$ and so $B$ is a basis for $\mathbb{R}.$
+:::
+::::
+
+
+::::{admonition} Exercise 1.12
+:class: tip
+Let $A = \{(0, 0, 1), (0, 0, -1)\} \subseteq S^2$ be the poles of the two-dimensional sphere.
+Let $B \subseteq T^2$ be the image of $\mathbb{R} \times 0 \subseteq \mathbb{R}^2$ into the two dimensional torus.
+Show that $S^2 / A$ is homeomorphic to $T^2 / B.$
+
+:::{dropdown} Solution
+For convenience, let us write $X = S^2 / A$ and $Y = T^2 / B.$
+We will use polar coordinate notation to describe $S^2$ where $\theta \in [0, \pi]$ is the polar angle and $\phi \in [0, 2 \pi)$ is the azimuthal angle.
+Similarly we can also use polar coordinate notation to describe $T^2$ where $\theta \in [0, \pi)$ is the polar angle and $\phi \in [0, 2 \pi)$ is the azimuthal angle.
+Let $\pi_X: S^2 \to X$ and $\pi_Y: T^2 \to Y$ be the quotient maps.
+Let $f: X \to Y$ be the map defined as:
+
+$$\begin{equation}
+f(\pi_X(\theta, \phi)) = \begin{cases}
+\{(\theta, \phi)\} & \text{if } x \neq \pi_X(A) \\
+\pi_Y(B) & \text{if } x = \pi_X(A)
+\end{cases}
+\end{equation}$$
+
+We will now show that $f$ is a homeomorphism between $X$ and $Y.$
+First, we show $f$ is a injective and surjective, and therefore a bijection.
+Second, we show that $f$ and $f^{-1}$ are continuous.
+
+__Injectivity:__
+Suppose $\pi_X(\{(\theta, \phi)\}) \in X$ and $\pi_X(\{(\theta', \phi')\}) \in X$ such that $f(\pi_X(\{(\theta, \phi)\})) = f(\pi_X(\{(\theta', \phi')\})).$
+By inspecting the definition of $f$ we see that this can occur only if $\pi_X(\{(\theta, \phi)\}) = \pi_X(\{(\theta', \phi')\}).$
+Therefore $f$ is injective.
+
+__Surjectivity:__
+If $\pi_Y(\{(\theta, \phi)\}) = B,$ then we note $f(\pi_X(\{A\})) = B.$
+Otherwise if $\pi_Y(\{(\theta, \phi)\}) \neq B,$ then $f(\pi_X(\{(\theta, \phi)\})) = \pi_Y(\{(\theta, \phi)\}).$
+Therefore $f$ is surjective.
+
+__Continuity:__
+We show that $f$ is continuous.
+Suppose $U$ is an open set in $Y.$
+Define the mapping $\iota: S^2 \setminus A \to T^2 \setminus B$ as the identity map in polar coordinates, and note that it is bijective and continuous, so it is a homeomorphism.
+Now we consider two possible cases:
+either $U$ contains $\pi_Y(B)$ or it does not.
+
+If $U$ does not contain $\pi_Y(B),$ then $\pi_Y^{-1}(U)$ is in the domain of $\iota^{-1},$ and we can write
+
+$$f^{-1}(U) = (\pi_X \circ \iota^{-1} \circ \pi^{-1}_Y)(U).$$
+
+Therefore $f^{-1}(U)$ is open in $X,$ as $(\iota^{-1} \circ \pi^{-1}_Y)(U)$ is open in $S^2.$ 
+
+If $U$ contains $\pi_Y(B),$ then $\pi_Y^{-1}(U)$ is an open set that contains $B.$
+Now, the pre-image of $\pi_Y^{-1}(U) \setminus B$ under $\iota$ is an open set in $S^2$ and furthermore, adding $A$ to this set does not change the fact that it is open, i.e. $\iota^{-1}(\pi_Y^{-1}(U) \setminus B) \cup A$ is open in $S^2.$
+We can now write
+
+$$f^{-1}(U) = \pi_X(\iota^{-1}(\pi_Y^{-1}(U) \setminus B) \cup A),$$
+
+and since $\iota^{-1}(\pi_Y^{-1}(U) \setminus B) \cup A$ is open in $S^2,$ we have that $f^{-1}(U)$ is open in $X.$
+We have therefore shown that $f$ is continuous.
+
+__Continuity of inverse:__
+We can similarly show that $f^{-1}$ is continuous.
+Let $V$ be an open set in $X.$
+Again, we consider two cases:
+either $V$ contains $\pi_X(A)$ or it does not.
+
+If $V$ does not contain $\pi_X(A),$ then $\pi_X^{-1}(V)$ is in the domain of $\iota,$ and we can write
+
+$$f(\pi_X^{-1}(V)) = (\pi_Y \circ \iota \circ \pi^{-1}_X)(V).$$
+
+Therefore $f(\pi_X^{-1}(V))$ is open in $Y,$ as $(\iota \circ \pi^{-1}_X)(V)$ is open in $T^2.$
+
+If $V$ contains $\pi_X(A),$ then $\pi_X^{-1}(V)$ is an open set that contains $A.$
+Now, the image of $\pi_X^{-1}(V) \setminus A$ under $\iota$ is an open set in $T^2$ and furthermore, adding $B$ to this set does not change the fact that it is open, i.e. $\iota(\pi_X^{-1}(V) \setminus A) \cup B$ is open in $T^2.$
+We can now write
+
+$$f(\pi_X^{-1}(V)) = \pi_Y(\iota(\pi_X^{-1}(V) \setminus A) \cup B),$$
+
+and since $\iota(\pi_X^{-1}(V) \setminus A) \cup B$ is open in $T^2,$ we have that $f(\pi_X^{-1}(V))$ is open in $Y.$
+We have therefore shown that $f^{-1}$ is continuous.
 :::
 ::::

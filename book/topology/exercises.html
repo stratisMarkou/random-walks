@@ -818,8 +818,78 @@ Each of these intervals can be written as <span class="math notranslate nohighli
 We will show that each such interval is a countable union of sets in <span class="math notranslate nohighlight">\(B.\)</span></p>
 <p class="sd-card-text">First, for each <span class="math notranslate nohighlight">\(a_n,\)</span> there exists a decreasing sequence <span class="math notranslate nohighlight">\(\tilde{a}_{n, 1} &gt; \tilde{a}_{n, 2}, \dots \in \mathbb{Q}\)</span> which converges to <span class="math notranslate nohighlight">\(a\)</span> from above.
 Similarly, for each <span class="math notranslate nohighlight">\(b_n,\)</span> there exists an increasing sequence <span class="math notranslate nohighlight">\(\tilde{b}_{n, 1} &lt; \tilde{b}_{n, 2}, \dots \in \mathbb{Q}\)</span> which converges to <span class="math notranslate nohighlight">\(b\)</span> from below.
-Then <span class="math notranslate nohighlight">\(U_n = \cup_{m = 1}^\infty (a_{n, m}, b_{n, m}),\)</span> which is a countable union of sets in <span class="math notranslate nohighlight">\(B.\)</span>
+Then <span class="math notranslate nohighlight">\(U_n = \cup_{m = 1}^\infty (\tilde{a}_{n, m}, \tilde{b}_{n, m}),\)</span> which is a countable union of sets in <span class="math notranslate nohighlight">\(B.\)</span>
 Therefore <span class="math notranslate nohighlight">\(U\)</span> can also be written as a countable union of sets in <span class="math notranslate nohighlight">\(B,\)</span> and so <span class="math notranslate nohighlight">\(B\)</span> is a basis for <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span></p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.12</p>
+<p>Let <span class="math notranslate nohighlight">\(A = \{(0, 0, 1), (0, 0, -1)\} \subseteq S^2\)</span> be the poles of the two-dimensional sphere.
+Let <span class="math notranslate nohighlight">\(B \subseteq T^2\)</span> be the image of <span class="math notranslate nohighlight">\(\mathbb{R} \times 0 \subseteq \mathbb{R}^2\)</span> into the two dimensional torus.
+Show that <span class="math notranslate nohighlight">\(S^2 / A\)</span> is homeomorphic to <span class="math notranslate nohighlight">\(T^2 / B.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">For convenience, let us write <span class="math notranslate nohighlight">\(X = S^2 / A\)</span> and <span class="math notranslate nohighlight">\(Y = T^2 / B.\)</span>
+We will use polar coordinate notation to describe <span class="math notranslate nohighlight">\(S^2\)</span> where <span class="math notranslate nohighlight">\(\theta \in [0, \pi]\)</span> is the polar angle and <span class="math notranslate nohighlight">\(\phi \in [0, 2 \pi)\)</span> is the azimuthal angle.
+Similarly we can also use polar coordinate notation to describe <span class="math notranslate nohighlight">\(T^2\)</span> where <span class="math notranslate nohighlight">\(\theta \in [0, \pi)\)</span> is the polar angle and <span class="math notranslate nohighlight">\(\phi \in [0, 2 \pi)\)</span> is the azimuthal angle.
+Let <span class="math notranslate nohighlight">\(\pi_X: S^2 \to X\)</span> and <span class="math notranslate nohighlight">\(\pi_Y: T^2 \to Y\)</span> be the quotient maps.
+Let <span class="math notranslate nohighlight">\(f: X \to Y\)</span> be the map defined as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{equation}
+f(\pi_X(\theta, \phi)) = \begin{cases}
+\{(\theta, \phi)\} &amp; \text{if } x \neq \pi_X(A) \\
+\pi_Y(B) &amp; \text{if } x = \pi_X(A)
+\end{cases}
+\end{equation}\end{split}\]</div>
+<p class="sd-card-text">We will now show that <span class="math notranslate nohighlight">\(f\)</span> is a homeomorphism between <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y.\)</span>
+First, we show <span class="math notranslate nohighlight">\(f\)</span> is a injective and surjective, and therefore a bijection.
+Second, we show that <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(f^{-1}\)</span> are continuous.</p>
+<p class="sd-card-text"><strong>Injectivity:</strong>
+Suppose <span class="math notranslate nohighlight">\(\pi_X(\{(\theta, \phi)\}) \in X\)</span> and <span class="math notranslate nohighlight">\(\pi_X(\{(\theta', \phi')\}) \in X\)</span> such that <span class="math notranslate nohighlight">\(f(\pi_X(\{(\theta, \phi)\})) = f(\pi_X(\{(\theta', \phi')\})).\)</span>
+By inspecting the definition of <span class="math notranslate nohighlight">\(f\)</span> we see that this can occur only if <span class="math notranslate nohighlight">\(\pi_X(\{(\theta, \phi)\}) = \pi_X(\{(\theta', \phi')\}).\)</span>
+Therefore <span class="math notranslate nohighlight">\(f\)</span> is injective.</p>
+<p class="sd-card-text"><strong>Surjectivity:</strong>
+If <span class="math notranslate nohighlight">\(\pi_Y(\{(\theta, \phi)\}) = B,\)</span> then we note <span class="math notranslate nohighlight">\(f(\pi_X(\{A\})) = B.\)</span>
+Otherwise if <span class="math notranslate nohighlight">\(\pi_Y(\{(\theta, \phi)\}) \neq B,\)</span> then <span class="math notranslate nohighlight">\(f(\pi_X(\{(\theta, \phi)\})) = \pi_Y(\{(\theta, \phi)\}).\)</span>
+Therefore <span class="math notranslate nohighlight">\(f\)</span> is surjective.</p>
+<p class="sd-card-text"><strong>Continuity:</strong>
+We show that <span class="math notranslate nohighlight">\(f\)</span> is continuous.
+Suppose <span class="math notranslate nohighlight">\(U\)</span> is an open set in <span class="math notranslate nohighlight">\(Y.\)</span>
+Define the mapping <span class="math notranslate nohighlight">\(\iota: S^2 \setminus A \to T^2 \setminus B\)</span> as the identity map in polar coordinates, and note that it is bijective and continuous, so it is a homeomorphism.
+Now we consider two possible cases:
+either <span class="math notranslate nohighlight">\(U\)</span> contains <span class="math notranslate nohighlight">\(\pi_Y(B)\)</span> or it does not.</p>
+<p class="sd-card-text">If <span class="math notranslate nohighlight">\(U\)</span> does not contain <span class="math notranslate nohighlight">\(\pi_Y(B),\)</span> then <span class="math notranslate nohighlight">\(\pi_Y^{-1}(U)\)</span> is in the domain of <span class="math notranslate nohighlight">\(\iota^{-1},\)</span> and we can write</p>
+<div class="math notranslate nohighlight">
+\[f^{-1}(U) = (\pi_X \circ \iota^{-1} \circ \pi^{-1}_Y)(U).\]</div>
+<p class="sd-card-text">Therefore <span class="math notranslate nohighlight">\(f^{-1}(U)\)</span> is open in <span class="math notranslate nohighlight">\(X,\)</span> as <span class="math notranslate nohighlight">\((\iota^{-1} \circ \pi^{-1}_Y)(U)\)</span> is open in <span class="math notranslate nohighlight">\(S^2.\)</span></p>
+<p class="sd-card-text">If <span class="math notranslate nohighlight">\(U\)</span> contains <span class="math notranslate nohighlight">\(\pi_Y(B),\)</span> then <span class="math notranslate nohighlight">\(\pi_Y^{-1}(U)\)</span> is an open set that contains <span class="math notranslate nohighlight">\(B.\)</span>
+Now, the pre-image of <span class="math notranslate nohighlight">\(\pi_Y^{-1}(U) \setminus B\)</span> under <span class="math notranslate nohighlight">\(\iota\)</span> is an open set in <span class="math notranslate nohighlight">\(S^2\)</span> and furthermore, adding <span class="math notranslate nohighlight">\(A\)</span> to this set does not change the fact that it is open, i.e. <span class="math notranslate nohighlight">\(\iota^{-1}(\pi_Y^{-1}(U) \setminus B) \cup A\)</span> is open in <span class="math notranslate nohighlight">\(S^2.\)</span>
+We can now write</p>
+<div class="math notranslate nohighlight">
+\[f^{-1}(U) = \pi_X(\iota^{-1}(\pi_Y^{-1}(U) \setminus B) \cup A),\]</div>
+<p class="sd-card-text">and since <span class="math notranslate nohighlight">\(\iota^{-1}(\pi_Y^{-1}(U) \setminus B) \cup A\)</span> is open in <span class="math notranslate nohighlight">\(S^2,\)</span> we have that <span class="math notranslate nohighlight">\(f^{-1}(U)\)</span> is open in <span class="math notranslate nohighlight">\(X.\)</span>
+We have therefore shown that <span class="math notranslate nohighlight">\(f\)</span> is continuous.</p>
+<p class="sd-card-text"><strong>Continuity of inverse:</strong>
+We can similarly show that <span class="math notranslate nohighlight">\(f^{-1}\)</span> is continuous.
+Let <span class="math notranslate nohighlight">\(V\)</span> be an open set in <span class="math notranslate nohighlight">\(X.\)</span>
+Again, we consider two cases:
+either <span class="math notranslate nohighlight">\(V\)</span> contains <span class="math notranslate nohighlight">\(\pi_X(A)\)</span> or it does not.</p>
+<p class="sd-card-text">If <span class="math notranslate nohighlight">\(V\)</span> does not contain <span class="math notranslate nohighlight">\(\pi_X(A),\)</span> then <span class="math notranslate nohighlight">\(\pi_X^{-1}(V)\)</span> is in the domain of <span class="math notranslate nohighlight">\(\iota,\)</span> and we can write</p>
+<div class="math notranslate nohighlight">
+\[f(\pi_X^{-1}(V)) = (\pi_Y \circ \iota \circ \pi^{-1}_X)(V).\]</div>
+<p class="sd-card-text">Therefore <span class="math notranslate nohighlight">\(f(\pi_X^{-1}(V))\)</span> is open in <span class="math notranslate nohighlight">\(Y,\)</span> as <span class="math notranslate nohighlight">\((\iota \circ \pi^{-1}_X)(V)\)</span> is open in <span class="math notranslate nohighlight">\(T^2.\)</span></p>
+<p class="sd-card-text">If <span class="math notranslate nohighlight">\(V\)</span> contains <span class="math notranslate nohighlight">\(\pi_X(A),\)</span> then <span class="math notranslate nohighlight">\(\pi_X^{-1}(V)\)</span> is an open set that contains <span class="math notranslate nohighlight">\(A.\)</span>
+Now, the image of <span class="math notranslate nohighlight">\(\pi_X^{-1}(V) \setminus A\)</span> under <span class="math notranslate nohighlight">\(\iota\)</span> is an open set in <span class="math notranslate nohighlight">\(T^2\)</span> and furthermore, adding <span class="math notranslate nohighlight">\(B\)</span> to this set does not change the fact that it is open, i.e. <span class="math notranslate nohighlight">\(\iota(\pi_X^{-1}(V) \setminus A) \cup B\)</span> is open in <span class="math notranslate nohighlight">\(T^2.\)</span>
+We can now write</p>
+<div class="math notranslate nohighlight">
+\[f(\pi_X^{-1}(V)) = \pi_Y(\iota(\pi_X^{-1}(V) \setminus A) \cup B),\]</div>
+<p class="sd-card-text">and since <span class="math notranslate nohighlight">\(\iota(\pi_X^{-1}(V) \setminus A) \cup B\)</span> is open in <span class="math notranslate nohighlight">\(T^2,\)</span> we have that <span class="math notranslate nohighlight">\(f(\pi_X^{-1}(V))\)</span> is open in <span class="math notranslate nohighlight">\(Y.\)</span>
+We have therefore shown that <span class="math notranslate nohighlight">\(f^{-1}\)</span> is continuous.</p>
 </div>
 </details></div>
 </section>
