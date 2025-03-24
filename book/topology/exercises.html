@@ -823,7 +823,7 @@ Therefore <span class="math notranslate nohighlight">\(U\)</span> can also be wr
 </div>
 </details></div>
 <div class="tip admonition">
-<p class="admonition-title">Exercise 1.12</p>
+<p class="admonition-title">Exercise 1.13</p>
 <p>Let <span class="math notranslate nohighlight">\(A = \{(0, 0, 1), (0, 0, -1)\} \subseteq S^2\)</span> be the poles of the two-dimensional sphere.
 Let <span class="math notranslate nohighlight">\(B \subseteq T^2\)</span> be the image of <span class="math notranslate nohighlight">\(\mathbb{R} \times 0 \subseteq \mathbb{R}^2\)</span> into the two dimensional torus.
 Show that <span class="math notranslate nohighlight">\(S^2 / A\)</span> is homeomorphic to <span class="math notranslate nohighlight">\(T^2 / B.\)</span></p>
@@ -847,18 +847,8 @@ f(\pi_X(\{(\theta, \phi)\})) = \begin{cases}
 \end{cases}
 \end{equation}\end{split}\]</div>
 <p class="sd-card-text">We will now show that <span class="math notranslate nohighlight">\(f\)</span> is a homeomorphism between <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y.\)</span>
-First, we show <span class="math notranslate nohighlight">\(f\)</span> is a injective and surjective, and therefore a bijection.
-Second, we show that <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(f^{-1}\)</span> are continuous.</p>
-<p class="sd-card-text"><strong>Injectivity:</strong>
-Suppose <span class="math notranslate nohighlight">\(\pi_X(\{(\theta, \phi)\}) \in X\)</span> and <span class="math notranslate nohighlight">\(\pi_X(\{(\theta', \phi')\}) \in X\)</span> such that <span class="math notranslate nohighlight">\(f(\pi_X(\{(\theta, \phi)\})) = f(\pi_X(\{(\theta', \phi')\})).\)</span>
-By inspecting the definition of <span class="math notranslate nohighlight">\(f\)</span> we see that this can occur only if <span class="math notranslate nohighlight">\(\pi_X(\{(\theta, \phi)\}) = \pi_X(\{(\theta', \phi')\}).\)</span>
-Therefore <span class="math notranslate nohighlight">\(f\)</span> is injective.</p>
-<p class="sd-card-text"><strong>Surjectivity:</strong>
-First, note <span class="math notranslate nohighlight">\(f(\pi_X(\{A\})) = \pi_Y(B).\)</span>
-The remaining equivalence classes in <span class="math notranslate nohighlight">\(Y\)</span> that we have to show are in the image of <span class="math notranslate nohighlight">\(f\)</span> are the singleton equivalence classes.
-Suppose <span class="math notranslate nohighlight">\(\{(\theta, \phi)\} \in Y\)</span> is a singleton equivalence class.
-Then <span class="math notranslate nohighlight">\(\theta \neq 0\)</span> so <span class="math notranslate nohighlight">\(f(\pi_X(\{(\theta, \phi)\})) = \{(\theta, \phi)\}.\)</span>
-Therefore <span class="math notranslate nohighlight">\(f\)</span> is surjective.</p>
+First, by inspecting the definition of <span class="math notranslate nohighlight">\(f,\)</span> we note that it is bijective.
+Now we show that <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(f^{-1}\)</span> are continuous.</p>
 <p class="sd-card-text"><strong>Continuity:</strong>
 We show that <span class="math notranslate nohighlight">\(f\)</span> is continuous.
 Suppose <span class="math notranslate nohighlight">\(U\)</span> is an open set in <span class="math notranslate nohighlight">\(Y.\)</span>
@@ -892,6 +882,83 @@ We can now write</p>
 \[f(\pi_X^{-1}(V)) = \pi_Y(\iota(\pi_X^{-1}(V) \setminus A) \cup B),\]</div>
 <p class="sd-card-text">and since <span class="math notranslate nohighlight">\(\iota(\pi_X^{-1}(V) \setminus A) \cup B\)</span> is open in <span class="math notranslate nohighlight">\(T^2,\)</span> we have that <span class="math notranslate nohighlight">\(f(\pi_X^{-1}(V))\)</span> is open in <span class="math notranslate nohighlight">\(Y.\)</span>
 We have therefore shown that <span class="math notranslate nohighlight">\(f^{-1}\)</span> is continuous.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.14</p>
+<p>Let <span class="math notranslate nohighlight">\(||\cdot||: \mathbb{R}^2 \to \mathbb{R}\)</span> be a function which satisifes all the axioms for a norm except possibly the triangle inequality.
+Let <span class="math notranslate nohighlight">\(B = \{v \in \mathbb{R} : ||v|| \leq 1\}.\)</span>
+Show that <span class="math notranslate nohighlight">\(||\cdot||\)</span> is a norm if and only if <span class="math notranslate nohighlight">\(B\)</span> is a convex subset of <span class="math notranslate nohighlight">\(\mathbb{R}^2.\)</span>
+For <span class="math notranslate nohighlight">\(r \in (0, \infty),\)</span> let <span class="math notranslate nohighlight">\(||v||_r = (|v_1|^r + |v_2|^r)^{1/r}\)</span> for <span class="math notranslate nohighlight">\(v = (v_1, v_2) \in \mathbb{R}^2.\)</span>
+Deduce that <span class="math notranslate nohighlight">\(||\cdot||_r\)</span> is a norm if and only if <span class="math notranslate nohighlight">\(r \geq 1.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><strong>First part:</strong>
+Suppose <span class="math notranslate nohighlight">\(||\cdot||\)</span> is a norm.
+Let <span class="math notranslate nohighlight">\(v_1, v_2 \in B\)</span> and <span class="math notranslate nohighlight">\(t \in [0, 1].\)</span>
+Then by the triangle inequality</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+||tv_1 + (1 - t)v_2|| \leq t||v_1|| + (1 - t)||v_2|| \leq t + (1 - t) = 1,
+\end{equation}\]</div>
+<p class="sd-card-text">so <span class="math notranslate nohighlight">\(B\)</span> is convex.
+Conversely, suppose <span class="math notranslate nohighlight">\(B\)</span> is convex.
+Let <span class="math notranslate nohighlight">\(v_1, v_2 \in \mathbb{R}^2\)</span> and <span class="math notranslate nohighlight">\(t \in [0, 1].\)</span>
+If <span class="math notranslate nohighlight">\(v_1 = v_2 = 0,\)</span> then the triangle inequality holds, so suppose that at least one of <span class="math notranslate nohighlight">\(v_1\)</span> and <span class="math notranslate nohighlight">\(v_2\)</span> is non-zero, and set <span class="math notranslate nohighlight">\(m = ||v_1|| + ||v_2|| \neq 0.\)</span>
+Then we have <span class="math notranslate nohighlight">\(v_1 / m, v_2 / m \in B.\)</span>
+By the convexity of <span class="math notranslate nohighlight">\(B\)</span> we have <span class="math notranslate nohighlight">\(t(v_1 / m) + (1 - t)(v_2 / m) \in B,\)</span> so</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+||tv_1 + (1 - t)v_2|| = m||t(v_1 / m) + (1 - t)(v_2 / m)|| \leq m ||v_1 / m|| + m ||v_2 / m|| = ||v_1|| + ||v_2||.
+\end{equation}\]</div>
+<p class="sd-card-text">Therefore <span class="math notranslate nohighlight">\(||\cdot||\)</span> is a norm.</p>
+<p class="sd-card-text"><strong>Second part:</strong>
+Let <span class="math notranslate nohighlight">\(r \in (0, \infty).\)</span>
+Without loss of generality, suppose <span class="math notranslate nohighlight">\(v_1, v_2 &gt; 0,\)</span> and consider the level set <span class="math notranslate nohighlight">\(||v||_r = (v_1^r + v_2^r)^{1/r} = 1.\)</span>
+Then, whenever <span class="math notranslate nohighlight">\(0 &lt; r &lt; 1,\)</span> the level set is not convex, because the line segment connecting <span class="math notranslate nohighlight">\((1, 0)\)</span> and <span class="math notranslate nohighlight">\((0, 1)\)</span> is not contained in the level set.
+Therefore <span class="math notranslate nohighlight">\(||\cdot||_r\)</span> is not a norm for <span class="math notranslate nohighlight">\(r &lt; 1.\)</span>
+Conversely, suppose <span class="math notranslate nohighlight">\(r \geq 1.\)</span>
+Then the level set <span class="math notranslate nohighlight">\(||v||_r = 1\)</span> is convex, so <span class="math notranslate nohighlight">\(||\cdot||_r\)</span> is a norm for <span class="math notranslate nohighlight">\(r \geq 1.\)</span></p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 1.16</p>
+<p>Show that the set of piecewise linear functions is dense in <span class="math notranslate nohighlight">\(C[0, 1]\)</span> with the uniform metric.
+By considering piecewise linear functions where each linear piece is given by an expression with rational coefficients, deduce that <span class="math notranslate nohighlight">\(C[0, 1]\)</span> has a countable dense subset.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><strong>First part:</strong>
+Let <span class="math notranslate nohighlight">\(f \in C[0, 1]\)</span> equiped with the uniform metric.
+Let <span class="math notranslate nohighlight">\(\epsilon &gt; 0.\)</span>
+Then, there exists <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> such that for all <span class="math notranslate nohighlight">\(x, y \in [0, 1]\)</span> with <span class="math notranslate nohighlight">\(|x - y| &lt; \delta,\)</span> we have <span class="math notranslate nohighlight">\(|f(x) - f(y)| &lt; \epsilon.\)</span>
+Pick <span class="math notranslate nohighlight">\(N \in \mathbb{N}\)</span> such that <span class="math notranslate nohighlight">\(1/N &lt; \delta.\)</span>
+Then, the piecewise linear function <span class="math notranslate nohighlight">\(g: [0, 1] \to \mathbb{R}\)</span> that interpolates between <span class="math notranslate nohighlight">\(((n / N), f(n / N))\)</span> and <span class="math notranslate nohighlight">\(((n + 1) / N, f((n + 1) / N))\)</span> for <span class="math notranslate nohighlight">\(n = 0, 1, \dots, N - 1\)</span> is within <span class="math notranslate nohighlight">\(\epsilon\)</span> of <span class="math notranslate nohighlight">\(f\)</span> for any <span class="math notranslate nohighlight">\(x \in [0, 1],\)</span> which can be shown as follows.
+Suppose <span class="math notranslate nohighlight">\(x \in [n / N, (n + 1) / N].\)</span>
+Then, within the interval <span class="math notranslate nohighlight">\([n / N, (n + 1) / N],\)</span> the function <span class="math notranslate nohighlight">\(g\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[g(x) = f\left(\frac{n}{N}\right) \dot N \dot \left(x - \frac{n}{N}\right) + f\left(\frac{n + 1}{N}\right) \dot N \dot \left(\frac{n + 1}{N} - x\right) = f\left(\frac{n}{N}\right) \theta(x) + f\left(\frac{n + 1}{N}\right) (1 - \theta(x)),\]</div>
+<p class="sd-card-text">where <span class="math notranslate nohighlight">\(\theta(x) = N \dot (x - n / N)\)</span> and <span class="math notranslate nohighlight">\(0 \leq \theta(x) \leq 1.\)</span>
+Then, we have</p>
+<div class="math notranslate nohighlight">
+\[|f(x) - g(x)| = |(f(x) - f(n / N)) \theta(x) - (f(x) - f((n + 1) / N)) (1 - \theta(x))| \leq \theta(x) |f(x) - f(n / N)| + (1 - \theta(x)) |f(x) - f((n + 1) / N)| &lt; \epsilon.\]</div>
+<p class="sd-card-text">Therefore, the set of piecewise linear functions is dense in <span class="math notranslate nohighlight">\(C[0, 1]\)</span> with the uniform metric.</p>
+<p class="sd-card-text"><strong>Second part:</strong>
+Let <span class="math notranslate nohighlight">\(f \in C[0, 1]\)</span> equiped with the uniform metric.
+Let <span class="math notranslate nohighlight">\(\epsilon &gt; 0.\)</span>
+We can find a piecewise linear function <span class="math notranslate nohighlight">\(g_\epsilon\)</span> that is within <span class="math notranslate nohighlight">\(\epsilon / 2\)</span> of <span class="math notranslate nohighlight">\(f,\)</span> as measured with the uniform metric, from the first part of the exercise.
+Now, we can also find a piecewise linear function <span class="math notranslate nohighlight">\(h_\epsilon\)</span> with rational coefficients that is within <span class="math notranslate nohighlight">\(\epsilon / 2\)</span> of <span class="math notranslate nohighlight">\(g_\epsilon,\)</span> as measured with the uniform metric.
+Therefore, <span class="math notranslate nohighlight">\(h_\epsilon\)</span> is within <span class="math notranslate nohighlight">\(\epsilon\)</span> of <span class="math notranslate nohighlight">\(f,\)</span> as measured with the uniform metric.
+Since the set of piecewise linear functions with rational coefficients is countable, we have shown that <span class="math notranslate nohighlight">\(C[0, 1]\)</span> has a countable dense subset.</p>
 </div>
 </details></div>
 </section>

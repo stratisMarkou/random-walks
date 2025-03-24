@@ -403,7 +403,7 @@ Therefore $U$ can also be written as a countable union of sets in $B,$ and so $B
 ::::
 
 
-::::{admonition} Exercise 1.12
+::::{admonition} Exercise 1.13
 :class: tip
 Let $A = \{(0, 0, 1), (0, 0, -1)\} \subseteq S^2$ be the poles of the two-dimensional sphere.
 Let $B \subseteq T^2$ be the image of $\mathbb{R} \times 0 \subseteq \mathbb{R}^2$ into the two dimensional torus.
@@ -424,20 +424,8 @@ f(\pi_X(\{(\theta, \phi)\})) = \begin{cases}
 \end{equation}$$
 
 We will now show that $f$ is a homeomorphism between $X$ and $Y.$
-First, we show $f$ is a injective and surjective, and therefore a bijection.
-Second, we show that $f$ and $f^{-1}$ are continuous.
-
-__Injectivity:__
-Suppose $\pi_X(\{(\theta, \phi)\}) \in X$ and $\pi_X(\{(\theta', \phi')\}) \in X$ such that $f(\pi_X(\{(\theta, \phi)\})) = f(\pi_X(\{(\theta', \phi')\})).$
-By inspecting the definition of $f$ we see that this can occur only if $\pi_X(\{(\theta, \phi)\}) = \pi_X(\{(\theta', \phi')\}).$
-Therefore $f$ is injective.
-
-__Surjectivity:__
-First, note $f(\pi_X(\{A\})) = \pi_Y(B).$
-The remaining equivalence classes in $Y$ that we have to show are in the image of $f$ are the singleton equivalence classes.
-Suppose $\{(\theta, \phi)\} \in Y$ is a singleton equivalence class.
-Then $\theta \neq 0$ so $f(\pi_X(\{(\theta, \phi)\})) = \{(\theta, \phi)\}.$
-Therefore $f$ is surjective.
+First, by inspecting the definition of $f,$ we note that it is bijective.
+Now we show that $f$ and $f^{-1}$ are continuous.
 
 __Continuity:__
 We show that $f$ is continuous.
@@ -481,5 +469,83 @@ $$f(\pi_X^{-1}(V)) = \pi_Y(\iota(\pi_X^{-1}(V) \setminus A) \cup B),$$
 
 and since $\iota(\pi_X^{-1}(V) \setminus A) \cup B$ is open in $T^2,$ we have that $f(\pi_X^{-1}(V))$ is open in $Y.$
 We have therefore shown that $f^{-1}$ is continuous.
+:::
+::::
+
+
+
+::::{admonition} Exercise 1.14
+:class: tip
+Let $||\cdot||: \mathbb{R}^2 \to \mathbb{R}$ be a function which satisifes all the axioms for a norm except possibly the triangle inequality.
+Let $B = \{v \in \mathbb{R} : ||v|| \leq 1\}.$
+Show that $||\cdot||$ is a norm if and only if $B$ is a convex subset of $\mathbb{R}^2.$
+For $r \in (0, \infty),$ let $||v||_r = (|v_1|^r + |v_2|^r)^{1/r}$ for $v = (v_1, v_2) \in \mathbb{R}^2.$
+Deduce that $||\cdot||_r$ is a norm if and only if $r \geq 1.$
+
+:::{dropdown} Solution
+__First part:__
+Suppose $||\cdot||$ is a norm.
+Let $v_1, v_2 \in B$ and $t \in [0, 1].$
+Then by the triangle inequality
+
+$$\begin{equation}
+||tv_1 + (1 - t)v_2|| \leq t||v_1|| + (1 - t)||v_2|| \leq t + (1 - t) = 1,
+\end{equation}$$
+
+so $B$ is convex.
+Conversely, suppose $B$ is convex.
+Let $v_1, v_2 \in \mathbb{R}^2$ and $t \in [0, 1].$
+If $v_1 = v_2 = 0,$ then the triangle inequality holds, so suppose that at least one of $v_1$ and $v_2$ is non-zero, and set $m = ||v_1|| + ||v_2|| \neq 0.$
+Then we have $v_1 / m, v_2 / m \in B.$
+By the convexity of $B$ we have $t(v_1 / m) + (1 - t)(v_2 / m) \in B,$ so
+
+$$\begin{equation}
+||tv_1 + (1 - t)v_2|| = m||t(v_1 / m) + (1 - t)(v_2 / m)|| \leq m ||v_1 / m|| + m ||v_2 / m|| = ||v_1|| + ||v_2||.
+\end{equation}$$
+
+Therefore $||\cdot||$ is a norm.
+
+__Second part:__
+Let $r \in (0, \infty).$
+Without loss of generality, suppose $v_1, v_2 > 0,$ and consider the level set $||v||_r = (v_1^r + v_2^r)^{1/r} = 1.$
+Then, whenever $0 < r < 1,$ the level set is not convex, because the line segment connecting $(1, 0)$ and $(0, 1)$ is not contained in the level set.
+Therefore $||\cdot||_r$ is not a norm for $r < 1.$
+Conversely, suppose $r \geq 1.$
+Then the level set $||v||_r = 1$ is convex, so $||\cdot||_r$ is a norm for $r \geq 1.$
+:::
+::::
+
+
+::::{admonition} Exercise 1.16
+:class: tip
+Show that the set of piecewise linear functions is dense in $C[0, 1]$ with the uniform metric.
+By considering piecewise linear functions where each linear piece is given by an expression with rational coefficients, deduce that $C[0, 1]$ has a countable dense subset.
+
+:::{dropdown} Solution
+__First part:__
+Let $f \in C[0, 1]$ equiped with the uniform metric.
+Let $\epsilon > 0.$
+Then, there exists $\delta > 0$ such that for all $x, y \in [0, 1]$ with $|x - y| < \delta,$ we have $|f(x) - f(y)| < \epsilon.$
+Pick $N \in \mathbb{N}$ such that $1/N < \delta.$
+Then, the piecewise linear function $g: [0, 1] \to \mathbb{R}$ that interpolates between $((n / N), f(n / N))$ and $((n + 1) / N, f((n + 1) / N))$ for $n = 0, 1, \dots, N - 1$ is within $\epsilon$ of $f$ for any $x \in [0, 1],$ which can be shown as follows.
+Suppose $x \in [n / N, (n + 1) / N].$
+Then, within the interval $[n / N, (n + 1) / N],$ the function $g$ is given by
+
+$$g(x) = f\left(\frac{n}{N}\right) \dot N \dot \left(x - \frac{n}{N}\right) + f\left(\frac{n + 1}{N}\right) \dot N \dot \left(\frac{n + 1}{N} - x\right) = f\left(\frac{n}{N}\right) \theta(x) + f\left(\frac{n + 1}{N}\right) (1 - \theta(x)),$$
+
+where $\theta(x) = N \dot (x - n / N)$ and $0 \leq \theta(x) \leq 1.$
+Then, we have
+
+$$|f(x) - g(x)| = |(f(x) - f(n / N)) \theta(x) - (f(x) - f((n + 1) / N)) (1 - \theta(x))| \leq \theta(x) |f(x) - f(n / N)| + (1 - \theta(x)) |f(x) - f((n + 1) / N)| < \epsilon.$$
+
+Therefore, the set of piecewise linear functions is dense in $C[0, 1]$ with the uniform metric.
+
+__Second part:__
+Let $f \in C[0, 1]$ equiped with the uniform metric.
+Let $\epsilon > 0.$
+We can find a piecewise linear function $g_\epsilon$ that is within $\epsilon / 2$ of $f,$ as measured with the uniform metric, from the first part of the exercise.
+Now, we can also find a piecewise linear function $h_\epsilon$ with rational coefficients that is within $\epsilon / 2$ of $g_\epsilon,$ as measured with the uniform metric.
+Therefore, $h_\epsilon$ is within $\epsilon$ of $f,$ as measured with the uniform metric.
+Since the set of piecewise linear functions with rational coefficients is countable, we have shown that $C[0, 1]$ has a countable dense subset.
 :::
 ::::
