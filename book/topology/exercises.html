@@ -913,9 +913,10 @@ If <span class="math notranslate nohighlight">\(v_1 = v_2 = 0,\)</span> then the
 Then we have <span class="math notranslate nohighlight">\(v_1 / m, v_2 / m \in B.\)</span>
 By the convexity of <span class="math notranslate nohighlight">\(B\)</span> we have <span class="math notranslate nohighlight">\(t(v_1 / m) + (1 - t)(v_2 / m) \in B,\)</span> so</p>
 <div class="math notranslate nohighlight">
-\[\begin{equation}
-||tv_1 + (1 - t)v_2|| = m||t(v_1 / m) + (1 - t)(v_2 / m)|| \leq m ||v_1 / m|| + m ||v_2 / m|| = ||v_1|| + ||v_2||.
-\end{equation}\]</div>
+\[\begin{split}\begin{align}
+||tv_1 + (1 - t)v_2|| &amp;= m||t(v_1 / m) + (1 - t)(v_2 / m)|| \\
+&amp;\leq m ||v_1 / m|| + m ||v_2 / m|| = ||v_1|| + ||v_2||.
+\end{align}\end{split}\]</div>
 <p class="sd-card-text">Therefore <span class="math notranslate nohighlight">\(||\cdot||\)</span> is a norm.</p>
 <p class="sd-card-text"><strong>Second part:</strong>
 Let <span class="math notranslate nohighlight">\(r \in (0, \infty).\)</span>
@@ -944,7 +945,7 @@ Then, there exists <span class="math notranslate nohighlight">\(\delta &gt; 0\)<
 Pick <span class="math notranslate nohighlight">\(N \in \mathbb{N}\)</span> such that <span class="math notranslate nohighlight">\(1/N &lt; \delta.\)</span>
 Then, the piecewise linear function <span class="math notranslate nohighlight">\(g: [0, 1] \to \mathbb{R}\)</span> that interpolates between <span class="math notranslate nohighlight">\(((n / N), f(n / N))\)</span> and <span class="math notranslate nohighlight">\(((n + 1) / N, f((n + 1) / N))\)</span> for <span class="math notranslate nohighlight">\(n = 0, 1, \dots, N - 1\)</span> is within <span class="math notranslate nohighlight">\(\epsilon\)</span> of <span class="math notranslate nohighlight">\(f\)</span> for any <span class="math notranslate nohighlight">\(x \in [0, 1],\)</span> which can be shown as follows.
 Suppose <span class="math notranslate nohighlight">\(x \in [n / N, (n + 1) / N].\)</span>
-Then, within the interval <span class="math notranslate nohighlight">\([n / N, (n + 1) / N],\)</span> the function <span class="math notranslate nohighlight">\(g\)</span> is given by</p>
+Then</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
 g(x) &amp;= f\left(\frac{n}{N}\right) \left(x - n\right) + f\left(\frac{n + 1}{N}\right) \left(n + 1 - x\right) \\
