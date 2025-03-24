@@ -532,8 +532,8 @@ Suppose $x \in [n / N, (n + 1) / N].$
 Then, within the interval $[n / N, (n + 1) / N],$ the function $g$ is given by
 
 $$\begin{align}
-g(x) &= f\left(\frac{n}{N}\right) \left(x - n\right) + f\left(\frac{n + 1}{N}\right) \left(n + 1 - x\right) 
-&= f\left(\frac{n}{N}\right) \theta + f\left(\frac{n + 1}{N}\right) (1 - \theta), \\
+g(x) &= f\left(\frac{n}{N}\right) \left(x - n\right) + f\left(\frac{n + 1}{N}\right) \left(n + 1 - x\right) \\
+&= f\left(\frac{n}{N}\right) \theta + f\left(\frac{n + 1}{N}\right) (1 - \theta),
 \end{align}$$
 
 where $\theta = (x - n / N).$
