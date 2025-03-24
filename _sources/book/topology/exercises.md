@@ -501,7 +501,8 @@ By the convexity of $B$ we have $t(v_1 / m) + (1 - t)(v_2 / m) \in B,$ so
 
 $$\begin{align}
 ||tv_1 + (1 - t)v_2|| &= m||t(v_1 / m) + (1 - t)(v_2 / m)|| \\
-&\leq m ||v_1 / m|| + m ||v_2 / m|| = ||v_1|| + ||v_2||.
+&\leq m ||v_1 / m|| + m ||v_2 / m|| \\
+&= ||v_1|| + ||v_2||.
 \end{align}$$
 
 Therefore $||\cdot||$ is a norm.
