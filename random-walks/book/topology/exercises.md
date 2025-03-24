@@ -499,9 +499,11 @@ If $v_1 = v_2 = 0,$ then the triangle inequality holds, so suppose that at least
 Then we have $v_1 / m, v_2 / m \in B.$
 By the convexity of $B$ we have $t(v_1 / m) + (1 - t)(v_2 / m) \in B,$ so
 
-$$\begin{equation}
-||tv_1 + (1 - t)v_2|| = m||t(v_1 / m) + (1 - t)(v_2 / m)|| \leq m ||v_1 / m|| + m ||v_2 / m|| = ||v_1|| + ||v_2||.
-\end{equation}$$
+$$\begin{align}
+||tv_1 + (1 - t)v_2|| &= m||t(v_1 / m) + (1 - t)(v_2 / m)|| \\
+&\leq m ||v_1 / m|| + m ||v_2 / m|| \\
+&= ||v_1|| + ||v_2||.
+\end{align}$$
 
 Therefore $||\cdot||$ is a norm.
 
@@ -529,14 +531,22 @@ Then, there exists $\delta > 0$ such that for all $x, y \in [0, 1]$ with $|x - y
 Pick $N \in \mathbb{N}$ such that $1/N < \delta.$
 Then, the piecewise linear function $g: [0, 1] \to \mathbb{R}$ that interpolates between $((n / N), f(n / N))$ and $((n + 1) / N, f((n + 1) / N))$ for $n = 0, 1, \dots, N - 1$ is within $\epsilon$ of $f$ for any $x \in [0, 1],$ which can be shown as follows.
 Suppose $x \in [n / N, (n + 1) / N].$
-Then, within the interval $[n / N, (n + 1) / N],$ the function $g$ is given by
+Then
 
-$$g(x) = f\left(\frac{n}{N}\right) \dot N \dot \left(x - \frac{n}{N}\right) + f\left(\frac{n + 1}{N}\right) \dot N \dot \left(\frac{n + 1}{N} - x\right) = f\left(\frac{n}{N}\right) \theta(x) + f\left(\frac{n + 1}{N}\right) (1 - \theta(x)),$$
+$$\begin{align}
+g(x) &= f\left(\frac{n}{N}\right) \left(x - n\right) + f\left(\frac{n + 1}{N}\right) \left(n + 1 - x\right) \\
+&= f\left(\frac{n}{N}\right) \theta + f\left(\frac{n + 1}{N}\right) (1 - \theta),
+\end{align}$$
 
-where $\theta(x) = N \dot (x - n / N)$ and $0 \leq \theta(x) \leq 1.$
-Then, we have
+where $\theta = (x - n / N).$
+Note that $0 \leq \theta \leq 1.$
+We have
 
-$$|f(x) - g(x)| = |(f(x) - f(n / N)) \theta(x) - (f(x) - f((n + 1) / N)) (1 - \theta(x))| \leq \theta(x) |f(x) - f(n / N)| + (1 - \theta(x)) |f(x) - f((n + 1) / N)| < \epsilon.$$
+$$\begin{align}
+|f(x) - g(x)| &= |(f(x) - f(n / N)) \theta - (f(x) - f((n + 1) / N)) (1 - \theta)| \\
+&\leq \theta |f(x) - f(n / N)| + (1 - \theta) |f(x) - f((n + 1) / N)| \\
+&< \epsilon.
+\end{align}$$
 
 Therefore, the set of piecewise linear functions is dense in $C[0, 1]$ with the uniform metric.
 
