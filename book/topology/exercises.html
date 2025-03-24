@@ -946,13 +946,17 @@ Then, the piecewise linear function <span class="math notranslate nohighlight">\
 Suppose <span class="math notranslate nohighlight">\(x \in [n / N, (n + 1) / N].\)</span>
 Then, within the interval <span class="math notranslate nohighlight">\([n / N, (n + 1) / N],\)</span> the function <span class="math notranslate nohighlight">\(g\)</span> is given by</p>
 <div class="math notranslate nohighlight">
-\[g(x) = f\left(\frac{n}{N}\right) \left(x - n\right) + f\left(\frac{n + 1}{N}\right) \left(n + 1 - x\right) = f\left(\frac{n}{N}\right) \theta(x) + f\left(\frac{n + 1}{N}\right) (1 - \theta(x)),\]</div>
-<p class="sd-card-text">where <span class="math notranslate nohighlight">\(\theta(x) = N(x - n / N)\)</span> and <span class="math notranslate nohighlight">\(0 \leq \theta(x) \leq 1.\)</span>
-Then, we have</p>
+\[\begin{split}\begin{align}
+g(x) &amp;= f\left(\frac{n}{N}\right) \left(x - n\right) + f\left(\frac{n + 1}{N}\right) \left(n + 1 - x\right) 
+&amp;= f\left(\frac{n}{N}\right) \theta + f\left(\frac{n + 1}{N}\right) (1 - \theta), \\
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">where <span class="math notranslate nohighlight">\(\theta = (x - n / N).\)</span>
+Note that <span class="math notranslate nohighlight">\(0 \leq \theta \leq 1.\)</span>
+We have</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
-|f(x) - g(x)| &amp;= |(f(x) - f(n / N)) \theta(x) - (f(x) - f((n + 1) / N)) (1 - \theta(x))| \\
-&amp;\leq \theta(x) |f(x) - f(n / N)| + (1 - \theta(x)) |f(x) - f((n + 1) / N)| \\
+|f(x) - g(x)| &amp;= |(f(x) - f(n / N)) \theta - (f(x) - f((n + 1) / N)) (1 - \theta)| \\
+&amp;\leq \theta |f(x) - f(n / N)| + (1 - \theta) |f(x) - f((n + 1) / N)| \\
 &amp;&lt; \epsilon.
 \end{align}\end{split}\]</div>
 <p class="sd-card-text">Therefore, the set of piecewise linear functions is dense in <span class="math notranslate nohighlight">\(C[0, 1]\)</span> with the uniform metric.</p>

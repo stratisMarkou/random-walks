@@ -531,14 +531,18 @@ Then, the piecewise linear function $g: [0, 1] \to \mathbb{R}$ that interpolates
 Suppose $x \in [n / N, (n + 1) / N].$
 Then, within the interval $[n / N, (n + 1) / N],$ the function $g$ is given by
 
-$$g(x) = f\left(\frac{n}{N}\right) \left(x - n\right) + f\left(\frac{n + 1}{N}\right) \left(n + 1 - x\right) = f\left(\frac{n}{N}\right) \theta(x) + f\left(\frac{n + 1}{N}\right) (1 - \theta(x)),$$
+$$\begin{align}
+g(x) &= f\left(\frac{n}{N}\right) \left(x - n\right) + f\left(\frac{n + 1}{N}\right) \left(n + 1 - x\right) 
+&= f\left(\frac{n}{N}\right) \theta + f\left(\frac{n + 1}{N}\right) (1 - \theta), \\
+\end{align}$$
 
-where $\theta(x) = N(x - n / N)$ and $0 \leq \theta(x) \leq 1.$
-Then, we have
+where $\theta = (x - n / N).$
+Note that $0 \leq \theta \leq 1.$
+We have
 
 $$\begin{align}
-|f(x) - g(x)| &= |(f(x) - f(n / N)) \theta(x) - (f(x) - f((n + 1) / N)) (1 - \theta(x))| \\
-&\leq \theta(x) |f(x) - f(n / N)| + (1 - \theta(x)) |f(x) - f((n + 1) / N)| \\
+|f(x) - g(x)| &= |(f(x) - f(n / N)) \theta - (f(x) - f((n + 1) / N)) (1 - \theta)| \\
+&\leq \theta |f(x) - f(n / N)| + (1 - \theta) |f(x) - f((n + 1) / N)| \\
 &< \epsilon.
 \end{align}$$
 
