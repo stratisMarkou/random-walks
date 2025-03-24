@@ -536,7 +536,11 @@ $$g(x) = f\left(\frac{n}{N}\right) \cdot N \cdot \left(x - \frac{n}{N}\right) + 
 where $\theta(x) = N \cdot (x - n / N)$ and $0 \leq \theta(x) \leq 1.$
 Then, we have
 
-$$|f(x) - g(x)| = |(f(x) - f(n / N)) \theta(x) - (f(x) - f((n + 1) / N)) (1 - \theta(x))| \leq \theta(x) |f(x) - f(n / N)| + (1 - \theta(x)) |f(x) - f((n + 1) / N)| < \epsilon.$$
+$$\begin{align}
+|f(x) - g(x)| &= |(f(x) - f(n / N)) \theta(x) - (f(x) - f((n + 1) / N)) (1 - \theta(x))| \\
+&\leq \theta(x) |f(x) - f(n / N)| + (1 - \theta(x)) |f(x) - f((n + 1) / N)| \\
+&< \epsilon.
+\end{align}$$
 
 Therefore, the set of piecewise linear functions is dense in $C[0, 1]$ with the uniform metric.
 

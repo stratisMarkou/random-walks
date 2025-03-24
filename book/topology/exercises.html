@@ -950,7 +950,11 @@ Then, within the interval <span class="math notranslate nohighlight">\([n / N, (
 <p class="sd-card-text">where <span class="math notranslate nohighlight">\(\theta(x) = N \cdot (x - n / N)\)</span> and <span class="math notranslate nohighlight">\(0 \leq \theta(x) \leq 1.\)</span>
 Then, we have</p>
 <div class="math notranslate nohighlight">
-\[|f(x) - g(x)| = |(f(x) - f(n / N)) \theta(x) - (f(x) - f((n + 1) / N)) (1 - \theta(x))| \leq \theta(x) |f(x) - f(n / N)| + (1 - \theta(x)) |f(x) - f((n + 1) / N)| &lt; \epsilon.\]</div>
+\[\begin{split}\begin{align}
+|f(x) - g(x)| &amp;= |(f(x) - f(n / N)) \theta(x) - (f(x) - f((n + 1) / N)) (1 - \theta(x))| \\
+&amp;\leq \theta(x) |f(x) - f(n / N)| + (1 - \theta(x)) |f(x) - f((n + 1) / N)| \\
+&amp;&lt; \epsilon.
+\end{align}\end{split}\]</div>
 <p class="sd-card-text">Therefore, the set of piecewise linear functions is dense in <span class="math notranslate nohighlight">\(C[0, 1]\)</span> with the uniform metric.</p>
 <p class="sd-card-text"><strong>Second part:</strong>
 Let <span class="math notranslate nohighlight">\(f \in C[0, 1]\)</span> equiped with the uniform metric.
