@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Masure, integration and real analysis &#8212; Random Walks</title>
+    <title>Connectivity &#8212; Random Walks</title>
   
   
   
@@ -74,12 +74,12 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'book/mira/000-intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/topology/003-connectivity';</script>
     <link rel="icon" href="../../_static/dicefav.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Riemann integration" href="001-riemann.html" />
-    <link rel="prev" title="Main limit theorems" href="../prob-intro/ch08/content.html" />
+    <link rel="next" title="Exercises" href="exercises.html" />
+    <link rel="prev" title="Topological Spaces" href="002-topological-spaces.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -207,17 +207,17 @@
 <li class="toctree-l2"><a class="reference internal" href="../prob-intro/ch08/content.html">Main limit theorems</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Measure Theory</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="001-riemann.html">Riemann integration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="002-measures.html">Measures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="000-exercises.html">Exercises</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../mira/000-intro.html">Measure Theory</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mira/001-riemann.html">Riemann integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mira/002-measures.html">Measures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mira/000-exercises.html">Exercises</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../topology/000-intro.html">Topology</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../topology/001-metric-spaces.html">Metric spaces</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../topology/002-topological-spaces.html">Topological Spaces</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../topology/003-connectivity.html">Connectivity</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../topology/exercises.html">Exercises</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="000-intro.html">Topology</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="001-metric-spaces.html">Metric spaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="002-topological-spaces.html">Topological Spaces</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Connectivity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises.html">Exercises</a></li>
 </ul>
 </li>
 </ul>
@@ -305,7 +305,7 @@
       
       
       
-      <li><a href="https://github.com/stratisMarkou/random-walks/issues/new?title=Issue%20on%20page%20%2Fbook/mira/000-intro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/stratisMarkou/random-walks/issues/new?title=Issue%20on%20page%20%2Fbook/topology/003-connectivity.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -335,7 +335,7 @@
       
       
       
-      <li><a href="../../_sources/book/mira/000-intro.md" target="_blank"
+      <li><a href="../../_sources/book/topology/003-connectivity.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -417,7 +417,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Masure, integration and real analysis</h1>
+    <h1>Connectivity</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -431,20 +431,95 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="masure-integration-and-real-analysis">
-<h1>Masure, integration and real analysis<a class="headerlink" href="#masure-integration-and-real-analysis" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="connectivity">
+<h1>Connectivity<a class="headerlink" href="#connectivity" title="Link to this heading">#</a></h1>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <p><a class="github-button" href="https://github.com/stratisMarkou/random-walks" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" aria-label="Star stratisMarkou/random-walks on GitHub">Star</a>
 <a class="github-button" href="https://github.com/stratisMarkou/random-walks/issues" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-issue-opened" data-size="large" aria-label="Issue stratisMarkou/random-walks on GitHub">Issue</a>
 <a class="github-button" href="https://github.com/stratisMarkou/random-walks/subscription" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-eye" data-size="large" aria-label="Watch stratisMarkou/random-walks on GitHub">Watch</a>
 <a class="github-button" href="https://github.com/stratisMarkou" data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large" aria-label="Follow @stratisMarkou on GitHub">Follow</a></p>
-<p>These are notes on the book <em>Measure, integration and real analysis</em> by Sheldon Axler, which is <a class="reference external" href="http://measure.axler.net/">freely available online</a>.
-These notes are work in progress as we are currently reading through the book in a reading group with Adrian Goldwaser and Shreyas Padhy.
-I have included solutions to some of the exercises which we have solved as we go along.
-Any errors in these notes or solutions to the exercise are most likely my own.</p>
-<div class="toctree-wrapper compound">
-</div>
+<div class="proof definition admonition" id="definition-0">
+<p class="admonition-title"><span class="caption-number">Definition 99 </span> (Connected space)</p>
+<section class="definition-content" id="proof-content">
+<p>A topological space <span class="math notranslate nohighlight">\(X\)</span> is disconnected if <span class="math notranslate nohighlight">\(X\)</span> can be written as <span class="math notranslate nohighlight">\(A \cup B,\)</span> where <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are disjoint, non-empty open subsets of <span class="math notranslate nohighlight">\(X.\)</span>
+We say <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> disconnect <span class="math notranslate nohighlight">\(X.\)</span>
+A space is connected if it is not disconnected.</p>
 </section>
+</div><div class="proof definition admonition" id="definition-1">
+<p class="admonition-title"><span class="caption-number">Definition 100 </span> (Connected subspace)</p>
+<section class="definition-content" id="proof-content">
+<p>Given a subset <span class="math notranslate nohighlight">\(A\)</span> of a topological space <span class="math notranslate nohighlight">\(X,\)</span> we say that <span class="math notranslate nohighlight">\(A\)</span> is connected if <span class="math notranslate nohighlight">\(A\)</span> is connected as a subspace of <span class="math notranslate nohighlight">\(X.\)</span></p>
+</section>
+</div><div class="proof lemma admonition" id="lemma-2">
+<p class="admonition-title"><span class="caption-number">Lemma 26 </span> (Equivalent condition for connectedness)</p>
+<section class="lemma-content" id="proof-content">
+<p>A space <span class="math notranslate nohighlight">\(X\)</span> is disconnected if and only if there exists a contunuous surjective <span class="math notranslate nohighlight">\(f: X \to \{0, 1\}\)</span> with the discrete topology.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(X\)</span> is disconnected.
+Then there exist disjoint, non-empty open sets <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> such that <span class="math notranslate nohighlight">\(X = A \cup B.\)</span>
+Define <span class="math notranslate nohighlight">\(f: X \to \{0, 1\}\)</span> by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}f(x) = \begin{cases}
+0 &amp; \text{if } x \in A, \\
+1 &amp; \text{if } x \in B.
+\end{cases}\end{split}\]</div>
+<p class="sd-card-text">Now, we note that <span class="math notranslate nohighlight">\(f\)</span> is surjective because <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are non-empty.
+In addition, <span class="math notranslate nohighlight">\(f\)</span> is continuous because <span class="math notranslate nohighlight">\(f^{-1}(\{0\}) = A\)</span> and <span class="math notranslate nohighlight">\(f^{-1}(\{1\}) = B\)</span> are open.
+Thus, <span class="math notranslate nohighlight">\(f\)</span> is continuous and surjective.</p>
+<p class="sd-card-text">Conversely, suppose there exists a continuous surjective <span class="math notranslate nohighlight">\(f: X \to \{0, 1\}\)</span> with the discrete topology.
+Then the disjoint sets <span class="math notranslate nohighlight">\(f^{-1}(\{0\})\)</span> and <span class="math notranslate nohighlight">\(f^{-1}(\{1\})\)</span> are non-empty (because <span class="math notranslate nohighlight">\(f\)</span> is surjective) and open (because <span class="math notranslate nohighlight">\(f\)</span> is continuous).
+Thus, <span class="math notranslate nohighlight">\(X\)</span> is disconnected.</p>
+</div>
+</details><div class="proof theorem admonition" id="theorem-3">
+<p class="admonition-title"><span class="caption-number">Theorem 91 </span> (Closed inverval is connected)</p>
+<section class="theorem-content" id="proof-content">
+<p>The closed interval <span class="math notranslate nohighlight">\([0, 1]\)</span> with the standard topology is connected.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\([0, 1]\)</span> is disconnected.
+Then there exist disjoint, non-empty open sets <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> such that <span class="math notranslate nohighlight">\([0, 1] = A \cup B.\)</span>
+Without loss of generality, we may assume that <span class="math notranslate nohighlight">\(1 \in B.\)</span>
+Since <span class="math notranslate nohighlight">\(A\)</span> is non-empty, <span class="math notranslate nohighlight">\(\alpha = \sup A\)</span> exists and <span class="math notranslate nohighlight">\(\alpha \in [0, 1].\)</span>
+There are two possibilities, either <span class="math notranslate nohighlight">\(\alpha \in A\)</span> or <span class="math notranslate nohighlight">\(\alpha \in B.\)</span></p>
+<p class="sd-card-text">If <span class="math notranslate nohighlight">\(\alpha \in A,\)</span> then <span class="math notranslate nohighlight">\(\alpha &lt; 1\)</span> and we immediately have a contradiction because, since <span class="math notranslate nohighlight">\(A\)</span> is open, there exists an open interval <span class="math notranslate nohighlight">\((\alpha - \varepsilon, \alpha + \varepsilon) \subseteq [0, 1]\)</span> contained in <span class="math notranslate nohighlight">\(A\)</span> for some <span class="math notranslate nohighlight">\(\varepsilon &gt; 0,\)</span> which means that <span class="math notranslate nohighlight">\(\alpha\)</span> cannot be the supremum of <span class="math notranslate nohighlight">\(A.\)</span>
+Therefore, <span class="math notranslate nohighlight">\(\alpha \in B.\)</span>
+However, again, this raises a contradiction because, since <span class="math notranslate nohighlight">\(B\)</span> is open, there exists an open interval <span class="math notranslate nohighlight">\((\alpha - \varepsilon, \alpha + \varepsilon) \subseteq [0, 1]\)</span> contained in <span class="math notranslate nohighlight">\(B\)</span> for some <span class="math notranslate nohighlight">\(\varepsilon &gt; 0,\)</span> which means that <span class="math notranslate nohighlight">\(\alpha\)</span> cannot be the supremum of <span class="math notranslate nohighlight">\(A.\)</span>
+Thus, <span class="math notranslate nohighlight">\([0, 1]\)</span> is connected.</p>
+</div>
+</details><div class="proof lemma admonition" id="lemma-4">
+<p class="admonition-title"><span class="caption-number">Lemma 27 </span> (Image of connected space under continuous map is connected)</p>
+<section class="lemma-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f: X \to Y\)</span> be a continuous map.
+If <span class="math notranslate nohighlight">\(X\)</span> is connected, then <span class="math notranslate nohighlight">\(f(X)\)</span> is connected.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(f(X)\)</span> is disconnected.
+Then there exist disjoint, non-empty open sets <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> such that <span class="math notranslate nohighlight">\(f(X) = A \cup B.\)</span>
+Define <span class="math notranslate nohighlight">\(U = f^{-1}(A)\)</span> and <span class="math notranslate nohighlight">\(V = f^{-1}(B).\)</span>
+Then <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(V\)</span> are disjoint, non-empty open sets in <span class="math notranslate nohighlight">\(X,\)</span> and <span class="math notranslate nohighlight">\(X = U \cup V.\)</span>
+Therefore <span class="math notranslate nohighlight">\(X\)</span> is disconnected, which is a contradiction.
+Thus, <span class="math notranslate nohighlight">\(f(X)\)</span> is connected.</p>
+</div>
+</details></section>
 
     <script type="text/x-thebe-config">
     {
@@ -459,7 +534,7 @@ Any errors in these notes or solutions to the exercise are most likely my own.</
         },
         kernelOptions: {
             name: "python3",
-            path: "./book/mira"
+            path: "./book/topology"
         },
         predefinedOutput: true
     }
@@ -477,20 +552,20 @@ Any errors in these notes or solutions to the exercise are most likely my own.</
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../prob-intro/ch08/content.html"
+       href="002-topological-spaces.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Main limit theorems</p>
+        <p class="prev-next-title">Topological Spaces</p>
       </div>
     </a>
     <a class="right-next"
-       href="001-riemann.html"
+       href="exercises.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Riemann integration</p>
+        <p class="prev-next-title">Exercises</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

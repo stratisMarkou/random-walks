@@ -220,6 +220,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="book/topology/000-intro.html">Topology</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="book/topology/001-metric-spaces.html">Metric spaces</a></li>
 <li class="toctree-l2"><a class="reference internal" href="book/topology/002-topological-spaces.html">Topological Spaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="book/topology/003-connectivity.html">Connectivity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="book/topology/exercises.html">Exercises</a></li>
 </ul>
 </li>
@@ -430,6 +431,7 @@ document.write(`
    <a href="#cap-lemma-18"><strong>lemma-18</strong></a> | 
    <a href="#cap-lemma-2"><strong>lemma-2</strong></a> | 
    <a href="#cap-lemma-3"><strong>lemma-3</strong></a> | 
+   <a href="#cap-lemma-4"><strong>lemma-4</strong></a> | 
    <a href="#cap-lemma-8"><strong>lemma-8</strong></a> | 
    <a href="#cap-mira-bounds-on-riemann-integral"><strong>mira-bounds-on-riemann-integral</strong></a> | 
    <a href="#cap-mira-eg-not-riemann-integrable"><strong>mira-eg-not-riemann-integrable</strong></a> | 
@@ -560,7 +562,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="book/prob-intro/ch08/content.html#definition-0"><code class="xref">definition-0</code></a> <em>(book/prob-intro/ch08/content)</em></td><td>
+       <a href="book/topology/003-connectivity.html#definition-0"><code class="xref">definition-0</code></a> <em>(book/topology/003-connectivity)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-1"><td></td><td>
@@ -568,7 +570,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="book/toc/001-fsa.html#definition-1"><code class="xref">definition-1</code></a> <em>(book/toc/001-fsa)</em></td><td>
+       <a href="book/topology/003-connectivity.html#definition-1"><code class="xref">definition-1</code></a> <em>(book/topology/003-connectivity)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-10"><td></td><td>
@@ -576,7 +578,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="book/prob-intro/ch08/content.html#definition-10"><code class="xref">definition-10</code></a> <em>(book/prob-intro/ch08/content)</em></td><td>
+       <a href="book/toc/002-cfl.html#definition-10"><code class="xref">definition-10</code></a> <em>(book/toc/002-cfl)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-11"><td></td><td>
@@ -616,7 +618,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="book/toc/001-fsa.html#definition-2"><code class="xref">definition-2</code></a> <em>(book/toc/001-fsa)</em></td><td>
+       <a href="book/topology/001-metric-spaces.html#definition-2"><code class="xref">definition-2</code></a> <em>(book/topology/001-metric-spaces)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-20"><td></td><td>
@@ -704,7 +706,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="book/toc/001-fsa.html#definition-7"><code class="xref">definition-7</code></a> <em>(book/toc/001-fsa)</em></td><td>
+       <a href="book/toc/002-cfl.html#definition-7"><code class="xref">definition-7</code></a> <em>(book/toc/002-cfl)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-8"><td></td><td>
@@ -768,7 +770,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="book/toc/001-fsa.html#example-3"><code class="xref">example-3</code></a> <em>(book/toc/001-fsa)</em></td><td>
+       <a href="book/toc/002-cfl.html#example-3"><code class="xref">example-3</code></a> <em>(book/toc/002-cfl)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-4"><td></td><td>
@@ -848,7 +850,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="book/papers/rff/rff.html#lemma-2"><code class="xref">lemma-2</code></a> <em>(book/papers/rff/rff)</em></td><td>
+       <a href="book/topology/003-connectivity.html#lemma-2"><code class="xref">lemma-2</code></a> <em>(book/topology/003-connectivity)</em></td><td>
        <em>lemma</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-lemma-3"><td></td><td>
@@ -857,6 +859,14 @@ document.write(`
        <td></td>
        <td>
        <a href="book/papers/rff/rff.html#lemma-3"><code class="xref">lemma-3</code></a> <em>(book/papers/rff/rff)</em></td><td>
+       <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-lemma-4"><td></td><td>
+       <strong>lemma-4</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/003-connectivity.html#lemma-4"><code class="xref">lemma-4</code></a> <em>(book/topology/003-connectivity)</em></td><td>
        <em>lemma</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-lemma-8"><td></td><td>
@@ -1040,7 +1050,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="book/papers/svgd/svgd.html#theorem-0"><code class="xref">theorem-0</code></a> <em>(book/papers/svgd/svgd)</em></td><td>
+       <a href="book/prob-intro/ch07/content.html#theorem-0"><code class="xref">theorem-0</code></a> <em>(book/prob-intro/ch07/content)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-theorem-1"><td></td><td>
@@ -1120,7 +1130,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="book/papers/score-matching/score-matching.html#theorem-2"><code class="xref">theorem-2</code></a> <em>(book/papers/score-matching/score-matching)</em></td><td>
+       <a href="book/prob-intro/ch06/content.html#theorem-2"><code class="xref">theorem-2</code></a> <em>(book/prob-intro/ch06/content)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-theorem-21"><td></td><td>
@@ -1176,7 +1186,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="book/prob-intro/ch08/content.html#theorem-3"><code class="xref">theorem-3</code></a> <em>(book/prob-intro/ch08/content)</em></td><td>
+       <a href="book/topology/003-connectivity.html#theorem-3"><code class="xref">theorem-3</code></a> <em>(book/topology/003-connectivity)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-theorem-30"><td></td><td>
@@ -1432,7 +1442,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="book/topology/001-metric-spaces.html#topology:def-limit-point"><code class="xref">topology:def-limit-point</code></a> <em>(book/topology/001-metric-spaces)</em></td><td>
+       <a href="book/topology/002-topological-spaces.html#topology:def-limit-point"><code class="xref">topology:def-limit-point</code></a> <em>(book/topology/002-topological-spaces)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-topology:def-metric-space"><td></td><td>

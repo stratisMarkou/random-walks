@@ -79,7 +79,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Stream of papers" href="../papers/intro.html" />
-    <link rel="prev" title="Topological Spaces" href="002-topological-spaces.html" />
+    <link rel="prev" title="Connectivity" href="003-connectivity.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -216,6 +216,7 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="000-intro.html">Topology</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="001-metric-spaces.html">Metric spaces</a></li>
 <li class="toctree-l2"><a class="reference internal" href="002-topological-spaces.html">Topological Spaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="003-connectivity.html">Connectivity</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Exercises</a></li>
 </ul>
 </li>
@@ -498,7 +499,7 @@ Since <span class="math notranslate nohighlight">\(A = \bigcup_{z &gt; 0} U_z,\)
 Again, note that the set <span class="math notranslate nohighlight">\(A\)</span> cannot be closed, by the same reasoning that was used to argue for set 1.</p>
 <p class="sd-card-text"><strong>Set 3:</strong>
 The set <span class="math notranslate nohighlight">\(A\)</span> is not open because for any rational <span class="math notranslate nohighlight">\(x \in \mathbb{Q},\)</span> there exists an irrational <span class="math notranslate nohighlight">\(x' \in \mathbb{R} \setminus \mathbb{Q}\)</span> that is arbitrarily close to it, so for any <span class="math notranslate nohighlight">\((x, y) \in A,\)</span> there exists an <span class="math notranslate nohighlight">\((x', y)\)</span> that is aribtrarily close to it but is not in <span class="math notranslate nohighlight">\(A,\)</span> because <span class="math notranslate nohighlight">\(x'\)</span> is irrational.
-In addition, the set <span class="math notranslate nohighlight">\(A\)</span> is not closed because it does not contain all its <a class="reference internal" href="001-metric-spaces.html#topology:def-limit-point">limit points</a>.
+In addition, the set <span class="math notranslate nohighlight">\(A\)</span> is not closed because it does not contain all its <a class="reference internal" href="002-topological-spaces.html#topology:def-limit-point">limit points</a>.
 For example, consider the point <span class="math notranslate nohighlight">\((0, 1) \in \mathbb{R}^2.\)</span>
 This is a limit point of the set <span class="math notranslate nohighlight">\(A\)</span>: for any <span class="math notranslate nohighlight">\(\epsilon &gt; 0,\)</span> there exists a rational <span class="math notranslate nohighlight">\(q \in \mathbb{Q}\)</span> such that <span class="math notranslate nohighlight">\(0 &lt; |q| &lt; \epsilon / 2\)</span> and a sufficiently large <span class="math notranslate nohighlight">\(n \in \mathbb{N}\)</span> such that <span class="math notranslate nohighlight">\(|q^{1/n} - 1| &lt; \epsilon / 2.\)</span>
 Then <span class="math notranslate nohighlight">\(|(q, q^{1/n}) - (0, 1)|_\infty = |q| + |q^{1/n} - 1| &lt; \epsilon,\)</span> from which it follows that <span class="math notranslate nohighlight">\((0, 1)\)</span> is a limit point of <span class="math notranslate nohighlight">\(A\)</span> that is not contained in <span class="math notranslate nohighlight">\(A.\)</span></p>
@@ -1094,7 +1095,7 @@ Suppose there exists <span class="math notranslate nohighlight">\(f: A \to B\)</
 <p class="sd-card-text">Now, note that <span class="math notranslate nohighlight">\(A \setminus \{(0, 0)\}\)</span> can be written as the union of half-open rays emanating from the origin, which are open sets in <span class="math notranslate nohighlight">\(A.\)</span>
 We can take the union of all these rays that have <span class="math notranslate nohighlight">\(x \geq 0\)</span> to obtain an open set in <span class="math notranslate nohighlight">\(A\)</span> and we can take the union of all these rays that have <span class="math notranslate nohighlight">\(x &lt; 0\)</span> to obtain another open set in <span class="math notranslate nohighlight">\(A.\)</span>
 These two open sets are disjoint and their union is <span class="math notranslate nohighlight">\(A \setminus \{(0, 0)\},\)</span> so <span class="math notranslate nohighlight">\(A \setminus \{(0, 0)\}\)</span> is disconnected.</p>
-<p class="sd-card-text">By contrast, noting that <span class="math notranslate nohighlight">\(\{f^{-1}(0, 0)\}\)</span> is a singleton subset of <span class="math notranslate nohighlight">\(B,\)</span> we have that <span class="math notranslate nohighlight">\(B \setminus f^{-1}\{(0, 0)\}\)</span> is connected because it is path connected.
+<p class="sd-card-text">By contrast, noting that <span class="math notranslate nohighlight">\(\{f^{-1}(0, 0)\}\)</span> is a singleton subset of <span class="math notranslate nohighlight">\(B,\)</span> we have that <span class="math notranslate nohighlight">\(B \setminus \{f^{-1}(0, 0)\}\)</span> is connected because it is path connected.
 Therefore, <span class="math notranslate nohighlight">\(f\)</span> cannot be a homeomorphism, so <span class="math notranslate nohighlight">\(A\)</span> is not homeomorphic to <span class="math notranslate nohighlight">\(B.\)</span></p>
 </div>
 </details></div>
@@ -1131,12 +1132,12 @@ Therefore, <span class="math notranslate nohighlight">\(f\)</span> cannot be a h
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="002-topological-spaces.html"
+       href="003-connectivity.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Topological Spaces</p>
+        <p class="prev-next-title">Connectivity</p>
       </div>
     </a>
     <a class="right-next"
