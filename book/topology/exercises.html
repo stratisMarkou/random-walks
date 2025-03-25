@@ -971,6 +971,133 @@ Therefore, <span class="math notranslate nohighlight">\(h_\epsilon\)</span> is w
 Since the set of piecewise linear functions with rational coefficients is countable, we have shown that <span class="math notranslate nohighlight">\(C[0, 1]\)</span> has a countable dense subset.</p>
 </div>
 </details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 2.1</p>
+<p>Which of the following subsets of <span class="math notranslate nohighlight">\(\mathbb{R}^2\)</span> are (a) connected (b) path connected?</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(B_1((1, 0)) \cup B_1((-1, 0))\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\bar{B}_1((1, 0)) \cup \bar{B}_1((-1, 0))\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\{(x, y) \in \mathbb{R}^2: y = 0 \text{ or } x / y \in \mathbb{Q}\}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\{(x, y) \in \mathbb{R}^2: y = 0 \text{ or } x / y \in \mathbb{Q}\} - \{(0, 0)\}\)</span></p></li>
+</ol>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><strong>Set 1:</strong>
+This set is not connected because it is the union of two disjoint open balls in <span class="math notranslate nohighlight">\(\mathbb{R}^2.\)</span>
+It is therefore also not path connected.</p>
+<p class="sd-card-text"><strong>Set 2:</strong>
+This set is path connected because:
+any two points in <span class="math notranslate nohighlight">\(\bar{B}_1((1, 0))\)</span> are connected by a path; any two points in <span class="math notranslate nohighlight">\(B_1((-1, 0))\)</span> are connected by a path; a pair of points consisting of a point in <span class="math notranslate nohighlight">\(\bar{B}_1((1, 0))\)</span> and a point in <span class="math notranslate nohighlight">\(B_1((-1, 0))\)</span> are connected by a path that goes through the point <span class="math notranslate nohighlight">\((0, 0).\)</span>
+Therefore, the set is path connected, so it is also conneted.</p>
+<p class="sd-card-text"><strong>Set 3:</strong>
+This is the set of all straight lines that pass through the origin and have a rational slope, as well as the <span class="math notranslate nohighlight">\(y\)</span> axis.
+From any point in this set, we can find a path to any other point in the set, by first passing through the origin, and then to the other point.
+Therefore, the set is path connected, so it is also connected.</p>
+<p class="sd-card-text"><strong>Set 4:</strong>
+This set is not connected, and therefore also not path connected, and this can be shown as follows.
+Let us denote this set as <span class="math notranslate nohighlight">\(S.\)</span>
+Let <span class="math notranslate nohighlight">\(q \in \mathbb{R} \setminus \mathbb{Q}.\)</span>
+Consider the sets <span class="math notranslate nohighlight">\(A = \{(x, y): y &gt; qx\}\)</span> and <span class="math notranslate nohighlight">\(B = \{(x, y): y &lt; qx\}.\)</span>
+Then, the sets <span class="math notranslate nohighlight">\(S \cap A\)</span> and <span class="math notranslate nohighlight">\(S \cap B\)</span> are nonempty, disjoint, and open in <span class="math notranslate nohighlight">\(S,\)</span> so <span class="math notranslate nohighlight">\(S\)</span> is not connected.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 2.2</p>
+<p>Suppose that <span class="math notranslate nohighlight">\(X\)</span> is connected, and that <span class="math notranslate nohighlight">\(f: X \to Y\)</span> is a locally constant map, i.e. for every <span class="math notranslate nohighlight">\(x \in X,\)</span> there is an open neighbourhood <span class="math notranslate nohighlight">\(U\)</span> of <span class="math notranslate nohighlight">\(x\)</span> such that <span class="math notranslate nohighlight">\(f(x) = f(x')\)</span> for all <span class="math notranslate nohighlight">\(x' \in U.\)</span>
+Show that <span class="math notranslate nohighlight">\(f\)</span> is constant.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(x \in X\)</span> and <span class="math notranslate nohighlight">\(y = f(x).\)</span>
+Now, consider the sets <span class="math notranslate nohighlight">\(A_z = f^{-1}(z),\)</span> and <span class="math notranslate nohighlight">\(X \setminus A_z.\)</span>
+The set <span class="math notranslate nohighlight">\(A_y\)</span> is non-empty because <span class="math notranslate nohighlight">\(x \in A_y.\)</span>
+If the set <span class="math notranslate nohighlight">\(X \setminus A_y\)</span> is empty, we are done because that means that <span class="math notranslate nohighlight">\(f\)</span> is constant and equal to <span class="math notranslate nohighlight">\(y,\)</span> so suppose that <span class="math notranslate nohighlight">\(X \setminus A_y\)</span> is non-empty.
+Note that <span class="math notranslate nohighlight">\(A_y\)</span> and <span class="math notranslate nohighlight">\(X \setminus A_y\)</span> are disjoint by definition.
+We will show that both <span class="math notranslate nohighlight">\(A_y\)</span> and <span class="math notranslate nohighlight">\(X \setminus A_y\)</span> are open sets.</p>
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(z \in Y.\)</span>
+Then, for each <span class="math notranslate nohighlight">\(a \in A_z,\)</span> we have that <span class="math notranslate nohighlight">\(f\)</span> is locally constant at <span class="math notranslate nohighlight">\(a,\)</span> so there exists an open neighbourhood <span class="math notranslate nohighlight">\(U_a\)</span> of <span class="math notranslate nohighlight">\(a\)</span> such that <span class="math notranslate nohighlight">\(f(a') = f(a)\)</span> for all <span class="math notranslate nohighlight">\(a' \in U_a.\)</span>
+In addition, by the definition of <span class="math notranslate nohighlight">\(A_z,\)</span> we have that <span class="math notranslate nohighlight">\(f(a) = z,\)</span> so <span class="math notranslate nohighlight">\(U_a \subseteq A_z\)</span> for all <span class="math notranslate nohighlight">\(a \in A_z.\)</span>
+Thus we can write</p>
+<div class="math notranslate nohighlight">
+\[A_z = \bigcup_{a \in A_z} U_a,\]</div>
+<p class="sd-card-text">where each <span class="math notranslate nohighlight">\(U_a\)</span> is open.
+Since <span class="math notranslate nohighlight">\(A_z\)</span> can be written as a union of open sets, it is open for each <span class="math notranslate nohighlight">\(z \in Y.\)</span>
+Therefore <span class="math notranslate nohighlight">\(A_y\)</span> is open.
+In addition, since <span class="math notranslate nohighlight">\(X \setminus A_y = \cup_{z \in Y: z \neq y} A_z,\)</span> we have that <span class="math notranslate nohighlight">\(X \setminus A_y\)</span> is open.
+Therefore <span class="math notranslate nohighlight">\(A_y\)</span> and <span class="math notranslate nohighlight">\(X \setminus A_y\)</span> are non-empty, disjoint, and open, so <span class="math notranslate nohighlight">\(X\)</span> is not connected, which is a contradiction.
+Therefore <span class="math notranslate nohighlight">\(f\)</span> is constant.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 2.3</p>
+<p>Show that the product of two connected spaces is connected.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> be connected spaces.
+Suppose that <span class="math notranslate nohighlight">\(X \times Y\)</span> is not connected.
+Then there exist non-empty disjoint open sets <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(V\)</span> in <span class="math notranslate nohighlight">\(X \times Y\)</span> such that <span class="math notranslate nohighlight">\(X \times Y = U \cup V.\)</span></p>
+<p class="sd-card-text">Now, for each <span class="math notranslate nohighlight">\(x \in X\)</span> the subspace <span class="math notranslate nohighlight">\(\{x\} \times Y\)</span> is homeomorphic to <span class="math notranslate nohighlight">\(Y,\)</span> so it is connected.
+Similarly, for each <span class="math notranslate nohighlight">\(y \in Y\)</span> the subspace <span class="math notranslate nohighlight">\(X \times \{y\}\)</span> is homeomorphic to <span class="math notranslate nohighlight">\(X,\)</span> so it is connected.</p>
+<p class="sd-card-text">For each <span class="math notranslate nohighlight">\(x \in X,\)</span> let <span class="math notranslate nohighlight">\(S_x = \{x\} \times Y.\)</span>
+There are two possibilities: (1) there exists some <span class="math notranslate nohighlight">\(x \in X\)</span> such that <span class="math notranslate nohighlight">\(S_x \cap U \neq \emptyset\)</span> and <span class="math notranslate nohighlight">\(S_x \cap V \neq \emptyset,\)</span> or (2) for all <span class="math notranslate nohighlight">\(x \in X,\)</span> either <span class="math notranslate nohighlight">\(S_x \subseteq U\)</span> or <span class="math notranslate nohighlight">\(S_x \subseteq V.\)</span></p>
+<p class="sd-card-text">In the first case, the sets <span class="math notranslate nohighlight">\(S_x \cap U\)</span> and <span class="math notranslate nohighlight">\(S_x \cap V\)</span> are non-empty, disjoint, and open in <span class="math notranslate nohighlight">\(S_x,\)</span> so <span class="math notranslate nohighlight">\(S_x\)</span> is not connected, which is a contradiction because <span class="math notranslate nohighlight">\(S_x\)</span> is homeomorphic to <span class="math notranslate nohighlight">\(Y\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> is connected.</p>
+<p class="sd-card-text">In the second case, we must have that <span class="math notranslate nohighlight">\(S_x \subseteq U\)</span> for some <span class="math notranslate nohighlight">\(x \in X\)</span> and <span class="math notranslate nohighlight">\(S_x \subseteq V\)</span> for some <span class="math notranslate nohighlight">\(x \in X,\)</span> because otherwise one of the sets <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(V\)</span> would be empty.
+From this, we conclude that, for each <span class="math notranslate nohighlight">\(y\)</span> the set <span class="math notranslate nohighlight">\(T_y = X \times \{y\}\)</span> must intersect both <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(V.\)</span>
+Then, similarly to the first case, we have that <span class="math notranslate nohighlight">\(T_y \cap U\)</span> and <span class="math notranslate nohighlight">\(T_y \cap V\)</span> are non-empty, disjoint, and open in <span class="math notranslate nohighlight">\(T_y,\)</span> so <span class="math notranslate nohighlight">\(T_y\)</span> is not connected, which is a contradiction because <span class="math notranslate nohighlight">\(T_y\)</span> is homeomorphic to <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(X\)</span> is connected.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 2.4</p>
+<p>Show that there is no continuous injective map <span class="math notranslate nohighlight">\(f: \mathbb{R}^2 \to \mathbb{R}.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose there exists a continuous injective map <span class="math notranslate nohighlight">\(f: \mathbb{R}^2 \to \mathbb{R}.\)</span>
+Now consider the subset <span class="math notranslate nohighlight">\(\mathbb{R} \setminus \{0\}\)</span> of <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span>
+This is a disconnected set because it can be written as the union of the two disjoint open sets <span class="math notranslate nohighlight">\((-\infty, 0)\)</span> and <span class="math notranslate nohighlight">\((0, \infty).\)</span></p>
+<p class="sd-card-text">Now, because <span class="math notranslate nohighlight">\(f\)</span> is injective, the set <span class="math notranslate nohighlight">\(f^{-1}(\mathbb{R} \setminus \{0\})\)</span> is equal to <span class="math notranslate nohighlight">\(\mathbb{R}^2\)</span> with a single point, the point <span class="math notranslate nohighlight">\(f^{-1}(0),\)</span> removed from it.
+The set <span class="math notranslate nohighlight">\(f^{-1}(\mathbb{R}) \setminus f^{-1}(\{0\})\)</span> is connected because it is path connected.
+However, since <span class="math notranslate nohighlight">\(f\)</span> is continuous, the sets <span class="math notranslate nohighlight">\(f^{-1}((-\infty, 0))\)</span> and <span class="math notranslate nohighlight">\(f^{-1}((0, \infty))\)</span> are open, disjoint and their union equals <span class="math notranslate nohighlight">\(f^{-1}(\mathbb{R}) \setminus f^{-1}(\{0\}),\)</span> which must therefore be disconnected, arriving at a contradiction.
+Therefore, there is no continuous injective map <span class="math notranslate nohighlight">\(f: \mathbb{R}^2 \to \mathbb{R}.\)</span></p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 2.5</p>
+<p>Show that <span class="math notranslate nohighlight">\(\mathbb{R}^2\)</span> with the topology induced by the British railway metric is not homeomorphic to <span class="math notranslate nohighlight">\(\mathbb{R}^2\)</span> with the topology induced by the Euclidean metric.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(A\)</span> be <span class="math notranslate nohighlight">\(\mathbb{R}^2\)</span> with the British railway metric, and let <span class="math notranslate nohighlight">\(B\)</span> be <span class="math notranslate nohighlight">\(\mathbb{R}^2\)</span> with the Euclidean metric.
+Suppose there exists <span class="math notranslate nohighlight">\(f: A \to B\)</span> that is a homeomorphism.</p>
+<p class="sd-card-text">Now, note that <span class="math notranslate nohighlight">\(A \setminus \{(0, 0)\}\)</span> can be written as the union of half-open rays emanating from the origin, which are open sets in <span class="math notranslate nohighlight">\(A.\)</span>
+We can take the union of all these rays that have <span class="math notranslate nohighlight">\(x \geq 0\)</span> to obtain an open set in <span class="math notranslate nohighlight">\(A\)</span> and we can take the union of all these rays that have <span class="math notranslate nohighlight">\(x &lt; 0\)</span> to obtain another open set in <span class="math notranslate nohighlight">\(A.\)</span>
+These two open sets are disjoint and their union is <span class="math notranslate nohighlight">\(A \setminus \{(0, 0)\},\)</span> so <span class="math notranslate nohighlight">\(A \setminus \{(0, 0)\}\)</span> is disconnected.</p>
+<p class="sd-card-text">By contrast, noting that <span class="math notranslate nohighlight">\(\{f(0, 0)\}\)</span> is a singleton subset of <span class="math notranslate nohighlight">\(B,\)</span> we have that <span class="math notranslate nohighlight">\(B \setminus \{f(0, 0)\}\)</span> is connected because it is path connected.
+Therefore, <span class="math notranslate nohighlight">\(f\)</span> cannot be a homeomorphism, so <span class="math notranslate nohighlight">\(A\)</span> is not homeomorphic to <span class="math notranslate nohighlight">\(B.\)</span></p>
+</div>
+</details></div>
 </section>
 
     <script type="text/x-thebe-config">

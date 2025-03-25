@@ -559,3 +559,131 @@ Therefore, $h_\epsilon$ is within $\epsilon$ of $f,$ as measured with the unifor
 Since the set of piecewise linear functions with rational coefficients is countable, we have shown that $C[0, 1]$ has a countable dense subset.
 :::
 ::::
+
+
+::::{admonition} Exercise 2.1
+:class: tip
+Which of the following subsets of $\mathbb{R}^2$ are (a) connected (b) path connected?
+
+1. $B_1((1, 0)) \cup B_1((-1, 0))$
+2. $\bar{B}_1((1, 0)) \cup \bar{B}_1((-1, 0))$
+3. $\{(x, y) \in \mathbb{R}^2: y = 0 \text{ or } x / y \in \mathbb{Q}\}$
+4. $\{(x, y) \in \mathbb{R}^2: y = 0 \text{ or } x / y \in \mathbb{Q}\} - \{(0, 0)\}$
+
+:::{dropdown} Solution
+__Set 1:__
+This set is not connected because it is the union of two disjoint open balls in $\mathbb{R}^2.$
+It is therefore also not path connected.
+
+__Set 2:__
+This set is path connected because:
+any two points in $\bar{B}_1((1, 0))$ are connected by a path; any two points in $B_1((-1, 0))$ are connected by a path; a pair of points consisting of a point in $\bar{B}_1((1, 0))$ and a point in $B_1((-1, 0))$ are connected by a path that goes through the point $(0, 0).$
+Therefore, the set is path connected, so it is also conneted.
+
+__Set 3:__
+This is the set of all straight lines that pass through the origin and have a rational slope, as well as the $y$ axis.
+From any point in this set, we can find a path to any other point in the set, by first passing through the origin, and then to the other point.
+Therefore, the set is path connected, so it is also connected.
+
+__Set 4:__
+This set is not connected, and therefore also not path connected, and this can be shown as follows.
+Let us denote this set as $S.$
+Let $q \in \mathbb{R} \setminus \mathbb{Q}.$
+Consider the sets $A = \{(x, y): y > qx\}$ and $B = \{(x, y): y < qx\}.$
+Then, the sets $S \cap A$ and $S \cap B$ are nonempty, disjoint, and open in $S,$ so $S$ is not connected.
+:::
+::::
+
+
+
+::::{admonition} Exercise 2.2
+:class: tip
+Suppose that $X$ is connected, and that $f: X \to Y$ is a locally constant map, i.e. for every $x \in X,$ there is an open neighbourhood $U$ of $x$ such that $f(x) = f(x')$ for all $x' \in U.$
+Show that $f$ is constant.
+
+:::{dropdown} Solution
+Let $x \in X$ and $y = f(x).$
+Now, consider the sets $A_z = f^{-1}(z),$ and $X \setminus A_z.$
+The set $A_y$ is non-empty because $x \in A_y.$
+If the set $X \setminus A_y$ is empty, we are done because that means that $f$ is constant and equal to $y,$ so suppose that $X \setminus A_y$ is non-empty.
+Note that $A_y$ and $X \setminus A_y$ are disjoint by definition.
+We will show that both $A_y$ and $X \setminus A_y$ are open sets.
+
+Let $z \in Y.$
+Then, for each $a \in A_z,$ we have that $f$ is locally constant at $a,$ so there exists an open neighbourhood $U_a$ of $a$ such that $f(a') = f(a)$ for all $a' \in U_a.$
+In addition, by the definition of $A_z,$ we have that $f(a) = z,$ so $U_a \subseteq A_z$ for all $a \in A_z.$
+Thus we can write
+
+$$A_z = \bigcup_{a \in A_z} U_a,$$
+
+where each $U_a$ is open.
+Since $A_z$ can be written as a union of open sets, it is open for each $z \in Y.$
+Therefore $A_y$ is open.
+In addition, since $X \setminus A_y = \cup_{z \in Y: z \neq y} A_z,$ we have that $X \setminus A_y$ is open.
+Therefore $A_y$ and $X \setminus A_y$ are non-empty, disjoint, and open, so $X$ is not connected, which is a contradiction.
+Therefore $f$ is constant.
+:::
+::::
+
+
+
+::::{admonition} Exercise 2.3
+:class: tip
+Show that the product of two connected spaces is connected.
+
+:::{dropdown} Solution
+Let $X$ and $Y$ be connected spaces.
+Suppose that $X \times Y$ is not connected.
+Then there exist non-empty disjoint open sets $U$ and $V$ in $X \times Y$ such that $X \times Y = U \cup V.$
+
+Now, for each $x \in X$ the subspace $\{x\} \times Y$ is homeomorphic to $Y,$ so it is connected.
+Similarly, for each $y \in Y$ the subspace $X \times \{y\}$ is homeomorphic to $X,$ so it is connected.
+
+For each $x \in X,$ let $S_x = \{x\} \times Y.$
+There are two possibilities: (1) there exists some $x \in X$ such that $S_x \cap U \neq \emptyset$ and $S_x \cap V \neq \emptyset,$ or (2) for all $x \in X,$ either $S_x \subseteq U$ or $S_x \subseteq V.$
+
+In the first case, the sets $S_x \cap U$ and $S_x \cap V$ are non-empty, disjoint, and open in $S_x,$ so $S_x$ is not connected, which is a contradiction because $S_x$ is homeomorphic to $Y$ and $Y$ is connected.
+
+In the second case, we must have that $S_x \subseteq U$ for some $x \in X$ and $S_x \subseteq V$ for some $x \in X,$ because otherwise one of the sets $U$ and $V$ would be empty.
+From this, we conclude that, for each $y$ the set $T_y = X \times \{y\}$ must intersect both $U$ and $V.$
+Then, similarly to the first case, we have that $T_y \cap U$ and $T_y \cap V$ are non-empty, disjoint, and open in $T_y,$ so $T_y$ is not connected, which is a contradiction because $T_y$ is homeomorphic to $X$ and $X$ is connected.
+:::
+::::
+
+
+::::{admonition} Exercise 2.4
+:class: tip
+
+Show that there is no continuous injective map $f: \mathbb{R}^2 \to \mathbb{R}.$
+
+:::{dropdown} Solution
+Suppose there exists a continuous injective map $f: \mathbb{R}^2 \to \mathbb{R}.$
+Now consider the subset $\mathbb{R} \setminus \{0\}$ of $\mathbb{R}.$
+This is a disconnected set because it can be written as the union of the two disjoint open sets $(-\infty, 0)$ and $(0, \infty).$
+
+Now, because $f$ is injective, the set $f^{-1}(\mathbb{R} \setminus \{0\})$ is equal to $\mathbb{R}^2$ with a single point, the point $f^{-1}(0),$ removed from it.
+The set $f^{-1}(\mathbb{R}) \setminus f^{-1}(\{0\})$ is connected because it is path connected.
+However, since $f$ is continuous, the sets $f^{-1}((-\infty, 0))$ and $f^{-1}((0, \infty))$ are open, disjoint and their union equals $f^{-1}(\mathbb{R}) \setminus f^{-1}(\{0\}),$ which must therefore be disconnected, arriving at a contradiction.
+Therefore, there is no continuous injective map $f: \mathbb{R}^2 \to \mathbb{R}.$
+:::
+::::
+
+
+
+::::{admonition} Exercise 2.5
+:class: tip
+
+Show that $\mathbb{R}^2$ with the topology induced by the British railway metric is not homeomorphic to $\mathbb{R}^2$ with the topology induced by the Euclidean metric.
+
+:::{dropdown} Solution
+Let $A$ be $\mathbb{R}^2$ with the British railway metric, and let $B$ be $\mathbb{R}^2$ with the Euclidean metric.
+Suppose there exists $f: A \to B$ that is a homeomorphism.
+
+Now, note that $A \setminus \{(0, 0)\}$ can be written as the union of half-open rays emanating from the origin, which are open sets in $A.$
+We can take the union of all these rays that have $x \geq 0$ to obtain an open set in $A$ and we can take the union of all these rays that have $x < 0$ to obtain another open set in $A.$
+These two open sets are disjoint and their union is $A \setminus \{(0, 0)\},$ so $A \setminus \{(0, 0)\}$ is disconnected.
+
+By contrast, noting that $\{f(0, 0)\}$ is a singleton subset of $B,$ we have that $B \setminus \{f(0, 0)\}$ is connected because it is path connected.
+Therefore, $f$ cannot be a homeomorphism, so $A$ is not homeomorphic to $B.$
+:::
+::::
