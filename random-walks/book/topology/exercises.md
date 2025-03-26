@@ -683,7 +683,7 @@ Now, note that $A \setminus \{(0, 0)\}$ can be written as the union of half-open
 We can take the union of all these rays that have $x \geq 0$ to obtain an open set in $A$ and we can take the union of all these rays that have $x < 0$ to obtain another open set in $A.$
 These two open sets are disjoint and their union is $A \setminus \{(0, 0)\},$ so $A \setminus \{(0, 0)\}$ is disconnected.
 
-By contrast, noting that $\{f^{-1}(0, 0)\}$ is a singleton subset of $B,$ we have that $B \setminus \{f^{-1}(0, 0)\}$ is connected because it is path connected.
+By contrast, noting that $\{f^{-1}((0, 0))\}$ is a singleton subset of $B,$ we have that $B \setminus \{f^{-1}((0, 0))\}$ is connected because it is path connected.
 Therefore, $f$ cannot be a homeomorphism, so $A$ is not homeomorphic to $B.$
 :::
 ::::
