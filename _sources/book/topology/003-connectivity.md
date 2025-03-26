@@ -23,7 +23,7 @@ Given a subset $A$ of a topological space $X,$ we say that $A$ is connected if $
 A space $X$ is disconnected if and only if there exists a contunuous surjective $f: X \to \{0, 1\}$ with the discrete topology.
 :::
 
-:::{dropdown} Proof
+:::{dropdown} Proof (Equivalent condition for connectedness)
 Suppose $X$ is disconnected.
 Then there exist disjoint, non-empty open sets $A$ and $B$ such that $X = A \cup B.$
 Define $f: X \to \{0, 1\}$ by
@@ -47,7 +47,7 @@ Thus, $X$ is disconnected.
 The closed interval $[0, 1]$ with the standard topology is connected.
 :::
 
-:::{dropdown} Proof
+:::{dropdown} Proof (Closed interval is connected)
 Suppose $[0, 1]$ is disconnected.
 Then there exist disjoint, non-empty open sets $A$ and $B$ such that $[0, 1] = A \cup B.$
 Without loss of generality, we may assume that $1 \in B.$
@@ -66,7 +66,7 @@ Let $f: X \to Y$ be a continuous map.
 If $X$ is connected, then $f(X)$ is connected.
 :::
 
-:::{dropdown} Proof
+:::{dropdown} Proof (Image of connected space under continuous map is connected)
 Suppose $f(X)$ is disconnected.
 Then there exist disjoint, non-empty open sets $A$ and $B$ such that $f(X) = A \cup B.$
 Define $U = f^{-1}(A)$ and $V = f^{-1}(B).$
@@ -81,7 +81,7 @@ Suppose $f: X \to \mathbb{R}$ is continuous and $X$ is connected.
 If $x_0, x_1 \in X$ such that $f(x_0) < 0 < f(x_1),$ then there exists $x \in X$ such that $f(x) = 0.$
 :::
 
-:::{dropdown} Proof
+:::{dropdown} Proof (Intermediate value theorem)
 Suppose there does not exist $x \in X$ such that $f(x) = 0.$
 Then $f(X) \cap (-\infty, 0)$ and $f(X) \cap (0, \infty)$ are open, non-empty and disjoint sets whose union is $f(X).$
 Therefore, $f(X)$ is disconnected, which is a contradiction.
@@ -105,7 +105,7 @@ A topological space $X$ is path connected if for all points $x_0, x_1 \in X,$ th
 If $X$ is path connected, then $X$ is connected.
 :::
 
-:::{dropdown} Proof
+:::{dropdown} Proof (Path connected implies connected)
 Let $X$ be path connected, and let $f: X \to \{0, 1\}$ be continuous.
 We want to show that $f$ is constant.
 
@@ -122,7 +122,7 @@ Let $f: X \to Y$ be a homeomorphism, and let $A \subseteq X.$
 Then $f|_A: A \to f(A)$ is a homeomorphism.
 :::
 
-:::{dropdown} Proof
+:::{dropdown} Proof (Restrictions of homeomorphisms are homeomorphisms)
 Since $f$ is a homeomorphism, it is a bijection, so $f|_A$ is a bijection.
 If $U \subseteq f(A)$ is open, then $U = f(A) \cap U'$ for some open $U' \subseteq Y.$
 Then $f^{-1}|_A(U) = f^{-1}(U) \cap A$ is open in $A$ because $f^{-1}$ is continuous.
@@ -145,7 +145,7 @@ For $x, x' \in X,$ define $x \sim x'$ if there exists a path from $x$ to $x'.$
 Then $\sim$ is an equivalence relation.
 :::
 
-:::{dropdown} Proof
+:::{dropdown} Proof (Path connected equivalence relation)
 Let $x, x', x'' \in X.$
 
 __Reflexivity:__
