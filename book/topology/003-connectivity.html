@@ -406,7 +406,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -422,6 +424,16 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-of-connectivity">Definition of connectivity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#path-connectivity">Path connectivity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#components">Components</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -438,6 +450,8 @@ document.write(`
 <a class="github-button" href="https://github.com/stratisMarkou/random-walks/issues" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-issue-opened" data-size="large" aria-label="Issue stratisMarkou/random-walks on GitHub">Issue</a>
 <a class="github-button" href="https://github.com/stratisMarkou/random-walks/subscription" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-eye" data-size="large" aria-label="Watch stratisMarkou/random-walks on GitHub">Watch</a>
 <a class="github-button" href="https://github.com/stratisMarkou" data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large" aria-label="Follow @stratisMarkou on GitHub">Follow</a></p>
+<section id="definition-of-connectivity">
+<h2>Definition of connectivity<a class="headerlink" href="#definition-of-connectivity" title="Link to this heading">#</a></h2>
 <div class="proof definition admonition" id="definition-0">
 <p class="admonition-title"><span class="caption-number">Definition 99 </span> (Connected space)</p>
 <section class="definition-content" id="proof-content">
@@ -519,7 +533,108 @@ Then <span class="math notranslate nohighlight">\(U\)</span> and <span class="ma
 Therefore <span class="math notranslate nohighlight">\(X\)</span> is disconnected, which is a contradiction.
 Thus, <span class="math notranslate nohighlight">\(f(X)\)</span> is connected.</p>
 </div>
+</details><div class="proof theorem admonition" id="theorem-5">
+<p class="admonition-title"><span class="caption-number">Theorem 92 </span> (Intermediate value theorem)</p>
+<section class="theorem-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\(f: X \to \mathbb{R}\)</span> is continuous and <span class="math notranslate nohighlight">\(X\)</span> is connected.
+If <span class="math notranslate nohighlight">\(x_0, x_1 \in X\)</span> such that <span class="math notranslate nohighlight">\(f(x_0) &lt; 0 &lt; f(x_1),\)</span> then there exists <span class="math notranslate nohighlight">\(x \in X\)</span> such that <span class="math notranslate nohighlight">\(f(x) = 0.\)</span></p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose there does not exist <span class="math notranslate nohighlight">\(x \in X\)</span> such that <span class="math notranslate nohighlight">\(f(x) = 0.\)</span>
+Then <span class="math notranslate nohighlight">\(f(X) \cap (-\infty, 0)\)</span> and <span class="math notranslate nohighlight">\(f(X) \cap (0, \infty)\)</span> are open, non-empty and disjoint sets whose union is <span class="math notranslate nohighlight">\(f(X).\)</span>
+Therefore, <span class="math notranslate nohighlight">\(f(X)\)</span> is disconnected, which is a contradiction.
+Thus, there exists <span class="math notranslate nohighlight">\(x \in X\)</span> such that <span class="math notranslate nohighlight">\(f(x) = 0.\)</span></p>
+</div>
 </details></section>
+<section id="path-connectivity">
+<h2>Path connectivity<a class="headerlink" href="#path-connectivity" title="Link to this heading">#</a></h2>
+<div class="proof definition admonition" id="definition-6">
+<p class="admonition-title"><span class="caption-number">Definition 101 </span> (Path connectivity)</p>
+<section class="definition-content" id="proof-content">
+<p>A topological space <span class="math notranslate nohighlight">\(X\)</span> is path connected if for all points <span class="math notranslate nohighlight">\(x_0, x_1 \in X,\)</span> there exists a path from <span class="math notranslate nohighlight">\(x_0\)</span> to <span class="math notranslate nohighlight">\(x_1.\)</span></p>
+</section>
+</div><div class="proof lemma admonition" id="lemma-7">
+<p class="admonition-title"><span class="caption-number">Lemma 28 </span> (Path connected implies connected)</p>
+<section class="lemma-content" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is path connected, then <span class="math notranslate nohighlight">\(X\)</span> is connected.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(X\)</span> be path connected, and let <span class="math notranslate nohighlight">\(f: X \to \{0, 1\}\)</span> be continuous.
+We want to show that <span class="math notranslate nohighlight">\(f\)</span> is constant.</p>
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(x_0, x_1 \in X.\)</span>
+By path connectedness, there is a map <span class="math notranslate nohighlight">\(\gamma: [0, 1] \to X\)</span> such that <span class="math notranslate nohighlight">\(\gamma(0) = x_0\)</span> and <span class="math notranslate nohighlight">\(\gamma(1) = x_1.\)</span>
+Then <span class="math notranslate nohighlight">\(f \circ \gamma: [0, 1] \to \{0, 1\}\)</span> is continuous.
+Since <span class="math notranslate nohighlight">\([0, 1]\)</span> is connected, <span class="math notranslate nohighlight">\(f \circ \gamma\)</span> is constant and <span class="math notranslate nohighlight">\(f(\gamma(0)) = f(\gamma(1)),\)</span> which means that <span class="math notranslate nohighlight">\(f(x_0) = f(x_1).\)</span>
+Since <span class="math notranslate nohighlight">\(x_0\)</span> and <span class="math notranslate nohighlight">\(x_1\)</span> were arbitrary, <span class="math notranslate nohighlight">\(f\)</span> is constant.</p>
+</div>
+</details><div class="proof lemma admonition" id="lemma-8">
+<p class="admonition-title"><span class="caption-number">Lemma 29 </span> (Restrictions of homeomorphisms are homeomorphisms)</p>
+<section class="lemma-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f: X \to Y\)</span> be a homeomorphism, and let <span class="math notranslate nohighlight">\(A \subseteq X.\)</span>
+Then <span class="math notranslate nohighlight">\(f|_A: A \to f(A)\)</span> is a homeomorphism.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Since <span class="math notranslate nohighlight">\(f\)</span> is a homeomorphism, it is a bijection, so <span class="math notranslate nohighlight">\(f|_A\)</span> is a bijection.
+If <span class="math notranslate nohighlight">\(U \subseteq f(A)\)</span> is open, then <span class="math notranslate nohighlight">\(U = f(A) \cap U'\)</span> for some open <span class="math notranslate nohighlight">\(U' \subseteq Y.\)</span>
+Then <span class="math notranslate nohighlight">\(f^{-1}|_A(U) = f^{-1}(U) \cap A\)</span> is open in <span class="math notranslate nohighlight">\(A\)</span> because <span class="math notranslate nohighlight">\(f^{-1}\)</span> is continuous.
+Therefore <span class="math notranslate nohighlight">\(f|_A\)</span> is continuous.</p>
+<p class="sd-card-text">Similarly, we can show that <span class="math notranslate nohighlight">\(f|_A^{-1}\)</span> is continuous.
+If <span class="math notranslate nohighlight">\(V \subseteq A\)</span> is open, then <span class="math notranslate nohighlight">\(V = A \cap V'\)</span> for some open <span class="math notranslate nohighlight">\(V' \subseteq X.\)</span>
+Then <span class="math notranslate nohighlight">\((f|_A^{-1})^{-1}(V) = (f^{-1})^{-1}(V) = f(V)\)</span> is open in <span class="math notranslate nohighlight">\(f(A)\)</span> because <span class="math notranslate nohighlight">\(f\)</span> is continuous.
+Therefore <span class="math notranslate nohighlight">\(f|_A^{-1}\)</span> is continuous.</p>
+<p class="sd-card-text">Thus, <span class="math notranslate nohighlight">\(f|_A\)</span> is a homeomorphism.</p>
+</div>
+</details></section>
+<section id="components">
+<h2>Components<a class="headerlink" href="#components" title="Link to this heading">#</a></h2>
+<div class="proof lemma admonition" id="lemma-9">
+<p class="admonition-title"><span class="caption-number">Lemma 30 </span> (Path connected equivalence relation)</p>
+<section class="lemma-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> be a topological space.
+For <span class="math notranslate nohighlight">\(x, x' \in X,\)</span> define <span class="math notranslate nohighlight">\(x \sim x'\)</span> if there exists a path from <span class="math notranslate nohighlight">\(x\)</span> to <span class="math notranslate nohighlight">\(x'.\)</span>
+Then <span class="math notranslate nohighlight">\(\sim\)</span> is an equivalence relation.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(x, x', x'' \in X.\)</span></p>
+<p class="sd-card-text"><strong>Reflexivity:</strong>
+Then the constant map <span class="math notranslate nohighlight">\(\gamma: [0, 1] \to X\)</span> defined by <span class="math notranslate nohighlight">\(\gamma(t) = x\)</span> is a path from <span class="math notranslate nohighlight">\(x\)</span> to <span class="math notranslate nohighlight">\(x,\)</span> so <span class="math notranslate nohighlight">\(x \sim x.\)</span></p>
+<p class="sd-card-text"><strong>Symmetry:</strong>
+If <span class="math notranslate nohighlight">\(\gamma: [0, 1] \to X\)</span> is a path from <span class="math notranslate nohighlight">\(x\)</span> to <span class="math notranslate nohighlight">\(x',\)</span> then the map <span class="math notranslate nohighlight">\(\gamma': [0, 1] \to X\)</span> defined by <span class="math notranslate nohighlight">\(\gamma'(t) = \gamma(1 - t)\)</span> is a path from <span class="math notranslate nohighlight">\(x'\)</span> to <span class="math notranslate nohighlight">\(x,\)</span> so <span class="math notranslate nohighlight">\(x \sim x'.\)</span></p>
+<p class="sd-card-text"><strong>Transitivity:</strong>
+If <span class="math notranslate nohighlight">\(\gamma: [0, 1] \to X\)</span> is a path from <span class="math notranslate nohighlight">\(x\)</span> to <span class="math notranslate nohighlight">\(x'\)</span> and <span class="math notranslate nohighlight">\(\gamma': [0, 1] \to X\)</span> is a path from <span class="math notranslate nohighlight">\(x'\)</span> to <span class="math notranslate nohighlight">\(x'',\)</span> then the map <span class="math notranslate nohighlight">\(\gamma'': [0, 1] \to X\)</span> defined by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\gamma''(t) = \begin{cases}
+\gamma(2t) &amp; \text{if } 0 \leq t \leq \frac{1}{2}, \\
+\gamma'(2t - 1) &amp; \text{if } \frac{1}{2} \leq t \leq 1,
+\end{cases}\end{split}\]</div>
+<p class="sd-card-text">is a path from <span class="math notranslate nohighlight">\(x\)</span> to <span class="math notranslate nohighlight">\(x'',\)</span> so <span class="math notranslate nohighlight">\(x \sim x''.\)</span></p>
+</div>
+</details></section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -576,7 +691,22 @@ Thus, <span class="math notranslate nohighlight">\(f(X)\)</span> is connected.</
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"></div>
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-of-connectivity">Definition of connectivity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#path-connectivity">Path connectivity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#components">Components</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
