@@ -147,6 +147,7 @@ Then $\sim$ is an equivalence relation.
 
 :::{dropdown} Proof (Path connected equivalence relation)
 Let $x, x', x'' \in X.$
+We show that $\sim$ satisfies the properties of an equivalence relation.
 
 __Reflexivity:__
 Then the constant map $\gamma: [0, 1] \to X$ defined by $\gamma(t) = x$ is a path from $x$ to $x,$ so $x \sim x.$
