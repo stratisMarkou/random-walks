@@ -461,10 +461,10 @@ We introduce these variants here and discuss some of their properties.</p>
 <section id="definition-of-connectivity">
 <h2>Definition of connectivity<a class="headerlink" href="#definition-of-connectivity" title="Link to this heading">#</a></h2>
 <p>The first definition of connectivity amounts to whether a space can be split into a disjoint union of two (non-empty) open sets.</p>
-<div class="proof definition admonition" id="definition-0">
+<div class="proof definition admonition" id="topology:def-connected">
 <p class="admonition-title"><span class="caption-number">Definition 99 </span> (Connected space)</p>
 <section class="definition-content" id="proof-content">
-<p>A topological space <span class="math notranslate nohighlight">\(X\)</span> is disconnected if <span class="math notranslate nohighlight">\(X\)</span> can be written as <span class="math notranslate nohighlight">\(A \cup B,\)</span> where <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are disjoint, non-empty open subsets of <span class="math notranslate nohighlight">\(X.\)</span>
+<p>A <a class="reference internal" href="002-topological-spaces.html#topology:def-topological-space">topological space</a> <span class="math notranslate nohighlight">\(X\)</span> is disconnected if <span class="math notranslate nohighlight">\(X\)</span> can be written as <span class="math notranslate nohighlight">\(A \cup B,\)</span> where <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are disjoint, non-empty open subsets of <span class="math notranslate nohighlight">\(X.\)</span>
 We say <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> disconnect <span class="math notranslate nohighlight">\(X.\)</span>
 A space is connected if it is not disconnected.</p>
 </section>
@@ -497,12 +497,12 @@ In this sense, we can consider <span class="math notranslate nohighlight">\(A\)<
 for example, any sequence that converges in <span class="math notranslate nohighlight">\(A\)</span> (or <span class="math notranslate nohighlight">\(B\)</span>) does not have its limit in <span class="math notranslate nohighlight">\(B\)</span> (or <span class="math notranslate nohighlight">\(A\)</span>).
 We can also go the other way and observe that for any connected space <span class="math notranslate nohighlight">\(X,\)</span> the only subspace of it that is both open and closed is the space <span class="math notranslate nohighlight">\(X\)</span> itself:
 if <span class="math notranslate nohighlight">\(X\)</span> contains a non-empty subset <span class="math notranslate nohighlight">\(A\)</span> that is both open and closed, then <span class="math notranslate nohighlight">\(B = X \subset A\)</span> is an open subset of <span class="math notranslate nohighlight">\(X\)</span> that is disjoint from <span class="math notranslate nohighlight">\(A,\)</span> and if <span class="math notranslate nohighlight">\(B\)</span> were non-empty then <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> would disconnect <span class="math notranslate nohighlight">\(X,\)</span> so <span class="math notranslate nohighlight">\(B = \emptyset\)</span> and <span class="math notranslate nohighlight">\(A = X.\)</span>
-With this final bit of intuition, whenever a space can be disconnected into <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B,\)</span> we can regard <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> as separate universe sets in <span class="math notranslate nohighlight">\(X.\)</span></p>
+With this final bit of intuition, whenever a space can be disconnected into <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B,\)</span> we can regard <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> as separate sets in <span class="math notranslate nohighlight">\(X,\)</span> whose union does not alter topological properties such as convergence of sequences when we consider the two sets together.</p>
 </div>
 </details><div class="proof definition admonition" id="definition-1">
 <p class="admonition-title"><span class="caption-number">Definition 100 </span> (Connected subspace)</p>
 <section class="definition-content" id="proof-content">
-<p>Given a subset <span class="math notranslate nohighlight">\(A\)</span> of a topological space <span class="math notranslate nohighlight">\(X,\)</span> we say that <span class="math notranslate nohighlight">\(A\)</span> is connected if <span class="math notranslate nohighlight">\(A\)</span> is connected as a subspace of <span class="math notranslate nohighlight">\(X.\)</span></p>
+<p>Given a subset <span class="math notranslate nohighlight">\(A\)</span> of a <a class="reference internal" href="002-topological-spaces.html#topology:def-topological-space">topological space</a> <span class="math notranslate nohighlight">\(X,\)</span> we say that <span class="math notranslate nohighlight">\(A\)</span> is connected if <span class="math notranslate nohighlight">\(A\)</span> is <a class="reference internal" href="#topology:def-connected">connected</a> as a subspace of <span class="math notranslate nohighlight">\(X.\)</span></p>
 </section>
 </div><div class="proof lemma admonition" id="lemma-2">
 <p class="admonition-title"><span class="caption-number">Lemma 26 </span> (Equivalent condition for connectedness)</p>
@@ -534,7 +534,7 @@ Thus, <span class="math notranslate nohighlight">\(X\)</span> is disconnected.</
 </details><div class="proof theorem admonition" id="theorem-3">
 <p class="admonition-title"><span class="caption-number">Theorem 91 </span> (Closed inverval is connected)</p>
 <section class="theorem-content" id="proof-content">
-<p>The closed interval <span class="math notranslate nohighlight">\([0, 1]\)</span> with the standard topology is connected.</p>
+<p>The closed interval <span class="math notranslate nohighlight">\([0, 1]\)</span> with the standard topology is <a class="reference internal" href="#topology:def-connected">connected</a>.</p>
 </section>
 </div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -551,13 +551,13 @@ There are two possibilities, either <span class="math notranslate nohighlight">\
 <p class="sd-card-text">If <span class="math notranslate nohighlight">\(\alpha \in T,\)</span> then <span class="math notranslate nohighlight">\(\alpha &lt; 1\)</span> and we immediately have a contradiction because, since <span class="math notranslate nohighlight">\(A\)</span> is open, there exists an open interval <span class="math notranslate nohighlight">\((\alpha - \varepsilon, \alpha + \varepsilon) \subseteq [0, 1]\)</span> contained in <span class="math notranslate nohighlight">\(A\)</span> for some <span class="math notranslate nohighlight">\(\varepsilon &gt; 0,\)</span> which means that <span class="math notranslate nohighlight">\(\alpha\)</span> cannot be the supremum of <span class="math notranslate nohighlight">\(A.\)</span>
 Therefore, <span class="math notranslate nohighlight">\(\alpha \in B.\)</span>
 However, again, this raises a contradiction because, since <span class="math notranslate nohighlight">\(B\)</span> is open, there exists an open interval <span class="math notranslate nohighlight">\((\alpha - \varepsilon, \alpha + \varepsilon) \subseteq [0, 1]\)</span> contained in <span class="math notranslate nohighlight">\(B\)</span> for some <span class="math notranslate nohighlight">\(\varepsilon &gt; 0,\)</span> which means that <span class="math notranslate nohighlight">\(\alpha\)</span> cannot be the supremum of <span class="math notranslate nohighlight">\(A.\)</span>
-Thus, <span class="math notranslate nohighlight">\([0, 1]\)</span> is connected.</p>
+Thus, <span class="math notranslate nohighlight">\([0, 1]\)</span> is <a class="reference internal" href="#topology:def-connected">connected</a>.</p>
 </div>
 </details><div class="proof lemma admonition" id="lemma-4">
 <p class="admonition-title"><span class="caption-number">Lemma 27 </span> (Image of connected space under continuous map is connected)</p>
 <section class="lemma-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(f: X \to Y\)</span> be a continuous map.
-If <span class="math notranslate nohighlight">\(X\)</span> is connected, then <span class="math notranslate nohighlight">\(f(X)\)</span> is connected.</p>
+If <span class="math notranslate nohighlight">\(X\)</span> is <a class="reference internal" href="#topology:def-connected">connected</a>, then <span class="math notranslate nohighlight">\(f(X)\)</span> is too.</p>
 </section>
 </div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -566,12 +566,12 @@ Proof: Image of connected space under continuous map is connected<div class="sd-
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(f(X)\)</span> is disconnected.
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(f(X)\)</span> is <a class="reference internal" href="#topology:def-connected">disconnected</a>.
 Then there exist disjoint, non-empty open sets <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> such that <span class="math notranslate nohighlight">\(f(X) = A \cup B.\)</span>
 Define <span class="math notranslate nohighlight">\(U = f^{-1}(A)\)</span> and <span class="math notranslate nohighlight">\(V = f^{-1}(B).\)</span>
 Then <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(V\)</span> are disjoint, non-empty open sets in <span class="math notranslate nohighlight">\(X,\)</span> and <span class="math notranslate nohighlight">\(X = U \cup V.\)</span>
 Therefore <span class="math notranslate nohighlight">\(X\)</span> is disconnected, which is a contradiction.
-Thus, <span class="math notranslate nohighlight">\(f(X)\)</span> is connected.</p>
+Thus, <span class="math notranslate nohighlight">\(f(X)\)</span> is <a class="reference internal" href="#topology:def-connected">connected</a>.</p>
 </div>
 </details><div class="proof theorem admonition" id="theorem-5">
 <p class="admonition-title"><span class="caption-number">Theorem 92 </span> (Intermediate value theorem)</p>
@@ -588,21 +588,21 @@ Proof: Intermediate value theorem<div class="sd-summary-down docutils">
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">Suppose there does not exist <span class="math notranslate nohighlight">\(x \in X\)</span> such that <span class="math notranslate nohighlight">\(f(x) = 0.\)</span>
 Then <span class="math notranslate nohighlight">\(f(X) \cap (-\infty, 0)\)</span> and <span class="math notranslate nohighlight">\(f(X) \cap (0, \infty)\)</span> are open, non-empty and disjoint sets whose union is <span class="math notranslate nohighlight">\(f(X).\)</span>
-Therefore, <span class="math notranslate nohighlight">\(f(X)\)</span> is disconnected, which is a contradiction.
+Therefore, <span class="math notranslate nohighlight">\(f(X)\)</span> is <a class="reference internal" href="#topology:def-connected">disconnected</a>, which is a contradiction.
 Thus, there exists <span class="math notranslate nohighlight">\(x \in X\)</span> such that <span class="math notranslate nohighlight">\(f(x) = 0.\)</span></p>
 </div>
 </details></section>
 <section id="path-connectivity">
 <h2>Path connectivity<a class="headerlink" href="#path-connectivity" title="Link to this heading">#</a></h2>
-<div class="proof definition admonition" id="definition-6">
+<div class="proof definition admonition" id="topology:def-path-connected">
 <p class="admonition-title"><span class="caption-number">Definition 101 </span> (Path connectivity)</p>
 <section class="definition-content" id="proof-content">
-<p>A topological space <span class="math notranslate nohighlight">\(X\)</span> is path connected if for all points <span class="math notranslate nohighlight">\(x_0, x_1 \in X,\)</span> there exists a path from <span class="math notranslate nohighlight">\(x_0\)</span> to <span class="math notranslate nohighlight">\(x_1.\)</span></p>
+<p>A <a class="reference internal" href="002-topological-spaces.html#topology:def-topological-space">topological space</a> <span class="math notranslate nohighlight">\(X\)</span> is path connected if for all points <span class="math notranslate nohighlight">\(x_0, x_1 \in X,\)</span> there exists a path from <span class="math notranslate nohighlight">\(x_0\)</span> to <span class="math notranslate nohighlight">\(x_1.\)</span></p>
 </section>
 </div><div class="proof lemma admonition" id="lemma-7">
 <p class="admonition-title"><span class="caption-number">Lemma 28 </span> (Path connected implies connected)</p>
 <section class="lemma-content" id="proof-content">
-<p>If <span class="math notranslate nohighlight">\(X\)</span> is path connected, then <span class="math notranslate nohighlight">\(X\)</span> is connected.</p>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is path connected, then <span class="math notranslate nohighlight">\(X\)</span> is <a class="reference internal" href="#topology:def-connected">connected</a>.</p>
 </section>
 </div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -616,7 +616,7 @@ We want to show that <span class="math notranslate nohighlight">\(f\)</span> is 
 <p class="sd-card-text">Let <span class="math notranslate nohighlight">\(x_0, x_1 \in X.\)</span>
 By path connectedness, there is a map <span class="math notranslate nohighlight">\(\gamma: [0, 1] \to X\)</span> such that <span class="math notranslate nohighlight">\(\gamma(0) = x_0\)</span> and <span class="math notranslate nohighlight">\(\gamma(1) = x_1.\)</span>
 Then <span class="math notranslate nohighlight">\(f \circ \gamma: [0, 1] \to \{0, 1\}\)</span> is continuous.
-Since <span class="math notranslate nohighlight">\([0, 1]\)</span> is connected, <span class="math notranslate nohighlight">\(f \circ \gamma\)</span> is constant and <span class="math notranslate nohighlight">\(f(\gamma(0)) = f(\gamma(1)),\)</span> which means that <span class="math notranslate nohighlight">\(f(x_0) = f(x_1).\)</span>
+Since <span class="math notranslate nohighlight">\([0, 1]\)</span> is <a class="reference internal" href="#topology:def-connected">connected</a>, <span class="math notranslate nohighlight">\(f \circ \gamma\)</span> is constant and <span class="math notranslate nohighlight">\(f(\gamma(0)) = f(\gamma(1)),\)</span> which means that <span class="math notranslate nohighlight">\(f(x_0) = f(x_1).\)</span>
 Since <span class="math notranslate nohighlight">\(x_0\)</span> and <span class="math notranslate nohighlight">\(x_1\)</span> were arbitrary, <span class="math notranslate nohighlight">\(f\)</span> is constant.</p>
 </div>
 </details><div class="proof lemma admonition" id="lemma-8">
@@ -652,7 +652,7 @@ These are equivalence classes of points which are path connected or connected, r
 <div class="proof lemma admonition" id="lemma-9">
 <p class="admonition-title"><span class="caption-number">Lemma 30 </span> (Path connected equivalence relation)</p>
 <section class="lemma-content" id="proof-content">
-<p>Let <span class="math notranslate nohighlight">\(X\)</span> be a topological space.
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> be a <a class="reference internal" href="002-topological-spaces.html#topology:def-topological-space">topological space</a>.
 For <span class="math notranslate nohighlight">\(x, x' \in X,\)</span> define <span class="math notranslate nohighlight">\(x \sim x'\)</span> if there exists a path from <span class="math notranslate nohighlight">\(x\)</span> to <span class="math notranslate nohighlight">\(x'.\)</span>
 Then <span class="math notranslate nohighlight">\(\sim\)</span> is an equivalence relation.</p>
 </section>
@@ -689,9 +689,9 @@ If <span class="math notranslate nohighlight">\(\gamma: [0, 1] \to X\)</span> is
 <div class="proof lemma admonition" id="topology:lem-union-of-increasing-connected-sets-is-connected">
 <p class="admonition-title"><span class="caption-number">Lemma 31 </span> (Union of intersecting connected sets is connected)</p>
 <section class="lemma-content" id="proof-content">
-<p>Let <span class="math notranslate nohighlight">\(X\)</span> be a topological space.
-Suppose <span class="math notranslate nohighlight">\(Y_\alpha \subseteq X\)</span> is connected for all <span class="math notranslate nohighlight">\(\alpha \in T,\)</span> and <span class="math notranslate nohighlight">\(\cap_{\alpha \in T} Y_\alpha \neq \emptyset.\)</span>
-Then <span class="math notranslate nohighlight">\(\cup_{\alpha \in T} Y_\alpha\)</span> is connected.</p>
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> be a <a class="reference internal" href="002-topological-spaces.html#topology:def-topological-space">topological space</a>.
+Suppose <span class="math notranslate nohighlight">\(Y_\alpha \subseteq X\)</span> is <a class="reference internal" href="#topology:def-connected">connected</a> for all <span class="math notranslate nohighlight">\(\alpha \in T,\)</span> and <span class="math notranslate nohighlight">\(\cap_{\alpha \in T} Y_\alpha \neq \emptyset.\)</span>
+Then <span class="math notranslate nohighlight">\(\cup_{\alpha \in T} Y_\alpha\)</span> is <a class="reference internal" href="#topology:def-connected">connected</a>.</p>
 </section>
 </div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -700,7 +700,7 @@ Proof: Union of intersecting connected sets is connected<div class="sd-summary-d
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(Y = \cup{\alpha \in T} Y_\alpha\)</span> is disconnected.
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(Y = \cup{\alpha \in T} Y_\alpha\)</span> is <a class="reference internal" href="#topology:def-connected">disconnected</a>.
 Then there exist disjoint, non-empty open sets <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> that are subsets of <span class="math notranslate nohighlight">\(Y\)</span> such that <span class="math notranslate nohighlight">\(A \cup B = Y.\)</span>
 Since <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are open in <span class="math notranslate nohighlight">\(Y,\)</span> there exist open <span class="math notranslate nohighlight">\(A', B' \subseteq X\)</span> such that <span class="math notranslate nohighlight">\(A = A' \cap Y\)</span> and <span class="math notranslate nohighlight">\(B = B' \cap Y.\)</span>
 Define</p>
@@ -710,19 +710,19 @@ A_\alpha = A \cap Y_\alpha = A' \cap Y_\alpha,~~ B_\alpha = B \cap Y_\alpha = B'
 \end{equation}\]</div>
 <p class="sd-card-text">Note that <span class="math notranslate nohighlight">\(A_\alpha\)</span> and <span class="math notranslate nohighlight">\(B_\alpha\)</span> are open in <span class="math notranslate nohighlight">\(Y_\alpha.\)</span>
 Note also that <span class="math notranslate nohighlight">\(A_\alpha \cup B_\alpha = Y_\alpha\)</span> and <span class="math notranslate nohighlight">\(A_\alpha \cap B_\alpha = \emptyset.\)</span>
-Since <span class="math notranslate nohighlight">\(Y_\alpha\)</span> is connected, we must have either <span class="math notranslate nohighlight">\(A_\alpha = \emptyset\)</span> or <span class="math notranslate nohighlight">\(B_\alpha = \emptyset\)</span> because otherwise <span class="math notranslate nohighlight">\(A_\alpha\)</span> and <span class="math notranslate nohighlight">\(B_\alpha\)</span> would disconnect <span class="math notranslate nohighlight">\(Y_\alpha.\)</span></p>
+Since <span class="math notranslate nohighlight">\(Y_\alpha\)</span> is <a class="reference internal" href="#topology:def-connected">connected</a>, we must have either <span class="math notranslate nohighlight">\(A_\alpha = \emptyset\)</span> or <span class="math notranslate nohighlight">\(B_\alpha = \emptyset\)</span> because otherwise <span class="math notranslate nohighlight">\(A_\alpha\)</span> and <span class="math notranslate nohighlight">\(B_\alpha\)</span> would disconnect <span class="math notranslate nohighlight">\(Y_\alpha.\)</span></p>
 <p class="sd-card-text">Now, by assumption, <span class="math notranslate nohighlight">\(\cap_{\alpha \in T} Y_\alpha\)</span> is non-empty, so pick <span class="math notranslate nohighlight">\(y \in \cap_{\alpha \in T}.\)</span>
 Then <span class="math notranslate nohighlight">\(y \in A\)</span> or <span class="math notranslate nohighlight">\(y \in B,\)</span> and without loss of generality we can pick <span class="math notranslate nohighlight">\(y \in A.\)</span>
 Since <span class="math notranslate nohighlight">\(y \in A,\)</span> we have <span class="math notranslate nohighlight">\(y \in A_\alpha\)</span> for all <span class="math notranslate nohighlight">\(\alpha \in T.\)</span>
 This implies that <span class="math notranslate nohighlight">\(B_\alpha = \emptyset\)</span> for all <span class="math notranslate nohighlight">\(\alpha \in T,\)</span> and in turn <span class="math notranslate nohighlight">\(B = \emptyset.\)</span>
 This is a contradiction because we assumed <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> disconnect <span class="math notranslate nohighlight">\(Y\)</span> and therefore cannot be empty.
-Therefore <span class="math notranslate nohighlight">\(Y\)</span> is connected.</p>
+Therefore <span class="math notranslate nohighlight">\(Y\)</span> is <a class="reference internal" href="#topology:def-connected">connected</a>.</p>
 </div>
 </details><p>With this result in place, we are ready to define connected components.</p>
 <div class="proof definition admonition" id="definition-12">
 <p class="admonition-title"><span class="caption-number">Definition 103 </span> (Connected component)</p>
 <section class="definition-content" id="proof-content">
-<p>Let <span class="math notranslate nohighlight">\(X\)</span> be a topological space and <span class="math notranslate nohighlight">\(x \in X.\)</span>
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> be a <a class="reference internal" href="002-topological-spaces.html#topology:def-topological-space">topological space</a> and <span class="math notranslate nohighlight">\(x \in X.\)</span>
 Define</p>
 <div class="math notranslate nohighlight">
 \[\begin{equation}
@@ -730,12 +730,12 @@ Define</p>
 \end{equation}\]</div>
 <p>Then <span class="math notranslate nohighlight">\(C(x) = \cup_{A \in \mathcal{C}(x)} A\)</span> is the connected component of <span class="math notranslate nohighlight">\(x.\)</span></p>
 </section>
-</div><p>In other words, the connected component of <span class="math notranslate nohighlight">\(x \in X\)</span> is the largest connected subset of <span class="math notranslate nohighlight">\(X\)</span> containing <span class="math notranslate nohighlight">\(x,\)</span> which can be shown as follows.</p>
+</div><p>In other words, the connected component of <span class="math notranslate nohighlight">\(x \in X\)</span> is the largest <a class="reference internal" href="#topology:def-connected">connected</a> subset of <span class="math notranslate nohighlight">\(X\)</span> containing <span class="math notranslate nohighlight">\(x,\)</span> which can be shown as follows.</p>
 <div class="proof remark admonition" id="remark-13">
 <p class="admonition-title"><span class="caption-number">Remark 1 </span> (Connected component of <span class="math notranslate nohighlight">\(x \in X\)</span> is the largest connected subspace containing <span class="math notranslate nohighlight">\(x\)</span>)</p>
 <section class="remark-content" id="proof-content">
 <p>First, note that <span class="math notranslate nohighlight">\(\{x\} \in \mathcal{C}(x),\)</span> so <span class="math notranslate nohighlight">\(x \in \mathcal{C}(x).\)</span>
-Second, note that <span class="math notranslate nohighlight">\(C(x)\)</span> is connected because <span class="math notranslate nohighlight">\(x \in \cap_{A \in \mathcal{C}(x)} A\)</span> so the set <span class="math notranslate nohighlight">\(\cap_{A \in \mathcal{C}(x)} A\)</span> is connected, and by our previous <a class="reference internal" href="#topology:lem-union-of-increasing-connected-sets-is-connected">lemma</a>, <span class="math notranslate nohighlight">\(C(x)\)</span> must also be connected.
+Second, note that <span class="math notranslate nohighlight">\(C(x)\)</span> is <a class="reference internal" href="#topology:def-connected">connected</a> because <span class="math notranslate nohighlight">\(x \in \cap_{A \in \mathcal{C}(x)} A\)</span> so the set <span class="math notranslate nohighlight">\(\cap_{A \in \mathcal{C}(x)} A\)</span> is connected, and by our previous <a class="reference internal" href="#topology:lem-union-of-increasing-connected-sets-is-connected">lemma</a>, <span class="math notranslate nohighlight">\(C(x)\)</span> must also be connected.
 Therefore <span class="math notranslate nohighlight">\(C(x)\)</span> is a connected subset of <span class="math notranslate nohighlight">\(X\)</span> that contains <span class="math notranslate nohighlight">\(x.\)</span>
 Finally, by the defintion of <span class="math notranslate nohighlight">\(C(x),\)</span> we see that if another connected subspace <span class="math notranslate nohighlight">\(C'\)</span> contains <span class="math notranslate nohighlight">\(x,\)</span> then it must be a subset of <span class="math notranslate nohighlight">\(C(x).\)</span></p>
 </section>
@@ -743,7 +743,7 @@ Finally, by the defintion of <span class="math notranslate nohighlight">\(C(x),\
 <div class="proof lemma admonition" id="topology:lem-elements-in-a-connected-component-have-the-same-connected-component">
 <p class="admonition-title"><span class="caption-number">Lemma 32 </span> (Elements in a connected component have the same connected component)</p>
 <section class="lemma-content" id="proof-content">
-<p>Let <span class="math notranslate nohighlight">\(X\)</span> be a topological space and <span class="math notranslate nohighlight">\(x, y \in X.\)</span>
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> be a <a class="reference internal" href="002-topological-spaces.html#topology:def-topological-space">topological space</a> and <span class="math notranslate nohighlight">\(x, y \in X.\)</span>
 If <span class="math notranslate nohighlight">\(y \in C(x),\)</span> then <span class="math notranslate nohighlight">\(C(x) = C(y).\)</span></p>
 </section>
 </div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
@@ -753,8 +753,8 @@ Proof: All elements in a connected component have the same connected component<d
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(X\)</span> be a topological space and <span class="math notranslate nohighlight">\(x, y \in X.\)</span>
-If <span class="math notranslate nohighlight">\(y \in C(x),\)</span> then <span class="math notranslate nohighlight">\(C(x)\)</span> is a connected set containing <span class="math notranslate nohighlight">\(y\)</span> and must therefore be a subset of <span class="math notranslate nohighlight">\(C(y)\)</span> so <span class="math notranslate nohighlight">\(C(x) \subseteq C(y).\)</span>
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(X\)</span> be a <a class="reference internal" href="002-topological-spaces.html#topology:def-topological-space">topological space</a> and <span class="math notranslate nohighlight">\(x, y \in X.\)</span>
+If <span class="math notranslate nohighlight">\(y \in C(x),\)</span> then <span class="math notranslate nohighlight">\(C(x)\)</span> is a <a class="reference internal" href="#topology:def-connected">connected</a> subspace containing <span class="math notranslate nohighlight">\(y\)</span> and must therefore be a subset of <span class="math notranslate nohighlight">\(C(y)\)</span> so <span class="math notranslate nohighlight">\(C(x) \subseteq C(y).\)</span>
 Because of this, we have <span class="math notranslate nohighlight">\(x \in C(y)\)</span> as well, and by the same argument it follows that <span class="math notranslate nohighlight">\(C(y) \subseteq C(x).\)</span>
 We conclude that <span class="math notranslate nohighlight">\(C(x) = C(y).\)</span></p>
 </div>
@@ -763,7 +763,7 @@ the binary relation that says two elements are equivalent if they share the same
 <div class="proof lemma admonition" id="lemma-15">
 <p class="admonition-title"><span class="caption-number">Lemma 33 </span> (Connected equivalence relation)</p>
 <section class="lemma-content" id="proof-content">
-<p>Let <span class="math notranslate nohighlight">\(X\)</span> be a topological space.
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> be a <a class="reference internal" href="002-topological-spaces.html#topology:def-topological-space">topological space</a>.
 For <span class="math notranslate nohighlight">\(x, x' \in X,\)</span> define <span class="math notranslate nohighlight">\(x \sim x'\)</span> if <span class="math notranslate nohighlight">\(C(x) = C(x').\)</span>
 Then <span class="math notranslate nohighlight">\(\sim\)</span> is an equivalence relation.</p>
 </section>
@@ -774,7 +774,7 @@ Proof: Connect equivalence relation<div class="sd-summary-down docutils">
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(X\)</span> be a topological space.
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(X\)</span> be a <a class="reference internal" href="002-topological-spaces.html#topology:def-topological-space">topological space</a>.
 For <span class="math notranslate nohighlight">\(x, x' \in X,\)</span> define <span class="math notranslate nohighlight">\(x \sim x'\)</span> if <span class="math notranslate nohighlight">\(C(x) = C(x').\)</span>
 We will prove that this binary relation satisfies the three requirements of equivalence relations.
 In the following, let <span class="math notranslate nohighlight">\(x, x', x'' \in X.\)</span></p>
@@ -790,7 +790,7 @@ These conditions mean that <span class="math notranslate nohighlight">\(C(x) = C
 </details><div class="proof lemma admonition" id="lemma-16">
 <p class="admonition-title"><span class="caption-number">Lemma 34 </span> (Open connected subspaces of <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> are path connected)</p>
 <section class="lemma-content" id="proof-content">
-<p>If <span class="math notranslate nohighlight">\(U \subseteq \mathbb{R}^n\)</span> with the standard topology is open and connected, then it is path connected.</p>
+<p>If <span class="math notranslate nohighlight">\(U \subseteq \mathbb{R}^n\)</span> with the standard topology is open and <a class="reference internal" href="#topology:def-connected">connected</a>, then it is path connected.</p>
 </section>
 </div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -799,7 +799,7 @@ Proof: open connected subspaces of <span class="math notranslate nohighlight">\(
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(U \subseteq \mathbb{R}^n\)</span> with the standard topology is open and connected.
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(U \subseteq \mathbb{R}^n\)</span> with the standard topology is open and <a class="reference internal" href="#topology:def-connected">connected</a>.
 Let <span class="math notranslate nohighlight">\(A\)</span> be a path component of <span class="math notranslate nohighlight">\(U.\)</span>
 We will show that <span class="math notranslate nohighlight">\(A = U,\)</span> by showing that <span class="math notranslate nohighlight">\(U \setminus A\)</span> must be empty.
 In turn, we will argue this by showing that both <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(U \setminus A\)</span> must be open, and since they are disjoint and <span class="math notranslate nohighlight">\(A\)</span> is non-empty, then <span class="math notranslate nohighlight">\(U \setminus A\)</span> must be empty:
@@ -814,7 +814,7 @@ Now suppose that <span class="math notranslate nohighlight">\(b \in U \setminus 
 Then since <span class="math notranslate nohighlight">\(U\)</span> is open, there exists <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(B_\epsilon(b) \subseteq U.\)</span>
 Now, we must have <span class="math notranslate nohighlight">\(B_\epsilon(b) \cap A = \emptyset\)</span> because if <span class="math notranslate nohighlight">\(B_\epsilon(b)\)</span> and <span class="math notranslate nohighlight">\(A\)</span> intersect, and since <span class="math notranslate nohighlight">\(B_\epsilon(b)  \simeq \text{Int}(D^n)\)</span> is path connected, it would follow that <span class="math notranslate nohighlight">\(B_\epsilon(b)\)</span> and <span class="math notranslate nohighlight">\(A\)</span> are path connected, so <span class="math notranslate nohighlight">\(b \in A\)</span> which is a contradiction.
 Therefore <span class="math notranslate nohighlight">\(B_\epsilon(b) \cap A = \emptyset,\)</span> which means <span class="math notranslate nohighlight">\(B_\epsilon(b) \subseteq U \setminus A,\)</span> which implies that <span class="math notranslate nohighlight">\(U \setminus A\)</span> is open.</p>
-<p class="sd-card-text">We conclude that since <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(U \setminus A\)</span> are disjoint open subsets of <span class="math notranslate nohighlight">\(U,\)</span> and <span class="math notranslate nohighlight">\(U\)</span> is connected, we must have <span class="math notranslate nohighlight">\(U \setminus A = \emptyset.\)</span>
+<p class="sd-card-text">We conclude that since <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(U \setminus A\)</span> are disjoint open subsets of <span class="math notranslate nohighlight">\(U,\)</span> and <span class="math notranslate nohighlight">\(U\)</span> is <a class="reference internal" href="#topology:def-connected">connected</a>, we must have <span class="math notranslate nohighlight">\(U \setminus A = \emptyset.\)</span>
 So <span class="math notranslate nohighlight">\(U = A\)</span> and <span class="math notranslate nohighlight">\(U\)</span> is path connected.</p>
 </div>
 </details></section>
