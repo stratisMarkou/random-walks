@@ -336,6 +336,6 @@ Then since $U$ is open, there exists $\epsilon > 0$ such that $B_\epsilon(b) \su
 Now, we must have $B_\epsilon(b) \cap A = \emptyset$ because if $B_\epsilon(b)$ and $A$ intersect, and since $B_\epsilon(b)  \simeq \text{Int}(D^n)$ is path connected, it would follow that $B_\epsilon(b)$ and $A$ are path connected, so $b \in A$ which is a contradiction.
 Therefore $B_\epsilon(b) \cap A = \emptyset,$ which means $B_\epsilon(b) \subseteq U \setminus A,$ which implies that $U \setminus A$ is open.
 
-We conclude that since $A$ and $U \setminus A$ are disjoint open subsets of $U,$ and $U$ is {prf:ref}`connected<topology:def-connected>`, we must have $U \setminus A = \emptyset.$
+We conclude that since $A$ and $U \setminus A$ are disjoint open subsets of $U,$ and $U$ is connected, we must have $U \setminus A = \emptyset.$
 So $U = A$ and $U$ is path connected.
 :::
