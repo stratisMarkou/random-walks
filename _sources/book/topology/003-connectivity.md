@@ -57,11 +57,11 @@ Given a subset $A$ of a {prf:ref}`topological space<topology:def-topological-spa
 :::
 
 :::{prf:lemma} Equivalent condition for connectedness
-A space $X$ is disconnected if and only if there exists a contunuous surjective $f: X \to \{0, 1\}$ with the discrete topology.
+A space $X$ is {prf:ref}`disconnected<topology:def-connected>` if and only if there exists a contunuous surjective $f: X \to \{0, 1\}$ with the discrete topology.
 :::
 
 :::{dropdown} Proof: Equivalent condition for connectedness
-Suppose $X$ is disconnected.
+Suppose $X$ is {prf:ref}`disconnected<topology:def-connected>`.
 Then there exist disjoint, non-empty open sets $A$ and $B$ such that $X = A \cup B.$
 Define $f: X \to \{0, 1\}$ by
 
@@ -85,7 +85,7 @@ The closed interval $[0, 1]$ with the standard topology is {prf:ref}`connected<t
 :::
 
 :::{dropdown} Proof: Closed interval is connected
-Suppose $[0, 1]$ is disconnected.
+Suppose $[0, 1]$ is {prf:ref}`disconnected<topology:def-connected>`.
 Then there exist disjoint, non-empty open sets $A$ and $B$ such that $[0, 1] = A \cup B.$
 Without loss of generality, we may assume that $1 \in B.$
 Since $A$ is non-empty, $\alpha = \sup A$ exists and $\alpha \in [0, 1].$
