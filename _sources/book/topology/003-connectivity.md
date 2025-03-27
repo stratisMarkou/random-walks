@@ -136,15 +136,15 @@ Then a path from $x_0$ to $x_1$ is a continuous map $\gamma: [0, 1] \to X$ such 
 
 :::{prf:definition} Path connectivity
 :label: topology:def-path-connected
-A {prf:ref}`topological space<topology:def-topological-space>` $X$ is path connected if for all points $x_0, x_1 \in X,$ there exists a path from $x_0$ to $x_1.$
+A {prf:ref}`topological space<topology:def-topological-space>` $X$ is {prf:ref}`path connected<topology:def-path-connected>` if for all points $x_0, x_1 \in X,$ there exists a path from $x_0$ to $x_1.$
 :::
 
 :::{prf:lemma} Path connected implies connected
-If $X$ is path connected, then $X$ is {prf:ref}`connected<topology:def-connected>`.
+If $X$ is {prf:ref}`path connected<topology:def-path-connected>`, then $X$ is {prf:ref}`connected<topology:def-connected>`.
 :::
 
 :::{dropdown} Proof: Path connected implies connected
-Let $X$ be path connected, and let $f: X \to \{0, 1\}$ be continuous.
+Let $X$ be {prf:ref}`path connected<topology:def-path-connected>`, and let $f: X \to \{0, 1\}$ be continuous.
 We want to show that $f$ is constant.
 
 Let $x_0, x_1 \in X.$
@@ -314,7 +314,7 @@ These conditions mean that $C(x) = C(x')$ and $C(x') = C(x'')$ so $C(x) = C(x'')
 :::
 
 :::{prf:lemma} Open connected subspaces of $\mathbb{R}^n$ are path connected
-If $U \subseteq \mathbb{R}^n$ with the standard topology is open and {prf:ref}`connected<topology:def-connected>`, then it is path connected.
+If $U \subseteq \mathbb{R}^n$ with the standard topology is open and {prf:ref}`connected<topology:def-connected>`, then it is {prf:ref}`path connected<topology:def-path-connected>`.
 :::
 
 :::{dropdown} Proof: open connected subspaces of $~\mathbb{R}^n$ are path connected
@@ -327,7 +327,7 @@ otherwise $A$ and $U \setminus A$ would disconnect $U.$
 __Showing $A$ is open:__
 Let $a \in A.$
 Since $U$ is open, there exists $\epsilon > 0$ such that $B_\epsilon(a) \subseteq U.$
-Since $B_\epsilon(a) \simeq \text{Int}(D^n)$ is path connected, and $A$ is a path component containing $a,$ we have that $B_\epsilon(a) \subseteq A.$
+Since $B_\epsilon(a) \simeq \text{Int}(D^n)$ is {prf:ref}`path connected<topology:def-path-connected>`, and $A$ is a path component containing $a,$ we have that $B_\epsilon(a) \subseteq A.$
 Therefore $A$ is an open subset of $U.$
 
 __Showing $U \setminus A$ is open:__

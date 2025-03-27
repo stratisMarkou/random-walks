@@ -597,12 +597,12 @@ Thus, there exists <span class="math notranslate nohighlight">\(x \in X\)</span>
 <div class="proof definition admonition" id="topology:def-path-connected">
 <p class="admonition-title"><span class="caption-number">Definition 101 </span> (Path connectivity)</p>
 <section class="definition-content" id="proof-content">
-<p>A <a class="reference internal" href="002-topological-spaces.html#topology:def-topological-space">topological space</a> <span class="math notranslate nohighlight">\(X\)</span> is path connected if for all points <span class="math notranslate nohighlight">\(x_0, x_1 \in X,\)</span> there exists a path from <span class="math notranslate nohighlight">\(x_0\)</span> to <span class="math notranslate nohighlight">\(x_1.\)</span></p>
+<p>A <a class="reference internal" href="002-topological-spaces.html#topology:def-topological-space">topological space</a> <span class="math notranslate nohighlight">\(X\)</span> is <a class="reference internal" href="#topology:def-path-connected">path connected</a> if for all points <span class="math notranslate nohighlight">\(x_0, x_1 \in X,\)</span> there exists a path from <span class="math notranslate nohighlight">\(x_0\)</span> to <span class="math notranslate nohighlight">\(x_1.\)</span></p>
 </section>
 </div><div class="proof lemma admonition" id="lemma-7">
 <p class="admonition-title"><span class="caption-number">Lemma 28 </span> (Path connected implies connected)</p>
 <section class="lemma-content" id="proof-content">
-<p>If <span class="math notranslate nohighlight">\(X\)</span> is path connected, then <span class="math notranslate nohighlight">\(X\)</span> is <a class="reference internal" href="#topology:def-connected">connected</a>.</p>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is <a class="reference internal" href="#topology:def-path-connected">path connected</a>, then <span class="math notranslate nohighlight">\(X\)</span> is <a class="reference internal" href="#topology:def-connected">connected</a>.</p>
 </section>
 </div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -611,7 +611,7 @@ Proof: Path connected implies connected<div class="sd-summary-down docutils">
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(X\)</span> be path connected, and let <span class="math notranslate nohighlight">\(f: X \to \{0, 1\}\)</span> be continuous.
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(X\)</span> be <a class="reference internal" href="#topology:def-path-connected">path connected</a>, and let <span class="math notranslate nohighlight">\(f: X \to \{0, 1\}\)</span> be continuous.
 We want to show that <span class="math notranslate nohighlight">\(f\)</span> is constant.</p>
 <p class="sd-card-text">Let <span class="math notranslate nohighlight">\(x_0, x_1 \in X.\)</span>
 By path connectedness, there is a map <span class="math notranslate nohighlight">\(\gamma: [0, 1] \to X\)</span> such that <span class="math notranslate nohighlight">\(\gamma(0) = x_0\)</span> and <span class="math notranslate nohighlight">\(\gamma(1) = x_1.\)</span>
@@ -790,7 +790,7 @@ These conditions mean that <span class="math notranslate nohighlight">\(C(x) = C
 </details><div class="proof lemma admonition" id="lemma-16">
 <p class="admonition-title"><span class="caption-number">Lemma 34 </span> (Open connected subspaces of <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> are path connected)</p>
 <section class="lemma-content" id="proof-content">
-<p>If <span class="math notranslate nohighlight">\(U \subseteq \mathbb{R}^n\)</span> with the standard topology is open and <a class="reference internal" href="#topology:def-connected">connected</a>, then it is path connected.</p>
+<p>If <span class="math notranslate nohighlight">\(U \subseteq \mathbb{R}^n\)</span> with the standard topology is open and <a class="reference internal" href="#topology:def-connected">connected</a>, then it is <a class="reference internal" href="#topology:def-path-connected">path connected</a>.</p>
 </section>
 </div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -807,7 +807,7 @@ otherwise <span class="math notranslate nohighlight">\(A\)</span> and <span clas
 <p class="sd-card-text"><strong>Showing <span class="math notranslate nohighlight">\(A\)</span> is open:</strong>
 Let <span class="math notranslate nohighlight">\(a \in A.\)</span>
 Since <span class="math notranslate nohighlight">\(U\)</span> is open, there exists <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(B_\epsilon(a) \subseteq U.\)</span>
-Since <span class="math notranslate nohighlight">\(B_\epsilon(a) \simeq \text{Int}(D^n)\)</span> is path connected, and <span class="math notranslate nohighlight">\(A\)</span> is a path component containing <span class="math notranslate nohighlight">\(a,\)</span> we have that <span class="math notranslate nohighlight">\(B_\epsilon(a) \subseteq A.\)</span>
+Since <span class="math notranslate nohighlight">\(B_\epsilon(a) \simeq \text{Int}(D^n)\)</span> is <a class="reference internal" href="#topology:def-path-connected">path connected</a>, and <span class="math notranslate nohighlight">\(A\)</span> is a path component containing <span class="math notranslate nohighlight">\(a,\)</span> we have that <span class="math notranslate nohighlight">\(B_\epsilon(a) \subseteq A.\)</span>
 Therefore <span class="math notranslate nohighlight">\(A\)</span> is an open subset of <span class="math notranslate nohighlight">\(U.\)</span></p>
 <p class="sd-card-text"><strong>Showing <span class="math notranslate nohighlight">\(U \setminus A\)</span> is open:</strong>
 Now suppose that <span class="math notranslate nohighlight">\(b \in U \setminus A.\)</span>
