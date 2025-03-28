@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Metric and topological spaces &#8212; Random Walks</title>
+    <title>Compactness &#8212; Random Walks</title>
   
   
   
@@ -74,12 +74,12 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'book/topology/000-intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/topology/004-compactness';</script>
     <link rel="icon" href="../../_static/dicefav.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Metric spaces" href="001-metric-spaces.html" />
-    <link rel="prev" title="Exercises" href="../mira/000-exercises.html" />
+    <link rel="next" title="Exercises" href="exercises.html" />
+    <link rel="prev" title="Connectivity" href="003-connectivity.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -213,11 +213,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../mira/000-exercises.html">Exercises</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Topology</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="000-intro.html">Topology</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="001-metric-spaces.html">Metric spaces</a></li>
 <li class="toctree-l2"><a class="reference internal" href="002-topological-spaces.html">Topological Spaces</a></li>
 <li class="toctree-l2"><a class="reference internal" href="003-connectivity.html">Connectivity</a></li>
-<li class="toctree-l2"><a class="reference internal" href="004-compactness.html">Compactness</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Compactness</a></li>
 <li class="toctree-l2"><a class="reference internal" href="exercises.html">Exercises</a></li>
 </ul>
 </li>
@@ -306,7 +306,7 @@
       
       
       
-      <li><a href="https://github.com/stratisMarkou/random-walks/issues/new?title=Issue%20on%20page%20%2Fbook/topology/000-intro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/stratisMarkou/random-walks/issues/new?title=Issue%20on%20page%20%2Fbook/topology/004-compactness.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -336,7 +336,7 @@
       
       
       
-      <li><a href="../../_sources/book/topology/000-intro.md" target="_blank"
+      <li><a href="../../_sources/book/topology/004-compactness.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -418,7 +418,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Metric and topological spaces</h1>
+    <h1>Compactness</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -432,17 +432,46 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="metric-and-topological-spaces">
-<h1>Metric and topological spaces<a class="headerlink" href="#metric-and-topological-spaces" title="Link to this heading">#</a></h1>
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-<p><a class="github-button" href="https://github.com/stratisMarkou/random-walks" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" aria-label="Star stratisMarkou/random-walks on GitHub">Star</a>
-<a class="github-button" href="https://github.com/stratisMarkou/random-walks/issues" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-issue-opened" data-size="large" aria-label="Issue stratisMarkou/random-walks on GitHub">Issue</a>
-<a class="github-button" href="https://github.com/stratisMarkou/random-walks/subscription" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-eye" data-size="large" aria-label="Watch stratisMarkou/random-walks on GitHub">Watch</a>
-<a class="github-button" href="https://github.com/stratisMarkou" data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large" aria-label="Follow @stratisMarkou on GitHub">Follow</a></p>
-<p>These are notes based off of Dexter Chua’s <a class="reference external" href="https://dec41.user.srcf.net/notes/">notes</a> on the course <em>Metric and Topological Spaces</em> in the part IB Mathematics Tripos at Cambridge.</p>
-<div class="toctree-wrapper compound">
-</div>
+  <section class="tex2jax_ignore mathjax_ignore" id="compactness">
+<h1>Compactness<a class="headerlink" href="#compactness" title="Link to this heading">#</a></h1>
+<div class="proof definition admonition" id="definition-0">
+<p class="admonition-title"><span class="caption-number">Definition 104 </span> (Compact space)</p>
+<section class="definition-content" id="proof-content">
+<p>A topological space <span class="math notranslate nohighlight">\(X\)</span> is compact if every open cover <span class="math notranslate nohighlight">\(\mathcal{V}\)</span> of <span class="math notranslate nohighlight">\(X\)</span> has a finite subcover <span class="math notranslate nohighlight">\(\mathcal{V}' = \{V_1, \dots, V_n\} \subseteq \mathcal{V}.\)</span></p>
 </section>
+</div><div class="proof theorem admonition" id="theorem-1">
+<p class="admonition-title"><span class="caption-number">Theorem 93 </span> (Closed interval is compact)</p>
+<section class="theorem-content" id="proof-content">
+<p>The closed interval <span class="math notranslate nohighlight">\([0, 1] \subseteq \mathbb{R}\)</span> with the standard topology is compact.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Closed interval is compact<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(\mathcal{V}\)</span> is an open cover of <span class="math notranslate nohighlight">\([0, 1].\)</span>
+Define</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+A = \{a \in [0, 1] : [0, a] \text{ has a finite subcover from } \mathcal{V} \}.
+\end{equation}\]</div>
+<p class="sd-card-text">We first show that <span class="math notranslate nohighlight">\(A\)</span> is non-empty.
+Since <span class="math notranslate nohighlight">\(\mathcal{V}\)</span> is an open cover of <span class="math notranslate nohighlight">\([0, 1],\)</span> there exists <span class="math notranslate nohighlight">\(V \in \mathcal{V}\)</span> that contains <span class="math notranslate nohighlight">\(0.\)</span>
+Therefore <span class="math notranslate nohighlight">\(\{0\}\)</span> has a finite sub-cover from <span class="math notranslate nohighlight">\(\mathcal{V}\)</span> and <span class="math notranslate nohighlight">\(0 \in A.\)</span></p>
+<p class="sd-card-text">Now, let <span class="math notranslate nohighlight">\(\alpha = \sup A.\)</span>
+Suppose <span class="math notranslate nohighlight">\(\alpha &lt; 1.\)</span>
+Since <span class="math notranslate nohighlight">\(\mathcal{V}\)</span> covers <span class="math notranslate nohighlight">\([0, 1],\)</span> there exists open <span class="math notranslate nohighlight">\(V_\alpha \in \mathcal{V}\)</span> with <span class="math notranslate nohighlight">\(\alpha \in V_\alpha.\)</span>
+Since <span class="math notranslate nohighlight">\(V_\alpha\)</span> is open, there exists <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(B_\epsilon(\alpha) \subseteq V_\alpha.\)</span>
+By the definition of <span class="math notranslate nohighlight">\(\alpha,\)</span> the set <span class="math notranslate nohighlight">\([0, \max(0, \alpha - \epsilon / 2)]\)</span> has a finite subcover, to which we can add <span class="math notranslate nohighlight">\(V_\alpha\)</span> to get a finite subcover of <span class="math notranslate nohighlight">\([0, \min(1, \alpha + \epsilon / 2)].\)</span>
+This leads to a contradiction, so <span class="math notranslate nohighlight">\(\alpha = 1.\)</span></p>
+<p class="sd-card-text">We finally show that <span class="math notranslate nohighlight">\(\alpha \in A.\)</span>
+Repeating this argument, since <span class="math notranslate nohighlight">\(\mathcal{V}\)</span> covers <span class="math notranslate nohighlight">\([0, 1],\)</span> there exists open <span class="math notranslate nohighlight">\(V_1 \in \mathcal{V}\)</span> that contains <span class="math notranslate nohighlight">\(1,\)</span> such that <span class="math notranslate nohighlight">\((1 - \epsilon, 1] \subseteq V_1.\)</span>
+Since <span class="math notranslate nohighlight">\(1 - \epsilon / 2 \in A,\)</span> there exists a finite <span class="math notranslate nohighlight">\(\mathcal{V}' \subseteq \mathcal{V}\)</span> which covers <span class="math notranslate nohighlight">\([0, 1 - \epsilon].\)</span>
+Then <span class="math notranslate nohighlight">\(\mathcal{W} = \mathcal{V}' \cup \{V_1\}\)</span> is a finite subcover of <span class="math notranslate nohighlight">\(\mathcal{V}.\)</span></p>
+</div>
+</details></section>
 
     <script type="text/x-thebe-config">
     {
@@ -475,20 +504,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../mira/000-exercises.html"
+       href="003-connectivity.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Exercises</p>
+        <p class="prev-next-title">Connectivity</p>
       </div>
     </a>
     <a class="right-next"
-       href="001-metric-spaces.html"
+       href="exercises.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Metric spaces</p>
+        <p class="prev-next-title">Exercises</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
