@@ -61,7 +61,7 @@ Since $X$ is compact, it has a finite subcover from $\mathcal{W},$ and since $C 
 
 :::{prf:lemma} Compact subspaces of Hausdorff spaces are closed
 :label: topology:lemma-compact-subspaces-of-hausdorff-spaces-are-closed
-Let $X$ be a Hausdorff space.
+Let $X$ be a {prf:ref}`Hausdorff space<topology:def-hausdorff-space>`.
 If $C \subseteq X$ is {prf:ref}`compact<topology:def-compact-space>`, then $C$ is closed in $X.$
 :::
 
@@ -168,7 +168,7 @@ If $X$ is a {prf:ref}`compact<topology:def-compact-space>` {prf:ref}`topological
 :::{dropdown} Proof: Maximum value theorem
 Suppose $X$ is a {prf:ref}`topological space<topology:def-topological-space>` and let $f: X \to \mathbb{R}$ be continuous.
 The image of a compact set under a continuous function is compact ({prf:ref}`topology:lem-image-of-compact-space-under-continuous-function-is-compact`), so $\text{im}f$ is compact.
-Since $\mathbb{R}$ is a metric space, so $\text{im}f$ is also a metric space and is therefore Hausdorff.
+Since $\mathbb{R}$ is a metric space, so $\text{im}f$ is also a metric space and is therefore {prf:ref}`Hausdorff<topology:def-hausdorff-space>`.
 Because $\text{im}f$ is a compact metric space, it must be bounded ({prf:ref}`topology:lem-compact-metric-spaces-are-bounded`).
 Therefore $\text{im} f$ contains its supremum, i.e. $f(x) = \sup \text{im} f$ for some $x \in X.$
 By definition of the supremum, $f(x) \geq f(x')$ for all $x' \in X.$
@@ -224,7 +224,7 @@ Therefore $X \times Y$ is compact.
 :::{prf:lemma} Sufficient condition for homeomorphism
 :label: topology:lem-sufficient-condition-for-homeomorphism
 Suppose $f: X \to Y$ is a continuous bijection.
-If $X$ is {prf:ref}`compact<topology:def-compact-space>` and $Y$ is Hausdorff, then $f$ is a homeomorphism.
+If $X$ is {prf:ref}`compact<topology:def-compact-space>` and $Y$ is {prf:ref}`Hausdorff<topology:def-hausdorff-space>`, then $f$ is a homeomorphism.
 :::
 
 :::{dropdown} Proof: Sufficient condition for homeomorphism
@@ -237,7 +237,7 @@ The set $f(C) \subseteq Y$ is therefore a compact subspace of a Hausdorff space,
 :::
 
 :::{prf:lemma} Condition for homeomorphism for quotient spaces
-Suppose $f: X / \sim \to Y$ is a bijection, $X$ is {prf:ref}`compact<topology:def-compact-space>`, $Y$ is Hausdorff and $f \circ \pi$ is continuous.
+Suppose $f: X / \sim~\to Y$ is a bijection, $X$ is {prf:ref}`compact<topology:def-compact-space>`, $Y$ is {prf:ref}`Hausdorff<topology:def-hausdorff-space>` and $f \circ \pi$ is continuous.
 Then $f$ is a homeomorphism.
 :::
 
