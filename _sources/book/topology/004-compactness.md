@@ -14,7 +14,7 @@ If $\mathcal{V}' \subseteq \mathcal{V}$ and $\mathcal{V}'$ covers $X,$ then we s
 
 :::{prf:definition} Compact space
 :label: topology:def-compact-space
-A topological space $X$ is compact if every open cover $\mathcal{V}$ of $X$ has a finite subcover $\mathcal{V}' = \{V_1, \dots, V_n\} \subseteq \mathcal{V}.$
+A {prf:ref}`topological space<topology:def-topological-space>` $X$ is compact if every open cover $\mathcal{V}$ of $X$ has a finite subcover $\mathcal{V}' = \{V_1, \dots, V_n\} \subseteq \mathcal{V}.$
 :::
 
 :::{prf:theorem} Closed interval is compact
@@ -145,7 +145,7 @@ Therefore $\alpha \in A.$
 
 :::{prf:lemma} Image of compact space under continuous function is compact
 :label: topology:lem-image-of-compact-space-under-continuous-function-is-compact
-Let $X$ and $Y$ be topological spaces.
+Let $X$ and $Y$ be {prf:ref}`topological spaces<topology:def-topological-space>`.
 If $f: X \to Y$ is continuous and $X$ is {prf:ref}`compact<topology:def-compact-space>`, then $\text{im}f \subseteq$ is also compact.
 :::
 
@@ -191,11 +191,11 @@ Now we turn to some properties of products and quotients of compact spaces.
 ### Product spaces
 
 :::{prf:theorem} Product of compact spaces is compact
-If $X$ and $Y$ are {prf:ref}`compact<topology:def-compact-space>` topological spaces, then $X \times Y$ is compact.
+If $X$ and $Y$ are {prf:ref}`compact<topology:def-compact-space>` {prf:ref}`topological spaces<topology:def-topological-space>`, then $X \times Y$ is compact.
 :::
 
 :::{dropdown} Proof: Product of compact spaces is compact
-Suppose $X$ and $Y$ are compact topological spaces.
+Suppose $X$ and $Y$ are compact {prf:ref}`topological spaces<topology:def-topological-space>`.
 Let $\mathcal{V}$ be an open cover of $X \times Y.$
 
 First, we consider the special case where each $U \in \mathcal{V}$ has the form $U = V \times W$ where $V \in X$ and $W \in Y.$
