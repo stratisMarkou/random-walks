@@ -129,7 +129,7 @@ In addition, since $C$ is a compact metric space, it is also bounded.
 If $A \subseteq \mathbb{R}$ with the standard topology is {prf:ref}`compact<topology:def-compact-space>`, there exists $\alpha \in A$ such that $\alpha \geq a$ for all $a \in A.$
 :::
 
-:::{dropdown} Proof: Compact subsets of $\mathbb{R}$ have finite upper bounds
+:::{dropdown} Proof: Compact subsets of $~\mathbb{R}$ have finite upper bounds
 Suppose $A \subseteq \mathbb{R}$ with the standard topology is compact.
 Since $A$ is compact, it is bounded and closed.
 Let $\alpha = \sup A.$
