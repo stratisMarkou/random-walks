@@ -47,6 +47,7 @@ Since $X$ is compact, it has a finite subcover from $\mathcal{W},$ and since $C 
 
 
 :::{prf:lemma} Compact subspaces of Hausdorff spaces are closed
+:label: topology:lemma-compact-subspaces-of-hausdorff-spaces-are-closed
 Let $X$ be a Hausdorff space.
 If $C \subseteq X$ is compact, then $C$ is closed in $X.$
 :::
@@ -73,6 +74,7 @@ Note that being bounded is not a topological property.
 For example $(0, 1) \simeq \mathbb{R}$ are homeomorphic but $(0, 1)$ is bounded while $\mathbb{R}$ is not.
 
 :::{prf:lemma} Compact metric spaces are bounded
+:label: topology:lem-compact-metric-spaces-are-bounded
 A compact metric space $(X, d)$ is bounded.
 :::
 
@@ -129,6 +131,7 @@ Therefore $\alpha \in A.$
 
 
 :::{prf:lemma} Image of compact space under continuous function is compact
+:label: topology:lem-image-of-compact-space-under-continuous-function-is-compact
 Let $X$ and $Y$ be topological spaces.
 If $f: X \to Y$ is continuous and $X$ is compact, then $\text{im}f \subseteq$ is also compact.
 :::
@@ -142,3 +145,19 @@ Then the sets $f^{-1}(V_\alpha), \alpha \in T$ are open in $X$ and also form an 
 Since $X$ is compact, it has a finite subcover of the form $\{f^{-1}(V_{\alpha_1}), \dots, f^{-1}(V_{\alpha_n})\}.$
 We conclude that $V_{\alpha_1}, \dots, V_{\alpha_N}$ form a finite subcover of $\text{im}f,$ which is therefore comapct.
 :::
+
+
+:::{prf:definition} Maximum value theorem
+If $X$ is a compact {prf:ref}`topological space<topology:def-topological-space>` and $f: X \to \mathbb{R}$ is continuous with the standard topology, then $x \in X$ such that $f(x) \geq f(x')$ for all $x' \in X.$
+:::
+
+:::{dropdown} Proof: Maximum value theorem
+Suppose $X$ is a {prf:ref}`topological space<topology:def-topological-space>` and let $f: X \to \mathbb{R}$ be continuous.
+The image of a compact set under a continuous function is compact ({prf:ref}`topology:lem-image-of-compact-space-under-continuous-function-is-compact`), so $\text{im}f$ is compact.
+Since $\mathbb{R}$ is a metric space, so $\text{im}f$ is also a metric space and is therefore Hausdorff.
+Because $\text{im}f$ is a compact metric space, it must be bounded ({ref}`topology:lem-compact-metric-spaces-are-bounded`).
+Therefore $\text{im} f$ contains its supremum, i.e. $f(x) = \sup \text{im} f$ for some $x \in X.$
+By definition of the supremum, $f(x) \geq f(x')$ for all $x' \in X.$
+:::
+
+

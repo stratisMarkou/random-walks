@@ -489,7 +489,7 @@ Then since each <span class="math notranslate nohighlight">\(V \in \mathcal{V}\)
 Then, the set <span class="math notranslate nohighlight">\(\mathcal{W}\)</span> containing all such <span class="math notranslate nohighlight">\(V',\)</span> i.e. all open <span class="math notranslate nohighlight">\(V'\)</span> such that <span class="math notranslate nohighlight">\(V' \cap C = V\)</span> for some <span class="math notranslate nohighlight">\(V \in \mathcal{V},\)</span> together with the open set <span class="math notranslate nohighlight">\(X \setminus C,\)</span> is an open cover of <span class="math notranslate nohighlight">\(X.\)</span>
 Since <span class="math notranslate nohighlight">\(X\)</span> is compact, it has a finite subcover from <span class="math notranslate nohighlight">\(\mathcal{W},\)</span> and since <span class="math notranslate nohighlight">\(C \subseteq X,\)</span> this also gives a finite subcover for <span class="math notranslate nohighlight">\(C,\)</span> which is therefore compact.</p>
 </div>
-</details><div class="proof lemma admonition" id="lemma-3">
+</details><div class="proof lemma admonition" id="topology:lemma-compact-subspaces-of-hausdorff-spaces-are-closed">
 <p class="admonition-title"><span class="caption-number">Lemma 36 </span> (Compact subspaces of Hausdorff spaces are closed)</p>
 <section class="lemma-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(X\)</span> be a Hausdorff space.
@@ -519,7 +519,7 @@ Therefore \)</span>X \setminus C<span class="math notranslate nohighlight">\( is
 </section>
 </div><p>Note that being bounded is not a topological property.
 For example <span class="math notranslate nohighlight">\((0, 1) \simeq \mathbb{R}\)</span> are homeomorphic but <span class="math notranslate nohighlight">\((0, 1)\)</span> is bounded while <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> is not.</p>
-<div class="proof lemma admonition" id="lemma-5">
+<div class="proof lemma admonition" id="topology:lem-compact-metric-spaces-are-bounded">
 <p class="admonition-title"><span class="caption-number">Lemma 37 </span> (Compact metric spaces are bounded)</p>
 <section class="lemma-content" id="proof-content">
 <p>A compact metric space <span class="math notranslate nohighlight">\((X, d)\)</span> is bounded.</p>
@@ -587,7 +587,7 @@ By the definition of supremum, for each <span class="math notranslate nohighligh
 This is a contradiction, because there must exist a sufficiently small ball centered on <span class="math notranslate nohighlight">\(\alpha\)</span> that is contained in <span class="math notranslate nohighlight">\(\mathbb{R} \setminus A,\)</span> because the latter is open.
 Therefore <span class="math notranslate nohighlight">\(\alpha \in A.\)</span></p>
 </div>
-</details><div class="proof lemma admonition" id="lemma-8">
+</details><div class="proof lemma admonition" id="topology:lem-image-of-compact-space-under-continuous-function-is-compact">
 <p class="admonition-title"><span class="caption-number">Lemma 39 </span> (Image of compact space under continuous function is compact)</p>
 <section class="lemma-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> be topological spaces.
@@ -606,6 +606,25 @@ Suppose <span class="math notranslate nohighlight">\(f: X \to Y\)</span> is cont
 Then the sets <span class="math notranslate nohighlight">\(f^{-1}(V_\alpha), \alpha \in T\)</span> are open in <span class="math notranslate nohighlight">\(X\)</span> and also form an open cover of it.
 Since <span class="math notranslate nohighlight">\(X\)</span> is compact, it has a finite subcover of the form <span class="math notranslate nohighlight">\(\{f^{-1}(V_{\alpha_1}), \dots, f^{-1}(V_{\alpha_n})\}.\)</span>
 We conclude that <span class="math notranslate nohighlight">\(V_{\alpha_1}, \dots, V_{\alpha_N}\)</span> form a finite subcover of <span class="math notranslate nohighlight">\(\text{im}f,\)</span> which is therefore comapct.</p>
+</div>
+</details><div class="proof definition admonition" id="definition-9">
+<p class="admonition-title"><span class="caption-number">Definition 106 </span> (Maximum value theorem)</p>
+<section class="definition-content" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is a compact <a class="reference internal" href="002-topological-spaces.html#topology:def-topological-space">topological space</a> and <span class="math notranslate nohighlight">\(f: X \to \mathbb{R}\)</span> is continuous with the standard topology, then <span class="math notranslate nohighlight">\(x \in X\)</span> such that <span class="math notranslate nohighlight">\(f(x) \geq f(x')\)</span> for all <span class="math notranslate nohighlight">\(x' \in X.\)</span></p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Maximum value theorem<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(X\)</span> is a <a class="reference internal" href="002-topological-spaces.html#topology:def-topological-space">topological space</a> and let <span class="math notranslate nohighlight">\(f: X \to \mathbb{R}\)</span> be continuous.
+The image of a compact set under a continuous function is compact (<a class="reference internal" href="#topology:lem-image-of-compact-space-under-continuous-function-is-compact">Lemma 39</a>), so <span class="math notranslate nohighlight">\(\text{im}f\)</span> is compact.
+Since <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> is a metric space, so <span class="math notranslate nohighlight">\(\text{im}f\)</span> is also a metric space and is therefore Hausdorff.
+Because <span class="math notranslate nohighlight">\(\text{im}f\)</span> is a compact metric space, it must be bounded (<span class="xref std std-ref">topology:lem-compact-metric-spaces-are-bounded</span>).
+Therefore <span class="math notranslate nohighlight">\(\text{im} f\)</span> contains its supremum, i.e. <span class="math notranslate nohighlight">\(f(x) = \sup \text{im} f\)</span> for some <span class="math notranslate nohighlight">\(x \in X.\)</span>
+By definition of the supremum, <span class="math notranslate nohighlight">\(f(x) \geq f(x')\)</span> for all <span class="math notranslate nohighlight">\(x' \in X.\)</span></p>
 </div>
 </details></section>
 
