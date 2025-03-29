@@ -231,8 +231,8 @@ By assumption, $f$ is a continuous bijection so it remains to show that $f^{-1}$
 We will show that if $C \subseteq X$ is closed in $X,$ then $(f^{-1})^{-1}(C)$ is closed in $Y.$
 
 Since $f$ is a bijection, $(f^{-1})^{-1}(C) = f(C).$
-Since $X$ is compact, $C$ is compact which, together with the fact that $f$ is continuous implies that $f(C) = \text{im}f|_C$ is compact ({ref}`topology:lem-image-of-compact-space-under-continuous-function-is-compact`).
-The set $f(C) \subseteq Y$ is therefore a compact subspace of a Hausdorff space, so it is closed ({ref}`topology:lemma-compact-subspaces-of-hausdorff-spaces-are-closed`).
+Since $X$ is compact, $C$ is compact which, together with the fact that $f$ is continuous implies that $f(C) = \text{im}f|_C$ is compact ({prf:ref}`topology:lem-image-of-compact-space-under-continuous-function-is-compact`).
+The set $f(C) \subseteq Y$ is therefore a compact subspace of a Hausdorff space, so it is closed ({prf:ref}`topology:lemma-compact-subspaces-of-hausdorff-spaces-are-closed`).
 :::
 
 :::{prf:lemma} Condition for homeomorphism for quotient spaces
@@ -242,8 +242,8 @@ Then $f$ is a homeomorphism.
 
 :::{dropdown} Proof: Condition for homeomorphism for quotient spaces
 Note that the function $\pi: X \to X / \sim$ which maps each element of $X$ to its equivalence class in $X / \sim,$ is continuous.
-Since $X$ is compact and $\pi$ is continuous, $\text{im} \pi$ is compact ({ref}`topology:lem-image-of-compact-space-under-continuous-function-is-compact`).
+Since $X$ is compact and $\pi$ is continuous, $\text{im} \pi$ is compact ({prf:ref}`topology:lem-image-of-compact-space-under-continuous-function-is-compact`).
 Note that both $\pi$ and $\pi^{-1}$ are continuous.
 Since $f \circ \pi$ is continuous, $f = f \circ \pi \circ \pi^{-1}$ is continuous.
-Finally, since $f$ is a continuous bijection, $X$ is compact and $Y$ is Hausdorff, $f$ is a homeomorphism ({ref}`topology:lem-sufficient-condition-for-homeomorphism`).
+Finally, since $f$ is a continuous bijection, $X$ is compact and $Y$ is Hausdorff, $f$ is a homeomorphism ({prf:ref}`topology:lem-sufficient-condition-for-homeomorphism`).
 :::
