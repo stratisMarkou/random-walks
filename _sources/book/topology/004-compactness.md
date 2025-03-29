@@ -148,6 +148,7 @@ We conclude that $V_{\alpha_1}, \dots, V_{\alpha_N}$ form a finite subcover of $
 
 
 :::{prf:definition} Maximum value theorem
+:label: topology:maximum-value-theorem
 If $X$ is a compact {prf:ref}`topological space<topology:def-topological-space>` and $f: X \to \mathbb{R}$ is continuous with the standard topology, then $x \in X$ such that $f(x) \geq f(x')$ for all $x' \in X.$
 :::
 
@@ -161,3 +162,10 @@ By definition of the supremum, $f(x) \geq f(x')$ for all $x' \in X.$
 :::
 
 
+:::{prf:lemma} Maximum value theorem for $[0, 1]$
+If $f: [0, 1] \to \mathbb{R}$ is continuous with the standard topology on both $[0, 1]$ and $\mathbb{R},$ then there exists $x \in X$ such that $f(x) \geq f(x')$ for all $x' \in X.$
+:::
+
+:::{dropdown} Maximum value theorem for $~[0, 1]$
+This follows since $[0, 1],$ with the standard topology, is compact ({ref}`topology:maximum-value-theorem`).
+:::
