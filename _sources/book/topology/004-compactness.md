@@ -13,11 +13,12 @@ If $\mathcal{V}' \subseteq \mathcal{V}$ and $\mathcal{V}'$ covers $X,$ then we s
 :::
 
 :::{prf:definition} Compact space
+:label: topology:def-compact-space
 A topological space $X$ is compact if every open cover $\mathcal{V}$ of $X$ has a finite subcover $\mathcal{V}' = \{V_1, \dots, V_n\} \subseteq \mathcal{V}.$
 :::
 
 :::{prf:theorem} Closed interval is compact
-The closed interval $[0, 1] \subseteq \mathbb{R}$ with the standard topology is compact.
+The closed interval $[0, 1] \subseteq \mathbb{R}$ with the standard topology is {prf:ref}`compact<topology:def-compact-space>`.
 :::
 
 :::{dropdown} Closed interval is compact
@@ -46,7 +47,7 @@ Then $\mathcal{W} = \mathcal{V}' \cup \{V_1\}$ is a finite subcover of $\mathcal
 :::
 
 :::{prf:lemma} Closed subsets of compact spaces are compact
-If $X$ is compact and $C$ is a closed subset of $X,$ then $C$ is also compact.
+If $X$ is {prf:ref}`compact<topology:def-compact-space>` and $C$ is a closed subset of $X,$ then $C$ is also compact.
 :::
 
 :::{dropdown} Proof: Closed subsets of compact spaces are compact
@@ -61,7 +62,7 @@ Since $X$ is compact, it has a finite subcover from $\mathcal{W},$ and since $C 
 :::{prf:lemma} Compact subspaces of Hausdorff spaces are closed
 :label: topology:lemma-compact-subspaces-of-hausdorff-spaces-are-closed
 Let $X$ be a Hausdorff space.
-If $C \subseteq X$ is compact, then $C$ is closed in $X.$
+If $C \subseteq X$ is {prf:ref}`compact<topology:def-compact-space>`, then $C$ is closed in $X.$
 :::
 
 :::{dropdown} Proof: Compact subspaces of Hausdorff spaces are closed
@@ -87,7 +88,7 @@ For example $(0, 1) \simeq \mathbb{R}$ are homeomorphic but $(0, 1)$ is bounded 
 
 :::{prf:lemma} Compact metric spaces are bounded
 :label: topology:lem-compact-metric-spaces-are-bounded
-A compact metric space $(X, d)$ is bounded.
+A {prf:ref}`compact<topology:def-compact-space>` metric space $(X, d)$ is bounded.
 :::
 
 :::{dropdown} Proof: Compact metric spaces are bounded
@@ -106,7 +107,7 @@ Therefore $X$ is boudnded.
 :::
 
 :::{prf:theorem} Heine-Borel
-A subset $C \subseteq \mathbb{R}$ with the standard topology is compact if and only if it is closed and bounded.
+A subset $C \subseteq \mathbb{R}$ with the standard topology is {prf:ref}`compact<topology:def-compact-space>` if and only if it is closed and bounded.
 :::
 
 :::{dropdown} Proof: Heine-Borel
@@ -125,7 +126,7 @@ In addition, since $C$ is a compact metric space, it is also bounded.
 
 
 :::{prf:lemma} Compact subsets of $\mathbb{R}$ have finite upper bounds
-If $A \subseteq \mathbb{R}$ with the standard topology is compact, there exists $\alpha \in A$ such that $\alpha \geq a$ for all $a \in A.$
+If $A \subseteq \mathbb{R}$ with the standard topology is {prf:ref}`compact<topology:def-compact-space>`, there exists $\alpha \in A$ such that $\alpha \geq a$ for all $a \in A.$
 :::
 
 :::{dropdown} Proof: Compact subsets of $\mathbb{R}$ have finite upper bounds
@@ -145,7 +146,7 @@ Therefore $\alpha \in A.$
 :::{prf:lemma} Image of compact space under continuous function is compact
 :label: topology:lem-image-of-compact-space-under-continuous-function-is-compact
 Let $X$ and $Y$ be topological spaces.
-If $f: X \to Y$ is continuous and $X$ is compact, then $\text{im}f \subseteq$ is also compact.
+If $f: X \to Y$ is continuous and $X$ is {prf:ref}`compact<topology:def-compact-space>`, then $\text{im}f \subseteq$ is also compact.
 :::
 
 :::{dropdown} Proof: Image of compact space under continuous function is compact
@@ -161,7 +162,7 @@ We conclude that $V_{\alpha_1}, \dots, V_{\alpha_N}$ form a finite subcover of $
 
 :::{prf:definition} Maximum value theorem
 :label: topology:maximum-value-theorem
-If $X$ is a compact {prf:ref}`topological space<topology:def-topological-space>` and $f: X \to \mathbb{R}$ is continuous with the standard topology, then $x \in X$ such that $f(x) \geq f(x')$ for all $x' \in X.$
+If $X$ is a {prf:ref}`compact<topology:def-compact-space>` {prf:ref}`topological space<topology:def-topological-space>` and $f: X \to \mathbb{R}$ is continuous with the standard topology, then $x \in X$ such that $f(x) \geq f(x')$ for all $x' \in X.$
 :::
 
 :::{dropdown} Proof: Maximum value theorem
@@ -179,7 +180,7 @@ If $f: [0, 1] \to \mathbb{R}$ is continuous with the standard topology on both $
 :::
 
 :::{dropdown} Maximum value theorem for $~[0, 1]$
-This follows since $[0, 1],$ with the standard topology, is compact ({prf:ref}`topology:maximum-value-theorem`).
+This follows from {prf:ref}`topology:maximum-value-theorem`, since the closed interval $[0, 1]$ with the standard topology is {prf:ref}`compact<topology:def-compact-space>`.
 :::
 
 
@@ -190,7 +191,7 @@ Now we turn to some properties of products and quotients of compact spaces.
 ### Product spaces
 
 :::{prf:theorem} Product of compact spaces is compact
-If $X$ and $Y$ are compact topological spaces, then $X \times Y$ is compact.
+If $X$ and $Y$ are {prf:ref}`compact<topology:def-compact-space>` topological spaces, then $X \times Y$ is compact.
 :::
 
 :::{dropdown} Proof: Product of compact spaces is compact
@@ -223,7 +224,7 @@ Therefore $X \times Y$ is compact.
 :::{prf:lemma} Sufficient condition for homeomorphism
 :label: topology:lem-sufficient-condition-for-homeomorphism
 Suppose $f: X \to Y$ is a continuous bijection.
-If $X$ is compact and $Y$ is Hausdorff, then $f$ is a homeomorphism.
+If $X$ is {prf:ref}`compact<topology:def-compact-space>` and $Y$ is Hausdorff, then $f$ is a homeomorphism.
 :::
 
 :::{dropdown} Proof: Sufficient condition for homeomorphism
@@ -236,7 +237,7 @@ The set $f(C) \subseteq Y$ is therefore a compact subspace of a Hausdorff space,
 :::
 
 :::{prf:lemma} Condition for homeomorphism for quotient spaces
-Suppose $f: X / \sim \to Y$ is a bijection, $X$ is compact, $Y$ is Hausdorff and $f \circ \pi$ is continuous.
+Suppose $f: X / \sim \to Y$ is a bijection, $X$ is {prf:ref}`compact<topology:def-compact-space>`, $Y$ is Hausdorff and $f \circ \pi$ is continuous.
 Then $f$ is a homeomorphism.
 :::
 
