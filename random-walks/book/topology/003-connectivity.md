@@ -52,9 +52,16 @@ if $X$ contains a non-empty subset $A$ that is both open and closed, then $B = X
 With this final bit of intuition, whenever a space can be disconnected into $A$ and $B,$ we can regard $A$ and $B$ as separate sets in $X,$ whose union does not alter topological properties such as convergence of sequences when we consider the two sets together.
 :::
 
+
+We can also consider whether a subspace of a topological space is connected, according to the following definition.
+
 :::{prf:definition} Connected subspace
 Given a subset $A$ of a {prf:ref}`topological space<topology:def-topological-space>` $X,$ we say that $A$ is connected if $A$ is {prf:ref}`connected<topology:def-connected>` as a subspace of $X.$
 :::
+
+
+The following is a useful equivalent condition for connectedness.
+For example, in some cases it may be easy to construct a function that helps us show a certain space is disconnected.
 
 :::{prf:lemma} Equivalent condition for connectedness
 A space $X$ is {prf:ref}`disconnected<topology:def-connected>` if and only if there exists a contunuous surjective $f: X \to \{0, 1\}$ with the discrete topology.
@@ -80,6 +87,8 @@ Thus, $X$ is disconnected.
 :::
 
 
+We now show one of the main results of the section, namely that $[0, 1]$ is connected in $\mathbb{R}$ with the regular topology.
+
 :::{prf:theorem} Closed inverval is connected
 The closed interval $[0, 1]$ with the standard topology is {prf:ref}`connected<topology:def-connected>`.
 :::
@@ -97,6 +106,7 @@ However, again, this raises a contradiction because, since $B$ is open, there ex
 Thus, $[0, 1]$ is {prf:ref}`connected<topology:def-connected>`.
 :::
 
+Together with the fact that {ref}`products of connected spaces are connected<topology:ex-2-3>`, we see that $[0, 1]^n$ is connected, and so the interior of the $n$-dimensional disc $\text{Int}(D^n)$ is also connected.
 
 :::{prf:lemma} Image of connected space under continuous map is connected
 Let $f: X \to Y$ be a continuous map.
@@ -112,6 +122,10 @@ Therefore $X$ is disconnected, which is a contradiction.
 Thus, $f(X)$ is {prf:ref}`connected<topology:def-connected>`.
 :::
 
+
+We now prove a more general version of a standard theorem in analysis:
+the intermediate value theorem.
+Note that our notion of connectivity makes the proof of the intermediate value theorem very short and elegant.
 
 :::{prf:theorem} Intermediate value theorem
 Suppose $f: X \to \mathbb{R}$ is continuous and $X$ is connected.
@@ -129,15 +143,26 @@ Thus, there exists $x \in X$ such that $f(x) = 0.$
 
 ## Path connectivity
 
+Now we introduce the second notion of connectivity that we will consider, path connectivity.
+This is a stronger requirement than regular connectivity.
+It is also perhaps a little more intuitive than regular connectivity:
+a space is path connected if any two points can be joined by a continuous path, i.e. curve, with the two points as end points.
+We first define paths.
+
 :::{prf:definiton} Path
 Let $X$ be a {prf:ref}`topological space<topology:def-topological-space>`, and $x_0, x_1 \in X.$
 Then a path from $x_0$ to $x_1$ is a continuous map $\gamma: [0, 1] \to X$ such that $\gamma(0) = x_0$ and $\gamma(1) = x_1.$
 :::
 
+
+With paths in place, we are ready to define path connectivity.
+
 :::{prf:definition} Path connectivity
 :label: topology:def-path-connected
 A {prf:ref}`topological space<topology:def-topological-space>` $X$ is {prf:ref}`path connected<topology:def-path-connected>` if for all points $x_0, x_1 \in X,$ there exists a path from $x_0$ to $x_1.$
 :::
+
+As mentioned, path connectivity is a stronger notion, i.e. implies, regular connectivity.
 
 :::{prf:lemma} Path connected implies connected
 If $X$ is {prf:ref}`path connected<topology:def-path-connected>`, then $X$ is {prf:ref}`connected<topology:def-connected>`.
@@ -216,6 +241,8 @@ Equivalence classes of the path connectivity equivalence relation are called pat
 
 
 ### Connected components
+
+Now we turn our attention to connected components, which are analogous to path components, but for regular connectivity.
 
 :::{prf:lemma} Union of intersecting connected sets is connected
 :label: topology:lem-union-of-increasing-connected-sets-is-connected

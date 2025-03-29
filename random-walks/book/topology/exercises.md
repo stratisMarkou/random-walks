@@ -629,9 +629,10 @@ Therefore $f$ is constant.
 
 ::::{admonition} Exercise 2.3
 :class: tip
+:name: topology:ex-2-3
 Show that the product of two connected spaces is connected.
 
-:::{dropdown} Solution
+:::{dropdown} Solution 1
 Let $X$ and $Y$ be connected spaces.
 Suppose that $X \times Y$ is not connected.
 Then there exist non-empty disjoint open sets $U$ and $V$ in $X \times Y$ such that $X \times Y = U \cup V.$
