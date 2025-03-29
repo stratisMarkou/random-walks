@@ -156,7 +156,7 @@ If $X$ is a compact {prf:ref}`topological space<topology:def-topological-space>`
 Suppose $X$ is a {prf:ref}`topological space<topology:def-topological-space>` and let $f: X \to \mathbb{R}$ be continuous.
 The image of a compact set under a continuous function is compact ({prf:ref}`topology:lem-image-of-compact-space-under-continuous-function-is-compact`), so $\text{im}f$ is compact.
 Since $\mathbb{R}$ is a metric space, so $\text{im}f$ is also a metric space and is therefore Hausdorff.
-Because $\text{im}f$ is a compact metric space, it must be bounded ({ref}`topology:lem-compact-metric-spaces-are-bounded`).
+Because $\text{im}f$ is a compact metric space, it must be bounded ({prf:ref}`topology:lem-compact-metric-spaces-are-bounded`).
 Therefore $\text{im} f$ contains its supremum, i.e. $f(x) = \sup \text{im} f$ for some $x \in X.$
 By definition of the supremum, $f(x) \geq f(x')$ for all $x' \in X.$
 :::
@@ -167,5 +167,5 @@ If $f: [0, 1] \to \mathbb{R}$ is continuous with the standard topology on both $
 :::
 
 :::{dropdown} Maximum value theorem for $~[0, 1]$
-This follows since $[0, 1],$ with the standard topology, is compact ({ref}`topology:maximum-value-theorem`).
+This follows since $[0, 1],$ with the standard topology, is compact ({prf:ref}`topology:maximum-value-theorem`).
 :::
