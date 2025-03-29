@@ -1,11 +1,24 @@
 # Compactness
 
+:::{prf:definition} Open cover
+Let $\mathcal{U} \subseteq 2^X$ be a topology on $X.$
+An open cover of $X$ is a subset $\mathcal{V} \subseteq \mathcal{U}$ such that
+
+$$\begin{equation}
+\cup_{V \in \mathcal{V}} V = X.
+\end{equation}$$
+
+We say $\mathcal{V}$ covers $X.$
+If $\mathcal{V}' \subseteq \mathcal{V}$ and $\mathcal{V}'$ covers $X,$ then we say $\mathcal{V}'$ is a subcover of $\mathcal{V}.$
+:::
+
 :::{prf:definition} Compact space
-A topological space $X$ is compact if every open cover $\mathcal{V}$ of $X$ has a finite subcover $\mathcal{V}' = \{V_1, \dots, V_n\} \subseteq \mathcal{V}.$
+:label: topology:def-compact-space
+A {prf:ref}`topological space<topology:def-topological-space>` $X$ is compact if every open cover $\mathcal{V}$ of $X$ has a finite subcover $\mathcal{V}' = \{V_1, \dots, V_n\} \subseteq \mathcal{V}.$
 :::
 
 :::{prf:theorem} Closed interval is compact
-The closed interval $[0, 1] \subseteq \mathbb{R}$ with the standard topology is compact.
+The closed interval $[0, 1] \subseteq \mathbb{R}$ with the standard topology is {prf:ref}`compact<topology:def-compact-space>`.
 :::
 
 :::{dropdown} Closed interval is compact
@@ -34,7 +47,7 @@ Then $\mathcal{W} = \mathcal{V}' \cup \{V_1\}$ is a finite subcover of $\mathcal
 :::
 
 :::{prf:lemma} Closed subsets of compact spaces are compact
-If $X$ is compact and $C$ is a closed subset of $X,$ then $C$ is also compact.
+If $X$ is {prf:ref}`compact<topology:def-compact-space>` and $C$ is a closed subset of $X,$ then $C$ is also compact.
 :::
 
 :::{dropdown} Proof: Closed subsets of compact spaces are compact
@@ -48,8 +61,8 @@ Since $X$ is compact, it has a finite subcover from $\mathcal{W},$ and since $C 
 
 :::{prf:lemma} Compact subspaces of Hausdorff spaces are closed
 :label: topology:lemma-compact-subspaces-of-hausdorff-spaces-are-closed
-Let $X$ be a Hausdorff space.
-If $C \subseteq X$ is compact, then $C$ is closed in $X.$
+Let $X$ be a {prf:ref}`Hausdorff space<topology:def-hausdorff-space>`.
+If $C \subseteq X$ is {prf:ref}`compact<topology:def-compact-space>`, then $C$ is closed in $X.$
 :::
 
 :::{dropdown} Proof: Compact subspaces of Hausdorff spaces are closed
@@ -75,7 +88,7 @@ For example $(0, 1) \simeq \mathbb{R}$ are homeomorphic but $(0, 1)$ is bounded 
 
 :::{prf:lemma} Compact metric spaces are bounded
 :label: topology:lem-compact-metric-spaces-are-bounded
-A compact metric space $(X, d)$ is bounded.
+A {prf:ref}`compact<topology:def-compact-space>` metric space $(X, d)$ is bounded.
 :::
 
 :::{dropdown} Proof: Compact metric spaces are bounded
@@ -94,7 +107,7 @@ Therefore $X$ is boudnded.
 :::
 
 :::{prf:theorem} Heine-Borel
-A subset $C \subseteq \mathbb{R}$ with the standard topology is compact if and only if it is closed and bounded.
+A subset $C \subseteq \mathbb{R}$ with the standard topology is {prf:ref}`compact<topology:def-compact-space>` if and only if it is closed and bounded.
 :::
 
 :::{dropdown} Proof: Heine-Borel
@@ -113,10 +126,10 @@ In addition, since $C$ is a compact metric space, it is also bounded.
 
 
 :::{prf:lemma} Compact subsets of $\mathbb{R}$ have finite upper bounds
-If $A \subseteq \mathbb{R}$ with the standard topology is compact, there exists $\alpha \in A$ such that $\alpha \geq a$ for all $a \in A.$
+If $A \subseteq \mathbb{R}$ with the standard topology is {prf:ref}`compact<topology:def-compact-space>`, there exists $\alpha \in A$ such that $\alpha \geq a$ for all $a \in A.$
 :::
 
-:::{dropdown} Proof: Compact subsets of $\mathbb{R}$ have finite upper bounds
+:::{dropdown} Proof: Compact subsets of $~\mathbb{R}$ have finite upper bounds
 Suppose $A \subseteq \mathbb{R}$ with the standard topology is compact.
 Since $A$ is compact, it is bounded and closed.
 Let $\alpha = \sup A.$
@@ -132,8 +145,8 @@ Therefore $\alpha \in A.$
 
 :::{prf:lemma} Image of compact space under continuous function is compact
 :label: topology:lem-image-of-compact-space-under-continuous-function-is-compact
-Let $X$ and $Y$ be topological spaces.
-If $f: X \to Y$ is continuous and $X$ is compact, then $\text{im}f \subseteq$ is also compact.
+Let $X$ and $Y$ be {prf:ref}`topological spaces<topology:def-topological-space>`.
+If $f: X \to Y$ is continuous and $X$ is {prf:ref}`compact<topology:def-compact-space>`, then $\text{im}f \subseteq$ is also compact.
 :::
 
 :::{dropdown} Proof: Image of compact space under continuous function is compact
@@ -149,14 +162,14 @@ We conclude that $V_{\alpha_1}, \dots, V_{\alpha_N}$ form a finite subcover of $
 
 :::{prf:definition} Maximum value theorem
 :label: topology:maximum-value-theorem
-If $X$ is a compact {prf:ref}`topological space<topology:def-topological-space>` and $f: X \to \mathbb{R}$ is continuous with the standard topology, then $x \in X$ such that $f(x) \geq f(x')$ for all $x' \in X.$
+If $X$ is a {prf:ref}`compact<topology:def-compact-space>` {prf:ref}`topological space<topology:def-topological-space>` and $f: X \to \mathbb{R}$ is continuous with the standard topology, then $x \in X$ such that $f(x) \geq f(x')$ for all $x' \in X.$
 :::
 
 :::{dropdown} Proof: Maximum value theorem
 Suppose $X$ is a {prf:ref}`topological space<topology:def-topological-space>` and let $f: X \to \mathbb{R}$ be continuous.
 The image of a compact set under a continuous function is compact ({prf:ref}`topology:lem-image-of-compact-space-under-continuous-function-is-compact`), so $\text{im}f$ is compact.
-Since $\mathbb{R}$ is a metric space, so $\text{im}f$ is also a metric space and is therefore Hausdorff.
-Because $\text{im}f$ is a compact metric space, it must be bounded ({ref}`topology:lem-compact-metric-spaces-are-bounded`).
+Since $\mathbb{R}$ is a metric space, so $\text{im}f$ is also a metric space and is therefore {prf:ref}`Hausdorff<topology:def-hausdorff-space>`.
+Because $\text{im}f$ is a compact metric space, it must be bounded ({prf:ref}`topology:lem-compact-metric-spaces-are-bounded`).
 Therefore $\text{im} f$ contains its supremum, i.e. $f(x) = \sup \text{im} f$ for some $x \in X.$
 By definition of the supremum, $f(x) \geq f(x')$ for all $x' \in X.$
 :::
@@ -167,5 +180,71 @@ If $f: [0, 1] \to \mathbb{R}$ is continuous with the standard topology on both $
 :::
 
 :::{dropdown} Maximum value theorem for $~[0, 1]$
-This follows since $[0, 1],$ with the standard topology, is compact ({ref}`topology:maximum-value-theorem`).
+This follows from {prf:ref}`topology:maximum-value-theorem`, since the closed interval $[0, 1]$ with the standard topology is {prf:ref}`compact<topology:def-compact-space>`.
+:::
+
+
+## Products and quotients
+
+Now we turn to some properties of products and quotients of compact spaces.
+
+### Product spaces
+
+:::{prf:theorem} Product of compact spaces is compact
+If $X$ and $Y$ are {prf:ref}`compact<topology:def-compact-space>` {prf:ref}`topological spaces<topology:def-topological-space>`, then $X \times Y$ is compact.
+:::
+
+:::{dropdown} Proof: Product of compact spaces is compact
+Suppose $X$ and $Y$ are compact {prf:ref}`topological spaces<topology:def-topological-space>`.
+Let $\mathcal{V}$ be an open cover of $X \times Y.$
+
+First, we consider the special case where each $U \in \mathcal{V}$ has the form $U = V \times W$ where $V \in X$ and $W \in Y.$
+Since $\mathcal{V}$ is an open cover of $X \times Y,$ for each $(x, y) \in X \times Y$ there exists $U_{xy} \in \mathcal{V}$ such that $(x, y) \in U_{xy}.$
+By our previous assumption we can write this as $U_{xy} = V_{xy} \times W_{xy}$ where $V_{xy} \in X$ and $W_{xy} \in Y.$
+
+Now fix $x \in X.$
+The set $\{W_{xw}: y \in Y\}$ is an open cover of $Y$ and since $Y$ is compact, it has a finite subcover $\{W_{xy_1}, \dots, W_{xy_N}\}.$
+Now, define $V_x = \cap_{n=1}^N V_{xy_n},$ and note that $V_x$ is a finite intersection of open sets so it is open in $X.$
+In addition, $\mathcal{U}_x = \{R_{xy_1}, \dots, U_{xy_N}\}$ is a finite open cover of $V_x \times Y.$
+Now, $\{V_x: x \in X\}$ is an open cover of $X$ and since $X$ is compact, it has a finite subcover $\{V_{x_1}, \dots, V_{x_M}\}.$
+Therefore $\cup_{m = 1}^M \mathcal{R}_{x_m}$ is a finite subset of $\mathcal{V}$ which covers $X \times Y.$
+
+Now consider the general case where $\mathcal{V}$ is an arbitrary open cover of $X \times Y.$
+For each $(x, y) \in X \times Y,$ there exists open $U_{xy} \in \mathcal{V}$ such that $(x, y) \in X \times Y.$
+Since $U_{xy}$ is open, there exist open $V_{xy} \subseteq X$ and open $W_{xy} \subseteq Y$ such that $x \in V_{xy}$ and $y \in W_{xy}$ and $V_{xy} \times W_{xy} \subseteq U_{xy}.$
+Then, the set $\{V_{xy} \times W_{xy} : (x, y) \in X \times Y\}$ is an open cover of $X \times Y$ of the special case we ahve considered above.
+Therefore it has a finite subcover $\{V_{x_1y_1} \times W_{x_1y_1}, \dots, V_{x_Ny_N} \times W_{x_Ny_N}\}.$
+Noting that $V_{x_ny_n} \times W_{x_ny_n} \subseteq U_{x_ny_n},$ we see that $\{U_{x_1y_1} \dots U_{x_Ny_N}\}$ has a finite subcover of $X \times Y.$
+Therefore $X \times Y$ is compact.
+:::
+
+
+### Quotient spaces
+
+:::{prf:lemma} Sufficient condition for homeomorphism
+:label: topology:lem-sufficient-condition-for-homeomorphism
+Suppose $f: X \to Y$ is a continuous bijection.
+If $X$ is {prf:ref}`compact<topology:def-compact-space>` and $Y$ is {prf:ref}`Hausdorff<topology:def-hausdorff-space>`, then $f$ is a homeomorphism.
+:::
+
+:::{dropdown} Proof: Sufficient condition for homeomorphism
+By assumption, $f$ is a continuous bijection so it remains to show that $f^{-1}$ is continuous.
+We will show that if $C \subseteq X$ is closed in $X,$ then $(f^{-1})^{-1}(C)$ is closed in $Y.$
+
+Since $f$ is a bijection, $(f^{-1})^{-1}(C) = f(C).$
+Since $X$ is compact, $C$ is compact which, together with the fact that $f$ is continuous implies that $f(C) = \text{im}f|_C$ is compact ({prf:ref}`topology:lem-image-of-compact-space-under-continuous-function-is-compact`).
+The set $f(C) \subseteq Y$ is therefore a compact subspace of a Hausdorff space, so it is closed ({prf:ref}`topology:lemma-compact-subspaces-of-hausdorff-spaces-are-closed`).
+:::
+
+:::{prf:lemma} Condition for homeomorphism for quotient spaces
+Suppose $f: X / \sim~\to Y$ is a bijection, $X$ is {prf:ref}`compact<topology:def-compact-space>`, $Y$ is {prf:ref}`Hausdorff<topology:def-hausdorff-space>` and $f \circ \pi$ is continuous.
+Then $f$ is a homeomorphism.
+:::
+
+:::{dropdown} Proof: Condition for homeomorphism for quotient spaces
+Note that the function $\pi: X \to X / \sim$ which maps each element of $X$ to its equivalence class in $X / \sim,$ is continuous.
+Since $X$ is compact and $\pi$ is continuous, $\text{im} \pi$ is compact ({prf:ref}`topology:lem-image-of-compact-space-under-continuous-function-is-compact`).
+Note that both $\pi$ and $\pi^{-1}$ are continuous.
+Since $f \circ \pi$ is continuous, $f = f \circ \pi \circ \pi^{-1}$ is continuous.
+Finally, since $f$ is a continuous bijection, $X$ is compact and $Y$ is Hausdorff, $f$ is a homeomorphism ({prf:ref}`topology:lem-sufficient-condition-for-homeomorphism`).
 :::
