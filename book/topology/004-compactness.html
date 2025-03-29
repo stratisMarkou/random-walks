@@ -445,11 +445,23 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="compactness">
 <h1>Compactness<a class="headerlink" href="#compactness" title="Link to this heading">#</a></h1>
 <div class="proof definition admonition" id="definition-0">
-<p class="admonition-title"><span class="caption-number">Definition 104 </span> (Compact space)</p>
+<p class="admonition-title"><span class="caption-number">Definition 104 </span> (Open cover)</p>
+<section class="definition-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\mathcal{U} \subseteq 2^X\)</span> be a topology on <span class="math notranslate nohighlight">\(X.\)</span>
+An open cover of <span class="math notranslate nohighlight">\(X\)</span> is a subset <span class="math notranslate nohighlight">\(\mathcal{V} \subseteq \mathcal{U}\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+\cup_{V \in \mathcal{V}} V = X.
+\end{equation}\]</div>
+<p>We say <span class="math notranslate nohighlight">\(\mathcal{V}\)</span> covers <span class="math notranslate nohighlight">\(X.\)</span>
+If <span class="math notranslate nohighlight">\(\mathcal{V}' \subseteq \mathcal{V}\)</span> and <span class="math notranslate nohighlight">\(\mathcal{V}'\)</span> covers <span class="math notranslate nohighlight">\(X,\)</span> then we say <span class="math notranslate nohighlight">\(\mathcal{V}'\)</span> is a subcover of <span class="math notranslate nohighlight">\(\mathcal{V}.\)</span></p>
+</section>
+</div><div class="proof definition admonition" id="definition-1">
+<p class="admonition-title"><span class="caption-number">Definition 105 </span> (Compact space)</p>
 <section class="definition-content" id="proof-content">
 <p>A topological space <span class="math notranslate nohighlight">\(X\)</span> is compact if every open cover <span class="math notranslate nohighlight">\(\mathcal{V}\)</span> of <span class="math notranslate nohighlight">\(X\)</span> has a finite subcover <span class="math notranslate nohighlight">\(\mathcal{V}' = \{V_1, \dots, V_n\} \subseteq \mathcal{V}.\)</span></p>
 </section>
-</div><div class="proof theorem admonition" id="theorem-1">
+</div><div class="proof theorem admonition" id="theorem-2">
 <p class="admonition-title"><span class="caption-number">Theorem 93 </span> (Closed interval is compact)</p>
 <section class="theorem-content" id="proof-content">
 <p>The closed interval <span class="math notranslate nohighlight">\([0, 1] \subseteq \mathbb{R}\)</span> with the standard topology is compact.</p>
@@ -481,7 +493,7 @@ Repeating this argument, since <span class="math notranslate nohighlight">\(\mat
 Since <span class="math notranslate nohighlight">\(1 - \epsilon / 2 \in A,\)</span> there exists a finite <span class="math notranslate nohighlight">\(\mathcal{V}' \subseteq \mathcal{V}\)</span> which covers <span class="math notranslate nohighlight">\([0, 1 - \epsilon].\)</span>
 Then <span class="math notranslate nohighlight">\(\mathcal{W} = \mathcal{V}' \cup \{V_1\}\)</span> is a finite subcover of <span class="math notranslate nohighlight">\(\mathcal{V}.\)</span></p>
 </div>
-</details><div class="proof lemma admonition" id="lemma-2">
+</details><div class="proof lemma admonition" id="lemma-3">
 <p class="admonition-title"><span class="caption-number">Lemma 35 </span> (Closed subsets of compact spaces are compact)</p>
 <section class="lemma-content" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(X\)</span> is compact and <span class="math notranslate nohighlight">\(C\)</span> is a closed subset of <span class="math notranslate nohighlight">\(X,\)</span> then <span class="math notranslate nohighlight">\(C\)</span> is also compact.</p>
@@ -522,8 +534,8 @@ Then, the collection \)</span>{W_{xy} \subseteq X: y \in C}<span class="math not
 Then the set \)</span>\cap_{n = 1}^N U_{x_ny}<span class="math notranslate nohighlight">\( is open because it is a finite interesection of open sets, and it does not intersect \)</span>C,<span class="math notranslate nohighlight">\( so it is contained in \)</span>X \setminus C.<span class="math notranslate nohighlight">\(
 Therefore \)</span>X \setminus C<span class="math notranslate nohighlight">\( is open and \)</span>C$ is closed.</p>
 </div>
-</details><div class="proof definition admonition" id="definition-4">
-<p class="admonition-title"><span class="caption-number">Definition 105 </span> (Bounded metric space)</p>
+</details><div class="proof definition admonition" id="definition-5">
+<p class="admonition-title"><span class="caption-number">Definition 106 </span> (Bounded metric space)</p>
 <section class="definition-content" id="proof-content">
 <p>A metric space <span class="math notranslate nohighlight">\((X, d)\)</span> is bounded if there exists <span class="math notranslate nohighlight">\(M \in \mathbb{R}\)</span> such that <span class="math notranslate nohighlight">\(d(x, y) \leq M\)</span> for all <span class="math notranslate nohighlight">\(x, y \in X.\)</span></p>
 </section>
@@ -553,7 +565,7 @@ d(y, z) \leq d(y, x) + d(x, z) &lt; 2R.
 \end{equation}\]</div>
 <p class="sd-card-text">Therefore <span class="math notranslate nohighlight">\(X\)</span> is boudnded.</p>
 </div>
-</details><div class="proof theorem admonition" id="theorem-6">
+</details><div class="proof theorem admonition" id="theorem-7">
 <p class="admonition-title"><span class="caption-number">Theorem 94 </span> (Heine-Borel)</p>
 <section class="theorem-content" id="proof-content">
 <p>A subset <span class="math notranslate nohighlight">\(C \subseteq \mathbb{R}\)</span> with the standard topology is compact if and only if it is closed and bounded.</p>
@@ -575,7 +587,7 @@ Suppose <span class="math notranslate nohighlight">\(C\)</span> is compact.
 Since <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> is a metric space, it is also Hausdorff, and since <span class="math notranslate nohighlight">\(C\)</span> is compact it follows that it is closed.
 In addition, since <span class="math notranslate nohighlight">\(C\)</span> is a compact metric space, it is also bounded.</p>
 </div>
-</details><div class="proof lemma admonition" id="lemma-7">
+</details><div class="proof lemma admonition" id="lemma-8">
 <p class="admonition-title"><span class="caption-number">Lemma 38 </span> (Compact subsets of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> have finite upper bounds)</p>
 <section class="lemma-content" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(A \subseteq \mathbb{R}\)</span> with the standard topology is compact, there exists <span class="math notranslate nohighlight">\(\alpha \in A\)</span> such that <span class="math notranslate nohighlight">\(\alpha \geq a\)</span> for all <span class="math notranslate nohighlight">\(a \in A.\)</span></p>
@@ -618,7 +630,7 @@ Since <span class="math notranslate nohighlight">\(X\)</span> is compact, it has
 We conclude that <span class="math notranslate nohighlight">\(V_{\alpha_1}, \dots, V_{\alpha_N}\)</span> form a finite subcover of <span class="math notranslate nohighlight">\(\text{im}f,\)</span> which is therefore comapct.</p>
 </div>
 </details><div class="proof definition admonition" id="topology:maximum-value-theorem">
-<p class="admonition-title"><span class="caption-number">Definition 106 </span> (Maximum value theorem)</p>
+<p class="admonition-title"><span class="caption-number">Definition 107 </span> (Maximum value theorem)</p>
 <section class="definition-content" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(X\)</span> is a compact <a class="reference internal" href="002-topological-spaces.html#topology:def-topological-space">topological space</a> and <span class="math notranslate nohighlight">\(f: X \to \mathbb{R}\)</span> is continuous with the standard topology, then <span class="math notranslate nohighlight">\(x \in X\)</span> such that <span class="math notranslate nohighlight">\(f(x) \geq f(x')\)</span> for all <span class="math notranslate nohighlight">\(x' \in X.\)</span></p>
 </section>
@@ -636,7 +648,7 @@ Because <span class="math notranslate nohighlight">\(\text{im}f\)</span> is a co
 Therefore <span class="math notranslate nohighlight">\(\text{im} f\)</span> contains its supremum, i.e. <span class="math notranslate nohighlight">\(f(x) = \sup \text{im} f\)</span> for some <span class="math notranslate nohighlight">\(x \in X.\)</span>
 By definition of the supremum, <span class="math notranslate nohighlight">\(f(x) \geq f(x')\)</span> for all <span class="math notranslate nohighlight">\(x' \in X.\)</span></p>
 </div>
-</details><div class="proof lemma admonition" id="lemma-10">
+</details><div class="proof lemma admonition" id="lemma-11">
 <p class="admonition-title"><span class="caption-number">Lemma 40 </span> (Maximum value theorem for <span class="math notranslate nohighlight">\([0, 1]\)</span>)</p>
 <section class="lemma-content" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(f: [0, 1] \to \mathbb{R}\)</span> is continuous with the standard topology on both <span class="math notranslate nohighlight">\([0, 1]\)</span> and <span class="math notranslate nohighlight">\(\mathbb{R},\)</span> then there exists <span class="math notranslate nohighlight">\(x \in X\)</span> such that <span class="math notranslate nohighlight">\(f(x) \geq f(x')\)</span> for all <span class="math notranslate nohighlight">\(x' \in X.\)</span></p>
@@ -648,11 +660,11 @@ Maximum value theorem for <span class="math notranslate nohighlight">\(~[0, 1]\)
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">This follows since <span class="math notranslate nohighlight">\([0, 1],\)</span> with the standard topology, is compact (<a class="reference internal" href="#topology:maximum-value-theorem">Definition 106</a>).</p>
+<p class="sd-card-text">This follows since <span class="math notranslate nohighlight">\([0, 1],\)</span> with the standard topology, is compact (<a class="reference internal" href="#topology:maximum-value-theorem">Definition 107</a>).</p>
 </div>
 </details><section id="products-and-quotients">
 <h2>Products and quotients<a class="headerlink" href="#products-and-quotients" title="Link to this heading">#</a></h2>
-<div class="proof theorem admonition" id="theorem-11">
+<div class="proof theorem admonition" id="theorem-12">
 <p class="admonition-title"><span class="caption-number">Theorem 95 </span> (Product of compact spaces is compact)</p>
 <section class="theorem-content" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are compact topological spaces, then <span class="math notranslate nohighlight">\(X \times Y\)</span> is compact.</p>
@@ -666,14 +678,22 @@ Proof: Product of compact spaces is compact<div class="sd-summary-down docutils"
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are compact topological spaces.
 Let <span class="math notranslate nohighlight">\(\mathcal{V}\)</span> be an open cover of <span class="math notranslate nohighlight">\(X \times Y.\)</span></p>
-<p class="sd-card-text">First, we consider the special case where each <span class="math notranslate nohighlight">\(U \in \mathcal{V}\)</span> consists has the form <span class="math notranslate nohighlight">\(U = V \times W\)</span> where <span class="math notranslate nohighlight">\(V \in X\)</span> and <span class="math notranslate nohighlight">\(W \in Y.\)</span>
+<p class="sd-card-text">First, we consider the special case where each <span class="math notranslate nohighlight">\(U \in \mathcal{V}\)</span> has the form <span class="math notranslate nohighlight">\(U = V \times W\)</span> where <span class="math notranslate nohighlight">\(V \in X\)</span> and <span class="math notranslate nohighlight">\(W \in Y.\)</span>
 Since <span class="math notranslate nohighlight">\(\mathcal{V}\)</span> is an open cover of <span class="math notranslate nohighlight">\(X \times Y,\)</span> for each <span class="math notranslate nohighlight">\((x, y) \in X \times Y\)</span> there exists <span class="math notranslate nohighlight">\(U_{xy} \in \mathcal{V}\)</span> such that <span class="math notranslate nohighlight">\((x, y) \in U_{xy}.\)</span>
-By our previous assumption we can write this as <span class="math notranslate nohighlight">\(U_{xy} = V_{xy} \times W_{xy}\)</span> where <span class="math notranslate nohighlight">\(V_{xy} \in X\)</span> and <span class="math notranslate nohighlight">\(W_{xy} \in Y.\)</span>
-Then <span class="math notranslate nohighlight">\(\{W_{xy} : y \in Y\}\)</span> is an open cover of <span class="math notranslate nohighlight">\(Y\)</span> and since <span class="math notranslate nohighlight">\(Y\)</span> is compact, it has a finite subcover <span class="math notranslate nohighlight">\(\{W_{xy_1}, \dots, W_{xy_N}\}.\)</span>
-In addition, <span class="math notranslate nohighlight">\(V_x = \cap_{n=1}^N V_{xy_n}\)</span> is a finite intersection of open sets so it is open in <span class="math notranslate nohighlight">\(X.\)</span>
-Moreover, <span class="math notranslate nohighlight">\(\mathcal{V}_x = \{U_{xy_1}, \dots, U_{xy_N}\}\)</span> covers the space <span class="math notranslate nohighlight">\(V_x \times Y.\)</span>
-Now, the set <span class="math notranslate nohighlight">\(\mathcal{O} = \{V_x: x \in X\}\)</span> is an open cover of <span class="math notranslate nohighlight">\(X\)</span> and since <span class="math notranslate nohighlight">\(X\)</span> is compact, it has a finite subcover <span class="math notranslate nohighlight">\(\{V_{x_1}, \dots, V_{x_M}\}\)</span> from <span class="math notranslate nohighlight">\(\mathcal{O}.\)</span>
-Then the set <span class="math notranslate nohighlight">\(\mathcal{V}' = \cup_{m = 1}^M \mathcal{V}_m\)</span> is a finite subset of <span class="math notranslate nohighlight">\(\mathcal{V}\)</span> which covers <span class="math notranslate nohighlight">\(X \times Y.\)</span></p>
+By our previous assumption we can write this as <span class="math notranslate nohighlight">\(U_{xy} = V_{xy} \times W_{xy}\)</span> where <span class="math notranslate nohighlight">\(V_{xy} \in X\)</span> and <span class="math notranslate nohighlight">\(W_{xy} \in Y.\)</span></p>
+<p class="sd-card-text">Now fix <span class="math notranslate nohighlight">\(x \in X.\)</span>
+The set <span class="math notranslate nohighlight">\(\{W_{xw}: y \in Y\}\)</span> is an open cover of <span class="math notranslate nohighlight">\(Y\)</span> and since <span class="math notranslate nohighlight">\(Y\)</span> is compact, it has a finite subcover <span class="math notranslate nohighlight">\(\{W_{xy_1}, \dots, W_{xy_N}\}.\)</span>
+Now, define <span class="math notranslate nohighlight">\(V_x = \cap_{n=1}^N V_{xy_n},\)</span> and note that <span class="math notranslate nohighlight">\(V_x\)</span> is a finite intersection of open sets so it is open in <span class="math notranslate nohighlight">\(X.\)</span>
+In addition, <span class="math notranslate nohighlight">\(\mathcal{U}_x = \{R_{xy_1}, \dots, U_{xy_N}\}\)</span> is a finite open cover of <span class="math notranslate nohighlight">\(V_x \times Y.\)</span>
+Now, <span class="math notranslate nohighlight">\(\{V_x: x \in X\}\)</span> is an open cover of <span class="math notranslate nohighlight">\(X\)</span> and since <span class="math notranslate nohighlight">\(X\)</span> is compact, it has a finite subcover <span class="math notranslate nohighlight">\(\{V_{x_1}, \dots, V_{x_M}\}.\)</span>
+Therefore <span class="math notranslate nohighlight">\(\cup_{m = 1}^M \mathcal{R}_{x_m}\)</span> is a finite subset of <span class="math notranslate nohighlight">\(\mathcal{V}\)</span> which covers <span class="math notranslate nohighlight">\(X \times Y.\)</span></p>
+<p class="sd-card-text">Now consider the general case where <span class="math notranslate nohighlight">\(\mathcal{V}\)</span> is an arbitrary open cover of <span class="math notranslate nohighlight">\(X \times Y.\)</span>
+For each <span class="math notranslate nohighlight">\((x, y) \in X \times Y,\)</span> there exists open <span class="math notranslate nohighlight">\(U_{xy} \in \mathcal{V}\)</span> such that <span class="math notranslate nohighlight">\((x, y) \in X \times Y.\)</span>
+Since <span class="math notranslate nohighlight">\(U_{xy}\)</span> is open, there exist open <span class="math notranslate nohighlight">\(V_{xy} \subseteq X\)</span> and open <span class="math notranslate nohighlight">\(W_{xy} \subseteq Y\)</span> such that <span class="math notranslate nohighlight">\(x \in V_{xy}\)</span> and <span class="math notranslate nohighlight">\(y \in W_{xy}\)</span> and <span class="math notranslate nohighlight">\(V_{xy} \times W_{xy} \subseteq U_{xy}.\)</span>
+Then, the set <span class="math notranslate nohighlight">\(\{V_{xy} \times W_{xy} : (x, y) \in X \times Y\}\)</span> is an open cover of <span class="math notranslate nohighlight">\(X \times Y\)</span> of the special case we ahve considered above.
+Therefore it has a finite subcover <span class="math notranslate nohighlight">\(\{V_{x_1y_1} \times W_{x_1y_1}, \dots, V_{x_Ny_N} \times W_{x_Ny_N}\}.\)</span>
+Noting that <span class="math notranslate nohighlight">\(V_{x_ny_n} \times W_{x_ny_n} \subseteq U_{x_ny_n},\)</span> we see that <span class="math notranslate nohighlight">\(\{U_{x_1y_1} \dots U_{x_Ny_N}\}\)</span> has a finite subcover of <span class="math notranslate nohighlight">\(X \times Y.\)</span>
+Therefore <span class="math notranslate nohighlight">\(X \times Y\)</span> is compact.</p>
 </div>
 </details></section>
 </section>

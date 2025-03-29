@@ -1,5 +1,17 @@
 # Compactness
 
+:::{prf:definition} Open cover
+Let $\mathcal{U} \subseteq 2^X$ be a topology on $X.$
+An open cover of $X$ is a subset $\mathcal{V} \subseteq \mathcal{U}$ such that
+
+$$\begin{equation}
+\cup_{V \in \mathcal{V}} V = X.
+\end{equation}$$
+
+We say $\mathcal{V}$ covers $X.$
+If $\mathcal{V}' \subseteq \mathcal{V}$ and $\mathcal{V}'$ covers $X,$ then we say $\mathcal{V}'$ is a subcover of $\mathcal{V}.$
+:::
+
 :::{prf:definition} Compact space
 A topological space $X$ is compact if every open cover $\mathcal{V}$ of $X$ has a finite subcover $\mathcal{V}' = \{V_1, \dots, V_n\} \subseteq \mathcal{V}.$
 :::
@@ -181,12 +193,22 @@ If $X$ and $Y$ are compact topological spaces, then $X \times Y$ is compact.
 Suppose $X$ and $Y$ are compact topological spaces.
 Let $\mathcal{V}$ be an open cover of $X \times Y.$
 
-First, we consider the special case where each $U \in \mathcal{V}$ consists has the form $U = V \times W$ where $V \in X$ and $W \in Y.$
+First, we consider the special case where each $U \in \mathcal{V}$ has the form $U = V \times W$ where $V \in X$ and $W \in Y.$
 Since $\mathcal{V}$ is an open cover of $X \times Y,$ for each $(x, y) \in X \times Y$ there exists $U_{xy} \in \mathcal{V}$ such that $(x, y) \in U_{xy}.$
 By our previous assumption we can write this as $U_{xy} = V_{xy} \times W_{xy}$ where $V_{xy} \in X$ and $W_{xy} \in Y.$
-Then $\{W_{xy} : y \in Y\}$ is an open cover of $Y$ and since $Y$ is compact, it has a finite subcover $\{W_{xy_1}, \dots, W_{xy_N}\}.$
-In addition, $V_x = \cap_{n=1}^N V_{xy_n}$ is a finite intersection of open sets so it is open in $X.$
-Moreover, $\mathcal{V}_x = \{U_{xy_1}, \dots, U_{xy_N}\}$ covers the space $V_x \times Y.$
-Now, the set $\mathcal{O} = \{V_x: x \in X\}$ is an open cover of $X$ and since $X$ is compact, it has a finite subcover $\{V_{x_1}, \dots, V_{x_M}\}$ from $\mathcal{O}.$
-Then the set $\mathcal{V}' = \cup_{m = 1}^M \mathcal{V}_m$ is a finite subset of $\mathcal{V}$ which covers $X \times Y.$
+
+Now fix $x \in X.$
+The set $\{W_{xw}: y \in Y\}$ is an open cover of $Y$ and since $Y$ is compact, it has a finite subcover $\{W_{xy_1}, \dots, W_{xy_N}\}.$
+Now, define $V_x = \cap_{n=1}^N V_{xy_n},$ and note that $V_x$ is a finite intersection of open sets so it is open in $X.$
+In addition, $\mathcal{U}_x = \{R_{xy_1}, \dots, U_{xy_N}\}$ is a finite open cover of $V_x \times Y.$
+Now, $\{V_x: x \in X\}$ is an open cover of $X$ and since $X$ is compact, it has a finite subcover $\{V_{x_1}, \dots, V_{x_M}\}.$
+Therefore $\cup_{m = 1}^M \mathcal{R}_{x_m}$ is a finite subset of $\mathcal{V}$ which covers $X \times Y.$
+
+Now consider the general case where $\mathcal{V}$ is an arbitrary open cover of $X \times Y.$
+For each $(x, y) \in X \times Y,$ there exists open $U_{xy} \in \mathcal{V}$ such that $(x, y) \in X \times Y.$
+Since $U_{xy}$ is open, there exist open $V_{xy} \subseteq X$ and open $W_{xy} \subseteq Y$ such that $x \in V_{xy}$ and $y \in W_{xy}$ and $V_{xy} \times W_{xy} \subseteq U_{xy}.$
+Then, the set $\{V_{xy} \times W_{xy} : (x, y) \in X \times Y\}$ is an open cover of $X \times Y$ of the special case we ahve considered above.
+Therefore it has a finite subcover $\{V_{x_1y_1} \times W_{x_1y_1}, \dots, V_{x_Ny_N} \times W_{x_Ny_N}\}.$
+Noting that $V_{x_ny_n} \times W_{x_ny_n} \subseteq U_{x_ny_n},$ we see that $\{U_{x_1y_1} \dots U_{x_Ny_N}\}$ has a finite subcover of $X \times Y.$
+Therefore $X \times Y$ is compact.
 :::
