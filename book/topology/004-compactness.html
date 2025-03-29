@@ -407,7 +407,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -423,6 +425,14 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#products-and-quotients">Products and quotients</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -640,7 +650,33 @@ Maximum value theorem for <span class="math notranslate nohighlight">\(~[0, 1]\)
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">This follows since <span class="math notranslate nohighlight">\([0, 1],\)</span> with the standard topology, is compact (<a class="reference internal" href="#topology:maximum-value-theorem">Definition 106</a>).</p>
 </div>
+</details><section id="products-and-quotients">
+<h2>Products and quotients<a class="headerlink" href="#products-and-quotients" title="Link to this heading">#</a></h2>
+<div class="proof theorem admonition" id="theorem-11">
+<p class="admonition-title"><span class="caption-number">Theorem 95 </span> (Product of compact spaces is compact)</p>
+<section class="theorem-content" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are compact topological spaces, then <span class="math notranslate nohighlight">\(X \times Y\)</span> is compact.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Product of compact spaces is compact<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are compact topological spaces.
+Let <span class="math notranslate nohighlight">\(\mathcal{V}\)</span> be an open cover of <span class="math notranslate nohighlight">\(X \times Y.\)</span></p>
+<p class="sd-card-text">First, we consider the special case where each <span class="math notranslate nohighlight">\(U \in \mathcal{V}\)</span> consists has the form <span class="math notranslate nohighlight">\(U = V \times W\)</span> where <span class="math notranslate nohighlight">\(V \in X\)</span> and <span class="math notranslate nohighlight">\(W \in Y.\)</span>
+Since <span class="math notranslate nohighlight">\(\mathcal{V}\)</span> is an open cover of <span class="math notranslate nohighlight">\(X \times Y,\)</span> for each <span class="math notranslate nohighlight">\((x, y) \in X \times Y\)</span> there exists <span class="math notranslate nohighlight">\(U_{xy} \in \mathcal{V}\)</span> such that <span class="math notranslate nohighlight">\((x, y) \in U_{xy}.\)</span>
+By our previous assumption we can write this as <span class="math notranslate nohighlight">\(U_{xy} = V_{xy} \times W_{xy}\)</span> where <span class="math notranslate nohighlight">\(V_{xy} \in X\)</span> and <span class="math notranslate nohighlight">\(W_{xy} \in Y.\)</span>
+Then <span class="math notranslate nohighlight">\(\{W_{xy} : y \in Y\}\)</span> is an open cover of <span class="math notranslate nohighlight">\(Y\)</span> and since <span class="math notranslate nohighlight">\(Y\)</span> is compact, it has a finite subcover <span class="math notranslate nohighlight">\(\{W_{xy_1}, \dots, W_{xy_N}\}.\)</span>
+In addition, <span class="math notranslate nohighlight">\(V_x = \cap_{n=1}^N V_{xy_n}\)</span> is a finite intersection of open sets so it is open in <span class="math notranslate nohighlight">\(X.\)</span>
+Moreover, <span class="math notranslate nohighlight">\(\mathcal{V}_x = \{U_{xy_1}, \dots, U_{xy_N}\}\)</span> covers the space <span class="math notranslate nohighlight">\(V_x \times Y.\)</span>
+Now, the set <span class="math notranslate nohighlight">\(\mathcal{O} = \{V_x: x \in X\}\)</span> is an open cover of <span class="math notranslate nohighlight">\(X\)</span> and since <span class="math notranslate nohighlight">\(X\)</span> is compact, it has a finite subcover <span class="math notranslate nohighlight">\(\{V_{x_1}, \dots, V_{x_M}\}\)</span> from <span class="math notranslate nohighlight">\(\mathcal{O}.\)</span>
+Then the set <span class="math notranslate nohighlight">\(\mathcal{V}' = \cup_{m = 1}^M \mathcal{V}_m\)</span> is a finite subset of <span class="math notranslate nohighlight">\(\mathcal{V}\)</span> which covers <span class="math notranslate nohighlight">\(X \times Y.\)</span></p>
+</div>
 </details></section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -697,7 +733,20 @@ Maximum value theorem for <span class="math notranslate nohighlight">\(~[0, 1]\)
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"></div>
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#products-and-quotients">Products and quotients</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

@@ -169,3 +169,24 @@ If $f: [0, 1] \to \mathbb{R}$ is continuous with the standard topology on both $
 :::{dropdown} Maximum value theorem for $~[0, 1]$
 This follows since $[0, 1],$ with the standard topology, is compact ({prf:ref}`topology:maximum-value-theorem`).
 :::
+
+
+## Products and quotients
+
+:::{prf:theorem} Product of compact spaces is compact
+If $X$ and $Y$ are compact topological spaces, then $X \times Y$ is compact.
+:::
+
+:::{dropdown} Proof: Product of compact spaces is compact
+Suppose $X$ and $Y$ are compact topological spaces.
+Let $\mathcal{V}$ be an open cover of $X \times Y.$
+
+First, we consider the special case where each $U \in \mathcal{V}$ consists has the form $U = V \times W$ where $V \in X$ and $W \in Y.$
+Since $\mathcal{V}$ is an open cover of $X \times Y,$ for each $(x, y) \in X \times Y$ there exists $U_{xy} \in \mathcal{V}$ such that $(x, y) \in U_{xy}.$
+By our previous assumption we can write this as $U_{xy} = V_{xy} \times W_{xy}$ where $V_{xy} \in X$ and $W_{xy} \in Y.$
+Then $\{W_{xy} : y \in Y\}$ is an open cover of $Y$ and since $Y$ is compact, it has a finite subcover $\{W_{xy_1}, \dots, W_{xy_N}\}.$
+In addition, $V_x = \cap_{n=1}^N V_{xy_n}$ is a finite intersection of open sets so it is open in $X.$
+Moreover, $\mathcal{V}_x = \{U_{xy_1}, \dots, U_{xy_N}\}$ covers the space $V_x \times Y.$
+Now, the set $\mathcal{O} = \{V_x: x \in X\}$ is an open cover of $X$ and since $X$ is compact, it has a finite subcover $\{V_{x_1}, \dots, V_{x_M}\}$ from $\mathcal{O}.$
+Then the set $\mathcal{V}' = \cup_{m = 1}^M \mathcal{V}_m$ is a finite subset of $\mathcal{V}$ which covers $X \times Y.$
+:::
