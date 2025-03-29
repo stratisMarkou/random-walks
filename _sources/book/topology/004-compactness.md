@@ -185,6 +185,10 @@ This follows since $[0, 1],$ with the standard topology, is compact ({prf:ref}`t
 
 ## Products and quotients
 
+Now we turn to some properties of products and quotients of compact spaces.
+
+### Product spaces
+
 :::{prf:theorem} Product of compact spaces is compact
 If $X$ and $Y$ are compact topological spaces, then $X \times Y$ is compact.
 :::
@@ -211,4 +215,35 @@ Then, the set $\{V_{xy} \times W_{xy} : (x, y) \in X \times Y\}$ is an open cove
 Therefore it has a finite subcover $\{V_{x_1y_1} \times W_{x_1y_1}, \dots, V_{x_Ny_N} \times W_{x_Ny_N}\}.$
 Noting that $V_{x_ny_n} \times W_{x_ny_n} \subseteq U_{x_ny_n},$ we see that $\{U_{x_1y_1} \dots U_{x_Ny_N}\}$ has a finite subcover of $X \times Y.$
 Therefore $X \times Y$ is compact.
+:::
+
+
+### Quotient spaces
+
+:::{prf:lemma} Sufficient condition for homeomorphism
+:label: topology:lem-sufficient-condition-for-homeomorphism
+Suppose $f: X \to Y$ is a continuous bijection.
+If $X$ is compact and $Y$ is Hausdorff, then $f$ is a homeomorphism.
+:::
+
+:::{dropdown} Proof: Sufficient condition for homeomorphism
+By assumption, $f$ is a continuous bijection so it remains to show that $f^{-1}$ is continuous.
+We will show that if $C \subseteq X$ is closed in $X,$ then $(f^{-1})^{-1}(C)$ is closed in $Y.$
+
+Since $f$ is a bijection, $(f^{-1})^{-1}(C) = f(C).$
+Since $X$ is compact, $C$ is compact which, together with the fact that $f$ is continuous implies that $f(C) = \text{im}f|_C$ is compact ({ref}`topology:lem-image-of-compact-space-under-continuous-function-is-compact`).
+The set $f(C) \subseteq Y$ is therefore a compact subspace of a Hausdorff space, so it is closed ({ref}`topology:lemma-compact-subspaces-of-hausdorff-spaces-are-closed`).
+:::
+
+:::{prf:lemma} Condition for homeomorphism for quotient spaces
+Suppose $f: X / \sim \to Y$ is a bijection, $X$ is compact, $Y$ is Hausdorff and $f \circ \pi$ is continuous.
+Then $f$ is a homeomorphism.
+:::
+
+:::{dropdown} Proof: Condition for homeomorphism for quotient spaces
+Note that the function $\pi: X \to X / \sim$ which maps each element of $X$ to its equivalence class in $X / \sim,$ is continuous.
+Since $X$ is compact and $\pi$ is continuous, $\text{im} \pi$ is compact ({ref}`topology:lem-image-of-compact-space-under-continuous-function-is-compact`).
+Note that both $\pi$ and $\pi^{-1}$ are continuous.
+Since $f \circ \pi$ is continuous, $f = f \circ \pi \circ \pi^{-1}$ is continuous.
+Finally, since $f$ is a continuous bijection, $X$ is compact and $Y$ is Hausdorff, $f$ is a homeomorphism ({ref}`topology:lem-sufficient-condition-for-homeomorphism`).
 :::

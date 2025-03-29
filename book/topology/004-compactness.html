@@ -430,7 +430,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#products-and-quotients">Products and quotients</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#products-and-quotients">Products and quotients</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#product-spaces">Product spaces</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quotient-spaces">Quotient spaces</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -664,6 +668,9 @@ Maximum value theorem for <span class="math notranslate nohighlight">\(~[0, 1]\)
 </div>
 </details><section id="products-and-quotients">
 <h2>Products and quotients<a class="headerlink" href="#products-and-quotients" title="Link to this heading">#</a></h2>
+<p>Now we turn to some properties of products and quotients of compact spaces.</p>
+<section id="product-spaces">
+<h3>Product spaces<a class="headerlink" href="#product-spaces" title="Link to this heading">#</a></h3>
 <div class="proof theorem admonition" id="theorem-12">
 <p class="admonition-title"><span class="caption-number">Theorem 95 </span> (Product of compact spaces is compact)</p>
 <section class="theorem-content" id="proof-content">
@@ -696,6 +703,48 @@ Noting that <span class="math notranslate nohighlight">\(V_{x_ny_n} \times W_{x_
 Therefore <span class="math notranslate nohighlight">\(X \times Y\)</span> is compact.</p>
 </div>
 </details></section>
+<section id="quotient-spaces">
+<h3>Quotient spaces<a class="headerlink" href="#quotient-spaces" title="Link to this heading">#</a></h3>
+<div class="proof lemma admonition" id="topology:lem-sufficient-condition-for-homeomorphism">
+<p class="admonition-title"><span class="caption-number">Lemma 41 </span> (Sufficient condition for homeomorphism)</p>
+<section class="lemma-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\(f: X \to Y\)</span> is a continuous bijection.
+If <span class="math notranslate nohighlight">\(X\)</span> is compact and <span class="math notranslate nohighlight">\(Y\)</span> is Hausdorff, then <span class="math notranslate nohighlight">\(f\)</span> is a homeomorphism.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Sufficient condition for homeomorphism<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">By assumption, <span class="math notranslate nohighlight">\(f\)</span> is a continuous bijection so it remains to show that <span class="math notranslate nohighlight">\(f^{-1}\)</span> is continuous.
+We will show that if <span class="math notranslate nohighlight">\(C \subseteq X\)</span> is closed in <span class="math notranslate nohighlight">\(X,\)</span> then <span class="math notranslate nohighlight">\((f^{-1})^{-1}(C)\)</span> is closed in <span class="math notranslate nohighlight">\(Y.\)</span></p>
+<p class="sd-card-text">Since <span class="math notranslate nohighlight">\(f\)</span> is a bijection, <span class="math notranslate nohighlight">\((f^{-1})^{-1}(C) = f(C).\)</span>
+Since <span class="math notranslate nohighlight">\(X\)</span> is compact, <span class="math notranslate nohighlight">\(C\)</span> is compact which, together with the fact that <span class="math notranslate nohighlight">\(f\)</span> is continuous implies that <span class="math notranslate nohighlight">\(f(C) = \text{im}f|_C\)</span> is compact (<span class="xref std std-ref">topology:lem-image-of-compact-space-under-continuous-function-is-compact</span>).
+The set <span class="math notranslate nohighlight">\(f(C) \subseteq Y\)</span> is therefore a compact subspace of a Hausdorff space, so it is closed (<span class="xref std std-ref">topology:lemma-compact-subspaces-of-hausdorff-spaces-are-closed</span>).</p>
+</div>
+</details><div class="proof lemma admonition" id="lemma-14">
+<p class="admonition-title"><span class="caption-number">Lemma 42 </span> (Condition for homeomorphism for quotient spaces)</p>
+<section class="lemma-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\(f: X / \sim \to Y\)</span> is a bijection, <span class="math notranslate nohighlight">\(X\)</span> is compact, <span class="math notranslate nohighlight">\(Y\)</span> is Hausdorff and <span class="math notranslate nohighlight">\(f \circ \pi\)</span> is continuous.
+Then <span class="math notranslate nohighlight">\(f\)</span> is a homeomorphism.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Condition for homeomorphism for quotient spaces<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Note that the function <span class="math notranslate nohighlight">\(\pi: X \to X / \sim\)</span> which maps each element of <span class="math notranslate nohighlight">\(X\)</span> to its equivalence class in <span class="math notranslate nohighlight">\(X / \sim,\)</span> is continuous.
+Since <span class="math notranslate nohighlight">\(X\)</span> is compact and <span class="math notranslate nohighlight">\(\pi\)</span> is continuous, <span class="math notranslate nohighlight">\(\text{im} \pi\)</span> is compact (<span class="xref std std-ref">topology:lem-image-of-compact-space-under-continuous-function-is-compact</span>).
+Note that both <span class="math notranslate nohighlight">\(\pi\)</span> and <span class="math notranslate nohighlight">\(\pi^{-1}\)</span> are continuous.
+Since <span class="math notranslate nohighlight">\(f \circ \pi\)</span> is continuous, <span class="math notranslate nohighlight">\(f = f \circ \pi \circ \pi^{-1}\)</span> is continuous.
+Finally, since <span class="math notranslate nohighlight">\(f\)</span> is a continuous bijection, <span class="math notranslate nohighlight">\(X\)</span> is compact and <span class="math notranslate nohighlight">\(Y\)</span> is Hausdorff, <span class="math notranslate nohighlight">\(f\)</span> is a homeomorphism (<span class="xref std std-ref">topology:lem-sufficient-condition-for-homeomorphism</span>).</p>
+</div>
+</details></section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -762,7 +811,11 @@ Therefore <span class="math notranslate nohighlight">\(X \times Y\)</span> is co
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#products-and-quotients">Products and quotients</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#products-and-quotients">Products and quotients</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#product-spaces">Product spaces</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quotient-spaces">Quotient spaces</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
