@@ -688,3 +688,28 @@ By contrast, noting that $\{f^{-1}((0, 0))\}$ is a singleton subset of $B,$ we h
 Therefore, $f$ cannot be a homeomorphism, so $A$ is not homeomorphic to $B.$
 :::
 ::::
+
+
+::::{admonition} Exercise 2.6
+:class: tip
+:name: topology:ex-2-3
+Let $X$ be a topological space.
+If $A$ is a connected subspace of $X,$ show that $\overline{A}$ is also connected.
+Deduce that any connected component of $X$ is a closed subset of $X.$
+
+:::{dropdown} Solution
+Let $X$ be a topological space, and let $A$ be a connected subspace of $X.$
+Suppose $\overline{A}$ is not connected, i.e. there exist non-empty and disjoint $B, C \subseteq \overline{A}$ that are open in the subspace topology of $\overline{A}.$
+Then, the sets $B' = A \cap B$ and $C' = A \cap C$ are open in the subspace topology of $A,$ and in addition they are disjoint because $B$ and $C$ are disjoint.
+This means that at least one of $B'$ or $C'$ must be empty, because otherwise they would disconnect $A.$
+Without loss of generality, suppose $C' = \emptyset.$
+Now, take $x \in C.$
+Since $x \in \overline{A},$ any open set containing $x$ must intersect $A$ which leads to a contradiction, because we just assumed $A \cap C = \emptyset.$
+Therefore $\overline{A}$ is connected.
+
+Now, let $x \in X$ and suppose $C(x) \subseteq X$ is the connected component of $x.$
+From the result we just showed, since $C(x)$ is connected, $\overline{C(x)}$ is also connected.
+Therefore $\overline{C(x)}$ is a connected set containing $x,$ so $\overline{C(x)} \subseteq C(x),$ which implies that $C(x) = \overline{C(x)}.$
+We conclude that any connected component of $X$ is a closed subset of $X.$
+:::
+::::
