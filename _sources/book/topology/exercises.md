@@ -15,7 +15,7 @@ where $n$ is the largest integer such that $p^n$ divides $a - b$.
 :::
 ::::{admonition} Exercise 1.1
 :class: tip
-:label: topology:ex:1.1
+:name: topology:ex:1.1
 Show that the sequence $2015, 20015, 200015, 2000015, \ldots$ converges in the 2-adic metric on $\mathbb{Z}$.
 
 :::{dropdown} Solution
@@ -30,7 +30,7 @@ Therefore, $|a_n - 15|_2 = 2^{-(n + 3)} \to 0$ as $n \to \infty.$
 
 ::::{admonition} Exercise 1.2
 :class: tip
-:label: topology:ex:1.2
+:name: topology:ex:1.2
 Determine whether the following subsets $A \subseteq \mathbb{R}^2$ are open, closed or neither, under the standard topology on $\mathbb{R}^2.$
 
 1. $A = \{(x, y) \in \mathbb{R}^2 \vert x < 0\} \cup \{(x, y) \in \mathbb{R}^2 \vert x > 0, y > 1 / x\}.$
