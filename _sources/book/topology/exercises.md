@@ -140,7 +140,7 @@ This is a contradiction, so $g^{-1}(U)$ is not open in $X \times X,$ and $g$ is 
 
 ::::{admonition} Exercise 1.4
 :class: tip
-:label: topology:ex:1.4
+:name: topology:ex:1-4
 Let $C^1([0, 1])$ be the set of continuously differentiable functions on $[0, 1],$ that is differentiable functions whose first derivative is continuous.
 For $f \in C^1([0, 1]),$ define
 
@@ -692,7 +692,7 @@ Therefore, $f$ cannot be a homeomorphism, so $A$ is not homeomorphic to $B.$
 
 ::::{admonition} Exercise 2.6
 :class: tip
-:name: topology:ex-2-3
+:name: topology:ex-2-6
 Let $X$ be a topological space.
 If $A$ is a connected subspace of $X,$ show that $\overline{A}$ is also connected.
 Deduce that any connected component of $X$ is a closed subset of $X.$
@@ -710,6 +710,81 @@ Therefore $\overline{A}$ is connected.
 Now, let $x \in X$ and suppose $C(x) \subseteq X$ is the connected component of $x.$
 From the result we just showed, since $C(x)$ is connected, $\overline{C(x)}$ is also connected.
 Therefore $\overline{C(x)}$ is a connected set containing $x,$ so $\overline{C(x)} \subseteq C(x),$ which implies that $C(x) = \overline{C(x)}.$
-We conclude that any connected component of $X$ is a closed subset of $X.$
+We conclude that any connected component of $X$ is closed.
 :::
 ::::
+
+
+::::{admonition} Exercise 2.7
+:class: tip
+:name: topology:ex-2-7
+1. If $f: [0, 1] \to [0, 1]$ is continuous, show there is some $x \in [0, 1]$ with $f(x) = x.$
+2. Suppose $f: [0, 1] \to \mathbb{R}$ is continuous and has $f(0) = f(1).$
+For each integer $n > 1,$ show that there is some $x \in [0, 1]$ with $f(x) = f(x + 1/n).$
+
+:::{dropdown} Solution
+__Part 1:__
+Consider $g: [0, 1] \to [-1, 1]$ defined as $g(x) = f(x) - x.$
+If $g(x) = 0$ for any $x,$ we are done, so suppose $g(x) \neq 0$ for all $x \in [0, 1].$
+Under this assumption, and using the fact that $f \leq 1,$ we have that $g(1) = f(1) - 1 < 0,$ while $g(0) = f(0) > 0.$
+Noting that $g$ is continuous and using the intermediate value theorem shows the result.
+
+__Part 2:__
+Suppose $f: [0, 1] \to \mathbb{R}$ is continuous and has $f(0) = f(1).$
+Fix $n \in \mathbb{N}$ and for $i = 0, 1, \dots n - 1$ define
+
+$$\begin{equation}
+\delta_i = f\left(\frac{i + 1}{n}\right) - f\left(\frac{i}{n}\right).
+\end{equation}$$
+
+Since $f(1) = f(0),$ we must have $\sum_{i = 0}^{n-1} \delta_i = 0.$
+If any $\delta_i = 0$ we are already done.
+Therefore, suppose $\delta_i \neq 0$ for all $i = 0, 1, \dots n - 1.$
+We cannot have all $\delta_i > 0$ or all $\delta_i < 0,$ so there must exist some $i$ for which $\delta_i$ and $\delta_{i+1}$ have opposite signs.
+Consider the case $\delta_i > 0$ while $\delta_{i+1} < 0.$
+Therefore
+
+$$\begin{equation}
+f\left(\frac{i+1}{n}\right) - f\left(\frac{i}{n}\right)> 0, ~~f\left(\frac{i+2}{n}\right) - f\left(\frac{i+1}{n}\right) < 0,
+\end{equation}$$
+
+and applying the intermediate value theorem to the continuous function $f(x + 1 / n) - f(x),$ we see there must exist some $x \in \left[\frac{i}{n}, \frac{i+1}{n}\right]$ such that $f(x + 1 / n) - f(x) = 0.$
+A similar argument holds for the case $\delta_i < 0$ while $\delta_{i+1} > 0,$ with inequality signs the other way around.
+We conclude that there exists $x \in [0, 1]$ such that $f(x + 1 / n) - f(x) = 0.$
+:::
+::::
+
+
+::::{admonition} Exercise 2.8
+:class: tip
+A standard chair (four legs, feet are the vertices of a square) is placed on an uneven floor (modeled by the graph of a continuous function $z = g(x, y)$.)
+By rotating the chair about its center, show that it is always possible to find a position where all four feet are on the floor.
+
+:::{dropdown} Solution
+Label the legs of the chair $a, b, c, d$ clockwise.
+Fix the center of the chair and consider rotating the chair around its center.
+For any given rotation of the chair, we can tilt the chair so that three of the feet are in contact with the floor.
+Without loss of generality, suppose that at rotation $0 \in [0, 2\pi)$ the feet $a, b, c$ are in contact with the floor, while the last remaining leg $d$ is either in contact with the surface of the floor or above it.
+If $d$ is in contact with the floor we are done, so assume it is not.
+Note that, in this rotation, we may wiggle the chair so that contact switches between $b$ and $d$ but $a$ and $c$ must always remain in contact with the floor.
+
+Now, consider rotating the chair while keeping the feet $a, b, c$ in contact with the floor.
+The height $h_d: [0, 2\pi) \to \mathbb{R}$ of foot $d$ over the floor surface $g$ is a continuous function.
+Note that we allow $h_d$ to be negative, i.e. for the foot of the chair to pass underneath the surface of the floor.
+By our earlier assumption, $h_d(0) > 0.$
+Consider a rotation of $\pi / 2.$
+If $h_d(x) \leq 0$ for any $x \in [0, \pi / 2]$ we are done by applying the intermediate value theorem.
+The only alternative is $h_d(x) > 0$ for all $x \in (0, \pi / 2].$
+This is not possible because it would imply, by symmetry and relabelling $a$ to $b,$ $b$ to $c,$ $c$ to $d$ and $d$ to $a,$ a position identical to the original one but where $b, c$ and $d$ but not $a$ are in contact with the floor, which we argued is not possible.
+This is a contradiction, so $h_d(x) < 0$ for some $x \in (0, \pi / 2),$ completing the proof.
+:::
+::::
+
+
+::::{admonition} Exercise 2.9
+:class: tip
+Is there an infinite compact subset of $\mathbb{Q}$?
+
+:::{dropdown}
+The set $\{x \in [0, 1]: x = 1 / n \text{ for some } n \in \mathbb{N}\} \cup \{0\},$ is an infinite subset of $\mathbb{Q}$ which is compact because it is a closed subset of $[0, 1],$ {prf:ref}`which is compact<topology:closed-interval-is-compact>` ({ref}`topology:def-compact-space`).
+:::

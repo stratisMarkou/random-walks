@@ -50,7 +50,7 @@ for example, any sequence that converges in $A$ (or $B$) does not have its limit
 We can also go the other way and observe that for any connected space $X,$ the only subspace of it that is both open and closed is the space $X$ itself:
 if $X$ contains a non-empty subset $A$ that is both open and closed, then $B = X \subset A$ is an open subset of $X$ that is disjoint from $A,$ and if $B$ were non-empty then $A$ and $B$ would disconnect $X,$ so $B = \emptyset$ and $A = X.$
 With this final bit of intuition, whenever a space can be disconnected into $A$ and $B,$ we can regard $A$ and $B$ as separate sets in $X,$ whose union does not alter topological properties such as convergence of sequences when we consider the two sets together.
-See also {ref}`topology:ex-2-3`.
+See also {ref}`exercise 2.6<topology:ex-2-6>`.
 :::
 
 

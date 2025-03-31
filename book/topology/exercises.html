@@ -563,7 +563,7 @@ However, this is a contradiction, because for any <span class="math notranslate 
 This is a contradiction, so <span class="math notranslate nohighlight">\(g^{-1}(U)\)</span> is not open in <span class="math notranslate nohighlight">\(X \times X,\)</span> and <span class="math notranslate nohighlight">\(g\)</span> is not continuous.</p>
 </div>
 </details></div>
-<div class="tip admonition">
+<div class="tip admonition" id="topology-ex-1-4">
 <p class="admonition-title">Exercise 1.4</p>
 <p>Let <span class="math notranslate nohighlight">\(C^1([0, 1])\)</span> be the set of continuously differentiable functions on <span class="math notranslate nohighlight">\([0, 1],\)</span> that is differentiable functions whose first derivative is continuous.
 For <span class="math notranslate nohighlight">\(f \in C^1([0, 1]),\)</span> define</p>
@@ -1100,7 +1100,7 @@ These two open sets are disjoint and their union is <span class="math notranslat
 Therefore, <span class="math notranslate nohighlight">\(f\)</span> cannot be a homeomorphism, so <span class="math notranslate nohighlight">\(A\)</span> is not homeomorphic to <span class="math notranslate nohighlight">\(B.\)</span></p>
 </div>
 </details></div>
-<div class="tip admonition" id="id1">
+<div class="tip admonition" id="topology-ex-2-6">
 <p class="admonition-title">Exercise 2.6</p>
 <p>Let <span class="math notranslate nohighlight">\(X\)</span> be a topological space.
 If <span class="math notranslate nohighlight">\(A\)</span> is a connected subspace of <span class="math notranslate nohighlight">\(X,\)</span> show that <span class="math notranslate nohighlight">\(\overline{A}\)</span> is also connected.
@@ -1123,7 +1123,89 @@ Therefore <span class="math notranslate nohighlight">\(\overline{A}\)</span> is 
 <p class="sd-card-text">Now, let <span class="math notranslate nohighlight">\(x \in X\)</span> and suppose <span class="math notranslate nohighlight">\(C(x) \subseteq X\)</span> is the connected component of <span class="math notranslate nohighlight">\(x.\)</span>
 From the result we just showed, since <span class="math notranslate nohighlight">\(C(x)\)</span> is connected, <span class="math notranslate nohighlight">\(\overline{C(x)}\)</span> is also connected.
 Therefore <span class="math notranslate nohighlight">\(\overline{C(x)}\)</span> is a connected set containing <span class="math notranslate nohighlight">\(x,\)</span> so <span class="math notranslate nohighlight">\(\overline{C(x)} \subseteq C(x),\)</span> which implies that <span class="math notranslate nohighlight">\(C(x) = \overline{C(x)}.\)</span>
-We conclude that any connected component of <span class="math notranslate nohighlight">\(X\)</span> is a closed subset of <span class="math notranslate nohighlight">\(X.\)</span></p>
+We conclude that any connected component of <span class="math notranslate nohighlight">\(X\)</span> is closed.</p>
+</div>
+</details></div>
+<div class="tip admonition" id="topology-ex-2-7">
+<p class="admonition-title">Exercise 2.7</p>
+<ol class="arabic simple">
+<li><p>If <span class="math notranslate nohighlight">\(f: [0, 1] \to [0, 1]\)</span> is continuous, show there is some <span class="math notranslate nohighlight">\(x \in [0, 1]\)</span> with <span class="math notranslate nohighlight">\(f(x) = x.\)</span></p></li>
+<li><p>Suppose <span class="math notranslate nohighlight">\(f: [0, 1] \to \mathbb{R}\)</span> is continuous and has <span class="math notranslate nohighlight">\(f(0) = f(1).\)</span>
+For each integer <span class="math notranslate nohighlight">\(n &gt; 1,\)</span> show that there is some <span class="math notranslate nohighlight">\(x \in [0, 1]\)</span> with <span class="math notranslate nohighlight">\(f(x) = f(x + 1/n).\)</span></p></li>
+</ol>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><strong>Part 1:</strong>
+Consider <span class="math notranslate nohighlight">\(g: [0, 1] \to [-1, 1]\)</span> defined as <span class="math notranslate nohighlight">\(g(x) = f(x) - x.\)</span>
+If <span class="math notranslate nohighlight">\(g(x) = 0\)</span> for any <span class="math notranslate nohighlight">\(x,\)</span> we are done, so suppose <span class="math notranslate nohighlight">\(g(x) \neq 0\)</span> for all <span class="math notranslate nohighlight">\(x \in [0, 1].\)</span>
+Under this assumption, and using the fact that <span class="math notranslate nohighlight">\(f \leq 1,\)</span> we have that <span class="math notranslate nohighlight">\(g(1) = f(1) - 1 &lt; 0,\)</span> while <span class="math notranslate nohighlight">\(g(0) = f(0) &gt; 0.\)</span>
+Noting that <span class="math notranslate nohighlight">\(g\)</span> is continuous and using the intermediate value theorem shows the result.</p>
+<p class="sd-card-text"><strong>Part 2:</strong>
+Suppose <span class="math notranslate nohighlight">\(f: [0, 1] \to \mathbb{R}\)</span> is continuous and has <span class="math notranslate nohighlight">\(f(0) = f(1).\)</span>
+Fix <span class="math notranslate nohighlight">\(n \in \mathbb{N}\)</span> and for <span class="math notranslate nohighlight">\(i = 0, 1, \dots n - 1\)</span> define</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+\delta_i = f\left(\frac{i + 1}{n}\right) - f\left(\frac{i}{n}\right).
+\end{equation}\]</div>
+<p class="sd-card-text">Since <span class="math notranslate nohighlight">\(f(1) = f(0),\)</span> we must have <span class="math notranslate nohighlight">\(\sum_{i = 0}^{n-1} \delta_i = 0.\)</span>
+If any <span class="math notranslate nohighlight">\(\delta_i = 0\)</span> we are already done.
+Therefore, suppose <span class="math notranslate nohighlight">\(\delta_i \neq 0\)</span> for all <span class="math notranslate nohighlight">\(i = 0, 1, \dots n - 1.\)</span>
+We cannot have all <span class="math notranslate nohighlight">\(\delta_i &gt; 0\)</span> or all <span class="math notranslate nohighlight">\(\delta_i &lt; 0,\)</span> so there must exist some <span class="math notranslate nohighlight">\(i\)</span> for which <span class="math notranslate nohighlight">\(\delta_i\)</span> and <span class="math notranslate nohighlight">\(\delta_{i+1}\)</span> have opposite signs.
+Consider the case <span class="math notranslate nohighlight">\(\delta_i &gt; 0\)</span> while <span class="math notranslate nohighlight">\(\delta_{i+1} &lt; 0.\)</span>
+Therefore</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+f\left(\frac{i+1}{n}\right) - f\left(\frac{i}{n}\right)&gt; 0, ~~f\left(\frac{i+2}{n}\right) - f\left(\frac{i+1}{n}\right) &lt; 0,
+\end{equation}\]</div>
+<p class="sd-card-text">and applying the intermediate value theorem to the continuous function <span class="math notranslate nohighlight">\(f(x + 1 / n) - f(x),\)</span> we see there must exist some <span class="math notranslate nohighlight">\(x \in \left[\frac{i}{n}, \frac{i+1}{n}\right]\)</span> such that <span class="math notranslate nohighlight">\(f(x + 1 / n) - f(x) = 0.\)</span>
+A similar argument holds for the case <span class="math notranslate nohighlight">\(\delta_i &lt; 0\)</span> while <span class="math notranslate nohighlight">\(\delta_{i+1} &gt; 0,\)</span> with inequality signs the other way around.
+We conclude that there exists <span class="math notranslate nohighlight">\(x \in [0, 1]\)</span> such that <span class="math notranslate nohighlight">\(f(x + 1 / n) - f(x) = 0.\)</span></p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 2.8</p>
+<p>A standard chair (four legs, feet are the vertices of a square) is placed on an uneven floor (modeled by the graph of a continuous function <span class="math notranslate nohighlight">\(z = g(x, y)\)</span>.)
+By rotating the chair about its center, show that it is always possible to find a position where all four feet are on the floor.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Label the legs of the chair <span class="math notranslate nohighlight">\(a, b, c, d\)</span> clockwise.
+Fix the center of the chair and consider rotating the chair around its center.
+For any given rotation of the chair, we can tilt the chair so that three of the feet are in contact with the floor.
+Without loss of generality, suppose that at rotation <span class="math notranslate nohighlight">\(0 \in [0, 2\pi)\)</span> the feet <span class="math notranslate nohighlight">\(a, b, c\)</span> are in contact with the floor, while the last remaining leg <span class="math notranslate nohighlight">\(d\)</span> is either in contact with the surface of the floor or above it.
+If <span class="math notranslate nohighlight">\(d\)</span> is in contact with the floor we are done, so assume it is not.
+Note that, in this rotation, we may wiggle the chair so that contact switches between <span class="math notranslate nohighlight">\(b\)</span> and <span class="math notranslate nohighlight">\(d\)</span> but <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(c\)</span> must always remain in contact with the floor.</p>
+<p class="sd-card-text">Now, consider rotating the chair while keeping the feet <span class="math notranslate nohighlight">\(a, b, c\)</span> in contact with the floor.
+The height <span class="math notranslate nohighlight">\(h_d: [0, 2\pi) \to \mathbb{R}\)</span> of foot <span class="math notranslate nohighlight">\(d\)</span> over the floor surface <span class="math notranslate nohighlight">\(g\)</span> is a continuous function.
+Note that we allow <span class="math notranslate nohighlight">\(h_d\)</span> to be negative, i.e. for the foot of the chair to pass underneath the surface of the floor.
+By our earlier assumption, <span class="math notranslate nohighlight">\(h_d(0) &gt; 0.\)</span>
+Consider a rotation of <span class="math notranslate nohighlight">\(\pi / 2.\)</span>
+If <span class="math notranslate nohighlight">\(h_d(x) \leq 0\)</span> for any <span class="math notranslate nohighlight">\(x \in [0, \pi / 2]\)</span> we are done by applying the intermediate value theorem.
+The only alternative is <span class="math notranslate nohighlight">\(h_d(x) &gt; 0\)</span> for all <span class="math notranslate nohighlight">\(x \in (0, \pi / 2].\)</span>
+This is not possible because it would imply, by symmetry and relabelling <span class="math notranslate nohighlight">\(a\)</span> to <span class="math notranslate nohighlight">\(b,\)</span> <span class="math notranslate nohighlight">\(b\)</span> to <span class="math notranslate nohighlight">\(c,\)</span> <span class="math notranslate nohighlight">\(c\)</span> to <span class="math notranslate nohighlight">\(d\)</span> and <span class="math notranslate nohighlight">\(d\)</span> to <span class="math notranslate nohighlight">\(a,\)</span> a position identical to the original one but where <span class="math notranslate nohighlight">\(b, c\)</span> and <span class="math notranslate nohighlight">\(d\)</span> but not <span class="math notranslate nohighlight">\(a\)</span> are in contact with the floor, which we argued is not possible.
+This is a contradiction, so <span class="math notranslate nohighlight">\(h_d(x) &lt; 0\)</span> for some <span class="math notranslate nohighlight">\(x \in (0, \pi / 2),\)</span> completing the proof.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 2.9</p>
+<p>Is there an infinite compact subset of <span class="math notranslate nohighlight">\(\mathbb{Q}\)</span>?</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-kebab-horizontal" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M6 12a2 2 0 11-4 0 2 2 0 014 0zm8 0a2 2 0 11-4 0 2 2 0 014 0zm6 2a2 2 0 100-4 2 2 0 000 4z"></path></svg><div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">The set <span class="math notranslate nohighlight">\(\{x \in [0, 1]: x = 1 / n \text{ for some } n \in \mathbb{N}\} \cup \{0\},\)</span> is an infinite subset of <span class="math notranslate nohighlight">\(\mathbb{Q}\)</span> which is compact because it is a closed subset of <span class="math notranslate nohighlight">\([0, 1],\)</span> <a class="reference internal" href="004-compactness.html#topology:closed-interval-is-compact">which is compact</a> (<span class="xref std std-ref">topology:def-compact-space</span>).</p>
 </div>
 </details></div>
 </section>

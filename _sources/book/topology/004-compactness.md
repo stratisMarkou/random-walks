@@ -18,6 +18,7 @@ A {prf:ref}`topological space<topology:def-topological-space>` $X$ is compact if
 :::
 
 :::{prf:theorem} Closed interval is compact
+:label: topology:closed-interval-is-compact
 The closed interval $[0, 1] \subseteq \mathbb{R}$ with the standard topology is {prf:ref}`compact<topology:def-compact-space>`.
 :::
 
