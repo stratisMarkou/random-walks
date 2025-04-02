@@ -15,7 +15,7 @@ where $n$ is the largest integer such that $p^n$ divides $a - b$.
 :::
 ::::{admonition} Exercise 1.1
 :class: tip
-:label: topology:ex:1.1
+:name: topology:ex:1.1
 Show that the sequence $2015, 20015, 200015, 2000015, \ldots$ converges in the 2-adic metric on $\mathbb{Z}$.
 
 :::{dropdown} Solution
@@ -30,7 +30,7 @@ Therefore, $|a_n - 15|_2 = 2^{-(n + 3)} \to 0$ as $n \to \infty.$
 
 ::::{admonition} Exercise 1.2
 :class: tip
-:label: topology:ex:1.2
+:name: topology:ex:1.2
 Determine whether the following subsets $A \subseteq \mathbb{R}^2$ are open, closed or neither, under the standard topology on $\mathbb{R}^2.$
 
 1. $A = \{(x, y) \in \mathbb{R}^2 \vert x < 0\} \cup \{(x, y) \in \mathbb{R}^2 \vert x > 0, y > 1 / x\}.$
@@ -140,7 +140,7 @@ This is a contradiction, so $g^{-1}(U)$ is not open in $X \times X,$ and $g$ is 
 
 ::::{admonition} Exercise 1.4
 :class: tip
-:label: topology:ex:1.4
+:name: topology:ex:1-4
 Let $C^1([0, 1])$ be the set of continuously differentiable functions on $[0, 1],$ that is differentiable functions whose first derivative is continuous.
 For $f \in C^1([0, 1]),$ define
 
@@ -686,5 +686,311 @@ These two open sets are disjoint and their union is $A \setminus \{(0, 0)\},$ so
 
 By contrast, noting that $\{f^{-1}((0, 0))\}$ is a singleton subset of $B,$ we have that $B \setminus \{f^{-1}((0, 0))\}$ is connected because it is path connected.
 Therefore, $f$ cannot be a homeomorphism, so $A$ is not homeomorphic to $B.$
+:::
+::::
+
+
+::::{admonition} Exercise 2.6
+:class: tip
+:name: topology:ex-2-6
+Let $X$ be a topological space.
+If $A$ is a connected subspace of $X,$ show that $\overline{A}$ is also connected.
+Deduce that any connected component of $X$ is a closed subset of $X.$
+
+:::{dropdown} Solution
+Let $X$ be a topological space, and let $A$ be a connected subspace of $X.$
+Suppose $\overline{A}$ is not connected, i.e. there exist non-empty and disjoint $B, C \subseteq \overline{A}$ that are open in the subspace topology of $\overline{A}.$
+Then, the sets $B' = A \cap B$ and $C' = A \cap C$ are open in the subspace topology of $A,$ and in addition they are disjoint because $B$ and $C$ are disjoint.
+This means that at least one of $B'$ or $C'$ must be empty, because otherwise they would disconnect $A.$
+Without loss of generality, suppose $C' = \emptyset.$
+Now, take $x \in C.$
+Since $x \in \overline{A},$ any open set containing $x$ must intersect $A$ which leads to a contradiction, because we just assumed $A \cap C = \emptyset.$
+Therefore $\overline{A}$ is connected.
+
+Now, let $x \in X$ and suppose $C(x) \subseteq X$ is the connected component of $x.$
+From the result we just showed, since $C(x)$ is connected, $\overline{C(x)}$ is also connected.
+Therefore $\overline{C(x)}$ is a connected set containing $x,$ so $\overline{C(x)} \subseteq C(x),$ which implies that $C(x) = \overline{C(x)}.$
+We conclude that any connected component of $X$ is closed.
+:::
+::::
+
+
+::::{admonition} Exercise 2.7
+:class: tip
+:name: topology:ex-2-7
+1. If $f: [0, 1] \to [0, 1]$ is continuous, show there is some $x \in [0, 1]$ with $f(x) = x.$
+2. Suppose $f: [0, 1] \to \mathbb{R}$ is continuous and has $f(0) = f(1).$
+For each integer $n > 1,$ show that there is some $x \in [0, 1]$ with $f(x) = f(x + 1/n).$
+
+:::{dropdown} Solution
+__Part 1:__
+Consider $g: [0, 1] \to [-1, 1]$ defined as $g(x) = f(x) - x.$
+If $g(x) = 0$ for any $x,$ we are done, so suppose $g(x) \neq 0$ for all $x \in [0, 1].$
+Under this assumption, and using the fact that $f \leq 1,$ we have that $g(1) = f(1) - 1 < 0,$ while $g(0) = f(0) > 0.$
+Noting that $g$ is continuous and using the intermediate value theorem shows the result.
+
+__Part 2:__
+Suppose $f: [0, 1] \to \mathbb{R}$ is continuous and has $f(0) = f(1).$
+Fix $n \in \mathbb{N}$ and for $i = 0, 1, \dots n - 1$ define
+
+$$\begin{equation}
+\delta_i = f\left(\frac{i + 1}{n}\right) - f\left(\frac{i}{n}\right).
+\end{equation}$$
+
+Since $f(1) = f(0),$ we must have $\sum_{i = 0}^{n-1} \delta_i = 0.$
+If any $\delta_i = 0$ we are already done.
+Therefore, suppose $\delta_i \neq 0$ for all $i = 0, 1, \dots n - 1.$
+We cannot have all $\delta_i > 0$ or all $\delta_i < 0,$ so there must exist some $i$ for which $\delta_i$ and $\delta_{i+1}$ have opposite signs.
+Consider the case $\delta_i > 0$ while $\delta_{i+1} < 0.$
+Therefore
+
+$$\begin{equation}
+f\left(\frac{i+1}{n}\right) - f\left(\frac{i}{n}\right)> 0, ~~f\left(\frac{i+2}{n}\right) - f\left(\frac{i+1}{n}\right) < 0,
+\end{equation}$$
+
+and applying the intermediate value theorem to the continuous function $f(x + 1 / n) - f(x),$ we see there must exist some $x \in \left[\frac{i}{n}, \frac{i+1}{n}\right]$ such that $f(x + 1 / n) - f(x) = 0.$
+A similar argument holds for the case $\delta_i < 0$ while $\delta_{i+1} > 0,$ with inequality signs the other way around.
+We conclude that there exists $x \in [0, 1]$ such that $f(x + 1 / n) - f(x) = 0.$
+:::
+::::
+
+
+::::{admonition} Exercise 2.8
+:class: tip
+A standard chair (four legs, feet are the vertices of a square) is placed on an uneven floor (modeled by the graph of a continuous function $z = g(x, y)$.)
+By rotating the chair about its center, show that it is always possible to find a position where all four feet are on the floor.
+
+:::{dropdown} Solution
+Label the legs of the chair $a, b, c, d$ clockwise.
+Fix the center of the chair and consider rotating the chair around its center.
+For any given rotation of the chair, we can tilt the chair so that three of the feet are in contact with the floor.
+Without loss of generality, suppose that at rotation $0 \in [0, 2\pi)$ the feet $a, b, c$ are in contact with the floor, while the last remaining leg $d$ is either in contact with the surface of the floor or above it.
+If $d$ is in contact with the floor we are done, so assume it is not.
+Note that, in this rotation, we may wiggle the chair so that contact switches between $b$ and $d$ but $a$ and $c$ must always remain in contact with the floor.
+
+Now, consider rotating the chair while keeping the feet $a, b, c$ in contact with the floor.
+The height $h_d: [0, 2\pi) \to \mathbb{R}$ of foot $d$ over the floor surface $g$ is a continuous function.
+Note that we allow $h_d$ to be negative, i.e. for the foot of the chair to pass underneath the surface of the floor.
+By our earlier assumption, $h_d(0) > 0.$
+Consider a rotation of $\pi / 2.$
+If $h_d(x) \leq 0$ for any $x \in [0, \pi / 2]$ we are done by applying the intermediate value theorem.
+The only alternative is $h_d(x) > 0$ for all $x \in (0, \pi / 2].$
+This is not possible because it would imply, by symmetry and relabelling $a$ to $b,$ $b$ to $c,$ $c$ to $d$ and $d$ to $a,$ a position identical to the original one but where $b, c$ and $d$ but not $a$ are in contact with the floor, which we argued is not possible.
+This is a contradiction, so $h_d(x) < 0$ for some $x \in (0, \pi / 2),$ completing the proof.
+:::
+::::
+
+
+::::{admonition} Exercise 2.9
+:class: tip
+Is there an infinite compact subset of $\mathbb{Q}$?
+
+:::{dropdown} Solution
+The set $\{x \in [0, 1]: x = 1 / n \text{ for some } n \in \mathbb{N}\} \cup \{0\},$ is an infinite subset of $\mathbb{Q}$ which is compact because it is a closed subset of $[0, 1],$ {prf:ref}`which is compact<topology:closed-interval-is-compact>` ({ref}`topology:def-compact-space`).
+:::
+::::
+
+
+::::{admonition} Exercise 2.10
+:class: tip
+If $A \subseteq \mathbb{R}^n$ is not compact, show that there is a continuous function $f: A \to \mathbb{R}$ which is not bounded.
+
+:::{dropdown} Solution
+Let $A \subseteq \mathbb{R}^n$ be a set that is not compact.
+If $A$ is unbounded, the function $f: A \to \mathbb{R}$ defined as $f(x) = ||x||_2$ is continuous and unbounded.
+If $A$ is bounded, it is contained in $[-M, M]^n$ for some $M \in \mathbb{R},$ which is compact.
+Therefore $A$ cannot be closed, because closed subsets of compact spaces are compact, and $A$ is not compact by assumption.
+Since $A$ is not closed, there exists $a \in \mathbb{R}^n \setminus A$ such that every open ball centered on $x$ intersects $A.$
+Then, the function $f: A \to \mathbb{R}$ defined as $f(x) = ||x - a||_2^{-1}$ is continuous on $A$ but is not bounded.
+:::
+::::
+
+::::{admonition} Exercise 2.11
+:class: tip
+If $X$ is a topological space, its one point compactification $X^+$ is defined as follows.
+As a set, $X^+$ is the union of $X$ with an additional point $\infty.$
+A subset $U \subseteq X^+$ is open if either
+
+1. $\infty \not \in U$ and $U$ is an open subset of $X.$
+2. $\infty \in U$ and $X^+ \setminus U$ is a compact, closed subset of $X.$
+
+Show that $X^+$ is a compact topological space.
+If $X = \mathbb{R}^n,$ show that $X^+ \simeq S^n.$
+
+:::{dropdown} Solution
+In the following let $X$ be a topological space and let $X^+$ be defined as above.
+
+__Part 1:__
+Suppose $\mathcal{V}$ is an open cover of $X^+.$
+Then, there exists $V_\infty \in \mathcal{V}$ such that $\infty \in V_\infty.$
+In addition, since $\mathcal{V}$ is a cover of $X^+,$ there is a subcover $\mathcal{V}' \subseteq \mathcal{V}$ that covers $X \setminus V_\infty,$ which is a compact closed subset of $X$ by definition.
+Since $X \setminus V_\infty$ is closed and compact and $\mathcal{V}'$ covers it, there is a finite subcover $\{V_1, \dots, V_N\} \subseteq \mathcal{V}'.$
+We conclude that the set $\{V_\infty, V_1, \dots, V_N\}$ is a finite subcover of $X^+$ from $\mathcal{V},$ so $X^+$ is compact.
+
+__Part 2:__
+Let $X = \mathbb{R}^n.$
+From the previous part, $X^+$ is compact.
+Note also that $S^n$ is Hausdorff.
+From {prf:ref}`topology:lem-sufficient-condition-for-homeomorphism`, any continuous bijection $f: X^+ \to S^n$ is a homeomorphism between the two spaces, so it sufficies to show that such a map exists.
+
+Let $f: X^+ \to S^n$ be the stereographic projection of the sphere which maps $\infty \in $X^+$$ to the north pole $s^* \in S^n$ and note that this mapping is a bijection.
+In addition, it is continuous which can be seen as follows.
+First note that $f|_X: X \to S^n \setminus \{s^*\}$ is continuous.
+Given $U \subseteq S^n,$ there are two possibilities:
+If $s^* \not \in U,$ then $f^{-1}(U)$ is open because $f|_X$ is continuous.
+If $s^* \in U,$ then $S^n \setminus U$ is a closed set in $S^n$ that does not contain $s^*$ and since $f|_X$ is continuous, $f|_X^{-1}(S^n \setminus U)$ is closed in $X^+,$ so $X^+ \setminus f|_X^{-1}(S^n \setminus U) = f^{-1}(U)$ is open in $X^+.$
+Therefore, $f$ is continuous.
+:::
+::::
+
+
+::::{admonition} Exercise 2.12
+:class: tip
+Suppose that $X$ is a compact Hausdorff space, and that $C_1$ and $C_2$ are disjoint closed subsets of $X.$
+Show that there exist open subsets $U_1, U_2 \subseteq X$ such that $C_i \subseteq U_i$ and $U_1 \cap U_2 = \emptyset.$
+
+:::{dropdown} Solution
+Suppose that $X$ is a compact Hausdorff space, and that $C_1$ and $C_2$ are disjoint closed subsets of $X.$
+Since $C_1, C_2$ are closed subsets of a compact space, they are also compact.
+
+Fix $x \in C_1.$
+Since $X$ is Hausdorff, for each $y \in C_2$ there exists an open $V_{xy}$ containing $x$ and an open $W_{xy}$ containing $y$ such that $V_{xy} \cap W_{xy} = \emptyset.$
+Then, the collection $\{W_{xy} \subseteq X: y \in C_2\}$ is an open cover of $C_2,$ and since $C_2$ is compact, it has a finite subcover of the form $\{W_{xy_1}, \dots, W_{xy_N}\}.$
+
+Now, the sets $\tilde{W}_x = \cup_{n = 1}^N W_{xy_n}$ and $\tilde{V}_x = \cap_{n = 1}^N V_{xy_n}$ are both open.
+In addition, $\{\tilde{V}_x \subseteq X: x \in X\}$ is an open cover of $C_1,$ which is itself compact, so it has a finite subcover of the form $\{\tilde{V}_{x_1}, \dots, \tilde{V}_{x_M}\}.$
+We note that for each $x \in X,$ the open set $\tilde{W}_x$ contains $C_2,$ so the set $\cap_{m = 1}^M \tilde{W}_{x_m}$ is also an open set that contains $C_2.$
+
+Finally, let $U_1 = \cup_{m = 1}^M \tilde{V}_{x_m},$ and $U_2 = \cap_{m = 1}^M \tilde{W}_{x_m}.$
+These are two disjoint open sets that contain $C_1$ and $C_2$ respectively.
+:::
+::::
+
+
+::::{admonition} Exercise 2.13
+:class: tip
+Let $(X, d)$ be a metric space.
+A complete metric space $(X', d')$ is said to be a completion of $(X, d)$ if (a) $X \subseteq X'$ and $d'|_{X \times X} = d$ and (b) $X$ is dense in $X'.$
+
+1. Suppose that $(Y, d_Y)$ is a complete metric space and that $f: X \to Y$ is an isometric embedding, i.e. $d_Y(f(x_1), f(x_2)) = d(x_1, x_2).$
+Show that $f$ extends to an isometric embedding $f': X' \to Y.$
+2. Deduce that any two completions of $X$ are isometric, i.e. related by a bijective isometric embedding.
+
+:::{dropdown} Solution
+__Part 1:__
+Let $(X, d)$ be a metric space, and let $X'$ be the completion of $X.$
+Suppose that $(Y, d_Y)$ is a complete metric space and that $f: X \to Y$ is an isometric embedding.
+We want to show that there exists an isometric embedding $f': X' \to Y.$
+For $x \in X,$ let $f'(x) = f(x).$
+It remains to define $f'$ on $X' \setminus X,$ and verify it is an isometric embedding.
+
+Let $x \in X' \setminus X.$
+Since $X$ is dense in $X',$ there exists a sequence $x_1, x_2, \dots \in X$ which converges to some $x \in X'$ under $d'.$
+Since this sequence converges, it is Cauchy.
+Let $y_n = f(x_n)$ for $n \in \mathbb{N}.$
+Since $f$ is an isometric embedding, $d_Y(y_i, y_j) = d_Y(f(x_i), f(x_j)) = d(x_i, x_j),$ and since $x_1, x_2, \dots$ is Cauchy, $y_1, y_2, \dots$ is also Cauchy.
+Since $Y$ is complete, $y_n$ converges to some $y \in Y$ under $d_Y.$
+We define $f'(x) = y.$
+
+We can verify that $f'$ is an isometric embedding by showing that
+
+$$\begin{equation}
+d_Y(f'(x), f'(z)) = d'(x, z)
+\end{equation}$$
+
+for all $x, z \in X'.$
+We show this as follows.
+First, note that since $x \in X',$ there exists a sequence $x_1, x_2, \dots \in X'$ such that $x_n \to x,$ and similarly for $z \in X'.$
+In addition, by the definition of $f',$ it holds that $f'(x) = \lim_{n \to \infty} f'(x_n)$ and similarly for $z \in X'.$
+Therefore
+
+$$\begin{align}
+d_Y(f'(x), f'(z)) &= d_Y(\lim_{n \to \infty} f(x_n), \lim_{m \to \infty} f(z_m)) \\
+&= \lim_{n, m \to \infty} d_Y(f(x_n), f(z_m)) \\
+&= \lim_{n, m \to \infty} d(x_n, z_m) \\
+&= \lim_{n, m \to \infty} d'(x_n, z_m) \\
+&= d'(\lim_{n \to \infty} x_n, \lim_{m \to \infty} z_m) \\
+&= d'(x, z)
+\end{align}$$
+
+__Part 2:__
+Let $(X_1, d_1), (X_2, d_2)$ be completions of $(X, d).$
+Consider the inclusion map $i: X \to X_2.$
+This is an isometric embedding because
+
+$$\begin{equation}
+d_2(i(x), i(y)) = d(x, y),
+\end{equation}$$
+
+for all $x, y \in X.$
+Now, by the previous part, the inclusion map extends to an isometric embedding on $X_1,$ that is $i': X_1 \to X_2.$
+It remains to show that this is a bijection.
+If $x \in X_2,$ there exists a sequence in $X$ that converges to some limit $a_2.$
+The same sequence is also in $X_1$ and, since $X_1$ is complete, it converges to a unique limit $a_1.$
+By the definition of the extension $i'(a_1) = a_2,$ and since $a_2$ was arbitrary, this mapping is surjective.
+In addition, by the uniquness of limits $i'$ is injective.
+Therefore $i'$ is a bijective isometric embedding.
+:::
+::::
+
+
+::::{admonition} Exercise 2.15
+:class: tip
+Show that $C[0, 1]$ equiped with the uniform metric is complete.
+
+
+:::{dropdown} Solution
+Let $C[0, 1]$ be the set of continuous functions on $[0, 1]$ equiped with the uniform metric.
+Suppose the sequence $f_1, f_2, \dots \in C[0, 1]$ is Cauchy.
+We will first show that this sequence converges uniformly to a function $f.$
+Then we will show that $f$ is continuous and therefore in $C[0, 1].$
+
+Let $x \in C[0, 1].$
+Then $f_1(x), f_2(x), \dots$ is a Cauchy sequence in $\mathbb{R}.$
+Since $\mathbb{R}$ is complete, $f_n(x)$ converges to some limit $\ell_x$ in $\mathbb{R}.$
+Let $f: [0, 1] \to \mathbb{R}$ be $f(x) = \ell_x.$
+Because $x \in [0, 1]$ was arbitrary, the sequence $f_1, f_2, \dots$ converges pointwise to $f.$
+
+We now show that $f_1, f_2, \dots$ converges to $f$ uniformly.
+Let $\epsilon > 0.$
+Since $f_1, f_2, \dots$ is Cauchy with the uniform metric, there exists $N \in \mathbb{N}$ such form all $n, m \geq N,$ and all $x \in [0, 1],$ it holds that
+
+$$\begin{equation}
+|f_n(x) - f_m(x)| < \frac{\epsilon}{2}
+\end{equation}$$
+
+and taking the limit $m \to \infty$ we have
+
+$$\begin{equation}
+\lim_{m \to \infty} |f_n(x) - f_m(x)| = |f_n(x) - f(x)| \leq \frac{\epsilon}{2} < \epsilon,
+\end{equation}$$
+
+for all $x \in [0, 1].$
+Therefore $f_n \to f$ uniformly.
+Finally, we show that $f$ is continuous, i.e. that $f \in C[0, 1].$
+
+Let $\epsilon > 0$ and fix $x \in [0, 1].$
+Since $f_n \to f$ uniformly and each $f_n$ is continuous, there exists $N \in \mathbb{N}$ such that
+
+$$\begin{equation}
+|f(x') - f_N(x')| < \frac{\epsilon}{3}
+\end{equation}$$
+
+for all $x' \in [0, 1].$
+In addition, since $f_N$ is continuous, there exists $\delta$ such that if $|x - x'| < \delta,$ we have
+
+$$\begin{equation}
+|f_N(x') - f_N(x)| < \frac{\epsilon}{3}.
+\end{equation}$$
+
+Putting these together we have
+
+$$\begin{align}
+|f(x') - f(x)| &= |f(x') - f_N(x') + f_N(x') - f_N(x) + f_N(x) - f(x)| \\
+&\leq |f(x') - f_N(x')| + |f_N(x') - f_N(x)| + |f_N(x) - f(x)| \\
+&< \epsilon
+\end{align}$$
+
+and since $\epsilon$ was arbitrary, $f$ is continuous.
 :::
 ::::
