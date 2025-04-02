@@ -5,7 +5,7 @@ Let $\mathcal{U} \subseteq 2^X$ be a topology on $X.$
 An open cover of $X$ is a subset $\mathcal{V} \subseteq \mathcal{U}$ such that
 
 $$\begin{equation}
-\cup_{V \in \mathcal{V}} V = X.
+\bigcup_{V \in \mathcal{V}} V = X.
 \end{equation}$$
 
 We say $\mathcal{V}$ covers $X.$
@@ -248,4 +248,116 @@ Since $X$ is compact and $\pi$ is continuous, $\text{im} \pi$ is compact ({prf:r
 Note that both $\pi$ and $\pi^{-1}$ are continuous.
 Since $f \circ \pi$ is continuous, $f = f \circ \pi \circ \pi^{-1}$ is continuous.
 Finally, since $f$ is a continuous bijection, $X$ is compact and $Y$ is Hausdorff, $f$ is a homeomorphism ({prf:ref}`topology:lem-sufficient-condition-for-homeomorphism`).
+:::
+
+
+## Sequential compactness
+
+:::{prf:definition} Sequential compactness
+A topological space $X$ is sequentially compact if every sequence in $X$ has a convergent subsequence.
+:::
+
+:::{prf:lemma} Equivalent condition for convergent subsequence in a metric space
+:label: topology:lem-equivalent-condition-for-convergent-subsequence-in-a-metric-space
+Let $(x_n)$ be a sequence in a metric space $(X, d)$ and $x \in X.$
+Then $(x_n)$ has a subsequence converging to $x$ if and only if for every $\epsilon > 0$ we have $x_n \in B_\epsilon(x)$ for infinitely many $n \in \mathbb{N}.$
+:::
+
+:::{dropdown} Proof: Equivalent condition for convergent sequence in a metric space
+Let $(x_n)$ be a sequence in a metric space $(X, d)$ and $x \in X.$
+
+__Implies:__
+Suppose $(x_n)$ has a subsequence $(x_{n_k})$ converging to $x.$
+Let $\epsilon > 0.$
+By the definition of convergence, there exists $N \in \mathbb{N}$ such that for all $m \geq N,$ we have $x_m \in B_\epsilon(x).$
+Therefore, for all $n_k \geq m,$ of which there are infinitely many, we have $x_{n_k} \in B_\epsilon(x).$
+
+__Is implied by:__
+Suppose that for every $\epsilon > 0$ we have $x_n \in B_\epsilon(x)$ for infinitely many $n \in \mathbb{N}.$
+We want to show $(x_n)$ has a subsequence converging to $x.$
+By hypothesis, $x_n \in B_{1 / n}(x)$ for infinitely many $n.$
+For $k = 1, 2, \dots,$ let $n_k$ be the smallest such $n$ with $n_k > n_{k - 1},$ where we define $n_0 = 0.$
+Since $d(x_{n_k}, x) < \frac{1}{n},$ we have that $x_{n_k} \to x.$
+:::
+::::
+
+
+:::{prf:theorem} Compact metric space $\iff$ sequentially compact metric space
+:label: topology:thm-compact-metric-space-iff-sequentially-compact-metric-space
+A metric space $(X, d)$ is a compact if and only if it is sequentially compact.
+:::
+
+:::{dropdown} Proof: Compact metric space $~\iff$ sequentially compact metric space
+Let $(X, d)$ be a metric space.
+
+__Implies:__
+Suppose $(X, d)$ is compact.
+Let $(x_n)$ be a sequence in $X$ and suppose that it does not have a convergent subsequence.
+Then, for any $y \in X,$ there is no subsequence converging to $y.$
+By {prf:ref}`topology:lem-equivalent-condition-for-convergent-subsequence-in-a-metric-space`, there exists $\epsilon_y > 0$ such that $x_n \in B_\epsilon_y(y)$ only finitely many times.
+Let $U_y = B_\epsilon_y(y).$
+Now, the set $\mathcal{V} = \{U_y: y \in X\}$ is an open cover of $X.$
+Since $X$ is compact, there is a finite subcover $\{U_{y_1}, \dots, U_{y_m}\}.$
+Then $x_n \cup_{i = 1}^m U_{y_i} = X$ only for finitely many $n,$ but this is a contradiction because $x_n \in X$ for all $n.$
+Therefore $(x_n)$ has a convergent subsequence and $(X, d).$
+
+__[Is implied by:](https://math.stackexchange.com/questions/164472/proving-that-sequentially-compact-spaces-are-compact)__
+Suppose $(X, d)$ is sequentially compact.
+Let $\mathcal{V}$ be an open cover of $X$ and suppose that there does not exist a finite open cover of $X$ from it.
+
+First, we show that there exists $\delta > 0$ such that any open ball with radius less than $\delta$ is contained within some $V \in \mathcal{V}.$
+This intermediate result is also known as [Lebesgue's number lemma](https://en.wikipedia.org/wiki/Lebesgue%27s_number_lemma).
+Suppose this is not the case.
+Then, for each $n \in \mathcal{N},$ there exists $x_n \in X$ such that $B_{1 / n}(x_n)$ is not contained in any $V \in \mathcal{V}.$
+Since $X$ is sequentially compact, the sequence $(x_n)$ has a convergent subsequence $(x_{n_k})$ with a limit $x \in X.$
+However, this leads to a contradiction.
+First, $x$ cannot be in any $V \in \mathcal{V},$ because if $x$ is in some $V \in \mathcal{V},$ then because $V$ is open there exists $r > 0$ such that $B_r(x) \subseteq V.
+Second, this means that all $x_{n_k}$ with $n_k$ sufficiently large such that $d(x_{n_k}, x) < r / 2$ and $n_k > 2 / r$ for all $n_k,$ would then satisfy $B_{1 / n_k}(x_{n_k}) \subseteq B_r(x) \subseteq V.$
+This is a contradiction, so the intermediate result holds.
+
+Now let $\delta > 0$ be such that any open ball with radius less than $\delta$ is contained within some $V \in \mathcal{V}.$
+Pick $x_1 \in X.$
+The ball $B_\delta(x_1)$ is contained in some $V_1 \in \mathcal{V},$ and since $V_1$ does not cover $X$ there exists $x_2 \in X \setminus B_\delta(x_1).$
+We proceed recursively to obtain a sequence $(x_n)$ in this manner, which satisfies $x_n \in X \setminus \cup_{i = 1}^{n - 1} B_\delta(x_i).$
+The sequence $(x_{n_k})$ has a convergent subsequence, and since it converges it is Cauchy.
+However, this is a contradiction because no two elements $x_{n_k}$ can belong to the same open ball of radius $\delta.$
+This contradicts the assumption that $\mathcal{V}$ has no finite subcover so $X$ is compact.
+:::
+
+## Completeness
+
+:::{prf:definition} Cauchy sequence
+:label: topology:def-cauchy-sequence
+Let $(X, d)$ be a metric space.
+A sequence $(x_n)$ in $X$ is Cauchy if for every $\epsilon > 0,$ there exists $N \in \mathbb{N}$ such that $d(x_n, x_m) < \epsilon$ for all $n, m \geq N.$
+:::
+
+
+:::{prf:definition} Complete metric space
+:label: topology:def-complete-metric-space
+A metric space $(X, d)$ is complete if every {prf:ref}`Cauchy sequence<topology:def-cauchy-sequence>` in it converges.
+:::
+
+:::{prf:lemma} Compact metric spaces are complete
+:label: topology:lem-compact-metric-spaces-are-complete
+If the metric space $(X, d)$ is compact, it is also complete.
+:::
+
+:::{dropdown} Proof: Compact metric spaces are complete
+Suppose $(X, d)$ is a compact metric space.
+Let $(x_n)$ be a Cauchy sequence in $X.$
+From {prf:ref}`topology:thm-compact-metric-space-iff-sequentially-compact-metric-space`, it is sequentially compact.
+Since the space is sequentially compact, $(x_n)$ has a convergent subsequence $(x_{n_k}),$ which converges to some $x \in X.$
+
+Let $\epsilon > 0.$
+Since $(x_n)$ is Cauchy, there exists $N \in \mathbb{N}$ such that for all $n, m \geq N,$ we have $d(x_n, x_m) < \epsilon / 2.$
+Since $(x_{n_k})$ converges to some $x,$ there exists $M \in \mathbb{N}$ such that for all $n_k \geq M,$ we have $d(x_{n_k}, x) < \epsilon / 2.$
+Let $l, n_k \geq \max\{N, M\}.$
+Then
+
+$$\begin{equation}
+d(x_l, x) \leq d(x_l, x_{n_k}) + d(x_{n_k}, x) < \epsilon,
+\end{equation}$$
+
+so $x_l$ converges to $x,$ and $X$ is complete.
 :::
