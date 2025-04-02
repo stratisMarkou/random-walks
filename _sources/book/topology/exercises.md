@@ -785,6 +785,212 @@ This is a contradiction, so $h_d(x) < 0$ for some $x \in (0, \pi / 2),$ completi
 :class: tip
 Is there an infinite compact subset of $\mathbb{Q}$?
 
-:::{dropdown}
+:::{dropdown} Solution
 The set $\{x \in [0, 1]: x = 1 / n \text{ for some } n \in \mathbb{N}\} \cup \{0\},$ is an infinite subset of $\mathbb{Q}$ which is compact because it is a closed subset of $[0, 1],$ {prf:ref}`which is compact<topology:closed-interval-is-compact>` ({ref}`topology:def-compact-space`).
 :::
+::::
+
+
+::::{admonition} Exercise 2.10
+:class: tip
+If $A \subseteq \mathbb{R}^n$ is not compact, show that there is a continuous function $f: A \to \mathbb{R}$ which is not bounded.
+
+:::{dropdown} Solution
+Let $A \subseteq \mathbb{R}^n$ be a set that is not compact.
+If $A$ is unbounded, the function $f: A \to \mathbb{R}$ defined as $f(x) = ||x||_2$ is continuous and unbounded.
+If $A$ is bounded, it is contained in $[-M, M]^n$ for some $M \in \mathbb{R},$ which is compact.
+Therefore $A$ cannot be closed, because closed subsets of compact spaces are compact, and $A$ is not compact by assumption.
+Since $A$ is not closed, there exists $a \in \mathbb{R}^n \setminus A$ such that every open ball centered on $x$ intersects $A.$
+Then, the function $f: A \to \mathbb{R}$ defined as $f(x) = ||x - a||_2^{-1}$ is continuous on $A$ but is not bounded.
+:::
+::::
+
+::::{admonition} Exercise 2.11
+:class: tip
+If $X$ is a topological space, its one point compactification $X^+$ is defined as follows.
+As a set, $X^+$ is the union of $X$ with an additional point $\infty.$
+A subset $U \subseteq X^+$ is open if either
+
+1. $\infty \not \in U$ and $U$ is an open subset of $X.$
+2. $\infty \in U$ and $X^+ \setminus U$ is a compact, closed subset of $X.$
+
+Show that $X^+$ is a compact topological space.
+If $X = \mathbb{R}^n,$ show that $X^+ \simeq S^n.$
+
+:::{dropdown} Solution
+In the following let $X$ be a topological space and let $X^+$ be defined as above.
+
+__Part 1:__
+Suppose $\mathcal{V}$ is an open cover of $X^+.$
+Then, there exists $V_\infty \in \mathcal{V}$ such that $\infty \in V_\infty.$
+In addition, since $\mathcal{V}$ is a cover of $X^+,$ there is a subcover $\mathcal{V}' \subseteq \mathcal{V}$ that covers $X \setminus V_\infty,$ which is a compact closed subset of $X$ by definition.
+Since $X \setminus V_\infty$ is closed and compact and $\mathcal{V}'$ covers it, there is a finite subcover $\{V_1, \dots, V_N\} \subseteq \mathcal{V}'.$
+We conclude that the set $\{V_\infty, V_1, \dots, V_N\}$ is a finite subcover of $X^+$ from $\mathcal{V},$ so $X^+$ is compact.
+
+__Part 2:__
+Let $X = \mathbb{R}^n.$
+From the previous part, $X^+$ is compact.
+Note also that $S^n$ is Hausdorff.
+From {prf:ref}`topology:lem-sufficient-condition-for-homeomorphism`, any continuous bijection $f: X^+ \to S^n$ is a homeomorphism between the two spaces, so it sufficies to show that such a map exists.
+
+Let $f: X^+ \to S^n$ be the stereographic projection of the sphere which maps $\infty \in $X^+$$ to the north pole $s^* \in S^n$ and note that this mapping is a bijection.
+In addition, it is continuous which can be seen as follows.
+First note that $f|_X: X \to S^n \setminus \{s^*\}$ is continuous.
+Given $U \subseteq S^n,$ there are two possibilities:
+If $s^* \not \in U,$ then $f^{-1}(U)$ is open because $f|_X$ is continuous.
+If $s^* \in U,$ then $S^n \setminus U$ is a closed set in $S^n$ that does not contain $s^*$ and since $f|_X$ is continuous, $f|_X^{-1}(S^n \setminus U)$ is closed in $X^+,$ so $X^+ \setminus f|_X^{-1}(S^n \setminus U) = f^{-1}(U)$ is open in $X^+.$
+Therefore, $f$ is continuous.
+:::
+::::
+
+
+::::{admonition} Exercise 2.12
+:class: tip
+Suppose that $X$ is a compact Hausdorff space, and that $C_1$ and $C_2$ are disjoint closed subsets of $X.$
+Show that there exist open subsets $U_1, U_2 \subseteq X$ such that $C_i \subseteq U_i$ and $U_1 \cap U_2 = \emptyset.$
+
+:::{dropdown} Solution
+Suppose that $X$ is a compact Hausdorff space, and that $C_1$ and $C_2$ are disjoint closed subsets of $X.$
+Since $C_1, C_2$ are closed subsets of a compact space, they are also compact.
+
+Fix $x \in C_1.$
+Since $X$ is Hausdorff, for each $y \in C_2$ there exists an open $V_{xy}$ containing $x$ and an open $W_{xy}$ containing $y$ such that $V_{xy} \cap W_{xy} = \emptyset.$
+Then, the collection $\{W_{xy} \subseteq X: y \in C_2\}$ is an open cover of $C_2,$ and since $C_2$ is compact, it has a finite subcover of the form $\{W_{xy_1}, \dots, W_{xy_N}\}.$
+
+Now, the sets $\tilde{W}_x = \cup_{n = 1}^N W_{xy_n}$ and $\tilde{V}_x = \cap_{n = 1}^N V_{xy_n}$ are both open.
+In addition, $\{\tilde{V}_x \subseteq X: x \in X\}$ is an open cover of $C_1,$ which is itself compact, so it has a finite subcover of the form $\{\tilde{V}_{x_1}, \dots, \tilde{V}_{x_M}\}.$
+We note that for each $x \in X,$ the open set $\tilde{W}_x$ contains $C_2,$ so the set $\cap_{m = 1}^M \tilde{W}_{x_m}$ is also an open set that contains $C_2.$
+
+Finally, let $U_1 = \cup_{m = 1}^M \tilde{V}_{x_m},$ and $U_2 = \cap_{m = 1}^M \tilde{W}_{x_m}.$
+These are two disjoint open sets that contain $C_1$ and $C_2$ respectively.
+:::
+::::
+
+
+::::{admonition} Exercise 2.13
+:class: tip
+Let $(X, d)$ be a metric space.
+A complete metric space $(X', d')$ is said to be a completion of $(X, d)$ if (a) $X \subseteq X'$ and $d'|_{X \times X} = d$ and (b) $X$ is dense in $X'.$
+
+1. Suppose that $(Y, d_Y)$ is a complete metric space and that $f: X \to Y$ is an isometric embedding, i.e. $d_Y(f(x_1), f(x_2)) = d(x_1, x_2).$
+Show that $f$ extends to an isometric embedding $f': X' \to Y.$
+2. Deduce that any two completions of $X$ are isometric, i.e. related by a bijective isometric embedding.
+
+:::{dropdown} Solution
+__Part 1:__
+Let $(X, d)$ be a metric space, and let $X'$ be the completion of $X.$
+Suppose that $(Y, d_Y)$ is a complete metric space and that $f: X \to Y$ is an isometric embedding.
+We want to show that there exists an isometric embedding $f': X' \to Y.$
+For $x \in X,$ let $f'(x) = f(x).$
+It remains to define $f'$ on $X' \setminus X,$ and verify it is an isometric embedding.
+
+Let $x \in X' \setminus X.$
+Since $X$ is dense in $X',$ there exists a sequence $x_1, x_2, \dots \in X$ which converges to some $x \in X'$ under $d'.$
+Since this sequence converges, it is Cauchy.
+Let $y_n = f(x_n)$ for $n \in \mathbb{N}.$
+Since $f$ is an isometric embedding, $d_Y(y_i, y_j) = d_Y(f(x_i), f(x_j)) = d(x_i, x_j),$ and since $x_1, x_2, \dots$ is Cauchy, $y_1, y_2, \dots$ is also Cauchy.
+Since $Y$ is complete, $y_n$ converges to some $y \in Y$ under $d_Y.$
+We define $f'(x) = y.$
+
+We can verify that $f'$ is an isometric embedding by showing that
+
+$$\begin{equation}
+d_Y(f'(x), f'(z)) = d'(x, z)
+\end{equation}$$
+
+for all $x, z \in X'.$
+We show this as follows.
+First, note that since $x \in X',$ there exists a sequence $x_1, x_2, \dots \in X'$ such that $x_n \to x,$ and similarly for $z \in X'.$
+In addition, by the definition of $f',$ it holds that $f'(x) = \lim_{n \to \infty} f'(x_n)$ and similarly for $z \in X'.$
+Therefore
+
+$$\begin{align}
+d_Y(f'(x), f'(z)) &= d_Y(\lim_{n \to \infty} f(x_n), \lim_{m \to \infty} f(z_m)) \\
+&= \lim_{n, m \to \infty} d_Y(f(x_n), f(z_m)) \\
+&= \lim_{n, m \to \infty} d(x_n, z_m) \\
+&= \lim_{n, m \to \infty} d'(x_n, z_m) \\
+&= d'(\lim_{n \to \infty} x_n, \lim_{m \to \infty} z_m) \\
+&= d'(x, z)
+\end{align}$$
+
+__Part 2:__
+Let $(X_1, d_1), (X_2, d_2)$ be completions of $(X, d).$
+Consider the inclusion map $i: X \to X_2.$
+This is an isometric embedding because
+
+$$\begin{equation}
+d_2(i(x), i(y)) = d(x, y),
+\end{equation}$$
+
+for all $x, y \in X.$
+Now, by the previous part, the inclusion map extends to an isometric embedding on $X_1,$ that is $i': X_1 \to X_2.$
+It remains to show that this is a bijection.
+If $x \in X_2,$ there exists a sequence in $X$ that converges to some limit $a_2.$
+The same sequence is also in $X_1$ and, since $X_1$ is complete, it converges to a unique limit $a_1.$
+By the definition of the extension $i'(a_1) = a_2,$ and since $a_2$ was arbitrary, this mapping is surjective.
+In addition, by the uniquness of limits $i'$ is injective.
+Therefore $i'$ is a bijective isometric embedding.
+:::
+::::
+
+
+::::{admonition} Exercise 2.15
+:class: tip
+Show that $C[0, 1]$ equiped with the uniform metric is complete.
+
+
+:::{dropdown} Solution
+Let $C[0, 1]$ be the set of continuous functions on $[0, 1]$ equiped with the uniform metric.
+Suppose the sequence $f_1, f_2, \dots \in C[0, 1]$ is Cauchy.
+We will first show that this sequence converges uniformly to a function $f.$
+Then we will show that $f$ is continuous and therefore in $C[0, 1].$
+
+Let $x \in C[0, 1].$
+Then $f_1(x), f_2(x), \dots$ is a Cauchy sequence in $\mathbb{R}.$
+Since $\mathbb{R}$ is complete, $f_n(x)$ converges to some limit $\ell_x$ in $\mathbb{R}.$
+Let $f: [0, 1] \to \mathbb{R}$ be $f(x) = \ell_x.$
+Because $x \in [0, 1]$ was arbitrary, the sequence $f_1, f_2, \dots$ converges pointwise to $f.$
+
+We now show that $f_1, f_2, \dots$ converges to $f$ uniformly.
+Let $\epsilon > 0.$
+Since $f_1, f_2, \dots$ is Cauchy with the uniform metric, there exists $N \in \mathbb{N}$ such form all $n, m \geq N,$ and all $x \in [0, 1],$ it holds that
+
+$$\begin{equation}
+|f_n(x) - f_m(x)| < \frac{\epsilon}{2}
+\end{equation}$$
+
+and taking the limit $m \to \infty$ we have
+
+$$\begin{equation}
+\lim_{m \to \infty} |f_n(x) - f_m(x)| = |f_n(x) - f(x)| \leq \frac{\epsilon}{2} < \epsilon,
+\end{equation}$$
+
+for all $x \in [0, 1].$
+Therefore $f_n \to f$ uniformly.
+Finally, we show that $f$ is continuous, i.e. that $f \in C[0, 1].$
+
+Let $\epsilon > 0$ and fix $x \in [0, 1].$
+Since $f_n \to f$ uniformly and each $f_n$ is continuous, there exists $N \in \mathbb{N}$ such that
+
+$$\begin{equation}
+|f(x') - f_N(x')| < \frac{\epsilon}{3}
+\end{equation}$$
+
+for all $x' \in [0, 1].$
+In addition, since $f_N$ is continuous, there exists $\delta$ such that if $|x - x'| < \delta,$ we have
+
+$$\begin{equation}
+|f_N(x') - f_N(x)| < \frac{\epsilon}{3}.
+\end{equation}$$
+
+Putting these together we have
+
+$$\begin{align}
+|f(x') - f(x)| &= |f(x') - f_N(x') + f_N(x') - f_N(x) + f_N(x) - f(x)| \\
+&\leq |f(x') - f_N(x')| + |f_N(x') - f_N(x)| + |f_N(x) - f(x)| \\
+&< \epsilon
+\end{align}$$
+
+and since $\epsilon$ was arbitrary, $f$ is continuous.
+:::
+::::

@@ -1200,12 +1200,214 @@ This is a contradiction, so <span class="math notranslate nohighlight">\(h_d(x) 
 <p>Is there an infinite compact subset of <span class="math notranslate nohighlight">\(\mathbb{Q}\)</span>?</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
-<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-kebab-horizontal" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M6 12a2 2 0 11-4 0 2 2 0 014 0zm8 0a2 2 0 11-4 0 2 2 0 014 0zm6 2a2 2 0 100-4 2 2 0 000 4z"></path></svg><div class="sd-summary-down docutils">
+Solution<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">The set <span class="math notranslate nohighlight">\(\{x \in [0, 1]: x = 1 / n \text{ for some } n \in \mathbb{N}\} \cup \{0\},\)</span> is an infinite subset of <span class="math notranslate nohighlight">\(\mathbb{Q}\)</span> which is compact because it is a closed subset of <span class="math notranslate nohighlight">\([0, 1],\)</span> <a class="reference internal" href="004-compactness.html#topology:closed-interval-is-compact">which is compact</a> (<span class="xref std std-ref">topology:def-compact-space</span>).</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 2.10</p>
+<p>If <span class="math notranslate nohighlight">\(A \subseteq \mathbb{R}^n\)</span> is not compact, show that there is a continuous function <span class="math notranslate nohighlight">\(f: A \to \mathbb{R}\)</span> which is not bounded.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(A \subseteq \mathbb{R}^n\)</span> be a set that is not compact.
+If <span class="math notranslate nohighlight">\(A\)</span> is unbounded, the function <span class="math notranslate nohighlight">\(f: A \to \mathbb{R}\)</span> defined as <span class="math notranslate nohighlight">\(f(x) = ||x||_2\)</span> is continuous and unbounded.
+If <span class="math notranslate nohighlight">\(A\)</span> is bounded, it is contained in <span class="math notranslate nohighlight">\([-M, M]^n\)</span> for some <span class="math notranslate nohighlight">\(M \in \mathbb{R},\)</span> which is compact.
+Therefore <span class="math notranslate nohighlight">\(A\)</span> cannot be closed, because closed subsets of compact spaces are compact, and <span class="math notranslate nohighlight">\(A\)</span> is not compact by assumption.
+Since <span class="math notranslate nohighlight">\(A\)</span> is not closed, there exists <span class="math notranslate nohighlight">\(a \in \mathbb{R}^n \setminus A\)</span> such that every open ball centered on <span class="math notranslate nohighlight">\(x\)</span> intersects <span class="math notranslate nohighlight">\(A.\)</span>
+Then, the function <span class="math notranslate nohighlight">\(f: A \to \mathbb{R}\)</span> defined as <span class="math notranslate nohighlight">\(f(x) = ||x - a||_2^{-1}\)</span> is continuous on <span class="math notranslate nohighlight">\(A\)</span> but is not bounded.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 2.11</p>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is a topological space, its one point compactification <span class="math notranslate nohighlight">\(X^+\)</span> is defined as follows.
+As a set, <span class="math notranslate nohighlight">\(X^+\)</span> is the union of <span class="math notranslate nohighlight">\(X\)</span> with an additional point <span class="math notranslate nohighlight">\(\infty.\)</span>
+A subset <span class="math notranslate nohighlight">\(U \subseteq X^+\)</span> is open if either</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\infty \not \in U\)</span> and <span class="math notranslate nohighlight">\(U\)</span> is an open subset of <span class="math notranslate nohighlight">\(X.\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\infty \in U\)</span> and <span class="math notranslate nohighlight">\(X^+ \setminus U\)</span> is a compact, closed subset of <span class="math notranslate nohighlight">\(X.\)</span></p></li>
+</ol>
+<p>Show that <span class="math notranslate nohighlight">\(X^+\)</span> is a compact topological space.
+If <span class="math notranslate nohighlight">\(X = \mathbb{R}^n,\)</span> show that <span class="math notranslate nohighlight">\(X^+ \simeq S^n.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">In the following let <span class="math notranslate nohighlight">\(X\)</span> be a topological space and let <span class="math notranslate nohighlight">\(X^+\)</span> be defined as above.</p>
+<p class="sd-card-text"><strong>Part 1:</strong>
+Suppose <span class="math notranslate nohighlight">\(\mathcal{V}\)</span> is an open cover of <span class="math notranslate nohighlight">\(X^+.\)</span>
+Then, there exists <span class="math notranslate nohighlight">\(V_\infty \in \mathcal{V}\)</span> such that <span class="math notranslate nohighlight">\(\infty \in V_\infty.\)</span>
+In addition, since <span class="math notranslate nohighlight">\(\mathcal{V}\)</span> is a cover of <span class="math notranslate nohighlight">\(X^+,\)</span> there is a subcover <span class="math notranslate nohighlight">\(\mathcal{V}' \subseteq \mathcal{V}\)</span> that covers <span class="math notranslate nohighlight">\(X \setminus V_\infty,\)</span> which is a compact closed subset of <span class="math notranslate nohighlight">\(X\)</span> by definition.
+Since <span class="math notranslate nohighlight">\(X \setminus V_\infty\)</span> is closed and compact and <span class="math notranslate nohighlight">\(\mathcal{V}'\)</span> covers it, there is a finite subcover <span class="math notranslate nohighlight">\(\{V_1, \dots, V_N\} \subseteq \mathcal{V}'.\)</span>
+We conclude that the set <span class="math notranslate nohighlight">\(\{V_\infty, V_1, \dots, V_N\}\)</span> is a finite subcover of <span class="math notranslate nohighlight">\(X^+\)</span> from <span class="math notranslate nohighlight">\(\mathcal{V},\)</span> so <span class="math notranslate nohighlight">\(X^+\)</span> is compact.</p>
+<p class="sd-card-text"><strong>Part 2:</strong>
+Let <span class="math notranslate nohighlight">\(X = \mathbb{R}^n.\)</span>
+From the previous part, <span class="math notranslate nohighlight">\(X^+\)</span> is compact.
+Note also that <span class="math notranslate nohighlight">\(S^n\)</span> is Hausdorff.
+From <a class="reference internal" href="004-compactness.html#topology:lem-sufficient-condition-for-homeomorphism">Lemma 41</a>, any continuous bijection <span class="math notranslate nohighlight">\(f: X^+ \to S^n\)</span> is a homeomorphism between the two spaces, so it sufficies to show that such a map exists.</p>
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(f: X^+ \to S^n\)</span> be the stereographic projection of the sphere which maps <span class="math notranslate nohighlight">\(\infty \in \)</span>X^+$<span class="math notranslate nohighlight">\( to the north pole \)</span>s^* \in S^n<span class="math notranslate nohighlight">\( and note that this mapping is a bijection.
+In addition, it is continuous which can be seen as follows.
+First note that \)</span>f|_X: X \to S^n \setminus {s^<em>}<span class="math notranslate nohighlight">\( is continuous.
+Given \)</span>U \subseteq S^n,<span class="math notranslate nohighlight">\( there are two possibilities:
+If \)</span>s^</em> \not \in U,<span class="math notranslate nohighlight">\( then \)</span>f^{-1}(U)<span class="math notranslate nohighlight">\( is open because \)</span>f|_X<span class="math notranslate nohighlight">\( is continuous.
+If \)</span>s^* \in U,<span class="math notranslate nohighlight">\( then \)</span>S^n \setminus U<span class="math notranslate nohighlight">\( is a closed set in \)</span>S^n<span class="math notranslate nohighlight">\( that does not contain \)</span>s^*<span class="math notranslate nohighlight">\( and since \)</span>f|_X<span class="math notranslate nohighlight">\( is continuous, \)</span>f|_X^{-1}(S^n \setminus U)<span class="math notranslate nohighlight">\( is closed in \)</span>X^+,<span class="math notranslate nohighlight">\( so \)</span>X^+ \setminus f|_X^{-1}(S^n \setminus U) = f^{-1}(U)<span class="math notranslate nohighlight">\( is open in \)</span>X^+.<span class="math notranslate nohighlight">\(
+Therefore, \)</span>f$ is continuous.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 2.12</p>
+<p>Suppose that <span class="math notranslate nohighlight">\(X\)</span> is a compact Hausdorff space, and that <span class="math notranslate nohighlight">\(C_1\)</span> and <span class="math notranslate nohighlight">\(C_2\)</span> are disjoint closed subsets of <span class="math notranslate nohighlight">\(X.\)</span>
+Show that there exist open subsets <span class="math notranslate nohighlight">\(U_1, U_2 \subseteq X\)</span> such that <span class="math notranslate nohighlight">\(C_i \subseteq U_i\)</span> and <span class="math notranslate nohighlight">\(U_1 \cap U_2 = \emptyset.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose that <span class="math notranslate nohighlight">\(X\)</span> is a compact Hausdorff space, and that <span class="math notranslate nohighlight">\(C_1\)</span> and <span class="math notranslate nohighlight">\(C_2\)</span> are disjoint closed subsets of <span class="math notranslate nohighlight">\(X.\)</span>
+Since <span class="math notranslate nohighlight">\(C_1, C_2\)</span> are closed subsets of a compact space, they are also compact.</p>
+<p class="sd-card-text">Fix <span class="math notranslate nohighlight">\(x \in C_1.\)</span>
+Since <span class="math notranslate nohighlight">\(X\)</span> is Hausdorff, for each <span class="math notranslate nohighlight">\(y \in C_2\)</span> there exists an open <span class="math notranslate nohighlight">\(V_{xy}\)</span> containing <span class="math notranslate nohighlight">\(x\)</span> and an open <span class="math notranslate nohighlight">\(W_{xy}\)</span> containing <span class="math notranslate nohighlight">\(y\)</span> such that <span class="math notranslate nohighlight">\(V_{xy} \cap W_{xy} = \emptyset.\)</span>
+Then, the collection <span class="math notranslate nohighlight">\(\{W_{xy} \subseteq X: y \in C_2\}\)</span> is an open cover of <span class="math notranslate nohighlight">\(C_2,\)</span> and since <span class="math notranslate nohighlight">\(C_2\)</span> is compact, it has a finite subcover of the form <span class="math notranslate nohighlight">\(\{W_{xy_1}, \dots, W_{xy_N}\}.\)</span></p>
+<p class="sd-card-text">Now, the sets <span class="math notranslate nohighlight">\(\tilde{W}_x = \cup_{n = 1}^N W_{xy_n}\)</span> and <span class="math notranslate nohighlight">\(\tilde{V}_x = \cap_{n = 1}^N V_{xy_n}\)</span> are both open.
+In addition, <span class="math notranslate nohighlight">\(\{\tilde{V}_x \subseteq X: x \in X\}\)</span> is an open cover of <span class="math notranslate nohighlight">\(C_1,\)</span> which is itself compact, so it has a finite subcover of the form <span class="math notranslate nohighlight">\(\{\tilde{V}_{x_1}, \dots, \tilde{V}_{x_M}\}.\)</span>
+We note that for each <span class="math notranslate nohighlight">\(x \in X,\)</span> the open set <span class="math notranslate nohighlight">\(\tilde{W}_x\)</span> contains <span class="math notranslate nohighlight">\(C_2,\)</span> so the set <span class="math notranslate nohighlight">\(\cap_{m = 1}^M \tilde{W}_{x_m}\)</span> is also an open set that contains <span class="math notranslate nohighlight">\(C_2.\)</span></p>
+<p class="sd-card-text">Finally, let <span class="math notranslate nohighlight">\(U_1 = \cup_{m = 1}^M \tilde{V}_{x_m},\)</span> and <span class="math notranslate nohighlight">\(U_2 = \cap_{m = 1}^M \tilde{W}_{x_m}.\)</span>
+These are two disjoint open sets that contain <span class="math notranslate nohighlight">\(C_1\)</span> and <span class="math notranslate nohighlight">\(C_2\)</span> respectively.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 2.13</p>
+<p>Let <span class="math notranslate nohighlight">\((X, d)\)</span> be a metric space.
+A complete metric space <span class="math notranslate nohighlight">\((X', d')\)</span> is said to be a completion of <span class="math notranslate nohighlight">\((X, d)\)</span> if (a) <span class="math notranslate nohighlight">\(X \subseteq X'\)</span> and <span class="math notranslate nohighlight">\(d'|_{X \times X} = d\)</span> and (b) <span class="math notranslate nohighlight">\(X\)</span> is dense in <span class="math notranslate nohighlight">\(X'.\)</span></p>
+<ol class="arabic simple">
+<li><p>Suppose that <span class="math notranslate nohighlight">\((Y, d_Y)\)</span> is a complete metric space and that <span class="math notranslate nohighlight">\(f: X \to Y\)</span> is an isometric embedding, i.e. <span class="math notranslate nohighlight">\(d_Y(f(x_1), f(x_2)) = d(x_1, x_2).\)</span>
+Show that <span class="math notranslate nohighlight">\(f\)</span> extends to an isometric embedding <span class="math notranslate nohighlight">\(f': X' \to Y.\)</span></p></li>
+<li><p>Deduce that any two completions of <span class="math notranslate nohighlight">\(X\)</span> are isometric, i.e. related by a bijective isometric embedding.</p></li>
+</ol>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><strong>Part 1:</strong>
+Let <span class="math notranslate nohighlight">\((X, d)\)</span> be a metric space, and let <span class="math notranslate nohighlight">\(X'\)</span> be the completion of <span class="math notranslate nohighlight">\(X.\)</span>
+Suppose that <span class="math notranslate nohighlight">\((Y, d_Y)\)</span> is a complete metric space and that <span class="math notranslate nohighlight">\(f: X \to Y\)</span> is an isometric embedding.
+We want to show that there exists an isometric embedding <span class="math notranslate nohighlight">\(f': X' \to Y.\)</span>
+For <span class="math notranslate nohighlight">\(x \in X,\)</span> let <span class="math notranslate nohighlight">\(f'(x) = f(x).\)</span>
+It remains to define <span class="math notranslate nohighlight">\(f'\)</span> on <span class="math notranslate nohighlight">\(X' \setminus X,\)</span> and verify it is an isometric embedding.</p>
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(x \in X' \setminus X.\)</span>
+Since <span class="math notranslate nohighlight">\(X\)</span> is dense in <span class="math notranslate nohighlight">\(X',\)</span> there exists a sequence <span class="math notranslate nohighlight">\(x_1, x_2, \dots \in X\)</span> which converges to some <span class="math notranslate nohighlight">\(x \in X'\)</span> under <span class="math notranslate nohighlight">\(d'.\)</span>
+Since this sequence converges, it is Cauchy.
+Let <span class="math notranslate nohighlight">\(y_n = f(x_n)\)</span> for <span class="math notranslate nohighlight">\(n \in \mathbb{N}.\)</span>
+Since <span class="math notranslate nohighlight">\(f\)</span> is an isometric embedding, <span class="math notranslate nohighlight">\(d_Y(y_i, y_j) = d_Y(f(x_i), f(x_j)) = d(x_i, x_j),\)</span> and since <span class="math notranslate nohighlight">\(x_1, x_2, \dots\)</span> is Cauchy, <span class="math notranslate nohighlight">\(y_1, y_2, \dots\)</span> is also Cauchy.
+Since <span class="math notranslate nohighlight">\(Y\)</span> is complete, <span class="math notranslate nohighlight">\(y_n\)</span> converges to some <span class="math notranslate nohighlight">\(y \in Y\)</span> under <span class="math notranslate nohighlight">\(d_Y.\)</span>
+We define <span class="math notranslate nohighlight">\(f'(x) = y.\)</span></p>
+<p class="sd-card-text">We can verify that <span class="math notranslate nohighlight">\(f'\)</span> is an isometric embedding by showing that</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+d_Y(f'(x), f'(z)) = d'(x, z)
+\end{equation}\]</div>
+<p class="sd-card-text">for all <span class="math notranslate nohighlight">\(x, z \in X'.\)</span>
+We show this as follows.
+First, note that since <span class="math notranslate nohighlight">\(x \in X',\)</span> there exists a sequence <span class="math notranslate nohighlight">\(x_1, x_2, \dots \in X'\)</span> such that <span class="math notranslate nohighlight">\(x_n \to x,\)</span> and similarly for <span class="math notranslate nohighlight">\(z \in X'.\)</span>
+In addition, by the definition of <span class="math notranslate nohighlight">\(f',\)</span> it holds that <span class="math notranslate nohighlight">\(f'(x) = \lim_{n \to \infty} f'(x_n)\)</span> and similarly for <span class="math notranslate nohighlight">\(z \in X'.\)</span>
+Therefore</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+d_Y(f'(x), f'(z)) &amp;= d_Y(\lim_{n \to \infty} f(x_n), \lim_{m \to \infty} f(z_m)) \\
+&amp;= \lim_{n, m \to \infty} d_Y(f(x_n), f(z_m)) \\
+&amp;= \lim_{n, m \to \infty} d(x_n, z_m) \\
+&amp;= \lim_{n, m \to \infty} d'(x_n, z_m) \\
+&amp;= d'(\lim_{n \to \infty} x_n, \lim_{m \to \infty} z_m) \\
+&amp;= d'(x, z)
+\end{align}\end{split}\]</div>
+<p class="sd-card-text"><strong>Part 2:</strong>
+Let <span class="math notranslate nohighlight">\((X_1, d_1), (X_2, d_2)\)</span> be completions of <span class="math notranslate nohighlight">\((X, d).\)</span>
+Consider the inclusion map <span class="math notranslate nohighlight">\(i: X \to X_2.\)</span>
+This is an isometric embedding because</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+d_2(i(x), i(y)) = d(x, y),
+\end{equation}\]</div>
+<p class="sd-card-text">for all <span class="math notranslate nohighlight">\(x, y \in X.\)</span>
+Now, by the previous part, the inclusion map extends to an isometric embedding on <span class="math notranslate nohighlight">\(X_1,\)</span> that is <span class="math notranslate nohighlight">\(i': X_1 \to X_2.\)</span>
+It remains to show that this is a bijection.
+If <span class="math notranslate nohighlight">\(x \in X_2,\)</span> there exists a sequence in <span class="math notranslate nohighlight">\(X\)</span> that converges to some limit <span class="math notranslate nohighlight">\(a_2.\)</span>
+The same sequence is also in <span class="math notranslate nohighlight">\(X_1\)</span> and, since <span class="math notranslate nohighlight">\(X_1\)</span> is complete, it converges to a unique limit <span class="math notranslate nohighlight">\(a_1.\)</span>
+By the definition of the extension <span class="math notranslate nohighlight">\(i'(a_1) = a_2,\)</span> and since <span class="math notranslate nohighlight">\(a_2\)</span> was arbitrary, this mapping is surjective.
+In addition, by the uniquness of limits <span class="math notranslate nohighlight">\(i'\)</span> is injective.
+Therefore <span class="math notranslate nohighlight">\(i'\)</span> is a bijective isometric embedding.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 2.15</p>
+<p>Show that <span class="math notranslate nohighlight">\(C[0, 1]\)</span> equiped with the uniform metric is complete.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(C[0, 1]\)</span> be the set of continuous functions on <span class="math notranslate nohighlight">\([0, 1]\)</span> equiped with the uniform metric.
+Suppose the sequence <span class="math notranslate nohighlight">\(f_1, f_2, \dots \in C[0, 1]\)</span> is Cauchy.
+We will first show that this sequence converges uniformly to a function <span class="math notranslate nohighlight">\(f.\)</span>
+Then we will show that <span class="math notranslate nohighlight">\(f\)</span> is continuous and therefore in <span class="math notranslate nohighlight">\(C[0, 1].\)</span></p>
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(x \in C[0, 1].\)</span>
+Then <span class="math notranslate nohighlight">\(f_1(x), f_2(x), \dots\)</span> is a Cauchy sequence in <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span>
+Since <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> is complete, <span class="math notranslate nohighlight">\(f_n(x)\)</span> converges to some limit <span class="math notranslate nohighlight">\(\ell_x\)</span> in <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span>
+Let <span class="math notranslate nohighlight">\(f: [0, 1] \to \mathbb{R}\)</span> be <span class="math notranslate nohighlight">\(f(x) = \ell_x.\)</span>
+Because <span class="math notranslate nohighlight">\(x \in [0, 1]\)</span> was arbitrary, the sequence <span class="math notranslate nohighlight">\(f_1, f_2, \dots\)</span> converges pointwise to <span class="math notranslate nohighlight">\(f.\)</span></p>
+<p class="sd-card-text">We now show that <span class="math notranslate nohighlight">\(f_1, f_2, \dots\)</span> converges to <span class="math notranslate nohighlight">\(f\)</span> uniformly.
+Let <span class="math notranslate nohighlight">\(\epsilon &gt; 0.\)</span>
+Since <span class="math notranslate nohighlight">\(f_1, f_2, \dots\)</span> is Cauchy with the uniform metric, there exists <span class="math notranslate nohighlight">\(N \in \mathbb{N}\)</span> such form all <span class="math notranslate nohighlight">\(n, m \geq N,\)</span> and all <span class="math notranslate nohighlight">\(x \in [0, 1],\)</span> it holds that</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+|f_n(x) - f_m(x)| &lt; \frac{\epsilon}{2}
+\end{equation}\]</div>
+<p class="sd-card-text">and taking the limit <span class="math notranslate nohighlight">\(m \to \infty\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+\lim_{m \to \infty} |f_n(x) - f_m(x)| = |f_n(x) - f(x)| \leq \frac{\epsilon}{2} &lt; \epsilon,
+\end{equation}\]</div>
+<p class="sd-card-text">for all <span class="math notranslate nohighlight">\(x \in [0, 1].\)</span>
+Therefore <span class="math notranslate nohighlight">\(f_n \to f\)</span> uniformly.
+Finally, we show that <span class="math notranslate nohighlight">\(f\)</span> is continuous, i.e. that <span class="math notranslate nohighlight">\(f \in C[0, 1].\)</span></p>
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> and fix <span class="math notranslate nohighlight">\(x \in [0, 1].\)</span>
+Since <span class="math notranslate nohighlight">\(f_n \to f\)</span> uniformly and each <span class="math notranslate nohighlight">\(f_n\)</span> is continuous, there exists <span class="math notranslate nohighlight">\(N \in \mathbb{N}\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+|f(x') - f_N(x')| &lt; \frac{\epsilon}{3}
+\end{equation}\]</div>
+<p class="sd-card-text">for all <span class="math notranslate nohighlight">\(x' \in [0, 1].\)</span>
+In addition, since <span class="math notranslate nohighlight">\(f_N\)</span> is continuous, there exists <span class="math notranslate nohighlight">\(\delta\)</span> such that if <span class="math notranslate nohighlight">\(|x - x'| &lt; \delta,\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+|f_N(x') - f_N(x)| &lt; \frac{\epsilon}{3}.
+\end{equation}\]</div>
+<p class="sd-card-text">Putting these together we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+|f(x') - f(x)| &amp;= |f(x') - f_N(x') + f_N(x') - f_N(x) + f_N(x) - f(x)| \\
+&amp;\leq |f(x') - f_N(x')| + |f_N(x') - f_N(x)| + |f_N(x) - f(x)| \\
+&amp;&lt; \epsilon
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">and since <span class="math notranslate nohighlight">\(\epsilon\)</span> was arbitrary, <span class="math notranslate nohighlight">\(f\)</span> is continuous.</p>
 </div>
 </details></div>
 </section>

@@ -73,7 +73,7 @@ We will show that $X \setminus C$ is open.
 
 Suppose $x \in X \setminus C.$
 We will show there exists an open $U \subseteq X \setminus C$ that contains $x.$
-Since $X$ is Hausdorff, for each $y \in C$ there exists an open $W_{xy}$ containing $y$ and an open $U_{xy}$ containing $x$ such that $W_{xy} \cap $U_{xy} = \emptyset.$
+Since $X$ is Hausdorff, for each $y \in C$ there exists an open $W_{xy}$ containing $y$ and an open $U_{xy}$ containing $x$ such that $W_{xy} \cap U_{xy} = \emptyset.$
 Then, the collection $\{W_{xy} \subseteq X: y \in C\}$ is an open cover of $C,$ and since $C$ is compact, it has a finite subcover of the form $\{W_{x_1y}, \dots, W_{x_Ny}\}.$
 Then the set $\cap_{n = 1}^N U_{x_ny}$ is open because it is a finite interesection of open sets, and it does not intersect $C,$ so it is contained in $X \setminus C.$
 Therefore $X \setminus C$ is open and $C$ is closed.
