@@ -120,7 +120,6 @@ A {prf:ref}`metric space<topology:def-metric-space>` $(X, d)$ is bounded if ther
 
 Note that being bounded is not a topological property.
 For example $(0, 1) \simeq \mathbb{R}$ are homeomorphic but $(0, 1)$ is bounded while $\mathbb{R}$ is not.
-
 A useful intermediate result is that a closed metric space is bounded.
 
 :::{prf:lemma} Compact metric spaces are bounded
@@ -170,7 +169,7 @@ The Heine-Borel theorem formalises the earlier point we made about compactness b
 If $A \subseteq \mathbb{R}$ with the standard topology is {prf:ref}`compact<topology:def-compact-space>`, there exists $\alpha \in A$ such that $\alpha \geq a$ for all $a \in A.$
 :::
 
-:::{dropdown} Proof: Compact subsets of $~\mathbb{R}$ have finite upper bounds
+:::{dropdown} Proof: Compact subsets of $~\mathbb{R}~$ have finite upper bounds
 Suppose $A \subseteq \mathbb{R}$ with the standard topology is compact.
 Since $A$ is compact, it is bounded and closed.
 Let $\alpha = \sup A.$
@@ -315,10 +314,16 @@ Finally, since $f$ is a continuous bijection, $X$ is compact and $Y$ is Hausdorf
 
 ## Sequential compactness
 
+We now introduce another notion of compactness, namely sequential compactness.
+
 :::{prf:definition} Sequential compactness
 :label: topology:def-sequentially-compact
 A topological space $X$ is sequentially compact if every sequence in $X$ has a convergent subsequence.
 :::
+
+Roughly speaking, sequential compacness captures the notion that a sequence cannot spread out arbitrarily in a space without having a subsequence that piles up around some point in the space.
+In general, compactness and sequential compactness are different properties, however in a metric space they are equivalent.
+To show this, we use the following intermediate lemma.
 
 :::{prf:lemma} Equivalent condition for convergent subsequence in a metric space
 :label: topology:lem-equivalent-condition-for-convergent-subsequence-in-a-metric-space
@@ -344,6 +349,7 @@ Since $d(x_{n_k}, x) < \frac{1}{n},$ we have that $x_{n_k} \to x.$
 :::
 ::::
 
+We are now ready to show that compactness and sequential compactness are equivalent in metric spaces.
 
 :::{prf:theorem} Compact metric space $\iff$ sequentially compact metric space
 :label: topology:thm-compact-metric-space-iff-sequentially-compact-metric-space
@@ -435,8 +441,9 @@ d(x_l, x) \leq d(x_l, x_{n_k}) + d(x_{n_k}, x) < \epsilon,
 so $x_l$ converges to $x,$ and $X$ is complete.
 :::
 
-The interval $[0, 1]$ is a compact set so by {prf:ref}`topology:lem-compact-metric-spaces-are-complete` it is complete.
-Finally a satisfying result that we will show here is that $\mathbb{R}^n$ is complete.
+The interval $[0, 1]$ is a compact set so it is complete ({prf:ref}`topology:lem-compact-metric-spaces-are-complete`.
+We conclude with a satisfying result that we can show with the ideas developed in the course:
+ $\mathbb{R}^n$ is complete.
 
 :::{prf:lemma} $\mathbb{R}^n$ is complete
 $\mathbb{R}^n$ with the standard topology is complete.
