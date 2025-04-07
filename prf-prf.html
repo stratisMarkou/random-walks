@@ -227,6 +227,7 @@
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="book/lst/000-intro.html">Logic and set theory</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="book/lst/001-propositional-calculus.html">Propositional calculus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="book/lst/002-well-orderings-and-ordinals.html">Well-orderings and ordinals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="book/lst/exercises.html">Exercises</a></li>
 </ul>
 </li>
@@ -401,6 +402,7 @@ document.write(`
    <a href="#cap-corollary-20"><strong>corollary-20</strong></a> | 
    <a href="#cap-def:lst-tautology"><strong>def:lst-tautology</strong></a> | 
    <a href="#cap-definition-0"><strong>definition-0</strong></a> | 
+   <a href="#cap-definition-1"><strong>definition-1</strong></a> | 
    <a href="#cap-definition-10"><strong>definition-10</strong></a> | 
    <a href="#cap-definition-11"><strong>definition-11</strong></a> | 
    <a href="#cap-definition-12"><strong>definition-12</strong></a> | 
@@ -415,9 +417,12 @@ document.write(`
    <a href="#cap-definition-31"><strong>definition-31</strong></a> | 
    <a href="#cap-definition-35"><strong>definition-35</strong></a> | 
    <a href="#cap-definition-36"><strong>definition-36</strong></a> | 
+   <a href="#cap-definition-4"><strong>definition-4</strong></a> | 
    <a href="#cap-definition-5"><strong>definition-5</strong></a> | 
    <a href="#cap-definition-6"><strong>definition-6</strong></a> | 
+   <a href="#cap-definition-7"><strong>definition-7</strong></a> | 
    <a href="#cap-definition-8"><strong>definition-8</strong></a> | 
+   <a href="#cap-definition-9"><strong>definition-9</strong></a> | 
    <a href="#cap-example-1"><strong>example-1</strong></a> | 
    <a href="#cap-example-11"><strong>example-11</strong></a> | 
    <a href="#cap-example-12"><strong>example-12</strong></a> | 
@@ -427,9 +432,11 @@ document.write(`
    <a href="#cap-example-4"><strong>example-4</strong></a> | 
    <a href="#cap-example-5"><strong>example-5</strong></a> | 
    <a href="#cap-example-6"><strong>example-6</strong></a> | 
+   <a href="#cap-example-9"><strong>example-9</strong></a> | 
    <a href="#cap-finite-state-automaton"><strong>finite-state-automaton</strong></a> | 
    <a href="#cap-lemma-0"><strong>lemma-0</strong></a> | 
    <a href="#cap-lemma-11"><strong>lemma-11</strong></a> | 
+   <a href="#cap-lemma-13"><strong>lemma-13</strong></a> | 
    <a href="#cap-lemma-15"><strong>lemma-15</strong></a> | 
    <a href="#cap-lemma-16"><strong>lemma-16</strong></a> | 
    <a href="#cap-lemma-18"><strong>lemma-18</strong></a> | 
@@ -439,15 +446,21 @@ document.write(`
    <a href="#cap-lemma-4"><strong>lemma-4</strong></a> | 
    <a href="#cap-lemma-7"><strong>lemma-7</strong></a> | 
    <a href="#cap-lemma-8"><strong>lemma-8</strong></a> | 
+   <a href="#cap-lemma-9"><strong>lemma-9</strong></a> | 
    <a href="#cap-lst:def-consistent"><strong>lst:def-consistent</strong></a> | 
    <a href="#cap-lst:def-logical-symbols"><strong>lst:def-logical-symbols</strong></a> | 
+   <a href="#cap-lst:def-non-strict-total-order"><strong>lst:def-non-strict-total-order</strong></a> | 
    <a href="#cap-lst:def-proof-and-syntactic-entailment"><strong>lst:def-proof-and-syntactic-entailment</strong></a> | 
    <a href="#cap-lst:def-proof-axioms-and-modus-ponens"><strong>lst:def-proof-axioms-and-modus-ponens</strong></a> | 
    <a href="#cap-lst:def-proposition"><strong>lst:def-proposition</strong></a> | 
    <a href="#cap-lst:def-semantic-entailment"><strong>lst:def-semantic-entailment</strong></a> | 
+   <a href="#cap-lst:def-strict-total-order"><strong>lst:def-strict-total-order</strong></a> | 
    <a href="#cap-lst:def-valuation"><strong>lst:def-valuation</strong></a> | 
+   <a href="#cap-lst:def-well-ordering"><strong>lst:def-well-ordering</strong></a> | 
    <a href="#cap-lst:ex-p-imp-p-is-a-theorem"><strong>lst:ex-p-imp-p-is-a-theorem</strong></a> | 
    <a href="#cap-lst:lem-consistent-assumptions-can-be-extended"><strong>lst:lem-consistent-assumptions-can-be-extended</strong></a> | 
+   <a href="#cap-lst:lem-principle-by-induction"><strong>lst:lem-principle-by-induction</strong></a> | 
+   <a href="#cap-lst:lem-well-ordering-equivalent-condition"><strong>lst:lem-well-ordering-equivalent-condition</strong></a> | 
    <a href="#cap-lst:thm-adequacy-theorem"><strong>lst:thm-adequacy-theorem</strong></a> | 
    <a href="#cap-lst:thm-compactness-theorem"><strong>lst:thm-compactness-theorem</strong></a> | 
    <a href="#cap-lst:thm-completeness-theorem"><strong>lst:thm-completeness-theorem</strong></a> | 
@@ -478,12 +491,16 @@ document.write(`
    <a href="#cap-remark-0"><strong>remark-0</strong></a> | 
    <a href="#cap-remark-13"><strong>remark-13</strong></a> | 
    <a href="#cap-theorem-0"><strong>theorem-0</strong></a> | 
+   <a href="#cap-theorem-1"><strong>theorem-1</strong></a> | 
    <a href="#cap-theorem-10"><strong>theorem-10</strong></a> | 
+   <a href="#cap-theorem-11"><strong>theorem-11</strong></a> | 
    <a href="#cap-theorem-12"><strong>theorem-12</strong></a> | 
    <a href="#cap-theorem-13"><strong>theorem-13</strong></a> | 
    <a href="#cap-theorem-14"><strong>theorem-14</strong></a> | 
    <a href="#cap-theorem-15"><strong>theorem-15</strong></a> | 
+   <a href="#cap-theorem-16"><strong>theorem-16</strong></a> | 
    <a href="#cap-theorem-18"><strong>theorem-18</strong></a> | 
+   <a href="#cap-theorem-2"><strong>theorem-2</strong></a> | 
    <a href="#cap-theorem-21"><strong>theorem-21</strong></a> | 
    <a href="#cap-theorem-22"><strong>theorem-22</strong></a> | 
    <a href="#cap-theorem-26"><strong>theorem-26</strong></a> | 
@@ -500,6 +517,7 @@ document.write(`
    <a href="#cap-theorem-43"><strong>theorem-43</strong></a> | 
    <a href="#cap-theorem-44"><strong>theorem-44</strong></a> | 
    <a href="#cap-theorem-5"><strong>theorem-5</strong></a> | 
+   <a href="#cap-theorem-6"><strong>theorem-6</strong></a> | 
    <a href="#cap-theorem-7"><strong>theorem-7</strong></a> | 
    <a href="#cap-theorem-8"><strong>theorem-8</strong></a> | 
    <a href="#cap-theorem-9"><strong>theorem-9</strong></a> | 
@@ -608,6 +626,14 @@ document.write(`
        <td></td>
        <td>
        <a href="book/topology/004-compactness.html#definition-0"><code class="xref">definition-0</code></a> <em>(book/topology/004-compactness)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-definition-1"><td></td><td>
+       <strong>definition-1</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/003-connectivity.html#definition-1"><code class="xref">definition-1</code></a> <em>(book/topology/003-connectivity)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-10"><td></td><td>
@@ -722,6 +748,14 @@ document.write(`
        <a href="book/mira/002-measures.html#definition-36"><code class="xref">definition-36</code></a> <em>(book/mira/002-measures)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-definition-4"><td></td><td>
+       <strong>definition-4</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/lst/002-well-orderings-and-ordinals.html#definition-4"><code class="xref">definition-4</code></a> <em>(book/lst/002-well-orderings-and-ordinals)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-5"><td></td><td>
        <strong>definition-5</strong></td><td></td></tr>
      <tr>
@@ -735,7 +769,15 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="book/lst/001-propositional-calculus.html#definition-6"><code class="xref">definition-6</code></a> <em>(book/lst/001-propositional-calculus)</em></td><td>
+       <a href="book/toc/002-cfl.html#definition-6"><code class="xref">definition-6</code></a> <em>(book/toc/002-cfl)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-definition-7"><td></td><td>
+       <strong>definition-7</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/toc/002-cfl.html#definition-7"><code class="xref">definition-7</code></a> <em>(book/toc/002-cfl)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-8"><td></td><td>
@@ -744,6 +786,14 @@ document.write(`
        <td></td>
        <td>
        <a href="book/prob-intro/ch08/content.html#definition-8"><code class="xref">definition-8</code></a> <em>(book/prob-intro/ch08/content)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-definition-9"><td></td><td>
+       <strong>definition-9</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/toc/002-cfl.html#definition-9"><code class="xref">definition-9</code></a> <em>(book/toc/002-cfl)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-1"><td></td><td>
@@ -818,6 +868,14 @@ document.write(`
        <a href="book/toc/001-fsa.html#example-6"><code class="xref">example-6</code></a> <em>(book/toc/001-fsa)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-example-9"><td></td><td>
+       <strong>example-9</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/toc/001-fsa.html#example-9"><code class="xref">example-9</code></a> <em>(book/toc/001-fsa)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-finite-state-automaton"><td></td><td>
        <strong>finite-state-automaton</strong></td><td></td></tr>
      <tr>
@@ -840,6 +898,14 @@ document.write(`
        <td></td>
        <td>
        <a href="book/topology/004-compactness.html#lemma-11"><code class="xref">lemma-11</code></a> <em>(book/topology/004-compactness)</em></td><td>
+       <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-lemma-13"><td></td><td>
+       <strong>lemma-13</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/toc/002-cfl.html#lemma-13"><code class="xref">lemma-13</code></a> <em>(book/toc/002-cfl)</em></td><td>
        <em>lemma</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-lemma-15"><td></td><td>
@@ -887,7 +953,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="book/lst/001-propositional-calculus.html#lemma-3"><code class="xref">lemma-3</code></a> <em>(book/lst/001-propositional-calculus)</em></td><td>
+       <a href="book/papers/rff/rff.html#lemma-3"><code class="xref">lemma-3</code></a> <em>(book/papers/rff/rff)</em></td><td>
        <em>lemma</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-lemma-4"><td></td><td>
@@ -914,6 +980,14 @@ document.write(`
        <a href="book/topology/004-compactness.html#lemma-8"><code class="xref">lemma-8</code></a> <em>(book/topology/004-compactness)</em></td><td>
        <em>lemma</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-lemma-9"><td></td><td>
+       <strong>lemma-9</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/topology/003-connectivity.html#lemma-9"><code class="xref">lemma-9</code></a> <em>(book/topology/003-connectivity)</em></td><td>
+       <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-lst:def-consistent"><td></td><td>
        <strong>lst:def-consistent</strong></td><td></td></tr>
      <tr>
@@ -928,6 +1002,14 @@ document.write(`
        <td></td>
        <td>
        <a href="book/lst/001-propositional-calculus.html#lst:def-logical-symbols"><code class="xref">lst:def-logical-symbols</code></a> <em>(book/lst/001-propositional-calculus)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-lst:def-non-strict-total-order"><td></td><td>
+       <strong>lst:def-non-strict-total-order</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/lst/002-well-orderings-and-ordinals.html#lst:def-non-strict-total-order"><code class="xref">lst:def-non-strict-total-order</code></a> <em>(book/lst/002-well-orderings-and-ordinals)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-lst:def-proof-and-syntactic-entailment"><td></td><td>
@@ -962,12 +1044,28 @@ document.write(`
        <a href="book/lst/001-propositional-calculus.html#lst:def-semantic-entailment"><code class="xref">lst:def-semantic-entailment</code></a> <em>(book/lst/001-propositional-calculus)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-lst:def-strict-total-order"><td></td><td>
+       <strong>lst:def-strict-total-order</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/lst/002-well-orderings-and-ordinals.html#lst:def-strict-total-order"><code class="xref">lst:def-strict-total-order</code></a> <em>(book/lst/002-well-orderings-and-ordinals)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-lst:def-valuation"><td></td><td>
        <strong>lst:def-valuation</strong></td><td></td></tr>
      <tr>
        <td></td>
        <td>
        <a href="book/lst/001-propositional-calculus.html#lst:def-valuation"><code class="xref">lst:def-valuation</code></a> <em>(book/lst/001-propositional-calculus)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-lst:def-well-ordering"><td></td><td>
+       <strong>lst:def-well-ordering</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/lst/002-well-orderings-and-ordinals.html#lst:def-well-ordering"><code class="xref">lst:def-well-ordering</code></a> <em>(book/lst/002-well-orderings-and-ordinals)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-lst:ex-p-imp-p-is-a-theorem"><td></td><td>
@@ -984,6 +1082,22 @@ document.write(`
        <td></td>
        <td>
        <a href="book/lst/001-propositional-calculus.html#lst:lem-consistent-assumptions-can-be-extended"><code class="xref">lst:lem-consistent-assumptions-can-be-extended</code></a> <em>(book/lst/001-propositional-calculus)</em></td><td>
+       <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-lst:lem-principle-by-induction"><td></td><td>
+       <strong>lst:lem-principle-by-induction</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/lst/002-well-orderings-and-ordinals.html#lst:lem-principle-by-induction"><code class="xref">lst:lem-principle-by-induction</code></a> <em>(book/lst/002-well-orderings-and-ordinals)</em></td><td>
+       <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-lst:lem-well-ordering-equivalent-condition"><td></td><td>
+       <strong>lst:lem-well-ordering-equivalent-condition</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/lst/002-well-orderings-and-ordinals.html#lst:lem-well-ordering-equivalent-condition"><code class="xref">lst:lem-well-ordering-equivalent-condition</code></a> <em>(book/lst/002-well-orderings-and-ordinals)</em></td><td>
        <em>lemma</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-lst:thm-adequacy-theorem"><td></td><td>
@@ -1226,12 +1340,28 @@ document.write(`
        <a href="book/prob-intro/ch07/content.html#theorem-0"><code class="xref">theorem-0</code></a> <em>(book/prob-intro/ch07/content)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-theorem-1"><td></td><td>
+       <strong>theorem-1</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/prob-intro/ch08/content.html#theorem-1"><code class="xref">theorem-1</code></a> <em>(book/prob-intro/ch08/content)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-theorem-10"><td></td><td>
        <strong>theorem-10</strong></td><td></td></tr>
      <tr>
        <td></td>
        <td>
        <a href="book/toc/001-fsa.html#theorem-10"><code class="xref">theorem-10</code></a> <em>(book/toc/001-fsa)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-theorem-11"><td></td><td>
+       <strong>theorem-11</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/prob-intro/ch08/content.html#theorem-11"><code class="xref">theorem-11</code></a> <em>(book/prob-intro/ch08/content)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-theorem-12"><td></td><td>
@@ -1266,12 +1396,28 @@ document.write(`
        <a href="book/toc/001-fsa.html#theorem-15"><code class="xref">theorem-15</code></a> <em>(book/toc/001-fsa)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-theorem-16"><td></td><td>
+       <strong>theorem-16</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/prob-intro/ch07/content.html#theorem-16"><code class="xref">theorem-16</code></a> <em>(book/prob-intro/ch07/content)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-theorem-18"><td></td><td>
        <strong>theorem-18</strong></td><td></td></tr>
      <tr>
        <td></td>
        <td>
        <a href="book/mira/002-measures.html#theorem-18"><code class="xref">theorem-18</code></a> <em>(book/mira/002-measures)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-theorem-2"><td></td><td>
+       <strong>theorem-2</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/prob-intro/ch06/content.html#theorem-2"><code class="xref">theorem-2</code></a> <em>(book/prob-intro/ch06/content)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-theorem-21"><td></td><td>
@@ -1400,6 +1546,14 @@ document.write(`
        <td></td>
        <td>
        <a href="book/topology/003-connectivity.html#theorem-5"><code class="xref">theorem-5</code></a> <em>(book/topology/003-connectivity)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-theorem-6"><td></td><td>
+       <strong>theorem-6</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/prob-intro/ch08/content.html#theorem-6"><code class="xref">theorem-6</code></a> <em>(book/prob-intro/ch08/content)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-theorem-7"><td></td><td>
