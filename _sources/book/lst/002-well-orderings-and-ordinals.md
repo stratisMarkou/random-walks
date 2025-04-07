@@ -18,7 +18,7 @@ $\newcommand{\imp}{\Rightarrow}$
 Given a set $X,$ a strict total order or linear order is a pair $(X, <),$ where $X$ is a set and $<$ is a relation on $X$ that satisfies
 
 1. $x \not < x$ for all $x \in X.$
-2. If $x < y, y < z,$ then $x < z for all $x, y, z \in X.$
+2. If $x < y, y < z,$ then $x < z$ for all $x, y, z \in X.$
 3. $x < y$ or $x = y$ or $y < x$ for all $x, y \in X.$
 
 We use the shorthand $x > y$ meaning $y < x.$
