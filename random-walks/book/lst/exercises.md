@@ -24,7 +24,7 @@ __Proposition 1:__
 This is a tautology because the only way a valuation of this proposition can be false is if
 
 $$\begin{align}
-v(p_1 \imp (p_2 \imp p_3)) &= 1,
+v(p_1 \imp (p_2 \imp p_3)) &= 1, \\
 v(p_2 \imp (p_1 \imp p_3)) &= 0.
 \end{align}$$
 
