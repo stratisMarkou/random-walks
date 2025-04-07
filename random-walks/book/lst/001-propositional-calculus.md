@@ -1,9 +1,17 @@
 # Propositional calculus
 
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<a class="github-button" href="https://github.com/stratisMarkou/random-walks" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" aria-label="Star stratisMarkou/random-walks on GitHub">Star</a>
+<a class="github-button" href="https://github.com/stratisMarkou/random-walks/issues" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-issue-opened" data-size="large" aria-label="Issue stratisMarkou/random-walks on GitHub">Issue</a>
+<a class="github-button" href="https://github.com/stratisMarkou/random-walks/subscription" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-eye" data-size="large" aria-label="Watch stratisMarkou/random-walks on GitHub">Watch</a>
+<a class="github-button" href="https://github.com/stratisMarkou" data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large" aria-label="Follow @stratisMarkou on GitHub">Follow</a>
+
 $\newcommand{\vd}{\vdash}$
 $\newcommand{\dvd}{\models}$
 $\newcommand{\imp}{\Rightarrow}$
 
+First, we define propositions.
+A primitive proposition should be regarded simply as a symbol, e.g. $p, q$ or $r,$ which can be combined with other symbols using a special $\imp$ symbol, to obtain new composite propositions.
 
 :::{prf:definition} Proposition
 :label: lst:def-proposition
@@ -23,6 +31,9 @@ L_{n+1} &= L_n \cup \{(p \imp q): p, q \in L_n\}
 
 and $L = L_0 \cup L_1 \cup L_2 \cup \dots.$
 :::
+
+
+We now define logical symbols, which should be understood as shorthand for particular propositions that are written in terms of the $\perp$ and $\imp$ symbols.
 
 :::{margin}
 One way to read the definition of $\neg$ is as follows.
@@ -45,7 +56,8 @@ where $p, q \in L.$
 
 ## Semantic entailment
 
-Semantic entailment assigns truth values to propositions, where we declare each proposition to either be "true" or "false" according to a _valuation_.
+By themselves, propositions are meaningless.
+Semantic entailment assigns truth values to propositions, where we declare each proposition to either be "true" or "false" according to a _valuation function_.
 
 :::{prf:definition} Valuation
 :label: lst:def-valuation
@@ -60,6 +72,8 @@ v(\perp) = 0,~~ v(p \imp q) = \begin{cases}
 :::
 
 We interpret $v(p)$ to be the truth value of $p,$ with $0$ and $1$ denoting "false" and "true" respectively.
+A valuation is uniquely determined by the value it takes on the primitive propositions, since all other propositions in the language are constructed from the primitive ones.
+In addition, given the values of a valuation function on the primitive propositions, we can extend this to a (unique) valuation on the entire language.
 
 :::{prf:lemma} Equivalent valuations and extension to valuation
 Suppose $P$ is a set of primitive propositions, and $L$ is the set of propositions derived from it.
@@ -87,6 +101,8 @@ We then define $v$ inductively on $L_n$ according to {prf:ref}`lst:def-valuation
 :::
 
 
+We now define the notion of tautology, i.e. a proposition that is true under all possible valuations on the primitive propositions.
+
 :::{prf:definition} Tautology
 :label: def:lst-tautology
 We say $t$ is a tautology, written $\models t,$ if $v(t) = 1$ for any valuation $v: L \to \{0, 1\}.$
@@ -95,6 +111,10 @@ We say $t$ is a tautology, written $\models t,$ if $v(t) = 1$ for any valuation 
 To show that a statement is a tautology, we can use a [truth table](https://en.wikipedia.org/wiki/Truth_table), which is a big table that summarises the value that a valuation function takes on each proposition for each inductive step.
 We can write out all possible starting combinations of truth values on $P,$ and the resulting propositions in $L,$ until we determine the value of the proposition we are after.
 If the value of this proposition is true for any starting combination of truth values of $P,$ then it is a tautology.
+
+
+We can now define semantic entailment.
+Informally a set of propositions $S$ (the assumptions) entails a proposition $t$ if for any valuation that is true on the assumptions is also true on $t.$
 
 :::{margin}
 Note that here we have reused the symbol $\models$ that we introduced in our definition of {prf:ref}`tautology<def:lst-tautology>`.
@@ -105,23 +125,36 @@ This is not really an abuse of notation because the statement $\models t$ is equ
 For $S \subseteq L, t \in L$ we say $S$ entails $t,$ $S$ semantically implies $t$ or $S \models t,$ if for any $v$ such that $v(s) = 1$ for all $s \in S,$ we have $v(t) = 1.$
 :::
 
+
+We define truth of a proposition under a valuation function, in terms of the value that this takes on the proposition.
+
 :::{prf:definition} Truth and model
 If $v(t) = 1,$ then we say that $t$ is true in $v,$ or $v$ is a model of $t.$
 For $S \subseteq L,$ a valuation $v$ is a model of $S$ if $v(s) = 1$ for all $s \in S.$
 :::
 
+
 ## Syntactic implication
+The second notion we study is syntactic valuation.
+While semantic implication captures the idea of truthfulness, syntactic implication captures the idea of a proof.
+We will set up our definitions so that a set of propositions $S$ (the assumptions) syntactically implies a proposition $t$ if there is a proof of $t$ from $S.$
+We have not yet defined a notion of proof though.
+A proof will turn out to be a finite sequence of propositions with some particular requirements.
+Before defining proofs we define the proof axioms and the _modus ponens_ rule.
 
 :::{prf:definition} Proof axioms and modus ponens
 :label: lst:def-proof-axioms-and-modus-ponens
-We define the following three statements as the proof axioms
+We define the following three proof axioms
 1. $p \imp (q \imp p),$
-2. $(p \imp (q \imp r)) \imp ((p \imp q) \imp (q \imp r)),$
+2. $(p \imp (q \imp r)) \imp ((p \imp q) \imp (p \imp r)),$
 3. $(\neg \neg p) \imp p.$
 
 We define the deduction rule of _modus ponens_ as:
 from $p$ and $p \imp q$ we can deduce $q.$
 :::
+
+
+We can now define proofs and syntactic entailment.
 
 :::{prf:definition} Proof and syntactic entailment
 :label: lst:def-proof-and-syntactic-entailment
@@ -149,6 +182,9 @@ We have that $\vd p \imp p,$ that is, $p \imp p$ is a theorem.
 :::
 ::::
 
+
+Generally, writing proofs as that in {prf:ref}`lst:ex-p-imp-p-is-a-theorem` can get cumbersome.
+The following theorem can help a lot to shorten our informal proofs.
 
 :::{prf:theorem} Deduction theorem
 :label: lst:thm-deduction-theorem
@@ -205,6 +241,21 @@ We can write down
 :::
 
 
+## Completeness
+
+Here we show one of the main results of this section.
+We will show that semantic entailment is equivalent to syntactic entailment.
+In other words, a proposition is semantically entailed by a set of assumptions if and only if it can be proved from those assumptions.
+We will break down this proof into two parts:
+the soundness theorem and the adequacy theorem.
+
+
+### Soundness
+The soundness theorem shows that syntactic entailment implies semantic entailment.
+It is called the soundness theorem because it demonstrates that our proof axioms are sound:
+if a {ref:prf}`proof<lst:def-proof-and-syntactic-entailment>` of a proposition exists, then this proposition is true under our notion of {prf:ref}`semantic entailment<lst:def-semantic-entailment>`.
+In other words, we can prove only those propositions that are true.
+
 :::{prf:theorem} Soundness theorem
 :label: lst:thm-soundness-theorem
 If $S \vd t,$ then $S \dvd t.$
@@ -216,7 +267,7 @@ Then, there exists a proof $t_1, \dots, t_n$ of $t$ from $S.$
 Now, suppose that $v: L \to \{0, 1\}$ is a valuation with $v(s) = 1$ for all $s \in S.$
 We will show that $v(t_i) = 1$ for all $t_i$ in the proof.
 
-If $t_i$ is an {prf:ref}`axiom<lst:def-proof-axioms-and-modus-ponens>`, then $v(t_i) = 1$ because all three axioms are tautologies.
+If $t_i$ is an {prf:ref}`axiom<lst:def-proof-axioms-and-modus-ponens>`, then $v(t_i) = 1$ because all three axioms are {prf:ref}`tautologies<lst:def-tautology>`.
 If $t_i$ is a hypothesis, then $t_i \in S$ and $v(t_i) = 1$ by assumption.
 If $t_i$ has been obtained by {prf:ref}`modus ponens<lst:def-proof-axioms-and-modus-ponens>`, then there are some $j, k < i$ such that $t_k = t_j \imp t_i.$
 This means that $v(t_j) = 1$ and $v(t_j \imp t_i) = 1$ so we must have $v(t_i) = 1.$
@@ -226,13 +277,24 @@ Therefore $S \dvd t.$
 :::
 
 
+### Adequacy
+The second part of the completeness theorem is the adequacy, which shows that semantic implication implies syntactic implication.
+It is called the adequacy theorem because it shows that our definition of {ref:prf}`proof<lst:def-proof-and-syntactic-entailment>` is adequate for capturing all logical truths in the system:
+if a proposition is true, then there exists a (formal) proof for it, so our definition of proof is adequate for proving all logical truths.
+
+This is a bit more involved than the soundness theorem.
+We break this down into intermediate results.
+First, we define consistent propositions.
+
 :::{prf:definition} Consistent
 :label: lst:def-consistent
-$S$ is inconsistent if $S \vd \perp.$
+A set of propositions $S \subseteq L$ is inconsistent if $S \vd \perp.$
 S is consistent if it is not inconsistent.
 :::
 
 
+Next, we show the following useful lemma.
+Given a set of consistent assumptions and a new proposition $p,$ then at least one of $p$ and $\neg p$ can be added to the propositions while preserving consistency.
 
 :::{prf:lemma} Consistent assumptions can be extended
 :label: lst:lem-consistent-assumptions-can-be-extended
@@ -248,6 +310,10 @@ Note that $(\neg p) = p \imp \perp,$ and using {prf:ref}`modus ponens<lst:def-pr
 Therefore $S$ is inconsistent which is a contradiction, and at least one of $S \cup \{p\}$ and $S \cup \{\neg p\}$ has to be consistent.
 :::
 
+
+Now we show the main intermediate result for proving adequacy.
+If a set of assumptions is consistent, then it has a model.
+Equivalently, if it does not have a model, then it is inconsistent.
 
 :::{prf:theorem} Model existence
 :label: lst:thm-model-existence
@@ -327,6 +393,8 @@ So $S$ has a model.
 :::
 
 
+We can now use the {prf:ref}`model existence theorem<lst:thm-model-existence>` to prove the adequacy theorem.
+
 :::{prf:theorem} Adequacy theorem
 :label: lst:thm-adequacy-theorem
 Let $S \subseteq L, t \in L.$
@@ -337,13 +405,17 @@ Then $S \models t$ implies $S \vd t.$
 Let $S \subseteq L, t \in L.$
 Suppose $S \models t.$
 Then $S \cup \{\neg t\} \models \perp.$
-By the model existence theorem, this means that $S \cup \{\neg t\} \vd \perp.$
-By the deduction theorem, we have $S \vd \neg t \implies \perp.$
-By the definition of negation we have $S \vd \neg \neg t,$ and by axiom 3 we have $S \vd t.$
+By the {prf:ref}`model existence theorem<lst:thm-model-existence>`, this means that $S \cup \{\neg t\} \vd \perp.$
+By the {prf:ref}`deduction theorem<lst:thm-deduction-theorem>`, we have $S \vd \neg t \implies \perp.$
+By the {prf:ref}`definition of negation<lst:def-logical-symbols>` we have $S \vd \neg \neg t,$ and by {prf:ref}`axiom 3<lst:def-proof-axioms-and-modus-ponens>` we have $S \vd t.$
 :::
 
 
+### Completeness and compactness
+We can now combine the soundness and adequacy theorems to prove the completness theorem.
+
 :::{prf:theorem} Completeness theorem
+:label: lst:thm-completeness-theorem
 Let $S \subseteq L$ and $t \in L.$
 Then $S \models t$ if and only if $S \vd t.$
 :::
@@ -359,6 +431,9 @@ If $S \vd t,$ then $S \models t$ by {prf:ref}`lst:thm-soundness-theorem`.
 :::
 
 
+A useful corollary of the completeness theorem is the compactness theorem.
+This says that for any logical truth, there is a finite set of assumptions that proves it.
+
 :::{prf:theorem} Compactness theorem
 :label: lst:thm-compactness-theorem
 Let $S \subseteq L$ and $t \in L$ with $S \models t.$
@@ -367,10 +442,13 @@ Then, there is some finite $S' \subseteq S$ with $S' \models t.$
 
 :::{dropdown} Proof: Compactness theorem
 Let $S \subseteq L$ and $t \in L$ with $S \models t.$
-By the completeness theorem, $S \vd t.$
+By the {prf:ref}`completeness theorem<lst:thm-completeness-theorem>`, $S \vd t.$
 Since proofs are finite, there exists a finite subset of assumptions $S' \subseteq S$ which proves $t,$ so $S' \vd t.$
 Applying the completeness theorem again, we have $S' \models t.$
 :::
+
+Another useful corollary of the completeness theorem is the decidability theorem.
+This says that given a finite set of assumptions and a proposition, there exists a procedure that determines whether this statement can be proved from the assumptions, in finite time.
 
 :::{prf:theorem} Decidability theorem
 :label: lst:thm-decidability-theorem
@@ -380,6 +458,6 @@ Then, there exists an algorithm that determines, in finite and bounded time, whe
 
 :::{dropdown} Proof: Decidability theorem
 Let $S \subseteq L$ be a finite set and $t \in L.$
-By the completeness theorem, we have $S \vd t$ if and only if $S \models t.$
+By the {prf:ref}`completeness theorem<lst:thm-completeness-theorem>`, we have $S \vd t$ if and only if $S \models t.$
 We can check $S \models t$ by making a truth table for $t.$
 :::
