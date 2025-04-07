@@ -223,6 +223,7 @@
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../lst/000-intro.html">Logic and set theory</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../lst/001-propositional-calculus.html">Propositional calculus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../lst/exercises.html">Exercises</a></li>
 </ul>
 </li>
 </ul>
@@ -491,7 +492,7 @@ z = T(x),~~\text{ where } x \sim q(x).
 <h3>Direction of steepest descent<a class="headerlink" href="#direction-of-steepest-descent" title="Link to this heading">#</a></h3>
 <p>Let us use the subscript notation <span class="math notranslate nohighlight">\(q_{[T]}\)</span> to denote the distribution obtained by passing <span class="math notranslate nohighlight">\(q\)</span> through <span class="math notranslate nohighlight">\(T\)</span>. Then we are interested in picking a <span class="math notranslate nohighlight">\(T\)</span> which minimises <span class="math notranslate nohighlight">\(\text{KL}(q_{[T]} || p)\)</span>. First, we compute the derivative of the KL w.r.t. <span class="math notranslate nohighlight">\(\epsilon\)</span>, which we obtain in closed form.</p>
 <div class="proof theorem admonition" id="theorem-0">
-<p class="admonition-title"><span class="caption-number">Theorem 100 </span> (Proof: Gradient of KL is the KSD)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 107 </span> (Proof: Gradient of KL is the KSD)</p>
 <section class="theorem-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(x \sim q(x)\)</span>, and <span class="math notranslate nohighlight">\(T(x) = x + \epsilon \phi(x)\)</span>, where <span class="math notranslate nohighlight">\(\phi\)</span> is a smooth function. Then</p>
 <div class="math notranslate nohighlight">
@@ -559,7 +560,7 @@ Gradient of KL is the KSD<div class="sd-summary-down docutils">
 \end{align}\]</div>
 <p>If we now constrain <span class="math notranslate nohighlight">\(\phi \in \mathcal{H}_D\)</span> and <span class="math notranslate nohighlight">\(|| \phi ||_{\mathcal{H}_D} \leq 1\)</span> we obtain<span id="id2">[<a class="reference internal" href="#id13" title="Qiang Liu, Jason Lee, and Michael Jordan. A kernelized stein discrepancy for goodness-of-fit tests. In International conference on machine learning, 276–284. PMLR, 2016.">Liu <em>et al.</em>, 2016</a>]</span> the following analytic expression for the direction of steepest descent.</p>
 <div class="proof theorem admonition" id="theorem-1">
-<p class="admonition-title"><span class="caption-number">Theorem 101 </span> (Direction of steepest descent)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 108 </span> (Direction of steepest descent)</p>
 <section class="theorem-content" id="proof-content">
 <p>The function <span class="math notranslate nohighlight">\(\phi^* \in \mathcal{H}_D, || \phi^* ||_{\mathcal{H}_D} \leq 1\)</span> which maximises the rate of decrease KL-divergence is</p>
 <div class="math notranslate nohighlight">
@@ -590,7 +591,7 @@ Proof: Direction of steepest descent<div class="sd-summary-down docutils">
 <h3>Empirical approximation<a class="headerlink" href="#empirical-approximation" title="Link to this heading">#</a></h3>
 <p>Now, if we approximate <span class="math notranslate nohighlight">\(q\)</span> by a finite set of <span class="math notranslate nohighlight">\(N\)</span> particles at locations <span class="math notranslate nohighlight">\(x_n^{(i)}, n = 1, ..., N\)</span>, at the <span class="math notranslate nohighlight">\(i^{th}\)</span> iteration, we obtain at the following iterative algorithm.</p>
 <div class="proof definition admonition" id="definition-2">
-<p class="admonition-title"><span class="caption-number">Definition 123 </span> (Stein variational gradient descent)</p>
+<p class="admonition-title"><span class="caption-number">Definition 124 </span> (Stein variational gradient descent)</p>
 <section class="definition-content" id="proof-content">
 <p>Given a distribution <span class="math notranslate nohighlight">\(p(x)\)</span>, a postive definite kernel <span class="math notranslate nohighlight">\(k(x, x')\)</span> and a set of particles with initial positions <span class="math notranslate nohighlight">\(\{x_n^{(0)}\}_{n=1}^N\)</span>, Stein variational gradient descent evolves the particles according to</p>
 <div class="math notranslate nohighlight">

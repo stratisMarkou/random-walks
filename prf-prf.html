@@ -227,6 +227,7 @@
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="book/lst/000-intro.html">Logic and set theory</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="book/lst/001-propositional-calculus.html">Propositional calculus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="book/lst/exercises.html">Exercises</a></li>
 </ul>
 </li>
 </ul>
@@ -399,7 +400,7 @@ document.write(`
    <a href="#cap-algorithm-19"><strong>algorithm-19</strong></a> | 
    <a href="#cap-corollary-20"><strong>corollary-20</strong></a> | 
    <a href="#cap-def:lst-tautology"><strong>def:lst-tautology</strong></a> | 
-   <a href="#cap-definition-1"><strong>definition-1</strong></a> | 
+   <a href="#cap-definition-0"><strong>definition-0</strong></a> | 
    <a href="#cap-definition-10"><strong>definition-10</strong></a> | 
    <a href="#cap-definition-11"><strong>definition-11</strong></a> | 
    <a href="#cap-definition-12"><strong>definition-12</strong></a> | 
@@ -426,11 +427,9 @@ document.write(`
    <a href="#cap-example-4"><strong>example-4</strong></a> | 
    <a href="#cap-example-5"><strong>example-5</strong></a> | 
    <a href="#cap-example-6"><strong>example-6</strong></a> | 
-   <a href="#cap-example-9"><strong>example-9</strong></a> | 
    <a href="#cap-finite-state-automaton"><strong>finite-state-automaton</strong></a> | 
    <a href="#cap-lemma-0"><strong>lemma-0</strong></a> | 
    <a href="#cap-lemma-11"><strong>lemma-11</strong></a> | 
-   <a href="#cap-lemma-13"><strong>lemma-13</strong></a> | 
    <a href="#cap-lemma-15"><strong>lemma-15</strong></a> | 
    <a href="#cap-lemma-16"><strong>lemma-16</strong></a> | 
    <a href="#cap-lemma-18"><strong>lemma-18</strong></a> | 
@@ -440,12 +439,22 @@ document.write(`
    <a href="#cap-lemma-4"><strong>lemma-4</strong></a> | 
    <a href="#cap-lemma-7"><strong>lemma-7</strong></a> | 
    <a href="#cap-lemma-8"><strong>lemma-8</strong></a> | 
-   <a href="#cap-lemma-9"><strong>lemma-9</strong></a> | 
+   <a href="#cap-lst:def-consistent"><strong>lst:def-consistent</strong></a> | 
+   <a href="#cap-lst:def-logical-symbols"><strong>lst:def-logical-symbols</strong></a> | 
    <a href="#cap-lst:def-proof-and-syntactic-entailment"><strong>lst:def-proof-and-syntactic-entailment</strong></a> | 
    <a href="#cap-lst:def-proof-axioms-and-modus-ponens"><strong>lst:def-proof-axioms-and-modus-ponens</strong></a> | 
    <a href="#cap-lst:def-proposition"><strong>lst:def-proposition</strong></a> | 
    <a href="#cap-lst:def-semantic-entailment"><strong>lst:def-semantic-entailment</strong></a> | 
    <a href="#cap-lst:def-valuation"><strong>lst:def-valuation</strong></a> | 
+   <a href="#cap-lst:ex-p-imp-p-is-a-theorem"><strong>lst:ex-p-imp-p-is-a-theorem</strong></a> | 
+   <a href="#cap-lst:lem-consistent-assumptions-can-be-extended"><strong>lst:lem-consistent-assumptions-can-be-extended</strong></a> | 
+   <a href="#cap-lst:thm-adequacy-theorem"><strong>lst:thm-adequacy-theorem</strong></a> | 
+   <a href="#cap-lst:thm-compactness-theorem"><strong>lst:thm-compactness-theorem</strong></a> | 
+   <a href="#cap-lst:thm-completeness-theorem"><strong>lst:thm-completeness-theorem</strong></a> | 
+   <a href="#cap-lst:thm-decidability-theorem"><strong>lst:thm-decidability-theorem</strong></a> | 
+   <a href="#cap-lst:thm-deduction-theorem"><strong>lst:thm-deduction-theorem</strong></a> | 
+   <a href="#cap-lst:thm-model-existence"><strong>lst:thm-model-existence</strong></a> | 
+   <a href="#cap-lst:thm-soundness-theorem"><strong>lst:thm-soundness-theorem</strong></a> | 
    <a href="#cap-mira-bounds-on-riemann-integral"><strong>mira-bounds-on-riemann-integral</strong></a> | 
    <a href="#cap-mira-eg-not-riemann-integrable"><strong>mira-eg-not-riemann-integrable</strong></a> | 
    <a href="#cap-mira-thm-condition-measurable"><strong>mira-thm-condition-measurable</strong></a> | 
@@ -474,7 +483,6 @@ document.write(`
    <a href="#cap-theorem-13"><strong>theorem-13</strong></a> | 
    <a href="#cap-theorem-14"><strong>theorem-14</strong></a> | 
    <a href="#cap-theorem-15"><strong>theorem-15</strong></a> | 
-   <a href="#cap-theorem-16"><strong>theorem-16</strong></a> | 
    <a href="#cap-theorem-18"><strong>theorem-18</strong></a> | 
    <a href="#cap-theorem-21"><strong>theorem-21</strong></a> | 
    <a href="#cap-theorem-22"><strong>theorem-22</strong></a> | 
@@ -594,12 +602,12 @@ document.write(`
        <a href="book/lst/001-propositional-calculus.html#def:lst-tautology"><code class="xref">def:lst-tautology</code></a> <em>(book/lst/001-propositional-calculus)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-definition-1"><td></td><td>
-       <strong>definition-1</strong></td><td></td></tr>
+     <tr class="cap" id="cap-definition-0"><td></td><td>
+       <strong>definition-0</strong></td><td></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="book/lst/001-propositional-calculus.html#definition-1"><code class="xref">definition-1</code></a> <em>(book/lst/001-propositional-calculus)</em></td><td>
+       <a href="book/topology/004-compactness.html#definition-0"><code class="xref">definition-0</code></a> <em>(book/topology/004-compactness)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-10"><td></td><td>
@@ -810,14 +818,6 @@ document.write(`
        <a href="book/toc/001-fsa.html#example-6"><code class="xref">example-6</code></a> <em>(book/toc/001-fsa)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-example-9"><td></td><td>
-       <strong>example-9</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="book/toc/001-fsa.html#example-9"><code class="xref">example-9</code></a> <em>(book/toc/001-fsa)</em></td><td>
-       <em>example</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-finite-state-automaton"><td></td><td>
        <strong>finite-state-automaton</strong></td><td></td></tr>
      <tr>
@@ -840,14 +840,6 @@ document.write(`
        <td></td>
        <td>
        <a href="book/topology/004-compactness.html#lemma-11"><code class="xref">lemma-11</code></a> <em>(book/topology/004-compactness)</em></td><td>
-       <em>lemma</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-lemma-13"><td></td><td>
-       <strong>lemma-13</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="book/toc/002-cfl.html#lemma-13"><code class="xref">lemma-13</code></a> <em>(book/toc/002-cfl)</em></td><td>
        <em>lemma</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-lemma-15"><td></td><td>
@@ -922,13 +914,21 @@ document.write(`
        <a href="book/topology/004-compactness.html#lemma-8"><code class="xref">lemma-8</code></a> <em>(book/topology/004-compactness)</em></td><td>
        <em>lemma</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-lemma-9"><td></td><td>
-       <strong>lemma-9</strong></td><td></td></tr>
+     <tr class="cap" id="cap-lst:def-consistent"><td></td><td>
+       <strong>lst:def-consistent</strong></td><td></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="book/lst/001-propositional-calculus.html#lemma-9"><code class="xref">lemma-9</code></a> <em>(book/lst/001-propositional-calculus)</em></td><td>
-       <em>lemma</em></td></tr>
+       <a href="book/lst/001-propositional-calculus.html#lst:def-consistent"><code class="xref">lst:def-consistent</code></a> <em>(book/lst/001-propositional-calculus)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-lst:def-logical-symbols"><td></td><td>
+       <strong>lst:def-logical-symbols</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/lst/001-propositional-calculus.html#lst:def-logical-symbols"><code class="xref">lst:def-logical-symbols</code></a> <em>(book/lst/001-propositional-calculus)</em></td><td>
+       <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-lst:def-proof-and-syntactic-entailment"><td></td><td>
        <strong>lst:def-proof-and-syntactic-entailment</strong></td><td></td></tr>
@@ -969,6 +969,78 @@ document.write(`
        <td>
        <a href="book/lst/001-propositional-calculus.html#lst:def-valuation"><code class="xref">lst:def-valuation</code></a> <em>(book/lst/001-propositional-calculus)</em></td><td>
        <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-lst:ex-p-imp-p-is-a-theorem"><td></td><td>
+       <strong>lst:ex-p-imp-p-is-a-theorem</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/lst/001-propositional-calculus.html#lst:ex-p-imp-p-is-a-theorem"><code class="xref">lst:ex-p-imp-p-is-a-theorem</code></a> <em>(book/lst/001-propositional-calculus)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-lst:lem-consistent-assumptions-can-be-extended"><td></td><td>
+       <strong>lst:lem-consistent-assumptions-can-be-extended</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/lst/001-propositional-calculus.html#lst:lem-consistent-assumptions-can-be-extended"><code class="xref">lst:lem-consistent-assumptions-can-be-extended</code></a> <em>(book/lst/001-propositional-calculus)</em></td><td>
+       <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-lst:thm-adequacy-theorem"><td></td><td>
+       <strong>lst:thm-adequacy-theorem</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/lst/001-propositional-calculus.html#lst:thm-adequacy-theorem"><code class="xref">lst:thm-adequacy-theorem</code></a> <em>(book/lst/001-propositional-calculus)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-lst:thm-compactness-theorem"><td></td><td>
+       <strong>lst:thm-compactness-theorem</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/lst/001-propositional-calculus.html#lst:thm-compactness-theorem"><code class="xref">lst:thm-compactness-theorem</code></a> <em>(book/lst/001-propositional-calculus)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-lst:thm-completeness-theorem"><td></td><td>
+       <strong>lst:thm-completeness-theorem</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/lst/001-propositional-calculus.html#lst:thm-completeness-theorem"><code class="xref">lst:thm-completeness-theorem</code></a> <em>(book/lst/001-propositional-calculus)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-lst:thm-decidability-theorem"><td></td><td>
+       <strong>lst:thm-decidability-theorem</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/lst/001-propositional-calculus.html#lst:thm-decidability-theorem"><code class="xref">lst:thm-decidability-theorem</code></a> <em>(book/lst/001-propositional-calculus)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-lst:thm-deduction-theorem"><td></td><td>
+       <strong>lst:thm-deduction-theorem</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/lst/001-propositional-calculus.html#lst:thm-deduction-theorem"><code class="xref">lst:thm-deduction-theorem</code></a> <em>(book/lst/001-propositional-calculus)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-lst:thm-model-existence"><td></td><td>
+       <strong>lst:thm-model-existence</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/lst/001-propositional-calculus.html#lst:thm-model-existence"><code class="xref">lst:thm-model-existence</code></a> <em>(book/lst/001-propositional-calculus)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-lst:thm-soundness-theorem"><td></td><td>
+       <strong>lst:thm-soundness-theorem</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="book/lst/001-propositional-calculus.html#lst:thm-soundness-theorem"><code class="xref">lst:thm-soundness-theorem</code></a> <em>(book/lst/001-propositional-calculus)</em></td><td>
+       <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-mira-bounds-on-riemann-integral"><td></td><td>
        <strong>mira-bounds-on-riemann-integral</strong></td><td></td></tr>
@@ -1192,14 +1264,6 @@ document.write(`
        <td></td>
        <td>
        <a href="book/toc/001-fsa.html#theorem-15"><code class="xref">theorem-15</code></a> <em>(book/toc/001-fsa)</em></td><td>
-       <em>theorem</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-theorem-16"><td></td><td>
-       <strong>theorem-16</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="book/prob-intro/ch07/content.html#theorem-16"><code class="xref">theorem-16</code></a> <em>(book/prob-intro/ch07/content)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-theorem-18"><td></td><td>

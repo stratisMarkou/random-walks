@@ -78,7 +78,7 @@
     <link rel="icon" href="../../_static/dicefav.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Stream of papers" href="../papers/intro.html" />
+    <link rel="next" title="Exercises" href="exercises.html" />
     <link rel="prev" title="Logic and set theory" href="000-intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -223,6 +223,7 @@
 </li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="000-intro.html">Logic and set theory</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Propositional calculus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises.html">Exercises</a></li>
 </ul>
 </li>
 </ul>
@@ -436,6 +437,12 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#semantic-entailment">Semantic entailment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#syntactic-implication">Syntactic implication</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#completeness">Completeness</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#soundness">Soundness</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adequacy">Adequacy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#completeness-and-compactness">Completeness and compactness</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -449,6 +456,16 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="propositional-calculus">
 <h1>Propositional calculus<a class="headerlink" href="#propositional-calculus" title="Link to this heading">#</a></h1>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<p><a class="github-button" href="https://github.com/stratisMarkou/random-walks" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" aria-label="Star stratisMarkou/random-walks on GitHub">Star</a>
+<a class="github-button" href="https://github.com/stratisMarkou/random-walks/issues" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-issue-opened" data-size="large" aria-label="Issue stratisMarkou/random-walks on GitHub">Issue</a>
+<a class="github-button" href="https://github.com/stratisMarkou/random-walks/subscription" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-eye" data-size="large" aria-label="Watch stratisMarkou/random-walks on GitHub">Watch</a>
+<a class="github-button" href="https://github.com/stratisMarkou" data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large" aria-label="Follow @stratisMarkou on GitHub">Follow</a></p>
+<p><span class="math notranslate nohighlight">\(\newcommand{\vd}{\vdash}\)</span>
+<span class="math notranslate nohighlight">\(\newcommand{\dvd}{\models}\)</span>
+<span class="math notranslate nohighlight">\(\newcommand{\imp}{\Rightarrow}\)</span></p>
+<p>First, we define propositions.
+A primitive proposition should be regarded simply as a symbol, e.g. <span class="math notranslate nohighlight">\(p, q\)</span> or <span class="math notranslate nohighlight">\(r,\)</span> which can be combined with other symbols using a special <span class="math notranslate nohighlight">\(\imp\)</span> symbol, to obtain new composite propositions.</p>
 <div class="proof definition admonition" id="lst:def-proposition">
 <p class="admonition-title"><span class="caption-number">Definition 111 </span> (Proposition)</p>
 <section class="definition-content" id="proof-content">
@@ -457,51 +474,54 @@ The set of <em>propositions</em>, written as <span class="math notranslate nohig
 <ol class="arabic simple">
 <li><p>If <span class="math notranslate nohighlight">\(p \in P,\)</span> then <span class="math notranslate nohighlight">\(p \in L.\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(\perp \in L,\)</span> where <span class="math notranslate nohighlight">\(\perp\)</span> is a proposition read as “false.”</p></li>
-<li><p>If <span class="math notranslate nohighlight">\(p, q \in L,\)</span> then <span class="math notranslate nohighlight">\((p \implies q) \in L.\)</span></p></li>
+<li><p>If <span class="math notranslate nohighlight">\(p, q \in L,\)</span> then <span class="math notranslate nohighlight">\((p \imp q) \in L.\)</span></p></li>
 </ol>
 <p>Equivalently, if <span class="math notranslate nohighlight">\(P\)</span> is a primitive set of propositions, then</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
 L_0 &amp;= \{\perp\} \cup P \\
-L_{n+1} &amp;= L_n \cup \{(p \implies q): p, q \in L_n\}
+L_{n+1} &amp;= L_n \cup \{(p \imp q): p, q \in L_n\}
 \end{align}\end{split}\]</div>
 <p>and <span class="math notranslate nohighlight">\(L = L_0 \cup L_1 \cup L_2 \cup \dots.\)</span></p>
 </section>
-</div><aside class="margin sidebar">
+</div><p>We now define logical symbols, which should be understood as shorthand for particular propositions that are written in terms of the <span class="math notranslate nohighlight">\(\perp\)</span> and <span class="math notranslate nohighlight">\(\imp\)</span> symbols.</p>
+<aside class="margin sidebar">
 <p class="sidebar-title"></p>
 <p>One way to read the definition of <span class="math notranslate nohighlight">\(\neg\)</span> is as follows.
 <span class="math notranslate nohighlight">\(\neg p\)</span> means the same as “<span class="math notranslate nohighlight">\(p\)</span> implies <span class="math notranslate nohighlight">\(\perp,\)</span>” because the only way <span class="math notranslate nohighlight">\(\neg p\)</span> can be true is if <span class="math notranslate nohighlight">\(p\)</span> is false (given a false assumption, any conclusion is true).
 Similarly, we can read the definition of <span class="math notranslate nohighlight">\(\wedge\)</span> and <span class="math notranslate nohighlight">\(\vee,\)</span> based off our definition of <span class="math notranslate nohighlight">\(\neg.\)</span></p>
 </aside>
-<div class="proof definition admonition" id="definition-1">
+<div class="proof definition admonition" id="lst:def-logical-symbols">
 <p class="admonition-title"><span class="caption-number">Definition 112 </span> (Logical symbols)</p>
 <section class="definition-content" id="proof-content">
 <p>We define the symbols <span class="math notranslate nohighlight">\(\neg, \wedge, \vee\)</span> as</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
-\neg p &amp;= p \implies \perp \\
-p \wedge q &amp;= \neg (p \implies \neg q) \\
-p \vee q &amp;= (\neg p) \implies q  \\
+\neg p &amp;= p \imp \perp \\
+p \wedge q &amp;= \neg (p \imp \neg q) \\
+p \vee q &amp;= (\neg p) \imp q  \\
 \end{align}\end{split}\]</div>
 <p>where <span class="math notranslate nohighlight">\(p, q \in L.\)</span></p>
 </section>
 </div><section id="semantic-entailment">
 <h2>Semantic entailment<a class="headerlink" href="#semantic-entailment" title="Link to this heading">#</a></h2>
-<p>Semantic entailment assigns truth values to propositions, where we declare each proposition to either be “true” or “false” according to a <em>valuation</em>.</p>
+<p>By themselves, propositions are meaningless.
+Semantic entailment assigns truth values to propositions, where we declare each proposition to either be “true” or “false” according to a <em>valuation function</em>.</p>
 <div class="proof definition admonition" id="lst:def-valuation">
 <p class="admonition-title"><span class="caption-number">Definition 113 </span> (Valuation)</p>
 <section class="definition-content" id="proof-content">
 <p>A valuation on <span class="math notranslate nohighlight">\(L\)</span> is a function <span class="math notranslate nohighlight">\(v: L \to \{0, 1\},\)</span> such that</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{align}
-v(\perp) &amp;= 0, \\
-v(p \implies q) &amp;= \begin{cases}
+\[\begin{split}\begin{equation}
+v(\perp) = 0,~~ v(p \imp q) = \begin{cases}
 0 &amp; \text{ if } v(p) = 1, v(q) = 0, \\
 1 &amp; \text{ otherwise }. \\
 \end{cases}
-\end{align}\end{split}\]</div>
+\end{equation}\end{split}\]</div>
 </section>
-</div><p>We interpret <span class="math notranslate nohighlight">\(v(p)\)</span> to be the truth value of <span class="math notranslate nohighlight">\(p,\)</span> with <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(1\)</span> denoting “false” and “true” respectively.</p>
+</div><p>We interpret <span class="math notranslate nohighlight">\(v(p)\)</span> to be the truth value of <span class="math notranslate nohighlight">\(p,\)</span> with <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(1\)</span> denoting “false” and “true” respectively.
+A valuation is uniquely determined by the value it takes on the primitive propositions, since all other propositions in the language are constructed from the primitive ones.
+In addition, given the values of a valuation function on the primitive propositions, we can extend this to a (unique) valuation on the entire language.</p>
 <div class="proof lemma admonition" id="lemma-3">
 <p class="admonition-title"><span class="caption-number">Lemma 47 </span> (Equivalent valuations and extension to valuation)</p>
 <section class="lemma-content" id="proof-content">
@@ -524,8 +544,8 @@ Proof: Equivalent valuations and extension to valuation<div class="sd-summary-do
 Suppose that <span class="math notranslate nohighlight">\(v, v': L \to \{0, 1\}\)</span> are valuations such that <span class="math notranslate nohighlight">\(v(p) = v'(p)\)</span> for all <span class="math notranslate nohighlight">\(p \in P.\)</span>
 By the defintion of , <span class="math notranslate nohighlight">\(v(\perp) = v'(\perp),\)</span> so <span class="math notranslate nohighlight">\(v(p) = v'(p)\)</span> for all <span class="math notranslate nohighlight">\(p \in L_0.\)</span>
 Suppose <span class="math notranslate nohighlight">\(p \in L_1.\)</span>
-By the defintion of , for all <span class="math notranslate nohighlight">\(p \in L_1,\)</span> <span class="math notranslate nohighlight">\(p\)</span> must be in the form <span class="math notranslate nohighlight">\(q \implies r\)</span> for some <span class="math notranslate nohighlight">\(q, r \in L_0.\)</span>
-Again, by the defintion of , we have <span class="math notranslate nohighlight">\(v(q \implies r) = v'(q \implies r),\)</span> which means that <span class="math notranslate nohighlight">\(v(p) = v'(p).\)</span>
+By the defintion of , for all <span class="math notranslate nohighlight">\(p \in L_1,\)</span> <span class="math notranslate nohighlight">\(p\)</span> must be in the form <span class="math notranslate nohighlight">\(q \imp r\)</span> for some <span class="math notranslate nohighlight">\(q, r \in L_0.\)</span>
+Again, by the defintion of , we have <span class="math notranslate nohighlight">\(v(q \imp r) = v'(q \imp r),\)</span> which means that <span class="math notranslate nohighlight">\(v(p) = v'(p).\)</span>
 Therefore <span class="math notranslate nohighlight">\(v(p) = v'(p)\)</span> for all <span class="math notranslate nohighlight">\(p \in P.\)</span>
 We proceeed inductively to show that <span class="math notranslate nohighlight">\(v(p) = v'(p)\)</span> for all <span class="math notranslate nohighlight">\(p \in L_n\)</span> for any <span class="math notranslate nohighlight">\(n.\)</span></p>
 <p class="sd-card-text"><strong>Part 2:</strong>
@@ -533,7 +553,8 @@ Suppose <span class="math notranslate nohighlight">\(w: P \to \{0, 1\}.\)</span>
 Define <span class="math notranslate nohighlight">\(v: L \to \{0, 1\}\)</span> to agree with <span class="math notranslate nohighlight">\(w\)</span> on <span class="math notranslate nohighlight">\(P,\)</span> that is <span class="math notranslate nohighlight">\(v(p) = w(p)\)</span> for all <span class="math notranslate nohighlight">\(p \in P,\)</span> and set <span class="math notranslate nohighlight">\(v(\perp) = 0.\)</span>
 We then define <span class="math notranslate nohighlight">\(v\)</span> inductively on <span class="math notranslate nohighlight">\(L_n\)</span> according to <a class="reference internal" href="#lst:def-valuation">Definition 113</a> to obtain a valuation on <span class="math notranslate nohighlight">\(L.\)</span></p>
 </div>
-</details><div class="proof definition admonition" id="def:lst-tautology">
+</details><p>We now define the notion of tautology, i.e. a proposition that is true under all possible valuations on the primitive propositions.</p>
+<div class="proof definition admonition" id="def:lst-tautology">
 <p class="admonition-title"><span class="caption-number">Definition 114 </span> (Tautology)</p>
 <section class="definition-content" id="proof-content">
 <p>We say <span class="math notranslate nohighlight">\(t\)</span> is a tautology, written <span class="math notranslate nohighlight">\(\models t,\)</span> if <span class="math notranslate nohighlight">\(v(t) = 1\)</span> for any valuation <span class="math notranslate nohighlight">\(v: L \to \{0, 1\}.\)</span></p>
@@ -541,6 +562,8 @@ We then define <span class="math notranslate nohighlight">\(v\)</span> inductive
 </div><p>To show that a statement is a tautology, we can use a <a class="reference external" href="https://en.wikipedia.org/wiki/Truth_table">truth table</a>, which is a big table that summarises the value that a valuation function takes on each proposition for each inductive step.
 We can write out all possible starting combinations of truth values on <span class="math notranslate nohighlight">\(P,\)</span> and the resulting propositions in <span class="math notranslate nohighlight">\(L,\)</span> until we determine the value of the proposition we are after.
 If the value of this proposition is true for any starting combination of truth values of <span class="math notranslate nohighlight">\(P,\)</span> then it is a tautology.</p>
+<p>We can now define semantic entailment.
+Informally a set of propositions <span class="math notranslate nohighlight">\(S\)</span> (the assumptions) entails a proposition <span class="math notranslate nohighlight">\(t\)</span> if for any valuation that is true on the assumptions is also true on <span class="math notranslate nohighlight">\(t.\)</span></p>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
 <p>Note that here we have reused the symbol <span class="math notranslate nohighlight">\(\models\)</span> that we introduced in our definition of <a class="reference internal" href="#def:lst-tautology">tautology</a>.
@@ -551,7 +574,8 @@ This is not really an abuse of notation because the statement <span class="math 
 <section class="definition-content" id="proof-content">
 <p>For <span class="math notranslate nohighlight">\(S \subseteq L, t \in L\)</span> we say <span class="math notranslate nohighlight">\(S\)</span> entails <span class="math notranslate nohighlight">\(t,\)</span> <span class="math notranslate nohighlight">\(S\)</span> semantically implies <span class="math notranslate nohighlight">\(t\)</span> or <span class="math notranslate nohighlight">\(S \models t,\)</span> if for any <span class="math notranslate nohighlight">\(v\)</span> such that <span class="math notranslate nohighlight">\(v(s) = 1\)</span> for all <span class="math notranslate nohighlight">\(s \in S,\)</span> we have <span class="math notranslate nohighlight">\(v(t) = 1.\)</span></p>
 </section>
-</div><div class="proof definition admonition" id="definition-6">
+</div><p>We define truth of a proposition under a valuation function, in terms of the value that this takes on the proposition.</p>
+<div class="proof definition admonition" id="definition-6">
 <p class="admonition-title"><span class="caption-number">Definition 116 </span> (Truth and model)</p>
 <section class="definition-content" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(v(t) = 1,\)</span> then we say that <span class="math notranslate nohighlight">\(t\)</span> is true in <span class="math notranslate nohighlight">\(v,\)</span> or <span class="math notranslate nohighlight">\(v\)</span> is a model of <span class="math notranslate nohighlight">\(t.\)</span>
@@ -560,36 +584,65 @@ For <span class="math notranslate nohighlight">\(S \subseteq L,\)</span> a valua
 </div></section>
 <section id="syntactic-implication">
 <h2>Syntactic implication<a class="headerlink" href="#syntactic-implication" title="Link to this heading">#</a></h2>
+<p>The second notion we study is syntactic valuation.
+While semantic implication captures the idea of truthfulness, syntactic implication captures the idea of a proof.
+We will set up our definitions so that a set of propositions <span class="math notranslate nohighlight">\(S\)</span> (the assumptions) syntactically implies a proposition <span class="math notranslate nohighlight">\(t\)</span> if there is a proof of <span class="math notranslate nohighlight">\(t\)</span> from <span class="math notranslate nohighlight">\(S.\)</span>
+We have not yet defined a notion of proof though.
+A proof will turn out to be a finite sequence of propositions with some particular requirements.
+Before defining proofs we define the proof axioms and the <em>modus ponens</em> rule.</p>
 <div class="proof definition admonition" id="lst:def-proof-axioms-and-modus-ponens">
 <p class="admonition-title"><span class="caption-number">Definition 117 </span> (Proof axioms and modus ponens)</p>
 <section class="definition-content" id="proof-content">
-<p>We define the following three statements as the proof axioms</p>
+<p>We define the following three proof axioms</p>
 <ol class="arabic simple">
-<li><p><span class="math notranslate nohighlight">\(p \implies (q \implies p),\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\((p \implies (q \implies r)) \implies ((p \implies q) \implies (q \implies r)),\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\((\neg \neg p) \implies p.\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(p \imp (q \imp p),\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((p \imp (q \imp r)) \imp ((p \imp q) \imp (p \imp r)),\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((\neg \neg p) \imp p.\)</span></p></li>
 </ol>
 <p>We define the deduction rule of <em>modus ponens</em> as:
-from <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(p \implies q\)</span> we can deduce <span class="math notranslate nohighlight">\(q.\)</span></p>
+from <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(p \imp q\)</span> we can deduce <span class="math notranslate nohighlight">\(q.\)</span></p>
 </section>
-</div><div class="proof definition admonition" id="lst:def-proof-and-syntactic-entailment">
+</div><p>We can now define proofs and syntactic entailment.</p>
+<div class="proof definition admonition" id="lst:def-proof-and-syntactic-entailment">
 <p class="admonition-title"><span class="caption-number">Definition 118 </span> (Proof and syntactic entailment)</p>
 <section class="definition-content" id="proof-content">
 <p>For any <span class="math notranslate nohighlight">\(S \subseteq L,\)</span> a proof of <span class="math notranslate nohighlight">\(t\)</span> from <span class="math notranslate nohighlight">\(S\)</span> is a finite sequence <span class="math notranslate nohighlight">\(t_1, t_2, \dots, t_n\)</span> of propositions, with <span class="math notranslate nohighlight">\(t_n = t,\)</span> such that each <span class="math notranslate nohighlight">\(t_i\)</span> is one of the following:</p>
 <ol class="arabic simple">
 <li><p>An axiom;</p></li>
 <li><p>A member of <span class="math notranslate nohighlight">\(S\)</span>;</p></li>
-<li><p>A proposition <span class="math notranslate nohighlight">\(t_i\)</span> such that there exist <span class="math notranslate nohighlight">\(j, k &lt; i\)</span> with <span class="math notranslate nohighlight">\(t_j\)</span> being <span class="math notranslate nohighlight">\(t_k \implies t_i.\)</span></p></li>
+<li><p>A proposition <span class="math notranslate nohighlight">\(t_i\)</span> such that there exist <span class="math notranslate nohighlight">\(j, k &lt; i\)</span> with <span class="math notranslate nohighlight">\(t_j\)</span> being <span class="math notranslate nohighlight">\(t_k \imp t_i.\)</span></p></li>
 </ol>
 <p>If there is a proof of <span class="math notranslate nohighlight">\(t\)</span> from <span class="math notranslate nohighlight">\(S,\)</span> we say that <span class="math notranslate nohighlight">\(S\)</span> proves, or syntactically entails <span class="math notranslate nohighlight">\(t,\)</span> written <span class="math notranslate nohighlight">\(S \vdash t.\)</span>
 If <span class="math notranslate nohighlight">\(\emptyset \vdash t,\)</span> we say <span class="math notranslate nohighlight">\(t\)</span> is a theorem and write <span class="math notranslate nohighlight">\(\vdash t.\)</span>
 In a proof of <span class="math notranslate nohighlight">\(t\)</span> from <span class="math notranslate nohighlight">\(S,\)</span> <span class="math notranslate nohighlight">\(t\)</span> is the conclusion and <span class="math notranslate nohighlight">\(S\)</span> is the set of hypothesis or premises.</p>
 </section>
-</div><div class="proof lemma admonition" id="lemma-9">
-<p class="admonition-title"><span class="caption-number">Lemma 48 </span> (Deduction theorem)</p>
-<section class="lemma-content" id="proof-content">
+</div><div class="proof example admonition" id="lst:ex-p-imp-p-is-a-theorem">
+<p class="admonition-title"><span class="caption-number">Example 15 </span> (<span class="math notranslate nohighlight">\(p \imp p\)</span> is a theorem)</p>
+<section class="example-content" id="proof-content">
+<p>We have that <span class="math notranslate nohighlight">\(\vd p \imp p,\)</span> that is, <span class="math notranslate nohighlight">\(p \imp p\)</span> is a theorem.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<ol class="arabic simple">
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\((p \imp ((p \imp p) \imp p)) \imp ((p \imp (p \imp p)) \imp (p \imp p))\)</span> by <a class="reference internal" href="#lst:def-proof-axioms-and-modus-ponens">axiom 2</a>.</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(p \imp ((p \imp p) \imp p)\)</span> by <a class="reference internal" href="#lst:def-proof-axioms-and-modus-ponens">axiom 1</a>.</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\((p \imp (p \imp p)) \imp (p \imp p)\)</span> by <a class="reference internal" href="#lst:def-proof-axioms-and-modus-ponens">modus ponens</a> on (1) and (2).</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(p \imp (p \imp p)\)</span> by <a class="reference internal" href="#lst:def-proof-axioms-and-modus-ponens">axiom 1</a>.</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(p \imp p\)</span> by <a class="reference internal" href="#lst:def-proof-axioms-and-modus-ponens">modus ponens</a> on (3) and (4).</p></li>
+</ol>
+</div>
+</details></section>
+</div><p>Generally, writing proofs as that in <a class="reference internal" href="#lst:ex-p-imp-p-is-a-theorem">Example 15</a> can get cumbersome.
+The following theorem can help a lot to shorten our informal proofs.</p>
+<div class="proof theorem admonition" id="lst:thm-deduction-theorem">
+<p class="admonition-title"><span class="caption-number">Theorem 97 </span> (Deduction theorem)</p>
+<section class="theorem-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(S \subseteq L\)</span> and <span class="math notranslate nohighlight">\(p, q \in L.\)</span>
-Then <span class="math notranslate nohighlight">\(S \vdash (p \implies q)\)</span> if and only if <span class="math notranslate nohighlight">\(S \cup \{p\} \vdash q.\)</span></p>
+Then <span class="math notranslate nohighlight">\(S \vdash (p \imp q)\)</span> if and only if <span class="math notranslate nohighlight">\(S \cup \{p\} \vdash q.\)</span></p>
 </section>
 </div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -600,13 +653,13 @@ Proof: Deduction theorem<div class="sd-summary-down docutils">
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">Let <span class="math notranslate nohighlight">\(S \subseteq L\)</span> and <span class="math notranslate nohighlight">\(p, q \in L.\)</span></p>
 <p class="sd-card-text"><strong>Implies:</strong>
-If <span class="math notranslate nohighlight">\(S \vdash (p \implies q),\)</span> then there is a proof of <span class="math notranslate nohighlight">\(p \implies q\)</span> from <span class="math notranslate nohighlight">\(S.\)</span>
+If <span class="math notranslate nohighlight">\(S \vdash (p \imp q),\)</span> then there is a proof of <span class="math notranslate nohighlight">\(p \imp q\)</span> from <span class="math notranslate nohighlight">\(S.\)</span>
 Now, let <span class="math notranslate nohighlight">\(S \cup \{p\}\)</span> be our set of assumptions.
-We can append <span class="math notranslate nohighlight">\(p\)</span> to the proof of <span class="math notranslate nohighlight">\(p \implies q\)</span> from before, and then apply <a class="reference internal" href="#lst:def-proof-axioms-and-modus-ponens">modus ponens</a> to obtain <span class="math notranslate nohighlight">\(q.\)</span></p>
+We can append <span class="math notranslate nohighlight">\(p\)</span> to the proof of <span class="math notranslate nohighlight">\(p \imp q\)</span> from before, and then apply <a class="reference internal" href="#lst:def-proof-axioms-and-modus-ponens">modus ponens</a> to obtain <span class="math notranslate nohighlight">\(q.\)</span></p>
 <p class="sd-card-text"><strong>Is implied by:</strong>
 Suppose <span class="math notranslate nohighlight">\(S \cup \{p\} \vdash q.\)</span>
 This means there is a proof <span class="math notranslate nohighlight">\(t_1, t_2, \dots, t_n\)</span> of <span class="math notranslate nohighlight">\(q\)</span> from <span class="math notranslate nohighlight">\(S \cup \{p\}.\)</span>
-We will show that <span class="math notranslate nohighlight">\(S \vdash p \implies t_i,\)</span> which in turn amounts to a proof of <span class="math notranslate nohighlight">\(S \vdash p \implies q,\)</span> by appending the statements of each <span class="math notranslate nohighlight">\(S \vdash p \implies t_i\)</span> together.</p>
+We will show that <span class="math notranslate nohighlight">\(S \vdash p \imp t_i,\)</span> which in turn amounts to a proof of <span class="math notranslate nohighlight">\(S \vdash p \imp q,\)</span> by appending the statements of each <span class="math notranslate nohighlight">\(S \vdash p \imp t_i\)</span> together.</p>
 <p class="sd-card-text">From the <a class="reference internal" href="#lst:def-proof-and-syntactic-entailment">definition of proof</a> there are finitely many possibilities for <span class="math notranslate nohighlight">\(t_i.\)</span>
 We consider each of these separately.</p>
 <p class="sd-card-text"><strong>Case 1:</strong>
@@ -614,34 +667,268 @@ We consider each of these separately.</p>
 We can write down</p>
 <ol class="arabic simple">
 <li><p class="sd-card-text"><span class="math notranslate nohighlight">\(t_i\)</span> since <span class="math notranslate nohighlight">\(t_i\)</span> is an axiom.</p></li>
-<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(p \implies (p \implies t_i)\)</span> by <a class="reference internal" href="#lst:def-proof-axioms-and-modus-ponens">axiom 1</a>.</p></li>
-<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(p \implies t_i\)</span> by <a class="reference internal" href="#lst:def-proof-axioms-and-modus-ponens">modus ponens</a>.</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(p \imp (p \imp t_i)\)</span> by <a class="reference internal" href="#lst:def-proof-axioms-and-modus-ponens">axiom 1</a>.</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(p \imp t_i\)</span> by <a class="reference internal" href="#lst:def-proof-axioms-and-modus-ponens">modus ponens</a>.</p></li>
 </ol>
 <p class="sd-card-text"><strong>Case 2:</strong>
 <span class="math notranslate nohighlight">\(t_i \in S.\)</span>
 In this case, we have that</p>
 <ol class="arabic simple">
 <li><p class="sd-card-text"><span class="math notranslate nohighlight">\(t_i\)</span> since <span class="math notranslate nohighlight">\(t_i\)</span> is an assumption.</p></li>
-<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(p \implies (p \implies t_i)\)</span> by <a class="reference internal" href="#lst:def-proof-axioms-and-modus-ponens">axiom 1</a>.</p></li>
-<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(p \implies t_i\)</span> by <a class="reference internal" href="#lst:def-proof-axioms-and-modus-ponens">modus ponens</a>.</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(p \imp (p \imp t_i)\)</span> by <a class="reference internal" href="#lst:def-proof-axioms-and-modus-ponens">axiom 1</a>.</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(p \imp t_i\)</span> by <a class="reference internal" href="#lst:def-proof-axioms-and-modus-ponens">modus ponens</a>.</p></li>
 </ol>
 <p class="sd-card-text"><strong>Case 3:</strong>
-<span class="math notranslate nohighlight">\(t_i = p.\)</span></p>
+<span class="math notranslate nohighlight">\(t_i = p.\)</span>
+From <a class="reference internal" href="#lst:ex-p-imp-p-is-a-theorem">Example 15</a> we know <span class="math notranslate nohighlight">\(\vdash p \imp p,\)</span> so <span class="math notranslate nohighlight">\(p \imp t_i.\)</span></p>
 <p class="sd-card-text"><strong>Case 4:</strong>
 <span class="math notranslate nohighlight">\(t_i\)</span> has been obtained by modus ponens.
-Then we have some <span class="math notranslate nohighlight">\(j, k &lt; i\)</span> such that <span class="math notranslate nohighlight">\(t_k = (t_j \implies t_i).\)</span>
-We can assume that <span class="math notranslate nohighlight">\(S \vdash p \implies t_j\)</span> and <span class="math notranslate nohighlight">\(S \vdash p \implies t_k\)</span> by induction on <span class="math notranslate nohighlight">\(i.\)</span>
+Then we have some <span class="math notranslate nohighlight">\(j, k &lt; i\)</span> such that <span class="math notranslate nohighlight">\(t_k = (t_j \imp t_i).\)</span>
+We can assume that <span class="math notranslate nohighlight">\(S \vdash p \imp t_j\)</span> and <span class="math notranslate nohighlight">\(S \vdash p \imp t_k\)</span> by induction on <span class="math notranslate nohighlight">\(i.\)</span>
 We can write down</p>
 <ol class="arabic simple">
-<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(t_j \implies t_i\)</span> is already known.</p></li>
-<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(p \implies (t_j \implies t_i)\)</span> by <a class="reference internal" href="#lst:def-proof-axioms-and-modus-ponens">axiom 1 and modus ponens</a>, similarly to the steps in the first two cases.</p></li>
-<li><p class="sd-card-text"><span class="math notranslate nohighlight">\((p \implies (t_j \implies t_i)) \implies ((p \implies t_j) \implies (p \implies t_i))\)</span> by <a class="reference internal" href="#lst:def-proof-axioms-and-modus-ponens">axiom 2</a> on (2).</p></li>
-<li><p class="sd-card-text"><span class="math notranslate nohighlight">\((p \implies t_j) \implies (p \implies t_i)\)</span> by <a class="reference internal" href="#lst:def-proof-axioms-and-modus-ponens">modus ponens</a> on (2) and (3).</p></li>
-<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(p \implies t_j\)</span> is already known.</p></li>
-<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(p \implies t_i\)</span> by <a class="reference internal" href="#lst:def-proof-axioms-and-modus-ponens">modus ponens</a> on (4) and (5).</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(t_j \imp t_i\)</span> is already known.</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(p \imp (t_j \imp t_i)\)</span> by <a class="reference internal" href="#lst:def-proof-axioms-and-modus-ponens">axiom 1 and modus ponens</a>, similarly to the steps in the first two cases.</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\((p \imp (t_j \imp t_i)) \imp ((p \imp t_j) \imp (p \imp t_i))\)</span> by <a class="reference internal" href="#lst:def-proof-axioms-and-modus-ponens">axiom 2</a> on (2).</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\((p \imp t_j) \imp (p \imp t_i)\)</span> by <a class="reference internal" href="#lst:def-proof-axioms-and-modus-ponens">modus ponens</a> on (2) and (3).</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(p \imp t_j\)</span> is already known.</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(p \imp t_i\)</span> by <a class="reference internal" href="#lst:def-proof-axioms-and-modus-ponens">modus ponens</a> on (4) and (5).</p></li>
 </ol>
 </div>
 </details></section>
+<section id="completeness">
+<h2>Completeness<a class="headerlink" href="#completeness" title="Link to this heading">#</a></h2>
+<p>Here we show one of the main results of this section.
+We will show that semantic entailment is equivalent to syntactic entailment.
+In other words, a proposition is semantically entailed by a set of assumptions if and only if it can be proved from those assumptions.
+We will break down this proof into two parts:
+the soundness theorem and the adequacy theorem.</p>
+<section id="soundness">
+<h3>Soundness<a class="headerlink" href="#soundness" title="Link to this heading">#</a></h3>
+<p>The soundness theorem shows that syntactic entailment implies semantic entailment.
+It is called the soundness theorem because it demonstrates that our proof axioms are sound:
+if a  of a proposition exists, then this proposition is true under our notion of <a class="reference internal" href="#lst:def-semantic-entailment">semantic entailment</a>.
+In other words, we can prove only those propositions that are true.</p>
+<div class="proof theorem admonition" id="lst:thm-soundness-theorem">
+<p class="admonition-title"><span class="caption-number">Theorem 98 </span> (Soundness theorem)</p>
+<section class="theorem-content" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(S \vd t,\)</span> then <span class="math notranslate nohighlight">\(S \dvd t.\)</span></p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Soundness theorem<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(S \vd t.\)</span>
+Then, there exists a proof <span class="math notranslate nohighlight">\(t_1, \dots, t_n\)</span> of <span class="math notranslate nohighlight">\(t\)</span> from <span class="math notranslate nohighlight">\(S.\)</span>
+Now, suppose that <span class="math notranslate nohighlight">\(v: L \to \{0, 1\}\)</span> is a valuation with <span class="math notranslate nohighlight">\(v(s) = 1\)</span> for all <span class="math notranslate nohighlight">\(s \in S.\)</span>
+We will show that <span class="math notranslate nohighlight">\(v(t_i) = 1\)</span> for all <span class="math notranslate nohighlight">\(t_i\)</span> in the proof.</p>
+<p class="sd-card-text">If <span class="math notranslate nohighlight">\(t_i\)</span> is an <a class="reference internal" href="#lst:def-proof-axioms-and-modus-ponens">axiom</a>, then <span class="math notranslate nohighlight">\(v(t_i) = 1\)</span> because all three axioms are <code class="xref prf prf-ref docutils literal notranslate"><span class="pre">tautologies</span></code>.
+If <span class="math notranslate nohighlight">\(t_i\)</span> is a hypothesis, then <span class="math notranslate nohighlight">\(t_i \in S\)</span> and <span class="math notranslate nohighlight">\(v(t_i) = 1\)</span> by assumption.
+If <span class="math notranslate nohighlight">\(t_i\)</span> has been obtained by <a class="reference internal" href="#lst:def-proof-axioms-and-modus-ponens">modus ponens</a>, then there are some <span class="math notranslate nohighlight">\(j, k &lt; i\)</span> such that <span class="math notranslate nohighlight">\(t_k = t_j \imp t_i.\)</span>
+This means that <span class="math notranslate nohighlight">\(v(t_j) = 1\)</span> and <span class="math notranslate nohighlight">\(v(t_j \imp t_i) = 1\)</span> so we must have <span class="math notranslate nohighlight">\(v(t_i) = 1.\)</span></p>
+<p class="sd-card-text">We conclude that <span class="math notranslate nohighlight">\(v(t_i) = 1\)</span> for all <span class="math notranslate nohighlight">\(t_i\)</span> in the proof, including <span class="math notranslate nohighlight">\(t_n\)</span> which is equal to <span class="math notranslate nohighlight">\(t.\)</span>
+Therefore <span class="math notranslate nohighlight">\(S \dvd t.\)</span></p>
+</div>
+</details></section>
+<section id="adequacy">
+<h3>Adequacy<a class="headerlink" href="#adequacy" title="Link to this heading">#</a></h3>
+<p>The second part of the completeness theorem is the adequacy, which shows that semantic implication implies syntactic implication.
+It is called the adequacy theorem because it shows that our definition of  is adequate for capturing all logical truths in the system:
+if a proposition is true, then there exists a (formal) proof for it, so our definition of proof is adequate for proving all logical truths.</p>
+<p>This is a bit more involved than the soundness theorem.
+We break this down into intermediate results.
+First, we define consistent propositions.</p>
+<div class="proof definition admonition" id="lst:def-consistent">
+<p class="admonition-title"><span class="caption-number">Definition 119 </span> (Consistent)</p>
+<section class="definition-content" id="proof-content">
+<p>A set of propositions <span class="math notranslate nohighlight">\(S \subseteq L\)</span> is inconsistent if <span class="math notranslate nohighlight">\(S \vd \perp.\)</span>
+S is consistent if it is not inconsistent.</p>
+</section>
+</div><p>Next, we show the following useful lemma.
+Given a set of consistent assumptions and a new proposition <span class="math notranslate nohighlight">\(p,\)</span> then at least one of <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(\neg p\)</span> can be added to the propositions while preserving consistency.</p>
+<div class="proof lemma admonition" id="lst:lem-consistent-assumptions-can-be-extended">
+<p class="admonition-title"><span class="caption-number">Lemma 48 </span> (Consistent assumptions can be extended)</p>
+<section class="lemma-content" id="proof-content">
+<p>For <a class="reference internal" href="#lst:def-consistent">consistent</a> <span class="math notranslate nohighlight">\(S \subseteq L\)</span> and <span class="math notranslate nohighlight">\(p \in L,\)</span> at least one of <span class="math notranslate nohighlight">\(S \cup \{p\}\)</span> and <span class="math notranslate nohighlight">\(S \cup \{\neg p\}\)</span> is consistent.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Consistent assumptions can be extended<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(L\)</span> is a set of propositions, <span class="math notranslate nohighlight">\(S \subseteq L\)</span> and <span class="math notranslate nohighlight">\(p \in L.\)</span>
+Suppose <span class="math notranslate nohighlight">\(S \cup \{p\}\)</span> and <span class="math notranslate nohighlight">\(S \cup \{\neg p\}\)</span> are both inconsistent.
+Then, we have <span class="math notranslate nohighlight">\(S \cup \{p\} \vd \perp\)</span> and <span class="math notranslate nohighlight">\(S \cup \{\neg p\} \vd \perp.\)</span>
+By the <span class="xref std std-ref">deduction theoremlst:thm-deduction-theorem</span>, we have that <span class="math notranslate nohighlight">\(S \vd p \implies \perp\)</span> and also that <span class="math notranslate nohighlight">\(S \vd (\neg p) \implies \perp.\)</span>
+Note that <span class="math notranslate nohighlight">\((\neg p) = p \imp \perp,\)</span> and using <a class="reference internal" href="#lst:def-proof-axioms-and-modus-ponens">modus ponens</a> from the proof of <span class="math notranslate nohighlight">\(p\)</span> from <span class="math notranslate nohighlight">\(S,\)</span> we have <span class="math notranslate nohighlight">\(S \vd \perp.\)</span>
+Therefore <span class="math notranslate nohighlight">\(S\)</span> is inconsistent which is a contradiction, and at least one of <span class="math notranslate nohighlight">\(S \cup \{p\}\)</span> and <span class="math notranslate nohighlight">\(S \cup \{\neg p\}\)</span> has to be consistent.</p>
+</div>
+</details><p>Now we show the main intermediate result for proving adequacy.
+If a set of assumptions is consistent, then it has a model.
+Equivalently, if it does not have a model, then it is inconsistent.</p>
+<div class="proof theorem admonition" id="lst:thm-model-existence">
+<p class="admonition-title"><span class="caption-number">Theorem 99 </span> (Model existence)</p>
+<section class="theorem-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(L\)</span> be a countable set of propositions.
+If <span class="math notranslate nohighlight">\(S \dvd \perp,\)</span> then <span class="math notranslate nohighlight">\(S \vd \perp.\)</span>
+In other words, if <span class="math notranslate nohighlight">\(S\)</span> has no model, then <span class="math notranslate nohighlight">\(S\)</span> is <a class="reference internal" href="#lst:def-consistent">inconsistent</a>.
+Equivalently, if <span class="math notranslate nohighlight">\(S\)</span> is <a class="reference internal" href="#lst:def-consistent">consistent</a>, then <span class="math notranslate nohighlight">\(S\)</span> has a model.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Model existence<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Assume <span class="math notranslate nohighlight">\(L\)</span> is countable and list it as <span class="math notranslate nohighlight">\(\{t_1, t_2, \dots\}.\)</span>
+Let <span class="math notranslate nohighlight">\(S \subseteq L\)</span> be consistent and define <span class="math notranslate nohighlight">\(S_0 = S.\)</span>
+Then by <a class="reference internal" href="#lst:lem-consistent-assumptions-can-be-extended">Lemma 48</a>, at least one of <span class="math notranslate nohighlight">\(S \cup \{t_1\}\)</span> and <span class="math notranslate nohighlight">\(S \cup \{\neg t_1\}\)</span> is consistent.
+Define <span class="math notranslate nohighlight">\(S_1\)</span> to be the consistent one.
+Then, let <span class="math notranslate nohighlight">\(S_2\)</span> be <span class="math notranslate nohighlight">\(S_1 \cup \{t_2\}\)</span> or <span class="math notranslate nohighlight">\(S_1 \cup \{\neg t_2\},\)</span> such that <span class="math notranslate nohighlight">\(S_2\)</span> is consistent, and continue inductively.</p>
+<p class="sd-card-text">Set <span class="math notranslate nohighlight">\(\bar{S} = S_0 \cup S_1 \cup \dots.\)</span>
+Then <span class="math notranslate nohighlight">\(p \in \bar{S}\)</span> or <span class="math notranslate nohighlight">\(\neg p \in \bar{S}\)</span> for each <span class="math notranslate nohighlight">\(p \in L\)</span> by construction.
+Also, we know that <span class="math notranslate nohighlight">\(\bar{S}\)</span> is consistent:
+if <span class="math notranslate nohighlight">\(\bar{S} \vd \perp,\)</span> then since proofs are finite, there is some <span class="math notranslate nohighlight">\(S_n\)</span> that contains all the assumptions used in the proof of <span class="math notranslate nohighlight">\(\bar{S} \vd \perp.\)</span>
+Hence <span class="math notranslate nohighlight">\(S_n \vd \perp,\)</span> but we know that all <span class="math notranslate nohighlight">\(S_n\)</span> are consistent.
+Finally, we check that <span class="math notranslate nohighlight">\(\bar{S}\)</span> is deductively closed:
+if <span class="math notranslate nohighlight">\(\bar{S} \vd \perp,\)</span> we must have <span class="math notranslate nohighlight">\(p \in \bar{S}\)</span> because otherwise we would have <span class="math notranslate nohighlight">\(\neg p \in \bar{S},\)</span> which would be a contradiction.</p>
+<p class="sd-card-text">Finally, we show that <span class="math notranslate nohighlight">\(\bar{S}\)</span> has a model.
+Define <span class="math notranslate nohighlight">\(v: L \to \{0, 1\}\)</span> by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{equation}
+v(p) = \begin{cases}
+1 &amp; \text{ if } p \in \bar{S} \\ 
+0 &amp; \text{ otherwise. }
+\end{cases}
+\end{equation}\end{split}\]</div>
+<p class="sd-card-text">Since <span class="math notranslate nohighlight">\(\bar{S}\)</span> is deductively closed, we only need to show that <span class="math notranslate nohighlight">\(v\)</span> is indeed a <a class="reference internal" href="#lst:def-valuation">valuation</a>.
+By <a class="reference internal" href="#lst:def-valuation">Definition 113</a>, for <span class="math notranslate nohighlight">\(v\)</span> to be a valuation it needs to satisfy a condition on <span class="math notranslate nohighlight">\(v(\perp)\)</span> and a condition on <span class="math notranslate nohighlight">\(v(p \imp q).\)</span>
+First, we have <span class="math notranslate nohighlight">\(v(\perp) = 0,\)</span> since <span class="math notranslate nohighlight">\(\perp \not \in \bar{S}\)</span> because <span class="math notranslate nohighlight">\(\bar{S}\)</span> is consistent.
+Second, we check <span class="math notranslate nohighlight">\(v(p \imp q)\)</span> for each possible combination of values that <span class="math notranslate nohighlight">\(v\)</span> can take on <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(q.\)</span></p>
+<p class="sd-card-text"><strong>Case 1:</strong>
+Suppose <span class="math notranslate nohighlight">\(v(p) = 0.\)</span>
+Then by the definition of <span class="math notranslate nohighlight">\(v,\)</span> we have <span class="math notranslate nohighlight">\(p \not \in \bar{S}\)</span> and <span class="math notranslate nohighlight">\(\neg p \in \bar{S}.\)</span>
+We want to show that <span class="math notranslate nohighlight">\(p \imp q \in \bar{S}.\)</span></p>
+<p class="sd-card-text">Now, note that to show <span class="math notranslate nohighlight">\(p \imp q \in \bar{S}\)</span> it suffices to show <span class="math notranslate nohighlight">\(\neg p \vd p \imp q.\)</span>
+This is because if <span class="math notranslate nohighlight">\(\neg p \vd p \imp q,\)</span> then since <span class="math notranslate nohighlight">\(\bar{S} \vd \neg p,\)</span> we have <span class="math notranslate nohighlight">\(\bar{S} \vd p \imp q.\)</span>
+We can show this by noting that</p>
+<ol class="arabic simple">
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\vd \perp \imp (\neg q \imp \perp)\)</span> by <a class="reference internal" href="#lst:def-proof-axioms-and-modus-ponens">axiom 1</a>.</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\vd \perp \imp (\neg \neg q)\)</span> by the <a class="reference internal" href="#lst:def-logical-symbols">definition of negation</a>.</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\perp \vd \neg \neg q\)</span> by the <a class="reference internal" href="#lst:thm-deduction-theorem">deduction theorem</a>.</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\{p, \neg p\} \vd \neg \neg q.\)</span></p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\{p, \neg p\} \vd q\)</span> by <a class="reference internal" href="#lst:def-proof-axioms-and-modus-ponens">axiom 3</a>.</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\neg p \vd p \imp q\)</span> by the <a class="reference internal" href="#lst:thm-deduction-theorem">deduction theorem</a>.</p></li>
+</ol>
+<p class="sd-card-text">We conclude that <span class="math notranslate nohighlight">\(\neg p \vd p \imp q,\)</span> which implies <span class="math notranslate nohighlight">\(\bar{S} \vd p \imp q,\)</span> so <span class="math notranslate nohighlight">\(p \imp q \in \bar{S}\)</span> and <span class="math notranslate nohighlight">\(v(p \imp q) = 1\)</span> as required.</p>
+<p class="sd-card-text"><strong>Case 2:</strong>
+Suppose <span class="math notranslate nohighlight">\(v(p) = 1, v(q) = 0.\)</span>
+Then, <span class="math notranslate nohighlight">\(p \in \bar{S}, q \not \in \bar{S}.\)</span>
+We want to show that <span class="math notranslate nohighlight">\(p \imp q \not \in \bar{S}.\)</span>
+Suppose instead that <span class="math notranslate nohighlight">\(p \imp q \in \bar{S}.\)</span>
+Then, <span class="math notranslate nohighlight">\(\bar{S} \perp p \imp q\)</span> and since <span class="math notranslate nohighlight">\(p \in \bar{S},\)</span> then by <a class="reference internal" href="#lst:def-proof-axioms-and-modus-ponens">modus ponens</a> we have <span class="math notranslate nohighlight">\(\bar{S} \per q\)</span> which means <span class="math notranslate nohighlight">\(q \in \bar{S},\)</span> which is a contradiction.
+Therefore <span class="math notranslate nohighlight">\(p \imp q \not \in \bar{S}\)</span> and <span class="math notranslate nohighlight">\(v(p \imp q) = 0\)</span> as required.</p>
+<p class="sd-card-text"><strong>Case 3:</strong>
+Suppose <span class="math notranslate nohighlight">\(v(p) = 1, v(q) = 1.\)</span>
+Then, <span class="math notranslate nohighlight">\(p \in \bar{S}, q \in \bar{S}.\)</span>
+We want to show that <span class="math notranslate nohighlight">\(p \imp q \in \bar{S}.\)</span>
+By the axiom 1, we have <span class="math notranslate nohighlight">\(\perp q \imp (p \imp q),\)</span> and by the deduction theorem we have <span class="math notranslate nohighlight">\(q \perp (p \imp q).\)</span>
+Since <span class="math notranslate nohighlight">\(\bar{S} \perp q,\)</span> we have  <span class="math notranslate nohighlight">\(\bar{S} \perp (p \imp q),\)</span> and since <span class="math notranslate nohighlight">\(\bar{S}\)</span> is deductively closed, we have <span class="math notranslate nohighlight">\(p \imp q \in \bar{S}.\)</span>
+We conclude that <span class="math notranslate nohighlight">\(v(p \imp q) = 1\)</span> as required.</p>
+<p class="sd-card-text">This covers all possible cases for <span class="math notranslate nohighlight">\(v\)</span> on <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(q,\)</span> so we conclude <span class="math notranslate nohighlight">\(v\)</span> is a valuation on <span class="math notranslate nohighlight">\(L\)</span> such that <span class="math notranslate nohighlight">\(v(s) = 1\)</span> for all <span class="math notranslate nohighlight">\(s \in \bar{S},\)</span> so <span class="math notranslate nohighlight">\(v\)</span> is a model of <span class="math notranslate nohighlight">\(\bar{S},\)</span> and also of <span class="math notranslate nohighlight">\(S.\)</span>
+So <span class="math notranslate nohighlight">\(S\)</span> has a model.</p>
+</div>
+</details><p>We can now use the <a class="reference internal" href="#lst:thm-model-existence">model existence theorem</a> to prove the adequacy theorem.</p>
+<div class="proof theorem admonition" id="lst:thm-adequacy-theorem">
+<p class="admonition-title"><span class="caption-number">Theorem 100 </span> (Adequacy theorem)</p>
+<section class="theorem-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(S \subseteq L, t \in L.\)</span>
+Then <span class="math notranslate nohighlight">\(S \models t\)</span> implies <span class="math notranslate nohighlight">\(S \vd t.\)</span></p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Adequacy theorem<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(S \subseteq L, t \in L.\)</span>
+Suppose <span class="math notranslate nohighlight">\(S \models t.\)</span>
+Then <span class="math notranslate nohighlight">\(S \cup \{\neg t\} \models \perp.\)</span>
+By the <a class="reference internal" href="#lst:thm-model-existence">model existence theorem</a>, this means that <span class="math notranslate nohighlight">\(S \cup \{\neg t\} \vd \perp.\)</span>
+By the <a class="reference internal" href="#lst:thm-deduction-theorem">deduction theorem</a>, we have <span class="math notranslate nohighlight">\(S \vd \neg t \implies \perp.\)</span>
+By the <a class="reference internal" href="#lst:def-logical-symbols">definition of negation</a> we have <span class="math notranslate nohighlight">\(S \vd \neg \neg t,\)</span> and by <a class="reference internal" href="#lst:def-proof-axioms-and-modus-ponens">axiom 3</a> we have <span class="math notranslate nohighlight">\(S \vd t.\)</span></p>
+</div>
+</details></section>
+<section id="completeness-and-compactness">
+<h3>Completeness and compactness<a class="headerlink" href="#completeness-and-compactness" title="Link to this heading">#</a></h3>
+<p>We can now combine the soundness and adequacy theorems to prove the completness theorem.</p>
+<div class="proof theorem admonition" id="lst:thm-completeness-theorem">
+<p class="admonition-title"><span class="caption-number">Theorem 101 </span> (Completeness theorem)</p>
+<section class="theorem-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(S \subseteq L\)</span> and <span class="math notranslate nohighlight">\(t \in L.\)</span>
+Then <span class="math notranslate nohighlight">\(S \models t\)</span> if and only if <span class="math notranslate nohighlight">\(S \vd t.\)</span></p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Completeness theorem<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(S \subseteq L\)</span> and <span class="math notranslate nohighlight">\(t \in L.\)</span></p>
+<p class="sd-card-text"><strong>Implies:</strong>
+If <span class="math notranslate nohighlight">\(S \models t,\)</span> then <span class="math notranslate nohighlight">\(S \vd t\)</span> by <a class="reference internal" href="#lst:thm-adequacy-theorem">Theorem 100</a>.</p>
+<p class="sd-card-text"><strong>Is implied by:</strong>
+If <span class="math notranslate nohighlight">\(S \vd t,\)</span> then <span class="math notranslate nohighlight">\(S \models t\)</span> by <a class="reference internal" href="#lst:thm-soundness-theorem">Theorem 98</a>.</p>
+</div>
+</details><p>A useful corollary of the completeness theorem is the compactness theorem.
+This says that for any logical truth, there is a finite set of assumptions that proves it.</p>
+<div class="proof theorem admonition" id="lst:thm-compactness-theorem">
+<p class="admonition-title"><span class="caption-number">Theorem 102 </span> (Compactness theorem)</p>
+<section class="theorem-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(S \subseteq L\)</span> and <span class="math notranslate nohighlight">\(t \in L\)</span> with <span class="math notranslate nohighlight">\(S \models t.\)</span>
+Then, there is some finite <span class="math notranslate nohighlight">\(S' \subseteq S\)</span> with <span class="math notranslate nohighlight">\(S' \models t.\)</span></p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Compactness theorem<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(S \subseteq L\)</span> and <span class="math notranslate nohighlight">\(t \in L\)</span> with <span class="math notranslate nohighlight">\(S \models t.\)</span>
+By the <a class="reference internal" href="#lst:thm-completeness-theorem">completeness theorem</a>, <span class="math notranslate nohighlight">\(S \vd t.\)</span>
+Since proofs are finite, there exists a finite subset of assumptions <span class="math notranslate nohighlight">\(S' \subseteq S\)</span> which proves <span class="math notranslate nohighlight">\(t,\)</span> so <span class="math notranslate nohighlight">\(S' \vd t.\)</span>
+Applying the completeness theorem again, we have <span class="math notranslate nohighlight">\(S' \models t.\)</span></p>
+</div>
+</details><p>Another useful corollary of the completeness theorem is the decidability theorem.
+This says that given a finite set of assumptions and a proposition, there exists a procedure that determines whether this statement can be proved from the assumptions, in finite time.</p>
+<div class="proof theorem admonition" id="lst:thm-decidability-theorem">
+<p class="admonition-title"><span class="caption-number">Theorem 103 </span> (Decidability theorem)</p>
+<section class="theorem-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(S \subseteq L\)</span> be a finite set and <span class="math notranslate nohighlight">\(t \in L.\)</span>
+Then, there exists an algorithm that determines, in finite and bounded time, whether or not <span class="math notranslate nohighlight">\(S \vd t.\)</span></p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Decidability theorem<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(S \subseteq L\)</span> be a finite set and <span class="math notranslate nohighlight">\(t \in L.\)</span>
+By the <a class="reference internal" href="#lst:thm-completeness-theorem">completeness theorem</a>, we have <span class="math notranslate nohighlight">\(S \vd t\)</span> if and only if <span class="math notranslate nohighlight">\(S \models t.\)</span>
+We can check <span class="math notranslate nohighlight">\(S \models t\)</span> by making a truth table for <span class="math notranslate nohighlight">\(t.\)</span></p>
+</div>
+</details></section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -684,11 +971,11 @@ We can write down</p>
       </div>
     </a>
     <a class="right-next"
-       href="../papers/intro.html"
+       href="exercises.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Stream of papers</p>
+        <p class="prev-next-title">Exercises</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -710,6 +997,12 @@ We can write down</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#semantic-entailment">Semantic entailment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#syntactic-implication">Syntactic implication</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#completeness">Completeness</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#soundness">Soundness</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adequacy">Adequacy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#completeness-and-compactness">Completeness and compactness</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
