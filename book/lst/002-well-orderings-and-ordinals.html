@@ -551,24 +551,244 @@ Since <span class="math notranslate nohighlight">\(y\)</span> is the least eleme
 But since <span class="math notranslate nohighlight">\(S\)</span> has the stated property, it follows that <span class="math notranslate nohighlight">\(x \in S,\)</span> which is a contradiction.
 Therefore <span class="math notranslate nohighlight">\(X \setminus S = \emptyset\)</span> and <span class="math notranslate nohighlight">\(S = X.\)</span></p>
 </div>
-</details><!-- $$\begin{equation}
-\end{equation}$$
-
-$$\begin{align}
-\end{align}$$
-
-:::{prf:definition} 
-:label: lst:def-
-:::
-
-:::{prf:lemma} 
-:label: lst:lem-
-:::
-
-:::{prf:theorem} 
-:label: lst:thm-
-::: -->
+</details><div class="proof lemma admonition" id="lst:lem-uniqueness-of-well-ordering-isomorphisms">
+<p class="admonition-title"><span class="caption-number">Lemma 51 </span> (Uniqueness of well-ordering isomorphisms)</p>
+<section class="lemma-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> be isomorphic well-orderings.
+Then, there is a unique isomorphism between <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y.\)</span></p>
 </section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Uniqueness of well-ordering isomorphisms<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(X, Y\)</span> be well-orderings and <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> be two isomorphisms from <span class="math notranslate nohighlight">\(X\)</span> to <span class="math notranslate nohighlight">\(Y.\)</span>
+Note that since <span class="math notranslate nohighlight">\(f, g\)</span> preserve order, they must map the least element of <span class="math notranslate nohighlight">\(X\)</span> to the least element of <span class="math notranslate nohighlight">\(Y,\)</span> so <span class="math notranslate nohighlight">\(f(\min X) = g(\min Y).\)</span>
+By the <a class="reference internal" href="#lst:lem-principle-by-induction">principle by induction</a> it suffices to show that if <span class="math notranslate nohighlight">\(f(y) = g(y)\)</span> for all <span class="math notranslate nohighlight">\(y &lt; x,\)</span> then <span class="math notranslate nohighlight">\(f(x) = g(x).\)</span></p>
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(S = \{f(x) \in Y: y &lt; x\}.\)</span>
+We know that <span class="math notranslate nohighlight">\(Y \setminus S\)</span> is non-empty because <span class="math notranslate nohighlight">\(f(x) \not \in S.\)</span>
+Therefore <span class="math notranslate nohighlight">\(Y \setminus S\)</span> must have a least element, say <span class="math notranslate nohighlight">\(a = \min(Y \setminus S).\)</span>
+Now it must be that <span class="math notranslate nohighlight">\(a = f(x)\)</span> because otherwise, by the minimality of <span class="math notranslate nohighlight">\(a\)</span> we would have <span class="math notranslate nohighlight">\(a &lt; f(x),\)</span> which means that <span class="math notranslate nohighlight">\(f^{-1}(a) &lt; x,\)</span> since <span class="math notranslate nohighlight">\(f\)</span> is order preserving.
+Then <span class="math notranslate nohighlight">\(f^{-1}(a) \in S\)</span> and <span class="math notranslate nohighlight">\(a = f(f^{-1}(a)) \in Y,\)</span> which is a contradiction.</p>
+<p class="sd-card-text">The induction hypothesis is that <span class="math notranslate nohighlight">\(f(y) = g(y)\)</span> for all <span class="math notranslate nohighlight">\(y &lt; x.\)</span>
+Therefore <span class="math notranslate nohighlight">\(\{g(y): y &lt; x\} = S\)</span> as well.
+By the same argument as above <span class="math notranslate nohighlight">\(g(x) = \min(Y \setminus S) = f(x).\)</span>
+Which concludes the proof.</p>
+</div>
+</details><div class="proof definition admonition" id="lst:def-initial-segment">
+<p class="admonition-title"><span class="caption-number">Definition 124 </span> (Initial segment)</p>
+<section class="definition-content" id="proof-content">
+<p>A subset <span class="math notranslate nohighlight">\(Y\)</span> of a totally ordered <span class="math notranslate nohighlight">\(X\)</span> is an initial segment if</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+x \in Y, y &lt; x \imp y \in Y.
+\end{equation}\]</div>
+</section>
+</div><div class="proof lemma admonition" id="lst:lem-initial-segment-equivalent-condition">
+<p class="admonition-title"><span class="caption-number">Lemma 52 </span> (Initial segment equivalent condition)</p>
+<section class="lemma-content" id="proof-content">
+<p>Every initial segment <span class="math notranslate nohighlight">\(Y\)</span> of a <a class="reference internal" href="#lst:def-well-ordering">well-ordering</a> <span class="math notranslate nohighlight">\(X\)</span> is of the form</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+I_x = \{y \in X: y &lt; x\}.
+\end{equation}\]</div>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Initial segment equivalent condition<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(X\)</span> is a <a class="reference internal" href="#lst:def-well-ordering">well-ordering</a>, and let <span class="math notranslate nohighlight">\(Y\)</span> to be an initial segment in <span class="math notranslate nohighlight">\(X.\)</span></p>
+<p class="sd-card-text">Take <span class="math notranslate nohighlight">\(x = \min(X \setminus Y).\)</span>
+Then for any <span class="math notranslate nohighlight">\(y \in I_x,\)</span> we have <span class="math notranslate nohighlight">\(y &lt; x.\)</span>
+So <span class="math notranslate nohighlight">\(y \in Y\)</span> by definition of <span class="math notranslate nohighlight">\(x.\)</span>
+So <span class="math notranslate nohighlight">\(I_x \subseteq Y.\)</span></p>
+<p class="sd-card-text">Going the other direction, if <span class="math notranslate nohighlight">\(y \in Y,\)</span> then <span class="math notranslate nohighlight">\(y \neq x.\)</span>
+Also by the definition of <span class="math notranslate nohighlight">\(x,\)</span> we cannot have <span class="math notranslate nohighlight">\(y &gt; x,\)</span> so <span class="math notranslate nohighlight">\(y &lt; x.\)</span>
+Therefore <span class="math notranslate nohighlight">\(y \in I_x\)</span> and <span class="math notranslate nohighlight">\(Y \subseteq I_x.\)</span></p>
+<p class="sd-card-text">We conclude that <span class="math notranslate nohighlight">\(Y = I_x.\)</span></p>
+</div>
+</details><p>In the following results, we think of each function <span class="math notranslate nohighlight">\(f: X \to Y\)</span> as a subset of <span class="math notranslate nohighlight">\(X \times Y,\)</span> i.e. an element of <span class="math notranslate nohighlight">\(\mathbb{P}(X \times Y).\)</span></p>
+<div class="proof definition admonition" id="lst:def-restriction-of-a-function">
+<p class="admonition-title"><span class="caption-number">Definition 125 </span> (Restriction of a function)</p>
+<section class="definition-content" id="proof-content">
+<p>For <span class="math notranslate nohighlight">\(f: A \to B\)</span> and <span class="math notranslate nohighlight">\(C \subseteq A,\)</span> the restriction of <span class="math notranslate nohighlight">\(f\)</span> to <span class="math notranslate nohighlight">\(C\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+f|_C =\{(x, f(x)): x \in C\}.
+\end{equation}\]</div>
+</section>
+</div><div class="proof theorem admonition" id="lst:thm-definition-by-recursion">
+<p class="admonition-title"><span class="caption-number">Theorem 104 </span> (Definition by recursion)</p>
+<section class="theorem-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> be a well-ordered set and <span class="math notranslate nohighlight">\(Y\)</span> be any set.
+Then for any function <span class="math notranslate nohighlight">\(G: \mathbb{P}(X \times Y) \to Y,\)</span> there exists a function <span class="math notranslate nohighlight">\(f: X \to Y\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+f(x) = G(f|_x)
+\end{equation}\]</div>
+<p>for all <span class="math notranslate nohighlight">\(x \in X.\)</span></p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Definition by recursion<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">We prove this result via a trick notion of an <em>attempt</em>.</p>
+<div class="proof definition admonition" id="lst:def-attempt">
+<p class="admonition-title"><span class="caption-number">Definition 126 </span> (Attempt)</p>
+<section class="definition-content" id="proof-content">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(I\)</span> is an initial segment of <span class="math notranslate nohighlight">\(X.\)</span>
+We say <span class="math notranslate nohighlight">\(h: I \to Y\)</span> is an attempt if</p>
+<div class="math notranslate nohighlight">
+\[h(x) = G(h|_{I_x})\]</div>
+<p class="sd-card-text">for all <span class="math notranslate nohighlight">\(x \in I.\)</span></p>
+</section>
+</div><p class="sd-card-text">Any two attempts that are defined at some <span class="math notranslate nohighlight">\(x\)</span> must be equal at <span class="math notranslate nohighlight">\(x.\)</span></p>
+<div class="proof lemma admonition" id="lst:lem-attempts-agree">
+<p class="admonition-title"><span class="caption-number">Lemma 53 </span> (Attempts agree)</p>
+<section class="lemma-content" id="proof-content">
+<p class="sd-card-text">If <a class="reference internal" href="#lst:def-attempt">attempts</a> <span class="math notranslate nohighlight">\(h\)</span> and <span class="math notranslate nohighlight">\(h'\)</span> are defined at <span class="math notranslate nohighlight">\(x,\)</span> then <span class="math notranslate nohighlight">\(h(x) = h'(x).\)</span></p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Attempts agree<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Note that <span class="math notranslate nohighlight">\(h\)</span> and <span class="math notranslate nohighlight">\(h'\)</span> must agree on the least element of <span class="math notranslate nohighlight">\(X.\)</span>
+Therefore by induction it suffices to show that if <span class="math notranslate nohighlight">\(h(y) = h'(y)\)</span> for all <span class="math notranslate nohighlight">\(y &lt; x,\)</span> then <span class="math notranslate nohighlight">\(h(x) = h'(x).\)</span>
+Suppose <span class="math notranslate nohighlight">\(h(y) = h'(y)\)</span> for all <span class="math notranslate nohighlight">\(y &lt; x.\)</span>
+Then <span class="math notranslate nohighlight">\(h|_{I_x} = h'|_{I_x}.\)</span>
+By the definition of attempt, we then have</p>
+<div class="math notranslate nohighlight">
+\[h(x) = G(h|_{I_x}) = G(h'_{I_x}) = h'(x).\]</div>
+</div>
+</details><p class="sd-card-text">Now we show that for any <span class="math notranslate nohighlight">\(x \in X\)</span> there must exist an attempt <span class="math notranslate nohighlight">\(h\)</span> that is defined at <span class="math notranslate nohighlight">\(x.\)</span></p>
+<div class="proof lemma admonition" id="lst:lem-an-attempt-exists-for-each-x">
+<p class="admonition-title"><span class="caption-number">Lemma 54 </span> (An attempt exists for each <span class="math notranslate nohighlight">\(x\)</span>)</p>
+<section class="lemma-content" id="proof-content">
+<p class="sd-card-text">For any <span class="math notranslate nohighlight">\(x \in X,\)</span> there must exist an attempt <span class="math notranslate nohighlight">\(h\)</span> that is defined at <span class="math notranslate nohighlight">\(x.\)</span></p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: An attempt exists for each <span class="math notranslate nohighlight">\(~x\)</span><div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">We proceed by induction, and assume that for each <span class="math notranslate nohighlight">\(y &lt; x,\)</span> there exists an attempt <span class="math notranslate nohighlight">\(h_y\)</span> defined at <span class="math notranslate nohighlight">\(y.\)</span>
+Then we combine all these functions together and take <span class="math notranslate nohighlight">\(h' = \cup_{y &lt; x} h_y.\)</span>
+This is a well-defined function since <a class="reference internal" href="#lst:lem-attempts-agree">attempts agree</a>, and it is defined for all <span class="math notranslate nohighlight">\(y &lt; x.\)</span>
+Now, add <span class="math notranslate nohighlight">\((x, G(h'|_{I_x}))\)</span> to <span class="math notranslate nohighlight">\(h',\)</span> to obtain an attempt <span class="math notranslate nohighlight">\(h\)</span> that is defined at <span class="math notranslate nohighlight">\(x.\)</span>
+We therefore have an attempt that is defined at <span class="math notranslate nohighlight">\(x.\)</span></p>
+</div>
+</details><p class="sd-card-text">Given this result, define <span class="math notranslate nohighlight">\(f: X \to Y\)</span> by <span class="math notranslate nohighlight">\(f(x) = y\)</span> if there exists an attempt <span class="math notranslate nohighlight">\(h,\)</span> defined at <span class="math notranslate nohighlight">\(x\)</span> with <span class="math notranslate nohighlight">\(h(x) = y.\)</span>
+Finally, we note that by its definition using attempts, this <span class="math notranslate nohighlight">\(f\)</span> is unique, concluding the proof.</p>
+</div>
+</details><div class="proof lemma admonition" id="lst:lem-subset-collapse">
+<p class="admonition-title"><span class="caption-number">Lemma 55 </span> (Subset collapse)</p>
+<section class="lemma-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> be a well-ordering and let <span class="math notranslate nohighlight">\(Y \subseteq X.\)</span>
+Then <span class="math notranslate nohighlight">\(Y\)</span> is isomorphic to an initial segment of <span class="math notranslate nohighlight">\(X.\)</span>
+Moreover, this initial segment is unique.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Subset collapse<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(X\)</span> be a well-ordering and let <span class="math notranslate nohighlight">\(Y \subseteq X.\)</span>
+We will construct <span class="math notranslate nohighlight">\(f: Y \to X\)</span> to be an order preserving bijection with an initial segment of <span class="math notranslate nohighlight">\(X.\)</span>
+Specifically, we will map each <span class="math notranslate nohighlight">\(x \in Y.\)</span> to the smallest element of <span class="math notranslate nohighlight">\(X\)</span> that we have not yet mapped to.
+Let</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+f(x) = \min (X \setminus \{f(y): y &lt; x\}).
+\end{equation}\]</div>
+<p class="sd-card-text">The minimum is well-defined because <span class="math notranslate nohighlight">\(\{f(y): y &lt; x\} \neq X.\)</span>
+This is because <span class="math notranslate nohighlight">\(f(z) &lt; x\)</span> for all <span class="math notranslate nohighlight">\(z &lt; x\)</span> by induction, so <span class="math notranslate nohighlight">\(x \not \in \{f(y): y &lt; x\}.\)</span>
+Therefore, by <a class="reference internal" href="#lst:thm-definition-by-recursion">Theorem 104</a>, the result holds.</p>
+</div>
+</details><div class="proof definition admonition" id="lst:def-isomorphic-notation">
+<p class="admonition-title"><span class="caption-number">Definition 127 </span> (Isomorphic notation)</p>
+<section class="definition-content" id="proof-content">
+<p>We write <span class="math notranslate nohighlight">\(X \leq Y\)</span> if <span class="math notranslate nohighlight">\(X\)</span> is isomorphic to an <a class="reference internal" href="#lst:def-initial-segment">initial segment</a> of <span class="math notranslate nohighlight">\(Y.\)</span>
+We write <span class="math notranslate nohighlight">\(X &lt; Y\)</span> if <span class="math notranslate nohighlight">\(X \leq Y\)</span> but <span class="math notranslate nohighlight">\(X\)</span> is not isomorphic to <span class="math notranslate nohighlight">\(Y,\)</span> and similarly for <span class="math notranslate nohighlight">\(X &gt; Y.\)</span></p>
+</section>
+</div><div class="proof theorem admonition" id="lst:thm-well-orderings-are-ordered">
+<p class="admonition-title"><span class="caption-number">Theorem 105 </span> (Well-orderings are ordered)</p>
+<section class="theorem-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(X, Y\)</span> be well-orderings.
+Then either <span class="math notranslate nohighlight">\(X \leq Y\)</span> or <span class="math notranslate nohighlight">\(Y \leq X.\)</span></p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Well-orderings are ordered<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">We attempt to define an isomorphism <span class="math notranslate nohighlight">\(f: X \to Y\)</span> by</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+f(x) = \min (Y \setminus \{f(y): y &lt; x\}).
+\end{equation}\]</div>
+<p class="sd-card-text">Now, depending on whether <span class="math notranslate nohighlight">\(Y \setminus \{f(y): y &lt; x\} = \emptyset\)</span> for some <span class="math notranslate nohighlight">\(x \in X,\)</span> this function is either well-defined or not.
+If it is well-defined, then it is an isomorphism from <span class="math notranslate nohighlight">\(X\)</span> to an initial segment of <span class="math notranslate nohighlight">\(Y.\)</span>
+If it is not well-defined, there exists an <span class="math notranslate nohighlight">\(x \in X\)</span> such that <span class="math notranslate nohighlight">\(\{f(y): y &lt; x\} = Y.\)</span>
+In this case, <span class="math notranslate nohighlight">\(f\)</span> is a bijection between <span class="math notranslate nohighlight">\(I_x = \{y: y &lt; x\}\)</span> and <span class="math notranslate nohighlight">\(Y.\)</span>
+So <span class="math notranslate nohighlight">\(f\)</span> is an isomorphism between <span class="math notranslate nohighlight">\(Y\)</span> and an initial segment of <span class="math notranslate nohighlight">\(X.\)</span></p>
+</div>
+</details><div class="proof theorem admonition" id="lst:thm-sufficient-condition-for-well-orderings">
+<p class="admonition-title"><span class="caption-number">Theorem 106 </span> (Sufficient condition for isomorphic well-orderings)</p>
+<section class="theorem-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(X, Y\)</span> be well-orderings.
+If <span class="math notranslate nohighlight">\(X \leq Y\)</span> and <span class="math notranslate nohighlight">\(Y \leq X,\)</span> then <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are isomorphic.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution: Sufficient condition for isomorphic well-orderings<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(X, Y\)</span> be well-orderings with <span class="math notranslate nohighlight">\(X \leq Y\)</span> and <span class="math notranslate nohighlight">\(Y \leq X.\)</span></p>
+<p class="sd-card-text">Since <span class="math notranslate nohighlight">\(X \leq Y,\)</span> there is an order preserving function <span class="math notranslate nohighlight">\(f: X \to Y\)</span> that is a bijection between <span class="math notranslate nohighlight">\(X\)</span> and an initial segment of <span class="math notranslate nohighlight">\(Y.\)</span>
+Similarly, since <span class="math notranslate nohighlight">\(Y \leq X,\)</span> there is an order preserving function <span class="math notranslate nohighlight">\(g: Y \to X\)</span> that is a bijection between <span class="math notranslate nohighlight">\(Y\)</span> and an initial segment of <span class="math notranslate nohighlight">\(X.\)</span></p>
+<p class="sd-card-text">Now <span class="math notranslate nohighlight">\(g \circ f: X \to X\)</span> is a bijection between <span class="math notranslate nohighlight">\(X\)</span> and an initial segment of <span class="math notranslate nohighlight">\(X.\)</span>
+It is not possible to have a bijection between a set and a proper subset of the set, it must be that <span class="math notranslate nohighlight">\(g \circ f\)</span> is a bijection between <span class="math notranslate nohighlight">\(X\)</span> and itself.
+Similarly, <span class="math notranslate nohighlight">\(f \circ g\)</span> must be a bijection between <span class="math notranslate nohighlight">\(Y\)</span> and itself.</p>
+<p class="sd-card-text">Therefore, both <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> must be bijections, and <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are isomorphic.</p>
+</div>
+</details><div class="math notranslate nohighlight">
+\[\begin{equation}
+\end{equation}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\end{align}\]</div>
+<div class="proof definition admonition" id="lst:def-">
+<p class="admonition-title"><span class="caption-number">Definition 128 </span></p>
+<section class="definition-content" id="proof-content">
+</section>
+</div><div class="proof lemma admonition" id="lst:lem-">
+<p class="admonition-title"><span class="caption-number">Lemma 56 </span></p>
+<section class="lemma-content" id="proof-content">
+</section>
+</div><div class="proof theorem admonition" id="lst:thm-">
+<p class="admonition-title"><span class="caption-number">Theorem 107 </span></p>
+<section class="theorem-content" id="proof-content">
+</section>
+</div></section>
 </section>
 
     <script type="text/x-thebe-config">

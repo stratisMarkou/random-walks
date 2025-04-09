@@ -98,8 +98,213 @@ But since $S$ has the stated property, it follows that $x \in S,$ which is a con
 Therefore $X \setminus S = \emptyset$ and $S = X.$
 :::
 
+:::{prf:lemma} Uniqueness of well-ordering isomorphisms
+:label: lst:lem-uniqueness-of-well-ordering-isomorphisms
+Let $X$ and $Y$ be isomorphic well-orderings.
+Then, there is a unique isomorphism between $X$ and $Y.$
+:::
 
-<!-- $$\begin{equation}
+:::{dropdown} Proof: Uniqueness of well-ordering isomorphisms
+Let $X, Y$ be well-orderings and $f$ and $g$ be two isomorphisms from $X$ to $Y.$
+Note that since $f, g$ preserve order, they must map the least element of $X$ to the least element of $Y,$ so $f(\min X) = g(\min Y).$
+By the {prf:ref}`principle by induction<lst:lem-principle-by-induction>` it suffices to show that if $f(y) = g(y)$ for all $y < x,$ then $f(x) = g(x).$
+
+Let $S = \{f(x) \in Y: y < x\}.$
+We know that $Y \setminus S$ is non-empty because $f(x) \not \in S.$
+Therefore $Y \setminus S$ must have a least element, say $a = \min(Y \setminus S).$
+Now it must be that $a = f(x)$ because otherwise, by the minimality of $a$ we would have $a < f(x),$ which means that $f^{-1}(a) < x,$ since $f$ is order preserving.
+Then $f^{-1}(a) \in S$ and $a = f(f^{-1}(a)) \in Y,$ which is a contradiction.
+
+The induction hypothesis is that $f(y) = g(y)$ for all $y < x.$
+Therefore $\{g(y): y < x\} = S$ as well.
+By the same argument as above $g(x) = \min(Y \setminus S) = f(x).$
+Which concludes the proof.
+:::
+
+
+:::{prf:definition} Initial segment
+:label: lst:def-initial-segment
+A subset $Y$ of a totally ordered $X$ is an initial segment if
+
+$$\begin{equation}
+x \in Y, y < x \imp y \in Y.
+\end{equation}$$
+:::
+
+
+:::{prf:lemma} Initial segment equivalent condition
+:label: lst:lem-initial-segment-equivalent-condition
+Every initial segment $Y$ of a {prf:ref}`well-ordering<lst:def-well-ordering>` $X$ is of the form
+
+$$\begin{equation}
+I_x = \{y \in X: y < x\}.
+\end{equation}$$
+:::
+
+:::{dropdown} Proof: Initial segment equivalent condition
+Let $X$ is a {prf:ref}`well-ordering<lst:def-well-ordering>`, and let $Y$ to be an initial segment in $X.$
+
+Take $x = \min(X \setminus Y).$
+Then for any $y \in I_x,$ we have $y < x.$
+So $y \in Y$ by definition of $x.$
+So $I_x \subseteq Y.$
+
+Going the other direction, if $y \in Y,$ then $y \neq x.$
+Also by the definition of $x,$ we cannot have $y > x,$ so $y < x.$
+Therefore $y \in I_x$ and $Y \subseteq I_x.$
+
+We conclude that $Y = I_x.$ 
+:::
+
+
+In the following results, we think of each function $f: X \to Y$ as a subset of $X \times Y,$ i.e. an element of $\mathbb{P}(X \times Y).$
+
+:::{prf:definition} Restriction of a function
+:label: lst:def-restriction-of-a-function
+For $f: A \to B$ and $C \subseteq A,$ the restriction of $f$ to $C$ is
+
+$$\begin{equation}
+f|_C =\{(x, f(x)): x \in C\}.
+\end{equation}$$
+:::
+
+
+:::{prf:theorem} Definition by recursion
+:label: lst:thm-definition-by-recursion
+Let $X$ be a well-ordered set and $Y$ be any set.
+Then for any function $G: \mathbb{P}(X \times Y) \to Y,$ there exists a function $f: X \to Y$ such that
+
+$$\begin{equation}
+f(x) = G(f|_x)
+\end{equation}$$
+
+for all $x \in X.$
+:::
+
+::::{dropdown} Proof: Definition by recursion
+
+We prove this result via a trick notion of an _attempt_.
+
+:::{prf:definition} Attempt
+:label: lst:def-attempt
+Let $I$ is an initial segment of $X.$
+We say $h: I \to Y$ is an attempt if
+
+$$h(x) = G(h|_{I_x})$$
+
+for all $x \in I.$
+:::
+
+
+Any two attempts that are defined at some $x$ must be equal at $x.$
+
+:::{prf:lemma} Attempts agree
+:label: lst:lem-attempts-agree
+If {prf:ref}`attempts<lst:def-attempt>` $h$ and $h'$ are defined at $x,$ then $h(x) = h'(x).$
+:::
+
+:::{dropdown} Proof: Attempts agree
+Note that $h$ and $h'$ must agree on the least element of $X.$
+Therefore by induction it suffices to show that if $h(y) = h'(y)$ for all $y < x,$ then $h(x) = h'(x).$
+Suppose $h(y) = h'(y)$ for all $y < x.$
+Then $h|_{I_x} = h'|_{I_x}.$
+By the definition of attempt, we then have
+
+$$h(x) = G(h|_{I_x}) = G(h'_{I_x}) = h'(x).$$
+:::
+
+Now we show that for any $x \in X$ there must exist an attempt $h$ that is defined at $x.$
+
+
+:::{prf:lemma} An attempt exists for each $x$
+:label: lst:lem-an-attempt-exists-for-each-x
+For any $x \in X,$ there must exist an attempt $h$ that is defined at $x.$
+:::
+
+:::{dropdown} Proof: An attempt exists for each $~x$
+We proceed by induction, and assume that for each $y < x,$ there exists an attempt $h_y$ defined at $y.$
+Then we combine all these functions together and take $h' = \cup_{y < x} h_y.$
+This is a well-defined function since {prf:ref}`attempts agree<lst:lem-attempts-agree>`, and it is defined for all $y < x.$
+Now, add $(x, G(h'|_{I_x}))$ to $h',$ to obtain an attempt $h$ that is defined at $x.$
+We therefore have an attempt that is defined at $x.$
+:::
+
+Given this result, define $f: X \to Y$ by $f(x) = y$ if there exists an attempt $h,$ defined at $x$ with $h(x) = y.$
+Finally, we note that by its definition using attempts, this $f$ is unique, concluding the proof.
+::::
+
+
+:::{prf:lemma} Subset collapse
+:label: lst:lem-subset-collapse
+Let $X$ be a well-ordering and let $Y \subseteq X.$
+Then $Y$ is isomorphic to an initial segment of $X.$
+Moreover, this initial segment is unique.
+:::
+
+:::{dropdown} Proof: Subset collapse
+Let $X$ be a well-ordering and let $Y \subseteq X.$
+We will construct $f: Y \to X$ to be an order preserving bijection with an initial segment of $X.$
+Specifically, we will map each $x \in Y.$ to the smallest element of $X$ that we have not yet mapped to.
+Let
+
+$$\begin{equation}
+f(x) = \min (X \setminus \{f(y): y < x\}).
+\end{equation}$$
+
+The minimum is well-defined because $\{f(y): y < x\} \neq X.$
+This is because $f(z) < x$ for all $z < x$ by induction, so $x \not \in \{f(y): y < x\}.$
+Therefore, by {prf:ref}`lst:thm-definition-by-recursion`, the result holds.
+:::
+
+
+:::{prf:definition} Isomorphic notation
+:label: lst:def-isomorphic-notation
+We write $X \leq Y$ if $X$ is isomorphic to an {prf:ref}`initial segment<lst:def-initial-segment>` of $Y.$
+We write $X < Y$ if $X \leq Y$ but $X$ is not isomorphic to $Y,$ and similarly for $X > Y.$
+:::
+
+
+:::{prf:theorem} Well-orderings are ordered
+:label: lst:thm-well-orderings-are-ordered
+Let $X, Y$ be well-orderings.
+Then either $X \leq Y$ or $Y \leq X.$
+:::
+
+:::{dropdown} Well-orderings are ordered
+We attempt to define an isomorphism $f: X \to Y$ by
+
+$$\begin{equation}
+f(x) = \min (Y \setminus \{f(y): y < x\}).
+\end{equation}$$
+
+Now, depending on whether $Y \setminus \{f(y): y < x\} = \emptyset$ for some $x \in X,$ this function is either well-defined or not.
+If it is well-defined, then it is an isomorphism from $X$ to an initial segment of $Y.$
+If it is not well-defined, there exists an $x \in X$ such that $\{f(y): y < x\} = Y.$
+In this case, $f$ is a bijection between $I_x = \{y: y < x\}$ and $Y.$
+So $f$ is an isomorphism between $Y$ and an initial segment of $X.$
+:::
+
+
+:::{prf:theorem} Sufficient condition for isomorphic well-orderings
+:label: lst:thm-sufficient-condition-for-well-orderings
+Let $X, Y$ be well-orderings.
+If $X \leq Y$ and $Y \leq X,$ then $X$ and $Y$ are isomorphic.
+:::
+
+:::{dropdown} Solution: Sufficient condition for isomorphic well-orderings
+Let $X, Y$ be well-orderings with $X \leq Y$ and $Y \leq X.$
+
+Since $X \leq Y,$ there is an order preserving function $f: X \to Y$ that is a bijection between $X$ and an initial segment of $Y.$
+Similarly, since $Y \leq X,$ there is an order preserving function $g: Y \to X$ that is a bijection between $Y$ and an initial segment of $X.$
+
+Now $g \circ f: X \to X$ is a bijection between $X$ and an initial segment of $X.$
+It is not possible to have a bijection between a set and a proper subset of the set, it must be that $g \circ f$ is a bijection between $X$ and itself.
+Similarly, $f \circ g$ must be a bijection between $Y$ and itself.
+
+Therefore, both $f$ and $g$ must be bijections, and $X$ and $Y$ are isomorphic.
+:::
+
+$$\begin{equation}
 \end{equation}$$
 
 $$\begin{align}
@@ -115,4 +320,4 @@ $$\begin{align}
 
 :::{prf:theorem} 
 :label: lst:thm-
-::: -->
+:::
