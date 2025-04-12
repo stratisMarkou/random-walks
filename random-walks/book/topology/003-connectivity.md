@@ -16,8 +16,8 @@ We introduce these variants here and discuss some of their properties.
 The first definition of connectivity amounts to whether a space can be split into a disjoint union of two (non-empty) open sets.
 
 :::{prf:definition} Connected space
-:label: topology:def-connected
-A {prf:ref}`topological space<topology:def-topological-space>` $X$ is disconnected if $X$ can be written as $A \cup B,$ where $A$ and $B$ are disjoint, non-empty open subsets of $X.$
+:label: topology:def:connected
+A {prf:ref}`topological space<topology:def:topological-space>` $X$ is disconnected if $X$ can be written as $A \cup B,$ where $A$ and $B$ are disjoint, non-empty open subsets of $X.$
 We say $A$ and $B$ disconnect $X.$
 A space is connected if it is not disconnected.
 :::
@@ -57,7 +57,7 @@ See also {ref}`exercise 2.6<topology:ex-2-6>`.
 We can also consider whether a subspace of a topological space is connected, according to the following definition.
 
 :::{prf:definition} Connected subspace
-Given a subset $A$ of a {prf:ref}`topological space<topology:def-topological-space>` $X,$ we say that $A$ is connected if $A$ is {prf:ref}`connected<topology:def-connected>` as a subspace of $X.$
+Given a subset $A$ of a {prf:ref}`topological space<topology:def:topological-space>` $X,$ we say that $A$ is connected if $A$ is {prf:ref}`connected<topology:def:connected>` as a subspace of $X.$
 :::
 
 
@@ -65,11 +65,11 @@ The following is a useful equivalent condition for connectedness.
 For example, in some cases it may be easy to construct a function that helps us show a certain space is disconnected.
 
 :::{prf:lemma} Equivalent condition for connectedness
-A space $X$ is {prf:ref}`disconnected<topology:def-connected>` if and only if there exists a contunuous surjective $f: X \to \{0, 1\}$ with the discrete topology.
+A space $X$ is {prf:ref}`disconnected<topology:def:connected>` if and only if there exists a contunuous surjective $f: X \to \{0, 1\}$ with the discrete topology.
 :::
 
 :::{dropdown} Proof: Equivalent condition for connectedness
-Suppose $X$ is {prf:ref}`disconnected<topology:def-connected>`.
+Suppose $X$ is {prf:ref}`disconnected<topology:def:connected>`.
 Then there exist disjoint, non-empty open sets $A$ and $B$ such that $X = A \cup B.$
 Define $f: X \to \{0, 1\}$ by
 
@@ -91,11 +91,11 @@ Thus, $X$ is disconnected.
 We now show one of the main results of the section, namely that $[0, 1]$ is connected in $\mathbb{R}$ with the regular topology.
 
 :::{prf:theorem} Closed inverval is connected
-The closed interval $[0, 1]$ with the standard topology is {prf:ref}`connected<topology:def-connected>`.
+The closed interval $[0, 1]$ with the standard topology is {prf:ref}`connected<topology:def:connected>`.
 :::
 
 :::{dropdown} Proof: Closed interval is connected
-Suppose $[0, 1]$ is {prf:ref}`disconnected<topology:def-connected>`.
+Suppose $[0, 1]$ is {prf:ref}`disconnected<topology:def:connected>`.
 Then there exist disjoint, non-empty open sets $A$ and $B$ such that $[0, 1] = A \cup B.$
 Without loss of generality, we may assume that $1 \in B.$
 Since $A$ is non-empty, $\alpha = \sup A$ exists and $\alpha \in [0, 1].$
@@ -104,23 +104,23 @@ There are two possibilities, either $\alpha \in T$ or $\alpha \in B.$
 If $\alpha \in T,$ then $\alpha < 1$ and we immediately have a contradiction because, since $A$ is open, there exists an open interval $(\alpha - \varepsilon, \alpha + \varepsilon) \subseteq [0, 1]$ contained in $A$ for some $\varepsilon > 0,$ which means that $\alpha$ cannot be the supremum of $A.$
 Therefore, $\alpha \in B.$
 However, again, this raises a contradiction because, since $B$ is open, there exists an open interval $(\alpha - \varepsilon, \alpha + \varepsilon) \subseteq [0, 1]$ contained in $B$ for some $\varepsilon > 0,$ which means that $\alpha$ cannot be the supremum of $A.$
-Thus, $[0, 1]$ is {prf:ref}`connected<topology:def-connected>`.
+Thus, $[0, 1]$ is {prf:ref}`connected<topology:def:connected>`.
 :::
 
 Together with the fact that {ref}`products of connected spaces are connected<topology:ex-2-3>`, we see that $[0, 1]^n$ is connected, and so the interior of the $n$-dimensional disc $\text{Int}(D^n)$ is also connected.
 
 :::{prf:lemma} Image of connected space under continuous map is connected
 Let $f: X \to Y$ be a continuous map.
-If $X$ is {prf:ref}`connected<topology:def-connected>`, then $f(X)$ is too.
+If $X$ is {prf:ref}`connected<topology:def:connected>`, then $f(X)$ is too.
 :::
 
 :::{dropdown} Proof: Image of connected space under continuous map is connected
-Suppose $f(X)$ is {prf:ref}`disconnected<topology:def-connected>`.
+Suppose $f(X)$ is {prf:ref}`disconnected<topology:def:connected>`.
 Then there exist disjoint, non-empty open sets $A$ and $B$ such that $f(X) = A \cup B.$
 Define $U = f^{-1}(A)$ and $V = f^{-1}(B).$
 Then $U$ and $V$ are disjoint, non-empty open sets in $X,$ and $X = U \cup V.$
 Therefore $X$ is disconnected, which is a contradiction.
-Thus, $f(X)$ is {prf:ref}`connected<topology:def-connected>`.
+Thus, $f(X)$ is {prf:ref}`connected<topology:def:connected>`.
 :::
 
 
@@ -136,7 +136,7 @@ If $x_0, x_1 \in X$ such that $f(x_0) < 0 < f(x_1),$ then there exists $x \in X$
 :::{dropdown} Proof: Intermediate value theorem
 Suppose there does not exist $x \in X$ such that $f(x) = 0.$
 Then $f(X) \cap (-\infty, 0)$ and $f(X) \cap (0, \infty)$ are open, non-empty and disjoint sets whose union is $f(X).$
-Therefore, $f(X)$ is {prf:ref}`disconnected<topology:def-connected>`, which is a contradiction.
+Therefore, $f(X)$ is {prf:ref}`disconnected<topology:def:connected>`, which is a contradiction.
 Thus, there exists $x \in X$ such that $f(x) = 0.$
 :::
 
@@ -151,7 +151,7 @@ a space is path connected if any two points can be joined by a continuous path, 
 We first define paths.
 
 :::{prf:definiton} Path
-Let $X$ be a {prf:ref}`topological space<topology:def-topological-space>`, and $x_0, x_1 \in X.$
+Let $X$ be a {prf:ref}`topological space<topology:def:topological-space>`, and $x_0, x_1 \in X.$
 Then a path from $x_0$ to $x_1$ is a continuous map $\gamma: [0, 1] \to X$ such that $\gamma(0) = x_0$ and $\gamma(1) = x_1.$
 :::
 
@@ -159,24 +159,24 @@ Then a path from $x_0$ to $x_1$ is a continuous map $\gamma: [0, 1] \to X$ such 
 With paths in place, we are ready to define path connectivity.
 
 :::{prf:definition} Path connectivity
-:label: topology:def-path-connected
-A {prf:ref}`topological space<topology:def-topological-space>` $X$ is {prf:ref}`path connected<topology:def-path-connected>` if for all points $x_0, x_1 \in X,$ there exists a path from $x_0$ to $x_1.$
+:label: topology:def:path-connected
+A {prf:ref}`topological space<topology:def:topological-space>` $X$ is {prf:ref}`path connected<topology:def:path-connected>` if for all points $x_0, x_1 \in X,$ there exists a path from $x_0$ to $x_1.$
 :::
 
 As mentioned, path connectivity is a stronger notion, i.e. implies, regular connectivity.
 
 :::{prf:lemma} Path connected implies connected
-If $X$ is {prf:ref}`path connected<topology:def-path-connected>`, then $X$ is {prf:ref}`connected<topology:def-connected>`.
+If $X$ is {prf:ref}`path connected<topology:def:path-connected>`, then $X$ is {prf:ref}`connected<topology:def:connected>`.
 :::
 
 :::{dropdown} Proof: Path connected implies connected
-Let $X$ be {prf:ref}`path connected<topology:def-path-connected>`, and let $f: X \to \{0, 1\}$ be continuous.
+Let $X$ be {prf:ref}`path connected<topology:def:path-connected>`, and let $f: X \to \{0, 1\}$ be continuous.
 We want to show that $f$ is constant.
 
 Let $x_0, x_1 \in X.$
 By path connectedness, there is a map $\gamma: [0, 1] \to X$ such that $\gamma(0) = x_0$ and $\gamma(1) = x_1.$
 Then $f \circ \gamma: [0, 1] \to \{0, 1\}$ is continuous.
-Since $[0, 1]$ is {prf:ref}`connected<topology:def-connected>`, $f \circ \gamma$ is constant and $f(\gamma(0)) = f(\gamma(1)),$ which means that $f(x_0) = f(x_1).$
+Since $[0, 1]$ is {prf:ref}`connected<topology:def:connected>`, $f \circ \gamma$ is constant and $f(\gamma(0)) = f(\gamma(1)),$ which means that $f(x_0) = f(x_1).$
 Since $x_0$ and $x_1$ were arbitrary, $f$ is constant.
 :::
 
@@ -209,7 +209,7 @@ These are equivalence classes of points which are path connected or connected, r
 ### Path components
 
 :::{prf:lemma} Path connected equivalence relation
-Let $X$ be a {prf:ref}`topological space<topology:def-topological-space>`.
+Let $X$ be a {prf:ref}`topological space<topology:def:topological-space>`.
 For $x, x' \in X,$ define $x \sim x'$ if there exists a path from $x$ to $x'.$
 Then $\sim$ is an equivalence relation.
 :::
@@ -246,14 +246,14 @@ Equivalence classes of the path connectivity equivalence relation are called pat
 Now we turn our attention to connected components, which are analogous to path components, but for regular connectivity.
 
 :::{prf:lemma} Union of intersecting connected sets is connected
-:label: topology:lem-union-of-increasing-connected-sets-is-connected
-Let $X$ be a {prf:ref}`topological space<topology:def-topological-space>`.
-Suppose $Y_\alpha \subseteq X$ is {prf:ref}`connected<topology:def-connected>` for all $\alpha \in T,$ and $\cap_{\alpha \in T} Y_\alpha \neq \emptyset.$
-Then $\cup_{\alpha \in T} Y_\alpha$ is {prf:ref}`connected<topology:def-connected>`.
+:label: topology:lem:union-of-increasing-connected-sets-is-connected
+Let $X$ be a {prf:ref}`topological space<topology:def:topological-space>`.
+Suppose $Y_\alpha \subseteq X$ is {prf:ref}`connected<topology:def:connected>` for all $\alpha \in T,$ and $\cap_{\alpha \in T} Y_\alpha \neq \emptyset.$
+Then $\cup_{\alpha \in T} Y_\alpha$ is {prf:ref}`connected<topology:def:connected>`.
 :::
 
 :::{dropdown} Proof: Union of intersecting connected sets is connected
-Suppose $Y = \cup{\alpha \in T} Y_\alpha$ is {prf:ref}`disconnected<topology:def-connected>`.
+Suppose $Y = \cup{\alpha \in T} Y_\alpha$ is {prf:ref}`disconnected<topology:def:connected>`.
 Then there exist disjoint, non-empty open sets $A$ and $B$ that are subsets of $Y$ such that $A \cup B = Y.$
 Since $A$ and $B$ are open in $Y,$ there exist open $A', B' \subseteq X$ such that $A = A' \cap Y$ and $B = B' \cap Y.$
 Define
@@ -264,21 +264,21 @@ A_\alpha = A \cap Y_\alpha = A' \cap Y_\alpha,~~ B_\alpha = B \cap Y_\alpha = B'
 
 Note that $A_\alpha$ and $B_\alpha$ are open in $Y_\alpha.$
 Note also that $A_\alpha \cup B_\alpha = Y_\alpha$ and $A_\alpha \cap B_\alpha = \emptyset.$
-Since $Y_\alpha$ is {prf:ref}`connected<topology:def-connected>`, we must have either $A_\alpha = \emptyset$ or $B_\alpha = \emptyset$ because otherwise $A_\alpha$ and $B_\alpha$ would disconnect $Y_\alpha.$
+Since $Y_\alpha$ is {prf:ref}`connected<topology:def:connected>`, we must have either $A_\alpha = \emptyset$ or $B_\alpha = \emptyset$ because otherwise $A_\alpha$ and $B_\alpha$ would disconnect $Y_\alpha.$
 
 Now, by assumption, $\cap_{\alpha \in T} Y_\alpha$ is non-empty, so pick $y \in \cap_{\alpha \in T}.$
 Then $y \in A$ or $y \in B,$ and without loss of generality we can pick $y \in A.$
 Since $y \in A,$ we have $y \in A_\alpha$ for all $\alpha \in T.$
 This implies that $B_\alpha = \emptyset$ for all $\alpha \in T,$ and in turn $B = \emptyset.$
 This is a contradiction because we assumed $A$ and $B$ disconnect $Y$ and therefore cannot be empty.
-Therefore $Y$ is {prf:ref}`connected<topology:def-connected>`.
+Therefore $Y$ is {prf:ref}`connected<topology:def:connected>`.
 :::
 
 
 With this result in place, we are ready to define connected components.
 
 :::{prf:definition} Connected component
-Let $X$ be a {prf:ref}`topological space<topology:def-topological-space>` and $x \in X.$
+Let $X$ be a {prf:ref}`topological space<topology:def:topological-space>` and $x \in X.$
 Define
 
 $$\begin{equation}
@@ -288,11 +288,11 @@ $$\begin{equation}
 Then $C(x) = \cup_{A \in \mathcal{C}(x)} A$ is the connected component of $x.$
 :::
 
-In other words, the connected component of $x \in X$ is the largest {prf:ref}`connected<topology:def-connected>` subset of $X$ containing $x,$ which can be shown as follows.
+In other words, the connected component of $x \in X$ is the largest {prf:ref}`connected<topology:def:connected>` subset of $X$ containing $x,$ which can be shown as follows.
 
 :::{prf:remark} Connected component of $x \in X$ is the largest connected subspace containing $x$
 First, note that $\{x\} \in \mathcal{C}(x),$ so $x \in \mathcal{C}(x).$
-Second, note that $C(x)$ is {prf:ref}`connected<topology:def-connected>` because $x \in \cap_{A \in \mathcal{C}(x)} A$ so the set $\cap_{A \in \mathcal{C}(x)} A$ is connected, and by our previous {prf:ref}`lemma<topology:lem-union-of-increasing-connected-sets-is-connected>`, $C(x)$ must also be connected.
+Second, note that $C(x)$ is {prf:ref}`connected<topology:def:connected>` because $x \in \cap_{A \in \mathcal{C}(x)} A$ so the set $\cap_{A \in \mathcal{C}(x)} A$ is connected, and by our previous {prf:ref}`lemma<topology:lem:union-of-increasing-connected-sets-is-connected>`, $C(x)$ must also be connected.
 Therefore $C(x)$ is a connected subset of $X$ that contains $x.$
 Finally, by the defintion of $C(x),$ we see that if another connected subspace $C'$ contains $x,$ then it must be a subset of $C(x).$
 :::
@@ -302,14 +302,14 @@ Similarly to path components, connected components also define an equivalence re
 
 
 :::{prf:lemma} Elements in a connected component have the same connected component
-:label: topology:lem-elements-in-a-connected-component-have-the-same-connected-component
-Let $X$ be a {prf:ref}`topological space<topology:def-topological-space>` and $x, y \in X.$
+:label: topology:lem:elements-in-a-connected-component-have-the-same-connected-component
+Let $X$ be a {prf:ref}`topological space<topology:def:topological-space>` and $x, y \in X.$
 If $y \in C(x),$ then $C(x) = C(y).$
 :::
 
 :::{dropdown} Proof: All elements in a connected component have the same connected component
-Let $X$ be a {prf:ref}`topological space<topology:def-topological-space>` and $x, y \in X.$
-If $y \in C(x),$ then $C(x)$ is a {prf:ref}`connected<topology:def-connected>` subspace containing $y$ and must therefore be a subset of $C(y)$ so $C(x) \subseteq C(y).$
+Let $X$ be a {prf:ref}`topological space<topology:def:topological-space>` and $x, y \in X.$
+If $y \in C(x),$ then $C(x)$ is a {prf:ref}`connected<topology:def:connected>` subspace containing $y$ and must therefore be a subset of $C(y)$ so $C(x) \subseteq C(y).$
 Because of this, we have $x \in C(y)$ as well, and by the same argument it follows that $C(y) \subseteq C(x).$
 We conclude that $C(x) = C(y).$
 :::
@@ -318,13 +318,13 @@ A corollary of the above is that:
 the binary relation that says two elements are equivalent if they share the same connected components is an equivalence relation.
 
 :::{prf:lemma} Connected equivalence relation
-Let $X$ be a {prf:ref}`topological space<topology:def-topological-space>`.
+Let $X$ be a {prf:ref}`topological space<topology:def:topological-space>`.
 For $x, x' \in X,$ define $x \sim x'$ if $C(x) = C(x').$
 Then $\sim$ is an equivalence relation.
 :::
 
 :::{dropdown} Proof: Connect equivalence relation
-Let $X$ be a {prf:ref}`topological space<topology:def-topological-space>`.
+Let $X$ be a {prf:ref}`topological space<topology:def:topological-space>`.
 For $x, x' \in X,$ define $x \sim x'$ if $C(x) = C(x').$
 We will prove that this binary relation satisfies the three requirements of equivalence relations.
 In the following, let $x, x', x'' \in X.$
@@ -342,11 +342,11 @@ These conditions mean that $C(x) = C(x')$ and $C(x') = C(x'')$ so $C(x) = C(x'')
 :::
 
 :::{prf:lemma} Open connected subspaces of $\mathbb{R}^n$ are path connected
-If $U \subseteq \mathbb{R}^n$ with the standard topology is open and {prf:ref}`connected<topology:def-connected>`, then it is {prf:ref}`path connected<topology:def-path-connected>`.
+If $U \subseteq \mathbb{R}^n$ with the standard topology is open and {prf:ref}`connected<topology:def:connected>`, then it is {prf:ref}`path connected<topology:def:path-connected>`.
 :::
 
 :::{dropdown} Proof: open connected subspaces of $~\mathbb{R}^n$ are path connected
-Suppose $U \subseteq \mathbb{R}^n$ with the standard topology is open and {prf:ref}`connected<topology:def-connected>`.
+Suppose $U \subseteq \mathbb{R}^n$ with the standard topology is open and {prf:ref}`connected<topology:def:connected>`.
 Let $A$ be a path component of $U.$
 We will show that $A = U,$ by showing that $U \setminus A$ must be empty.
 In turn, we will argue this by showing that both $A$ and $U \setminus A$ must be open, and since they are disjoint and $A$ is non-empty, then $U \setminus A$ must be empty:
@@ -355,7 +355,7 @@ otherwise $A$ and $U \setminus A$ would disconnect $U.$
 __Showing $A$ is open:__
 Let $a \in A.$
 Since $U$ is open, there exists $\epsilon > 0$ such that $B_\epsilon(a) \subseteq U.$
-Since $B_\epsilon(a) \simeq \text{Int}(D^n)$ is {prf:ref}`path connected<topology:def-path-connected>`, and $A$ is a path component containing $a,$ we have that $B_\epsilon(a) \subseteq A.$
+Since $B_\epsilon(a) \simeq \text{Int}(D^n)$ is {prf:ref}`path connected<topology:def:path-connected>`, and $A$ is a path component containing $a,$ we have that $B_\epsilon(a) \subseteq A.$
 Therefore $A$ is an open subset of $U.$
 
 __Showing $U \setminus A$ is open:__

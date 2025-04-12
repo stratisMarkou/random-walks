@@ -194,7 +194,7 @@ U&(f + g, P, [a, b]) - L(f + g, P, [a, b]) \\
 &< \epsilon.
 \end{align}$$
 
-where in the inequality we have used {prf:ref}`the property of refined partitions <mira-thm-refining-partitions>`.
+where in the inequality we have used {prf:ref}`the property of refined partitions <mira-thm:refining-partitions>`.
 
 :::
 ::::
@@ -386,7 +386,7 @@ Since $f$ is Riemann integrable, by {ref}`exercise 1.A.3<mira-ex-1a3>`, for any 
 $$U(f, P_\epsilon, [a, b]) - L(f, P_\epsilon, [a, b]) < \epsilon.$$
 
 Now, let $P_\epsilon'$ be the partition of $[a, b]$ obtained by adding the points $c$ and $d$ to $P_\epsilon.$
-Then, by the {prf:ref}`property of refined partitions <mira-thm-refining-partitions>`, we have
+Then, by the {prf:ref}`property of refined partitions <mira-thm:refining-partitions>`, we have
 
 $$U(f, P_\epsilon', [a, b]) - L(f, P_\epsilon', [a, b]) \leq U(f, P_\epsilon, [a, b]) - L(f, P_\epsilon, [a, b]) < \epsilon,$$
 
@@ -425,7 +425,7 @@ If $f$ is Rieman integrable on $[a, b],$ then by {ref}`exercise 1.A.3<mira-ex-1a
 $$U(f, P_\epsilon, [a, b]) - L(f, P_\epsilon, [a, b]) < \epsilon.$$
 
 Let $P_\epsilon'$ be the partition of $[a, b]$ obtained by adding the point $c$ to $P_\epsilon.$
-Then, by the {prf:ref}`property of refined partitions <mira-thm-refining-partitions>`, we have
+Then, by the {prf:ref}`property of refined partitions <mira-thm:refining-partitions>`, we have
 
 $$U(f, P_\epsilon', [a, b]) - L(f, P_\epsilon', [a, b]) \leq U(f, P_\epsilon, [a, b]) - L(f, P_\epsilon, [a, b]) < \epsilon,$$
 

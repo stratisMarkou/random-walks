@@ -48,7 +48,7 @@ b - a & \text{if } I = (a, b) \text{ for some } a, b \in \mathbb{R} \text{ with 
 Given lengths of open intervals, we can define the outer measure of a set as the least sum of the lengths of open intervals that cover the set.
 
 :::{prf:definition} Outer measure
-:label: mira-def-outer-measure
+:label: mira-def:outer-measure
 The outer measure $|A|$ of a subset $A \subseteq \mathbb{R}$ is defined by
 
 $$|A| = \inf \left\{ \sum_{j=1}^\infty \ell(I_j) : A \subseteq \bigcup_{j=1}^\infty I_j \right\}.$$
@@ -64,7 +64,7 @@ First, the outer measure of countable subsets of $\mathbb{R}$ is zero.
 
 :::{prf:theorem} Countable sets have outer measure zero
 :label: mira:thm:countable-sets-have-measure-zero
-Every countable subset of $\mathbb{R}$ has {prf:ref}`outer measure<mira-def-outer-measure>` $0.$
+Every countable subset of $\mathbb{R}$ has {prf:ref}`outer measure<mira-def:outer-measure>` $0.$
 :::
 
 :::{dropdown} Proof: Countable sets have outer measure zero
@@ -435,8 +435,7 @@ A natural question is whether the {prf:ref}`nonadditivity of the outer measure <
 However, this next result shows that any notion of length that satisfies certain intuitive properties cannot be additive.
 
 :::{prf:theorem} Nonexistence of extension of length to all subsets of $\mathbb{R}$
-:label: mira:thm:nonexistence-length
-
+:label: mira:thm:nonexistence-of-extension-of-length-to-all-subsets-of-r
 There does not exist a function $\mu$ with the following properties:
 
 (a) $\mu$ is a function from the set of subsets of $\mathbb{R}$ to $[0, \infty],$
@@ -446,7 +445,6 @@ There does not exist a function $\mu$ with the following properties:
 (c) For every disjoint sequence $A_1, A_2, \ldots$ of subsets of $\mathbb{R},$ $\mu \left( \cup_{k=1}^\infty A_k \right) = \sum_{k=1}^\infty \mu(A_k),$
 
 (d) $\mu(t + A) = \mu(A)$ for all $A \subseteq \mathbb{R}$ and $t \in \mathbb{R}.$
-
 :::
 
 :::{dropdown} Proof: Nonexistence of extension of length to all subsets of $~\mathbb{R}$
@@ -511,7 +509,7 @@ reaching a contradiction, because $|V| > 0,$ so the above inequality cannot hold
 
 ### Sigma algebras
 
-{prf:ref}`mira:thm:nonexistence-length` shows that there does not exist a notion of length that satisfies all four intuitive properties that we would like length to satisfy.
+{prf:ref}`mira:thm:nonexistence-of-extension-of-length-to-all-subsets-of-r` shows that there does not exist a notion of length that satisfies all four intuitive properties that we would like length to satisfy.
 We therefore need to relax at least one of these properties to proceed.
 We cannot relax (b), because we want all open intervals to have the length one would expect.
 We also cannot give up (c), because we want length to be additive.
@@ -727,7 +725,7 @@ The following result gives a sufficient condition for a function to be measurabl
 
 
 :::{prf:theorem} Condition for measurable function
-:label: mira-thm-condition-measurable
+:label: mira-thm:condition-measurable
 Suppose $(X, S)$ is a measurable space and $f: X \to \mathbb{R}$ is a function such that
 
 $$f^{-1}((a, \infty)) \in S$$
@@ -789,7 +787,7 @@ f^{-1}((a, \infty)) = \left( \bigcup_{x \in f^{-1}((a, \infty))} (x - \delta_x, 
 \end{equation}$$
 
 The above union is a union of open sets, which is therefore also open, so its intersection with $X$ is a Bore set.
-By our earlier {prf:ref}`condition for measurable functions<mira-thm-condition-measurable>`, $f$ is Borel measurable.
+By our earlier {prf:ref}`condition for measurable functions<mira-thm:condition-measurable>`, $f$ is Borel measurable.
 :::
 
 
@@ -814,7 +812,7 @@ $$f^{-1}((a, \infty)) = (b, \infty) \cap X \text{ or } f^{-1}((a, \infty)) = [b,
 
 holds.
 Since $X$ is a Borel set, and both $(b, \infty)$ and $[b, \infty)$ are Borel sets, it follows that $f^{-1}((a, \infty))$ is a {prf:ref}`Borel set<mira:def:borel-set>`.
-By our earlier {prf:ref}`condition for measurable functions<mira-thm-condition-measurable>`, $f$ is Borel measurable.
+By our earlier {prf:ref}`condition for measurable functions<mira-thm:condition-measurable>`, $f$ is Borel measurable.
 :::
 
 :::{prf:theorem} Composition of measurable functions
@@ -906,7 +904,7 @@ Conversely, suppose $x$ is in the right hand side of the equation above.
 Then there exists $j \in \mathbb{Z}^+$ and $m \in \mathbb{Z}^+$ such that $f_k(x) > a + 1/j$ for all $k \geq m.$
 Taking the limit as $k \to \infty,$ we have $f(x) \geq a + 1/j > a,$ so $x \in f^{-1}((a, \infty)).$
 
-We conclude that $f^{-1}((a, \infty))$ is a Borel set and by our earlier {prf:ref}`condition for measurable functions<mira-thm-condition-measurable>`, $f$ is a Borel measurable function.
+We conclude that $f^{-1}((a, \infty))$ is a Borel set and by our earlier {prf:ref}`condition for measurable functions<mira-thm:condition-measurable>`, $f$ is a Borel measurable function.
 :::
 
 Sometimes, we may need to consider functions which take values in $[-\infty, \infty].$
@@ -928,10 +926,10 @@ $f^{-1}(B) \in S$
 for every Borel set $B \subseteq [-\infty, \infty].$
 :::
 
-The following result is the counterpart of our earlier {prf:ref}`sufficient condition for measurability<mira-thm-condition-measurable>`, but with infinities included in the range of the function.
+The following result is the counterpart of our earlier {prf:ref}`sufficient condition for measurability<mira-thm:condition-measurable>`, but with infinities included in the range of the function.
 
 :::{prf:theorem} Sufficient condition for measurable function
-:label: mira-thm-sufficient-condition-measurable-with-infinity
+:label: mira-thm:sufficient-condition-measurable-with-infinity
 Suppose $(X, S)$ is a measurable space and $f: X \to [-\infty, \infty]$ is a function such that
 
 $$f^{-1}((a, \infty]) \in S$$
@@ -956,7 +954,7 @@ From these it follows that
 $$f^{-1}((a, \infty)) = f^{-1}((a, \infty]) \setminus f^{-1}(\{\infty\}) \in S \text{ for all } a \in \mathbb{R}.$$
 
 Let $B$ be a Borel set in $[-\infty, \infty].$
-From our earlier {prf:ref}`condition for measurable functions<mira-thm-condition-measurable>`, it follows that $f^{-1}(B \cap \mathbb{R}) \in S$ for any Borel set $B \subseteq [-\infty, \infty].$
+From our earlier {prf:ref}`condition for measurable functions<mira-thm:condition-measurable>`, it follows that $f^{-1}(B \cap \mathbb{R}) \in S$ for any Borel set $B \subseteq [-\infty, \infty].$
 We therefore have
 
 $$\begin{align}
@@ -985,7 +983,7 @@ The definition of the supremum implies that
 
 $$h^{-1}((a, \infty]) = \bigcup_{k=1}^\infty f_k^{-1}((a, \infty]) \in S,$$
 
-which, together with the earlier {prf:ref}`sufficient condition for measurable function<mira-thm-sufficient-condition-measurable-with-infinity>`, implies that $h$ is $S$-measurable, that is, the supremum of a sequence of measurable functions is measurable.
+which, together with the earlier {prf:ref}`sufficient condition for measurable function<mira-thm:sufficient-condition-measurable-with-infinity>`, implies that $h$ is $S$-measurable, that is, the supremum of a sequence of measurable functions is measurable.
 Now, note that
 
 $$g(x) = -\sup\{-f_k(x) : k \in \mathbb{Z}^+\},$$
@@ -1008,7 +1006,7 @@ The word *measure* allows us to use a single word for different notions of size 
 
 
 :::{prf:definition} Measure
-:label: mira-def-measure
+:label: mira-def:measure
 Suppose $X$ is a set and $S$ is a $\sigma$-algebra on $X.$
 A measure on $(X, S)$ is a function $\mu: S \to [0, \infty]$ such that $\mu(\emptyset) = 0$ and $\mu$ is countably additive, that is
 
@@ -1036,7 +1034,7 @@ A measure space is an ordered triple $(X, S, \mu),$ where $X$ is a set, $S$ is a
 Now we discuss several useful properties of measures.
 
 :::{prf:theorem} Measure preserves order; measure of a set difference
-:label: mira-thm-measure-preserves-order
+:label: mira-thm:measure-preserves-order
 Suppose $(X, S, \mu)$ is a measure space and $D, E \in S$ with $D \subseteq E.$
 Then
 
@@ -1046,7 +1044,7 @@ Then
 :::
 
 :::{dropdown} Proof: Measure preserves order; measure of a set difference
-Note that $E = D \cup (E \setminus D)$ is a disjoint union, so by {prf:ref}`countable additivity of measures<mira-def-measure>`, we have
+Note that $E = D \cup (E \setminus D)$ is a disjoint union, so by {prf:ref}`countable additivity of measures<mira-def:measure>`, we have
 
 $$\mu(E) = \mu(D) + \mu(E \setminus D) \geq \mu(D),$$
 
@@ -1078,7 +1076,7 @@ $$\begin{align}
 &\leq \sum_{k=1}^\infty \mu(E_k).
 \end{align}$$
 
-where the second equality follows from {prf:ref}`countable additivity of measures<mira-def-measure>` and the inequality follows from the fact that {prf:ref}`measures preserve order<mira-thm-measure-preserves-order>`.
+where the second equality follows from {prf:ref}`countable additivity of measures<mira-def:measure>` and the inequality follows from the fact that {prf:ref}`measures preserve order<mira-thm:measure-preserves-order>`.
 :::
 
 
@@ -1092,7 +1090,7 @@ Note that the countable additivity property of measures is crucial for the follo
 
 
 :::{prf:theorem} Measure of an increasing union
-:label: mira-thm-measure-increasing-union
+:label: mira-thm:measure-increasing-union
 Suppose $(X, S, \mu)$ is a measure space and $E_1, E_2, \ldots \in S$ is an increasing sequence of sets in $S,$ that is $E_1 \subseteq E_2 \subseteq \cdots.$
 Then
 
@@ -1109,7 +1107,7 @@ Then, using the fact that $E_1, E_2, \ldots$ is an increasing sequence of sets, 
 $$\bigcup_{k=1}^\infty E_k = \bigcup_{k=1}^\infty (E_k \setminus E_{k-1}),$$
 
 which is a disjoint union.
-Therefore, by {prf:ref}`countable additivity of measures<mira-def-measure>`, we have
+Therefore, by {prf:ref}`countable additivity of measures<mira-def:measure>`, we have
 
 $$\begin{align}
 \mu\left( \bigcup_{j=1}^\infty E_j \right) &= \mu\left( \bigcup_{j=1}^\infty (E_j \setminus E_{j-1}) \right) \\
@@ -1133,7 +1131,7 @@ First, we have that
 
 $$E_1 \setminus \bigcap_{k=1}^\infty E_k = \bigcup_{k=1}^\infty (E_1 \setminus E_k),$$
 
-which is an increasing union and, by {prf:ref}`mira-thm-measure-increasing-union`, we have
+which is an increasing union and, by {prf:ref}`mira-thm:measure-increasing-union`, we have
 
 $$\mu\left( E_1 \setminus \bigcap_{k=1}^\infty E_k \right) = \lim_{k \to \infty} \mu(E_1 \setminus E_k).$$
 
@@ -1166,7 +1164,7 @@ We have
 $$D \cup E = (D \setminus (D \cap E)) \cup (E \setminus (D \cap E)) \cup (D \cap E),$$
 
 which is a disjoint union.
-Therefore, by {prf:ref}`countable additivity of measures<mira-def-measure>`, we have
+Therefore, by {prf:ref}`countable additivity of measures<mira-def:measure>`, we have
 
 $$\begin{align}
 \mu(D \cup E) &= \mu(D \setminus (D \cap E)) + \mu(E \setminus (D \cap E)) + \mu(D \cap E) \\
@@ -1224,7 +1222,7 @@ $$\begin{align}
 &\geq |A| + |G|.
 \end{align}$$
 
-This inequality implies that $|A \cup G| \geq |A| + |G|$ in the special case that $G$ is an open interval.
+This inequality implies that $|A \cup G| = |A| + |G|$ in the special case that $G$ is an open interval.
 Using induction on $m$ we conclude that if $m \in \mathbb{Z}^+$ and $G$ is a union of $m$ disjoint open intervals that are all disjoint from $A,$ then $|A \cup G| = |A| + |G|.$
 Now, suppose that $G$ is an arbitrary open subset of $\mathbb{R}$ that is disjoint from $A.$
 Then $G = \cup_{n=1}^\infty I_n$ for some sequence of disjoint open intervals $I_1, I_2, \dots,$ each of which is disjoint from $A.$
@@ -1265,9 +1263,9 @@ $$|G| = |F| + |G \setminus F|.$$
 
 Using the fact that $A \subseteq G \setminus F,$ and the above equation, we have that
 
-$$|G| \geq |F| + |A|,$$
+$$|G| \geq |F| + |A|.$$
 
-which in turn implies that
+Thaking the infimum over all open covers of $F \cup A,$ we obtain
 
 $$|F \cup A| \geq |F| + |A|,$$
 
@@ -1281,6 +1279,7 @@ Note that this result would not hold if we replaced closed sets by open sets.
 For example, if $B = [0, 1] \setminus \mathbb{Q},$ then the only open subset of $B$ is the empty set, and thus $B$ cannot be approximated arbitrarily well by open subsets.
 :::
 :::{prf:theorem} Approximation of Borel sets from below by closed sets
+:label: mira-thm:approximation-of-borel-sets-from-below-by-closed-sets
 Suppose $B \subseteq \mathbb{R}$ is a {prf:ref}`Borel set<mira:def:borel-set>`.
 Then, for every $\epsilon > 0,$ there exists a closed set $F \subseteq B$ such that $|B \setminus F| < \epsilon.$
 :::
@@ -1295,7 +1294,7 @@ Our approach to proving the result will be to show that $\mathcal{L}$ is a $\sig
 Then, noting that $\mathcal{L}$ contains all closed subsets of $\mathbb{R},$ by taking complements we conclude that it must contain all open subsets of $\mathbb{R},$ so it also contains every {prf:ref}`Borel subset<mira:def:borel-set>` of $\mathbb{R},$ which will complete the proof.
 
 To show that $\mathcal{L}$ is a $\sigma$-algebra, we will first show that it is closed under countable intersections.
-Suppose $D_1, D_2, \cdot \subseteq \mathcal{L}.$
+Suppose $D_1, D_2, \dots \subseteq \mathcal{L}.$
 Let $\epsilon > 0.$
 For each $k \in \mathbb{Z}^+,$ there exists a closed set $F_k$ such that
 
@@ -1304,7 +1303,7 @@ $$F_k \subseteq D_k \text{ and } |D_k \setminus F_k| < \frac{\epsilon}{2^k}.$$
 Thus $\cap_{k=1}^\infty F_k$ is a closed set and
 
 $$\begin{align}
-\left(\bigcap_{n = 1}^\infty D_k\right) \setminus \left(\bigcap_{n = 1}^\infty F_k\right) \subseteq \bigcap_{n = 1}^\infty (D_k \setminus F_k)
+\left(\bigcap_{n = 1}^\infty D_k\right) \setminus \left(\bigcap_{n = 1}^\infty F_k\right) \subseteq \bigcup_{n = 1}^\infty (D_k \setminus F_k)
 \end{align}$$
 
 from which it follows that 
@@ -1348,4 +1347,215 @@ $$\begin{equation}
 
 we conclude that $\mathbb{R} \setminus D \in \mathcal{L}.$
 Thus $\mathcal{L}$ is a $\sigma$-algebra, which concludes the proof.
+:::
+
+
+:::{prf:theorem} Additivity of the outer measure if one of the sets is Borel
+:label: mira:thm:additivity-of-outer-measure-if-one-set-is-borel
+Suppose $A$ and $B$ are disjoint subsets of $\mathbb{R}$ and $B$ is a Borel set.
+Then
+
+$$|A \cup B| = |A| + |B|.$$
+:::
+
+:::{dropdown} Proof: Additivity of the outer measure if one of the sets is Borel
+Suppose $A$ and $B$ are disjoint subsets of $\mathbb{R}$ and $B$ is a Borel set.
+
+Let $\epsilon > 0.$
+By the previous theorem, there exists a closed $F \subseteq B$ such that $|B \setminus F| < \epsilon.$
+
+By another previous theorem, the outer measure is additive whenever one of the sets is closed.
+
+We therefore have
+
+$$\begin{align}
+|A \cup B| &\geq |A \cup F| \\
+&= |A| + |F| \\
+&= |A| + |B| - |B \setminus F| \\
+&= |A| + |B| - \epsilon
+\end{align}$$
+
+and since $\epsilon > 0$ was arbitrary, we must have $|A \cup B| = |A| + |B|.$
+:::
+
+
+:::{prf:theorem} Existence of a subset of $\mathbb{R}$ that is not a Borel set
+:label: mira:thm:existence-of-a-subset-of-R-that-is-not-a-borel-set
+There exists a subset $B \subseteq \mathbb{R}$ such that $B$ is not a Borel set.
+:::
+
+:::{dropdown} Proof: existence of a subset of $~\mathbb{R}~$ that is not a Borel set
+In the proof of {prf:ref}`mira:thm:nonexistence-of-extension-of-length-to-all-subsets-of-r`, we showed that there exist disjoint $A, B \subseteq \mathbb{R}$ such that $|A \cup B| \neq |A| + |B|.$
+Now, it must be the case that $|B| < \infty,$ because otherwise both sides of the equation would be equal to $\infty.$
+Now, by {prf:ref}`mira:thm:additivity-of-outer-measure-if-one-set-is-borel`, it must be the case that $B$ is not a Borel set, because otherwise we would have $|A \cup B| = |A| + |B|.$
+:::
+
+
+:::{prf:theorem} Outer measure is a measure on Borel sets
+:label: mira:thm:outer-measure-is-a-measure-on-borel-sets
+The {prf:ref}`outer measure<mira:def:outer-measure>` is a {prf:ref}`measure<mira:def:measure>` on the {prf:ref}`Borel sets<mira:def:borel-set>` of $\mathbb{R}.$
+:::
+
+:::{dropdown} Proof: Outer measure is a measure on Borel sets
+The outer measure is a non-negative function with $|\emptyset| = 0.$
+It remains to show that the outer measure is countably additive on the Borel sets of $\mathbb{R}.$
+
+Suppose $B_1, B_2, \ldots$ is a sequence of disjoint Borel sets.
+For each $K \in \mathbb{Z},$ we have
+
+$$\left|\bigcup_{k=1}^\infty B_k\right| &\geq \left| \bigcup_{k=1}^K B_k \right| = \sum_{k=1}^K |B_k|,$$
+
+where the first inequality follows from the {prf:ref}`order-preserving property of measures<mira-thm:measure-preserves-order>` and the second equality follows from {prf:ref}`additivity of outer measure if one of the sets is Borel<mira:thm:additivity-of-outer-measure-if-one-set-is-borel>`.
+Taking the limit as $K \to \infty$ we have
+
+$$\left|\bigcup_{k=1}^\infty B_k\right| \geq \sum_{k=1}^\infty |B_k|.$$
+
+Now, using the {prf:ref}`countable subadditivity of outer measure<mira-thm:countable-subadditivity-of-outer-measure>`, we have
+
+$$\left|\bigcup_{k=1}^\infty B_k\right| \leq \sum_{k=1}^\infty |B_k|.$$
+
+Therefore, we conclude that
+
+$$\left|\bigcup_{k=1}^\infty B_k\right| = \sum_{k=1}^\infty |B_k|,$$
+
+which proves that the outer measure is countably additive on the Borel sets of $\mathbb{R}.$
+:::
+
+
+:::{prf:definition} Lebesgue measure
+:label: mira:def:lebesgue-measure
+The Lebesgue measure is the measure on the Borel $\sigma$-algebra on $\mathbb{R},$ that assigns to each {prf:ref}`Borel set<mira:def:borel-set>` its {prf:ref}`outer measure<mira:def:outer-measure>`.
+:::
+
+Note that this definition is sound because the outer measure is a measure on the Borel sets of $\mathbb{R}$, as shown in {prf:ref}`mira:thm:outer-measure-is-a-measure-on-borel-sets`.
+It turns out that the Lebesgue measure is actually a measure on a larger class of sets called the Lebesgue measurable sets.
+
+:::{prf:definition} Lebesgue measurable set
+:label: mira:def:lebesgue-measurable-set
+A set $A \subseteq \mathbb{R}$ is Lebesgue measurable if there exists a Borel set $B$ such that $|A \setminus B| = 0.$
+:::
+
+:::{prf:theorem} Equivalent conditions for Lebesgue measurable set
+:label: mira:thm:equivalent-conditions-for-lebesgue-measurable-set
+Suppose $A \subseteq \mathbb{R}.$
+Then the following are equivalent.
+
+1. $A$ is {prf:ref}`Lebesgue measurable<mira:def:lebesgue-measurable-set>`.
+2. For each $\epsilon > 0,$ there exists a closed set $F \subseteq A$ such that $|A \setminus F| < \epsilon.$
+3. There exist closed sets $F_1, F_2, \ldots$ contained in $A$ such that
+
+$$\left|A \setminus \bigcup_{k=1}^\infty F_k\right| = 0.$$
+
+4. There exists a {prf:ref}`Borel set<mira:def:borel-set>` $B$ such that $|A \setminus B| = 0.$
+5. For each $\epsilon > 0,$ there exists an open set $G \supseteq A$ such that $|G \setminus A| < \epsilon.$
+6. There exist open sets $G_1, G_2, \ldots$ containing $A$ such that
+
+$$\left|\bigcap_{k=1}^\infty G_k \setminus A\right| = 0.$$
+
+7. There exists a Borel set $B \supseteq A$ such that $|B \setminus A| = 0.$
+:::
+
+:::{dropdown} Proof: equivalent conditions for Lebesgue measurable set
+
+__(2) implies (3):__
+Suppose (2) holds.
+Then, for each $n \in \mathbb{Z}^+,$ there exists a closed set $F_n \subseteq A$ such that $|A \setminus F_n| < \frac{1}{n}.$
+Now
+
+$$\begin{align}
+A \setminus \bigcup_{k=1}^\infty F_k \subseteq A \setminus F_n
+\end{align}$$
+
+for all $n \in \mathbb{Z}^+.$
+Therefore $|A \setminus \cup_{k=1}^\infty F_k| \leq |A \setminus F_n| < \frac{1}{n}$ for all $n \in \mathbb{Z}^+.$
+Therefore $|A \setminus \cup_{k=1}^\infty F_k| = 0,$ which proves (3).
+
+__(3) implies (4):__
+Suppose (3) holds.
+Then, there exists a sequence of closed sets $F_1, F_2, \ldots$ such that $F_k \subseteq A$ for all $k \in \mathbb{Z}^+$ and $|A \setminus \cup_{k=1}^\infty F_k| = 0.$
+Let $B = \cup_{k=1}^\infty F_k.$
+Then $B$ is a Borel set and $|A \setminus B| = 0,$ which proves (4).
+
+__(4) implies (2):__
+Suppose (4) holds.
+Let $\epsilon > 0.$
+Since (4) holds, there exists a Borel set $B$ such that $|A \setminus B| = 0.$
+Then, since $B$ is a Borel set, by {prf:ref}`mira-thm:approximation-of-borel-sets-from-below-by-closed-sets`, there exists a closed set $F \subseteq B$ such that $|B \setminus F| < \epsilon.$
+Now, since $B$ is a Borel set, so is $B \setminus F.$
+Therefore, we have $|A \setminus F| = |A \setminus B| + |B \setminus F| < \epsilon,$ which proves (2).
+
+__(2) implies (5):__
+Suppose (2) holds.
+Let $\epsilon > 0.$
+Define $B = \mathbb{R} \setminus A.$
+Then, by (2), there exists a closed set $F \subseteq B$ such that $|B \setminus F| < \epsilon.$
+Then $G = \mathbb{R} \setminus F$ is an open set, and it satisfies
+
+$$\begin{equation}
+|G \setminus A| = |(\mathbb{R} \setminus F) \setminus A| = |(\mathbb{R} \setminus A) \setminus F| = |B \setminus F| < \epsilon.
+\end{equation}$$
+
+Thus $G$ is an open set such that $|G \setminus A| < \epsilon,$ which proves (5).
+
+__(5) implies (6):__
+Suppose (5) holds.
+Then, for each $n \in \mathbb{Z}^+,$ there exists an open set $G_n$ such that $|G_n \setminus A| < \frac{1}{n}.$
+Let $G = \cap_{n=1}^\infty G_n.$
+Then $G$ is an open set and $A \subseteq G.$
+Therefore, for each $n \in \mathbb{Z}^+,$ we have
+
+$$\begin{align}
+|G \setminus A| &\leq |G_n \setminus A| \\
+&< \frac{1}{n}.
+\end{align}$$
+
+Thus $|G \setminus A| = 0,$ which proves (6).
+
+__(6) implies (7):__
+Suppose (6) holds.
+Then, there exists a sequence of open sets $G_1, G_2, \ldots$ such that $A \subseteq G_k$ for all $k \in \mathbb{Z}^+$ and $|\cap_{k=1}^\infty G_k \setminus A| = 0.$
+Then $B$ is a Borel set and $|B \setminus A| = 0,$ which proves (7).
+
+__(7) implies (2):__
+Suppose (7) holds.
+Let $\epsilon > 0.$
+Since (7) holds, there exists a Borel set $B \subseteq \mathbb{R} \setminus A$ such that $|(\mathbb{R} \setminus A) \setminus B| = 0.$
+Then, since $B$ is a Borel set, by {prf:ref}`mira-thm:approximation-of-borel-sets-from-below-by-closed-sets`, there exists a closed set $F \subseteq B$ such that $|B \setminus F| < \epsilon.$
+Now, since $B$ is a Borel set, so is $B \setminus F.$
+Therefore, we have $|A \setminus F| = |A \setminus B| + |B \setminus F| < \epsilon,$ which proves (2).
+
+__(1) and (4) are equivalent:__
+This is the definition of Lebesgue measurable sets {prf:ref}`mira:def:lebesgue-measurable-set`.
+:::
+
+
+:::{prf:theorem} Outer measure is a measure on Lebesgue measurable sets
+:label: mira:thm:outer-measure-is-a-measure-on-lebesgue-measurable-sets
+* The set $\mathcal{L}$ of Lebesgue measurable sets is a $\sigma$-{prf:ref}`algebra<mira:def:sigma-algebra>` on $\mathbb{R}.$
+* The {prf:ref}`outer measure<mira:def:outer-measure>` is a {prf:ref}`measure<mira:def:measure>` on the Lebesgue measurable sets of $\mathbb{R}.$
+:::
+
+:::{dropdown} Proof: outer measure is a measure on Lebesgue measurable sets
+
+__Part (a):__
+Since (a) and (b) in {prf:ref}`mira:thm:outer-measure-is-a-measure-on-lebesgue-measurable-sets` are equivalent, the set $\mathcal{L}$ of Lebesgue measurable sets is the collection of sets satisfying (b) in {prf:ref}`mira:thm:equivalent-conditions-for-lebesgue-measurable-set`.
+As shown in the proof of {prf:ref}`mira-thm:approximation-of-borel-sets-from-below-by-closed-sets`, the set $\mathcal{L}$ is a $\sigma$-algebra.
+This proves part (a).
+
+__Part (b):__
+We will show that the outer measure is countably additive on the Lebesgue measurable sets of $\mathbb{R}.$
+Suppose $A_1, A_2, \ldots$ is a sequence of disjoint Lebesgue measurable sets.
+By the {prf:ref}`definition of Lebesgue measurable sets<mira:def:lebesgue-measurable-set>`, there exists a sequence of Borel sets $B_1, B_2, \ldots$ such that $B_k \subseteq A_k$ and $|A_k \setminus B_k| = 0$ for all $k \in \mathbb{Z}^+.$
+Then, we have
+
+$$
+\left|\bigcup_{k=1}^\infty A_k\right| \geq \left|\bigcup_{k=1}^\infty B_k\right| = \sum_{k=1}^\infty |B_k| = \sum_{k=1}^\infty |A_k| 
+$$
+
+where the first equality holds because $B_1, B_2, \ldots$ is a sequence of disjoint Borel sets and the outer measure is countably additive on the Borel sets of $\mathbb{R}$ ({prf:ref}`mira:thm:outer-measure-is-a-measure-on-borel-sets`), and the second equality holds because $|A_k| = |B_k|$ for all $k \in \mathbb{Z}^+.$
+Combined with the countable subadditivity of the outer measure, we have
+
+$$\left|\bigcup_{k=1}^\infty A_k\right| = \sum_{k=1}^\infty |A_k|,$$
+
+which shows that the outer measure is countably additive on the Lebesgue measurable sets of $\mathbb{R}.$
 :::

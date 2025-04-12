@@ -54,7 +54,7 @@ A very useful intermediate result is that refining a partition of $[a, b],$ i.e.
 
 
 :::{prf:theorem} Inequalities with Riemann sums
-:label: mira-thm-refining-partitions
+:label: mira-thm:refining-partitions
 
 Suppose $f: [a, b] \to \mathbb{R}$ is a bounded function and $P, P'$ are partitions of $[a, b],$ such that all the points in $P$ are also contained in $P'.$
 Then
@@ -108,7 +108,7 @@ L(f, P, [a, b]) &\leq L(f, P \cup P', [a, b]) \\
 &\leq U(f, P', [a, b]),
 \end{align}$$
 
-where the first inequality follows from the {ref}`refinement property of partitions <mira-thm-refining-partitions>`, the second inequality follows from the fact that the infimum of a set is less than or equal to its supremum, and the third inequality follows again from the refinement property.
+where the first inequality follows from the {ref}`refinement property of partitions <mira-thm:refining-partitions>`, the second inequality follows from the fact that the infimum of a set is less than or equal to its supremum, and the third inequality follows again from the refinement property.
 
 :::
 

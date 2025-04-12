@@ -20,7 +20,7 @@ We begin with the definition of metric spaces.
 A metric space is a set that is equiped with a notion of distance between elements, the metric.
 
 :::{prf:definition} Metric space
-:label: topology:def-metric-space
+:label: topology:def:metric-space
 A metric space is a pair $(X, d_X)$ of a set $X,$ called the space, and a function $d_X: X \times X \to \mathbb{R},$ called the metric, which for all $x, y, z \in X$ satisfies
 
 1. $d(x, y) \geq 0,$
@@ -48,7 +48,7 @@ $$ d_X(a, b) = \begin{cases} 0 & \text{ if } x = y \\ 1 & \text{ if } x \neq y \
 
 
 :::{prf:definition} Metric subspace
-Let a {prf:ref}`metric space<topology:def-metric-space>` $(X, d_X),$ and $Y \subseteq X.$
+Let a {prf:ref}`metric space<topology:def:metric-space>` $(X, d_X),$ and $Y \subseteq X.$
 We call $(Y, d_Y)$ a metric subspace of $X$ where $d_Y: Y \to \mathbb{R}$ is defined such that $d_Y(a, b) = d_X(a, b)$ for all $a, b \in Y.$
 :::
 
@@ -57,7 +57,7 @@ This is a generalisation of convergence from the familiar definition in the cont
 
 
 :::{prf:definition} Convergent sequence
-Let $(x_n)$ be a sequence in a {prf:ref}`metric space<topology:def-metric-space>` $(X, d_X).$
+Let $(x_n)$ be a sequence in a {prf:ref}`metric space<topology:def:metric-space>` $(X, d_X).$
 We say that $(x_n)$ converges to $x \in X,$ written $x_n \to x$ if for every $\epsilon > 0,$ there exists $N \in \mathbb{N}$ such that $d_X(x_n, x) < \epsilon$ for all $n > N.$
 :::
 
@@ -66,13 +66,13 @@ Similar to analogous results in analysis, we can show that in a metric space, li
 
 :::{prf:lemma} Limits in metric spaces are unique
 :label: topology:lemma-limits-in-metric-spaces-are-unique
-Suppose $(X, d_X)$ is a {prf:ref}`metric space<topology:def-metric-space>` and $(x_n)$ is a sequence in $X$ such that $x_n \to x$ and $x_n \to x'$ for some $x, x' \in X.$
+Suppose $(X, d_X)$ is a {prf:ref}`metric space<topology:def:metric-space>` and $(x_n)$ is a sequence in $X$ such that $x_n \to x$ and $x_n \to x'$ for some $x, x' \in X.$
 Then $x = x'.$
 :::
 
 :::{dropdown} Proof: Limits in metric spaces are unique
 Let $(X, d_X)$ be a metric space and $(x_n)$ be a sequence in $X$ such that $x_n \to x$ and $x_n \to x'$ for some $x, x' \in X.$
-By the {ref}`non-negativity, symmetry and the triangle inequality of metrics<topology:def-metric-space>` we have that
+By the {ref}`non-negativity, symmetry and the triangle inequality of metrics<topology:def:metric-space>` we have that
 
 $$0 \leq d(x, x') \leq d(x, x_n) + d(x_n, x') = d(x_n, x) + d(x_n, x')$$
 
@@ -84,8 +84,8 @@ This definition appears slightly different than the $\epsilon-\delta$ defnition 
 
 
 :::{prf:definition} Continuous function
-:label: topology:def-continuous-function
-Let $(X, d_X)$ and $(Y, d_Y)$ be {prf:ref}`metric space<topology:def-metric-space>`.
+:label: topology:def:continuous-function
+Let $(X, d_X)$ and $(Y, d_Y)$ be {prf:ref}`metric space<topology:def:metric-space>`.
 A function $f: X \to Y$ is continuous if $f(x_n) \to f(x)$ in $Y$ whenever $x_n \to x$ in $X.$
 :::
 
@@ -96,7 +96,7 @@ We now introduce the idea of a norm, which is a definition of the length of a po
 
 
 :::{prf:definition} Norm
-:label: topology:def-norm
+:label: topology:def:norm
 Let $V$ be a vector space.
 A norm is a function $||\cdot||: V \to \mathbb{R}$ which satisfies the following properties.
 
@@ -117,7 +117,7 @@ The function $d_V: V \times V \to \mathbb{R}$ defined as $d_V(v, w) = ||v - w||$
 
 :::{dropdown} Proof: Norms induce metrics
 Let $V$ be a vector space with a norm $||\cdot||$ and define $d_V: V \times V \to \mathbb{R}.$
-Using the {ref}`properties of norms<topology:def-norm>`, for any $v, w, u \in V,$ we have
+Using the {ref}`properties of norms<topology:def:norm>`, for any $v, w, u \in V,$ we have
 
 1. $d_V(v, w) = ||v - w|| \geq 0,$ by property 1 of norms,
 2. $d_V(v, v) = ||v|| = 0 \iff v = 0,$ by property 2 norms,
@@ -137,7 +137,7 @@ $$\begin{align}
 :::
 
 ::::{dropdown} Proof: Examples above are norms
-Most of the properties of norms in {prf:ref}`topology:def-norm` follow from the definition of the examples but property 2, the identity of indiscernibles for norms, is a little more involved.
+Most of the properties of norms in {prf:ref}`topology:def:norm` follow from the definition of the examples but property 2, the identity of indiscernibles for norms, is a little more involved.
 For this, we need an intermediate result that we prove here.
 
 :::{prf:lemma} Non-constant positive continuous function has positive integral
@@ -292,8 +292,8 @@ These will turn out to be the key objects that determine continuity of functions
 We first define open and closed balls.
 
 :::{prf:definition} Open and closed balls
-:label: topology:def-open-and-closed-balls
-Let $(X, d_X)$ be a {prf:ref}`metric space<topology:def-metric-space>`.
+:label: topology:def:open-and-closed-balls
+Let $(X, d_X)$ be a {prf:ref}`metric space<topology:def:metric-space>`.
 For any $x \in X$ and $r > 0,$ we define the open ball to be the set
 
 $$B_r(x) = \{ x' \in X : d_X(x, x') < r \},$$
@@ -307,8 +307,8 @@ $$\overline{B}_r(x) = \{ x' \in X : d_X(x, x') \leq r \}.$$
 With open and closed balls defined, we can now define open and closed sets.
 
 :::{prf:definition} Open and closed subsets
-:label: topology:def-open-and-closed-subsets
-Let $(X, d_X)$ be a {prf:ref}`metric space<topology:def-metric-space>`.
+:label: topology:def:open-and-closed-subsets
+Let $(X, d_X)$ be a {prf:ref}`metric space<topology:def:metric-space>`.
 A subset $U \subseteq X$ is open if for every $x \in U,$ there exists $r > 0$ such that $B_r(x) \subseteq U.$
 A subset $C \subseteq X$ is closed if its complement $X \setminus C$ is open.
 :::
@@ -318,14 +318,14 @@ We can now show that the terms _open ball_ and _closed ball_ are in fact justifi
 
 :::{prf:lemma} Open (closed) balls are open (closed)
 :label: topology:lemma-open-and-closed-balls-are-open-and-closed
-Let $(X, d_X)$ be a {prf:ref}`metric space<topology:def-metric-space>`.
-Then, for any $x \in X$ and $r > 0,$ the {prf:ref}`open ball<topology:def-open-and-closed-balls>` $B_r(x)$ is an open subset of $X$ and the {prf:ref}`closed ball<topology:def-open-and-closed-balls>` $\overline{B}_r(x)$ is a closed subset of $X.$
+Let $(X, d_X)$ be a {prf:ref}`metric space<topology:def:metric-space>`.
+Then, for any $x \in X$ and $r > 0,$ the {prf:ref}`open ball<topology:def:open-and-closed-balls>` $B_r(x)$ is an open subset of $X$ and the {prf:ref}`closed ball<topology:def:open-and-closed-balls>` $\overline{B}_r(x)$ is a closed subset of $X.$
 :::
 
 :::{dropdown} Proof: Open (closed) balls are open (closed)
 Let $(X, d_X)$ be a metric space and $x \in X$ and $r > 0.$
 Then, for any $x' \in B_r(x),$ we have $d_X(x, x') < r,$ so we can choose $\epsilon = r - d_X(x, x') > 0.$
-By the {prf:ref}`triangle inequality<topology:def-metric-space>`, we have that $B_\epsilon(x') \subseteq B_r(x),$ so $B_r(x)$ is open.
+By the {prf:ref}`triangle inequality<topology:def:metric-space>`, we have that $B_\epsilon(x') \subseteq B_r(x),$ so $B_r(x)$ is open.
 
 Similarly, suppose $x' \in X \setminus \overline{B}_r(x).$
 Then, $d_X(x, x') > r,$ so we can choose $\epsilon = d_X(x, x') - r > 0,$ and by the triangle inequality we have that $B_\epsilon(x') \subseteq X \setminus \overline{B}_r(x),$ so $X \setminus \overline{B}_r(x)$ is open and $\overline{B}_r(x)$ is closed.
@@ -335,8 +335,8 @@ Then, $d_X(x, x') > r,$ so we can choose $\epsilon = d_X(x, x') - r > 0,$ and by
 Sometimes it's handy to have the following shorthand when talking about open sets.
 
 :::{prf:definition} Open neighbourhood
-:label: topology:def-open-neighbourhood
-Let $(X, d_X)$ be a {prf:ref}`metric space<topology:def-metric-space>`.
+:label: topology:def:open-neighbourhood
+Let $(X, d_X)$ be a {prf:ref}`metric space<topology:def:metric-space>`.
 If $x \in X,$ an open neighbourhood of $x$ is an open set $U \subseteq X$ such that $x \in U.$
 :::
 
@@ -345,8 +345,8 @@ We can re-express convergence of sequences in terms of this shorthand.
 
 :::{prf:lemma} Convergence implies sequence eventually in open neighbourhood
 :label: topology:lemma-convergence-implies-sequence-eventually-in-open-neighbourhood
-Let $(X, d_X)$ be a {prf:ref}`metric space<topology:def-metric-space>` and $(x_n)$ be a sequence in $X$ that converges to $x \in X.$
-Then, for every {prf:ref}`open neighbourhood<topology:def-open-neighbourhood>` $U$ of $x,$ there exists $N \in \mathbb{N}$ such that $x_n \in U$ for all $n > N.$
+Let $(X, d_X)$ be a {prf:ref}`metric space<topology:def:metric-space>` and $(x_n)$ be a sequence in $X$ that converges to $x \in X.$
+Then, for every {prf:ref}`open neighbourhood<topology:def:open-neighbourhood>` $U$ of $x,$ there exists $N \in \mathbb{N}$ such that $x_n \in U$ for all $n > N.$
 :::
 
 :::{dropdown} Proof: Convergence implies sequence eventually in open neighbourhood
@@ -362,8 +362,8 @@ Intuitively, a limit point of a set is a point that is the limit of some sequenc
 Note that a limit point of a set need not itself be in the set.
 
 :::{prf:definition} Limit point
-:label: topology:def-limit-point
-Let $(X, d_X)$ be a {prf:ref}`metric space<topology:def-metric-space>` and $A \subseteq X.$
+:label: topology:def:limit-point
+Let $(X, d_X)$ be a {prf:ref}`metric space<topology:def:metric-space>` and $A \subseteq X.$
 A point $x \in X$ is a limit point of $A$ if there exists a sequence $(x_n)$ in $A$ such that $x_n \to x.$
 :::
 
@@ -372,8 +372,8 @@ Limit points allow an equivalent definition of closed sets, as stated in the fol
 
 :::{prf:lemma} Closed set $\iff$ set contains all its limit points
 :label: topology:lemma-closed-set-iff-set-contains-all-its-limit-points
-Let $(X, d_X)$ be a {prf:ref}`metric space<topology:def-metric-space>` and $A \subseteq X.$
-The set $A$ is {prf:ref}`closed<topology:def-open-and-closed-subsets>` if and only if $A$ contains all its {prf:ref}`limit points<topology:def-limit-point>`.
+Let $(X, d_X)$ be a {prf:ref}`metric space<topology:def:metric-space>` and $A \subseteq X.$
+The set $A$ is {prf:ref}`closed<topology:def:open-and-closed-subsets>` if and only if $A$ contains all its {prf:ref}`limit points<topology:def:limit-point>`.
 :::
 
 :::{dropdown} Proof: Closed set $\iff$ set contains all its limit points
@@ -401,20 +401,20 @@ In particular, even if two metrics are different, if they define the same open s
 
 :::{prf:theorem} Characterisation of continuity
 :label: topology:theorem-characterisation-of-continuity
-Let $(X, d_X)$ and $(Y, d_Y)$ be {prf:ref}`metric spaces<topology:def-metric-space>` and $f: X \to Y$ be a function.
+Let $(X, d_X)$ and $(Y, d_Y)$ be {prf:ref}`metric spaces<topology:def:metric-space>` and $f: X \to Y$ be a function.
 Then, the following are equivalent:
 
-1. $f$ is {prf:ref}`continuous<topology:def-continuous-function>`,
+1. $f$ is {prf:ref}`continuous<topology:def:continuous-function>`,
 2. $f(x_n) \to f(x)$ in $Y$ whenever $x_n \to x$ in $X,$
-3. For every {prf:ref}`open set<topology:def-open-and-closed-subsets>` $U \subseteq Y,$ the preimage $f^{-1}(U)$ is open in $X,$
-4. For every {prf:ref}`closed set<topology:def-open-and-closed-subsets>` $C \subseteq Y,$ the preimage $f^{-1}(C)$ is closed in $X,$
+3. For every {prf:ref}`open set<topology:def:open-and-closed-subsets>` $U \subseteq Y,$ the preimage $f^{-1}(U)$ is open in $X,$
+4. For every {prf:ref}`closed set<topology:def:open-and-closed-subsets>` $C \subseteq Y,$ the preimage $f^{-1}(C)$ is closed in $X,$
 5. For every $x \in X$ and $\epsilon > 0,$ there exists $\delta > 0$ such that $f(B_\delta(x)) \subseteq B_\epsilon(f(x)).$
 :::
 
 :::{dropdown} Proof: Characterisation of continuity
 We break the proof down into a series of implications.
 
-($1 \iff 2$) This is the definition of {prf:ref}`continuity<topology:def-continuous-function>`.
+($1 \iff 2$) This is the definition of {prf:ref}`continuity<topology:def:continuous-function>`.
 
 ($2 \Rightarrow 3$) Suppose $f(x_n) \to f(x)$ in $Y$ whenever $x_n \to x$ in $X.$
 Suppose $U \subseteq Y$ is open but $f^{-1}(U)$ is not.
@@ -443,7 +443,7 @@ We conclude with three properties of open sets that we will use to define toplog
 
 :::{prf:lemma} Properties of open sets
 :label: topology:lemma-properties-of-open-sets
-Let $(X, d_X)$ be a {prf:ref}`metric space<topology:def-metric-space>`.
+Let $(X, d_X)$ be a {prf:ref}`metric space<topology:def:metric-space>`.
 Then
 
 1. The empty set $\emptyset$ and $X$ are open,
