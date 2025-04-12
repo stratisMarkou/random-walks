@@ -471,8 +471,8 @@ This motivates the definition of a topological space, which abstracts the notion
 <p>First, we define topological spaces.
 These are sets equipped with a topology, a collection of subsets which we <em>define</em> to be open.
 Unlike in metric spaces, where we first defined open balls and then used them to define open sets, here we define open sets directly, and require they satisfy certain properties.</p>
-<div class="proof definition admonition" id="topology:def-topological-space">
-<p class="admonition-title"><span class="caption-number">Definition 80 </span> (Topological space)</p>
+<div class="proof definition admonition" id="topology:def:topological-space">
+<p class="admonition-title"><span class="caption-number">Definition 82 </span> (Topological space)</p>
 <section class="definition-content" id="proof-content">
 <p>A topological space is a set <span class="math notranslate nohighlight">\(X,\)</span> called the space, together with a collection <span class="math notranslate nohighlight">\(\mathcal{U} \subseteq \mathcal{P}(X)\)</span> of subsets of <span class="math notranslate nohighlight">\(X,\)</span> called the topology on <span class="math notranslate nohighlight">\(X,\)</span> such that</p>
 <ol class="arabic simple">
@@ -484,15 +484,15 @@ Unlike in metric spaces, where we first defined open balls and then used them to
 </section>
 </div><p>When working with specific spaces, they will often be already be equipped with a metric.
 We refer to the topology associated with a given metric as the induced topology.</p>
-<div class="proof definition admonition" id="topology:def-induced-topology">
-<p class="admonition-title"><span class="caption-number">Definition 81 </span> (Induced topology)</p>
+<div class="proof definition admonition" id="topology:def:induced-topology">
+<p class="admonition-title"><span class="caption-number">Definition 83 </span> (Induced topology)</p>
 <section class="definition-content" id="proof-content">
-<p>Let <span class="math notranslate nohighlight">\((X, d)\)</span> be a <a class="reference internal" href="001-metric-spaces.html#topology:def-metric-space">metric space</a>.
+<p>Let <span class="math notranslate nohighlight">\((X, d)\)</span> be a <a class="reference internal" href="001-metric-spaces.html#topology:def:metric-space">metric space</a>.
 Then, the topology induced by <span class="math notranslate nohighlight">\(d\)</span> is the set of all open sets in <span class="math notranslate nohighlight">\(X\)</span> with respect to the metric <span class="math notranslate nohighlight">\(d.\)</span></p>
 </section>
 </div><p>We now also re-define continuity in terms of open sets.</p>
-<div class="proof definition admonition" id="topology:def-continuous-function-topology">
-<p class="admonition-title"><span class="caption-number">Definition 82 </span> (Continuous function)</p>
+<div class="proof definition admonition" id="topology:def:continuous-function-topology">
+<p class="admonition-title"><span class="caption-number">Definition 84 </span> (Continuous function)</p>
 <section class="definition-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(f: X \to Y\)</span> be a function between topological spaces.
 Then, <span class="math notranslate nohighlight">\(f\)</span> is continuous if for every open set <span class="math notranslate nohighlight">\(U \subseteq Y,\)</span> the pre-image <span class="math notranslate nohighlight">\(f^{-1}(U)\)</span> is an open set in <span class="math notranslate nohighlight">\(X.\)</span></p>
@@ -500,22 +500,22 @@ Then, <span class="math notranslate nohighlight">\(f\)</span> is continuous if f
 </div><div class="proof lemma admonition" id="topology:lemma-composition-preserves-continuity">
 <p class="admonition-title"><span class="caption-number">Lemma 15 </span> (Composition preserves continuity)</p>
 <section class="lemma-content" id="proof-content">
-<p>If <span class="math notranslate nohighlight">\(f: X \to Y\)</span> and <span class="math notranslate nohighlight">\(g: Y \to Z\)</span> are <a class="reference internal" href="#topology:def-continuous-function-topology">continuous functions</a> between <a class="reference internal" href="#topology:def-topological-space">topological spaces</a>, then the composition <span class="math notranslate nohighlight">\(g \circ f: X \to Z\)</span> is continuous.</p>
+<p>If <span class="math notranslate nohighlight">\(f: X \to Y\)</span> and <span class="math notranslate nohighlight">\(g: Y \to Z\)</span> are <a class="reference internal" href="#topology:def:continuous-function-topology">continuous functions</a> between <a class="reference internal" href="#topology:def:topological-space">topological spaces</a>, then the composition <span class="math notranslate nohighlight">\(g \circ f: X \to Z\)</span> is continuous.</p>
 </section>
 </div><p>In topology, we are interested in studying the properties of spaces that are preserved under continuous deformations.
 Therefore, from a topology perspective, two spaces are considered essentially the same up to a continuous bijection.
 This is captured by the notion of homeomorphism.</p>
-<div class="proof definition admonition" id="topology:def-homeomorphism">
-<p class="admonition-title"><span class="caption-number">Definition 83 </span> (Homeomorphism)</p>
+<div class="proof definition admonition" id="topology:def:homeomorphism">
+<p class="admonition-title"><span class="caption-number">Definition 85 </span> (Homeomorphism)</p>
 <section class="definition-content" id="proof-content">
-<p>A function <span class="math notranslate nohighlight">\(f: X \to Y\)</span> between <a class="reference internal" href="#topology:def-topological-space">topological spaces</a> is a <a class="reference internal" href="#topology:def-homeomorphism">homeomorphism</a> if it is bijective, <a class="reference internal" href="#topology:def-continuous-function-topology">continuous</a>, and its inverse <span class="math notranslate nohighlight">\(f^{-1}\)</span> is also continuous.
-Equivalently, <span class="math notranslate nohighlight">\(f\)</span> is a homeomorphism if <span class="math notranslate nohighlight">\(f\)</span> is a bijection and <span class="math notranslate nohighlight">\(U \subseteq X\)</span> is <a class="reference internal" href="#topology:def-topological-space">open</a> if and only if <span class="math notranslate nohighlight">\(f(U) \subseteq Y\)</span> is open.
+<p>A function <span class="math notranslate nohighlight">\(f: X \to Y\)</span> between <a class="reference internal" href="#topology:def:topological-space">topological spaces</a> is a <a class="reference internal" href="#topology:def:homeomorphism">homeomorphism</a> if it is bijective, <a class="reference internal" href="#topology:def:continuous-function-topology">continuous</a>, and its inverse <span class="math notranslate nohighlight">\(f^{-1}\)</span> is also continuous.
+Equivalently, <span class="math notranslate nohighlight">\(f\)</span> is a homeomorphism if <span class="math notranslate nohighlight">\(f\)</span> is a bijection and <span class="math notranslate nohighlight">\(U \subseteq X\)</span> is <a class="reference internal" href="#topology:def:topological-space">open</a> if and only if <span class="math notranslate nohighlight">\(f(U) \subseteq Y\)</span> is open.
 We say two spaces are homeomorphic if there exists a homeomorphism between them.</p>
 </section>
 </div><div class="proof lemma admonition" id="topology:lemma-homeomorphism-equivalence-relation">
 <p class="admonition-title"><span class="caption-number">Lemma 16 </span> (Homeomorphism is an equivalence relation)</p>
 <section class="lemma-content" id="proof-content">
-<p><a class="reference internal" href="#topology:def-homeomorphism">Homeomorphism</a> is an equivalence relation between topological spaces.</p>
+<p><a class="reference internal" href="#topology:def:homeomorphism">Homeomorphism</a> is an equivalence relation between topological spaces.</p>
 </section>
 </div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -546,37 +546,37 @@ In the remainder of this chapter we give definitions and results building up to 
 <h2>Sequences<a class="headerlink" href="#sequences" title="Link to this heading">#</a></h2>
 <p>We now turn to re-defining concepts from metric spaces in terms of topological spaces, starting with sequences.
 First we re-define the following shorthand for open sets.</p>
-<div class="proof definition admonition" id="topology:def-open-neighbourhood-topology">
-<p class="admonition-title"><span class="caption-number">Definition 84 </span> (Open neighbourhood)</p>
+<div class="proof definition admonition" id="topology:def:open-neighbourhood-topology">
+<p class="admonition-title"><span class="caption-number">Definition 86 </span> (Open neighbourhood)</p>
 <section class="definition-content" id="proof-content">
-<p>An open neighbourhood of a point <span class="math notranslate nohighlight">\(x \in X\)</span> in a <a class="reference internal" href="#topology:def-topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span> is an open set <span class="math notranslate nohighlight">\(U \in \mathcal{U}\)</span> such that <span class="math notranslate nohighlight">\(x \in U.\)</span></p>
+<p>An open neighbourhood of a point <span class="math notranslate nohighlight">\(x \in X\)</span> in a <a class="reference internal" href="#topology:def:topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span> is an open set <span class="math notranslate nohighlight">\(U \in \mathcal{U}\)</span> such that <span class="math notranslate nohighlight">\(x \in U.\)</span></p>
 </section>
 </div><p>In topological spaces, convergent sequences are defined directly in terms of open neighbourhoods, rather than using open balls.</p>
-<div class="proof definition admonition" id="topology:def-convergent-sequence-topology">
-<p class="admonition-title"><span class="caption-number">Definition 85 </span> (Convergent sequence)</p>
+<div class="proof definition admonition" id="topology:def:convergent-sequence-topology">
+<p class="admonition-title"><span class="caption-number">Definition 87 </span> (Convergent sequence)</p>
 <section class="definition-content" id="proof-content">
-<p>A sequence <span class="math notranslate nohighlight">\(x_n \to x\)</span> if for every <a class="reference internal" href="#topology:def-open-neighbourhood-topology">open neighbourhood</a> <span class="math notranslate nohighlight">\(U\)</span> of <span class="math notranslate nohighlight">\(x,\)</span> there exists <span class="math notranslate nohighlight">\(N \in \mathbb{N}\)</span> such that <span class="math notranslate nohighlight">\(x_n \in U\)</span> for all <span class="math notranslate nohighlight">\(n &gt; N.\)</span></p>
+<p>A sequence <span class="math notranslate nohighlight">\(x_n \to x\)</span> if for every <a class="reference internal" href="#topology:def:open-neighbourhood-topology">open neighbourhood</a> <span class="math notranslate nohighlight">\(U\)</span> of <span class="math notranslate nohighlight">\(x,\)</span> there exists <span class="math notranslate nohighlight">\(N \in \mathbb{N}\)</span> such that <span class="math notranslate nohighlight">\(x_n \in U\)</span> for all <span class="math notranslate nohighlight">\(n &gt; N.\)</span></p>
 </section>
 </div><p>We now turn to uniqueness of limits.
 In general, in a topological space limits need not be unique.
 For example, given a set <span class="math notranslate nohighlight">\(X\)</span> with the coarse topology <span class="math notranslate nohighlight">\(\mathcal{U} = \{\emptyset, X\},\)</span> every sequence converges to every point.
 However, further assumptions on the topology can result into unique limits.</p>
-<div class="proof definition admonition" id="topology:def-hausdorff-space">
-<p class="admonition-title"><span class="caption-number">Definition 86 </span> (Hausdorff space)</p>
+<div class="proof definition admonition" id="topology:def:hausdorff-space">
+<p class="admonition-title"><span class="caption-number">Definition 88 </span> (Hausdorff space)</p>
 <section class="definition-content" id="proof-content">
-<p>A <a class="reference internal" href="#topology:def-topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span> is Hausdorff if for every pair of distinct points <span class="math notranslate nohighlight">\(x_1, x_2 \in X,\)</span> there exist <a class="reference internal" href="#topology:def-open-neighbourhood-topology">open neighbourhoods</a> <span class="math notranslate nohighlight">\(U_1, U_2\)</span> of <span class="math notranslate nohighlight">\(x_1, x_2\)</span> respectively such that <span class="math notranslate nohighlight">\(U_1 \cap U_2 = \emptyset.\)</span></p>
+<p>A <a class="reference internal" href="#topology:def:topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span> is Hausdorff if for every pair of distinct points <span class="math notranslate nohighlight">\(x_1, x_2 \in X,\)</span> there exist <a class="reference internal" href="#topology:def:open-neighbourhood-topology">open neighbourhoods</a> <span class="math notranslate nohighlight">\(U_1, U_2\)</span> of <span class="math notranslate nohighlight">\(x_1, x_2\)</span> respectively such that <span class="math notranslate nohighlight">\(U_1 \cap U_2 = \emptyset.\)</span></p>
 </section>
 </div><aside class="margin sidebar">
 <p class="sidebar-title"></p>
 <p>Earlier, we proved that <a class="reference internal" href="001-metric-spaces.html#topology:lemma-limits-in-metric-spaces-are-unique">limits in metric spaces are unique</a>.
-The property we used in that proof was that, in a <a class="reference internal" href="001-metric-spaces.html#topology:def-metric-space">metric space</a>, open balls centered around distinct points are disjoint if their radii are small enough.
+The property we used in that proof was that, in a <a class="reference internal" href="001-metric-spaces.html#topology:def:metric-space">metric space</a>, open balls centered around distinct points are disjoint if their radii are small enough.
 This was the Hausdorff property in disguise.
-Metric spaces are always <a class="reference internal" href="#topology:def-hausdorff-space">Hausdorff</a>, and therefore have unique limits.</p>
+Metric spaces are always <a class="reference internal" href="#topology:def:hausdorff-space">Hausdorff</a>, and therefore have unique limits.</p>
 </aside>
 <div class="proof lemma admonition" id="topology:lemma-limits-unique-hausdorff">
 <p class="admonition-title"><span class="caption-number">Lemma 17 </span> (Limits are unique in Hausdorff spaces)</p>
 <section class="lemma-content" id="proof-content">
-<p>If <span class="math notranslate nohighlight">\(X\)</span> is <a class="reference internal" href="#topology:def-hausdorff-space">Hausdorff</a> and <span class="math notranslate nohighlight">\((x_n)\)</span> is a sequence in <span class="math notranslate nohighlight">\(X\)</span> such that <span class="math notranslate nohighlight">\(x_n \to x\)</span> and <span class="math notranslate nohighlight">\(x_n \to x',\)</span> then <span class="math notranslate nohighlight">\(x = x'.\)</span></p>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is <a class="reference internal" href="#topology:def:hausdorff-space">Hausdorff</a> and <span class="math notranslate nohighlight">\((x_n)\)</span> is a sequence in <span class="math notranslate nohighlight">\(X\)</span> such that <span class="math notranslate nohighlight">\(x_n \to x\)</span> and <span class="math notranslate nohighlight">\(x_n \to x',\)</span> then <span class="math notranslate nohighlight">\(x = x'.\)</span></p>
 </section>
 </div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -594,19 +594,19 @@ Then, for all <span class="math notranslate nohighlight">\(n &gt; \max(N, N'),\)
 Therefore, <span class="math notranslate nohighlight">\(x = x'.\)</span></p>
 </div>
 </details><p>We now revisit closed sets and limit points, this time in topological spaces.</p>
-<div class="proof definition admonition" id="topology:def-closed-set-topology">
-<p class="admonition-title"><span class="caption-number">Definition 87 </span> (Closed set)</p>
+<div class="proof definition admonition" id="topology:def:closed-set-topology">
+<p class="admonition-title"><span class="caption-number">Definition 89 </span> (Closed set)</p>
 <section class="definition-content" id="proof-content">
-<p>A set <span class="math notranslate nohighlight">\(C \subseteq X\)</span> in a <a class="reference internal" href="#topology:def-topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span> is closed if its complement <span class="math notranslate nohighlight">\(X \setminus C\)</span> is open.</p>
+<p>A set <span class="math notranslate nohighlight">\(C \subseteq X\)</span> in a <a class="reference internal" href="#topology:def:topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span> is closed if its complement <span class="math notranslate nohighlight">\(X \setminus C\)</span> is open.</p>
 </section>
 </div><p>We now prove some properties of closed sets.</p>
 <div class="proof lemma admonition" id="topology:lemma-properties-of-closed-sets">
 <p class="admonition-title"><span class="caption-number">Lemma 18 </span> (Properties of closed sets)</p>
 <section class="lemma-content" id="proof-content">
-<p>Let <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span> be a <a class="reference internal" href="#topology:def-topological-space">topological space</a>.
+<p>Let <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span> be a <a class="reference internal" href="#topology:def:topological-space">topological space</a>.
 Then,</p>
 <ol class="arabic simple">
-<li><p><span class="math notranslate nohighlight">\(\emptyset\)</span> and <span class="math notranslate nohighlight">\(X\)</span> are <a class="reference internal" href="#topology:def-closed-set-topology">closed</a>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\emptyset\)</span> and <span class="math notranslate nohighlight">\(X\)</span> are <a class="reference internal" href="#topology:def:closed-set-topology">closed</a>,</p></li>
 <li><p>If <span class="math notranslate nohighlight">\(C_1, \dots, C_n\)</span> are closed, then <span class="math notranslate nohighlight">\(\bigcup_{i=1}^n C_i\)</span> is closed,</p></li>
 <li><p>If <span class="math notranslate nohighlight">\(\{C_i\}_{i \in I}\)</span> are closed, then <span class="math notranslate nohighlight">\(\bigcap_{i \in I} C_i\)</span> is closed.</p></li>
 </ol>
@@ -628,12 +628,12 @@ Therefore, <span class="math notranslate nohighlight">\(\bigcup_{i = 1}^n (X \se
 If <span class="math notranslate nohighlight">\({C_i}_{i \in I}\)</span> are closed, then their complements <span class="math notranslate nohighlight">\({X \setminus C_i}_{i \in I}\)</span> are open.
 Therefore, <span class="math notranslate nohighlight">\(\bigcap_{i \in I} (X \setminus C_i) = X \setminus \bigcup_{i \in I} C_i\)</span> is open, so <span class="math notranslate nohighlight">\(\bigcup_{i \in I} C_i\)</span> is closed.</p>
 </div>
-</details><p>Note the similarity of the properties above to the defining properties of <a class="reference internal" href="#topology:def-topological-space">open sets</a>.
+</details><p>Note the similarity of the properties above to the defining properties of <a class="reference internal" href="#topology:def:topological-space">open sets</a>.
 In fact, we could have defined topologies in terms of closed sets rather than open sets.</p>
 <div class="proof lemma admonition" id="topology:lemma-singleton-set-closed-hausdorff">
 <p class="admonition-title"><span class="caption-number">Lemma 19 </span> (Singleton set in Hausdorff space is closed)</p>
 <section class="lemma-content" id="proof-content">
-<p>If <span class="math notranslate nohighlight">\(X\)</span> is <a class="reference internal" href="#topology:def-hausdorff-space">Hausdorff</a> and <span class="math notranslate nohighlight">\(x \in X,\)</span> then <span class="math notranslate nohighlight">\(\{x\}\)</span> is closed.</p>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is <a class="reference internal" href="#topology:def:hausdorff-space">Hausdorff</a> and <span class="math notranslate nohighlight">\(x \in X,\)</span> then <span class="math notranslate nohighlight">\(\{x\}\)</span> is closed.</p>
 </section>
 </div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -660,10 +660,10 @@ Then, <span class="math notranslate nohighlight">\(U' \subseteq X \setminus \{x\
 </details></section>
 <section id="closure-interior-and-limit-points">
 <h2>Closure, interior and limit points<a class="headerlink" href="#closure-interior-and-limit-points" title="Link to this heading">#</a></h2>
-<div class="proof definition admonition" id="topology:def-closure">
-<p class="admonition-title"><span class="caption-number">Definition 88 </span> (Closure)</p>
+<div class="proof definition admonition" id="topology:def:closure">
+<p class="admonition-title"><span class="caption-number">Definition 90 </span> (Closure)</p>
 <section class="definition-content" id="proof-content">
-<p>Let <span class="math notranslate nohighlight">\(A \subseteq X\)</span> be a subset of a <a class="reference internal" href="#topology:def-topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span>.
+<p>Let <span class="math notranslate nohighlight">\(A \subseteq X\)</span> be a subset of a <a class="reference internal" href="#topology:def:topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span>.
 Define</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{C}_A = \{C \subseteq X \mid A \subseteq C \text{ and } C \text{ is closed}\}.\]</div>
@@ -674,7 +674,7 @@ Define</p>
 </div><div class="proof lemma admonition" id="topology:lemma-closure-closed-set">
 <p class="admonition-title"><span class="caption-number">Lemma 20 </span> (Closure of a set is the smallest closed set containing it)</p>
 <section class="lemma-content" id="proof-content">
-<p>Given a set <span class="math notranslate nohighlight">\(A \subseteq X\)</span> in a <a class="reference internal" href="#topology:def-topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U}),\)</span> its closure <span class="math notranslate nohighlight">\(\overline{A}\)</span> is the smallest closed set containing <span class="math notranslate nohighlight">\(A.\)</span></p>
+<p>Given a set <span class="math notranslate nohighlight">\(A \subseteq X\)</span> in a <a class="reference internal" href="#topology:def:topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U}),\)</span> its closure <span class="math notranslate nohighlight">\(\overline{A}\)</span> is the smallest closed set containing <span class="math notranslate nohighlight">\(A.\)</span></p>
 </section>
 </div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -698,16 +698,16 @@ Dexter Chua’s <a class="reference external" href="https://dec41.user.srcf.net/
 Under this definition, all elements of <span class="math notranslate nohighlight">\(A\)</span> are limit points of <span class="math notranslate nohighlight">\(A,\)</span> which does not match the standard defintion.
 I have chosen to follow the standard definition, ammending the results provided in the notes as needed.</p>
 </aside>
-<div class="proof definition admonition" id="topology:def-limit-point">
-<p class="admonition-title"><span class="caption-number">Definition 89 </span> (Limit point)</p>
+<div class="proof definition admonition" id="topology:def:limit-point">
+<p class="admonition-title"><span class="caption-number">Definition 91 </span> (Limit point)</p>
 <section class="definition-content" id="proof-content">
-<p>Let <span class="math notranslate nohighlight">\(A \subseteq X\)</span> be a subset of a <a class="reference internal" href="#topology:def-topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U}).\)</span>
+<p>Let <span class="math notranslate nohighlight">\(A \subseteq X\)</span> be a subset of a <a class="reference internal" href="#topology:def:topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U}).\)</span>
 Then <span class="math notranslate nohighlight">\(x \in X\)</span> is a limit point of <span class="math notranslate nohighlight">\(A\)</span> if every open neighbourhood of <span class="math notranslate nohighlight">\(x\)</span> contains a point of <span class="math notranslate nohighlight">\(A\)</span> different from <span class="math notranslate nohighlight">\(x.\)</span></p>
 </section>
 </div><div class="proof lemma admonition" id="topology:lemma-closed-set-iff-it-contains-its-limit-points">
 <p class="admonition-title"><span class="caption-number">Lemma 21 </span> (Set is closed if and only if it contains its limit points)</p>
 <section class="lemma-content" id="proof-content">
-<p>Given a set <span class="math notranslate nohighlight">\(A \subseteq X\)</span> in a <a class="reference internal" href="#topology:def-topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U}),\)</span> the set <span class="math notranslate nohighlight">\(A\)</span> is <a class="reference internal" href="#topology:def-closed-set-topology">closed</a> if and only if <span class="math notranslate nohighlight">\(A\)</span> contains all its <a class="reference internal" href="#topology:def-limit-point">limit points</a>.</p>
+<p>Given a set <span class="math notranslate nohighlight">\(A \subseteq X\)</span> in a <a class="reference internal" href="#topology:def:topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U}),\)</span> the set <span class="math notranslate nohighlight">\(A\)</span> is <a class="reference internal" href="#topology:def:closed-set-topology">closed</a> if and only if <span class="math notranslate nohighlight">\(A\)</span> contains all its <a class="reference internal" href="#topology:def:limit-point">limit points</a>.</p>
 </section>
 </div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -728,15 +728,15 @@ Suppose <span class="math notranslate nohighlight">\(x \in X \setminus A.\)</spa
 This means <span class="math notranslate nohighlight">\(x\)</span> is not a limit point of <span class="math notranslate nohighlight">\(A,\)</span> so there exists an open neighbourhood <span class="math notranslate nohighlight">\(U\)</span> of <span class="math notranslate nohighlight">\(x\)</span> such that <span class="math notranslate nohighlight">\(U \cap A\)</span> contains no points other than, possibly, <span class="math notranslate nohighlight">\(x.\)</span>
 Therefore, <span class="math notranslate nohighlight">\(U \subseteq X \setminus A,\)</span> so <span class="math notranslate nohighlight">\(X \setminus A\)</span> is open, and <span class="math notranslate nohighlight">\(A\)</span> is closed.</p>
 </div>
-</details><div class="proof definition admonition" id="topology:def-dense-subset">
-<p class="admonition-title"><span class="caption-number">Definition 90 </span> (Dense subset)</p>
+</details><div class="proof definition admonition" id="topology:def:dense-subset">
+<p class="admonition-title"><span class="caption-number">Definition 92 </span> (Dense subset)</p>
 <section class="definition-content" id="proof-content">
-<p>A subset <span class="math notranslate nohighlight">\(A \subseteq X\)</span> of a <a class="reference internal" href="#topology:def-topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span> is dense in <span class="math notranslate nohighlight">\(X\)</span> if <span class="math notranslate nohighlight">\(\overline{A} = X.\)</span></p>
+<p>A subset <span class="math notranslate nohighlight">\(A \subseteq X\)</span> of a <a class="reference internal" href="#topology:def:topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span> is dense in <span class="math notranslate nohighlight">\(X\)</span> if <span class="math notranslate nohighlight">\(\overline{A} = X.\)</span></p>
 </section>
-</div><div class="proof definition admonition" id="topology:def-interior">
-<p class="admonition-title"><span class="caption-number">Definition 91 </span> (Interior)</p>
+</div><div class="proof definition admonition" id="topology:def:interior">
+<p class="admonition-title"><span class="caption-number">Definition 93 </span> (Interior)</p>
 <section class="definition-content" id="proof-content">
-<p>Let <span class="math notranslate nohighlight">\(A \subseteq X\)</span> be a subset of a <a class="reference internal" href="#topology:def-topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U}).\)</span>
+<p>Let <span class="math notranslate nohighlight">\(A \subseteq X\)</span> be a subset of a <a class="reference internal" href="#topology:def:topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U}).\)</span>
 Define</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{O}_A = \{U \subseteq X \mid U \subseteq A \text{ and } U \text{ is open}\}.\]</div>
@@ -747,7 +747,7 @@ Define</p>
 </div><div class="proof lemma admonition" id="topology:lemma-interior-open-set">
 <p class="admonition-title"><span class="caption-number">Lemma 22 </span> (Interior of a set is the largest open set contained in it)</p>
 <section class="lemma-content" id="proof-content">
-<p>Given a set <span class="math notranslate nohighlight">\(A \subseteq X\)</span> in a <a class="reference internal" href="#topology:def-topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U}),\)</span> its <a class="reference internal" href="#topology:def-interior">interior</a> <span class="math notranslate nohighlight">\(\text{Int}(A)\)</span> is the largest open set contained in <span class="math notranslate nohighlight">\(A.\)</span></p>
+<p>Given a set <span class="math notranslate nohighlight">\(A \subseteq X\)</span> in a <a class="reference internal" href="#topology:def:topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U}),\)</span> its <a class="reference internal" href="#topology:def:interior">interior</a> <span class="math notranslate nohighlight">\(\text{Int}(A)\)</span> is the largest open set contained in <span class="math notranslate nohighlight">\(A.\)</span></p>
 </section>
 </div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -762,10 +762,10 @@ Suppose <span class="math notranslate nohighlight">\(U\)</span> is an open set c
 Then <span class="math notranslate nohighlight">\(U \in \mathcal{O}_A,\)</span> so <span class="math notranslate nohighlight">\(U \subseteq \text{Int}(A).\)</span>
 Therefore, <span class="math notranslate nohighlight">\(\text{Int}(A)\)</span> is the largest open set contained in <span class="math notranslate nohighlight">\(A.\)</span></p>
 </div>
-</details><div class="proof lemma admonition" id="topology:def-complement-interior-closure-complement">
+</details><div class="proof lemma admonition" id="topology:def:complement-interior-closure-complement">
 <p class="admonition-title"><span class="caption-number">Lemma 23 </span> (Complement of interior is closure of complement)</p>
 <section class="lemma-content" id="proof-content">
-<p>Given a set <span class="math notranslate nohighlight">\(A \subseteq X\)</span> in a <a class="reference internal" href="#topology:def-topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U}),\)</span> we have</p>
+<p>Given a set <span class="math notranslate nohighlight">\(A \subseteq X\)</span> in a <a class="reference internal" href="#topology:def:topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U}),\)</span> we have</p>
 <div class="math notranslate nohighlight">
 \[X \setminus \text{Int}(A) = \overline{X \setminus A}.\]</div>
 </section>
@@ -788,16 +788,16 @@ We have that</p>
 <section id="subspace-topology">
 <h3>Subspace topology<a class="headerlink" href="#subspace-topology" title="Link to this heading">#</a></h3>
 <p>First, we define the subspace topology.</p>
-<div class="proof definition admonition" id="topology:def-subspace-topology">
-<p class="admonition-title"><span class="caption-number">Definition 92 </span> (Subspace topology)</p>
+<div class="proof definition admonition" id="topology:def:subspace-topology">
+<p class="admonition-title"><span class="caption-number">Definition 94 </span> (Subspace topology)</p>
 <section class="definition-content" id="proof-content">
-<p>Let <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span> be a <a class="reference internal" href="#topology:def-topological-space">topological space</a>, and let <span class="math notranslate nohighlight">\(Y \subseteq X\)</span> be a subset.
+<p>Let <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span> be a <a class="reference internal" href="#topology:def:topological-space">topological space</a>, and let <span class="math notranslate nohighlight">\(Y \subseteq X\)</span> be a subset.
 Then, the subspace topology on <span class="math notranslate nohighlight">\(Y\)</span> is the collection of subsets of <span class="math notranslate nohighlight">\(Y\)</span> given by: <span class="math notranslate nohighlight">\(V\)</span> is an open set in <span class="math notranslate nohighlight">\(Y\)</span> if there exists an open set <span class="math notranslate nohighlight">\(U \in \mathcal{U}\)</span> such that <span class="math notranslate nohighlight">\(V = U \cap Y.\)</span></p>
 </section>
 </div><div class="proof lemma admonition" id="topology:lemma-subspace-topology">
 <p class="admonition-title"><span class="caption-number">Lemma 24 </span> (Subspace topology is a topology)</p>
 <section class="lemma-content" id="proof-content">
-<p>The subspace topology on a subset <span class="math notranslate nohighlight">\(Y \subseteq X\)</span> of a <a class="reference internal" href="#topology:def-topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span> is a <a class="reference internal" href="#topology:def-topological-space">topology</a>.</p>
+<p>The subspace topology on a subset <span class="math notranslate nohighlight">\(Y \subseteq X\)</span> of a <a class="reference internal" href="#topology:def:topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span> is a <a class="reference internal" href="#topology:def:topological-space">topology</a>.</p>
 </section>
 </div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -809,7 +809,7 @@ Proof: Subspace topology is a topology<div class="sd-summary-down docutils">
 <p class="sd-card-text">Let <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span> be a topological space, and let <span class="math notranslate nohighlight">\(Y \subseteq X\)</span> be a subset.
 We want to show that the subspace topology on <span class="math notranslate nohighlight">\(Y\)</span> is a topology.
 Let <span class="math notranslate nohighlight">\(\mathcal{U}_Y\)</span> be the subspace topology on <span class="math notranslate nohighlight">\(Y.\)</span>
-We show each of the <a class="reference internal" href="#topology:def-topological-space">properties of a topology</a> are satisfied by the subspace topology.</p>
+We show each of the <a class="reference internal" href="#topology:def:topological-space">properties of a topology</a> are satisfied by the subspace topology.</p>
 <p class="sd-card-text">First, <span class="math notranslate nohighlight">\(\emptyset = \emptyset \cap Y\)</span> and <span class="math notranslate nohighlight">\(Y = X \cap Y,\)</span> so <span class="math notranslate nohighlight">\(\emptyset, Y \in \mathcal{U}_Y.\)</span>
 Second, suppose <span class="math notranslate nohighlight">\(V_\alpha \in \mathcal{U}_Y\)</span> for all <span class="math notranslate nohighlight">\(\alpha \in A.\)</span>
 Then, there exist open sets <span class="math notranslate nohighlight">\(U_\alpha \in \mathcal{U}\)</span> such that <span class="math notranslate nohighlight">\(V_\alpha = U_\alpha \cap Y.\)</span>
@@ -823,17 +823,17 @@ Then</p>
 \[\bigcap_{i=1}^n V_i = \bigcap_{i=1}^n (U_i \cap Y) = (\bigcap_{i=1}^n U_i) \cap Y \in \mathcal{U}_Y.\]</div>
 <p class="sd-card-text">Putting these three parts together, we conclude that the subspace topology on <span class="math notranslate nohighlight">\(Y\)</span> is a topology.</p>
 </div>
-</details><div class="proof definition admonition" id="topology:def-inclusion-function">
-<p class="admonition-title"><span class="caption-number">Definition 93 </span> (Inclusion function)</p>
+</details><div class="proof definition admonition" id="topology:def:inclusion-function">
+<p class="admonition-title"><span class="caption-number">Definition 95 </span> (Inclusion function)</p>
 <section class="definition-content" id="proof-content">
-<p>Let <span class="math notranslate nohighlight">\(Y \subseteq X\)</span> be a subset of a <a class="reference internal" href="#topology:def-topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span>.
+<p>Let <span class="math notranslate nohighlight">\(Y \subseteq X\)</span> be a subset of a <a class="reference internal" href="#topology:def:topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span>.
 Then, the inclusion function <span class="math notranslate nohighlight">\(\iota: Y \to X\)</span> is the function defined by <span class="math notranslate nohighlight">\(\iota(y) = y\)</span> for all <span class="math notranslate nohighlight">\(y \in Y.\)</span></p>
 </section>
 </div><div class="proof lemma admonition" id="topology:lemma-condition-for-continuity-subspace-topology">
 <p class="admonition-title"><span class="caption-number">Lemma 25 </span> (Condition for continuity in subspace topology)</p>
 <section class="lemma-content" id="proof-content">
-<p>Let <span class="math notranslate nohighlight">\(Y \subseteq X\)</span> be a subset of a <a class="reference internal" href="#topology:def-topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span>.
-Then, a function <span class="math notranslate nohighlight">\(f: Z \to Y\)</span> is continuous if and only if the composition of <span class="math notranslate nohighlight">\(f\)</span> with the <a class="reference internal" href="#topology:def-inclusion-function">inclusion function</a> <span class="math notranslate nohighlight">\(\iota: Y \to X,\)</span> is also continuous.</p>
+<p>Let <span class="math notranslate nohighlight">\(Y \subseteq X\)</span> be a subset of a <a class="reference internal" href="#topology:def:topological-space">topological space</a> <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span>.
+Then, a function <span class="math notranslate nohighlight">\(f: Z \to Y\)</span> is continuous if and only if the composition of <span class="math notranslate nohighlight">\(f\)</span> with the <a class="reference internal" href="#topology:def:inclusion-function">inclusion function</a> <span class="math notranslate nohighlight">\(\iota: Y \to X,\)</span> is also continuous.</p>
 </section>
 </div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -845,7 +845,7 @@ Proof: Condition for continuity in subspace topology<div class="sd-summary-down 
 <p class="sd-card-text">Let <span class="math notranslate nohighlight">\(Y \subseteq X\)</span> be a subset of a topological space <span class="math notranslate nohighlight">\((X, \mathcal{U}).\)</span>
 Let <span class="math notranslate nohighlight">\(f: Y \to Z\)</span> be a function and <span class="math notranslate nohighlight">\(\iota: Y \to X\)</span> be the inclusion function.</p>
 <p class="sd-card-text">To show the first part, suppose <span class="math notranslate nohighlight">\(f\)</span> is continuous.
-Note that the inclusion function <span class="math notranslate nohighlight">\(\iota\)</span> is continuous, and this follows directly from the <a class="reference internal" href="#topology:def-subspace-topology">definition of the subspace topology</a>.
+Note that the inclusion function <span class="math notranslate nohighlight">\(\iota\)</span> is continuous, and this follows directly from the <a class="reference internal" href="#topology:def:subspace-topology">definition of the subspace topology</a>.
 In particular, if <span class="math notranslate nohighlight">\(U\)</span> is open in <span class="math notranslate nohighlight">\(X,\)</span> then <span class="math notranslate nohighlight">\(U \cap Y\)</span> is open in the subspace topology on <span class="math notranslate nohighlight">\(Y,\)</span> and since <span class="math notranslate nohighlight">\(\iota^{-1}(U) = U \cap Y,\)</span> it follows that <span class="math notranslate nohighlight">\(\iota\)</span> is continuous.
 Since <span class="math notranslate nohighlight">\(f\)</span> is continuous, the composition <span class="math notranslate nohighlight">\(f \circ \iota: Y \to Z\)</span> is continuous.</p>
 <p class="sd-card-text">Conversely, suppose <span class="math notranslate nohighlight">\(\iota \circ f\)</span> is continuous and let <span class="math notranslate nohighlight">\(U \subseteq X\)</span> be open in <span class="math notranslate nohighlight">\(X.\)</span>
@@ -859,25 +859,25 @@ Therefore, since any open set in the subspace topology on <span class="math notr
 <p>Now we turn to defining product topologies.
 Before doing so, we define products of sets and projection functions.
 These may be familiar from other contexts, and are included for completeness.</p>
-<div class="proof definition admonition" id="topology:def-cartesian-product">
-<p class="admonition-title"><span class="caption-number">Definition 94 </span> (Product of sets)</p>
+<div class="proof definition admonition" id="topology:def:cartesian-product">
+<p class="admonition-title"><span class="caption-number">Definition 96 </span> (Product of sets)</p>
 <section class="definition-content" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are sets, then the product <span class="math notranslate nohighlight">\(X \times Y\)</span> is the set of all ordered pairs <span class="math notranslate nohighlight">\((x, y)\)</span> with <span class="math notranslate nohighlight">\(x \in X\)</span> and <span class="math notranslate nohighlight">\(y \in Y,\)</span> that is</p>
 <div class="math notranslate nohighlight">
 \[X \times Y = \{(x, y) \mid x \in X, y \in Y\}.\]</div>
 </section>
-</div><div class="proof definition admonition" id="topology:def-projection-function">
-<p class="admonition-title"><span class="caption-number">Definition 95 </span> (Projection function)</p>
+</div><div class="proof definition admonition" id="topology:def:projection-function">
+<p class="admonition-title"><span class="caption-number">Definition 97 </span> (Projection function)</p>
 <section class="definition-content" id="proof-content">
 <p>Given sets <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y,\)</span> the projection functions <span class="math notranslate nohighlight">\(\pi_1 : X \times Y \to X\)</span> and <span class="math notranslate nohighlight">\(\pi_2 : X \times Y \to Y\)</span> are defined by</p>
 <div class="math notranslate nohighlight">
 \[\pi_1(x, y) = x \quad \text{and} \quad \pi_2(x, y) = y.\]</div>
 </section>
 </div><p>Now we are ready to define the product topology.</p>
-<div class="proof definition admonition" id="topology:def-product-topology">
-<p class="admonition-title"><span class="caption-number">Definition 96 </span> (Product topology)</p>
+<div class="proof definition admonition" id="topology:def:product-topology">
+<p class="admonition-title"><span class="caption-number">Definition 98 </span> (Product topology)</p>
 <section class="definition-content" id="proof-content">
-<p>Let <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span> and <span class="math notranslate nohighlight">\((Y, \mathcal{V})\)</span> be <a class="reference internal" href="#topology:def-topological-space">topological spaces</a>.
+<p>Let <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span> and <span class="math notranslate nohighlight">\((Y, \mathcal{V})\)</span> be <a class="reference internal" href="#topology:def:topological-space">topological spaces</a>.
 Then, the product topology on <span class="math notranslate nohighlight">\(X \times Y\)</span> is the collection of subsets of <span class="math notranslate nohighlight">\(X \times Y\)</span> given by: <span class="math notranslate nohighlight">\(U\)</span> is open in <span class="math notranslate nohighlight">\(X \times Y\)</span> if for every <span class="math notranslate nohighlight">\((x, y) \in U,\)</span> there exist open sets <span class="math notranslate nohighlight">\(U_x \in \mathcal{U}\)</span> and <span class="math notranslate nohighlight">\(U_y \in \mathcal{V}\)</span> such that <span class="math notranslate nohighlight">\(x \in U_x,\)</span> <span class="math notranslate nohighlight">\(y \in U_y,\)</span> and <span class="math notranslate nohighlight">\(U_x \times U_y \subseteq U.\)</span></p>
 </section>
 </div><p>The product topology can therefore be thought as a collection in which each open set is a union of products of open sets that is contained in the set.
@@ -892,8 +892,8 @@ In this sense, we can think of the sets over which we are taking the unions as a
 <h3>Quotient topology<a class="headerlink" href="#quotient-topology" title="Link to this heading">#</a></h3>
 <p>Finally, we define the quotient topology.
 First, we define quotients and projections onto equivalence classes for completeness.</p>
-<div class="proof definition admonition" id="topology:def-quotient">
-<p class="admonition-title"><span class="caption-number">Definition 97 </span> (Equivalence classes and quotient)</p>
+<div class="proof definition admonition" id="topology:def:quotient">
+<p class="admonition-title"><span class="caption-number">Definition 99 </span> (Equivalence classes and quotient)</p>
 <section class="definition-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(X\)</span> be a set and <span class="math notranslate nohighlight">\(\sim\)</span> be an equivalence relation on <span class="math notranslate nohighlight">\(X.\)</span>
 Then, the quotient of <span class="math notranslate nohighlight">\(X / \sim\)</span> is the set of equivalence classes of <span class="math notranslate nohighlight">\(\sim.\)</span>
@@ -901,10 +901,10 @@ The projection <span class="math notranslate nohighlight">\(\pi: X \to X / \sim\
 </section>
 </div><p>Now we define the quotient topology.
 The quotient topology can be thought of as a topology on the shape that results when we identify, i.e. glue together, a subset of its points.</p>
-<div class="proof definition admonition" id="topology:def-quotient-topology">
-<p class="admonition-title"><span class="caption-number">Definition 98 </span> (Quotient topology)</p>
+<div class="proof definition admonition" id="topology:def:quotient-topology">
+<p class="admonition-title"><span class="caption-number">Definition 100 </span> (Quotient topology)</p>
 <section class="definition-content" id="proof-content">
-<p>Let <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span> be a <a class="reference internal" href="#topology:def-topological-space">topological space</a>, and let <span class="math notranslate nohighlight">\(\sim\)</span> be an equivalence relation on <span class="math notranslate nohighlight">\(X.\)</span>
+<p>Let <span class="math notranslate nohighlight">\((X, \mathcal{U})\)</span> be a <a class="reference internal" href="#topology:def:topological-space">topological space</a>, and let <span class="math notranslate nohighlight">\(\sim\)</span> be an equivalence relation on <span class="math notranslate nohighlight">\(X.\)</span>
 The quotient topology on <span class="math notranslate nohighlight">\(X / \sim\)</span> is the set of all subsets <span class="math notranslate nohighlight">\(U \subseteq X / \sim\)</span> such that <span class="math notranslate nohighlight">\(\pi^{-1}(U)\)</span> is open in <span class="math notranslate nohighlight">\(X.\)</span></p>
 </section>
 </div><div class="docutils container" id="id2">

@@ -472,9 +472,9 @@ Roughly speaking, compactness can be viewed as a generalisation of what it means
 <h2>Compact spaces<a class="headerlink" href="#compact-spaces" title="Link to this heading">#</a></h2>
 <p>The notion of compactness relies on open covers as defined below.</p>
 <div class="proof definition admonition" id="definition-0">
-<p class="admonition-title"><span class="caption-number">Definition 104 </span> (Open cover)</p>
+<p class="admonition-title"><span class="caption-number">Definition 106 </span> (Open cover)</p>
 <section class="definition-content" id="proof-content">
-<p>Let <span class="math notranslate nohighlight">\(\mathcal{U} \subseteq 2^X\)</span> be a <a class="reference internal" href="002-topological-spaces.html#topology:def-topological-space">topology</a> on <span class="math notranslate nohighlight">\(X.\)</span>
+<p>Let <span class="math notranslate nohighlight">\(\mathcal{U} \subseteq 2^X\)</span> be a <a class="reference internal" href="002-topological-spaces.html#topology:def:topological-space">topology</a> on <span class="math notranslate nohighlight">\(X.\)</span>
 An open cover of <span class="math notranslate nohighlight">\(X\)</span> is a subset <span class="math notranslate nohighlight">\(\mathcal{V} \subseteq \mathcal{U}\)</span> such that</p>
 <div class="math notranslate nohighlight">
 \[\begin{equation}
@@ -484,18 +484,18 @@ An open cover of <span class="math notranslate nohighlight">\(X\)</span> is a su
 If <span class="math notranslate nohighlight">\(\mathcal{V}' \subseteq \mathcal{V}\)</span> and <span class="math notranslate nohighlight">\(\mathcal{V}'\)</span> covers <span class="math notranslate nohighlight">\(X,\)</span> then we say <span class="math notranslate nohighlight">\(\mathcal{V}'\)</span> is a subcover of <span class="math notranslate nohighlight">\(\mathcal{V}.\)</span></p>
 </section>
 </div><p>Now, a space is defined to be compact if any open cover of the space contains a finite subcover.</p>
-<div class="proof definition admonition" id="topology:def-compact-space">
-<p class="admonition-title"><span class="caption-number">Definition 105 </span> (Compact space)</p>
+<div class="proof definition admonition" id="topology:def:compact-space">
+<p class="admonition-title"><span class="caption-number">Definition 107 </span> (Compact space)</p>
 <section class="definition-content" id="proof-content">
-<p>A <a class="reference internal" href="002-topological-spaces.html#topology:def-topological-space">topological space</a> <span class="math notranslate nohighlight">\(X\)</span> is <a class="reference internal" href="#topology:def-compact-space">compact</a> if every open cover <span class="math notranslate nohighlight">\(\mathcal{V}\)</span> of <span class="math notranslate nohighlight">\(X\)</span> has a finite <a class="reference internal" href="002-topological-spaces.html#topology:def-topological-space">subcover</a> <span class="math notranslate nohighlight">\(\mathcal{V}' = \{V_1, \dots, V_n\} \subseteq \mathcal{V}.\)</span></p>
+<p>A <a class="reference internal" href="002-topological-spaces.html#topology:def:topological-space">topological space</a> <span class="math notranslate nohighlight">\(X\)</span> is <a class="reference internal" href="#topology:def:compact-space">compact</a> if every open cover <span class="math notranslate nohighlight">\(\mathcal{V}\)</span> of <span class="math notranslate nohighlight">\(X\)</span> has a finite <a class="reference internal" href="002-topological-spaces.html#topology:def:topological-space">subcover</a> <span class="math notranslate nohighlight">\(\mathcal{V}' = \{V_1, \dots, V_n\} \subseteq \mathcal{V}.\)</span></p>
 </section>
 </div><p>We note that compactness is topological property:
 if a compact space is homeomorphic to another space, the second space is also compact.
 The first result that we show is that the closed unit interval is compact.</p>
 <div class="proof theorem admonition" id="topology:closed-interval-is-compact">
-<p class="admonition-title"><span class="caption-number">Theorem 93 </span> (Closed interval is compact)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 98 </span> (Closed interval is compact)</p>
 <section class="theorem-content" id="proof-content">
-<p>The closed interval <span class="math notranslate nohighlight">\([0, 1] \subseteq \mathbb{R}\)</span> with the standard topology is <a class="reference internal" href="#topology:def-compact-space">compact</a>.</p>
+<p>The closed interval <span class="math notranslate nohighlight">\([0, 1] \subseteq \mathbb{R}\)</span> with the standard topology is <a class="reference internal" href="#topology:def:compact-space">compact</a>.</p>
 </section>
 </div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -530,10 +530,10 @@ Similarly, the open interval <span class="math notranslate nohighlight">\((0, 1)
 <p>We now show two useful results.
 First, we note that a subset of a compact space is not necessarily a compact space: <span class="math notranslate nohighlight">\((0, 1) \subseteq [0, 1]\)</span> but the former is not compact even though the latter is.
 However, a closed subset of a compact space is compact.</p>
-<div class="proof lemma admonition" id="topology:lem-closed-subsets-of-compact-spaces-are-compact">
+<div class="proof lemma admonition" id="topology:lem:closed-subsets-of-compact-spaces-are-compact">
 <p class="admonition-title"><span class="caption-number">Lemma 35 </span> (Closed subsets of compact spaces are compact)</p>
 <section class="lemma-content" id="proof-content">
-<p>If <span class="math notranslate nohighlight">\(X\)</span> is <a class="reference internal" href="#topology:def-compact-space">compact</a> and <span class="math notranslate nohighlight">\(C\)</span> is a closed subset of <span class="math notranslate nohighlight">\(X,\)</span> then <span class="math notranslate nohighlight">\(C\)</span> is also compact.</p>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is <a class="reference internal" href="#topology:def:compact-space">compact</a> and <span class="math notranslate nohighlight">\(C\)</span> is a closed subset of <span class="math notranslate nohighlight">\(X,\)</span> then <span class="math notranslate nohighlight">\(C\)</span> is also compact.</p>
 </section>
 </div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -553,8 +553,8 @@ a compact subspace of a Hausdorff space is closed.</p>
 <div class="proof lemma admonition" id="topology:lemma-compact-subspaces-of-hausdorff-spaces-are-closed">
 <p class="admonition-title"><span class="caption-number">Lemma 36 </span> (Compact subspaces of Hausdorff spaces are closed)</p>
 <section class="lemma-content" id="proof-content">
-<p>Let <span class="math notranslate nohighlight">\(X\)</span> be a <a class="reference internal" href="002-topological-spaces.html#topology:def-hausdorff-space">Hausdorff space</a>.
-If <span class="math notranslate nohighlight">\(C \subseteq X\)</span> is <a class="reference internal" href="#topology:def-compact-space">compact</a>, then <span class="math notranslate nohighlight">\(C\)</span> is closed in <span class="math notranslate nohighlight">\(X.\)</span></p>
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> be a <a class="reference internal" href="002-topological-spaces.html#topology:def:hausdorff-space">Hausdorff space</a>.
+If <span class="math notranslate nohighlight">\(C \subseteq X\)</span> is <a class="reference internal" href="#topology:def:compact-space">compact</a>, then <span class="math notranslate nohighlight">\(C\)</span> is closed in <span class="math notranslate nohighlight">\(X.\)</span></p>
 </section>
 </div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -576,17 +576,17 @@ Therefore <span class="math notranslate nohighlight">\(X \setminus C\)</span> is
 </details><p>It turns out that for <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> with the standard topology, compactness is equivalent to closedness plus boundedness.
 To show this, we first define boundedness for metric spaces.</p>
 <div class="proof definition admonition" id="definition-5">
-<p class="admonition-title"><span class="caption-number">Definition 106 </span> (Bounded metric space)</p>
+<p class="admonition-title"><span class="caption-number">Definition 108 </span> (Bounded metric space)</p>
 <section class="definition-content" id="proof-content">
-<p>A <a class="reference internal" href="001-metric-spaces.html#topology:def-metric-space">metric space</a> <span class="math notranslate nohighlight">\((X, d)\)</span> is bounded if there exists <span class="math notranslate nohighlight">\(M \in \mathbb{R}\)</span> such that <span class="math notranslate nohighlight">\(d(x, y) \leq M\)</span> for all <span class="math notranslate nohighlight">\(x, y \in X.\)</span></p>
+<p>A <a class="reference internal" href="001-metric-spaces.html#topology:def:metric-space">metric space</a> <span class="math notranslate nohighlight">\((X, d)\)</span> is bounded if there exists <span class="math notranslate nohighlight">\(M \in \mathbb{R}\)</span> such that <span class="math notranslate nohighlight">\(d(x, y) \leq M\)</span> for all <span class="math notranslate nohighlight">\(x, y \in X.\)</span></p>
 </section>
 </div><p>Note that being bounded is not a topological property.
 For example <span class="math notranslate nohighlight">\((0, 1) \simeq \mathbb{R}\)</span> are homeomorphic but <span class="math notranslate nohighlight">\((0, 1)\)</span> is bounded while <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> is not.
 A useful intermediate result is that a closed metric space is bounded.</p>
-<div class="proof lemma admonition" id="topology:lem-compact-metric-spaces-are-bounded">
+<div class="proof lemma admonition" id="topology:lem:compact-metric-spaces-are-bounded">
 <p class="admonition-title"><span class="caption-number">Lemma 37 </span> (Compact metric spaces are bounded)</p>
 <section class="lemma-content" id="proof-content">
-<p>A <a class="reference internal" href="#topology:def-compact-space">compact</a> <a class="reference internal" href="001-metric-spaces.html#topology:def-metric-space">metric space</a> <span class="math notranslate nohighlight">\((X, d)\)</span> is bounded.</p>
+<p>A <a class="reference internal" href="#topology:def:compact-space">compact</a> <a class="reference internal" href="001-metric-spaces.html#topology:def:metric-space">metric space</a> <span class="math notranslate nohighlight">\((X, d)\)</span> is bounded.</p>
 </section>
 </div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -609,9 +609,9 @@ d(y, z) \leq d(y, x) + d(x, z) &lt; 2R.
 </div>
 </details><p>We now arrive at one of the main results of this section, the Heine Borel theorem, which states a subsets of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> is compact if and only if it is closed and bounded.</p>
 <div class="proof theorem admonition" id="theorem-7">
-<p class="admonition-title"><span class="caption-number">Theorem 94 </span> (Heine-Borel)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 99 </span> (Heine-Borel)</p>
 <section class="theorem-content" id="proof-content">
-<p>A subset <span class="math notranslate nohighlight">\(C \subseteq \mathbb{R}\)</span> with the standard topology is <a class="reference internal" href="#topology:def-compact-space">compact</a> if and only if it is closed and bounded.</p>
+<p>A subset <span class="math notranslate nohighlight">\(C \subseteq \mathbb{R}\)</span> with the standard topology is <a class="reference internal" href="#topology:def:compact-space">compact</a> if and only if it is closed and bounded.</p>
 </section>
 </div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -627,14 +627,14 @@ Since <span class="math notranslate nohighlight">\(C\)</span> is bounded, it is 
 Therefore <span class="math notranslate nohighlight">\(C\)</span> is a closed subset of a compact space <span class="math notranslate nohighlight">\([-M, M] \simeq [0, 1],\)</span> therefore it is compact.</p>
 <p class="sd-card-text"><strong>Implied by:</strong>
 Suppose <span class="math notranslate nohighlight">\(C\)</span> is compact.
-Since <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> is a metric space, it is also Hausdorff, and since <span class="math notranslate nohighlight">\(C\)</span> is compact it follows that it is closed (<a class="reference internal" href="#topology:lem-closed-subsets-of-compact-spaces-are-compact">Lemma 35</a>).
+Since <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> is a metric space, it is also Hausdorff, and since <span class="math notranslate nohighlight">\(C\)</span> is compact it follows that it is closed (<a class="reference internal" href="#topology:lem:closed-subsets-of-compact-spaces-are-compact">Lemma 35</a>).
 In addition, since <span class="math notranslate nohighlight">\(C\)</span> is a compact metric space, it is also bounded ().</p>
 </div>
 </details><p>The Heine-Borel theorem formalises the earlier point we made about compactness being a generalisation of closedness plus boundedness, beyond the reals.</p>
 <div class="proof lemma admonition" id="lemma-8">
 <p class="admonition-title"><span class="caption-number">Lemma 38 </span> (Compact subsets of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> have finite upper bounds)</p>
 <section class="lemma-content" id="proof-content">
-<p>If <span class="math notranslate nohighlight">\(A \subseteq \mathbb{R}\)</span> with the standard topology is <a class="reference internal" href="#topology:def-compact-space">compact</a>, there exists <span class="math notranslate nohighlight">\(\alpha \in A\)</span> such that <span class="math notranslate nohighlight">\(\alpha \geq a\)</span> for all <span class="math notranslate nohighlight">\(a \in A.\)</span></p>
+<p>If <span class="math notranslate nohighlight">\(A \subseteq \mathbb{R}\)</span> with the standard topology is <a class="reference internal" href="#topology:def:compact-space">compact</a>, there exists <span class="math notranslate nohighlight">\(\alpha \in A\)</span> such that <span class="math notranslate nohighlight">\(\alpha \geq a\)</span> for all <span class="math notranslate nohighlight">\(a \in A.\)</span></p>
 </section>
 </div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -653,11 +653,11 @@ By the definition of supremum, for each <span class="math notranslate nohighligh
 This is a contradiction, because there must exist a sufficiently small ball centered on <span class="math notranslate nohighlight">\(\alpha\)</span> that is contained in <span class="math notranslate nohighlight">\(\mathbb{R} \setminus A,\)</span> because the latter is open.
 Therefore <span class="math notranslate nohighlight">\(\alpha \in A.\)</span></p>
 </div>
-</details><div class="proof lemma admonition" id="topology:lem-image-of-compact-space-under-continuous-function-is-compact">
+</details><div class="proof lemma admonition" id="topology:lem:image-of-compact-space-under-continuous-function-is-compact">
 <p class="admonition-title"><span class="caption-number">Lemma 39 </span> (Image of compact space under continuous function is compact)</p>
 <section class="lemma-content" id="proof-content">
-<p>Let <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> be <a class="reference internal" href="002-topological-spaces.html#topology:def-topological-space">topological spaces</a>.
-If <span class="math notranslate nohighlight">\(f: X \to Y\)</span> is continuous and <span class="math notranslate nohighlight">\(X\)</span> is <a class="reference internal" href="#topology:def-compact-space">compact</a>, then <span class="math notranslate nohighlight">\(\text{im}f \subseteq\)</span> is also compact.</p>
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> be <a class="reference internal" href="002-topological-spaces.html#topology:def:topological-space">topological spaces</a>.
+If <span class="math notranslate nohighlight">\(f: X \to Y\)</span> is continuous and <span class="math notranslate nohighlight">\(X\)</span> is <a class="reference internal" href="#topology:def:compact-space">compact</a>, then <span class="math notranslate nohighlight">\(\text{im}f \subseteq\)</span> is also compact.</p>
 </section>
 </div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -674,9 +674,9 @@ Since <span class="math notranslate nohighlight">\(X\)</span> is compact, it has
 We conclude that <span class="math notranslate nohighlight">\(V_{\alpha_1}, \dots, V_{\alpha_N}\)</span> form a finite subcover of <span class="math notranslate nohighlight">\(\text{im}f,\)</span> which is therefore comapct.</p>
 </div>
 </details><div class="proof definition admonition" id="topology:maximum-value-theorem">
-<p class="admonition-title"><span class="caption-number">Definition 107 </span> (Maximum value theorem)</p>
+<p class="admonition-title"><span class="caption-number">Definition 109 </span> (Maximum value theorem)</p>
 <section class="definition-content" id="proof-content">
-<p>If <span class="math notranslate nohighlight">\(X\)</span> is a <a class="reference internal" href="#topology:def-compact-space">compact</a> <a class="reference internal" href="002-topological-spaces.html#topology:def-topological-space">topological space</a> and <span class="math notranslate nohighlight">\(f: X \to \mathbb{R}\)</span> is continuous with the standard topology, then <span class="math notranslate nohighlight">\(x \in X\)</span> such that <span class="math notranslate nohighlight">\(f(x) \geq f(x')\)</span> for all <span class="math notranslate nohighlight">\(x' \in X.\)</span></p>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is a <a class="reference internal" href="#topology:def:compact-space">compact</a> <a class="reference internal" href="002-topological-spaces.html#topology:def:topological-space">topological space</a> and <span class="math notranslate nohighlight">\(f: X \to \mathbb{R}\)</span> is continuous with the standard topology, then <span class="math notranslate nohighlight">\(x \in X\)</span> such that <span class="math notranslate nohighlight">\(f(x) \geq f(x')\)</span> for all <span class="math notranslate nohighlight">\(x' \in X.\)</span></p>
 </section>
 </div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -685,10 +685,10 @@ Proof: Maximum value theorem<div class="sd-summary-down docutils">
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(X\)</span> is a <a class="reference internal" href="002-topological-spaces.html#topology:def-topological-space">topological space</a> and let <span class="math notranslate nohighlight">\(f: X \to \mathbb{R}\)</span> be continuous.
-The image of a compact set under a continuous function is compact (<a class="reference internal" href="#topology:lem-image-of-compact-space-under-continuous-function-is-compact">Lemma 39</a>), so <span class="math notranslate nohighlight">\(\text{im}f\)</span> is compact.
-Since <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> is a <a class="reference internal" href="001-metric-spaces.html#topology:def-metric-space">metric space</a>, so <span class="math notranslate nohighlight">\(\text{im}f\)</span> is also a metric space and is therefore <a class="reference internal" href="002-topological-spaces.html#topology:def-hausdorff-space">Hausdorff</a>.
-Because <span class="math notranslate nohighlight">\(\text{im}f\)</span> is a compact metric space, it must be bounded (<a class="reference internal" href="#topology:lem-compact-metric-spaces-are-bounded">Lemma 37</a>).
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(X\)</span> is a <a class="reference internal" href="002-topological-spaces.html#topology:def:topological-space">topological space</a> and let <span class="math notranslate nohighlight">\(f: X \to \mathbb{R}\)</span> be continuous.
+The image of a compact set under a continuous function is compact (<a class="reference internal" href="#topology:lem:image-of-compact-space-under-continuous-function-is-compact">Lemma 39</a>), so <span class="math notranslate nohighlight">\(\text{im}f\)</span> is compact.
+Since <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> is a <a class="reference internal" href="001-metric-spaces.html#topology:def:metric-space">metric space</a>, so <span class="math notranslate nohighlight">\(\text{im}f\)</span> is also a metric space and is therefore <a class="reference internal" href="002-topological-spaces.html#topology:def:hausdorff-space">Hausdorff</a>.
+Because <span class="math notranslate nohighlight">\(\text{im}f\)</span> is a compact metric space, it must be bounded (<a class="reference internal" href="#topology:lem:compact-metric-spaces-are-bounded">Lemma 37</a>).
 Therefore <span class="math notranslate nohighlight">\(\text{im} f\)</span> contains its supremum, i.e. <span class="math notranslate nohighlight">\(f(x) = \sup \text{im} f\)</span> for some <span class="math notranslate nohighlight">\(x \in X.\)</span>
 By definition of the supremum, <span class="math notranslate nohighlight">\(f(x) \geq f(x')\)</span> for all <span class="math notranslate nohighlight">\(x' \in X.\)</span></p>
 </div>
@@ -704,7 +704,7 @@ Maximum value theorem for <span class="math notranslate nohighlight">\(~[0, 1]\)
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">This follows from <a class="reference internal" href="#topology:maximum-value-theorem">Definition 107</a>, since the closed interval <span class="math notranslate nohighlight">\([0, 1]\)</span> with the standard topology is <a class="reference internal" href="#topology:def-compact-space">compact</a>.</p>
+<p class="sd-card-text">This follows from <a class="reference internal" href="#topology:maximum-value-theorem">Definition 109</a>, since the closed interval <span class="math notranslate nohighlight">\([0, 1]\)</span> with the standard topology is <a class="reference internal" href="#topology:def:compact-space">compact</a>.</p>
 </div>
 </details></section>
 <section id="products-and-quotients">
@@ -715,9 +715,9 @@ The results in this section are very useful for proving many other properties.</
 <h3>Product spaces<a class="headerlink" href="#product-spaces" title="Link to this heading">#</a></h3>
 <p>One particularly useful result is that the product of compact spaces is compact.</p>
 <div class="proof theorem admonition" id="theorem-12">
-<p class="admonition-title"><span class="caption-number">Theorem 95 </span> (Product of compact spaces is compact)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 100 </span> (Product of compact spaces is compact)</p>
 <section class="theorem-content" id="proof-content">
-<p>If <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are <a class="reference internal" href="#topology:def-compact-space">compact</a> <a class="reference internal" href="002-topological-spaces.html#topology:def-topological-space">topological spaces</a>, then <span class="math notranslate nohighlight">\(X \times Y\)</span> is compact.</p>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are <a class="reference internal" href="#topology:def:compact-space">compact</a> <a class="reference internal" href="002-topological-spaces.html#topology:def:topological-space">topological spaces</a>, then <span class="math notranslate nohighlight">\(X \times Y\)</span> is compact.</p>
 </section>
 </div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -726,7 +726,7 @@ Proof: Product of compact spaces is compact<div class="sd-summary-down docutils"
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are compact <a class="reference internal" href="002-topological-spaces.html#topology:def-topological-space">topological spaces</a>.
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are compact <a class="reference internal" href="002-topological-spaces.html#topology:def:topological-space">topological spaces</a>.
 Let <span class="math notranslate nohighlight">\(\mathcal{V}\)</span> be an open cover of <span class="math notranslate nohighlight">\(X \times Y.\)</span></p>
 <p class="sd-card-text">First, we consider the special case where each <span class="math notranslate nohighlight">\(U \in \mathcal{V}\)</span> has the form <span class="math notranslate nohighlight">\(U = V \times W\)</span> where <span class="math notranslate nohighlight">\(V \in X\)</span> and <span class="math notranslate nohighlight">\(W \in Y.\)</span>
 Since <span class="math notranslate nohighlight">\(\mathcal{V}\)</span> is an open cover of <span class="math notranslate nohighlight">\(X \times Y,\)</span> for each <span class="math notranslate nohighlight">\((x, y) \in X \times Y\)</span> there exists <span class="math notranslate nohighlight">\(U_{xy} \in \mathcal{V}\)</span> such that <span class="math notranslate nohighlight">\((x, y) \in U_{xy}.\)</span>
@@ -749,7 +749,7 @@ Therefore <span class="math notranslate nohighlight">\(X \times Y\)</span> is co
 <section id="quotient-spaces">
 <h3>Quotient spaces<a class="headerlink" href="#quotient-spaces" title="Link to this heading">#</a></h3>
 <p>First, we remark that the quotient space of a compact space must be compact, since any open set in the quotient space can be related to an open set in the original space.</p>
-<div class="proof lemma admonition" id="topology:lem-quotient-space-of-a-compact-space-is-compact">
+<div class="proof lemma admonition" id="topology:lem:quotient-space-of-a-compact-space-is-compact">
 <p class="admonition-title"><span class="caption-number">Lemma 41 </span> (Quotient space of a compact space is compact)</p>
 <section class="lemma-content" id="proof-content">
 <p>Suppose <span class="math notranslate nohighlight">\(X\)</span> is a compact space and <span class="math notranslate nohighlight">\(\sim\)</span> an equivalence relation on <span class="math notranslate nohighlight">\(X.\)</span>
@@ -770,11 +770,11 @@ Since <span class="math notranslate nohighlight">\(X\)</span> is compact <span c
 Therefore <span class="math notranslate nohighlight">\(X / \sim\)</span> is compact.</p>
 </div>
 </details><p>We now show two useful results on quotient spaces, specifically we show two sufficient conditions for a map on a compact space to be a homeomorphism.</p>
-<div class="proof lemma admonition" id="topology:lem-sufficient-condition-for-homeomorphism">
+<div class="proof lemma admonition" id="topology:lem:sufficient-condition-for-homeomorphism">
 <p class="admonition-title"><span class="caption-number">Lemma 42 </span> (Sufficient condition for homeomorphism)</p>
 <section class="lemma-content" id="proof-content">
 <p>Suppose <span class="math notranslate nohighlight">\(f: X \to Y\)</span> is a continuous bijection.
-If <span class="math notranslate nohighlight">\(X\)</span> is <a class="reference internal" href="#topology:def-compact-space">compact</a> and <span class="math notranslate nohighlight">\(Y\)</span> is <a class="reference internal" href="002-topological-spaces.html#topology:def-hausdorff-space">Hausdorff</a>, then <span class="math notranslate nohighlight">\(f\)</span> is a homeomorphism.</p>
+If <span class="math notranslate nohighlight">\(X\)</span> is <a class="reference internal" href="#topology:def:compact-space">compact</a> and <span class="math notranslate nohighlight">\(Y\)</span> is <a class="reference internal" href="002-topological-spaces.html#topology:def:hausdorff-space">Hausdorff</a>, then <span class="math notranslate nohighlight">\(f\)</span> is a homeomorphism.</p>
 </section>
 </div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -786,13 +786,13 @@ Proof: Sufficient condition for homeomorphism<div class="sd-summary-down docutil
 <p class="sd-card-text">By assumption, <span class="math notranslate nohighlight">\(f\)</span> is a continuous bijection so it remains to show that <span class="math notranslate nohighlight">\(f^{-1}\)</span> is continuous.
 We will show that if <span class="math notranslate nohighlight">\(C \subseteq X\)</span> is closed in <span class="math notranslate nohighlight">\(X,\)</span> then <span class="math notranslate nohighlight">\((f^{-1})^{-1}(C)\)</span> is closed in <span class="math notranslate nohighlight">\(Y.\)</span></p>
 <p class="sd-card-text">Since <span class="math notranslate nohighlight">\(f\)</span> is a bijection, <span class="math notranslate nohighlight">\((f^{-1})^{-1}(C) = f(C).\)</span>
-Since <span class="math notranslate nohighlight">\(X\)</span> is compact, <span class="math notranslate nohighlight">\(C\)</span> is compact which, together with the fact that <span class="math notranslate nohighlight">\(f\)</span> is continuous implies that <span class="math notranslate nohighlight">\(f(C) = \text{im}f|_C\)</span> is compact (<a class="reference internal" href="#topology:lem-image-of-compact-space-under-continuous-function-is-compact">Lemma 39</a>).
+Since <span class="math notranslate nohighlight">\(X\)</span> is compact, <span class="math notranslate nohighlight">\(C\)</span> is compact which, together with the fact that <span class="math notranslate nohighlight">\(f\)</span> is continuous implies that <span class="math notranslate nohighlight">\(f(C) = \text{im}f|_C\)</span> is compact (<a class="reference internal" href="#topology:lem:image-of-compact-space-under-continuous-function-is-compact">Lemma 39</a>).
 The set <span class="math notranslate nohighlight">\(f(C) \subseteq Y\)</span> is therefore a compact subspace of a Hausdorff space, so it is closed (<a class="reference internal" href="#topology:lemma-compact-subspaces-of-hausdorff-spaces-are-closed">Lemma 36</a>).</p>
 </div>
 </details><div class="proof lemma admonition" id="lemma-15">
 <p class="admonition-title"><span class="caption-number">Lemma 43 </span> (Condition for homeomorphism for quotient spaces)</p>
 <section class="lemma-content" id="proof-content">
-<p>Suppose <span class="math notranslate nohighlight">\(f: X / \sim~\to Y\)</span> is a bijection, <span class="math notranslate nohighlight">\(X\)</span> is <a class="reference internal" href="#topology:def-compact-space">compact</a>, <span class="math notranslate nohighlight">\(Y\)</span> is <a class="reference internal" href="002-topological-spaces.html#topology:def-hausdorff-space">Hausdorff</a> and <span class="math notranslate nohighlight">\(f \circ \pi\)</span> is continuous.
+<p>Suppose <span class="math notranslate nohighlight">\(f: X / \sim~\to Y\)</span> is a bijection, <span class="math notranslate nohighlight">\(X\)</span> is <a class="reference internal" href="#topology:def:compact-space">compact</a>, <span class="math notranslate nohighlight">\(Y\)</span> is <a class="reference internal" href="002-topological-spaces.html#topology:def:hausdorff-space">Hausdorff</a> and <span class="math notranslate nohighlight">\(f \circ \pi\)</span> is continuous.
 Then <span class="math notranslate nohighlight">\(f\)</span> is a homeomorphism.</p>
 </section>
 </div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
@@ -803,28 +803,28 @@ Proof: Condition for homeomorphism for quotient spaces<div class="sd-summary-dow
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">Note that the function <span class="math notranslate nohighlight">\(\pi: X \to X / \sim\)</span> which maps each element of <span class="math notranslate nohighlight">\(X\)</span> to its equivalence class in <span class="math notranslate nohighlight">\(X / \sim,\)</span> is continuous.
-Since <span class="math notranslate nohighlight">\(X\)</span> is compact and <span class="math notranslate nohighlight">\(\pi\)</span> is continuous, <span class="math notranslate nohighlight">\(\text{im} \pi\)</span> is compact (<a class="reference internal" href="#topology:lem-image-of-compact-space-under-continuous-function-is-compact">Lemma 39</a>).
+Since <span class="math notranslate nohighlight">\(X\)</span> is compact and <span class="math notranslate nohighlight">\(\pi\)</span> is continuous, <span class="math notranslate nohighlight">\(\text{im} \pi\)</span> is compact (<a class="reference internal" href="#topology:lem:image-of-compact-space-under-continuous-function-is-compact">Lemma 39</a>).
 Note that both <span class="math notranslate nohighlight">\(\pi\)</span> and <span class="math notranslate nohighlight">\(\pi^{-1}\)</span> are continuous.
 Since <span class="math notranslate nohighlight">\(f \circ \pi\)</span> is continuous, <span class="math notranslate nohighlight">\(f = f \circ \pi \circ \pi^{-1}\)</span> is continuous.
-Finally, since <span class="math notranslate nohighlight">\(f\)</span> is a continuous bijection, <span class="math notranslate nohighlight">\(X\)</span> is compact and <span class="math notranslate nohighlight">\(Y\)</span> is Hausdorff, <span class="math notranslate nohighlight">\(f\)</span> is a homeomorphism (<a class="reference internal" href="#topology:lem-sufficient-condition-for-homeomorphism">Lemma 42</a>).</p>
+Finally, since <span class="math notranslate nohighlight">\(f\)</span> is a continuous bijection, <span class="math notranslate nohighlight">\(X\)</span> is compact and <span class="math notranslate nohighlight">\(Y\)</span> is Hausdorff, <span class="math notranslate nohighlight">\(f\)</span> is a homeomorphism (<a class="reference internal" href="#topology:lem:sufficient-condition-for-homeomorphism">Lemma 42</a>).</p>
 </div>
 </details></section>
 </section>
 <section id="sequential-compactness">
 <h2>Sequential compactness<a class="headerlink" href="#sequential-compactness" title="Link to this heading">#</a></h2>
 <p>We now introduce another notion of compactness, namely sequential compactness.</p>
-<div class="proof definition admonition" id="topology:def-sequentially-compact">
-<p class="admonition-title"><span class="caption-number">Definition 108 </span> (Sequential compactness)</p>
+<div class="proof definition admonition" id="topology:def:sequentially-compact">
+<p class="admonition-title"><span class="caption-number">Definition 110 </span> (Sequential compactness)</p>
 <section class="definition-content" id="proof-content">
 <p>A topological space <span class="math notranslate nohighlight">\(X\)</span> is sequentially compact if every sequence in <span class="math notranslate nohighlight">\(X\)</span> has a convergent subsequence.</p>
 </section>
 </div><p>Roughly speaking, sequential compacness captures the notion that a sequence cannot spread out arbitrarily in a space without having a subsequence that piles up around some point in the space.
 In general, compactness and sequential compactness are different properties, however in a metric space they are equivalent.
 To show this, we use the following intermediate lemma.</p>
-<div class="proof lemma admonition" id="topology:lem-equivalent-condition-for-convergent-subsequence-in-a-metric-space">
+<div class="proof lemma admonition" id="topology:lem:equivalent-condition-for-convergent-subsequence-in-a-metric-space">
 <p class="admonition-title"><span class="caption-number">Lemma 44 </span> (Equivalent condition for convergent subsequence in a metric space)</p>
 <section class="lemma-content" id="proof-content">
-<p>Let <span class="math notranslate nohighlight">\((x_n)\)</span> be a sequence in a <a class="reference internal" href="001-metric-spaces.html#topology:def-metric-space">metric space</a> <span class="math notranslate nohighlight">\((X, d)\)</span> and <span class="math notranslate nohighlight">\(x \in X.\)</span>
+<p>Let <span class="math notranslate nohighlight">\((x_n)\)</span> be a sequence in a <a class="reference internal" href="001-metric-spaces.html#topology:def:metric-space">metric space</a> <span class="math notranslate nohighlight">\((X, d)\)</span> and <span class="math notranslate nohighlight">\(x \in X.\)</span>
 Then <span class="math notranslate nohighlight">\((x_n)\)</span> has a subsequence converging to <span class="math notranslate nohighlight">\(x\)</span> if and only if for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> we have <span class="math notranslate nohighlight">\(x_n \in B_\epsilon(x)\)</span> for infinitely many <span class="math notranslate nohighlight">\(n \in \mathbb{N}.\)</span></p>
 </section>
 </div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
@@ -849,10 +849,10 @@ Since <span class="math notranslate nohighlight">\(d(x_{n_k}, x) &lt; \frac{1}{n
 </div>
 </details><div class="docutils">
 <p>We are now ready to show that compactness and sequential compactness are equivalent in metric spaces.</p>
-<div class="proof theorem admonition" id="topology:thm-compact-metric-space-iff-sequentially-compact-metric-space">
-<p class="admonition-title"><span class="caption-number">Theorem 96 </span> (Compact metric space <span class="math notranslate nohighlight">\(\iff\)</span> sequentially compact metric space)</p>
+<div class="proof theorem admonition" id="topology:thm:compact-metric-space-iff-sequentially-compact-metric-space">
+<p class="admonition-title"><span class="caption-number">Theorem 101 </span> (Compact metric space <span class="math notranslate nohighlight">\(\iff\)</span> sequentially compact metric space)</p>
 <section class="theorem-content" id="proof-content">
-<p>A <a class="reference internal" href="001-metric-spaces.html#topology:def-metric-space">metric space</a> <span class="math notranslate nohighlight">\((X, d)\)</span> is a <a class="reference internal" href="#topology:def-compact-space">compact</a> if and only if it is <a class="reference internal" href="#topology:def-sequentially-compact">sequentially compact</a>.</p>
+<p>A <a class="reference internal" href="001-metric-spaces.html#topology:def:metric-space">metric space</a> <span class="math notranslate nohighlight">\((X, d)\)</span> is a <a class="reference internal" href="#topology:def:compact-space">compact</a> if and only if it is <a class="reference internal" href="#topology:def:sequentially-compact">sequentially compact</a>.</p>
 </section>
 </div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -866,7 +866,7 @@ Proof: Compact metric space <span class="math notranslate nohighlight">\(~\iff\)
 Suppose <span class="math notranslate nohighlight">\((X, d)\)</span> is compact.
 Let <span class="math notranslate nohighlight">\((x_n)\)</span> be a sequence in <span class="math notranslate nohighlight">\(X\)</span> and suppose that it does not have a convergent subsequence.
 Then, for any <span class="math notranslate nohighlight">\(y \in X,\)</span> there is no subsequence converging to <span class="math notranslate nohighlight">\(y.\)</span>
-By <a class="reference internal" href="#topology:lem-equivalent-condition-for-convergent-subsequence-in-a-metric-space">Lemma 44</a>, there exists <span class="math notranslate nohighlight">\(\epsilon_y &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(x_n \in B_\epsilon_y(y)\)</span> only finitely many times.
+By <a class="reference internal" href="#topology:lem:equivalent-condition-for-convergent-subsequence-in-a-metric-space">Lemma 44</a>, there exists <span class="math notranslate nohighlight">\(\epsilon_y &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(x_n \in B_\epsilon_y(y)\)</span> only finitely many times.
 Let <span class="math notranslate nohighlight">\(U_y = B_\epsilon_y(y).\)</span>
 Now, the set <span class="math notranslate nohighlight">\(\mathcal{V} = \{U_y: y \in X\}\)</span> is an open cover of <span class="math notranslate nohighlight">\(X.\)</span>
 Since <span class="math notranslate nohighlight">\(X\)</span> is compact, there is a finite subcover <span class="math notranslate nohighlight">\(\{U_{y_1}, \dots, U_{y_m}\}.\)</span>
@@ -896,26 +896,26 @@ This contradicts the assumption that <span class="math notranslate nohighlight">
 <p>We finish with a last section on completeness.
 This concerns metric spaces, but relies on results on compactness we have shown in this section.
 To define completeness, we first need to define Cauchy sequences.</p>
-<div class="proof definition admonition" id="topology:def-cauchy-sequence">
-<p class="admonition-title"><span class="caption-number">Definition 109 </span> (Cauchy sequence)</p>
+<div class="proof definition admonition" id="topology:def:cauchy-sequence">
+<p class="admonition-title"><span class="caption-number">Definition 111 </span> (Cauchy sequence)</p>
 <section class="definition-content" id="proof-content">
-<p>Let <span class="math notranslate nohighlight">\((X, d)\)</span> be a <a class="reference internal" href="001-metric-spaces.html#topology:def-metric-space">metric space</a>.
+<p>Let <span class="math notranslate nohighlight">\((X, d)\)</span> be a <a class="reference internal" href="001-metric-spaces.html#topology:def:metric-space">metric space</a>.
 A sequence <span class="math notranslate nohighlight">\((x_n)\)</span> in <span class="math notranslate nohighlight">\(X\)</span> is Cauchy if for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0,\)</span> there exists <span class="math notranslate nohighlight">\(N \in \mathbb{N}\)</span> such that <span class="math notranslate nohighlight">\(d(x_n, x_m) &lt; \epsilon\)</span> for all <span class="math notranslate nohighlight">\(n, m \geq N.\)</span></p>
 </section>
 </div><p>A space is complete if every Cauchy sequence within it converges (to some limit in the space).
 Intutively, a Cauchy sequence is one whose the terms are progressively closer to one another.
 Completeness therefore means that all such sequences have a limit in the space.</p>
-<div class="proof definition admonition" id="topology:def-complete-metric-space">
-<p class="admonition-title"><span class="caption-number">Definition 110 </span> (Complete metric space)</p>
+<div class="proof definition admonition" id="topology:def:complete-metric-space">
+<p class="admonition-title"><span class="caption-number">Definition 112 </span> (Complete metric space)</p>
 <section class="definition-content" id="proof-content">
-<p>A <a class="reference internal" href="001-metric-spaces.html#topology:def-metric-space">metric space</a> <span class="math notranslate nohighlight">\((X, d)\)</span> is complete if every <a class="reference internal" href="#topology:def-cauchy-sequence">Cauchy sequence</a> in it converges.</p>
+<p>A <a class="reference internal" href="001-metric-spaces.html#topology:def:metric-space">metric space</a> <span class="math notranslate nohighlight">\((X, d)\)</span> is complete if every <a class="reference internal" href="#topology:def:cauchy-sequence">Cauchy sequence</a> in it converges.</p>
 </section>
 </div><p>For example <span class="math notranslate nohighlight">\((0, 1)\)</span> is a metric space that is not complete because the sequence <span class="math notranslate nohighlight">\((a_n)\)</span> where <span class="math notranslate nohighlight">\(a_n = n^{-1}\)</span> is Cauchy but does not converge to a point in <span class="math notranslate nohighlight">\((0, 1).\)</span>
 By contrast, we will show that <span class="math notranslate nohighlight">\([0, 1]\)</span> is complete, and this is a consequence of the space being compact, as shown by the following result.</p>
-<div class="proof lemma admonition" id="topology:lem-compact-metric-spaces-are-complete">
+<div class="proof lemma admonition" id="topology:lem:compact-metric-spaces-are-complete">
 <p class="admonition-title"><span class="caption-number">Lemma 45 </span> (Compact metric spaces are complete)</p>
 <section class="lemma-content" id="proof-content">
-<p>If the <a class="reference internal" href="001-metric-spaces.html#topology:def-metric-space">metric space</a> <span class="math notranslate nohighlight">\((X, d)\)</span> is <a class="reference internal" href="#topology:def-compact-space">compact</a>, it is also <a class="reference internal" href="#topology:def-complete-metric-space">complete</a>.</p>
+<p>If the <a class="reference internal" href="001-metric-spaces.html#topology:def:metric-space">metric space</a> <span class="math notranslate nohighlight">\((X, d)\)</span> is <a class="reference internal" href="#topology:def:compact-space">compact</a>, it is also <a class="reference internal" href="#topology:def:complete-metric-space">complete</a>.</p>
 </section>
 </div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -926,7 +926,7 @@ Proof: Compact metric spaces are complete<div class="sd-summary-down docutils">
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\((X, d)\)</span> is a compact metric space.
 Let <span class="math notranslate nohighlight">\((x_n)\)</span> be a Cauchy sequence in <span class="math notranslate nohighlight">\(X.\)</span>
-From <a class="reference internal" href="#topology:thm-compact-metric-space-iff-sequentially-compact-metric-space">Theorem 96</a>, it is sequentially compact.
+From <a class="reference internal" href="#topology:thm:compact-metric-space-iff-sequentially-compact-metric-space">Theorem 101</a>, it is sequentially compact.
 Since the space is sequentially compact, <span class="math notranslate nohighlight">\((x_n)\)</span> has a convergent subsequence <span class="math notranslate nohighlight">\((x_{n_k}),\)</span> which converges to some <span class="math notranslate nohighlight">\(x \in X.\)</span></p>
 <p class="sd-card-text">Let <span class="math notranslate nohighlight">\(\epsilon &gt; 0.\)</span>
 Since <span class="math notranslate nohighlight">\((x_n)\)</span> is Cauchy, there exists <span class="math notranslate nohighlight">\(N \in \mathbb{N}\)</span> such that for all <span class="math notranslate nohighlight">\(n, m \geq N,\)</span> we have <span class="math notranslate nohighlight">\(d(x_n, x_m) &lt; \epsilon / 2.\)</span>
@@ -939,7 +939,7 @@ d(x_l, x) \leq d(x_l, x_{n_k}) + d(x_{n_k}, x) &lt; \epsilon,
 \end{equation}\]</div>
 <p class="sd-card-text">so <span class="math notranslate nohighlight">\(x_l\)</span> converges to <span class="math notranslate nohighlight">\(x,\)</span> and <span class="math notranslate nohighlight">\(X\)</span> is complete.</p>
 </div>
-</details><p>The interval <span class="math notranslate nohighlight">\([0, 1]\)</span> is a compact set so it is complete (<a class="reference internal" href="#topology:lem-compact-metric-spaces-are-complete">Lemma 45</a>.
+</details><p>The interval <span class="math notranslate nohighlight">\([0, 1]\)</span> is a compact set so it is complete (<a class="reference internal" href="#topology:lem:compact-metric-spaces-are-complete">Lemma 45</a>.
 We conclude with a satisfying result that we can show with the ideas developed in the course:
 <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> is complete.</p>
 <div class="proof lemma admonition" id="lemma-22">
@@ -955,8 +955,8 @@ Proof: <span class="math notranslate nohighlight">\(~\mathbb{R}^n~\)</span> is c
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">If <span class="math notranslate nohighlight">\((x_n)\)</span> is a Cauchy sequence in <span class="math notranslate nohighlight">\(\mathbb{R}^n,\)</span> then <span class="math notranslate nohighlight">\((x_n) \subseteq \overline{B}_r(0)\)</span> for some <span class="math notranslate nohighlight">\(r \in \mathbb{R}.\)</span>
-Since <span class="math notranslate nohighlight">\(\overline{B}_r(0)\)</span> is a closed and bounded subset of a metric space, it is compact (<a class="reference internal" href="#topology:lem-closed-subsets-of-compact-spaces-are-compact">Lemma 35</a>).
-Since <span class="math notranslate nohighlight">\((x_n)\)</span> is a Cauchy sequence in a compact metric space, it converges (<a class="reference internal" href="#topology:lem-compact-metric-spaces-are-complete">Lemma 45</a>).
+Since <span class="math notranslate nohighlight">\(\overline{B}_r(0)\)</span> is a closed and bounded subset of a metric space, it is compact (<a class="reference internal" href="#topology:lem:closed-subsets-of-compact-spaces-are-compact">Lemma 35</a>).
+Since <span class="math notranslate nohighlight">\((x_n)\)</span> is a Cauchy sequence in a compact metric space, it converges (<a class="reference internal" href="#topology:lem:compact-metric-spaces-are-complete">Lemma 45</a>).
 Therefore <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> is complete.</p>
 </div>
 </details></div>

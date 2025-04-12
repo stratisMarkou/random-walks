@@ -600,7 +600,7 @@ The quantity which affects the amount of random error in an importance sampling 
 It is reasonable to expect that the more dissimilar <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(p\)</span> are, the larger the variance will be.
 In partricular, we can show that the variance of the importance weights can be lower bounded by a quantity that scales exponentially with the KL divergence.</p>
 <div class="proof lemma admonition" id="lemma-0">
-<p class="admonition-title"><span class="caption-number">Lemma 57 </span> (Lower bound to importance weight variance)</p>
+<p class="admonition-title"><span class="caption-number">Lemma 58 </span> (Lower bound to importance weight variance)</p>
 <section class="lemma-content" id="proof-content">
 <p>Given distributions <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(q\)</span>, it holds that</p>
 <div class="math notranslate nohighlight">
@@ -658,7 +658,7 @@ Markov Chain Monte Carlo (MCMC) is a standard class of methods geared towards so
 So we could, in principle, use MCMC within an importance-weighted estimator to reduce its variance.
 The following algorithm is based on this intuition.</p>
 <div class="proof definition admonition" id="definition-1">
-<p class="admonition-title"><span class="caption-number">Definition 129 </span> (Importance weighted MCMC algorithm)</p>
+<p class="admonition-title"><span class="caption-number">Definition 138 </span> (Importance weighted MCMC algorithm)</p>
 <section class="definition-content" id="proof-content">
 <p>Given a proposal density <span class="math notranslate nohighlight">\(q\)</span>, a target density <span class="math notranslate nohighlight">\(p\)</span> and a sequence of transition kernels <span class="math notranslate nohighlight">\(T_1(x, x'), \dots, T_K(x, x')\)</span> be a sequence of transition kernels such that <span class="math notranslate nohighlight">\(T_k\)</span> leaves <span class="math notranslate nohighlight">\(p\)</span> invariant.
 Sampling <span class="math notranslate nohighlight">\(x_0 \sim q(x)\)</span> followed by</p>
@@ -746,7 +746,7 @@ However, unfortunately these importance weight are exactly the same as the impor
 <p>These distributions interpolate between <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(p\)</span> as we vary <span class="math notranslate nohighlight">\(\beta\)</span>.
 AIS then proceeds in a similar way to the importance weighted MCMC algorithm we highlighted above, except that it requires that each <span class="math notranslate nohighlight">\(T_k\)</span> leaves <span class="math notranslate nohighlight">\(\pi_k\)</span>, instead of <span class="math notranslate nohighlight">\(p\)</span>, invariant.</p>
 <div class="proof definition admonition" id="definition-2">
-<p class="admonition-title"><span class="caption-number">Definition 130 </span> (Annealed Importance Sampling)</p>
+<p class="admonition-title"><span class="caption-number">Definition 139 </span> (Annealed Importance Sampling)</p>
 <section class="definition-content" id="proof-content">
 <p>Given a target density <span class="math notranslate nohighlight">\(p\)</span>, a proposal density <span class="math notranslate nohighlight">\(q\)</span> and a sequence <span class="math notranslate nohighlight">\(0 = \beta_0 \leq \dots \leq \beta_K = 1\)</span>, define</p>
 <div class="math notranslate nohighlight">

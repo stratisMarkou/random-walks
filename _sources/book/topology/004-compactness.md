@@ -21,7 +21,7 @@ Roughly speaking, compactness can be viewed as a generalisation of what it means
 The notion of compactness relies on open covers as defined below.
 
 :::{prf:definition} Open cover
-Let $\mathcal{U} \subseteq 2^X$ be a {prf:ref}`topology<topology:def-topological-space>` on $X.$
+Let $\mathcal{U} \subseteq 2^X$ be a {prf:ref}`topology<topology:def:topological-space>` on $X.$
 An open cover of $X$ is a subset $\mathcal{V} \subseteq \mathcal{U}$ such that
 
 $$\begin{equation}
@@ -35,8 +35,8 @@ If $\mathcal{V}' \subseteq \mathcal{V}$ and $\mathcal{V}'$ covers $X,$ then we s
 Now, a space is defined to be compact if any open cover of the space contains a finite subcover.
 
 :::{prf:definition} Compact space
-:label: topology:def-compact-space
-A {prf:ref}`topological space<topology:def-topological-space>` $X$ is {prf:ref}`compact<topology:def-compact-space>` if every open cover $\mathcal{V}$ of $X$ has a finite {prf:ref}`subcover<topology:def-topological-space>` $\mathcal{V}' = \{V_1, \dots, V_n\} \subseteq \mathcal{V}.$
+:label: topology:def:compact-space
+A {prf:ref}`topological space<topology:def:topological-space>` $X$ is {prf:ref}`compact<topology:def:compact-space>` if every open cover $\mathcal{V}$ of $X$ has a finite {prf:ref}`subcover<topology:def:topological-space>` $\mathcal{V}' = \{V_1, \dots, V_n\} \subseteq \mathcal{V}.$
 :::
 
 We note that compactness is topological property:
@@ -45,7 +45,7 @@ The first result that we show is that the closed unit interval is compact.
 
 :::{prf:theorem} Closed interval is compact
 :label: topology:closed-interval-is-compact
-The closed interval $[0, 1] \subseteq \mathbb{R}$ with the standard topology is {prf:ref}`compact<topology:def-compact-space>`.
+The closed interval $[0, 1] \subseteq \mathbb{R}$ with the standard topology is {prf:ref}`compact<topology:def:compact-space>`.
 :::
 
 :::{dropdown} Closed interval is compact
@@ -82,8 +82,8 @@ First, we note that a subset of a compact space is not necessarily a compact spa
 However, a closed subset of a compact space is compact.
 
 :::{prf:lemma} Closed subsets of compact spaces are compact
-:label: topology:lem-closed-subsets-of-compact-spaces-are-compact
-If $X$ is {prf:ref}`compact<topology:def-compact-space>` and $C$ is a closed subset of $X,$ then $C$ is also compact.
+:label: topology:lem:closed-subsets-of-compact-spaces-are-compact
+If $X$ is {prf:ref}`compact<topology:def:compact-space>` and $C$ is a closed subset of $X,$ then $C$ is also compact.
 :::
 
 :::{dropdown} Proof: Closed subsets of compact spaces are compact
@@ -99,8 +99,8 @@ a compact subspace of a Hausdorff space is closed.
 
 :::{prf:lemma} Compact subspaces of Hausdorff spaces are closed
 :label: topology:lemma-compact-subspaces-of-hausdorff-spaces-are-closed
-Let $X$ be a {prf:ref}`Hausdorff space<topology:def-hausdorff-space>`.
-If $C \subseteq X$ is {prf:ref}`compact<topology:def-compact-space>`, then $C$ is closed in $X.$
+Let $X$ be a {prf:ref}`Hausdorff space<topology:def:hausdorff-space>`.
+If $C \subseteq X$ is {prf:ref}`compact<topology:def:compact-space>`, then $C$ is closed in $X.$
 :::
 
 :::{dropdown} Proof: Compact subspaces of Hausdorff spaces are closed
@@ -121,7 +121,7 @@ It turns out that for $\mathbb{R}^n$ with the standard topology, compactness is 
 To show this, we first define boundedness for metric spaces.
 
 :::{prf:definition} Bounded metric space
-A {prf:ref}`metric space<topology:def-metric-space>` $(X, d)$ is bounded if there exists $M \in \mathbb{R}$ such that $d(x, y) \leq M$ for all $x, y \in X.$
+A {prf:ref}`metric space<topology:def:metric-space>` $(X, d)$ is bounded if there exists $M \in \mathbb{R}$ such that $d(x, y) \leq M$ for all $x, y \in X.$
 :::
 
 Note that being bounded is not a topological property.
@@ -129,8 +129,8 @@ For example $(0, 1) \simeq \mathbb{R}$ are homeomorphic but $(0, 1)$ is bounded 
 A useful intermediate result is that a closed metric space is bounded.
 
 :::{prf:lemma} Compact metric spaces are bounded
-:label: topology:lem-compact-metric-spaces-are-bounded
-A {prf:ref}`compact<topology:def-compact-space>` {prf:ref}`metric space<topology:def-metric-space>` $(X, d)$ is bounded.
+:label: topology:lem:compact-metric-spaces-are-bounded
+A {prf:ref}`compact<topology:def:compact-space>` {prf:ref}`metric space<topology:def:metric-space>` $(X, d)$ is bounded.
 :::
 
 :::{dropdown} Proof: Compact metric spaces are bounded
@@ -151,7 +151,7 @@ Therefore $X$ is boudnded.
 We now arrive at one of the main results of this section, the Heine Borel theorem, which states a subsets of $\mathbb{R}$ is compact if and only if it is closed and bounded.
 
 :::{prf:theorem} Heine-Borel
-A subset $C \subseteq \mathbb{R}$ with the standard topology is {prf:ref}`compact<topology:def-compact-space>` if and only if it is closed and bounded.
+A subset $C \subseteq \mathbb{R}$ with the standard topology is {prf:ref}`compact<topology:def:compact-space>` if and only if it is closed and bounded.
 :::
 
 :::{dropdown} Proof: Heine-Borel
@@ -164,15 +164,15 @@ Therefore $C$ is a closed subset of a compact space $[-M, M] \simeq [0, 1],$ the
 
 __Implied by:__
 Suppose $C$ is compact.
-Since $\mathbb{R}$ is a metric space, it is also Hausdorff, and since $C$ is compact it follows that it is closed ({prf:ref}`topology:lem-closed-subsets-of-compact-spaces-are-compact`).
-In addition, since $C$ is a compact metric space, it is also bounded ({ref:prf}`topology:lem-compact-metric-spaces-are-bounded`).
+Since $\mathbb{R}$ is a metric space, it is also Hausdorff, and since $C$ is compact it follows that it is closed ({prf:ref}`topology:lem:closed-subsets-of-compact-spaces-are-compact`).
+In addition, since $C$ is a compact metric space, it is also bounded ({ref:prf}`topology:lem:compact-metric-spaces-are-bounded`).
 :::
 
 The Heine-Borel theorem formalises the earlier point we made about compactness being a generalisation of closedness plus boundedness, beyond the reals.
 
 
 :::{prf:lemma} Compact subsets of $\mathbb{R}$ have finite upper bounds
-If $A \subseteq \mathbb{R}$ with the standard topology is {prf:ref}`compact<topology:def-compact-space>`, there exists $\alpha \in A$ such that $\alpha \geq a$ for all $a \in A.$
+If $A \subseteq \mathbb{R}$ with the standard topology is {prf:ref}`compact<topology:def:compact-space>`, there exists $\alpha \in A$ such that $\alpha \geq a$ for all $a \in A.$
 :::
 
 :::{dropdown} Proof: Compact subsets of $~\mathbb{R}~$ have finite upper bounds
@@ -190,9 +190,9 @@ Therefore $\alpha \in A.$
 
 
 :::{prf:lemma} Image of compact space under continuous function is compact
-:label: topology:lem-image-of-compact-space-under-continuous-function-is-compact
-Let $X$ and $Y$ be {prf:ref}`topological spaces<topology:def-topological-space>`.
-If $f: X \to Y$ is continuous and $X$ is {prf:ref}`compact<topology:def-compact-space>`, then $\text{im}f \subseteq$ is also compact.
+:label: topology:lem:image-of-compact-space-under-continuous-function-is-compact
+Let $X$ and $Y$ be {prf:ref}`topological spaces<topology:def:topological-space>`.
+If $f: X \to Y$ is continuous and $X$ is {prf:ref}`compact<topology:def:compact-space>`, then $\text{im}f \subseteq$ is also compact.
 :::
 
 :::{dropdown} Proof: Image of compact space under continuous function is compact
@@ -208,14 +208,14 @@ We conclude that $V_{\alpha_1}, \dots, V_{\alpha_N}$ form a finite subcover of $
 
 :::{prf:definition} Maximum value theorem
 :label: topology:maximum-value-theorem
-If $X$ is a {prf:ref}`compact<topology:def-compact-space>` {prf:ref}`topological space<topology:def-topological-space>` and $f: X \to \mathbb{R}$ is continuous with the standard topology, then $x \in X$ such that $f(x) \geq f(x')$ for all $x' \in X.$
+If $X$ is a {prf:ref}`compact<topology:def:compact-space>` {prf:ref}`topological space<topology:def:topological-space>` and $f: X \to \mathbb{R}$ is continuous with the standard topology, then $x \in X$ such that $f(x) \geq f(x')$ for all $x' \in X.$
 :::
 
 :::{dropdown} Proof: Maximum value theorem
-Suppose $X$ is a {prf:ref}`topological space<topology:def-topological-space>` and let $f: X \to \mathbb{R}$ be continuous.
-The image of a compact set under a continuous function is compact ({prf:ref}`topology:lem-image-of-compact-space-under-continuous-function-is-compact`), so $\text{im}f$ is compact.
-Since $\mathbb{R}$ is a {prf:ref}`metric space<topology:def-metric-space>`, so $\text{im}f$ is also a metric space and is therefore {prf:ref}`Hausdorff<topology:def-hausdorff-space>`.
-Because $\text{im}f$ is a compact metric space, it must be bounded ({prf:ref}`topology:lem-compact-metric-spaces-are-bounded`).
+Suppose $X$ is a {prf:ref}`topological space<topology:def:topological-space>` and let $f: X \to \mathbb{R}$ be continuous.
+The image of a compact set under a continuous function is compact ({prf:ref}`topology:lem:image-of-compact-space-under-continuous-function-is-compact`), so $\text{im}f$ is compact.
+Since $\mathbb{R}$ is a {prf:ref}`metric space<topology:def:metric-space>`, so $\text{im}f$ is also a metric space and is therefore {prf:ref}`Hausdorff<topology:def:hausdorff-space>`.
+Because $\text{im}f$ is a compact metric space, it must be bounded ({prf:ref}`topology:lem:compact-metric-spaces-are-bounded`).
 Therefore $\text{im} f$ contains its supremum, i.e. $f(x) = \sup \text{im} f$ for some $x \in X.$
 By definition of the supremum, $f(x) \geq f(x')$ for all $x' \in X.$
 :::
@@ -226,7 +226,7 @@ If $f: [0, 1] \to \mathbb{R}$ is continuous with the standard topology on both $
 :::
 
 :::{dropdown} Maximum value theorem for $~[0, 1]$
-This follows from {prf:ref}`topology:maximum-value-theorem`, since the closed interval $[0, 1]$ with the standard topology is {prf:ref}`compact<topology:def-compact-space>`.
+This follows from {prf:ref}`topology:maximum-value-theorem`, since the closed interval $[0, 1]$ with the standard topology is {prf:ref}`compact<topology:def:compact-space>`.
 :::
 
 
@@ -240,11 +240,11 @@ The results in this section are very useful for proving many other properties.
 One particularly useful result is that the product of compact spaces is compact.
 
 :::{prf:theorem} Product of compact spaces is compact
-If $X$ and $Y$ are {prf:ref}`compact<topology:def-compact-space>` {prf:ref}`topological spaces<topology:def-topological-space>`, then $X \times Y$ is compact.
+If $X$ and $Y$ are {prf:ref}`compact<topology:def:compact-space>` {prf:ref}`topological spaces<topology:def:topological-space>`, then $X \times Y$ is compact.
 :::
 
 :::{dropdown} Proof: Product of compact spaces is compact
-Suppose $X$ and $Y$ are compact {prf:ref}`topological spaces<topology:def-topological-space>`.
+Suppose $X$ and $Y$ are compact {prf:ref}`topological spaces<topology:def:topological-space>`.
 Let $\mathcal{V}$ be an open cover of $X \times Y.$
 
 First, we consider the special case where each $U \in \mathcal{V}$ has the form $U = V \times W$ where $V \in X$ and $W \in Y.$
@@ -273,7 +273,7 @@ Therefore $X \times Y$ is compact.
 First, we remark that the quotient space of a compact space must be compact, since any open set in the quotient space can be related to an open set in the original space.
 
 :::{prf:lemma} Quotient space of a compact space is compact
-:label: topology:lem-quotient-space-of-a-compact-space-is-compact
+:label: topology:lem:quotient-space-of-a-compact-space-is-compact
 Suppose $X$ is a compact space and $\sim$ an equivalence relation on $X.$
 The quotient space $X / \sim$ is compact.
 :::
@@ -290,9 +290,9 @@ Therefore $X / \sim$ is compact.
 We now show two useful results on quotient spaces, specifically we show two sufficient conditions for a map on a compact space to be a homeomorphism.
 
 :::{prf:lemma} Sufficient condition for homeomorphism
-:label: topology:lem-sufficient-condition-for-homeomorphism
+:label: topology:lem:sufficient-condition-for-homeomorphism
 Suppose $f: X \to Y$ is a continuous bijection.
-If $X$ is {prf:ref}`compact<topology:def-compact-space>` and $Y$ is {prf:ref}`Hausdorff<topology:def-hausdorff-space>`, then $f$ is a homeomorphism.
+If $X$ is {prf:ref}`compact<topology:def:compact-space>` and $Y$ is {prf:ref}`Hausdorff<topology:def:hausdorff-space>`, then $f$ is a homeomorphism.
 :::
 
 :::{dropdown} Proof: Sufficient condition for homeomorphism
@@ -300,21 +300,21 @@ By assumption, $f$ is a continuous bijection so it remains to show that $f^{-1}$
 We will show that if $C \subseteq X$ is closed in $X,$ then $(f^{-1})^{-1}(C)$ is closed in $Y.$
 
 Since $f$ is a bijection, $(f^{-1})^{-1}(C) = f(C).$
-Since $X$ is compact, $C$ is compact which, together with the fact that $f$ is continuous implies that $f(C) = \text{im}f|_C$ is compact ({prf:ref}`topology:lem-image-of-compact-space-under-continuous-function-is-compact`).
+Since $X$ is compact, $C$ is compact which, together with the fact that $f$ is continuous implies that $f(C) = \text{im}f|_C$ is compact ({prf:ref}`topology:lem:image-of-compact-space-under-continuous-function-is-compact`).
 The set $f(C) \subseteq Y$ is therefore a compact subspace of a Hausdorff space, so it is closed ({prf:ref}`topology:lemma-compact-subspaces-of-hausdorff-spaces-are-closed`).
 :::
 
 :::{prf:lemma} Condition for homeomorphism for quotient spaces
-Suppose $f: X / \sim~\to Y$ is a bijection, $X$ is {prf:ref}`compact<topology:def-compact-space>`, $Y$ is {prf:ref}`Hausdorff<topology:def-hausdorff-space>` and $f \circ \pi$ is continuous.
+Suppose $f: X / \sim~\to Y$ is a bijection, $X$ is {prf:ref}`compact<topology:def:compact-space>`, $Y$ is {prf:ref}`Hausdorff<topology:def:hausdorff-space>` and $f \circ \pi$ is continuous.
 Then $f$ is a homeomorphism.
 :::
 
 :::{dropdown} Proof: Condition for homeomorphism for quotient spaces
 Note that the function $\pi: X \to X / \sim$ which maps each element of $X$ to its equivalence class in $X / \sim,$ is continuous.
-Since $X$ is compact and $\pi$ is continuous, $\text{im} \pi$ is compact ({prf:ref}`topology:lem-image-of-compact-space-under-continuous-function-is-compact`).
+Since $X$ is compact and $\pi$ is continuous, $\text{im} \pi$ is compact ({prf:ref}`topology:lem:image-of-compact-space-under-continuous-function-is-compact`).
 Note that both $\pi$ and $\pi^{-1}$ are continuous.
 Since $f \circ \pi$ is continuous, $f = f \circ \pi \circ \pi^{-1}$ is continuous.
-Finally, since $f$ is a continuous bijection, $X$ is compact and $Y$ is Hausdorff, $f$ is a homeomorphism ({prf:ref}`topology:lem-sufficient-condition-for-homeomorphism`).
+Finally, since $f$ is a continuous bijection, $X$ is compact and $Y$ is Hausdorff, $f$ is a homeomorphism ({prf:ref}`topology:lem:sufficient-condition-for-homeomorphism`).
 :::
 
 
@@ -323,7 +323,7 @@ Finally, since $f$ is a continuous bijection, $X$ is compact and $Y$ is Hausdorf
 We now introduce another notion of compactness, namely sequential compactness.
 
 :::{prf:definition} Sequential compactness
-:label: topology:def-sequentially-compact
+:label: topology:def:sequentially-compact
 A topological space $X$ is sequentially compact if every sequence in $X$ has a convergent subsequence.
 :::
 
@@ -332,8 +332,8 @@ In general, compactness and sequential compactness are different properties, how
 To show this, we use the following intermediate lemma.
 
 :::{prf:lemma} Equivalent condition for convergent subsequence in a metric space
-:label: topology:lem-equivalent-condition-for-convergent-subsequence-in-a-metric-space
-Let $(x_n)$ be a sequence in a {prf:ref}`metric space<topology:def-metric-space>` $(X, d)$ and $x \in X.$
+:label: topology:lem:equivalent-condition-for-convergent-subsequence-in-a-metric-space
+Let $(x_n)$ be a sequence in a {prf:ref}`metric space<topology:def:metric-space>` $(X, d)$ and $x \in X.$
 Then $(x_n)$ has a subsequence converging to $x$ if and only if for every $\epsilon > 0$ we have $x_n \in B_\epsilon(x)$ for infinitely many $n \in \mathbb{N}.$
 :::
 
@@ -358,8 +358,8 @@ Since $d(x_{n_k}, x) < \frac{1}{n},$ we have that $x_{n_k} \to x.$
 We are now ready to show that compactness and sequential compactness are equivalent in metric spaces.
 
 :::{prf:theorem} Compact metric space $\iff$ sequentially compact metric space
-:label: topology:thm-compact-metric-space-iff-sequentially-compact-metric-space
-A {prf:ref}`metric space<topology:def-metric-space>` $(X, d)$ is a {prf:ref}`compact<topology:def-compact-space>` if and only if it is {prf:ref}`sequentially compact<topology:def-sequentially-compact>`.
+:label: topology:thm:compact-metric-space-iff-sequentially-compact-metric-space
+A {prf:ref}`metric space<topology:def:metric-space>` $(X, d)$ is a {prf:ref}`compact<topology:def:compact-space>` if and only if it is {prf:ref}`sequentially compact<topology:def:sequentially-compact>`.
 :::
 
 :::{dropdown} Proof: Compact metric space $~\iff$ sequentially compact metric space
@@ -369,7 +369,7 @@ __Implies:__
 Suppose $(X, d)$ is compact.
 Let $(x_n)$ be a sequence in $X$ and suppose that it does not have a convergent subsequence.
 Then, for any $y \in X,$ there is no subsequence converging to $y.$
-By {prf:ref}`topology:lem-equivalent-condition-for-convergent-subsequence-in-a-metric-space`, there exists $\epsilon_y > 0$ such that $x_n \in B_\epsilon_y(y)$ only finitely many times.
+By {prf:ref}`topology:lem:equivalent-condition-for-convergent-subsequence-in-a-metric-space`, there exists $\epsilon_y > 0$ such that $x_n \in B_\epsilon_y(y)$ only finitely many times.
 Let $U_y = B_\epsilon_y(y).$
 Now, the set $\mathcal{V} = \{U_y: y \in X\}$ is an open cover of $X.$
 Since $X$ is compact, there is a finite subcover $\{U_{y_1}, \dots, U_{y_m}\}.$
@@ -406,8 +406,8 @@ This concerns metric spaces, but relies on results on compactness we have shown 
 To define completeness, we first need to define Cauchy sequences.
 
 :::{prf:definition} Cauchy sequence
-:label: topology:def-cauchy-sequence
-Let $(X, d)$ be a {prf:ref}`metric space<topology:def-metric-space>`.
+:label: topology:def:cauchy-sequence
+Let $(X, d)$ be a {prf:ref}`metric space<topology:def:metric-space>`.
 A sequence $(x_n)$ in $X$ is Cauchy if for every $\epsilon > 0,$ there exists $N \in \mathbb{N}$ such that $d(x_n, x_m) < \epsilon$ for all $n, m \geq N.$
 :::
 
@@ -416,22 +416,22 @@ Intutively, a Cauchy sequence is one whose the terms are progressively closer to
 Completeness therefore means that all such sequences have a limit in the space.
 
 :::{prf:definition} Complete metric space
-:label: topology:def-complete-metric-space
-A {prf:ref}`metric space<topology:def-metric-space>` $(X, d)$ is complete if every {prf:ref}`Cauchy sequence<topology:def-cauchy-sequence>` in it converges.
+:label: topology:def:complete-metric-space
+A {prf:ref}`metric space<topology:def:metric-space>` $(X, d)$ is complete if every {prf:ref}`Cauchy sequence<topology:def:cauchy-sequence>` in it converges.
 :::
 
 For example $(0, 1)$ is a metric space that is not complete because the sequence $(a_n)$ where $a_n = n^{-1}$ is Cauchy but does not converge to a point in $(0, 1).$
 By contrast, we will show that $[0, 1]$ is complete, and this is a consequence of the space being compact, as shown by the following result.
 
 :::{prf:lemma} Compact metric spaces are complete
-:label: topology:lem-compact-metric-spaces-are-complete
-If the {prf:ref}`metric space<topology:def-metric-space>` $(X, d)$ is {prf:ref}`compact<topology:def-compact-space>`, it is also {prf:ref}`complete<topology:def-complete-metric-space>`.
+:label: topology:lem:compact-metric-spaces-are-complete
+If the {prf:ref}`metric space<topology:def:metric-space>` $(X, d)$ is {prf:ref}`compact<topology:def:compact-space>`, it is also {prf:ref}`complete<topology:def:complete-metric-space>`.
 :::
 
 :::{dropdown} Proof: Compact metric spaces are complete
 Suppose $(X, d)$ is a compact metric space.
 Let $(x_n)$ be a Cauchy sequence in $X.$
-From {prf:ref}`topology:thm-compact-metric-space-iff-sequentially-compact-metric-space`, it is sequentially compact.
+From {prf:ref}`topology:thm:compact-metric-space-iff-sequentially-compact-metric-space`, it is sequentially compact.
 Since the space is sequentially compact, $(x_n)$ has a convergent subsequence $(x_{n_k}),$ which converges to some $x \in X.$
 
 Let $\epsilon > 0.$
@@ -447,7 +447,7 @@ d(x_l, x) \leq d(x_l, x_{n_k}) + d(x_{n_k}, x) < \epsilon,
 so $x_l$ converges to $x,$ and $X$ is complete.
 :::
 
-The interval $[0, 1]$ is a compact set so it is complete ({prf:ref}`topology:lem-compact-metric-spaces-are-complete`.
+The interval $[0, 1]$ is a compact set so it is complete ({prf:ref}`topology:lem:compact-metric-spaces-are-complete`.
 We conclude with a satisfying result that we can show with the ideas developed in the course:
  $\mathbb{R}^n$ is complete.
 
@@ -457,7 +457,7 @@ $\mathbb{R}^n$ with the standard topology is complete.
 
 :::{dropdown} Proof: $~\mathbb{R}^n~$ is complete
 If $(x_n)$ is a Cauchy sequence in $\mathbb{R}^n,$ then $(x_n) \subseteq \overline{B}_r(0)$ for some $r \in \mathbb{R}.$
-Since $\overline{B}_r(0)$ is a closed and bounded subset of a metric space, it is compact ({prf:ref}`topology:lem-closed-subsets-of-compact-spaces-are-compact`).
-Since $(x_n)$ is a Cauchy sequence in a compact metric space, it converges ({prf:ref}`topology:lem-compact-metric-spaces-are-complete`).
+Since $\overline{B}_r(0)$ is a closed and bounded subset of a metric space, it is compact ({prf:ref}`topology:lem:closed-subsets-of-compact-spaces-are-compact`).
+Since $(x_n)$ is a Cauchy sequence in a compact metric space, it converges ({prf:ref}`topology:lem:compact-metric-spaces-are-complete`).
 Therefore $\mathbb{R}^n$ is complete.
 :::

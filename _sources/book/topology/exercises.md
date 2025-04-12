@@ -66,7 +66,7 @@ Again, note that the set $A$ cannot be closed, by the same reasoning that was us
 
 __Set 3:__
 The set $A$ is not open because for any rational $x \in \mathbb{Q},$ there exists an irrational $x' \in \mathbb{R} \setminus \mathbb{Q}$ that is arbitrarily close to it, so for any $(x, y) \in A,$ there exists an $(x', y)$ that is aribtrarily close to it but is not in $A,$ because $x'$ is irrational.
-In addition, the set $A$ is not closed because it does not contain all its {prf:ref}`limit points <topology:def-limit-point>`.
+In addition, the set $A$ is not closed because it does not contain all its {prf:ref}`limit points <topology:def:limit-point>`.
 For example, consider the point $(0, 1) \in \mathbb{R}^2.$
 This is a limit point of the set $A$: for any $\epsilon > 0,$ there exists a rational $q \in \mathbb{Q}$ such that $0 < |q| < \epsilon / 2$ and a sufficiently large $n \in \mathbb{N}$ such that $|q^{1/n} - 1| < \epsilon / 2.$
 Then $|(q, q^{1/n}) - (0, 1)|_\infty = |q| + |q^{1/n} - 1| < \epsilon,$ from which it follows that $(0, 1)$ is a limit point of $A$ that is not contained in $A.$
@@ -153,7 +153,7 @@ Give an example to show that the converse statement does not hold.
 :::{dropdown} Solution
 
 __First part:__
-First, we show that $||\cdot||_{1, 1}$ is a norm on $C^1([0, 1]),$ by showing that it satisfies the {prf:ref}`properties of a norm <topology:def-norm>`.
+First, we show that $||\cdot||_{1, 1}$ is a norm on $C^1([0, 1]),$ by showing that it satisfies the {prf:ref}`properties of a norm <topology:def:norm>`.
 
 __Positive definiteness:__
 By the definition of $||\cdot||_{1, 1},$ we have $||f||_{1, 1} \geq 0,$ for all $f \in C^1([0, 1]).$
@@ -229,7 +229,7 @@ Therefore, the sequence $(f_n)$ does not converge to the zero function with resp
 
 ::::{admonition} Exercise 1.5
 :class: tip
-Let $d: X \times X \to \mathbb{R}$ be a function which satisfies all the axioms for a {prf:ref}`metric <topology:def-metric-space>` except for the requirement that $d(x, y) = 0 \implies x = y.$
+Let $d: X \times X \to \mathbb{R}$ be a function which satisfies all the axioms for a {prf:ref}`metric <topology:def:metric-space>` except for the requirement that $d(x, y) = 0 \implies x = y.$
 For $x, y \in X,$ define $x \sim y$ if $d(x, y) = 0.$
 Show that $\sim$ is an equivalence relation on $X,$ and that $d$ induces a metric on the quotient topology $X / \sim.$
 
@@ -367,10 +367,10 @@ Therefore $U_1$ and $U_2$ are not disjoint, so the topology is not Hausdorff.
 ::::{admonition} Exercise 1.10
 :class: tip
 The diagonal in $X \times X$ is the set $\Delta = \{(x, x) \in X \times X | x \in X \}.$
-If $X$ is a {prf:ref}`Haussdorff space <topology:def-hausdorff-space>`, show that $\Delta$ is a closed subset of $X \times X.$
+If $X$ is a {prf:ref}`Haussdorff space <topology:def:hausdorff-space>`, show that $\Delta$ is a closed subset of $X \times X.$
 
 :::{dropdown} Solution
-Let $X$ be a {prf:ref}`Hausdorff space <topology:def-hausdorff-space>`.
+Let $X$ be a {prf:ref}`Hausdorff space <topology:def:hausdorff-space>`.
 We will show that the complement of $\Delta$ is open.
 
 Let $(x_1, x_2) \in X \times X \setminus \Delta.$
@@ -786,7 +786,7 @@ This is a contradiction, so $h_d(x) < 0$ for some $x \in (0, \pi / 2),$ completi
 Is there an infinite compact subset of $\mathbb{Q}$?
 
 :::{dropdown} Solution
-The set $\{x \in [0, 1]: x = 1 / n \text{ for some } n \in \mathbb{N}\} \cup \{0\},$ is an infinite subset of $\mathbb{Q}$ which is compact because it is a closed subset of $[0, 1],$ {prf:ref}`which is compact<topology:closed-interval-is-compact>` ({ref}`topology:def-compact-space`).
+The set $\{x \in [0, 1]: x = 1 / n \text{ for some } n \in \mathbb{N}\} \cup \{0\},$ is an infinite subset of $\mathbb{Q}$ which is compact because it is a closed subset of $[0, 1],$ {prf:ref}`which is compact<topology:closed-interval-is-compact>` ({ref}`topology:def:compact-space`).
 :::
 ::::
 
@@ -831,7 +831,7 @@ __Part 2:__
 Let $X = \mathbb{R}^n.$
 From the previous part, $X^+$ is compact.
 Note also that $S^n$ is Hausdorff.
-From {prf:ref}`topology:lem-sufficient-condition-for-homeomorphism`, any continuous bijection $f: X^+ \to S^n$ is a homeomorphism between the two spaces, so it sufficies to show that such a map exists.
+From {prf:ref}`topology:lem:sufficient-condition-for-homeomorphism`, any continuous bijection $f: X^+ \to S^n$ is a homeomorphism between the two spaces, so it sufficies to show that such a map exists.
 
 Let $f: X^+ \to S^n$ be the stereographic projection of the sphere which maps $\infty \in $X^+$$ to the north pole $s^* \in S^n$ and note that this mapping is a bijection.
 In addition, it is continuous which can be seen as follows.
