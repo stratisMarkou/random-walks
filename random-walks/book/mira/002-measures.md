@@ -139,16 +139,13 @@ This property will also turn out to be true of more general measures which we wi
 
 :::{prf:theorem} Outer measure is countably subadditive
 :label: mira:thm:countable-subadditivity-of-outer-measure
-
 Suppose $A_1, A_2, \ldots$ are subsets of $\mathbb{R}.$
 Then
 
 $$\left| \bigcup_{k=1}^\infty A_k \right| \leq \sum_{k=1}^\infty |A_k|.$$
-
 :::
 
 :::{dropdown} Proof: Outer measure is countably subadditive
-
 If $|A_k| = \infty$ for some $k \in \mathbb{Z}^+,$ then the inequality holds.
 Suppose instead that $|A_k| < \infty$ for all $k \in \mathbb{Z}^+.$
 Let $\epsilon > 0.$
@@ -171,10 +168,7 @@ $$\left| \bigcup_{k=1}^\infty A_k \right| \leq \sum_{k=1}^\infty |A_k| + \epsilo
 and since $\epsilon > 0$ is arbitrary, this implies that
 
 $$\left| \bigcup_{k=1}^\infty A_k \right| \leq \sum_{k=1}^\infty |A_k|.$$
-
 :::
-
-
 
 
 ### Heine-Borel theorem
@@ -184,11 +178,9 @@ To show this, we will use the Heine-Borel theorem, which is a theorem of indepen
 The Heine-Borel theorem is a statement about open covers, an idea which we now define.
 
 :::{prf:definition} Open cover, finite subcover
-
 Suppose $A \subseteq \mathbb{R}.$
 A collection $\mathcal{C}$ of open intervals is called an open cover of $A$ if $A$ is contained in the union of the intervals in $\mathcal{C}.$
 An open cover $\mathcal{C}$ of $A$ is said to have a finite subcover if $A$ is contained in the union of some finite list of sets in $\mathcal{C}.$
-
 :::
 
 
@@ -196,13 +188,10 @@ The Heine-Borel theorem states that every open cover of a closed bounded subset 
 
 :::{prf:theorem} Heine-Borel
 :label: mira:thm:heine-borel
-
 Every open cover of a closed bounded subset of $\mathbb{R}$ has a finite subcover.
-
 :::
 
 :::{dropdown} Proof: Heine-Borel
-
 This proof goes in two parts.
 The first part shows the result for the special case of a closed bounded interval $[a, b].$
 The second part then extends this result to any closed bounded subset of $\mathbb{R}.$
@@ -242,10 +231,7 @@ Thus
 $$F \subseteq \bigcup_{j=1}^n G_j,$$
 
 which shows that $F$ has a finite subcover from $\mathcal{C}.$
-
 :::
-
-
 
 Using the Heine-Borel theorem, we can now show that the outer measure of a closed interval is equal to the difference between the endpoints of the interval.
 
@@ -254,7 +240,6 @@ Using the Heine-Borel theorem, we can now show that the outer measure of a close
 
 Suppose $a, b \in \mathbb{R}$ with $a < b.$
 Then $|[a, b]| = b - a.$
-
 :::
 
 :::{dropdown} Proof: Outer measure of a closed interval
@@ -270,10 +255,9 @@ $$|[a, b]| \leq |(a - \epsilon, b + \epsilon)| = b - a + 2\epsilon,$$
 
 and since $\epsilon > 0$ is arbitrary, this implies that $|[a, b]| \leq b - a.$
 
-
 __Second inequality:__
 For the second inequality, suppose that $I_1, I_2, \ldots$ is a sequence of open intervals whose union contains $[a, b].$
-Then $I_1, I_2, \ldots$ is an open cover of $[a, b],$ so by the {prf:ref}`Heine-Borel theorem <mira:thm:heine-borel>`, there exists an $n \in \mathbb{Z}^+$ such that
+Then $I_1, I_2, \ldots$ is an open cover of $[a, b],$ so by the {prf:ref}`Heine-Borel theorem<mira:thm:heine-borel>`, there exists an $n \in \mathbb{Z}^+$ such that
 
 $$[a, b] \subseteq I_1 \cup \cdots \cup I_n.$$
 
@@ -309,14 +293,11 @@ Putting the two inequalities in {eq}`mira:eq:outer-measure-of-closed-interval` t
 :::
 
 
-
 A nice result from the previous theorems is that nontrivial intervals in $\mathbb{R}$ are uncountable.
 Interestingly, this proof does not use the [diagonal argument](https://en.wikipedia.org/wiki/Cantor's_diagonal_argument), which is the argument that is usually used to show that the real numbers are uncountable.
 
 :::{prf:theorem} Nontrivial intervals are uncountable
-
 Every inverval in $\mathbb{R}$ that contains at least two distinct elements is uncountable.
-
 :::
 
 :::{dropdown} Proof: Nontrivial intervals are uncountable
@@ -334,15 +315,11 @@ Since {prf:ref}`every countable subset of $\mathbb{R}$ has outer measure zero <m
 
 
 ### Nonadditivity of the outer measure
-
-
 Now we come to the negative result of the outer measure, namely that it is not additive.
 Additivity is an important property that we would like our notion of length to have, because it allows us to prove good theorems about integration.
 
 The proof of nonadditivity of the outer measure relies on defining a subset of a closed interval.
 Similar sets are used beyond the subadditivity of the outer measure, so we give it a special name.
-
-
 
 :::{prf:definition} Rational difference equivalence relation
 :label: mira:def:rational-difference-equivalence-relation
@@ -350,11 +327,9 @@ Similar sets are used beyond the subadditivity of the outer measure, so we give 
 Suppose $S \in \mathbb{R}.$
 Let $\sim$ be the equivalence relation defined by $x \sim y \iff x - y \in \mathbb{Q},$ for any $\mathbb{R}.$
 We call this the rational difference equivalence relation.
-
 :::
 
 :::{dropdown} Detail: Rational difference is an equivalence relation
-
 Let $\sim$ be the binary relation defined by
 
 $$a \sim b \iff a - b \in \mathbb{Q}.$$
@@ -368,22 +343,17 @@ Note that $\sim$ is an equivalence relation on $\mathbb{R},$ because it is:
 :::
 
 
-
-
 :::{prf:theorem} Nonadditivity of the outer measure
 :label: mira:thm:non-additivity-of-outer-measure
 
 There exist disjoint subsets $A, B$ of $\mathbb{R}$ such that
 
 $$|A \cup B| \neq |A| + |B|.$$
-
 :::
 
 
 :::{dropdown} Proof: Nonadditivity of the outer measure
-
 __Proof idea:__
-We will show this result as follows.
 We will define a countable collection of disjoint sets.
 We will set up these sets so that their union is contained in an closed bounded interval of $\mathbb{R},$ and they all have equal outer measure.
 Then, we will show that the outer measure of each of these sets is nonzero, which leads to a contradiction.
@@ -434,7 +404,6 @@ $$\left|\bigcup_{n=1}^\infty S_n\right| = \sum_{n=1}^\infty |S_n|.$$
 
 
 :::{dropdown} Proof: Outer measure is additive if sets are contained by disjoint open intervals
-
 First, by the {prf:ref}`subadditivity of the outer measure<mira:thm:countable-subadditivity-of-outer-measure>`, we have 
 
 $$\left|\bigcup_{n=1}^\infty S_n\right| \leq \sum_{n=1}^\infty |S_n|.$$
@@ -595,6 +564,7 @@ The fact that $\sigma$-algebras are closed under complements, as well as countab
 For this, we first define measurable spaces and measurable sets.
 
 :::{prf:definition} Measurable space, measurable set
+:label: mira:def:measurable-space-measurable-set
 A measurable space is an ordered pair $(X, S),$ where $X$ is a set and $S$ is a $\sigma$-algebra on $X.$
 An element of $S$ is called a $S$-measurable set, or simply a measurable set if $S$ is clear from the context.
 :::
@@ -622,8 +592,9 @@ We now come to the definition of an important $\sigma$-algebra, the Borel $\sigm
 This is the $\sigma$-algebra generated by the open subsets of $\mathbb{R}.$
 
 :::{prf:definition} Borel set
+:label: mira:def:borel-set
 The smallest $\sigma$-algebra on $\mathbb{R}$ that contains all the open subsets of $\mathbb{R}$ is called the collection of Borel subsets on $\mathbb{R}.$
-An element of this $\sigma$-algebra is called a Borel set.
+An element of this $\sigma$-algebra is called a {prf:ref}`Borel set<mira:def:borel-set>`.
 :::
 
 Before moving to measurable functions, we will define inverse images of functions.
@@ -730,6 +701,7 @@ Now we introduce measurable functions.
 As the name suggests, measurable functions are functions such that the inverse images of Borel sets under these functions are measurable sets.
 
 :::{prf:definition} Measurable function
+:label: mira:def:measurable-function
 Suppose $(X, S)$ is a measurable space.
 A function $f: X \to \mathbb{R}$ is called $S$-measurable if
 
@@ -761,7 +733,7 @@ Suppose $(X, S)$ is a measurable space and $f: X \to \mathbb{R}$ is a function s
 $$f^{-1}((a, \infty)) \in S$$
 
 for all $a \in \mathbb{R}.$
-Then $f$ is $S$-measurable.
+Then $f$ is $S$-{prf:ref}`measurable<mira:def:measurable-function>`.
 :::
 
 :::{dropdown} Proof: Condition for measurable function
@@ -770,7 +742,7 @@ Consider the set
 
 $$T = \{A \subseteq \mathbb{R} : f^{-1}(A) \in S \}.$$
 
-We will show that every Borel subset of $\mathbb{R}$ is in $T.$
+We will show that every {prf:ref}`Borel subset<mira:def:borel-set>` of $\mathbb{R}$ is in $T.$
 To do this, we will first show that $T$ is a $\sigma$-algebra on $\mathbb{R}.$
 Then, we will show that $T$ contains all the open intervals of $\mathbb{R},$ which will imply that $T$ contains all the Borel subsets of $\mathbb{R}.$
 
@@ -795,18 +767,19 @@ Therefore $T$ contains all the open intervals of $\mathbb{R},$ so $T$ contains a
 In the special case that $X$ is a subset of $\mathbb{R}$ and $S$ is the set of Borel subsets of $\mathbb{R},$ we use the term Borel measurable to refer to $S$-measurable functions.
 
 :::{prf:definition} Borel measurable function
+:label: mira:def:borel-measurable-function
 Suppose $X \subseteq \mathbb{R}.$
-A function $f: X \to \mathbb{R}$ is called Borel measurable if $f^{-1}(B)$ is a Borel set for every Borel set $B \subseteq \mathbb{R}.$
+A function $f: X \to \mathbb{R}$ is called Borel measurable if $f^{-1}(B)$ is a {prf:ref}`Borel set<mira:def:borel-set>` for every Borel set $B \subseteq \mathbb{R}.$
 :::
 
 Now we prove a number a few results on sufficient conditions for Borel measurable functions.
 
 :::{prf:theorem} Every continuous function is Borel measurable
-Every continuous real-valued function defined on a Borel subset of $\mathbb{R}$ is a Borel measurable function.
+Every continuous real-valued function defined on a {prf:ref}`Borel subset<mira:def:borel-set>` of $\mathbb{R}$ is a {prf:ref}`Borel measurable function<mira:def:borel-measurable-function>`.
 :::
 
 :::{dropdown} Proof: Every continuous function is Borel measurable
-Suppose that $X \subseteq \mathbb{R}$ is a Borel set and $f: X \to \mathbb{R}$ is a Borel measurable function.
+Suppose that $X \subseteq \mathbb{R}$ is a {prf:ref}`Borel set<mira:def:borel-set>` and $f: X \to \mathbb{R}$ is a Borel measurable function.
 Suppose $a \in \mathbb{R}.$
 If $x \in X$ such that $f(x) > a,$ then by the continuity of $f,$ there exists $\delta_x > 0$ such that $f(y) > a$ for all $y \in (x - \delta_x, x + \delta_x).$
 Thus, we have
@@ -828,11 +801,11 @@ If $f(x) < f(y)$ for all $x, y \in X$ with $x < y,$ then $f$ is called strictly 
 
 
 :::{prf:theorem} Every increasing function is Borel measurable
-Every increasing function defined on a Borel subset of $\mathbb{R}$ is a Borel measurable function.
+Every increasing function defined on a {prf:ref}`Borel subset<mira:def:borel-set>` of $\mathbb{R}$ is a Borel measurable function.
 :::
 
 :::{dropdown} Proof: Every increasing function is Borel measurable
-Suppose that $X \subseteq \mathbb{R}$ is a Borel set and $f: X \to \mathbb{R}$ is an increasing function.
+Suppose that $X \subseteq \mathbb{R}$ is a {prf:ref}`Borel set<mira:def:borel-set>` and $f: X \to \mathbb{R}$ is an increasing function.
 Suppose $a \in \mathbb{R}.$
 Let $b = \inf f^{-1}((a, \infty)).$
 Then
@@ -840,22 +813,20 @@ Then
 $$f^{-1}((a, \infty)) = (b, \infty) \cap X \text{ or } f^{-1}((a, \infty)) = [b, \infty) \cap X$$
 
 holds.
-Since $X$ is a Borel set, and both $(b, \infty)$ and $[b, \infty)$ are Borel sets, it follows that $f^{-1}((a, \infty))$ is a Borel set.
+Since $X$ is a Borel set, and both $(b, \infty)$ and $[b, \infty)$ are Borel sets, it follows that $f^{-1}((a, \infty))$ is a {prf:ref}`Borel set<mira:def:borel-set>`.
 By our earlier {prf:ref}`condition for measurable functions<mira-thm-condition-measurable>`, $f$ is Borel measurable.
 :::
 
 :::{prf:theorem} Composition of measurable functions
-
 Suppose $(X, S)$ is a measurable space and $f: X \to \mathbb{R}$ is a measurable function.
-Suppose that $g$ is a real-valued Borel measurable function defined on a subset of $\mathbb{R}$ that includes the range of $f.$
+Suppose that $g$ is a real-valued {prf:ref}`Borel measurable function<mira:def:borel-measurable-function>` defined on a subset of $\mathbb{R}$ that includes the range of $f.$
 Then $g \circ f: X \to \mathbb{R}$ is a measurable function.
-
 :::
 
 :::{dropdown} Proof: Composition of measurable functions
 Suppose $(X, S)$ is a measurable space and $f: X \to \mathbb{R}$ is a measurable function.
 Suppose that $g$ is a real-valued Borel measurable function defined on a subset of $\mathbb{R}$ that includes the range of $f.$
-Let $B \subseteq \mathbb{R}$ be a Borel set.
+Let $B \subseteq \mathbb{R}$ be a {prf:ref}`Borel set<mira:def:borel-set>`.
 Because $g$ is a Borel measurable function, and $B$ is a Borel set, $g^{-1}(B)$ is also a Borel set.
 Because $f$ is a measurable function, and $g^{-1}(B)$ is a Borel set, $f^{-1}(g^{-1}(B))$ is in $S,$ so $g \circ f$ is Borel measurable.
 :::
@@ -863,7 +834,7 @@ Because $f$ is a measurable function, and $g^{-1}(B)$ is a Borel set, $f^{-1}(g^
 Measurable functions also satisfy intuitive algebraic properties that are very useful for proving measurability.
 
 :::{prf:theorem} Algebraic operations with measurable functions
-Suppose $(X, S)$ is a measurable space and $f, g: X \to \mathbb{R}$ are $S$-measurable functions.
+Suppose $(X, S)$ is a measurable space and $f, g: X \to \mathbb{R}$ are $S$-{prf:ref}`measurable<mira:def:measurable-function>` functions.
 Then
 
 (a) $f + g, f - g, f g$ are $S$-measurable functions,
@@ -906,7 +877,7 @@ We now prove a very useful result, namely that pointwise limits of measurable fu
 This is a highly desirable property, and perhaps somewhat surprising that it holds: recall that the pointwise limit of Riemann integrable functions on some interval is not closed under taking pointwise limits.
 
 :::{prf:theorem} Pointwise limit of $S$-measurable functions is $S$-measurable
-Suppose $(X, S)$ is a measurable space and $f_1, f_2, \ldots$ are $S$-measurable functions from $X$ to $\mathbb{R}.$
+Suppose $(X, S)$ is a measurable space and $f_1, f_2, \ldots$ are $S$-{prf:ref}`measurable<mira:def:measurable-function>` functions from $X$ to $\mathbb{R}.$
 Suppose $\lim_{k \to \infty} f_k(x)$ exists for each $x \in X.$
 Define $f: X \to \mathbb{R}$ by
 
@@ -942,7 +913,7 @@ Sometimes, we may need to consider functions which take values in $[-\infty, \in
 We therefore extend the notion of Vorel sets to subsets of $[-\infty, \infty]$ in the following way.
 
 :::{prf:definition} Borel subsets of $[-\infty, \infty]$
-A subset of $[-\infty, \infty]$ is called a Borel subset if its intersection with $\mathbb{R}$ is a Borel set.
+A subset of $[-\infty, \infty]$ is called a {prf:ref}`Borel subset<mira:def:borel-set>` if its intersection with $\mathbb{R}$ is a {prf:ref}`Borel set<mira:def:borel-set>`.
 :::
 
 With the above definition in place, we can also extend the definition of measurable functions.
@@ -950,7 +921,7 @@ With the above definition in place, we can also extend the definition of measura
 :::{prf:definition} Measurable function on $[-\infty, \infty]$
 :label: mira:def:measurable-function-infinity
 Suppose $(X, S)$ is a measurable space.
-A function $f: X \to [-\infty, \infty]$ is $S$-measurable if
+A function $f: X \to [-\infty, \infty]$ is $S$-{prf:ref}`measurable<mira:def:measurable-function>` if
 
 $f^{-1}(B) \in S$
 
@@ -966,7 +937,7 @@ Suppose $(X, S)$ is a measurable space and $f: X \to [-\infty, \infty]$ is a fun
 $$f^{-1}((a, \infty]) \in S$$
 
 for all $a \in \mathbb{R}.$
-Then $f$ is $S$-measurable.
+Then $f$ is $S$-{prf:ref}`measurable<mira:def:measurable-function>`.
 :::
 
 :::{dropdown} Proof: Sufficient condition for measurable function
@@ -1000,12 +971,12 @@ Concluding this section, we show that pointwise infimuma and pointwise supremuma
 Note that this result would not have made sense before modifying the {prf:ref}`definition of measurability to include infinity<mira:def:measurable-function-infinity>`, because the supremum and infimum can be $\infty$ and $- \infty.$
 
 :::{prf:theorem} Infimum and supremum of a sequence of measurable functions is measurable
-Suppose $(X, S)$ is a measurable space and $f_1, f_2, \ldots$ is a sequence of $S$-measurable functions from $X$ to $[-\infty, \infty].$
+Suppose $(X, S)$ is a measurable space and $f_1, f_2, \ldots$ is a sequence of $S$-{prf:ref}`measurable<mira:def:measurable-function>` functions from $X$ to $[-\infty, \infty].$
 Define $g, h: X \to [-\infty, \infty]$ by
 
 $$g(x) = \inf\{f_k(x) : k \in \mathbb{Z}^+\} \text{ and } h(x) = \sup\{f_k(x) : k \in \mathbb{Z}^+\}.$$
 
-Then $g$ and $h$ are $S$-measurable functions.
+Then $g$ and $h$ are $S$-{prf:ref}`measurable<mira:def:measurable-function>` functions.
 :::
 
 :::{dropdown} Proof: Infimum and supremum of a sequence of measurable functions is measurable
@@ -1260,8 +1231,8 @@ Then $G = \cup_{n=1}^\infty I_n$ for some sequence of disjoint open intervals $I
 For each $m \in \mathbb{Z}^+$ we have
 
 $$\begin{align}
-|A \cup G| &\geq \left| A \cup \left(\bigcup_{n=1}^\infty I_n \right) \right| \\
-&\geq |A| + \sum_{n=1}^\infty \ell(I_n)
+|A \cup G| &\geq \left| A \cup \left(\bigcup_{n=1}^m I_n \right) \right| \\
+&\geq |A| + \sum_{n=1}^m \ell(I_n)
 \end{align}$$
 
 which in turn implies that
@@ -1310,7 +1281,7 @@ Note that this result would not hold if we replaced closed sets by open sets.
 For example, if $B = [0, 1] \setminus \mathbb{Q},$ then the only open subset of $B$ is the empty set, and thus $B$ cannot be approximated arbitrarily well by open subsets.
 :::
 :::{prf:theorem} Approximation of Borel sets from below by closed sets
-Suppose $B \subseteq \mathbb{R}$ is a Borel set.
+Suppose $B \subseteq \mathbb{R}$ is a {prf:ref}`Borel set<mira:def:borel-set>`.
 Then, for every $\epsilon > 0,$ there exists a closed set $F \subseteq B$ such that $|B \setminus F| < \epsilon.$
 :::
 
@@ -1321,7 +1292,7 @@ $$\mathcal{L} = \{D \subseteq \mathbb{R}: \text{ for every } \epsilon > 0, \text
 
 This is the set of all subsets of $\mathbb{R}$ which can be approximated below with closed sets.
 Our approach to proving the result will be to show that $\mathcal{L}$ is a $\sigma$-algebra.
-Then, noting that $\mathcal{L}$ contains all closed subsets of $\mathbb{R},$ by taking complements we conclude that it must contain all open subsets of $\mathbb{R},$ so it also contains every Borel subset of $\mathbb{R},$ which will complete the proof.
+Then, noting that $\mathcal{L}$ contains all closed subsets of $\mathbb{R},$ by taking complements we conclude that it must contain all open subsets of $\mathbb{R},$ so it also contains every {prf:ref}`Borel subset<mira:def:borel-set>` of $\mathbb{R},$ which will complete the proof.
 
 To show that $\mathcal{L}$ is a $\sigma$-algebra, we will first show that it is closed under countable intersections.
 Suppose $D_1, D_2, \cdot \subseteq \mathcal{L}.$
