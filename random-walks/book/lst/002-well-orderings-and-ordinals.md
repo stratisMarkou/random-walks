@@ -347,6 +347,83 @@ Otherwise, if $y \in S$ and $y < x,$ we would have $y \in X_i$ because $X_i$ is 
 Therefore, $S$ has a least element and $X$ is a well-ordering.
 :::
 
+
+## Ordinals
+
+:::{prf:definition} Ordinal
+:label: lst:def-ordinal
+An ordinal is a well-ordering, with any two regarded as the same if they are isomorphic.
+:::
+
+
+:::{prf:definition} Order type
+:label: lst:def-order-type
+If a well-ordering $X$ has a corresponding ordinal $\alpha,$ we say $X$ has order type $\alpha$ and write $\text{otp}(X) = \alpha.$
+:::
+
+:::{prf:definition} Order type notation
+:label: lst:def-order-type-notation
+For each $k \in \mathbb{N},$ we write $k$ for the order type of the (unique) well-ordering of size $k.$
+We write $\omega$ for teh order type of $\mathbb{N}.$
+:::
+
+:::{prf:definition} Ordinal inequality signs
+:label: lst:def-ordinal-inequality-signs
+For ordinals $\alpha, \beta,$ we write $\alpha \leq \beta$ if $X \leq Y$ for some $X$ of type $\alpha$ and $Y$ of type $\beta.$
+We define strict inequality sings for ordinals in a similar way.
+:::
+
+
+:::{prf:definition} Initial segment of set of ordinals
+:label: lst:def-initial-segment-of-set-of-ordinals
+We write $I_\alpha = \{\beta: \beta < a\}.$
+:::
+
+:::{prf:lemma} Ordinals smaller than an ordinal form a well-ordering
+:label: lst:lem-ordinals-smaller-than-an-ordinal-form-a-well-ordering
+Let $\alpha$ be an ordinal.
+Then the ordinals $< \alpha$ form a well-ordering of order type $\alpha.$
+:::
+
+:::{dropdown} Proof: Ordinals smaller than an ordinal form a well-ordering
+Let $\alpha$ be an ordinal.
+Let $X$ have order type $\alpha.$
+By {prf:ref}`lst:def-isomorphic-notation`, the well orderings $< X$ are exactly those well-orderings which are isomorphic to some proper initial segment of $X.$
+These are the sets $I_x$ for some $x \in X.$
+We can therefore form a bijection between $X$ and the well-orderings $< X$ via the function that maps $x \in X$ to $I_x.$
+This function is one-to-one and order preserving.
+Therefore $\alpha$ is isomorphic to $X$ which is isomorphic to the collection of ordinals of size $< \alpha.$
+:::
+
+
+:::{prf:theorem} Non-empty set of ordinals has least element
+:label: lst:thm-non-empty-set-of-ordinals-has-least-element
+Let $S$ be a non-empty set of ordinals.
+Then $S$ has a least element.
+:::
+
+:::{dropwdown} Proof: Non-empty set of ordinals has least element
+Suppose $S$ is a non-empty set of ordinals.
+Pick $\alpha \in S.$
+If $\alpha$ is the least element of $S$ then we are done, so suppose it is not.
+Then $I_\alpha \cap S$ is a non-empty set.
+Since $I_\alpha$ is well-ordered, the set $I_\alpha \cap S$ has a least element, and this is also the least element of $S.$
+:::
+
+
+:::{prf:theorem} Burali-Forti
+:label: lst:thm-burali-forti
+The ordinals do not form a set.
+:::
+
+:::{dropdown} Proof: Burali-Forti
+Suppose the {prf:ref}`ordinals<lst:def-ordinal>` form a set $X.$
+Then they also form a {prf:ref}`well-ordering<lst:def-ordinal>`.
+Let the {prf:ref}`order type<lst:def-order-type>` of $X$ be $\alpha.$
+Then $X$ is {prf:def}`isomorphic<lst:def-isomorphic-notation>` to $I_\alpha,$ which is a proper {prf:ref}`initial segment<lst:def-initial-segment-of-set-of-ordinals>` of $X.$
+This is a contradiction.
+:::
+
 <!-- $$\begin{equation}
 \end{equation}$$
 
@@ -363,4 +440,7 @@ $$\begin{align}
 
 :::{prf:theorem} 
 :label: lst:thm-
+:::
+
+:::{dropdown} 
 ::: -->
