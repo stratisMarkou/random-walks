@@ -31,7 +31,7 @@ To define the outer measure, we first need a definition of the length of an open
 
 :::{prf:definition} Length of an open interval
 
-The lenght $\ell(I)$ of an open interval $I \subseteq \mathbb{R}$ is defined by
+The length $\ell(I)$ of an open interval $I \subseteq \mathbb{R}$ is defined by
 
 $$\begin{align}
 \ell(I) = \begin{cases}
@@ -48,7 +48,7 @@ b - a & \text{if } I = (a, b) \text{ for some } a, b \in \mathbb{R} \text{ with 
 Given lengths of open intervals, we can define the outer measure of a set as the least sum of the lengths of open intervals that cover the set.
 
 :::{prf:definition} Outer measure
-
+:label: mira-def-outer-measure
 The outer measure $|A|$ of a subset $A \subseteq \mathbb{R}$ is defined by
 
 $$|A| = \inf \left\{ \sum_{j=1}^\infty \ell(I_j) : A \subseteq \bigcup_{j=1}^\infty I_j \right\}.$$
@@ -64,13 +64,10 @@ First, the outer measure of countable subsets of $\mathbb{R}$ is zero.
 
 :::{prf:theorem} Countable sets have outer measure zero
 :label: mira:thm:countable-sets-have-measure-zero
-
-Every countable subset of $\mathbb{R}$ has outer measure $0.$
-
+Every countable subset of $\mathbb{R}$ has {prf:ref}`outer measure<mira-def-outer-measure>` $0.$
 :::
 
 :::{dropdown} Proof: Countable sets have outer measure zero
-
 Suppose $A = \{ a_1, a_2, \ldots \}$ is a countable subset of $\mathbb{R}.$
 Let $\epsilon > 0.$
 For $k \in \mathbb{Z}^+,$ let
@@ -84,25 +81,19 @@ $$\sum_{k=1}^\infty \ell(I_k) = 2\epsilon,$$
 
 we have $|A| \leq 2\epsilon.$
 Because $\epsilon > 0$ is an arbitrary positive real number, this implies that $|A| = 0.$
-
 :::
-
-
 
 Second, the outer measure preserves order, that is the outer measure of a subset of $\mathbb{R}$ is less than or equal to the outer measure of any of its supersets.
 
 :::{prf:theorem} Outer measure preserves order
 :label: mira:thm:outer-measure-preserves-order
-
 If $A$ and $B$ are subsets of $\mathbb{R}$ with $A \subseteq B,$ then $|A| \leq |B|.$
-
 :::
 
 :::{dropdown} Proof: Outer measure preserves order
-
 Suppose $A$ and $B$ are subsets of $\mathbb{R}$ with $A \subseteq B,$ and let $I_1, I_2, \ldots$ be a sequence of open intervals whose union contains $B.$
 Then the union of this sequence of open intervals also contains $A.$
-Therefore,
+Therefore
 
 $$|A| \leq \sum_{j=1}^\infty \ell(I_j),$$
 
@@ -114,32 +105,23 @@ and taking the infimum of both sides, over all sequences of open intervals whose
 The third good property of the outer measure is translation invariance.
 To establish this property, we first need a definition of the translation of a set.
 
-:::{prf:definition} Translation invariance
-:label: mira:thm:outer-measure-is-translation-invariant
-
+:::{prf:definition} Translation
+:label: mira:def:translation
 For $A \subseteq \mathbb{R}$ and $t \in \mathbb{R},$ the translation of $t + A$ is defined by
 
 $$A + t = \{ a + t : a \in A \}.$$
-
 :::
 
-
-
-With this definition in place, we can now state the translation invariance property of the outer measure.
-Specifically, the outer measure of a set is the same as the outer measure of its translation.
-
 :::{prf:theorem} Outer measure is translation invariant
-
+:label: mira:thm:outer-measure-is-translation-invariant
 For every subset $A$ of $\mathbb{R}$ and every $t \in \mathbb{R},$ we have $|t + A| = |A|.$
-
 :::
 
 :::{dropdown} Proof: Outer measure is translation invariant
-
 Suppose $A$ is a subset of $\mathbb{R}$ and $t \in \mathbb{R}.$
 Let $I_1, I_2, \ldots$ be a sequence of open intervals whose union contains $A.$
 Then $t + I_1, t + I_2, \ldots$ is a sequence of open intervals whose union contains $t + A.$
-Thus,
+Thus
 
 $$|t + A| \leq \sum_{j=1}^\infty \ell(t + I_j) = \sum_{j=1}^\infty \ell(I_j),$$
 
@@ -149,9 +131,7 @@ Conversely, we can apply the same argument by noting that $A = -t + (t + A)$ to 
 $$|A| = |-t + (t + A)| \leq |t + A|.$$
 
 Putting these two inequalities together gives $|A| = |t + A|.$
-
 :::
-
 
 
 Another useful property of the outer measure is countable subadditivity.
@@ -573,26 +553,26 @@ This is where $\sigma$-algebras come in: instead of using all subsets of $\mathb
 :::{prf:definition} $\sigma$-algebra
 :label: mira:def:sigma-algebra
 
-Suppose $X$ is a set and $\mathcal{S}$ is a set of subsets of $X.$
-Then $\mathcal{S}$ is called a $\sigma$-algebra on $X$ if it satisfies:
+Suppose $X$ is a set and $S$ is a set of subsets of $X.$
+Then $S$ is called a $\sigma$-algebra on $X$ if it satisfies:
 
-- $\emptyset \in \mathcal{S},$
-- if $E \in \mathcal{S},$ then $X \setminus E \in \mathcal{S},$
-- if $E_1, E_2, \ldots$ is a sequnece of elements of $\mathcal{S},$ then $\bigcup_{k=1}^\infty E_k \in S.$
+- $\emptyset \in S,$
+- if $E \in S,$ then $X \setminus E \in S,$
+- if $E_1, E_2, \ldots$ is a sequnece of elements of $S,$ then $\bigcup_{k=1}^\infty E_k \in S.$
 
 :::
 
 From this definition, a number of basic properties of $\sigma$ algebras follow immediately.
 
 :::{prf:theorem} Other properties of $\sigma$-algebras
-Suppose $\mathcal{S}$ is a $\sigma$-algebra on a set $X.$
+Suppose $S$ is a $\sigma$-algebra on a set $X.$
 Then
 
-(a) $X \in \mathcal{S},$
+(a) $X \in S,$
 
-(b) if $D, E \in \mathcal{S},$ then $D \cup E \in \mathcal{S}, D \cap E \in \mathcal{S}$ and $D \setminus E \in \mathcal{S},$
+(b) if $D, E \in S,$ then $D \cup E \in S, D \cap E \in S$ and $D \setminus E \in S,$
 
-(c) if $E_1, E_2, \ldots$ is a sequence of elements of $\mathcal{S},$ then $\cap_{k = 1}^\infty E_k \in \mathcal{S}.$
+(c) if $E_1, E_2, \ldots$ is a sequence of elements of $S,$ then $\cap_{k = 1}^\infty E_k \in S.$
 :::
 
 :::{dropdown} Proof: Other properties of $~\sigma$-algebras
@@ -969,10 +949,10 @@ With the above definition in place, we can also extend the definition of measura
 
 :::{prf:definition} Measurable function on $[-\infty, \infty]$
 :label: mira:def:measurable-function-infinity
-Suppose $(X, \mathcal{S})$ is a measurable space.
-A function $f: X \to [-\infty, \infty]$ is $\mathcal{S}$-measurable if
+Suppose $(X, S)$ is a measurable space.
+A function $f: X \to [-\infty, \infty]$ is $S$-measurable if
 
-$f^{-1}(B) \in \mathcal{S}$
+$f^{-1}(B) \in S$
 
 for every Borel set $B \subseteq [-\infty, \infty].$
 :::
@@ -981,60 +961,60 @@ The following result is the counterpart of our earlier {prf:ref}`sufficient cond
 
 :::{prf:theorem} Sufficient condition for measurable function
 :label: mira-thm-sufficient-condition-measurable-with-infinity
-Suppose $(X, \mathcal{S})$ is a measurable space and $f: X \to [-\infty, \infty]$ is a function such that
+Suppose $(X, S)$ is a measurable space and $f: X \to [-\infty, \infty]$ is a function such that
 
-$$f^{-1}((a, \infty]) \in \mathcal{S}$$
+$$f^{-1}((a, \infty]) \in S$$
 
 for all $a \in \mathbb{R}.$
-Then $f$ is $\mathcal{S}$-measurable.
+Then $f$ is $S$-measurable.
 :::
 
 :::{dropdown} Proof: Sufficient condition for measurable function
-Suppose $(X, \mathcal{S})$ is a measurable space and $f: X \to [-\infty, \infty]$ is a function such that
+Suppose $(X, S)$ is a measurable space and $f: X \to [-\infty, \infty]$ is a function such that
 
-$$f^{-1}((a, \infty]) \in \mathcal{S}$$
+$$f^{-1}((a, \infty]) \in S$$
 
 for all $a \in \mathbb{R}.$
 Note that
 
-$$f^{-1}(\{\infty\}) = \bigcap_{n=1}^\infty f^{-1}((n, \infty]) \in \mathcal{S},$$
+$$f^{-1}(\{\infty\}) = \bigcap_{n=1}^\infty f^{-1}((n, \infty]) \in S,$$
 
-and also similarly $f^{-1}(\{-\infty\}) \in \mathcal{S}.$
+and also similarly $f^{-1}(\{-\infty\}) \in S.$
 From these it follows that
 
-$$f^{-1}((a, \infty)) = f^{-1}((a, \infty]) \setminus f^{-1}(\{\infty\}) \in \mathcal{S} \text{ for all } a \in \mathbb{R}.$$
+$$f^{-1}((a, \infty)) = f^{-1}((a, \infty]) \setminus f^{-1}(\{\infty\}) \in S \text{ for all } a \in \mathbb{R}.$$
 
 Let $B$ be a Borel set in $[-\infty, \infty].$
-From our earlier {prf:ref}`condition for measurable functions<mira-thm-condition-measurable>`, it follows that $f^{-1}(B \cap \mathbb{R}) \in \mathcal{S}$ for any Borel set $B \subseteq [-\infty, \infty].$
+From our earlier {prf:ref}`condition for measurable functions<mira-thm-condition-measurable>`, it follows that $f^{-1}(B \cap \mathbb{R}) \in S$ for any Borel set $B \subseteq [-\infty, \infty].$
 We therefore have
 
 $$\begin{align}
 f^{-1}(B) &= f^{-1}((B \cap \mathbb{R}) \cup (B \cap \{\infty\}) \cup (B \cap \{-\infty\})) \\
-&= f^{-1}(B \cap \mathbb{R}) \cup f^{-1}(\{\infty\}) \cup f^{-1}(\{-\infty\}) \in \mathcal{S}
+&= f^{-1}(B \cap \mathbb{R}) \cup f^{-1}(\{\infty\}) \cup f^{-1}(\{-\infty\}) \in S
 \end{align}$$
 
-so $f$ is $\mathcal{S}$-measurable.
+so $f$ is $S$-measurable.
 :::
 
 Concluding this section, we show that pointwise infimuma and pointwise supremuma of measurable functions are measurable.
 Note that this result would not have made sense before modifying the {prf:ref}`definition of measurability to include infinity<mira:def:measurable-function-infinity>`, because the supremum and infimum can be $\infty$ and $- \infty.$
 
 :::{prf:theorem} Infimum and supremum of a sequence of measurable functions is measurable
-Suppose $(X, \mathcal{S})$ is a measurable space and $f_1, f_2, \ldots$ is a sequence of $\mathcal{S}$-measurable functions from $X$ to $[-\infty, \infty].$
+Suppose $(X, S)$ is a measurable space and $f_1, f_2, \ldots$ is a sequence of $S$-measurable functions from $X$ to $[-\infty, \infty].$
 Define $g, h: X \to [-\infty, \infty]$ by
 
 $$g(x) = \inf\{f_k(x) : k \in \mathbb{Z}^+\} \text{ and } h(x) = \sup\{f_k(x) : k \in \mathbb{Z}^+\}.$$
 
-Then $g$ and $h$ are $\mathcal{S}$-measurable functions.
+Then $g$ and $h$ are $S$-measurable functions.
 :::
 
 :::{dropdown} Proof: Infimum and supremum of a sequence of measurable functions is measurable
 Let $a \in \mathbb{R}.$
 The definition of the supremum implies that
 
-$$h^{-1}((a, \infty]) = \bigcup_{k=1}^\infty f_k^{-1}((a, \infty]) \in \mathcal{S},$$
+$$h^{-1}((a, \infty]) = \bigcup_{k=1}^\infty f_k^{-1}((a, \infty]) \in S,$$
 
-which, together with the earlier {prf:ref}`sufficient condition for measurable function<mira-thm-sufficient-condition-measurable-with-infinity>`, implies that $h$ is $\mathcal{S}$-measurable, that is, the supremum of a sequence of measurable functions is measurable.
+which, together with the earlier {prf:ref}`sufficient condition for measurable function<mira-thm-sufficient-condition-measurable-with-infinity>`, implies that $h$ is $S$-measurable, that is, the supremum of a sequence of measurable functions is measurable.
 Now, note that
 
 $$g(x) = -\sup\{-f_k(x) : k \in \mathbb{Z}^+\},$$
@@ -1057,17 +1037,18 @@ The word *measure* allows us to use a single word for different notions of size 
 
 
 :::{prf:definition} Measure
-Suppose $X$ is a set and $\mathcal{S}$ is a $\sigma$-algebra on $X.$
-A measure on $(X, \mathcal{S})$ is a function $\mu: \mathcal{S} \to [0, \infty]$ such that $\mu(\emptyset) = 0$ and $\mu$ is countably additive, that is
+:label: mira-def-measure
+Suppose $X$ is a set and $S$ is a $\sigma$-algebra on $X.$
+A measure on $(X, S)$ is a function $\mu: S \to [0, \infty]$ such that $\mu(\emptyset) = 0$ and $\mu$ is countably additive, that is
 
 $$\mu\left( \bigcup_{k=1}^\infty E_k \right) = \sum_{k=1}^\infty \mu(E_k)$$
 
-for every disjoint sequence $E_1, E_2, \ldots$ of sets in $\mathcal{S}.$
+for every disjoint sequence $E_1, E_2, \ldots$ of sets in $S.$
 :::
 
 
 Countable additivity of measures is a key property that allows us to prove useful limit theorems.
-Note that countable additvity implies finite additivity, that is, if $\mu$ is a measure on $(X, \mathcal{S})$ and $E_1, \ldots, E_n$ are disjoint sets in $\mathcal{S},$ then
+Note that countable additvity implies finite additivity, that is, if $\mu$ is a measure on $(X, S)$ and $E_1, \ldots, E_n$ are disjoint sets in $S,$ then
 
 $$\mu(E_1 \cup \cdots \cup E_n) = \mu(E_1) + \cdots + \mu(E_n).$$
 
@@ -1075,7 +1056,7 @@ The following terminology is often very useful.
 
 
 :::{prf:definition} Measure space
-A measure space is an ordered triple $(X, \mathcal{S}, \mu),$ where $X$ is a set, $\mathcal{S}$ is a $\sigma$-algebra on $X$ and $\mu$ is a measure on $(X, \mathcal{S}).$
+A measure space is an ordered triple $(X, S, \mu),$ where $X$ is a set, $S$ is a $\sigma$-algebra on $X$ and $\mu$ is a measure on $(X, S).$
 :::
 
 
@@ -1085,7 +1066,7 @@ Now we discuss several useful properties of measures.
 
 :::{prf:theorem} Measure preserves order; measure of a set difference
 :label: mira-thm-measure-preserves-order
-Suppose $(X, \mathcal{S}, \mu)$ is a measure space and $D, E \in \mathcal{S}$ with $D \subseteq E.$
+Suppose $(X, S, \mu)$ is a measure space and $D, E \in S$ with $D \subseteq E.$
 Then
 
 (a) $\mu(D) \leq \mu(E),$
@@ -1107,7 +1088,7 @@ The countable additivity property of measures applies to disjoint countable unio
 The following countable _subadditivity_ property applies to countable unions that may not be disjoint unions.
 
 :::{prf:theorem} Countable subadditivity
-Suppose $(X, \mathcal{S}, \mu)$ is a measure space and $E_1, E_2, \ldots \in \mathcal{S}.$
+Suppose $(X, S, \mu)$ is a measure space and $E_1, E_2, \ldots \in S.$
 Then
 
 $$\mu\left( \bigcup_{k=1}^\infty E_k \right) \leq \sum_{k=1}^\infty \mu(E_k).$$
@@ -1115,9 +1096,9 @@ $$\mu\left( \bigcup_{k=1}^\infty E_k \right) \leq \sum_{k=1}^\infty \mu(E_k).$$
 :::
 
 :::{dropdown} Proof: Countable subadditivity
-Suppose $E_1, E_2, \ldots \in \mathcal{S}.$
+Suppose $E_1, E_2, \ldots \in S.$
 Let $D_1 = \emptyset$ and $D_k = E_1 \cup \cdots \cup E_{k-1}$ for $k \geq 2.$
-Then $E_1 \setminus D_1, E_2 \setminus D_2, \ldots$ is a sequence of disjoint sets in $\mathcal{S}$ whose union equals $\cup_{k=1}^\infty E_k.$
+Then $E_1 \setminus D_1, E_2 \setminus D_2, \ldots$ is a sequence of disjoint sets in $S$ whose union equals $\cup_{k=1}^\infty E_k.$
 Therefore
 
 $$\begin{align}
@@ -1131,7 +1112,7 @@ where the second equality follows from {prf:ref}`countable additivity of measure
 
 
 Just as countable additivity implies finite additivity, countable subadditivity implies finite subadditivity.
-That is if $\mu$ is a measure on $(X, \mathcal{S})$ and $E_1, \ldots, E_n$ are sets in $\mathcal{S},$ then
+That is if $\mu$ is a measure on $(X, S)$ and $E_1, \ldots, E_n$ are sets in $S,$ then
 
 $$\mu(E_1 \cup \cdots \cup E_n) \leq \mu(E_1) + \cdots + \mu(E_n).$$
 
@@ -1141,7 +1122,7 @@ Note that the countable additivity property of measures is crucial for the follo
 
 :::{prf:theorem} Measure of an increasing union
 :label: mira-thm-measure-increasing-union
-Suppose $(X, \mathcal{S}, \mu)$ is a measure space and $E_1, E_2, \ldots \in \mathcal{S}$ is an increasing sequence of sets in $\mathcal{S},$ that is $E_1 \subseteq E_2 \subseteq \cdots.$
+Suppose $(X, S, \mu)$ is a measure space and $E_1, E_2, \ldots \in S$ is an increasing sequence of sets in $S,$ that is $E_1 \subseteq E_2 \subseteq \cdots.$
 Then
 
 $$\mu\left( \bigcup_{k=1}^\infty E_k \right) = \lim_{k \to \infty} \mu(E_k).$$
@@ -1160,19 +1141,20 @@ which is a disjoint union.
 Therefore, by {prf:ref}`countable additivity of measures<mira-def-measure>`, we have
 
 $$\begin{align}
-\mu\left( \bigcup_{j=1}^\infty E_j \right) &= \mu\left( \bigcup_{j=1}^\infty (E_j \setminus E_{j-1}) \right) \
+\mu\left( \bigcup_{j=1}^\infty E_j \right) &= \mu\left( \bigcup_{j=1}^\infty (E_j \setminus E_{j-1}) \right) \\
 &= \lim_{k \to \infty} \sum_{j=1}^k \mu(E_j \setminus E_{j-1}) \\
 &= \lim_{k \to \infty} \mu(E_k).
 \end{align}$$
+:::
 
 
 Just as with the earlier property we showed about limits of increasing sequences of sets, we also have an analogous result about limits of decreasing sequences of sets.
 
 :::{prf:theorem} Measure of a decreasing intersection
-Suppose $(X, \mathcal{S}, \mu)$ is a measure space and $E_1, E_2, \ldots \in \mathcal{S}$ is a decreasing sequence of sets in $\mathcal{S},$ that is $E_1 \supseteq E_2 \supseteq \cdots,$ with $\mu(E_1) < \infty.$
+Suppose $(X, S, \mu)$ is a measure space and $E_1, E_2, \ldots \in S$ is a decreasing sequence of sets in $S,$ that is $E_1 \supseteq E_2 \supseteq \cdots,$ with $\mu(E_1) < \infty.$
 Then
 
-$$\mu\left( \bigcap_{k=1}^\infty E_k \right) = \bigcup_{k=1}^\infty \mu(E_k).$$
+$$\mu\left( \bigcap_{k=1}^\infty E_k \right) = \lim_{k \to \infty} \mu(E_k).$$
 :::
 
 :::{dropdown} Proof: Measure of a decreasing intersection
@@ -1180,22 +1162,28 @@ First, we have that
 
 $$E_1 \setminus \bigcap_{k=1}^\infty E_k = \bigcup_{k=1}^\infty (E_1 \setminus E_k),$$
 
-which is an increasing union, and by our earlier result on {prf:ref}`measures of increasing unions<mira-thm-measure-increasing-union>`, we have
+which is an increasing union and, by {prf:ref}`mira-thm-measure-increasing-union`, we have
 
 $$\mu\left( E_1 \setminus \bigcap_{k=1}^\infty E_k \right) = \lim_{k \to \infty} \mu(E_1 \setminus E_k).$$
 
 Using the countable additivity of measures, we have
 
-$$\mu(E_1) - \mu\left( \bigcap_{k=1}^\infty E_k \right) = \mu(E_1) - \lim_{k \to \infty} \mu(E_k)$$
+$$\begin{align}
+\mu\left( \bigcap_{k=1}^\infty E_k \right) &= \mu\left( E_1 \right) - \mu\left(E_1 \setminus \bigcap_{k=1}^\infty E_k \right) \\
+&= \mu\left( E_1 \right) - \lim_{k \to \infty} \mu(E_1 \setminus E_k) \\
+&= \mu\left( E_1 \right) - \lim_{k \to \infty} (\mu(E_1) - \mu(E_k)) \\
+&= \lim_{k \to \infty} \mu(E_k).
+\end{align}$$
 
 which proves the result.
 :::
 
 
-We conclude this section with another useful intuitive result, namely that the measure of the union of two sets is the sum of the measures of the sets minus the measure of their intersection, which has been counted twice.
+We conclude this section with another useful result:
+the measure of the union of two sets is the sum of the measures of the sets minus the measure of their intersection, which has been counted twice.
 
 :::{prf:theorem} Measure of the union of two sets
-Suppose $(X, \mathcal{S}, \mu)$ is a measure space and $D, E \in \mathcal{S}.$
+Suppose $(X, S, \mu)$ is a measure space and $D, E \in S.$
 Then
 
 $$\mu(D \cup E) = \mu(D) + \mu(E) - \mu(D \cap E).$$
@@ -1218,10 +1206,10 @@ $$\begin{align}
 
 
 ## Lebesgue measure
-```{margin}
-Despite the name "outer measure", the outer measure is not in fact a measure, because it is not additive.
+:::{margin}
+Despite the name "outer measure", the outer measure is not in fact a measure - at least not on all subsets of $\mathbb{R},$ because it is not additive.
 Restricting its domain to the set of all subsets of $\mathbb{R}$ gives the Lebesgue measure, which is in fact a measure.
-```
+:::
 Now we move to define the Lebesgue measure which is central in measure theory.
 In short the Lebesgue measure is the modified notion of length we have been building up towards.
 Specifically, it will be the outer measure restricted (from the set of all subsets of $\mathbb{R}$) to the Borel sets of $\mathbb{R}.$
@@ -1240,7 +1228,7 @@ Then
 $$|A \cup G| = |A| + |G|.$$
 :::
 
-```{dropdown} Proof: additivity of outer measure if one of the sets is open
+:::{dropdown} Proof: additivity of outer measure if one of the sets is open
 First, we can assume that $|G| < \infty,$ because otherwise both sides of the equation above are equal to $\infty.$
 
 The {prf:ref}`subadditivity of the outer measure<mira:thm:countable-subadditivity-of-outer-measure>` implies that $|A \cup G| \leq |A| + |G|.$
@@ -1284,18 +1272,18 @@ $$\begin{align}
 \end{align}$$
 
 completing the proof that $|A \cup G| = |A| + |G|$ for the case of a general open set $G.$
-```
+:::
 
 Then we show that the outer measure is additive if one of the sets is closed.
 
-```{prf:theorem} Additivity of outer measure if one of the sets is closed
+:::{prf:theorem} Additivity of outer measure if one of the sets is closed
 Suppose $A$ and $F$ are disjoint subsets of $\mathbb{R}$ and $F$ is closed.
 Then
 
 $$|A \cup F| = |A| + |F|.$$
-```
+:::
 
-```{dropdown} Proof: additivity of outer measure if one of the sets is closed
+:::{dropdown} Proof: additivity of outer measure if one of the sets is closed
 Suppose $I_1, I_2, \dots$ is a sequence of open intervals whose union contains $A \cup F.$
 Let $G = \cup_{n = 1}^\infty I_n.$
 Then $G$ is an open set which contains $A \cup F.$
@@ -1313,20 +1301,20 @@ which in turn implies that
 $$|F \cup A| \geq |F| + |A|,$$
 
 from which we conclude that $|F \cup A| = |F| + |A|.$
-```
+:::
 
 Now we turn to a very useful result, which says that any Borel set can be approximated by a closed subset arbitrarily well.
 
-```{margin}
+:::{margin}
 Note that this result would not hold if we replaced closed sets by open sets.
 For example, if $B = [0, 1] \setminus \mathbb{Q},$ then the only open subset of $B$ is the empty set, and thus $B$ cannot be approximated arbitrarily well by open subsets.
-```
-```{prf:theorem} Approximation of Borel sets from below by closed sets
+:::
+:::{prf:theorem} Approximation of Borel sets from below by closed sets
 Suppose $B \subseteq \mathbb{R}$ is a Borel set.
 Then, for every $\epsilon > 0,$ there exists a closed set $F \subseteq B$ such that $|B \setminus F| < \epsilon.$
-```
+:::
 
-```{dropdown} Proof: approximation of Borel sets from below by closed sets
+:::{dropdown} Proof: approximation of Borel sets from below by closed sets
 Consider the set
 
 $$\mathcal{L} = \{D \subseteq \mathbb{R}: \text{ for every } \epsilon > 0, \text{ there exists a closed set } F \subseteq D \text{ such that } |D \setminus F| < \epsilon \}.$$
@@ -1389,4 +1377,4 @@ $$\begin{equation}
 
 we conclude that $\mathbb{R} \setminus D \in \mathcal{L}.$
 Thus $\mathcal{L}$ is a $\sigma$-algebra, which concludes the proof.
-```
+:::
