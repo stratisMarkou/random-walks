@@ -409,7 +409,7 @@ We will set up these sets so that their union is contained in an closed bounded 
 Then, we will show that the outer measure of each of these sets is nonzero, which leads to a contradiction.
 
 __Proof:__
-Let $\sim$ be the equivalence class of $a$ under the {prf:ref}`rational difference equivalence relation<mira:def:rational-difference-equivalence-relation>`, and for each $a \in [-1, 1]$ let $\mathtilde{a}$ be the equivalence class of $a$ under $\sim.$
+Let $\sim$ be the {prf:ref}`rational difference equivalence relation<mira:def:rational-difference-equivalence-relation>`, and for each $a \in [-1, 1]$ let $\tilde{a}$ be the equivalence class of $a$ under $\sim.$
 Then
 
 $$[-1, 1] = \bigcup_{a \in [-1, 1]} \tilde{a}.$$
@@ -475,18 +475,15 @@ Taking the infimum over all sequences of all open intervals whose union contains
 $$\left|\bigcup_{n=1}^\infty S_n\right| \geq \sum_{n=1}^\infty |S_n|,$$ 
 
 completing the result.
-
 :::
 
 This result highlights that if there is a sequence of sets on which the outer measure is not additive, then the sets cannot be separable in the sense described above.
-
 
 
 ## Measurable spaces and functions
 
 A natural question is whether the {prf:ref}`nonadditivity of the outer measure <mira:thm:non-additivity-of-outer-measure>` is due to a flaw in our definition.
 However, this next result shows that any notion of length that satisfies certain intuitive properties cannot be additive.
-
 
 :::{prf:theorem} Nonexistence of extension of length to all subsets of $\mathbb{R}$
 :label: mira:thm:nonexistence-length
@@ -547,7 +544,7 @@ Let $V$ be the set which contains exactly one representative from each equivalen
 Let $r_1, r_2, \ldots$ be a sequence that contains each rational number in $[-2, 2]$ exactly once.
 Then, by properties {eq}`mira:eq:mu-of-closed-interval` and {eq}`mira:eq:mu-is-countably-subadditive` of $\mu,$ as well as the translation invariance of $\mu$, property (d), we have
 
-$$2 = \mu([-1, 1]) = \mu\left(\bigcup_{k = 1}^\infty r_k + V\right) = \sum_{k=1}^\infty \mu(r_k + V) = \sum_{k=1}^\infty \mu(V)$$
+$$2 = \mu([-1, 1]) \leq \mu\left(\bigcup_{k = 1}^\infty r_k + V\right) = \sum_{k=1}^\infty \mu(r_k + V) = \sum_{k=1}^\infty \mu(V)$$
 
 Thus $\mu(V) > 0.$
 Now, note that the sets $(r_1 + V), (r_2 + V), \ldots, (r_K + V)$ are disjoint for any $K \in \mathbb{Z}^+.$
@@ -560,7 +557,6 @@ Now, using the additivity and the translation invariance of $\mu$, properties (c
 $$\mu\left( \bigcup_{k=1}^K (r_k + V) \right) = \sum_{k=1}^K \mu(r_k + V) = K \mu(V) < 6,$$
 
 reaching a contradiction, because $|V| > 0,$ so the above inequality cannot hold for any $K.$
-
 :::
 
 
