@@ -92,7 +92,7 @@ Therefore $f$ is Riemann integrable on $[a, b]$ and that $\int_a^b f = t - s.$
 ::::
 
 ::::{admonition} Exercise 1.A.3
-:name: mira-ex-1a3
+:name: mira:ex-1a3
 :class: tip
 
 Suppose $f: [a, b] \to \mathbb{R}$ is a bounded function.
@@ -147,7 +147,7 @@ Therefore, $U(f, [a, b]) = L(f, [a, b]),$ which means that $f$ is Riemann integr
 
 ::::{admonition} Exercise 1.A.4
 :class: tip
-:name: mira-ex-1a4
+:name: mira:ex-1a4
 
 Suppose $f, g: [a, b] \to \mathbb{R}$ are Riemann integrable.
 Prove that $f + g$ is Riemann integrable on $[a, b]$ and that
@@ -179,7 +179,7 @@ $$\begin{align}
 \end{align}$$
 
 Let $\epsilon > 0.$
-Now, from {ref}`exercise 1.A.3 <mira-ex-1a3>`, since $f$ and $g$ are Riemann integrable, there exist partitions $P_f$ and $P_g$ such that
+Now, from {ref}`exercise 1.A.3 <mira:ex-1a3>`, since $f$ and $g$ are Riemann integrable, there exist partitions $P_f$ and $P_g$ such that
 
 $$\begin{align}
 U(f, P_f, [a, b]) - L(f, P_f, [a, b]) &< \frac{\epsilon}{2}, \\
@@ -194,7 +194,7 @@ U&(f + g, P, [a, b]) - L(f + g, P, [a, b]) \\
 &< \epsilon.
 \end{align}$$
 
-where in the inequality we have used {prf:ref}`the property of refined partitions <mira-thm:refining-partitions>`.
+where in the inequality we have used {prf:ref}`the property of refined partitions <mira:thm:refining-partitions>`.
 
 :::
 ::::
@@ -211,7 +211,7 @@ $$\int_a^b (-f) = - \int_a^b f.$$
 
 :::{dropdown} Solution
 
-If $f$ is Riemann integrable, from {ref}`exercise 1.A.3<mira-ex-1a3>`, for any $\epsilon > 0,$ there exists a partition $P$ of $[a, b]$ such that
+If $f$ is Riemann integrable, from {ref}`exercise 1.A.3<mira:ex-1a3>`, for any $\epsilon > 0,$ there exists a partition $P$ of $[a, b]$ such that
 
 $$U(f, P, [a, b]) - L(f, P, [a, b]) < \epsilon.$$
 
@@ -219,7 +219,7 @@ Since $\inf_{[c, d]} -f = - \sup_{[c, d]} f,$ we have $U(-f, P, [a, b]) = - L(f,
 
 $$U(-f, P, [a, b]) - L(-f, P, [a, b]) = U(f, P, [a, b]) - L(f, P, [a, b]) < \epsilon$$
 
-Therefore, again from {ref}`exercise 1.A.3<mira-ex-1a3>`, it follows that $-f$ is also Riemann integrable on $[a, b],$ and
+Therefore, again from {ref}`exercise 1.A.3<mira:ex-1a3>`, it follows that $-f$ is also Riemann integrable on $[a, b],$ and
 
 $$\int_a^b (-f) = - \int_a^b f.$$
 
@@ -261,8 +261,8 @@ $$\begin{align}
 U(g, P_n, [a, b]) - L(g, P_n, [a, b]) \leq 4k \frac{b - a}{n} C,
 \end{align}$$
 
-and since $n$ can be made arbitrarily large it follows, by {ref}`exercise 1.A.3<mira-ex-1a3>`, that $h$ is Riemann integrable on $[a, b].$
-Therefore, $g = f - h$ is also Riemann integrable on $[a, b],$ because it is a sum of two Riemann integrable functions, which we know from {ref}`exercise 1.A.4<mira-ex-1a4>` is Riemann integrable, and satisfies
+and since $n$ can be made arbitrarily large it follows, by {ref}`exercise 1.A.3<mira:ex-1a3>`, that $h$ is Riemann integrable on $[a, b].$
+Therefore, $g = f - h$ is also Riemann integrable on $[a, b],$ because it is a sum of two Riemann integrable functions, which we know from {ref}`exercise 1.A.4<mira:ex-1a4>` is Riemann integrable, and satisfies
 
 $$\int_a^b g = \int_a^b f - \int_a^b h = \int_a^b f.$$
 
@@ -273,7 +273,7 @@ $$\int_a^b g = \int_a^b f - \int_a^b h = \int_a^b f.$$
 
 ::::{admonition} Exercise 1.A.7
 :class: tip
-:name: mira-ex-1a7
+:name: mira:ex-1a7
 
 Suppose $f: [a, b] \to \mathbb{R}$ is a bounded function.
 For $n \in \mathbb{N},$ let $P_n$ denote the partition that divides $[a, b]$ into $2^n$ intervals of equal size.
@@ -329,7 +329,7 @@ $$\int_a^b f = \lim_{n \to \infty} \frac{b - a}{n} \sum_{j=1}^n f\left(a + \frac
 
 :::{dropdown} Solution
 
-This exercise follows the a similar argument to {ref}`exercise 1.A.7<mira-ex-1a7>`.
+This exercise follows the a similar argument to {ref}`exercise 1.A.7<mira:ex-1a7>`.
 Suppose $f: [a, b] \to \mathbb{R}$ is Riemann integrable.
 Since $f$ is Riemann integrable, it is bounded, so there exists $C > 0$ such that $|f(x)| \leq C$ for all $x \in [a, b].$
 By the definition of supremum, for any $\epsilon > 0,$ there exists a partition $R_\epsilon$ of $[a, b]$ such that
@@ -381,12 +381,12 @@ Prove that if $c, d \in [a, b]$ and $a \leq c < d \leq b,$ then $f$ is Riemann i
 :::{dropdown} Solution
 
 Suppose $f: [a, b] \to \mathbb{R}$ is Riemann integrable, and let $c, d \in [a, b]$ such that $a \leq c < d \leq b.$
-Since $f$ is Riemann integrable, by {ref}`exercise 1.A.3<mira-ex-1a3>`, for any $\epsilon > 0,$ there exists a partition $P_\epsilon$ of $[a, b]$ such that
+Since $f$ is Riemann integrable, by {ref}`exercise 1.A.3<mira:ex-1a3>`, for any $\epsilon > 0,$ there exists a partition $P_\epsilon$ of $[a, b]$ such that
 
 $$U(f, P_\epsilon, [a, b]) - L(f, P_\epsilon, [a, b]) < \epsilon.$$
 
 Now, let $P_\epsilon'$ be the partition of $[a, b]$ obtained by adding the points $c$ and $d$ to $P_\epsilon.$
-Then, by the {prf:ref}`property of refined partitions <mira-thm:refining-partitions>`, we have
+Then, by the {prf:ref}`property of refined partitions <mira:thm:refining-partitions>`, we have
 
 $$U(f, P_\epsilon', [a, b]) - L(f, P_\epsilon', [a, b]) \leq U(f, P_\epsilon, [a, b]) - L(f, P_\epsilon, [a, b]) < \epsilon,$$
 
@@ -398,7 +398,7 @@ Therefore, for each $\epsilon,$ there exists a partition $P_\epsilon''$ of $[c, 
 
 $$U(f, P_\epsilon'', [c, d]) - L(f, P_\epsilon'', [c, d]) < \epsilon,$$
 
-and using {ref}`exercise 1.A.3<mira-ex-1a3>` again, we conclude that $f$ is Riemann integrable on $[c, d].$
+and using {ref}`exercise 1.A.3<mira:ex-1a3>` again, we conclude that $f$ is Riemann integrable on $[c, d].$
 
 :::
 ::::
@@ -420,12 +420,12 @@ $$\int_a^b f = \int_a^c f + \int_c^b f.$$
 Suppose $f: [a, b] \to \mathbb{R}$ is a bounded function and $c \in (a, b).$
 
 __Part 1:__
-If $f$ is Rieman integrable on $[a, b],$ then by {ref}`exercise 1.A.3<mira-ex-1a3>`, for any $\epsilon > 0,$ there exists a partition $P_\epsilon$ of $[a, b]$ such that
+If $f$ is Rieman integrable on $[a, b],$ then by {ref}`exercise 1.A.3<mira:ex-1a3>`, for any $\epsilon > 0,$ there exists a partition $P_\epsilon$ of $[a, b]$ such that
 
 $$U(f, P_\epsilon, [a, b]) - L(f, P_\epsilon, [a, b]) < \epsilon.$$
 
 Let $P_\epsilon'$ be the partition of $[a, b]$ obtained by adding the point $c$ to $P_\epsilon.$
-Then, by the {prf:ref}`property of refined partitions <mira-thm:refining-partitions>`, we have
+Then, by the {prf:ref}`property of refined partitions <mira:thm:refining-partitions>`, we have
 
 $$U(f, P_\epsilon', [a, b]) - L(f, P_\epsilon', [a, b]) \leq U(f, P_\epsilon, [a, b]) - L(f, P_\epsilon, [a, b]) < \epsilon,$$
 
@@ -488,7 +488,7 @@ Prove that $F$ is continuous on $[a, b].$
 
 :::{dropdown} Solution
 Let $t_0 \in [a, b]$ and $\epsilon > 0.$
-Since $f$ is Riemann integrable, it {prf:ref}`is boundedd<mira-bounds-on-riemann-integral>` by some $C \in \mathbb{R}.$
+Since $f$ is Riemann integrable, it {prf:ref}`is boundedd<mira:bounds-on-riemann-integral>` by some $C \in \mathbb{R}.$
 For any $\delta > 0$ and $x \in [a, b],$ if $|t - t_0| < \delta,$ then
 
 $$|F(t) - F(t_0)| = \left|\int^t_{t_0} f\right| < \delta C.$$
@@ -1806,7 +1806,7 @@ Therefore, $V \subseteq A$ is not Lebesgue measurable.
 
 ::::{admonition} Exercise 4.A.1
 :class: tip
-:label: mira-ex-4a1
+:label: mira:ex-4a1
 Suppose $(X, \mathcal{S}, \mu)$ is a measure space and $h: X \to \mathbb{R}$ is an $\mathcal{S}$-measurable function.
 Prove that
 
@@ -1826,7 +1826,7 @@ $$\mu\left(x \in X: |h(x)| \geq c \right) = \mu\left(x \in X: |h(x)|^p \geq c^p 
 
 ::::{admonition} Exercise 4.A.2 (Chebyshev's inequality)
 :class: tip
-:label: mira-ex-4a2
+:label: mira:ex-4a2
 Suppose $(X, \mathcal{S}, \mu)$ is a measure space with $\mu(X) = 1$ and $h \in \mathcal{L}^1(\mu).$
 Prove that
 
@@ -1836,7 +1836,7 @@ for all $c > 0.$
 
 :::{dropdown} Solution
 Note that for all $c > 0,$ we have $\left|h(x) - \int h d\mu\right| \geq c$ if and only if $\left|h(x) - \int h d\mu\right|^2 \geq c^2.$
-Therefore, applying the result of {prf:ref}`Exercise 4.A.1 <mira-ex-4a1>`, we have
+Therefore, applying the result of {prf:ref}`Exercise 4.A.1 <mira:ex-4a1>`, we have
 
 $$\begin{align}
 \mu\left(x \in X: \left|h(x) - \int h d\mu\right| \geq c \right) &\leq \frac{1}{c^2} \int \left|h - \int h d\mu\right|^2 d\mu 
@@ -1960,7 +1960,7 @@ This means that $A_c$ is open.
 
 ::::{admonition} Exercise 4.A.10
 :class: tip
-:label: mira-ex-4a10
+:label: mira:ex-4a10
 Prove or give a counterexample: if $h: \mathbb{R} \to [0, \infty)$ is an increasing function, then $h^*$ is also an increasing function.
 
 :::{dropdown} Solution

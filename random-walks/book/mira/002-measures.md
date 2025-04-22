@@ -30,7 +30,7 @@ Then, we will show that the outer measure is not additive.
 To define the outer measure, we first need a definition of the length of an open interval.
 
 :::{prf:definition} Length of an open interval
-
+:label: mira:def:length-of-open-interval
 The length $\ell(I)$ of an open interval $I \subseteq \mathbb{R}$ is defined by
 
 $$\begin{align}
@@ -48,7 +48,7 @@ b - a & \text{if } I = (a, b) \text{ for some } a, b \in \mathbb{R} \text{ with 
 Given lengths of open intervals, we can define the outer measure of a set as the least sum of the lengths of open intervals that cover the set.
 
 :::{prf:definition} Outer measure
-:label: mira-def:outer-measure
+:label: mira:def:outer-measure
 The outer measure $|A|$ of a subset $A \subseteq \mathbb{R}$ is defined by
 
 $$|A| = \inf \left\{ \sum_{j=1}^\infty \ell(I_j) : A \subseteq \bigcup_{j=1}^\infty I_j \right\}.$$
@@ -63,8 +63,8 @@ The outer measure has a number of good properties.
 First, the outer measure of countable subsets of $\mathbb{R}$ is zero.
 
 :::{prf:theorem} Countable sets have outer measure zero
-:label: mira:thm:countable-sets-have-measure-zero
-Every countable subset of $\mathbb{R}$ has {prf:ref}`outer measure<mira-def:outer-measure>` $0.$
+:label: mira:thm:countable-sets-have-outer-measure-zero
+Every countable subset of $\mathbb{R}$ has {prf:ref}`outer measure<mira:def:outer-measure>` $0.$
 :::
 
 :::{dropdown} Proof: Countable sets have outer measure zero
@@ -725,7 +725,7 @@ The following result gives a sufficient condition for a function to be measurabl
 
 
 :::{prf:theorem} Condition for measurable function
-:label: mira-thm:condition-measurable
+:label: mira:thm:condition-measurable
 Suppose $(X, S)$ is a measurable space and $f: X \to \mathbb{R}$ is a function such that
 
 $$f^{-1}((a, \infty)) \in S$$
@@ -787,7 +787,7 @@ f^{-1}((a, \infty)) = \left( \bigcup_{x \in f^{-1}((a, \infty))} (x - \delta_x, 
 \end{equation}$$
 
 The above union is a union of open sets, which is therefore also open, so its intersection with $X$ is a Bore set.
-By our earlier {prf:ref}`condition for measurable functions<mira-thm:condition-measurable>`, $f$ is Borel measurable.
+By our earlier {prf:ref}`condition for measurable functions<mira:thm:condition-measurable>`, $f$ is Borel measurable.
 :::
 
 
@@ -812,7 +812,7 @@ $$f^{-1}((a, \infty)) = (b, \infty) \cap X \text{ or } f^{-1}((a, \infty)) = [b,
 
 holds.
 Since $X$ is a Borel set, and both $(b, \infty)$ and $[b, \infty)$ are Borel sets, it follows that $f^{-1}((a, \infty))$ is a {prf:ref}`Borel set<mira:def:borel-set>`.
-By our earlier {prf:ref}`condition for measurable functions<mira-thm:condition-measurable>`, $f$ is Borel measurable.
+By our earlier {prf:ref}`condition for measurable functions<mira:thm:condition-measurable>`, $f$ is Borel measurable.
 :::
 
 :::{prf:theorem} Composition of measurable functions
@@ -904,7 +904,7 @@ Conversely, suppose $x$ is in the right hand side of the equation above.
 Then there exists $j \in \mathbb{Z}^+$ and $m \in \mathbb{Z}^+$ such that $f_k(x) > a + 1/j$ for all $k \geq m.$
 Taking the limit as $k \to \infty,$ we have $f(x) \geq a + 1/j > a,$ so $x \in f^{-1}((a, \infty)).$
 
-We conclude that $f^{-1}((a, \infty))$ is a Borel set and by our earlier {prf:ref}`condition for measurable functions<mira-thm:condition-measurable>`, $f$ is a Borel measurable function.
+We conclude that $f^{-1}((a, \infty))$ is a Borel set and by our earlier {prf:ref}`condition for measurable functions<mira:thm:condition-measurable>`, $f$ is a Borel measurable function.
 :::
 
 Sometimes, we may need to consider functions which take values in $[-\infty, \infty].$
@@ -926,10 +926,10 @@ $f^{-1}(B) \in S$
 for every Borel set $B \subseteq [-\infty, \infty].$
 :::
 
-The following result is the counterpart of our earlier {prf:ref}`sufficient condition for measurability<mira-thm:condition-measurable>`, but with infinities included in the range of the function.
+The following result is the counterpart of our earlier {prf:ref}`sufficient condition for measurability<mira:thm:condition-measurable>`, but with infinities included in the range of the function.
 
 :::{prf:theorem} Sufficient condition for measurable function
-:label: mira-thm:sufficient-condition-measurable-with-infinity
+:label: mira:thm:sufficient-condition-measurable-with-infinity
 Suppose $(X, S)$ is a measurable space and $f: X \to [-\infty, \infty]$ is a function such that
 
 $$f^{-1}((a, \infty]) \in S$$
@@ -954,7 +954,7 @@ From these it follows that
 $$f^{-1}((a, \infty)) = f^{-1}((a, \infty]) \setminus f^{-1}(\{\infty\}) \in S \text{ for all } a \in \mathbb{R}.$$
 
 Let $B$ be a Borel set in $[-\infty, \infty].$
-From our earlier {prf:ref}`condition for measurable functions<mira-thm:condition-measurable>`, it follows that $f^{-1}(B \cap \mathbb{R}) \in S$ for any Borel set $B \subseteq [-\infty, \infty].$
+From our earlier {prf:ref}`condition for measurable functions<mira:thm:condition-measurable>`, it follows that $f^{-1}(B \cap \mathbb{R}) \in S$ for any Borel set $B \subseteq [-\infty, \infty].$
 We therefore have
 
 $$\begin{align}
@@ -983,7 +983,7 @@ The definition of the supremum implies that
 
 $$h^{-1}((a, \infty]) = \bigcup_{k=1}^\infty f_k^{-1}((a, \infty]) \in S,$$
 
-which, together with the earlier {prf:ref}`sufficient condition for measurable function<mira-thm:sufficient-condition-measurable-with-infinity>`, implies that $h$ is $S$-measurable, that is, the supremum of a sequence of measurable functions is measurable.
+which, together with the earlier {prf:ref}`sufficient condition for measurable function<mira:thm:sufficient-condition-measurable-with-infinity>`, implies that $h$ is $S$-measurable, that is, the supremum of a sequence of measurable functions is measurable.
 Now, note that
 
 $$g(x) = -\sup\{-f_k(x) : k \in \mathbb{Z}^+\},$$
@@ -1006,7 +1006,7 @@ The word *measure* allows us to use a single word for different notions of size 
 
 
 :::{prf:definition} Measure
-:label: mira-def:measure
+:label: mira:def:measure
 Suppose $X$ is a set and $S$ is a $\sigma$-algebra on $X.$
 A measure on $(X, S)$ is a function $\mu: S \to [0, \infty]$ such that $\mu(\emptyset) = 0$ and $\mu$ is countably additive, that is
 
@@ -1034,7 +1034,7 @@ A measure space is an ordered triple $(X, S, \mu),$ where $X$ is a set, $S$ is a
 Now we discuss several useful properties of measures.
 
 :::{prf:theorem} Measure preserves order; measure of a set difference
-:label: mira-thm:measure-preserves-order
+:label: mira:thm:measure-preserves-order
 Suppose $(X, S, \mu)$ is a measure space and $D, E \in S$ with $D \subseteq E.$
 Then
 
@@ -1044,7 +1044,7 @@ Then
 :::
 
 :::{dropdown} Proof: Measure preserves order; measure of a set difference
-Note that $E = D \cup (E \setminus D)$ is a disjoint union, so by {prf:ref}`countable additivity of measures<mira-def:measure>`, we have
+Note that $E = D \cup (E \setminus D)$ is a disjoint union, so by {prf:ref}`countable additivity of measures<mira:def:measure>`, we have
 
 $$\mu(E) = \mu(D) + \mu(E \setminus D) \geq \mu(D),$$
 
@@ -1076,7 +1076,7 @@ $$\begin{align}
 &\leq \sum_{k=1}^\infty \mu(E_k).
 \end{align}$$
 
-where the second equality follows from {prf:ref}`countable additivity of measures<mira-def:measure>` and the inequality follows from the fact that {prf:ref}`measures preserve order<mira-thm:measure-preserves-order>`.
+where the second equality follows from {prf:ref}`countable additivity of measures<mira:def:measure>` and the inequality follows from the fact that {prf:ref}`measures preserve order<mira:thm:measure-preserves-order>`.
 :::
 
 
@@ -1090,7 +1090,7 @@ Note that the countable additivity property of measures is crucial for the follo
 
 
 :::{prf:theorem} Measure of an increasing union
-:label: mira-thm:measure-increasing-union
+:label: mira:thm:measure-increasing-union
 Suppose $(X, S, \mu)$ is a measure space and $E_1, E_2, \ldots \in S$ is an increasing sequence of sets in $S,$ that is $E_1 \subseteq E_2 \subseteq \cdots.$
 Then
 
@@ -1107,7 +1107,7 @@ Then, using the fact that $E_1, E_2, \ldots$ is an increasing sequence of sets, 
 $$\bigcup_{k=1}^\infty E_k = \bigcup_{k=1}^\infty (E_k \setminus E_{k-1}),$$
 
 which is a disjoint union.
-Therefore, by {prf:ref}`countable additivity of measures<mira-def:measure>`, we have
+Therefore, by {prf:ref}`countable additivity of measures<mira:def:measure>`, we have
 
 $$\begin{align}
 \mu\left( \bigcup_{j=1}^\infty E_j \right) &= \mu\left( \bigcup_{j=1}^\infty (E_j \setminus E_{j-1}) \right) \\
@@ -1131,7 +1131,7 @@ First, we have that
 
 $$E_1 \setminus \bigcap_{k=1}^\infty E_k = \bigcup_{k=1}^\infty (E_1 \setminus E_k),$$
 
-which is an increasing union and, by {prf:ref}`mira-thm:measure-increasing-union`, we have
+which is an increasing union and, by {prf:ref}`mira:thm:measure-increasing-union`, we have
 
 $$\mu\left( E_1 \setminus \bigcap_{k=1}^\infty E_k \right) = \lim_{k \to \infty} \mu(E_1 \setminus E_k).$$
 
@@ -1164,7 +1164,7 @@ We have
 $$D \cup E = (D \setminus (D \cap E)) \cup (E \setminus (D \cap E)) \cup (D \cap E),$$
 
 which is a disjoint union.
-Therefore, by {prf:ref}`countable additivity of measures<mira-def:measure>`, we have
+Therefore, by {prf:ref}`countable additivity of measures<mira:def:measure>`, we have
 
 $$\begin{align}
 \mu(D \cup E) &= \mu(D \setminus (D \cap E)) + \mu(E \setminus (D \cap E)) + \mu(D \cap E) \\
@@ -1279,7 +1279,7 @@ Note that this result would not hold if we replaced closed sets by open sets.
 For example, if $B = [0, 1] \setminus \mathbb{Q},$ then the only open subset of $B$ is the empty set, and thus $B$ cannot be approximated arbitrarily well by open subsets.
 :::
 :::{prf:theorem} Approximation of Borel sets from below by closed sets
-:label: mira-thm:approximation-of-borel-sets-from-below-by-closed-sets
+:label: mira:thm:approximation-of-borel-sets-from-below-by-closed-sets
 Suppose $B \subseteq \mathbb{R}$ is a {prf:ref}`Borel set<mira:def:borel-set>`.
 Then, for every $\epsilon > 0,$ there exists a closed set $F \subseteq B$ such that $|B \setminus F| < \epsilon.$
 :::
@@ -1405,12 +1405,12 @@ For each $K \in \mathbb{Z},$ we have
 
 $$\left|\bigcup_{k=1}^\infty B_k\right| &\geq \left| \bigcup_{k=1}^K B_k \right| = \sum_{k=1}^K |B_k|,$$
 
-where the first inequality follows from the {prf:ref}`order-preserving property of measures<mira-thm:measure-preserves-order>` and the second equality follows from {prf:ref}`additivity of outer measure if one of the sets is Borel<mira:thm:additivity-of-outer-measure-if-one-set-is-borel>`.
+where the first inequality follows from the {prf:ref}`order-preserving property of measures<mira:thm:measure-preserves-order>` and the second equality follows from {prf:ref}`additivity of outer measure if one of the sets is Borel<mira:thm:additivity-of-outer-measure-if-one-set-is-borel>`.
 Taking the limit as $K \to \infty$ we have
 
 $$\left|\bigcup_{k=1}^\infty B_k\right| \geq \sum_{k=1}^\infty |B_k|.$$
 
-Now, using the {prf:ref}`countable subadditivity of outer measure<mira-thm:countable-subadditivity-of-outer-measure>`, we have
+Now, using the {prf:ref}`countable subadditivity of outer measure<mira:thm:countable-subadditivity-of-outer-measure>`, we have
 
 $$\left|\bigcup_{k=1}^\infty B_k\right| \leq \sum_{k=1}^\infty |B_k|.$$
 
@@ -1480,7 +1480,7 @@ __(4) implies (2):__
 Suppose (4) holds.
 Let $\epsilon > 0.$
 Since (4) holds, there exists a Borel set $B$ such that $|A \setminus B| = 0.$
-Then, since $B$ is a Borel set, by {prf:ref}`mira-thm:approximation-of-borel-sets-from-below-by-closed-sets`, there exists a closed set $F \subseteq B$ such that $|B \setminus F| < \epsilon.$
+Then, since $B$ is a Borel set, by {prf:ref}`mira:thm:approximation-of-borel-sets-from-below-by-closed-sets`, there exists a closed set $F \subseteq B$ such that $|B \setminus F| < \epsilon.$
 Now, since $B$ is a Borel set, so is $B \setminus F.$
 Therefore, we have $|A \setminus F| = |A \setminus B| + |B \setminus F| < \epsilon,$ which proves (2).
 
@@ -1520,7 +1520,7 @@ __(7) implies (2):__
 Suppose (7) holds.
 Let $\epsilon > 0.$
 Since (7) holds, there exists a Borel set $B \subseteq \mathbb{R} \setminus A$ such that $|(\mathbb{R} \setminus A) \setminus B| = 0.$
-Then, since $B$ is a Borel set, by {prf:ref}`mira-thm:approximation-of-borel-sets-from-below-by-closed-sets`, there exists a closed set $F \subseteq B$ such that $|B \setminus F| < \epsilon.$
+Then, since $B$ is a Borel set, by {prf:ref}`mira:thm:approximation-of-borel-sets-from-below-by-closed-sets`, there exists a closed set $F \subseteq B$ such that $|B \setminus F| < \epsilon.$
 Now, since $B$ is a Borel set, so is $B \setminus F.$
 Therefore, we have $|A \setminus F| = |A \setminus B| + |B \setminus F| < \epsilon,$ which proves (2).
 
@@ -1539,7 +1539,7 @@ This is the definition of Lebesgue measurable sets {prf:ref}`mira:def:lebesgue-m
 
 __Part (a):__
 Since (a) and (b) in {prf:ref}`mira:thm:outer-measure-is-a-measure-on-lebesgue-measurable-sets` are equivalent, the set $\mathcal{L}$ of Lebesgue measurable sets is the collection of sets satisfying (b) in {prf:ref}`mira:thm:equivalent-conditions-for-lebesgue-measurable-set`.
-As shown in the proof of {prf:ref}`mira-thm:approximation-of-borel-sets-from-below-by-closed-sets`, the set $\mathcal{L}$ is a $\sigma$-algebra.
+As shown in the proof of {prf:ref}`mira:thm:approximation-of-borel-sets-from-below-by-closed-sets`, the set $\mathcal{L}$ is a $\sigma$-algebra.
 This proves part (a).
 
 __Part (b):__
@@ -1559,3 +1559,225 @@ $$\left|\bigcup_{k=1}^\infty A_k\right| = \sum_{k=1}^\infty |A_k|,$$
 
 which shows that the outer measure is countably additive on the Lebesgue measurable sets of $\mathbb{R}.$
 :::
+
+
+We now give another definition of the Lebesgue measure, but this time defined on a different domain.
+{prf:ref}`mira:def:lebesgue-measure` defined the Lebesgue measure on the Borel sets of $\mathbb{R},$ whereas {prf:ref}`mira:def:lebesgue-measure-lebesgue-measurable-sets` defines the Lebesgue measure on the Lebesgue measurable sets of $\mathbb{R}.$
+
+:::{prf:definition} Lebesgue measure
+:label: mira:def:lebesgue-measure-lebesgue-measurable-sets
+The Lebesgue measure is the measure on $(\mathbb{R}, \mathcal{L}),$ where $\mathcal{L}$ is the $\sigma$-algebra of Lebesgue measurable subsets of $\mathbb{R},$ that assigns to each Lebesgue measurable set its outer measure.
+:::
+
+
+## Cantor set and Cantor function
+
+Every countable set has outer measure $0$ ({prf:ref}`mira:thm:countable-sets-have-outer-measure-zero`).
+We may ask whether the converse holds:
+does each set of outer measure $0$ have to be countable?
+The answer is no, and the Cantor set is a counterexample.
+
+:::{prf:definition} Cantor set
+:label: mira:def:cantor-set
+The Cantor set $C$ is defined as $[0, 1] \setminus \cup_{n=1}^\infty G_n,$ where $G_1 = (\frac{1}{3}, \frac{2}{3})$ and $G_n$ for $n > 1$ is the union of the middle third open intervals in the intervals of $[0, 1] \setminus \cup_{j=1}^{n-1} G_j.$
+:::
+
+
+:::{prf:lemma} Base 3 description of the Cantor set
+:label: mira:lem:base-3-description-of-cantor-set
+The Cantor set $C$ is the set of all numbers in $[0, 1]$ that have a base 3 representation containing only 0s and 2s.
+:::
+
+:::{dropdown} Proof: base 3 description of the Cantor set
+Note that the set $G_1$ contains all numbers which have a base 3 representation with a 1 in the first digit, except for the number $1/3 = 0.1_3.$
+However, $0.1_3 = 0.0222\ldots_3,$ so this number has a representation containing only 0s and 2s.
+Similarly, the set $G_1 \cup G_2$ contains all numbers which have a base 3 representation with a 1 in the first or second digit, except for the numbers $0.1_3, 0.01_3, 0.21_3.$
+However, simiarly to our earlier argument, we have $0.1_3 = 0.0222\ldots_3,$ $0.01_3 = 0.002222\ldots_3,$ and $0.21_3 = 0.202222\ldots_3,$ so these numbers also have representations containing only 0s and 2s.
+Continuing this process, we see that $\cup_{j=1}^n G_j$ contains all numbers which have a base 3 representation with a 1 in the first, second, or third digit, except for the left endpoints of the sub-intervals of $\cup_{j=1}^n G_j.$
+However, these numbers all have representations containing only 0s and 2s.
+THerefore the set $[0, 1] \setminus \cup_{n=1}^\infty G_n,$ i.e. the Cantor set, contains all numbers whose decimal representation contains only 0s and 2s.
+:::
+
+
+:::{prf:theorem} Properties of the Cantor set
+:label: mira:thm:properties-of-cantor-set
+1. The {prf:ref}`Cantor set<mira:def:cantor-set>` is a closed subset of $\mathbb{R}$.
+2. The Cantor set has Lebesgue measure $0$.
+3. The Cantor set contains no interval with more than one element
+:::
+
+:::{dropdown} Proof: properties of the Cantor set
+__Part 1:__
+The sets $G_n$ defined in {prf:ref}`mira:def:cantor-set` are open sets, so their union $\cup_{n=1}^\infty G_n$ is an open set.
+The Cantor set is the intersection of $[0, 1]$ with $\mathbb{R} \setminus \cup_{n=1}^\infty G_n,$ which is a closed set.
+Therefore, the Cantor set is a closed subset of $\mathbb{R}.$
+
+__Part 2:__
+We proceed by induction.
+Weach $G_n$ is the union of $2^{n-1}$ open intervals, each of length $\frac{1}{3^n}.$
+Note also that the $G_n$ are all disjoint, and since measures are {prf:ref}`countably additive<mira:def:measure>`, we have
+
+$$\begin{align}
+\left|\cup_{n=1}^\infty G_n\right| &= \sum_{n=1}^\infty |G_n| \\
+&= \frac{1}{3} + \frac{2}{3^2} + \frac{4}{3^3} + \cdots \\
+&= \frac{1}{3} \left(1 + \frac{2}{3} + \frac{4}{9} + \cdots \right) \\
+&= \frac{1}{3} \frac{1}{1 - \frac{2}{3}} \\
+&= 1.
+\end{align}$$
+
+Thus the Cantor set $[0, 1] \setminus \cup_{n=1}^\infty G_n$ has Lebesgue measure $|[0, 1]| - |\cup_{n=1}^\infty G_n| = 1 - 1 = 0.$
+
+__Part 3:__
+The Cantor set is a {prf:ref}`Lebesgue set<mira:def:lebesgue-measurable-set>` of measure 0, and a Lebesgue set of measure 0 cannot contain an interval that has more than one element. (Otherwise, the interval would have positive measure and the set would also have positive measure.)
+Thus the Cantor set cannot contain an interval with more than one element.
+:::
+
+
+:::{prf:theorem} Cantor function
+:label: mira:thm:cantor-function
+The Cantor function $\Lambda: [0, 1] \to [0, 1]$ is defined by converting base 3 representations into base 2 representations as follows:
+
+1. If $x \in C,$ then $\Lambda(x)$ is the number obtained from the unique representation of $x$ containing only 0s and 2s, by replacing each 2 by 1 and interpreting the resulting string as a base 2 number.
+2. If $x \in [0, 1] \setminus C,$ then $\Lambda(x)$ is computed from a base 3 representation of $x$ by truncating after the first 1, replacing each 2 before the first 1 by 1, and interpreting the resulting tring as a base 2 number.
+:::
+
+
+
+:::{prf:theorem} Properties of the Cantor function
+:label: mira:thm:properties-of-cantor-function
+The {prf:ref}`Cantor function<mira:thm:cantor-function>` $\Lambda$ is a continuous, increasing function from $[0, 1]$ onto $[0, 1].$
+Furthermore, $\Lambda(C) = [0, 1].$
+:::
+
+:::{dropdown} Proof: properties of the Cantor function
+__Part 1:__
+First we prove that $\Lambda(C) = [0, 1],$ which also implies that $\Lambda$ is onto.
+Suppose $y \in [0, 1].$
+Then, define $x \in [0, 1]$ to be the number obtained by taking the base 2 representation of $y,$ replacing each $1$ by $2$ and interpreting the result as a base 3 number.
+Because $x$ has a base 3 representation containing only 0s and 2s, $x$ is in the Cantor set $C.$
+By the definition of the {prf:ref}`Cantor function<mira:thm:cantor-function>`, we have $\Lambda(x) = y.$
+Thus $\Lambda(C) = [0, 1].$
+
+__Part 2:__
+Now we show that $\Lambda$ is increasing.
+Suppose $x_1, x_2 \in [0, 1]$ and $x_1 < x_2.$
+Then, in the base 3 representation of $x_1$ and $x_2,$ there exists a $k \in \mathbb{N}$ such that the $k$th digit of $x_1$ is less than the $k$th digit of $x_2.$
+Before the $k$th digit, the two numbers have identical digits.
+There are a three different cases to consider.
+First, if a 1 appears in the base 3 representation of $x_1$ before the $k$th digit (and thus also in the base 3 representation of $x_2$), then the base 3 representation of both $x_1$ and $x_2$ are truncated by $\Lambda$ before the $k$th digit, so $\Lambda(x_1) = \Lambda(x_2).$
+Second, if the $k$th digit of $x_1$ is 1, then the base 3 representation of $x_1$ is truncated by the Cantor function at this digit and has trailing 0s.
+The base 3 representation of $x_2$ must have a 2 in the $k$th digit, so the $k$th digit of $\Lambda(x_2)$ is 1, and $\Lambda(x_1) \leq \Lambda(x_2).$
+Finally, if no 1 appears in the base 3 representation of $x_1$ before the $k$th digit, then $\Lambda(x_1) \leq \Lambda(x_2),$ by inspection of the definition of the Cantor function.
+
+
+__Part 3:__
+Finally, we note that an increasing onto function from $[0, 1]$ to $[0, 1]$ is continuous.
+Therefore, $\Lambda$ is continuous.
+:::
+
+
+Now we can use the Cantor function to show that the Cantor set is uncountable.
+
+:::{prf:theorem} Cantor set is uncountable
+:label: mira:thm:cantor-set-is-uncountable
+The Cantor set $C$ is uncountable.
+:::
+
+:::{dropdown} Proof: Cantor set is uncountable
+If $C$ were countable, then $\Lambda(C)$ would also be countable.
+However, $\Lambda(C) = [0, 1],$ which is uncountable.
+Therefore, $C$ must be uncountable.
+:::
+
+
+The Canotr function also shows that even a continuous function can map a set with Lebesgue measure $0$ to a non-measurable set.
+
+:::{prf:theorem} Continuous image of a Lebesgue measurable set can be non-measurable
+:label: mira:thm:continuous-image-of-a-lebesgue-measurable-set-can-be-non-measurable
+There exists a Lebesgue measurable set $A \subseteq [0, 1]$ such that $|A| = 0$ and $\Lambda(A)$ is not a Lebesgue measurable set.
+:::
+
+
+:::{dropdown} Proof: continuous image of a Lebesgue measurable set can be non-measurable
+Let $E$ be a subset of $[0, 1]$ that is not Lebesgue measurable.
+Also let $A = C \cap \Lambda^{-1}(E).$
+Then $|A| = 0$ because $A \subseteq C$ and $|C| = 0$ ({prf:ref}`mira:thm:outer-measure-preserves-order`).
+Thus $A$ is Lebesgue measurable because every subset of $\mathbb{R}$ with outer measure $0$ is Lebesgue measurable.
+Because $\Lambda$ maps $C$ onto $[0, 1],$ we have $\Lambda(A) = E.$
+:::
+
+
+## Convergence of measurable functions
+
+
+:::{prf:definition} Pointwise convergence; uniform convergence
+:label: mira:def:pointwise-convergence-uniform-convergence
+Suppose $X$ is a set, $f_1, f_2, \ldots$ is a sequence of functions from $X$ to $\mathbb{R},$ and $f: X \to \mathbb{R}$ is a function.
+
+1. The sequence $f_1, f_2, \ldots$ converges pointwise to $f$ if for each $x \in X$ and each $\epsilon > 0,$ there exists $n \in \mathbb{Z}^+$ such that $|f_n(x) - f(x)| < \epsilon$ for all $k \geq n.$
+2. The sequence $f_1, f_2, \ldots$ converges uniformly to $f$ if for every $\epsilon > 0,$ there exists $n \in \mathbb{Z}^+$ such that $|f_n(x) - f(x)| < \epsilon$ for all $k \geq n$ and all $x \in X.$
+:::
+
+
+
+:::{prf:theorem} Uniform limit of continuous functions is continuous
+:label: mira:thm:uniform-limit-of-continuous-functions-is-continuous
+Suppose $B \subseteq \mathbb{R}$ and $f_1, f_2, \ldots$ is a sequence of continuous functions from $B$ to $\mathbb{R}$ that converges uniformly to a function $f: B \to \mathbb{R}.$
+Suppose $b \in B$ and $f_k$ is continuous at $b$ for all $k \in \mathbb{Z}^+.$
+Then $f$ is continuous at $b.$
+:::
+
+:::{dropdown} Proof: uniform limit of continuous functions is continuous
+Let $\epsilon > 0.$
+Since $f_n$ converges to $f$ uniformly, there exists $n \in \mathbb{Z}^+$ such that $|f_n(x) - f(x)| < \frac{\epsilon}{3}$ for all $x \in B.$
+Because $f_n$ is continuous at $b,$ there exists $\delta$ such that $|f_n(x) - f_n(b)| < \frac{\epsilon}{3}$ for all $x \in B$ such that $|x - b| < \delta.$
+Now, suppose that $x \in B$ and $|x - b| < \delta.$
+Then we have
+
+$$\begin{align}
+|f(x) - f(b)| &\leq |f(x) - f_n(x)| + |f_n(x) - f_n(b)| + |f_n(b) - f(b)| \\
+&< \epsilon
+\end{align}$$
+
+so $f$ is continuous at $b.$
+:::
+
+:::{prf:theorem} Egorov's theorem
+:label: mira:thm:egorovs-theorem
+Suppose $(X, S, \mu)$ is a measurable space with $\mu < \infty.$
+Suppose $f_1, f_2, \dots$ is a sequence of $S$-measurable functions from $X$ to $\mathbb{R}$ that converges pointwise on $X$ to a function $f: X \to \mathbb{R}.$
+Then for every $\epsilon > 0,$ there exists a set $E \in S$ such that $\mu(X \setminus E) < \epsilon$ and $f_1, f_2, \dots$ converges uniformly to $f$ on $E.$
+:::
+
+<!-- :::{dropdown} Proof: Egorov's theorem
+Suppose that $(X, S, \mu)$ is a measurable space with $\mu < \infty$ and that $f_1, f_2, \dots$ is a sequence of $S$-measurable functions from $X$ to $\mathbb{R}$ that converges pointwise on $X$ to a function $f: X \to \mathbb{R}.$
+Let $\epsilon > 0.$
+Because $f_1, f_2, \dots$ converges to $f$ pointwise, for each $x \in X$ there exists a least $N_{x, \epsilon} \in \mathbb{Z}^+$ such that for all $n \geq N_{x, \epsilon},$ it holds that $|f_n(x) - f(x)| < \epsilon.$
+Now define the sets
+
+$$E_k = \{x \in X: N_{x, \epsilon} \leq k\}.$$
+
+We show a number of properties for $E_k.$
+First, $E_k$ is $S$-measurable for each $k \in \mathbb{Z}^+,$ which can be shown as follows.
+First
+
+$$\begin{align}
+x \in E_k \iff |f_m(x) - f(x)| < \epsilon \text{ for all } m \geq k
+\end{align}$$
+
+which implies that
+
+$$\begin{align}
+E_k = \bigcap_{m = k}^\infty (f_m - f)^{-1}((-\epsilon, \epsilon))
+\end{align}$$
+
+which is $S$-measurable since $(f_m - f)^{-1}((-\epsilon, \epsilon))$ is $S$-measurable for each $m \in \mathbb{Z}^+.$
+Second, $E_k$ is increasing and $E_k \to X,$ which means that $X \setminus E_k$ is decreasing and $X \setminus E_k \to \emptyset.$
+Therefore
+
+$$\begin{equation}
+\lim_{k \to \infty} \mu(X \setminus E_k) = \mu(\lim_{k \to \infty} X \setminus E_k) = \mu(\emptyset) = 0.
+\end{equation}$$
+
+From this, we conclude that there must exist some $K \in \mathbb{Z}^+$ such that for all $k \geq K$ we have $\mu(X \setminus E_k) < \epsilon.$
+::: -->

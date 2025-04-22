@@ -54,7 +54,7 @@ A very useful intermediate result is that refining a partition of $[a, b],$ i.e.
 
 
 :::{prf:theorem} Inequalities with Riemann sums
-:label: mira-thm:refining-partitions
+:label: mira:thm:refining-partitions
 
 Suppose $f: [a, b] \to \mathbb{R}$ is a bounded function and $P, P'$ are partitions of $[a, b],$ such that all the points in $P$ are also contained in $P'.$
 Then
@@ -108,7 +108,7 @@ L(f, P, [a, b]) &\leq L(f, P \cup P', [a, b]) \\
 &\leq U(f, P', [a, b]),
 \end{align}$$
 
-where the first inequality follows from the {ref}`refinement property of partitions <mira-thm:refining-partitions>`, the second inequality follows from the fact that the infimum of a set is less than or equal to its supremum, and the third inequality follows again from the refinement property.
+where the first inequality follows from the {ref}`refinement property of partitions <mira:thm:refining-partitions>`, the second inequality follows from the fact that the infimum of a set is less than or equal to its supremum, and the third inequality follows again from the refinement property.
 
 :::
 
@@ -220,7 +220,7 @@ Since this holds for any $\epsilon > 0,$ we have $U(f, [a, b]) = L(f, [a, b])$ a
 The last result in this section concerns a frequently used estimate for the Riemann integral of a function.
 
 :::{prf:theorem} Bounds on the Riemann integral
-:label: mira-bounds-on-riemann-integral
+:label: mira:bounds-on-riemann-integral
 
 Suppose $f: [a, b] \to \mathbb{R}$ is Riemann integrable.
 Then
@@ -262,7 +262,7 @@ The next four examples illustrate these issues.
 The first is an example of a bounded function which is not Riemann integrable.
 
 ::::{prf:example} A function that is not Riemann integrable
-:label: mira-eg-not-riemann-integrable
+:label: mira:eg-not-riemann-integrable
 
 The function $f: [0, 1] \to \mathbb{R}$ defined by
 
@@ -350,7 +350,7 @@ and define $f: [0, 1] \to \mathbb{R}$ as
 
 $$f(x) = \begin{cases} 1 & \text{if } x \in \mathbb{Q}, \\ 0 & \text{otherwise}. \end{cases}$$
 
-Each $f_n$ is Riemann integrable and $f_n(x) \to f(x)$ for all $x \in [0, 1],$ but $f$ is not Riemann integrable -- this was shown in {prf:ref}`the first example <mira-eg-not-riemann-integrable>` in this section.
+Each $f_n$ is Riemann integrable and $f_n(x) \to f(x)$ for all $x \in [0, 1],$ but $f$ is not Riemann integrable -- this was shown in {prf:ref}`the first example <mira:eg-not-riemann-integrable>` in this section.
 
 ::::
 
