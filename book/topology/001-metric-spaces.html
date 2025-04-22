@@ -469,7 +469,7 @@ This will give rise to the notion of a topology, which abstracts away the idea o
 <p>We begin with the definition of metric spaces.
 A metric space is a set that is equiped with a notion of distance between elements, the metric.</p>
 <div class="proof definition admonition" id="topology:def:metric-space">
-<p class="admonition-title"><span class="caption-number">Definition 72 </span> (Metric space)</p>
+<p class="admonition-title"><span class="caption-number">Definition 75 </span> (Metric space)</p>
 <section class="definition-content" id="proof-content">
 <p>A metric space is a pair <span class="math notranslate nohighlight">\((X, d_X)\)</span> of a set <span class="math notranslate nohighlight">\(X,\)</span> called the space, and a function <span class="math notranslate nohighlight">\(d_X: X \times X \to \mathbb{R},\)</span> called the metric, which for all <span class="math notranslate nohighlight">\(x, y, z \in X\)</span> satisfies</p>
 <ol class="arabic simple">
@@ -495,7 +495,7 @@ The discrete metric <span class="math notranslate nohighlight">\(d_X\)</span> on
 \[\begin{split} d_X(a, b) = \begin{cases} 0 &amp; \text{ if } x = y \\ 1 &amp; \text{ if } x \neq y \\  \end{cases}, \text{ where } a, b \in X. \end{split}\]</div>
 </section>
 </div><div class="proof definition admonition" id="definition-2">
-<p class="admonition-title"><span class="caption-number">Definition 73 </span> (Metric subspace)</p>
+<p class="admonition-title"><span class="caption-number">Definition 76 </span> (Metric subspace)</p>
 <section class="definition-content" id="proof-content">
 <p>Let a <a class="reference internal" href="#topology:def:metric-space">metric space</a> <span class="math notranslate nohighlight">\((X, d_X),\)</span> and <span class="math notranslate nohighlight">\(Y \subseteq X.\)</span>
 We call <span class="math notranslate nohighlight">\((Y, d_Y)\)</span> a metric subspace of <span class="math notranslate nohighlight">\(X\)</span> where <span class="math notranslate nohighlight">\(d_Y: Y \to \mathbb{R}\)</span> is defined such that <span class="math notranslate nohighlight">\(d_Y(a, b) = d_X(a, b)\)</span> for all <span class="math notranslate nohighlight">\(a, b \in Y.\)</span></p>
@@ -503,14 +503,14 @@ We call <span class="math notranslate nohighlight">\((Y, d_Y)\)</span> a metric 
 </div><p>With the definition of metric spaces in place, we are ready to define convergent sequences.
 This is a generalisation of convergence from the familiar definition in the context of the real numbers to more general metric spaces.</p>
 <div class="proof definition admonition" id="definition-3">
-<p class="admonition-title"><span class="caption-number">Definition 74 </span> (Convergent sequence)</p>
+<p class="admonition-title"><span class="caption-number">Definition 77 </span> (Convergent sequence)</p>
 <section class="definition-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\((x_n)\)</span> be a sequence in a <a class="reference internal" href="#topology:def:metric-space">metric space</a> <span class="math notranslate nohighlight">\((X, d_X).\)</span>
 We say that <span class="math notranslate nohighlight">\((x_n)\)</span> converges to <span class="math notranslate nohighlight">\(x \in X,\)</span> written <span class="math notranslate nohighlight">\(x_n \to x\)</span> if for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0,\)</span> there exists <span class="math notranslate nohighlight">\(N \in \mathbb{N}\)</span> such that <span class="math notranslate nohighlight">\(d_X(x_n, x) &lt; \epsilon\)</span> for all <span class="math notranslate nohighlight">\(n &gt; N.\)</span></p>
 </section>
 </div><p>Similar to analogous results in analysis, we can show that in a metric space, limits are unique.</p>
 <div class="proof lemma admonition" id="topology:lemma-limits-in-metric-spaces-are-unique">
-<p class="admonition-title"><span class="caption-number">Lemma 6 </span> (Limits in metric spaces are unique)</p>
+<p class="admonition-title"><span class="caption-number">Lemma 7 </span> (Limits in metric spaces are unique)</p>
 <section class="lemma-content" id="proof-content">
 <p>Suppose <span class="math notranslate nohighlight">\((X, d_X)\)</span> is a <a class="reference internal" href="#topology:def:metric-space">metric space</a> and <span class="math notranslate nohighlight">\((x_n)\)</span> is a sequence in <span class="math notranslate nohighlight">\(X\)</span> such that <span class="math notranslate nohighlight">\(x_n \to x\)</span> and <span class="math notranslate nohighlight">\(x_n \to x'\)</span> for some <span class="math notranslate nohighlight">\(x, x' \in X.\)</span>
 Then <span class="math notranslate nohighlight">\(x = x'.\)</span></p>
@@ -531,7 +531,7 @@ By the <span class="xref std std-ref">non-negativity, symmetry and the triangle 
 </details><p>With convergent sequences in place, we can define continuous functions.
 This definition appears slightly different than the <span class="math notranslate nohighlight">\(\epsilon-\delta\)</span> defnition in analysis, but we will shortly see the two are equivalent.</p>
 <div class="proof definition admonition" id="topology:def:continuous-function">
-<p class="admonition-title"><span class="caption-number">Definition 75 </span> (Continuous function)</p>
+<p class="admonition-title"><span class="caption-number">Definition 78 </span> (Continuous function)</p>
 <section class="definition-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> and <span class="math notranslate nohighlight">\((Y, d_Y)\)</span> be <a class="reference internal" href="#topology:def:metric-space">metric space</a>.
 A function <span class="math notranslate nohighlight">\(f: X \to Y\)</span> is continuous if <span class="math notranslate nohighlight">\(f(x_n) \to f(x)\)</span> in <span class="math notranslate nohighlight">\(Y\)</span> whenever <span class="math notranslate nohighlight">\(x_n \to x\)</span> in <span class="math notranslate nohighlight">\(X.\)</span></p>
@@ -541,7 +541,7 @@ A function <span class="math notranslate nohighlight">\(f: X \to Y\)</span> is c
 <h2>Norms<a class="headerlink" href="#norms" title="Link to this heading">#</a></h2>
 <p>We now introduce the idea of a norm, which is a definition of the length of a point in a vector space.</p>
 <div class="proof definition admonition" id="topology:def:norm">
-<p class="admonition-title"><span class="caption-number">Definition 76 </span> (Norm)</p>
+<p class="admonition-title"><span class="caption-number">Definition 79 </span> (Norm)</p>
 <section class="definition-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(V\)</span> be a vector space.
 A norm is a function <span class="math notranslate nohighlight">\(||\cdot||: V \to \mathbb{R}\)</span> which satisfies the following properties.</p>
@@ -554,7 +554,7 @@ A norm is a function <span class="math notranslate nohighlight">\(||\cdot||: V \
 </section>
 </div><p>A norm can be used to define a metric on a vector space.</p>
 <div class="proof lemma admonition" id="topology:lemma-norms-induce-metrics">
-<p class="admonition-title"><span class="caption-number">Lemma 7 </span> (Norms induce metrics)</p>
+<p class="admonition-title"><span class="caption-number">Lemma 8 </span> (Norms induce metrics)</p>
 <section class="lemma-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(V\)</span> be a vector space with a norm <span class="math notranslate nohighlight">\(||\cdot||.\)</span>
 The function <span class="math notranslate nohighlight">\(d_V: V \times V \to \mathbb{R}\)</span> defined as <span class="math notranslate nohighlight">\(d_V(v, w) = ||v - w||\)</span> is a metric on <span class="math notranslate nohighlight">\(V.\)</span></p>
@@ -593,10 +593,10 @@ Proof: Examples above are norms<div class="sd-summary-down docutils">
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">Most of the properties of norms in <a class="reference internal" href="#topology:def:norm">Definition 76</a> follow from the definition of the examples but property 2, the identity of indiscernibles for norms, is a little more involved.
+<p class="sd-card-text">Most of the properties of norms in <a class="reference internal" href="#topology:def:norm">Definition 79</a> follow from the definition of the examples but property 2, the identity of indiscernibles for norms, is a little more involved.
 For this, we need an intermediate result that we prove here.</p>
 <div class="proof lemma admonition" id="topology:lemma-non-constant-positive-continuous-function-has-positive-integral">
-<p class="admonition-title"><span class="caption-number">Lemma 8 </span> (Non-constant positive continuous function has positive integral)</p>
+<p class="admonition-title"><span class="caption-number">Lemma 9 </span> (Non-constant positive continuous function has positive integral)</p>
 <section class="lemma-content" id="proof-content">
 <p class="sd-card-text">Let <span class="math notranslate nohighlight">\(f \in C[0, 1]\)</span> satisfy <span class="math notranslate nohighlight">\(f(x) \geq 0\)</span> for all <span class="math notranslate nohighlight">\(x \in [0, 1].\)</span>
 If <span class="math notranslate nohighlight">\(f\)</span> is not constantly <span class="math notranslate nohighlight">\(0,\)</span> then <span class="math notranslate nohighlight">\(\int_0^1 f(x)dx &gt; 0.\)</span></p>
@@ -626,7 +626,7 @@ a / 2 &amp; \text{ if } x \in (x_0 - \delta, x_0 + \delta), \\
 In the following, assume that <span class="math notranslate nohighlight">\(f, g \in C[0, 1]\)</span></p>
 <p class="sd-card-text"><strong>Example 1:</strong>
 First, <span class="math notranslate nohighlight">\(||f||_1 \geq 0\)</span> so the first property is satisfied.
-Second, by <a class="reference internal" href="#topology:lemma-non-constant-positive-continuous-function-has-positive-integral">Lemma 8</a> we have that <span class="math notranslate nohighlight">\(||f||_1 = 0\)</span> only if <span class="math notranslate nohighlight">\(f = 0,\)</span> so the second property is satisfied.
+Second, by <a class="reference internal" href="#topology:lemma-non-constant-positive-continuous-function-has-positive-integral">Lemma 9</a> we have that <span class="math notranslate nohighlight">\(||f||_1 = 0\)</span> only if <span class="math notranslate nohighlight">\(f = 0,\)</span> so the second property is satisfied.
 Third, note that <span class="math notranslate nohighlight">\(||\lambda f||_1 = |\lambda|||f||_1.\)</span>
 Fourth, we have that</p>
 <div class="math notranslate nohighlight">
@@ -668,7 +668,7 @@ For the fourth part, we have</p>
 <p>Now we turn to inner products.
 Inner products generalise the notion of angles between vectors to general vector spaces.</p>
 <div class="proof definition admonition" id="topology:inner-product-space">
-<p class="admonition-title"><span class="caption-number">Definition 77 </span> (Inner product)</p>
+<p class="admonition-title"><span class="caption-number">Definition 80 </span> (Inner product)</p>
 <section class="definition-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(V\)</span> be a vector space.
 An inner product on <span class="math notranslate nohighlight">\(V\)</span> is a function <span class="math notranslate nohighlight">\(\langle \cdot, \cdot \rangle: V \times V \to \mathbb{R}\)</span> which satisfies:</p>
@@ -683,7 +683,7 @@ An inner product on <span class="math notranslate nohighlight">\(V\)</span> is a
 In fact an inner product can be used to define a norm on a vector space.
 To show this, we must first however show an intermediate result for inner products.</p>
 <div class="proof lemma admonition" id="topology:cauchy-schwarz">
-<p class="admonition-title"><span class="caption-number">Lemma 9 </span> (Cauchy-Schwarz inequality)</p>
+<p class="admonition-title"><span class="caption-number">Lemma 10 </span> (Cauchy-Schwarz inequality)</p>
 <section class="lemma-content" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(\langle \cdot, \cdot \rangle\)</span> is an <a class="reference internal" href="#topology:inner-product-space">inner product</a> on a vector space <span class="math notranslate nohighlight">\(V,\)</span> then for all <span class="math notranslate nohighlight">\(v, w \in V,\)</span> we have</p>
 <div class="math notranslate nohighlight">
@@ -710,7 +710,7 @@ Then, by the <a class="reference internal" href="#topology:inner-product-space">
 </div>
 </details><p>We can now show that an inner product induces a norm.</p>
 <div class="proof lemma admonition" id="topology:lemma-inner-products-induce-norms">
-<p class="admonition-title"><span class="caption-number">Lemma 10 </span> (Inner products induce norms)</p>
+<p class="admonition-title"><span class="caption-number">Lemma 11 </span> (Inner products induce norms)</p>
 <section class="lemma-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(V\)</span> be a vector space with an <a class="reference internal" href="#topology:inner-product-space">inner product</a> <span class="math notranslate nohighlight">\(\langle \cdot, \cdot \rangle.\)</span>
 The function <span class="math notranslate nohighlight">\(||\cdot||: V \to \mathbb{R}\)</span> defined as</p>
@@ -742,7 +742,7 @@ Using the <span class="xref std std-ref">properties of inner products</span>, fo
 These will turn out to be the key objects that determine continuity of functions in metric spaces.
 We first define open and closed balls.</p>
 <div class="proof definition admonition" id="topology:def:open-and-closed-balls">
-<p class="admonition-title"><span class="caption-number">Definition 78 </span> (Open and closed balls)</p>
+<p class="admonition-title"><span class="caption-number">Definition 81 </span> (Open and closed balls)</p>
 <section class="definition-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> be a <a class="reference internal" href="#topology:def:metric-space">metric space</a>.
 For any <span class="math notranslate nohighlight">\(x \in X\)</span> and <span class="math notranslate nohighlight">\(r &gt; 0,\)</span> we define the open ball to be the set</p>
@@ -754,7 +754,7 @@ For any <span class="math notranslate nohighlight">\(x \in X\)</span> and <span 
 </section>
 </div><p>With open and closed balls defined, we can now define open and closed sets.</p>
 <div class="proof definition admonition" id="topology:def:open-and-closed-subsets">
-<p class="admonition-title"><span class="caption-number">Definition 79 </span> (Open and closed subsets)</p>
+<p class="admonition-title"><span class="caption-number">Definition 82 </span> (Open and closed subsets)</p>
 <section class="definition-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> be a <a class="reference internal" href="#topology:def:metric-space">metric space</a>.
 A subset <span class="math notranslate nohighlight">\(U \subseteq X\)</span> is open if for every <span class="math notranslate nohighlight">\(x \in U,\)</span> there exists <span class="math notranslate nohighlight">\(r &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(B_r(x) \subseteq U.\)</span>
@@ -762,7 +762,7 @@ A subset <span class="math notranslate nohighlight">\(C \subseteq X\)</span> is 
 </section>
 </div><p>We can now show that the terms <em>open ball</em> and <em>closed ball</em> are in fact justified, by showing that open balls are open subsets and closed balls are closed subsets.</p>
 <div class="proof lemma admonition" id="topology:lemma-open-and-closed-balls-are-open-and-closed">
-<p class="admonition-title"><span class="caption-number">Lemma 11 </span> (Open (closed) balls are open (closed))</p>
+<p class="admonition-title"><span class="caption-number">Lemma 12 </span> (Open (closed) balls are open (closed))</p>
 <section class="lemma-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> be a <a class="reference internal" href="#topology:def:metric-space">metric space</a>.
 Then, for any <span class="math notranslate nohighlight">\(x \in X\)</span> and <span class="math notranslate nohighlight">\(r &gt; 0,\)</span> the <a class="reference internal" href="#topology:def:open-and-closed-balls">open ball</a> <span class="math notranslate nohighlight">\(B_r(x)\)</span> is an open subset of <span class="math notranslate nohighlight">\(X\)</span> and the <a class="reference internal" href="#topology:def:open-and-closed-balls">closed ball</a> <span class="math notranslate nohighlight">\(\overline{B}_r(x)\)</span> is a closed subset of <span class="math notranslate nohighlight">\(X.\)</span></p>
@@ -782,14 +782,14 @@ Then, <span class="math notranslate nohighlight">\(d_X(x, x') &gt; r,\)</span> s
 </div>
 </details><p>Sometimes it’s handy to have the following shorthand when talking about open sets.</p>
 <div class="proof definition admonition" id="topology:def:open-neighbourhood">
-<p class="admonition-title"><span class="caption-number">Definition 80 </span> (Open neighbourhood)</p>
+<p class="admonition-title"><span class="caption-number">Definition 83 </span> (Open neighbourhood)</p>
 <section class="definition-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> be a <a class="reference internal" href="#topology:def:metric-space">metric space</a>.
 If <span class="math notranslate nohighlight">\(x \in X,\)</span> an open neighbourhood of <span class="math notranslate nohighlight">\(x\)</span> is an open set <span class="math notranslate nohighlight">\(U \subseteq X\)</span> such that <span class="math notranslate nohighlight">\(x \in U.\)</span></p>
 </section>
 </div><p>We can re-express convergence of sequences in terms of this shorthand.</p>
 <div class="proof lemma admonition" id="topology:lemma-convergence-implies-sequence-eventually-in-open-neighbourhood">
-<p class="admonition-title"><span class="caption-number">Lemma 12 </span> (Convergence implies sequence eventually in open neighbourhood)</p>
+<p class="admonition-title"><span class="caption-number">Lemma 13 </span> (Convergence implies sequence eventually in open neighbourhood)</p>
 <section class="lemma-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> be a <a class="reference internal" href="#topology:def:metric-space">metric space</a> and <span class="math notranslate nohighlight">\((x_n)\)</span> be a sequence in <span class="math notranslate nohighlight">\(X\)</span> that converges to <span class="math notranslate nohighlight">\(x \in X.\)</span>
 Then, for every <a class="reference internal" href="#topology:def:open-neighbourhood">open neighbourhood</a> <span class="math notranslate nohighlight">\(U\)</span> of <span class="math notranslate nohighlight">\(x,\)</span> there exists <span class="math notranslate nohighlight">\(N \in \mathbb{N}\)</span> such that <span class="math notranslate nohighlight">\(x_n \in U\)</span> for all <span class="math notranslate nohighlight">\(n &gt; N.\)</span></p>
@@ -810,14 +810,14 @@ Since <span class="math notranslate nohighlight">\(x_n \to x,\)</span> there exi
 Intuitively, a limit point of a set is a point that is the limit of some sequence in the set.
 Note that a limit point of a set need not itself be in the set.</p>
 <div class="proof definition admonition" id="topology:def:limit-point">
-<p class="admonition-title"><span class="caption-number">Definition 81 </span> (Limit point)</p>
+<p class="admonition-title"><span class="caption-number">Definition 84 </span> (Limit point)</p>
 <section class="definition-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> be a <a class="reference internal" href="#topology:def:metric-space">metric space</a> and <span class="math notranslate nohighlight">\(A \subseteq X.\)</span>
 A point <span class="math notranslate nohighlight">\(x \in X\)</span> is a limit point of <span class="math notranslate nohighlight">\(A\)</span> if there exists a sequence <span class="math notranslate nohighlight">\((x_n)\)</span> in <span class="math notranslate nohighlight">\(A\)</span> such that <span class="math notranslate nohighlight">\(x_n \to x.\)</span></p>
 </section>
 </div><p>Limit points allow an equivalent definition of closed sets, as stated in the following lemma.</p>
 <div class="proof lemma admonition" id="topology:lemma-closed-set-iff-set-contains-all-its-limit-points">
-<p class="admonition-title"><span class="caption-number">Lemma 13 </span> (Closed set <span class="math notranslate nohighlight">\(\iff\)</span> set contains all its limit points)</p>
+<p class="admonition-title"><span class="caption-number">Lemma 14 </span> (Closed set <span class="math notranslate nohighlight">\(\iff\)</span> set contains all its limit points)</p>
 <section class="lemma-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> be a <a class="reference internal" href="#topology:def:metric-space">metric space</a> and <span class="math notranslate nohighlight">\(A \subseteq X.\)</span>
 The set <span class="math notranslate nohighlight">\(A\)</span> is <a class="reference internal" href="#topology:def:open-and-closed-subsets">closed</a> if and only if <span class="math notranslate nohighlight">\(A\)</span> contains all its <a class="reference internal" href="002-topological-spaces.html#topology:def:limit-point">limit points</a>.</p>
@@ -847,7 +847,7 @@ Then, <span class="math notranslate nohighlight">\(x_n \to x,\)</span> so <span 
 This result shows that the thing that determines whether a function is continuous is not the metric itself, but rather the collection of sets that are open under the metric.
 In particular, even if two metrics are different, if they define the same open sets, then the same functions will be continuous under both of them.</p>
 <div class="proof theorem admonition" id="topology:theorem-characterisation-of-continuity">
-<p class="admonition-title"><span class="caption-number">Theorem 95 </span> (Characterisation of continuity)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 102 </span> (Characterisation of continuity)</p>
 <section class="theorem-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> and <span class="math notranslate nohighlight">\((Y, d_Y)\)</span> be <a class="reference internal" href="#topology:def:metric-space">metric spaces</a> and <span class="math notranslate nohighlight">\(f: X \to Y\)</span> be a function.
 Then, the following are equivalent:</p>
@@ -888,7 +888,7 @@ Since <span class="math notranslate nohighlight">\(x_n \to x,\)</span> there exi
 </div>
 </details><p>We conclude with three properties of open sets that we will use to define toplogies in the next section.</p>
 <div class="proof lemma admonition" id="topology:lemma-properties-of-open-sets">
-<p class="admonition-title"><span class="caption-number">Lemma 14 </span> (Properties of open sets)</p>
+<p class="admonition-title"><span class="caption-number">Lemma 15 </span> (Properties of open sets)</p>
 <section class="lemma-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\((X, d_X)\)</span> be a <a class="reference internal" href="#topology:def:metric-space">metric space</a>.
 Then</p>

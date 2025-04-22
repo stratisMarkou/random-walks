@@ -469,7 +469,7 @@ We introduce these variants here and discuss some of their properties.</p>
 <h2>Definition of connectivity<a class="headerlink" href="#definition-of-connectivity" title="Link to this heading">#</a></h2>
 <p>The first definition of connectivity amounts to whether a space can be split into a disjoint union of two (non-empty) open sets.</p>
 <div class="proof definition admonition" id="topology:def:connected">
-<p class="admonition-title"><span class="caption-number">Definition 101 </span> (Connected space)</p>
+<p class="admonition-title"><span class="caption-number">Definition 104 </span> (Connected space)</p>
 <section class="definition-content" id="proof-content">
 <p>A <a class="reference internal" href="002-topological-spaces.html#topology:def:topological-space">topological space</a> <span class="math notranslate nohighlight">\(X\)</span> is disconnected if <span class="math notranslate nohighlight">\(X\)</span> can be written as <span class="math notranslate nohighlight">\(A \cup B,\)</span> where <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are disjoint, non-empty open subsets of <span class="math notranslate nohighlight">\(X.\)</span>
 We say <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> disconnect <span class="math notranslate nohighlight">\(X.\)</span>
@@ -509,14 +509,14 @@ See also <a class="reference internal" href="exercises.html#topology-ex-2-6"><sp
 </div>
 </details><p>We can also consider whether a subspace of a topological space is connected, according to the following definition.</p>
 <div class="proof definition admonition" id="definition-1">
-<p class="admonition-title"><span class="caption-number">Definition 102 </span> (Connected subspace)</p>
+<p class="admonition-title"><span class="caption-number">Definition 105 </span> (Connected subspace)</p>
 <section class="definition-content" id="proof-content">
 <p>Given a subset <span class="math notranslate nohighlight">\(A\)</span> of a <a class="reference internal" href="002-topological-spaces.html#topology:def:topological-space">topological space</a> <span class="math notranslate nohighlight">\(X,\)</span> we say that <span class="math notranslate nohighlight">\(A\)</span> is connected if <span class="math notranslate nohighlight">\(A\)</span> is <a class="reference internal" href="#topology:def:connected">connected</a> as a subspace of <span class="math notranslate nohighlight">\(X.\)</span></p>
 </section>
 </div><p>The following is a useful equivalent condition for connectedness.
 For example, in some cases it may be easy to construct a function that helps us show a certain space is disconnected.</p>
 <div class="proof lemma admonition" id="lemma-2">
-<p class="admonition-title"><span class="caption-number">Lemma 26 </span> (Equivalent condition for connectedness)</p>
+<p class="admonition-title"><span class="caption-number">Lemma 27 </span> (Equivalent condition for connectedness)</p>
 <section class="lemma-content" id="proof-content">
 <p>A space <span class="math notranslate nohighlight">\(X\)</span> is <a class="reference internal" href="#topology:def:connected">disconnected</a> if and only if there exists a contunuous surjective <span class="math notranslate nohighlight">\(f: X \to \{0, 1\}\)</span> with the discrete topology.</p>
 </section>
@@ -544,7 +544,7 @@ Thus, <span class="math notranslate nohighlight">\(X\)</span> is disconnected.</
 </div>
 </details><p>We now show one of the main results of the section, namely that <span class="math notranslate nohighlight">\([0, 1]\)</span> is connected in <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> with the regular topology.</p>
 <div class="proof theorem admonition" id="theorem-3">
-<p class="admonition-title"><span class="caption-number">Theorem 96 </span> (Closed inverval is connected)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 103 </span> (Closed inverval is connected)</p>
 <section class="theorem-content" id="proof-content">
 <p>The closed interval <span class="math notranslate nohighlight">\([0, 1]\)</span> with the standard topology is <a class="reference internal" href="#topology:def:connected">connected</a>.</p>
 </section>
@@ -567,7 +567,7 @@ Thus, <span class="math notranslate nohighlight">\([0, 1]\)</span> is <a class="
 </div>
 </details><p>Together with the fact that <a class="reference internal" href="exercises.html#topology-ex-2-3"><span class="std std-ref">products of connected spaces are connected</span></a>, we see that <span class="math notranslate nohighlight">\([0, 1]^n\)</span> is connected, and so the interior of the <span class="math notranslate nohighlight">\(n\)</span>-dimensional disc <span class="math notranslate nohighlight">\(\text{Int}(D^n)\)</span> is also connected.</p>
 <div class="proof lemma admonition" id="lemma-4">
-<p class="admonition-title"><span class="caption-number">Lemma 27 </span> (Image of connected space under continuous map is connected)</p>
+<p class="admonition-title"><span class="caption-number">Lemma 28 </span> (Image of connected space under continuous map is connected)</p>
 <section class="lemma-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(f: X \to Y\)</span> be a continuous map.
 If <span class="math notranslate nohighlight">\(X\)</span> is <a class="reference internal" href="#topology:def:connected">connected</a>, then <span class="math notranslate nohighlight">\(f(X)\)</span> is too.</p>
@@ -590,7 +590,7 @@ Thus, <span class="math notranslate nohighlight">\(f(X)\)</span> is <a class="re
 the intermediate value theorem.
 Note that our notion of connectivity makes the proof of the intermediate value theorem very short and elegant.</p>
 <div class="proof theorem admonition" id="theorem-5">
-<p class="admonition-title"><span class="caption-number">Theorem 97 </span> (Intermediate value theorem)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 104 </span> (Intermediate value theorem)</p>
 <section class="theorem-content" id="proof-content">
 <p>Suppose <span class="math notranslate nohighlight">\(f: X \to \mathbb{R}\)</span> is continuous and <span class="math notranslate nohighlight">\(X\)</span> is connected.
 If <span class="math notranslate nohighlight">\(x_0, x_1 \in X\)</span> such that <span class="math notranslate nohighlight">\(f(x_0) &lt; 0 &lt; f(x_1),\)</span> then there exists <span class="math notranslate nohighlight">\(x \in X\)</span> such that <span class="math notranslate nohighlight">\(f(x) = 0.\)</span></p>
@@ -617,13 +617,13 @@ a space is path connected if any two points can be joined by a continuous path, 
 We first define paths.</p>
 <p>With paths in place, we are ready to define path connectivity.</p>
 <div class="proof definition admonition" id="topology:def:path-connected">
-<p class="admonition-title"><span class="caption-number">Definition 103 </span> (Path connectivity)</p>
+<p class="admonition-title"><span class="caption-number">Definition 106 </span> (Path connectivity)</p>
 <section class="definition-content" id="proof-content">
 <p>A <a class="reference internal" href="002-topological-spaces.html#topology:def:topological-space">topological space</a> <span class="math notranslate nohighlight">\(X\)</span> is <a class="reference internal" href="#topology:def:path-connected">path connected</a> if for all points <span class="math notranslate nohighlight">\(x_0, x_1 \in X,\)</span> there exists a path from <span class="math notranslate nohighlight">\(x_0\)</span> to <span class="math notranslate nohighlight">\(x_1.\)</span></p>
 </section>
 </div><p>As mentioned, path connectivity is a stronger notion, i.e. implies, regular connectivity.</p>
 <div class="proof lemma admonition" id="lemma-7">
-<p class="admonition-title"><span class="caption-number">Lemma 28 </span> (Path connected implies connected)</p>
+<p class="admonition-title"><span class="caption-number">Lemma 29 </span> (Path connected implies connected)</p>
 <section class="lemma-content" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(X\)</span> is <a class="reference internal" href="#topology:def:path-connected">path connected</a>, then <span class="math notranslate nohighlight">\(X\)</span> is <a class="reference internal" href="#topology:def:connected">connected</a>.</p>
 </section>
@@ -643,7 +643,7 @@ Since <span class="math notranslate nohighlight">\([0, 1]\)</span> is <a class="
 Since <span class="math notranslate nohighlight">\(x_0\)</span> and <span class="math notranslate nohighlight">\(x_1\)</span> were arbitrary, <span class="math notranslate nohighlight">\(f\)</span> is constant.</p>
 </div>
 </details><div class="proof lemma admonition" id="lemma-8">
-<p class="admonition-title"><span class="caption-number">Lemma 29 </span> (Restrictions of homeomorphisms are homeomorphisms)</p>
+<p class="admonition-title"><span class="caption-number">Lemma 30 </span> (Restrictions of homeomorphisms are homeomorphisms)</p>
 <section class="lemma-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(f: X \to Y\)</span> be a homeomorphism, and let <span class="math notranslate nohighlight">\(A \subseteq X.\)</span>
 Then <span class="math notranslate nohighlight">\(f|_A: A \to f(A)\)</span> is a homeomorphism.</p>
@@ -673,7 +673,7 @@ These are equivalence classes of points which are path connected or connected, r
 <section id="path-components">
 <h3>Path components<a class="headerlink" href="#path-components" title="Link to this heading">#</a></h3>
 <div class="proof lemma admonition" id="lemma-9">
-<p class="admonition-title"><span class="caption-number">Lemma 30 </span> (Path connected equivalence relation)</p>
+<p class="admonition-title"><span class="caption-number">Lemma 31 </span> (Path connected equivalence relation)</p>
 <section class="lemma-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(X\)</span> be a <a class="reference internal" href="002-topological-spaces.html#topology:def:topological-space">topological space</a>.
 For <span class="math notranslate nohighlight">\(x, x' \in X,\)</span> define <span class="math notranslate nohighlight">\(x \sim x'\)</span> if there exists a path from <span class="math notranslate nohighlight">\(x\)</span> to <span class="math notranslate nohighlight">\(x'.\)</span>
@@ -702,7 +702,7 @@ If <span class="math notranslate nohighlight">\(\gamma: [0, 1] \to X\)</span> is
 <p class="sd-card-text">is a path from <span class="math notranslate nohighlight">\(x\)</span> to <span class="math notranslate nohighlight">\(x'',\)</span> so <span class="math notranslate nohighlight">\(x \sim x''.\)</span></p>
 </div>
 </details><div class="proof definition admonition" id="definition-10">
-<p class="admonition-title"><span class="caption-number">Definition 104 </span> (Path component)</p>
+<p class="admonition-title"><span class="caption-number">Definition 107 </span> (Path component)</p>
 <section class="definition-content" id="proof-content">
 <p>Equivalence classes of the path connectivity equivalence relation are called path components.</p>
 </section>
@@ -711,7 +711,7 @@ If <span class="math notranslate nohighlight">\(\gamma: [0, 1] \to X\)</span> is
 <h3>Connected components<a class="headerlink" href="#connected-components" title="Link to this heading">#</a></h3>
 <p>Now we turn our attention to connected components, which are analogous to path components, but for regular connectivity.</p>
 <div class="proof lemma admonition" id="topology:lem:union-of-increasing-connected-sets-is-connected">
-<p class="admonition-title"><span class="caption-number">Lemma 31 </span> (Union of intersecting connected sets is connected)</p>
+<p class="admonition-title"><span class="caption-number">Lemma 32 </span> (Union of intersecting connected sets is connected)</p>
 <section class="lemma-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(X\)</span> be a <a class="reference internal" href="002-topological-spaces.html#topology:def:topological-space">topological space</a>.
 Suppose <span class="math notranslate nohighlight">\(Y_\alpha \subseteq X\)</span> is <a class="reference internal" href="#topology:def:connected">connected</a> for all <span class="math notranslate nohighlight">\(\alpha \in T,\)</span> and <span class="math notranslate nohighlight">\(\cap_{\alpha \in T} Y_\alpha \neq \emptyset.\)</span>
@@ -744,7 +744,7 @@ Therefore <span class="math notranslate nohighlight">\(Y\)</span> is <a class="r
 </div>
 </details><p>With this result in place, we are ready to define connected components.</p>
 <div class="proof definition admonition" id="definition-12">
-<p class="admonition-title"><span class="caption-number">Definition 105 </span> (Connected component)</p>
+<p class="admonition-title"><span class="caption-number">Definition 108 </span> (Connected component)</p>
 <section class="definition-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(X\)</span> be a <a class="reference internal" href="002-topological-spaces.html#topology:def:topological-space">topological space</a> and <span class="math notranslate nohighlight">\(x \in X.\)</span>
 Define</p>
@@ -765,7 +765,7 @@ Finally, by the defintion of <span class="math notranslate nohighlight">\(C(x),\
 </section>
 </div><p>Similarly to path components, connected components also define an equivalence relation and equivalence classes.</p>
 <div class="proof lemma admonition" id="topology:lem:elements-in-a-connected-component-have-the-same-connected-component">
-<p class="admonition-title"><span class="caption-number">Lemma 32 </span> (Elements in a connected component have the same connected component)</p>
+<p class="admonition-title"><span class="caption-number">Lemma 33 </span> (Elements in a connected component have the same connected component)</p>
 <section class="lemma-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(X\)</span> be a <a class="reference internal" href="002-topological-spaces.html#topology:def:topological-space">topological space</a> and <span class="math notranslate nohighlight">\(x, y \in X.\)</span>
 If <span class="math notranslate nohighlight">\(y \in C(x),\)</span> then <span class="math notranslate nohighlight">\(C(x) = C(y).\)</span></p>
@@ -785,7 +785,7 @@ We conclude that <span class="math notranslate nohighlight">\(C(x) = C(y).\)</sp
 </details><p>A corollary of the above is that:
 the binary relation that says two elements are equivalent if they share the same connected components is an equivalence relation.</p>
 <div class="proof lemma admonition" id="lemma-15">
-<p class="admonition-title"><span class="caption-number">Lemma 33 </span> (Connected equivalence relation)</p>
+<p class="admonition-title"><span class="caption-number">Lemma 34 </span> (Connected equivalence relation)</p>
 <section class="lemma-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(X\)</span> be a <a class="reference internal" href="002-topological-spaces.html#topology:def:topological-space">topological space</a>.
 For <span class="math notranslate nohighlight">\(x, x' \in X,\)</span> define <span class="math notranslate nohighlight">\(x \sim x'\)</span> if <span class="math notranslate nohighlight">\(C(x) = C(x').\)</span>
@@ -812,7 +812,7 @@ Suppose <span class="math notranslate nohighlight">\(x \sim x'\)</span> and <spa
 These conditions mean that <span class="math notranslate nohighlight">\(C(x) = C(x')\)</span> and <span class="math notranslate nohighlight">\(C(x') = C(x'')\)</span> so <span class="math notranslate nohighlight">\(C(x) = C(x'')\)</span> and $x \sim x’’.</p>
 </div>
 </details><div class="proof lemma admonition" id="lemma-16">
-<p class="admonition-title"><span class="caption-number">Lemma 34 </span> (Open connected subspaces of <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> are path connected)</p>
+<p class="admonition-title"><span class="caption-number">Lemma 35 </span> (Open connected subspaces of <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> are path connected)</p>
 <section class="lemma-content" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(U \subseteq \mathbb{R}^n\)</span> with the standard topology is open and <a class="reference internal" href="#topology:def:connected">connected</a>, then it is <a class="reference internal" href="#topology:def:path-connected">path connected</a>.</p>
 </section>

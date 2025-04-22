@@ -458,6 +458,8 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additivity-of-outer-measure-on-borel-sets">Additivity of outer measure on Borel sets</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cantor-set-and-cantor-function">Cantor set and Cantor function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convergence-of-measurable-functions">Convergence of measurable functions</a></li>
 </ul>
             </nav>
         </div>
@@ -521,7 +523,7 @@ b - a &amp; \text{if } I = (a, b) \text{ for some } a, b \in \mathbb{R} \text{ w
 <h3>Good properties<a class="headerlink" href="#good-properties" title="Link to this heading">#</a></h3>
 <p>The outer measure has a number of good properties.
 First, the outer measure of countable subsets of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> is zero.</p>
-<div class="proof theorem admonition" id="mira:thm:countable-sets-have-measure-zero">
+<div class="proof theorem admonition" id="mira:thm:countable-sets-have-outer-measure-zero">
 <p class="admonition-title"><span class="caption-number">Theorem 60 </span> (Countable sets have outer measure zero)</p>
 <section class="theorem-content" id="proof-content">
 <p>Every countable subset of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> has <a class="reference internal" href="#mira:def:outer-measure">outer measure</a> <span class="math notranslate nohighlight">\(0.\)</span></p>
@@ -764,7 +766,7 @@ Then</p>
 <div class="math notranslate nohighlight">
 \[ |I| \geq |[a, b]| = b - a &gt; 0,\]</div>
 <p class="sd-card-text">where the first inequality follows by the <a class="reference internal" href="#mira:thm:outer-measure-preserves-order">order preserving property of the outer measure</a>, and the equality follows by the previous theorem on the <a class="reference internal" href="#mira:thm:outer-measure-of-a-closed-interval">outer measure of a closed interval</a>.
-Since <code class="xref prf prf-ref docutils literal notranslate"><span class="pre">every</span> <span class="pre">countable</span> <span class="pre">subset</span> <span class="pre">of</span> <span class="pre">$\mathbb{R}$</span> <span class="pre">has</span> <span class="pre">outer</span> <span class="pre">measure</span> <span class="pre">zero</span></code> and <span class="math notranslate nohighlight">\(I\)</span> has nonzero measure, it follows that <span class="math notranslate nohighlight">\(I\)</span> is uncountable.</p>
+Since <a class="reference internal" href="#mira:thm:countable-sets-have-outer-measure-zero">every countable subset of $\mathbb{R}$ has outer measure zero</a> and <span class="math notranslate nohighlight">\(I\)</span> has nonzero measure, it follows that <span class="math notranslate nohighlight">\(I\)</span> is uncountable.</p>
 </div>
 </details></section>
 <section id="nonadditivity-of-the-outer-measure">
@@ -1973,7 +1975,239 @@ Combined with the countable subadditivity of the outer measure, we have</p>
 \[\left|\bigcup_{k=1}^\infty A_k\right| = \sum_{k=1}^\infty |A_k|,\]</div>
 <p class="sd-card-text">which shows that the outer measure is countably additive on the Lebesgue measurable sets of <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span></p>
 </div>
+</details><p>We now give another definition of the Lebesgue measure, but this time defined on a different domain.
+<a class="reference internal" href="#mira:def:lebesgue-measure">Definition 70</a> defined the Lebesgue measure on the Borel sets of <span class="math notranslate nohighlight">\(\mathbb{R},\)</span> whereas <a class="reference internal" href="#mira:def:lebesgue-measure-lebesgue-measurable-sets">Definition 72</a> defines the Lebesgue measure on the Lebesgue measurable sets of <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span></p>
+<div class="proof definition admonition" id="mira:def:lebesgue-measure-lebesgue-measurable-sets">
+<p class="admonition-title"><span class="caption-number">Definition 72 </span> (Lebesgue measure)</p>
+<section class="definition-content" id="proof-content">
+<p>The Lebesgue measure is the measure on <span class="math notranslate nohighlight">\((\mathbb{R}, \mathcal{L}),\)</span> where <span class="math notranslate nohighlight">\(\mathcal{L}\)</span> is the <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra of Lebesgue measurable subsets of <span class="math notranslate nohighlight">\(\mathbb{R},\)</span> that assigns to each Lebesgue measurable set its outer measure.</p>
+</section>
+</div></section>
+</section>
+<section id="cantor-set-and-cantor-function">
+<h2>Cantor set and Cantor function<a class="headerlink" href="#cantor-set-and-cantor-function" title="Link to this heading">#</a></h2>
+<p>Every countable set has outer measure <span class="math notranslate nohighlight">\(0\)</span> (<a class="reference internal" href="#mira:thm:countable-sets-have-outer-measure-zero">Theorem 60</a>).
+We may ask whether the converse holds:
+does each set of outer measure <span class="math notranslate nohighlight">\(0\)</span> have to be countable?
+The answer is no, and the Cantor set is a counterexample.</p>
+<div class="proof definition admonition" id="mira:def:cantor-set">
+<p class="admonition-title"><span class="caption-number">Definition 73 </span> (Cantor set)</p>
+<section class="definition-content" id="proof-content">
+<p>The Cantor set <span class="math notranslate nohighlight">\(C\)</span> is defined as <span class="math notranslate nohighlight">\([0, 1] \setminus \cup_{n=1}^\infty G_n,\)</span> where <span class="math notranslate nohighlight">\(G_1 = (\frac{1}{3}, \frac{2}{3})\)</span> and <span class="math notranslate nohighlight">\(G_n\)</span> for <span class="math notranslate nohighlight">\(n &gt; 1\)</span> is the union of the middle third open intervals in the intervals of <span class="math notranslate nohighlight">\([0, 1] \setminus \cup_{j=1}^{n-1} G_j.\)</span></p>
+</section>
+</div><div class="proof lemma admonition" id="mira:lem:base-3-description-of-cantor-set">
+<p class="admonition-title"><span class="caption-number">Lemma 6 </span> (Base 3 description of the Cantor set)</p>
+<section class="lemma-content" id="proof-content">
+<p>The Cantor set <span class="math notranslate nohighlight">\(C\)</span> is the set of all numbers in <span class="math notranslate nohighlight">\([0, 1]\)</span> that have a base 3 representation containing only 0s and 2s.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: base 3 description of the Cantor set<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Note that the set <span class="math notranslate nohighlight">\(G_1\)</span> contains all numbers which have a base 3 representation with a 1 in the first digit, except for the number <span class="math notranslate nohighlight">\(1/3 = 0.1_3.\)</span>
+However, <span class="math notranslate nohighlight">\(0.1_3 = 0.0222\ldots_3,\)</span> so this number has a representation containing only 0s and 2s.
+Similarly, the set <span class="math notranslate nohighlight">\(G_1 \cup G_2\)</span> contains all numbers which have a base 3 representation with a 1 in the first or second digit, except for the numbers <span class="math notranslate nohighlight">\(0.1_3, 0.01_3, 0.21_3.\)</span>
+However, simiarly to our earlier argument, we have <span class="math notranslate nohighlight">\(0.1_3 = 0.0222\ldots_3,\)</span> <span class="math notranslate nohighlight">\(0.01_3 = 0.002222\ldots_3,\)</span> and <span class="math notranslate nohighlight">\(0.21_3 = 0.202222\ldots_3,\)</span> so these numbers also have representations containing only 0s and 2s.
+Continuing this process, we see that <span class="math notranslate nohighlight">\(\cup_{j=1}^n G_j\)</span> contains all numbers which have a base 3 representation with a 1 in the first, second, or third digit, except for the left endpoints of the sub-intervals of <span class="math notranslate nohighlight">\(\cup_{j=1}^n G_j.\)</span>
+However, these numbers all have representations containing only 0s and 2s.
+THerefore the set <span class="math notranslate nohighlight">\([0, 1] \setminus \cup_{n=1}^\infty G_n,\)</span> i.e. the Cantor set, contains all numbers whose decimal representation contains only 0s and 2s.</p>
+</div>
+</details><div class="proof theorem admonition" id="mira:thm:properties-of-cantor-set">
+<p class="admonition-title"><span class="caption-number">Theorem 95 </span> (Properties of the Cantor set)</p>
+<section class="theorem-content" id="proof-content">
+<ol class="arabic simple">
+<li><p>The <a class="reference internal" href="#mira:def:cantor-set">Cantor set</a> is a closed subset of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>.</p></li>
+<li><p>The Cantor set has Lebesgue measure <span class="math notranslate nohighlight">\(0\)</span>.</p></li>
+<li><p>The Cantor set contains no interval with more than one element</p></li>
+</ol>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: properties of the Cantor set<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><strong>Part 1:</strong>
+The sets <span class="math notranslate nohighlight">\(G_n\)</span> defined in <a class="reference internal" href="#mira:def:cantor-set">Definition 73</a> are open sets, so their union <span class="math notranslate nohighlight">\(\cup_{n=1}^\infty G_n\)</span> is an open set.
+The Cantor set is the intersection of <span class="math notranslate nohighlight">\([0, 1]\)</span> with <span class="math notranslate nohighlight">\(\mathbb{R} \setminus \cup_{n=1}^\infty G_n,\)</span> which is a closed set.
+Therefore, the Cantor set is a closed subset of <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span></p>
+<p class="sd-card-text"><strong>Part 2:</strong>
+We proceed by induction.
+Weach <span class="math notranslate nohighlight">\(G_n\)</span> is the union of <span class="math notranslate nohighlight">\(2^{n-1}\)</span> open intervals, each of length <span class="math notranslate nohighlight">\(\frac{1}{3^n}.\)</span>
+Note also that the <span class="math notranslate nohighlight">\(G_n\)</span> are all disjoint, and since measures are <a class="reference internal" href="#mira:def:measure">countably additive</a>, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\left|\cup_{n=1}^\infty G_n\right| &amp;= \sum_{n=1}^\infty |G_n| \\
+&amp;= \frac{1}{3} + \frac{2}{3^2} + \frac{4}{3^3} + \cdots \\
+&amp;= \frac{1}{3} \left(1 + \frac{2}{3} + \frac{4}{9} + \cdots \right) \\
+&amp;= \frac{1}{3} \frac{1}{1 - \frac{2}{3}} \\
+&amp;= 1.
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">Thus the Cantor set <span class="math notranslate nohighlight">\([0, 1] \setminus \cup_{n=1}^\infty G_n\)</span> has Lebesgue measure <span class="math notranslate nohighlight">\(|[0, 1]| - |\cup_{n=1}^\infty G_n| = 1 - 1 = 0.\)</span></p>
+<p class="sd-card-text"><strong>Part 3:</strong>
+The Cantor set is a <a class="reference internal" href="#mira:def:lebesgue-measurable-set">Lebesgue set</a> of measure 0, and a Lebesgue set of measure 0 cannot contain an interval that has more than one element. (Otherwise, the interval would have positive measure and the set would also have positive measure.)
+Thus the Cantor set cannot contain an interval with more than one element.</p>
+</div>
+</details><div class="proof theorem admonition" id="mira:thm:cantor-function">
+<p class="admonition-title"><span class="caption-number">Theorem 96 </span> (Cantor function)</p>
+<section class="theorem-content" id="proof-content">
+<p>The Cantor function <span class="math notranslate nohighlight">\(\Lambda: [0, 1] \to [0, 1]\)</span> is defined by converting base 3 representations into base 2 representations as follows:</p>
+<ol class="arabic simple">
+<li><p>If <span class="math notranslate nohighlight">\(x \in C,\)</span> then <span class="math notranslate nohighlight">\(\Lambda(x)\)</span> is the number obtained from the unique representation of <span class="math notranslate nohighlight">\(x\)</span> containing only 0s and 2s, by replacing each 2 by 1 and interpreting the resulting string as a base 2 number.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(x \in [0, 1] \setminus C,\)</span> then <span class="math notranslate nohighlight">\(\Lambda(x)\)</span> is computed from a base 3 representation of <span class="math notranslate nohighlight">\(x\)</span> by truncating after the first 1, replacing each 2 before the first 1 by 1, and interpreting the resulting tring as a base 2 number.</p></li>
+</ol>
+</section>
+</div><div class="proof theorem admonition" id="mira:thm:properties-of-cantor-function">
+<p class="admonition-title"><span class="caption-number">Theorem 97 </span> (Properties of the Cantor function)</p>
+<section class="theorem-content" id="proof-content">
+<p>The <a class="reference internal" href="#mira:thm:cantor-function">Cantor function</a> <span class="math notranslate nohighlight">\(\Lambda\)</span> is a continuous, increasing function from <span class="math notranslate nohighlight">\([0, 1]\)</span> onto <span class="math notranslate nohighlight">\([0, 1].\)</span>
+Furthermore, <span class="math notranslate nohighlight">\(\Lambda(C) = [0, 1].\)</span></p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: properties of the Cantor function<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><strong>Part 1:</strong>
+First we prove that <span class="math notranslate nohighlight">\(\Lambda(C) = [0, 1],\)</span> which also implies that <span class="math notranslate nohighlight">\(\Lambda\)</span> is onto.
+Suppose <span class="math notranslate nohighlight">\(y \in [0, 1].\)</span>
+Then, define <span class="math notranslate nohighlight">\(x \in [0, 1]\)</span> to be the number obtained by taking the base 2 representation of <span class="math notranslate nohighlight">\(y,\)</span> replacing each <span class="math notranslate nohighlight">\(1\)</span> by <span class="math notranslate nohighlight">\(2\)</span> and interpreting the result as a base 3 number.
+Because <span class="math notranslate nohighlight">\(x\)</span> has a base 3 representation containing only 0s and 2s, <span class="math notranslate nohighlight">\(x\)</span> is in the Cantor set <span class="math notranslate nohighlight">\(C.\)</span>
+By the definition of the <a class="reference internal" href="#mira:thm:cantor-function">Cantor function</a>, we have <span class="math notranslate nohighlight">\(\Lambda(x) = y.\)</span>
+Thus <span class="math notranslate nohighlight">\(\Lambda(C) = [0, 1].\)</span></p>
+<p class="sd-card-text"><strong>Part 2:</strong>
+Now we show that <span class="math notranslate nohighlight">\(\Lambda\)</span> is increasing.
+Suppose <span class="math notranslate nohighlight">\(x_1, x_2 \in [0, 1]\)</span> and <span class="math notranslate nohighlight">\(x_1 &lt; x_2.\)</span>
+Then, in the base 3 representation of <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2,\)</span> there exists a <span class="math notranslate nohighlight">\(k \in \mathbb{N}\)</span> such that the <span class="math notranslate nohighlight">\(k\)</span>th digit of <span class="math notranslate nohighlight">\(x_1\)</span> is less than the <span class="math notranslate nohighlight">\(k\)</span>th digit of <span class="math notranslate nohighlight">\(x_2.\)</span>
+Before the <span class="math notranslate nohighlight">\(k\)</span>th digit, the two numbers have identical digits.
+There are a three different cases to consider.
+First, if a 1 appears in the base 3 representation of <span class="math notranslate nohighlight">\(x_1\)</span> before the <span class="math notranslate nohighlight">\(k\)</span>th digit (and thus also in the base 3 representation of <span class="math notranslate nohighlight">\(x_2\)</span>), then the base 3 representation of both <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> are truncated by <span class="math notranslate nohighlight">\(\Lambda\)</span> before the <span class="math notranslate nohighlight">\(k\)</span>th digit, so <span class="math notranslate nohighlight">\(\Lambda(x_1) = \Lambda(x_2).\)</span>
+Second, if the <span class="math notranslate nohighlight">\(k\)</span>th digit of <span class="math notranslate nohighlight">\(x_1\)</span> is 1, then the base 3 representation of <span class="math notranslate nohighlight">\(x_1\)</span> is truncated by the Cantor function at this digit and has trailing 0s.
+The base 3 representation of <span class="math notranslate nohighlight">\(x_2\)</span> must have a 2 in the <span class="math notranslate nohighlight">\(k\)</span>th digit, so the <span class="math notranslate nohighlight">\(k\)</span>th digit of <span class="math notranslate nohighlight">\(\Lambda(x_2)\)</span> is 1, and <span class="math notranslate nohighlight">\(\Lambda(x_1) \leq \Lambda(x_2).\)</span>
+Finally, if no 1 appears in the base 3 representation of <span class="math notranslate nohighlight">\(x_1\)</span> before the <span class="math notranslate nohighlight">\(k\)</span>th digit, then <span class="math notranslate nohighlight">\(\Lambda(x_1) \leq \Lambda(x_2),\)</span> by inspection of the definition of the Cantor function.</p>
+<p class="sd-card-text"><strong>Part 3:</strong>
+Finally, we note that an increasing onto function from <span class="math notranslate nohighlight">\([0, 1]\)</span> to <span class="math notranslate nohighlight">\([0, 1]\)</span> is continuous.
+Therefore, <span class="math notranslate nohighlight">\(\Lambda\)</span> is continuous.</p>
+</div>
+</details><p>Now we can use the Cantor function to show that the Cantor set is uncountable.</p>
+<div class="proof theorem admonition" id="mira:thm:cantor-set-is-uncountable">
+<p class="admonition-title"><span class="caption-number">Theorem 98 </span> (Cantor set is uncountable)</p>
+<section class="theorem-content" id="proof-content">
+<p>The Cantor set <span class="math notranslate nohighlight">\(C\)</span> is uncountable.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Cantor set is uncountable<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">If <span class="math notranslate nohighlight">\(C\)</span> were countable, then <span class="math notranslate nohighlight">\(\Lambda(C)\)</span> would also be countable.
+However, <span class="math notranslate nohighlight">\(\Lambda(C) = [0, 1],\)</span> which is uncountable.
+Therefore, <span class="math notranslate nohighlight">\(C\)</span> must be uncountable.</p>
+</div>
+</details><p>The Canotr function also shows that even a continuous function can map a set with Lebesgue measure <span class="math notranslate nohighlight">\(0\)</span> to a non-measurable set.</p>
+<div class="proof theorem admonition" id="mira:thm:continuous-image-of-a-lebesgue-measurable-set-can-be-non-measurable">
+<p class="admonition-title"><span class="caption-number">Theorem 99 </span> (Continuous image of a Lebesgue measurable set can be non-measurable)</p>
+<section class="theorem-content" id="proof-content">
+<p>There exists a Lebesgue measurable set <span class="math notranslate nohighlight">\(A \subseteq [0, 1]\)</span> such that <span class="math notranslate nohighlight">\(|A| = 0\)</span> and <span class="math notranslate nohighlight">\(\Lambda(A)\)</span> is not a Lebesgue measurable set.</p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: continuous image of a Lebesgue measurable set can be non-measurable<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(E\)</span> be a subset of <span class="math notranslate nohighlight">\([0, 1]\)</span> that is not Lebesgue measurable.
+Also let <span class="math notranslate nohighlight">\(A = C \cap \Lambda^{-1}(E).\)</span>
+Then <span class="math notranslate nohighlight">\(|A| = 0\)</span> because <span class="math notranslate nohighlight">\(A \subseteq C\)</span> and <span class="math notranslate nohighlight">\(|C| = 0\)</span> (<a class="reference internal" href="#mira:thm:outer-measure-preserves-order">Theorem 61</a>).
+Thus <span class="math notranslate nohighlight">\(A\)</span> is Lebesgue measurable because every subset of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> with outer measure <span class="math notranslate nohighlight">\(0\)</span> is Lebesgue measurable.
+Because <span class="math notranslate nohighlight">\(\Lambda\)</span> maps <span class="math notranslate nohighlight">\(C\)</span> onto <span class="math notranslate nohighlight">\([0, 1],\)</span> we have <span class="math notranslate nohighlight">\(\Lambda(A) = E.\)</span></p>
+</div>
 </details></section>
+<section id="convergence-of-measurable-functions">
+<h2>Convergence of measurable functions<a class="headerlink" href="#convergence-of-measurable-functions" title="Link to this heading">#</a></h2>
+<div class="proof definition admonition" id="mira:def:pointwise-convergence-uniform-convergence">
+<p class="admonition-title"><span class="caption-number">Definition 74 </span> (Pointwise convergence; uniform convergence)</p>
+<section class="definition-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\(X\)</span> is a set, <span class="math notranslate nohighlight">\(f_1, f_2, \ldots\)</span> is a sequence of functions from <span class="math notranslate nohighlight">\(X\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R},\)</span> and <span class="math notranslate nohighlight">\(f: X \to \mathbb{R}\)</span> is a function.</p>
+<ol class="arabic simple">
+<li><p>The sequence <span class="math notranslate nohighlight">\(f_1, f_2, \ldots\)</span> converges pointwise to <span class="math notranslate nohighlight">\(f\)</span> if for each <span class="math notranslate nohighlight">\(x \in X\)</span> and each <span class="math notranslate nohighlight">\(\epsilon &gt; 0,\)</span> there exists <span class="math notranslate nohighlight">\(n \in \mathbb{Z}^+\)</span> such that <span class="math notranslate nohighlight">\(|f_n(x) - f(x)| &lt; \epsilon\)</span> for all <span class="math notranslate nohighlight">\(k \geq n.\)</span></p></li>
+<li><p>The sequence <span class="math notranslate nohighlight">\(f_1, f_2, \ldots\)</span> converges uniformly to <span class="math notranslate nohighlight">\(f\)</span> if for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0,\)</span> there exists <span class="math notranslate nohighlight">\(n \in \mathbb{Z}^+\)</span> such that <span class="math notranslate nohighlight">\(|f_n(x) - f(x)| &lt; \epsilon\)</span> for all <span class="math notranslate nohighlight">\(k \geq n\)</span> and all <span class="math notranslate nohighlight">\(x \in X.\)</span></p></li>
+</ol>
+</section>
+</div><div class="proof theorem admonition" id="mira:thm:uniform-limit-of-continuous-functions-is-continuous">
+<p class="admonition-title"><span class="caption-number">Theorem 100 </span> (Uniform limit of continuous functions is continuous)</p>
+<section class="theorem-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\(B \subseteq \mathbb{R}\)</span> and <span class="math notranslate nohighlight">\(f_1, f_2, \ldots\)</span> is a sequence of continuous functions from <span class="math notranslate nohighlight">\(B\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> that converges uniformly to a function <span class="math notranslate nohighlight">\(f: B \to \mathbb{R}.\)</span>
+Suppose <span class="math notranslate nohighlight">\(b \in B\)</span> and <span class="math notranslate nohighlight">\(f_k\)</span> is continuous at <span class="math notranslate nohighlight">\(b\)</span> for all <span class="math notranslate nohighlight">\(k \in \mathbb{Z}^+.\)</span>
+Then <span class="math notranslate nohighlight">\(f\)</span> is continuous at <span class="math notranslate nohighlight">\(b.\)</span></p>
+</section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: uniform limit of continuous functions is continuous<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(\epsilon &gt; 0.\)</span>
+Since <span class="math notranslate nohighlight">\(f_n\)</span> converges to <span class="math notranslate nohighlight">\(f\)</span> uniformly, there exists <span class="math notranslate nohighlight">\(n \in \mathbb{Z}^+\)</span> such that <span class="math notranslate nohighlight">\(|f_n(x) - f(x)| &lt; \frac{\epsilon}{3}\)</span> for all <span class="math notranslate nohighlight">\(x \in B.\)</span>
+Because <span class="math notranslate nohighlight">\(f_n\)</span> is continuous at <span class="math notranslate nohighlight">\(b,\)</span> there exists <span class="math notranslate nohighlight">\(\delta\)</span> such that <span class="math notranslate nohighlight">\(|f_n(x) - f_n(b)| &lt; \frac{\epsilon}{3}\)</span> for all <span class="math notranslate nohighlight">\(x \in B\)</span> such that <span class="math notranslate nohighlight">\(|x - b| &lt; \delta.\)</span>
+Now, suppose that <span class="math notranslate nohighlight">\(x \in B\)</span> and <span class="math notranslate nohighlight">\(|x - b| &lt; \delta.\)</span>
+Then we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+|f(x) - f(b)| &amp;\leq |f(x) - f_n(x)| + |f_n(x) - f_n(b)| + |f_n(b) - f(b)| \\
+&amp;&lt; \epsilon
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">so <span class="math notranslate nohighlight">\(f\)</span> is continuous at <span class="math notranslate nohighlight">\(b.\)</span></p>
+</div>
+</details><div class="proof theorem admonition" id="mira:thm:egorovs-theorem">
+<p class="admonition-title"><span class="caption-number">Theorem 101 </span> (Egorov’s theorem)</p>
+<section class="theorem-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\((X, S, \mu)\)</span> is a measurable space with <span class="math notranslate nohighlight">\(\mu &lt; \infty.\)</span>
+Suppose <span class="math notranslate nohighlight">\(f_1, f_2, \dots\)</span> is a sequence of <span class="math notranslate nohighlight">\(S\)</span>-measurable functions from <span class="math notranslate nohighlight">\(X\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> that converges pointwise on <span class="math notranslate nohighlight">\(X\)</span> to a function <span class="math notranslate nohighlight">\(f: X \to \mathbb{R}.\)</span>
+Then for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0,\)</span> there exists a set <span class="math notranslate nohighlight">\(E \in S\)</span> such that <span class="math notranslate nohighlight">\(\mu(X \setminus E) &lt; \epsilon\)</span> and <span class="math notranslate nohighlight">\(f_1, f_2, \dots\)</span> converges uniformly to <span class="math notranslate nohighlight">\(f\)</span> on <span class="math notranslate nohighlight">\(E.\)</span></p>
+</section>
+</div><!-- :::{dropdown} Proof: Egorov's theorem
+Suppose that $(X, S, \mu)$ is a measurable space with $\mu < \infty$ and that $f_1, f_2, \dots$ is a sequence of $S$-measurable functions from $X$ to $\mathbb{R}$ that converges pointwise on $X$ to a function $f: X \to \mathbb{R}.$
+Let $\epsilon > 0.$
+Because $f_1, f_2, \dots$ converges to $f$ pointwise, for each $x \in X$ there exists a least $N_{x, \epsilon} \in \mathbb{Z}^+$ such that for all $n \geq N_{x, \epsilon},$ it holds that $|f_n(x) - f(x)| < \epsilon.$
+Now define the sets
+
+$$E_k = \{x \in X: N_{x, \epsilon} \leq k\}.$$
+
+We show a number of properties for $E_k.$
+First, $E_k$ is $S$-measurable for each $k \in \mathbb{Z}^+,$ which can be shown as follows.
+First
+
+$$\begin{align}
+x \in E_k \iff |f_m(x) - f(x)| < \epsilon \text{ for all } m \geq k
+\end{align}$$
+
+which implies that
+
+$$\begin{align}
+E_k = \bigcap_{m = k}^\infty (f_m - f)^{-1}((-\epsilon, \epsilon))
+\end{align}$$
+
+which is $S$-measurable since $(f_m - f)^{-1}((-\epsilon, \epsilon))$ is $S$-measurable for each $m \in \mathbb{Z}^+.$
+Second, $E_k$ is increasing and $E_k \to X,$ which means that $X \setminus E_k$ is decreasing and $X \setminus E_k \to \emptyset.$
+Therefore
+
+$$\begin{equation}
+\lim_{k \to \infty} \mu(X \setminus E_k) = \mu(\lim_{k \to \infty} X \setminus E_k) = \mu(\emptyset) = 0.
+\end{equation}$$
+
+From this, we conclude that there must exist some $K \in \mathbb{Z}^+$ such that for all $k \geq K$ we have $\mu(X \setminus E_k) < \epsilon.$
+::: -->
 </section>
 </section>
 
@@ -2063,6 +2297,8 @@ Combined with the countable subadditivity of the outer measure, we have</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additivity-of-outer-measure-on-borel-sets">Additivity of outer measure on Borel sets</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cantor-set-and-cantor-function">Cantor set and Cantor function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convergence-of-measurable-functions">Convergence of measurable functions</a></li>
 </ul>
   </nav></div>
 

@@ -63,7 +63,7 @@ The outer measure has a number of good properties.
 First, the outer measure of countable subsets of $\mathbb{R}$ is zero.
 
 :::{prf:theorem} Countable sets have outer measure zero
-:label: mira:thm:countable-sets-have-measure-zero
+:label: mira:thm:countable-sets-have-outer-measure-zero
 Every countable subset of $\mathbb{R}$ has {prf:ref}`outer measure<mira:def:outer-measure>` $0.$
 :::
 
@@ -1559,3 +1559,225 @@ $$\left|\bigcup_{k=1}^\infty A_k\right| = \sum_{k=1}^\infty |A_k|,$$
 
 which shows that the outer measure is countably additive on the Lebesgue measurable sets of $\mathbb{R}.$
 :::
+
+
+We now give another definition of the Lebesgue measure, but this time defined on a different domain.
+{prf:ref}`mira:def:lebesgue-measure` defined the Lebesgue measure on the Borel sets of $\mathbb{R},$ whereas {prf:ref}`mira:def:lebesgue-measure-lebesgue-measurable-sets` defines the Lebesgue measure on the Lebesgue measurable sets of $\mathbb{R}.$
+
+:::{prf:definition} Lebesgue measure
+:label: mira:def:lebesgue-measure-lebesgue-measurable-sets
+The Lebesgue measure is the measure on $(\mathbb{R}, \mathcal{L}),$ where $\mathcal{L}$ is the $\sigma$-algebra of Lebesgue measurable subsets of $\mathbb{R},$ that assigns to each Lebesgue measurable set its outer measure.
+:::
+
+
+## Cantor set and Cantor function
+
+Every countable set has outer measure $0$ ({prf:ref}`mira:thm:countable-sets-have-outer-measure-zero`).
+We may ask whether the converse holds:
+does each set of outer measure $0$ have to be countable?
+The answer is no, and the Cantor set is a counterexample.
+
+:::{prf:definition} Cantor set
+:label: mira:def:cantor-set
+The Cantor set $C$ is defined as $[0, 1] \setminus \cup_{n=1}^\infty G_n,$ where $G_1 = (\frac{1}{3}, \frac{2}{3})$ and $G_n$ for $n > 1$ is the union of the middle third open intervals in the intervals of $[0, 1] \setminus \cup_{j=1}^{n-1} G_j.$
+:::
+
+
+:::{prf:lemma} Base 3 description of the Cantor set
+:label: mira:lem:base-3-description-of-cantor-set
+The Cantor set $C$ is the set of all numbers in $[0, 1]$ that have a base 3 representation containing only 0s and 2s.
+:::
+
+:::{dropdown} Proof: base 3 description of the Cantor set
+Note that the set $G_1$ contains all numbers which have a base 3 representation with a 1 in the first digit, except for the number $1/3 = 0.1_3.$
+However, $0.1_3 = 0.0222\ldots_3,$ so this number has a representation containing only 0s and 2s.
+Similarly, the set $G_1 \cup G_2$ contains all numbers which have a base 3 representation with a 1 in the first or second digit, except for the numbers $0.1_3, 0.01_3, 0.21_3.$
+However, simiarly to our earlier argument, we have $0.1_3 = 0.0222\ldots_3,$ $0.01_3 = 0.002222\ldots_3,$ and $0.21_3 = 0.202222\ldots_3,$ so these numbers also have representations containing only 0s and 2s.
+Continuing this process, we see that $\cup_{j=1}^n G_j$ contains all numbers which have a base 3 representation with a 1 in the first, second, or third digit, except for the left endpoints of the sub-intervals of $\cup_{j=1}^n G_j.$
+However, these numbers all have representations containing only 0s and 2s.
+THerefore the set $[0, 1] \setminus \cup_{n=1}^\infty G_n,$ i.e. the Cantor set, contains all numbers whose decimal representation contains only 0s and 2s.
+:::
+
+
+:::{prf:theorem} Properties of the Cantor set
+:label: mira:thm:properties-of-cantor-set
+1. The {prf:ref}`Cantor set<mira:def:cantor-set>` is a closed subset of $\mathbb{R}$.
+2. The Cantor set has Lebesgue measure $0$.
+3. The Cantor set contains no interval with more than one element
+:::
+
+:::{dropdown} Proof: properties of the Cantor set
+__Part 1:__
+The sets $G_n$ defined in {prf:ref}`mira:def:cantor-set` are open sets, so their union $\cup_{n=1}^\infty G_n$ is an open set.
+The Cantor set is the intersection of $[0, 1]$ with $\mathbb{R} \setminus \cup_{n=1}^\infty G_n,$ which is a closed set.
+Therefore, the Cantor set is a closed subset of $\mathbb{R}.$
+
+__Part 2:__
+We proceed by induction.
+Weach $G_n$ is the union of $2^{n-1}$ open intervals, each of length $\frac{1}{3^n}.$
+Note also that the $G_n$ are all disjoint, and since measures are {prf:ref}`countably additive<mira:def:measure>`, we have
+
+$$\begin{align}
+\left|\cup_{n=1}^\infty G_n\right| &= \sum_{n=1}^\infty |G_n| \\
+&= \frac{1}{3} + \frac{2}{3^2} + \frac{4}{3^3} + \cdots \\
+&= \frac{1}{3} \left(1 + \frac{2}{3} + \frac{4}{9} + \cdots \right) \\
+&= \frac{1}{3} \frac{1}{1 - \frac{2}{3}} \\
+&= 1.
+\end{align}$$
+
+Thus the Cantor set $[0, 1] \setminus \cup_{n=1}^\infty G_n$ has Lebesgue measure $|[0, 1]| - |\cup_{n=1}^\infty G_n| = 1 - 1 = 0.$
+
+__Part 3:__
+The Cantor set is a {prf:ref}`Lebesgue set<mira:def:lebesgue-measurable-set>` of measure 0, and a Lebesgue set of measure 0 cannot contain an interval that has more than one element. (Otherwise, the interval would have positive measure and the set would also have positive measure.)
+Thus the Cantor set cannot contain an interval with more than one element.
+:::
+
+
+:::{prf:theorem} Cantor function
+:label: mira:thm:cantor-function
+The Cantor function $\Lambda: [0, 1] \to [0, 1]$ is defined by converting base 3 representations into base 2 representations as follows:
+
+1. If $x \in C,$ then $\Lambda(x)$ is the number obtained from the unique representation of $x$ containing only 0s and 2s, by replacing each 2 by 1 and interpreting the resulting string as a base 2 number.
+2. If $x \in [0, 1] \setminus C,$ then $\Lambda(x)$ is computed from a base 3 representation of $x$ by truncating after the first 1, replacing each 2 before the first 1 by 1, and interpreting the resulting tring as a base 2 number.
+:::
+
+
+
+:::{prf:theorem} Properties of the Cantor function
+:label: mira:thm:properties-of-cantor-function
+The {prf:ref}`Cantor function<mira:thm:cantor-function>` $\Lambda$ is a continuous, increasing function from $[0, 1]$ onto $[0, 1].$
+Furthermore, $\Lambda(C) = [0, 1].$
+:::
+
+:::{dropdown} Proof: properties of the Cantor function
+__Part 1:__
+First we prove that $\Lambda(C) = [0, 1],$ which also implies that $\Lambda$ is onto.
+Suppose $y \in [0, 1].$
+Then, define $x \in [0, 1]$ to be the number obtained by taking the base 2 representation of $y,$ replacing each $1$ by $2$ and interpreting the result as a base 3 number.
+Because $x$ has a base 3 representation containing only 0s and 2s, $x$ is in the Cantor set $C.$
+By the definition of the {prf:ref}`Cantor function<mira:thm:cantor-function>`, we have $\Lambda(x) = y.$
+Thus $\Lambda(C) = [0, 1].$
+
+__Part 2:__
+Now we show that $\Lambda$ is increasing.
+Suppose $x_1, x_2 \in [0, 1]$ and $x_1 < x_2.$
+Then, in the base 3 representation of $x_1$ and $x_2,$ there exists a $k \in \mathbb{N}$ such that the $k$th digit of $x_1$ is less than the $k$th digit of $x_2.$
+Before the $k$th digit, the two numbers have identical digits.
+There are a three different cases to consider.
+First, if a 1 appears in the base 3 representation of $x_1$ before the $k$th digit (and thus also in the base 3 representation of $x_2$), then the base 3 representation of both $x_1$ and $x_2$ are truncated by $\Lambda$ before the $k$th digit, so $\Lambda(x_1) = \Lambda(x_2).$
+Second, if the $k$th digit of $x_1$ is 1, then the base 3 representation of $x_1$ is truncated by the Cantor function at this digit and has trailing 0s.
+The base 3 representation of $x_2$ must have a 2 in the $k$th digit, so the $k$th digit of $\Lambda(x_2)$ is 1, and $\Lambda(x_1) \leq \Lambda(x_2).$
+Finally, if no 1 appears in the base 3 representation of $x_1$ before the $k$th digit, then $\Lambda(x_1) \leq \Lambda(x_2),$ by inspection of the definition of the Cantor function.
+
+
+__Part 3:__
+Finally, we note that an increasing onto function from $[0, 1]$ to $[0, 1]$ is continuous.
+Therefore, $\Lambda$ is continuous.
+:::
+
+
+Now we can use the Cantor function to show that the Cantor set is uncountable.
+
+:::{prf:theorem} Cantor set is uncountable
+:label: mira:thm:cantor-set-is-uncountable
+The Cantor set $C$ is uncountable.
+:::
+
+:::{dropdown} Proof: Cantor set is uncountable
+If $C$ were countable, then $\Lambda(C)$ would also be countable.
+However, $\Lambda(C) = [0, 1],$ which is uncountable.
+Therefore, $C$ must be uncountable.
+:::
+
+
+The Canotr function also shows that even a continuous function can map a set with Lebesgue measure $0$ to a non-measurable set.
+
+:::{prf:theorem} Continuous image of a Lebesgue measurable set can be non-measurable
+:label: mira:thm:continuous-image-of-a-lebesgue-measurable-set-can-be-non-measurable
+There exists a Lebesgue measurable set $A \subseteq [0, 1]$ such that $|A| = 0$ and $\Lambda(A)$ is not a Lebesgue measurable set.
+:::
+
+
+:::{dropdown} Proof: continuous image of a Lebesgue measurable set can be non-measurable
+Let $E$ be a subset of $[0, 1]$ that is not Lebesgue measurable.
+Also let $A = C \cap \Lambda^{-1}(E).$
+Then $|A| = 0$ because $A \subseteq C$ and $|C| = 0$ ({prf:ref}`mira:thm:outer-measure-preserves-order`).
+Thus $A$ is Lebesgue measurable because every subset of $\mathbb{R}$ with outer measure $0$ is Lebesgue measurable.
+Because $\Lambda$ maps $C$ onto $[0, 1],$ we have $\Lambda(A) = E.$
+:::
+
+
+## Convergence of measurable functions
+
+
+:::{prf:definition} Pointwise convergence; uniform convergence
+:label: mira:def:pointwise-convergence-uniform-convergence
+Suppose $X$ is a set, $f_1, f_2, \ldots$ is a sequence of functions from $X$ to $\mathbb{R},$ and $f: X \to \mathbb{R}$ is a function.
+
+1. The sequence $f_1, f_2, \ldots$ converges pointwise to $f$ if for each $x \in X$ and each $\epsilon > 0,$ there exists $n \in \mathbb{Z}^+$ such that $|f_n(x) - f(x)| < \epsilon$ for all $k \geq n.$
+2. The sequence $f_1, f_2, \ldots$ converges uniformly to $f$ if for every $\epsilon > 0,$ there exists $n \in \mathbb{Z}^+$ such that $|f_n(x) - f(x)| < \epsilon$ for all $k \geq n$ and all $x \in X.$
+:::
+
+
+
+:::{prf:theorem} Uniform limit of continuous functions is continuous
+:label: mira:thm:uniform-limit-of-continuous-functions-is-continuous
+Suppose $B \subseteq \mathbb{R}$ and $f_1, f_2, \ldots$ is a sequence of continuous functions from $B$ to $\mathbb{R}$ that converges uniformly to a function $f: B \to \mathbb{R}.$
+Suppose $b \in B$ and $f_k$ is continuous at $b$ for all $k \in \mathbb{Z}^+.$
+Then $f$ is continuous at $b.$
+:::
+
+:::{dropdown} Proof: uniform limit of continuous functions is continuous
+Let $\epsilon > 0.$
+Since $f_n$ converges to $f$ uniformly, there exists $n \in \mathbb{Z}^+$ such that $|f_n(x) - f(x)| < \frac{\epsilon}{3}$ for all $x \in B.$
+Because $f_n$ is continuous at $b,$ there exists $\delta$ such that $|f_n(x) - f_n(b)| < \frac{\epsilon}{3}$ for all $x \in B$ such that $|x - b| < \delta.$
+Now, suppose that $x \in B$ and $|x - b| < \delta.$
+Then we have
+
+$$\begin{align}
+|f(x) - f(b)| &\leq |f(x) - f_n(x)| + |f_n(x) - f_n(b)| + |f_n(b) - f(b)| \\
+&< \epsilon
+\end{align}$$
+
+so $f$ is continuous at $b.$
+:::
+
+:::{prf:theorem} Egorov's theorem
+:label: mira:thm:egorovs-theorem
+Suppose $(X, S, \mu)$ is a measurable space with $\mu < \infty.$
+Suppose $f_1, f_2, \dots$ is a sequence of $S$-measurable functions from $X$ to $\mathbb{R}$ that converges pointwise on $X$ to a function $f: X \to \mathbb{R}.$
+Then for every $\epsilon > 0,$ there exists a set $E \in S$ such that $\mu(X \setminus E) < \epsilon$ and $f_1, f_2, \dots$ converges uniformly to $f$ on $E.$
+:::
+
+<!-- :::{dropdown} Proof: Egorov's theorem
+Suppose that $(X, S, \mu)$ is a measurable space with $\mu < \infty$ and that $f_1, f_2, \dots$ is a sequence of $S$-measurable functions from $X$ to $\mathbb{R}$ that converges pointwise on $X$ to a function $f: X \to \mathbb{R}.$
+Let $\epsilon > 0.$
+Because $f_1, f_2, \dots$ converges to $f$ pointwise, for each $x \in X$ there exists a least $N_{x, \epsilon} \in \mathbb{Z}^+$ such that for all $n \geq N_{x, \epsilon},$ it holds that $|f_n(x) - f(x)| < \epsilon.$
+Now define the sets
+
+$$E_k = \{x \in X: N_{x, \epsilon} \leq k\}.$$
+
+We show a number of properties for $E_k.$
+First, $E_k$ is $S$-measurable for each $k \in \mathbb{Z}^+,$ which can be shown as follows.
+First
+
+$$\begin{align}
+x \in E_k \iff |f_m(x) - f(x)| < \epsilon \text{ for all } m \geq k
+\end{align}$$
+
+which implies that
+
+$$\begin{align}
+E_k = \bigcap_{m = k}^\infty (f_m - f)^{-1}((-\epsilon, \epsilon))
+\end{align}$$
+
+which is $S$-measurable since $(f_m - f)^{-1}((-\epsilon, \epsilon))$ is $S$-measurable for each $m \in \mathbb{Z}^+.$
+Second, $E_k$ is increasing and $E_k \to X,$ which means that $X \setminus E_k$ is decreasing and $X \setminus E_k \to \emptyset.$
+Therefore
+
+$$\begin{equation}
+\lim_{k \to \infty} \mu(X \setminus E_k) = \mu(\lim_{k \to \infty} X \setminus E_k) = \mu(\emptyset) = 0.
+\end{equation}$$
+
+From this, we conclude that there must exist some $K \in \mathbb{Z}^+$ such that for all $k \geq K$ we have $\mu(X \setminus E_k) < \epsilon.$
+::: -->

@@ -468,7 +468,7 @@ document.write(`
 <p>First, we define propositions.
 A primitive proposition should be regarded simply as a symbol, e.g. <span class="math notranslate nohighlight">\(p, q\)</span> or <span class="math notranslate nohighlight">\(r,\)</span> which can be combined with other symbols using a special <span class="math notranslate nohighlight">\(\imp\)</span> symbol, to obtain new composite propositions.</p>
 <div class="proof definition admonition" id="lst:def:proposition">
-<p class="admonition-title"><span class="caption-number">Definition 113 </span> (Proposition)</p>
+<p class="admonition-title"><span class="caption-number">Definition 116 </span> (Proposition)</p>
 <section class="definition-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(P\)</span> be a set of <em>primitive propositions,</em> (e.g. <span class="math notranslate nohighlight">\(p, q, r\)</span>).
 The set of <em>propositions</em>, written as <span class="math notranslate nohighlight">\(L\)</span> or <span class="math notranslate nohighlight">\(L(P)\)</span> is defined inductively by</p>
@@ -493,7 +493,7 @@ L_{n+1} &amp;= L_n \cup \{(p \imp q): p, q \in L_n\}
 Similarly, we can read the definition of <span class="math notranslate nohighlight">\(\wedge\)</span> and <span class="math notranslate nohighlight">\(\vee,\)</span> based off our definition of <span class="math notranslate nohighlight">\(\neg.\)</span></p>
 </aside>
 <div class="proof definition admonition" id="lst:def:logical-symbols">
-<p class="admonition-title"><span class="caption-number">Definition 114 </span> (Logical symbols)</p>
+<p class="admonition-title"><span class="caption-number">Definition 117 </span> (Logical symbols)</p>
 <section class="definition-content" id="proof-content">
 <p>We define the symbols <span class="math notranslate nohighlight">\(\neg, \wedge, \vee\)</span> as</p>
 <div class="math notranslate nohighlight">
@@ -509,7 +509,7 @@ p \vee q &amp;= (\neg p) \imp q  \\
 <p>By themselves, propositions are meaningless.
 Semantic entailment assigns truth values to propositions, where we declare each proposition to either be “true” or “false” according to a <em>valuation function</em>.</p>
 <div class="proof definition admonition" id="lst:def:valuation">
-<p class="admonition-title"><span class="caption-number">Definition 115 </span> (Valuation)</p>
+<p class="admonition-title"><span class="caption-number">Definition 118 </span> (Valuation)</p>
 <section class="definition-content" id="proof-content">
 <p>A valuation on <span class="math notranslate nohighlight">\(L\)</span> is a function <span class="math notranslate nohighlight">\(v: L \to \{0, 1\},\)</span> such that</p>
 <div class="math notranslate nohighlight">
@@ -524,7 +524,7 @@ v(\perp) = 0,~~ v(p \imp q) = \begin{cases}
 A valuation is uniquely determined by the value it takes on the primitive propositions, since all other propositions in the language are constructed from the primitive ones.
 In addition, given the values of a valuation function on the primitive propositions, we can extend this to a (unique) valuation on the entire language.</p>
 <div class="proof lemma admonition" id="lemma-3">
-<p class="admonition-title"><span class="caption-number">Lemma 47 </span> (Equivalent valuations and extension to valuation)</p>
+<p class="admonition-title"><span class="caption-number">Lemma 48 </span> (Equivalent valuations and extension to valuation)</p>
 <section class="lemma-content" id="proof-content">
 <p>Suppose <span class="math notranslate nohighlight">\(P\)</span> is a set of primitive propositions, and <span class="math notranslate nohighlight">\(L\)</span> is the set of propositions derived from it.
 Then</p>
@@ -552,11 +552,11 @@ We proceeed inductively to show that <span class="math notranslate nohighlight">
 <p class="sd-card-text"><strong>Part 2:</strong>
 Suppose <span class="math notranslate nohighlight">\(w: P \to \{0, 1\}.\)</span>
 Define <span class="math notranslate nohighlight">\(v: L \to \{0, 1\}\)</span> to agree with <span class="math notranslate nohighlight">\(w\)</span> on <span class="math notranslate nohighlight">\(P,\)</span> that is <span class="math notranslate nohighlight">\(v(p) = w(p)\)</span> for all <span class="math notranslate nohighlight">\(p \in P,\)</span> and set <span class="math notranslate nohighlight">\(v(\perp) = 0.\)</span>
-We then define <span class="math notranslate nohighlight">\(v\)</span> inductively on <span class="math notranslate nohighlight">\(L_n\)</span> according to <a class="reference internal" href="#lst:def:valuation">Definition 115</a> to obtain a valuation on <span class="math notranslate nohighlight">\(L.\)</span></p>
+We then define <span class="math notranslate nohighlight">\(v\)</span> inductively on <span class="math notranslate nohighlight">\(L_n\)</span> according to <a class="reference internal" href="#lst:def:valuation">Definition 118</a> to obtain a valuation on <span class="math notranslate nohighlight">\(L.\)</span></p>
 </div>
 </details><p>We now define the notion of tautology, i.e. a proposition that is true under all possible valuations on the primitive propositions.</p>
 <div class="proof definition admonition" id="def:lst-tautology">
-<p class="admonition-title"><span class="caption-number">Definition 116 </span> (Tautology)</p>
+<p class="admonition-title"><span class="caption-number">Definition 119 </span> (Tautology)</p>
 <section class="definition-content" id="proof-content">
 <p>We say <span class="math notranslate nohighlight">\(t\)</span> is a tautology, written <span class="math notranslate nohighlight">\(\models t,\)</span> if <span class="math notranslate nohighlight">\(v(t) = 1\)</span> for any valuation <span class="math notranslate nohighlight">\(v: L \to \{0, 1\}.\)</span></p>
 </section>
@@ -571,13 +571,13 @@ Informally a set of propositions <span class="math notranslate nohighlight">\(S\
 This is not really an abuse of notation because the statement <span class="math notranslate nohighlight">\(\models t\)</span> is equivalent to the statement <span class="math notranslate nohighlight">\(\emptyset \models t.\)</span></p>
 </aside>
 <div class="proof definition admonition" id="lst:def:semantic-entailment">
-<p class="admonition-title"><span class="caption-number">Definition 117 </span> (Semantic entailment)</p>
+<p class="admonition-title"><span class="caption-number">Definition 120 </span> (Semantic entailment)</p>
 <section class="definition-content" id="proof-content">
 <p>For <span class="math notranslate nohighlight">\(S \subseteq L, t \in L\)</span> we say <span class="math notranslate nohighlight">\(S\)</span> entails <span class="math notranslate nohighlight">\(t,\)</span> <span class="math notranslate nohighlight">\(S\)</span> semantically implies <span class="math notranslate nohighlight">\(t\)</span> or <span class="math notranslate nohighlight">\(S \models t,\)</span> if for any <span class="math notranslate nohighlight">\(v\)</span> such that <span class="math notranslate nohighlight">\(v(s) = 1\)</span> for all <span class="math notranslate nohighlight">\(s \in S,\)</span> we have <span class="math notranslate nohighlight">\(v(t) = 1.\)</span></p>
 </section>
 </div><p>We define truth of a proposition under a valuation function, in terms of the value that this takes on the proposition.</p>
 <div class="proof definition admonition" id="definition-6">
-<p class="admonition-title"><span class="caption-number">Definition 118 </span> (Truth and model)</p>
+<p class="admonition-title"><span class="caption-number">Definition 121 </span> (Truth and model)</p>
 <section class="definition-content" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(v(t) = 1,\)</span> then we say that <span class="math notranslate nohighlight">\(t\)</span> is true in <span class="math notranslate nohighlight">\(v,\)</span> or <span class="math notranslate nohighlight">\(v\)</span> is a model of <span class="math notranslate nohighlight">\(t.\)</span>
 For <span class="math notranslate nohighlight">\(S \subseteq L,\)</span> a valuation <span class="math notranslate nohighlight">\(v\)</span> is a model of <span class="math notranslate nohighlight">\(S\)</span> if <span class="math notranslate nohighlight">\(v(s) = 1\)</span> for all <span class="math notranslate nohighlight">\(s \in S.\)</span></p>
@@ -592,7 +592,7 @@ We have not yet defined a notion of proof though.
 A proof will turn out to be a finite sequence of propositions with some particular requirements.
 Before defining proofs we define the proof axioms and the <em>modus ponens</em> rule.</p>
 <div class="proof definition admonition" id="lst:def:proof-axioms-and-modus-ponens">
-<p class="admonition-title"><span class="caption-number">Definition 119 </span> (Proof axioms and modus ponens)</p>
+<p class="admonition-title"><span class="caption-number">Definition 122 </span> (Proof axioms and modus ponens)</p>
 <section class="definition-content" id="proof-content">
 <p>We define the following three proof axioms</p>
 <ol class="arabic simple">
@@ -605,7 +605,7 @@ from <span class="math notranslate nohighlight">\(p\)</span> and <span class="ma
 </section>
 </div><p>We can now define proofs and syntactic entailment.</p>
 <div class="proof definition admonition" id="lst:def:proof-and-syntactic-entailment">
-<p class="admonition-title"><span class="caption-number">Definition 120 </span> (Proof and syntactic entailment)</p>
+<p class="admonition-title"><span class="caption-number">Definition 123 </span> (Proof and syntactic entailment)</p>
 <section class="definition-content" id="proof-content">
 <p>For any <span class="math notranslate nohighlight">\(S \subseteq L,\)</span> a proof of <span class="math notranslate nohighlight">\(t\)</span> from <span class="math notranslate nohighlight">\(S\)</span> is a finite sequence <span class="math notranslate nohighlight">\(t_1, t_2, \dots, t_n\)</span> of propositions, with <span class="math notranslate nohighlight">\(t_n = t,\)</span> such that each <span class="math notranslate nohighlight">\(t_i\)</span> is one of the following:</p>
 <ol class="arabic simple">
@@ -640,7 +640,7 @@ Proof<div class="sd-summary-down docutils">
 </div><p>Generally, writing proofs as that in <a class="reference internal" href="#lst:ex-p-imp-p-is-a-theorem">Example 15</a> can get cumbersome.
 The following theorem can help a lot to shorten our informal proofs.</p>
 <div class="proof theorem admonition" id="lst:thm:deduction-theorem">
-<p class="admonition-title"><span class="caption-number">Theorem 102 </span> (Deduction theorem)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 109 </span> (Deduction theorem)</p>
 <section class="theorem-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(S \subseteq L\)</span> and <span class="math notranslate nohighlight">\(p, q \in L.\)</span>
 Then <span class="math notranslate nohighlight">\(S \vdash (p \imp q)\)</span> if and only if <span class="math notranslate nohighlight">\(S \cup \{p\} \vdash q.\)</span></p>
@@ -711,7 +711,7 @@ It is called the soundness theorem because it demonstrates that our proof axioms
 if a  of a proposition exists, then this proposition is true under our notion of <a class="reference internal" href="#lst:def:semantic-entailment">semantic entailment</a>.
 In other words, we can prove only those propositions that are true.</p>
 <div class="proof theorem admonition" id="lst:thm:soundness-theorem">
-<p class="admonition-title"><span class="caption-number">Theorem 103 </span> (Soundness theorem)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 110 </span> (Soundness theorem)</p>
 <section class="theorem-content" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(S \vd t,\)</span> then <span class="math notranslate nohighlight">\(S \dvd t.\)</span></p>
 </section>
@@ -743,7 +743,7 @@ if a proposition is true, then there exists a (formal) proof for it, so our defi
 We break this down into intermediate results.
 First, we define consistent propositions.</p>
 <div class="proof definition admonition" id="lst:def:consistent">
-<p class="admonition-title"><span class="caption-number">Definition 121 </span> (Consistent)</p>
+<p class="admonition-title"><span class="caption-number">Definition 124 </span> (Consistent)</p>
 <section class="definition-content" id="proof-content">
 <p>A set of propositions <span class="math notranslate nohighlight">\(S \subseteq L\)</span> is inconsistent if <span class="math notranslate nohighlight">\(S \vd \perp.\)</span>
 S is consistent if it is not inconsistent.</p>
@@ -751,7 +751,7 @@ S is consistent if it is not inconsistent.</p>
 </div><p>Next, we show the following useful lemma.
 Given a set of consistent assumptions and a new proposition <span class="math notranslate nohighlight">\(p,\)</span> then at least one of <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(\neg p\)</span> can be added to the propositions while preserving consistency.</p>
 <div class="proof lemma admonition" id="lst:lem:consistent-assumptions-can-be-extended">
-<p class="admonition-title"><span class="caption-number">Lemma 48 </span> (Consistent assumptions can be extended)</p>
+<p class="admonition-title"><span class="caption-number">Lemma 49 </span> (Consistent assumptions can be extended)</p>
 <section class="lemma-content" id="proof-content">
 <p>For <a class="reference internal" href="#lst:def:consistent">consistent</a> <span class="math notranslate nohighlight">\(S \subseteq L\)</span> and <span class="math notranslate nohighlight">\(p \in L,\)</span> at least one of <span class="math notranslate nohighlight">\(S \cup \{p\}\)</span> and <span class="math notranslate nohighlight">\(S \cup \{\neg p\}\)</span> is consistent.</p>
 </section>
@@ -773,7 +773,7 @@ Therefore <span class="math notranslate nohighlight">\(S\)</span> is inconsisten
 If a set of assumptions is consistent, then it has a model.
 Equivalently, if it does not have a model, then it is inconsistent.</p>
 <div class="proof theorem admonition" id="lst:thm:model-existence">
-<p class="admonition-title"><span class="caption-number">Theorem 104 </span> (Model existence)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 111 </span> (Model existence)</p>
 <section class="theorem-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(L\)</span> be a countable set of propositions.
 If <span class="math notranslate nohighlight">\(S \dvd \perp,\)</span> then <span class="math notranslate nohighlight">\(S \vd \perp.\)</span>
@@ -789,7 +789,7 @@ Proof: Model existence<div class="sd-summary-down docutils">
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">Assume <span class="math notranslate nohighlight">\(L\)</span> is countable and list it as <span class="math notranslate nohighlight">\(\{t_1, t_2, \dots\}.\)</span>
 Let <span class="math notranslate nohighlight">\(S \subseteq L\)</span> be consistent and define <span class="math notranslate nohighlight">\(S_0 = S.\)</span>
-Then by <a class="reference internal" href="#lst:lem:consistent-assumptions-can-be-extended">Lemma 48</a>, at least one of <span class="math notranslate nohighlight">\(S \cup \{t_1\}\)</span> and <span class="math notranslate nohighlight">\(S \cup \{\neg t_1\}\)</span> is consistent.
+Then by <a class="reference internal" href="#lst:lem:consistent-assumptions-can-be-extended">Lemma 49</a>, at least one of <span class="math notranslate nohighlight">\(S \cup \{t_1\}\)</span> and <span class="math notranslate nohighlight">\(S \cup \{\neg t_1\}\)</span> is consistent.
 Define <span class="math notranslate nohighlight">\(S_1\)</span> to be the consistent one.
 Then, let <span class="math notranslate nohighlight">\(S_2\)</span> be <span class="math notranslate nohighlight">\(S_1 \cup \{t_2\}\)</span> or <span class="math notranslate nohighlight">\(S_1 \cup \{\neg t_2\},\)</span> such that <span class="math notranslate nohighlight">\(S_2\)</span> is consistent, and continue inductively.</p>
 <p class="sd-card-text">Set <span class="math notranslate nohighlight">\(\bar{S} = S_0 \cup S_1 \cup \dots.\)</span>
@@ -809,7 +809,7 @@ v(p) = \begin{cases}
 \end{cases}
 \end{equation}\end{split}\]</div>
 <p class="sd-card-text">Since <span class="math notranslate nohighlight">\(\bar{S}\)</span> is deductively closed, we only need to show that <span class="math notranslate nohighlight">\(v\)</span> is indeed a <a class="reference internal" href="#lst:def:valuation">valuation</a>.
-By <a class="reference internal" href="#lst:def:valuation">Definition 115</a>, for <span class="math notranslate nohighlight">\(v\)</span> to be a valuation it needs to satisfy a condition on <span class="math notranslate nohighlight">\(v(\perp)\)</span> and a condition on <span class="math notranslate nohighlight">\(v(p \imp q).\)</span>
+By <a class="reference internal" href="#lst:def:valuation">Definition 118</a>, for <span class="math notranslate nohighlight">\(v\)</span> to be a valuation it needs to satisfy a condition on <span class="math notranslate nohighlight">\(v(\perp)\)</span> and a condition on <span class="math notranslate nohighlight">\(v(p \imp q).\)</span>
 First, we have <span class="math notranslate nohighlight">\(v(\perp) = 0,\)</span> since <span class="math notranslate nohighlight">\(\perp \not \in \bar{S}\)</span> because <span class="math notranslate nohighlight">\(\bar{S}\)</span> is consistent.
 Second, we check <span class="math notranslate nohighlight">\(v(p \imp q)\)</span> for each possible combination of values that <span class="math notranslate nohighlight">\(v\)</span> can take on <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(q.\)</span></p>
 <p class="sd-card-text"><strong>Case 1:</strong>
@@ -847,7 +847,7 @@ So <span class="math notranslate nohighlight">\(S\)</span> has a model.</p>
 </div>
 </details><p>We can now use the <a class="reference internal" href="#lst:thm:model-existence">model existence theorem</a> to prove the adequacy theorem.</p>
 <div class="proof theorem admonition" id="lst:thm:adequacy-theorem">
-<p class="admonition-title"><span class="caption-number">Theorem 105 </span> (Adequacy theorem)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 112 </span> (Adequacy theorem)</p>
 <section class="theorem-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(S \subseteq L, t \in L.\)</span>
 Then <span class="math notranslate nohighlight">\(S \models t\)</span> implies <span class="math notranslate nohighlight">\(S \vd t.\)</span></p>
@@ -871,7 +871,7 @@ By the <a class="reference internal" href="#lst:def:logical-symbols">definition 
 <h3>Completeness and compactness<a class="headerlink" href="#completeness-and-compactness" title="Link to this heading">#</a></h3>
 <p>We can now combine the soundness and adequacy theorems to prove the completness theorem.</p>
 <div class="proof theorem admonition" id="lst:thm:completeness-theorem">
-<p class="admonition-title"><span class="caption-number">Theorem 106 </span> (Completeness theorem)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 113 </span> (Completeness theorem)</p>
 <section class="theorem-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(S \subseteq L\)</span> and <span class="math notranslate nohighlight">\(t \in L.\)</span>
 Then <span class="math notranslate nohighlight">\(S \models t\)</span> if and only if <span class="math notranslate nohighlight">\(S \vd t.\)</span></p>
@@ -885,14 +885,14 @@ Proof: Completeness theorem<div class="sd-summary-down docutils">
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(S \subseteq L\)</span> and <span class="math notranslate nohighlight">\(t \in L.\)</span></p>
 <p class="sd-card-text"><strong>Implies:</strong>
-If <span class="math notranslate nohighlight">\(S \models t,\)</span> then <span class="math notranslate nohighlight">\(S \vd t\)</span> by <a class="reference internal" href="#lst:thm:adequacy-theorem">Theorem 105</a>.</p>
+If <span class="math notranslate nohighlight">\(S \models t,\)</span> then <span class="math notranslate nohighlight">\(S \vd t\)</span> by <a class="reference internal" href="#lst:thm:adequacy-theorem">Theorem 112</a>.</p>
 <p class="sd-card-text"><strong>Is implied by:</strong>
-If <span class="math notranslate nohighlight">\(S \vd t,\)</span> then <span class="math notranslate nohighlight">\(S \models t\)</span> by <a class="reference internal" href="#lst:thm:soundness-theorem">Theorem 103</a>.</p>
+If <span class="math notranslate nohighlight">\(S \vd t,\)</span> then <span class="math notranslate nohighlight">\(S \models t\)</span> by <a class="reference internal" href="#lst:thm:soundness-theorem">Theorem 110</a>.</p>
 </div>
 </details><p>A useful corollary of the completeness theorem is the compactness theorem.
 This says that for any logical truth, there is a finite set of assumptions that proves it.</p>
 <div class="proof theorem admonition" id="lst:thm:compactness-theorem">
-<p class="admonition-title"><span class="caption-number">Theorem 107 </span> (Compactness theorem)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 114 </span> (Compactness theorem)</p>
 <section class="theorem-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(S \subseteq L\)</span> and <span class="math notranslate nohighlight">\(t \in L\)</span> with <span class="math notranslate nohighlight">\(S \models t.\)</span>
 Then, there is some finite <span class="math notranslate nohighlight">\(S' \subseteq S\)</span> with <span class="math notranslate nohighlight">\(S' \models t.\)</span></p>
@@ -912,7 +912,7 @@ Applying the completeness theorem again, we have <span class="math notranslate n
 </details><p>Another useful corollary of the completeness theorem is the decidability theorem.
 This says that given a finite set of assumptions and a proposition, there exists a procedure that determines whether this statement can be proved from the assumptions, in finite time.</p>
 <div class="proof theorem admonition" id="lst:thm:decidability-theorem">
-<p class="admonition-title"><span class="caption-number">Theorem 108 </span> (Decidability theorem)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 115 </span> (Decidability theorem)</p>
 <section class="theorem-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(S \subseteq L\)</span> be a finite set and <span class="math notranslate nohighlight">\(t \in L.\)</span>
 Then, there exists an algorithm that determines, in finite and bounded time, whether or not <span class="math notranslate nohighlight">\(S \vd t.\)</span></p>
