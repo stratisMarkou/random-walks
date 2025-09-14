@@ -774,9 +774,7 @@ By the {prf:ref}`order preserving property of the outer measure<mira:thm:outer-m
 This simpler solution was pointed out to me by Jeffrey Hoag.
 %
 By the {ref}`order-preserving property<mira:thm:outer-measure-preserves-order>` of the outer measure, we have $|A| \leq |A \cup B|.$
-%
 Since $|B| = 0,$ by the {ref}`subadditivity<:label: mira:thm:countable-subadditivity-of-outer-measure>` of the outer measure $|A \cup B| \leq |A| + |B| = |A|.$
-%
 Since  $|A| \leq |A \cup B|$ and $|A \cup B| \leq |A|,$ we have $|A| = |A \cup B|.$
 :::
 ::::
