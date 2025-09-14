@@ -748,7 +748,7 @@ $$\int_0^1 f \neq \lim_{k \to \infty} \int_0^1 f_k.$$
 :class: tip
 Prove that if $A$ and $B$ are subsets of $\mathbb{R}$ and $|B| = 0,$ then $|A \cup B| = |A|.$
 
-:::{dropdown} Solution
+:::{dropdown} Solution 1
 Suppose that $|B| = 0.$
 If $|A| = \infty,$ then $|A \cup B| = \infty = |A|.$
 Instead, suppose that $|A| < \infty.$
@@ -768,6 +768,16 @@ $$A \cup B \subseteq \bigcup_{n = 1}^\infty K_n ~\text{ and }~ \sum_{n = 1}^\inf
 
 and since $\epsilon > 0$ was arbitrary, we have $|A \cup B| \leq |A|.$
 By the {prf:ref}`order preserving property of the outer measure<mira:thm:outer-measure-preserves-order>` we have $|A \cup B| \geq |B|$ and thus $|A \cup B| = |A|.$
+:::
+
+:::{dropdown} Solution 2
+This simpler solution was pointed out to me by Jeffrey Hoag.
+%
+By the {ref}`order-preserving property<mira:thm:outer-measure-preserves-order>` of the outer measure, we have $|A| \leq |A \cup B|.$
+%
+Since $|B| = 0,$ by the {ref}`subadditivity<:label: mira:thm:countable-subadditivity-of-outer-measure>` of the outer measure $|A \cup B| \leq |A| + |B| = |A|.$
+%
+Since  $|A| \leq |A \cup B|$ and $|A \cup B| \leq |A|,$ we have $|A| = |A \cup B|.$
 :::
 ::::
 
@@ -1263,7 +1273,7 @@ Therefore, $\mu + \nu$ is a measure on $(X, S).$
 ::::{admonition} Exercise 2.C.10
 :class: tip
 
-Give an example of a measure space $(X, S, \mu)$ and a decreasing sequence $E_1 \subseteq E_2 \subseteq \cdots$ of sets in $S$ such that
+Give an example of a measure space $(X, S, \mu)$ and a decreasing sequence $E_1 \supseteq E_2 \supseteq \cdots$ of sets in $S$ such that
 
 $$\mu\left(\bigcap_{n=1}^\infty E_n\right) \neq \lim_{n \to \infty} \mu(E_n).$$
 
