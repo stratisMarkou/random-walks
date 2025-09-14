@@ -1120,6 +1120,7 @@ $$\begin{align}
 Just as with the earlier property we showed about limits of increasing sequences of sets, we also have an analogous result about limits of decreasing sequences of sets.
 
 :::{prf:theorem} Measure of a decreasing intersection
+:label: mira:thm:measure-decreasing-intersection
 Suppose $(X, S, \mu)$ is a measure space and $E_1, E_2, \ldots \in S$ is a decreasing sequence of sets in $S,$ that is $E_1 \supseteq E_2 \supseteq \cdots,$ with $\mu(E_1) < \infty.$
 Then
 
@@ -1709,6 +1710,7 @@ Because $\Lambda$ maps $C$ onto $[0, 1],$ we have $\Lambda(A) = E.$
 
 ## Convergence of measurable functions
 
+### Pointwise and uniform convergence
 
 :::{prf:definition} Pointwise convergence; uniform convergence
 :label: mira:def:pointwise-convergence-uniform-convergence
@@ -1742,6 +1744,9 @@ $$\begin{align}
 so $f$ is continuous at $b.$
 :::
 
+
+### Egorov's theorem
+
 :::{prf:theorem} Egorov's theorem
 :label: mira:thm:egorovs-theorem
 Suppose $(X, S, \mu)$ is a measurable space with $\mu < \infty.$
@@ -1749,35 +1754,89 @@ Suppose $f_1, f_2, \dots$ is a sequence of $S$-measurable functions from $X$ to 
 Then for every $\epsilon > 0,$ there exists a set $E \in S$ such that $\mu(X \setminus E) < \epsilon$ and $f_1, f_2, \dots$ converges uniformly to $f$ on $E.$
 :::
 
-<!-- :::{dropdown} Proof: Egorov's theorem
-Suppose that $(X, S, \mu)$ is a measurable space with $\mu < \infty$ and that $f_1, f_2, \dots$ is a sequence of $S$-measurable functions from $X$ to $\mathbb{R}$ that converges pointwise on $X$ to a function $f: X \to \mathbb{R}.$
+:::{dropdown} Proof: Egorov's theorem
+Suppose that $(X, S, \mu)$ is a measurable space with $\mu(X) < \infty$ and that $f_1, f_2, \dots$ is a sequence of $S$-measurable functions from $X$ to $\mathbb{R}$ that converges pointwise on $X$ to a function $f: X \to \mathbb{R}.$
+
 Let $\epsilon > 0.$
-Because $f_1, f_2, \dots$ converges to $f$ pointwise, for each $x \in X$ there exists a least $N_{x, \epsilon} \in \mathbb{Z}^+$ such that for all $n \geq N_{x, \epsilon},$ it holds that $|f_n(x) - f(x)| < \epsilon.$
-Now define the sets
-
-$$E_k = \{x \in X: N_{x, \epsilon} \leq k\}.$$
-
-We show a number of properties for $E_k.$
-First, $E_k$ is $S$-measurable for each $k \in \mathbb{Z}^+,$ which can be shown as follows.
-First
-
-$$\begin{align}
-x \in E_k \iff |f_m(x) - f(x)| < \epsilon \text{ for all } m \geq k
-\end{align}$$
-
-which implies that
-
-$$\begin{align}
-E_k = \bigcap_{m = k}^\infty (f_m - f)^{-1}((-\epsilon, \epsilon))
-\end{align}$$
-
-which is $S$-measurable since $(f_m - f)^{-1}((-\epsilon, \epsilon))$ is $S$-measurable for each $m \in \mathbb{Z}^+.$
-Second, $E_k$ is increasing and $E_k \to X,$ which means that $X \setminus E_k$ is decreasing and $X \setminus E_k \to \emptyset.$
-Therefore
+The by the {prf:ref}`definition of pointwise convergence<mira:def:pointwise-convergence-uniform-convergence>`, we have
 
 $$\begin{equation}
-\lim_{k \to \infty} \mu(X \setminus E_k) = \mu(\lim_{k \to \infty} X \setminus E_k) = \mu(\emptyset) = 0.
+\bigcup_{m=1}^\infty \bigcap_{k=m}^\infty \{x \in X: |f_k(x) - f(x)| < \frac{1}{n}\} = X.
 \end{equation}$$
 
-From this, we conclude that there must exist some $K \in \mathbb{Z}^+$ such that for all $k \geq K$ we have $\mu(X \setminus E_k) < \epsilon.$
-::: -->
+For $m \in \mathbb{Z}^+,$ let
+
+$$\begin{equation}
+A_{m, n} = \bigcap_{k=m}^\infty \{x \in X: |f_k(x) - f(x)| < \frac{1}{n}\} = X.
+\end{equation}$$
+
+Each $A_{m, n} \in S$ because each $f_k - f$ is an $S$-measurable function.
+In addition, for each $n \in \mathbb{Z}^+,$ the sequence $A_{1, n} \subseteq A_{2, n} \subseteq \dots$ is an increasing sequence of sets, and also we can write
+
+$$\begin{equation}
+\bigcup_{m=1}^\infty A_{m, n} = X.
+\end{equation}$$
+
+This equation implies that $\lim_{m \to \infty} \mu(A_{m, n}) = \mu(X).$
+Therefore, there exists $m_n \in \mathbb{Z}^+$ such that 
+
+$$\begin{equation}
+\mu(X) - \mu(A_{m_n, n}) < \frac{\epsilon}{2^n}.
+\end{equation}$$
+
+Now let
+
+$$\begin{equation}
+E = \bigcap^\infty_{n=1} A_{m_n, n}.
+\end{equation}$$
+
+Then, it holds that
+
+$$\begin{align}
+\mu(X \setminus E) &= \mu\left(X \setminus \bigcap_{n = 1}^\infty A_{m_n, n} \right) \\
+&=  \mu\left(\bigcup_{n = 1}^\infty X \setminus A_{m_n, n} \right) \\
+&\leq  \sum_{n = 1}^\infty \mu\left(X \setminus A_{m_n, n} \right) \\
+&< \epsilon.
+\end{align}$$
+
+Last, we verify that $f_1, f_2, \dots$ converges uniformly to $f$ on $E.$
+Suppose $\epsilon' > 0.$
+Let $n \in \mathbb{Z}$ be such that $\frac{1}{n} < \epsilon'.$
+Then $E \subseteq A_{m_n, n},$ which implies that
+
+$$|f_k(x) - f(x)| < \frac{1}{n} < \epsilon'$$
+
+for all $k \geq m_n$ and all $x \in E.$
+Hence $f_1, f_2, \dots$ converges uniformly to $f$ on $E.$
+:::
+
+
+### Approximation by simple functions
+
+:::{prf:definition} Simple function
+:label: mira:def:simple-function
+A function is called simple if it takes on only finitely many values.
+:::
+
+We can express simple functions as linear combinations of indicator functions as follows.
+Suppose $(X, S)$ is a measurable space, $f: X \to \mathbb{R}$ is a simple function, and $c_1, \ldots, c_n$ are the distinct non-zero values of $f.$
+Then
+
+$$\begin{equation}
+f = c_1 \chi_{E_1} + \cdots + c_n \chi_{E_n},
+\end{equation}$$
+
+where $E_k = f^{-1}(\{c_k})$ for $k = 1, \ldots, n.$
+Thus this function $f$ is an $S$-measurable function if and only if $E_1, \ldots, E_n$ are $S$-measurable sets.
+We have the following results on approximation by simple functions.
+
+:::{prf:theorem} Approximation by simple functions
+:label: mira:thm:approximation-by-simple-functions
+Suppose $(X, S, \mu)$ is a measure space and $f: X \to [-\infty, \infty]$ is $S$-measurable.
+Then there exists a sequence of simple functions $f_1, \dots, f_n, \ldots$ from $X$ to $\mathbb{R}$ such that
+
+1. each $f_k$ is a {prf:ref}`simple<mira:def:simple-function>` $S$-measurable function,
+2. $|f_k(x)| \leq |f_{k+1}(x)| \leq |f(x)|$ for all $x \in X,$ and all $k \in \mathbb{Z}^+,$
+3. $\lim_{k \to \infty} f_k(x) = f(x)$ for all $x \in X,$ and
+4. $f_1, f_2, \ldots$ converges to $f$ uniformly on $X$ if $f$ is bounded.
+:::

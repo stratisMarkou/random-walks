@@ -459,7 +459,12 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cantor-set-and-cantor-function">Cantor set and Cantor function</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convergence-of-measurable-functions">Convergence of measurable functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convergence-of-measurable-functions">Convergence of measurable functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pointwise-and-uniform-convergence">Pointwise and uniform convergence</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#egorov-s-theorem">Egorov’s theorem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#approximation-by-simple-functions">Approximation by simple functions</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -1530,7 +1535,7 @@ Therefore, by <a class="reference internal" href="#mira:def:measure">countable a
 \end{align}\end{split}\]</div>
 </div>
 </details><p>Just as with the earlier property we showed about limits of increasing sequences of sets, we also have an analogous result about limits of decreasing sequences of sets.</p>
-<div class="proof theorem admonition" id="theorem-40">
+<div class="proof theorem admonition" id="mira:thm:measure-decreasing-intersection">
 <p class="admonition-title"><span class="caption-number">Theorem 85 </span> (Measure of a decreasing intersection)</p>
 <section class="theorem-content" id="proof-content">
 <p>Suppose <span class="math notranslate nohighlight">\((X, S, \mu)\)</span> is a measure space and <span class="math notranslate nohighlight">\(E_1, E_2, \ldots \in S\)</span> is a decreasing sequence of sets in <span class="math notranslate nohighlight">\(S,\)</span> that is <span class="math notranslate nohighlight">\(E_1 \supseteq E_2 \supseteq \cdots,\)</span> with <span class="math notranslate nohighlight">\(\mu(E_1) &lt; \infty.\)</span>
@@ -2134,6 +2139,8 @@ Because <span class="math notranslate nohighlight">\(\Lambda\)</span> maps <span
 </details></section>
 <section id="convergence-of-measurable-functions">
 <h2>Convergence of measurable functions<a class="headerlink" href="#convergence-of-measurable-functions" title="Link to this heading">#</a></h2>
+<section id="pointwise-and-uniform-convergence">
+<h3>Pointwise and uniform convergence<a class="headerlink" href="#pointwise-and-uniform-convergence" title="Link to this heading">#</a></h3>
 <div class="proof definition admonition" id="mira:def:pointwise-convergence-uniform-convergence">
 <p class="admonition-title"><span class="caption-number">Definition 74 </span> (Pointwise convergence; uniform convergence)</p>
 <section class="definition-content" id="proof-content">
@@ -2169,45 +2176,100 @@ Then we have</p>
 \end{align}\end{split}\]</div>
 <p class="sd-card-text">so <span class="math notranslate nohighlight">\(f\)</span> is continuous at <span class="math notranslate nohighlight">\(b.\)</span></p>
 </div>
-</details><div class="proof theorem admonition" id="mira:thm:egorovs-theorem">
+</details></section>
+<section id="egorov-s-theorem">
+<h3>Egorov’s theorem<a class="headerlink" href="#egorov-s-theorem" title="Link to this heading">#</a></h3>
+<div class="proof theorem admonition" id="mira:thm:egorovs-theorem">
 <p class="admonition-title"><span class="caption-number">Theorem 101 </span> (Egorov’s theorem)</p>
 <section class="theorem-content" id="proof-content">
 <p>Suppose <span class="math notranslate nohighlight">\((X, S, \mu)\)</span> is a measurable space with <span class="math notranslate nohighlight">\(\mu &lt; \infty.\)</span>
 Suppose <span class="math notranslate nohighlight">\(f_1, f_2, \dots\)</span> is a sequence of <span class="math notranslate nohighlight">\(S\)</span>-measurable functions from <span class="math notranslate nohighlight">\(X\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> that converges pointwise on <span class="math notranslate nohighlight">\(X\)</span> to a function <span class="math notranslate nohighlight">\(f: X \to \mathbb{R}.\)</span>
 Then for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0,\)</span> there exists a set <span class="math notranslate nohighlight">\(E \in S\)</span> such that <span class="math notranslate nohighlight">\(\mu(X \setminus E) &lt; \epsilon\)</span> and <span class="math notranslate nohighlight">\(f_1, f_2, \dots\)</span> converges uniformly to <span class="math notranslate nohighlight">\(f\)</span> on <span class="math notranslate nohighlight">\(E.\)</span></p>
 </section>
-</div><!-- :::{dropdown} Proof: Egorov's theorem
-Suppose that $(X, S, \mu)$ is a measurable space with $\mu < \infty$ and that $f_1, f_2, \dots$ is a sequence of $S$-measurable functions from $X$ to $\mathbb{R}$ that converges pointwise on $X$ to a function $f: X \to \mathbb{R}.$
-Let $\epsilon > 0.$
-Because $f_1, f_2, \dots$ converges to $f$ pointwise, for each $x \in X$ there exists a least $N_{x, \epsilon} \in \mathbb{Z}^+$ such that for all $n \geq N_{x, \epsilon},$ it holds that $|f_n(x) - f(x)| < \epsilon.$
-Now define the sets
-
-$$E_k = \{x \in X: N_{x, \epsilon} \leq k\}.$$
-
-We show a number of properties for $E_k.$
-First, $E_k$ is $S$-measurable for each $k \in \mathbb{Z}^+,$ which can be shown as follows.
-First
-
-$$\begin{align}
-x \in E_k \iff |f_m(x) - f(x)| < \epsilon \text{ for all } m \geq k
-\end{align}$$
-
-which implies that
-
-$$\begin{align}
-E_k = \bigcap_{m = k}^\infty (f_m - f)^{-1}((-\epsilon, \epsilon))
-\end{align}$$
-
-which is $S$-measurable since $(f_m - f)^{-1}((-\epsilon, \epsilon))$ is $S$-measurable for each $m \in \mathbb{Z}^+.$
-Second, $E_k$ is increasing and $E_k \to X,$ which means that $X \setminus E_k$ is decreasing and $X \setminus E_k \to \emptyset.$
-Therefore
-
-$$\begin{equation}
-\lim_{k \to \infty} \mu(X \setminus E_k) = \mu(\lim_{k \to \infty} X \setminus E_k) = \mu(\emptyset) = 0.
-\end{equation}$$
-
-From this, we conclude that there must exist some $K \in \mathbb{Z}^+$ such that for all $k \geq K$ we have $\mu(X \setminus E_k) < \epsilon.$
-::: -->
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Egorov’s theorem<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose that <span class="math notranslate nohighlight">\((X, S, \mu)\)</span> is a measurable space with <span class="math notranslate nohighlight">\(\mu(X) &lt; \infty\)</span> and that <span class="math notranslate nohighlight">\(f_1, f_2, \dots\)</span> is a sequence of <span class="math notranslate nohighlight">\(S\)</span>-measurable functions from <span class="math notranslate nohighlight">\(X\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> that converges pointwise on <span class="math notranslate nohighlight">\(X\)</span> to a function <span class="math notranslate nohighlight">\(f: X \to \mathbb{R}.\)</span></p>
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(\epsilon &gt; 0.\)</span>
+The by the <a class="reference internal" href="#mira:def:pointwise-convergence-uniform-convergence">definition of pointwise convergence</a>, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+\bigcup_{m=1}^\infty \bigcap_{k=m}^\infty \{x \in X: |f_k(x) - f(x)| &lt; \frac{1}{n}\} = X.
+\end{equation}\]</div>
+<p class="sd-card-text">For <span class="math notranslate nohighlight">\(m \in \mathbb{Z}^+,\)</span> let</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+A_{m, n} = \bigcap_{k=m}^\infty \{x \in X: |f_k(x) - f(x)| &lt; \frac{1}{n}\} = X.
+\end{equation}\]</div>
+<p class="sd-card-text">Each <span class="math notranslate nohighlight">\(A_{m, n} \in S\)</span> because each <span class="math notranslate nohighlight">\(f_k - f\)</span> is an <span class="math notranslate nohighlight">\(S\)</span>-measurable function.
+In addition, for each <span class="math notranslate nohighlight">\(n \in \mathbb{Z}^+,\)</span> the sequence <span class="math notranslate nohighlight">\(A_{1, n} \subseteq A_{2, n} \subseteq \dots\)</span> is an increasing sequence of sets, and also we can write</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+\bigcup_{m=1}^\infty A_{m, n} = X.
+\end{equation}\]</div>
+<p class="sd-card-text">This equation implies that <span class="math notranslate nohighlight">\(\lim_{m \to \infty} \mu(A_{m, n}) = \mu(X).\)</span>
+Therefore, there exists <span class="math notranslate nohighlight">\(m_n \in \mathbb{Z}^+\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+\mu(X) - \mu(A_{m_n, n}) &lt; \frac{\epsilon}{2^n}.
+\end{equation}\]</div>
+<p class="sd-card-text">Now let</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+E = \bigcap^\infty_{n=1} A_{m_n, n}.
+\end{equation}\]</div>
+<p class="sd-card-text">Then, it holds that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\mu(X \setminus E) &amp;= \mu\left(X \setminus \bigcap_{n = 1}^\infty A_{m_n, n} \right) \\
+&amp;=  \mu\left(\bigcup_{n = 1}^\infty X \setminus A_{m_n, n} \right) \\
+&amp;\leq  \sum_{n = 1}^\infty \mu\left(X \setminus A_{m_n, n} \right) \\
+&amp;&lt; \epsilon.
+\end{align}\end{split}\]</div>
+<p class="sd-card-text">Last, we verify that <span class="math notranslate nohighlight">\(f_1, f_2, \dots\)</span> converges uniformly to <span class="math notranslate nohighlight">\(f\)</span> on <span class="math notranslate nohighlight">\(E.\)</span>
+Suppose <span class="math notranslate nohighlight">\(\epsilon' &gt; 0.\)</span>
+Let <span class="math notranslate nohighlight">\(n \in \mathbb{Z}\)</span> be such that <span class="math notranslate nohighlight">\(\frac{1}{n} &lt; \epsilon'.\)</span>
+Then <span class="math notranslate nohighlight">\(E \subseteq A_{m_n, n},\)</span> which implies that</p>
+<div class="math notranslate nohighlight">
+\[|f_k(x) - f(x)| &lt; \frac{1}{n} &lt; \epsilon'\]</div>
+<p class="sd-card-text">for all <span class="math notranslate nohighlight">\(k \geq m_n\)</span> and all <span class="math notranslate nohighlight">\(x \in E.\)</span>
+Hence <span class="math notranslate nohighlight">\(f_1, f_2, \dots\)</span> converges uniformly to <span class="math notranslate nohighlight">\(f\)</span> on <span class="math notranslate nohighlight">\(E.\)</span></p>
+</div>
+</details></section>
+<section id="approximation-by-simple-functions">
+<h3>Approximation by simple functions<a class="headerlink" href="#approximation-by-simple-functions" title="Link to this heading">#</a></h3>
+<div class="proof definition admonition" id="mira:def:simple-function">
+<p class="admonition-title"><span class="caption-number">Definition 75 </span> (Simple function)</p>
+<section class="definition-content" id="proof-content">
+<p>A function is called simple if it takes on only finitely many values.</p>
+</section>
+</div><p>We can express simple functions as linear combinations of indicator functions as follows.
+Suppose <span class="math notranslate nohighlight">\((X, S)\)</span> is a measurable space, <span class="math notranslate nohighlight">\(f: X \to \mathbb{R}\)</span> is a simple function, and <span class="math notranslate nohighlight">\(c_1, \ldots, c_n\)</span> are the distinct non-zero values of <span class="math notranslate nohighlight">\(f.\)</span>
+Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+f = c_1 \chi_{E_1} + \cdots + c_n \chi_{E_n},
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(E_k = f^{-1}(\{c_k})\)</span> for <span class="math notranslate nohighlight">\(k = 1, \ldots, n.\)</span>
+Thus this function <span class="math notranslate nohighlight">\(f\)</span> is an <span class="math notranslate nohighlight">\(S\)</span>-measurable function if and only if <span class="math notranslate nohighlight">\(E_1, \ldots, E_n\)</span> are <span class="math notranslate nohighlight">\(S\)</span>-measurable sets.
+We have the following results on approximation by simple functions.</p>
+<div class="proof theorem admonition" id="mira:thm:approximation-by-simple-functions">
+<p class="admonition-title"><span class="caption-number">Theorem 102 </span> (Approximation by simple functions)</p>
+<section class="theorem-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\((X, S, \mu)\)</span> is a measure space and <span class="math notranslate nohighlight">\(f: X \to [-\infty, \infty]\)</span> is <span class="math notranslate nohighlight">\(S\)</span>-measurable.
+Then there exists a sequence of simple functions <span class="math notranslate nohighlight">\(f_1, \dots, f_n, \ldots\)</span> from <span class="math notranslate nohighlight">\(X\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> such that</p>
+<ol class="arabic simple">
+<li><p>each <span class="math notranslate nohighlight">\(f_k\)</span> is a <a class="reference internal" href="#mira:def:simple-function">simple</a> <span class="math notranslate nohighlight">\(S\)</span>-measurable function,</p></li>
+<li><p><span class="math notranslate nohighlight">\(|f_k(x)| \leq |f_{k+1}(x)| \leq |f(x)|\)</span> for all <span class="math notranslate nohighlight">\(x \in X,\)</span> and all <span class="math notranslate nohighlight">\(k \in \mathbb{Z}^+,\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\lim_{k \to \infty} f_k(x) = f(x)\)</span> for all <span class="math notranslate nohighlight">\(x \in X,\)</span> and</p></li>
+<li><p><span class="math notranslate nohighlight">\(f_1, f_2, \ldots\)</span> converges to <span class="math notranslate nohighlight">\(f\)</span> uniformly on <span class="math notranslate nohighlight">\(X\)</span> if <span class="math notranslate nohighlight">\(f\)</span> is bounded.</p></li>
+</ol>
+</section>
+</div></section>
 </section>
 </section>
 
@@ -2298,7 +2360,12 @@ From this, we conclude that there must exist some $K \in \mathbb{Z}^+$ such that
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cantor-set-and-cantor-function">Cantor set and Cantor function</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convergence-of-measurable-functions">Convergence of measurable functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convergence-of-measurable-functions">Convergence of measurable functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pointwise-and-uniform-convergence">Pointwise and uniform convergence</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#egorov-s-theorem">Egorov’s theorem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#approximation-by-simple-functions">Approximation by simple functions</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

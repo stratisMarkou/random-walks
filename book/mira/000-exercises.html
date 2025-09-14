@@ -1143,7 +1143,7 @@ Thus</p>
 <p>Prove that if <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are subsets of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> and <span class="math notranslate nohighlight">\(|B| = 0,\)</span> then <span class="math notranslate nohighlight">\(|A \cup B| = |A|.\)</span></p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
-Solution<div class="sd-summary-down docutils">
+Solution 1<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
@@ -1164,6 +1164,18 @@ Then</p>
 \[A \cup B \subseteq \bigcup_{n = 1}^\infty K_n ~\text{ and }~ \sum_{n = 1}^\infty \ell(K_n) \leq |A| + \epsilon,\]</div>
 <p class="sd-card-text">and since <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> was arbitrary, we have <span class="math notranslate nohighlight">\(|A \cup B| \leq |A|.\)</span>
 By the <a class="reference internal" href="002-measures.html#mira:thm:outer-measure-preserves-order">order preserving property of the outer measure</a> we have <span class="math notranslate nohighlight">\(|A \cup B| \geq |B|\)</span> and thus <span class="math notranslate nohighlight">\(|A \cup B| = |A|.\)</span></p>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution 2<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">This simpler solution was pointed out to me by Jeffrey Hoag.</p>
+<p class="sd-card-text">By the <span class="xref std std-ref">order-preserving property</span> of the outer measure, we have <span class="math notranslate nohighlight">\(|A| \leq |A \cup B|.\)</span>
+Since <span class="math notranslate nohighlight">\(|B| = 0,\)</span> by the <span class="xref std std-ref">subadditivity</span> of the outer measure <span class="math notranslate nohighlight">\(|A \cup B| \leq |A| + |B| = |A|.\)</span>
+Since  <span class="math notranslate nohighlight">\(|A| \leq |A \cup B|\)</span> and <span class="math notranslate nohighlight">\(|A \cup B| \leq |A|,\)</span> we have <span class="math notranslate nohighlight">\(|A| = |A \cup B|.\)</span></p>
 </div>
 </details></div>
 <div class="tip admonition">
@@ -1630,7 +1642,7 @@ Then, we have</p>
 </details></div>
 <div class="tip admonition">
 <p class="admonition-title">Exercise 2.C.10</p>
-<p>Give an example of a measure space <span class="math notranslate nohighlight">\((X, S, \mu)\)</span> and a decreasing sequence <span class="math notranslate nohighlight">\(E_1 \subseteq E_2 \subseteq \cdots\)</span> of sets in <span class="math notranslate nohighlight">\(S\)</span> such that</p>
+<p>Give an example of a measure space <span class="math notranslate nohighlight">\((X, S, \mu)\)</span> and a decreasing sequence <span class="math notranslate nohighlight">\(E_1 \supseteq E_2 \supseteq \cdots\)</span> of sets in <span class="math notranslate nohighlight">\(S\)</span> such that</p>
 <div class="math notranslate nohighlight">
 \[\mu\left(\bigcap_{n=1}^\infty E_n\right) \neq \lim_{n \to \infty} \mu(E_n).\]</div>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
