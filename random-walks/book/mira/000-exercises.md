@@ -1131,7 +1131,7 @@ Since $\mu(X) < \infty,$ the set $\{a: \mu(A) \text{ for some } A \in \mathcal{A
 Consider splitting the interval $(0, C)$ into a countable number of subintervals $I_k = (C \dot 2^k, C \dot 2^{k-1})$
 Suppose $\mathcal{A}$ is uncountable.
 Then at least one of the intervals $I_1, I_2, \dots,$ say $I_k,$ must be such that $\mu(A) \in I_k$ for uncountably many $A \in \mathcal{A},$ because otherwise $\mathcal{A}$ would be countable.
-But since $\mu(A) = (C \dot 2^k, C \dot 2^{k-1})$ we have $\mu(\cup_{A \in \mathcal{A}} A) = \infty$ which is a contradiction.
+But since $\mu(A) = (C \dot 2^k, C \dot 2^{k-1})$ is satisfied for infinitely many disjoint $A \in \mathcal{A}$ we have $\mu(\cup_{A \in \mathcal{A}} A) = \infty$ which is a contradiction.
 Therefore $\mathcal{A}$ must be countable.
 :::
 ::::
