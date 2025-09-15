@@ -1112,11 +1112,7 @@ $$\begin{align}
 and for each $n \in \mathbb{Z}^+$ let $\mu(\{n\})$ be the equal to the $n^{\text{th}}$ term in the sequence above.
 The range of $\mu$ contains $\infty$ because the sum of the sequence above diverges.
 In addition, the range of $\mu$ contains any number $x \in [3k, 3k+1]$ for each $k \in \mathbb{Z}$ because any such number can be written as the sum of: (a) the first $k$ odd terms in the sequence plus (b) the required even terms in the sequence whose sum equals $x - 3k.$
-Conversely, any $E \subseteq 2^{\mathbb{Z}^+}$ is mapped to either $\{\infty\}$ or to some $x \in [3k, 3k+1],$ so we conclude that
-
-$$\begin{align}
-\{\mu(E): E \subseteq S \} = \{\infty\} \cup \bigcup_{k=0}^\infty [3k, 3k + 1].
-\end{align}$$
+Conversely, any $E \subseteq 2^{\mathbb{Z}^+}$ is mapped to either $\{\infty\}$ or to some $x \in [3k, 3k+1],$ which completes the proof.
 :::
 ::::
 
