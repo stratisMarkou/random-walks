@@ -2443,7 +2443,7 @@ Therefore $U$ is the union of a sequence of closed sets in $V,$ as required.
 ::::{admonition} Exercise 6.A.10
 :class: tip
 Prove or give a counterexample:
-If $V$ is a metric space and $U, W$ are subserts of $V,$ then $\overline{U} \cup \overline{W} = \overline{U \cup W}.$
+If $V$ is a metric space and $U, W$ are subsets of $V,$ then $\overline{U} \cup \overline{W} = \overline{U \cup W}.$
 
 :::{dropdown} Solution
 If $v \in \overline{U},$ then there exists a sequence of elements in $U$ whose limit is $v.$
