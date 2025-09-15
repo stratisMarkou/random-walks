@@ -1025,6 +1025,121 @@ Using the fact that the {prf:ref}`outer measure preserves order<mira:thm:outer-m
 ::::
 
 
+## Chapter 2.B
+
+::::{admonition} Exercise 2.B.1
+:class: tip
+Explain why there does not exist a measure space $(X, \mathcal{S}, \mu)$ with the property that $\{\mu(E): E \in \mathcal{S}\} = [0, 1).$
+
+:::{dropdown} Solution
+Suppose $\{\mu(E): E \in \mathcal{S}\} = [0, 1).$
+Then for every $E \in \mathcal{S},$ we have $\mu(E) \in [0, 1)$ so there exists $E' \in \mathcal{S}$ such that $\mu(E) < \mu(E') < 1.$
+This leads to a contradiction because this inequality cannot hold for $E = X,$ so the assumption cannot hold.
+:::
+::::
+
+
+::::{admonition} Exercise 2.B.2
+:class: tip
+Suppose $\mu$ is a measure on $(\mathbb{Z}^+, 2^{\mathbb{Z}^+}).$
+Prove that there is a sequence $w_1, w_2, \dots$ in $[0, \infty]$ such that
+
+$$\begin{align}
+\mu(E) = \sum_{k \in E} w_k
+\end{align}$$
+
+for every set $E \subseteq{Z}^+.$
+
+:::{dropdown} Solution
+Suppose $\mu$ is a measure on $(\mathbb{Z}^+, 2^{\mathbb{Z}^+}).$
+Define $w_k = \mu(\{k\})$ for each $k \in \mathbb{Z}^+.$
+Let $E \subseteq 2^{\mathbb{Z}^+}.$
+By the countable additivity of measures, and since $E$ is countable, we have
+
+$$\begin{align}
+\mu(E) = \sum_{k \in E} \mu(\{k\}) = \sum_{k \in E} w_k.
+\end{align}$$
+:::
+::::
+
+
+::::{admonition} Exercise 2.B.3
+:class: tip
+Give an example of a measure $\mu$ on $(\mathbb{Z}^+, 2^{\mathbb{Z}^+})$ such that
+
+$$\begin{align}
+\{\mu(E): E \subseteq {Z}^+\} = [0, 1].
+\end{align}$$
+
+:::{dropdown} Solution
+Let $\mu$ be a measure on $(\mathbb{Z}^+, 2^{\mathbb{Z}^+})$ defined as
+
+$$\begin{align}
+\mu(E) := \sum_{k \in E} \mu(\{k\}) = \sum_{k \in E} 2^{-k}.
+\end{align}$$
+
+Let $x \in [0, 1],$ write its binary expansion as $x = 0.x_1x_2...,$ and observe that
+
+$$\begin{align}
+x = \sum_{k = 1}^\infty 2^{-k} x_k = \sum_{k = 1}^\infty 2^{-k} 1_{x_k = 1} = \sum_{k \in E_x} 2^{-k} = \mu(E_x),
+\end{align}$$
+
+where $E_x = \{k \in \mathbb{Z}^+ | x_k = 1\}.$
+Therefore, any number in $[0, 1]$ can be written in this form, so the range of $\mu$ contains $[0, 1].$
+Conversely, the range of $\mu$ is contained in $[0, 1],$ because it is a non-negative function whose maximum is $\mu(\mathbb{Z}^+) = 1.$
+:::
+::::
+
+
+
+
+::::{admonition} Exercise 2.B.4
+:class: tip
+Give an example of a measure space $(X, \mathcal{S}, \mu)$ such that
+
+$$\begin{align}
+\{\mu(E): E \subseteq S \} = \{\infty\} \cup \bigcup_{k=0}^\infty [3k, 3k + 1].
+\end{align}$$
+
+:::{dropdown} Solution
+Let $X = \mathbb{Z}^+$ and $\mathcal{S} = 2^{\mathbb{Z}^+}.$
+Let
+
+$$\begin{align}
+3, 1/2, 3, 1/4, \dots
+\end{align}$$
+
+and for each $n \in \mathbb{Z}^+$ let $\mu(\{n\})$ be the equal to the $n^{\text{th}}$ term in the sequence above.
+The range of $\mu$ contains $\infty$ because the sum of the sequence above diverges.
+In addition, the range of $\mu$ contains any number $x \in [3k, 3k+1]$ for each $k \in \mathbb{Z}$ because any such number can be written as the sum of: (a) the first $k$ odd terms in the sequence plus (b) the required even terms in the sequence whose sum equals $x - 3k.$
+Conversely, any $E \subseteq 2^{\mathbb{Z}^+}$ is mapped to either $\{\infty\}$ or to some $x \in [3k, 3k+1],$ so we conclude that
+
+$$\begin{align}
+\{\mu(E): E \subseteq S \} = \{\infty\} \cup \bigcup_{k=0}^\infty [3k, 3k + 1].
+\end{align}$$
+:::
+::::
+
+
+
+::::{admonition} Exercise 2.B.5
+:class: tip
+Suppose $(X, \mathcal{S}, \mu)$ is a measure space such that $\mu(X) < \infty.$
+Prove that if $\mathcal{A}$ is a set of disjoint sets in $\mathcal{S}$ such that $\mu(A) > 0$ for every $A \in \mathcal{A},$ then $\mathcal{A}$ is a countable set.
+
+:::{dropdown} Solution
+Suppose $(X, \mathcal{S}, \mu)$ is a measure space such that $\mu(X) < \infty.$
+Suppose also that $\mathcal{A}$ is a set of disjoint sets in $\mathcal{S}$ such that $\mu(A) > 0.$
+
+Since $\mu(X) < \infty,$ the set $\{a: \mu(A) \text{ for some } A \in \mathcal{A}\}$ must be bounded above by some $C \in \mathbb{R}$, and since $\mu(A) > 0$ by assumption, we have $0 < \mu(A) < C$ for each $A \in \mathcal{A}.$
+Consider splitting the interval $(0, C)$ into a countable number of subintervals $I_k = (C 2^k, C 2^{k-1})$
+Suppose $\mathcal{A}$ is uncountable.
+Then at least one of the intervals $I_1, I_2, \dots,$ say $I_k,$ must be such that $\mu(A) \in I_k$ for uncountably many $A \in \mathcal{A},$ because otherwise $\mathcal{A}$ would be countable.
+But since $\mu(A) = (C2^k, C2^{k-1})$ we have $\mu(\cup_{A \in \mathcal{A}} A) = \infty$ which is a contradiction.
+Therefore $\mathcal{A}$ must be countable.
+:::
+::::
+
 ## Chapter 2.C
 
 ::::{admonition} Exercise 2.C.1
