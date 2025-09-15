@@ -439,6 +439,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-1-a">Chapter 1.A</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-1-b">Chapter 1.B</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-a">Chapter 2.A</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-b">Chapter 2.B</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-c">Chapter 2.C</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-d">Chapter 2.D</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-4-a">Chapter 4.A</a></li>
@@ -1421,6 +1422,126 @@ Solution<div class="sd-summary-down docutils">
 \end{equation}\]</div>
 <p class="sd-card-text">where we have used the fact that <code class="xref prf prf-ref docutils literal notranslate"><span class="pre">countable</span> <span class="pre">sets</span> <span class="pre">have</span> <span class="pre">measure</span> <span class="pre">zero</span></code>.
 Using the fact that the <a class="reference internal" href="002-measures.html#mira:thm:outer-measure-preserves-order">outer measure preserves order</a> we have <span class="math notranslate nohighlight">\(|[0, 1] \setminus \mathbb{Q}| \leq |[0, 1]| = 1,\)</span> concluding the proof.</p>
+</div>
+</details></div>
+</section>
+<section id="chapter-2-b">
+<h2>Chapter 2.B<a class="headerlink" href="#chapter-2-b" title="Link to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 2.B.1</p>
+<p>Explain why there does not exist a measure space <span class="math notranslate nohighlight">\((X, \mathcal{S}, \mu)\)</span> with the property that <span class="math notranslate nohighlight">\(\{\mu(E): E \in \mathcal{S}\} = [0, 1).\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(\{\mu(E): E \in \mathcal{S}\} = [0, 1).\)</span>
+Then for every <span class="math notranslate nohighlight">\(E \in \mathcal{S},\)</span> we have <span class="math notranslate nohighlight">\(\mu(E) \in [0, 1)\)</span> so there exists <span class="math notranslate nohighlight">\(E' \in \mathcal{S}\)</span> such that <span class="math notranslate nohighlight">\(\mu(E) &lt; \mu(E') &lt; 1.\)</span>
+This leads to a contradiction because this inequality cannot hold for <span class="math notranslate nohighlight">\(E = X,\)</span> so the assumption cannot hold.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 2.B.2</p>
+<p>Suppose <span class="math notranslate nohighlight">\(\mu\)</span> is a measure on <span class="math notranslate nohighlight">\((\mathbb{Z}^+, 2^{\mathbb{Z}^+}).\)</span>
+Prove that there is a sequence <span class="math notranslate nohighlight">\(w_1, w_2, \dots\)</span> in <span class="math notranslate nohighlight">\([0, \infty]\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mu(E) = \sum_{k \in E} w_k
+\end{align}\]</div>
+<p>for every set <span class="math notranslate nohighlight">\(E \subseteq{Z}^+.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(\mu\)</span> is a measure on <span class="math notranslate nohighlight">\((\mathbb{Z}^+, 2^{\mathbb{Z}^+}).\)</span>
+Define <span class="math notranslate nohighlight">\(w_k = \mu(\{k\})\)</span> for each <span class="math notranslate nohighlight">\(k \in \mathbb{Z}^+.\)</span>
+Let <span class="math notranslate nohighlight">\(E \subseteq 2^{\mathbb{Z}^+}.\)</span>
+By the countable additivity of measures, and since <span class="math notranslate nohighlight">\(E\)</span> is countable, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mu(E) = \sum_{k \in E} \mu(\{k\}) = \sum_{k \in E} w_k.
+\end{align}\]</div>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 2.B.3</p>
+<p>Give an example of a measure <span class="math notranslate nohighlight">\(\mu\)</span> on <span class="math notranslate nohighlight">\((\mathbb{Z}^+, 2^{\mathbb{Z}^+})\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\{\mu(E): E \subseteq {Z}^+\} = [0, 1].
+\end{align}\]</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(\mu\)</span> be a measure on <span class="math notranslate nohighlight">\((\mathbb{Z}^+, 2^{\mathbb{Z}^+})\)</span> defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\mu(E) := \sum_{k \in E} \mu(\{k\}) = \sum_{k \in E} 2^{-k}.
+\end{align}\]</div>
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(x \in [0, 1],\)</span> write its binary expansion as <span class="math notranslate nohighlight">\(x = 0.x_1x_2...,\)</span> and observe that</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+x = \sum_{k = 1}^\infty 2^{-k} x_k = \sum_{k = 1}^\infty 2^{-k} 1_{x_k = 1} = \sum_{k \in E_x} 2^{-k} = \mu(E_x),
+\end{align}\]</div>
+<p class="sd-card-text">where <span class="math notranslate nohighlight">\(E_x = \{k \in \mathbb{Z}^+ | x_k = 1\}.\)</span>
+Therefore, any number in <span class="math notranslate nohighlight">\([0, 1]\)</span> can be written in this form, so the range of <span class="math notranslate nohighlight">\(\mu\)</span> contains <span class="math notranslate nohighlight">\([0, 1].\)</span>
+Conversely, the range of <span class="math notranslate nohighlight">\(\mu\)</span> is contained in <span class="math notranslate nohighlight">\([0, 1],\)</span> because it is a non-negative function whose maximum is <span class="math notranslate nohighlight">\(\mu(\mathbb{Z}^+) = 1.\)</span></p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 2.B.4</p>
+<p>Give an example of a measure space <span class="math notranslate nohighlight">\((X, \mathcal{S}, \mu)\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\{\mu(E): E \subseteq S \} = \{\infty\} \cup \bigcup_{k=0}^\infty [3k, 3k + 1].
+\end{align}\]</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(X = \mathbb{Z}^+\)</span> and <span class="math notranslate nohighlight">\(\mathcal{S} = 2^{\mathbb{Z}^+}.\)</span>
+Let</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+3, 1/2, 3, 1/4, \dots
+\end{align}\]</div>
+<p class="sd-card-text">and for each <span class="math notranslate nohighlight">\(n \in \mathbb{Z}^+\)</span> let <span class="math notranslate nohighlight">\(\mu(\{n\})\)</span> be the equal to the <span class="math notranslate nohighlight">\(n^{\text{th}}\)</span> term in the sequence above.
+The range of <span class="math notranslate nohighlight">\(\mu\)</span> contains <span class="math notranslate nohighlight">\(\infty\)</span> because the sum of the sequence above diverges.
+In addition, the range of <span class="math notranslate nohighlight">\(\mu\)</span> contains any number <span class="math notranslate nohighlight">\(x \in [3k, 3k+1]\)</span> for each <span class="math notranslate nohighlight">\(k \in \mathbb{Z}\)</span> because any such number can be written as the sum of: (a) the first <span class="math notranslate nohighlight">\(k\)</span> odd terms in the sequence plus (b) the required even terms in the sequence whose sum equals <span class="math notranslate nohighlight">\(x - 3k.\)</span>
+Conversely, any <span class="math notranslate nohighlight">\(E \subseteq 2^{\mathbb{Z}^+}\)</span> is mapped to either <span class="math notranslate nohighlight">\(\{\infty\}\)</span> or to some <span class="math notranslate nohighlight">\(x \in [3k, 3k+1],\)</span> which completes the proof.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 2.B.5</p>
+<p>Suppose <span class="math notranslate nohighlight">\((X, \mathcal{S}, \mu)\)</span> is a measure space such that <span class="math notranslate nohighlight">\(\mu(X) &lt; \infty.\)</span>
+Prove that if <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> is a set of disjoint sets in <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> such that <span class="math notranslate nohighlight">\(\mu(A) &gt; 0\)</span> for every <span class="math notranslate nohighlight">\(A \in \mathcal{A},\)</span> then <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> is a countable set.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\((X, \mathcal{S}, \mu)\)</span> is a measure space such that <span class="math notranslate nohighlight">\(\mu(X) &lt; \infty.\)</span>
+Suppose also that <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> is a set of disjoint sets in <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> such that <span class="math notranslate nohighlight">\(\mu(A) &gt; 0.\)</span></p>
+<p class="sd-card-text">Since <span class="math notranslate nohighlight">\(\mu(X) &lt; \infty,\)</span> the set <span class="math notranslate nohighlight">\(\{a: \mu(A) \text{ for some } A \in \mathcal{A}\}\)</span> must be bounded above by some <span class="math notranslate nohighlight">\(C \in \mathbb{R}\)</span>, and since <span class="math notranslate nohighlight">\(\mu(A) &gt; 0\)</span> by assumption, we have <span class="math notranslate nohighlight">\(0 &lt; \mu(A) &lt; C\)</span> for each <span class="math notranslate nohighlight">\(A \in \mathcal{A}.\)</span>
+Consider splitting the interval <span class="math notranslate nohighlight">\((0, C)\)</span> into a countable number of subintervals <span class="math notranslate nohighlight">\(I_k = (C \cdot 2^k, C \cdot 2^{k-1})\)</span>
+Suppose <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> is uncountable.
+Then at least one of the intervals <span class="math notranslate nohighlight">\(I_1, I_2, \dots,\)</span> say <span class="math notranslate nohighlight">\(I_k,\)</span> must be such that <span class="math notranslate nohighlight">\(\mu(A) \in I_k\)</span> for uncountably many <span class="math notranslate nohighlight">\(A \in \mathcal{A},\)</span> because otherwise <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> would be countable.
+But since <span class="math notranslate nohighlight">\(\mu(A) = (C \cdot 2^k, C \cdot 2^{k-1})\)</span> is satisfied for infinitely many disjoint <span class="math notranslate nohighlight">\(A \in \mathcal{A}\)</span> we have <span class="math notranslate nohighlight">\(\mu(\cup_{A \in \mathcal{A}} A) = \infty\)</span> which is a contradiction.
+Therefore <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> must be countable.</p>
 </div>
 </details></div>
 </section>
@@ -2939,6 +3060,7 @@ Therefore the sequence <span class="math notranslate nohighlight">\((u_1, u_2, \
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-1-a">Chapter 1.A</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-1-b">Chapter 1.B</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-a">Chapter 2.A</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-b">Chapter 2.B</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-c">Chapter 2.C</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-d">Chapter 2.D</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-4-a">Chapter 4.A</a></li>
