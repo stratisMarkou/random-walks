@@ -1328,23 +1328,22 @@ Give an example of a set $X,$ a $\sigma$-algebra $S$ on $X,$ a set $\mathcal{A}$
 
 :::{dropdown} Solution
 
-Let $X = \{1, 2, 3, 4\},$ and let
+Let $X = {a, b, c},$ and let
 
-$$\mathcal{A} = \{\{1, 2\}, \{2, 3\}, \{3, 4\}, \{4, 1\}\}.$$
+$$\mathcal{A} = \{\{a, b\}, \{a, c\}\}.$$
 
-Note that $S$ must contain all singleton sets, namely $\{1\}, \{2\}, \{3\}, \{4\}.$
-This is because, for example, $\{1\} = \{1, 2\} \cap \{4, 1\},$ and so on for the other singleton sets.
-Therefore $S$ must contain all subsets of $X.$
+Since $\sigma$ algebras are closed under intersections, $S$ must contain $\{a\} = \{a, b\} \cap \{a, c\}.$
+Since $\sigma$ algebras are closed under set differences, $S$ must also contain $\{b\} = \{a, b\} \setminus \{b\},$ and similarly for $\{c\}.$
 
-Now, let $\mu$ be the measure on $(X, S)$ defined via
+Now, let
 
-$$\mu(\{1\}) = \mu(\{2\}) = \mu(\{3\}) = \mu(\{4\}) = 1,$$
+$$\mu(\{a\}) = \mu(\{b\}) = \mu(\{c\}) = 2,$$
 
-and let $\nu$ be the measure on $(X, S)$ defined via
+and let
 
-$$\nu(\{1\}) = \nu(\{3\}) = \frac{1}{2} \text{ and } \nu(\{2\}) = \nu(\{4\}) = \frac{3}{2}.$$
+$$\nu(\{a\}) = 1, \nu(\{b\}) = 3, \nu(\{c\}) = 3.$$
 
-Then, $\mu$ and $\nu$ agree on all elements of $\mathcal{A},$ and $\mu(X) = \nu(X) = 4,$ but $\mu \neq \nu.$
+Then $\mu$ and $\nu$ are equal on $A,$ but they are not equal measures.
 
 :::
 ::::
