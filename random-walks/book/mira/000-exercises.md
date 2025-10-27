@@ -1269,6 +1269,7 @@ Therefore, $\mathcal{A}$ must be countable.
 
 ::::{admonition} Exercise 2.C.6
 :class: tip
+:name: mira:ex-2c6
 
 Find all $c \in [3, \infty)$ such that there exists a measure space $(X, S, \mu)$ with
 
@@ -1316,6 +1317,7 @@ Then, we have that
 
 $$\{\mu(E): E \in S\} = [0, 1] \cup [3, \infty].$$
 
+**Note:** it is interesting to think why a similar construction does not work for {ref}`exercise 2.C.6<mira:ex-2c6>` to obtain a finite $c$ other than $c = 4$ that satisfies the conditions of that exercise.
 :::
 ::::
 
@@ -1927,7 +1929,7 @@ Therefore, $V \subseteq A$ is not Lebesgue measurable.
 
 ::::{admonition} Exercise 4.A.1
 :class: tip
-:label: mira:ex-4a1
+:name: mira:ex-4a1
 Suppose $(X, \mathcal{S}, \mu)$ is a measure space and $h: X \to \mathbb{R}$ is an $\mathcal{S}$-measurable function.
 Prove that
 
@@ -1947,7 +1949,7 @@ $$\mu\left(x \in X: |h(x)| \geq c \right) = \mu\left(x \in X: |h(x)|^p \geq c^p 
 
 ::::{admonition} Exercise 4.A.2 (Chebyshev's inequality)
 :class: tip
-:label: mira:ex-4a2
+:name: mira:ex-4a2
 Suppose $(X, \mathcal{S}, \mu)$ is a measure space with $\mu(X) = 1$ and $h \in \mathcal{L}^1(\mu).$
 Prove that
 
