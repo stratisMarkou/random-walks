@@ -1284,7 +1284,9 @@ Now, using the fact that
 $$\mu(X \setminus E) = \mu(X) - \mu(E) = c - x,$$
 
 we see that $c - x \in \text{im}(\mu).$
-Therefore, for any $x \in \text{im}(\mu),$ we have $c - x \in A,$ and the only $c \in [3, \infty)$ that satisfies this property is $c = 4.$
+Therefore, for any $x \in \text{im}(\mu),$ we have $c - x \in A.$
+This cannot be satisfied by any $3 \leq c < 4$ because, if so, there would exist $x \in [0, 1]$ such that $c - x \in (1, 2).$
+In addition, this property also cannot be satisfied by any $c > 4$ because, if so, there would exist $x \in [3, c]$ such that $c - x \in (1, 2).$
 
 :::
 ::::
@@ -1297,9 +1299,19 @@ Therefore, for any $x \in \text{im}(\mu),$ we have $c - x \in A,$ and the only $
 
 Given an example of a measure space $(X, S, \mu)$ such that
 
-$$\{\mu(E): E \in S\} = \{\infty\} \cup [3, \infty].$$
+$$\{\mu(E): E \in S\} = [0, 1] \cup [3, \infty].$$
 
 :::{dropdown} Solution
+
+
+Let $X = \mathbb{Z}$ and $S = 2^{\mathbb{Z}}.$
+Let $\mu$ be the measure on $(X, S)$ defined via
+
+$$\mu(\{n\}) = \begin{cases}
+2^{n} & \text{if } n < 0, \\
+n + 1& \text{if } n \geq 0. \\
+\end{cases}$$
+
 
 Let $X = \mathbb{Z}$ and $S = 2^{\mathbb{Z}}.$
 Let $\mu$ be the measure on $(X, S)$ defined via
