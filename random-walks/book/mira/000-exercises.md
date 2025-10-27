@@ -1465,27 +1465,14 @@ $$\begin{align}
 A = \bigcup_{n=1}^\infty \bigcup_{x_1 \ldots x_n \in D} \left(\sum_{k=1}^n x_k \cdot 10^{-k}\right) + 10^{-n} \cdot \left[\sum_{m=1}^{100} 4 \cdot 10^{-m}, 10^{-100} + \sum_{m=1}^{100} 4 \cdot 10^{-m} \right)
 \end{align}$$
 
-where $D$ is the set of integers from 0 to 9, together with the set
-
-$$\begin{align}
-\left[\sum_{m=1}^{100} 4 \cdot 10^{-m}, 10^{-100} + \sum_{m=1}^{100} 4 \cdot 10^{-m} \right).
-\end{align}$$
-
+where $D$ is the set of integers from 0 to 9.
 This is a countable union of closed-open intervals and is therefore a Borel set.
 
 
 __Computing the measure:__
 Let $C(n, k)$ the number of rational numbers in $(0, 1)$ whose decimal expansion has $n$ digits, such that these $n$ digits do not contain one hundred consecutive 4s and also such that the $k$ last digits in the expansion are all 4s.
 Then, $C(1, 0) = 9$ and $C(1, 1) = 1.$
-By its definition, we can set up a recursive relation for $C(n, k)$ as follows.
-
-For each rational number whose expansion has $n-1$ digits, such that these $n-1$ digits do not contain one hundred consecutive 4s, there are ten possible digits we can append to the end of the expansion to obtain a rational number whose expansion has $n$ digits.
-If we append a digit that is not 4, then the resulting rational number with $n$ digits will not contain one hundred consecutive 4s and also, the last digit will not be 4.
-Therefore, $C(n, 0) = 9 \sum_{k' = 0}^{99} C(n-1, k').$
-If we append a digit that is 4, then the resulting rational number with $n$ digits will contain fewer than one hundred consecutive 4s if and only if there are fewer than $99$ consecutive 4s in the last digits of the expansion.
-Also, we would be increasing the number of consecutive 4s in the last digits of the expansion by 1.
-Therefore, $C(n, k) = C(n-1, k-1)$ if and only if $1 \leq k < 99.$
-We can collect this information into the following recursion
+By its definition, it holds that
 
 $$\begin{align}
 C(n, k) = \begin{cases}
@@ -1507,9 +1494,9 @@ $$C_n = \begin{bmatrix}
 Let $A_n$ be the set of real numbers in $(0, 1)$ whose decimal expansion does not contain one hundred consecutive 4s up to and including the $n^{th}$ digit.
 Then
 
-$$|A_n| = \frac{1}{10^n} \sum_{k = 0}^{99} C(n, k),$$
+$$|A_n| = \frac{1}{10^n} \sum_{k = 0}^{99} C(n, k).$$
 
-because $A_n$ consists of $C(n, k)$ intervals of size $10^{-n},$ each corresponding to each of the $C(n, k)$ ways to choose the first $n$ digits of a rational number in $(0, 1)$ whose decimal expansion does not contain one hundred consecutive 4s and also such that the last $k$ digits are all 4s, followed by an arbitrary sequnce of digits.
+This holds because $A_n$ consists of $C(n, k)$ intervals of size $10^{-n},$ each corresponding to each of the $C(n, k)$ ways to choose the first $n$ digits of a rational number in $(0, 1)$ whose decimal expansion does not contain one hundred consecutive 4s and also such that the last $k$ digits are all 4s, followed by an arbitrary sequnce of digits.
 Now, using the recursion derived earlier, the above equality can be expressed as
 
 $$\begin{align}
