@@ -1278,13 +1278,13 @@ $$\{\mu(E): E \in S\} = [0, 1] \cup [3, c].$$
 
 Suppose $(X, S, \mu)$ is a measure space such that $\text{im}(\mu) = \{\mu(E): E \in S\} = [0, 1] \cup [3, c].$
 Then, it must be the case that $\mu(X) = c.$
-Now, since $A$ is the range of $\mu,$ it holds that for each $x \in \text{im}(\mu),$ there exists $E \in S$ such that $\mu(E) = x.$
+For each $x \in \text{im}(\mu),$ there exists $E \in S$ such that $\mu(E) = x.$
 Now, using the fact that
 
 $$\mu(X \setminus E) = \mu(X) - \mu(E) = c - x,$$
 
 we see that $c - x \in \text{im}(\mu).$
-Therefore, for any $x \in A,$ we have $c - x \in A,$ and the only $c \in [3, \infty)$ that satisfies this property is $c = 3.$
+Therefore, for any $x \in \text{im}(\mu),$ we have $c - x \in A,$ and the only $c \in [3, \infty)$ that satisfies this property is $c = 4.$
 
 :::
 ::::
