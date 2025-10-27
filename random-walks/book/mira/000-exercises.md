@@ -1309,21 +1309,12 @@ Let $\mu$ be the measure on $(X, S)$ defined via
 
 $$\mu(\{n\}) = \begin{cases}
 2^{n} & \text{if } n < 0, \\
-n + 1& \text{if } n \geq 0. \\
-\end{cases}$$
-
-
-Let $X = \mathbb{Z}$ and $S = 2^{\mathbb{Z}}.$
-Let $\mu$ be the measure on $(X, S)$ defined via
-
-$$\mu(\{n\}) = \begin{cases}
-2^{n} & \text{if } n < 0, \\
-n& \text{if } n \geq 0. \\
+n + 2& \text{if } n \geq 0. \\
 \end{cases}$$
 
 Then, we have that
 
-$$\{\mu(E): E \in S\} = \{\infty\} \cup [3, \infty].$$
+$$\{\mu(E): E \in S\} = [0, 1] \cup [3, \infty].$$
 
 :::
 ::::
