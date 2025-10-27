@@ -1362,7 +1362,7 @@ Prove that $\mu + \nu$ is a measure on $(X, S).$
 :::{dropdown} Solution
 
 Let $\mu$ and $\nu$ be measures on a measurable space $(X, S).$
-We need to show that $\mu + \nu$ is a measure on $(X, S).$
+We need to show that $\mu + \nu$ is a {prf:ref}`measure<mira:def:measure>` on $(X, S).$
 First, note that $\mu + \nu$ is a function whose domain is $S$ and whose range is a subset of $[0, \infty].$
 Second, note that $(\mu + \nu)(\emptyset) = \mu(\emptyset) + \nu(\emptyset) = 0.$
 Third, suppose $A_1, A_2, \ldots$ is a sequence of disjoint sets in $S.$
