@@ -1309,7 +1309,7 @@ Let $\mu$ be the measure on $(X, S)$ defined via
 
 $$\mu(\{n\}) = \begin{cases}
 2^{n} & \text{if } n < 0, \\
-n + 2& \text{if } n \geq 0. \\
+n + 3& \text{if } n \geq 0. \\
 \end{cases}$$
 
 Then, we have that
