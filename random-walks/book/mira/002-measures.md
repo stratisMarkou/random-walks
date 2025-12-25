@@ -1826,17 +1826,44 @@ $$\begin{equation}
 f = c_1 \chi_{E_1} + \cdots + c_n \chi_{E_n},
 \end{equation}$$
 
-where $E_k = f^{-1}(\{c_k})$ for $k = 1, \ldots, n.$
+where $E_k = f^{-1}(\{c_k\})$ for $k = 1, \ldots, n.$
 Thus this function $f$ is an $S$-measurable function if and only if $E_1, \ldots, E_n$ are $S$-measurable sets.
 We have the following results on approximation by simple functions.
 
 :::{prf:theorem} Approximation by simple functions
 :label: mira:thm:approximation-by-simple-functions
 Suppose $(X, S, \mu)$ is a measure space and $f: X \to [-\infty, \infty]$ is $S$-measurable.
-Then there exists a sequence of simple functions $f_1, \dots, f_n, \ldots$ from $X$ to $\mathbb{R}$ such that
+Then there exists a sequence of {prf:ref}`simple functions<mira:def:simple-function>` $f_1, f_2, \ldots$ from $X$ to $\mathbb{R}$ such that
 
-1. each $f_k$ is a {prf:ref}`simple<mira:def:simple-function>` $S$-measurable function,
-2. $|f_k(x)| \leq |f_{k+1}(x)| \leq |f(x)|$ for all $x \in X,$ and all $k \in \mathbb{Z}^+,$
-3. $\lim_{k \to \infty} f_k(x) = f(x)$ for all $x \in X,$ and
+1. each $f_K$ is a simple $S$-measurable function,
+2. $|f_K(x)| \leq |f_{K+1}(x)| \leq |f(x)|$ for all $x \in X,$ and all $K \in \mathbb{Z}^+,$
+3. $\lim_{K \to \infty} f_K(x) = f(x)$ for all $x \in X,$ and
 4. $f_1, f_2, \ldots$ converges to $f$ uniformly on $X$ if $f$ is bounded.
+:::
+
+:::{dropdown} Proof: Approximation by simple functions
+For $K \in \mathbb{Z},$ define $f_K: X \to [-\infty, \infty]$ as
+
+$$\begin{equation}
+f_K(x) = \begin{cases}
+\frac{k}{2^K} &\text{ if } 0 \leq f(x) \leq K \text{ and } k \in \mathbb{Z} \text{ such that } f(x) \in \left[\frac{k}{2^K}, \frac{k+1}{2^K}\right), \\
+\frac{k+1}{2^K} &\text{ if } -K \leq f(x) < 0 \text{ and } k \in \mathbb{Z} \text{ such that } f(x) \in \left[\frac{k}{2^K}, \frac{k+1}{2^K}\right), \\
+K \text{ if } f(x) > K,
+-K \text{ if } f(x) < -K,
+\end{cases}
+\end{equation}$$
+
+Each $f_K$ is a simple function because it takes a finite number of values.
+Since $f$ is $\mathcal{S}$-measurable, $f^{-1}\left([\frac{k}{2^K}, \frac{k+1}{2^K})\right)$ is in $\mathcal{S}.$
+Therefore $f_K$ is $\mathcal{S}$-measurable and (1) holds.
+Also for each $x \in X,$ the sequence $f_1(x), f_2(x), \dots$ is monotonic and also $|f_K(x)| \leq |f(x)|,$ and (2) holds.
+
+Suppose $x \in X.$
+Let $\epsilon > 0.$
+There exists $M$ such that for all $K \geq M$ we have that $|f(x)| < K.$
+Therefore $f(x)$ lies within one of the closed-open intervals that define $f_K,$ which means that $|f(x) - f_K(x)| < \frac{1}{2^K},$ and picking sufficiently large $M$ we obtain $|f(x) - f_K(x)| < \epsilon,$ so (3) holds.
+
+Suppose $f$ is bounded above by some constant $C \in \mathbb{R}.$
+Then for all $K \geq C$ and any $x \in X$ we have that $|f(x)| < K,$ so $|f(x) - f_K(x)| \leq \frac{1}{2^K}.$
+Therefore $f_1, f_2, \ldots$ converges to $f$ uniformly on $X,$ and (4) holds.
 :::

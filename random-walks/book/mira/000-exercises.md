@@ -1496,8 +1496,7 @@ Then
 
 $$|A_n| = \frac{1}{10^n} \sum_{k = 0}^{99} C(n, k).$$
 
-This holds because $A_n$ consists of $C(n, k)$ intervals of size $10^{-n},$ each corresponding to each of the $C(n, k)$ ways to choose the first $n$ digits of a rational number in $(0, 1)$ whose decimal expansion does not contain one hundred consecutive 4s and also such that the last $k$ digits are all 4s, followed by an arbitrary sequnce of digits.
-Now, using the recursion derived earlier, the above equality can be expressed as
+Now, using the matrix recursion above, this equality can be written as
 
 $$\begin{align}
 |A_n| = \left|\begin{bmatrix}
