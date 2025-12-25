@@ -1663,7 +1663,7 @@ By countable additivity, we have</p>
 Therefore, <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> must be countable.</p>
 </div>
 </details></div>
-<div class="tip admonition">
+<div class="tip admonition" id="mira-ex-2c6">
 <p class="admonition-title">Exercise 2.C.6</p>
 <p>Find all <span class="math notranslate nohighlight">\(c \in [3, \infty)\)</span> such that there exists a measure space <span class="math notranslate nohighlight">\((X, S, \mu)\)</span> with</p>
 <div class="math notranslate nohighlight">
@@ -1677,19 +1677,21 @@ Solution<div class="sd-summary-down docutils">
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\((X, S, \mu)\)</span> is a measure space such that <span class="math notranslate nohighlight">\(\text{im}(\mu) = \{\mu(E): E \in S\} = [0, 1] \cup [3, c].\)</span>
 Then, it must be the case that <span class="math notranslate nohighlight">\(\mu(X) = c.\)</span>
-Now, since <span class="math notranslate nohighlight">\(A\)</span> is the range of <span class="math notranslate nohighlight">\(\mu,\)</span> it holds that for each <span class="math notranslate nohighlight">\(x \in \text{im}(\mu),\)</span> there exists <span class="math notranslate nohighlight">\(E \in S\)</span> such that <span class="math notranslate nohighlight">\(\mu(E) = x.\)</span>
+For each <span class="math notranslate nohighlight">\(x \in \text{im}(\mu),\)</span> there exists <span class="math notranslate nohighlight">\(E \in S\)</span> such that <span class="math notranslate nohighlight">\(\mu(E) = x.\)</span>
 Now, using the fact that</p>
 <div class="math notranslate nohighlight">
 \[\mu(X \setminus E) = \mu(X) - \mu(E) = c - x,\]</div>
 <p class="sd-card-text">we see that <span class="math notranslate nohighlight">\(c - x \in \text{im}(\mu).\)</span>
-Therefore, for any <span class="math notranslate nohighlight">\(x \in A,\)</span> we have <span class="math notranslate nohighlight">\(c - x \in A,\)</span> and the only <span class="math notranslate nohighlight">\(c \in [3, \infty)\)</span> that satisfies this property is <span class="math notranslate nohighlight">\(c = 3.\)</span></p>
+Therefore, for any <span class="math notranslate nohighlight">\(x \in \text{im}(\mu),\)</span> we have <span class="math notranslate nohighlight">\(c - x \in A.\)</span>
+This cannot be satisfied by any <span class="math notranslate nohighlight">\(3 \leq c &lt; 4\)</span> because, if so, there would exist <span class="math notranslate nohighlight">\(x \in [0, 1]\)</span> such that <span class="math notranslate nohighlight">\(c - x \in (1, 2).\)</span>
+In addition, this property also cannot be satisfied by any <span class="math notranslate nohighlight">\(c &gt; 4\)</span> because, if so, there would exist <span class="math notranslate nohighlight">\(x \in [3, c]\)</span> such that <span class="math notranslate nohighlight">\(c - x \in (1, 2).\)</span></p>
 </div>
 </details></div>
 <div class="tip admonition">
 <p class="admonition-title">Exercise 2.C.7</p>
 <p>Given an example of a measure space <span class="math notranslate nohighlight">\((X, S, \mu)\)</span> such that</p>
 <div class="math notranslate nohighlight">
-\[\{\mu(E): E \in S\} = \{\infty\} \cup [3, \infty].\]</div>
+\[\{\mu(E): E \in S\} = [0, 1] \cup [3, \infty].\]</div>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
 Solution<div class="sd-summary-down docutils">
@@ -1702,11 +1704,12 @@ Let <span class="math notranslate nohighlight">\(\mu\)</span> be the measure on 
 <div class="math notranslate nohighlight">
 \[\begin{split}\mu(\{n\}) = \begin{cases}
 2^{n} &amp; \text{if } n &lt; 0, \\
-n&amp; \text{if } n \geq 0. \\
+n + 3&amp; \text{if } n \geq 0. \\
 \end{cases}\end{split}\]</div>
 <p class="sd-card-text">Then, we have that</p>
 <div class="math notranslate nohighlight">
-\[\{\mu(E): E \in S\} = \{\infty\} \cup [3, \infty].\]</div>
+\[\{\mu(E): E \in S\} = [0, 1] \cup [3, \infty].\]</div>
+<p class="sd-card-text"><strong>Note:</strong> it is interesting to think why a similar construction does not work for <a class="reference internal" href="#mira-ex-2c6"><span class="std std-ref">exercise 2.C.6</span></a> to obtain a finite <span class="math notranslate nohighlight">\(c\)</span> other than <span class="math notranslate nohighlight">\(c = 4\)</span> that satisfies the conditions of that exercise.</p>
 </div>
 </details></div>
 <div class="tip admonition">
@@ -1719,19 +1722,18 @@ Solution<div class="sd-summary-down docutils">
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(X = \{1, 2, 3, 4\},\)</span> and let</p>
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(X = {a, b, c},\)</span> and let</p>
 <div class="math notranslate nohighlight">
-\[\mathcal{A} = \{\{1, 2\}, \{2, 3\}, \{3, 4\}, \{4, 1\}\}.\]</div>
-<p class="sd-card-text">Note that <span class="math notranslate nohighlight">\(S\)</span> must contain all singleton sets, namely <span class="math notranslate nohighlight">\(\{1\}, \{2\}, \{3\}, \{4\}.\)</span>
-This is because, for example, <span class="math notranslate nohighlight">\(\{1\} = \{1, 2\} \cap \{4, 1\},\)</span> and so on for the other singleton sets.
-Therefore <span class="math notranslate nohighlight">\(S\)</span> must contain all subsets of <span class="math notranslate nohighlight">\(X.\)</span></p>
-<p class="sd-card-text">Now, let <span class="math notranslate nohighlight">\(\mu\)</span> be the measure on <span class="math notranslate nohighlight">\((X, S)\)</span> defined via</p>
+\[\mathcal{A} = \{\{a, b\}, \{a, c\}\}.\]</div>
+<p class="sd-card-text">Since <span class="math notranslate nohighlight">\(\sigma\)</span> algebras are closed under intersections, <span class="math notranslate nohighlight">\(S\)</span> must contain <span class="math notranslate nohighlight">\(\{a\} = \{a, b\} \cap \{a, c\}.\)</span>
+Since <span class="math notranslate nohighlight">\(\sigma\)</span> algebras are closed under set differences, <span class="math notranslate nohighlight">\(S\)</span> must also contain <span class="math notranslate nohighlight">\(\{b\} = \{a, b\} \setminus \{b\},\)</span> and similarly for <span class="math notranslate nohighlight">\(\{c\}.\)</span></p>
+<p class="sd-card-text">Now, let</p>
 <div class="math notranslate nohighlight">
-\[\mu(\{1\}) = \mu(\{2\}) = \mu(\{3\}) = \mu(\{4\}) = 1,\]</div>
-<p class="sd-card-text">and let <span class="math notranslate nohighlight">\(\nu\)</span> be the measure on <span class="math notranslate nohighlight">\((X, S)\)</span> defined via</p>
+\[\mu(\{a\}) = \mu(\{b\}) = \mu(\{c\}) = 2,\]</div>
+<p class="sd-card-text">and let</p>
 <div class="math notranslate nohighlight">
-\[\nu(\{1\}) = \nu(\{3\}) = \frac{1}{2} \text{ and } \nu(\{2\}) = \nu(\{4\}) = \frac{3}{2}.\]</div>
-<p class="sd-card-text">Then, <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\nu\)</span> agree on all elements of <span class="math notranslate nohighlight">\(\mathcal{A},\)</span> and <span class="math notranslate nohighlight">\(\mu(X) = \nu(X) = 4,\)</span> but <span class="math notranslate nohighlight">\(\mu \neq \nu.\)</span></p>
+\[\nu(\{a\}) = 1, \nu(\{b\}) = 3, \nu(\{c\}) = 3.\]</div>
+<p class="sd-card-text">Then <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\nu\)</span> are equal on <span class="math notranslate nohighlight">\(A,\)</span> but they are not equal measures.</p>
 </div>
 </details></div>
 <div class="tip admonition">
@@ -1746,7 +1748,7 @@ Solution<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">Let <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\nu\)</span> be measures on a measurable space <span class="math notranslate nohighlight">\((X, S).\)</span>
-We need to show that <span class="math notranslate nohighlight">\(\mu + \nu\)</span> is a measure on <span class="math notranslate nohighlight">\((X, S).\)</span>
+We need to show that <span class="math notranslate nohighlight">\(\mu + \nu\)</span> is a <a class="reference internal" href="002-measures.html#mira:def:measure">measure</a> on <span class="math notranslate nohighlight">\((X, S).\)</span>
 First, note that <span class="math notranslate nohighlight">\(\mu + \nu\)</span> is a function whose domain is <span class="math notranslate nohighlight">\(S\)</span> and whose range is a subset of <span class="math notranslate nohighlight">\([0, \infty].\)</span>
 Second, note that <span class="math notranslate nohighlight">\((\mu + \nu)(\emptyset) = \mu(\emptyset) + \nu(\emptyset) = 0.\)</span>
 Third, suppose <span class="math notranslate nohighlight">\(A_1, A_2, \ldots\)</span> is a sequence of disjoint sets in <span class="math notranslate nohighlight">\(S.\)</span>
@@ -1846,23 +1848,12 @@ We can write <span class="math notranslate nohighlight">\(A\)</span> as the unio
 \[\begin{align}
 A = \bigcup_{n=1}^\infty \bigcup_{x_1 \ldots x_n \in D} \left(\sum_{k=1}^n x_k \cdot 10^{-k}\right) + 10^{-n} \cdot \left[\sum_{m=1}^{100} 4 \cdot 10^{-m}, 10^{-100} + \sum_{m=1}^{100} 4 \cdot 10^{-m} \right)
 \end{align}\]</div>
-<p class="sd-card-text">where <span class="math notranslate nohighlight">\(D\)</span> is the set of integers from 0 to 9, together with the set</p>
-<div class="math notranslate nohighlight">
-\[\begin{align}
-\left[\sum_{m=1}^{100} 4 \cdot 10^{-m}, 10^{-100} + \sum_{m=1}^{100} 4 \cdot 10^{-m} \right).
-\end{align}\]</div>
-<p class="sd-card-text">This is a countable union of closed-open intervals and is therefore a Borel set.</p>
+<p class="sd-card-text">where <span class="math notranslate nohighlight">\(D\)</span> is the set of integers from 0 to 9.
+This is a countable union of closed-open intervals and is therefore a Borel set.</p>
 <p class="sd-card-text"><strong>Computing the measure:</strong>
 Let <span class="math notranslate nohighlight">\(C(n, k)\)</span> the number of rational numbers in <span class="math notranslate nohighlight">\((0, 1)\)</span> whose decimal expansion has <span class="math notranslate nohighlight">\(n\)</span> digits, such that these <span class="math notranslate nohighlight">\(n\)</span> digits do not contain one hundred consecutive 4s and also such that the <span class="math notranslate nohighlight">\(k\)</span> last digits in the expansion are all 4s.
 Then, <span class="math notranslate nohighlight">\(C(1, 0) = 9\)</span> and <span class="math notranslate nohighlight">\(C(1, 1) = 1.\)</span>
-By its definition, we can set up a recursive relation for <span class="math notranslate nohighlight">\(C(n, k)\)</span> as follows.</p>
-<p class="sd-card-text">For each rational number whose expansion has <span class="math notranslate nohighlight">\(n-1\)</span> digits, such that these <span class="math notranslate nohighlight">\(n-1\)</span> digits do not contain one hundred consecutive 4s, there are ten possible digits we can append to the end of the expansion to obtain a rational number whose expansion has <span class="math notranslate nohighlight">\(n\)</span> digits.
-If we append a digit that is not 4, then the resulting rational number with <span class="math notranslate nohighlight">\(n\)</span> digits will not contain one hundred consecutive 4s and also, the last digit will not be 4.
-Therefore, <span class="math notranslate nohighlight">\(C(n, 0) = 9 \sum_{k' = 0}^{99} C(n-1, k').\)</span>
-If we append a digit that is 4, then the resulting rational number with <span class="math notranslate nohighlight">\(n\)</span> digits will contain fewer than one hundred consecutive 4s if and only if there are fewer than <span class="math notranslate nohighlight">\(99\)</span> consecutive 4s in the last digits of the expansion.
-Also, we would be increasing the number of consecutive 4s in the last digits of the expansion by 1.
-Therefore, <span class="math notranslate nohighlight">\(C(n, k) = C(n-1, k-1)\)</span> if and only if <span class="math notranslate nohighlight">\(1 \leq k &lt; 99.\)</span>
-We can collect this information into the following recursion</p>
+By its definition, it holds that</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
 C(n, k) = \begin{cases}
@@ -1882,9 +1873,8 @@ C(n-1, k-1) &amp;\text{if } 1 \leq k &lt; 99
 <p class="sd-card-text">Let <span class="math notranslate nohighlight">\(A_n\)</span> be the set of real numbers in <span class="math notranslate nohighlight">\((0, 1)\)</span> whose decimal expansion does not contain one hundred consecutive 4s up to and including the <span class="math notranslate nohighlight">\(n^{th}\)</span> digit.
 Then</p>
 <div class="math notranslate nohighlight">
-\[|A_n| = \frac{1}{10^n} \sum_{k = 0}^{99} C(n, k),\]</div>
-<p class="sd-card-text">because <span class="math notranslate nohighlight">\(A_n\)</span> consists of <span class="math notranslate nohighlight">\(C(n, k)\)</span> intervals of size <span class="math notranslate nohighlight">\(10^{-n},\)</span> each corresponding to each of the <span class="math notranslate nohighlight">\(C(n, k)\)</span> ways to choose the first <span class="math notranslate nohighlight">\(n\)</span> digits of a rational number in <span class="math notranslate nohighlight">\((0, 1)\)</span> whose decimal expansion does not contain one hundred consecutive 4s and also such that the last <span class="math notranslate nohighlight">\(k\)</span> digits are all 4s, followed by an arbitrary sequnce of digits.
-Now, using the recursion derived earlier, the above equality can be expressed as</p>
+\[|A_n| = \frac{1}{10^n} \sum_{k = 0}^{99} C(n, k).\]</div>
+<p class="sd-card-text">Now, using the matrix recursion above, this equality can be written as</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
 |A_n| = \left|\begin{bmatrix}
@@ -2239,7 +2229,7 @@ Therefore, <span class="math notranslate nohighlight">\(V \subseteq A\)</span> i
 </section>
 <section id="chapter-4-a">
 <h2>Chapter 4.A<a class="headerlink" href="#chapter-4-a" title="Link to this heading">#</a></h2>
-<div class="tip admonition">
+<div class="tip admonition" id="mira-ex-4a1">
 <p class="admonition-title">Exercise 4.A.1</p>
 <p>Suppose <span class="math notranslate nohighlight">\((X, \mathcal{S}, \mu)\)</span> is a measure space and <span class="math notranslate nohighlight">\(h: X \to \mathbb{R}\)</span> is an <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>-measurable function.
 Prove that</p>
@@ -2259,7 +2249,7 @@ Therefore, applying Markov’s inequality, we have</p>
 \[\mu\left(x \in X: |h(x)| \geq c \right) = \mu\left(x \in X: |h(x)|^p \geq c^p \right) \leq \frac{1}{c^p} \int |h|^p d\mu.\]</div>
 </div>
 </details></div>
-<div class="tip admonition">
+<div class="tip admonition" id="mira-ex-4a2">
 <p class="admonition-title">Exercise 4.A.2 (Chebyshev’s inequality)</p>
 <p>Suppose <span class="math notranslate nohighlight">\((X, \mathcal{S}, \mu)\)</span> is a measure space with <span class="math notranslate nohighlight">\(\mu(X) = 1\)</span> and <span class="math notranslate nohighlight">\(h \in \mathcal{L}^1(\mu).\)</span>
 Prove that</p>
@@ -2770,7 +2760,7 @@ Therefore <span class="math notranslate nohighlight">\(U\)</span> is the union o
 <div class="tip admonition">
 <p class="admonition-title">Exercise 6.A.10</p>
 <p>Prove or give a counterexample:
-If <span class="math notranslate nohighlight">\(V\)</span> is a metric space and <span class="math notranslate nohighlight">\(U, W\)</span> are subserts of <span class="math notranslate nohighlight">\(V,\)</span> then <span class="math notranslate nohighlight">\(\overline{U} \cup \overline{W} = \overline{U \cup W}.\)</span></p>
+If <span class="math notranslate nohighlight">\(V\)</span> is a metric space and <span class="math notranslate nohighlight">\(U, W\)</span> are subsets of <span class="math notranslate nohighlight">\(V,\)</span> then <span class="math notranslate nohighlight">\(\overline{U} \cup \overline{W} = \overline{U \cup W}.\)</span></p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
 Solution<div class="sd-summary-down docutils">

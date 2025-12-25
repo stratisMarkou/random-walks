@@ -2254,22 +2254,51 @@ Then</p>
 \[\begin{equation}
 f = c_1 \chi_{E_1} + \cdots + c_n \chi_{E_n},
 \end{equation}\]</div>
-<p>where <span class="math notranslate nohighlight">\(E_k = f^{-1}(\{c_k})\)</span> for <span class="math notranslate nohighlight">\(k = 1, \ldots, n.\)</span>
+<p>where <span class="math notranslate nohighlight">\(E_k = f^{-1}(\{c_k\})\)</span> for <span class="math notranslate nohighlight">\(k = 1, \ldots, n.\)</span>
 Thus this function <span class="math notranslate nohighlight">\(f\)</span> is an <span class="math notranslate nohighlight">\(S\)</span>-measurable function if and only if <span class="math notranslate nohighlight">\(E_1, \ldots, E_n\)</span> are <span class="math notranslate nohighlight">\(S\)</span>-measurable sets.
 We have the following results on approximation by simple functions.</p>
 <div class="proof theorem admonition" id="mira:thm:approximation-by-simple-functions">
 <p class="admonition-title"><span class="caption-number">Theorem 102 </span> (Approximation by simple functions)</p>
 <section class="theorem-content" id="proof-content">
 <p>Suppose <span class="math notranslate nohighlight">\((X, S, \mu)\)</span> is a measure space and <span class="math notranslate nohighlight">\(f: X \to [-\infty, \infty]\)</span> is <span class="math notranslate nohighlight">\(S\)</span>-measurable.
-Then there exists a sequence of simple functions <span class="math notranslate nohighlight">\(f_1, \dots, f_n, \ldots\)</span> from <span class="math notranslate nohighlight">\(X\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> such that</p>
+Then there exists a sequence of <a class="reference internal" href="#mira:def:simple-function">simple functions</a> <span class="math notranslate nohighlight">\(f_1, f_2, \ldots\)</span> from <span class="math notranslate nohighlight">\(X\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> such that</p>
 <ol class="arabic simple">
-<li><p>each <span class="math notranslate nohighlight">\(f_k\)</span> is a <a class="reference internal" href="#mira:def:simple-function">simple</a> <span class="math notranslate nohighlight">\(S\)</span>-measurable function,</p></li>
-<li><p><span class="math notranslate nohighlight">\(|f_k(x)| \leq |f_{k+1}(x)| \leq |f(x)|\)</span> for all <span class="math notranslate nohighlight">\(x \in X,\)</span> and all <span class="math notranslate nohighlight">\(k \in \mathbb{Z}^+,\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\lim_{k \to \infty} f_k(x) = f(x)\)</span> for all <span class="math notranslate nohighlight">\(x \in X,\)</span> and</p></li>
+<li><p>each <span class="math notranslate nohighlight">\(f_K\)</span> is a simple <span class="math notranslate nohighlight">\(S\)</span>-measurable function,</p></li>
+<li><p><span class="math notranslate nohighlight">\(|f_K(x)| \leq |f_{K+1}(x)| \leq |f(x)|\)</span> for all <span class="math notranslate nohighlight">\(x \in X,\)</span> and all <span class="math notranslate nohighlight">\(K \in \mathbb{Z}^+,\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\lim_{K \to \infty} f_K(x) = f(x)\)</span> for all <span class="math notranslate nohighlight">\(x \in X,\)</span> and</p></li>
 <li><p><span class="math notranslate nohighlight">\(f_1, f_2, \ldots\)</span> converges to <span class="math notranslate nohighlight">\(f\)</span> uniformly on <span class="math notranslate nohighlight">\(X\)</span> if <span class="math notranslate nohighlight">\(f\)</span> is bounded.</p></li>
 </ol>
 </section>
-</div></section>
+</div><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Proof: Approximation by simple functions<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">For <span class="math notranslate nohighlight">\(K \in \mathbb{Z},\)</span> define <span class="math notranslate nohighlight">\(f_K: X \to [-\infty, \infty]\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{equation}
+f_K(x) = \begin{cases}
+\frac{k}{2^K} &amp;\text{ if } 0 \leq f(x) \leq K \text{ and } k \in \mathbb{Z} \text{ such that } f(x) \in \left[\frac{k}{2^K}, \frac{k+1}{2^K}\right), \\
+\frac{k+1}{2^K} &amp;\text{ if } -K \leq f(x) &lt; 0 \text{ and } k \in \mathbb{Z} \text{ such that } f(x) \in \left[\frac{k}{2^K}, \frac{k+1}{2^K}\right), \\
+K \text{ if } f(x) &gt; K,
+-K \text{ if } f(x) &lt; -K,
+\end{cases}
+\end{equation}\end{split}\]</div>
+<p class="sd-card-text">Each <span class="math notranslate nohighlight">\(f_K\)</span> is a simple function because it takes a finite number of values.
+Since <span class="math notranslate nohighlight">\(f\)</span> is <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>-measurable, <span class="math notranslate nohighlight">\(f^{-1}\left([\frac{k}{2^K}, \frac{k+1}{2^K})\right)\)</span> is in <span class="math notranslate nohighlight">\(\mathcal{S}.\)</span>
+Therefore <span class="math notranslate nohighlight">\(f_K\)</span> is <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>-measurable and (1) holds.
+Also for each <span class="math notranslate nohighlight">\(x \in X,\)</span> the sequence <span class="math notranslate nohighlight">\(f_1(x), f_2(x), \dots\)</span> is monotonic and also <span class="math notranslate nohighlight">\(|f_K(x)| \leq |f(x)|,\)</span> and (2) holds.</p>
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(x \in X.\)</span>
+Let <span class="math notranslate nohighlight">\(\epsilon &gt; 0.\)</span>
+There exists <span class="math notranslate nohighlight">\(M\)</span> such that for all <span class="math notranslate nohighlight">\(K \geq M\)</span> we have that <span class="math notranslate nohighlight">\(|f(x)| &lt; K.\)</span>
+Therefore <span class="math notranslate nohighlight">\(f(x)\)</span> lies within one of the closed-open intervals that define <span class="math notranslate nohighlight">\(f_K,\)</span> which means that <span class="math notranslate nohighlight">\(|f(x) - f_K(x)| &lt; \frac{1}{2^K},\)</span> and picking sufficiently large <span class="math notranslate nohighlight">\(M\)</span> we obtain <span class="math notranslate nohighlight">\(|f(x) - f_K(x)| &lt; \epsilon,\)</span> so (3) holds.</p>
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(f\)</span> is bounded above by some constant <span class="math notranslate nohighlight">\(C \in \mathbb{R}.\)</span>
+Then for all <span class="math notranslate nohighlight">\(K \geq C\)</span> and any <span class="math notranslate nohighlight">\(x \in X\)</span> we have that <span class="math notranslate nohighlight">\(|f(x)| &lt; K,\)</span> so <span class="math notranslate nohighlight">\(|f(x) - f_K(x)| \leq \frac{1}{2^K}.\)</span>
+Therefore <span class="math notranslate nohighlight">\(f_1, f_2, \ldots\)</span> converges to <span class="math notranslate nohighlight">\(f\)</span> uniformly on <span class="math notranslate nohighlight">\(X,\)</span> and (4) holds.</p>
+</div>
+</details></section>
 </section>
 </section>
 

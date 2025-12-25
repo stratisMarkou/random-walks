@@ -1269,6 +1269,7 @@ Therefore, $\mathcal{A}$ must be countable.
 
 ::::{admonition} Exercise 2.C.6
 :class: tip
+:name: mira:ex-2c6
 
 Find all $c \in [3, \infty)$ such that there exists a measure space $(X, S, \mu)$ with
 
@@ -1278,13 +1279,15 @@ $$\{\mu(E): E \in S\} = [0, 1] \cup [3, c].$$
 
 Suppose $(X, S, \mu)$ is a measure space such that $\text{im}(\mu) = \{\mu(E): E \in S\} = [0, 1] \cup [3, c].$
 Then, it must be the case that $\mu(X) = c.$
-Now, since $A$ is the range of $\mu,$ it holds that for each $x \in \text{im}(\mu),$ there exists $E \in S$ such that $\mu(E) = x.$
+For each $x \in \text{im}(\mu),$ there exists $E \in S$ such that $\mu(E) = x.$
 Now, using the fact that
 
 $$\mu(X \setminus E) = \mu(X) - \mu(E) = c - x,$$
 
 we see that $c - x \in \text{im}(\mu).$
-Therefore, for any $x \in A,$ we have $c - x \in A,$ and the only $c \in [3, \infty)$ that satisfies this property is $c = 3.$
+Therefore, for any $x \in \text{im}(\mu),$ we have $c - x \in A.$
+This cannot be satisfied by any $3 \leq c < 4$ because, if so, there would exist $x \in [0, 1]$ such that $c - x \in (1, 2).$
+In addition, this property also cannot be satisfied by any $c > 4$ because, if so, there would exist $x \in [3, c]$ such that $c - x \in (1, 2).$
 
 :::
 ::::
@@ -1297,22 +1300,24 @@ Therefore, for any $x \in A,$ we have $c - x \in A,$ and the only $c \in [3, \in
 
 Given an example of a measure space $(X, S, \mu)$ such that
 
-$$\{\mu(E): E \in S\} = \{\infty\} \cup [3, \infty].$$
+$$\{\mu(E): E \in S\} = [0, 1] \cup [3, \infty].$$
 
 :::{dropdown} Solution
+
 
 Let $X = \mathbb{Z}$ and $S = 2^{\mathbb{Z}}.$
 Let $\mu$ be the measure on $(X, S)$ defined via
 
 $$\mu(\{n\}) = \begin{cases}
 2^{n} & \text{if } n < 0, \\
-n& \text{if } n \geq 0. \\
+n + 3& \text{if } n \geq 0. \\
 \end{cases}$$
 
 Then, we have that
 
-$$\{\mu(E): E \in S\} = \{\infty\} \cup [3, \infty].$$
+$$\{\mu(E): E \in S\} = [0, 1] \cup [3, \infty].$$
 
+**Note:** it is interesting to think why a similar construction does not work for {ref}`exercise 2.C.6<mira:ex-2c6>` to obtain a finite $c$ other than $c = 4$ that satisfies the conditions of that exercise.
 :::
 ::::
 
@@ -1325,23 +1330,22 @@ Give an example of a set $X,$ a $\sigma$-algebra $S$ on $X,$ a set $\mathcal{A}$
 
 :::{dropdown} Solution
 
-Let $X = \{1, 2, 3, 4\},$ and let
+Let $X = {a, b, c},$ and let
 
-$$\mathcal{A} = \{\{1, 2\}, \{2, 3\}, \{3, 4\}, \{4, 1\}\}.$$
+$$\mathcal{A} = \{\{a, b\}, \{a, c\}\}.$$
 
-Note that $S$ must contain all singleton sets, namely $\{1\}, \{2\}, \{3\}, \{4\}.$
-This is because, for example, $\{1\} = \{1, 2\} \cap \{4, 1\},$ and so on for the other singleton sets.
-Therefore $S$ must contain all subsets of $X.$
+Since $\sigma$ algebras are closed under intersections, $S$ must contain $\{a\} = \{a, b\} \cap \{a, c\}.$
+Since $\sigma$ algebras are closed under set differences, $S$ must also contain $\{b\} = \{a, b\} \setminus \{b\},$ and similarly for $\{c\}.$
 
-Now, let $\mu$ be the measure on $(X, S)$ defined via
+Now, let
 
-$$\mu(\{1\}) = \mu(\{2\}) = \mu(\{3\}) = \mu(\{4\}) = 1,$$
+$$\mu(\{a\}) = \mu(\{b\}) = \mu(\{c\}) = 2,$$
 
-and let $\nu$ be the measure on $(X, S)$ defined via
+and let
 
-$$\nu(\{1\}) = \nu(\{3\}) = \frac{1}{2} \text{ and } \nu(\{2\}) = \nu(\{4\}) = \frac{3}{2}.$$
+$$\nu(\{a\}) = 1, \nu(\{b\}) = 3, \nu(\{c\}) = 3.$$
 
-Then, $\mu$ and $\nu$ agree on all elements of $\mathcal{A},$ and $\mu(X) = \nu(X) = 4,$ but $\mu \neq \nu.$
+Then $\mu$ and $\nu$ are equal on $A,$ but they are not equal measures.
 
 :::
 ::::
@@ -1358,7 +1362,7 @@ Prove that $\mu + \nu$ is a measure on $(X, S).$
 :::{dropdown} Solution
 
 Let $\mu$ and $\nu$ be measures on a measurable space $(X, S).$
-We need to show that $\mu + \nu$ is a measure on $(X, S).$
+We need to show that $\mu + \nu$ is a {prf:ref}`measure<mira:def:measure>` on $(X, S).$
 First, note that $\mu + \nu$ is a function whose domain is $S$ and whose range is a subset of $[0, \infty].$
 Second, note that $(\mu + \nu)(\emptyset) = \mu(\emptyset) + \nu(\emptyset) = 0.$
 Third, suppose $A_1, A_2, \ldots$ is a sequence of disjoint sets in $S.$
@@ -1461,27 +1465,14 @@ $$\begin{align}
 A = \bigcup_{n=1}^\infty \bigcup_{x_1 \ldots x_n \in D} \left(\sum_{k=1}^n x_k \cdot 10^{-k}\right) + 10^{-n} \cdot \left[\sum_{m=1}^{100} 4 \cdot 10^{-m}, 10^{-100} + \sum_{m=1}^{100} 4 \cdot 10^{-m} \right)
 \end{align}$$
 
-where $D$ is the set of integers from 0 to 9, together with the set
-
-$$\begin{align}
-\left[\sum_{m=1}^{100} 4 \cdot 10^{-m}, 10^{-100} + \sum_{m=1}^{100} 4 \cdot 10^{-m} \right).
-\end{align}$$
-
+where $D$ is the set of integers from 0 to 9.
 This is a countable union of closed-open intervals and is therefore a Borel set.
 
 
 __Computing the measure:__
 Let $C(n, k)$ the number of rational numbers in $(0, 1)$ whose decimal expansion has $n$ digits, such that these $n$ digits do not contain one hundred consecutive 4s and also such that the $k$ last digits in the expansion are all 4s.
 Then, $C(1, 0) = 9$ and $C(1, 1) = 1.$
-By its definition, we can set up a recursive relation for $C(n, k)$ as follows.
-
-For each rational number whose expansion has $n-1$ digits, such that these $n-1$ digits do not contain one hundred consecutive 4s, there are ten possible digits we can append to the end of the expansion to obtain a rational number whose expansion has $n$ digits.
-If we append a digit that is not 4, then the resulting rational number with $n$ digits will not contain one hundred consecutive 4s and also, the last digit will not be 4.
-Therefore, $C(n, 0) = 9 \sum_{k' = 0}^{99} C(n-1, k').$
-If we append a digit that is 4, then the resulting rational number with $n$ digits will contain fewer than one hundred consecutive 4s if and only if there are fewer than $99$ consecutive 4s in the last digits of the expansion.
-Also, we would be increasing the number of consecutive 4s in the last digits of the expansion by 1.
-Therefore, $C(n, k) = C(n-1, k-1)$ if and only if $1 \leq k < 99.$
-We can collect this information into the following recursion
+By its definition, it holds that
 
 $$\begin{align}
 C(n, k) = \begin{cases}
@@ -1503,10 +1494,9 @@ $$C_n = \begin{bmatrix}
 Let $A_n$ be the set of real numbers in $(0, 1)$ whose decimal expansion does not contain one hundred consecutive 4s up to and including the $n^{th}$ digit.
 Then
 
-$$|A_n| = \frac{1}{10^n} \sum_{k = 0}^{99} C(n, k),$$
+$$|A_n| = \frac{1}{10^n} \sum_{k = 0}^{99} C(n, k).$$
 
-because $A_n$ consists of $C(n, k)$ intervals of size $10^{-n},$ each corresponding to each of the $C(n, k)$ ways to choose the first $n$ digits of a rational number in $(0, 1)$ whose decimal expansion does not contain one hundred consecutive 4s and also such that the last $k$ digits are all 4s, followed by an arbitrary sequnce of digits.
-Now, using the recursion derived earlier, the above equality can be expressed as
+Now, using the matrix recursion above, this equality can be written as
 
 $$\begin{align}
 |A_n| = \left|\begin{bmatrix}
@@ -1925,7 +1915,7 @@ Therefore, $V \subseteq A$ is not Lebesgue measurable.
 
 ::::{admonition} Exercise 4.A.1
 :class: tip
-:label: mira:ex-4a1
+:name: mira:ex-4a1
 Suppose $(X, \mathcal{S}, \mu)$ is a measure space and $h: X \to \mathbb{R}$ is an $\mathcal{S}$-measurable function.
 Prove that
 
@@ -1945,7 +1935,7 @@ $$\mu\left(x \in X: |h(x)| \geq c \right) = \mu\left(x \in X: |h(x)|^p \geq c^p 
 
 ::::{admonition} Exercise 4.A.2 (Chebyshev's inequality)
 :class: tip
-:label: mira:ex-4a2
+:name: mira:ex-4a2
 Suppose $(X, \mathcal{S}, \mu)$ is a measure space with $\mu(X) = 1$ and $h \in \mathcal{L}^1(\mu).$
 Prove that
 
@@ -2443,7 +2433,7 @@ Therefore $U$ is the union of a sequence of closed sets in $V,$ as required.
 ::::{admonition} Exercise 6.A.10
 :class: tip
 Prove or give a counterexample:
-If $V$ is a metric space and $U, W$ are subserts of $V,$ then $\overline{U} \cup \overline{W} = \overline{U \cup W}.$
+If $V$ is a metric space and $U, W$ are subsets of $V,$ then $\overline{U} \cup \overline{W} = \overline{U \cup W}.$
 
 :::{dropdown} Solution
 If $v \in \overline{U},$ then there exists a sequence of elements in $U$ whose limit is $v.$
