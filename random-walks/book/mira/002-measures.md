@@ -1848,8 +1848,8 @@ $$\begin{equation}
 f_K(x) = \begin{cases}
 \frac{k}{2^K} &\text{ if } 0 \leq f(x) \leq K \text{ and } k \in \mathbb{Z} \text{ such that } f(x) \in \left[\frac{k}{2^K}, \frac{k+1}{2^K}\right), \\
 \frac{k+1}{2^K} &\text{ if } -K \leq f(x) < 0 \text{ and } k \in \mathbb{Z} \text{ such that } f(x) \in \left[\frac{k}{2^K}, \frac{k+1}{2^K}\right), \\
-K \text{ if } f(x) > K,
--K \text{ if } f(x) < -K,
+K &\text{ if } f(x) > K, \\
+-K &\text{ if } f(x) < -K,
 \end{cases}
 \end{equation}$$
 
