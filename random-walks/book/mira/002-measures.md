@@ -1929,7 +1929,7 @@ For each $m \in \mathbb{Z}^+,$ the sequence $g_1|_{(m, m+1)}, g_2|_{(m, m+1)}, \
 $$|(m, m + 1) \setminus E_m| < \frac{\epsilon}{2^{|m| + 3}}.$$
 
 Therefore $g_1, g_2, \dots$ converges uniformly to $g$ on $C \cap E_m$ for each $m \in \mathbb{Z}.$
-Because each $g_k|_C$ is continuous, we conclude from {prf:ref}`<mira:thm:uniform-limit-of-continuous-functions-is-continuous>` that $g|_{C \cap E_m}$ is continuous for each $m \in \mathbb{Z}.$
+Because each $g_k|_C$ is continuous, we conclude from {prf:ref}`mira:thm:uniform-limit-of-continuous-functions-is-continuous` that $g|_{C \cap E_m}$ is continuous for each $m \in \mathbb{Z}.$
 Thus $g|_D$ is continuous where
 
 $$D = \bigcup_{m \in \mathbb{Z}} (C \cap E_m).$$
@@ -1939,7 +1939,7 @@ Now, we have
 $$\mathbb{R} \setminus D \subseteq \mathbb{Z} \cup \left(\bigcup_{m \in \mathbb{Z}} ((m, m + 1) \setminus E_m) \right) \cup (\mathbb{R} \setminus C)$$
 
 from which we conclude that $|\mathbb{R} \setminus D| < \epsilon.$
-By *** there exists a closed set $F \subseteq D$ such that $|D \setminus D| < \epsilon - |\mathbb{R} \setminus D|,$ so
+By {prf:ref}`mira:thm:approximation-of-borel-sets-from-below-by-closed-sets`, there exists a closed set $F \subseteq D$ such that $|D \setminus F| < \epsilon - |\mathbb{R} \setminus D|,$ so
 
 $$|\mathbb{R} \setminus F| = |(\mathbb{R} \setminus D) \cup (D \setminus F)| \leq |\mathbb{R} \setminus D| + |D \setminus F| < \epsilon.$$
 
