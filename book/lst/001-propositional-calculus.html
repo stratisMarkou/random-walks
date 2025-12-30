@@ -640,7 +640,7 @@ Proof<div class="sd-summary-down docutils">
 </div><p>Generally, writing proofs as that in <a class="reference internal" href="#lst:ex-p-imp-p-is-a-theorem">Example 15</a> can get cumbersome.
 The following theorem can help a lot to shorten our informal proofs.</p>
 <div class="proof theorem admonition" id="lst:thm:deduction-theorem">
-<p class="admonition-title"><span class="caption-number">Theorem 110 </span> (Deduction theorem)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 111 </span> (Deduction theorem)</p>
 <section class="theorem-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(S \subseteq L\)</span> and <span class="math notranslate nohighlight">\(p, q \in L.\)</span>
 Then <span class="math notranslate nohighlight">\(S \vdash (p \imp q)\)</span> if and only if <span class="math notranslate nohighlight">\(S \cup \{p\} \vdash q.\)</span></p>
@@ -711,7 +711,7 @@ It is called the soundness theorem because it demonstrates that our proof axioms
 if a  of a proposition exists, then this proposition is true under our notion of <a class="reference internal" href="#lst:def:semantic-entailment">semantic entailment</a>.
 In other words, we can prove only those propositions that are true.</p>
 <div class="proof theorem admonition" id="lst:thm:soundness-theorem">
-<p class="admonition-title"><span class="caption-number">Theorem 111 </span> (Soundness theorem)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 112 </span> (Soundness theorem)</p>
 <section class="theorem-content" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(S \vd t,\)</span> then <span class="math notranslate nohighlight">\(S \dvd t.\)</span></p>
 </section>
@@ -773,7 +773,7 @@ Therefore <span class="math notranslate nohighlight">\(S\)</span> is inconsisten
 If a set of assumptions is consistent, then it has a model.
 Equivalently, if it does not have a model, then it is inconsistent.</p>
 <div class="proof theorem admonition" id="lst:thm:model-existence">
-<p class="admonition-title"><span class="caption-number">Theorem 112 </span> (Model existence)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 113 </span> (Model existence)</p>
 <section class="theorem-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(L\)</span> be a countable set of propositions.
 If <span class="math notranslate nohighlight">\(S \dvd \perp,\)</span> then <span class="math notranslate nohighlight">\(S \vd \perp.\)</span>
@@ -847,7 +847,7 @@ So <span class="math notranslate nohighlight">\(S\)</span> has a model.</p>
 </div>
 </details><p>We can now use the <a class="reference internal" href="#lst:thm:model-existence">model existence theorem</a> to prove the adequacy theorem.</p>
 <div class="proof theorem admonition" id="lst:thm:adequacy-theorem">
-<p class="admonition-title"><span class="caption-number">Theorem 113 </span> (Adequacy theorem)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 114 </span> (Adequacy theorem)</p>
 <section class="theorem-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(S \subseteq L, t \in L.\)</span>
 Then <span class="math notranslate nohighlight">\(S \models t\)</span> implies <span class="math notranslate nohighlight">\(S \vd t.\)</span></p>
@@ -871,7 +871,7 @@ By the <a class="reference internal" href="#lst:def:logical-symbols">definition 
 <h3>Completeness and compactness<a class="headerlink" href="#completeness-and-compactness" title="Link to this heading">#</a></h3>
 <p>We can now combine the soundness and adequacy theorems to prove the completness theorem.</p>
 <div class="proof theorem admonition" id="lst:thm:completeness-theorem">
-<p class="admonition-title"><span class="caption-number">Theorem 114 </span> (Completeness theorem)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 115 </span> (Completeness theorem)</p>
 <section class="theorem-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(S \subseteq L\)</span> and <span class="math notranslate nohighlight">\(t \in L.\)</span>
 Then <span class="math notranslate nohighlight">\(S \models t\)</span> if and only if <span class="math notranslate nohighlight">\(S \vd t.\)</span></p>
@@ -885,14 +885,14 @@ Proof: Completeness theorem<div class="sd-summary-down docutils">
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(S \subseteq L\)</span> and <span class="math notranslate nohighlight">\(t \in L.\)</span></p>
 <p class="sd-card-text"><strong>Implies:</strong>
-If <span class="math notranslate nohighlight">\(S \models t,\)</span> then <span class="math notranslate nohighlight">\(S \vd t\)</span> by <a class="reference internal" href="#lst:thm:adequacy-theorem">Theorem 113</a>.</p>
+If <span class="math notranslate nohighlight">\(S \models t,\)</span> then <span class="math notranslate nohighlight">\(S \vd t\)</span> by <a class="reference internal" href="#lst:thm:adequacy-theorem">Theorem 114</a>.</p>
 <p class="sd-card-text"><strong>Is implied by:</strong>
-If <span class="math notranslate nohighlight">\(S \vd t,\)</span> then <span class="math notranslate nohighlight">\(S \models t\)</span> by <a class="reference internal" href="#lst:thm:soundness-theorem">Theorem 111</a>.</p>
+If <span class="math notranslate nohighlight">\(S \vd t,\)</span> then <span class="math notranslate nohighlight">\(S \models t\)</span> by <a class="reference internal" href="#lst:thm:soundness-theorem">Theorem 112</a>.</p>
 </div>
 </details><p>A useful corollary of the completeness theorem is the compactness theorem.
 This says that for any logical truth, there is a finite set of assumptions that proves it.</p>
 <div class="proof theorem admonition" id="lst:thm:compactness-theorem">
-<p class="admonition-title"><span class="caption-number">Theorem 115 </span> (Compactness theorem)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 116 </span> (Compactness theorem)</p>
 <section class="theorem-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(S \subseteq L\)</span> and <span class="math notranslate nohighlight">\(t \in L\)</span> with <span class="math notranslate nohighlight">\(S \models t.\)</span>
 Then, there is some finite <span class="math notranslate nohighlight">\(S' \subseteq S\)</span> with <span class="math notranslate nohighlight">\(S' \models t.\)</span></p>
@@ -912,7 +912,7 @@ Applying the completeness theorem again, we have <span class="math notranslate n
 </details><p>Another useful corollary of the completeness theorem is the decidability theorem.
 This says that given a finite set of assumptions and a proposition, there exists a procedure that determines whether this statement can be proved from the assumptions, in finite time.</p>
 <div class="proof theorem admonition" id="lst:thm:decidability-theorem">
-<p class="admonition-title"><span class="caption-number">Theorem 116 </span> (Decidability theorem)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 117 </span> (Decidability theorem)</p>
 <section class="theorem-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(S \subseteq L\)</span> be a finite set and <span class="math notranslate nohighlight">\(t \in L.\)</span>
 Then, there exists an algorithm that determines, in finite and bounded time, whether or not <span class="math notranslate nohighlight">\(S \vd t.\)</span></p>

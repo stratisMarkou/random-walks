@@ -442,6 +442,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-b">Chapter 2.B</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-c">Chapter 2.C</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-d">Chapter 2.D</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-e">Chapter 2.E</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-4-a">Chapter 4.A</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-5-a">Chapter 5.A</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-6-a">Chapter 6.A</a></li>
@@ -2227,6 +2228,46 @@ Therefore, <span class="math notranslate nohighlight">\(V \subseteq A\)</span> i
 </div>
 </details></div>
 </section>
+<section id="chapter-2-e">
+<h2>Chapter 2.E<a class="headerlink" href="#chapter-2-e" title="Link to this heading">#</a></h2>
+<div class="tip admonition" id="mira-ex-2e9">
+<p class="admonition-title">Exercise 2.E.9</p>
+<p>Suppose <span class="math notranslate nohighlight">\(F_1, \dots, F_n\)</span> are disjoint closed subsets of <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span>
+Prove that if</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+g: F_1 \cup \dots \cup F_n \to \mathbb{R}
+\end{equation}\]</div>
+<p>is a function such that <span class="math notranslate nohighlight">\(g|_{F_k}\)</span> is a continuous function for each <span class="math notranslate nohighlight">\(k \in \{1, \dots, n\},\)</span> then <span class="math notranslate nohighlight">\(g\)</span> is a continuous function.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">If <span class="math notranslate nohighlight">\(n = 1\)</span> we are immediately done, so suppose <span class="math notranslate nohighlight">\(n &gt; 1.\)</span>
+Let <span class="math notranslate nohighlight">\(F = F_1 \cup \dots \cup F_n.\)</span>
+We will first show an intermediate result: if <span class="math notranslate nohighlight">\(x \in F_k,\)</span> there exists <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> such that for all <span class="math notranslate nohighlight">\(x \in F\)</span> and <span class="math notranslate nohighlight">\(|x - x'| &lt; \delta\)</span> it holds that <span class="math notranslate nohighlight">\(x' \in F_k.\)</span>
+Suppose this does not hold.
+Then for any <span class="math notranslate nohighlight">\(\delta &gt; 0,\)</span> there exists <span class="math notranslate nohighlight">\(x' \in F\)</span> with <span class="math notranslate nohighlight">\(|x - x'| &lt; \delta\)</span> such that <span class="math notranslate nohighlight">\(x' \not \in F_k.\)</span>
+Therefore, at least one <span class="math notranslate nohighlight">\(F_m\)</span> with <span class="math notranslate nohighlight">\(m \neq k\)</span> must contain elements arbitrarily close to <span class="math notranslate nohighlight">\(x.\)</span>
+This means that <span class="math notranslate nohighlight">\(x\)</span> is a <a class="reference external" href="https://mathworld.wolfram.com/LimitPoint.html">limit point</a> of <span class="math notranslate nohighlight">\(F_m.\)</span>
+But a closed set must contain its limit points and <span class="math notranslate nohighlight">\(x \not \in F_m\)</span> since <span class="math notranslate nohighlight">\(F_1, \dots, F_n\)</span> are all disjoint, which is a contradiction.
+Therefore the hypothesis holds.</p>
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(x \in F.\)</span>
+We want to show <span class="math notranslate nohighlight">\(g\)</span> is continuous at <span class="math notranslate nohighlight">\(x.\)</span>
+Suppose <span class="math notranslate nohighlight">\(\epsilon &gt; 0.\)</span>
+First, <span class="math notranslate nohighlight">\(x \in F_k\)</span> for some <span class="math notranslate nohighlight">\(k \in \{1, \dots, n\}.\)</span>
+Since <span class="math notranslate nohighlight">\(g|_{F_k} \to \mathbb{R}\)</span> is continuous, there exists <span class="math notranslate nohighlight">\(\delta_\epsilon\)</span> such that <span class="math notranslate nohighlight">\(|g|_{F_k}(x) - g|_{F_k}(x')| &lt; \epsilon\)</span> for all <span class="math notranslate nohighlight">\(x' \in F\)</span> with <span class="math notranslate nohighlight">\(|x - x'| &lt; \delta_\epsilon.\)</span>
+By the hypothesis we just showed, there also exists <span class="math notranslate nohighlight">\(\delta_x &gt; 0\)</span> such that if <span class="math notranslate nohighlight">\(x' \in F\)</span> and <span class="math notranslate nohighlight">\(|x - x'| &lt; \delta_x\)</span> then <span class="math notranslate nohighlight">\(x' \in F_k.\)</span>
+Therefore, if <span class="math notranslate nohighlight">\(|x - x'| &lt; \min(\delta_\epsilon, \delta_x),\)</span> we have that <span class="math notranslate nohighlight">\(x' \in F_k\)</span> so <span class="math notranslate nohighlight">\(g|_{F_k}(x') = g(x)\)</span> so</p>
+<div class="math notranslate nohighlight">
+\[|g(x) - g(x')| = |g|_{F_k}(x) - g|_{F_k}(x')| &lt; \epsilon.\]</div>
+<p class="sd-card-text">We conclude that <span class="math notranslate nohighlight">\(g\)</span> is continuous on <span class="math notranslate nohighlight">\(F.\)</span></p>
+</div>
+</details></div>
+</section>
 <section id="chapter-4-a">
 <h2>Chapter 4.A<a class="headerlink" href="#chapter-4-a" title="Link to this heading">#</a></h2>
 <div class="tip admonition" id="mira-ex-4a1">
@@ -3053,6 +3094,7 @@ Therefore the sequence <span class="math notranslate nohighlight">\((u_1, u_2, \
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-b">Chapter 2.B</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-c">Chapter 2.C</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-d">Chapter 2.D</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2-e">Chapter 2.E</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-4-a">Chapter 4.A</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-5-a">Chapter 5.A</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-6-a">Chapter 6.A</a></li>

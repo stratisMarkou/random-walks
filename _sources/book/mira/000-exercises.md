@@ -1857,7 +1857,6 @@ so $tA$ is Lebesgue measurable.
 ::::{admonition} Exercise 2.D.10
 :class: tip
 
-
 Prove that if $A$ and $B$ are disjoint subsets of $\mathbb{R}$ and $B$ is Lebesgue measurable, then $|A \cup B| = |A| + |B|.$
 
 :::{dropdown} Solution
@@ -1870,8 +1869,6 @@ $$|A \cup B| = |A \cup C \cup (B \setminus C)| = |A \cup C| = |A| + |C| = |A| + 
 
 :::
 ::::
-
-
 
 
 ::::{admonition} Exercise 2.D.11
@@ -1906,6 +1903,46 @@ for all $n \in \mathbb{N},$ which can only hold if $|V| = 0.$
 But this implies $|\cup_{i=1}^\infty (r_i + V)| = 0,$ which in turn implies $|A \cap (n, n+1)| = 0,$ which is a contradiction.
 Therefore, $V \subseteq A$ is not Lebesgue measurable.
 
+:::
+::::
+
+
+## Chapter 2.E
+::::{admonition} Exercise 2.E.9
+:class: tip
+:name: mira:ex-2e9
+
+Suppose $F_1, \dots, F_n$ are disjoint closed subsets of $\mathbb{R}.$
+Prove that if
+
+$$\begin{equation}
+g: F_1 \cup \dots \cup F_n \to \mathbb{R}
+\end{equation}$$
+
+is a function such that $g|_{F_k}$ is a continuous function for each $k \in \{1, \dots, n\},$ then $g$ is a continuous function.
+
+:::{dropdown} Solution
+If $n = 1$ we are immediately done, so suppose $n > 1.$
+Let $F = F_1 \cup \dots \cup F_n.$
+We will first show an intermediate result: if $x \in F_k,$ there exists $\delta > 0$ such that for all $x \in F$ and $|x - x'| < \delta$ it holds that $x' \in F_k.$
+Suppose this does not hold.
+Then for any $\delta > 0,$ there exists $x' \in F$ with $|x - x'| < \delta$ such that $x' \not \in F_k.$
+Therefore, at least one $F_m$ with $m \neq k$ must contain elements arbitrarily close to $x.$
+This means that $x$ is a [limit point](https://mathworld.wolfram.com/LimitPoint.html) of $F_m.$
+But a closed set must contain its limit points and $x \not \in F_m$ since $F_1, \dots, F_n$ are all disjoint, which is a contradiction.
+Therefore the hypothesis holds.
+
+Let $x \in F.$
+We want to show $g$ is continuous at $x.$
+Suppose $\epsilon > 0.$
+First, $x \in F_k$ for some $k \in \{1, \dots, n\}.$
+Since $g|_{F_k} \to \mathbb{R}$ is continuous, there exists $\delta_\epsilon$ such that $|g|_{F_k}(x) - g|_{F_k}(x')| < \epsilon$ for all $x' \in F$ with $|x - x'| < \delta_\epsilon.$
+By the hypothesis we just showed, there also exists $\delta_x > 0$ such that if $x' \in F$ and $|x - x'| < \delta_x$ then $x' \in F_k.$
+Therefore, if $|x - x'| < \min(\delta_\epsilon, \delta_x),$ we have that $x' \in F_k$ so $g|_{F_k}(x') = g(x)$ so
+
+$$|g(x) - g(x')| = |g|_{F_k}(x) - g|_{F_k}(x')| < \epsilon.$$
+
+We conclude that $g$ is continuous on $F.$
 :::
 ::::
 
