@@ -1867,3 +1867,81 @@ Suppose $f$ is bounded above by some constant $C \in \mathbb{R}.$
 Then for all $K \geq C$ and any $x \in X$ we have that $|f(x)| < K,$ so $|f(x) - f_K(x)| \leq \frac{1}{2^K}.$
 Therefore $f_1, f_2, \ldots$ converges to $f$ uniformly on $X,$ and (4) holds.
 :::
+
+### Luzin's theorem
+
+:::{prf:theorem} Luzin's theorem
+:label: mira:thm:luzin
+Suppose $g: \mathbb{R} \to \mathbb{R}$ is a {prf:ref}`Borel measurable function<mira:def:measurable-function>`.
+Then for every $\epsilon > 0,$ there exists a closed set $F \subseteq \mathbb{R}$ such that $|\mathbb{R} \setminus F| < \epsilon$ and $g|_F$ is a continuous function on $F.$
+:::
+
+:::{dropdown} Proof: Luzin's theorem
+First, consider the special case where $g = d_1 \chi_{D_1} + \dots + d_n \chi_{D_n}$ for some $d_1, \dots, d_n \in \mathbb{R}$ and some disjoint Borel sets $D_1, \dots, D_n \subseteq \mathbb{R}.$
+Suppose $\epsilon > 0.$
+By {prf:ref}`mira:thm:approximation-of-borel-sets-from-below-by-closed-sets`, there exist a closed set $F_k \subseteq D_k$ and an open set $G_k \supseteq D_k$ such that
+
+$$\begin{equation}
+|G_k \setminus D_k| < \frac{\epsilon}{2n} \text{ and } |D_k \setminus F_k| < \frac{\epsilon}{2n}.
+\end{equation}$$
+
+Since $F_k \subseteq D_k \subseteq G_k,$ we have $G_k \setminus F_k = (G_k \setminus D_k) \cup (D_k \setminus F_k),$ so $|G_k \setminus F_k| < \frac{\epsilon}{n}$ for each $k \in \{1, \dots, n\}.$
+Let
+
+$$\begin{equation}
+F = \left(\bigcup_{k=1}^n F_k\right) \cup \left(\bigcap_{k=1}^n (\mathbb{R} \setminus G_k)\right).
+\end{equation}$$
+
+We have $\mathbb{R} \setminus F \subseteq \cup_{k = 1}^n (G_k \setminus F_k),$ so by subadditivity of the outer measure, $|\mathbb{R} \setminus F| < \epsilon.$
+Because $F_k \subseteq D_k,$ $g$ is identically $d_k$ on $F_k.$
+Thus $g|_{F_k}$ is continuous for each $k = \{1, \dots, n\}.$
+In addition, because 
+
+$$\begin{equation}
+\bigcap_{k=1}^n (\mathbb{R} \setminus G_k) \subseteq \bigcap_{k=1}^n (\mathbb{R} \setminus D_k),
+\end{equation}$$
+
+$g$ is identically $0$ on $\bigcap_{k=1}^n (\mathbb{R} \setminus G_k),$ which is a closed set.
+Since $g$ is continuous on a collection of disjoint closed sets, it must be continuous on their union (from {ref}`Exercise 2.C.9 <mira:ex-2c9>`), so $g$ is continuous on $F.$
+This concludes the proof in this special case.
+
+Now consider the general case where $g: \mathbb{R} \to \mathbb{R}$ is a general measurable function.
+From {prf:ref}`mira:thm:approximation-by-simple-functions`, there exists a sequence of measurable simple functions $g_1, g_2, \dots$ that converges pointwise to $g.$
+
+From the special case we just proved, for each $k \in \mathbb{Z}^+$ there exists $C_k \subseteq \mathbb{R}$ such that $|\mathbb{R} \setminus C_k| < \frac{\epsilon}{2^{k+1}}$ and $g_k|_{C_k}$ is continuous.
+Let
+
+$$\begin{equation}
+C = \bigcap_{k = 1}^\infty C_k.$
+\end{equation}$$
+
+$C$ is a closed set and $g_k|_C$ is continuous for every $k \in \mathbb{Z}^+,$ and also
+
+$$\begin{equation}
+\mathbb{R} \setminus C = \mathbb{R} \setminus \bigcap_{k = 1}^\infty C_k = \bigcup_{k = 1}^\infty \mathbb{R} \setminus C_k,
+\end{equation}$$
+
+so $|\mathbb{R} \setminus C| < \frac{\epsilon}{2}.$
+
+
+For each $m \in \mathbb{Z}^+,$ the sequence $g_1|_{(m, m+1)}, g_2|_{(m, m+1)}, \dots$ converges pointwise on $(m, m+1)$ to $g|_{(m, m+1)}$ so by Egorov's theorem, for each $m \in \mathbb{Z}^+,$ there exists a a Borel set $E_m \subseteq (m, m + 1)$ such that $g_1, g_2, \dots$ converges uniformly to $g$ on $E_m$ and
+
+$$|(m, m + 1) \setminus E_m| < \frac{\epsilon}{2^{|m| + 3}}.$$
+
+Therefore $g_1, g_2, \dots$ converges uniformly to $g$ on $C \cap E_m$ for each $m \in \mathbb{Z}.$
+Because each $g_k|_C$ is continuous, we conclude from {prf:ref}`<mira:thm:uniform-limit-of-continuous-functions-is-continuous>` that $g|_{C \cap E_m}$ is continuous for each $m \in \mathbb{Z}.$
+Thus $g|_D$ is continuous where
+
+$$D = \bigcup_{m \in \mathbb{Z}} (C \cap E_m).$$
+
+Now, we have
+
+$$\mathbb{R} \setminus D \subseteq \mathbb{Z} \cup \left(\bigcup_{m \in \mathbb{Z}} ((m, m + 1) \setminus E_m) \right) \cup (\mathbb{R} \setminus C)$$
+
+from which we conclude that $|\mathbb{R} \setminus D| < \epsilon.$
+By *** there exists a closed set $F \subseteq D$ such that $|D \setminus D| < \epsilon - |\mathbb{R} \setminus D|,$ so
+
+$$|\mathbb{R} \setminus F| = |(\mathbb{R} \setminus D) \cup (D \setminus F)| \leq |\mathbb{R} \setminus D| + |D \setminus F| < \epsilon.$$
+
+Finally, because the restriction of a continuous function to a smaller domain is also continuous, $g|_F$ is continuous, completing the proof.
+:::
