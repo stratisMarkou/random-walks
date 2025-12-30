@@ -1879,7 +1879,7 @@ Then for every $\epsilon > 0,$ there exists a closed set $F \subseteq \mathbb{R}
 :::{dropdown} Proof: Luzin's theorem
 First, consider the special case where $g = d_1 \chi_{D_1} + \dots + d_n \chi_{D_n}$ for some $d_1, \dots, d_n \in \mathbb{R}$ and some disjoint Borel sets $D_1, \dots, D_n \subseteq \mathbb{R}.$
 Suppose $\epsilon > 0.$
-By {prf:ref}`mira:thm:approximation-of-borel-sets-from-below-by-closed-sets`, there exist a closed set $F_k \subseteq D_k$ and an open set $G_k \supseteq D_k$ such that
+By {prf:ref}`mira:thm:equivalent-conditions-for-lebesgue-measurable-set`, there exist a closed set $F_k \subseteq D_k$ and an open set $G_k \supseteq D_k$ such that
 
 $$\begin{equation}
 |G_k \setminus D_k| < \frac{\epsilon}{2n} \text{ and } |D_k \setminus F_k| < \frac{\epsilon}{2n}.
