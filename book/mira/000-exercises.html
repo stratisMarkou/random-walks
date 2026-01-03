@@ -2230,6 +2230,187 @@ Therefore, <span class="math notranslate nohighlight">\(V \subseteq A\)</span> i
 </section>
 <section id="chapter-2-e">
 <h2>Chapter 2.E<a class="headerlink" href="#chapter-2-e" title="Link to this heading">#</a></h2>
+<div class="tip admonition" id="mira-ex-2e1">
+<p class="admonition-title">Exercise 2.E.1</p>
+<p>Suppose <span class="math notranslate nohighlight">\(X\)</span> is a finite set.
+Explain why a sequence of functions from <span class="math notranslate nohighlight">\(X\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> that converges pointwise on <span class="math notranslate nohighlight">\(X\)</span> also converges uniformly on <span class="math notranslate nohighlight">\(X.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(f_1, f_2, \dots\)</span> is a sequence of functions from <span class="math notranslate nohighlight">\(X\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> that converges pointwise on <span class="math notranslate nohighlight">\(X,\)</span> to some limit function <span class="math notranslate nohighlight">\(f.\)</span></p>
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(\epsilon &gt; 0.\)</span>
+For each <span class="math notranslate nohighlight">\(x \in X,\)</span> there exists some <span class="math notranslate nohighlight">\(N_x\)</span> such that for all <span class="math notranslate nohighlight">\(n &gt; N_x\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[
+\label{eq:mira:ex2e1:eq1}
+\begin{equation}
+|f_n(x) - f(x)| &lt; \epsilon.
+\end{equation}
+\]</div>
+<p class="sd-card-text">Now suppose <span class="math notranslate nohighlight">\(X = \{x_1, \dots, x_K\}\)</span> if finite.
+Let <span class="math notranslate nohighlight">\(N = \max\{N_{x_1}, \dots, N_{x_K}\}.\)</span>
+Then the above equation holds for all <span class="math notranslate nohighlight">\(n \geq N\)</span> and every <span class="math notranslate nohighlight">\(x,\)</span> which implies that the sequence converges to <span class="math notranslate nohighlight">\(f\)</span> uniformly.</p>
+</div>
+</details></div>
+<div class="tip admonition" id="mira-ex-2e2">
+<p class="admonition-title">Exercise 2.E.2</p>
+<p>Give an example of a sequence of functions from <span class="math notranslate nohighlight">\(\mathbb{Z}^+\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> that converges pointwise on <span class="math notranslate nohighlight">\(\mathbb{Z}^+\)</span> but does not converge uniformly on <span class="math notranslate nohighlight">\(\mathbb{Z}^+.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Consider the function <span class="math notranslate nohighlight">\(f_k: \mathbb{Z}^+ \to \mathbb{R}\)</span> defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+f_k(x) = \mathbf{1}_{x = k}
+\end{equation}\]</div>
+<p class="sd-card-text">This converges pointwise to the zero function, but does not converge uniformly.</p>
+</div>
+</details></div>
+<div class="tip admonition" id="mira-ex-2e3">
+<p class="admonition-title">Exercise 2.E.3</p>
+<p>Give an example of a sequence of continuous functions <span class="math notranslate nohighlight">\(f_1, f_2, \dots\)</span> from <span class="math notranslate nohighlight">\([0, 1]\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> that converges pointwise to a function <span class="math notranslate nohighlight">\(f : [0, 1] \to \mathbb{R}\)</span> that is not a bounded function.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(f: [0, 1] \to \mathbb{R}\)</span> be defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}f(x) = \begin{cases}
+\frac{1}{x - \frac{1}{2}} &amp; \text{ if } x \neq \frac{1}{2} \\
+0 &amp; \text{ otherwise.}
+\end{cases}\end{split}\]</div>
+<p class="sd-card-text">Then, define <span class="math notranslate nohighlight">\(f_n: [0, 1] \to \mathbb{R}\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}f_n(x) = \begin{cases}
+\frac{1}{x - \frac{1}{2}} &amp; \text{ if } \left|x - \frac{1}{2}\right| \geq \frac{1}{2n} \\
+4n^2 \left(x - \frac{1}{2}\right) &amp; \text{ otherwise.}
+\end{cases}\end{split}\]</div>
+<p class="sd-card-text">Note that <span class="math notranslate nohighlight">\(f_n\)</span> is continuous.
+In particular it can be verified that it is continuous at</p>
+<div class="math notranslate nohighlight">
+\[\left|x - \frac{1}{2}\right| = \frac{1}{2n},\]</div>
+<p class="sd-card-text">and it is clear that it is continuous at all other <span class="math notranslate nohighlight">\(x \in [0, 1].\)</span>
+It is also clear that <span class="math notranslate nohighlight">\(f_n \to f\)</span> pointwise for all <span class="math notranslate nohighlight">\(x \neq \frac{1}{2}.\)</span>
+Finally, at <span class="math notranslate nohighlight">\(x = \frac{1}{2},\)</span> we have <span class="math notranslate nohighlight">\(f_n(\frac{1}{2}) = f(\frac{1}{2}) = 0.\)</span></p>
+</div>
+</details></div>
+<div class="tip admonition" id="mira-ex-2e4">
+<p class="admonition-title">Exercise 2.E.4</p>
+<p>Prove or give a counterexample: If <span class="math notranslate nohighlight">\(A \subseteq \mathbb{R}\)</span> and <span class="math notranslate nohighlight">\(f_1, f_2, \dots\)</span> is a sequence of uniformly continuous functions from <span class="math notranslate nohighlight">\(A\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> that converges uniformly to a function <span class="math notranslate nohighlight">\(f: A \to \mathbb{R},\)</span> then <span class="math notranslate nohighlight">\(f\)</span> is uniformly continuous on <span class="math notranslate nohighlight">\(A.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(A \subseteq \mathbb{R}\)</span> and <span class="math notranslate nohighlight">\(f_1, f_2, \dots\)</span> is a sequence of uniformly continuous functions from <span class="math notranslate nohighlight">\(A\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> that converges uniformly to a function <span class="math notranslate nohighlight">\(f: A \to \mathbb{R}.\)</span></p>
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(\epsilon &gt; 0.\)</span>
+Since <span class="math notranslate nohighlight">\(f_1, f_2, \dots\)</span> converge to <span class="math notranslate nohighlight">\(f\)</span> uniformly, there exists <span class="math notranslate nohighlight">\(n\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[|f_n(x) - f(x)| &lt; \frac{\epsilon}{3}.\]</div>
+<p class="sd-card-text">Since <span class="math notranslate nohighlight">\(f_n\)</span> is uniformly continuous, there exists <span class="math notranslate nohighlight">\(\delta\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[|f_n(x) - f_n(y)| &lt; \frac{\epsilon}{3},\]</div>
+<p class="sd-card-text">for all <span class="math notranslate nohighlight">\(x, y \in A\)</span> such that <span class="math notranslate nohighlight">\(|x - y| &lt; \delta.\)</span>
+Therefore, for any <span class="math notranslate nohighlight">\(x, y \in A\)</span> with <span class="math notranslate nohighlight">\(|x - y| &lt; \delta,\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+|f(x) - f(y)| &amp;\leq |f(x) - f_n(x)| + |f_n(x) - f_n(y)| + |f_n(y) - f(y)| &lt; \epsilon,
+\end{align}\]</div>
+<p class="sd-card-text">which concludes the proof.</p>
+</div>
+</details></div>
+<div class="tip admonition" id="mira-ex-2e5">
+<p class="admonition-title">Exercise 2.E.5</p>
+<p>Give an example to show that <a class="reference internal" href="002-measures.html#mira:thm:egorovs-theorem">Egorov’s Theorem</a> can fail without the hypothesis that <span class="math notranslate nohighlight">\(\mu(X) &lt; \infty.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Consider the function <span class="math notranslate nohighlight">\(f_k: \mathbb{R} \to \mathbb{R}\)</span> defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+f_k(x) = \frac{e^x}{k}.
+\end{equation}\]</div>
+<p class="sd-card-text">The sequence of functions <span class="math notranslate nohighlight">\(f_1, f_2, \dots\)</span> converges pointwise to the function <span class="math notranslate nohighlight">\(0\)</span> on <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> but does not satisfy the conclusion of Egorov’s theorem.
+Specifically, fixing <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> the conclusion of Egorov’s theorem implies that there exists a Borel set <span class="math notranslate nohighlight">\(E \subseteq \mathbb{R}\)</span> such that <span class="math notranslate nohighlight">\(|\mathbb{R} \setminus E| &lt; \epsilon\)</span> and <span class="math notranslate nohighlight">\(f_1, f_2, \dots\)</span> converges uniformly to <span class="math notranslate nohighlight">\(0\)</span> on <span class="math notranslate nohighlight">\(E.\)</span>
+But we will show this conclusion does not hold here.
+Suppose such a set <span class="math notranslate nohighlight">\(E\)</span> exists.
+Because <span class="math notranslate nohighlight">\(|\mathbb{R} \setminus E| &lt; \epsilon &lt; \infty,\)</span> the set <span class="math notranslate nohighlight">\(E\)</span> must be unbounded both above (and below).
+If <span class="math notranslate nohighlight">\(E\)</span> were bounded, then we would have <span class="math notranslate nohighlight">\(|\mathbb{R} \setminus E| = \infty.\)</span>
+Now, while <span class="math notranslate nohighlight">\(f_k(x) = \frac{e^x}{k}\)</span> converges pointwise to <span class="math notranslate nohighlight">\(0,\)</span> it does not converge uniformly to <span class="math notranslate nohighlight">\(0\)</span> on <span class="math notranslate nohighlight">\(E,\)</span> because <span class="math notranslate nohighlight">\(E\)</span> is unbounded above, so for any fixed <span class="math notranslate nohighlight">\(k \in \mathbb{Z}\)</span> we can always find <span class="math notranslate nohighlight">\(x \in E\)</span> such that <span class="math notranslate nohighlight">\(f_k(x)\)</span> is arbitrarily large.</p>
+</div>
+</details></div>
+<div class="tip admonition" id="mira-ex-2e6">
+<p class="admonition-title">Exercise 2.E.6</p>
+<p>Suppose <span class="math notranslate nohighlight">\((X, \mathcal{S}, \mu)\)</span> is a measure space with <span class="math notranslate nohighlight">\(\mu(X) &lt; \infty.\)</span> Suppose <span class="math notranslate nohighlight">\(f_1, f_2, \dots\)</span> is a sequence of <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>-measurable functions from <span class="math notranslate nohighlight">\(X\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> such that <span class="math notranslate nohighlight">\(\lim_{k \to \infty} f_k(x) = \infty\)</span> for each <span class="math notranslate nohighlight">\(x \in X.\)</span> Prove that for every <span class="math notranslate nohighlight">\(\epsilon &gt; 0,\)</span> there exists a set <span class="math notranslate nohighlight">\(E \in \mathcal{S}\)</span> such that <span class="math notranslate nohighlight">\(\mu(X \setminus E) &lt; \epsilon\)</span> and <span class="math notranslate nohighlight">\(f_1, f_2, \dots\)</span> converges uniformly to <span class="math notranslate nohighlight">\(\infty\)</span> on <span class="math notranslate nohighlight">\(E.\)</span></p>
+<p>Note: “converges to <span class="math notranslate nohighlight">\(\infty\)</span>” means that for every <span class="math notranslate nohighlight">\(t &gt; 0,\)</span> there exists <span class="math notranslate nohighlight">\(n \in \mathbb{Z}^+\)</span> such that <span class="math notranslate nohighlight">\(f_k(x) &gt; t\)</span> for all integers <span class="math notranslate nohighlight">\(k \geq n\)</span> and all <span class="math notranslate nohighlight">\(x \in E.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">In the proof of <a class="reference internal" href="002-measures.html#mira:thm:egorovs-theorem">Egorov’s Theorem</a>, replacing the definition of <span class="math notranslate nohighlight">\(A_{m, n}\)</span> with</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+A_{m, n} = \bigcap_{k=m}^\infty \{x \in X: f_k(x) &gt; n\}
+\end{equation}\]</div>
+<p class="sd-card-text">and repeating the proof with minor changes shows the result.</p>
+</div>
+</details></div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise 2.E.7 (Dini’s Theorem)</p>
+<p>Suppose <span class="math notranslate nohighlight">\(F\)</span> is a closed bounded subset of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> and <span class="math notranslate nohighlight">\(g_1, g_2, \dots\)</span> is an increasing sequence of continuous real-valued functions on <span class="math notranslate nohighlight">\(F\)</span> (thus <span class="math notranslate nohighlight">\(g_1(x) \leq g_2(x) \leq \cdots\)</span> for all <span class="math notranslate nohighlight">\(x \in F\)</span>) such that <span class="math notranslate nohighlight">\(\sup\{g_1(x), g_2(x), \dots\} &lt; \infty\)</span> for each <span class="math notranslate nohighlight">\(x \in F.\)</span> Define a real-valued function <span class="math notranslate nohighlight">\(g\)</span> on <span class="math notranslate nohighlight">\(F\)</span> by</p>
+<div class="math notranslate nohighlight">
+\[g(x) = \lim_{k \to \infty} g_k(x).\]</div>
+<p>Prove that <span class="math notranslate nohighlight">\(g\)</span> is continuous on <span class="math notranslate nohighlight">\(F\)</span> if and only if <span class="math notranslate nohighlight">\(g_1, g_2, \dots\)</span> converges uniformly on <span class="math notranslate nohighlight">\(F\)</span> to <span class="math notranslate nohighlight">\(g.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(g_1, g_2, \dots\)</span> converges uniformly to <span class="math notranslate nohighlight">\(g.\)</span>
+By <a class="reference internal" href="002-measures.html#mira:thm:uniform-limit-of-continuous-functions-is-continuous">Theorem 100</a>, since <span class="math notranslate nohighlight">\(g_1, g_2, \dots\)</span> is a sequence of continuous functions that converges uniformly to <span class="math notranslate nohighlight">\(g,\)</span> it follows that <span class="math notranslate nohighlight">\(g\)</span> is continuous.</p>
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(g\)</span> is continuous.
+Define <span class="math notranslate nohighlight">\(h_n = g - g_n.\)</span>
+Equivalently, we can show that <span class="math notranslate nohighlight">\(h_1, h_2, \dots\)</span> converges uniformly on <span class="math notranslate nohighlight">\(F\)</span> to <span class="math notranslate nohighlight">\(0.\)</span>
+Note that <span class="math notranslate nohighlight">\(h_1, h_2, \dots\)</span> is also continuous, non-negative and decreasing.
+Define</p>
+<div class="math notranslate nohighlight">
+\[\Delta_n = \sup_{x \in F} h_n(x),\]</div>
+<p class="sd-card-text">and note that <span class="math notranslate nohighlight">\(\Delta_1, \Delta_2, \dots\)</span> is a non-negative and decreasing sequence.
+Therefore, it converges to some <span class="math notranslate nohighlight">\(\Delta \geq 0.\)</span>
+Since each <span class="math notranslate nohighlight">\(h_n\)</span> is a continuous function on a closed subset <span class="math notranslate nohighlight">\(F \subseteq \mathbb{R},\)</span> it is bounded and attains its supremum: for each <span class="math notranslate nohighlight">\(n \in \mathbb{Z},\)</span> there exists <span class="math notranslate nohighlight">\(x_n \in F\)</span> such that <span class="math notranslate nohighlight">\(h_n(x_n) = \Delta_n &lt; \infty.\)</span>
+Since <span class="math notranslate nohighlight">\(x_n\)</span> is a sequence in a closed and bounded subset <span class="math notranslate nohighlight">\(F \subseteq \mathbb{R},\)</span> it has a convergent subsequence <span class="math notranslate nohighlight">\(x_{k_n},\)</span> which converges to some limit <span class="math notranslate nohighlight">\(x^*.\)</span></p>
+<p class="sd-card-text">Now, we will show that <span class="math notranslate nohighlight">\(h_n(x^*) \geq \Delta\)</span> for each <span class="math notranslate nohighlight">\(n,\)</span> which can be seen as follows.
+Suppose <span class="math notranslate nohighlight">\(h_N(x^*) &lt; \Delta\)</span> for some <span class="math notranslate nohighlight">\(N.\)</span>
+Then, by the continuity of <span class="math notranslate nohighlight">\(h_N,\)</span> there exists <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(h_N(x) &lt; \Delta\)</span> for all <span class="math notranslate nohighlight">\(x \in (x^* - \delta, x^* + \delta).\)</span>
+But since <span class="math notranslate nohighlight">\(x_{k_m} \to x^*,\)</span> there exists <span class="math notranslate nohighlight">\(M\)</span> such that <span class="math notranslate nohighlight">\(x_{k_m} \in (x^* - \delta, x^* + \delta)\)</span> for all <span class="math notranslate nohighlight">\(m &gt; M.\)</span>
+Therefore <span class="math notranslate nohighlight">\(h_N(x_{k_m}) &lt; \Delta\)</span> for all <span class="math notranslate nohighlight">\(m &gt; M.\)</span>
+In addition since <span class="math notranslate nohighlight">\(h_1, h_2, \dots\)</span> is a decreasing sequence, we also have <span class="math notranslate nohighlight">\(h_{k_m}(x_{k_m}) &lt; \Delta\)</span> for all sufficiently large <span class="math notranslate nohighlight">\(k_m.\)</span>
+This is a contradiction with the earlier conclusion that <span class="math notranslate nohighlight">\(h_n(x_n) = \Delta_n \geq \Delta.\)</span>
+This means that <span class="math notranslate nohighlight">\(h_n(x^*) \geq \Delta,\)</span> but since <span class="math notranslate nohighlight">\(h_n\)</span> converges to <span class="math notranslate nohighlight">\(0\)</span> pointwise, it must be that <span class="math notranslate nohighlight">\(\Delta = 0,\)</span> which means that <span class="math notranslate nohighlight">\(h_n\)</span> converges to <span class="math notranslate nohighlight">\(0\)</span> uniformly.</p>
+</div>
+</details></div>
 <div class="tip admonition" id="mira-ex-2e9">
 <p class="admonition-title">Exercise 2.E.9</p>
 <p>Suppose <span class="math notranslate nohighlight">\(F_1, \dots, F_n\)</span> are disjoint closed subsets of <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span>
