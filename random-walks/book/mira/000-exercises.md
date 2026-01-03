@@ -1908,6 +1908,193 @@ Therefore, $V \subseteq A$ is not Lebesgue measurable.
 
 
 ## Chapter 2.E
+
+::::{admonition} Exercise 2.E.1
+:class: tip
+:name: mira:ex-2e1
+
+Suppose $X$ is a finite set.
+Explain why a sequence of functions from $X$ to $\mathbb{R}$ that converges pointwise on $X$ also converges uniformly on $X.$
+
+:::{dropdown} Solution
+Suppose $f_1, f_2, \dots$ is a sequence of functions from $X$ to $\mathbb{R}$ that converges pointwise on $X,$ to some limit function $f.$
+
+Let $\epsilon > 0.$
+For each $x \in X,$ there exists some $N_x$ such that for all $n > N_x$ we have
+
+$$
+\label{eq:mira:ex2e1:eq1}
+\begin{equation}
+|f_n(x) - f(x)| < \epsilon.
+\end{equation}
+$$
+
+Now suppose $X = \{x_1, \dots, x_K\}$ if finite.
+Let $N = \max\{N_{x_1}, \dots, N_{x_K}\}.$
+Then the above equation holds for all $n \geq N$ and every $x,$ which implies that the sequence converges to $f$ uniformly.
+:::
+::::
+
+
+::::{admonition} Exercise 2.E.2
+:class: tip
+:name: mira:ex-2e2
+
+Give an example of a sequence of functions from $\mathbb{Z}^+$ to $\mathbb{R}$ that converges pointwise on $\mathbb{Z}^+$ but does not converge uniformly on $\mathbb{Z}^+.$
+
+:::{dropdown} Solution
+Consider the function $f_k: \mathbb{Z}^+ \to \mathbb{R}$ defined as
+
+$$\begin{equation}
+f_k(x) = \mathbf{1}_{x = k}
+\end{equation}$$
+
+This converges pointwise to the zero function, but does not converge uniformly.
+:::
+::::
+
+
+::::{admonition} Exercise 2.E.3
+:class: tip
+:name: mira:ex-2e3
+Give an example of a sequence of continuous functions $f_1, f_2, \dots$ from $[0, 1]$ to $\mathbb{R}$ that converges pointwise to a function $f : [0, 1] \to \mathbb{R}$ that is not a bounded function.
+
+:::{dropdown} Solution
+Let $f: [0, 1] \to \mathbb{R}$ be defined as
+
+$$f(x) = \begin{cases}
+\frac{1}{x - \frac{1}{2}} & \text{ if } x \neq \frac{1}{2} \\
+0 & \text{ otherwise.}
+\end{cases}$$
+
+Then, define $f_n: [0, 1] \to \mathbb{R}$ as
+
+$$f_n(x) = \begin{cases}
+\frac{1}{x - \frac{1}{2}} & \text{ if } \left|x - \frac{1}{2}\right| \geq \frac{1}{2n} \\
+4n^2 \left(x - \frac{1}{2}\right) & \text{ otherwise.}
+\end{cases}$$
+
+Note that $f_n$ is continuous.
+In particular it can be verified that it is continuous at
+
+$$\left|x - \frac{1}{2}\right| = \frac{1}{2n},$$
+
+and it is clear that it is continuous at all other $x \in [0, 1].$
+It is also clear that $f_n \to f$ pointwise for all $x \neq \frac{1}{2}.$
+Finally, at $x = \frac{1}{2},$ we have $f_n(\frac{1}{2}) = f(\frac{1}{2}) = 0.$
+:::
+::::
+
+
+
+::::{admonition} Exercise 2.E.4
+:class: tip
+:name: mira:ex-2e4
+Prove or give a counterexample: If $A \subseteq \mathbb{R}$ and $f_1, f_2, \dots$ is a sequence of uniformly continuous functions from $A$ to $\mathbb{R}$ that converges uniformly to a function $f: A \to \mathbb{R},$ then $f$ is uniformly continuous on $A.$
+
+
+:::{dropdown} Solution
+Suppose $A \subseteq \mathbb{R}$ and $f_1, f_2, \dots$ is a sequence of uniformly continuous functions from $A$ to $\mathbb{R}$ that converges uniformly to a function $f: A \to \mathbb{R}.$
+
+Let $\epsilon > 0.$
+Since $f_1, f_2, \dots$ converge to $f$ uniformly, there exists $n$ such that 
+
+$$|f_n(x) - f(x)| < \frac{\epsilon}{3}.$$
+
+Since $f_n$ is uniformly continuous, there exists $\delta$ such that 
+
+$$|f_n(x) - f_n(y)| < \frac{\epsilon}{3},$$ 
+
+for all $x, y \in A$ such that $|x - y| < \delta.$
+Therefore, for any $x, y \in A$ with $|x - y| < \delta,$ we have
+
+$$\begin{align}
+|f(x) - f(y)| &\leq |f(x) - f_n(x)| + |f_n(x) - f_n(y)| + |f_n(y) - f(y)| < \epsilon,
+\end{align}$$ 
+
+which concludes the proof.
+:::
+::::
+
+
+::::{admonition} Exercise 2.E.5
+:class: tip
+:name: mira:ex-2e5
+Give an example to show that {prf:ref}`Egorov’s Theorem <mira:thm:egorovs-theorem>` can fail without the hypothesis that $\mu(X) < \infty.$
+
+:::{dropdown} Solution
+Consider the function $f_k: \mathbb{R} \to \mathbb{R}$ defined as
+
+$$\begin{equation}
+f_k(x) = \frac{e^x}{k}.
+\end{equation}$$
+
+The sequence of functions $f_1, f_2, \dots$ converges pointwise to the function $0$ on $\mathbb{R}$ but does not satisfy the conclusion of Egorov's theorem.
+Specifically, fixing $\epsilon > 0$ the conclusion of Egorov's theorem implies that there exists a Borel set $E \subseteq \mathbb{R}$ such that $|\mathbb{R} \setminus E| < \epsilon$ and $f_1, f_2, \dots$ converges uniformly to $0$ on $E.$
+But we will show this conclusion does not hold here.
+Suppose such a set $E$ exists.
+Because $|\mathbb{R} \setminus E| < \epsilon < \infty,$ the set $E$ must be unbounded both above (and below).
+If $E$ were bounded, then we would have $|\mathbb{R} \setminus E| = \infty.$
+Now, while $f_k(x) = \frac{e^x}{k}$ converges pointwise to $0,$ it does not converge uniformly to $0$ on $E,$ because $E$ is unbounded above, so for any fixed $k \in \mathbb{Z}$ we can always find $x \in E$ such that $f_k(x)$ is arbitrarily large.
+:::
+::::
+
+
+::::{admonition} Exercise 2.E.6
+:class: tip
+:name: mira:ex-2e6
+Suppose $(X, \mathcal{S}, \mu)$ is a measure space with $\mu(X) < \infty.$ Suppose $f_1, f_2, \dots$ is a sequence of $\mathcal{S}$-measurable functions from $X$ to $\mathbb{R}$ such that $\lim_{k \to \infty} f_k(x) = \infty$ for each $x \in X.$ Prove that for every $\epsilon > 0,$ there exists a set $E \in \mathcal{S}$ such that $\mu(X \setminus E) < \epsilon$ and $f_1, f_2, \dots$ converges uniformly to $\infty$ on $E.$  
+
+Note: "converges to $\infty$" means that for every $t > 0,$ there exists $n \in \mathbb{Z}^+$ such that $f_k(x) > t$ for all integers $k \geq n$ and all $x \in E.$
+
+:::{dropdown} Solution
+In the proof of {prf:ref}`Egorov’s Theorem <mira:thm:egorovs-theorem>`, replacing the definition of $A_{m, n}$ with
+
+$$\begin{equation}
+A_{m, n} = \bigcap_{k=m}^\infty \{x \in X: f_k(x) > n\}
+\end{equation}$$
+
+and repeating the proof with minor changes shows the result.
+:::
+::::
+
+::::{admonition} Exercise 2.E.7 (Dini's Theorem)
+:class: tip
+Suppose $F$ is a closed bounded subset of $\mathbb{R}$ and $g_1, g_2, \dots$ is an increasing sequence of continuous real-valued functions on $F$ (thus $g_1(x) \leq g_2(x) \leq \cdots$ for all $x \in F$) such that $\sup\{g_1(x), g_2(x), \dots\} < \infty$ for each $x \in F.$ Define a real-valued function $g$ on $F$ by
+
+$$g(x) = \lim_{k \to \infty} g_k(x).$$
+
+Prove that $g$ is continuous on $F$ if and only if $g_1, g_2, \dots$ converges uniformly on $F$ to $g.$
+
+:::{dropdown} Solution
+Suppose $g_1, g_2, \dots$ converges uniformly to $g.$
+By {prf:ref}`mira:thm:uniform-limit-of-continuous-functions-is-continuous`, since $g_1, g_2, \dots$ is a sequence of continuous functions that converges uniformly to $g,$ it follows that $g$ is continuous.
+
+Suppose $g$ is continuous.
+Define $h_n = g - g_n.$
+Equivalently, we can show that $h_1, h_2, \dots$ converges uniformly on $F$ to $0.$
+Note that $h_1, h_2, \dots$ is also continuous, non-negative and decreasing.
+Define
+
+$$\Delta_n = \sup_{x \in F} h_n(x),$$
+
+and note that $\Delta_1, \Delta_2, \dots$ is a non-negative and decreasing sequence.
+Therefore, it converges to some $\Delta \geq 0.$
+Since each $h_n$ is a continuous function on a closed subset $F \subseteq \mathbb{R},$ it is bounded and attains its supremum: for each $n \in \mathbb{Z},$ there exists $x_n \in F$ such that $h_n(x_n) = \Delta_n < \infty.$
+Since $x_n$ is a sequence in a closed and bounded subset $F \subseteq \mathbb{R},$ it has a convergent subsequence $x_{k_n},$ which converges to some limit $x^*.$
+
+Now, we will show that $h_n(x^*) \geq \Delta$ for each $n,$ which can be seen as follows.
+Suppose $h_N(x^*) < \Delta$ for some $N.$
+Then, by the continuity of $h_N,$ there exists $\delta > 0$ such that $h_N(x) < \Delta$ for all $x \in (x^* - \delta, x^* + \delta).$
+But since $x_{k_m} \to x^*,$ there exists $M$ such that $x_{k_m} \in (x^* - \delta, x^* + \delta)$ for all $m > M.$
+Therefore $h_N(x_{k_m}) < \Delta$ for all $m > M.$
+In addition since $h_1, h_2, \dots$ is a decreasing sequence, we also have $h_{k_m}(x_{k_m}) < \Delta$ for all sufficiently large $k_m.$
+This is a contradiction with the earlier conclusion that $h_n(x_n) = \Delta_n \geq \Delta.$
+This means that $h_n(x^*) \geq \Delta,$ but since $h_n$ converges to $0$ pointwise, it must be that $\Delta = 0,$ which means that $h_n$ converges to $0$ uniformly.
+:::
+:::: 
+
+
 ::::{admonition} Exercise 2.E.9
 :class: tip
 :name: mira:ex-2e9

@@ -1767,7 +1767,7 @@ $$\begin{equation}
 For $m \in \mathbb{Z}^+,$ let
 
 $$\begin{equation}
-A_{m, n} = \bigcap_{k=m}^\infty \{x \in X: |f_k(x) - f(x)| < \frac{1}{n}\} = X.
+A_{m, n} = \bigcap_{k=m}^\infty \{x \in X: |f_k(x) - f(x)| < \frac{1}{n}\}.
 \end{equation}$$
 
 Each $A_{m, n} \in S$ because each $f_k - f$ is an $S$-measurable function.
