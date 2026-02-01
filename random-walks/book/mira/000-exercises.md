@@ -2163,15 +2163,7 @@ Therefore, $F$ contains all its limit points, so it is closed.
 :class: tip
 :name: mira:ex-2e11
 
-::::{admonition} Exercise 2.E.11
-:class: tip
-:name: mira:ex-2e11
-
 Prove or give a counterexample: If $F \subseteq \mathbb{R}$ is such that every bounded continuous function from $F$ to $\mathbb{R}$ can be extended to a continuous function from $\mathbb{R}$ to $\mathbb{R},$ then $F$ is a closed subset of $\mathbb{R}.$
-
-:::{dropdown} Solution
-:::
-:::: 
 
 :::{dropdown} Solution
 :::
