@@ -2200,17 +2200,38 @@ Therefore $F$ must be closed.
 :class: tip
 :name: mira:ex-2e12
 
-Give an example of a Borel measurable function $f$ from $\mathbb{R}$ to $\mathbb{R}$ such that there does not exist a set $B \subseteq \mathbb{R}$ with $|\mathbb{R} \setminus B| = 0$ and $f|_B$ is a continuous function on $B$.
+Give an example of a Borel measurable function $f$ from $\mathbb{R}$ to $\mathbb{R}$ such that there does not exist a set $B \subseteq \mathbb{R}$ with $|\mathbb{R} \setminus B| = 0$ and $f|_B$ is a continuous function on $B.$
 
 :::{dropdown} Solution
-Consider the function 
+<!-- 
+Let $b_1, b_2, \dots$ be an enumeration of the rationals.
+Consider a slightly modified version of the function $f: \mathbb{R} \to \mathbb{R}$ considered in {ref}`Exercise 2.E.14<mira:ex-2e14>`
 
 $$\begin{equation}
 f(x) = \begin{cases} 
 \displaystyle\sum_{k=1}^{\infty} \frac{1}{4^k |x - b_k|} & \text{if } x \notin \{b_1, b_2, \dots \}, \\
-\infty & \text{if } x \in \{b_1, b_2, \dots \}.
+0 & \text{ if } x \in \{b_1, b_2, \dots \}.
 \end{cases}
 \end{equation}$$
+
+The solution of {ref}`Exercise 2.E.14<mira:ex-2e14>` shows that this function is finite everywhere.
+Note that this function is Borel measurable because it is the limit of a sequence of Borel measurable functions $f_n$
+
+$$\begin{equation}
+f_n(x) = \begin{cases} 
+\displaystyle\sum_{k=1}^n \frac{1}{4^k |x - b_k|} & \text{if } x \notin \{b_1, b_2, \dots \}, \\
+0 & \text{if } x \in \{b_1, b_2, \dots \}.
+\end{cases}
+\end{equation}$$
+
+Suppose $B \subseteq \mathbb{R}$ with $|\mathbb{R} \setminus B| = 0,$ and $x_0 \in B.$
+Let $\delta > 0.$
+We will show that $f(x)$ is unbounded in $B \cap (x_0 - \delta, x_0 + \delta),$ which means it cannot be continuous at $x_0.$
+
+$B \cap (x_0 - \delta, x_0 + \delta)$ must be dense.
+
+There exists a sequence $x_1, x_2, \dots \in B \cap (x_0 - \delta, x_0 + \delta)$ that converges to a rational $b_k \in (x_0 - \delta, x_0 + \delta)$ -->
+
 :::
 ::::
 
