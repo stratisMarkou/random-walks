@@ -2182,13 +2182,14 @@ $$\begin{equation}
 f(x) = \begin{cases}
 0 & \text{ if } x < x_0, \\
 1 & \text{ if } x > x_{k_1}, \\
-g(x) & \text{ if } x \in (x, x_{k_1}]
+g(x) & \text{ if } x \in (x_0, x_{k_1}]
 \end{cases}.
 \end{equation}$$
 
 Note that $f$ is bounded and it is also continuous on $F.$
 By assumption, it can be extended to a continuous function $f': \mathbb{R} \to \mathbb{R}.$
-But since $f'$ is continuous, $f'(x_{k_n}) = (-1)^{n+1}$ converges to some limit as $n \to \infty,$ which is a contradiction.
+Since $f'$ is continuous, $f'(x_{k_n})$ must converge to some limit as $n \to \infty.$
+But $f'(x_{k_n}) = (-1)^{n+1}$ which does not have a limit, arriving at a contradiction.
 Therefore $F$ must be closed.
 :::
 ::::
