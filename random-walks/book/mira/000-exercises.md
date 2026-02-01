@@ -2135,6 +2135,93 @@ We conclude that $g$ is continuous on $F.$
 
 
 
+
+::::{admonition} Exercise 2.E.10
+:class: tip
+:name: mira:ex-2e10
+
+Suppose $F \subseteq \mathbb{R}$ is such that every continuous function from $F$ to $\mathbb{R}$ can be extended to a continuous function from $\mathbb{R}$ to $\mathbb{R}.$
+Prove that $F$ is a closed subset of $\mathbb{R}.$
+
+:::{dropdown} Solution
+Suppose $F \subseteq \mathbb{R}$ is such that every continuous function from $F$ to $\mathbb{R}$ can be extended to a continuous function from $\mathbb{R}$ to $\mathbb{R}.$
+If $F$ has no limit points, then it is closed, so we are done.
+Instead, suppose $F$ has limit points in $\mathbb{R}.$
+We will show $F$ contains its limit points.
+Suppose $x_0 \in \mathbb{R}$ is a limit point of $F$ that is not contained in $F.$
+Then, the function $f: F \to \mathbb{R}$ defined as $f(x) = (x - x_0)^{-1}$ is continuous on $F$ because $(x - x_0)^{-1}$ is continuous on $\mathbb{R} \setminus \{x_0\},$ but $f$ cannot be extended to a continuous function on $\mathbb{R}$ which can be shown as follows.
+Suppose $f: F \to \mathbb{R}$ could be extended to a continuous function $f': F \to \mathbb{R}.$
+Since $x_0$ is a limit point of $F,$ there exists a sequence $x_1, x_2, \dots \in F$ that converges to it.
+Since $f'$ is continuous, $f'(x_n)$ converges to $f'(x_0),$ which is a contradiction, because $(x_n - x_0)^{-1}$ does not have a limit as $n \to \infty.$
+Therefore, $F$ contains all its limit points, so it is closed.
+:::
+::::
+
+
+
+::::{admonition} Exercise 2.E.11
+:class: tip
+:name: mira:ex-2e11
+
+::::{admonition} Exercise 2.E.11
+:class: tip
+:name: mira:ex-2e11
+
+Prove or give a counterexample: If $F \subseteq \mathbb{R}$ is such that every bounded continuous function from $F$ to $\mathbb{R}$ can be extended to a continuous function from $\mathbb{R}$ to $\mathbb{R},$ then $F$ is a closed subset of $\mathbb{R}.$
+
+:::{dropdown} Solution
+:::
+:::: 
+
+:::{dropdown} Solution
+:::
+::::
+
+
+
+::::{admonition} Exercise 2.E.12
+:class: tip
+:name: mira:ex-2e12
+
+
+:::{dropdown} Solution
+:::
+::::
+
+
+
+::::{admonition} Exercise 2.E.13
+:class: tip
+:name: mira:ex-2e13
+
+
+:::{dropdown} Solution
+:::
+::::
+
+
+
+::::{admonition} Exercise 2.E.14
+:class: tip
+:name: mira:ex-2e14
+
+
+:::{dropdown} Solution
+:::
+::::
+
+
+
+::::{admonition} Exercise 2.E.15
+:class: tip
+:name: mira:ex-2e15
+
+
+:::{dropdown} Solution
+:::
+::::
+
+
 ## Chapter 4.A
 
 ::::{admonition} Exercise 4.A.1
