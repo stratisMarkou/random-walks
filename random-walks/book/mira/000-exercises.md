@@ -2163,9 +2163,33 @@ Therefore, $F$ contains all its limit points, so it is closed.
 :class: tip
 :name: mira:ex-2e11
 
-Prove or give a counterexample: If $F \subseteq \mathbb{R}$ is such that every bounded continuous function from $F$ to $\mathbb{R}$ can be extended to a continuous function from $\mathbb{R}$ to $\mathbb{R},$ then $F$ is a closed subset of $\mathbb{R}.$
+Prove or give a counterexample:
+If $F \subseteq \mathbb{R}$ is such that every bounded continuous function from $F$ to $\mathbb{R}$ can be extended to a continuous function from $\mathbb{R}$ to $\mathbb{R},$ then $F$ is a closed subset of $\mathbb{R}.$
 
 :::{dropdown} Solution
+Suppose $F \subseteq \mathbb{R}$ is such that every bounded continuous function from $F$ to $\mathbb{R}$ can be extended to a continuous function from $\mathbb{R}$ to $\mathbb{R}.$
+Suppose $F$ is not closed.
+We will show this leads to a contradiction.
+
+Since $F$ is not closed, there exists $x_0 \in \mathbb{R}$ that is a limit point of $F$ but is not contained in $F.$
+There exists a sequence $x_1, x_2, \dots \in F$ that converges to $x_0.$
+This sequence must have a subsequence $x_{k_1}, x_{k_2}, \dots$ that is monotonic decreasing and converges to $x_0$ from above, or is monotonic increasing and converges to $x_0$ from below.
+Without loss of generality, suppose the former.
+Now, define $g: (x_0, x_{k_1}] \to \mathbb{R}$ as the piecewise linear function that passes through the points $(x_{k_n}, (-1)^{n + 1}),$ and note that $g$ is bounded and continuous.
+Then define $f: F \to \mathbb{R}$ as
+
+$$\begin{equation}
+f(x) = \begin{cases}
+0 & \text{ if } x < x_0, \\
+1 & \text{ if } x > x_{k_1}, \\
+g(x) & \text{ if } x \in (x, x_{k_1}]
+\end{cases}.
+\end{equation}$$
+
+Note that $f$ is bounded and it is also continuous on $F.$
+By assumption, it can be extended to a continuous function $f': \mathbb{R} \to \mathbb{R}.$
+But since $f'$ is continuous, $f'(x_{k_n}) = (-1)^{n+1}$ converges to some limit as $n \to \infty,$ which is a contradiction.
+Therefore $F$ must be closed.
 :::
 ::::
 
@@ -2175,8 +2199,17 @@ Prove or give a counterexample: If $F \subseteq \mathbb{R}$ is such that every b
 :class: tip
 :name: mira:ex-2e12
 
+Give an example of a Borel measurable function $f$ from $\mathbb{R}$ to $\mathbb{R}$ such that there does not exist a set $B \subseteq \mathbb{R}$ with $|\mathbb{R} \setminus B| = 0$ and $f|_B$ is a continuous function on $B$.
 
 :::{dropdown} Solution
+Consider the function 
+
+$$\begin{equation}
+f(x) = \begin{cases} 
+\displaystyle\sum_{k=1}^{\infty} \frac{1}{4^k |x - b_k|} & \text{if } x \notin \{b_1, b_2, \dots \}, \\
+\infty & \text{if } x \in \{b_1, b_2, \dots \}.
+\end{cases}
+\end{equation}$$
 :::
 ::::
 
