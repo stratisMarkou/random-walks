@@ -2135,6 +2135,140 @@ We conclude that $g$ is continuous on $F.$
 
 
 
+
+::::{admonition} Exercise 2.E.10
+:class: tip
+:name: mira:ex-2e10
+
+Suppose $F \subseteq \mathbb{R}$ is such that every continuous function from $F$ to $\mathbb{R}$ can be extended to a continuous function from $\mathbb{R}$ to $\mathbb{R}.$
+Prove that $F$ is a closed subset of $\mathbb{R}.$
+
+:::{dropdown} Solution
+Suppose $F \subseteq \mathbb{R}$ is such that every continuous function from $F$ to $\mathbb{R}$ can be extended to a continuous function from $\mathbb{R}$ to $\mathbb{R}.$
+If $F$ has no limit points, then it is closed, so we are done.
+Instead, suppose $F$ has limit points in $\mathbb{R}.$
+We will show $F$ contains its limit points.
+Suppose $x_0 \in \mathbb{R}$ is a limit point of $F$ that is not contained in $F.$
+Then, the function $f: F \to \mathbb{R}$ defined as $f(x) = (x - x_0)^{-1}$ is continuous on $F$ because $(x - x_0)^{-1}$ is continuous on $\mathbb{R} \setminus \{x_0\},$ but $f$ cannot be extended to a continuous function on $\mathbb{R}$ which can be shown as follows.
+Suppose $f: F \to \mathbb{R}$ could be extended to a continuous function $f': F \to \mathbb{R}.$
+Since $x_0$ is a limit point of $F,$ there exists a sequence $x_1, x_2, \dots \in F$ that converges to it.
+Since $f'$ is continuous, $f'(x_n)$ converges to $f'(x_0),$ which is a contradiction, because $(x_n - x_0)^{-1}$ does not have a limit as $n \to \infty.$
+Therefore, $F$ contains all its limit points, so it is closed.
+:::
+::::
+
+
+
+::::{admonition} Exercise 2.E.11
+:class: tip
+:name: mira:ex-2e11
+
+Prove or give a counterexample:
+If $F \subseteq \mathbb{R}$ is such that every bounded continuous function from $F$ to $\mathbb{R}$ can be extended to a continuous function from $\mathbb{R}$ to $\mathbb{R},$ then $F$ is a closed subset of $\mathbb{R}.$
+
+:::{dropdown} Solution
+Suppose $F \subseteq \mathbb{R}$ is such that every bounded continuous function from $F$ to $\mathbb{R}$ can be extended to a continuous function from $\mathbb{R}$ to $\mathbb{R}.$
+Suppose $F$ is not closed.
+We will show this leads to a contradiction.
+
+Since $F$ is not closed, there exists $x_0 \in \mathbb{R}$ that is a limit point of $F$ but is not contained in $F.$
+There exists a sequence $x_1, x_2, \dots \in F$ that converges to $x_0.$
+This sequence must have a subsequence $x_{k_1}, x_{k_2}, \dots$ that is monotonic decreasing and converges to $x_0$ from above, or is monotonic increasing and converges to $x_0$ from below.
+Without loss of generality, suppose the former.
+Now, define $g: (x_0, x_{k_1}] \to \mathbb{R}$ as the piecewise linear function that passes through the points $(x_{k_n}, (-1)^{n + 1}),$ and note that $g$ is bounded and continuous.
+Then define $f: F \to \mathbb{R}$ as
+
+$$\begin{equation}
+f(x) = \begin{cases}
+0 & \text{ if } x < x_0, \\
+1 & \text{ if } x > x_{k_1}, \\
+g(x) & \text{ if } x \in (x_0, x_{k_1}]
+\end{cases}.
+\end{equation}$$
+
+Note that $f$ is bounded and it is also continuous on $F.$
+By assumption, it can be extended to a continuous function $f': \mathbb{R} \to \mathbb{R}.$
+Since $f'$ is continuous, $f'(x_{k_n})$ must converge to some limit as $n \to \infty.$
+But $f'(x_{k_n}) = (-1)^{n+1}$ which does not have a limit, arriving at a contradiction.
+Therefore $F$ must be closed.
+:::
+::::
+
+
+
+::::{admonition} Exercise 2.E.12
+:class: tip
+:name: mira:ex-2e12
+
+Give an example of a Borel measurable function $f$ from $\mathbb{R}$ to $\mathbb{R}$ such that there does not exist a set $B \subseteq \mathbb{R}$ with $|\mathbb{R} \setminus B| = 0$ and $f|_B$ is a continuous function on $B.$
+
+:::{dropdown} Solution
+<!-- 
+Let $b_1, b_2, \dots$ be an enumeration of the rationals.
+Consider a slightly modified version of the function $f: \mathbb{R} \to \mathbb{R}$ considered in {ref}`Exercise 2.E.14<mira:ex-2e14>`
+
+$$\begin{equation}
+f(x) = \begin{cases} 
+\displaystyle\sum_{k=1}^{\infty} \frac{1}{4^k |x - b_k|} & \text{if } x \notin \{b_1, b_2, \dots \}, \\
+0 & \text{ if } x \in \{b_1, b_2, \dots \}.
+\end{cases}
+\end{equation}$$
+
+The solution of {ref}`Exercise 2.E.14<mira:ex-2e14>` shows that this function is finite everywhere.
+Note that this function is Borel measurable because it is the limit of a sequence of Borel measurable functions $f_n$
+
+$$\begin{equation}
+f_n(x) = \begin{cases} 
+\displaystyle\sum_{k=1}^n \frac{1}{4^k |x - b_k|} & \text{if } x \notin \{b_1, b_2, \dots \}, \\
+0 & \text{if } x \in \{b_1, b_2, \dots \}.
+\end{cases}
+\end{equation}$$
+
+Suppose $B \subseteq \mathbb{R}$ with $|\mathbb{R} \setminus B| = 0,$ and $x_0 \in B.$
+Let $\delta > 0.$
+We will show that $f(x)$ is unbounded in $B \cap (x_0 - \delta, x_0 + \delta),$ which means it cannot be continuous at $x_0.$
+
+$B \cap (x_0 - \delta, x_0 + \delta)$ must be dense.
+
+There exists a sequence $x_1, x_2, \dots \in B \cap (x_0 - \delta, x_0 + \delta)$ that converges to a rational $b_k \in (x_0 - \delta, x_0 + \delta)$ -->
+
+:::
+::::
+
+
+
+::::{admonition} Exercise 2.E.13
+:class: tip
+:name: mira:ex-2e13
+
+
+:::{dropdown} Solution
+:::
+::::
+
+
+
+::::{admonition} Exercise 2.E.14
+:class: tip
+:name: mira:ex-2e14
+
+
+:::{dropdown} Solution
+:::
+::::
+
+
+
+::::{admonition} Exercise 2.E.15
+:class: tip
+:name: mira:ex-2e15
+
+
+:::{dropdown} Solution
+:::
+::::
+
+
 ## Chapter 4.A
 
 ::::{admonition} Exercise 4.A.1

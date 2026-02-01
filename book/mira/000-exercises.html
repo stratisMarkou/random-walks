@@ -2448,6 +2448,137 @@ Therefore, if <span class="math notranslate nohighlight">\(|x - x'| &lt; \min(\d
 <p class="sd-card-text">We conclude that <span class="math notranslate nohighlight">\(g\)</span> is continuous on <span class="math notranslate nohighlight">\(F.\)</span></p>
 </div>
 </details></div>
+<div class="tip admonition" id="mira-ex-2e10">
+<p class="admonition-title">Exercise 2.E.10</p>
+<p>Suppose <span class="math notranslate nohighlight">\(F \subseteq \mathbb{R}\)</span> is such that every continuous function from <span class="math notranslate nohighlight">\(F\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> can be extended to a continuous function from <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span>
+Prove that <span class="math notranslate nohighlight">\(F\)</span> is a closed subset of <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(F \subseteq \mathbb{R}\)</span> is such that every continuous function from <span class="math notranslate nohighlight">\(F\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> can be extended to a continuous function from <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span>
+If <span class="math notranslate nohighlight">\(F\)</span> has no limit points, then it is closed, so we are done.
+Instead, suppose <span class="math notranslate nohighlight">\(F\)</span> has limit points in <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span>
+We will show <span class="math notranslate nohighlight">\(F\)</span> contains its limit points.
+Suppose <span class="math notranslate nohighlight">\(x_0 \in \mathbb{R}\)</span> is a limit point of <span class="math notranslate nohighlight">\(F\)</span> that is not contained in <span class="math notranslate nohighlight">\(F.\)</span>
+Then, the function <span class="math notranslate nohighlight">\(f: F \to \mathbb{R}\)</span> defined as <span class="math notranslate nohighlight">\(f(x) = (x - x_0)^{-1}\)</span> is continuous on <span class="math notranslate nohighlight">\(F\)</span> because <span class="math notranslate nohighlight">\((x - x_0)^{-1}\)</span> is continuous on <span class="math notranslate nohighlight">\(\mathbb{R} \setminus \{x_0\},\)</span> but <span class="math notranslate nohighlight">\(f\)</span> cannot be extended to a continuous function on <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> which can be shown as follows.
+Suppose <span class="math notranslate nohighlight">\(f: F \to \mathbb{R}\)</span> could be extended to a continuous function <span class="math notranslate nohighlight">\(f': F \to \mathbb{R}.\)</span>
+Since <span class="math notranslate nohighlight">\(x_0\)</span> is a limit point of <span class="math notranslate nohighlight">\(F,\)</span> there exists a sequence <span class="math notranslate nohighlight">\(x_1, x_2, \dots \in F\)</span> that converges to it.
+Since <span class="math notranslate nohighlight">\(f'\)</span> is continuous, <span class="math notranslate nohighlight">\(f'(x_n)\)</span> converges to <span class="math notranslate nohighlight">\(f'(x_0),\)</span> which is a contradiction, because <span class="math notranslate nohighlight">\((x_n - x_0)^{-1}\)</span> does not have a limit as <span class="math notranslate nohighlight">\(n \to \infty.\)</span>
+Therefore, <span class="math notranslate nohighlight">\(F\)</span> contains all its limit points, so it is closed.</p>
+</div>
+</details></div>
+<div class="tip admonition" id="mira-ex-2e11">
+<p class="admonition-title">Exercise 2.E.11</p>
+<p>Prove or give a counterexample:
+If <span class="math notranslate nohighlight">\(F \subseteq \mathbb{R}\)</span> is such that every bounded continuous function from <span class="math notranslate nohighlight">\(F\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> can be extended to a continuous function from <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R},\)</span> then <span class="math notranslate nohighlight">\(F\)</span> is a closed subset of <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Suppose <span class="math notranslate nohighlight">\(F \subseteq \mathbb{R}\)</span> is such that every bounded continuous function from <span class="math notranslate nohighlight">\(F\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> can be extended to a continuous function from <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R}.\)</span>
+Suppose <span class="math notranslate nohighlight">\(F\)</span> is not closed.
+We will show this leads to a contradiction.</p>
+<p class="sd-card-text">Since <span class="math notranslate nohighlight">\(F\)</span> is not closed, there exists <span class="math notranslate nohighlight">\(x_0 \in \mathbb{R}\)</span> that is a limit point of <span class="math notranslate nohighlight">\(F\)</span> but is not contained in <span class="math notranslate nohighlight">\(F.\)</span>
+There exists a sequence <span class="math notranslate nohighlight">\(x_1, x_2, \dots \in F\)</span> that converges to <span class="math notranslate nohighlight">\(x_0.\)</span>
+This sequence must have a subsequence <span class="math notranslate nohighlight">\(x_{k_1}, x_{k_2}, \dots\)</span> that is monotonic decreasing and converges to <span class="math notranslate nohighlight">\(x_0\)</span> from above, or is monotonic increasing and converges to <span class="math notranslate nohighlight">\(x_0\)</span> from below.
+Without loss of generality, suppose the former.
+Now, define <span class="math notranslate nohighlight">\(g: (x_0, x_{k_1}] \to \mathbb{R}\)</span> as the piecewise linear function that passes through the points <span class="math notranslate nohighlight">\((x_{k_n}, (-1)^{n + 1}),\)</span> and note that <span class="math notranslate nohighlight">\(g\)</span> is bounded and continuous.
+Then define <span class="math notranslate nohighlight">\(f: F \to \mathbb{R}\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{equation}
+f(x) = \begin{cases}
+0 &amp; \text{ if } x &lt; x_0, \\
+1 &amp; \text{ if } x &gt; x_{k_1}, \\
+g(x) &amp; \text{ if } x \in (x_0, x_{k_1}]
+\end{cases}.
+\end{equation}\end{split}\]</div>
+<p class="sd-card-text">Note that <span class="math notranslate nohighlight">\(f\)</span> is bounded and it is also continuous on <span class="math notranslate nohighlight">\(F.\)</span>
+By assumption, it can be extended to a continuous function <span class="math notranslate nohighlight">\(f': \mathbb{R} \to \mathbb{R}.\)</span>
+Since <span class="math notranslate nohighlight">\(f'\)</span> is continuous, <span class="math notranslate nohighlight">\(f'(x_{k_n})\)</span> must converge to some limit as <span class="math notranslate nohighlight">\(n \to \infty.\)</span>
+But <span class="math notranslate nohighlight">\(f'(x_{k_n}) = (-1)^{n+1}\)</span> which does not have a limit, arriving at a contradiction.
+Therefore <span class="math notranslate nohighlight">\(F\)</span> must be closed.</p>
+</div>
+</details></div>
+<div class="tip admonition" id="mira-ex-2e12">
+<p class="admonition-title">Exercise 2.E.12</p>
+<p>Give an example of a Borel measurable function <span class="math notranslate nohighlight">\(f\)</span> from <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> such that there does not exist a set <span class="math notranslate nohighlight">\(B \subseteq \mathbb{R}\)</span> with <span class="math notranslate nohighlight">\(|\mathbb{R} \setminus B| = 0\)</span> and <span class="math notranslate nohighlight">\(f|_B\)</span> is a continuous function on <span class="math notranslate nohighlight">\(B.\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<!-- 
+Let $b_1, b_2, \dots$ be an enumeration of the rationals.
+Consider a slightly modified version of the function $f: \mathbb{R} \to \mathbb{R}$ considered in {ref}`Exercise 2.E.14<mira:ex-2e14>`
+
+$$\begin{equation}
+f(x) = \begin{cases} 
+\displaystyle\sum_{k=1}^{\infty} \frac{1}{4^k |x - b_k|} & \text{if } x \notin \{b_1, b_2, \dots \}, \\
+0 & \text{ if } x \in \{b_1, b_2, \dots \}.
+\end{cases}
+\end{equation}$$
+
+The solution of {ref}`Exercise 2.E.14<mira:ex-2e14>` shows that this function is finite everywhere.
+Note that this function is Borel measurable because it is the limit of a sequence of Borel measurable functions $f_n$
+
+$$\begin{equation}
+f_n(x) = \begin{cases} 
+\displaystyle\sum_{k=1}^n \frac{1}{4^k |x - b_k|} & \text{if } x \notin \{b_1, b_2, \dots \}, \\
+0 & \text{if } x \in \{b_1, b_2, \dots \}.
+\end{cases}
+\end{equation}$$
+
+Suppose $B \subseteq \mathbb{R}$ with $|\mathbb{R} \setminus B| = 0,$ and $x_0 \in B.$
+Let $\delta > 0.$
+We will show that $f(x)$ is unbounded in $B \cap (x_0 - \delta, x_0 + \delta),$ which means it cannot be continuous at $x_0.$
+
+$B \cap (x_0 - \delta, x_0 + \delta)$ must be dense.
+
+There exists a sequence $x_1, x_2, \dots \in B \cap (x_0 - \delta, x_0 + \delta)$ that converges to a rational $b_k \in (x_0 - \delta, x_0 + \delta)$ -->
+</div>
+</details></div>
+<div class="tip admonition" id="mira-ex-2e13">
+<p class="admonition-title">Exercise 2.E.13</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+</div>
+</details></div>
+<div class="tip admonition" id="mira-ex-2e14">
+<p class="admonition-title">Exercise 2.E.14</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+</div>
+</details></div>
+<div class="tip admonition" id="mira-ex-2e15">
+<p class="admonition-title">Exercise 2.E.15</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+</div>
+</details></div>
 </section>
 <section id="chapter-4-a">
 <h2>Chapter 4.A<a class="headerlink" href="#chapter-4-a" title="Link to this heading">#</a></h2>
